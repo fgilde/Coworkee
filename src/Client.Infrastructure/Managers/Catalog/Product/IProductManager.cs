@@ -1,6 +1,5 @@
 ﻿using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Requests.Catalog;
 using CleanArchitectureBase.Shared.Wrapper;
 using System.Threading.Tasks;
 
@@ -8,7 +7,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product
 {
     public interface IProductManager : IManager
     {
-        Task<PaginatedResult<GetAllPagedProductsResponse>> GetProductsAsync(GetAllPagedProductsRequest request);
+        Task<PaginatedResult<GetAllPagedProductsResponse>> GetProductsAsync(GetAllProductsQuery request);
 
         Task<IResult<string>> GetProductImageAsync(int id);
 

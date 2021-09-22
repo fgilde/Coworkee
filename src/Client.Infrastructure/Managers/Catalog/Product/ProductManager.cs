@@ -1,6 +1,5 @@
 ﻿using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Requests.Catalog;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using System.Net.Http;
@@ -38,9 +37,9 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product
             return await response.ToResult<string>();
         }
 
-        public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetProductsAsync(GetAllPagedProductsRequest request)
+        public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetProductsAsync(GetAllProductsQuery request)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPaged(request));
             return await response.ToPaginatedResult<GetAllPagedProductsResponse>();
         }
 

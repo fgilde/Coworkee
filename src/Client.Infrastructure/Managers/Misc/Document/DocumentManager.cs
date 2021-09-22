@@ -1,6 +1,5 @@
 ﻿using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
-using CleanArchitectureBase.Application.Requests.Documents;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using System.Net.Http;
@@ -25,9 +24,9 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Misc.Document
             return await response.ToResult<int>();
         }
 
-        public async Task<PaginatedResult<GetAllDocumentsResponse>> GetAllAsync(GetAllPagedDocumentsRequest request)
+        public async Task<PaginatedResult<GetAllDocumentsResponse>> GetAllAsync(GetAllDocumentsQuery query)
         {
-            var response = await _httpClient.GetAsync(Routes.DocumentsEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString));
+            var response = await _httpClient.GetAsync(Routes.DocumentsEndpoints.GetAllPaged(query));
             return await response.ToPaginatedResult<GetAllDocumentsResponse>();
         }
 

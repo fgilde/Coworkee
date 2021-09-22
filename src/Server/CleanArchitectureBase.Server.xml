@@ -277,13 +277,10 @@
             <param name="currentGroup"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(System.Int32,System.Int32,System.String)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(CleanArchitectureBase.Application.Features.Documents.Queries.GetAll.GetAllDocumentsQuery)">
             <summary>
             Get All Documents
             </summary>
-            <param name="pageNumber"></param>
-            <param name="pageSize"></param>
-            <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.Int32)">
@@ -382,14 +379,10 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery)">
             <summary>
             Get All Products
             </summary>
-            <param name="pageNumber"></param>
-            <param name="pageSize"></param>
-            <param name="searchString"></param>
-            <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetProductImageAsync(System.Int32)">

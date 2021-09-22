@@ -19,6 +19,9 @@ namespace CleanArchitectureBase.Application.Features.Documents.Queries.GetAll
         public int PageSize { get; set; }
         public string SearchString { get; set; }
 
+        public GetAllDocumentsQuery()
+        {}
+
         public GetAllDocumentsQuery(int pageNumber, int pageSize, string searchString)
         {
             PageNumber = pageNumber;

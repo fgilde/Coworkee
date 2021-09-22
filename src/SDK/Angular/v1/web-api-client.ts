@@ -1005,7 +1005,7 @@ export interface IProductsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string | null | undefined): Observable<FileResponse>;
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<FileResponse>;
     /**
      * Add/Edit a Product
      * @return Status 200 OK
@@ -1050,20 +1050,20 @@ export class ProductsClient implements IProductsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string | null | undefined): Observable<FileResponse> {
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<FileResponse> {
         let url_ = this.baseUrl + "/Products?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
-            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
         if (pageSize === null)
             throw new Error("The parameter 'pageSize' cannot be null.");
         else if (pageSize !== undefined)
-            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
         if (searchString !== undefined && searchString !== null)
-            url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
+            url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
         if (orderBy !== undefined && orderBy !== null)
-            url_ += "orderBy=" + encodeURIComponent("" + orderBy) + "&";
+            orderBy && orderBy.forEach(item => { url_ += "OrderBy=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1592,13 +1592,13 @@ export class DocumentsClient implements IDocumentsClient {
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
-            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
         if (pageSize === null)
             throw new Error("The parameter 'pageSize' cannot be null.");
         else if (pageSize !== undefined)
-            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
         if (searchString !== undefined && searchString !== null)
-            url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
+            url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {

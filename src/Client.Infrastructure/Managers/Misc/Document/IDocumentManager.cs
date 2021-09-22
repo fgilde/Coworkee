@@ -1,6 +1,5 @@
 ﻿using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
-using CleanArchitectureBase.Application.Requests.Documents;
 using CleanArchitectureBase.Shared.Wrapper;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
@@ -9,7 +8,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Misc.Document
 {
     public interface IDocumentManager : IManager
     {
-        Task<PaginatedResult<GetAllDocumentsResponse>> GetAllAsync(GetAllPagedDocumentsRequest request);
+        Task<PaginatedResult<GetAllDocumentsResponse>> GetAllAsync(GetAllDocumentsQuery query);
 
         Task<IResult<GetDocumentByIdResponse>> GetByIdAsync(GetDocumentByIdQuery request);
 

@@ -15,16 +15,12 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <summary>
         /// Get All Documents
         /// </summary>
-        /// <param name="pageNumber"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchString"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllDocumentsQuery query)
         {
-            var docs = await _mediator.Send(new GetAllDocumentsQuery(pageNumber, pageSize, searchString));
-            return Ok(docs);
+            return Ok(await _mediator.Send(query));
         }
 
         /// <summary>
@@ -36,8 +32,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var document = await _mediator.Send(new GetDocumentByIdQuery { Id = id });
-            return Ok(document);
+            return Ok(await _mediator.Send(new GetDocumentByIdQuery { Id = id }));
         }
 
         /// <summary>

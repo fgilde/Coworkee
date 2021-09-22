@@ -202,13 +202,13 @@ namespace SDK
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, string orderBy = null);
+        FileResponse Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, string orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
@@ -1867,7 +1867,7 @@ namespace SDK
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, string orderBy = null)
+        public FileResponse Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetAllAsync(pageNumber, pageSize, searchString, orderBy, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1876,25 +1876,25 @@ namespace SDK
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, string orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products?");
             if (pageNumber != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("pageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (pageSize != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("pageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (searchString != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("searchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderBy != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("orderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderBy, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                foreach (var item_ in orderBy) { urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
     
@@ -2513,15 +2513,15 @@ namespace SDK
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Documents?");
             if (pageNumber != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("pageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (pageSize != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("pageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (searchString != null) 
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("searchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
     

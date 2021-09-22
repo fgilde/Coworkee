@@ -1,5 +1,4 @@
 ﻿using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Requests.Catalog;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
@@ -73,10 +72,10 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             string[] orderings = null;
             if (!string.IsNullOrEmpty(state.SortLabel))
             {
-                orderings = state.SortDirection != SortDirection.None ? new[] {$"{state.SortLabel} {state.SortDirection}"} : new[] {$"{state.SortLabel}"};
+                orderings = state.SortDirection != SortDirection.None ? new[] { $"{state.SortLabel} {state.SortDirection}" } : new[] { $"{state.SortLabel}" };
             }
 
-            var request = new GetAllPagedProductsRequest { PageSize = pageSize, PageNumber = pageNumber + 1, SearchString = _searchString, Orderby = orderings };
+            GetAllProductsQuery request = new GetAllProductsQuery(pageNumber + 1, pageSize, _searchString) { OrderBy = orderings };
             var response = await ProductManager.GetProductsAsync(request);
             if (response.Succeeded)
             {

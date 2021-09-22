@@ -15,16 +15,12 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <summary>
         /// Get All Products
         /// </summary>
-        /// <param name="pageNumber"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchString"></param>
-        /// <param name="orderBy"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query)
         {
-            var products = await _mediator.Send(new GetAllProductsQuery(pageNumber, pageSize, searchString, orderBy));
+            var products = await _mediator.Send(query);
             return Ok(products);
         }
 

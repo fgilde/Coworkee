@@ -1,5 +1,4 @@
 ﻿using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
-using CleanArchitectureBase.Application.Requests.Documents;
 using CleanArchitectureBase.Client.Extensions;
 using MudBlazor;
 using System;
@@ -70,7 +69,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task LoadData(int pageNumber, int pageSize, TableState state)
         {
-            var request = new GetAllPagedDocumentsRequest { PageSize = pageSize, PageNumber = pageNumber + 1, SearchString = _searchString };
+            var request = new GetAllDocumentsQuery(pageNumber + 1, pageSize, _searchString);
             var response = await DocumentManager.GetAllAsync(request);
             if (response.Succeeded)
             {

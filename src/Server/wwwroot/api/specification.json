@@ -581,7 +581,7 @@
         "operationId": "Products_GetAll",
         "parameters": [
           {
-            "name": "pageNumber",
+            "name": "PageNumber",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -590,7 +590,7 @@
             "x-position": 1
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -599,7 +599,7 @@
             "x-position": 2
           },
           {
-            "name": "searchString",
+            "name": "SearchString",
             "in": "query",
             "schema": {
               "type": "string",
@@ -608,11 +608,16 @@
             "x-position": 3
           },
           {
-            "name": "orderBy",
+            "name": "OrderBy",
             "in": "query",
+            "style": "form",
+            "explode": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string"
+              }
             },
             "x-position": 4
           }
@@ -922,7 +927,7 @@
         "operationId": "Documents_GetAll",
         "parameters": [
           {
-            "name": "pageNumber",
+            "name": "PageNumber",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -931,7 +936,7 @@
             "x-position": 1
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -940,7 +945,7 @@
             "x-position": 2
           },
           {
-            "name": "searchString",
+            "name": "SearchString",
             "in": "query",
             "schema": {
               "type": "string",

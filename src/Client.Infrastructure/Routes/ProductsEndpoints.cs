@@ -1,18 +1,15 @@
 ﻿using System.Linq;
+using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Routes
 {
     public static class ProductsEndpoints
     {
-        public static string GetAllPaged(int pageNumber, int pageSize, string searchString, string[] orderBy)
+        public static string GetAllPaged(GetAllProductsQuery query)
         {
-            var url = $"{BaseEndpoints.Api}/products?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
-            if (orderBy?.Any() == true)
-            {
-                url = orderBy.Aggregate(url, (current, orderByPart) => current + $"{orderByPart},");
-                url = url[..^1]; // loose training ,
-            }
-            return url;
+            return $"{BaseEndpoints.Api}/products/{query.AsGet()}";
         }
 
         public static string GetCount = $"{BaseEndpoints.Api}/products/count";

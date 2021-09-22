@@ -20,7 +20,10 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.GetAllPage
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; } // of the form fieldname [ascending|descending],fieldname [ascending|descending]...
 
-        public GetAllProductsQuery(int pageNumber, int pageSize, string searchString, string orderBy)
+        public GetAllProductsQuery()
+        { }
+
+        public GetAllProductsQuery(int pageNumber, int pageSize, string searchString, string orderBy = "")
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -54,7 +57,8 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.GetAllPage
                 BrandId = e.BrandId
             };
             var productFilterSpec = new ProductFilterSpecification(request.SearchString);
-            if (request.OrderBy?.Any() != true)
+            var orderBy = request.OrderBy?.Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+            if (orderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<Product>().Entities
                    .Specify(productFilterSpec)
@@ -64,7 +68,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.GetAllPage
             }
             else
             {
-                var ordering = string.Join(",", request.OrderBy); // of the form fieldname [ascending|descending], ...
+                var ordering = string.Join(",", orderBy); // of the form fieldname [ascending|descending], ...
                 var data = await _unitOfWork.Repository<Product>().Entities
                    .Specify(productFilterSpec)
                    .OrderBy(ordering) // require system.linq.dynamic.core

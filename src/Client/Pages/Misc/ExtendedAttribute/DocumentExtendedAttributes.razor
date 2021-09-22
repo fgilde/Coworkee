@@ -1,0 +1,22 @@
+﻿@page "/extended-attributes/{EntityName}/{EntityIdString}"
+@attribute [Authorize(Policy = Permissions.DocumentExtendedAttributes.View)]
+
+@using CleanArchitectureBase.Domain.Entities.Misc
+@using CleanArchitectureBase.Domain.Entities.ExtendedAttributes
+@namespace CleanArchitectureBase.Client.Pages.Misc.ExtendedAttribute
+
+@inherits ExtendedAttributes<int, int, Document, DocumentExtendedAttribute>
+
+@Inherited()
+
+@code
+{
+    protected override Func<string, int> FromStringToEntityIdTypeConverter => s => int.Parse(s);
+
+    protected override string ExtendedAttributesViewPolicyName => Permissions.DocumentExtendedAttributes.View;
+    protected override string ExtendedAttributesEditPolicyName => Permissions.DocumentExtendedAttributes.Edit;
+    protected override string ExtendedAttributesCreatePolicyName => Permissions.DocumentExtendedAttributes.Create;
+    protected override string ExtendedAttributesDeletePolicyName => Permissions.DocumentExtendedAttributes.Delete;
+    protected override string ExtendedAttributesExportPolicyName => Permissions.DocumentExtendedAttributes.Export;
+    protected override string ExtendedAttributesSearchPolicyName => Permissions.DocumentExtendedAttributes.Search;
+}

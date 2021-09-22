@@ -1,0 +1,1340 @@
+2021-09-22 11:43:38.602 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 11:43:38.638 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 11:43:38.641 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 11:43:38.641 +02:00 [INF] Hosting environment: Development
+2021-09-22 11:43:38.642 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 11:46:13.335 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 11:46:13.370 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 11:46:13.372 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 11:46:13.373 +02:00 [INF] Hosting environment: Development
+2021-09-22 11:46:13.373 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 11:52:00.304 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 11:52:00.342 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 11:52:00.344 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 11:52:00.345 +02:00 [INF] Hosting environment: Development
+2021-09-22 11:52:00.345 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 11:55:41.484 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 11:55:41.541 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 11:55:41.543 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 11:55:41.543 +02:00 [INF] Hosting environment: Development
+2021-09-22 11:55:41.544 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:06:25.953 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:06:25.990 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:06:25.994 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:06:25.994 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:06:25.995 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:07:23.188 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:07:31.975 +02:00 [INF] CleanArchitectureBase Request: AddEditBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"Name":"hj","Description":"hj","Tax":7,"$type":"AddEditBrandCommand"}
+2021-09-22 12:07:32.232 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:14:11.544 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:14:11.579 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:14:11.582 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:14:11.582 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:14:11.583 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:14:11.980 +02:00 [ERR] Connection id "0HMBTM6SFGEM5", Request id "0HMBTM6SFGEM5:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:12.268 +02:00 [ERR] Connection id "0HMBTM6SFGEM6", Request id "0HMBTM6SFGEM6:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:12.497 +02:00 [ERR] Connection id "0HMBTM6SFGEM7", Request id "0HMBTM6SFGEM7:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:12.727 +02:00 [ERR] Connection id "0HMBTM6SFGEM8", Request id "0HMBTM6SFGEM8:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:12.966 +02:00 [ERR] Connection id "0HMBTM6SFGEM9", Request id "0HMBTM6SFGEM9:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:13.197 +02:00 [ERR] Connection id "0HMBTM6SFGEMA", Request id "0HMBTM6SFGEMA:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:13.427 +02:00 [ERR] Connection id "0HMBTM6SFGEMB", Request id "0HMBTM6SFGEMB:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:13.659 +02:00 [ERR] Connection id "0HMBTM6SFGEMC", Request id "0HMBTM6SFGEMC:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:13.895 +02:00 [ERR] Connection id "0HMBTM6SFGEMD", Request id "0HMBTM6SFGEMD:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:14.128 +02:00 [ERR] Connection id "0HMBTM6SFGEME", Request id "0HMBTM6SFGEME:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at System.Text.UTF8Encoding.UTF8EncodingSealed.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:14.357 +02:00 [ERR] Connection id "0HMBTM6SFGEMF", Request id "0HMBTM6SFGEMF:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:14.589 +02:00 [ERR] Connection id "0HMBTM6SFGEMG", Request id "0HMBTM6SFGEMG:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:14.820 +02:00 [ERR] Connection id "0HMBTM6SFGEMH", Request id "0HMBTM6SFGEMH:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:15.060 +02:00 [ERR] Connection id "0HMBTM6SFGEMI", Request id "0HMBTM6SFGEMI:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:15.289 +02:00 [ERR] Connection id "0HMBTM6SFGEMJ", Request id "0HMBTM6SFGEMJ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:15.525 +02:00 [ERR] Connection id "0HMBTM6SFGEMK", Request id "0HMBTM6SFGEMK:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:15.755 +02:00 [ERR] Connection id "0HMBTM6SFGEML", Request id "0HMBTM6SFGEML:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:15.989 +02:00 [ERR] Connection id "0HMBTM6SFGEMM", Request id "0HMBTM6SFGEMM:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:16.219 +02:00 [ERR] Connection id "0HMBTM6SFGEMN", Request id "0HMBTM6SFGEMN:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:16.458 +02:00 [ERR] Connection id "0HMBTM6SFGEMO", Request id "0HMBTM6SFGEMO:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:16.684 +02:00 [ERR] Connection id "0HMBTM6SFGEMP", Request id "0HMBTM6SFGEMP:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:16.922 +02:00 [ERR] Connection id "0HMBTM6SFGEMQ", Request id "0HMBTM6SFGEMQ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:17.154 +02:00 [ERR] Connection id "0HMBTM6SFGEMR", Request id "0HMBTM6SFGEMR:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:17.382 +02:00 [ERR] Connection id "0HMBTM6SFGEMS", Request id "0HMBTM6SFGEMS:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:17.615 +02:00 [ERR] Connection id "0HMBTM6SFGEMT", Request id "0HMBTM6SFGEMT:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:17.852 +02:00 [ERR] Connection id "0HMBTM6SFGEMU", Request id "0HMBTM6SFGEMU:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:18.090 +02:00 [ERR] Connection id "0HMBTM6SFGEMV", Request id "0HMBTM6SFGEMV:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:18.319 +02:00 [ERR] Connection id "0HMBTM6SFGEN0", Request id "0HMBTM6SFGEN0:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:18.554 +02:00 [ERR] Connection id "0HMBTM6SFGEN1", Request id "0HMBTM6SFGEN1:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:18.786 +02:00 [ERR] Connection id "0HMBTM6SFGEN2", Request id "0HMBTM6SFGEN2:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:19.017 +02:00 [ERR] Connection id "0HMBTM6SFGEN3", Request id "0HMBTM6SFGEN3:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:19.254 +02:00 [ERR] Connection id "0HMBTM6SFGEN4", Request id "0HMBTM6SFGEN4:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:19.484 +02:00 [ERR] Connection id "0HMBTM6SFGEN5", Request id "0HMBTM6SFGEN5:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:19.714 +02:00 [ERR] Connection id "0HMBTM6SFGEN6", Request id "0HMBTM6SFGEN6:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:19.955 +02:00 [ERR] Connection id "0HMBTM6SFGEN7", Request id "0HMBTM6SFGEN7:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:20.186 +02:00 [ERR] Connection id "0HMBTM6SFGEN8", Request id "0HMBTM6SFGEN8:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:20.419 +02:00 [ERR] Connection id "0HMBTM6SFGEN9", Request id "0HMBTM6SFGEN9:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:20.664 +02:00 [ERR] Connection id "0HMBTM6SFGENA", Request id "0HMBTM6SFGENA:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:20.903 +02:00 [ERR] Connection id "0HMBTM6SFGENB", Request id "0HMBTM6SFGENB:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:21.132 +02:00 [ERR] Connection id "0HMBTM6SFGENC", Request id "0HMBTM6SFGENC:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:21.361 +02:00 [ERR] Connection id "0HMBTM6SFGEND", Request id "0HMBTM6SFGEND:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:21.595 +02:00 [ERR] Connection id "0HMBTM6SFGENE", Request id "0HMBTM6SFGENE:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:21.831 +02:00 [ERR] Connection id "0HMBTM6SFGENF", Request id "0HMBTM6SFGENF:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:22.067 +02:00 [ERR] Connection id "0HMBTM6SFGENG", Request id "0HMBTM6SFGENG:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:22.296 +02:00 [ERR] Connection id "0HMBTM6SFGENH", Request id "0HMBTM6SFGENH:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:22.531 +02:00 [ERR] Connection id "0HMBTM6SFGENI", Request id "0HMBTM6SFGENI:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:22.766 +02:00 [ERR] Connection id "0HMBTM6SFGENJ", Request id "0HMBTM6SFGENJ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:22.998 +02:00 [ERR] Connection id "0HMBTM6SFGENK", Request id "0HMBTM6SFGENK:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:23.230 +02:00 [ERR] Connection id "0HMBTM6SFGENL", Request id "0HMBTM6SFGENL:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:23.465 +02:00 [ERR] Connection id "0HMBTM6SFGENM", Request id "0HMBTM6SFGENM:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:23.693 +02:00 [ERR] Connection id "0HMBTM6SFGENN", Request id "0HMBTM6SFGENN:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:23.933 +02:00 [ERR] Connection id "0HMBTM6SFGENO", Request id "0HMBTM6SFGENO:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:24.167 +02:00 [ERR] Connection id "0HMBTM6SFGENP", Request id "0HMBTM6SFGENP:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:24.394 +02:00 [ERR] Connection id "0HMBTM6SFGENQ", Request id "0HMBTM6SFGENQ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:24.625 +02:00 [ERR] Connection id "0HMBTM6SFGENR", Request id "0HMBTM6SFGENR:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:24.856 +02:00 [ERR] Connection id "0HMBTM6SFGENS", Request id "0HMBTM6SFGENS:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:25.095 +02:00 [ERR] Connection id "0HMBTM6SFGENT", Request id "0HMBTM6SFGENT:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:25.324 +02:00 [ERR] Connection id "0HMBTM6SFGENU", Request id "0HMBTM6SFGENU:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:25.561 +02:00 [ERR] Connection id "0HMBTM6SFGENV", Request id "0HMBTM6SFGENV:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:25.793 +02:00 [ERR] Connection id "0HMBTM6SFGEO0", Request id "0HMBTM6SFGEO0:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:26.028 +02:00 [ERR] Connection id "0HMBTM6SFGEO1", Request id "0HMBTM6SFGEO1:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:26.261 +02:00 [ERR] Connection id "0HMBTM6SFGEO2", Request id "0HMBTM6SFGEO2:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:26.493 +02:00 [ERR] Connection id "0HMBTM6SFGEO3", Request id "0HMBTM6SFGEO3:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:26.722 +02:00 [ERR] Connection id "0HMBTM6SFGEO4", Request id "0HMBTM6SFGEO4:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:26.955 +02:00 [ERR] Connection id "0HMBTM6SFGEO5", Request id "0HMBTM6SFGEO5:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:27.191 +02:00 [ERR] Connection id "0HMBTM6SFGEO6", Request id "0HMBTM6SFGEO6:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:27.428 +02:00 [ERR] Connection id "0HMBTM6SFGEO7", Request id "0HMBTM6SFGEO7:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:27.655 +02:00 [ERR] Connection id "0HMBTM6SFGEO8", Request id "0HMBTM6SFGEO8:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:27.891 +02:00 [ERR] Connection id "0HMBTM6SFGEO9", Request id "0HMBTM6SFGEO9:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:28.126 +02:00 [ERR] Connection id "0HMBTM6SFGEOA", Request id "0HMBTM6SFGEOA:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:28.356 +02:00 [ERR] Connection id "0HMBTM6SFGEOB", Request id "0HMBTM6SFGEOB:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:28.589 +02:00 [ERR] Connection id "0HMBTM6SFGEOC", Request id "0HMBTM6SFGEOC:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:28.822 +02:00 [ERR] Connection id "0HMBTM6SFGEOD", Request id "0HMBTM6SFGEOD:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:29.056 +02:00 [ERR] Connection id "0HMBTM6SFGEOE", Request id "0HMBTM6SFGEOE:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:29.289 +02:00 [ERR] Connection id "0HMBTM6SFGEOF", Request id "0HMBTM6SFGEOF:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:29.531 +02:00 [ERR] Connection id "0HMBTM6SFGEOG", Request id "0HMBTM6SFGEOG:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:29.761 +02:00 [ERR] Connection id "0HMBTM6SFGEOH", Request id "0HMBTM6SFGEOH:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:29.992 +02:00 [ERR] Connection id "0HMBTM6SFGEOI", Request id "0HMBTM6SFGEOI:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:30.226 +02:00 [ERR] Connection id "0HMBTM6SFGEOJ", Request id "0HMBTM6SFGEOJ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:30.461 +02:00 [ERR] Connection id "0HMBTM6SFGEOK", Request id "0HMBTM6SFGEOK:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:30.691 +02:00 [ERR] Connection id "0HMBTM6SFGEOL", Request id "0HMBTM6SFGEOL:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:30.928 +02:00 [ERR] Connection id "0HMBTM6SFGEOM", Request id "0HMBTM6SFGEOM:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:31.151 +02:00 [ERR] Connection id "0HMBTM6SFGEON", Request id "0HMBTM6SFGEON:00000001": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:31.173 +02:00 [ERR] Connection id "0HMBTM6SFGEOO", Request id "0HMBTM6SFGEOO:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:31.410 +02:00 [ERR] Connection id "0HMBTM6SFGEOP", Request id "0HMBTM6SFGEOP:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:31.643 +02:00 [ERR] Connection id "0HMBTM6SFGEOQ", Request id "0HMBTM6SFGEOQ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:31.872 +02:00 [ERR] Connection id "0HMBTM6SFGEOR", Request id "0HMBTM6SFGEOR:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:32.105 +02:00 [ERR] Connection id "0HMBTM6SFGEOS", Request id "0HMBTM6SFGEOS:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:32.337 +02:00 [ERR] Connection id "0HMBTM6SFGEOT", Request id "0HMBTM6SFGEOT:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:32.569 +02:00 [ERR] Connection id "0HMBTM6SFGEOU", Request id "0HMBTM6SFGEOU:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:32.804 +02:00 [ERR] Connection id "0HMBTM6SFGEOV", Request id "0HMBTM6SFGEOV:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:33.030 +02:00 [ERR] Connection id "0HMBTM6SFGEP0", Request id "0HMBTM6SFGEP0:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:33.265 +02:00 [ERR] Connection id "0HMBTM6SFGEP1", Request id "0HMBTM6SFGEP1:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:33.499 +02:00 [ERR] Connection id "0HMBTM6SFGEP2", Request id "0HMBTM6SFGEP2:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:33.726 +02:00 [ERR] Connection id "0HMBTM6SFGEP3", Request id "0HMBTM6SFGEP3:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:33.959 +02:00 [ERR] Connection id "0HMBTM6SFGEP4", Request id "0HMBTM6SFGEP4:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:34.191 +02:00 [ERR] Connection id "0HMBTM6SFGEP5", Request id "0HMBTM6SFGEP5:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:34.419 +02:00 [ERR] Connection id "0HMBTM6SFGEP6", Request id "0HMBTM6SFGEP6:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:34.645 +02:00 [ERR] Connection id "0HMBTM6SFGEP7", Request id "0HMBTM6SFGEP7:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:34.879 +02:00 [ERR] Connection id "0HMBTM6SFGEP8", Request id "0HMBTM6SFGEP8:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:35.109 +02:00 [ERR] Connection id "0HMBTM6SFGEP9", Request id "0HMBTM6SFGEP9:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:35.342 +02:00 [ERR] Connection id "0HMBTM6SFGEPA", Request id "0HMBTM6SFGEPA:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:35.574 +02:00 [ERR] Connection id "0HMBTM6SFGEPB", Request id "0HMBTM6SFGEPB:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:35.804 +02:00 [ERR] Connection id "0HMBTM6SFGEPC", Request id "0HMBTM6SFGEPC:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:36.036 +02:00 [ERR] Connection id "0HMBTM6SFGEPD", Request id "0HMBTM6SFGEPD:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:36.272 +02:00 [ERR] Connection id "0HMBTM6SFGEPE", Request id "0HMBTM6SFGEPE:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:36.508 +02:00 [ERR] Connection id "0HMBTM6SFGEPF", Request id "0HMBTM6SFGEPF:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:36.743 +02:00 [ERR] Connection id "0HMBTM6SFGEPG", Request id "0HMBTM6SFGEPG:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:36.976 +02:00 [ERR] Connection id "0HMBTM6SFGEPH", Request id "0HMBTM6SFGEPH:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:37.209 +02:00 [ERR] Connection id "0HMBTM6SFGEPI", Request id "0HMBTM6SFGEPI:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:37.447 +02:00 [ERR] Connection id "0HMBTM6SFGEPJ", Request id "0HMBTM6SFGEPJ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:37.679 +02:00 [ERR] Connection id "0HMBTM6SFGEPK", Request id "0HMBTM6SFGEPK:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:37.910 +02:00 [ERR] Connection id "0HMBTM6SFGEPL", Request id "0HMBTM6SFGEPL:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:38.138 +02:00 [ERR] Connection id "0HMBTM6SFGEPM", Request id "0HMBTM6SFGEPM:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:38.372 +02:00 [ERR] Connection id "0HMBTM6SFGEPN", Request id "0HMBTM6SFGEPN:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:38.604 +02:00 [ERR] Connection id "0HMBTM6SFGEPO", Request id "0HMBTM6SFGEPO:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:38.827 +02:00 [ERR] Connection id "0HMBTM6SFGEPP", Request id "0HMBTM6SFGEPP:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:39.066 +02:00 [ERR] Connection id "0HMBTM6SFGEPQ", Request id "0HMBTM6SFGEPQ:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:39.293 +02:00 [ERR] Connection id "0HMBTM6SFGEPR", Request id "0HMBTM6SFGEPR:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:39.535 +02:00 [ERR] Connection id "0HMBTM6SFGEPS", Request id "0HMBTM6SFGEPS:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:39.763 +02:00 [ERR] Connection id "0HMBTM6SFGEPT", Request id "0HMBTM6SFGEPT:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:39.996 +02:00 [ERR] Connection id "0HMBTM6SFGEPU", Request id "0HMBTM6SFGEPU:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:40.232 +02:00 [ERR] Connection id "0HMBTM6SFGEPV", Request id "0HMBTM6SFGEPV:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:40.466 +02:00 [ERR] Connection id "0HMBTM6SFGEQ0", Request id "0HMBTM6SFGEQ0:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:40.695 +02:00 [ERR] Connection id "0HMBTM6SFGEQ1", Request id "0HMBTM6SFGEQ1:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:40.924 +02:00 [ERR] Connection id "0HMBTM6SFGEQ2", Request id "0HMBTM6SFGEQ2:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:14:47.218 +02:00 [ERR] Connection id "0HMBTM6SFGEQ3", Request id "0HMBTM6SFGEQ3:00000002": An unhandled exception was thrown by the application.
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Microsoft.AspNetCore.Http.SessionExtensions.SetString(ISession session, String key, String value)
+   at CleanArchitectureBase.Server.Extensions.ApplicationBuilderExtensions.<>c.<<UseSessionId>b__0_0>d.MoveNext() in C:\dev\privat\!tests\CleanArchitectureBase\src\Server\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2021-09-22 12:15:21.071 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:15:21.103 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:15:21.106 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:15:21.106 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:15:21.106 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:15:35.255 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:15:53.314 +02:00 [INF] CleanArchitectureBase Request: DeleteBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":4,"$type":"DeleteBrandCommand"}
+2021-09-22 12:15:53.539 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:16:04.037 +02:00 [INF] CleanArchitectureBase Request: AddEditBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"Name":"fff","Description":"fff","Tax":3,"$type":"AddEditBrandCommand"}
+2021-09-22 12:16:04.116 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:17:58.412 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:17:58.447 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:17:58.449 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:17:58.449 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:17:58.451 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:20:42.436 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:20:42.469 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:20:42.471 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:20:42.471 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:20:42.471 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:23:28.821 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery   {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:25:55.511 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:25:55.545 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:25:55.548 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:25:55.549 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:25:55.549 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:28:49.394 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:28:49.440 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:28:49.444 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:28:49.444 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:28:49.445 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:29:37.217 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery   {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-22 12:32:28.825 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:32:28.860 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:32:28.862 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:32:28.862 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:32:28.863 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 12:33:14.706 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery   {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:33:44.817 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery   {"$type":"GetAllBrandsQuery"}
+2021-09-22 12:35:06.543 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 12:35:06.579 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 12:35:06.581 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 12:35:06.581 +02:00 [INF] Hosting environment: Development
+2021-09-22 12:35:06.582 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:11:42.947 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:11:42.985 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:11:42.987 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:11:42.987 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:11:42.988 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:19:34.821 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:19:34.854 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:19:34.857 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:19:34.857 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:19:34.857 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:22:08.019 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:22:08.057 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:22:08.059 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:22:08.059 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:22:08.060 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:22:45.168 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery   {"$type":"GetDashboardDataQuery"}
+2021-09-22 13:24:05.124 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:24:05.159 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:24:05.161 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:24:05.162 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:24:05.162 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:24:20.887 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetDashboardDataQuery"}
+2021-09-22 13:25:49.600 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:25:49.637 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:25:49.639 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:25:49.639 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:25:49.640 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:28:14.286 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:28:14.325 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:28:14.328 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:28:14.328 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:28:14.329 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:30:21.810 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:30:21.842 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:30:21.844 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:30:21.844 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:30:21.845 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:32:03.433 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:32:03.469 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:32:03.471 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:32:03.472 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:32:03.472 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:50:02.810 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:50:02.849 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:50:02.853 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:50:02.853 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:50:02.853 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:51:24.267 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:51:24.305 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:51:24.307 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:51:24.308 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:51:24.308 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 13:53:40.114 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 13:53:40.147 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 13:53:40.150 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 13:53:40.150 +02:00 [INF] Hosting environment: Development
+2021-09-22 13:53:40.150 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:01:48.062 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:01:48.096 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:01:48.099 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:01:48.099 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:01:48.100 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:03:26.008 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:03:26.048 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:03:26.050 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:03:26.050 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:03:26.051 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:04:42.428 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:04:42.463 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:04:42.465 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:04:42.465 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:04:42.466 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:07:13.923 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:07:13.960 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:07:13.962 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:07:13.962 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:07:13.963 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:14:12.957 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:14:12.992 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:14:12.994 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:14:12.995 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:14:12.995 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:15:12.317 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 14:15:36.741 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-22 14:15:40.983 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 14:15:44.341 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-22 14:15:44.785 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 14:15:45.275 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-22 14:15:45.697 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 14:15:46.169 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-22 14:15:46.619 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-22 14:15:47.059 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-22 14:17:25.802 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:17:25.841 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:17:25.843 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:17:25.844 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:17:25.844 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:19:14.415 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:19:14.453 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:19:14.456 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:19:14.456 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:19:14.456 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:19:45.249 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetDashboardDataQuery"}
+2021-09-22 14:19:49.881 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetDashboardDataQuery"}
+2021-09-22 14:22:06.010 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-22 14:22:06.049 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-22 14:22:06.052 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-22 14:22:06.053 +02:00 [INF] Hosting environment: Development
+2021-09-22 14:22:06.053 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-22 14:28:20.120 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}

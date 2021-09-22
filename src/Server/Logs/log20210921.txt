@@ -1,0 +1,32 @@
+2021-09-21 10:07:55.823 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-21 10:07:55.867 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-21 10:07:55.870 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-21 10:07:55.870 +02:00 [INF] Hosting environment: Development
+2021-09-21 10:07:55.871 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-21 10:39:09.260 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-21 10:39:09.302 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-21 10:39:09.306 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-21 10:39:09.306 +02:00 [INF] Hosting environment: Development
+2021-09-21 10:39:09.307 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-21 10:39:32.327 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-21 10:39:36.516 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-21 10:41:57.477 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-21 10:45:46.743 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-21 10:46:11.521 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-21 10:46:15.241 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-21 10:49:03.075 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-21 10:49:39.107 +02:00 [INF] CleanArchitectureBase Request: GetProductImageQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"$type":"GetProductImageQuery"}
+2021-09-21 10:49:39.159 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-21 10:49:42.245 +02:00 [INF] CleanArchitectureBase Request: GetProductImageQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"$type":"GetProductImageQuery"}
+2021-09-21 10:49:42.289 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-21 10:49:53.376 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-21 16:20:49.447 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-21 16:20:49.498 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-21 16:20:49.501 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-21 16:20:49.502 +02:00 [INF] Hosting environment: Development
+2021-09-21 16:20:49.503 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server
+2021-09-21 18:04:31.345 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-21 18:04:31.389 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-21 18:04:31.392 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-21 18:04:31.393 +02:00 [INF] Hosting environment: Development
+2021-09-21 18:04:31.393 +02:00 [INF] Content root path: C:\dev\privat\!tests\CleanArchitectureBase\src\Server

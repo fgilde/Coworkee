@@ -11,7 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 
@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Products
     {
-        [Inject] private IProductManager ProductManager { get; set; }
+        [Inject] private IBlazorHeroClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -76,7 +76,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             }
 
             GetAllProductsQuery request = new GetAllProductsQuery(pageNumber + 1, pageSize, _searchString) { OrderBy = orderings };
-            var response = await ProductManager.GetProductsAsync(request);
+            var response = await Api.Products_GetAllAsync(request.PageNumber, request.PageSize, request.SearchString, request.OrderBy);
             if (response.Succeeded)
             {
                 _totalItems = response.TotalCount;
@@ -100,7 +100,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task ExportToExcel()
         {
-            var response = await ProductManager.ExportToExcelAsync(_searchString);
+            var response = await Api.Products_ExportAsync(_searchString);
             if (response.Succeeded)
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
@@ -162,7 +162,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await ProductManager.DeleteAsync(id);
+                var response = await Api.Products_DeleteAsync(id);
                 if (response.Succeeded)
                 {
                     OnSearch("");

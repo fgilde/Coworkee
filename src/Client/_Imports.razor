@@ -22,11 +22,6 @@
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Users
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Brand
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Dashboard
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Communication
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Audit
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.Document
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.DocumentType
 
@@ -45,6 +40,7 @@
 
 @using CleanArchitectureBase.Client.Infrastructure.Authentication
 @using CleanArchitectureBase.Client.Extensions
+@using CleanArchitectureBase.SDK
 
 @attribute [Authorize]
 @inject IAuthenticationManager _authenticationManager
@@ -55,6 +51,7 @@
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService
 @inject HttpClient _httpClient
+@inject IBlazorHeroClient _api
 @inject IHttpInterceptorManager _interceptor
 @inject ClientPreferenceManager _clientPreferenceManager
 @inject IUserManager _userManager

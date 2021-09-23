@@ -212,7 +212,7 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.Threading.CancellationToken)">
             <summary>
             Get Current User Audit Trails
             </summary>
@@ -345,34 +345,34 @@
             <param name="languageCode"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.GetAll">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.GetAll(System.Threading.CancellationToken)">
             <summary>
             Get All Brands
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.GetById(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get a Brand By Id
             </summary>
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand,System.Threading.CancellationToken)">
             <summary>
             Create/Update a Brand
             </summary>
             <param name="command"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Delete(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Delete a Brand
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Export(System.String)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Export(System.String,System.Threading.CancellationToken)">
             <summary>
             Search Brands and Export to Excel
             </summary>
@@ -385,32 +385,36 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetProductImageAsync(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetProductImageAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get a Product Image by Id
             </summary>
-            <param name="id"></param>
+            <param name="id">Product Id</param>
+            <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductCommand)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit a Product
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Delete(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Delete a Product
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Export(System.String)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Export(System.String,System.Threading.CancellationToken)">
             <summary>
             Search Products and Export to Excel
             </summary>
             <param name="searchString"></param>
+            <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.v1.DashboardController.GetDataAsync">
@@ -424,6 +428,9 @@
             Get the new ultimate Dashboard Data
             </summary>
             <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.CustomTypeNameGenerator.Generate(NJsonSchema.JsonSchema,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc />
         </member>
     </members>
 </doc>

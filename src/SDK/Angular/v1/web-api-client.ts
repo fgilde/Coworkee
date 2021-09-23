@@ -570,12 +570,12 @@ export interface IDashboardClient {
      * Get the new ultimate Dashboard Data
      * @return Status 200 OK
      */
-    getData(): Observable<FileResponse>;
+    getData(): Observable<ResultOfDashboardDataResponse>;
     /**
      * Get the new ultimate Dashboard Data
      * @return Status 200 OK
      */
-    getJobDashBoardUrl(): Observable<FileResponse>;
+    getJobDashBoardUrl(): Observable<string>;
 }
 
 @Injectable({
@@ -595,7 +595,7 @@ export class DashboardClient implements IDashboardClient {
      * Get the new ultimate Dashboard Data
      * @return Status 200 OK
      */
-    getData(): Observable<FileResponse> {
+    getData(): Observable<ResultOfDashboardDataResponse> {
         let url_ = this.baseUrl + "/Dashboard";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -603,7 +603,7 @@ export class DashboardClient implements IDashboardClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -614,38 +614,40 @@ export class DashboardClient implements IDashboardClient {
                 try {
                     return this.processGetData(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfDashboardDataResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfDashboardDataResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetData(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetData(response: HttpResponseBase): Observable<ResultOfDashboardDataResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfDashboardDataResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfDashboardDataResponse>(<any>null);
     }
 
     /**
      * Get the new ultimate Dashboard Data
      * @return Status 200 OK
      */
-    getJobDashBoardUrl(): Observable<FileResponse> {
+    getJobDashBoardUrl(): Observable<string> {
         let url_ = this.baseUrl + "/Dashboard/jobdashboardurl";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -653,7 +655,7 @@ export class DashboardClient implements IDashboardClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -664,31 +666,33 @@ export class DashboardClient implements IDashboardClient {
                 try {
                     return this.processGetJobDashBoardUrl(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<string>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<string>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetJobDashBoardUrl(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetJobDashBoardUrl(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<string>(<any>null);
     }
 }
 
@@ -697,27 +701,27 @@ export interface IBrandsClient {
      * Get All Brands
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse>;
+    getAll(): Observable<ResultOfListOfGetAllBrandsResponse>;
     /**
      * Create/Update a Brand
      * @return Status 200 OK
      */
-    post(command: AddEditBrandCommand): Observable<FileResponse>;
+    post(command: AddEditBrandCommand): Observable<ResultOfInteger>;
     /**
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<FileResponse>;
+    getById(id: number): Observable<ResultOfGetBrandByIdResponse>;
     /**
      * Delete a Brand
      * @return Status 200 OK
      */
-    delete(id: number): Observable<FileResponse>;
+    delete(id: number): Observable<ResultOfInteger>;
     /**
      * Search Brands and Export to Excel
      * @param searchString (optional) 
      */
-    export(searchString: string | null | undefined): Observable<FileResponse>;
+    export(searchString: string | null | undefined): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -737,7 +741,7 @@ export class BrandsClient implements IBrandsClient {
      * Get All Brands
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<ResultOfListOfGetAllBrandsResponse> {
         let url_ = this.baseUrl + "/Brands";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -745,7 +749,7 @@ export class BrandsClient implements IBrandsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -756,38 +760,40 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfListOfGetAllBrandsResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfListOfGetAllBrandsResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfGetAllBrandsResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfListOfGetAllBrandsResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfListOfGetAllBrandsResponse>(<any>null);
     }
 
     /**
      * Create/Update a Brand
      * @return Status 200 OK
      */
-    post(command: AddEditBrandCommand): Observable<FileResponse> {
+    post(command: AddEditBrandCommand): Observable<ResultOfInteger> {
         let url_ = this.baseUrl + "/Brands";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -799,7 +805,7 @@ export class BrandsClient implements IBrandsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -810,38 +816,40 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<ResultOfInteger> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfInteger.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfInteger>(<any>null);
     }
 
     /**
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<FileResponse> {
+    getById(id: number): Observable<ResultOfGetBrandByIdResponse> {
         let url_ = this.baseUrl + "/Brands/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -852,7 +860,7 @@ export class BrandsClient implements IBrandsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -863,38 +871,40 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfGetBrandByIdResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfGetBrandByIdResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetById(response: HttpResponseBase): Observable<ResultOfGetBrandByIdResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfGetBrandByIdResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfGetBrandByIdResponse>(<any>null);
     }
 
     /**
      * Delete a Brand
      * @return Status 200 OK
      */
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<ResultOfInteger> {
         let url_ = this.baseUrl + "/Brands/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -905,7 +915,7 @@ export class BrandsClient implements IBrandsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -916,38 +926,40 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<ResultOfInteger> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfInteger.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfInteger>(<any>null);
     }
 
     /**
      * Search Brands and Export to Excel
      * @param searchString (optional) 
      */
-    export(searchString: string | null | undefined): Observable<FileResponse> {
+    export(searchString: string | null | undefined): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/Brands/export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
@@ -957,7 +969,7 @@ export class BrandsClient implements IBrandsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -968,31 +980,33 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processExport(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processExport(response: HttpResponseBase): Observable<FileResponse> {
+    protected processExport(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 }
 
@@ -1010,23 +1024,24 @@ export interface IProductsClient {
      * Add/Edit a Product
      * @return Status 200 OK
      */
-    post(command: AddEditProductCommand): Observable<FileResponse>;
+    post(command: AddEditProductCommand): Observable<ResultOfInteger>;
     /**
      * Get a Product Image by Id
+     * @param id Product Id
      * @return Status 200 OK
      */
-    getProductImage(id: number): Observable<FileResponse>;
+    getProductImage(id: number): Observable<ResultOfString>;
     /**
      * Delete a Product
      * @return Status 200 OK response
      */
-    delete(id: number): Observable<FileResponse>;
+    delete(id: number): Observable<ResultOfInteger>;
     /**
      * Search Products and Export to Excel
      * @param searchString (optional) 
      * @return Status 200 OK
      */
-    export(searchString: string | null | undefined): Observable<FileResponse>;
+    export(searchString: string | null | undefined): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -1114,7 +1129,7 @@ export class ProductsClient implements IProductsClient {
      * Add/Edit a Product
      * @return Status 200 OK
      */
-    post(command: AddEditProductCommand): Observable<FileResponse> {
+    post(command: AddEditProductCommand): Observable<ResultOfInteger> {
         let url_ = this.baseUrl + "/Products";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1126,7 +1141,7 @@ export class ProductsClient implements IProductsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1137,38 +1152,41 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<ResultOfInteger> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfInteger.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfInteger>(<any>null);
     }
 
     /**
      * Get a Product Image by Id
+     * @param id Product Id
      * @return Status 200 OK
      */
-    getProductImage(id: number): Observable<FileResponse> {
+    getProductImage(id: number): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/Products/image/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1179,7 +1197,7 @@ export class ProductsClient implements IProductsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1190,38 +1208,40 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processGetProductImage(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetProductImage(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetProductImage(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 
     /**
      * Delete a Product
      * @return Status 200 OK response
      */
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<ResultOfInteger> {
         let url_ = this.baseUrl + "/Products/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1232,7 +1252,7 @@ export class ProductsClient implements IProductsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1243,31 +1263,33 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<ResultOfInteger> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfInteger.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfInteger>(<any>null);
     }
 
     /**
@@ -1275,7 +1297,7 @@ export class ProductsClient implements IProductsClient {
      * @param searchString (optional) 
      * @return Status 200 OK
      */
-    export(searchString: string | null | undefined): Observable<FileResponse> {
+    export(searchString: string | null | undefined): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/Products/export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
@@ -1285,7 +1307,7 @@ export class ProductsClient implements IProductsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1296,31 +1318,33 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processExport(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processExport(response: HttpResponseBase): Observable<FileResponse> {
+    protected processExport(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 }
 
@@ -1329,7 +1353,7 @@ export interface IAuditsClient {
      * Get Current User Audit Trails
      * @return Status 200 OK
      */
-    getUserTrails(): Observable<FileResponse>;
+    getUserTrails(): Observable<ResultOfIEnumerableOfAuditResponse>;
     /**
      * Search Audit Trails and Export to Excel
      * @param searchString (optional) 
@@ -1337,7 +1361,7 @@ export interface IAuditsClient {
      * @param searchInNewValues (optional) 
      * @return Status 200 OK
      */
-    exportExcel(searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<FileResponse>;
+    exportExcel(searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -1357,7 +1381,7 @@ export class AuditsClient implements IAuditsClient {
      * Get Current User Audit Trails
      * @return Status 200 OK
      */
-    getUserTrails(): Observable<FileResponse> {
+    getUserTrails(): Observable<ResultOfIEnumerableOfAuditResponse> {
         let url_ = this.baseUrl + "/Audits";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1365,7 +1389,7 @@ export class AuditsClient implements IAuditsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1376,31 +1400,33 @@ export class AuditsClient implements IAuditsClient {
                 try {
                     return this.processGetUserTrails(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfIEnumerableOfAuditResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfIEnumerableOfAuditResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetUserTrails(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetUserTrails(response: HttpResponseBase): Observable<ResultOfIEnumerableOfAuditResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfIEnumerableOfAuditResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfIEnumerableOfAuditResponse>(<any>null);
     }
 
     /**
@@ -1410,7 +1436,7 @@ export class AuditsClient implements IAuditsClient {
      * @param searchInNewValues (optional) 
      * @return Status 200 OK
      */
-    exportExcel(searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<FileResponse> {
+    exportExcel(searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/Audits/export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
@@ -1428,7 +1454,7 @@ export class AuditsClient implements IAuditsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1439,31 +1465,33 @@ export class AuditsClient implements IAuditsClient {
                 try {
                     return this.processExportExcel(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processExportExcel(response: HttpResponseBase): Observable<FileResponse> {
+    protected processExportExcel(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 }
 
@@ -3443,17 +3471,17 @@ export interface IChatsClient {
      * Get user wise chat history
      * @return Status 200 OK
      */
-    getChatHistory(contactId: string | null): Observable<FileResponse>;
+    getChatHistory(contactId: string | null): Observable<ResultOfIEnumerableOfChatHistoryResponse>;
     /**
      * get available users
      * @return Status 200 OK
      */
-    getChatUsers(): Observable<FileResponse>;
+    getChatUsers(): Observable<ResultOfIEnumerableOfChatUserResponse>;
     /**
      * Save Chat Message
      * @return Status 200 OK
      */
-    saveMessage(message: ChatHistoryOfIChatUser): Observable<FileResponse>;
+    saveMessage(message: ChatHistoryOfIChatUser): Observable<Result>;
 }
 
 @Injectable({
@@ -3473,7 +3501,7 @@ export class ChatsClient implements IChatsClient {
      * Get user wise chat history
      * @return Status 200 OK
      */
-    getChatHistory(contactId: string | null): Observable<FileResponse> {
+    getChatHistory(contactId: string | null): Observable<ResultOfIEnumerableOfChatHistoryResponse> {
         let url_ = this.baseUrl + "/Chats/{contactId}";
         if (contactId === undefined || contactId === null)
             throw new Error("The parameter 'contactId' must be defined.");
@@ -3484,7 +3512,7 @@ export class ChatsClient implements IChatsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3495,38 +3523,40 @@ export class ChatsClient implements IChatsClient {
                 try {
                     return this.processGetChatHistory(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfIEnumerableOfChatHistoryResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfIEnumerableOfChatHistoryResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetChatHistory(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetChatHistory(response: HttpResponseBase): Observable<ResultOfIEnumerableOfChatHistoryResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfIEnumerableOfChatHistoryResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfIEnumerableOfChatHistoryResponse>(<any>null);
     }
 
     /**
      * get available users
      * @return Status 200 OK
      */
-    getChatUsers(): Observable<FileResponse> {
+    getChatUsers(): Observable<ResultOfIEnumerableOfChatUserResponse> {
         let url_ = this.baseUrl + "/Chats/users";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3534,7 +3564,7 @@ export class ChatsClient implements IChatsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3545,38 +3575,40 @@ export class ChatsClient implements IChatsClient {
                 try {
                     return this.processGetChatUsers(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfIEnumerableOfChatUserResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfIEnumerableOfChatUserResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetChatUsers(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetChatUsers(response: HttpResponseBase): Observable<ResultOfIEnumerableOfChatUserResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfIEnumerableOfChatUserResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfIEnumerableOfChatUserResponse>(<any>null);
     }
 
     /**
      * Save Chat Message
      * @return Status 200 OK
      */
-    saveMessage(message: ChatHistoryOfIChatUser): Observable<FileResponse> {
+    saveMessage(message: ChatHistoryOfIChatUser): Observable<Result> {
         let url_ = this.baseUrl + "/Chats";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3588,7 +3620,7 @@ export class ChatsClient implements IChatsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3599,31 +3631,33 @@ export class ChatsClient implements IChatsClient {
                 try {
                     return this.processSaveMessage(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processSaveMessage(response: HttpResponseBase): Observable<FileResponse> {
+    protected processSaveMessage(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 }
 
@@ -3779,6 +3813,426 @@ export interface IPermissionRequest {
     roleClaims?: RoleClaimRequest[] | undefined;
 }
 
+export class Result implements IResult {
+    messages?: string[] | undefined;
+    succeeded?: boolean;
+
+    constructor(data?: IResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(item);
+            }
+            this.succeeded = _data["succeeded"];
+        }
+    }
+
+    static fromJS(data: any): Result {
+        data = typeof data === 'object' ? data : {};
+        let result = new Result();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item);
+        }
+        data["succeeded"] = this.succeeded;
+        return data; 
+    }
+}
+
+export interface IResult {
+    messages?: string[] | undefined;
+    succeeded?: boolean;
+}
+
+export class ResultOfDashboardDataResponse extends Result implements IResultOfDashboardDataResponse {
+    data?: DashboardDataResponse | undefined;
+
+    constructor(data?: IResultOfDashboardDataResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? DashboardDataResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfDashboardDataResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfDashboardDataResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfDashboardDataResponse extends IResult {
+    data?: DashboardDataResponse | undefined;
+}
+
+export class DashboardDataResponse implements IDashboardDataResponse {
+    productCount?: number;
+    brandCount?: number;
+    documentCount?: number;
+    documentTypeCount?: number;
+    documentExtendedAttributeCount?: number;
+    userCount?: number;
+    roleCount?: number;
+    dataEnterBarChart?: ChartSeries[] | undefined;
+    productByBrandTypePieChart?: { [key: string]: number; } | undefined;
+
+    constructor(data?: IDashboardDataResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.productCount = _data["productCount"];
+            this.brandCount = _data["brandCount"];
+            this.documentCount = _data["documentCount"];
+            this.documentTypeCount = _data["documentTypeCount"];
+            this.documentExtendedAttributeCount = _data["documentExtendedAttributeCount"];
+            this.userCount = _data["userCount"];
+            this.roleCount = _data["roleCount"];
+            if (Array.isArray(_data["dataEnterBarChart"])) {
+                this.dataEnterBarChart = [] as any;
+                for (let item of _data["dataEnterBarChart"])
+                    this.dataEnterBarChart!.push(ChartSeries.fromJS(item));
+            }
+            if (_data["productByBrandTypePieChart"]) {
+                this.productByBrandTypePieChart = {} as any;
+                for (let key in _data["productByBrandTypePieChart"]) {
+                    if (_data["productByBrandTypePieChart"].hasOwnProperty(key))
+                        this.productByBrandTypePieChart![key] = _data["productByBrandTypePieChart"][key];
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): DashboardDataResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new DashboardDataResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["productCount"] = this.productCount;
+        data["brandCount"] = this.brandCount;
+        data["documentCount"] = this.documentCount;
+        data["documentTypeCount"] = this.documentTypeCount;
+        data["documentExtendedAttributeCount"] = this.documentExtendedAttributeCount;
+        data["userCount"] = this.userCount;
+        data["roleCount"] = this.roleCount;
+        if (Array.isArray(this.dataEnterBarChart)) {
+            data["dataEnterBarChart"] = [];
+            for (let item of this.dataEnterBarChart)
+                data["dataEnterBarChart"].push(item.toJSON());
+        }
+        if (this.productByBrandTypePieChart) {
+            data["productByBrandTypePieChart"] = {};
+            for (let key in this.productByBrandTypePieChart) {
+                if (this.productByBrandTypePieChart.hasOwnProperty(key))
+                    data["productByBrandTypePieChart"][key] = this.productByBrandTypePieChart[key];
+            }
+        }
+        return data; 
+    }
+}
+
+export interface IDashboardDataResponse {
+    productCount?: number;
+    brandCount?: number;
+    documentCount?: number;
+    documentTypeCount?: number;
+    documentExtendedAttributeCount?: number;
+    userCount?: number;
+    roleCount?: number;
+    dataEnterBarChart?: ChartSeries[] | undefined;
+    productByBrandTypePieChart?: { [key: string]: number; } | undefined;
+}
+
+export class ChartSeries implements IChartSeries {
+    name?: string | undefined;
+    data?: number[] | undefined;
+
+    constructor(data?: IChartSeries) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ChartSeries {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChartSeries();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IChartSeries {
+    name?: string | undefined;
+    data?: number[] | undefined;
+}
+
+export class ResultOfListOfGetAllBrandsResponse extends Result implements IResultOfListOfGetAllBrandsResponse {
+    data?: GetAllBrandsResponse[] | undefined;
+
+    constructor(data?: IResultOfListOfGetAllBrandsResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(GetAllBrandsResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfListOfGetAllBrandsResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfListOfGetAllBrandsResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfListOfGetAllBrandsResponse extends IResult {
+    data?: GetAllBrandsResponse[] | undefined;
+}
+
+export class GetAllBrandsResponse implements IGetAllBrandsResponse {
+    id?: number;
+    name?: string | undefined;
+    description?: string | undefined;
+    tax?: number;
+
+    constructor(data?: IGetAllBrandsResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.tax = _data["tax"];
+        }
+    }
+
+    static fromJS(data: any): GetAllBrandsResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetAllBrandsResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["tax"] = this.tax;
+        return data; 
+    }
+}
+
+export interface IGetAllBrandsResponse {
+    id?: number;
+    name?: string | undefined;
+    description?: string | undefined;
+    tax?: number;
+}
+
+export class ResultOfGetBrandByIdResponse extends Result implements IResultOfGetBrandByIdResponse {
+    data?: GetBrandByIdResponse | undefined;
+
+    constructor(data?: IResultOfGetBrandByIdResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? GetBrandByIdResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfGetBrandByIdResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfGetBrandByIdResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfGetBrandByIdResponse extends IResult {
+    data?: GetBrandByIdResponse | undefined;
+}
+
+export class GetBrandByIdResponse implements IGetBrandByIdResponse {
+    id?: number;
+    name?: string | undefined;
+    tax?: number;
+    description?: string | undefined;
+
+    constructor(data?: IGetBrandByIdResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.tax = _data["tax"];
+            this.description = _data["description"];
+        }
+    }
+
+    static fromJS(data: any): GetBrandByIdResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetBrandByIdResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["tax"] = this.tax;
+        data["description"] = this.description;
+        return data; 
+    }
+}
+
+export interface IGetBrandByIdResponse {
+    id?: number;
+    name?: string | undefined;
+    tax?: number;
+    description?: string | undefined;
+}
+
+export class ResultOfInteger extends Result implements IResultOfInteger {
+    data?: number;
+
+    constructor(data?: IResultOfInteger) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"];
+        }
+    }
+
+    static fromJS(data: any): ResultOfInteger {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfInteger();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfInteger extends IResult {
+    data?: number;
+}
+
 export class AddEditBrandCommand implements IAddEditBrandCommand {
     id?: number;
     name!: string;
@@ -3827,52 +4281,37 @@ export interface IAddEditBrandCommand {
     tax: number;
 }
 
-export class Result implements IResult {
-    messages?: string[] | undefined;
-    succeeded?: boolean;
+export class ResultOfString extends Result implements IResultOfString {
+    data?: string | undefined;
 
-    constructor(data?: IResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
+    constructor(data?: IResultOfString) {
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            if (Array.isArray(_data["messages"])) {
-                this.messages = [] as any;
-                for (let item of _data["messages"])
-                    this.messages!.push(item);
-            }
-            this.succeeded = _data["succeeded"];
+            this.data = _data["data"];
         }
     }
 
-    static fromJS(data: any): Result {
+    static fromJS(data: any): ResultOfString {
         data = typeof data === 'object' ? data : {};
-        let result = new Result();
+        let result = new ResultOfString();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.messages)) {
-            data["messages"] = [];
-            for (let item of this.messages)
-                data["messages"].push(item);
-        }
-        data["succeeded"] = this.succeeded;
+        data["data"] = this.data;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IResult {
-    messages?: string[] | undefined;
-    succeeded?: boolean;
+export interface IResultOfString extends IResult {
+    data?: string | undefined;
 }
 
 export class PaginatedResultOfGetAllPagedProductsResponse extends Result implements IPaginatedResultOfGetAllPagedProductsResponse {
@@ -4116,6 +4555,115 @@ export enum UploadType {
     Product = 0,
     ProfilePicture = 1,
     Document = 2,
+}
+
+export class ResultOfIEnumerableOfAuditResponse extends Result implements IResultOfIEnumerableOfAuditResponse {
+    data?: AuditResponse[] | undefined;
+
+    constructor(data?: IResultOfIEnumerableOfAuditResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(AuditResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfIEnumerableOfAuditResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfIEnumerableOfAuditResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfIEnumerableOfAuditResponse extends IResult {
+    data?: AuditResponse[] | undefined;
+}
+
+export class AuditResponse implements IAuditResponse {
+    id?: number;
+    userId?: string | undefined;
+    type?: string | undefined;
+    tableName?: string | undefined;
+    dateTime?: Date;
+    oldValues?: string | undefined;
+    newValues?: string | undefined;
+    affectedColumns?: string | undefined;
+    primaryKey?: string | undefined;
+
+    constructor(data?: IAuditResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userId = _data["userId"];
+            this.type = _data["type"];
+            this.tableName = _data["tableName"];
+            this.dateTime = _data["dateTime"] ? new Date(_data["dateTime"].toString()) : <any>undefined;
+            this.oldValues = _data["oldValues"];
+            this.newValues = _data["newValues"];
+            this.affectedColumns = _data["affectedColumns"];
+            this.primaryKey = _data["primaryKey"];
+        }
+    }
+
+    static fromJS(data: any): AuditResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new AuditResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userId"] = this.userId;
+        data["type"] = this.type;
+        data["tableName"] = this.tableName;
+        data["dateTime"] = this.dateTime ? this.dateTime.toISOString() : <any>undefined;
+        data["oldValues"] = this.oldValues;
+        data["newValues"] = this.newValues;
+        data["affectedColumns"] = this.affectedColumns;
+        data["primaryKey"] = this.primaryKey;
+        return data; 
+    }
+}
+
+export interface IAuditResponse {
+    id?: number;
+    userId?: string | undefined;
+    type?: string | undefined;
+    tableName?: string | undefined;
+    dateTime?: Date;
+    oldValues?: string | undefined;
+    newValues?: string | undefined;
+    affectedColumns?: string | undefined;
+    primaryKey?: string | undefined;
 }
 
 export class AddEditDocumentCommand implements IAddEditDocumentCommand {
@@ -4871,6 +5419,240 @@ export interface IResetPasswordRequest {
     password: string;
     confirmPassword: string;
     token: string;
+}
+
+export class ResultOfIEnumerableOfChatHistoryResponse extends Result implements IResultOfIEnumerableOfChatHistoryResponse {
+    data?: ChatHistoryResponse[] | undefined;
+
+    constructor(data?: IResultOfIEnumerableOfChatHistoryResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(ChatHistoryResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfIEnumerableOfChatHistoryResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfIEnumerableOfChatHistoryResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfIEnumerableOfChatHistoryResponse extends IResult {
+    data?: ChatHistoryResponse[] | undefined;
+}
+
+export class ChatHistoryResponse implements IChatHistoryResponse {
+    id?: number;
+    fromUserId?: string | undefined;
+    fromUserImageURL?: string | undefined;
+    fromUserFullName?: string | undefined;
+    toUserId?: string | undefined;
+    toUserImageURL?: string | undefined;
+    toUserFullName?: string | undefined;
+    message?: string | undefined;
+    createdDate?: Date;
+
+    constructor(data?: IChatHistoryResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.fromUserId = _data["fromUserId"];
+            this.fromUserImageURL = _data["fromUserImageURL"];
+            this.fromUserFullName = _data["fromUserFullName"];
+            this.toUserId = _data["toUserId"];
+            this.toUserImageURL = _data["toUserImageURL"];
+            this.toUserFullName = _data["toUserFullName"];
+            this.message = _data["message"];
+            this.createdDate = _data["createdDate"] ? new Date(_data["createdDate"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ChatHistoryResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChatHistoryResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["fromUserId"] = this.fromUserId;
+        data["fromUserImageURL"] = this.fromUserImageURL;
+        data["fromUserFullName"] = this.fromUserFullName;
+        data["toUserId"] = this.toUserId;
+        data["toUserImageURL"] = this.toUserImageURL;
+        data["toUserFullName"] = this.toUserFullName;
+        data["message"] = this.message;
+        data["createdDate"] = this.createdDate ? this.createdDate.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IChatHistoryResponse {
+    id?: number;
+    fromUserId?: string | undefined;
+    fromUserImageURL?: string | undefined;
+    fromUserFullName?: string | undefined;
+    toUserId?: string | undefined;
+    toUserImageURL?: string | undefined;
+    toUserFullName?: string | undefined;
+    message?: string | undefined;
+    createdDate?: Date;
+}
+
+export class ResultOfIEnumerableOfChatUserResponse extends Result implements IResultOfIEnumerableOfChatUserResponse {
+    data?: ChatUserResponse[] | undefined;
+
+    constructor(data?: IResultOfIEnumerableOfChatUserResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(ChatUserResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfIEnumerableOfChatUserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfIEnumerableOfChatUserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfIEnumerableOfChatUserResponse extends IResult {
+    data?: ChatUserResponse[] | undefined;
+}
+
+export class ChatUserResponse implements IChatUserResponse {
+    id?: string | undefined;
+    userName?: string | undefined;
+    profilePictureDataUrl?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    emailAddress?: string | undefined;
+    isOnline?: boolean;
+    chatHistoryFromUsers?: ChatHistoryOfIChatUser[] | undefined;
+    chatHistoryToUsers?: ChatHistoryOfIChatUser[] | undefined;
+
+    constructor(data?: IChatUserResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userName = _data["userName"];
+            this.profilePictureDataUrl = _data["profilePictureDataUrl"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.emailAddress = _data["emailAddress"];
+            this.isOnline = _data["isOnline"];
+            if (Array.isArray(_data["chatHistoryFromUsers"])) {
+                this.chatHistoryFromUsers = [] as any;
+                for (let item of _data["chatHistoryFromUsers"])
+                    this.chatHistoryFromUsers!.push(ChatHistoryOfIChatUser.fromJS(item));
+            }
+            if (Array.isArray(_data["chatHistoryToUsers"])) {
+                this.chatHistoryToUsers = [] as any;
+                for (let item of _data["chatHistoryToUsers"])
+                    this.chatHistoryToUsers!.push(ChatHistoryOfIChatUser.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ChatUserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChatUserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["profilePictureDataUrl"] = this.profilePictureDataUrl;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["emailAddress"] = this.emailAddress;
+        data["isOnline"] = this.isOnline;
+        if (Array.isArray(this.chatHistoryFromUsers)) {
+            data["chatHistoryFromUsers"] = [];
+            for (let item of this.chatHistoryFromUsers)
+                data["chatHistoryFromUsers"].push(item.toJSON());
+        }
+        if (Array.isArray(this.chatHistoryToUsers)) {
+            data["chatHistoryToUsers"] = [];
+            for (let item of this.chatHistoryToUsers)
+                data["chatHistoryToUsers"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IChatUserResponse {
+    id?: string | undefined;
+    userName?: string | undefined;
+    profilePictureDataUrl?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    emailAddress?: string | undefined;
+    isOnline?: boolean;
+    chatHistoryFromUsers?: ChatHistoryOfIChatUser[] | undefined;
+    chatHistoryToUsers?: ChatHistoryOfIChatUser[] | undefined;
 }
 
 export class ChatHistoryOfIChatUser implements IChatHistoryOfIChatUser {

@@ -134,9 +134,10 @@ namespace CleanArchitectureBase.Server.Extensions
                 {
                     var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
 
+                    //options.SchemaNameGenerator = new CustomSchemaNameGenerator();
+                    //options.TypeNameGenerator = new CustomTypeNameGenerator();
                     options.Title = configSection.GetValue<string>(nameof(options.Title));
                     options.Description = configSection.GetValue<string>(nameof(options.Description));
-
                     options.DocumentName = ApiVersions.DocumentVersionPrefix + version.MajorVersion;
                     options.ApiGroupNames = new[] { ApiVersions.DocumentVersionPrefix + version.MajorVersion };
                     options.Version = ApiVersions.VersionString(version);

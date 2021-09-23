@@ -1,8 +1,12 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
+﻿using System.Collections.Generic;
+using System.Threading;
+using CleanArchitectureBase.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Utilities
 {
@@ -25,7 +29,8 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.AuditTrails.View)]
         [HttpGet]
-        public async Task<IActionResult> GetUserTrailsAsync()
+        [Produces(typeof(Result<IEnumerable<AuditResponse>>))]
+        public async Task<IActionResult> GetUserTrailsAsync(CancellationToken cancellationToken = default)
         {
             return Ok(await _auditService.GetCurrentUserTrailsAsync(_currentUserService.UserId));
         }
@@ -39,6 +44,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.AuditTrails.Export)]
         [HttpGet("export")]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> ExportExcel(string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
         {
             var data = await _auditService.ExportToExcelAsync(_currentUserService.UserId, searchString, searchInOldValues, searchInNewValues);

@@ -67,3 +67,71 @@
 2021-09-23 11:54:17.720 +02:00 [INF] Application started. Press Ctrl+C to shut down.
 2021-09-23 11:54:17.720 +02:00 [INF] Hosting environment: Development
 2021-09-23 11:54:17.721 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 14:05:04.018 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 14:05:04.058 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 14:05:04.061 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 14:05:04.062 +02:00 [INF] Hosting environment: Development
+2021-09-23 14:05:04.062 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 14:05:16.276 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:05:18.687 +02:00 [INF] CleanArchitectureBase Request: ExportProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"SearchString":null,"$type":"ExportProductsQuery"}
+2021-09-23 14:05:19.221 +02:00 [WRN] CleanArchitectureBase Long Running Request: ExportProductsQuery (524 milliseconds) 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"SearchString":null,"$type":"ExportProductsQuery"}
+2021-09-23 14:05:30.013 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":2,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:05:31.823 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:05:36.513 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":"mit b","OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:05:37.929 +02:00 [INF] CleanArchitectureBase Request: ExportProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"SearchString":"mit b","$type":"ExportProductsQuery"}
+2021-09-23 14:05:48.850 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:05:50.109 +02:00 [INF] CleanArchitectureBase Request: GetProductImageQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"$type":"GetProductImageQuery"}
+2021-09-23 14:05:50.160 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:06:03.073 +02:00 [INF] CleanArchitectureBase Request: AddEditProductCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"Name":"Salami","Barcode":"2ds","Description":"Eine art wurst","ImageDataURL":null,"Rate":3.0,"BrandId":3,"UploadRequest":null,"$type":"AddEditProductCommand"}
+2021-09-23 14:06:03.410 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:06:05.471 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":2,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:06:07.144 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:06:15.832 +02:00 [INF] CleanArchitectureBase Request: DeleteProductCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":7,"$type":"DeleteProductCommand"}
+2021-09-23 14:06:15.897 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:06:19.046 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":2,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:06:21.518 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 14:40:42.435 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 14:40:42.473 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 14:40:42.476 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 14:40:42.476 +02:00 [INF] Hosting environment: Development
+2021-09-23 14:40:42.477 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 14:43:04.853 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 14:43:04.897 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 14:43:04.900 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 14:43:04.901 +02:00 [INF] Hosting environment: Development
+2021-09-23 14:43:04.901 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 14:43:14.294 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:43:27.344 +02:00 [INF] CleanArchitectureBase Request: AddEditBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":0,"Name":"My brand","Description":"super nice","Tax":32.0,"$type":"AddEditBrandCommand"}
+2021-09-23 14:43:27.636 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:43:32.836 +02:00 [INF] CleanArchitectureBase Request: DeleteBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":3,"$type":"DeleteBrandCommand"}
+2021-09-23 14:43:32.889 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:43:40.327 +02:00 [INF] CleanArchitectureBase Request: DeleteBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":5,"$type":"DeleteBrandCommand"}
+2021-09-23 14:43:40.362 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:43:43.982 +02:00 [INF] CleanArchitectureBase Request: DeleteBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":1,"$type":"DeleteBrandCommand"}
+2021-09-23 14:43:44.015 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:43:47.337 +02:00 [INF] CleanArchitectureBase Request: ExportBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"SearchString":null,"$type":"ExportBrandsQuery"}
+2021-09-23 14:43:57.618 +02:00 [INF] CleanArchitectureBase Request: DeleteBrandCommand 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"Id":6,"$type":"DeleteBrandCommand"}
+2021-09-23 14:43:57.676 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 14:44:10.085 +02:00 [INF] CleanArchitectureBase Request: ExportBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"SearchString":"fff","$type":"ExportBrandsQuery"}
+2021-09-23 14:56:17.515 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 14:56:17.559 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 14:56:17.562 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 14:56:17.562 +02:00 [INF] Hosting environment: Development
+2021-09-23 14:56:17.564 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 15:04:51.030 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 15:04:51.074 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 15:04:51.077 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 15:04:51.078 +02:00 [INF] Hosting environment: Development
+2021-09-23 15:04:51.078 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 15:09:03.904 +02:00 [INF] Application is shutting down...
+2021-09-23 16:42:50.743 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 16:42:50.787 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 16:42:50.789 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 16:42:50.790 +02:00 [INF] Hosting environment: Development
+2021-09-23 16:42:50.790 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 17:00:23.820 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 17:00:23.862 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 17:00:23.865 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 17:00:23.865 +02:00 [INF] Hosting environment: Development
+2021-09-23 17:00:23.865 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 17:00:37.709 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetDashboardDataQuery"}

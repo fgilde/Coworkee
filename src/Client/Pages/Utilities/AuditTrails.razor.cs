@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Audit;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -16,7 +16,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 {
     public partial class AuditTrails
     {
-        [Inject] private IAuditManager AuditManager { get; set; }
+        [Inject] private IBlazorHeroClient Api { get; set; }
 
         public List<RelatedAuditTrail> Trails = new();
 
@@ -37,10 +37,9 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 
         private bool Search(AuditResponse response)
         {
-            var result = false;
+            bool result = string.IsNullOrWhiteSpace(_searchString);
 
             // check Search String
-            if (string.IsNullOrWhiteSpace(_searchString)) result = true;
             if (!result)
             {
                 if (response.TableName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
@@ -85,7 +84,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 
         private async Task GetDataAsync()
         {
-            var response = await AuditManager.GetCurrentUserTrailsAsync();
+            var response = await Api.Audits_GetUserTrailsAsync();
             if (response.Succeeded)
             {
                 Trails = response.Data
@@ -124,7 +123,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 
         private async Task ExportToExcelAsync()
         {
-            var response = await AuditManager.DownloadFileAsync(_searchString, _searchInOldValues, _searchInNewValues);
+            var response = await Api.Audits_ExportExcelAsync(_searchString, _searchInOldValues, _searchInNewValues);
             if (response.Succeeded)
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new

@@ -72,7 +72,7 @@ namespace CleanArchitectureBase.Client.Extensions
                     client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
                     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 })
-                .AddTypedClient<BlazorHeroClient>((_, services) =>
+                .AddTypedClient<IBlazorHeroClient>((_, services) =>
                 {
                     var c = services.GetService<HttpClient>();
                     return new BlazorHeroClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/")+"api/v1/", c);

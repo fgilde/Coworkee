@@ -25,13 +25,13 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
         private readonly ILocalStorageService _localStorage;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
         private readonly IStringLocalizer<AuthenticationManager> _localizer;
-        private readonly BlazorHeroClient _api;
+        private readonly IBlazorHeroClient _api;
 
         public AuthenticationManager(
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
-            IStringLocalizer<AuthenticationManager> localizer, BlazorHeroClient api)
+            IStringLocalizer<AuthenticationManager> localizer, IBlazorHeroClient api)
         {
             _httpClient = httpClient;
             _localStorage = localStorage;

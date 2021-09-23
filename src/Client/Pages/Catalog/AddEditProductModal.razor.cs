@@ -13,16 +13,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Brand;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product;
+using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class AddEditProductModal
     {
-        [Inject] private IProductManager ProductManager { get; set; }
-        [Inject] private IBrandManager BrandManager { get; set; }
-
+        [Inject] private IBlazorHeroClient Api { get; set; }
+        
         [Parameter] public AddEditProductCommand AddEditProductModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
@@ -38,7 +36,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task SaveAsync()
         {
-            var response = await ProductManager.SaveAsync(AddEditProductModel);
+            var response = await Api.Products_PostAsync(AddEditProductModel);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
@@ -72,7 +70,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task LoadBrandsAsync()
         {
-            var data = await BrandManager.GetAllAsync();
+            var data = await Api.Brands_GetAllAsync();
             if (data.Succeeded)
             {
                 _brands = data.Data;
@@ -81,7 +79,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task LoadImageAsync()
         {
-            var data = await ProductManager.GetProductImageAsync(AddEditProductModel.Id);
+            var data = await Api.Products_GetProductImageAsync(AddEditProductModel.Id);
             if (data.Succeeded)
             {
                 var imageData = data.Data;

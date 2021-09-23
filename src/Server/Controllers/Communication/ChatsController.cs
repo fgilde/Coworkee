@@ -3,9 +3,12 @@ using CleanArchitectureBase.Application.Models.Chat;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Chat;
+using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Communication
 {
@@ -29,6 +32,7 @@ namespace CleanArchitectureBase.Server.Controllers.Communication
         /// <returns>Status 200 OK</returns>
         //Get user wise chat history
         [HttpGet("{contactId}")]
+        [Produces(typeof(Result<IEnumerable<ChatHistoryResponse>>))]
         public async Task<IActionResult> GetChatHistoryAsync(string contactId)
         {
             return Ok(await _chatService.GetChatHistoryAsync(_currentUserService.UserId, contactId));
@@ -39,6 +43,7 @@ namespace CleanArchitectureBase.Server.Controllers.Communication
         /// <returns>Status 200 OK</returns>
         //get available users - sorted by date of last message if exists
         [HttpGet("users")]
+        [Produces(typeof(Result<IEnumerable<ChatUserResponse>>))]
         public async Task<IActionResult> GetChatUsersAsync()
         {
             return Ok(await _chatService.GetChatUsersAsync(_currentUserService.UserId));
@@ -51,6 +56,7 @@ namespace CleanArchitectureBase.Server.Controllers.Communication
         /// <returns>Status 200 OK</returns>
         //save chat message
         [HttpPost]
+        [Produces(typeof(Result))]
         public async Task<IActionResult> SaveMessageAsync(ChatHistory<IChatUser> message)
         {
             message.FromUserId = _currentUserService.UserId;

@@ -143,7 +143,7 @@
       "queryNullValue": "",
       "className": "GeneratedClient",
       "operationGenerationMode": "SingleClientFromOperationId",
-      "additionalNamespaceUsages": [ "CleanArchitectureBase.SDK", "CleanArchitectureBase.Domain.Entities", "CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit", "CleanArchitectureBase.Application.Requests.Identity", "CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit", "CleanArchitectureBase.Application.Features.Products.Commands.AddEdit", "CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit", "CleanArchitectureBase.SDK.Models", "CleanArchitectureBase.Application.Responses.Identity" ],
+      "additionalNamespaceUsages": [ "CleanArchitectureBase.SDK", "CleanArchitectureBase.Domain.Entities", "CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit", "CleanArchitectureBase.Application.Requests.Identity", "CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit", "CleanArchitectureBase.Application.Features.Products.Commands.AddEdit", "CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit", "CleanArchitectureBase.SDK.Models", "CleanArchitectureBase.Application.Responses.Identity", "CleanArchitectureBase.Shared.Wrapper" ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": true,
       "generateJsonMethods": true,

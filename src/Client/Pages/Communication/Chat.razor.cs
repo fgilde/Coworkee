@@ -12,14 +12,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Chat;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Communication;
+using CleanArchitectureBase.SDK;
+using CleanArchitectureBase.SDK.Models;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Pages.Communication
 {
     public partial class Chat
     {
-        [Inject] private IChatManager ChatManager { get; set; }
+        [Inject] private IBlazorHeroClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public string CurrentMessage { get; set; }
@@ -38,13 +39,13 @@ namespace CleanArchitectureBase.Client.Pages.Communication
             if (!string.IsNullOrEmpty(CurrentMessage) && !string.IsNullOrEmpty(CId))
             {
                 //Save Message to DB
-                var chatHistory = new ChatHistory<IChatUser>
+                var chatHistory = new ChatHistoryOfIChatUser
                 {
                     Message = CurrentMessage,
                     ToUserId = CId,
                     CreatedDate = DateTime.Now
                 };
-                var response = await ChatManager.SaveMessageAsync(chatHistory);
+                var response = await Api.Chats_SaveMessageAsync(chatHistory);
                 if (response.Succeeded)
                 {
                     var state = await _stateProvider.GetAuthenticationStateAsync();
@@ -149,7 +150,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                 _navigationManager.NavigateTo($"chat/{CId}");
                 //Load messages from db here
                 _messages = new List<ChatHistoryResponse>();
-                var historyResponse = await ChatManager.GetChatHistoryAsync(CId);
+                var historyResponse = await Api.Chats_GetChatHistoryAsync(CId);
                 if (historyResponse.Succeeded)
                 {
                     _messages = historyResponse.Data.ToList();
@@ -174,7 +175,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         private async Task GetUsersAsync()
         {
             //add get chat history from chat controller / manager
-            var response = await ChatManager.GetChatUsersAsync();
+            var response = await Api.Chats_GetChatUsersAsync();
             if (response.Succeeded)
             {
                 UserList = response.Data.ToList();

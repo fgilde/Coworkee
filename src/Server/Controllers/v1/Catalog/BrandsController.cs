@@ -1,4 +1,6 @@
-﻿using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
+﻿using System.Collections.Generic;
+using System.Threading;
+using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +9,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Brands.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Brands.Queries.Export;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
 {
@@ -18,9 +21,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Produces(typeof(Result<List<GetAllBrandsResponse>>))]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
-            var brands = await _mediator.Send(new GetAllBrandsQuery());
+            var brands = await _mediator.Send(new GetAllBrandsQuery(), cancellationToken);
             return Ok(brands);
         }
 
@@ -31,9 +35,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.Brands.View)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [Produces(typeof(Result<GetBrandByIdResponse>))]
+        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            var brand = await _mediator.Send(new GetBrandByIdQuery() { Id = id });
+            var brand = await _mediator.Send(new GetBrandByIdQuery { Id = id }, cancellationToken);
             return Ok(brand);
         }
 
@@ -44,9 +49,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.Create)]
         [HttpPost]
-        public async Task<IActionResult> Post(AddEditBrandCommand command)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Post(AddEditBrandCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await _mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
@@ -56,9 +62,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.Delete)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteBrandCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteBrandCommand { Id = id }, cancellationToken));
         }
 
         /// <summary>
@@ -68,9 +75,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <returns></returns>
         [Authorize(Policy = Permissions.Brands.Export)]
         [HttpGet("export")]
-        public async Task<IActionResult> Export(string searchString = "")
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new ExportBrandsQuery(searchString)));
+            return Ok(await _mediator.Send(new ExportBrandsQuery(searchString), cancellationToken));
         }
     }
 }

@@ -5,10 +5,8 @@ using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
-using Hangfire.Dashboard;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Http;
-using Nextended.Core.Encryption;
-using Nextended.Core.Hashing;
 
 namespace CleanArchitectureBase.Server.Controllers.v1
 {
@@ -21,10 +19,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1
         /// <returns>Status 200 OK </returns>
         [Authorize(Policy = Permissions.Dashboards.View)]
         [HttpGet]
+        [Produces(typeof(Result<DashboardDataResponse>))]
         public async Task<IActionResult> GetDataAsync()
         {
-            var result = await _mediator.Send(new GetDashboardDataQuery());
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetDashboardDataQuery()));
         }
 
         /// <summary>
@@ -33,7 +31,8 @@ namespace CleanArchitectureBase.Server.Controllers.v1
         /// <returns>Status 200 OK </returns>
         [Authorize(Policy = Permissions.Hangfire.View)]
         [HttpGet("jobdashboardurl")]
-        public async Task<IActionResult> GetJobDashBoardUrl()
+        [Produces(typeof(string))]
+        public IActionResult GetJobDashBoardUrl()
         {
             HttpContext.Session.SetString(ApplicationConstants.Hangfire.SessionUserIdKey, Get<ICurrentUserService>().UserId);
             return Ok(ApplicationConstants.Hangfire.DashboardRoute);

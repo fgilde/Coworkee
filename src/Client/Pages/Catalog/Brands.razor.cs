@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Brand;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Brands
     {
-        [Inject] private IBrandManager BrandManager { get; set; }
+        [Inject] private IBlazorHeroClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -58,7 +58,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task GetBrandsAsync()
         {
-            var response = await BrandManager.GetAllAsync();
+            var response = await Api.Brands_GetAllAsync();
             if (response.Succeeded)
             {
                 _brandList = response.Data.ToList();
@@ -84,7 +84,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await BrandManager.DeleteAsync(id);
+                var response = await Api.Brands_DeleteAsync(id);
                 if (response.Succeeded)
                 {
                     await Reset();
@@ -104,7 +104,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task ExportToExcel()
         {
-            var response = await BrandManager.ExportToExcelAsync(_searchString);
+            var response = await Api.Brands_ExportAsync(_searchString);
             if (response.Succeeded)
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new

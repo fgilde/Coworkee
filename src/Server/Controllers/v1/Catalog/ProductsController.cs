@@ -29,13 +29,15 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <summary>
         /// Get a Product Image by Id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Product Id</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet("image/{id}")]
-        public async Task<IActionResult> GetProductImageAsync(int id)
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> GetProductImageAsync(int id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetProductImageQuery(id));
+            var result = await _mediator.Send(new GetProductImageQuery(id), cancellationToken);
             return Ok(result);
         }
 
@@ -43,36 +45,42 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// Add/Edit a Product
         /// </summary>
         /// <param name="command"></param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.Create)]
         [HttpPost]
-        public async Task<IActionResult> Post(AddEditProductCommand command)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Post(AddEditProductCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await _mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
         /// Delete a Product
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK response</returns>
         [Authorize(Policy = Permissions.Products.Delete)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteProductCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteProductCommand { Id = id }, cancellationToken));
         }
 
         /// <summary>
         /// Search Products and Export to Excel
         /// </summary>
         /// <param name="searchString"></param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.Export)]
         [HttpGet("export")]
-        public async Task<IActionResult> Export(string searchString = "")
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new ExportProductsQuery(searchString)));
+            return Ok(await _mediator.Send(new ExportProductsQuery(searchString), cancellationToken));
         }
     }
 }

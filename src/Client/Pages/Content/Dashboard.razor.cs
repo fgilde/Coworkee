@@ -3,16 +3,15 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Dashboard;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Client.Pages.Content
 {
     public partial class Dashboard
     {
-        [Inject] private IDashboardManager DashboardManager { get; set; }
+        [Inject] private IBlazorHeroClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public int ProductCount { get; set; }
@@ -44,7 +43,7 @@ namespace CleanArchitectureBase.Client.Pages.Content
 
         private async Task LoadDataAsync()
         {
-            var response = await DashboardManager.GetDataAsync();
+            var response = await Api.Dashboard_GetDataAsync();
             if (response.Succeeded)
             {
                 ProductCount = response.Data.ProductCount;

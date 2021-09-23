@@ -13,6 +13,7 @@ using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.SDK.Models;
 using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Shared.Wrapper;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
@@ -128,77 +129,77 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Dashboard_GetData();
+        ResultOfDashboardDataResponse Dashboard_GetData();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfDashboardDataResponse> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Dashboard_GetJobDashBoardUrl();
+        string Dashboard_GetJobDashBoardUrl();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Dashboard_GetJobDashBoardUrlAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<string> Dashboard_GetJobDashBoardUrlAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_GetAll();
+        ResultOfListOfGetAllBrandsResponse Brands_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfListOfGetAllBrandsResponse> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_Post(AddEditBrandCommand command);
+        ResultOfInteger Brands_Post(AddEditBrandCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_GetById(int id);
+        ResultOfGetBrandByIdResponse Brands_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfGetBrandByIdResponse> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_Delete(int id);
+        ResultOfInteger Brands_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_Export(string searchString = null);
+        ResultOfString Brands_Export(string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfString> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
@@ -214,68 +215,70 @@ namespace SDK
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_Post(AddEditProductCommand command);
+        ResultOfInteger Products_Post(AddEditProductCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get a Product Image by Id</summary>
+        /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_GetProductImage(int id);
+        ResultOfString Products_GetProductImage(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get a Product Image by Id</summary>
+        /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfString> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Product</summary>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_Delete(int id);
+        ResultOfInteger Products_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Product</summary>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> Products_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_Export(string searchString = null);
+        ResultOfString Products_Export(string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfString> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Audits_GetUserTrails();
+        ResultOfIEnumerableOfAuditResponse Audits_GetUserTrails();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfIEnumerableOfAuditResponse> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null);
+        ResultOfString Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfString> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Change Language Preference</summary>
         /// <returns>Status 200 OK</returns>
@@ -606,35 +609,35 @@ namespace SDK
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Chats_GetChatHistory(string contactId);
+        ResultOfIEnumerableOfChatHistoryResponse Chats_GetChatHistory(string contactId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfIEnumerableOfChatHistoryResponse> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Chats_GetChatUsers();
+        ResultOfIEnumerableOfChatUserResponse Chats_GetChatUsers();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfIEnumerableOfChatUserResponse> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Chats_SaveMessage(ChatHistoryOfIChatUser message);
+        Result Chats_SaveMessage(ChatHistoryOfIChatUser message);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Chats_SaveMessageAsync(ChatHistoryOfIChatUser message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result> Chats_SaveMessageAsync(ChatHistoryOfIChatUser message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -1347,7 +1350,7 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Dashboard_GetData()
+        public ResultOfDashboardDataResponse Dashboard_GetData()
         {
             return System.Threading.Tasks.Task.Run(async () => await Dashboard_GetDataAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1356,7 +1359,7 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfDashboardDataResponse> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Dashboard");
@@ -1368,7 +1371,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1389,12 +1392,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfDashboardDataResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1419,7 +1424,7 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Dashboard_GetJobDashBoardUrl()
+        public string Dashboard_GetJobDashBoardUrl()
         {
             return System.Threading.Tasks.Task.Run(async () => await Dashboard_GetJobDashBoardUrlAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1428,7 +1433,7 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Dashboard_GetJobDashBoardUrlAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<string> Dashboard_GetJobDashBoardUrlAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Dashboard/jobdashboardurl");
@@ -1440,7 +1445,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1461,12 +1466,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<string>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1491,7 +1498,7 @@ namespace SDK
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Brands_GetAll()
+        public ResultOfListOfGetAllBrandsResponse Brands_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1500,7 +1507,7 @@ namespace SDK
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfListOfGetAllBrandsResponse> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands");
@@ -1512,7 +1519,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1533,12 +1540,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfGetAllBrandsResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1563,7 +1572,7 @@ namespace SDK
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Brands_Post(AddEditBrandCommand command)
+        public ResultOfInteger Brands_Post(AddEditBrandCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1572,7 +1581,7 @@ namespace SDK
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -1590,7 +1599,7 @@ namespace SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1611,12 +1620,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1641,7 +1652,7 @@ namespace SDK
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Brands_GetById(int id)
+        public ResultOfGetBrandByIdResponse Brands_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1650,7 +1661,7 @@ namespace SDK
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfGetBrandByIdResponse> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1666,7 +1677,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1687,12 +1698,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetBrandByIdResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1717,7 +1730,7 @@ namespace SDK
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Brands_Delete(int id)
+        public ResultOfInteger Brands_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1726,7 +1739,7 @@ namespace SDK
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1742,7 +1755,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1763,12 +1776,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1792,7 +1807,7 @@ namespace SDK
     
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Brands_Export(string searchString = null)
+        public ResultOfString Brands_Export(string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1800,7 +1815,7 @@ namespace SDK
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfString> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands/export?");
@@ -1817,7 +1832,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1838,12 +1853,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1959,7 +1976,7 @@ namespace SDK
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Products_Post(AddEditProductCommand command)
+        public ResultOfInteger Products_Post(AddEditProductCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1968,7 +1985,7 @@ namespace SDK
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -1986,7 +2003,7 @@ namespace SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2007,12 +2024,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2035,18 +2054,20 @@ namespace SDK
         }
     
         /// <summary>Get a Product Image by Id</summary>
+        /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Products_GetProductImage(int id)
+        public ResultOfString Products_GetProductImage(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetProductImageAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get a Product Image by Id</summary>
+        /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfString> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2062,7 +2083,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2083,12 +2104,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2113,7 +2136,7 @@ namespace SDK
         /// <summary>Delete a Product</summary>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Products_Delete(int id)
+        public ResultOfInteger Products_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2122,7 +2145,7 @@ namespace SDK
         /// <summary>Delete a Product</summary>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Products_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> Products_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2138,7 +2161,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2159,12 +2182,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2189,7 +2214,7 @@ namespace SDK
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Products_Export(string searchString = null)
+        public ResultOfString Products_Export(string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2198,7 +2223,7 @@ namespace SDK
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfString> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/export?");
@@ -2215,7 +2240,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2236,12 +2261,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2266,7 +2293,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Audits_GetUserTrails()
+        public ResultOfIEnumerableOfAuditResponse Audits_GetUserTrails()
         {
             return System.Threading.Tasks.Task.Run(async () => await Audits_GetUserTrailsAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2275,7 +2302,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfIEnumerableOfAuditResponse> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits");
@@ -2287,7 +2314,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2308,12 +2335,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfIEnumerableOfAuditResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2338,7 +2367,7 @@ namespace SDK
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null)
+        public ResultOfString Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Audits_ExportExcelAsync(searchString, searchInOldValues, searchInNewValues, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2347,7 +2376,7 @@ namespace SDK
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfString> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits/export?");
@@ -2372,7 +2401,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2393,12 +2422,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -4879,7 +4910,7 @@ namespace SDK
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Chats_GetChatHistory(string contactId)
+        public ResultOfIEnumerableOfChatHistoryResponse Chats_GetChatHistory(string contactId)
         {
             return System.Threading.Tasks.Task.Run(async () => await Chats_GetChatHistoryAsync(contactId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4888,7 +4919,7 @@ namespace SDK
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfIEnumerableOfChatHistoryResponse> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Chats/{contactId}");
@@ -4901,7 +4932,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -4922,12 +4953,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfIEnumerableOfChatHistoryResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -4952,7 +4985,7 @@ namespace SDK
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Chats_GetChatUsers()
+        public ResultOfIEnumerableOfChatUserResponse Chats_GetChatUsers()
         {
             return System.Threading.Tasks.Task.Run(async () => await Chats_GetChatUsersAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4961,7 +4994,7 @@ namespace SDK
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfIEnumerableOfChatUserResponse> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Chats/users");
@@ -4973,7 +5006,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -4994,12 +5027,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfIEnumerableOfChatUserResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -5024,7 +5059,7 @@ namespace SDK
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Chats_SaveMessage(ChatHistoryOfIChatUser message)
+        public Result Chats_SaveMessage(ChatHistoryOfIChatUser message)
         {
             return System.Threading.Tasks.Task.Run(async () => await Chats_SaveMessageAsync(message, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -5033,7 +5068,7 @@ namespace SDK
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Chats_SaveMessageAsync(ChatHistoryOfIChatUser message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result> Chats_SaveMessageAsync(ChatHistoryOfIChatUser message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (message == null)
                 throw new System.ArgumentNullException("message");
@@ -5051,7 +5086,7 @@ namespace SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -5072,12 +5107,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<Result>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {

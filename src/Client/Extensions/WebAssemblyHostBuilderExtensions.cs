@@ -17,6 +17,9 @@ using System.Reflection;
 using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
+using CleanArchitectureBase.SDK;
+using Nextended.Core.Extensions;
+using SDK;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace CleanArchitectureBase.Client.Extensions
@@ -68,6 +71,11 @@ namespace CleanArchitectureBase.Client.Extensions
                     client.DefaultRequestHeaders.AcceptLanguage.Clear();
                     client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
                     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+                })
+                .AddTypedClient<BlazorHeroClient>((_, services) =>
+                {
+                    var c = services.GetService<HttpClient>();
+                    return new BlazorHeroClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/")+"api/v1/", c);
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();

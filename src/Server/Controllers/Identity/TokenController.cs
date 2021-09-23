@@ -3,6 +3,8 @@ using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
 {
@@ -24,6 +26,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="model"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost]
+        [Produces(typeof(Result<TokenResponse>))]
         public async Task<ActionResult> Get(TokenRequest model)
         {
             var response = await _identityService.LoginAsync(model);

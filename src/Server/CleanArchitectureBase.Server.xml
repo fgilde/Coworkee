@@ -379,7 +379,7 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Products
             </summary>

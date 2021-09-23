@@ -1005,7 +1005,7 @@ export interface IProductsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<FileResponse>;
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfGetAllPagedProductsResponse>;
     /**
      * Add/Edit a Product
      * @return Status 200 OK
@@ -1050,7 +1050,7 @@ export class ProductsClient implements IProductsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<FileResponse> {
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfGetAllPagedProductsResponse> {
         let url_ = this.baseUrl + "/Products?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
@@ -1070,7 +1070,7 @@ export class ProductsClient implements IProductsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1081,31 +1081,33 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<PaginatedResultOfGetAllPagedProductsResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<PaginatedResultOfGetAllPagedProductsResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<PaginatedResultOfGetAllPagedProductsResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PaginatedResultOfGetAllPagedProductsResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<PaginatedResultOfGetAllPagedProductsResponse>(<any>null);
     }
 
     /**
@@ -2696,7 +2698,7 @@ export interface ITokenClient {
      * Get Token (Email, Password)
      * @return Status 200 OK
      */
-    get(model: TokenRequest): Observable<FileResponse>;
+    get(model: TokenRequest): Observable<ResultOfTokenResponse>;
     /**
      * Refresh Token
      * @return Status 200 OK
@@ -2721,7 +2723,7 @@ export class TokenClient implements ITokenClient {
      * Get Token (Email, Password)
      * @return Status 200 OK
      */
-    get(model: TokenRequest): Observable<FileResponse> {
+    get(model: TokenRequest): Observable<ResultOfTokenResponse> {
         let url_ = this.baseUrl + "/identity/Token";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2733,7 +2735,7 @@ export class TokenClient implements ITokenClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2744,31 +2746,33 @@ export class TokenClient implements ITokenClient {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfTokenResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfTokenResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGet(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGet(response: HttpResponseBase): Observable<ResultOfTokenResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfTokenResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfTokenResponse>(<any>null);
     }
 
     /**
@@ -3823,6 +3827,179 @@ export interface IAddEditBrandCommand {
     tax: number;
 }
 
+export class Result implements IResult {
+    messages?: string[] | undefined;
+    succeeded?: boolean;
+
+    constructor(data?: IResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(item);
+            }
+            this.succeeded = _data["succeeded"];
+        }
+    }
+
+    static fromJS(data: any): Result {
+        data = typeof data === 'object' ? data : {};
+        let result = new Result();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item);
+        }
+        data["succeeded"] = this.succeeded;
+        return data; 
+    }
+}
+
+export interface IResult {
+    messages?: string[] | undefined;
+    succeeded?: boolean;
+}
+
+export class PaginatedResultOfGetAllPagedProductsResponse extends Result implements IPaginatedResultOfGetAllPagedProductsResponse {
+    data?: GetAllPagedProductsResponse[] | undefined;
+    currentPage?: number;
+    totalPages?: number;
+    totalCount?: number;
+    pageSize?: number;
+    hasPreviousPage?: boolean;
+    hasNextPage?: boolean;
+
+    constructor(data?: IPaginatedResultOfGetAllPagedProductsResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(GetAllPagedProductsResponse.fromJS(item));
+            }
+            this.currentPage = _data["currentPage"];
+            this.totalPages = _data["totalPages"];
+            this.totalCount = _data["totalCount"];
+            this.pageSize = _data["pageSize"];
+            this.hasPreviousPage = _data["hasPreviousPage"];
+            this.hasNextPage = _data["hasNextPage"];
+        }
+    }
+
+    static fromJS(data: any): PaginatedResultOfGetAllPagedProductsResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new PaginatedResultOfGetAllPagedProductsResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["currentPage"] = this.currentPage;
+        data["totalPages"] = this.totalPages;
+        data["totalCount"] = this.totalCount;
+        data["pageSize"] = this.pageSize;
+        data["hasPreviousPage"] = this.hasPreviousPage;
+        data["hasNextPage"] = this.hasNextPage;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IPaginatedResultOfGetAllPagedProductsResponse extends IResult {
+    data?: GetAllPagedProductsResponse[] | undefined;
+    currentPage?: number;
+    totalPages?: number;
+    totalCount?: number;
+    pageSize?: number;
+    hasPreviousPage?: boolean;
+    hasNextPage?: boolean;
+}
+
+export class GetAllPagedProductsResponse implements IGetAllPagedProductsResponse {
+    id?: number;
+    name?: string | undefined;
+    barcode?: string | undefined;
+    description?: string | undefined;
+    rate?: number;
+    brand?: string | undefined;
+    brandId?: number;
+
+    constructor(data?: IGetAllPagedProductsResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.barcode = _data["barcode"];
+            this.description = _data["description"];
+            this.rate = _data["rate"];
+            this.brand = _data["brand"];
+            this.brandId = _data["brandId"];
+        }
+    }
+
+    static fromJS(data: any): GetAllPagedProductsResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetAllPagedProductsResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["barcode"] = this.barcode;
+        data["description"] = this.description;
+        data["rate"] = this.rate;
+        data["brand"] = this.brand;
+        data["brandId"] = this.brandId;
+        return data; 
+    }
+}
+
+export interface IGetAllPagedProductsResponse {
+    id?: number;
+    name?: string | undefined;
+    barcode?: string | undefined;
+    description?: string | undefined;
+    rate?: number;
+    brand?: string | undefined;
+    brandId?: number;
+}
+
 export class AddEditProductCommand implements IAddEditProductCommand {
     id?: number;
     name!: string;
@@ -4249,6 +4426,87 @@ export class UpdateProfilePictureRequest extends UploadRequest implements IUpdat
 }
 
 export interface IUpdateProfilePictureRequest extends IUploadRequest {
+}
+
+export class ResultOfTokenResponse extends Result implements IResultOfTokenResponse {
+    data?: TokenResponse | undefined;
+
+    constructor(data?: IResultOfTokenResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? TokenResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfTokenResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfTokenResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfTokenResponse extends IResult {
+    data?: TokenResponse | undefined;
+}
+
+export class TokenResponse implements ITokenResponse {
+    token?: string | undefined;
+    refreshToken?: string | undefined;
+    userImageURL?: string | undefined;
+    refreshTokenExpiryTime?: Date;
+
+    constructor(data?: ITokenResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.token = _data["token"];
+            this.refreshToken = _data["refreshToken"];
+            this.userImageURL = _data["userImageURL"];
+            this.refreshTokenExpiryTime = _data["refreshTokenExpiryTime"] ? new Date(_data["refreshTokenExpiryTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): TokenResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new TokenResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["token"] = this.token;
+        data["refreshToken"] = this.refreshToken;
+        data["userImageURL"] = this.userImageURL;
+        data["refreshTokenExpiryTime"] = this.refreshTokenExpiryTime ? this.refreshTokenExpiryTime.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface ITokenResponse {
+    token?: string | undefined;
+    refreshToken?: string | undefined;
+    userImageURL?: string | undefined;
+    refreshTokenExpiryTime?: Date;
 }
 
 export class TokenRequest implements ITokenRequest {

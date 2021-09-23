@@ -12,8 +12,10 @@ using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Routes;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
+using SDK;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication
 {
@@ -23,17 +25,19 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
         private readonly ILocalStorageService _localStorage;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
         private readonly IStringLocalizer<AuthenticationManager> _localizer;
+        private readonly BlazorHeroClient _api;
 
         public AuthenticationManager(
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
-            IStringLocalizer<AuthenticationManager> localizer)
+            IStringLocalizer<AuthenticationManager> localizer, BlazorHeroClient api)
         {
             _httpClient = httpClient;
             _localStorage = localStorage;
             _authenticationStateProvider = authenticationStateProvider;
             _localizer = localizer;
+            _api = api;
         }
 
         public async Task<ClaimsPrincipal> CurrentUser()
@@ -44,8 +48,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
 
         public async Task<IResult> Login(TokenRequest model)
         {
-            var response = await _httpClient.PostAsJsonAsync(TokenEndpoints.Get, model);
-            var result = await response.ToResult<TokenResponse>();
+            var result = await _api.Token_GetAsync(model);
             if (result.Succeeded)
             {
                 var token = result.Data.Token;
@@ -57,14 +60,12 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
                 {
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageURL);
                 }
-                ((BlazorHeroStateProvider)this._authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
+                ((BlazorHeroStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 return await Result.SuccessAsync();
             }
-            else
-            {
-                return await Result.FailAsync(result.Messages);
-            }
+
+            return await Result.FailAsync(result.Messages);
         }
 
         public async Task<IResult> Logout()

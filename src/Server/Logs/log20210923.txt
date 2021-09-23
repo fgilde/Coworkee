@@ -1,0 +1,69 @@
+2021-09-23 00:51:24.531 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 00:51:24.581 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 00:51:24.583 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 00:51:24.584 +02:00 [INF] Hosting environment: Development
+2021-09-23 00:51:24.585 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 00:56:12.159 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 00:56:12.207 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 00:56:12.210 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 00:56:12.211 +02:00 [INF] Hosting environment: Development
+2021-09-23 00:56:12.212 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 00:59:29.448 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 00:59:29.495 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 00:59:29.497 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 00:59:29.498 +02:00 [INF] Hosting environment: Development
+2021-09-23 00:59:29.498 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 01:04:40.943 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 01:04:40.980 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 01:04:40.983 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 01:04:40.983 +02:00 [INF] Hosting environment: Development
+2021-09-23 01:04:40.984 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 01:08:59.950 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 01:08:59.993 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 01:08:59.995 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 01:08:59.996 +02:00 [INF] Hosting environment: Development
+2021-09-23 01:08:59.996 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 01:10:55.448 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 01:10:55.484 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 01:10:55.486 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 01:10:55.486 +02:00 [INF] Hosting environment: Development
+2021-09-23 01:10:55.487 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 01:11:10.195 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:13.712 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 01:22:13.752 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 01:22:13.754 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 01:22:13.754 +02:00 [INF] Hosting environment: Development
+2021-09-23 01:22:13.755 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 01:22:25.062 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:27.100 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":2,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:28.985 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:30.046 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":["Name Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:30.213 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":["Name Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:31.470 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:31.501 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:35.053 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":"mit bi","OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:42.887 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":"ff","OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:52.797 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":"si","OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:22:57.518 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:23:10.291 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":100,"SearchString":null,"OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:23:13.596 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":["Brand Ascending"],"$type":"GetAllProductsQuery"}
+2021-09-23 01:24:52.355 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 01:24:52.392 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 01:24:52.395 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 01:24:52.396 +02:00 [INF] Hosting environment: Development
+2021-09-23 01:24:52.396 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 11:22:10.012 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 11:22:10.057 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 11:22:10.061 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 11:22:10.062 +02:00 [INF] Hosting environment: Development
+2021-09-23 11:22:10.062 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-23 11:22:35.854 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 11:22:50.142 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 11:28:53.850 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 11:29:22.391 +02:00 [INF] CleanArchitectureBase Request: GetAllBrandsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllBrandsQuery"}
+2021-09-23 11:29:27.555 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-23 11:54:17.675 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-23 11:54:17.716 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-23 11:54:17.720 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-23 11:54:17.720 +02:00 [INF] Hosting environment: Development
+2021-09-23 11:54:17.721 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server

@@ -5,16 +5,19 @@ using CleanArchitectureBase.Shared.Wrapper;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product
 {
     public class ProductManager : IProductManager
     {
         private readonly HttpClient _httpClient;
+        private readonly BlazorHeroClient _api;
 
-        public ProductManager(HttpClient httpClient)
+        public ProductManager(HttpClient httpClient, BlazorHeroClient api)
         {
             _httpClient = httpClient;
+            _api = api;
         }
 
         public async Task<IResult<int>> DeleteAsync(int id)
@@ -39,12 +42,12 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Catalog.Product
 
         public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetProductsAsync(GetAllProductsQuery request)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPaged(request));
-            return await response.ToPaginatedResult<GetAllPagedProductsResponse>();
+            return await _api.Products_GetAllAsync(request.PageNumber, request.PageSize, request.SearchString, request.OrderBy);
         }
 
         public async Task<IResult<int>> SaveAsync(AddEditProductCommand request)
         {
+           _api.Products_PostAsync(request)
             var response = await _httpClient.PostAsJsonAsync(Routes.ProductsEndpoints.Save, request);
             return await response.ToResult<int>();
         }

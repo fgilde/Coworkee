@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
+﻿using System.Threading;
+using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Products.Queries.Export;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
@@ -7,6 +8,7 @@ using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
 {
@@ -18,10 +20,10 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query)
+        [Produces(typeof(PaginatedResult<GetAllPagedProductsResponse>))]
+        public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, CancellationToken cancellationToken = default)
         {
-            var products = await _mediator.Send(query);
-            return Ok(products);
+            return Ok(await _mediator.Send(query, cancellationToken));
         }
 
         /// <summary>

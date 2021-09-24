@@ -167,8 +167,11 @@ namespace CleanArchitectureBase.Server.Extensions
             var prefix = $"/api/" + ApiVersions.DocumentVersionPrefix + version.MajorVersion;
             foreach (var pair in document.Paths.ToArray())
             {
-                document.Paths.Remove(pair.Key);
-                document.Paths[pair.Key.Substring(prefix.Length)] = pair.Value;
+                if (pair.Key.Contains(prefix))
+                {
+                    document.Paths.Remove(pair.Key);
+                    document.Paths[pair.Key.Substring(prefix.Length)] = pair.Value;
+                }
             }
         }
 
@@ -178,7 +181,7 @@ namespace CleanArchitectureBase.Server.Extensions
                 .AddScoped<IJsonSerializerOptions, SystemTextJsonOptions>()
                 .Configure<SystemTextJsonOptions>(configureOptions =>
                 {
-                    if (!configureOptions.JsonSerializerOptions.Converters.Any(c => c.GetType() == typeof(TimespanJsonConverter)))
+                    if (configureOptions.JsonSerializerOptions.Converters.All(c => c.GetType() != typeof(TimespanJsonConverter)))
                         configureOptions.JsonSerializerOptions.Converters.Add(new TimespanJsonConverter());
                 });
             services.AddScoped<IJsonSerializerSettings, NewtonsoftJsonSettings>();

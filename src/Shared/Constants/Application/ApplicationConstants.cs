@@ -4,7 +4,7 @@
     {
         public const string ApplicationName = "CleanArchitectureBase";
         public const string SessionIdKey = nameof(SessionIdKey);
-        public static string EncryptionKey = $"{nameof(EncryptionKey)}-d60fd2e8-c839-42dc-9a7b-b5d3904a6b44-{ApplicationName}";
+        
         public static class Environment
         {
             public const string Testing = nameof(Testing);

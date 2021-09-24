@@ -1,0 +1,32 @@
+﻿using System.Globalization;
+using System.Threading.Tasks;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Nextended.Core.Helper;
+
+namespace CleanArchitectureBase.Server.Controllers
+{
+    public class ResourceController : BaseApiController<ResourceController>
+    {
+        private readonly IMemoryCache memoryCache;
+
+        public ResourceController(IMemoryCache memoryCache)
+        {
+            this.memoryCache = memoryCache;
+        }
+
+        [HttpGet("~/resources.js")]
+        public async Task<IActionResult> GetResources(string cacheBuster = "")
+        {
+            string jsonResources = await memoryCache.GetOrCreateAsync(
+                CultureInfo.CurrentUICulture.TwoLetterISOLanguageName + "_resources.js" + cacheBuster,
+                cacheEntry =>
+                    new JsStringBuilder(false, ApplicationConstants.ApplicationName)
+                        .Append(typeof(ApplicationConstants))
+                        .ToJsonAsync());
+
+            return Ok(jsonResources);
+        }
+    }
+}

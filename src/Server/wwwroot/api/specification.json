@@ -330,6 +330,39 @@
         ]
       }
     },
+    "/resources.js": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "operationId": "Resource_GetResources",
+        "parameters": [
+          {
+            "name": "cacheBuster",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Dashboard": {
       "get": {
         "tags": [

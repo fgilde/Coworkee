@@ -13,7 +13,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task SubmitAsync()
         {
-            var result = await _userManager.ForgotPasswordAsync(_emailModel);
+            var result = await _api.User_ForgotPasswordAsync(_emailModel);
             if (result.Succeeded)
             {
                 _snackBar.Add(_localizer["Done!"], Severity.Success);

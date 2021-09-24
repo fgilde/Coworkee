@@ -19,22 +19,22 @@ export interface IRoleClaimClient {
      * Get All Role Claims(e.g. Product Create Permission)
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse>;
+    getAll(): Observable<ResultOfListOfRoleClaimResponse>;
     /**
      * Add a Role Claim
      * @return Status 200 OK
      */
-    post(request: RoleClaimRequest): Observable<FileResponse>;
+    post(request: RoleClaimRequest): Observable<ResultOfString>;
     /**
      * Get All Role Claims By Id
      * @return Status 200 OK
      */
-    getAllByRoleId(roleId: string | null): Observable<FileResponse>;
+    getAllByRoleId(roleId: string | null): Observable<ResultOfListOfRoleClaimResponse>;
     /**
      * Delete a Role Claim
      * @return Status 200 OK
      */
-    delete(id: number): Observable<FileResponse>;
+    delete(id: number): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -54,7 +54,7 @@ export class RoleClaimClient implements IRoleClaimClient {
      * Get All Role Claims(e.g. Product Create Permission)
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<ResultOfListOfRoleClaimResponse> {
         let url_ = this.baseUrl + "/identity/RoleClaim";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -62,7 +62,7 @@ export class RoleClaimClient implements IRoleClaimClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -73,38 +73,40 @@ export class RoleClaimClient implements IRoleClaimClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfListOfRoleClaimResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfListOfRoleClaimResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfRoleClaimResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfListOfRoleClaimResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfListOfRoleClaimResponse>(<any>null);
     }
 
     /**
      * Add a Role Claim
      * @return Status 200 OK
      */
-    post(request: RoleClaimRequest): Observable<FileResponse> {
+    post(request: RoleClaimRequest): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/RoleClaim";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -116,7 +118,7 @@ export class RoleClaimClient implements IRoleClaimClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -127,38 +129,40 @@ export class RoleClaimClient implements IRoleClaimClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 
     /**
      * Get All Role Claims By Id
      * @return Status 200 OK
      */
-    getAllByRoleId(roleId: string | null): Observable<FileResponse> {
+    getAllByRoleId(roleId: string | null): Observable<ResultOfListOfRoleClaimResponse> {
         let url_ = this.baseUrl + "/identity/RoleClaim/{roleId}";
         if (roleId === undefined || roleId === null)
             throw new Error("The parameter 'roleId' must be defined.");
@@ -169,7 +173,7 @@ export class RoleClaimClient implements IRoleClaimClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -180,38 +184,40 @@ export class RoleClaimClient implements IRoleClaimClient {
                 try {
                     return this.processGetAllByRoleId(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfListOfRoleClaimResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfListOfRoleClaimResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAllByRoleId(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAllByRoleId(response: HttpResponseBase): Observable<ResultOfListOfRoleClaimResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfListOfRoleClaimResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfListOfRoleClaimResponse>(<any>null);
     }
 
     /**
      * Delete a Role Claim
      * @return Status 200 OK
      */
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/RoleClaim/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -222,7 +228,7 @@ export class RoleClaimClient implements IRoleClaimClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -233,31 +239,33 @@ export class RoleClaimClient implements IRoleClaimClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 }
 
@@ -266,26 +274,26 @@ export interface IRoleClient {
      * Get All Roles (basic, admin etc.)
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse>;
+    getAll(): Observable<ResultOfListOfRoleResponse>;
     /**
      * Add a Role
      * @return Status 200 OK
      */
-    post(request: RoleRequest): Observable<FileResponse>;
+    post(request: RoleRequest): Observable<ResultOfString>;
     /**
      * Delete a Role
      * @return Status 200 OK
      */
-    delete(id: string | null): Observable<FileResponse>;
+    delete(id: string | null): Observable<ResultOfString>;
     /**
      * Get Permissions By Role Id
      * @return Status 200 Ok
      */
-    getPermissionsByRoleId(roleId: string | null): Observable<FileResponse>;
+    getPermissionsByRoleId(roleId: string | null): Observable<ResultOfPermissionResponse>;
     /**
      * Edit a Role Claim
      */
-    update(model: PermissionRequest): Observable<FileResponse>;
+    update(model: PermissionRequest): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -305,7 +313,7 @@ export class RoleClient implements IRoleClient {
      * Get All Roles (basic, admin etc.)
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<ResultOfListOfRoleResponse> {
         let url_ = this.baseUrl + "/identity/Role";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -313,7 +321,7 @@ export class RoleClient implements IRoleClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -324,38 +332,40 @@ export class RoleClient implements IRoleClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfListOfRoleResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfListOfRoleResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfRoleResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfListOfRoleResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfListOfRoleResponse>(<any>null);
     }
 
     /**
      * Add a Role
      * @return Status 200 OK
      */
-    post(request: RoleRequest): Observable<FileResponse> {
+    post(request: RoleRequest): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/Role";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -367,7 +377,7 @@ export class RoleClient implements IRoleClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -378,38 +388,40 @@ export class RoleClient implements IRoleClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 
     /**
      * Delete a Role
      * @return Status 200 OK
      */
-    delete(id: string | null): Observable<FileResponse> {
+    delete(id: string | null): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/Role/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -420,7 +432,7 @@ export class RoleClient implements IRoleClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -431,38 +443,40 @@ export class RoleClient implements IRoleClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 
     /**
      * Get Permissions By Role Id
      * @return Status 200 Ok
      */
-    getPermissionsByRoleId(roleId: string | null): Observable<FileResponse> {
+    getPermissionsByRoleId(roleId: string | null): Observable<ResultOfPermissionResponse> {
         let url_ = this.baseUrl + "/identity/Role/permissions/{roleId}";
         if (roleId === undefined || roleId === null)
             throw new Error("The parameter 'roleId' must be defined.");
@@ -473,7 +487,7 @@ export class RoleClient implements IRoleClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -484,37 +498,39 @@ export class RoleClient implements IRoleClient {
                 try {
                     return this.processGetPermissionsByRoleId(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfPermissionResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfPermissionResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetPermissionsByRoleId(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetPermissionsByRoleId(response: HttpResponseBase): Observable<ResultOfPermissionResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfPermissionResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfPermissionResponse>(<any>null);
     }
 
     /**
      * Edit a Role Claim
      */
-    update(model: PermissionRequest): Observable<FileResponse> {
+    update(model: PermissionRequest): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/Role/permissions/update";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -526,7 +542,7 @@ export class RoleClient implements IRoleClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -537,31 +553,33 @@ export class RoleClient implements IRoleClient {
                 try {
                     return this.processUpdate(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdate(response: HttpResponseBase): Observable<FileResponse> {
+    protected processUpdate(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 }
 
@@ -2471,22 +2489,22 @@ export interface IAccountClient {
      * Update Profile
      * @return Status 200 OK
      */
-    updateProfile(model: UpdateProfileRequest): Observable<FileResponse>;
+    updateProfile(model: UpdateProfileRequest): Observable<Result>;
     /**
      * Change Password
      * @return Status 200 OK
      */
-    changePassword(model: ChangePasswordRequest): Observable<FileResponse>;
+    changePassword(model: ChangePasswordRequest): Observable<Result>;
     /**
      * Get Profile picture by Id
      * @return Status 200 OK
      */
-    getProfilePicture(userId: string | null): Observable<FileResponse>;
+    getProfilePicture(userId: string | null): Observable<ResultOfString>;
     /**
      * Update Profile Picture
      * @return Status 200 OK
      */
-    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<FileResponse>;
+    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -2506,7 +2524,7 @@ export class AccountClient implements IAccountClient {
      * Update Profile
      * @return Status 200 OK
      */
-    updateProfile(model: UpdateProfileRequest): Observable<FileResponse> {
+    updateProfile(model: UpdateProfileRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/Account/UpdateProfile";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2518,7 +2536,7 @@ export class AccountClient implements IAccountClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2529,38 +2547,40 @@ export class AccountClient implements IAccountClient {
                 try {
                     return this.processUpdateProfile(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdateProfile(response: HttpResponseBase): Observable<FileResponse> {
+    protected processUpdateProfile(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
      * Change Password
      * @return Status 200 OK
      */
-    changePassword(model: ChangePasswordRequest): Observable<FileResponse> {
+    changePassword(model: ChangePasswordRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/Account/ChangePassword";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2572,7 +2592,7 @@ export class AccountClient implements IAccountClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2583,38 +2603,40 @@ export class AccountClient implements IAccountClient {
                 try {
                     return this.processChangePassword(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processChangePassword(response: HttpResponseBase): Observable<FileResponse> {
+    protected processChangePassword(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
      * Get Profile picture by Id
      * @return Status 200 OK
      */
-    getProfilePicture(userId: string | null): Observable<FileResponse> {
+    getProfilePicture(userId: string | null): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/Account/profile-picture/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -2625,7 +2647,7 @@ export class AccountClient implements IAccountClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2636,38 +2658,40 @@ export class AccountClient implements IAccountClient {
                 try {
                     return this.processGetProfilePicture(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetProfilePicture(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetProfilePicture(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 
     /**
      * Update Profile Picture
      * @return Status 200 OK
      */
-    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<FileResponse> {
+    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/Account/profile-picture/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -2682,7 +2706,7 @@ export class AccountClient implements IAccountClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2693,31 +2717,33 @@ export class AccountClient implements IAccountClient {
                 try {
                     return this.processUpdateProfilePicture(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdateProfilePicture(response: HttpResponseBase): Observable<FileResponse> {
+    protected processUpdateProfilePicture(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 }
 
@@ -2731,7 +2757,7 @@ export interface ITokenClient {
      * Refresh Token
      * @return Status 200 OK
      */
-    refresh(model: RefreshTokenRequest): Observable<FileResponse>;
+    refresh(model: RefreshTokenRequest): Observable<ResultOfTokenResponse>;
 }
 
 @Injectable({
@@ -2807,7 +2833,7 @@ export class TokenClient implements ITokenClient {
      * Refresh Token
      * @return Status 200 OK
      */
-    refresh(model: RefreshTokenRequest): Observable<FileResponse> {
+    refresh(model: RefreshTokenRequest): Observable<ResultOfTokenResponse> {
         let url_ = this.baseUrl + "/identity/Token/refresh";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2819,7 +2845,7 @@ export class TokenClient implements ITokenClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2830,31 +2856,33 @@ export class TokenClient implements ITokenClient {
                 try {
                     return this.processRefresh(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfTokenResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfTokenResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processRefresh(response: HttpResponseBase): Observable<FileResponse> {
+    protected processRefresh(response: HttpResponseBase): Observable<ResultOfTokenResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfTokenResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfTokenResponse>(<any>null);
     }
 }
 
@@ -2863,55 +2891,55 @@ export interface IUserClient {
      * Get User Details
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse>;
+    getAll(): Observable<ResultOfListOfUserResponse>;
     /**
      * Register a User
      * @return Status 200 OK
      */
-    register(request: RegisterRequest): Observable<FileResponse>;
+    register(request: RegisterRequest): Observable<Result>;
     /**
      * Get User By Id
      * @return Status 200 OK
      */
-    getById(id: string | null): Observable<FileResponse>;
+    getById(id: string | null): Observable<ResultOfUserResponse>;
     /**
      * Get User Roles By Id
      * @return Status 200 OK
      */
-    getRoles(id: string | null): Observable<FileResponse>;
+    getRoles(id: string | null): Observable<ResultOfUserRolesResponse>;
     /**
      * Update Roles for User
      * @return Status 200 OK
      */
-    updateRoles(id: string, request: UpdateUserRolesRequest): Observable<FileResponse>;
+    updateRoles(id: string, request: UpdateUserRolesRequest): Observable<Result>;
     /**
      * Confirm Email
      * @param userId (optional) 
      * @param code (optional) 
      * @return Status 200 OK
      */
-    confirmEmail(userId: string | null | undefined, code: string | null | undefined): Observable<FileResponse>;
+    confirmEmail(userId: string | null | undefined, code: string | null | undefined): Observable<ResultOfString>;
     /**
      * Toggle User Status (Activate and Deactivate)
      * @return Status 200 OK
      */
-    toggleUserStatus(request: ToggleUserStatusRequest): Observable<FileResponse>;
+    toggleUserStatus(request: ToggleUserStatusRequest): Observable<Result>;
     /**
      * Forgot Password
      * @return Status 200 OK
      */
-    forgotPassword(request: ForgotPasswordRequest): Observable<FileResponse>;
+    forgotPassword(request: ForgotPasswordRequest): Observable<Result>;
     /**
      * Reset Password
      * @return Status 200 OK
      */
-    resetPassword(request: ResetPasswordRequest): Observable<FileResponse>;
+    resetPassword(request: ResetPasswordRequest): Observable<Result>;
     /**
      * Export to Excel
      * @param searchString (optional) 
      * @return Status 200 OK
      */
-    export(searchString: string | null | undefined): Observable<FileResponse>;
+    export(searchString: string | null | undefined): Observable<string>;
 }
 
 @Injectable({
@@ -2931,7 +2959,7 @@ export class UserClient implements IUserClient {
      * Get User Details
      * @return Status 200 OK
      */
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<ResultOfListOfUserResponse> {
         let url_ = this.baseUrl + "/identity/User";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2939,7 +2967,7 @@ export class UserClient implements IUserClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -2950,38 +2978,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfListOfUserResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfListOfUserResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfUserResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfListOfUserResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfListOfUserResponse>(<any>null);
     }
 
     /**
      * Register a User
      * @return Status 200 OK
      */
-    register(request: RegisterRequest): Observable<FileResponse> {
+    register(request: RegisterRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/User";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2993,7 +3023,7 @@ export class UserClient implements IUserClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3004,38 +3034,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processRegister(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processRegister(response: HttpResponseBase): Observable<FileResponse> {
+    protected processRegister(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
      * Get User By Id
      * @return Status 200 OK
      */
-    getById(id: string | null): Observable<FileResponse> {
+    getById(id: string | null): Observable<ResultOfUserResponse> {
         let url_ = this.baseUrl + "/identity/User/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3046,7 +3078,7 @@ export class UserClient implements IUserClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3057,38 +3089,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfUserResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfUserResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetById(response: HttpResponseBase): Observable<ResultOfUserResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfUserResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfUserResponse>(<any>null);
     }
 
     /**
      * Get User Roles By Id
      * @return Status 200 OK
      */
-    getRoles(id: string | null): Observable<FileResponse> {
+    getRoles(id: string | null): Observable<ResultOfUserRolesResponse> {
         let url_ = this.baseUrl + "/identity/User/roles/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3099,7 +3133,7 @@ export class UserClient implements IUserClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3110,38 +3144,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processGetRoles(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfUserRolesResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfUserRolesResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetRoles(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetRoles(response: HttpResponseBase): Observable<ResultOfUserRolesResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfUserRolesResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfUserRolesResponse>(<any>null);
     }
 
     /**
      * Update Roles for User
      * @return Status 200 OK
      */
-    updateRoles(id: string, request: UpdateUserRolesRequest): Observable<FileResponse> {
+    updateRoles(id: string, request: UpdateUserRolesRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/User/roles/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3156,7 +3192,7 @@ export class UserClient implements IUserClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3167,31 +3203,33 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processUpdateRoles(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdateRoles(response: HttpResponseBase): Observable<FileResponse> {
+    protected processUpdateRoles(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
@@ -3200,7 +3238,7 @@ export class UserClient implements IUserClient {
      * @param code (optional) 
      * @return Status 200 OK
      */
-    confirmEmail(userId: string | null | undefined, code: string | null | undefined): Observable<FileResponse> {
+    confirmEmail(userId: string | null | undefined, code: string | null | undefined): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/User/confirm-email?";
         if (userId !== undefined && userId !== null)
             url_ += "userId=" + encodeURIComponent("" + userId) + "&";
@@ -3212,7 +3250,7 @@ export class UserClient implements IUserClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3223,38 +3261,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processConfirmEmail(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
         }));
     }
 
-    protected processConfirmEmail(response: HttpResponseBase): Observable<FileResponse> {
+    protected processConfirmEmail(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<ResultOfString>(<any>null);
     }
 
     /**
      * Toggle User Status (Activate and Deactivate)
      * @return Status 200 OK
      */
-    toggleUserStatus(request: ToggleUserStatusRequest): Observable<FileResponse> {
+    toggleUserStatus(request: ToggleUserStatusRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/User/toggle-status";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3266,7 +3306,7 @@ export class UserClient implements IUserClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3277,38 +3317,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processToggleUserStatus(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processToggleUserStatus(response: HttpResponseBase): Observable<FileResponse> {
+    protected processToggleUserStatus(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
      * Forgot Password
      * @return Status 200 OK
      */
-    forgotPassword(request: ForgotPasswordRequest): Observable<FileResponse> {
+    forgotPassword(request: ForgotPasswordRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/User/forgot-password";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3320,7 +3362,7 @@ export class UserClient implements IUserClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3331,38 +3373,40 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processForgotPassword(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processForgotPassword(response: HttpResponseBase): Observable<FileResponse> {
+    protected processForgotPassword(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
      * Reset Password
      * @return Status 200 OK
      */
-    resetPassword(request: ResetPasswordRequest): Observable<FileResponse> {
+    resetPassword(request: ResetPasswordRequest): Observable<Result> {
         let url_ = this.baseUrl + "/identity/User/reset-password";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3374,7 +3418,7 @@ export class UserClient implements IUserClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3385,31 +3429,33 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processResetPassword(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<Result>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<Result>><any>_observableThrow(response_);
         }));
     }
 
-    protected processResetPassword(response: HttpResponseBase): Observable<FileResponse> {
+    protected processResetPassword(response: HttpResponseBase): Observable<Result> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<Result>(<any>null);
     }
 
     /**
@@ -3417,7 +3463,7 @@ export class UserClient implements IUserClient {
      * @param searchString (optional) 
      * @return Status 200 OK
      */
-    export(searchString: string | null | undefined): Observable<FileResponse> {
+    export(searchString: string | null | undefined): Observable<string> {
         let url_ = this.baseUrl + "/identity/User/export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
@@ -3427,7 +3473,7 @@ export class UserClient implements IUserClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -3438,31 +3484,33 @@ export class UserClient implements IUserClient {
                 try {
                     return this.processExport(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<string>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<string>><any>_observableThrow(response_);
         }));
     }
 
-    protected processExport(response: HttpResponseBase): Observable<FileResponse> {
+    protected processExport(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<string>(<any>null);
     }
 }
 
@@ -3661,6 +3709,188 @@ export class ChatsClient implements IChatsClient {
     }
 }
 
+export class Result implements IResult {
+    messages?: string[] | undefined;
+    succeeded?: boolean;
+
+    constructor(data?: IResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(item);
+            }
+            this.succeeded = _data["succeeded"];
+        }
+    }
+
+    static fromJS(data: any): Result {
+        data = typeof data === 'object' ? data : {};
+        let result = new Result();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item);
+        }
+        data["succeeded"] = this.succeeded;
+        return data; 
+    }
+}
+
+export interface IResult {
+    messages?: string[] | undefined;
+    succeeded?: boolean;
+}
+
+export class ResultOfListOfRoleClaimResponse extends Result implements IResultOfListOfRoleClaimResponse {
+    data?: RoleClaimResponse[] | undefined;
+
+    constructor(data?: IResultOfListOfRoleClaimResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(RoleClaimResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfListOfRoleClaimResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfListOfRoleClaimResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfListOfRoleClaimResponse extends IResult {
+    data?: RoleClaimResponse[] | undefined;
+}
+
+export class RoleClaimResponse implements IRoleClaimResponse {
+    id?: number;
+    roleId?: string | undefined;
+    type?: string | undefined;
+    value?: string | undefined;
+    description?: string | undefined;
+    group?: string | undefined;
+    selected?: boolean;
+
+    constructor(data?: IRoleClaimResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.roleId = _data["roleId"];
+            this.type = _data["type"];
+            this.value = _data["value"];
+            this.description = _data["description"];
+            this.group = _data["group"];
+            this.selected = _data["selected"];
+        }
+    }
+
+    static fromJS(data: any): RoleClaimResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new RoleClaimResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["roleId"] = this.roleId;
+        data["type"] = this.type;
+        data["value"] = this.value;
+        data["description"] = this.description;
+        data["group"] = this.group;
+        data["selected"] = this.selected;
+        return data; 
+    }
+}
+
+export interface IRoleClaimResponse {
+    id?: number;
+    roleId?: string | undefined;
+    type?: string | undefined;
+    value?: string | undefined;
+    description?: string | undefined;
+    group?: string | undefined;
+    selected?: boolean;
+}
+
+export class ResultOfString extends Result implements IResultOfString {
+    data?: string | undefined;
+
+    constructor(data?: IResultOfString) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"];
+        }
+    }
+
+    static fromJS(data: any): ResultOfString {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfString();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfString extends IResult {
+    data?: string | undefined;
+}
+
 export class RoleClaimRequest implements IRoleClaimRequest {
     id?: number;
     roleId?: string | undefined;
@@ -3721,6 +3951,91 @@ export interface IRoleClaimRequest {
     selected?: boolean;
 }
 
+export class ResultOfListOfRoleResponse extends Result implements IResultOfListOfRoleResponse {
+    data?: RoleResponse[] | undefined;
+
+    constructor(data?: IResultOfListOfRoleResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(RoleResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfListOfRoleResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfListOfRoleResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfListOfRoleResponse extends IResult {
+    data?: RoleResponse[] | undefined;
+}
+
+export class RoleResponse implements IRoleResponse {
+    id?: string | undefined;
+    name!: string;
+    description?: string | undefined;
+
+    constructor(data?: IRoleResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+        }
+    }
+
+    static fromJS(data: any): RoleResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new RoleResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        return data; 
+    }
+}
+
+export interface IRoleResponse {
+    id?: string | undefined;
+    name: string;
+    description?: string | undefined;
+}
+
 export class RoleRequest implements IRoleRequest {
     id?: string | undefined;
     name!: string;
@@ -3763,6 +4078,91 @@ export interface IRoleRequest {
     id?: string | undefined;
     name: string;
     description?: string | undefined;
+}
+
+export class ResultOfPermissionResponse extends Result implements IResultOfPermissionResponse {
+    data?: PermissionResponse | undefined;
+
+    constructor(data?: IResultOfPermissionResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? PermissionResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfPermissionResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfPermissionResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfPermissionResponse extends IResult {
+    data?: PermissionResponse | undefined;
+}
+
+export class PermissionResponse implements IPermissionResponse {
+    roleId?: string | undefined;
+    roleName?: string | undefined;
+    roleClaims?: RoleClaimResponse[] | undefined;
+
+    constructor(data?: IPermissionResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.roleId = _data["roleId"];
+            this.roleName = _data["roleName"];
+            if (Array.isArray(_data["roleClaims"])) {
+                this.roleClaims = [] as any;
+                for (let item of _data["roleClaims"])
+                    this.roleClaims!.push(RoleClaimResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PermissionResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new PermissionResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["roleId"] = this.roleId;
+        data["roleName"] = this.roleName;
+        if (Array.isArray(this.roleClaims)) {
+            data["roleClaims"] = [];
+            for (let item of this.roleClaims)
+                data["roleClaims"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPermissionResponse {
+    roleId?: string | undefined;
+    roleName?: string | undefined;
+    roleClaims?: RoleClaimResponse[] | undefined;
 }
 
 export class PermissionRequest implements IPermissionRequest {
@@ -3811,54 +4211,6 @@ export class PermissionRequest implements IPermissionRequest {
 export interface IPermissionRequest {
     roleId?: string | undefined;
     roleClaims?: RoleClaimRequest[] | undefined;
-}
-
-export class Result implements IResult {
-    messages?: string[] | undefined;
-    succeeded?: boolean;
-
-    constructor(data?: IResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["messages"])) {
-                this.messages = [] as any;
-                for (let item of _data["messages"])
-                    this.messages!.push(item);
-            }
-            this.succeeded = _data["succeeded"];
-        }
-    }
-
-    static fromJS(data: any): Result {
-        data = typeof data === 'object' ? data : {};
-        let result = new Result();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.messages)) {
-            data["messages"] = [];
-            for (let item of this.messages)
-                data["messages"].push(item);
-        }
-        data["succeeded"] = this.succeeded;
-        return data; 
-    }
-}
-
-export interface IResult {
-    messages?: string[] | undefined;
-    succeeded?: boolean;
 }
 
 export class ResultOfDashboardDataResponse extends Result implements IResultOfDashboardDataResponse {
@@ -4279,39 +4631,6 @@ export interface IAddEditBrandCommand {
     name: string;
     description: string;
     tax: number;
-}
-
-export class ResultOfString extends Result implements IResultOfString {
-    data?: string | undefined;
-
-    constructor(data?: IResultOfString) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.data = _data["data"];
-        }
-    }
-
-    static fromJS(data: any): ResultOfString {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfString();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["data"] = this.data;
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IResultOfString extends IResult {
-    data?: string | undefined;
 }
 
 export class PaginatedResultOfGetAllPagedProductsResponse extends Result implements IPaginatedResultOfGetAllPagedProductsResponse {
@@ -5137,6 +5456,269 @@ export interface IRefreshTokenRequest {
     refreshToken?: string | undefined;
 }
 
+export class ResultOfListOfUserResponse extends Result implements IResultOfListOfUserResponse {
+    data?: UserResponse[] | undefined;
+
+    constructor(data?: IResultOfListOfUserResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(UserResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfListOfUserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfListOfUserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfListOfUserResponse extends IResult {
+    data?: UserResponse[] | undefined;
+}
+
+export class UserResponse implements IUserResponse {
+    id?: string | undefined;
+    userName?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    email?: string | undefined;
+    isActive?: boolean;
+    emailConfirmed?: boolean;
+    phoneNumber?: string | undefined;
+    profilePictureDataUrl?: string | undefined;
+
+    constructor(data?: IUserResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userName = _data["userName"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.email = _data["email"];
+            this.isActive = _data["isActive"];
+            this.emailConfirmed = _data["emailConfirmed"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.profilePictureDataUrl = _data["profilePictureDataUrl"];
+        }
+    }
+
+    static fromJS(data: any): UserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["email"] = this.email;
+        data["isActive"] = this.isActive;
+        data["emailConfirmed"] = this.emailConfirmed;
+        data["phoneNumber"] = this.phoneNumber;
+        data["profilePictureDataUrl"] = this.profilePictureDataUrl;
+        return data; 
+    }
+}
+
+export interface IUserResponse {
+    id?: string | undefined;
+    userName?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    email?: string | undefined;
+    isActive?: boolean;
+    emailConfirmed?: boolean;
+    phoneNumber?: string | undefined;
+    profilePictureDataUrl?: string | undefined;
+}
+
+export class ResultOfUserResponse extends Result implements IResultOfUserResponse {
+    data?: UserResponse | undefined;
+
+    constructor(data?: IResultOfUserResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? UserResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfUserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfUserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfUserResponse extends IResult {
+    data?: UserResponse | undefined;
+}
+
+export class ResultOfUserRolesResponse extends Result implements IResultOfUserRolesResponse {
+    data?: UserRolesResponse | undefined;
+
+    constructor(data?: IResultOfUserRolesResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? UserRolesResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfUserRolesResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfUserRolesResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfUserRolesResponse extends IResult {
+    data?: UserRolesResponse | undefined;
+}
+
+export class UserRolesResponse implements IUserRolesResponse {
+    userRoles?: UserRoleModel[] | undefined;
+
+    constructor(data?: IUserRolesResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["userRoles"])) {
+                this.userRoles = [] as any;
+                for (let item of _data["userRoles"])
+                    this.userRoles!.push(UserRoleModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): UserRolesResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserRolesResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.userRoles)) {
+            data["userRoles"] = [];
+            for (let item of this.userRoles)
+                data["userRoles"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IUserRolesResponse {
+    userRoles?: UserRoleModel[] | undefined;
+}
+
+export class UserRoleModel implements IUserRoleModel {
+    roleName?: string | undefined;
+    roleDescription?: string | undefined;
+    selected?: boolean;
+
+    constructor(data?: IUserRoleModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.roleName = _data["roleName"];
+            this.roleDescription = _data["roleDescription"];
+            this.selected = _data["selected"];
+        }
+    }
+
+    static fromJS(data: any): UserRoleModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserRoleModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["roleName"] = this.roleName;
+        data["roleDescription"] = this.roleDescription;
+        data["selected"] = this.selected;
+        return data; 
+    }
+}
+
+export interface IUserRoleModel {
+    roleName?: string | undefined;
+    roleDescription?: string | undefined;
+    selected?: boolean;
+}
+
 export class UpdateUserRolesRequest implements IUpdateUserRolesRequest {
     userId?: string | undefined;
     userRoles?: UserRoleModel[] | undefined;
@@ -5183,50 +5765,6 @@ export class UpdateUserRolesRequest implements IUpdateUserRolesRequest {
 export interface IUpdateUserRolesRequest {
     userId?: string | undefined;
     userRoles?: UserRoleModel[] | undefined;
-}
-
-export class UserRoleModel implements IUserRoleModel {
-    roleName?: string | undefined;
-    roleDescription?: string | undefined;
-    selected?: boolean;
-
-    constructor(data?: IUserRoleModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.roleName = _data["roleName"];
-            this.roleDescription = _data["roleDescription"];
-            this.selected = _data["selected"];
-        }
-    }
-
-    static fromJS(data: any): UserRoleModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new UserRoleModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["roleName"] = this.roleName;
-        data["roleDescription"] = this.roleDescription;
-        data["selected"] = this.selected;
-        return data; 
-    }
-}
-
-export interface IUserRoleModel {
-    roleName?: string | undefined;
-    roleDescription?: string | undefined;
-    selected?: boolean;
 }
 
 export class RegisterRequest implements IRegisterRequest {

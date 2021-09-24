@@ -96,17 +96,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 {
                     return await Result<string>.SuccessAsync(_localizer["Role Claim does not exist."]);
                 }
-                else
-                {
-                    existingRoleClaim.ClaimType = request.Type;
-                    existingRoleClaim.ClaimValue = request.Value;
-                    existingRoleClaim.Group = request.Group;
-                    existingRoleClaim.Description = request.Description;
-                    existingRoleClaim.RoleId = request.RoleId;
-                    _db.RoleClaims.Update(existingRoleClaim);
-                    await _db.SaveChangesAsync(_currentUserService.UserId);
-                    return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} for Role {1} updated."], request.Value, existingRoleClaim.Role.Name));
-                }
+
+                existingRoleClaim.ClaimType = request.Type;
+                existingRoleClaim.ClaimValue = request.Value;
+                existingRoleClaim.Group = request.Group;
+                existingRoleClaim.Description = request.Description;
+                existingRoleClaim.RoleId = request.RoleId;
+                _db.RoleClaims.Update(existingRoleClaim);
+                await _db.SaveChangesAsync(_currentUserService.UserId);
+                return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} for Role {1} updated."], request.Value, existingRoleClaim.Role.Name));
             }
         }
 
@@ -121,10 +119,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 await _db.SaveChangesAsync(_currentUserService.UserId);
                 return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} for {1} Role deleted."], existingRoleClaim.ClaimValue, existingRoleClaim.Role.Name));
             }
-            else
-            {
-                return await Result<string>.FailAsync(_localizer["Role Claim does not exist."]);
-            }
+
+            return await Result<string>.FailAsync(_localizer["Role Claim does not exist."]);
         }
     }
 }

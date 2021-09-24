@@ -13,7 +13,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         private async Task SubmitAsync()
         {
-            var response = await _userManager.RegisterUserAsync(_registerUserModel);
+            var response = await _api.User_RegisterAsync(_registerUserModel);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);

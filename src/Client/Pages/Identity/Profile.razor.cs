@@ -22,7 +22,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task UpdateProfileAsync()
         {
-            var response = await _accountManager.UpdateProfileAsync(_profileModel);
+            var response = await _api.Account_UpdateProfileAsync(_profileModel);
             if (response.Succeeded)
             {
                 await _authenticationManager.Logout();
@@ -52,7 +52,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             _profileModel.LastName = user.GetLastName();
             _profileModel.PhoneNumber = user.GetPhoneNumber();
             UserId = user.GetUserId();
-            var data = await _accountManager.GetProfilePictureAsync(UserId);
+            var data = await _api.Account_GetProfilePictureAsync(UserId);
             if (data.Succeeded)
             {
                 ImageDataUrl = data.Data;
@@ -80,7 +80,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
                 var request = new UpdateProfilePictureRequest { Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.ProfilePicture };
-                var result = await _accountManager.UpdateProfilePictureAsync(request, UserId);
+                var result = await _api.Account_UpdateProfilePictureAsync(request, UserId);
                 if (result.Succeeded)
                 {
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, result.Data);
@@ -109,7 +109,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (!result.Cancelled)
             {
                 var request = new UpdateProfilePictureRequest { Data = null, FileName = string.Empty, UploadType = Application.Enums.UploadType.ProfilePicture };
-                var data = await _accountManager.UpdateProfilePictureAsync(request, UserId);
+                var data = await _api.Account_UpdateProfilePictureAsync(request, UserId);
                 if (data.Succeeded)
                 {
                     await _localStorage.RemoveItemAsync(StorageConstants.Local.UserImageURL);

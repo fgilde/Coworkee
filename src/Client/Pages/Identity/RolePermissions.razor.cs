@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Roles;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 
@@ -19,8 +18,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 {
     public partial class RolePermissions
     {
-        [Inject] private IRoleManager RoleManager { get; set; }
-
+        
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public string Id { get; set; }
         [Parameter] public string Title { get; set; }
@@ -60,7 +58,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             _mapper = new MapperConfiguration(c => { c.AddProfile<RoleProfile>(); }).CreateMapper();
             var roleId = Id;
-            var result = await RoleManager.GetPermissionsAsync(roleId);
+            var result = await _api.Role_GetPermissionsByRoleIdAsync(roleId);
             if (result.Succeeded)
             {
                 _model = result.Data;
@@ -94,7 +92,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task SaveAsync()
         {
             var request = _mapper.Map<PermissionResponse, PermissionRequest>(_model);
-            var result = await RoleManager.UpdatePermissionsAsync(request);
+            var result = await _api.Role_UpdateAsync(request);
             if (result.Succeeded)
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);

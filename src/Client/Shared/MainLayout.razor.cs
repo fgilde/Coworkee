@@ -8,15 +8,14 @@ using System;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Roles;
+using CleanArchitectureBase.SDK;
 using Microsoft.AspNetCore.Components;
 
 namespace CleanArchitectureBase.Client.Shared
 {
     public partial class MainLayout : IDisposable
     {
-        [Inject] private IRoleManager RoleManager { get; set; }
-
+        
         private string CurrentUserId { get; set; }
         private string ImageDataUrl { get; set; }
         private string FirstName { get; set; }
@@ -39,13 +38,13 @@ namespace CleanArchitectureBase.Client.Shared
                 }
                 SecondName = user.GetLastName();
                 Email = user.GetEmail();
-                var imageResponse = await _accountManager.GetProfilePictureAsync(CurrentUserId);
+                var imageResponse = await _api.Account_GetProfilePictureAsync(CurrentUserId);
                 if (imageResponse.Succeeded)
                 {
                     ImageDataUrl = imageResponse.Data;
                 }
 
-                var currentUserResult = await _userManager.GetAsync(CurrentUserId);
+                var currentUserResult = await _api.User_GetByIdAsync(CurrentUserId);
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(localizer["You are logged out because the user with your Token has been deleted."], Severity.Error);
@@ -117,13 +116,13 @@ namespace CleanArchitectureBase.Client.Shared
             {
                 if (CurrentUserId != userId)
                 {
-                    var rolesResponse = await RoleManager.GetRolesAsync();
+                    var rolesResponse = await _api.Role_GetAllAsync();
                     if (rolesResponse.Succeeded)
                     {
                         var role = rolesResponse.Data.FirstOrDefault(x => x.Id == roleId);
                         if (role != null)
                         {
-                            var currentUserRolesResponse = await _userManager.GetRolesAsync(CurrentUserId);
+                            var currentUserRolesResponse = await _api.User_GetRolesAsync(CurrentUserId);
                             if (currentUserRolesResponse.Succeeded && currentUserRolesResponse.Data.UserRoles.Any(x => x.RoleName == role.Name))
                             {
                                 _snackBar.Add(localizer["You are logged out because the Permissions of one of your Roles have been updated."], Severity.Error);

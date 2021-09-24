@@ -139,7 +139,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         private async Task LoadUserChat(string userId)
         {
             _open = false;
-            var response = await _userManager.GetAsync(userId);
+            var response = await _api.User_GetByIdAsync(userId);
             if (response.Succeeded)
             {
                 var contact = response.Data;

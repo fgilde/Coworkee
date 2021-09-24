@@ -39,6 +39,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="model"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost("refresh")]
+        [Produces(typeof(Result<TokenResponse>))]
         public async Task<ActionResult> Refresh([FromBody] RefreshTokenRequest model)
         {
             var response = await _identityService.GetRefreshTokenAsync(model);

@@ -27,10 +27,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfListOfRoleClaimResponse"
                 }
               }
             }
@@ -64,10 +63,9 @@
           "200": {
             "description": "Status 200 OK ",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -103,10 +101,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfListOfRoleClaimResponse"
                 }
               }
             }
@@ -142,10 +139,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -169,10 +165,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfListOfRoleResponse"
                 }
               }
             }
@@ -206,10 +201,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -245,10 +239,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -284,10 +277,9 @@
           "200": {
             "description": "Status 200 Ok",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfPermissionResponse"
                 }
               }
             }
@@ -323,10 +315,9 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -1526,10 +1517,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -1565,10 +1555,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -1604,10 +1593,9 @@
           "200": {
             "description": "Status 200 OK ",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -1652,10 +1640,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -1724,10 +1711,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfTokenResponse"
                 }
               }
             }
@@ -1746,10 +1732,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfListOfUserResponse"
                 }
               }
             }
@@ -1783,10 +1768,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -1817,10 +1801,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfUserResponse"
                 }
               }
             }
@@ -1856,10 +1839,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfUserRolesResponse"
                 }
               }
             }
@@ -1904,10 +1886,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -1951,10 +1932,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/ResultOfString"
                 }
               }
             }
@@ -1985,10 +1965,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -2024,10 +2003,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -2058,10 +2036,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -2092,10 +2069,9 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "string"
                 }
               }
             }
@@ -2213,6 +2189,92 @@
   },
   "components": {
     "schemas": {
+      "ResultOfListOfRoleClaimResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/RoleClaimResponse"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RoleClaimResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "group": {
+            "type": "string",
+            "nullable": true
+          },
+          "selected": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "succeeded": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResultOfString": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
       "RoleClaimRequest": {
         "type": "object",
         "additionalProperties": false,
@@ -2246,6 +2308,47 @@
           }
         }
       },
+      "ResultOfListOfRoleResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RoleResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "RoleRequest": {
         "type": "object",
         "additionalProperties": false,
@@ -2264,6 +2367,44 @@
           "description": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "ResultOfPermissionResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "$ref": "#/components/schemas/PermissionResponse"
+              }
+            }
+          }
+        ]
+      },
+      "PermissionResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleClaims": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RoleClaimResponse"
+            }
           }
         }
       },
@@ -2365,22 +2506,6 @@
               "type": "number",
               "format": "double"
             }
-          }
-        }
-      },
-      "Result": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "messages": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "succeeded": {
-            "type": "boolean"
           }
         }
       },
@@ -2508,23 +2633,6 @@
             "format": "decimal"
           }
         }
-      },
-      "ResultOfString": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Result"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
       },
       "PaginatedResultOfGetAllPagedProductsResponse": {
         "allOf": [
@@ -3010,14 +3118,104 @@
           }
         }
       },
-      "UpdateUserRolesRequest": {
+      "ResultOfListOfUserResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "UserResponse": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "userId": {
+          "id": {
             "type": "string",
             "nullable": true
           },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "emailConfirmed": {
+            "type": "boolean"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "profilePictureDataUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ResultOfUserResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "$ref": "#/components/schemas/UserResponse"
+              }
+            }
+          }
+        ]
+      },
+      "ResultOfUserRolesResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "$ref": "#/components/schemas/UserRolesResponse"
+              }
+            }
+          }
+        ]
+      },
+      "UserRolesResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
           "userRoles": {
             "type": "array",
             "nullable": true,
@@ -3041,6 +3239,23 @@
           },
           "selected": {
             "type": "boolean"
+          }
+        }
+      },
+      "UpdateUserRolesRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userRoles": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/UserRoleModel"
+            }
           }
         }
       },

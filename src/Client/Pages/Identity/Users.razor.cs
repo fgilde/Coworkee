@@ -42,7 +42,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task GetUsersAsync()
         {
-            var response = await _userManager.GetAllAsync();
+            var response = await _api.User_GetAllAsync();
             if (response.Succeeded)
             {
                 _userList = response.Data.ToList();
@@ -84,7 +84,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task ExportToExcel()
         {
-            var base64 = await _userManager.ExportToExcelAsync(_searchString);
+            var base64 = await _api.User_ExportAsync(_searchString);
             await _jsRuntime.InvokeVoidAsync("Download", new
             {
                 ByteArray = base64,

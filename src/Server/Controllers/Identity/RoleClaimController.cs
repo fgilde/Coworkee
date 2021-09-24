@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
+using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +28,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.RoleClaims.View)]
         [HttpGet]
+        [Produces(typeof(Result<List<RoleClaimResponse>>))]
         public async Task<IActionResult> GetAll()
         {
             var roleClaims = await _roleClaimService.GetAllAsync();
@@ -38,6 +42,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.RoleClaims.View)]
         [HttpGet("{roleId}")]
+        [Produces(typeof(Result<List<RoleClaimResponse>>))]
         public async Task<IActionResult> GetAllByRoleId([FromRoute] string roleId)
         {
             var response = await _roleClaimService.GetAllByRoleIdAsync(roleId);
@@ -51,6 +56,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK </returns>
         [Authorize(Policy = Permissions.RoleClaims.Create)]
         [HttpPost]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Post(RoleClaimRequest request)
         {
             var response = await _roleClaimService.SaveAsync(request);
@@ -64,6 +70,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.RoleClaims.Delete)]
         [HttpDelete("{id}")]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _roleClaimService.DeleteAsync(id);

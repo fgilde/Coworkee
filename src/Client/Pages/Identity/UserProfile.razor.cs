@@ -1,7 +1,6 @@
 ﻿using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
@@ -24,7 +23,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task ToggleUserStatus()
         {
             var request = new ToggleUserStatusRequest { ActivateUser = _active, UserId = Id };
-            var result = await _userManager.ToggleUserStatusAsync(request);
+            var result = await _api.User_ToggleUserStatusAsync(request);
             if (result.Succeeded)
             {
                 _snackBar.Add(_localizer["Updated User Status."], Severity.Success);
@@ -44,7 +43,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         protected override async Task OnInitializedAsync()
         {
             var userId = Id;
-            var result = await _userManager.GetAsync(userId);
+            var result = await _api.User_GetByIdAsync(userId);
             if (result.Succeeded)
             {
                 var user = result.Data;
@@ -55,7 +54,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                     _email = user.Email;
                     _phoneNumber = user.PhoneNumber;
                     _active = user.IsActive;
-                    var data = await _accountManager.GetProfilePictureAsync(userId);
+                    var data = await _api.Account_GetProfilePictureAsync(userId);
                     if (data.Succeeded)
                     {
                         ImageDataUrl = data.Data;

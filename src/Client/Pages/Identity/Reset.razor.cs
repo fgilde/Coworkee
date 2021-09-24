@@ -28,7 +28,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             if (!string.IsNullOrEmpty(_resetPasswordModel.Token))
             {
-                var result = await _userManager.ResetPasswordAsync(_resetPasswordModel);
+                var result = await _api.User_ResetPasswordAsync(_resetPasswordModel);
                 if (result.Succeeded)
                 {
                     _snackBar.Add(result.Messages[0], Severity.Success);

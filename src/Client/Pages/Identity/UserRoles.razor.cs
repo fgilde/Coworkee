@@ -36,7 +36,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             _canSearchRoles = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Roles.Search)).Succeeded;
 
             var userId = Id;
-            var result = await _userManager.GetAsync(userId);
+            var result = await _api.User_GetByIdAsync(userId);
             if (result.Succeeded)
             {
                 var user = result.Data;
@@ -44,7 +44,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 {
                     Title = $"{user.FirstName} {user.LastName}";
                     Description = string.Format(_localizer["Manage {0} {1}'s Roles"], user.FirstName, user.LastName);
-                    var response = await _userManager.GetRolesAsync(user.Id);
+                    var response = await _api.User_GetRolesAsync(user.Id);
                     UserRolesList = response.Data.UserRoles;
                 }
             }
@@ -59,7 +59,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 UserId = Id,
                 UserRoles = UserRolesList
             };
-            var result = await _userManager.UpdateRolesAsync(request);
+            var result = await _api.User_UpdateRolesAsync(request, request.UserId);
             if (result.Succeeded)
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);

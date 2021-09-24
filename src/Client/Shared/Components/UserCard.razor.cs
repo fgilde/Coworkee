@@ -33,7 +33,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 FirstLetterOfName = FirstName[0];
             }
             var UserId = user.GetUserId();
-            var imageResponse = await _accountManager.GetProfilePictureAsync(UserId);
+            var imageResponse = await _api.Account_GetProfilePictureAsync(UserId);
             if (imageResponse.Succeeded)
             {
                 ImageDataUrl = imageResponse.Data;

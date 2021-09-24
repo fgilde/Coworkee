@@ -1,9 +1,12 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services.Identity;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
 {
@@ -26,6 +29,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Users.View)]
         [HttpGet]
+        [Produces(typeof(Result<List<UserResponse>>))]
         public async Task<IActionResult> GetAll()
         {
             var users = await _userService.GetAllAsync();
@@ -39,6 +43,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         //[Authorize(Policy = Permissions.Users.View)]
         [HttpGet("{id}")]
+        [Produces(typeof(Result<UserResponse>))]
         public async Task<IActionResult> GetById(string id)
         {
             var user = await _userService.GetAsync(id);
@@ -52,6 +57,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Users.View)]
         [HttpGet("roles/{id}")]
+        [Produces(typeof(Result<UserRolesResponse>))]
         public async Task<IActionResult> GetRolesAsync(string id)
         {
             var userRoles = await _userService.GetRolesAsync(id);
@@ -65,6 +71,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Users.Edit)]
         [HttpPut("roles/{id}")]
+        [Produces(typeof(Result))]
         public async Task<IActionResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
             return Ok(await _userService.UpdateRolesAsync(request));
@@ -77,6 +84,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [AllowAnonymous]
         [HttpPost]
+        [Produces(typeof(Result))]
         public async Task<IActionResult> RegisterAsync(RegisterRequest request)
         {
             var origin = Request.Headers["origin"];
@@ -91,6 +99,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [HttpGet("confirm-email")]
         [AllowAnonymous]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> ConfirmEmailAsync([FromQuery] string userId, [FromQuery] string code)
         {
             return Ok(await _userService.ConfirmEmailAsync(userId, code));
@@ -102,6 +111,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="request"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost("toggle-status")]
+        [Produces(typeof(Result))]
         public async Task<IActionResult> ToggleUserStatusAsync(ToggleUserStatusRequest request)
         {
             return Ok(await _userService.ToggleUserStatusAsync(request));
@@ -114,6 +124,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [HttpPost("forgot-password")]
         [AllowAnonymous]
+        [Produces(typeof(Result))]
         public async Task<IActionResult> ForgotPasswordAsync(ForgotPasswordRequest request)
         {
             var origin = Request.Headers["origin"];
@@ -127,6 +138,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [HttpPost("reset-password")]
         [AllowAnonymous]
+        [Produces(typeof(Result))]
         public async Task<IActionResult> ResetPasswordAsync(ResetPasswordRequest request)
         {
             return Ok(await _userService.ResetPasswordAsync(request));
@@ -139,6 +151,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Users.Export)]
         [HttpGet("export")]
+        [Produces(typeof(string))]
         public async Task<IActionResult> Export(string searchString = "")
         {
             var data = await _userService.ExportToExcelAsync(searchString);

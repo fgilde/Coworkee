@@ -15,11 +15,7 @@
 @using Blazored.FluentValidation
 
 @*Client Services*@
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Account
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Roles
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.RoleClaims
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Users
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
 @using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.Document
@@ -44,7 +40,6 @@
 
 @attribute [Authorize]
 @inject IAuthenticationManager _authenticationManager
-@inject IAccountManager _accountManager
 @inject NavigationManager _navigationManager
 @inject BlazorHeroStateProvider _stateProvider
 @inject IAuthorizationService _authorizationService
@@ -54,6 +49,5 @@
 @inject IBlazorHeroClient _api
 @inject IHttpInterceptorManager _interceptor
 @inject ClientPreferenceManager _clientPreferenceManager
-@inject IUserManager _userManager
 @inject ILocalStorageService _localStorage;
 @inject IJSRuntime _jsRuntime;

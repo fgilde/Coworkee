@@ -17,6 +17,12 @@ namespace CleanArchitectureBase.SDK.Models
     public class ResultOfIEnumerableOfChatUserResponse : Result<IEnumerable<ChatUserResponse>> {}
     public class ResultOfIEnumerableOfChatHistoryResponse : Result<IEnumerable<ChatHistoryResponse>> {}
     public class ResultOfDashboardDataResponse: Result<DashboardDataResponse> {}
+    public class ResultOfListOfRoleClaimResponse : Result<List<RoleClaimResponse>> {}
+    public class ResultOfListOfRoleResponse : Result<List<RoleResponse>> {}
+    public class ResultOfPermissionResponse : Result<PermissionResponse> {}
+    public class ResultOfUserResponse : Result<UserResponse> { }
+    public class ResultOfUserRolesResponse : Result<UserRolesResponse> { }
+    public class ResultOfListOfUserResponse : Result<List<UserResponse>> {}
 
     public class PaginatedResultOfGetAllPagedProductsResponse : PaginatedResult<GetAllPagedProductsResponse>
     {

@@ -1,0 +1,6 @@
+2021-09-24 10:01:27.000 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 10:01:27.065 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 10:01:27.068 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 10:01:27.069 +02:00 [INF] Hosting environment: Development
+2021-09-24 10:01:27.070 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 10:05:36.822 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 18ba06eb-ece1-4b90-a722-8d49b90bf8ec hansi2 {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}

@@ -4,6 +4,7 @@ using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
 {
@@ -28,6 +29,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="model"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPut(nameof(UpdateProfile))]
+        [Produces(typeof(Result))]
         public async Task<ActionResult> UpdateProfile(UpdateProfileRequest model)
         {
             var response = await _accountService.UpdateProfileAsync(model, _currentUser.UserId);
@@ -40,6 +42,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="model"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPut(nameof(ChangePassword))]
+        [Produces(typeof(Result))]
         public async Task<ActionResult> ChangePassword(ChangePasswordRequest model)
         {
             var response = await _accountService.ChangePasswordAsync(model, _currentUser.UserId);
@@ -53,6 +56,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <returns>Status 200 OK </returns>
         [HttpGet("profile-picture/{userId}")]
         [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Client, Duration = 60)]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> GetProfilePictureAsync(string userId)
         {
             return Ok(await _accountService.GetProfilePictureAsync(userId));
@@ -64,6 +68,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="request"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost("profile-picture/{userId}")]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> UpdateProfilePictureAsync(UpdateProfilePictureRequest request)
         {
             return Ok(await _accountService.UpdateProfilePictureAsync(request, _currentUser.UserId));

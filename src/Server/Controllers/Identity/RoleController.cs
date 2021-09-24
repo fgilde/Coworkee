@@ -1,9 +1,12 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services.Identity;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers
 {
@@ -25,6 +28,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Roles.View)]
         [HttpGet]
+        [Produces(typeof(Result<List<RoleResponse>>))]
         public async Task<IActionResult> GetAll()
         {
             var roles = await _roleService.GetAllAsync();
@@ -38,6 +42,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Roles.Create)]
         [HttpPost]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Post(RoleRequest request)
         {
             var response = await _roleService.SaveAsync(request);
@@ -51,6 +56,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Roles.Delete)]
         [HttpDelete("{id}")]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Delete(string id)
         {
             var response = await _roleService.DeleteAsync(id);
@@ -64,6 +70,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.RoleClaims.View)]
         [HttpGet("permissions/{roleId}")]
+        [Produces(typeof(Result<PermissionResponse>))]
         public async Task<IActionResult> GetPermissionsByRoleId([FromRoute] string roleId)
         {
             var response = await _roleService.GetAllPermissionsAsync(roleId);
@@ -77,6 +84,7 @@ namespace CleanArchitectureBase.Server.Controllers
         /// <returns></returns>
         [Authorize(Policy = Permissions.RoleClaims.Edit)]
         [HttpPut("permissions/update")]
+        [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Update(PermissionRequest model)
         {
             var response = await _roleService.UpdatePermissionsAsync(model);

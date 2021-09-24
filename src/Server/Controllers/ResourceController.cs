@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Shared.Constants;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -24,6 +25,7 @@ namespace CleanArchitectureBase.Server.Controllers
                 cacheEntry =>
                     new JsStringBuilder(false, ApplicationConstants.ApplicationName)
                         .Append(typeof(ApplicationConstants))
+                        .Append(typeof(CustomIcons))
                         .ToJsonAsync());
 
             return Ok(jsonResources);

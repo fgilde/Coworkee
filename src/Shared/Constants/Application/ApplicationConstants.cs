@@ -4,6 +4,7 @@
     {
         public const string ApplicationName = "CleanArchitectureBase";
         public const string SessionIdKey = nameof(SessionIdKey);
+        public const string Version = "v2.2";
         
         public static class Environment
         {

@@ -131,3 +131,131 @@
 2021-09-24 13:30:16.577 +02:00 [INF] Application started. Press Ctrl+C to shut down.
 2021-09-24 13:30:16.577 +02:00 [INF] Hosting environment: Development
 2021-09-24 13:30:16.578 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:39:26.250 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:39:26.289 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:39:26.292 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:39:26.293 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:39:26.293 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:44:02.326 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:44:02.366 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:44:02.369 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:44:02.370 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:44:02.370 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:48:09.437 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:48:09.483 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:48:09.487 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:48:09.488 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:48:09.488 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:50:41.657 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:50:41.693 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:50:41.697 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:50:41.697 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:50:41.697 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:55:17.085 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:55:17.126 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:55:17.129 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:55:17.130 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:55:17.130 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:57:01.282 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:57:01.331 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:57:01.335 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:57:01.336 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:57:01.336 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 13:57:59.177 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 13:57:59.222 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 13:57:59.226 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 13:57:59.226 +02:00 [INF] Hosting environment: Development
+2021-09-24 13:57:59.227 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:01:23.843 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:01:23.889 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:01:23.893 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:01:23.893 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:01:23.894 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:02:52.763 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:02:52.808 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:02:52.810 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:02:52.810 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:02:52.811 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:08:47.980 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:08:48.024 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:08:48.026 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:08:48.027 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:08:48.027 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:12:52.564 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:12:52.606 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:12:52.609 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:12:52.609 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:12:52.610 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:15:38.510 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:15:38.566 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:15:38.569 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:15:38.570 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:15:38.571 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:27:05.707 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:27:05.747 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:27:05.750 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:27:05.751 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:27:05.752 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:28:48.917 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:28:48.956 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:28:48.958 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:28:48.959 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:28:48.959 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:29:56.983 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetDashboardDataQuery"}
+2021-09-24 14:31:57.289 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:31:57.335 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:31:57.338 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:31:57.339 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:31:57.339 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:37:02.607 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:37:02.650 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:37:02.654 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:37:02.654 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:37:02.655 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:38:49.912 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:38:49.960 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:38:49.964 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:38:49.964 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:38:49.965 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:49:39.741 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:49:39.787 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:49:39.790 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:49:39.791 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:49:39.791 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:54:06.110 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:54:06.151 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:54:06.153 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:54:06.154 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:54:06.154 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:57:12.094 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:57:12.134 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:57:12.138 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:57:12.138 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:57:12.139 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:59:34.410 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 14:59:34.455 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 14:59:34.458 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 14:59:34.458 +02:00 [INF] Hosting environment: Development
+2021-09-24 14:59:34.459 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 14:59:49.269 +02:00 [INF] CleanArchitectureBase Request: GetAllDocumentsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"$type":"GetAllDocumentsQuery"}
+2021-09-24 15:00:44.619 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 15:00:44.659 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 15:00:44.662 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 15:00:44.663 +02:00 [INF] Hosting environment: Development
+2021-09-24 15:00:44.663 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 15:03:57.663 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 15:03:57.702 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 15:03:57.705 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 15:03:57.705 +02:00 [INF] Hosting environment: Development
+2021-09-24 15:03:57.705 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 15:07:00.380 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 15:07:00.418 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 15:07:00.420 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 15:07:00.421 +02:00 [INF] Hosting environment: Development
+2021-09-24 15:07:00.421 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 15:11:07.442 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 15:11:07.482 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 15:11:07.485 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 15:11:07.485 +02:00 [INF] Hosting environment: Development
+2021-09-24 15:11:07.485 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 15:11:54.480 +02:00 [INF] CleanArchitectureBase Request: GetAllDocumentTypesQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetAllDocumentTypesQuery"}

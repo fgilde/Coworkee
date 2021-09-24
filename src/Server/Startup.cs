@@ -88,7 +88,7 @@ namespace CleanArchitectureBase.Server
             app.UseAuthorization();
             app.UseHangfireDashboard(ApplicationConstants.Hangfire.DashboardRoute, new DashboardOptions
             {
-                DashboardTitle = localizer["BlazorHero Jobs"],
+                DashboardTitle = localizer["ApplicationMainIcon Jobs"],
                 Authorization = new[] { authorizationFilter }
             });
             app.UseEndpoints();

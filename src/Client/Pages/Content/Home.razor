@@ -1,16 +1,18 @@
 @page "/home"
 @page "/"
+@using CleanArchitectureBase.Shared.Constants
+@using CleanArchitectureBase.Shared.Constants.Application
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Home> _localizer
 
 <MudContainer>
     <MudGrid>
         <MudItem xs="12" sm="12" md="12">
             <div class="d-flex justify-center mt-4">
-                <MudIcon Icon="@CustomIcons.BlazorHero" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px;" />
+                <MudIcon Icon="@CustomIcons.ApplicationMainIcon" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px;" />
             </div>
         </MudItem>
         <MudItem xs="12" sm="12" md="12">
-            <MudText Align="Align.Center" Typo="Typo.h2">@_localizer["Title"] v2.2</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h2">@ApplicationConstants.ApplicationName @ApplicationConstants.Version</MudText>
             <MudText Align="Align.Center" Typo="Typo.h5" Class="smaller">@_localizer["Description"]</MudText>
         </MudItem>
         <MudItem xs="12" sm="12" md="12">
@@ -19,7 +21,7 @@
             </MudText>
         </MudItem>
         <MudItem  xs="12" sm="12" md="12">
-            <MudAlert Style="margin-top:10px;justify-content:center" Severity="Severity.Info">@_localizer["Celebrating 1,500 Stars on Github!"] <MudLink Href="https://github.com/blazorhero/CleanArchitecture/stargazers">@_localizer["Liked BlazorHero? Star us on Github!"]</MudLink></MudAlert>
+            <MudAlert Style="margin-top:10px;justify-content:center" Severity="Severity.Info">@_localizer["Celebrating 1,500 Stars on Github!"] <MudLink Href="https://github.com/blazorhero/CleanArchitecture/stargazers">@_localizer["Liked ApplicationMainIcon? Star us on Github!"]</MudLink></MudAlert>
         </MudItem>
         <MudItem xs="12" sm="12" md="12">
             <div class="pa-4 justify-center my-4 mud-text-align-center">

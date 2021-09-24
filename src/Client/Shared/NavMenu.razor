@@ -121,8 +121,8 @@
 
     private async void OpenJobDashboard()
     {
-        var url = await _httpClient.GetStringAsync(DashboardEndpoints.GetJobsUrl);
-        _navigationManager.NavigateTo(url, true);
+        var uri =await _api.Dashboard_GetJobDashBoardUrlAsync();
+        _navigationManager.NavigateTo(uri, true);
     }
 
 }

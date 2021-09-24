@@ -25,8 +25,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 
         public async Task<bool> ToggleDarkModeAsync()
         {
-            var preference = await GetPreference() as ClientPreference;
-            if (preference != null)
+            if (await GetPreference() is ClientPreference preference)
             {
                 preference.IsDarkMode = !preference.IsDarkMode;
                 await SetPreference(preference);
@@ -37,8 +36,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
         }
         public async Task<bool> ToggleLayoutDirection()
         {
-            var preference = await GetPreference() as ClientPreference;
-            if (preference != null)
+            if (await GetPreference() is ClientPreference preference)
             {
                 preference.IsRTL = !preference.IsRTL;
                 await SetPreference(preference);
@@ -49,8 +47,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 
         public async Task<IResult> ChangeLanguageAsync(string languageCode)
         {
-            var preference = await GetPreference() as ClientPreference;
-            if (preference != null)
+            if (await GetPreference() is ClientPreference preference)
             {
                 preference.LanguageCode = languageCode;
                 await SetPreference(preference);
@@ -70,21 +67,14 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 
         public async Task<MudTheme> GetCurrentThemeAsync()
         {
-            var preference = await GetPreference() as ClientPreference;
-            if (preference != null)
-            {
-                if (preference.IsDarkMode == true) return BlazorHeroTheme.DarkTheme;
-            }
+            if (await GetPreference() is ClientPreference {IsDarkMode: true}) 
+                return BlazorHeroTheme.DarkTheme;
             return BlazorHeroTheme.DefaultTheme;
         }
         public async Task<bool> IsRTL()
         {
             var preference = await GetPreference() as ClientPreference;
-            if (preference != null)
-            {
-                if (preference.IsDarkMode == true) return false;
-            }
-            return preference.IsRTL;
+            return preference?.IsRTL ?? false;
         }
 
         public async Task<IPreference> GetPreference()

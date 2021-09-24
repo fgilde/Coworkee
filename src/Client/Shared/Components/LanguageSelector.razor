@@ -1,13 +1,39 @@
 ﻿@using CleanArchitectureBase.Shared.Constants.Localization
-<MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
-    @foreach (var language in LocalizationConstants.SupportedLanguages)
-    {
-        <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language.Code))">@language.DisplayName</MudMenuItem>
-    }
-</MudMenu>
+@using CleanArchitectureBase.Shared.Settings
+@inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
+
+@{
+    string actual = preference?.LanguageCode;
+    string displayName = localizer[LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual)?.DisplayName ?? "Select Language"];
+
+    <MudMenu Label="@displayName" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
+        @{
+            foreach (var language in LocalizationConstants.SupportedLanguages)
+            {
+                <MudMenuItem Disabled="language.Code == actual" OnClick="(() => ChangeLanguageAsync(language.Code))">
+                    <MudText Typo="Typo.body2">
+                        @if (language.Code == actual)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1" />
+                        }
+                        @localizer[language.DisplayName]
+                        <span style="font-size: xx-small; font-weight: bold; margin-left: 35px; float: right;">@language.Code</span>
+                    </MudText>
+                </MudMenuItem>
+            }
+        }
+
+    </MudMenu>
+}
 
 @code
 {
+    IPreference preference;
+    protected override async Task OnInitializedAsync()
+    {
+        preference = await _clientPreferenceManager.GetPreference();
+    }
+
     private async Task ChangeLanguageAsync(string languageCode)
     {
         var result = await _clientPreferenceManager.ChangeLanguageAsync(languageCode);

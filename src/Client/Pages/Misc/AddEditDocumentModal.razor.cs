@@ -9,16 +9,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.Document;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.DocumentType;
+
 
 namespace CleanArchitectureBase.Client.Pages.Misc
 {
     public partial class AddEditDocumentModal
     {
-        [Inject] private IDocumentManager DocumentManager { get; set; }
-        [Inject] private IDocumentTypeManager DocumentTypeManager { get; set; }
 
         [Parameter] public AddEditDocumentCommand AddEditDocumentModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
@@ -34,7 +32,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task SaveAsync()
         {
-            var response = await DocumentManager.SaveAsync(AddEditDocumentModel);
+            var response = await _api.Documents_PostAsync(AddEditDocumentModel);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
@@ -61,7 +59,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task LoadDocumentTypesAsync()
         {
-            var data = await DocumentTypeManager.GetAllAsync();
+            var data = await _api.DocumentTypes_GetAllAsync();
             if (data.Succeeded)
             {
                 _documentTypes = data.Data;

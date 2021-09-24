@@ -2,7 +2,6 @@
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.DocumentType;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -12,8 +11,6 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 {
     public partial class AddEditDocumentTypeModal
     {
-        [Inject] private IDocumentTypeManager DocumentTypeManager { get; set; }
-
         [Parameter] public AddEditDocumentTypeCommand AddEditDocumentTypeModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -28,7 +25,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task SaveAsync()
         {
-            var response = await DocumentTypeManager.SaveAsync(AddEditDocumentTypeModel);
+            var response = await _api.DocumentTypes_PostAsync(AddEditDocumentTypeModel);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);

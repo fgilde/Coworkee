@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Misc.DocumentType;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -19,8 +18,6 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 {
     public partial class DocumentTypes
     {
-        [Inject] private IDocumentTypeManager DocumentTypeManager { get; set; }
-
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private List<GetAllDocumentTypesResponse> _documentTypeList = new();
@@ -58,7 +55,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task GetDocumentTypesAsync()
         {
-            var response = await DocumentTypeManager.GetAllAsync();
+            var response = await _api.DocumentTypes_GetAllAsync();
             if (response.Succeeded)
             {
                 _documentTypeList = response.Data.ToList();
@@ -84,7 +81,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await DocumentTypeManager.DeleteAsync(id);
+                var response = await _api.DocumentTypes_DeleteAsync(id);
                 if (response.Succeeded)
                 {
                     await Reset();
@@ -104,7 +101,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task ExportToExcel()
         {
-            var response = await DocumentTypeManager.ExportToExcelAsync(_searchString);
+            var response = await _api.DocumentTypes_ExportAsync(_searchString);
             if (response.Succeeded)
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new

@@ -11,27 +11,25 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Routes;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
-using SDK;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication
 {
-    public class AuthenticationManager : IAuthenticationManager
+    public class ClientAuthenticationManager : IClientAuthenticationManager
     {
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
-        private readonly IStringLocalizer<AuthenticationManager> _localizer;
+        private readonly IStringLocalizer<ClientAuthenticationManager> _localizer;
         private readonly IBlazorHeroClient _api;
 
-        public AuthenticationManager(
+        public ClientAuthenticationManager(
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
-            IStringLocalizer<AuthenticationManager> localizer, IBlazorHeroClient api)
+            IStringLocalizer<ClientAuthenticationManager> localizer, IBlazorHeroClient api)
         {
             _httpClient = httpClient;
             _localStorage = localStorage;
@@ -83,9 +81,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             var token = await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
             var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.Local.RefreshToken);
 
-            var response = await _httpClient.PostAsJsonAsync(Routes.TokenEndpoints.Refresh, new RefreshTokenRequest { Token = token, RefreshToken = refreshToken });
-
-            var result = await response.ToResult<TokenResponse>();
+            var result = await _api.Token_RefreshAsync(new RefreshTokenRequest {Token = token, RefreshToken = refreshToken});
 
             if (!result.Succeeded)
             {

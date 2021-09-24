@@ -4,3 +4,21 @@
 2021-09-24 10:01:27.069 +02:00 [INF] Hosting environment: Development
 2021-09-24 10:01:27.070 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
 2021-09-24 10:05:36.822 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 18ba06eb-ece1-4b90-a722-8d49b90bf8ec hansi2 {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-24 10:15:55.806 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 10:15:55.847 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 10:15:55.849 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 10:15:55.850 +02:00 [INF] Hosting environment: Development
+2021-09-24 10:15:55.850 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 10:16:13.582 +02:00 [INF] CleanArchitectureBase Request: GetDashboardDataQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"$type":"GetDashboardDataQuery"}
+2021-09-24 10:24:22.202 +02:00 [INF] Now listening on: https://localhost:5001
+2021-09-24 10:24:22.240 +02:00 [INF] Now listening on: http://localhost:5000
+2021-09-24 10:24:22.244 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-24 10:24:22.245 +02:00 [INF] Hosting environment: Development
+2021-09-24 10:24:22.246 +02:00 [INF] Content root path: C:\dev\privat\github\CleanArchitectureBaseBlazor\src\Server
+2021-09-24 10:24:39.479 +02:00 [INF] CleanArchitectureBase Request: GetAllDocumentsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"$type":"GetAllDocumentsQuery"}
+2021-09-24 10:25:11.211 +02:00 [INF] CleanArchitectureBase Request: GetAllExtendedAttributesByEntityIdQuery`4 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"EntityId":1,"$type":"GetAllExtendedAttributesByEntityIdQuery`4"}
+2021-09-24 10:27:07.785 +02:00 [INF] CleanArchitectureBase Request: GetAllExtendedAttributesByEntityIdQuery`4 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"EntityId":1,"$type":"GetAllExtendedAttributesByEntityIdQuery`4"}
+2021-09-24 10:27:18.617 +02:00 [INF] CleanArchitectureBase Request: GetAllExtendedAttributesByEntityIdQuery`4 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"EntityId":1,"$type":"GetAllExtendedAttributesByEntityIdQuery`4"}
+2021-09-24 10:27:29.195 +02:00 [INF] CleanArchitectureBase Request: GetAllProductsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"OrderBy":null,"$type":"GetAllProductsQuery"}
+2021-09-24 10:27:33.534 +02:00 [INF] CleanArchitectureBase Request: GetAllDocumentsQuery 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"PageNumber":1,"PageSize":10,"SearchString":null,"$type":"GetAllDocumentsQuery"}
+2021-09-24 10:27:54.194 +02:00 [INF] CleanArchitectureBase Request: GetAllExtendedAttributesByEntityIdQuery`4 00bb98c5-b934-4976-8568-30fd60d1e613 mukesh {"EntityId":1,"$type":"GetAllExtendedAttributesByEntityIdQuery`4"}

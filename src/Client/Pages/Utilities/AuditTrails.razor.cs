@@ -74,7 +74,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 
         protected override async Task OnInitializedAsync()
         {
-            _currentUser = await _authenticationManager.CurrentUser();
+            _currentUser = await _clientAuthenticationManager.CurrentUser();
             _canExportAuditTrails = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.AuditTrails.Export)).Succeeded;
             _canSearchAuditTrails = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.AuditTrails.Search)).Succeeded;
 

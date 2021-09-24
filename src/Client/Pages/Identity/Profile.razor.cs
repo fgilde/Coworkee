@@ -25,7 +25,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             var response = await _api.Account_UpdateProfileAsync(_profileModel);
             if (response.Succeeded)
             {
-                await _authenticationManager.Logout();
+                await _clientAuthenticationManager.Logout();
                 _snackBar.Add(_localizer["Your Profile has been updated. Please Login to Continue."], Severity.Success);
                 _navigationManager.NavigateTo("/");
             }

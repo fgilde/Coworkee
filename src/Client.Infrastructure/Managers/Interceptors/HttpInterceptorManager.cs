@@ -12,20 +12,20 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
     public class HttpInterceptorManager : IHttpInterceptorManager
     {
         private readonly HttpClientInterceptor _interceptor;
-        private readonly IAuthenticationManager _authenticationManager;
+        private readonly IClientAuthenticationManager _clientAuthenticationManager;
         private readonly NavigationManager _navigationManager;
         private readonly ISnackbar _snackBar;
         private readonly IStringLocalizer<HttpInterceptorManager> _localizer;
 
         public HttpInterceptorManager(
             HttpClientInterceptor interceptor,
-            IAuthenticationManager authenticationManager,
+            IClientAuthenticationManager clientAuthenticationManager,
             NavigationManager navigationManager,
             ISnackbar snackBar,
             IStringLocalizer<HttpInterceptorManager> localizer)
         {
             _interceptor = interceptor;
-            _authenticationManager = authenticationManager;
+            _clientAuthenticationManager = clientAuthenticationManager;
             _navigationManager = navigationManager;
             _snackBar = snackBar;
             _localizer = localizer;
@@ -40,7 +40,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
             {
                 try
                 {
-                    var token = await _authenticationManager.TryRefreshToken();
+                    var token = await _clientAuthenticationManager.TryRefreshToken();
                     if (!string.IsNullOrEmpty(token))
                     {
                         _snackBar.Add(_localizer["Refreshed Token."], Severity.Success);
@@ -51,7 +51,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
                 {
                     Console.WriteLine(ex.Message);
                     _snackBar.Add(_localizer["You are Logged Out."], Severity.Error);
-                    await _authenticationManager.Logout();
+                    await _clientAuthenticationManager.Logout();
                     _navigationManager.NavigateTo("/");
                 }
             }

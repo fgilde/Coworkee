@@ -48,7 +48,7 @@ namespace CleanArchitectureBase.Client.Shared
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(localizer["You are logged out because the user with your Token has been deleted."], Severity.Error);
-                    await _authenticationManager.Logout();
+                    await _clientAuthenticationManager.Logout();
                 }
 
                 await hubConnection.SendAsync(ApplicationConstants.SignalR.OnConnect, CurrentUserId);
@@ -97,7 +97,7 @@ namespace CleanArchitectureBase.Client.Shared
             {
                 try
                 {
-                    var token = await _authenticationManager.TryForceRefreshToken();
+                    var token = await _clientAuthenticationManager.TryForceRefreshToken();
                     if (!string.IsNullOrEmpty(token))
                     {
                         _snackBar.Add(localizer["Refreshed Token."], Severity.Success);
@@ -108,7 +108,7 @@ namespace CleanArchitectureBase.Client.Shared
                 {
                     Console.WriteLine(ex.Message);
                     _snackBar.Add(localizer["You are Logged Out."], Severity.Error);
-                    await _authenticationManager.Logout();
+                    await _clientAuthenticationManager.Logout();
                     _navigationManager.NavigateTo("/");
                 }
             });
@@ -127,7 +127,7 @@ namespace CleanArchitectureBase.Client.Shared
                             {
                                 _snackBar.Add(localizer["You are logged out because the Permissions of one of your Roles have been updated."], Severity.Error);
                                 await hubConnection.SendAsync(ApplicationConstants.SignalR.OnDisconnect, CurrentUserId);
-                                await _authenticationManager.Logout();
+                                await _clientAuthenticationManager.Logout();
                                 _navigationManager.NavigateTo("/login");
                             }
                         }

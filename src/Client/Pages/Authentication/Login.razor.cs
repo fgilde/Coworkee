@@ -24,7 +24,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         private async Task SubmitAsync()
         {
-            var result = await _authenticationManager.Login(_tokenModel);
+            var result = await _clientAuthenticationManager.Login(_tokenModel);
             if (result.Succeeded)
             {
                 _snackBar.Add(string.Format(_localizer["Welcome {0}"], _tokenModel.Email), Severity.Success);

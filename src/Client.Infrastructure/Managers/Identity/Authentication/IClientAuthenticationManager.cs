@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication
 {
-    public interface IAuthenticationManager : IManager
+    public interface IClientAuthenticationManager : IManager
     {
         Task<IResult> Login(TokenRequest model);
 

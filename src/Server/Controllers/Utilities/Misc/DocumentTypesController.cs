@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.Delete;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,10 +22,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Produces(typeof(Result<List<GetAllDocumentTypesResponse>>))]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
-            var documentTypes = await _mediator.Send(new GetAllDocumentTypesQuery());
-            return Ok(documentTypes);
+            return Ok(await _mediator.Send(new GetAllDocumentTypesQuery(), cancellationToken));
         }
 
         /// <summary>
@@ -32,10 +35,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.DocumentTypes.View)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [Produces(typeof(Result<GetDocumentTypeByIdResponse>))]
+        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            var documentType = await _mediator.Send(new GetDocumentTypeByIdQuery { Id = id });
-            return Ok(documentType);
+            return Ok(await _mediator.Send(new GetDocumentTypeByIdQuery { Id = id }, cancellationToken));
         }
 
         /// <summary>
@@ -45,9 +48,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.Create)]
         [HttpPost]
-        public async Task<IActionResult> Post(AddEditDocumentTypeCommand command)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Post(AddEditDocumentTypeCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await _mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
@@ -57,9 +61,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.Delete)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteDocumentTypeCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteDocumentTypeCommand { Id = id }, cancellationToken));
         }
 
         /// <summary>
@@ -69,9 +74,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns></returns>
         [Authorize(Policy = Permissions.DocumentTypes.Export)]
         [HttpGet("export")]
-        public async Task<IActionResult> Export(string searchString = "")
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new ExportDocumentTypesQuery(searchString)));
+            return Ok(await _mediator.Send(new ExportDocumentTypesQuery(searchString), cancellationToken));
         }
     }
 }

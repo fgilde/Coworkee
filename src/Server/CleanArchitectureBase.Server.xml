@@ -277,61 +277,61 @@
             <param name="currentGroup"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(CleanArchitectureBase.Application.Features.Documents.Queries.GetAll.GetAllDocumentsQuery)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(CleanArchitectureBase.Application.Features.Documents.Queries.GetAll.GetAllDocumentsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Documents
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get Document By Id
             </summary>
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Post(CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit.AddEditDocumentCommand)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Post(CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit.AddEditDocumentCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit Document
             </summary>
             <param name="command"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Delete a Document
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll(System.Threading.CancellationToken)">
             <summary>
             Get All Document Types
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetById(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get Document Type By Id
             </summary>
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypeCommand)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypeCommand,System.Threading.CancellationToken)">
             <summary>
             Create/Update a Document Type
             </summary>
             <param name="command"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Delete a Document Type
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(System.String)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(System.String,System.Threading.CancellationToken)">
             <summary>
             Search Document Types and Export to Excel
             </summary>

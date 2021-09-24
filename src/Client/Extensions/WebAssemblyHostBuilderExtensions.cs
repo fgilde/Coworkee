@@ -43,10 +43,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 {
                     options.ResourcesPath = "Resources";
                 })
-                .AddAuthorizationCore(options =>
-                {
-                    RegisterPermissionClaims(options);
-                })
+                .AddAuthorizationCore(RegisterPermissionClaims)
                 .AddBlazoredLocalStorage()
                 .AddMudServices(configuration =>
                 {

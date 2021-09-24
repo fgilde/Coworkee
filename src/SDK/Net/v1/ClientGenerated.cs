@@ -294,99 +294,99 @@ namespace SDK
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null);
+        PaginatedResultOfGetAllDocumentsResponse Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResultOfGetAllDocumentsResponse> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_Post(AddEditDocumentCommand command);
+        ResultOfInteger Documents_Post(AddEditDocumentCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_GetById(int id);
+        ResultOfGetDocumentByIdResponse Documents_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfGetDocumentByIdResponse> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_Delete(int id);
+        ResultOfInteger Documents_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentTypes_GetAll();
+        ResultOfListOfGetAllDocumentTypesResponse DocumentTypes_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfListOfGetAllDocumentTypesResponse> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentTypes_Post(AddEditDocumentTypeCommand command);
+        ResultOfInteger DocumentTypes_Post(AddEditDocumentTypeCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentTypes_GetById(int id);
+        ResultOfGetDocumentTypeByIdResponse DocumentTypes_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfGetDocumentTypeByIdResponse> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentTypes_Delete(int id);
+        ResultOfInteger DocumentTypes_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentTypes_Export(string searchString = null);
+        ResultOfString DocumentTypes_Export(string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ResultOfString> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse DocumentExtendedAttributes_GetAll();
@@ -2550,7 +2550,7 @@ namespace SDK
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null)
+        public PaginatedResultOfGetAllDocumentsResponse Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_GetAllAsync(pageNumber, pageSize, searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2559,7 +2559,7 @@ namespace SDK
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PaginatedResultOfGetAllDocumentsResponse> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Documents?");
@@ -2584,7 +2584,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2605,12 +2605,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<PaginatedResultOfGetAllDocumentsResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2635,7 +2637,7 @@ namespace SDK
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Documents_Post(AddEditDocumentCommand command)
+        public ResultOfInteger Documents_Post(AddEditDocumentCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2644,7 +2646,7 @@ namespace SDK
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -2662,7 +2664,7 @@ namespace SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2683,12 +2685,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2713,7 +2717,7 @@ namespace SDK
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Documents_GetById(int id)
+        public ResultOfGetDocumentByIdResponse Documents_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2722,7 +2726,7 @@ namespace SDK
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfGetDocumentByIdResponse> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2738,7 +2742,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2759,12 +2763,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetDocumentByIdResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2789,7 +2795,7 @@ namespace SDK
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Documents_Delete(int id)
+        public ResultOfInteger Documents_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2798,7 +2804,7 @@ namespace SDK
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2814,7 +2820,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2835,12 +2841,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2865,7 +2873,7 @@ namespace SDK
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse DocumentTypes_GetAll()
+        public ResultOfListOfGetAllDocumentTypesResponse DocumentTypes_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2874,7 +2882,7 @@ namespace SDK
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfListOfGetAllDocumentTypesResponse> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes");
@@ -2886,7 +2894,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2907,12 +2915,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfGetAllDocumentTypesResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2937,7 +2947,7 @@ namespace SDK
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse DocumentTypes_Post(AddEditDocumentTypeCommand command)
+        public ResultOfInteger DocumentTypes_Post(AddEditDocumentTypeCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2946,7 +2956,7 @@ namespace SDK
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -2964,7 +2974,7 @@ namespace SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2985,12 +2995,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -3015,7 +3027,7 @@ namespace SDK
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse DocumentTypes_GetById(int id)
+        public ResultOfGetDocumentTypeByIdResponse DocumentTypes_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3024,7 +3036,7 @@ namespace SDK
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfGetDocumentTypeByIdResponse> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3040,7 +3052,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3061,12 +3073,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetDocumentTypeByIdResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -3091,7 +3105,7 @@ namespace SDK
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse DocumentTypes_Delete(int id)
+        public ResultOfInteger DocumentTypes_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3100,7 +3114,7 @@ namespace SDK
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3116,7 +3130,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3137,12 +3151,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -3166,7 +3182,7 @@ namespace SDK
     
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse DocumentTypes_Export(string searchString = null)
+        public ResultOfString DocumentTypes_Export(string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3174,7 +3190,7 @@ namespace SDK
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ResultOfString> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes/export?");
@@ -3191,7 +3207,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3212,12 +3228,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {

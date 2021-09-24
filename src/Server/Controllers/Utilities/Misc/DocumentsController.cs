@@ -1,10 +1,12 @@
-﻿using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
+﻿using System.Threading;
+using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Documents.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
@@ -18,9 +20,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllDocumentsQuery query)
+        [Produces(typeof(PaginatedResult<GetAllDocumentsResponse>))]
+        public async Task<IActionResult> GetAll([FromQuery] GetAllDocumentsQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(query));
+            return Ok(await _mediator.Send(query, cancellationToken));
         }
 
         /// <summary>
@@ -30,9 +33,11 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.Documents.View)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [Produces(typeof(Result<GetDocumentByIdResponse>))]
+
+        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new GetDocumentByIdQuery { Id = id }));
+            return Ok(await _mediator.Send(new GetDocumentByIdQuery { Id = id }, cancellationToken));
         }
 
         /// <summary>
@@ -42,9 +47,11 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Create)]
         [HttpPost]
-        public async Task<IActionResult> Post(AddEditDocumentCommand command)
+        [Produces(typeof(Result<int>))]
+
+        public async Task<IActionResult> Post(AddEditDocumentCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await _mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
@@ -54,9 +61,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Delete)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Produces(typeof(Result<int>))]
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteDocumentCommand { Id = id }));
+            return Ok(await _mediator.Send(new DeleteDocumentCommand { Id = id }, cancellationToken));
         }
     }
 }

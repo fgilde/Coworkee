@@ -67,7 +67,6 @@ namespace CleanArchitectureBase.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
-            _currentTheme = BlazorHeroTheme.DefaultTheme;
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
             _rightToLeft = await _clientPreferenceManager.IsRTL();
             _interceptor.RegisterEvent();
@@ -78,19 +77,23 @@ namespace CleanArchitectureBase.Client.Shared
                 if (CurrentUserId == receiverUserId)
                 {
                     _jsRuntime.InvokeAsync<string>("PlayAudio", "notification");
-                    _snackBar.Add(message, Severity.Info, config =>
+                    var chatUrlToUser = $"chat/{senderUserId}";
+                    if (!_navigationManager.Uri.EndsWith(chatUrlToUser))
                     {
-                        config.VisibleStateDuration = 10000;
-                        config.HideTransitionDuration = 500;
-                        config.ShowTransitionDuration = 500;
-                        config.Action = localizer["Chat?"];
-                        config.ActionColor = Color.Primary;
-                        config.Onclick = snackbar =>
+                        _snackBar.Add(message, Severity.Info, config =>
                         {
-                            _navigationManager.NavigateTo($"chat/{senderUserId}");
-                            return Task.CompletedTask;
-                        };
-                    });
+                            config.VisibleStateDuration = 10000;
+                            config.HideTransitionDuration = 500;
+                            config.ShowTransitionDuration = 500;
+                            config.Action = localizer["Chat?"];
+                            config.ActionColor = Color.Primary;
+                            config.Onclick = snackbar =>
+                            {
+                                _navigationManager.NavigateTo(chatUrlToUser);
+                                return Task.CompletedTask;
+                            };
+                        });
+                    }
                 }
             });
             hubConnection.On(ApplicationConstants.SignalR.ReceiveRegenerateTokens, async () =>

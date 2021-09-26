@@ -1,4 +1,4 @@
-﻿@page "/catalog/products"
+﻿@page "/catalog/products/{Action?}/{Id?}"
 @attribute [Authorize(Policy = Permissions.Products.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer
 @using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
@@ -16,32 +16,45 @@
 }
 else
 {
-    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllPagedProductsResponse>>>(ServerReload))" Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
+    <MudTable MultiSelection="true" @bind-SelectedItems="selectedItems" Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllPagedProductsResponse>>>(ServerReload))" Hover="true" Dense="false" Bordered="false" Striped="true" @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateProducts)
-                {
+                    {
                     <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                     @if (_canExportProducts)
-                    {
+                        {
                         <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                        }
                     }
-                }
-                else
-                {
+                    else
+                    {
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                     @if (_canExportProducts)
-                    {
+                        {
                         <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                        }
                     }
+                @if (selectedItems.Count > 0 && (_canDeleteProducts || _canEditProducts))
+                {
+                    <MudMenu DisableElevation Style="margin-left: 5px; margin-top:1px;" Label="@_localizer["{0} Selected", selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true">
+                        @if (_canEditProducts)
+                        {
+                            <MudMenuItem>@_localizer["Edit"]</MudMenuItem>
+                        }
+                        @if (_canDeleteProducts)
+                        {
+                            <MudMenuItem>@_localizer["Delete"]</MudMenuItem>
+                        }
+                    </MudMenu>
                 }
             </div>
             <MudToolBarSpacer />
             @if (_canSearchProducts)
-            {
+                {
                 <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-            }
+                }
         </ToolBarContent>
         <HeaderContent>
             <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
@@ -69,17 +82,20 @@ else
             <MudTd DataLabel="Rate">@context.Rate</MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditProducts || _canDeleteProducts)
-                {
-                    <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                        @if (_canEditProducts)
-                            {
-                            <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
-                            }
-                        @if (_canDeleteProducts)
-                            {
-                            <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
-                            }
-                    </MudMenu>
+                    {
+                    @if (_canEditProducts)
+                        {
+                        <MudTooltip Text="@_localizer["Edit"]">
+                            <MudIconButton @onclick="@(() => InvokeModal(@context.Id))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" aria-label="@_localizer["Edit"]"></MudIconButton>
+                        </MudTooltip>
+                        }
+                    @if (_canDeleteProducts)
+                        {
+                        <MudTooltip Text="@_localizer["Delete"]">
+                            <MudIconButton @onclick="@(() => Delete(@context.Id))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIconButton>
+
+                        </MudTooltip>
+                        }
                     }
                     else
                     {
@@ -91,13 +107,13 @@ else
                                Color="Color.Surface">
                         @_localizer["No Allowed Actions"]
                     </MudButton>
-                }
+                    }
             </MudTd>
         </RowTemplate>
         <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
+            <MudItem  xs="12" sm="12" md="12">
+                <MudText Style="margin-top:17px;justify-content:center">@_localizer["{0} Selected", selectedItems.Count]</MudText>
+            </MudItem>
         </FooterContent>
         <PagerContent>
             <TablePager />

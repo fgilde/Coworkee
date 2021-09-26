@@ -234,3 +234,5 @@ _Pvt_Extensions
 .fake/
 /NDependOut
 /CleanArchitectureBase.ndproj
+/src/Server/Logs
+/src/Server/Files/Images/Products

@@ -14,24 +14,30 @@ using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Products
     {
         [Inject] private IBlazorHeroClient Api { get; set; }
+        private string pageUrl = "/catalog/products";
+
+        [Parameter]
+        public string Action { get; set; }
+        [Parameter]
+        public string Id { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private IEnumerable<GetAllPagedProductsResponse> _pagedData;
         private MudTable<GetAllPagedProductsResponse> _table;
+        private HashSet<GetAllPagedProductsResponse> selectedItems = new HashSet<GetAllPagedProductsResponse>();
+
         private int _totalItems;
         private int _currentPage;
         private string _searchString = "";
-        private bool _dense = false;
-        private bool _striped = true;
-        private bool _bordered = false;
-
+   
         private ClaimsPrincipal _currentUser;
         private bool _canCreateProducts;
         private bool _canEditProducts;
@@ -39,7 +45,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         private bool _canExportProducts;
         private bool _canSearchProducts;
         private bool _loaded;
-
+        
         protected override async Task OnInitializedAsync()
         {
             _currentUser = await _clientAuthenticationManager.CurrentUser();
@@ -48,12 +54,30 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             _canDeleteProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Delete)).Succeeded;
             _canExportProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Export)).Succeeded;
             _canSearchProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Search)).Succeeded;
-
+            
             _loaded = true;
             HubConnection = HubConnection.TryInitialize(_navigationManager);
             if (HubConnection.State == HubConnectionState.Disconnected)
             {
                 await HubConnection.StartAsync();
+            }
+
+            await ExecuteInitialPageActionAsync();
+        }
+
+        private async Task ExecuteInitialPageActionAsync()
+        {
+            if (Action == "add")
+            {
+                await InvokeModal(0);
+            }
+            if (Action == "edit" && !string.IsNullOrWhiteSpace(Id) && int.TryParse(Id, out var id))
+            {
+                await InvokeModal(id);
+            }
+            if (Action == "delete" && !string.IsNullOrWhiteSpace(Id) && int.TryParse(Id, out var _id))
+            {
+                await Delete(_id);
             }
         }
 
@@ -124,21 +148,16 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task InvokeModal(int id = 0)
         {
+            string u = id != 0 ? "edit" : "add";
+            
+            _navigationManager.NavigateTo($"{pageUrl}/{u}/{(id > 0 ? id : string.Empty)}");
             var parameters = new DialogParameters();
             if (id != 0)
             {
                 var product = _pagedData.FirstOrDefault(c => c.Id == id);
                 if (product != null)
                 {
-                    parameters.Add(nameof(AddEditProductModal.AddEditProductModel), new AddEditProductCommand
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        Description = product.Description,
-                        Rate = product.Rate,
-                        BrandId = product.BrandId,
-                        Barcode = product.Barcode
-                    });
+                    parameters.Add(nameof(AddEditProductModal.AddEditProductModel), product.MapTo<AddEditProductCommand>());
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
@@ -148,10 +167,12 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             {
                 OnSearch("");
             }
+            _navigationManager.NavigateTo(pageUrl);
         }
 
         private async Task Delete(int id)
         {
+            _navigationManager.NavigateTo($"{pageUrl}/delete/{id}");
             string deleteContent = _localizer["Delete Content"];
             var parameters = new DialogParameters
             {
@@ -178,6 +199,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
                     }
                 }
             }
+            _navigationManager.NavigateTo(pageUrl);
         }
     }
 }

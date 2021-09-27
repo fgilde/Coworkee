@@ -39,9 +39,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task<Result> DeleteProducts(int[] ids)
         {
-            // TODO: Delete many on server
-            var results = await Task.WhenAll(ids.Select(i => _api.Products_DeleteAsync(i)));
-            return results.FirstOrDefault();
+            return await _api.Products_DeleteAsync(ids.ToList());
         }
 
         private string GetName(GetAllPagedProductsResponse arg)

@@ -8,7 +8,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers
+namespace CleanArchitectureBase.Server.Controllers.Identity
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/identity/[controller]")]

@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
@@ -8,12 +9,12 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Products.Commands.Delete
 {
-    public class DeleteProductCommand : IRequest<Result<int>>
+    public class DeleteProductCommand : IRequest<IResult>
     {
-        public int Id { get; set; }
+        public int[] Ids { get; set; }
     }
 
-    internal class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, Result<int>>
+    internal class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, IResult>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IStringLocalizer<DeleteProductCommandHandler> _localizer;
@@ -24,19 +25,17 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.Delete
             _localizer = localizer;
         }
 
-        public async Task<Result<int>> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+        public async Task<IResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
         {
-            var product = await _unitOfWork.Repository<Product>().GetByIdAsync(command.Id);
-            if (product != null)
+            var products = await Task.WhenAll(command.Ids.Select(id => _unitOfWork.Repository<Product>().GetByIdAsync(id)));
+            if (products.Any())
             {
-                await _unitOfWork.Repository<Product>().DeleteAsync(product);
+                await _unitOfWork.Repository<Product>().DeleteManyAsync(products);
                 await _unitOfWork.Commit(cancellationToken);
-                return await Result<int>.SuccessAsync(product.Id, _localizer["Product Deleted"]);
+                return await Result.SuccessAsync(_localizer["Products Deleted"]);
             }
-            else
-            {
-                return await Result<int>.FailAsync(_localizer["Product Not Found!"]);
-            }
+
+            return await Result.FailAsync(_localizer["Products Not Found!"]);
         }
     }
 }

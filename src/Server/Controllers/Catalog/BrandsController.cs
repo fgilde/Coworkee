@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
-using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Brands.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Brands.Queries.Export;
+using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
+using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
+namespace CleanArchitectureBase.Server.Controllers.Catalog
 {
     public class BrandsController : BaseApiController<BrandsController>
     {

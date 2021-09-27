@@ -20,5 +20,9 @@ namespace CleanArchitectureBase.Application.Interfaces.Repositories
         Task UpdateAsync(T entity);
 
         Task DeleteAsync(T entity);
+
+        Task DeleteManyAsync(IEnumerable<T> entities);
+
+        Task DeleteManyAsync(params T[] entities);
     }
 }

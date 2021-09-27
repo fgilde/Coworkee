@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.v1
+namespace CleanArchitectureBase.Server.Controllers
 {
     [ApiController]
     public class DashboardController : BaseApiController<DashboardController>

@@ -1,17 +1,17 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Products.Queries.Export;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
+using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
-using CleanArchitectureBase.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
+namespace CleanArchitectureBase.Server.Controllers.Catalog
 {
     public class ProductsController : BaseApiController<ProductsController>
     {
@@ -73,15 +73,15 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         /// <summary>
         /// Delete a Product
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ids">Products to delete</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK response</returns>
         [Authorize(Policy = Permissions.Products.Delete)]
-        [HttpDelete("{id}")]
-        [Produces(typeof(Result<int>))]
-        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
+        [HttpDelete]
+        [Produces(typeof(Result))]
+        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteProductCommand { Id = id }, cancellationToken));
+            return Ok(await _mediator.Send(new DeleteProductCommand { Ids = ids }, cancellationToken));
         }
 
         /// <summary>

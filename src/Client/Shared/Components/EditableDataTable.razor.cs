@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Pages.Catalog;
+using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
@@ -217,38 +218,47 @@ namespace CleanArchitectureBase.Client.Shared.Components
             _navigationManager.NavigateTo(_pageUrl);
         }
 
-        private async Task Delete(params TIdType[] ids)
+        private async Task<bool> Delete(params TIdType[] ids)
         {
             _navigationManager.NavigateTo($"{_pageUrl}delete/{string.Join(',', ids)}");
-            var names = await GetDisplayNamesAsync(ids);
-            var value = ids.Length > 1 ? _localizer["Delete these {0} elements"]: _localizer["Delete this element"];
-            var parameters = new DialogParameters
+            try
             {
-                {nameof(Dialogs.DeleteConfirmation.Details), names},
-                {nameof(Dialogs.DeleteConfirmation.Message), string.Format(value, ids.Length)}
-            };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                var response = await ApiDelete(ids);
-                if (response.Succeeded)
+                var names = await GetDisplayNamesAsync(ids);
+                var value = ids.Length > 1 ? _localizer["Delete these {0} elements"]: _localizer["Delete this element"];
+                var parameters = new DialogParameters
                 {
-                    OnSearch("");
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-                    _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
+                    {nameof(DeleteConfirmation.Details), names},
+                    {nameof(DeleteConfirmation.Message), string.Format(value, ids.Length)}
+                };
+                var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+                var dialog = _dialogService.Show<DeleteConfirmation>(_localizer["Delete"], parameters, options);
+                var result = await dialog.Result;
+                if (!result.Cancelled)
                 {
-                    OnSearch("");
-                    foreach (var message in response.Messages)
+                    var response = await ApiDelete(ids);
+                    if (response.Succeeded)
                     {
-                        _snackBar.Add(message, Severity.Error);
+                        OnSearch("");
+                        await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                        _snackBar.Add(response.Messages[0], Severity.Success);
                     }
+                    else
+                    {
+                        OnSearch("");
+                        foreach (var message in response.Messages)
+                        {
+                            _snackBar.Add(message, Severity.Error);
+                        }
+                    }
+
+                    return response.Succeeded;
                 }
+                return false;
             }
-            _navigationManager.NavigateTo(_pageUrl);
+            finally
+            {
+                _navigationManager.NavigateTo(_pageUrl);
+            }
         }
 
         private async Task<IEnumerable<string>> GetDisplayNamesAsync(TIdType[] ids)
@@ -270,8 +280,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private async Task DeleteSelected()
         {
             var ids = _selectedItems.Select(item => GetId(item)).ToArray();
-            await Delete(ids);
-            _selectedItems.Clear();
+            if (await Delete(ids))
+                _selectedItems.Clear();
         }
     }
 }

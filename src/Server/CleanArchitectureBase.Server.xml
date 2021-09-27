@@ -19,6 +19,93 @@
             Abstract BaseApi Controller Class
             </summary>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetAll(System.Threading.CancellationToken)">
+            <summary>
+            Get All Brands
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a Brand By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand,System.Threading.CancellationToken)">
+            <summary>
+            Create/Update a Brand
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Delete a Brand
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Export(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Search Brands and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
+            <summary>
+            Get All Products
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetProductImageAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a Product Image by Id
+            </summary>
+            <param name="id">Product Id</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a Brand By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add/Edit a Product
+            </summary>
+            <param name="command"></param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Delete(System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            Delete a Product
+            </summary>
+            <param name="ids">Products to delete</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Export(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Search Products and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            Exports specific products as excel
+            </summary>
+            <param name="ids">Produc ids to export</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
             <summary>
             Get user wise chat history
@@ -38,6 +125,18 @@
             </summary>
             <param name="message"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.DashboardController.GetDataAsync">
+            <summary>
+            Get the new ultimate Dashboard Data
+            </summary>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.DashboardController.GetJobDashBoardUrl">
+            <summary>
+            Get the new ultimate Dashboard Data
+            </summary>
+            <returns>Status 200 OK </returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.UpdateProfile(CleanArchitectureBase.Application.Requests.Identity.UpdateProfileRequest)">
             <summary>
@@ -66,6 +165,67 @@
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.GetAll">
+            <summary>
+            Get All Role Claims(e.g. Product Create Permission)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.GetAllByRoleId(System.String)">
+            <summary>
+            Get All Role Claims By Id
+            </summary>
+            <param name="roleId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.Post(CleanArchitectureBase.Application.Requests.Identity.RoleClaimRequest)">
+            <summary>
+            Add a Role Claim
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.Delete(System.Int32)">
+            <summary>
+            Delete a Role Claim
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetAll">
+            <summary>
+            Get All Roles (basic, admin etc.)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Post(CleanArchitectureBase.Application.Requests.Identity.RoleRequest)">
+            <summary>
+            Add a Role
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Delete(System.String)">
+            <summary>
+            Delete a Role
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetPermissionsByRoleId(System.String)">
+            <summary>
+            Get Permissions By Role Id
+            </summary>
+            <param name="roleId"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Update(CleanArchitectureBase.Application.Requests.Identity.PermissionRequest)">
+            <summary>
+            Edit a Role Claim
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.TokenController.Get(CleanArchitectureBase.Application.Requests.Identity.TokenRequest)">
             <summary>
@@ -150,67 +310,6 @@
             </summary>
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleClaimController.GetAll">
-            <summary>
-            Get All Role Claims(e.g. Product Create Permission)
-            </summary>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleClaimController.GetAllByRoleId(System.String)">
-            <summary>
-            Get All Role Claims By Id
-            </summary>
-            <param name="roleId"></param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleClaimController.Post(CleanArchitectureBase.Application.Requests.Identity.RoleClaimRequest)">
-            <summary>
-            Add a Role Claim
-            </summary>
-            <param name="request"></param>
-            <returns>Status 200 OK </returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleClaimController.Delete(System.Int32)">
-            <summary>
-            Delete a Role Claim
-            </summary>
-            <param name="id"></param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleController.GetAll">
-            <summary>
-            Get All Roles (basic, admin etc.)
-            </summary>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleController.Post(CleanArchitectureBase.Application.Requests.Identity.RoleRequest)">
-            <summary>
-            Add a Role
-            </summary>
-            <param name="request"></param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleController.Delete(System.String)">
-            <summary>
-            Delete a Role
-            </summary>
-            <param name="id"></param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleController.GetPermissionsByRoleId(System.String)">
-            <summary>
-            Get Permissions By Role Id
-            </summary>
-            <param name="roleId"></param>
-            <returns>Status 200 Ok</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.RoleController.Update(CleanArchitectureBase.Application.Requests.Identity.PermissionRequest)">
-            <summary>
-            Edit a Role Claim
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.Threading.CancellationToken)">
             <summary>
@@ -344,105 +443,6 @@
             </summary>
             <param name="languageCode"></param>
             <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.GetAll(System.Threading.CancellationToken)">
-            <summary>
-            Get All Brands
-            </summary>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.GetById(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Get a Brand By Id
-            </summary>
-            <param name="id"></param>
-            <returns>Status 200 Ok</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand,System.Threading.CancellationToken)">
-            <summary>
-            Create/Update a Brand
-            </summary>
-            <param name="command"></param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Delete(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Delete a Brand
-            </summary>
-            <param name="id"></param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.BrandsController.Export(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Search Brands and Export to Excel
-            </summary>
-            <param name="searchString"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
-            <summary>
-            Get All Products
-            </summary>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetProductImageAsync(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Get a Product Image by Id
-            </summary>
-            <param name="id">Product Id</param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetById(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Get a Brand By Id
-            </summary>
-            <param name="id"></param>
-            <returns>Status 200 Ok</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductCommand,System.Threading.CancellationToken)">
-            <summary>
-            Add/Edit a Product
-            </summary>
-            <param name="command"></param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Delete(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Delete a Product
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK response</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Export(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Search Products and Export to Excel
-            </summary>
-            <param name="searchString"></param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
-            <summary>
-            Exports specific products as excel
-            </summary>
-            <param name="ids">Produc ids to export</param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.DashboardController.GetDataAsync">
-            <summary>
-            Get the new ultimate Dashboard Data
-            </summary>
-            <returns>Status 200 OK </returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.v1.DashboardController.GetJobDashBoardUrl">
-            <summary>
-            Get the new ultimate Dashboard Data
-            </summary>
-            <returns>Status 200 OK </returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.CustomTypeNameGenerator.Generate(NJsonSchema.JsonSchema,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <inheritdoc />

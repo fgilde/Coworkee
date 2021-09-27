@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
+using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Responses.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Server.Controllers
+namespace CleanArchitectureBase.Server.Controllers.Identity
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/identity/[controller]")]

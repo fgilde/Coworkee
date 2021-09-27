@@ -31,6 +31,18 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
+        public Task DeleteManyAsync(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteManyAsync(params T[] entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            return Task.CompletedTask;
+        }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbContext

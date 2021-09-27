@@ -14,7 +14,7 @@
 <HeroTitle Title="@_localizer["Products"]" Description="@_localizer["Manage Products."]" />
 
 <EditableDataTable
-    ApiLoad="@(new Func<int, int, string, string[], Task<PaginatedResult<GetAllPagedProductsResponse>>>(Load))"
+    ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<GetAllPagedProductsResponse>>>(Load))"
     ApiDelete="@(new Func<int[], Task<Result>>(DeleteProducts))"
     ApiCreateOrEdit="@(new Func<GetAllPagedProductsResponse, Task<bool>>(CreateOrEditProduct))"
     Export="@(new Func<string, Task<Result<string>>>(Export))"

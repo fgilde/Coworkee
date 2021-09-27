@@ -26,8 +26,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         [Parameter]
-        public Func<int, int, string, string[], Task<PaginatedResult<TResult>>> ApiLoad { get; set; }       
-        
+        public Func<int, int, string, string[], Task<PaginatedResult<TResult>>> ApiLoadPaged { get; set; }
+
+        [Parameter]
+        public Func<Task<Result<List<TResult>>>> ApiLoad { get; set; }
+
         [Parameter]
         public Func<TResult, Task<bool>> ApiCreateOrEdit { get; set; }
         
@@ -67,7 +70,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter]
         public string SearchPermission { get; set; }
 
+        [Parameter]
+        public bool? ImmediateSearch { get; set; }
+
         private string _pageUrl;
+        private List<TResult> _flatList = new();
         private IEnumerable<TResult> _pagedData;
         private MudTable<TResult> _table;
         private HashSet<TResult> _selectedItems = new();
@@ -85,14 +92,18 @@ namespace CleanArchitectureBase.Client.Shared.Components
         
         protected override async Task OnInitializedAsync()
         {
+            ImmediateSearch ??= ApiLoadPaged == null;
             _pageUrl = _navigationManager.Uri.Split(InitialAction)[0].EnsureEndsWith("/");
             _currentUser = await _clientAuthenticationManager.CurrentUser();
             _canCreate = ApiCreateOrEdit != null && await HasPermission(CreatePermission);
             _canEdit = ApiCreateOrEdit != null && GetId != null && await HasPermission(EditPermission);
             _canDelete = ApiDelete != null && GetId != null && await HasPermission(DeletePermission);
             _canExport = await HasPermission(ExportPermission);
-            _canSearch = await HasPermission(SearchPermission); 
-            
+            _canSearch = await HasPermission(SearchPermission);
+
+            if (ApiLoadPaged == null)
+                await LoadAllData();
+
             _loaded = true;
             HubConnection = HubConnection.TryInitialize(_navigationManager);
             if (HubConnection.State == HubConnectionState.Disconnected)
@@ -143,7 +154,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 orderings = state.SortDirection != SortDirection.None ? new[] { $"{state.SortLabel} {state.SortDirection}" } : new[] { $"{state.SortLabel}" };
             }
 
-            var response = await ApiLoad(pageNumber + 1, pageSize, _searchString, orderings);
+            var response = await ApiLoadPaged(pageNumber + 1, pageSize, _searchString, orderings);
             if (response.Succeeded)
             {
                 _totalItems = response.TotalCount;
@@ -159,10 +170,39 @@ namespace CleanArchitectureBase.Client.Shared.Components
             }
         }
 
+        private async Task LoadAllData()
+        {
+            if (ApiLoad != null)
+            {
+                var response = await ApiLoad();
+                if (response.Succeeded)
+                {
+                    _flatList = response.Data.ToList();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
+            }
+        }
+
         private void OnSearch(string text)
         {
             _searchString = text;
-            _table.ReloadServerData();
+            if (ApiLoadPaged != null)
+                _table.ReloadServerData();
+        }
+
+        private async Task Reset(bool keepSearch = false)
+        {
+            if (ApiLoadPaged != null)
+                OnSearch(keepSearch ? _searchString : string.Empty);
+            else
+                await LoadAllData();
+            _selectedItems.Clear();
         }
 
         private async Task ExportSelectedToExcel()
@@ -208,14 +248,19 @@ namespace CleanArchitectureBase.Client.Shared.Components
             string u = !isDefaultId ? "edit" : "add";
             
             _navigationManager.NavigateTo($"{_pageUrl}{u}/{(!isDefaultId ? id : string.Empty)}");
-            bool success = await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, _pagedData));
+            bool success = await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData()));
 
             if (success)
             {
-                OnSearch(string.Empty);
+                await Reset();
             }
             
             _navigationManager.NavigateTo(_pageUrl);
+        }
+
+        private IEnumerable<TResult> GetLoadedData()
+        {
+            return _pagedData?.Any() == true ? _pagedData : _flatList;
         }
 
         private async Task<bool> Delete(params TIdType[] ids)
@@ -238,13 +283,13 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     var response = await ApiDelete(ids);
                     if (response.Succeeded)
                     {
-                        OnSearch("");
+                        await Reset(true);
                         await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                         _snackBar.Add(response.Messages[0], Severity.Success);
                     }
                     else
                     {
-                        OnSearch("");
+                        await Reset(true);
                         foreach (var message in response.Messages)
                         {
                             _snackBar.Add(message, Severity.Error);
@@ -266,7 +311,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             var names = new List<string>();
             foreach (var id in ids)
             {
-                TResult result = await GetById(id, _pagedData);
+                TResult result = await GetById(id, GetLoadedData());
                 names.Add(Display == null ? id.ToString() : Display(result));
             }
             return names;
@@ -280,8 +325,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private async Task DeleteSelected()
         {
             var ids = _selectedItems.Select(item => GetId(item)).ToArray();
-            if (await Delete(ids))
-                _selectedItems.Clear();
+            await Delete(ids);
+        }
+
+        private bool LocalFilter(TResult item)
+        {
+            if (string.IsNullOrWhiteSpace(_searchString)) return true;
+            return TableProperties.Select(p => PropertyValueFor(item, p)).Any(s =>
+                s.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true);
         }
     }
 }

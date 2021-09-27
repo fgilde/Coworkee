@@ -11,165 +11,73 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.SDK;
+using CleanArchitectureBase.SDK.Models;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Brands
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
 
-        [CascadingParameter] private HubConnection HubConnection { get; set; }
+        [Parameter]
+        public string Action { get; set; }
 
-        private List<GetAllBrandsResponse> _brandList = new();
-        private GetAllBrandsResponse _brand = new();
-        private string _searchString = "";
-        private bool _dense = false;
-        private bool _striped = true;
-        private bool _bordered = false;
+        [Parameter]
+        public string Id { get; set; }
 
-        private ClaimsPrincipal _currentUser;
-        private bool _canCreateBrands;
-        private bool _canEditBrands;
-        private bool _canDeleteBrands;
-        private bool _canExportBrands;
-        private bool _canSearchBrands;
-        private bool _loaded;
 
-        protected override async Task OnInitializedAsync()
+        private async Task<Result<List<GetAllBrandsResponse>>> Load()
         {
-            _currentUser = await _clientAuthenticationManager.CurrentUser();
-            _canCreateBrands = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Brands.Create)).Succeeded;
-            _canEditBrands = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Brands.Edit)).Succeeded;
-            _canDeleteBrands = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Brands.Delete)).Succeeded;
-            _canExportBrands = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Brands.Export)).Succeeded;
-            _canSearchBrands = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Brands.Search)).Succeeded;
-
-            await GetBrandsAsync();
-            _loaded = true;
-            HubConnection = HubConnection.TryInitialize(_navigationManager);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            return await _api.Brands_GetAllAsync();
         }
 
-        private async Task GetBrandsAsync()
+        private async Task<GetAllBrandsResponse> FindById(int id, IEnumerable<GetAllBrandsResponse> loaded)
         {
-            var response = await Api.Brands_GetAllAsync();
-            if (response.Succeeded)
-            {
-                _brandList = response.Data.ToList();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
+            return loaded.FirstOrDefault(p => p.Id == id);
         }
 
-        private async Task Delete(int id)
+        private int GetId(GetAllBrandsResponse brand)
         {
-            string deleteContent = _localizer["Delete Content"];
-            var parameters = new DialogParameters
-            {
-                {nameof(Shared.Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
-            };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                var response = await Api.Brands_DeleteAsync(id);
-                if (response.Succeeded)
-                {
-                    await Reset();
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-                    _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    await Reset();
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
-                }
-            }
+            return brand.Id;
         }
 
-        private async Task ExportToExcel()
+        private async Task<Result> DeleteBrands(int[] ids)
         {
-            var response = await Api.Brands_ExportAsync(_searchString);
-            if (response.Succeeded)
-            {
-                await _jsRuntime.InvokeVoidAsync("Download", new
-                {
-                    ByteArray = response.Data,
-                    FileName = $"{nameof(Brands).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
-                    MimeType = ApplicationConstants.MimeTypes.OpenXml
-                });
-                _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
-                    ? _localizer["Brands exported"]
-                    : _localizer["Filtered Brands exported"], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
+            return await _api.Brands_DeleteAsync(ids.First()); // TODO: Delete many
         }
 
-        private async Task InvokeModal(int id = 0)
+        private string GetName(GetAllBrandsResponse arg)
+        {
+            return arg.Name;
+        }
+
+        private async Task<Result<string>> Export(string search)
+        {
+            return await _api.Brands_ExportAsync(search);
+        }
+
+        private async Task<Result<string>> ExportSelected(int[] ids)
+        {
+            throw new NotImplementedException("Not implemented");
+            //return await _api.Products_ExportByIdsAsync(ids.ToList());
+        }
+
+        private async Task<bool> CreateOrEditBrand(GetAllBrandsResponse brandOrNull)
         {
             var parameters = new DialogParameters();
-            if (id != 0)
+            if (brandOrNull != null)
             {
-                _brand = _brandList.FirstOrDefault(c => c.Id == id);
-                if (_brand != null)
-                {
-                    parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), new AddEditBrandCommand
-                    {
-                        Id = _brand.Id,
-                        Name = _brand.Name,
-                        Description = _brand.Description,
-                        Tax = _brand.Tax
-                    });
-                }
+                parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<AddEditBrandCommand>());
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditBrandModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = _dialogService.Show<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                await Reset();
-            }
-        }
 
-        private async Task Reset()
-        {
-            _brand = new GetAllBrandsResponse();
-            await GetBrandsAsync();
-        }
-
-        private bool Search(GetAllBrandsResponse brand)
-        {
-            if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (brand.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (brand.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            return false;
+            return !result.Cancelled;
         }
     }
 }

@@ -393,6 +393,13 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a Brand By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit a Product
@@ -414,6 +421,14 @@
             Search Products and Export to Excel
             </summary>
             <param name="searchString"></param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.v1.Catalog.ProductsController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            Exports specific products as excel
+            </summary>
+            <param name="ids">Produc ids to export</param>
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>

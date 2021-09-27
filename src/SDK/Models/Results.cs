@@ -30,6 +30,7 @@ namespace CleanArchitectureBase.SDK.Models
     public class ResultOfGetDocumentByIdResponse : Result<GetDocumentByIdResponse> { }
     public class ResultOfListOfGetAllDocumentTypesResponse : Result<List<GetAllDocumentTypesResponse>> { }
     public class ResultOfGetDocumentTypeByIdResponse : Result<GetDocumentTypeByIdResponse> { }
+    public class ResultOfGetAllPagedProductsResponse : Result<GetAllPagedProductsResponse> { }
 
     public class PaginatedResultOfGetAllDocumentsResponse : PaginatedResult<GetAllDocumentsResponse>
     {

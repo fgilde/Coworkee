@@ -220,7 +220,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             string deleteContent = _localizer["Delete Extended Attribute?"];
             var parameters = new DialogParameters
             {
-                {nameof(Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
+                {nameof(Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
             };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);

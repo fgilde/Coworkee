@@ -1,205 +1,75 @@
 ﻿using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.JSInterop;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using Microsoft.AspNetCore.Authorization;
+using CleanArchitectureBase.Shared.Wrapper;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Products
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
-        private string pageUrl = "/catalog/products";
-
+        
         [Parameter]
         public string Action { get; set; }
+
         [Parameter]
         public string Id { get; set; }
 
-        [CascadingParameter] private HubConnection HubConnection { get; set; }
-
-        private IEnumerable<GetAllPagedProductsResponse> _pagedData;
-        private MudTable<GetAllPagedProductsResponse> _table;
-        private HashSet<GetAllPagedProductsResponse> selectedItems = new HashSet<GetAllPagedProductsResponse>();
-
-        private int _totalItems;
-        private int _currentPage;
-        private string _searchString = "";
-   
-        private ClaimsPrincipal _currentUser;
-        private bool _canCreateProducts;
-        private bool _canEditProducts;
-        private bool _canDeleteProducts;
-        private bool _canExportProducts;
-        private bool _canSearchProducts;
-        private bool _loaded;
         
-        protected override async Task OnInitializedAsync()
+        private async Task<PaginatedResult<GetAllPagedProductsResponse>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings)
         {
-            _currentUser = await _clientAuthenticationManager.CurrentUser();
-            _canCreateProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Create)).Succeeded;
-            _canEditProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Edit)).Succeeded;
-            _canDeleteProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Delete)).Succeeded;
-            _canExportProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Export)).Succeeded;
-            _canSearchProducts = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Products.Search)).Succeeded;
-            
-            _loaded = true;
-            HubConnection = HubConnection.TryInitialize(_navigationManager);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
-
-            await ExecuteInitialPageActionAsync();
+            return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings);
         }
 
-        private async Task ExecuteInitialPageActionAsync()
+        private async Task<GetAllPagedProductsResponse> FindById(int id, IEnumerable<GetAllPagedProductsResponse> loaded)
         {
-            if (Action == "add")
-            {
-                await InvokeModal(0);
-            }
-            if (Action == "edit" && !string.IsNullOrWhiteSpace(Id) && int.TryParse(Id, out var id))
-            {
-                await InvokeModal(id);
-            }
-            if (Action == "delete" && !string.IsNullOrWhiteSpace(Id) && int.TryParse(Id, out var _id))
-            {
-                await Delete(_id);
-            }
+            var res = loaded.FirstOrDefault(p => p.Id == id) ?? (await _api.Products_GetByIdAsync(id))?.Data;
+            return res;
         }
 
-        private async Task<TableData<GetAllPagedProductsResponse>> ServerReload(TableState state)
+        private int GetId(GetAllPagedProductsResponse product)
         {
-            if (!string.IsNullOrWhiteSpace(_searchString))
-            {
-                state.Page = 0;
-            }
-            await LoadData(state.Page, state.PageSize, state);
-            return new TableData<GetAllPagedProductsResponse> { TotalItems = _totalItems, Items = _pagedData };
+            return product.Id;
         }
 
-        private async Task LoadData(int pageNumber, int pageSize, TableState state)
+        private async Task<Result> DeleteProducts(int[] ids)
         {
-            string[] orderings = null;
-            if (!string.IsNullOrEmpty(state.SortLabel))
-            {
-                orderings = state.SortDirection != SortDirection.None ? new[] { $"{state.SortLabel} {state.SortDirection}" } : new[] { $"{state.SortLabel}" };
-            }
-
-            GetAllProductsQuery request = new GetAllProductsQuery(pageNumber + 1, pageSize, _searchString) { OrderBy = orderings };
-            var response = await Api.Products_GetAllAsync(request.PageNumber, request.PageSize, request.SearchString, request.OrderBy);
-            if (response.Succeeded)
-            {
-                _totalItems = response.TotalCount;
-                _currentPage = response.CurrentPage;
-                _pagedData = response.Data;
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
+            // TODO: Delete many on server
+            var results = await Task.WhenAll(ids.Select(i => _api.Products_DeleteAsync(i)));
+            return results.FirstOrDefault();
         }
 
-        private void OnSearch(string text)
+        private string GetName(GetAllPagedProductsResponse arg)
         {
-            _searchString = text;
-            _table.ReloadServerData();
+            return arg.Name;
         }
 
-        private async Task ExportToExcel()
+        private async Task<Result<string>> Export(string search)
         {
-            var response = await Api.Products_ExportAsync(_searchString);
-            if (response.Succeeded)
-            {
-                await _jsRuntime.InvokeVoidAsync("Download", new
-                {
-                    ByteArray = response.Data,
-                    FileName = $"{nameof(Products).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
-                    MimeType = ApplicationConstants.MimeTypes.OpenXml
-                });
-                _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
-                    ? _localizer["Products exported"]
-                    : _localizer["Filtered Products exported"], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
+            return await _api.Products_ExportAsync(search);
         }
 
-        private async Task InvokeModal(int id = 0)
+        private async Task<Result<string>> ExportSelected(int[] ids)
         {
-            string u = id != 0 ? "edit" : "add";
-            
-            _navigationManager.NavigateTo($"{pageUrl}/{u}/{(id > 0 ? id : string.Empty)}");
+            return await _api.Products_ExportByIdsAsync(ids.ToList());
+        }
+
+        private async Task<bool> CreateOrEditProduct(GetAllPagedProductsResponse productOrNull)
+        {
             var parameters = new DialogParameters();
-            if (id != 0)
+            if (productOrNull != null)
             {
-                var product = _pagedData.FirstOrDefault(c => c.Id == id);
-                if (product != null)
-                {
-                    parameters.Add(nameof(AddEditProductModal.AddEditProductModel), product.MapTo<AddEditProductCommand>());
-                }
+                parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<AddEditProductCommand>());
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditProductModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = _dialogService.Show<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                OnSearch("");
-            }
-            _navigationManager.NavigateTo(pageUrl);
-        }
-
-        private async Task Delete(int id)
-        {
-            _navigationManager.NavigateTo($"{pageUrl}/delete/{id}");
-            string deleteContent = _localizer["Delete Content"];
-            var parameters = new DialogParameters
-            {
-                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
-            };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                var response = await Api.Products_DeleteAsync(id);
-                if (response.Succeeded)
-                {
-                    OnSearch("");
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-                    _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    OnSearch("");
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
-                }
-            }
-            _navigationManager.NavigateTo(pageUrl);
+            return !result.Cancelled;
         }
     }
 }

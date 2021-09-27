@@ -8,7 +8,18 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        <MudText>@ContentText</MudText>
+        <MudText>@Message</MudText>
+        @if (Details != null)
+        {
+            <div class="scroll-container" style="max-height: 300px; overflow: auto;">
+            @foreach (var info in Details)
+            {
+                <MudAlert Severity="Severity.Warning">
+                    @info
+                </MudAlert>
+            }
+            </div>
+        }
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">@localizer["Cancel"]</MudButton>
@@ -18,7 +29,8 @@
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
-    [Parameter] public string ContentText { get; set; }
+    [Parameter] public string Message { get; set; }
+    [Parameter] public IEnumerable<string> Details { get; set; }
 
     void Submit()
     {

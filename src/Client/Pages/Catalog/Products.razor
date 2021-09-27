@@ -2,6 +2,8 @@
 @attribute [Authorize(Policy = Permissions.Products.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer
 @using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
+@using CleanArchitectureBase.Shared.Wrapper
+@using Nextended.Core.Extensions
 
 <style>
     .mud-table-container {
@@ -10,113 +12,23 @@
 </style>
 
 <HeroTitle Title="@_localizer["Products"]" Description="@_localizer["Manage Products."]" />
-@if (!_loaded)
-{
-    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-}
-else
-{
-    <MudTable MultiSelection="true" @bind-SelectedItems="selectedItems" Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllPagedProductsResponse>>>(ServerReload))" Hover="true" Dense="false" Bordered="false" Striped="true" @ref="_table">
-        <ToolBarContent>
-            <div class="justify-center mud-text-align-center">
-                @if (_canCreateProducts)
-                    {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
-                    @if (_canExportProducts)
-                        {
-                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
-                        }
-                    }
-                    else
-                    {
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
-                    @if (_canExportProducts)
-                        {
-                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
-                        }
-                    }
-                @if (selectedItems.Count > 0 && (_canDeleteProducts || _canEditProducts))
-                {
-                    <MudMenu DisableElevation Style="margin-left: 5px; margin-top:1px;" Label="@_localizer["{0} Selected", selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true">
-                        @if (_canEditProducts)
-                        {
-                            <MudMenuItem>@_localizer["Edit"]</MudMenuItem>
-                        }
-                        @if (_canDeleteProducts)
-                        {
-                            <MudMenuItem>@_localizer["Delete"]</MudMenuItem>
-                        }
-                    </MudMenu>
-                }
-            </div>
-            <MudToolBarSpacer />
-            @if (_canSearchProducts)
-                {
-                <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-                }
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Id">@_localizer["Id"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Name">@_localizer["Name"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Brand">@_localizer["Brand"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Description">@_localizer["Description"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Barcode">@_localizer["Barcode"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Rate">@_localizer["Rate"]</MudTableSortLabel></MudTh>
-            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Id">@context.Id</MudTd>
-            <MudTd DataLabel="Name">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Brand">
-                <MudHighlighter Text="@context.Brand" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Description">
-                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Barcode">
-                <MudHighlighter Text="@context.Barcode" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Rate">@context.Rate</MudTd>
-            <MudTd DataLabel="Actions" Style="text-align: right">
-                @if (_canEditProducts || _canDeleteProducts)
-                    {
-                    @if (_canEditProducts)
-                        {
-                        <MudTooltip Text="@_localizer["Edit"]">
-                            <MudIconButton @onclick="@(() => InvokeModal(@context.Id))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" aria-label="@_localizer["Edit"]"></MudIconButton>
-                        </MudTooltip>
-                        }
-                    @if (_canDeleteProducts)
-                        {
-                        <MudTooltip Text="@_localizer["Delete"]">
-                            <MudIconButton @onclick="@(() => Delete(@context.Id))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIconButton>
 
-                        </MudTooltip>
-                        }
-                    }
-                    else
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
-                        @_localizer["No Allowed Actions"]
-                    </MudButton>
-                    }
-            </MudTd>
-        </RowTemplate>
-        <FooterContent>
-            <MudItem  xs="12" sm="12" md="12">
-                <MudText Style="margin-top:17px;justify-content:center">@_localizer["{0} Selected", selectedItems.Count]</MudText>
-            </MudItem>
-        </FooterContent>
-        <PagerContent>
-            <TablePager />
-        </PagerContent>
-    </MudTable>
-}
+<EditableDataTable
+    ApiLoad="@(new Func<int, int, string, string[], Task<PaginatedResult<GetAllPagedProductsResponse>>>(Load))"
+    ApiDelete="@(new Func<int[], Task<Result>>(DeleteProducts))"
+    ApiCreateOrEdit="@(new Func<GetAllPagedProductsResponse, Task<bool>>(CreateOrEditProduct))"
+    Export="@(new Func<string, Task<Result<string>>>(Export))"
+    ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
+    GetById="@(new Func<int, IEnumerable<GetAllPagedProductsResponse>, Task<GetAllPagedProductsResponse>>(FindById))"
+    GetId="@(new Func<GetAllPagedProductsResponse,int>(GetId))"
+    Display="@(new Func<GetAllPagedProductsResponse, string>(GetName))"
+    TableProperties="@(new []{"Id", "Name", "Brand", "Description", "Barcode", "Rate"})"
+    InitialAction="@Action"
+    InitialIdString="@Id"
+    CreatePermission="@Permissions.Products.Create"
+    DeletePermission="@Permissions.Products.Delete"
+    EditPermission="@Permissions.Products.Edit"
+    ExportPermission="@Permissions.Products.Export"
+    SearchPermission="@Permissions.Products.Search"
+>
+</EditableDataTable>

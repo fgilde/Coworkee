@@ -68,6 +68,7 @@ namespace CleanArchitectureBase.Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
             IStringLocalizer<Startup> localizer, 
+            IWebHostEnvironment environment,
             IDashboardAuthorizationFilter authorizationFilter)
         {
             app.UseSessionId();
@@ -88,7 +89,8 @@ namespace CleanArchitectureBase.Server
             app.UseAuthorization();
             app.UseHangfireDashboard(ApplicationConstants.Hangfire.DashboardRoute, new DashboardOptions
             {
-                DashboardTitle = localizer["ApplicationMainIcon Jobs"],
+                DashboardTitle = localizer["{0} Jobs", ApplicationConstants.ApplicationName],
+                AppPath = "https://localhost:5001",
                 Authorization = new[] { authorizationFilter }
             });
             app.UseEndpoints();

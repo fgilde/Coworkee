@@ -74,7 +74,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             string deleteContent = _localizer["Delete Content"];
             var parameters = new DialogParameters
             {
-                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
+                {nameof(Shared.Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
             };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);

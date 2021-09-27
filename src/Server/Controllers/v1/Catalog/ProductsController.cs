@@ -8,6 +8,7 @@ using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
@@ -39,6 +40,20 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         {
             var result = await _mediator.Send(new GetProductImageQuery(id), cancellationToken);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Get a Brand By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Status 200 Ok</returns>
+        [Authorize(Policy = Permissions.Products.View)]
+        [HttpGet("{id}")]
+        [Produces(typeof(Result<GetAllPagedProductsResponse>))]
+        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
+        {
+            var product = await _mediator.Send(new GetProductByIdQuery(id), cancellationToken);
+            return Ok(product);
         }
 
         /// <summary>
@@ -81,6 +96,20 @@ namespace CleanArchitectureBase.Server.Controllers.v1.Catalog
         public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
             return Ok(await _mediator.Send(new ExportProductsQuery(searchString), cancellationToken));
+        }
+
+        /// <summary>
+        /// Exports specific products as excel
+        /// </summary>
+        /// <param name="ids">Produc ids to export</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Products.Export)]
+        [HttpGet("exportByIds")]
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _mediator.Send(new ExportProductsQuery(ids), cancellationToken));
         }
     }
 }

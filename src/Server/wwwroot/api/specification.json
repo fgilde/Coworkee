@@ -734,6 +734,42 @@
       }
     },
     "/Products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get a Brand By Id",
+        "operationId": "Products_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200 Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfGetAllPagedProductsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
       "delete": {
         "tags": [
           "Products"
@@ -786,6 +822,50 @@
               "type": "string",
               "default": "",
               "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/Products/exportByIds": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Exports specific products as excel",
+        "operationId": "Products_ExportByIds",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "description": "Produc ids to export",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
             },
             "x-position": 1
           }
@@ -2733,6 +2813,23 @@
             "format": "int32"
           }
         }
+      },
+      "ResultOfGetAllPagedProductsResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "$ref": "#/components/schemas/GetAllPagedProductsResponse"
+              }
+            }
+          }
+        ]
       },
       "AddEditProductCommand": {
         "type": "object",

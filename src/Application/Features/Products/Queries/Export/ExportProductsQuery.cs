@@ -4,6 +4,7 @@ using CleanArchitectureBase.Domain.Entities.Catalog;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Extensions;
@@ -17,6 +18,12 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.Export
     public class ExportProductsQuery : IRequest<Result<string>>
     {
         public string SearchString { get; set; }
+        public int[] ProductIds { get; }
+
+        public ExportProductsQuery(int[] productIds)
+        {
+            ProductIds = productIds;
+        }
 
         public ExportProductsQuery(string searchString = "")
         {
@@ -41,10 +48,9 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.Export
 
         public async Task<Result<string>> Handle(ExportProductsQuery request, CancellationToken cancellationToken)
         {
-            var productFilterSpec = new ProductFilterSpecification(request.SearchString);
-            var products = await _unitOfWork.Repository<Product>().Entities
-                .Specify(productFilterSpec)
-                .ToListAsync( cancellationToken);
+            var products = request.ProductIds is {Length: > 0} 
+                ? await _unitOfWork.Repository<Product>().Entities.Where(p => request.ProductIds.Contains(p.Id)).ToListAsync(cancellationToken)
+                : await _unitOfWork.Repository<Product>().Entities.Specify(new ProductFilterSpecification(request.SearchString)).ToListAsync(cancellationToken);
             var data = await _excelService.ExportAsync(products, mappers: new Dictionary<string, Func<Product, object>>
             {
                 { _localizer["Id"], item => item.Id },

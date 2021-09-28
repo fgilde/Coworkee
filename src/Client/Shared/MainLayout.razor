@@ -12,9 +12,7 @@
         <MudAppBar Elevation="4" Color="Color.Primary">
             <MudAppBarSpacer />
             <LanguageSelector />
-            <MudTooltip Text="@localizer["Toggle Dark Mode"]">
-                <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => DarkMode())" />
-            </MudTooltip>
+            <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
         </MudAppBar>
 
         <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
@@ -45,9 +43,7 @@
                         <MudTooltip Text="@localizer["Toggle right-to-left/left-to-right"]">
                             <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())" />
                         </MudTooltip>
-                        <MudTooltip Text="@localizer["Toggle Dark Mode"]">
-                            <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => DarkMode())" />
-                        </MudTooltip>
+                        <ThemeSelector OnThemeSelected="@ThemeChanged" />
                         <MudTooltip Text="@localizer["Notifications"]">
                             <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit" />
                         </MudTooltip>
@@ -56,9 +52,7 @@
                         <LanguageSelector />
                         <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
                             <div class="px-2">
-                                <MudTooltip Text="@localizer["Toggle Dark Mode"]">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => DarkMode())" />
-                                </MudTooltip>
+                                <ThemeSelector OnThemeSelected="@ThemeChanged" />
                                 <MudTooltip Text="@localizer["Fork Repository"]">
                                     <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/blazorhero/CleanArchitecture" Target="_blank" />
                                 </MudTooltip>

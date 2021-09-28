@@ -62,7 +62,8 @@ namespace CleanArchitectureBase.Client.Shared
         {
             var isRtl = await _clientPreferenceManager.ToggleLayoutDirection();
             _rightToLeft = isRtl;
-            _drawerOpen = false;
+            DrawerToggle();
+            DrawerToggle(); // 2 calls to Ensure refresh and old state
         }
 
         protected override async Task OnInitializedAsync()
@@ -160,12 +161,9 @@ namespace CleanArchitectureBase.Client.Shared
             _drawerOpen = !_drawerOpen;
         }
 
-        private async Task DarkMode()
+        private void ThemeChanged(MudTheme theme)
         {
-            bool isDarkMode = await _clientPreferenceManager.ToggleDarkModeAsync();
-            _currentTheme = isDarkMode
-                ? BlazorHeroTheme.DefaultTheme
-                : BlazorHeroTheme.DarkTheme;
+            _currentTheme = theme;
         }
 
         public void Dispose()

@@ -8,6 +8,6 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
     {
         Task<MudTheme> GetCurrentThemeAsync();
 
-        Task<bool> ToggleDarkModeAsync();
+        Task SetCurrentThemeName(string themeName);
     }
 }

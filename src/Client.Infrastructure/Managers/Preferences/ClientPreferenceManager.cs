@@ -3,6 +3,7 @@ using Blazored.LocalStorage;
 using CleanArchitectureBase.Client.Infrastructure.Settings;
 using MudBlazor;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Infrastructure.Managers.Theme;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Settings;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -14,26 +15,27 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
     {
         private readonly ILocalStorageService _localStorageService;
         private readonly IStringLocalizer<ClientPreferenceManager> _localizer;
+        private readonly IThemeManager _themeManager;
 
         public ClientPreferenceManager(
             ILocalStorageService localStorageService,
-            IStringLocalizer<ClientPreferenceManager> localizer)
+            IStringLocalizer<ClientPreferenceManager> localizer,
+            IThemeManager themeManager)
         {
             _localStorageService = localStorageService;
             _localizer = localizer;
+            _themeManager = themeManager;
         }
 
-        public async Task<bool> ToggleDarkModeAsync()
+        public async Task SetCurrentThemeName(string themeName)
         {
             if (await GetPreference() is ClientPreference preference)
             {
-                preference.IsDarkMode = !preference.IsDarkMode;
+                preference.ThemeName = themeName;
                 await SetPreference(preference);
-                return !preference.IsDarkMode;
             }
-
-            return false;
         }
+
         public async Task<bool> ToggleLayoutDirection()
         {
             if (await GetPreference() is ClientPreference preference)
@@ -67,8 +69,8 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 
         public async Task<MudTheme> GetCurrentThemeAsync()
         {
-            if (await GetPreference() is ClientPreference { IsDarkMode: true })
-                return BlazorHeroTheme.DarkTheme;
+            if (await GetPreference() is ClientPreference preference)
+                return await _themeManager.GetByName(preference.ThemeName) ?? BlazorHeroTheme.DefaultTheme;
             return BlazorHeroTheme.DefaultTheme;
         }
         public async Task<bool> IsRTL()

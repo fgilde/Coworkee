@@ -1,0 +1,111 @@
+﻿@using CleanArchitectureBase.Client.Infrastructure.Managers.Theme
+@using Nextended.Core.Extensions
+@inject Microsoft.Extensions.Localization.IStringLocalizer<ThemeSelector> localizer
+
+@if (Mode == SelectionMode.Charm)
+{
+    <MudDrawer @bind-Open="@_charmOpen" Anchor="Anchor.End" Elevation="1" Variant="@DrawerVariant.Temporary">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">@localizer["Select Theme"]</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            @foreach (var theme in _themes)
+            {
+            <MudContainer>
+                <MudNavLink Icon="@Icons.Filled.FormatColorFill" OnClick="@((e) => Select(theme.Key, theme.Value))">@ThemeDisplayName(theme.Key)</MudNavLink>
+                <div style="width: 70%; height: 2px; background: linear-gradient(90deg,@theme.Value.Palette.AppbarBackground 0%, @theme.Value.Palette.Primary 35%, @theme.Value.Palette.Background 100%);; margin-left: 27%; margin-top: -5px; margin-bottom: 6px;"></div>
+            </MudContainer>
+            }
+        </MudNavMenu>
+    </MudDrawer>
+}
+@if (_themes is { Count: > 0 })
+{
+    @if (Mode == SelectionMode.Menu)
+    {
+        <MudMenu Color="Color.Inherit" IconColor="Color.Inherit" Icon="@Icon" OffsetY="true" Dense="true">
+            @{
+                @foreach (var theme in _themes)
+                {
+                    <MudMenuItem OnClick="(() => Select(theme.Key, theme.Value))">
+                        <MudText Typo="Typo.body2">
+                            @ThemeDisplayName(theme.Key)
+                        </MudText>
+                    </MudMenuItem>
+                }
+            }
+        </MudMenu>
+    }
+    else
+    {
+        <MudIconButton Icon="@Icon" Color="Color.Inherit" OnClick="@ButtonClicked"/>
+    }
+}
+
+@code {
+    bool _charmOpen;
+
+    [Parameter]
+    public EventCallback<MudTheme> OnThemeSelected { get; set; }
+
+    [Parameter]
+    public SelectionMode Mode { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; } = Icons.Material.Filled.Brightness4;
+
+    [Inject]
+    private IThemeManager themeManager { get; set; }
+
+    private KeyValuePair<string, MudTheme> _current;
+    private Dictionary<string, MudTheme> _themes = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _themes = await themeManager.ThemesAsync();
+    }
+
+    private async Task UpdateCurrent()
+    {
+        var preference = await _clientPreferenceManager.GetPreference() as ClientPreference;
+        var name = preference?.ThemeName ?? _themes.First().Key;
+        _current = new KeyValuePair<string, MudTheme>(name, await themeManager.GetByName(name));
+    }
+
+    private async Task Select(string themeName, MudTheme theme)
+    {
+        await OnThemeSelected.InvokeAsync(theme);
+        _charmOpen = false;
+        await _clientPreferenceManager.SetCurrentThemeName(themeName);
+        await UpdateCurrent();
+    }
+
+    private async void ButtonClicked()
+    {
+        if (Mode == SelectionMode.Charm)
+            _charmOpen = true;
+        if (Mode == SelectionMode.ToggleCircle)
+            await Toggle();
+    }
+
+    private async Task Toggle()
+    {
+        await UpdateCurrent();
+        var index = Array.IndexOf(_themes.Keys.ToArray(), _current.Key) + 1;
+        var toSelect = _themes.ElementAt(index > _themes.Count - 1 ? 0 : index);
+        await Select(toSelect.Key, toSelect.Value);
+    }
+
+    public enum SelectionMode
+    {
+        Charm,
+        Menu,
+        ToggleCircle
+    }
+
+    private string ThemeDisplayName(string themeKey)
+    {
+        return string.Join(" ", themeKey.SplitByUpperCase());
+    }
+
+}

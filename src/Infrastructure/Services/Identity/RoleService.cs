@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
+﻿using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Infrastructure.Helpers;
@@ -15,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -25,18 +25,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IRoleClaimService _roleClaimService;
         private readonly IStringLocalizer<RoleService> _localizer;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IMapper _mapper;
-
+        
         public RoleService(
             RoleManager<BlazorHeroRole> roleManager,
-            IMapper mapper,
             UserManager<BlazorHeroUser> userManager,
             IRoleClaimService roleClaimService,
             IStringLocalizer<RoleService> localizer,
             ICurrentUserService currentUserService)
         {
             _roleManager = roleManager;
-            _mapper = mapper;
             _userManager = userManager;
             _roleClaimService = roleClaimService;
             _localizer = localizer;
@@ -76,7 +73,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<Result<List<RoleResponse>>> GetAllAsync()
         {
             var roles = await _roleManager.Roles.ToListAsync();
-            var rolesResponse = _mapper.Map<List<RoleResponse>>(roles);
+            var rolesResponse = roles.MapTo<List<RoleResponse>>();
             return await Result<List<RoleResponse>>.SuccessAsync(rolesResponse);
         }
 
@@ -93,15 +90,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 if (roleClaimsResult.Succeeded)
                 {
                     var roleClaims = roleClaimsResult.Data;
-                    var allClaimValues = allPermissions.Select(a => a.Value).ToList();
-                    var roleClaimValues = roleClaims.Select(a => a.Value).ToList();
+                    var allClaimValues = allPermissions.Select(a => a.ClaimValue).ToList();
+                    var roleClaimValues = roleClaims.Select(a => a.ClaimValue).ToList();
                     var authorizedClaims = allClaimValues.Intersect(roleClaimValues).ToList();
                     foreach (var permission in allPermissions)
                     {
-                        if (authorizedClaims.Any(a => a == permission.Value))
+                        if (authorizedClaims.Any(a => a == permission.ClaimValue))
                         {
                             permission.Selected = true;
-                            var roleClaim = roleClaims.SingleOrDefault(a => a.Value == permission.Value);
+                            var roleClaim = roleClaims.SingleOrDefault(a => a.ClaimValue == permission.ClaimValue);
                             if (roleClaim?.Description != null)
                             {
                                 permission.Description = roleClaim.Description;
@@ -139,7 +136,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<Result<RoleResponse>> GetByIdAsync(string id)
         {
             var roles = await _roleManager.Roles.SingleOrDefaultAsync(x => x.Id == id);
-            var rolesResponse = _mapper.Map<RoleResponse>(roles);
+            var rolesResponse = roles.MapTo<RoleResponse>();
             return await Result<RoleResponse>.SuccessAsync(rolesResponse);
         }
 
@@ -192,9 +189,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 var selectedClaims = request.RoleClaims.Where(a => a.Selected).ToList();
                 if (role.Name == RoleConstants.AdministratorRole)
                 {
-                    if (!selectedClaims.Any(x => x.Value == Permissions.Roles.View)
-                       || !selectedClaims.Any(x => x.Value == Permissions.RoleClaims.View)
-                       || !selectedClaims.Any(x => x.Value == Permissions.RoleClaims.Edit))
+                    if (!selectedClaims.Any(x => x.ClaimValue == Permissions.Roles.View)
+                       || !selectedClaims.Any(x => x.ClaimValue == Permissions.RoleClaims.View)
+                       || !selectedClaims.Any(x => x.ClaimValue == Permissions.RoleClaims.Edit))
                     {
                         return await Result<string>.FailAsync(string.Format(
                             _localizer["Not allowed to deselect {0} or {1} or {2} for this Role."],
@@ -209,7 +206,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 }
                 foreach (var claim in selectedClaims)
                 {
-                    var addResult = await _roleManager.AddPermissionClaim(role, claim.Value);
+                    var addResult = await _roleManager.AddPermissionClaim(role, claim.ClaimValue);
                     if (!addResult.Succeeded)
                     {
                         errors.AddRange(addResult.Errors.Select(e => _localizer[e.Description].ToString()));
@@ -221,7 +218,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 {
                     foreach (var claim in selectedClaims)
                     {
-                        var addedClaim = addedClaims.Data.SingleOrDefault(x => x.Type == claim.Type && x.Value == claim.Value);
+                        var addedClaim = addedClaims.Data.SingleOrDefault(x => x.ClaimType == claim.ClaimType && x.ClaimValue == claim.ClaimValue);
                         if (addedClaim != null)
                         {
                             claim.Id = addedClaim.Id;

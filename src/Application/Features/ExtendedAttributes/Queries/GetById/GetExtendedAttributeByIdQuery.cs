@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetById
 {
@@ -25,18 +25,16 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
             where TId : IEquatable<TId>
     {
         private readonly IUnitOfWork<TId> _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public GetExtendedAttributeByIdQueryHandler(IUnitOfWork<TId> unitOfWork, IMapper mapper)
+        public GetExtendedAttributeByIdQueryHandler(IUnitOfWork<TId> unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<Result<GetExtendedAttributeByIdResponse<TId, TEntityId>>> Handle(GetExtendedAttributeByIdQuery<TId, TEntityId, TEntity, TExtendedAttribute> query, CancellationToken cancellationToken)
         {
             var extendedAttribute = await _unitOfWork.Repository<TExtendedAttribute>().GetByIdAsync(query.Id);
-            var mappedExtendedAttribute = _mapper.Map<GetExtendedAttributeByIdResponse<TId, TEntityId>>(extendedAttribute);
+            var mappedExtendedAttribute = extendedAttribute.MapTo<GetExtendedAttributeByIdResponse<TId, TEntityId>>();
             return await Result<GetExtendedAttributeByIdResponse<TId, TEntityId>>.SuccessAsync(mappedExtendedAttribute);
         }
     }

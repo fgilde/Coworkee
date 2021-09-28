@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetById
 {
@@ -16,18 +16,16 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetById
     internal class GetProductByIdQueryHandler : IRequestHandler<GetBrandByIdQuery, Result<GetBrandByIdResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IMapper _mapper;
-
-        public GetProductByIdQueryHandler(IUnitOfWork<int> unitOfWork, IMapper mapper)
+        
+        public GetProductByIdQueryHandler(IUnitOfWork<int> unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<Result<GetBrandByIdResponse>> Handle(GetBrandByIdQuery query, CancellationToken cancellationToken)
         {
             var brand = await _unitOfWork.Repository<Brand>().GetByIdAsync(query.Id);
-            var mappedBrand = _mapper.Map<GetBrandByIdResponse>(brand);
+            var mappedBrand = brand.MapTo<GetBrandByIdResponse>();
             return await Result<GetBrandByIdResponse>.SuccessAsync(mappedBrand);
         }
     }

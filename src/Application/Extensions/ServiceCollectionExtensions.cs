@@ -23,7 +23,6 @@ namespace CleanArchitectureBase.Application.Extensions
         public static void AddApplicationLayer(this IServiceCollection services)
         {
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ClientEventBehaviour<,>));

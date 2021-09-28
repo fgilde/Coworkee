@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitectureBase.Application.Interfaces.Services;
+﻿using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Infrastructure.Models.Audit;
 using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Infrastructure.Contexts;
@@ -13,23 +12,21 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Extensions;
 using CleanArchitectureBase.Infrastructure.Specifications;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
     public class AuditService : IAuditService
     {
         private readonly BlazorHeroContext _context;
-        private readonly IMapper _mapper;
         private readonly IExcelService _excelService;
         private readonly IStringLocalizer<AuditService> _localizer;
 
         public AuditService(
-            IMapper mapper,
             BlazorHeroContext context,
             IExcelService excelService,
             IStringLocalizer<AuditService> localizer)
         {
-            _mapper = mapper;
             _context = context;
             _excelService = excelService;
             _localizer = localizer;
@@ -38,7 +35,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
         public async Task<IResult<IEnumerable<AuditResponse>>> GetCurrentUserTrailsAsync(string userId)
         {
             var trails = await _context.AuditTrails.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync();
-            var mappedLogs = _mapper.Map<List<AuditResponse>>(trails);
+            var mappedLogs = trails.MapTo<List<AuditResponse>>();
             return await Result<IEnumerable<AuditResponse>>.SuccessAsync(mappedLogs);
         }
 

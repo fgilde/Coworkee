@@ -56,7 +56,6 @@ namespace CleanArchitectureBase.Server
             services.AddSharedInfrastructure(_configuration);
             services.AddApiVersions();
             services.AddOpenApiDocumentation(_configuration);
-            services.AddInfrastructureMappings();
             services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
             services.AddControllers().AddValidators();

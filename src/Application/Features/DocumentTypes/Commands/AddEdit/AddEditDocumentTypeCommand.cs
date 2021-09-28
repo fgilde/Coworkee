@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -10,6 +9,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit
 {
@@ -24,14 +24,12 @@ namespace CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddE
 
     internal class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>
     {
-        private readonly IMapper _mapper;
         private readonly IStringLocalizer<AddEditDocumentTypeCommandHandler> _localizer;
         private readonly IUnitOfWork<int> _unitOfWork;
 
-        public AddEditDocumentTypeCommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IStringLocalizer<AddEditDocumentTypeCommandHandler> localizer)
+        public AddEditDocumentTypeCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<AddEditDocumentTypeCommandHandler> localizer)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _localizer = localizer;
         }
 
@@ -45,7 +43,7 @@ namespace CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddE
 
             if (command.Id == 0)
             {
-                var documentType = _mapper.Map<DocumentType>(command);
+                var documentType = command.MapTo<DocumentType>();
                 await _unitOfWork.Repository<DocumentType>().AddAsync(documentType);
                 await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllDocumentTypesCacheKey);
                 return await Result<int>.SuccessAsync(documentType.Id, _localizer["Document Type Saved"]);

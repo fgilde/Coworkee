@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
@@ -13,6 +12,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit
 {
@@ -48,17 +48,14 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands
             where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
             where TId : IEquatable<TId>
     {
-        private readonly IMapper _mapper;
         private readonly IStringLocalizer<AddEditExtendedAttributeCommandLocalization> _localizer;
         private readonly IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> _unitOfWork;
 
         public AddEditExtendedAttributeCommandHandler(
             IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> unitOfWork,
-            IMapper mapper,
             IStringLocalizer<AddEditExtendedAttributeCommandLocalization> localizer)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _localizer = localizer;
         }
 
@@ -72,7 +69,7 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands
 
             if (command.Id.Equals(default))
             {
-                var extendedAttribute = _mapper.Map<TExtendedAttribute>(command);
+                var extendedAttribute = command.MapTo<TExtendedAttribute>();
                 await _unitOfWork.Repository<TExtendedAttribute>().AddAsync(extendedAttribute);
                 await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllEntityExtendedAttributesCacheKey(typeof(TEntity).Name));
 

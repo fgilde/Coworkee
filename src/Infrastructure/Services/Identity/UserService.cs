@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Exceptions;
 using CleanArchitectureBase.Application.Extensions;
 using CleanArchitectureBase.Application.Interfaces.Services;
@@ -22,6 +21,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -33,11 +33,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IStringLocalizer<UserService> _localizer;
         private readonly IExcelService _excelService;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IMapper _mapper;
 
         public UserService(
             UserManager<BlazorHeroUser> userManager,
-            IMapper mapper,
             RoleManager<BlazorHeroRole> roleManager,
             IMailService mailService,
             IStringLocalizer<UserService> localizer,
@@ -45,7 +43,6 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             ICurrentUserService currentUserService)
         {
             _userManager = userManager;
-            _mapper = mapper;
             _roleManager = roleManager;
             _mailService = mailService;
             _localizer = localizer;
@@ -56,7 +53,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<Result<List<UserResponse>>> GetAllAsync()
         {
             var users = await _userManager.Users.ToListAsync();
-            var result = _mapper.Map<List<UserResponse>>(users);
+            var result = users.MapTo<List<UserResponse>>();
             return await Result<List<UserResponse>>.SuccessAsync(result);
         }
 
@@ -134,7 +131,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<IResult<UserResponse>> GetAsync(string userId)
         {
             var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
-            var result = _mapper.Map<UserResponse>(user);
+            var result = user.MapTo<UserResponse>();
             return await Result<UserResponse>.SuccessAsync(result);
         }
 

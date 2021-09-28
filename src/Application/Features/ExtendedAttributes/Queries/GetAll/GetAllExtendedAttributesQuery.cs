@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;
 using LazyCache;
 using MediatR;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAll
 {
@@ -30,21 +30,19 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
             where TId : IEquatable<TId>
     {
         private readonly IUnitOfWork<TId> _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IAppCache _cache;
 
-        public GetAllExtendedAttributesQueryHandler(IUnitOfWork<TId> unitOfWork, IMapper mapper, IAppCache cache)
+        public GetAllExtendedAttributesQueryHandler(IUnitOfWork<TId> unitOfWork, IAppCache cache)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _cache = cache;
         }
 
         public async Task<Result<List<GetAllExtendedAttributesResponse<TId, TEntityId>>>> Handle(GetAllExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute> request, CancellationToken cancellationToken)
         {
-            Func<Task<List<TExtendedAttribute>>> getAllExtendedAttributes = () => _unitOfWork.Repository<TExtendedAttribute>().GetAllAsync();
-            var extendedAttributeList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllEntityExtendedAttributesCacheKey(typeof(TEntity).Name), getAllExtendedAttributes);
-            var mappedExtendedAttributes = _mapper.Map<List<GetAllExtendedAttributesResponse<TId, TEntityId>>>(extendedAttributeList);
+            Task<List<TExtendedAttribute>> GetAllExtendedAttributes() => _unitOfWork.Repository<TExtendedAttribute>().GetAllAsync();
+            var extendedAttributeList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllEntityExtendedAttributesCacheKey(typeof(TEntity).Name), GetAllExtendedAttributes);
+            var mappedExtendedAttributes = extendedAttributeList.MapTo<List<GetAllExtendedAttributesResponse<TId, TEntityId>>>();
             return await Result<List<GetAllExtendedAttributesResponse<TId, TEntityId>>>.SuccessAsync(mappedExtendedAttributes);
         }
     }

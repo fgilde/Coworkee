@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
@@ -11,24 +10,22 @@ using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
     public class RoleClaimService : IRoleClaimService
     {
         private readonly IStringLocalizer<RoleClaimService> _localizer;
-        private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         private readonly BlazorHeroContext _db;
 
         public RoleClaimService(
             IStringLocalizer<RoleClaimService> localizer,
-            IMapper mapper,
             ICurrentUserService currentUserService,
             BlazorHeroContext db)
         {
             _localizer = localizer;
-            _mapper = mapper;
             _currentUserService = currentUserService;
             _db = db;
         }
@@ -36,7 +33,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<Result<List<RoleClaimResponse>>> GetAllAsync()
         {
             var roleClaims = await _db.RoleClaims.ToListAsync();
-            var roleClaimsResponse = _mapper.Map<List<RoleClaimResponse>>(roleClaims);
+            var roleClaimsResponse = roleClaims.MapTo<List<RoleClaimResponse>>();
             return await Result<List<RoleClaimResponse>>.SuccessAsync(roleClaimsResponse);
         }
 
@@ -50,7 +47,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         {
             var roleClaim = await _db.RoleClaims
                 .SingleOrDefaultAsync(x => x.Id == id);
-            var roleClaimResponse = _mapper.Map<RoleClaimResponse>(roleClaim);
+            var roleClaimResponse = roleClaim.MapTo<RoleClaimResponse>();
             return await Result<RoleClaimResponse>.SuccessAsync(roleClaimResponse);
         }
 
@@ -60,7 +57,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 .Include(x => x.Role)
                 .Where(x => x.RoleId == roleId)
                 .ToListAsync();
-            var roleClaimsResponse = _mapper.Map<List<RoleClaimResponse>>(roleClaims);
+            var roleClaimsResponse = roleClaims.MapTo<List<RoleClaimResponse>>();
             return await Result<List<RoleClaimResponse>>.SuccessAsync(roleClaimsResponse);
         }
 
@@ -76,15 +73,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 var existingRoleClaim =
                     await _db.RoleClaims
                         .SingleOrDefaultAsync(x =>
-                            x.RoleId == request.RoleId && x.ClaimType == request.Type && x.ClaimValue == request.Value);
+                            x.RoleId == request.RoleId && x.ClaimType == request.ClaimType && x.ClaimValue == request.ClaimValue);
                 if (existingRoleClaim != null)
                 {
                     return await Result<string>.FailAsync(_localizer["Similar Role Claim already exists."]);
                 }
-                var roleClaim = _mapper.Map<BlazorHeroRoleClaim>(request);
+                var roleClaim = request.MapTo<BlazorHeroRoleClaim>();
                 await _db.RoleClaims.AddAsync(roleClaim);
                 await _db.SaveChangesAsync(_currentUserService.UserId);
-                return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} created."], request.Value));
+                return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} created."], request.ClaimValue));
             }
             else
             {
@@ -97,14 +94,14 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                     return await Result<string>.SuccessAsync(_localizer["Role Claim does not exist."]);
                 }
 
-                existingRoleClaim.ClaimType = request.Type;
-                existingRoleClaim.ClaimValue = request.Value;
+                existingRoleClaim.ClaimType = request.ClaimType;
+                existingRoleClaim.ClaimValue = request.ClaimValue;
                 existingRoleClaim.Group = request.Group;
                 existingRoleClaim.Description = request.Description;
                 existingRoleClaim.RoleId = request.RoleId;
                 _db.RoleClaims.Update(existingRoleClaim);
                 await _db.SaveChangesAsync(_currentUserService.UserId);
-                return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} for Role {1} updated."], request.Value, existingRoleClaim.Role.Name));
+                return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} for Role {1} updated."], request.ClaimValue, existingRoleClaim.Role.Name));
             }
         }
 

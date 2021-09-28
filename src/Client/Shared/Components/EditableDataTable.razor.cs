@@ -310,10 +310,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             var names = new List<string>();
             foreach (var id in ids)
-            {
-                TResult result = await GetById(id, GetLoadedData());
-                names.Add(Display == null ? id.ToString() : Display(result));
-            }
+                names.Add(Display == null ? id.ToString() : Display(await GetById(id, GetLoadedData())));
             return names;
         }
 
@@ -324,8 +321,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task DeleteSelected()
         {
-            var ids = _selectedItems.Select(item => GetId(item)).ToArray();
-            await Delete(ids);
+            await Delete(_selectedItems.Select(item => GetId(item)).ToArray());
         }
 
         private bool LocalFilter(TResult item)
@@ -334,5 +330,12 @@ namespace CleanArchitectureBase.Client.Shared.Components
             return TableProperties.Select(p => PropertyValueFor(item, p)).Any(s =>
                 s.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true);
         }
+        
+        public async ValueTask DisposeAsync()
+        {
+            if (HubConnection != null)
+                await HubConnection.DisposeAsync();
+        }
+
     }
 }

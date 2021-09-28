@@ -2970,11 +2970,11 @@
             "type": "string",
             "nullable": true
           },
-          "type": {
+          "claimType": {
             "type": "string",
             "nullable": true
           },
-          "value": {
+          "claimValue": {
             "type": "string",
             "nullable": true
           },
@@ -3003,11 +3003,11 @@
             "type": "string",
             "nullable": true
           },
-          "type": {
+          "claimType": {
             "type": "string",
             "nullable": true
           },
-          "value": {
+          "claimValue": {
             "type": "string",
             "nullable": true
           },

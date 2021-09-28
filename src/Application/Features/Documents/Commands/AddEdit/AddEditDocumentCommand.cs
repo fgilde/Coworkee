@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Domain.Entities.Misc;
@@ -10,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit
 {
@@ -30,15 +30,13 @@ namespace CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit
 
     internal class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentCommand, Result<int>>
     {
-        private readonly IMapper _mapper;
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AddEditDocumentCommandHandler> _localizer;
 
-        public AddEditDocumentCommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IUploadService uploadService, IStringLocalizer<AddEditDocumentCommandHandler> localizer)
+        public AddEditDocumentCommandHandler(IUnitOfWork<int> unitOfWork, IUploadService uploadService, IStringLocalizer<AddEditDocumentCommandHandler> localizer)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _uploadService = uploadService;
             _localizer = localizer;
         }
@@ -53,7 +51,7 @@ namespace CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit
 
             if (command.Id == 0)
             {
-                var doc = _mapper.Map<Document>(command);
+                var doc = command.MapTo<Document>();
                 if (uploadRequest != null)
                 {
                     doc.URL = _uploadService.UploadAsync(uploadRequest);

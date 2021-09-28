@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using AutoMapper;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Mappings;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -13,6 +11,7 @@ using MudBlazor;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
@@ -26,7 +25,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private PermissionResponse _model;
         private Dictionary<string, List<RoleClaimResponse>> GroupedRoleClaims { get; } = new();
-        private IMapper _mapper;
         private RoleClaimResponse _roleClaims = new();
         private RoleClaimResponse _selectedItem = new();
         private string _searchString = "";
@@ -56,7 +54,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task GetRolePermissionsAsync()
         {
-            _mapper = new MapperConfiguration(c => { c.AddProfile<RoleProfile>(); }).CreateMapper();
             var roleId = Id;
             var result = await _api.Role_GetPermissionsByRoleIdAsync(roleId);
             if (result.Succeeded)
@@ -91,7 +88,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task SaveAsync()
         {
-            var request = _mapper.Map<PermissionResponse, PermissionRequest>(_model);
+            var request = _model.MapTo<PermissionRequest>();
             var result = await _api.Role_UpdateAsync(request);
             if (result.Succeeded)
             {
@@ -112,7 +109,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private bool Search(RoleClaimResponse roleClaims)
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (roleClaims.Value?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (roleClaims.ClaimValue?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }

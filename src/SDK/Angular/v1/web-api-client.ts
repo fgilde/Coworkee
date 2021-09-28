@@ -5113,8 +5113,8 @@ export interface IResultOfListOfRoleClaimResponse extends IResult {
 export class RoleClaimResponse implements IRoleClaimResponse {
     id?: number;
     roleId?: string | undefined;
-    type?: string | undefined;
-    value?: string | undefined;
+    claimType?: string | undefined;
+    claimValue?: string | undefined;
     description?: string | undefined;
     group?: string | undefined;
     selected?: boolean;
@@ -5132,8 +5132,8 @@ export class RoleClaimResponse implements IRoleClaimResponse {
         if (_data) {
             this.id = _data["id"];
             this.roleId = _data["roleId"];
-            this.type = _data["type"];
-            this.value = _data["value"];
+            this.claimType = _data["claimType"];
+            this.claimValue = _data["claimValue"];
             this.description = _data["description"];
             this.group = _data["group"];
             this.selected = _data["selected"];
@@ -5151,8 +5151,8 @@ export class RoleClaimResponse implements IRoleClaimResponse {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["roleId"] = this.roleId;
-        data["type"] = this.type;
-        data["value"] = this.value;
+        data["claimType"] = this.claimType;
+        data["claimValue"] = this.claimValue;
         data["description"] = this.description;
         data["group"] = this.group;
         data["selected"] = this.selected;
@@ -5163,8 +5163,8 @@ export class RoleClaimResponse implements IRoleClaimResponse {
 export interface IRoleClaimResponse {
     id?: number;
     roleId?: string | undefined;
-    type?: string | undefined;
-    value?: string | undefined;
+    claimType?: string | undefined;
+    claimValue?: string | undefined;
     description?: string | undefined;
     group?: string | undefined;
     selected?: boolean;
@@ -5173,8 +5173,8 @@ export interface IRoleClaimResponse {
 export class RoleClaimRequest implements IRoleClaimRequest {
     id?: number;
     roleId?: string | undefined;
-    type?: string | undefined;
-    value?: string | undefined;
+    claimType?: string | undefined;
+    claimValue?: string | undefined;
     description?: string | undefined;
     group?: string | undefined;
     selected?: boolean;
@@ -5192,8 +5192,8 @@ export class RoleClaimRequest implements IRoleClaimRequest {
         if (_data) {
             this.id = _data["id"];
             this.roleId = _data["roleId"];
-            this.type = _data["type"];
-            this.value = _data["value"];
+            this.claimType = _data["claimType"];
+            this.claimValue = _data["claimValue"];
             this.description = _data["description"];
             this.group = _data["group"];
             this.selected = _data["selected"];
@@ -5211,8 +5211,8 @@ export class RoleClaimRequest implements IRoleClaimRequest {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["roleId"] = this.roleId;
-        data["type"] = this.type;
-        data["value"] = this.value;
+        data["claimType"] = this.claimType;
+        data["claimValue"] = this.claimValue;
         data["description"] = this.description;
         data["group"] = this.group;
         data["selected"] = this.selected;
@@ -5223,8 +5223,8 @@ export class RoleClaimRequest implements IRoleClaimRequest {
 export interface IRoleClaimRequest {
     id?: number;
     roleId?: string | undefined;
-    type?: string | undefined;
-    value?: string | undefined;
+    claimType?: string | undefined;
+    claimValue?: string | undefined;
     description?: string | undefined;
     group?: string | undefined;
     selected?: boolean;

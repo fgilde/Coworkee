@@ -6,8 +6,6 @@
     <AssemblyName>CleanArchitectureBase.Client.Infrastructure</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.7" />
     <PackageReference Include="MudBlazor" Version="5.0.14" />

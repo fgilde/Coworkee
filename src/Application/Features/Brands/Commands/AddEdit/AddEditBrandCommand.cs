@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -8,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using CleanArchitectureBase.Shared.Constants.Application;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit
 {
@@ -24,14 +24,12 @@ namespace CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit
 
     internal class AddEditBrandCommandHandler : IRequestHandler<AddEditBrandCommand, Result<int>>
     {
-        private readonly IMapper _mapper;
         private readonly IStringLocalizer<AddEditBrandCommandHandler> _localizer;
         private readonly IUnitOfWork<int> _unitOfWork;
 
-        public AddEditBrandCommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IStringLocalizer<AddEditBrandCommandHandler> localizer)
+        public AddEditBrandCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<AddEditBrandCommandHandler> localizer)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _localizer = localizer;
         }
 
@@ -39,7 +37,7 @@ namespace CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit
         {
             if (command.Id == 0)
             {
-                var brand = _mapper.Map<Brand>(command);
+                var brand = command.MapTo<Brand>();
                 await _unitOfWork.Repository<Brand>().AddAsync(brand);
                 await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllBrandsCacheKey);
                 return await Result<int>.SuccessAsync(brand.Id, _localizer["Brand Saved"]);
@@ -56,10 +54,8 @@ namespace CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit
                     await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllBrandsCacheKey);
                     return await Result<int>.SuccessAsync(brand.Id, _localizer["Brand Updated"]);
                 }
-                else
-                {
-                    return await Result<int>.FailAsync(_localizer["Brand Not Found!"]);
-                }
+
+                return await Result<int>.FailAsync(_localizer["Brand Not Found!"]);
             }
         }
     }

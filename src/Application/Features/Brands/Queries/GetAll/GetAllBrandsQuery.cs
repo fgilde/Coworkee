@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetAll
 {
@@ -22,13 +22,11 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetAll
     internal class GetAllBrandsCachedQueryHandler : IRequestHandler<GetAllBrandsQuery, Result<List<GetAllBrandsResponse>>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IAppCache _cache;
 
-        public GetAllBrandsCachedQueryHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IAppCache cache)
+        public GetAllBrandsCachedQueryHandler(IUnitOfWork<int> unitOfWork, IAppCache cache)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _cache = cache;
         }
 
@@ -36,7 +34,7 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetAll
         {
             Func<Task<List<Brand>>> getAllBrands = () => _unitOfWork.Repository<Brand>().GetAllAsync();
             var brandList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllBrandsCacheKey, getAllBrands);
-            var mappedBrands = _mapper.Map<List<GetAllBrandsResponse>>(brandList);
+            var mappedBrands = brandList.MapTo<List<GetAllBrandsResponse>>();
             return await Result<List<GetAllBrandsResponse>>.SuccessAsync(mappedBrands);
         }
     }

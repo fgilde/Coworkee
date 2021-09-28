@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitectureBase.Application.Exceptions;
+﻿using CleanArchitectureBase.Application.Exceptions;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Models.Chat;
@@ -14,24 +13,22 @@ using CleanArchitectureBase.Application.Interfaces.Chat;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Shared.Constants.Role;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
     public class ChatService : IChatService
     {
         private readonly BlazorHeroContext _context;
-        private readonly IMapper _mapper;
         private readonly IUserService _userService;
         private readonly IStringLocalizer<ChatService> _localizer;
 
         public ChatService(
             BlazorHeroContext context,
-            IMapper mapper,
             IUserService userService,
             IStringLocalizer<ChatService> localizer)
         {
             _context = context;
-            _mapper = mapper;
             _userService = userService;
             _localizer = localizer;
         }
@@ -72,14 +69,14 @@ namespace CleanArchitectureBase.Infrastructure.Services
             var userRoles = await _userService.GetRolesAsync(userId);
             var userIsAdmin = userRoles.Data?.UserRoles?.Any(x => x.Selected && x.RoleName == RoleConstants.AdministratorRole) == true;
             var allUsers = await _context.Users.Where(user => user.Id != userId && (userIsAdmin || user.IsActive && user.EmailConfirmed)).ToListAsync();
-            var chatUsers = _mapper.Map<IEnumerable<ChatUserResponse>>(allUsers);
+            var chatUsers = allUsers.MapTo<IEnumerable<ChatUserResponse>>();
             return await Result<IEnumerable<ChatUserResponse>>.SuccessAsync(chatUsers);
         }
 
         public async Task<IResult> SaveMessageAsync(ChatHistory<IChatUser> message)
         {
             message.ToUser = await _context.Users.Where(user => user.Id == message.ToUserId).FirstOrDefaultAsync();
-            await _context.ChatHistories.AddAsync(_mapper.Map<ChatHistory<BlazorHeroUser>>(message));
+            await _context.ChatHistories.AddAsync(message.MapTo<ChatHistory<BlazorHeroUser>>());
             await _context.SaveChangesAsync();
             return await Result.SuccessAsync();
         }

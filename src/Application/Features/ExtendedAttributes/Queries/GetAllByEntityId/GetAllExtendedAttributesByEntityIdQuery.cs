@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -11,6 +10,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 using LazyCache;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId
 {
@@ -35,21 +35,19 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
             where TId : IEquatable<TId>
     {
         private readonly IUnitOfWork<TId> _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IAppCache _cache;
 
-        public GetAllExtendedAttributesByEntityIdQueryHandler(IUnitOfWork<TId> unitOfWork, IMapper mapper, IAppCache cache)
+        public GetAllExtendedAttributesByEntityIdQueryHandler(IUnitOfWork<TId> unitOfWork, IAppCache cache)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _cache = cache;
         }
 
         public async Task<Result<List<GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId>>>> Handle(GetAllExtendedAttributesByEntityIdQuery<TId, TEntityId, TEntity, TExtendedAttribute> request, CancellationToken cancellationToken)
         {
-            Func<Task<List<TExtendedAttribute>>> getAllExtendedAttributesByEntityId = () => _unitOfWork.Repository<TExtendedAttribute>().Entities.Where(x => x.EntityId.Equals(request.EntityId)).ToListAsync(cancellationToken);
-            var extendedAttributeList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllEntityExtendedAttributesByEntityIdCacheKey(typeof(TEntity).Name, request.EntityId), getAllExtendedAttributesByEntityId);
-            var mappedExtendedAttributes = _mapper.Map<List<GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId>>>(extendedAttributeList);
+            Task<List<TExtendedAttribute>> GetAllExtendedAttributesByEntityId() => _unitOfWork.Repository<TExtendedAttribute>().Entities.Where(x => x.EntityId.Equals(request.EntityId)).ToListAsync(cancellationToken);
+            var extendedAttributeList = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllEntityExtendedAttributesByEntityIdCacheKey(typeof(TEntity).Name, request.EntityId), GetAllExtendedAttributesByEntityId);
+            var mappedExtendedAttributes = extendedAttributeList.MapTo<List<GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId>>>();
             return await Result<List<GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId>>>.SuccessAsync(mappedExtendedAttributes);
         }
     }

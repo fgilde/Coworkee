@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services.Storage;
 using CleanArchitectureBase.Application.Interfaces.Services.Storage.Provider;
@@ -17,10 +16,6 @@ namespace CleanArchitectureBase.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddInfrastructureMappings(this IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
@@ -52,7 +47,7 @@ namespace CleanArchitectureBase.Infrastructure.Extensions
                 .Configure<SystemTextJsonOptions>(configureOptions =>
                 {
                     configure?.Invoke(configureOptions);
-                    if (!configureOptions.JsonSerializerOptions.Converters.Any(c => c.GetType() == typeof(TimespanJsonConverter)))
+                    if (configureOptions.JsonSerializerOptions.Converters.All(c => c.GetType() != typeof(TimespanJsonConverter)))
                         configureOptions.JsonSerializerOptions.Converters.Add(new TimespanJsonConverter());
                 });
         }

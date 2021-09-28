@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Application.Requests;
@@ -11,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 {
@@ -33,15 +33,13 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 
     internal class AddEditProductCommandHandler : IRequestHandler<AddEditProductCommand, Result<int>>
     {
-        private readonly IMapper _mapper;
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AddEditProductCommandHandler> _localizer;
 
-        public AddEditProductCommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IUploadService uploadService, IStringLocalizer<AddEditProductCommandHandler> localizer)
+        public AddEditProductCommandHandler(IUnitOfWork<int> unitOfWork, IUploadService uploadService, IStringLocalizer<AddEditProductCommandHandler> localizer)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _uploadService = uploadService;
             _localizer = localizer;
         }
@@ -62,7 +60,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 
             if (command.Id == 0)
             {
-                var product = _mapper.Map<Product>(command);
+                var product = command.MapTo<Product>();
                 if (uploadRequest != null)
                 {
                     product.ImageDataURL = _uploadService.UploadAsync(uploadRequest);

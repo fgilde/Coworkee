@@ -68,10 +68,19 @@ namespace CleanArchitectureBase.Client.Pages.Communication
 
         private async Task OnKeyPressInChat(KeyboardEventArgs e)
         {
-            if (e.Key == "Enter")
-            {
+            if (e.Key == "Enter" && !e.ShiftKey && !e.AltKey)
                 await SubmitAsync();
+        }
+
+        private Task OnKeyDownInChat(KeyboardEventArgs e)
+        {
+            if (e.Key == "Escape")
+            {
+                CurrentMessage = string.Empty; 
+                StateHasChanged();
             }
+
+            return Task.CompletedTask;
         }
 
         protected override async Task OnInitializedAsync()
@@ -208,5 +217,6 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                     return Color.Success;
             }
         }
+
     }
 }

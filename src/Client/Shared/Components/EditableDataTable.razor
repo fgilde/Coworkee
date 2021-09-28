@@ -73,7 +73,7 @@ else
             <MudToolBarSpacer/>
             @if (_canSearch)
             {
-                <MudTextField Immediate="@ImmediateSearch.Value" T="string" ValueChanged="@(OnSearch)" Placeholder="@(ImmediateSearch.Value ? _localizer["Filter"] : _localizer["Search"])" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudTextField Clearable="true" Immediate="@ImmediateSearch.Value" T="string" ValueChanged="@(OnSearch)" Placeholder="@(ImmediateSearch.Value ? _localizer["Filter"] : _localizer["Search"])" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             }
         </ToolBarContent>
         <HeaderContent>

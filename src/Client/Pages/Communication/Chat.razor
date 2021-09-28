@@ -24,7 +24,7 @@
                 <MudIconButton OnClick="@(() => OpenDrawer(Anchor.Right))" Icon="@Icons.Material.Outlined.PeopleAlt" Color="Color.Inherit" Class="ml-3" />
             </MudHidden>
         </MudToolBar>
-        <div class="d-flex flex-column px-4" style="max-height:80vh;min-height:80vh; overflow:scroll;" id="chatContainer">
+        <div class="d-flex flex-column px-4" style="max-height:75vh;min-height:75vh; overflow:scroll;" id="chatContainer">
             @foreach (var message in _messages)
             {
                 <div class="d-flex flex-row my-4">
@@ -47,7 +47,7 @@
             }
         </div>
         <MudPaper Elevation="25" Class="d-flex flex-row px-2 mx-4" Style="">
-            <MudTextField T="string" Placeholder="@_localizer["Enter your message..."]" @onkeypress="OnKeyPressInChat" DisableUnderLine="true" Class="mt-n2 mx-4"
+            <MudTextField T="string" Placeholder="@_localizer["Enter your message..."]" Immediate="true" Lines="3" @onkeydown="OnKeyDownInChat" @onkeypress="OnKeyPressInChat" DisableUnderLine="true"
                           @bind-Value="CurrentMessage" For="@(()=> CurrentMessage)" />
             <MudButton OnClick="SubmitAsync" StartIcon="@Icons.Material.Outlined.Send" Color="Color.Secondary" ButtonType="ButtonType.Button">@_localizer["Send"]</MudButton>
         </MudPaper>
@@ -58,7 +58,7 @@
                 <MudText Typo="Typo.h6" Inline="true" Class="mr-2">#</MudText>
                 <MudText Typo="Typo.h6">@_localizer["contacts"]</MudText>
             </MudToolBar>
-            <div class="d-flex flex-column px-4" style="max-height:80vh;min-height:80vh; overflow:scroll;">
+            <div class="d-flex flex-column px-4" style="max-height:75vh;min-height:75vh; overflow:scroll;">
                 <MudList Clickable="true">
                     @foreach (var user in UserList)
                     {

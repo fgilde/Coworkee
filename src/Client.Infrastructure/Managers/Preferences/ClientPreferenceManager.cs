@@ -67,7 +67,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 
         public async Task<MudTheme> GetCurrentThemeAsync()
         {
-            if (await GetPreference() is ClientPreference {IsDarkMode: true}) 
+            if (await GetPreference() is ClientPreference { IsDarkMode: true })
                 return BlazorHeroTheme.DarkTheme;
             return BlazorHeroTheme.DefaultTheme;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Nextended.Core.Extensions;
@@ -17,7 +19,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 {
     public partial class RolePermissions
     {
-        
+
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public string Id { get; set; }
         [Parameter] public string Title { get; set; }
@@ -108,27 +110,50 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private bool Search(RoleClaimResponse roleClaims)
         {
-            if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (roleClaims.ClaimValue?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (roleClaims.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            return false;
+            return string.IsNullOrWhiteSpace(_searchString) ||
+                   (roleClaims.ClaimValue?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true ||
+                    roleClaims.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true);
         }
 
         private Color GetGroupBadgeColor(int selected, int all)
         {
-            if (selected == 0)
-                return Color.Error;
+            return selected == 0 ? Color.Error : selected == all ? Color.Success : Color.Info;
+        }
 
-            if (selected == all)
-                return Color.Success;
+        private async void CheckChange(RoleClaimResponse context, bool isChecked)
+        {
+            if (isChecked)
+            {
+                var requiredDependencies = Permissions.GetRequiredDependencyPermissionsFor(context.ClaimValue);
+                var neededAdditionalPermissions = GroupedRoleClaims.Values.SelectMany(l => l).Where(roleClaim => requiredDependencies.Contains(roleClaim.ClaimValue) && !roleClaim.Selected).Distinct().ToArray();
+                if (neededAdditionalPermissions.Any())
+                {
+                    string message = neededAdditionalPermissions.Length == 1
+                        ? _localizer["The following permission is also required for permission {1}"]
+                        : _localizer["The following {0} permissions are also required for permission {1}"];
+                    var parameters = new DialogParameters
+                    {
+                        {nameof(PermissionsRequired.RequiredClaims), neededAdditionalPermissions},
+                        {nameof(PermissionsRequired.Message), string.Format(message, neededAdditionalPermissions.Length, context.ClaimValue)}
+                    };
+                    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, FullScreen = false, DisableBackdropClick = true };
+                    var dialog = _dialogService.Show<PermissionsRequired>(_localizer["Dependent permissions required"], parameters, options);
+                    var result = await dialog.Result;
+                    if (!result.Cancelled)
+                    {
+                        if (result.Data.MapTo<bool>())
+                            neededAdditionalPermissions.Apply(r => r.Selected = true);
+                    }
+                    else
+                    {
+                        context.Selected = false;
+                        return;
+                    }
 
-            return Color.Info;
+                    StateHasChanged();
+                }
+            }
+            context.Selected = isChecked;
         }
     }
 }

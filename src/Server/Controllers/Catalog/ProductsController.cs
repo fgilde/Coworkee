@@ -73,7 +73,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <param name="command"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
-        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.All)]
         [HttpPost]
         [Produces(typeof(Result<int>))]
         public async Task<IActionResult> Post(AddEditProductCommand command, CancellationToken cancellationToken = default)

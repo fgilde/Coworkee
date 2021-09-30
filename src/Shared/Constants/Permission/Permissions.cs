@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -9,9 +10,9 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
         public static class Products
         {
             public const string View = "Permissions.Products.View";
-            //[RequiresPermissions(Brands.View)]
+            [RequiresPermissions(Brands.View)] // You can't create products without to see possible brands for assignment
             public const string Create = "Permissions.Products.Create";
-            //[RequiresPermissions(Brands.View)]
+            [RequiresPermissions(Brands.View)] // You can't edit products without to see possible brands for assignment
             public const string Edit = "Permissions.Products.Edit";
             public const string Delete = "Permissions.Products.Delete";
             public const string Export = "Permissions.Products.Export";
@@ -113,20 +114,28 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
             public const string Export = "Permissions.AuditTrails.Export";
             public const string Search = "Permissions.AuditTrails.Search";
         }
-       /// <summary>
-       /// Returns a list of Permissions.
-       /// </summary>
-       /// <returns></returns>
-        public static List<string> GetRegisteredPermissions()
+
+        public static string[] GetRequiredDependencyPermissionsFor(string permission)
         {
-            var permssions = new List<string>();
-            foreach (var prop in typeof(Permissions).GetNestedTypes().SelectMany(c => c.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)))
-            {
-                var propertyValue = prop.GetValue(null);
-                if (propertyValue is not null)
-                    permssions.Add(propertyValue.ToString());
-            }
-            return permssions;
+            return (IteratePermissionProperties().FirstOrDefault(tuple => tuple.Value == permission).Info
+                        ?.GetCustomAttributes<RequiresPermissionsAttribute>()?.SelectMany(a => a.Permissions) ??
+                    Enumerable.Empty<string>()).ToArray();
+        }
+
+        /// <summary>
+        /// Returns a list of Permissions.
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<string> GetRegisteredPermissions()
+        {
+            return IteratePermissionProperties().Select(prop => prop.Value);
+        }
+
+        private static IEnumerable<(FieldInfo Info, string Value)> IteratePermissionProperties()
+        {
+            return typeof(Permissions).GetNestedTypes()
+                .SelectMany(c => c.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+                .Select(info => (info, info.GetValue(null)?.ToString())).Where(o => o.Item2 is not null);
         }
     }
 }

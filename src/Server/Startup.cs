@@ -13,7 +13,6 @@ using System.IO;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
-using FluentValidation.AspNetCore;
 using Hangfire.Dashboard;
 using Microsoft.Extensions.Localization;
 

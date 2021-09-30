@@ -447,5 +447,30 @@
         <member name="M:CleanArchitectureBase.Server.CustomTypeNameGenerator.Generate(NJsonSchema.JsonSchema,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <inheritdoc />
         </member>
+        <member name="M:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute"/> class. 
+            </summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.RoleMatch">
+            <summary>
+            If more than one role is set you can specify if you need all ore one to get access
+            </summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.PolicyMatch">
+            <summary>
+            If more than one policy is set you can specify if you need all ore one to get access
+            </summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.Roles">
+            <summary>
+            Gets or sets a comma delimited list of roles that are allowed to access the resource.
+            </summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.Policies">
+            <summary>
+            Gets or sets the policy name or a a comma delimited list of that determines access to the resource.
+            </summary>
+        </member>
     </members>
 </doc>

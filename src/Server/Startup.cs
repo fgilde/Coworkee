@@ -13,6 +13,7 @@ using System.IO;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
+using FluentValidation.AspNetCore;
 using Hangfire.Dashboard;
 using Microsoft.Extensions.Localization;
 
@@ -41,7 +42,7 @@ namespace CleanArchitectureBase.Server
             {
                 options.ResourcesPath = "Resources";
             });
-            
+            services.AddHealthChecks();
             services.AddSerialization();
             services.AddDatabase(_configuration);
             services.AddServerStorage(); //TODO - should implement ServerStorageProvider to work correctly!
@@ -58,7 +59,8 @@ namespace CleanArchitectureBase.Server
             services.AddOpenApiDocumentation(_configuration);
             services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
-            services.AddControllers().AddValidators();
+            //services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>()).AddValidators();
+            services.AddControllersWithViews(options => options.Filters.Add<ApiExceptionFilterAttribute>()).AddValidators();
             services.AddExtendedAttributesValidators();
             services.AddExtendedAttributesHandlers();
             services.AddRazorPages();

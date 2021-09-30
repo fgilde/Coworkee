@@ -9,11 +9,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using System.Linq;
+using CleanArchitectureBase.Application.Security;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 {
+    [CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
     public partial class AddEditProductCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
@@ -36,12 +39,17 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AddEditProductCommandHandler> _localizer;
+        private readonly IPermissionService _permissionService;
 
-        public AddEditProductCommandHandler(IUnitOfWork<int> unitOfWork, IUploadService uploadService, IStringLocalizer<AddEditProductCommandHandler> localizer)
+        public AddEditProductCommandHandler(IUnitOfWork<int> unitOfWork, 
+            IUploadService uploadService, 
+            IStringLocalizer<AddEditProductCommandHandler> localizer, 
+            IPermissionService permissionService)
         {
             _unitOfWork = unitOfWork;
             _uploadService = uploadService;
             _localizer = localizer;
+            _permissionService = permissionService;
         }
 
         public async Task<Result<int>> Handle(AddEditProductCommand command, CancellationToken cancellationToken)
@@ -60,6 +68,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 
             if (command.Id == 0)
             {
+                await _permissionService.EnsurePolicyAsync(Permissions.Products.Create);
                 var product = command.MapTo<Product>();
                 if (uploadRequest != null)
                 {
@@ -71,6 +80,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
             }
             else
             {
+                await _permissionService.EnsurePolicyAsync(Permissions.Products.Edit);
                 var product = await _unitOfWork.Repository<Product>().GetByIdAsync(command.Id);
                 if (product != null)
                 {

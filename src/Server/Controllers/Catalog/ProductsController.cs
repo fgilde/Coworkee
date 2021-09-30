@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Commands.Delete;
@@ -6,7 +8,10 @@ using CleanArchitectureBase.Application.Features.Products.Queries.Export;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage;
+using CleanArchitectureBase.Application.Interfaces.Services.Identity;
+using CleanArchitectureBase.Application.Security;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Constants.Role;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +29,12 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Produces(typeof(PaginatedResult<GetAllPagedProductsResponse>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, CancellationToken cancellationToken = default)
         {
+            var lang = Thread.CurrentThread.CurrentCulture;
+            var user = HttpContext.User;
+            //Get<IAccountService>()
+            // var isInRole = Thread.CurrentPrincipal.IsInRole(RoleConstants.AdministratorRole);
+            var r = (await Get<IRoleService>().GetAllAsync()).Data.FirstOrDefault(r => r.Name == RoleConstants.AdministratorRole);
+            var p = await Get<IRoleService>().GetAllPermissionsAsync(r.Id);
             return Ok(await _mediator.Send(query, cancellationToken));
         }
 
@@ -62,7 +73,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <param name="command"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Products.Create)]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
         [HttpPost]
         [Produces(typeof(Result<int>))]
         public async Task<IActionResult> Post(AddEditProductCommand command, CancellationToken cancellationToken = default)

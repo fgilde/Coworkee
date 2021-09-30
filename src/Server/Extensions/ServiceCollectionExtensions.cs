@@ -43,8 +43,6 @@ using CleanArchitectureBase.Application.Serialization.JsonConverters;
 using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
-using CleanArchitectureBase.Shared;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using NSwag;
@@ -54,7 +52,6 @@ namespace CleanArchitectureBase.Server.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
-
 
         internal static IServiceCollection AddCurrentUserServiceAndSession(this IServiceCollection services)
         {
@@ -229,10 +226,12 @@ namespace CleanArchitectureBase.Server.Extensions
 
         internal static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            // TODO: Reflect by base Interface or Attribute
             services.AddTransient<IRoleClaimService, RoleClaimService>();
             services.AddTransient<ITokenService, IdentityService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IPermissionService, PermissionService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IChatService, ChatService>();
             services.AddTransient<IUploadService, UploadService>();

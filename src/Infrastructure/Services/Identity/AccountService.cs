@@ -46,7 +46,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 return await Result.FailAsync(_localizer["User Not Found."]);
             }
 
-            var identityResult = await this._userManager.ChangePasswordAsync(
+            var identityResult = await _userManager.ChangePasswordAsync(
                 user,
                 model.Password,
                 model.NewPassword);

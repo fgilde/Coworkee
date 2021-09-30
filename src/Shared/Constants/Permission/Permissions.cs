@@ -9,7 +9,9 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
         public static class Products
         {
             public const string View = "Permissions.Products.View";
+            //[RequiresPermissions(Brands.View)]
             public const string Create = "Permissions.Products.Create";
+            //[RequiresPermissions(Brands.View)]
             public const string Edit = "Permissions.Products.Edit";
             public const string Delete = "Permissions.Products.Delete";
             public const string Export = "Permissions.Products.Export";

@@ -12,6 +12,7 @@ using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetA
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetById;
 using CleanArchitectureBase.Application.Interfaces;
+using CleanArchitectureBase.Application.Security;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -23,11 +24,12 @@ namespace CleanArchitectureBase.Application.Extensions
         public static void AddApplicationLayer(this IServiceCollection services)
         {
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
+            services.AddTransient<ICustomAuthorizeAttributeHandler, CustomAuthorizeAttributeHandler>();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ClientEventBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         }

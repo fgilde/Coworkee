@@ -26,7 +26,7 @@ namespace CleanArchitectureBase.Server
 
                     if (context.Database.IsSqlServer())
                     {
-                        context.Database.Migrate();
+                        await context.Database.MigrateAsync();
                     }
                 }
                 catch (Exception ex)

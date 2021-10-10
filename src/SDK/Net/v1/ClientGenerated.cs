@@ -4,15 +4,29 @@
 // </auto-generated>
 //----------------------
 
+using System.Collections.Generic;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Domain.Entities;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
+using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
+using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
+using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
+using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
+using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
-using CleanArchitectureBase.SDK.Models;
+using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
+using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById;
+using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
+using CleanArchitectureBase.Application.Interfaces.Chat;
+using CleanArchitectureBase.Application.Models.Chat;
+using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
+using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Wrapper;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
@@ -32,13 +46,13 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfDashboardDataResponse Dashboard_GetData();
+        Result<DashboardDataResponse> Dashboard_GetData();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfDashboardDataResponse> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<DashboardDataResponse>> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
@@ -61,24 +75,24 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfIEnumerableOfAuditResponse Audits_GetUserTrails();
+        Result<IEnumerable<AuditResponse>> Audits_GetUserTrails();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfIEnumerableOfAuditResponse> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<IEnumerable<AuditResponse>>> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null);
+        Result<string> Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Change Language Preference</summary>
         /// <returns>Status 200 OK</returns>
@@ -94,99 +108,99 @@ namespace SDK
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        PaginatedResultOfGetAllDocumentsResponse Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null);
+        PaginatedResult<GetAllDocumentsResponse> Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<PaginatedResultOfGetAllDocumentsResponse> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResult<GetAllDocumentsResponse>> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger Documents_Post(AddEditDocumentCommand command);
+        Result<int> Documents_Post(AddEditDocumentCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfGetDocumentByIdResponse Documents_GetById(int id);
+        Result<GetDocumentByIdResponse> Documents_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfGetDocumentByIdResponse> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<GetDocumentByIdResponse>> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger Documents_Delete(int id);
+        Result<int> Documents_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfListOfGetAllDocumentTypesResponse DocumentTypes_GetAll();
+        Result<List<GetAllDocumentTypesResponse>> DocumentTypes_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfListOfGetAllDocumentTypesResponse> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<GetAllDocumentTypesResponse>>> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger DocumentTypes_Post(AddEditDocumentTypeCommand command);
+        Result<int> DocumentTypes_Post(AddEditDocumentTypeCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfGetDocumentTypeByIdResponse DocumentTypes_GetById(int id);
+        Result<GetDocumentTypeByIdResponse> DocumentTypes_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfGetDocumentTypeByIdResponse> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<GetDocumentTypeByIdResponse>> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger DocumentTypes_Delete(int id);
+        Result<int> DocumentTypes_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString DocumentTypes_Export(string searchString = null);
+        Result<string> DocumentTypes_Export(string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse DocumentExtendedAttributes_GetAll();
@@ -196,11 +210,11 @@ namespace SDK
         System.Threading.Tasks.Task<FileResponse> DocumentExtendedAttributes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentExtendedAttributes_Post(AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute command);
+        FileResponse DocumentExtendedAttributes_Post(AddEditExtendedAttributeCommand<int,int,Document,DocumentExtendedAttribute> command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentExtendedAttributes_PostAsync(AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> DocumentExtendedAttributes_PostAsync(AddEditExtendedAttributeCommand<int,int,Document,DocumentExtendedAttribute> command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse DocumentExtendedAttributes_GetAllByEntityId(int entityId);
@@ -255,154 +269,154 @@ namespace SDK
         /// <summary>Get Profile picture by Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Account_GetProfilePicture(string userId);
+        Result<string> Account_GetProfilePicture(string userId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Profile picture by Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Account_GetProfilePictureAsync(string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Account_GetProfilePictureAsync(string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId);
+        Result<string> Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Role Claims(e.g. Product Create Permission)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfListOfRoleClaimResponse RoleClaim_GetAll();
+        Result<List<RoleClaimResponse>> RoleClaim_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Role Claims(e.g. Product Create Permission)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfListOfRoleClaimResponse> RoleClaim_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Add a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString RoleClaim_Post(RoleClaimRequest request);
+        Result<string> RoleClaim_Post(RoleClaimRequest request);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Add a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> RoleClaim_PostAsync(RoleClaimRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> RoleClaim_PostAsync(RoleClaimRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Role Claims By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfListOfRoleClaimResponse RoleClaim_GetAllByRoleId(string roleId);
+        Result<List<RoleClaimResponse>> RoleClaim_GetAllByRoleId(string roleId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Role Claims By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfListOfRoleClaimResponse> RoleClaim_GetAllByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString RoleClaim_Delete(int id);
+        Result<string> RoleClaim_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> RoleClaim_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> RoleClaim_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Roles (basic, admin etc.)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfListOfRoleResponse Role_GetAll();
+        Result<List<RoleResponse>> Role_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Roles (basic, admin etc.)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfListOfRoleResponse> Role_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<RoleResponse>>> Role_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Add a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Role_Post(RoleRequest request);
+        Result<string> Role_Post(RoleRequest request);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Add a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Role_PostAsync(RoleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Role_PostAsync(RoleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Role_Delete(string id);
+        Result<string> Role_Delete(string id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Role_DeleteAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Role_DeleteAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Permissions By Role Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfPermissionResponse Role_GetPermissionsByRoleId(string roleId);
+        Result<PermissionResponse> Role_GetPermissionsByRoleId(string roleId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Permissions By Role Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfPermissionResponse> Role_GetPermissionsByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<PermissionResponse>> Role_GetPermissionsByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Edit a Role Claim</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Role_Update(PermissionRequest model);
+        Result<string> Role_Update(PermissionRequest model);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Edit a Role Claim</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Role_UpdateAsync(PermissionRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Role_UpdateAsync(PermissionRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Token (Email, Password)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfTokenResponse Token_Get(TokenRequest model);
+        Result<TokenResponse> Token_Get(TokenRequest model);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Token (Email, Password)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfTokenResponse> Token_GetAsync(TokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<TokenResponse>> Token_GetAsync(TokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Refresh Token</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfTokenResponse Token_Refresh(RefreshTokenRequest model);
+        Result<TokenResponse> Token_Refresh(RefreshTokenRequest model);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Refresh Token</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfTokenResponse> Token_RefreshAsync(RefreshTokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<TokenResponse>> Token_RefreshAsync(RefreshTokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get User Details</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfListOfUserResponse User_GetAll();
+        Result<List<UserResponse>> User_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get User Details</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfListOfUserResponse> User_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<UserResponse>>> User_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Register a User</summary>
         /// <returns>Status 200 OK</returns>
@@ -418,24 +432,24 @@ namespace SDK
         /// <summary>Get User By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfUserResponse User_GetById(string id);
+        Result<UserResponse> User_GetById(string id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get User By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfUserResponse> User_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<UserResponse>> User_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get User Roles By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfUserRolesResponse User_GetRoles(string id);
+        Result<UserRolesResponse> User_GetRoles(string id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get User Roles By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfUserRolesResponse> User_GetRolesAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<UserRolesResponse>> User_GetRolesAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Update Roles for User</summary>
         /// <returns>Status 200 OK</returns>
@@ -451,13 +465,13 @@ namespace SDK
         /// <summary>Confirm Email</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString User_ConfirmEmail(string userId = null, string code = null);
+        Result<string> User_ConfirmEmail(string userId = null, string code = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Confirm Email</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> User_ConfirmEmailAsync(string userId = null, string code = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> User_ConfirmEmailAsync(string userId = null, string code = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Toggle User Status (Activate and Deactivate)</summary>
         /// <returns>Status 200 OK</returns>
@@ -506,110 +520,110 @@ namespace SDK
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfIEnumerableOfChatHistoryResponse Chats_GetChatHistory(string contactId);
+        Result<IEnumerable<ChatHistoryResponse>> Chats_GetChatHistory(string contactId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfIEnumerableOfChatHistoryResponse> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<IEnumerable<ChatHistoryResponse>>> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfIEnumerableOfChatUserResponse Chats_GetChatUsers();
+        Result<IEnumerable<ChatUserResponse>> Chats_GetChatUsers();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfIEnumerableOfChatUserResponse> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<IEnumerable<ChatUserResponse>>> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result Chats_SaveMessage(ChatHistoryOfIChatUser message);
+        Result Chats_SaveMessage(ChatHistory<IChatUser> message);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result> Chats_SaveMessageAsync(ChatHistoryOfIChatUser message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result> Chats_SaveMessageAsync(ChatHistory<IChatUser> message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfListOfGetAllBrandsResponse Brands_GetAll();
+        Result<List<GetAllBrandsResponse>> Brands_GetAll();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfListOfGetAllBrandsResponse> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<GetAllBrandsResponse>>> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger Brands_Post(AddEditBrandCommand command);
+        Result<int> Brands_Post(AddEditBrandCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfGetBrandByIdResponse Brands_GetById(int id);
+        Result<GetBrandByIdResponse> Brands_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfGetBrandByIdResponse> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<GetBrandByIdResponse>> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger Brands_Delete(int id);
+        Result<int> Brands_Delete(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Brands_Export(string searchString = null);
+        Result<string> Brands_Export(string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        PaginatedResultOfGetAllPagedProductsResponse Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
+        PaginatedResult<GetAllPagedProductsResponse> Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<PaginatedResultOfGetAllPagedProductsResponse> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResult<GetAllPagedProductsResponse>> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfInteger Products_Post(AddEditProductCommand command);
+        Result<int> Products_Post(AddEditProductCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfInteger> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<int>> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Delete a Product</summary>
         /// <param name="ids">Products to delete</param>
@@ -628,49 +642,49 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Products_GetProductImage(int id);
+        Result<string> Products_GetProductImage(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get a Product Image by Id</summary>
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfGetAllPagedProductsResponse Products_GetById(int id);
+        Result<GetAllPagedProductsResponse> Products_GetById(int id);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfGetAllPagedProductsResponse> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<GetAllPagedProductsResponse>> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Products_Export(string searchString = null);
+        Result<string> Products_Export(string searchString = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Exports specific products as excel</summary>
         /// <param name="ids">Produc ids to export</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ResultOfString Products_ExportByIds(System.Collections.Generic.IList<int> ids = null);
+        Result<string> Products_ExportByIds(System.Collections.Generic.IList<int> ids = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Exports specific products as excel</summary>
         /// <param name="ids">Produc ids to export</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ResultOfString> Products_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Products_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -712,7 +726,7 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfDashboardDataResponse Dashboard_GetData()
+        public Result<DashboardDataResponse> Dashboard_GetData()
         {
             return System.Threading.Tasks.Task.Run(async () => await Dashboard_GetDataAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -721,7 +735,7 @@ namespace SDK
         /// <summary>Get the new ultimate Dashboard Data</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfDashboardDataResponse> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<DashboardDataResponse>> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Dashboard");
@@ -756,7 +770,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfDashboardDataResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<DashboardDataResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -933,7 +947,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfIEnumerableOfAuditResponse Audits_GetUserTrails()
+        public Result<IEnumerable<AuditResponse>> Audits_GetUserTrails()
         {
             return System.Threading.Tasks.Task.Run(async () => await Audits_GetUserTrailsAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -942,7 +956,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfIEnumerableOfAuditResponse> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<IEnumerable<AuditResponse>>> Audits_GetUserTrailsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits");
@@ -977,7 +991,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfIEnumerableOfAuditResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<IEnumerable<AuditResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1007,7 +1021,7 @@ namespace SDK
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null)
+        public Result<string> Audits_ExportExcel(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Audits_ExportExcelAsync(searchString, searchInOldValues, searchInNewValues, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1016,7 +1030,7 @@ namespace SDK
         /// <summary>Search Audit Trails and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Audits_ExportExcelAsync(string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits/export?");
@@ -1064,7 +1078,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1172,7 +1186,7 @@ namespace SDK
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public PaginatedResultOfGetAllDocumentsResponse Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null)
+        public PaginatedResult<GetAllDocumentsResponse> Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_GetAllAsync(pageNumber, pageSize, searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1181,7 +1195,7 @@ namespace SDK
         /// <summary>Get All Documents</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PaginatedResultOfGetAllDocumentsResponse> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PaginatedResult<GetAllDocumentsResponse>> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Documents?");
@@ -1229,7 +1243,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<PaginatedResultOfGetAllDocumentsResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<PaginatedResult<GetAllDocumentsResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1259,7 +1273,7 @@ namespace SDK
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger Documents_Post(AddEditDocumentCommand command)
+        public Result<int> Documents_Post(AddEditDocumentCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1268,7 +1282,7 @@ namespace SDK
         /// <summary>Add/Edit Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> Documents_PostAsync(AddEditDocumentCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -1309,7 +1323,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1339,7 +1353,7 @@ namespace SDK
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfGetDocumentByIdResponse Documents_GetById(int id)
+        public Result<GetDocumentByIdResponse> Documents_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1348,7 +1362,7 @@ namespace SDK
         /// <summary>Get Document By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfGetDocumentByIdResponse> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<GetDocumentByIdResponse>> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1387,7 +1401,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetDocumentByIdResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<GetDocumentByIdResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1417,7 +1431,7 @@ namespace SDK
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger Documents_Delete(int id)
+        public Result<int> Documents_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1426,7 +1440,7 @@ namespace SDK
         /// <summary>Delete a Document</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> Documents_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1465,7 +1479,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1495,7 +1509,7 @@ namespace SDK
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfListOfGetAllDocumentTypesResponse DocumentTypes_GetAll()
+        public Result<List<GetAllDocumentTypesResponse>> DocumentTypes_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1504,7 +1518,7 @@ namespace SDK
         /// <summary>Get All Document Types</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfListOfGetAllDocumentTypesResponse> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<List<GetAllDocumentTypesResponse>>> DocumentTypes_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes");
@@ -1539,7 +1553,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfGetAllDocumentTypesResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<List<GetAllDocumentTypesResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1569,7 +1583,7 @@ namespace SDK
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger DocumentTypes_Post(AddEditDocumentTypeCommand command)
+        public Result<int> DocumentTypes_Post(AddEditDocumentTypeCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1578,7 +1592,7 @@ namespace SDK
         /// <summary>Create/Update a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> DocumentTypes_PostAsync(AddEditDocumentTypeCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -1619,7 +1633,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1649,7 +1663,7 @@ namespace SDK
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfGetDocumentTypeByIdResponse DocumentTypes_GetById(int id)
+        public Result<GetDocumentTypeByIdResponse> DocumentTypes_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1658,7 +1672,7 @@ namespace SDK
         /// <summary>Get Document Type By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfGetDocumentTypeByIdResponse> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<GetDocumentTypeByIdResponse>> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1697,7 +1711,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetDocumentTypeByIdResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<GetDocumentTypeByIdResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1727,7 +1741,7 @@ namespace SDK
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger DocumentTypes_Delete(int id)
+        public Result<int> DocumentTypes_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1736,7 +1750,7 @@ namespace SDK
         /// <summary>Delete a Document Type</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> DocumentTypes_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1775,7 +1789,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1804,7 +1818,7 @@ namespace SDK
     
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString DocumentTypes_Export(string searchString = null)
+        public Result<string> DocumentTypes_Export(string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1812,7 +1826,7 @@ namespace SDK
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Document Types and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes/export?");
@@ -1852,7 +1866,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1948,14 +1962,14 @@ namespace SDK
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse DocumentExtendedAttributes_Post(AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute command)
+        public FileResponse DocumentExtendedAttributes_Post(AddEditExtendedAttributeCommand<int,int,Document,DocumentExtendedAttribute> command)
         {
             return System.Threading.Tasks.Task.Run(async () => await DocumentExtendedAttributes_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DocumentExtendedAttributes_PostAsync(AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> DocumentExtendedAttributes_PostAsync(AddEditExtendedAttributeCommand<int,int,Document,DocumentExtendedAttribute> command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -2489,7 +2503,7 @@ namespace SDK
         /// <summary>Get Profile picture by Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Account_GetProfilePicture(string userId)
+        public Result<string> Account_GetProfilePicture(string userId)
         {
             return System.Threading.Tasks.Task.Run(async () => await Account_GetProfilePictureAsync(userId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2498,7 +2512,7 @@ namespace SDK
         /// <summary>Get Profile picture by Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Account_GetProfilePictureAsync(string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Account_GetProfilePictureAsync(string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/Account/profile-picture/{userId}");
@@ -2534,7 +2548,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2564,7 +2578,7 @@ namespace SDK
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId)
+        public Result<string> Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId)
         {
             return System.Threading.Tasks.Task.Run(async () => await Account_UpdateProfilePictureAsync(request, userId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2573,7 +2587,7 @@ namespace SDK
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (userId == null)
                 throw new System.ArgumentNullException("userId");
@@ -2618,7 +2632,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2648,7 +2662,7 @@ namespace SDK
         /// <summary>Get All Role Claims(e.g. Product Create Permission)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfListOfRoleClaimResponse RoleClaim_GetAll()
+        public Result<List<RoleClaimResponse>> RoleClaim_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await RoleClaim_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2657,7 +2671,7 @@ namespace SDK
         /// <summary>Get All Role Claims(e.g. Product Create Permission)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfListOfRoleClaimResponse> RoleClaim_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/RoleClaim");
@@ -2692,7 +2706,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfRoleClaimResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<List<RoleClaimResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2722,7 +2736,7 @@ namespace SDK
         /// <summary>Add a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString RoleClaim_Post(RoleClaimRequest request)
+        public Result<string> RoleClaim_Post(RoleClaimRequest request)
         {
             return System.Threading.Tasks.Task.Run(async () => await RoleClaim_PostAsync(request, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2731,7 +2745,7 @@ namespace SDK
         /// <summary>Add a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> RoleClaim_PostAsync(RoleClaimRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> RoleClaim_PostAsync(RoleClaimRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (request == null)
                 throw new System.ArgumentNullException("request");
@@ -2772,7 +2786,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2802,7 +2816,7 @@ namespace SDK
         /// <summary>Get All Role Claims By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfListOfRoleClaimResponse RoleClaim_GetAllByRoleId(string roleId)
+        public Result<List<RoleClaimResponse>> RoleClaim_GetAllByRoleId(string roleId)
         {
             return System.Threading.Tasks.Task.Run(async () => await RoleClaim_GetAllByRoleIdAsync(roleId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2811,7 +2825,7 @@ namespace SDK
         /// <summary>Get All Role Claims By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfListOfRoleClaimResponse> RoleClaim_GetAllByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/RoleClaim/{roleId}");
@@ -2847,7 +2861,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfRoleClaimResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<List<RoleClaimResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2877,7 +2891,7 @@ namespace SDK
         /// <summary>Delete a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString RoleClaim_Delete(int id)
+        public Result<string> RoleClaim_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await RoleClaim_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2886,7 +2900,7 @@ namespace SDK
         /// <summary>Delete a Role Claim</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> RoleClaim_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> RoleClaim_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2925,7 +2939,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2955,7 +2969,7 @@ namespace SDK
         /// <summary>Get All Roles (basic, admin etc.)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfListOfRoleResponse Role_GetAll()
+        public Result<List<RoleResponse>> Role_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await Role_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2964,7 +2978,7 @@ namespace SDK
         /// <summary>Get All Roles (basic, admin etc.)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfListOfRoleResponse> Role_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<List<RoleResponse>>> Role_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/Role");
@@ -2999,7 +3013,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfRoleResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<List<RoleResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3029,7 +3043,7 @@ namespace SDK
         /// <summary>Add a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Role_Post(RoleRequest request)
+        public Result<string> Role_Post(RoleRequest request)
         {
             return System.Threading.Tasks.Task.Run(async () => await Role_PostAsync(request, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3038,7 +3052,7 @@ namespace SDK
         /// <summary>Add a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Role_PostAsync(RoleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Role_PostAsync(RoleRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (request == null)
                 throw new System.ArgumentNullException("request");
@@ -3079,7 +3093,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3109,7 +3123,7 @@ namespace SDK
         /// <summary>Delete a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Role_Delete(string id)
+        public Result<string> Role_Delete(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Role_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3118,7 +3132,7 @@ namespace SDK
         /// <summary>Delete a Role</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Role_DeleteAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Role_DeleteAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/Role/{id}");
@@ -3154,7 +3168,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3184,7 +3198,7 @@ namespace SDK
         /// <summary>Get Permissions By Role Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfPermissionResponse Role_GetPermissionsByRoleId(string roleId)
+        public Result<PermissionResponse> Role_GetPermissionsByRoleId(string roleId)
         {
             return System.Threading.Tasks.Task.Run(async () => await Role_GetPermissionsByRoleIdAsync(roleId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3193,7 +3207,7 @@ namespace SDK
         /// <summary>Get Permissions By Role Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfPermissionResponse> Role_GetPermissionsByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<PermissionResponse>> Role_GetPermissionsByRoleIdAsync(string roleId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/Role/permissions/{roleId}");
@@ -3229,7 +3243,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfPermissionResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<PermissionResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3258,7 +3272,7 @@ namespace SDK
     
         /// <summary>Edit a Role Claim</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Role_Update(PermissionRequest model)
+        public Result<string> Role_Update(PermissionRequest model)
         {
             return System.Threading.Tasks.Task.Run(async () => await Role_UpdateAsync(model, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3266,7 +3280,7 @@ namespace SDK
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Edit a Role Claim</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Role_UpdateAsync(PermissionRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Role_UpdateAsync(PermissionRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (model == null)
                 throw new System.ArgumentNullException("model");
@@ -3307,7 +3321,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3337,7 +3351,7 @@ namespace SDK
         /// <summary>Get Token (Email, Password)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfTokenResponse Token_Get(TokenRequest model)
+        public Result<TokenResponse> Token_Get(TokenRequest model)
         {
             return System.Threading.Tasks.Task.Run(async () => await Token_GetAsync(model, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3346,7 +3360,7 @@ namespace SDK
         /// <summary>Get Token (Email, Password)</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfTokenResponse> Token_GetAsync(TokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<TokenResponse>> Token_GetAsync(TokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (model == null)
                 throw new System.ArgumentNullException("model");
@@ -3387,7 +3401,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfTokenResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<TokenResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3417,7 +3431,7 @@ namespace SDK
         /// <summary>Refresh Token</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfTokenResponse Token_Refresh(RefreshTokenRequest model)
+        public Result<TokenResponse> Token_Refresh(RefreshTokenRequest model)
         {
             return System.Threading.Tasks.Task.Run(async () => await Token_RefreshAsync(model, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3426,7 +3440,7 @@ namespace SDK
         /// <summary>Refresh Token</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfTokenResponse> Token_RefreshAsync(RefreshTokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<TokenResponse>> Token_RefreshAsync(RefreshTokenRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (model == null)
                 throw new System.ArgumentNullException("model");
@@ -3467,7 +3481,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfTokenResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<TokenResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3497,7 +3511,7 @@ namespace SDK
         /// <summary>Get User Details</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfListOfUserResponse User_GetAll()
+        public Result<List<UserResponse>> User_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await User_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3506,7 +3520,7 @@ namespace SDK
         /// <summary>Get User Details</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfListOfUserResponse> User_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<List<UserResponse>>> User_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/User");
@@ -3541,7 +3555,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfUserResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<List<UserResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3651,7 +3665,7 @@ namespace SDK
         /// <summary>Get User By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfUserResponse User_GetById(string id)
+        public Result<UserResponse> User_GetById(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await User_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3660,7 +3674,7 @@ namespace SDK
         /// <summary>Get User By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfUserResponse> User_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<UserResponse>> User_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/User/{id}");
@@ -3696,7 +3710,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfUserResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<UserResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3726,7 +3740,7 @@ namespace SDK
         /// <summary>Get User Roles By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfUserRolesResponse User_GetRoles(string id)
+        public Result<UserRolesResponse> User_GetRoles(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await User_GetRolesAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3735,7 +3749,7 @@ namespace SDK
         /// <summary>Get User Roles By Id</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfUserRolesResponse> User_GetRolesAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<UserRolesResponse>> User_GetRolesAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/User/roles/{id}");
@@ -3771,7 +3785,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfUserRolesResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<UserRolesResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3885,7 +3899,7 @@ namespace SDK
         /// <summary>Confirm Email</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString User_ConfirmEmail(string userId = null, string code = null)
+        public Result<string> User_ConfirmEmail(string userId = null, string code = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await User_ConfirmEmailAsync(userId, code, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3894,7 +3908,7 @@ namespace SDK
         /// <summary>Confirm Email</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> User_ConfirmEmailAsync(string userId = null, string code = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> User_ConfirmEmailAsync(string userId = null, string code = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/User/confirm-email?");
@@ -3938,7 +3952,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4287,7 +4301,7 @@ namespace SDK
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfIEnumerableOfChatHistoryResponse Chats_GetChatHistory(string contactId)
+        public Result<IEnumerable<ChatHistoryResponse>> Chats_GetChatHistory(string contactId)
         {
             return System.Threading.Tasks.Task.Run(async () => await Chats_GetChatHistoryAsync(contactId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4296,7 +4310,7 @@ namespace SDK
         /// <summary>Get user wise chat history</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfIEnumerableOfChatHistoryResponse> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<IEnumerable<ChatHistoryResponse>>> Chats_GetChatHistoryAsync(string contactId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Chats/{contactId}");
@@ -4332,7 +4346,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfIEnumerableOfChatHistoryResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<IEnumerable<ChatHistoryResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4362,7 +4376,7 @@ namespace SDK
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfIEnumerableOfChatUserResponse Chats_GetChatUsers()
+        public Result<IEnumerable<ChatUserResponse>> Chats_GetChatUsers()
         {
             return System.Threading.Tasks.Task.Run(async () => await Chats_GetChatUsersAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4371,7 +4385,7 @@ namespace SDK
         /// <summary>get available users</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfIEnumerableOfChatUserResponse> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<IEnumerable<ChatUserResponse>>> Chats_GetChatUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Chats/users");
@@ -4406,7 +4420,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfIEnumerableOfChatUserResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<IEnumerable<ChatUserResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4436,7 +4450,7 @@ namespace SDK
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result Chats_SaveMessage(ChatHistoryOfIChatUser message)
+        public Result Chats_SaveMessage(ChatHistory<IChatUser> message)
         {
             return System.Threading.Tasks.Task.Run(async () => await Chats_SaveMessageAsync(message, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4445,7 +4459,7 @@ namespace SDK
         /// <summary>Save Chat Message</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result> Chats_SaveMessageAsync(ChatHistoryOfIChatUser message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result> Chats_SaveMessageAsync(ChatHistory<IChatUser> message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (message == null)
                 throw new System.ArgumentNullException("message");
@@ -4516,7 +4530,7 @@ namespace SDK
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfListOfGetAllBrandsResponse Brands_GetAll()
+        public Result<List<GetAllBrandsResponse>> Brands_GetAll()
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4525,7 +4539,7 @@ namespace SDK
         /// <summary>Get All Brands</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfListOfGetAllBrandsResponse> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<List<GetAllBrandsResponse>>> Brands_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands");
@@ -4560,7 +4574,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfListOfGetAllBrandsResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<List<GetAllBrandsResponse>>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4590,7 +4604,7 @@ namespace SDK
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger Brands_Post(AddEditBrandCommand command)
+        public Result<int> Brands_Post(AddEditBrandCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4599,7 +4613,7 @@ namespace SDK
         /// <summary>Create/Update a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> Brands_PostAsync(AddEditBrandCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -4640,7 +4654,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4670,7 +4684,7 @@ namespace SDK
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfGetBrandByIdResponse Brands_GetById(int id)
+        public Result<GetBrandByIdResponse> Brands_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4679,7 +4693,7 @@ namespace SDK
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfGetBrandByIdResponse> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<GetBrandByIdResponse>> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -4718,7 +4732,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetBrandByIdResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<GetBrandByIdResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4748,7 +4762,7 @@ namespace SDK
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger Brands_Delete(int id)
+        public Result<int> Brands_Delete(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_DeleteAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4757,7 +4771,7 @@ namespace SDK
         /// <summary>Delete a Brand</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> Brands_DeleteAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -4796,7 +4810,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4825,7 +4839,7 @@ namespace SDK
     
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Brands_Export(string searchString = null)
+        public Result<string> Brands_Export(string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4833,7 +4847,7 @@ namespace SDK
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Search Brands and Export to Excel</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands/export?");
@@ -4873,7 +4887,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4903,7 +4917,7 @@ namespace SDK
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public PaginatedResultOfGetAllPagedProductsResponse Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
+        public PaginatedResult<GetAllPagedProductsResponse> Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetAllAsync(pageNumber, pageSize, searchString, orderBy, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4912,7 +4926,7 @@ namespace SDK
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PaginatedResultOfGetAllPagedProductsResponse> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PaginatedResult<GetAllPagedProductsResponse>> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products?");
@@ -4964,7 +4978,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<PaginatedResultOfGetAllPagedProductsResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<PaginatedResult<GetAllPagedProductsResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4994,7 +5008,7 @@ namespace SDK
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfInteger Products_Post(AddEditProductCommand command)
+        public Result<int> Products_Post(AddEditProductCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -5003,7 +5017,7 @@ namespace SDK
         /// <summary>Add/Edit a Product</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfInteger> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<int>> Products_PostAsync(AddEditProductCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -5044,7 +5058,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfInteger>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<int>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5157,7 +5171,7 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Products_GetProductImage(int id)
+        public Result<string> Products_GetProductImage(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetProductImageAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -5167,7 +5181,7 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5206,7 +5220,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5236,7 +5250,7 @@ namespace SDK
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfGetAllPagedProductsResponse Products_GetById(int id)
+        public Result<GetAllPagedProductsResponse> Products_GetById(int id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -5245,7 +5259,7 @@ namespace SDK
         /// <summary>Get a Brand By Id</summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfGetAllPagedProductsResponse> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<GetAllPagedProductsResponse>> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5284,7 +5298,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfGetAllPagedProductsResponse>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<GetAllPagedProductsResponse>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5314,7 +5328,7 @@ namespace SDK
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Products_Export(string searchString = null)
+        public Result<string> Products_Export(string searchString = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -5323,7 +5337,7 @@ namespace SDK
         /// <summary>Search Products and Export to Excel</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/export?");
@@ -5363,7 +5377,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5394,7 +5408,7 @@ namespace SDK
         /// <param name="ids">Produc ids to export</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public ResultOfString Products_ExportByIds(System.Collections.Generic.IList<int> ids = null)
+        public Result<string> Products_ExportByIds(System.Collections.Generic.IList<int> ids = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_ExportByIdsAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -5404,7 +5418,7 @@ namespace SDK
         /// <param name="ids">Produc ids to export</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ResultOfString> Products_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<string>> Products_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/exportByIds?");
@@ -5444,7 +5458,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ResultOfString>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

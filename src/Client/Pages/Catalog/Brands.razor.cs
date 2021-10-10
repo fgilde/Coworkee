@@ -1,21 +1,12 @@
 ﻿using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.SDK.Models;
-using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog

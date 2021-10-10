@@ -13,7 +13,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Chat;
 using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.SDK.Models;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Pages.Communication
@@ -39,7 +38,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
             if (!string.IsNullOrEmpty(CurrentMessage) && !string.IsNullOrEmpty(CId))
             {
                 //Save Message to DB
-                var chatHistory = new ChatHistoryOfIChatUser
+                var chatHistory = new ChatHistory<IChatUser>()
                 {
                     Message = CurrentMessage,
                     ToUserId = CId,

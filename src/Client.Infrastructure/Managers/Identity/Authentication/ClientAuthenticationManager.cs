@@ -29,7 +29,8 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
-            IStringLocalizer<ClientAuthenticationManager> localizer, IBlazorHeroClient api)
+            IStringLocalizer<ClientAuthenticationManager> localizer, 
+            IBlazorHeroClient api)
         {
             _httpClient = httpClient;
             _localStorage = localStorage;

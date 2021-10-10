@@ -6,7 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.JSInterop;
+using MudBlazor.Extensions;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
@@ -57,6 +60,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return await _api.Products_ExportByIdsAsync(ids.ToList());
         }
 
+
         private async Task<bool> CreateOrEditProduct(GetAllPagedProductsResponse productOrNull)
         {
             var parameters = new DialogParameters();
@@ -64,8 +68,11 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             {
                 parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<AddEditProductCommand>());
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+
+            var options = new DialogOptionsEx { MaximizeButton = true, DragMode = MudDialogDragMode.Simple, CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = await _dialogService.ShowEx<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            
+            var x = dialog.Dialog;
             var result = await dialog.Result;
             return !result.Cancelled;
         }

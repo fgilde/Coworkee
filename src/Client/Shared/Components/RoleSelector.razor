@@ -1,48 +1,46 @@
-﻿@using CleanArchitectureBase.Shared.Constants.Localization
-@using CleanArchitectureBase.Shared.Settings
-@using CleanArchitectureBase.Shared.Wrapper
-@using CleanArchitectureBase.Application.Responses.Identity
+﻿@using CleanArchitectureBase.Application.Responses.Identity
 @using CleanArchitectureBase.Client.Infrastructure.Extensions
+@using Nextended.Core.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RoleSelector> localizer
 
 @{
 
-    string nameAllRoles = "< " + localizer["All Roles"] + " >";
     @if (IsVisible)
     {
-        <MudMenu Label="@(actual?.RoleName ?? nameAllRoles)" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Variant="Variant.Filled" Color="Color.Secondary" Direction="Direction.Right" OffsetY="true" Dense="true">
-            @{
-                foreach (var role in userRoles)
+        <MudTooltip Placement="Placement.Start" Text="@DisplayName(false)">
+            <MudMenu MaxHeight="400" Style="min-width: 185px; max-width: 300px; text-overflow: ellipsis;" Label="@DisplayName()" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Color="Color.Inherit" FullWidth="true" Direction="Direction.Right" OffsetY="true" Dense="true">
+                <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Select active Roles"]</b></MudText>
+                <MudMenuItem Class="px-4 py-2" OnClick="() => AddUpdateRole(null)">
+                    @DisplayName(true, true)
+                </MudMenuItem>
+                <MudDivider Vertical="false" DividerType="DividerType.FullWidth" />
+                @foreach (var role in userRoles)
                 {
-                    <MudMenuItem Disabled="role?.Id == actual?.Id" OnClick="() => ChangeRole(role)">
-                        <MudText Typo="Typo.body2">
-                            @if (role?.Id == actual?.Id)
-                            {
-                                <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1"/>
-                            }
-
-                            @if (role != null)
-                            {
-                                @localizer[role.RoleName]
-                            }
-                            else
-                            {
-                                @nameAllRoles
-                            }
-                        </MudText>
+                    <MudMenuItem OnClick ="() => ToggleRole(role)"> @*Direct click work s toggle otherwise in checkbox is multi select*@
+                        <MudCheckBox Label="@localizer[role.RoleName]" CheckedChanged="@(new Action<bool>(e => AddUpdateRole(role, e)))" Checked="@IsSelected(role.Id)"></MudCheckBox>
                     </MudMenuItem>
                 }
-            }
-
-        </MudMenu>
+            </MudMenu>
+        </MudTooltip>
     }
 }
 
 @code
 {
     public bool IsVisible { get; private set; }
-    UserRoleModel actual;
+    List<UserRoleModel> actualRoles;
     List<UserRoleModel> userRoles;
+
+    private string DisplayName(bool ellipse = true, bool forceAll = false)
+    {
+        var res = !forceAll && actualRoles != null && actualRoles.Any() ? string.Join(", ", actualRoles.Select(m => m.RoleName)) : $"< {localizer["All Roles"]} >";
+        return ellipse ? res.ToEllipsis(20): res;
+    }
+
+    private bool IsSelected(string roleId)
+    {
+        return actualRoles != null && actualRoles.Any(m => m.Id == roleId);
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -51,15 +49,29 @@
 
     private async Task UpdateDataAsync()
     {
-        userRoles = new() { null };
         var roleResult = await _api.User_GetMyRolesAsync();
-        userRoles.AddRange(roleResult.Data.UserRoles);
-        IsVisible = roleResult.Succeeded && userRoles.Count > 2; // At least one role
+        userRoles = roleResult.Data.UserRoles;
+        IsVisible = roleResult.Succeeded && userRoles.Count > 1; // At least one role
     }
 
-    private async Task ChangeRole(UserRoleModel role)
+    private void ToggleRole(UserRoleModel role)
     {
-        actual = role;
-        _httpClient.SetActiveRoleId(role?.Id);
+        var add = actualRoles?.Contains(role) ?? false;
+        actualRoles = null;
+        AddUpdateRole(role, add);
+    }
+
+    private void AddUpdateRole(UserRoleModel role, bool add = true)
+    {
+        actualRoles = role == null ? null : actualRoles ?? new List<UserRoleModel>();
+        if (add && role != null)
+            actualRoles?.Add(role);
+        else if (role != null && actualRoles?.Contains(role) == true)
+            actualRoles.Remove(role);
+
+        if (add && role != null && userRoles != null && userRoles.All(m => actualRoles?.Contains(m) == true)) // Every role is selected then all roles should be used
+            actualRoles = null;
+
+        _httpClient.SetActiveRoleId(actualRoles?.Select(m => m.Id)?.ToArray());
     }
 }

@@ -14,16 +14,16 @@ namespace CleanArchitectureBase.Client.Infrastructure.Extensions
             return headers;
         }
 
-        public static HttpRequestHeaders SetActiveRoleId(this HttpRequestHeaders headers, string roleId)
+        public static HttpRequestHeaders SetActiveRoleId(this HttpRequestHeaders headers, params string[] roleIds)
         {
             if (headers.Contains(ApplicationConstants.HeaderNames.RoleIdHeader))
                 headers.Remove(ApplicationConstants.HeaderNames.RoleIdHeader);
-            if (!string.IsNullOrWhiteSpace(roleId))
+            foreach (var roleId in roleIds.EmptyIfNull())
                 headers.Add(ApplicationConstants.HeaderNames.RoleIdHeader, RoleIdHeaderValue(roleId));
             return headers;
         }
 
-        public static void SetActiveRoleId(this HttpClient client, string roleId) => client.DefaultRequestHeaders.SetActiveRoleId(roleId);
+        public static void SetActiveRoleId(this HttpClient client, params string[] roleIds) => client.DefaultRequestHeaders.SetActiveRoleId(roleIds);
         public static void SetActiveRoleId(this HttpRequestMessage request, string roleId) => request.Headers.SetActiveRoleId(roleId);
         public static void SetAuthorization(this HttpClient httpClient, string token) => httpClient.DefaultRequestHeaders.SetAuthorization(token);
         public static void SetAuthorization(this HttpRequestMessage request, string token) => request.Headers.SetAuthorization(token);

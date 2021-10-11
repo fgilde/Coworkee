@@ -52,7 +52,7 @@
                     <LanguageSelector/>
                     <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
                         <div class="px-2">
-                            <ThemeSelector OnThemeSelected="@ThemeChanged"/>
+                            <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle"/>
                             <MudTooltip Text="@localizer["Fork Repository"]">
                                 <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/blazorhero/CleanArchitecture" Target="_blank"/>
                             </MudTooltip>

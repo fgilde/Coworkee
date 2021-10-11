@@ -24,7 +24,8 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// Get All Products
         /// </summary>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Products.View)]
+        // [Authorize(Policy = Permissions.Products.View)]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet]
         [Produces(typeof(PaginatedResult<GetAllPagedProductsResponse>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, CancellationToken cancellationToken = default)
@@ -58,7 +59,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 Ok</returns>
-        [Authorize(Policy = Permissions.Products.View)]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet("{id}")]
         [Produces(typeof(Result<GetAllPagedProductsResponse>))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)

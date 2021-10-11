@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.SDK;
 using Microsoft.AspNetCore.Components;
 
@@ -105,7 +106,7 @@ namespace CleanArchitectureBase.Client.Shared
                     if (!string.IsNullOrEmpty(token))
                     {
                         _snackBar.Add(localizer["Refreshed Token."], Severity.Success);
-                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                        _httpClient.SetAuthorization(token);
                     }
                 }
                 catch (Exception ex)

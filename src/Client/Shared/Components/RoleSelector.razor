@@ -1,0 +1,65 @@
+﻿@using CleanArchitectureBase.Shared.Constants.Localization
+@using CleanArchitectureBase.Shared.Settings
+@using CleanArchitectureBase.Shared.Wrapper
+@using CleanArchitectureBase.Application.Responses.Identity
+@using CleanArchitectureBase.Client.Infrastructure.Extensions
+@inject Microsoft.Extensions.Localization.IStringLocalizer<RoleSelector> localizer
+
+@{
+
+    string nameAllRoles = "< " + localizer["All Roles"] + " >";
+    @if (IsVisible)
+    {
+        <MudMenu Label="@(actual?.RoleName ?? nameAllRoles)" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Variant="Variant.Filled" Color="Color.Secondary" Direction="Direction.Right" OffsetY="true" Dense="true">
+            @{
+                foreach (var role in userRoles)
+                {
+                    <MudMenuItem Disabled="role?.Id == actual?.Id" OnClick="() => ChangeRole(role)">
+                        <MudText Typo="Typo.body2">
+                            @if (role?.Id == actual?.Id)
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1"/>
+                            }
+
+                            @if (role != null)
+                            {
+                                @localizer[role.RoleName]
+                            }
+                            else
+                            {
+                                @nameAllRoles
+                            }
+                        </MudText>
+                    </MudMenuItem>
+                }
+            }
+
+        </MudMenu>
+    }
+}
+
+@code
+{
+    public bool IsVisible { get; private set; }
+    UserRoleModel actual;
+    List<UserRoleModel> userRoles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateDataAsync();
+    }
+
+    private async Task UpdateDataAsync()
+    {
+        userRoles = new() { null };
+        var roleResult = await _api.User_GetMyRolesAsync();
+        userRoles.AddRange(roleResult.Data.UserRoles);
+        IsVisible = roleResult.Succeeded && userRoles.Count > 2; // At least one role
+    }
+
+    private async Task ChangeRole(UserRoleModel role)
+    {
+        actual = role;
+        _httpClient.SetActiveRoleId(role?.Id);
+    }
+}

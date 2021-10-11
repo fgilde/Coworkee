@@ -261,6 +261,12 @@
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.GetMyRolesAsync">
+            <summary>
+            Get Actual User Roles
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.UpdateRolesAsync(CleanArchitectureBase.Application.Requests.Identity.UpdateUserRolesRequest)">
             <summary>
             Update Roles for User

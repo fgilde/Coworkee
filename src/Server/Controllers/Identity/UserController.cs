@@ -65,6 +65,19 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         }
 
         /// <summary>
+        /// Get Actual User Roles
+        /// </summary>
+        /// <returns>Status 200 OK</returns>
+        [Authorize]
+        [HttpGet("roles/my")]
+        [Produces(typeof(Result<UserRolesResponse>))]
+        public async Task<IActionResult> GetMyRolesAsync()
+        {
+            var userRoles = await _userService.GetRolesAsync();
+            return Ok(userRoles);
+        }
+
+        /// <summary>
         /// Update Roles for User
         /// </summary>
         /// <param name="request"></param>

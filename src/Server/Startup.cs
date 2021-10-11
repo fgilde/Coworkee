@@ -73,6 +73,7 @@ namespace CleanArchitectureBase.Server
         {
             app.UseSessionId();
             app.UseCors();
+            app.UseHealthChecks("/health");
             app.UseExceptionHandling(env);
             app.UseHttpsRedirection();
             app.UseMiddleware<ErrorHandlerMiddleware>();

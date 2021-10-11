@@ -2345,6 +2345,11 @@ export interface IUserClient {
      */
     updateRoles(id: string, request: UpdateUserRolesRequest): Observable<Result>;
     /**
+     * Get Actual User Roles
+     * @return Status 200 OK
+     */
+    getMyRoles(): Observable<ResultOfUserRolesResponse>;
+    /**
      * Confirm Email
      * @param userId (optional) 
      * @param code (optional) 
@@ -2662,6 +2667,58 @@ export class UserClient implements IUserClient {
             }));
         }
         return _observableOf<Result>(<any>null);
+    }
+
+    /**
+     * Get Actual User Roles
+     * @return Status 200 OK
+     */
+    getMyRoles(): Observable<ResultOfUserRolesResponse> {
+        let url_ = this.baseUrl + "/identity/User/roles/my";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetMyRoles(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetMyRoles(<any>response_);
+                } catch (e) {
+                    return <Observable<ResultOfUserRolesResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ResultOfUserRolesResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetMyRoles(response: HttpResponseBase): Observable<ResultOfUserRolesResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfUserRolesResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfUserRolesResponse>(<any>null);
     }
 
     /**
@@ -5873,6 +5930,7 @@ export interface IUserRolesResponse {
 }
 
 export class UserRoleModel implements IUserRoleModel {
+    id?: string | undefined;
     roleName?: string | undefined;
     roleDescription?: string | undefined;
     selected?: boolean;
@@ -5888,6 +5946,7 @@ export class UserRoleModel implements IUserRoleModel {
 
     init(_data?: any) {
         if (_data) {
+            this.id = _data["id"];
             this.roleName = _data["roleName"];
             this.roleDescription = _data["roleDescription"];
             this.selected = _data["selected"];
@@ -5903,6 +5962,7 @@ export class UserRoleModel implements IUserRoleModel {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
         data["roleName"] = this.roleName;
         data["roleDescription"] = this.roleDescription;
         data["selected"] = this.selected;
@@ -5911,6 +5971,7 @@ export class UserRoleModel implements IUserRoleModel {
 }
 
 export interface IUserRoleModel {
+    id?: string | undefined;
     roleName?: string | undefined;
     roleDescription?: string | undefined;
     selected?: boolean;

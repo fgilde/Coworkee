@@ -3,9 +3,15 @@
     public static class ApplicationConstants
     {
         public const string ApplicationName = "CleanArchitectureBase";
+        public static string ApplicationClientName = $"{ApplicationName}Client";
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string Version = "v2.2";
-        
+
+        public static class HeaderNames
+        {
+            public const string RoleIdHeader = "x-role-id";
+        }
+
         public static class Environment
         {
             public const string Testing = nameof(Testing);

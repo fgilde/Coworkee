@@ -151,8 +151,10 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result.SuccessAsync();
         }
 
-        public async Task<IResult<UserRolesResponse>> GetRolesAsync(string userId)
+        public async Task<IResult<UserRolesResponse>> GetRolesAsync(string userId = null)
         {
+            bool selectedOnly = userId == null;
+            userId ??= _currentUserService.UserId;
             var viewModel = new List<UserRoleModel>();
             var user = await _userManager.FindByIdAsync(userId);
             var roles = await _roleManager.Roles.ToListAsync();
@@ -161,6 +163,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             {
                 var userRolesViewModel = new UserRoleModel
                 {
+                    Id = role.Id,
                     RoleName = role.Name,
                     RoleDescription = role.Description
                 };
@@ -172,7 +175,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 {
                     userRolesViewModel.Selected = false;
                 }
-                viewModel.Add(userRolesViewModel);
+                if(!selectedOnly || userRolesViewModel.Selected)
+                    viewModel.Add(userRolesViewModel);
             }
             var result = new UserRolesResponse { UserRoles = viewModel };
             return await Result<UserRolesResponse>.SuccessAsync(result);

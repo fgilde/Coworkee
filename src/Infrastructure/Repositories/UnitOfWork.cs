@@ -28,8 +28,7 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
 
         public IRepositoryAsync<TEntity, TId> Repository<TEntity>() where TEntity : AuditableEntity<TId>
         {
-            if (_repositories == null)
-                _repositories = new Hashtable();
+            _repositories ??= new Hashtable();
 
             var type = typeof(TEntity).Name;
 

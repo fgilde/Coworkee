@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Authentication
@@ -63,7 +64,8 @@ namespace CleanArchitectureBase.Client.Infrastructure.Authentication
             {
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", savedToken);
+
+            _httpClient.SetAuthorization(savedToken);
             var state = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(GetClaimsFromJwt(savedToken), "jwt")));
             AuthenticationStateUser = state.User;
             return state;

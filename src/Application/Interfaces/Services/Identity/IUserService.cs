@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Application.Interfaces.Services.Identity
 
         Task<IResult> ToggleUserStatusAsync(ToggleUserStatusRequest request);
 
-        Task<IResult<UserRolesResponse>> GetRolesAsync(string id);
+        Task<IResult<UserRolesResponse>> GetRolesAsync(string id = null);
 
         Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request);
 

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Authentication
@@ -20,11 +21,11 @@ namespace CleanArchitectureBase.Client.Infrastructure.Authentication
         {
             if (request.Headers.Authorization?.Scheme != "Bearer")
             {
-                var savedToken = await this.localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
+                var savedToken = await localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
 
                 if (!string.IsNullOrWhiteSpace(savedToken))
                 {
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", savedToken);
+                    request.SetAuthorization(savedToken);
                 }
             }
 

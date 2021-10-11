@@ -52,15 +52,15 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             {
                 var token = result.Data.Token;
                 var refreshToken = result.Data.RefreshToken;
-                var userImageURL = result.Data.UserImageURL;
+                var userImageUrl = result.Data.UserImageURL;
                 await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
                 await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, refreshToken);
-                if (!string.IsNullOrEmpty(userImageURL))
+                if (!string.IsNullOrEmpty(userImageUrl))
                 {
-                    await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageURL);
+                    await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageUrl);
                 }
                 ((BlazorHeroStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _httpClient.SetAuthorization(token);
                 return await Result.SuccessAsync();
             }
 
@@ -73,7 +73,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             await _localStorage.RemoveItemAsync(StorageConstants.Local.RefreshToken);
             await _localStorage.RemoveItemAsync(StorageConstants.Local.UserImageURL);
             ((BlazorHeroStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
-            _httpClient.DefaultRequestHeaders.Authorization = null;
+            _httpClient.SetAuthorization(null);
             return await Result.SuccessAsync();
         }
 
@@ -93,7 +93,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             refreshToken = result.Data.RefreshToken;
             await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
             await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, refreshToken);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _httpClient.SetAuthorization(token);
             return token;
         }
 

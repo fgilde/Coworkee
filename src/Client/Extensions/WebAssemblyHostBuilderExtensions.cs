@@ -18,16 +18,14 @@ using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.SDK;
+using CleanArchitectureBase.Shared.Constants.Application;
 using Nextended.Core.Extensions;
-using SDK;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace CleanArchitectureBase.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
-        private const string ClientName = "ApplicationMainIcon.API";
-
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
             builder.RootComponents.Add<App>("#app");
@@ -61,8 +59,8 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddTransient<AuthenticationHeaderHandler>()
                 .AddScoped(sp => sp
                     .GetRequiredService<IHttpClientFactory>()
-                    .CreateClient(ClientName).EnableIntercept(sp))
-                .AddHttpClient(ClientName, client =>
+                    .CreateClient(ApplicationConstants.ApplicationClientName).EnableIntercept(sp))
+                .AddHttpClient(ApplicationConstants.ApplicationClientName, client =>
                 {
                     client.DefaultRequestHeaders.AcceptLanguage.Clear();
                     client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);

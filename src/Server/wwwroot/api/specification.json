@@ -1531,6 +1531,32 @@
         ]
       }
     },
+    "/identity/User/roles/my": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get Actual User Roles",
+        "operationId": "User_GetMyRoles",
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfUserRolesResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/identity/User/confirm-email": {
       "get": {
         "tags": [
@@ -3318,6 +3344,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
           "roleName": {
             "type": "string",
             "nullable": true

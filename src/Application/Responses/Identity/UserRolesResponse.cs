@@ -9,6 +9,7 @@ namespace CleanArchitectureBase.Application.Responses.Identity
 
     public class UserRoleModel
     {
+        public string Id { get; set; }
         public string RoleName { get; set; }
         public string RoleDescription { get; set; }
         public bool Selected { get; set; }

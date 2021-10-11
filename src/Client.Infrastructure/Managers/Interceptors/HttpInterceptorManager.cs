@@ -4,6 +4,7 @@ using MudBlazor;
 using System;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using Microsoft.Extensions.Localization;
 using Toolbelt.Blazor;
 
@@ -44,7 +45,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
                     if (!string.IsNullOrEmpty(token))
                     {
                         _snackBar.Add(_localizer["Refreshed Token."], Severity.Success);
-                        e.Request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                        e.Request.SetAuthorization(token);
                     }
                 }
                 catch (Exception ex)

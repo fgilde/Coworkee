@@ -1,0 +1,41 @@
+﻿using System.Net.Http;
+using System.Net.Http.Headers;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Nextended.Core.Extensions;
+
+namespace CleanArchitectureBase.Client.Infrastructure.Extensions
+{
+    public static class HttpClientExtensions
+    {
+
+        public static HttpRequestHeaders SetAuthorization(this HttpRequestHeaders headers, string token)
+        {
+            headers.Authorization = GetAuth(token);
+            return headers;
+        }
+
+        public static HttpRequestHeaders SetActiveRoleId(this HttpRequestHeaders headers, string roleId)
+        {
+            if (headers.Contains(ApplicationConstants.HeaderNames.RoleIdHeader))
+                headers.Remove(ApplicationConstants.HeaderNames.RoleIdHeader);
+            if (!string.IsNullOrWhiteSpace(roleId))
+                headers.Add(ApplicationConstants.HeaderNames.RoleIdHeader, RoleIdHeaderValue(roleId));
+            return headers;
+        }
+
+        public static void SetActiveRoleId(this HttpClient client, string roleId) => client.DefaultRequestHeaders.SetActiveRoleId(roleId);
+        public static void SetActiveRoleId(this HttpRequestMessage request, string roleId) => request.Headers.SetActiveRoleId(roleId);
+        public static void SetAuthorization(this HttpClient httpClient, string token) => httpClient.DefaultRequestHeaders.SetAuthorization(token);
+        public static void SetAuthorization(this HttpRequestMessage request, string token) => request.Headers.SetAuthorization(token);
+
+        private static string RoleIdHeaderValue(string roleId)
+        {
+            return roleId;
+        }
+
+        private static AuthenticationHeaderValue GetAuth(string token)
+        {
+            return token.IsNullOrWhiteSpace() ? null : new AuthenticationHeaderValue("Bearer", token);
+        }
+    }
+}

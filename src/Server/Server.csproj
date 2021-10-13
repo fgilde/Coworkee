@@ -73,9 +73,4 @@
     <Exec Command="makeGenericAgain -f $(SolutionDir)src\SDK\Net\v1\ClientGenerated.cs" />
   </Target>
 
-  <!--<Target Name="MakeItGenericAgain" AfterTargets="NSwag">
-    <Exec Command='dotnet tool install -g orang.dotnet.cli' />
-    <Exec Command='orang replace "$(SolutionDir)\SDK\Net\v1\ClientGenerated.cs" -c "([A-Z\d]+[a-zA-Z\d]+)Of([A-Z\d]+[a-zA-Z\d]+)Of([A-Z\d]+[a-zA-Z\d]+)" -r "$1&lt;$2&lt;$3&gt;&gt;" -v m' />
-  </Target>-->
-
 </Project>

@@ -12,10 +12,9 @@ namespace CleanArchitectureBase.Application
             EventName = eventName;
             Arguments = arguments;
         }
+
         public TargetClient Target { get; set; }
-
         public string EventName { get; set; }
-
         public object Arguments { get; set; }
         public ClientEvent Clone()
         {

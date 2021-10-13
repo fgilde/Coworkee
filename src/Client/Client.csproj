@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="compilerconfig.json" />
     <Content Remove="Shared\Components\BlazorHeroLogo.razor" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="5.0.10" />
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.7" />
@@ -37,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="compilerconfig.json" />
     <None Include="Shared\Components\BlazorHeroLogo.razor" />
   </ItemGroup>
 

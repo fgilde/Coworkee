@@ -1,0 +1,121 @@
+﻿body * {
+    transition-property: color, background-color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+}
+
+#app {
+    @keyframes slide {
+        0% {
+            transform: translateX(-25%);
+        }
+
+        100% {
+            transform: translateX(25%);
+        }
+    }
+
+    .mud-wasm {
+        animation: slide 3s ease-in-out infinite alternate;
+        background-image: linear-gradient(-60deg,#01052D 50%, #01020C 50%);
+        bottom: 0;
+        left: -50%;
+        opacity: .5;
+        position: fixed;
+        right: -50%;
+        top: 0;
+        z-index: -1
+    }
+
+    .mud-wasm-cont {
+        left: 50%;
+        padding: 10vmin;
+        position: fixed;
+        text-align: center;
+        top: 50%;
+        transform: translate(-50%,-50%)
+    }
+
+    .sub-text {
+        color: white;
+        margin-top: 40px;
+        font-family: Montserrat, Helvetica, Arial, sans-serif;
+    }
+
+    .app-preload {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        position: fixed;
+    }
+}
+
+.loader-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 99999;
+}
+
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 0;
+    color: #00c9d0;
+    display: inline-block;
+    margin: -25px 0 0 -25px;
+    text-indent: -9999em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.loader div {
+    background-color: #00c9d0;
+    display: inline-block;
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    opacity: 0.5;
+    border-radius: 50%;
+    -webkit-animation: ballPulseDouble 2s ease-in-out infinite;
+    animation: ballPulseDouble 2s ease-in-out infinite;
+}
+
+.loader div:last-child {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
+}
+
+@-webkit-keyframes ballPulseDouble {
+    0%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes ballPulseDouble {
+    0%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}

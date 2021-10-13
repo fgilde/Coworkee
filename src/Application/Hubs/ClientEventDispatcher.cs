@@ -4,7 +4,6 @@ using CleanArchitectureBase.Application.Interfaces;
 using CleanArchitectureBase.Shared.Constants.Application;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.VisualBasic;
 
 namespace CleanArchitectureBase.Application.Hubs
 {
@@ -24,7 +23,7 @@ namespace CleanArchitectureBase.Application.Hubs
             var targetProxy = clientEvent.Target == TargetClient.Current
                 ? _hubContext.Clients.Group(_sessionProvider.SessionId)
                 : _hubContext.Clients.All;
-            return targetProxy.SendAsync(ApplicationConstants.EventNames.ClientEventName, clientEvent, cancellationToken: cancellationToken);
+            return targetProxy.SendAsync(ApplicationConstants.EventNames.ClientEventName, clientEvent, cancellationToken);
         }
     }
 }

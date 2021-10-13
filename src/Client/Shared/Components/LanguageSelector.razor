@@ -6,7 +6,7 @@
     string actual = preference?.LanguageCode;
     string displayName = localizer[LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual)?.DisplayName ?? "Select Language"];
 
-    <MudMenu Label="@displayName" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
+    <MudMenu MaxHeight="350" Label="@displayName" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
         @{
             foreach (var language in LocalizationConstants.SupportedLanguages)
             {
@@ -17,7 +17,7 @@
                             <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1" />
                         }
                         @localizer[language.DisplayName]
-                        <span style="font-size: xx-small; font-weight: bold; margin-left: 35px; float: right;">@language.Code</span>
+                        <span class="culture-code">@language.Code</span>
                     </MudText>
                 </MudMenuItem>
             }

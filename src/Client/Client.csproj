@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
-    <Content Remove="Shared\Components\BlazorHeroLogo.razor" />
+    <Content Remove="Shared\Components\ApplicationLogo.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,16 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Shared\Components\BlazorHeroLogo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Shared\Components\BlazorHeroLogo.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="compilerconfig.json" />
-    <None Include="Shared\Components\BlazorHeroLogo.razor" />
+    <None Include="Shared\Components\ApplicationLogo.razor" />
   </ItemGroup>
 
   <ItemGroup>

@@ -76,7 +76,6 @@ namespace CleanArchitectureBase.Server
             app.UseHealthChecks("/health");
             app.UseExceptionHandling(env);
             app.UseHttpsRedirection();
-            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions

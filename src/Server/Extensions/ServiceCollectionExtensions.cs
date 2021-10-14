@@ -142,13 +142,13 @@ namespace CleanArchitectureBase.Server.Extensions
                     // Patch document for Azure API Management
                     options.AllowReferencesWithProperties = true;
                     options.PostProcess = document => configSection.ConfigureDocument(document, version);
-                    options.AddSecurity("Bearer", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
+                    options.AddSecurity("JWT", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
                     {
                         Type = OpenApiSecuritySchemeType.ApiKey,
                         Name = "Authorization",
                         In = OpenApiSecurityApiKeyLocation.Header,
-                        Scheme = "Bearer",
-                        BearerFormat = "JWT",
+                        //Scheme = "Bearer",
+                        //BearerFormat = "JWT",
                         Description = localizer["Input your Bearer token in this format - Bearer {your token here} to access this API"],
                     }).OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
                 });

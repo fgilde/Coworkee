@@ -4,6 +4,7 @@ using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
@@ -72,6 +73,13 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> UpdateProfilePictureAsync(UpdateProfilePictureRequest request)
         {
             return Ok(await _accountService.UpdateProfilePictureAsync(request, _currentUser.UserId));
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountService.LogoutAsync();
+            return Ok();
         }
     }
 }

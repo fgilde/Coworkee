@@ -16,7 +16,6 @@ namespace CleanArchitectureBase.Client.Shared
 {
     public partial class MainLayout : IDisposable
     {
-        
         private string CurrentUserId { get; set; }
         private string ImageDataUrl { get; set; }
         private string FirstName { get; set; }
@@ -67,6 +66,15 @@ namespace CleanArchitectureBase.Client.Shared
             DrawerToggle(); // 2 calls to Ensure refresh and old state
         }
 
+
+        protected override async Task OnParametersSetAsync()
+        {
+            base.OnParametersSet();
+            var currentUser = await _clientAuthenticationManager.CurrentUser();
+            if (currentUser != null && currentUser.Identity?.IsAuthenticated == true)
+                _navigationManager.NavigateToReturnUrlIf();
+        }
+
         protected override async Task OnInitializedAsync()
         {
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
@@ -114,7 +122,7 @@ namespace CleanArchitectureBase.Client.Shared
                     Console.WriteLine(ex.Message);
                     _snackBar.Add(localizer["You are Logged Out."], Severity.Error);
                     await _clientAuthenticationManager.Logout();
-                    _navigationManager.NavigateTo("/");
+                    _navigationManager.NavigateToHomeWithReturnTo();
                 }
             });
             hubConnection.On<string, string>(ApplicationConstants.SignalR.LogoutUsersByRole, async (userId, roleId) =>
@@ -133,7 +141,7 @@ namespace CleanArchitectureBase.Client.Shared
                                 _snackBar.Add(localizer["You are logged out because the Permissions of one of your Roles have been updated."], Severity.Error);
                                 await hubConnection.SendAsync(ApplicationConstants.SignalR.OnDisconnect, CurrentUserId);
                                 await _clientAuthenticationManager.Logout();
-                                _navigationManager.NavigateTo("/login");
+                                _navigationManager.NavigateToHomeWithReturnTo();
                             }
                         }
                     }

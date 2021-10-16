@@ -9,6 +9,7 @@ using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetA
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Domain.Contracts;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute

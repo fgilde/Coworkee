@@ -132,12 +132,6 @@
             </summary>
             <returns>Status 200 OK </returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.DashboardController.GetJobDashBoardUrl">
-            <summary>
-            Get the new ultimate Dashboard Data
-            </summary>
-            <returns>Status 200 OK </returns>
-        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.UpdateProfile(CleanArchitectureBase.Application.Requests.Identity.UpdateProfileRequest)">
             <summary>
             Update Profile

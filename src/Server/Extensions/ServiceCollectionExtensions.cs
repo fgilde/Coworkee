@@ -43,6 +43,7 @@ using CleanArchitectureBase.Application.Serialization.JsonConverters;
 using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
+using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using NSwag;
@@ -268,6 +269,12 @@ namespace CleanArchitectureBase.Server.Extensions
 
                     bearer.Events = new JwtBearerEvents
                     {
+                        OnTokenValidated = async c =>
+                        {
+                            var userId = c.Principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                            if (!string.IsNullOrEmpty(userId))
+                                c.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, userId);
+                        },
                         OnAuthenticationFailed = c =>
                         {
                             if (c.Exception is SecurityTokenExpiredException)
@@ -275,6 +282,7 @@ namespace CleanArchitectureBase.Server.Extensions
                                 c.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                                 c.Response.ContentType = "application/json";
                                 var result = JsonConvert.SerializeObject(Result.Fail(localizer["The Token is expired."]));
+                                c.HttpContext?.RequestServices?.GetService<IAccountService>()?.LogoutAsync();
                                 return c.Response.WriteAsync(result);
                             }
                             else

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
+using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Server.Services
@@ -11,7 +11,7 @@ namespace CleanArchitectureBase.Server.Services
     {
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
-            UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserId = httpContextAccessor.HttpContext.GetUserId();
             Claims = httpContextAccessor.HttpContext?.User?.Claims.AsEnumerable().Select(item => new KeyValuePair<string, string>(item.Type, item.Value)).ToList();
             RoleIds = httpContextAccessor.HttpContext?.Request.Headers[ApplicationConstants.HeaderNames.RoleIdHeader].SelectMany(s => s.Split(",")).ToArray();
         }

@@ -1,14 +1,12 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 @using System.Security.Claims
-@using CleanArchitectureBase.Client.Infrastructure.Extensions
-@using CleanArchitectureBase.Client.Infrastructure.Routes
 
 <UserCard />
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
     @if (_canViewHangfire)
     {
-        <MudNavLink OnClick="OpenJobDashboard" Target="_blank" Icon="@Icons.Material.Outlined.Work">
+        <MudNavLink Href="/jobs" Target="_blank" Icon="@Icons.Material.Outlined.Work">
             @_localizer["Hangfire"]
         </MudNavLink>
     }
@@ -24,6 +22,7 @@
         <MudNavLink Href="/dashboard" Icon="@Icons.Material.Outlined.Dashboard">
             @_localizer["Dashboard"]
         </MudNavLink>
+
     }
     <MudNavLink Href="/account" Icon="@Icons.Material.Outlined.SupervisorAccount">
         @_localizer["Account"]
@@ -118,11 +117,5 @@
         _canViewProducts = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Products.View)).Succeeded;
         _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded;
     }
-
-    private async void OpenJobDashboard()
-    {
-        var uri =await _api.Dashboard_GetJobDashBoardUrlAsync();
-        _navigationManager.NavigateTo(uri, true);
-    }
-
+    
 }

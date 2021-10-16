@@ -69,6 +69,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
 
         public async Task<IResult> Logout()
         {
+            await _api.Account_LogoutAsync();
             await _localStorage.RemoveItemAsync(StorageConstants.Local.AuthToken);
             await _localStorage.RemoveItemAsync(StorageConstants.Local.RefreshToken);
             await _localStorage.RemoveItemAsync(StorageConstants.Local.UserImageURL);

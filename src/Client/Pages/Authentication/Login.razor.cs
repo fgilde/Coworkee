@@ -1,14 +1,22 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Client.Extensions;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Authentication
 {
     public partial class Login
     {
+        //[Parameter]
+        //public string ReturnUrl { get; set; }
+
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private TokenRequest _tokenModel = new();
@@ -18,7 +26,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
             var state = await _stateProvider.GetAuthenticationStateAsync();
             if (state != new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())))
             {
-                _navigationManager.NavigateTo("/");
+                _navigationManager.NavigateToHomeWithReturnTo();
             }
         }
 
@@ -28,7 +36,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
             if (result.Succeeded)
             {
                 _snackBar.Add(string.Format(_localizer["Welcome {0}"], _tokenModel.Email), Severity.Success);
-                _navigationManager.NavigateTo("/", true);
+                _navigationManager.NavigateToReturnUrlIf("/");
             }
             else
             {
@@ -45,7 +53,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         void TogglePasswordVisibility()
         {
-            if(_passwordVisibility)
+            if (_passwordVisibility)
             {
                 _passwordVisibility = false;
                 _passwordInputIcon = Icons.Material.Filled.VisibilityOff;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
@@ -19,6 +20,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AccountService> _localizer;
         private readonly IUserClaimsPrincipalFactory<BlazorHeroUser> _userClaimsPrincipalFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthorizationService _authorizationService;
 
 
@@ -28,7 +30,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             IUploadService uploadService,
             IStringLocalizer<AccountService> localizer, 
             IUserClaimsPrincipalFactory<BlazorHeroUser> userClaimsPrincipalFactory,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,6 +38,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             _localizer = localizer;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _authorizationService = authorizationService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId)
@@ -86,10 +89,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 await _signInManager.RefreshSignInAsync(user);
                 return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
             }
-            else
-            {
-                return await Result.FailAsync(string.Format(_localizer["Email {0} is already used."], request.Email));
-            }
+
+            return await Result.FailAsync(string.Format(_localizer["Email {0} is already used."], request.Email));
         }
 
         public async Task<IResult<string>> GetProfilePictureAsync(string userId)
@@ -160,6 +161,12 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             }
 
             return Result.Success();
+        }
+
+        public async Task LogoutAsync()
+        {
+            _httpContextAccessor?.HttpContext?.Session.Clear();
+            await _signInManager.SignOutAsync();
         }
 
         public async Task<IResult> DeleteUserAsync(BlazorHeroUser user)

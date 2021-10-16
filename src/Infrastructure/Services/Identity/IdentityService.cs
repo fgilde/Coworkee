@@ -15,6 +15,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
@@ -27,18 +29,20 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly RoleManager<BlazorHeroRole> _roleManager;
         private readonly AppConfiguration _appConfig;
         private readonly SignInManager<BlazorHeroUser> _signInManager;
+        private readonly IHttpContextAccessor _contextAccessor;
         private readonly IStringLocalizer<IdentityService> _localizer;
 
         public IdentityService(
             UserManager<BlazorHeroUser> userManager, RoleManager<BlazorHeroRole> roleManager,
             IOptions<AppConfiguration> appConfig, SignInManager<BlazorHeroUser> signInManager,
-            IStringLocalizer<IdentityService> localizer)
+            IStringLocalizer<IdentityService> localizer, IHttpContextAccessor contextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _appConfig = appConfig.Value;
             _signInManager = signInManager;
             _localizer = localizer;
+            _contextAccessor = contextAccessor;
         }
 
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
@@ -68,6 +72,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
             var token = await GenerateJwtAsync(user);
             var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, UserImageURL = user.ProfilePictureDataUrl };
+            _contextAccessor.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, user.Id);
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 

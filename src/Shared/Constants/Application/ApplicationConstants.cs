@@ -7,6 +7,12 @@
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string Version = "v2.2";
 
+        public static class ParameterNames
+        {
+            public const string ReturnUrl = nameof(ReturnUrl);
+        }
+
+
         public static class HeaderNames
         {
             public const string RoleIdHeader = "x-role-id";
@@ -19,9 +25,13 @@
             public const string Production = nameof(Production);
         }
 
+        public static class Session
+        {
+            public const string SessionUserIdKey = nameof(Session) + "_" + nameof(SessionUserIdKey);
+        }
+
         public static class Hangfire
         {
-            public const string SessionUserIdKey = nameof(Hangfire)+"_"+nameof(SessionUserIdKey);
             public const string DashboardRoute = "/jobs";
         }
 

@@ -142,7 +142,11 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
         {
             public const string View = "Permissions.Hangfire.View";
         }
-
+        public static class Swagger
+        {
+            public const string View = "Permissions.Swagger.View";
+        }
+        
         public static class AuditTrails
         {
             public const string View = "Permissions.AuditTrails.View";

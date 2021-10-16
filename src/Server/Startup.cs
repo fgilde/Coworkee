@@ -1,3 +1,4 @@
+using System;
 using CleanArchitectureBase.Application.Extensions;
 using CleanArchitectureBase.Infrastructure.Extensions;
 using CleanArchitectureBase.Server.Extensions;
@@ -10,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -32,6 +37,7 @@ namespace CleanArchitectureBase.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient(p => ApplicationConfiguration.Create(_configuration));
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors();
             services.AddSignalR();
@@ -94,8 +100,10 @@ namespace CleanArchitectureBase.Server
                 Authorization = new[] { authorizationFilter }
             });
             app.UseEndpoints();
+            app.UseSwaggerAuthorized();
             app.UseSwagger();
             app.Initialize(_configuration);
         }
     }
+    
 }

@@ -42,32 +42,6 @@
         ]
       }
     },
-    "/Dashboard/jobdashboardurl": {
-      "get": {
-        "tags": [
-          "Dashboard"
-        ],
-        "summary": "Get the new ultimate Dashboard Data",
-        "operationId": "Dashboard_GetJobDashBoardUrl",
-        "responses": {
-          "200": {
-            "description": "Status 200 OK ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
     "/resources.js": {
       "get": {
         "tags": [
@@ -959,6 +933,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/identity/Account/Logout": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Logout",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }

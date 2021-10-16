@@ -34,7 +34,7 @@
     {
         await HubConnection.SendAsync(ApplicationConstants.SignalR.OnDisconnect, CurrentUserId);
         await _clientAuthenticationManager.Logout();
-        _navigationManager.NavigateTo("/login");
+        _navigationManager.NavigateToHomeWithReturnTo();
         MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();

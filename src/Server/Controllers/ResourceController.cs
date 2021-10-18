@@ -17,13 +17,13 @@ namespace CleanArchitectureBase.Server.Controllers
             this.memoryCache = memoryCache;
         }
 
-        [HttpGet("~/resources.js")]
-        public async Task<IActionResult> GetResources(string cacheBuster = "")
+        [HttpGet("~/{objectName}/resources.js")]
+        public async Task<IActionResult> GetResources(string objectName, string cacheBuster = "")
         {
             string jsonResources = await memoryCache.GetOrCreateAsync(
-                CultureInfo.CurrentUICulture.TwoLetterISOLanguageName + "_resources.js" + cacheBuster,
+                CultureInfo.CurrentUICulture.TwoLetterISOLanguageName + objectName +"_resources.js" + cacheBuster,
                 cacheEntry =>
-                    new JsStringBuilder(false, ApplicationConstants.ApplicationName)
+                    new JsStringBuilder(false, objectName)
                         .Append(typeof(ApplicationConstants))
                         .Append(typeof(CustomIcons))
                         .ToJsonAsync());

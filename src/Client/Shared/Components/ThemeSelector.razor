@@ -1,4 +1,5 @@
 ﻿@using CleanArchitectureBase.Client.Infrastructure.Managers.Theme
+@using CleanArchitectureBase.Client.Infrastructure.Theming
 @using Nextended.Core.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<ThemeSelector> localizer
 
@@ -46,7 +47,7 @@
     bool _charmOpen;
 
     [Parameter]
-    public EventCallback<MudTheme> OnThemeSelected { get; set; }
+    public EventCallback<ClientTheme> OnThemeSelected { get; set; }
 
     [Parameter]
     public SelectionMode Mode { get; set; }
@@ -57,8 +58,8 @@
     [Inject]
     private IThemeManager themeManager { get; set; }
 
-    private KeyValuePair<string, MudTheme> _current;
-    private Dictionary<string, MudTheme> _themes = new();
+    private KeyValuePair<string, ClientTheme> _current;
+    private Dictionary<string, ClientTheme> _themes = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,10 +70,10 @@
     {
         var preference = await _clientPreferenceManager.GetPreference() as ClientPreference;
         var name = preference?.ThemeName ?? _themes.First().Key;
-        _current = new KeyValuePair<string, MudTheme>(name, await themeManager.GetByName(name));
+        _current = new KeyValuePair<string, ClientTheme>(name, await themeManager.GetByNameAsync(name));
     }
 
-    private async Task Select(string themeName, MudTheme theme)
+    private async Task Select(string themeName, ClientTheme theme)
     {
         await OnThemeSelected.InvokeAsync(theme);
         _charmOpen = false;

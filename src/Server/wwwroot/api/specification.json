@@ -42,13 +42,23 @@
         ]
       }
     },
-    "/resources.js": {
+    "/{objectName}/resources.js": {
       "get": {
         "tags": [
           "Resource"
         ],
         "operationId": "Resource_GetResources",
         "parameters": [
+          {
+            "name": "objectName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
           {
             "name": "cacheBuster",
             "in": "query",
@@ -57,7 +67,7 @@
               "default": "",
               "nullable": true
             },
-            "x-position": 1
+            "x-position": 2
           }
         ],
         "responses": {

@@ -15,7 +15,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
     {
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private char _firstLetterOfName;
+        
         private readonly UpdateProfileRequest _profileModel = new();
 
         public string UserId { get; set; }
@@ -56,10 +56,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (data.Succeeded)
             {
                 ImageDataUrl = data.Data;
-            }
-            if (_profileModel.FirstName.Length > 0)
-            {
-                _firstLetterOfName = _profileModel.FirstName[0];
             }
         }
 

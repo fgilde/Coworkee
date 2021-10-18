@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Responses.Identity;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
@@ -11,18 +12,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         [Parameter] public string Title { get; set; }
         [Parameter] public string Description { get; set; }
 
-        private bool _active;
-        private char _firstLetterOfName;
-        private string _firstName;
-        private string _lastName;
-        private string _phoneNumber;
-        private string _email;
+        private UserResponse user;
 
         private bool _loaded;
 
         private async Task ToggleUserStatus()
         {
-            var request = new ToggleUserStatusRequest { ActivateUser = _active, UserId = Id };
+            var request = new ToggleUserStatusRequest { ActivateUser = user.IsActive, UserId = Id };
             var result = await _api.User_ToggleUserStatusAsync(request);
             if (result.Succeeded)
             {
@@ -46,26 +42,18 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             var result = await _api.User_GetByIdAsync(userId);
             if (result.Succeeded)
             {
-                var user = result.Data;
+                user = result.Data;
                 if (user != null)
                 {
-                    _firstName = user.FirstName;
-                    _lastName = user.LastName;
-                    _email = user.Email;
-                    _phoneNumber = user.PhoneNumber;
-                    _active = user.IsActive;
+                    Title = $"{user.FirstName} {user.LastName}'s {_localizer["Profile"]}";
+                    Description = user.Email;
                     var data = await _api.Account_GetProfilePictureAsync(userId);
                     if (data.Succeeded)
                     {
                         ImageDataUrl = data.Data;
                     }
                 }
-                Title = $"{_firstName} {_lastName}'s {_localizer["Profile"]}";
-                Description = _email;
-                if (_firstName.Length > 0)
-                {
-                    _firstLetterOfName = _firstName[0];
-                }
+
             }
 
             _loaded = true;

@@ -55,11 +55,11 @@ namespace SDK
         System.Threading.Tasks.Task<Result<DashboardDataResponse>> Dashboard_GetDataAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Resource_GetResources(string cacheBuster = null);
+        FileResponse Resource_GetResources(string objectName, string cacheBuster = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Resource_GetResourcesAsync(string cacheBuster = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Resource_GetResourcesAsync(string objectName, string cacheBuster = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
@@ -805,17 +805,18 @@ namespace SDK
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public FileResponse Resource_GetResources(string cacheBuster = null)
+        public FileResponse Resource_GetResources(string objectName, string cacheBuster = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Resource_GetResourcesAsync(cacheBuster, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Resource_GetResourcesAsync(objectName, cacheBuster, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> Resource_GetResourcesAsync(string cacheBuster = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> Resource_GetResourcesAsync(string objectName, string cacheBuster = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/resources.js?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/{objectName}/resources.js?");
+            urlBuilder_.Replace("{objectName}", System.Uri.EscapeDataString(ConvertToString(objectName, System.Globalization.CultureInfo.InvariantCulture)));
             if (cacheBuster != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("cacheBuster") + "=").Append(System.Uri.EscapeDataString(ConvertToString(cacheBuster, System.Globalization.CultureInfo.InvariantCulture))).Append("&");

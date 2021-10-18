@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Client.Extensions;
+﻿using System.Security.Claims;
+using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
@@ -7,37 +8,27 @@ namespace CleanArchitectureBase.Client.Shared.Components
     public partial class UserCard
     {
         [Parameter] public string Class { get; set; }
+        [Parameter] public bool ShowEmail { get; set; } = true;
+
+        [Parameter]
+        public ClaimsPrincipal User { get; set; }
+
         private string FirstName { get; set; }
         private string SecondName { get; set; }
         private string Email { get; set; }
-        private char FirstLetterOfName { get; set; }
 
-        [Parameter]
-        public string ImageDataUrl { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            await LoadDataAsync();
+            User ??= (await _stateProvider.GetAuthenticationStateAsync()).User;
+            LoadData();
         }
 
-        private async Task LoadDataAsync()
+        private void LoadData()
         {
-            var state = await _stateProvider.GetAuthenticationStateAsync();
-            var user = state.User;
-
-            this.Email = user.GetEmail().Replace(".com", string.Empty);
-            this.FirstName = user.GetFirstName();
-            this.SecondName = user.GetLastName();
-            if (this.FirstName.Length > 0)
-            {
-                FirstLetterOfName = FirstName[0];
-            }
-            var UserId = user.GetUserId();
-            var imageResponse = await _api.Account_GetProfilePictureAsync(UserId);
-            if (imageResponse.Succeeded)
-            {
-                ImageDataUrl = imageResponse.Data;
-            }
+            Email = User.GetEmail();
+            FirstName = User.GetFirstName();
+            SecondName = User.GetLastName();
         }
     }
 }

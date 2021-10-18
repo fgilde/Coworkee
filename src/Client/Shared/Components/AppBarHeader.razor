@@ -1,0 +1,31 @@
+﻿@using CleanArchitectureBase.Shared.Constants
+
+@if (MenuTogglePosition == MenuTogglePosition.Start)
+{
+    <MudToolBar DisableGutters="true">
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@(e => OnMenuIconClick.InvokeAsync(e))" Class="ml-3" />
+    </MudToolBar>
+}
+
+
+@if (IsLogoVisible)
+{
+    <p style="cursor: pointer" @onclick="MainClick">
+        <MudIcon Icon="@CustomIcons.ApplicationMainIcon" Size="Size.Large" ViewBox="0 0 500 500" />
+    </p>
+}
+
+@if (!string.IsNullOrEmpty(Title) && TitleBehaviour != TitleBehaviour.Hidden)
+{
+    <p style="cursor: pointer" @onclick="MainClick">
+        <MudText Typo="Typo.h6" Class="ml-4">@Title</MudText>
+    </p>
+}
+
+
+@if (MenuTogglePosition == MenuTogglePosition.End)
+{
+    <MudToolBar DisableGutters="true">
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@(e => OnMenuIconClick.InvokeAsync(e))" Class="ml-3" />
+    </MudToolBar>
+}

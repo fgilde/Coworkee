@@ -1,28 +1,20 @@
 ﻿using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Settings;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using System;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
-using CleanArchitectureBase.SDK;
-using Microsoft.AspNetCore.Components;
+using CleanArchitectureBase.Client.Infrastructure.Theming;
 
 namespace CleanArchitectureBase.Client.Shared
 {
     public partial class MainLayout : IDisposable
     {
         private string CurrentUserId { get; set; }
-        private string ImageDataUrl { get; set; }
-        private string FirstName { get; set; }
-        private string SecondName { get; set; }
-        private string Email { get; set; }
-        private char FirstLetterOfName { get; set; }
-
+        
         private async Task LoadDataAsync()
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
@@ -31,19 +23,7 @@ namespace CleanArchitectureBase.Client.Shared
             if (user.Identity?.IsAuthenticated == true)
             {
                 CurrentUserId = user.GetUserId();                
-                FirstName = user.GetFirstName();
-                if (FirstName.Length > 0)
-                {
-                    FirstLetterOfName = FirstName[0];
-                }
-                SecondName = user.GetLastName();
-                Email = user.GetEmail();
-                var imageResponse = await _api.Account_GetProfilePictureAsync(CurrentUserId);
-                if (imageResponse.Succeeded)
-                {
-                    ImageDataUrl = imageResponse.Data;
-                }
-
+                
                 var currentUserResult = await _api.User_GetByIdAsync(CurrentUserId);
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
@@ -55,7 +35,7 @@ namespace CleanArchitectureBase.Client.Shared
             }
         }
 
-        private MudTheme _currentTheme;
+        private ClientTheme _currentTheme = ClientTheme.DefaultTheme;
         private bool _drawerOpen = true;
         private bool _rightToLeft = false;
         private async Task RightToLeftToggle()
@@ -170,9 +150,12 @@ namespace CleanArchitectureBase.Client.Shared
             _drawerOpen = !_drawerOpen;
         }
 
-        private void ThemeChanged(MudTheme theme)
+        private void ThemeChanged(ClientTheme theme)
         {
+            var updateDrawer = theme.LayoutProperties.DrawerVariant == DrawerVariant.Temporary || _currentTheme.LayoutProperties.DrawerVariant == DrawerVariant.Temporary;
             _currentTheme = theme;
+            if (updateDrawer)
+                _drawerOpen = theme.LayoutProperties.DrawerVariant != DrawerVariant.Temporary;
         }
 
         public void Dispose()

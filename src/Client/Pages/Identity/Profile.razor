@@ -5,14 +5,7 @@
         <MudCard Elevation="25">
             <MudCardContent>
                 <div class="d-flex justify-center mb-4">
-                    @if (!string.IsNullOrEmpty(@ImageDataUrl))
-                    {
-                        <MudAvatar Image="@ImageDataUrl" Style="height:250px; width:250px;"> </MudAvatar>
-                    }
-                    else
-                    {
-                        <MudAvatar Color="Color.Secondary" Style="height:250px; width:250px;">@_firstLetterOfName</MudAvatar>
-                    }
+                    <UserAvatar Height="250" Width="250" />
                 </div>
                 <MudText Typo="Typo.h6" Align="Align.Center">@_profileModel.FirstName @_profileModel.LastName</MudText>
                 <MudText Align="Align.Center">@_profileModel.Email</MudText>

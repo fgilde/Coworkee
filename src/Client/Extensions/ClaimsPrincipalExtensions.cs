@@ -1,9 +1,13 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 
 namespace CleanArchitectureBase.Client.Extensions
 {
     internal static class ClaimsPrincipalExtensions
     {
+        internal static string GetInitials(this ClaimsPrincipal claimsPrincipal)
+            => new(new []{claimsPrincipal.GetFirstName().FirstOrDefault(), claimsPrincipal.GetLastName().FirstOrDefault()});
+        
         internal static string GetEmail(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.Email);
 

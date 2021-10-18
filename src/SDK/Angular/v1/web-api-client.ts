@@ -89,7 +89,7 @@ export class DashboardClient implements IDashboardClient {
 }
 
 export interface IResourceClient {
-    getResources(cacheBuster: string | null | undefined): Observable<FileResponse>;
+    getResources(objectName: string | null, cacheBuster: string | null | undefined): Observable<FileResponse>;
 }
 
 @Injectable({
@@ -105,8 +105,11 @@ export class ResourceClient implements IResourceClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getResources(cacheBuster: string | null | undefined): Observable<FileResponse> {
-        let url_ = this.baseUrl + "/resources.js?";
+    getResources(objectName: string | null, cacheBuster: string | null | undefined): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/{objectName}/resources.js?";
+        if (objectName === undefined || objectName === null)
+            throw new Error("The parameter 'objectName' must be defined.");
+        url_ = url_.replace("{objectName}", encodeURIComponent("" + objectName));
         if (cacheBuster !== undefined && cacheBuster !== null)
             url_ += "cacheBuster=" + encodeURIComponent("" + cacheBuster) + "&";
         url_ = url_.replace(/[?&]$/, "");

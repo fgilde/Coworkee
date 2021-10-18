@@ -1,0 +1,78 @@
+﻿@using System.Security.Claims
+@using CleanArchitectureBase.Application.Responses.Identity
+
+@if (string.IsNullOrEmpty(ImageDataUrl))
+{
+    <MudAvatar Color="Color.Secondary" Style="@StyleStr()">@Initials?.ToUpper()</MudAvatar>
+}
+else
+{
+    <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()"> </MudAvatar>
+}
+    
+@code {
+
+    [Parameter]
+    public ClaimsPrincipal User { get; set; }
+
+    [Parameter]
+    public UserResponse UserData { get; set; }
+
+    [Parameter]
+    public string UserId { get; set; }
+
+    [Parameter]
+    public int Height { get; set; } = 50;
+
+    [Parameter]
+    public int Width { get; set; } = 50;
+
+    private string ImageDataUrl { get; set; }
+    private string Initials { get; set; }
+
+    private string StyleStr()
+    {
+        return $"height: {Height}px; width: {Width}px;";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrWhiteSpace(UserId) && UserData == null)
+            await LoadCurrentUserData();
+        else
+            await LoadOtherUserData();
+    }
+
+    private async Task LoadCurrentUserData()
+    {
+        var user = User ?? (await _stateProvider.GetAuthenticationStateAsync()).User;
+        if (user?.Identity?.IsAuthenticated == true)
+        {
+            Initials = user.GetInitials();
+            var imageResponse = await _api.Account_GetProfilePictureAsync(user.GetUserId());
+            if (imageResponse.Succeeded)
+            {
+                ImageDataUrl = imageResponse.Data;
+            }
+        }
+    }
+
+    protected async Task LoadOtherUserData()
+    {
+        if (UserData == null && !string.IsNullOrWhiteSpace(UserId))
+        {
+            var result = await _api.User_GetByIdAsync(UserId);
+            if (result.Succeeded)
+                UserData = result.Data;
+        }
+        if (UserData != null)
+        {
+            Initials = new(new[] { UserData.FirstName.FirstOrDefault(), UserData.LastName.FirstOrDefault()});
+            var data = await _api.Account_GetProfilePictureAsync(UserData.Id);
+            if (data.Succeeded)
+            {
+                ImageDataUrl = data.Data;
+            }
+        }
+    }
+}

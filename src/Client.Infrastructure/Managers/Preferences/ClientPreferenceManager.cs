@@ -4,6 +4,7 @@ using CleanArchitectureBase.Client.Infrastructure.Settings;
 using MudBlazor;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Managers.Theme;
+using CleanArchitectureBase.Client.Infrastructure.Theming;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Settings;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -67,11 +68,11 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
             };
         }
 
-        public async Task<MudTheme> GetCurrentThemeAsync()
+        public async Task<ClientTheme> GetCurrentThemeAsync()
         {
             if (await GetPreference() is ClientPreference preference)
-                return await _themeManager.GetByName(preference.ThemeName) ?? BlazorHeroTheme.DefaultTheme;
-            return BlazorHeroTheme.DefaultTheme;
+                return await _themeManager.GetByNameAsync(preference.ThemeName) ?? ClientTheme.DefaultTheme;
+            return ClientTheme.DefaultTheme;
         }
         public async Task<bool> IsRTL()
         {

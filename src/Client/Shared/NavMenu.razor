@@ -1,7 +1,9 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 @using System.Security.Claims
 
-<UserCard />
+<UserCard ShowEmail="false" />
+<MudDivider Class="mb-2" />
+
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
     @if (_canViewHangfire)

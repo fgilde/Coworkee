@@ -1,10 +1,18 @@
 ﻿using MudBlazor;
+using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Infrastructure.Settings
+namespace CleanArchitectureBase.Client.Infrastructure.Theming
 {
-    public class BlazorHeroTheme
+
+    public class ClientTheme : MudTheme
     {
-        private static Typography DefaultTypography = new Typography()
+        public new LayoutPropertiesEx LayoutProperties { get; set; }
+
+        #region Statics
+
+        #region Default Typography and Layout
+
+        private static Typography DefaultTypography => new()
         {
             Default = new Default()
             {
@@ -104,12 +112,15 @@ namespace CleanArchitectureBase.Client.Infrastructure.Settings
             }
         };
 
-        private static LayoutProperties DefaultLayoutProperties = new LayoutProperties()
+        private static LayoutPropertiesEx DefaultLayoutProperties => new()
         {
             DefaultBorderRadius = "3px"
         };
 
-        public static MudTheme DefaultTheme = new MudTheme()
+        #endregion
+
+
+        public static ClientTheme DefaultTheme = new ClientTheme()
         {
             Palette = new Palette()
             {
@@ -122,10 +133,33 @@ namespace CleanArchitectureBase.Client.Infrastructure.Settings
             },
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
-        };
+        }.SetProperties(
+            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always, 
+            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
 
-        public static MudTheme DarkTheme = new MudTheme()
+
+        public static ClientTheme CodeBlue = new ClientTheme()
         {
+            Palette = new Palette()
+            {
+                Primary = "#0082bb",
+                AppbarBackground = "#0082bb",
+                Secondary = "#ff8300",
+                Background = Colors.Grey.Lighten5,
+                DrawerBackground = "#FFF",
+                DrawerText = "rgba(0,0,0, 0.7)",
+                Success = "#128a00",
+                Warning = "#ffdd00",
+                Error = "#df1642"
+            },
+            Typography = DefaultTypography,
+            LayoutProperties = DefaultLayoutProperties
+        }.SetProperties(
+            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Never,
+            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Temporary);
+
+
+        public static ClientTheme DarkTheme = new ClientTheme() {
             Palette = new Palette()
             {
                 Primary = "#1E88E5",
@@ -147,6 +181,11 @@ namespace CleanArchitectureBase.Client.Infrastructure.Settings
             },
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
-        };
+        }.SetProperties(
+            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always, 
+            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
+
+
+        #endregion
     }
 }

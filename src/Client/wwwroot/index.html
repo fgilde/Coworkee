@@ -16,7 +16,7 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
     <base href="/" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <script src="/resources.js"></script> <!--Comes from server see resource controller-->
+    <script src="/Application/resources.js"></script> <!--Comes from server see resource controller-->
     <!--Own Client only resources -->
     <link href="_content/MudBlazor/MudBlazor.min.css?v=5.0.5" rel="stylesheet" />
     <link href="css/site.min.css" rel="stylesheet" /> <!--Main Site Css-->
@@ -45,9 +45,9 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
         <a class="dismiss">🗙</a>
     </div>
     <script>
-        document.querySelector('#app-logo').insertAdjacentHTML('beforeend', CleanArchitectureBase.CustomIcons.ApplicationMainIcon);
-        document.querySelector('#sub-text').innerHTML = `${CleanArchitectureBase.ApplicationConstants.ApplicationName} ${CleanArchitectureBase.ApplicationConstants.Version}`;
-        document.title = CleanArchitectureBase.ApplicationConstants.ApplicationName + ' - Home';
+        document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
+        document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
+        document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
     </script>
 
     <script async src="js/site.es5.min.js"></script>

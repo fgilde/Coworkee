@@ -19,6 +19,15 @@ window.ScrollToBottom = function (elementName) {
     element.scrollTop = element.scrollHeight - element.clientHeight;
 };
 
+window.SetTitle = function (title) {
+    var appName = Application.ApplicationConstants.ApplicationName;
+    if (title.includes('-') || title === appName) {
+        window.document.title = title;
+    } else {
+        document.title = appName ? appName + ' - ' + title : title;
+    }
+};
+
 window.PlayAudio = function (elementName) {
     document.getElementById(elementName).play();
 };

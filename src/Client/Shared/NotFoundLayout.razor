@@ -1,7 +1,8 @@
+@using CleanArchitectureBase.Client.Infrastructure.Theming
 @inherits LayoutComponentBase
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NotFoundLayout> _localizer
 
-<MudThemeProvider Theme="BlazorHeroTheme.DefaultTheme" />
+<MudThemeProvider Theme="ClientTheme.DefaultTheme" />
 <MudSnackbarProvider />
 <MudContainer MaxWidth="MaxWidth.Small">
     <div class="d-flex flex-column">

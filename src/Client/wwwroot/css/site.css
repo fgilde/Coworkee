@@ -3,6 +3,9 @@
   transition-duration: 0.1s;
   transition-timing-function: ease; }
 
+.cursor-pointer {
+  cursor: pointer; }
+
 .mud-menu.role-selector-menu {
   min-width: 185px;
   max-width: 300px;

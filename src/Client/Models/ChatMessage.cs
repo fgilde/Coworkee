@@ -1,4 +1,4 @@
-namespace AdminDashboard.Wasm.Models
+namespace CleanArchitectureBase.Client.Models
 {
     public class ChatMessage
     {

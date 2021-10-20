@@ -29,7 +29,7 @@
         <MudLayout RightToLeft="@_rightToLeft">
             <MudAppBar Elevation="25">
 
-                <AppBarHeader Title="@ApplicationConstants.ApplicationName" 
+                <AppBarHeader Title="@GetTitle()" 
                               MenuTogglePosition="_currentTheme.LayoutProperties.MenuTogglePosition" 
                               TitleBehaviour="_currentTheme.LayoutProperties.AppBarTitleBehaviour" 
                               IsLogoVisible="_currentTheme.LayoutProperties.ShowLogoInAppBar" 
@@ -79,7 +79,8 @@
                 </MudMenu>
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutProperties.DrawerVariant" ClipMode="_currentTheme.LayoutProperties.DrawerClipMode">
-                <NavMenu Logout="Logout"
+                <NavMenu @ref="navMenu"
+                         Logout="Logout"
                          ShowApplicationLogo="_currentTheme.LayoutProperties.ShowLogoInNavMenu" 
                          ShowUserCard="_currentTheme.LayoutProperties.ShowUserCardInNavigation" 
                          ExpandMode="_currentTheme.LayoutProperties.NavMenuExpandMode" />

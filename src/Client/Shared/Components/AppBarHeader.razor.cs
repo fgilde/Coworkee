@@ -30,7 +30,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             if (TitleBehaviour == AppBarTitleBehaviour.AppNameOnly)
                 return ApplicationConstants.ApplicationName;
             if (Title != ApplicationConstants.ApplicationName && TitleBehaviour == AppBarTitleBehaviour.AppNameAndTitle)
-                return $"{ApplicationConstants.ApplicationName} - {Title}";
+                return !string.IsNullOrWhiteSpace(Title) ? $"{ApplicationConstants.ApplicationName} - {Title}" : ApplicationConstants.ApplicationName;
             return Title;
         }
 

@@ -15,9 +15,9 @@
     }
 
     <MudNavMenu>
-        <MudTreeView Items="Entries" Dense="true">
+        <MudTreeView Items="Entries" @bind-SelectedValue="SelectedEntry" Dense="true">
             <ItemTemplate>
-                <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Entries">
+                <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Children">
                     <Content>
                         @if (IsAuthorized(context))
                         {
@@ -29,13 +29,14 @@
                             }
                             else
                             {
-                                <MudListSubheader @onclick="() => ToggleExpand(context)" Class="@SubHeaderCls(context)">@_localizer[context.Text]</MudListSubheader>
-                            }
-                            @if (CanExpand(context))
-                            {
-                                <div class="apply-right">
-                                    <MudTreeViewItemToggleButton Visible="CanExpand(context)" Expanded="context.IsExpanded" ExpandedChanged="() => ToggleExpand(context)" />
-                                </div>
+                                if (CanExpand(context))
+                                {
+                                    <MudNavGroup @bind-Expanded="context.IsExpanded" @onclick="b => ToggleExpand(context)" Disabled="true" Icon="@context.Icon" Title="@_localizer[context.Text]" />
+                                }
+                                else
+                                {
+                                    <MudListSubheader>@_localizer[context.Text]</MudListSubheader>
+                                }
                             }
                         }
                     </Content>

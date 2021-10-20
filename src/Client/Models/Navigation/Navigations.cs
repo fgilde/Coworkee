@@ -13,7 +13,7 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             new NavigationEntry("Swagger",Icons.Material.Outlined.LiveHelp, "/swagger/index.html", "_blank" ).WithPolicies(Permissions.Swagger.View),
             new NavigationEntry("Personal")
             {
-                Entries = new()
+                Children = new()
                 {
                     new NavigationEntry("Dashboard",Icons.Material.Outlined.Dashboard, "/dashboard" ),
                     new NavigationEntry("Account",Icons.Material.Outlined.SupervisorAccount, "/account" ),
@@ -22,7 +22,7 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             },
             new NavigationEntry("Document Management")
             {
-                Entries = new()
+                Children = new()
                 {
                     new NavigationEntry("Document Store",Icons.Material.Outlined.AttachFile, "/document-store").WithPolicies(Permissions.Documents.View),
                     new NavigationEntry("Document Types",Icons.Material.Outlined.AttachFile, "/document-types").WithPolicies(Permissions.DocumentTypes.View)
@@ -30,7 +30,7 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             },
             new NavigationEntry("Administrator")
             {
-                Entries = new()
+                Children = new()
                 {
                     new NavigationEntry("Users",Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
                     new NavigationEntry("Roles",Icons.Material.Outlined.Person, "/identity/roles").WithPolicies(Permissions.Roles.View)
@@ -38,14 +38,14 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             },
             new NavigationEntry("Communication")
             {
-                Entries = new()
+                Children = new()
                 {
                     new NavigationEntry("Chat",Icons.Material.Outlined.Chat, "/chat").WithPolicies(Permissions.Communication.Chat)
                 }
             },
             new NavigationEntry("Catalog Management")
             {
-                Entries = new()
+                Children = new()
                 {
                     new NavigationEntry("Products",Icons.Material.Outlined.CallToAction, "/catalog/products").WithPolicies(Permissions.Products.View),
                     new NavigationEntry("Brands",Icons.Material.Outlined.CallToAction, "/catalog/brands").WithPolicies(Permissions.Brands.View)

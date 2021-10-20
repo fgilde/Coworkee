@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CleanArchitectureBase.Application.Security;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Models.Navigation
 {
-    public class NavigationEntry
+    public class NavigationEntry : Hierarchical<NavigationEntry>
     {
         public NavigationEntry(string text = "", string icon = "", string href = "", string target = "")
         {
@@ -13,16 +14,13 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             Href = href;
             Target = target;
         }
-
-        public string Icon { get; set; }
         public string Text { get; set; }
+        public string Icon { get; set; }
         public string Href { get; set; }
         public string Target { get; set; }
         public string[] Policies { get; set; }
         public PolicyMatch PolicyMatch { get; set; }
-        public HashSet<NavigationEntry> Entries { get; set; }
         public bool IsExpanded { get; set; }
-        public bool HasChildren => Entries?.Any() == true;
 
         public NavigationEntry WithPolicies(PolicyMatch match, params string[] policies)
         {
@@ -35,5 +33,6 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             Policies = policies;
             return this;
         }
+
     }
 }

@@ -14,7 +14,7 @@ namespace CleanArchitectureBase.Client.Shared
     public partial class MainLayout : IDisposable
     {
         private string CurrentUserId { get; set; }
-        
+        private NavMenu navMenu;
         private async Task LoadDataAsync()
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
@@ -166,5 +166,11 @@ namespace CleanArchitectureBase.Client.Shared
 
         private HubConnection hubConnection;
         public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+
+        private string GetTitle()
+        {
+            var menuItem = navMenu?.FindEntriesForUrl()?.FirstOrDefault();
+            return navMenu?.Locale(menuItem?.Parent?.Text ?? menuItem?.Text);
+        }
     }
 }

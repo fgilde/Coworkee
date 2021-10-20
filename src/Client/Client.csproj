@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
   </ItemGroup>
 
   <ItemGroup>

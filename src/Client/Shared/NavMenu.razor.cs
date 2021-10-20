@@ -2,9 +2,10 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.Infrastructure.Enums;
 using CleanArchitectureBase.Client.Models.Navigation;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Shared
@@ -15,7 +16,7 @@ namespace CleanArchitectureBase.Client.Shared
         public bool ShowUserCard { get; set; } = true;
 
         [Parameter]
-        public ExpandMode ExpandMode { get; set; } = ExpandMode.None;
+        public ExpandMode ExpandMode { get; set; }
 
         [Parameter]
         public HashSet<NavigationEntry> Entries { get; set; } = Navigations.Default;
@@ -25,10 +26,10 @@ namespace CleanArchitectureBase.Client.Shared
 
         private bool IsAuthorized(NavigationEntry entry)
         {
-            //var p = entry.Policies.FirstOrDefault();
-            //if (!string.IsNullOrWhiteSpace(p))
-            //    return (_authorizationService.AuthorizeAsync(_user, p).GetAwaiter().GetResult()).Succeeded;
-            return true;
+            bool result = _authorizationService.HasPoliciesAsync(_user, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
+            if (entry.HasChildren)
+                return result && entry.Entries.Any(IsAuthorized);
+            return result;
         }
 
         protected override async Task OnParametersSetAsync()
@@ -65,10 +66,4 @@ namespace CleanArchitectureBase.Client.Shared
         }
     }
 
-    public enum ExpandMode
-    {
-        Default,
-        SingleExpand,
-        None
-    }
 }

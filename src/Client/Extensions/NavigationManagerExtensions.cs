@@ -17,7 +17,7 @@ namespace CleanArchitectureBase.Client.Extensions
         public static string GetReturnUrlValue(this NavigationManager navigationManager)
         {
             var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
-            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("ReturnUrl", out var param))
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue(ApplicationConstants.ParameterNames.ReturnUrl, out var param))
             {
                 var url = param.First();
                 if (!string.IsNullOrWhiteSpace(url))

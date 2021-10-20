@@ -49,9 +49,9 @@ namespace CleanArchitectureBase.Client.Shared
 
         protected override async Task OnParametersSetAsync()
         {
-            base.OnParametersSet();
+            await base.OnParametersSetAsync();
             var currentUser = await _clientAuthenticationManager.CurrentUser();
-            if (currentUser != null && currentUser.Identity?.IsAuthenticated == true)
+            if (currentUser is {Identity: {IsAuthenticated: true}})
                 _navigationManager.NavigateToReturnUrlIf();
         }
 

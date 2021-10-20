@@ -1,4 +1,5 @@
-﻿using MudBlazor;
+﻿using CleanArchitectureBase.Client.Infrastructure.Enums;
+using MudBlazor;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Theming
 {
@@ -6,5 +7,10 @@ namespace CleanArchitectureBase.Client.Infrastructure.Theming
     {
         public DrawerClipMode DrawerClipMode { get; set; } = DrawerClipMode.Always;
         public DrawerVariant DrawerVariant { get; set; } = DrawerVariant.Responsive;
+        public ExpandMode NavMenuExpandMode { get; set; } = ExpandMode.None;
+        public AppBarTitleBehaviour AppBarTitleBehaviour { get; set; } = AppBarTitleBehaviour.AppNameOnly;
+        public MenuTogglePosition MenuTogglePosition { get; set; } = MenuTogglePosition.End;
+        public bool ShowUserCardInNavigation { get; set; } = true;
+        public bool ShowLogoInAppBar { get; set; } = true;
     }
 }

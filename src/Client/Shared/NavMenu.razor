@@ -1,33 +1,37 @@
+@using CleanArchitectureBase.Shared.Constants
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 
 <div>
-    
+    @*<MudIcon Icon="@CustomIcons.ApplicationMainIcon" Size="Size.Large" ViewBox="0 0 500 500" />*@
     @if (ShowUserCard)
     {
-        <UserCard ShowEmail="false"/>
-        <MudDivider Class="mb-2"/>
+        <UserCard ShowEmail="false" />
+        <MudDivider Class="mb-2" />
     }
 
     <MudNavMenu>
         <MudTreeView Items="Entries" Dense="true">
             <ItemTemplate>
-                <MudTreeViewItem @bind-Expanded="@context.IsExpanded"  Items="@context.Entries">
+                <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Entries">
                     <Content>
-                        @if (HasAction(context))
+                        @if (IsAuthorized(context))
                         {
-                            <MudNavLink Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
-                                @_localizer[context.Text]
-                            </MudNavLink>
-                        }
-                        else
-                        {
-                            <MudListSubheader @onclick="() => ToggleExpand(context)" Class="@SubHeaderCls(context)">@_localizer[context.Text]</MudListSubheader>
-                        }
-                        @if (CanExpand(context))
-                        {
-                            <div class="apply-right">
-                                <MudTreeViewItemToggleButton Visible="CanExpand(context)" Expanded="context.IsExpanded" ExpandedChanged="() => ToggleExpand(context)"/>
-                            </div>
+                            @if (HasAction(context))
+                            {
+                                <MudNavLink Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
+                                    @_localizer[context.Text]
+                                </MudNavLink>
+                            }
+                            else
+                            {
+                                <MudListSubheader @onclick="() => ToggleExpand(context)" Class="@SubHeaderCls(context)">@_localizer[context.Text]</MudListSubheader>
+                            }
+                            @if (CanExpand(context))
+                            {
+                                <div class="apply-right">
+                                    <MudTreeViewItemToggleButton Visible="CanExpand(context)" Expanded="context.IsExpanded" ExpandedChanged="() => ToggleExpand(context)" />
+                                </div>
+                            }
                         }
                     </Content>
                 </MudTreeViewItem>

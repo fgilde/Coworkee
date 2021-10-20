@@ -39,28 +39,30 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<bool> HasRolesAsync(string[] roles, RoleMatch match, string userId = null)
         {
+            var granted = true;
             foreach (var role in roles ?? Enumerable.Empty<string>().ToArray())
             {
-                var granted = await HasRoleAsync(role, userId);
+                granted = await HasRoleAsync(role, userId);
                 if (!granted && match == RoleMatch.All)
                     return false;
                 if (granted && match == RoleMatch.Any)
-                    break;
+                    return true;
             }
-            return true;
+            return granted;
         }
 
         public async Task<bool> HasPoliciesAsync(string[] policies, PolicyMatch match, string userId = null)
         {
+            var granted = true;
             foreach (var policy in policies ?? Enumerable.Empty<string>().ToArray())
             {
-                var granted = await HasPolicyAsync(policy, userId);
+                granted = await HasPolicyAsync(policy, userId);
                 if (!granted && match == PolicyMatch.All)
                     return false;
                 if (granted && match == PolicyMatch.Any)
-                    break;
+                    return true;
             }
-            return true;
+            return granted;
         }
 
         public async Task EnsurePolicyAsync(string policy, string userId = null)

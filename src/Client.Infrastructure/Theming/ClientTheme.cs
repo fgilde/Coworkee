@@ -1,4 +1,5 @@
-﻿using MudBlazor;
+﻿using CleanArchitectureBase.Client.Infrastructure.Enums;
+using MudBlazor;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Theming
@@ -156,7 +157,12 @@ namespace CleanArchitectureBase.Client.Infrastructure.Theming
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
             t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Never,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Temporary);
+            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Temporary,
+            t => t.LayoutProperties.ShowUserCardInNavigation = false,
+            t => t.LayoutProperties.ShowLogoInAppBar = false,
+            t => t.LayoutProperties.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
+            t => t.LayoutProperties.MenuTogglePosition = MenuTogglePosition.Start,
+            t => t.LayoutProperties.NavMenuExpandMode = ExpandMode.SingleExpand);
 
 
         public static ClientTheme DarkTheme = new ClientTheme() {

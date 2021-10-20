@@ -1,5 +1,6 @@
 @using CleanArchitectureBase.Shared.Constants
 @using CleanArchitectureBase.Shared.Constants.Application
+@using CleanArchitectureBase.Client.Infrastructure.Enums
 @inherits LayoutComponentBase
 @inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> localizer
 
@@ -29,30 +30,30 @@
         }
         <MudLayout RightToLeft="@_rightToLeft">
             <MudAppBar Elevation="25">
-                
-                <AppBarHeader Title="@ApplicationConstants.ApplicationName" OnMenuIconClick="(e) => DrawerToggle()" />
 
-                <MudAppBarSpacer/>
+                <AppBarHeader Title="@ApplicationConstants.ApplicationName" MenuTogglePosition="_currentTheme.LayoutProperties.MenuTogglePosition" TitleBehaviour="_currentTheme.LayoutProperties.AppBarTitleBehaviour" IsLogoVisible="_currentTheme.LayoutProperties.ShowLogoInAppBar" OnMenuIconClick="(e) => DrawerToggle()" />
+
+                <MudAppBarSpacer />
                 <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
-                    <RoleSelector/>
-                    <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5"/>
-                    <LanguageSelector/>
+                    <RoleSelector />
+                    <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
+                    <LanguageSelector />
                     <MudTooltip Text="@localizer["Toggle right-to-left/left-to-right"]">
-                        <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())"/>
+                        <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())" />
                     </MudTooltip>
-                    <ThemeSelector OnThemeSelected="@ThemeChanged"/>
+                    <ThemeSelector OnThemeSelected="@ThemeChanged" />
                     <MudTooltip Text="@localizer["Notifications"]">
-                        <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit"/>
+                        <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit" />
                     </MudTooltip>
                 </MudHidden>
                 <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-                    <RoleSelector/>
-                    <LanguageSelector/>
+                    <RoleSelector />
+                    <LanguageSelector />
                     <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
                         <div class="px-2">
-                            <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle"/>
+                            <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
                             <MudTooltip Text="@localizer["Fork Repository"]">
-                                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/blazorhero/CleanArchitecture" Target="_blank"/>
+                                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/blazorhero/CleanArchitecture" Target="_blank" />
                             </MudTooltip>
                         </div>
                         <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Community"]</b></MudText>
@@ -68,15 +69,15 @@
                         <UserAvatar />
                     </ActivatorContent>
                     <ChildContent>
-                        <UserCard Class="mt-n2"/>
-                        <MudDivider Class="mb-2"/>
-                        <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person"/>
-                        <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout"/>
+                        <UserCard Class="mt-n2" />
+                        <MudDivider Class="mb-2" />
+                        <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+                        <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
                     </ChildContent>
                 </MudMenu>
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutProperties.DrawerVariant" ClipMode="_currentTheme.LayoutProperties.DrawerClipMode">
-                <NavMenu/>
+                <NavMenu ShowUserCard="_currentTheme.LayoutProperties.ShowUserCardInNavigation" ExpandMode="_currentTheme.LayoutProperties.NavMenuExpandMode" />
             </MudDrawer>
             <MudMainContent>
                 <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">

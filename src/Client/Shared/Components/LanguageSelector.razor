@@ -6,7 +6,7 @@
     string actual = preference?.LanguageCode;
     string displayName = localizer[LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual)?.DisplayName ?? "Select Language"];
 
-    <MudMenu MaxHeight="350" Label="@displayName" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
+    <MudMenu MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
         @{
             foreach (var language in LocalizationConstants.SupportedLanguages)
             {
@@ -28,6 +28,9 @@
 
 @code
 {
+    [Parameter]
+    public bool Small { get; set; } = false;
+
     IPreference preference;
     protected override async Task OnInitializedAsync()
     {

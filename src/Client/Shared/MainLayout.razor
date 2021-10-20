@@ -47,36 +47,36 @@
                     <MudTooltip Text="@localizer["Notifications"]">
                         <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit" />
                     </MudTooltip>
-                </MudHidden>
-                <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-                    <RoleSelector />
-                    <LanguageSelector />
-                    <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
-                        <div class="px-2">
-                            <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
-                            <MudTooltip Text="@localizer["Fork Repository"]">
-                                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/blazorhero/CleanArchitecture" Target="_blank" />
-                            </MudTooltip>
-                        </div>
-                        <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Community"]</b></MudText>
-                        <MudMenuItem Link="https://www.facebook.com/codewithmukesh" Target="_blank">@localizer["Facebook Page"]</MudMenuItem>
-                        <MudMenuItem Link="https://www.linkedin.com/in/iammukeshm/" Target="_blank">LinkedIn</MudMenuItem>
-                        <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Resources"]</b></MudText>
-                        <MudMenuItem Link="https://mudblazor.com/getting-started/installation" Target="_blank">@localizer["MudBlazor Documentation"]</MudMenuItem>
-                        <MudMenuItem Link="https://codewithmukesh.com/blog/blazor-hero-quick-start-guide/" Target="_blank">@localizer["Quick-Start Guide"]</MudMenuItem>
+                    <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                        <ActivatorContent>
+                            <UserAvatar />
+                        </ActivatorContent>
+                        <ChildContent>
+                            <UserCard Class="mt-n2" />
+                            <MudDivider Class="mb-2" />
+                            <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+                            <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
+                        </ChildContent>
                     </MudMenu>
                 </MudHidden>
-                <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
-                    <ActivatorContent>
-                        <UserAvatar />
-                    </ActivatorContent>
-                    <ChildContent>
-                        <UserCard Class="mt-n2" />
-                        <MudDivider Class="mb-2" />
+                <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+                    <RoleSelector Small="true" />
+                    <LanguageSelector Small="true" />
+                    <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="_rightToLeft ? Direction.Left : Direction.Right" OffsetY="true">
+                        <div class="px-2">
+                            <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
+                            <MudTooltip Text="@localizer["Notifications"]">
+                                <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit" />
+                            </MudTooltip>
+                            <MudTooltip Text="@localizer["Toggle right-to-left/left-to-right"]">
+                                <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())" />
+                            </MudTooltip>
+                        </div>
+                        <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Account"]</b></MudText>
                         <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
                         <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
-                    </ChildContent>
-                </MudMenu>
+                    </MudMenu>
+                </MudHidden>
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutProperties.DrawerVariant" ClipMode="_currentTheme.LayoutProperties.DrawerClipMode">
                 <NavMenu @ref="navMenu"

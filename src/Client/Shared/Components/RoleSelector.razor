@@ -7,7 +7,7 @@
     @if (IsVisible)
     {
         <MudTooltip Placement="Placement.Start" Text="@DisplayName(false)">
-            <MudMenu MaxHeight="350" Class="role-selector-menu" Label="@DisplayName()" EndIcon="@Icons.Material.Outlined.KeyboardArrowDown" Color="Color.Inherit" FullWidth="true" Direction="Direction.Right" OffsetY="true" Dense="true">
+            <MudMenu MaxHeight="350" Class="@(Small ? "" : "role-selector-menu")" Label="@(Small ? "" : DisplayName())" Icon="@(Small ? Icons.Material.Outlined.Group : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" FullWidth="false" Direction="Direction.Right" OffsetY="true" Dense="true">
                 <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Select active Roles"]</b></MudText>
                 <MudMenuItem Class="px-4 py-2" OnClick="() => AddUpdateRole(null)">
                     @DisplayName(true, true)
@@ -26,6 +26,9 @@
 
 @code
 {
+    [Parameter]
+    public bool Small { get; set; } = false;
+
     public bool IsVisible { get; private set; }
     List<UserRoleModel> actualRoles;
     List<UserRoleModel> userRoles;

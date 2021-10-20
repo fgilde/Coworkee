@@ -1,10 +1,24 @@
 ﻿@using CleanArchitectureBase.Shared.Constants
 @namespace CleanArchitectureBase.Client.Shared.Components
 
-<MudIcon Icon="@CustomIcons.ApplicationMainIcon" Size="Size.Large" ViewBox="0 0 500 500" Style="@Style" />
+<MudIcon Icon="@CustomIcons.ApplicationMainIcon" Size="@Size" ViewBox="@ViewBox" Style="@Style()" />
 
 @code
 {
     [Parameter]
-    public string Style { get; set; } = "width:100px; height:100px;";
+    public int Height { get; set; } = 100;
+    
+    [Parameter]
+    public int Width { get; set; } = 100;
+
+    [Parameter]
+    public string ViewBox { get; set; } = "0 0 500 500";
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Large;
+
+    private string Style()
+    {
+        return $"width:{Width}px; height:{Height}px;";
+    }
 }

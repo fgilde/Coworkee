@@ -8,6 +8,13 @@ namespace CleanArchitectureBase.Client.Extensions
 {
     public static class NavigationManagerExtensions
     {
+        private static readonly string[] ForbiddenReturnUrls = {"login", "register"};
+
+        private static bool IsForbidden(string url)
+        {
+            return !string.IsNullOrWhiteSpace(url) && ForbiddenReturnUrls.Contains(url.Replace("/", ""), StringComparer.InvariantCultureIgnoreCase);
+        }
+
         private static string CleanReturnUrl(string url)
         {
             var returnUrlParamName = ApplicationConstants.ParameterNames.ReturnUrl;
@@ -22,7 +29,8 @@ namespace CleanArchitectureBase.Client.Extensions
                 var url = param.First();
                 if (!string.IsNullOrWhiteSpace(url))
                 {
-                    return CleanReturnUrl(url);
+                    string result = CleanReturnUrl(url);
+                    return !IsForbidden(result) ? result : null;
                 }
             }
 
@@ -33,7 +41,7 @@ namespace CleanArchitectureBase.Client.Extensions
         {
             returnUrl ??= navigationManager.ToBaseRelativePath(navigationManager.Uri);
             returnUrl = CleanReturnUrl(returnUrl);
-            navigationManager.NavigateTo(string.IsNullOrWhiteSpace(returnUrl) || returnUrl == "/" || returnUrl == "/login" 
+            navigationManager.NavigateTo(string.IsNullOrWhiteSpace(returnUrl) || returnUrl == "/" || IsForbidden(returnUrl)
                 ? "/"
                 : $"/?{ApplicationConstants.ParameterNames.ReturnUrl}=" + returnUrl);
         }

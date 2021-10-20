@@ -12,5 +12,6 @@ namespace CleanArchitectureBase.Client.Infrastructure.Theming
         public MenuTogglePosition MenuTogglePosition { get; set; } = MenuTogglePosition.End;
         public bool ShowUserCardInNavigation { get; set; } = true;
         public bool ShowLogoInAppBar { get; set; } = true;
+        public bool ShowLogoInNavMenu { get; set; }
     }
 }

@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
-    <Content Remove="Shared\Components\ApplicationLogo.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +31,6 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
-    <None Include="Shared\Components\ApplicationLogo.razor" />
   </ItemGroup>
 
   <ItemGroup>

@@ -160,6 +160,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Theming
             t => t.LayoutProperties.DrawerVariant = DrawerVariant.Temporary,
             t => t.LayoutProperties.ShowUserCardInNavigation = false,
             t => t.LayoutProperties.ShowLogoInAppBar = false,
+            t => t.LayoutProperties.ShowLogoInNavMenu = true,
             t => t.LayoutProperties.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
             t => t.LayoutProperties.MenuTogglePosition = MenuTogglePosition.Start,
             t => t.LayoutProperties.NavMenuExpandMode = ExpandMode.SingleExpand);

@@ -12,17 +12,17 @@ namespace CleanArchitectureBase.Client.Shared
 {
     public partial class NavMenu
     {
-        [Parameter]
-        public bool ShowUserCard { get; set; } = true;
+        [Parameter] public bool ShowUserCard { get; set; } = true;     
+        
+        [Parameter] public bool ShowApplicationLogo { get; set; } = false;
 
-        [Parameter]
-        public ExpandMode ExpandMode { get; set; }
+        [Parameter] public ExpandMode ExpandMode { get; set; }
 
-        [Parameter]
-        public HashSet<NavigationEntry> Entries { get; set; } = Navigations.Default;
-
+        [Parameter] public HashSet<NavigationEntry> Entries { get; set; } = Navigations.Default;
+        
+        [Parameter] public EventCallback Logout { get; set; }
+        
         private ClaimsPrincipal _user;
-
 
         private bool IsAuthorized(NavigationEntry entry)
         {

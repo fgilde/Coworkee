@@ -1,11 +1,16 @@
-@using CleanArchitectureBase.Shared.Constants
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 
 <div>
-    @*<MudIcon Icon="@CustomIcons.ApplicationMainIcon" Size="Size.Large" ViewBox="0 0 500 500" />*@
+    @if (ShowApplicationLogo)
+    {
+        <div class="d-flex justify-center mt-4 mb-4">
+            <ApplicationLogo />
+        </div>
+        <MudDivider Class="mb-2" />
+    }
     @if (ShowUserCard)
     {
-        <UserCard ShowEmail="false" />
+        <UserCard Logout="Logout" ShowEmail="false" ShowLogout="true" />
         <MudDivider Class="mb-2" />
     }
 

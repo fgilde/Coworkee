@@ -42,6 +42,27 @@
         ]
       }
     },
+    "/favicon.ico": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "operationId": "Resource_FavIcon",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/{objectName}/resources.js": {
       "get": {
         "tags": [

@@ -1,13 +1,19 @@
 @inject NavigationManager NavigationManager
-
 <Error>
-    <Router AppAssembly="@typeof(Program).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
         <Found Context="routeData">
+
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <Login />
+                    <Login/>
                 </NotAuthorized>
             </AuthorizeRouteView>
+
+            @*<CascadingAuthenticationState>
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                </RouteView>
+            </CascadingAuthenticationState>*@
+
         </Found>
         <NotFound>
             <CascadingAuthenticationState>

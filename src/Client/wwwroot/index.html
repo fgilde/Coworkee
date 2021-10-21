@@ -25,19 +25,20 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
 </head>
 
 <body>
-    <div id="app">
+    <div id="overlay-app-load" class="app-load full-overlay">
         <div class="app-preload">
             <div class="mud-wasm"></div>
             <div class="mud-wasm" style="animation-direction:alternate-reverse;animation-duration:4s;"></div>
             <div class="mud-wasm" style="animation-duration:5s;"></div>
             <div class="mud-wasm-cont ">
-                <svg id="app-logo" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-
-                </svg>
+                <svg id="app-logo" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" />
                 <h1 id="sub-text" class="sub-text">Please wait...</h1>
-
             </div>
         </div>
+    </div>
+
+    <div id="app">
+
     </div>
 
     <div id="blazor-error-ui">
@@ -45,14 +46,24 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
     <script>
         document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
         document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
         document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
+        var app = document.getElementById('app');
+        app.addEventListener('DOMSubtreeModified', contentChanged, false);
+
+        function contentChanged() {
+            app.removeEventListener('DOMSubtreeModified', contentChanged);
+            var overlay = document.getElementById('overlay-app-load');
+            if (overlay)
+                overlay.remove();
+        }
     </script>
 
     <script async src="js/site.es5.min.js"></script>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script async src="_framework/blazor.webassembly.js"></script>
     <script async src="_content/MudBlazor/MudBlazor.min.js?v=5.0.5"></script>
 </body>
 </html>

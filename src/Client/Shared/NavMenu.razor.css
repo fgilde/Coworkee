@@ -1,4 +1,5 @@
 ﻿.apply-right {
     position: absolute;
-    right: 2px;
+    right: 0;
+    margin-bottom: 10px;
 }

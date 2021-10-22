@@ -1,3 +1,4 @@
+@using Nextended.Core.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 
 <div>
@@ -15,7 +16,7 @@
     }
 
     <MudNavMenu>
-        <MudTreeView Items="Entries" @bind-SelectedValue="SelectedEntry" Dense="true">
+        <MudTreeView Items="@Entries">
             <ItemTemplate>
                 <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Children">
                     <Content>
@@ -29,14 +30,15 @@
                             }
                             else
                             {
-                                if (CanExpand(context))
+                                @if (!context.Icon.IsNullOrWhiteSpace())
                                 {
-                                    <MudNavGroup @bind-Expanded="context.IsExpanded" @onclick="b => ToggleExpand(context)" Disabled="true" Icon="@context.Icon" Title="@_localizer[context.Text]" />
+                                    <MudIcon Icon="@context.Icon" Class="ml-0 mr-2" Color="@Color.Default"/>
                                 }
-                                else
-                                {
-                                    <MudListSubheader>@_localizer[context.Text]</MudListSubheader>
-                                }
+                                <MudListSubheader Class="@(CanExpand(context) ? "cursor-pointer" : "")" @onclick="() => ToggleExpand(context)" >@_localizer[context.Text]</MudListSubheader>
+
+                                <div class="apply-right">
+                                    <MudTreeViewItemToggleButton Visible="CanExpand(context)" Expanded="context.IsExpanded" ExpandedChanged="() => ToggleExpand(context)" />
+                                </div>
                             }
                         }
                     </Content>
@@ -46,3 +48,7 @@
     </MudNavMenu>
 
 </div>
+
+
+
+

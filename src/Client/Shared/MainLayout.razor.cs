@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Theming;
+using MudBlazor.ThemeManager;
 
 namespace CleanArchitectureBase.Client.Shared
 {

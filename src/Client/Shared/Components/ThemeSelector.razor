@@ -5,7 +5,7 @@
 
 @if (Mode == SelectionMode.Charm)
 {
-    <MudDrawer @bind-Open="@_charmOpen" Anchor="Anchor.End" Elevation="1" Variant="@DrawerVariant.Temporary">
+    <MudDrawer @bind-Open="@_charmOpen" Anchor="@(rtl ? Anchor.Left: Anchor.Right)" Elevation="1" Variant="@DrawerVariant.Temporary">
         <MudDrawerHeader>
             <MudText Typo="Typo.h6">@localizer["Select Theme"]</MudText>
         </MudDrawerHeader>
@@ -60,6 +60,13 @@
 
     private KeyValuePair<string, ClientTheme> _current;
     private Dictionary<string, ClientTheme> _themes = new();
+    private bool rtl;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        rtl = await _clientPreferenceManager.IsRTL();
+    }
 
     protected override async Task OnInitializedAsync()
     {

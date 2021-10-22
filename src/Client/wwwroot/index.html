@@ -22,6 +22,7 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     <link href="css/site.min.css" rel="stylesheet" /> <!--Main Site Css-->
     <link href="CleanArchitectureBase.Client.styles.css" rel="stylesheet"> <!--Blazor Component Based CSS Isolation https://docs.microsoft.com/de-de/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0-->
+
 </head>
 
 <body>
@@ -31,7 +32,7 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
             <div class="mud-wasm" style="animation-direction:alternate-reverse;animation-duration:4s;"></div>
             <div class="mud-wasm" style="animation-duration:5s;"></div>
             <div class="mud-wasm-cont ">
-                <svg id="app-logo" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" />
+                <svg class="svg-animate" id="app-logo" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" />
                 <h1 id="sub-text" class="sub-text">Please wait...</h1>
             </div>
         </div>
@@ -48,18 +49,21 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
     </div>
 
     <script>
-        document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
-        document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
-        document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
-        var app = document.getElementById('app');
-        app.addEventListener('DOMSubtreeModified', contentChanged, false);
+        (function() {
+            document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
+            document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
+            document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
+            var app = document.getElementById('app');
+            app.addEventListener('DOMSubtreeModified', contentChanged, false);
 
-        function contentChanged() {
-            app.removeEventListener('DOMSubtreeModified', contentChanged);
-            var overlay = document.getElementById('overlay-app-load');
-            if (overlay)
-                overlay.remove();
-        }
+            function contentChanged() {
+                app.removeEventListener('DOMSubtreeModified', contentChanged);
+                var overlay = document.getElementById('overlay-app-load');
+                overlay.classList.add('fade-out');
+                setTimeout(function() { overlay.remove(); }, 2000); // Remove element after fadeout
+            }
+
+        })();
     </script>
 
     <script async src="js/site.es5.min.js"></script>

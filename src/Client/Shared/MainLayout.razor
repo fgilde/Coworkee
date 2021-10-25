@@ -1,8 +1,10 @@
 @using CleanArchitectureBase.Shared.Constants.Application
+@using System.Globalization
 @inherits LayoutComponentBase
 @inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> localizer
 
 <audio id="notification" src="/media/notification.mp3" />
+<ReactOnPreferenceChanged Component="this" OnPreferenceChanged="@((arg) => {if (_rightToLeft != arg.NewValue.IsRTL) {this._rightToLeft = arg.NewValue.IsRTL;}} )" />
 <MudRTLProvider RightToLeft="@_rightToLeft">
     <MudThemeProvider Theme="_currentTheme" />
     <MudDialogProvider />

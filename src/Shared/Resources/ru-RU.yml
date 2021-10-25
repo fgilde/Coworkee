@@ -1,0 +1,276 @@
+Hello World: Всем привет
+Account: Счет
+Done!: Договорились!
+E-Mail: Электронная почта
+Enter email for password reset: Введите адрес электронной почты, связанный с вашей учетной записью, и вы получите электронное письмо, содержащее ссылку для сброса пароля
+Forgot password?: Забыли пароль?
+Reset Password: Сброс пароля
+Already have an account?: У вас уже есть учетная запись?
+E-mail: Электронная почта
+I agree to the terms and privacy: Я согласен с условиями и конфиденциальностью
+Password: Пароль
+Phone Number: Номер телефона
+Register: Регистрировать
+Sign In: Войти
+Sign Up: Регистрация
+Username: Имя пользователя
+New Password: Новый пароль
+Set new password: Установка нового пароля
+Token Not Found!: Токен не найден!
+LoginDescription: Войдите в систему, и иди свои учетные данные.
+Description: Описание
+Don't have an account?: У вас нет учетной записи?
+Email is required!: Электронная почта обязательна!
+Fill Administrator Credentials: Заполнение учетных данных администратора
+Fill Basic User Credentials: Заполнение учетных данных базового пользователя
+Register here: Зарегистрируйтесь здесь
+Remember me?: Помните меня?
+Title: Войти
+Welcome {0}: Добро пожаловать {0}
+Confirm Password: Подтвердите пароль
+First Name: Имя
+Last Name: Фамилия
+User Name: Имя пользователя
+Brand Saved: Бренд сохранен!
+Brand Updated: Бренд обновлен!
+Update Brand: Обновление бренда
+Add Product: Добавить продукт
+Cancel: Отмена
+Product Saved: Продукт сохранен!
+Product Updated: Продукт обновлен!
+Save: Спасать
+Update: Обновлять
+Update Product: Обновление продукта
+Upload: Закачать
+View: Вид
+Actions: Действия
+Add Brand: Добавить бренд
+Bordered: Граничит
+Brands: Брендов
+Brands exported: Экспортируемые бренды
+Filtered Brands exported: Экспортированных фильтрованных брендов
+Manage Brands.: Управляйте брендами.
+Search for Brands: Поиск брендов
+Tax: Налог
+Barcode: Штрихкод
+Brand: Клеймо
+Create: Создавать
+Delete: Удалить
+Delete Content: Удаление содержимого
+Dense: Густой
+Edit: Редактировать
+Export: Экспорт
+Filtered Products exported: Экспортированные фильтрованные продукты
+Id: Идентификатор
+Manage Products.: Управление продуктами.
+Name: Имя
+No Allowed Actions: Действия запрещены
+Products exported: Экспортируемая продукция
+Rate: Скорость
+Reload: Перезаряжать
+Search: Искать
+Striped: Полосатый
+chat: Чат
+contacts: Контакты
+detailed guide for more.: подробное руководство для получения дополнительной информации.
+Enter your message...: Введите ваше сообщение...
+Logged In.: Вошел в систему.
+Logged Out.: Вышел из системы.
+New Message From {0}: Новое сообщение от {0}
+Send: Отправить
+Apr: Апр
+Aug: Авг
+Charts comming soon ish...: Чарты скоро ...
+Dashboard: Щиток
+Dec: Дек
+Document Extended Attributes: Расширенные атрибуты документа
+Document Types: Типы документов
+Documents: Документы
+Feb: Фев
+Jan: Янв
+Jul: Июл
+Jun: Июн
+Mar: Портить
+May: Май
+Nov: Ноя
+Oct: Центр развертывания office
+Products: Продукция
+Quick Insights.: Краткая аналитика.
+Realtime Updates & Insights with SignalR.: Обновления и аналитика в реальном времени с SignalR.
+Registered Roles: Зарегистрированные роли
+Registered Users: Зарегистрированные пользователи
+Sep: Сен
+ApplicationDescription: Пример приложения с шаблоном WebAssembly и чистой архитектуры
+Resources: Ресурсы
+Manage your account: Управление учетной записью
+Security: Безопасность
+Delete Image: Удалить изображение
+Delete Picture: Удалить рисунок
+Do you want to delete the profile picture of {0}: Вы хотите удалить фотографию профиля {0}
+Email: Электронная почта
+Profile: Профиль
+Profile Details: Сведения о профиле
+Profile picture added.: Добавлена фотография профиля.
+Profile picture deleted.: Фотография профиля удалена.
+Save Changes: Сохранить изменения
+Upload Image: Загрузить изображение
+Your Profile has been updated. Please Login to Continue.: Ваш профиль обновлен. Пожалуйста, войдите в систему, чтобы продолжить.
+Activate User?: Активировать пользователя?
+Auto Confirm Email?: Автоматическое подтверждение электронной почты?
+Register User: Регистрация пользователя
+User Registered: Пользователь зарегистрирован!
+User Registered Mailbox: Пользователь зарегистрирован. Письмо с подтверждением доставлено в почтовый ящик.
+Reset password: Сброс пароля
+Add Role: Добавить роль
+Role ID: Идентификатор роли
+Role Name: Имя роли
+Save Role: Сохранить роль
+Update Role: Роль обновления
+All Permissions: Все разрешения
+Apply: Применять
+Here you can leave a comment for this permission for the current role: Здесь вы можете оставить комментарий к этому разрешению для текущей роли
+Manage {0} {1}'s Permissions: Управление разрешениями {0} {1}
+Manage Permission: Управление разрешениями
+Permission Name: Имя разрешения
+Search For Permissions: Поиск разрешений
+Status: Статус
+Type: Тип
+Update Role Permissions: Обновление разрешений ролей
+Will be saved only when selected Permission: Будет сохранен только при выборе разрешения
+Delete Role Content: Вы хотите удалить роль с помощью id {0}?
+Manage Roles.: Управление ролями.
+Role: Роль
+Roles: Роли
+Search for Roles...: Поиск ролей...
+Change Password: Изменить пароль
+Current Password: Текущий пароль
+Incorrect Password.: Неправильный пароль.
+Password Changed!: Пароль изменен!
+Password Confirmation: Подтверждение пароля
+Password Confirmation is required!: Требуется подтверждение пароля!
+Password is required!: Пароль обязателен!
+Password must be at least of length 8: Пароль должен быть длиной не менее 8
+Password must contain at least one capital letter: Пароль должен содержать хотя бы одну заглавную букву
+Password must contain at least one digit: Пароль должен содержать хотя бы одну цифру
+Password must contain at least one lowercase letter: Пароль должен содержать хотя бы одну строчную букву
+Passwords don't match: Пароли не совпадают
+Active?: Активный?
+Administrator Settings.: Настройки администратора.
+Public Profile: Публичный профиль
+This is an Administrator Only View.: Это представление только для администраторов.
+Updated User Status.: Обновлен статус пользователя.
+Manage {0} {1}'s Roles: Управление ролями {0} {1}
+Roles Updated: Роли обновлены!
+Search For User Roles: Поиск ролей пользователей
+Update User Roles: Обновление ролей пользователей
+Active: Активный
+Email Confirmation: Подтверждение по электронной почте
+Filtered Users exported: Экспортированных фильтрованных пользователей
+Manage Roles: Управление ролями
+Manage Users: Управление пользователями
+Not Allowed.: Не допускается.
+PhoneNumber: Номер телефона
+Register New User: Регистрация нового пользователя
+Search For Users: Поиск пользователей
+UserName: Имя_пользователя
+Users: Пользователей
+Users exported: Экспортируемые пользователи
+View Profile: Просмотреть профиль
+Audit Trails: Контрольные журналы
+Audit Trails exported: Экспортированные журналы аудита
+Clear: Ясный
+Columns Affected: Затронутые столбцы
+Date: Дата
+Date Range For Searching: Диапазон дат для поиска
+Details for Trail ID: Сведения об идентификаторе тропы
+Export To Excel: Экспорт в Excel
+Filtered Audit Trails exported: Экспортированные отфильтрованные журналы аудита
+Hide: Прятать
+Local: Местный
+New Values: Новые ценности
+Ok: Хорошо
+Old Values: Старые ценности
+Primary Key: Первичный ключ
+Search for Trails: Поиск троп
+Search in New Values: Поиск новых ценностей
+Search in Old Values: Поиск по старым значениям
+Show: Показывать
+Table Name: Имя таблицы
+Trail Details: Детали трассы
+UTC: UTC (UTC)
+Your Recent Activities.: Ваши последние действия.
+Add Document: Добавить документ
+Document Type: Тип документа
+Download: Загружать
+Is Public?: Является ли публичным?
+Update Document: Обновить документ
+Add Document Type: Добавление типа документа
+Update Document Type: Обновить тип документа
+Browse Available Documents.: Просмотр доступных документов.
+Date Created: Дата создания
+Document Store: Хранилище документов
+Is Public: Является публичным
+Manage Extended Attributes: Управление расширенными атрибутами
+Owner: Владелец
+you: ты
+Document Types exported: Экспортированные типы документов
+Filtered Document Types exported: Экспортированные отфильтрованные типы документов
+Manage Document Types.: Управление типами документов.
+Search for Document Types: Поиск типов документов
+Chat?: Чат?
+Community: Сообщество
+Logout: Выход
+Logout Confirmation: Вы действительно хотите выйти из системы?
+Refreshed Token.: Обновленный маркер.
+Support: Поддержка
+Toggle right-to-left/left-to-right: Переключение справа налево/слева направо
+You are logged out because the Permissions of one of your Roles have been updated.: Вы вышли из системы, так как были обновлены разрешения одной из ролей.
+You are logged out because the user with your Token has been deleted.: Вы вышли из системы, потому что пользователь с вашим токеном был удален.
+You are Logged Out.: Вы вышли из системы.
+Administrator: Администратор
+Catalog Management: Управление каталогом
+Chat: Чат
+Communication: Коммуникация
+Document Management: Управление документами
+FAQs: Часто задаваемые вопросы
+Features: Функции
+Home: Дом
+Mail: Почта
+Personal: Личный
+Quick Start Guide: Краткое руководство пользователя
+Swagger: Документация по API
+GoHome: Идите домой!
+NotFoundMessage: Страница, которую вы искали, не существует.
+Confirm: Подтверждать
+Delete Confirmation: Удалить подтверждение
+Add Extended Attribute: Добавление расширенного атрибута
+Decimal: Десятичный
+Entity Id: Идентификатор сущности
+External Id: Внешний идентификатор
+Group: Группа
+Is Active: Активен
+Json: Джсон
+Key: Ключ
+Text: СМС
+Time: Время
+Update Extended Attribute: Обновление расширенного атрибута
+All Groups: Все группы
+Delete Extended Attribute?: Удалить расширенный атрибут?
+Extended Attributes exported: Экспортированных расширенных атрибутов
+Filtered Extended Attributes exported: Экспортированных фильтрованных расширенных атрибутов
+Include Entity fields (Export): Включить поля сущностей (экспорт)
+Manage {0} {1}'s Extended Attributes: Управление расширенными атрибутами {0} {1}
+Manage {0} Extended Attributes: Управление расширенными атрибутами {0}
+Only Selected Group (Export): Только выбранная группа (экспорт)
+Search For {0} Extended Attributes: Поиск расширенных атрибутов {0}
+Value: Ценность
+English: Английский
+Español: Испанский
+French: Французский
+German: Немецкий
+Indonesia: Индонезия
+Italian: Итальянский
+Select Language: Выбрать язык
+Swedish: Шведский
+Russian: Русский
+RowsPerPageString: Строк на странице

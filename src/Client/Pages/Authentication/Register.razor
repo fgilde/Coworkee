@@ -3,7 +3,7 @@
 @layout MainLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Register> _localizer
-
+<ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@_registerUserModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudGrid>

@@ -3,6 +3,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RolePermissions> _localizer
 @attribute [Authorize(Policy = Permissions.RoleClaims.View)]
 
+<ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Manage Permission"]" Description="@Description" />
 @if (!_loaded)
 {

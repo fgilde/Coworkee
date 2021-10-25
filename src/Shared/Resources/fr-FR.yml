@@ -1,0 +1,276 @@
+Hello World: Salut tout le monde
+Account: Compte
+Done!: Fait!
+E-Mail: Courriel
+Enter email for password reset: Entrez l’adresse e-mail liée à votre compte et vous recevrez un e-mail contenant un lien pour réinitialiser votre mot de passe
+Forgot password?: Mot de passe oublié?
+Reset Password: Réinitialiser le mot de passe
+Already have an account?: Vous avez déjà un compte ?
+E-mail: Courriel
+I agree to the terms and privacy: J’accepte les conditions et la confidentialité
+Password: Mot de passe
+Phone Number: Numéro de téléphone
+Register: Registre
+Sign In: Connexion
+Sign Up: S’enregistrer
+Username: Nom d’utilisateur
+New Password: Nouveau mot de passe
+Set new password: Définir un nouveau mot de passe
+Token Not Found!: Jeton introuvable!
+LoginDescription: Connectez-vous avec vos informations d’identification.
+Description: La description
+Don't have an account?: Vous n’avez pas de compte ?
+Email is required!: L’e-mail est requis!
+Fill Administrator Credentials: Remplir les informations d’identification de l’administrateur
+Fill Basic User Credentials: Remplir les informations d’identification de l’utilisateur de base
+Register here: Inscrivez-vous ici
+Remember me?: Souvenez-vous de moi?
+Title: Connexion
+Welcome {0}: '{0} de bienvenue'
+Confirm Password: Confirmer le mot de passe
+First Name: Prénom
+Last Name: Nom
+User Name: Nom d’utilisateur
+Brand Saved: Marque sauvée!
+Brand Updated: Marque mise à jour!
+Update Brand: Mettre à jour la marque
+Add Product: Ajouter un produit
+Cancel: Annuler
+Product Saved: Produit sauvé!
+Product Updated: Produit mis à jour!
+Save: Sauvegarder
+Update: Mettre à jour
+Update Product: Mettre à jour le produit
+Upload: Télécharger
+View: Vue
+Actions: Actions
+Add Brand: Ajouter une marque
+Bordered: Bordé
+Brands: Marques
+Brands exported: Marques exportées
+Filtered Brands exported: Marques filtrées exportées
+Manage Brands.: Gérer les marques.
+Search for Brands: Rechercher des marques
+Tax: Taxe
+Barcode: Code-barres
+Brand: Marque
+Create: Créer
+Delete: Supprimer
+Delete Content: Supprimer du contenu
+Dense: Dense
+Edit: Éditer
+Export: Exportation
+Filtered Products exported: Produits filtrés exportés
+Id: Id
+Manage Products.: Gérer les produits.
+Name: Nom
+No Allowed Actions: Aucune action autorisée
+Products exported: Produits exportés
+Rate: Taux
+Reload: Recharger
+Search: Rechercher
+Striped: Rayé
+chat: Bavarder
+contacts: Contacts
+detailed guide for more.: guide détaillé pour en savoir plus.
+Enter your message...: Entrez votre message...
+Logged In.: Connecté.
+Logged Out.: Déconnecté.
+New Message From {0}: Nouveau message de {0}
+Send: Envoyer
+Apr: Avr
+Aug: Août
+Charts comming soon ish...: Graphiques à venir bientôt ish...
+Dashboard: Tableau de bord
+Dec: Dec
+Document Extended Attributes: Attributs étendus du document
+Document Types: Types de documents
+Documents: Documents
+Feb: Fév
+Jan: Vérone
+Jul: Juil
+Jun: Juin
+Mar: Mars
+May: Mai
+Nov: Novembre
+Oct: Opo
+Products: Produits
+Quick Insights.: Aperçus rapides.
+Realtime Updates & Insights with SignalR.: Mises à jour et informations en temps réel avec SignalR.
+Registered Roles: Rôles enregistrés
+Registered Users: Utilisateurs enregistrés
+Sep: Sept.
+ApplicationDescription: Exemple d’application avec WebAssembly et modèle d’architecture propre
+Resources: Ressources
+Manage your account: Gérer votre compte
+Security: Sécurité
+Delete Image: Supprimer l’image
+Delete Picture: Supprimer l’image
+Do you want to delete the profile picture of {0}: Voulez-vous supprimer la photo de profil de {0}
+Email: Messagerie électronique
+Profile: Profil
+Profile Details: Détails du profil
+Profile picture added.: Photo de profil ajoutée.
+Profile picture deleted.: Photo de profil supprimée.
+Save Changes: Enregistrer les modifications
+Upload Image: Télécharger l’image
+Your Profile has been updated. Please Login to Continue.: Votre profil a été mis à jour. Veuillez vous connecter pour continuer.
+Activate User?: Activer l’utilisateur ?
+Auto Confirm Email?: Confirmation automatique de l’e-mail?
+Register User: Enregistrer l’utilisateur
+User Registered: Utilisateur enregistré!
+User Registered Mailbox: Utilisateur enregistré. Le courrier de confirmation a été remis à la boîte aux lettres.
+Reset password: Réinitialiser le mot de passe
+Add Role: Ajouter un rôle
+Role ID: ID de rôle
+Role Name: Nom du rôle
+Save Role: Enregistrer le rôle
+Update Role: Rôle de mise à jour
+All Permissions: Toutes les autorisations
+Apply: Appliquer
+Here you can leave a comment for this permission for the current role: Ici, vous pouvez laisser un commentaire pour cette autorisation pour le rôle actuel
+Manage {0} {1}'s Permissions: Gérer les autorisations de {0} {1}
+Manage Permission: Gérer les autorisations
+Permission Name: Nom de l’autorisation
+Search For Permissions: Rechercher des autorisations
+Status: Statut
+Type: Type
+Update Role Permissions: Mettre à jour les autorisations de rôle
+Will be saved only when selected Permission: Sera enregistré uniquement lorsque l’autorisation est sélectionnée
+Delete Role Content: Voulez-vous supprimer le rôle avec Id {0} ?
+Manage Roles.: Gérer les rôles.
+Role: Rôle
+Roles: Rôles
+Search for Roles...: Rechercher des rôles...
+Change Password: Changer le mot de passe
+Current Password: Mot de passe actuel
+Incorrect Password.: Mot de passe incorrect.
+Password Changed!: Mot de passe changé!
+Password Confirmation: Confirmation du mot de passe
+Password Confirmation is required!: La confirmation du mot de passe est requise!
+Password is required!: Le mot de passe est requis!
+Password must be at least of length 8: Le mot de passe doit être d’au moins la longueur 8
+Password must contain at least one capital letter: Le mot de passe doit contenir au moins une lettre majuscule
+Password must contain at least one digit: Le mot de passe doit contenir au moins un chiffre
+Password must contain at least one lowercase letter: Le mot de passe doit contenir au moins une lettre minuscule
+Passwords don't match: Les mots de passe ne correspondent pas
+Active?: Actif?
+Administrator Settings.: Paramètres de l’administrateur.
+Public Profile: Profil public
+This is an Administrator Only View.: Il s’agit d’une vue Administrateur uniquement.
+Updated User Status.: Statut de l’utilisateur mis à jour.
+Manage {0} {1}'s Roles: Gérer les rôles des {0} {1}
+Roles Updated: Rôles mis à jour!
+Search For User Roles: Rechercher des rôles d’utilisateur
+Update User Roles: Mettre à jour les rôles d’utilisateur
+Active: Actif
+Email Confirmation: Confirmation par e-mail
+Filtered Users exported: Utilisateurs filtrés exportés
+Manage Roles: Gérer les rôles
+Manage Users: Gérer les utilisateurs
+Not Allowed.: Non autorisé.
+PhoneNumber: Numéro de téléphone
+Register New User: Enregistrer un nouvel utilisateur
+Search For Users: Rechercher des utilisateurs
+UserName: Nom d’utilisateur
+Users: Utilisateurs
+Users exported: Utilisateurs exportés
+View Profile: Voir le profil
+Audit Trails: Pistes d’audit
+Audit Trails exported: Pistes d’audit exportées
+Clear: Clair
+Columns Affected: Colonnes affectées
+Date: Date
+Date Range For Searching: Plage de dates pour la recherche
+Details for Trail ID: Détails pour Trail ID
+Export To Excel: Exporter vers Excel
+Filtered Audit Trails exported: Pistes d’audit filtrées exportées
+Hide: Cacher
+Local: Local
+New Values: Nouvelles valeurs
+Ok: D’accord
+Old Values: Anciennes valeurs
+Primary Key: Clé primaire
+Search for Trails: Rechercher des sentiers
+Search in New Values: Rechercher dans de nouvelles valeurs
+Search in Old Values: Rechercher dans les anciennes valeurs
+Show: Montrer
+Table Name: Nom de la table
+Trail Details: Détails du sentier
+UTC: UTC
+Your Recent Activities.: Vos activités récentes.
+Add Document: Ajouter un document
+Document Type: Document Type
+Download: Télécharger
+Is Public?: Est-ce que public?
+Update Document: Document de mise à jour
+Add Document Type: Ajouter un type de document
+Update Document Type: Mettre à jour le type de document
+Browse Available Documents.: Parcourez les documents disponibles.
+Date Created: Date de création
+Document Store: Magasin de documents
+Is Public: Est public
+Manage Extended Attributes: Gérer les attributs étendus
+Owner: Propriétaire
+you: vous
+Document Types exported: Types de documents exportés
+Filtered Document Types exported: Types de documents filtrés exportés
+Manage Document Types.: Gérer les types de documents.
+Search for Document Types: Rechercher des types de documents
+Chat?: Bavarder?
+Community: Communauté
+Logout: Déconnexion
+Logout Confirmation: Voulez-vous vraiment vous déconnecter?
+Refreshed Token.: Jeton actualisé.
+Support: Soutien
+Toggle right-to-left/left-to-right: Basculer de droite à gauche/de gauche à droite
+You are logged out because the Permissions of one of your Roles have been updated.: Vous êtes déconnecté car les autorisations de l’un de vos rôles ont été mises à jour.
+You are logged out because the user with your Token has been deleted.: Vous êtes déconnecté car l’utilisateur avec votre Token a été supprimé.
+You are Logged Out.: Vous êtes déconnecté.
+Administrator: Administrateur
+Catalog Management: Gestion des catalogues
+Chat: Bavarder
+Communication: Communication
+Document Management: Gestion des documents
+FAQs: Foire aux questions (FAQ)
+Features: Fonctionnalités
+Home: Domicile
+Mail: Courrier
+Personal: Personnel
+Quick Start Guide: Guide de démarrage rapide
+Swagger: Documentation de l’API
+GoHome: Rentre chez toi!
+NotFoundMessage: La page que vous recherchiez n’existe pas.
+Confirm: Confirmer
+Delete Confirmation: Confirmation de suppression
+Add Extended Attribute: Ajouter un attribut étendu
+Decimal: Décimal
+Entity Id: ID d’entité
+External Id: ID externe
+Group: Groupe
+Is Active: Est actif
+Json: Json
+Key: Clé
+Text: SMS
+Time: Heure
+Update Extended Attribute: Mettre à jour l’attribut étendu
+All Groups: Tous les groupes
+Delete Extended Attribute?: Supprimer l’attribut étendu ?
+Extended Attributes exported: Attributs étendus exportés
+Filtered Extended Attributes exported: Attributs étendus filtrés exportés
+Include Entity fields (Export): Inclure les champs d’entité (Exporter)
+Manage {0} {1}'s Extended Attributes: Gérer les attributs étendus de {0} {1}
+Manage {0} Extended Attributes: Gérer {0} attributs étendus
+Only Selected Group (Export): Seul le groupe sélectionné (exporter)
+Search For {0} Extended Attributes: Rechercher des attributs étendus {0}
+Value: Valeur
+English: Anglais
+Español: Español
+French: Français
+German: Allemand
+Indonesia: Indonésie
+Italian: Italien
+Select Language: Sélectionner une langue
+Swedish: Suédois
+Russian: Russe
+RowsPerPageString: Lignes par page

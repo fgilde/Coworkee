@@ -10,6 +10,7 @@
     }
 </style>
 
+<ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Brands"]" Description="@_localizer["Manage Brands."]" />
 
 <EditableDataTable ApiLoad="@(new Func<Task<Result<List<GetAllBrandsResponse>>>>(Load))"

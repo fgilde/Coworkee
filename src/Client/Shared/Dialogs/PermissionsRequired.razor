@@ -16,7 +16,7 @@
                 @foreach (var info in RequiredClaims)
                 {
                     <MudAlert Severity="Severity.Warning">
-                        @info.ClaimValue
+                        @localizer[info.ClaimValue]
                     </MudAlert>
                 }
             </div>

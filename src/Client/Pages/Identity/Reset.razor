@@ -4,6 +4,7 @@
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Reset> _localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@_resetPasswordModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudGrid>

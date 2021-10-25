@@ -32,6 +32,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             IStringLocalizer<ClientAuthenticationManager> localizer, 
             IBlazorHeroClient api)
         {
+            //_localStorage.ClearAsync();
             _httpClient = httpClient;
             _localStorage = localStorage;
             _authenticationStateProvider = authenticationStateProvider;

@@ -1,0 +1,276 @@
+Hello World: Здравей, свят
+Account: Сметка
+Done!: Направи!
+E-Mail: Електронна поща
+Enter email for password reset: Въведете имейл адреса, свързан с профила ви, и ще получите имейл, съдържащ връзка, за да възстановите паролата си
+Forgot password?: Забравена парола?
+Reset Password: Нулиране на парола
+Already have an account?: Вече имате сметка?
+E-mail: Електронна поща
+I agree to the terms and privacy: Съгласен съм с условията и неприкосновеността на личния живот
+Password: Парола
+Phone Number: Телефонен номер
+Register: Регистрирайте се.
+Sign In: Влизане
+Sign Up: Регистрирайте се
+Username: Потребителско име
+New Password: Нова парола
+Set new password: Задаване на нова парола
+Token Not Found!: Жетон не е намерен!
+LoginDescription: Вход с вашите Идентификационни данни.
+Description: Описание
+Don't have an account?: Нямате сметка?
+Email is required!: Изисква се имейл!
+Fill Administrator Credentials: Запълване на идентификационни данни на администратор
+Fill Basic User Credentials: Попълнете основните потребителски идентификационни данни
+Register here: Регистрирайте се тук
+Remember me?: Помниш ли ме?
+Title: Влизане
+Welcome {0}: Добре дошли {0}
+Confirm Password: Потвърждаване на парола
+First Name: Собствено име
+Last Name: Презиме
+User Name: Потребителско име
+Brand Saved: Марка Спасени!
+Brand Updated: Марка Обновено!
+Update Brand: Актуализиране на марката
+Add Product: Добавяне на продукт
+Cancel: Задрасквам
+Product Saved: Продукт Записан!
+Product Updated: Продукт Актуализиран!
+Save: Спасявам
+Update: Актуализирам
+Update Product: Актуализиране на продукта
+Upload: Качвам
+View: Изглед
+Actions: Действия
+Add Brand: Добавяне на марка
+Bordered: Граничи
+Brands: Марки
+Brands exported: Изнесени марки
+Filtered Brands exported: Филтрирани марки изнесени
+Manage Brands.: Управление на марки.
+Search for Brands: Търсене на марки
+Tax: Данък
+Barcode: Баркод
+Brand: Марка
+Create: Създавам
+Delete: Изтривам
+Delete Content: Изтриване на съдържание
+Dense: Гъст
+Edit: Редактирам
+Export: Износ
+Filtered Products exported: Филтрирани продукти, изнесени
+Id: ИД
+Manage Products.: Управление на Продукти.
+Name: Име
+No Allowed Actions: Без разрешени действия
+Products exported: Изнасяни продукти
+Rate: Ставка
+Reload: Презареди
+Search: Търсене
+Striped: Шарени
+chat: Чат
+contacts: Контакти
+detailed guide for more.: подробно ръководство за повече.
+Enter your message...: Въведете съобщението си...
+Logged In.: Влезли в системата.
+Logged Out.: Излезли.
+New Message From {0}: Ново съобщение от {0}
+Send: Изпращам
+Apr: Април
+Aug: Август
+Charts comming soon ish...: Диаграми, идващи скоро иш...
+Dashboard: Таблото
+Dec: Декември
+Document Extended Attributes: Разширени атрибути на документа
+Document Types: Видове документи
+Documents: Документи
+Feb: Февруари
+Jan: Ян
+Jul: Юли
+Jun: Юни
+Mar: Мар
+May: Май
+Nov: Ноември
+Oct: Ост
+Products: Продукти
+Quick Insights.: Бързи прозрения.
+Realtime Updates & Insights with SignalR.: Актуализации в реално време & Прозрения с SignalR.
+Registered Roles: Регистрирани роли
+Registered Users: Регистрирани потребители
+Sep: Септември
+ApplicationDescription: Примерно приложение с webAssembly и модел чиста архитектура
+Resources: Ресурси
+Manage your account: Управление на профила ви
+Security: Безопасност
+Delete Image: Изтриване на изображение
+Delete Picture: Изтриване на картина
+Do you want to delete the profile picture of {0}: Искате ли да изтриете снимката на профила на {0}
+Email: Имейл
+Profile: Профил
+Profile Details: Подробни данни за профила
+Profile picture added.: Добавена е снимка на профила.
+Profile picture deleted.: Снимката на профила е изтрита.
+Save Changes: Записване на промените
+Upload Image: Качване на изображение
+Your Profile has been updated. Please Login to Continue.: Вашият профил е актуализиран. Моля, Вход в Продължи.
+Activate User?: Активиране на потребител?
+Auto Confirm Email?: Автоматично потвърждаване на имейл?
+Register User: Регистриране на потребител
+User Registered: Регистриран потребител!
+User Registered Mailbox: Регистриран потребител. Потвърждение Mail е доставено на пощенската кутия.
+Reset password: Нулиране на паролата
+Add Role: Добавяне на роля
+Role ID: ИД на роля
+Role Name: Име на роля
+Save Role: Записване на роля
+Update Role: Роля на актуализиране
+All Permissions: Всички разрешения
+Apply: Прилагам
+Here you can leave a comment for this permission for the current role: Тук можете да оставите коментар за това разрешение за текущата роля
+Manage {0} {1}'s Permissions: Управление на разрешенията на {0} {1}
+Manage Permission: Управление на разрешение
+Permission Name: Име на разрешение
+Search For Permissions: Търсене на разрешения
+Status: Статус
+Type: Вид
+Update Role Permissions: Разрешения за роля за актуализиране
+Will be saved only when selected Permission: Ще бъде записано само когато е избрано разрешение
+Delete Role Content: Искате ли да изтриете ролята с Id {0}?
+Manage Roles.: Управление на роли.
+Role: Роля
+Roles: Роли
+Search for Roles...: Търсене на роли...
+Change Password: Промяна на парола
+Current Password: Текуща парола
+Incorrect Password.: Неправилна парола.
+Password Changed!: Парола Променена!
+Password Confirmation: Потвърждение на паролата
+Password Confirmation is required!: Изисква се потвърждение на паролата!
+Password is required!: Изисква се парола!
+Password must be at least of length 8: Паролата трябва да е най-малко с дължина 8
+Password must contain at least one capital letter: Паролата трябва да съдържа поне една главна буква
+Password must contain at least one digit: Паролата трябва да съдържа поне една цифри
+Password must contain at least one lowercase letter: Паролата трябва да съдържа поне една малка буква
+Passwords don't match: Паролите не съвпадат
+Active?: Активен?
+Administrator Settings.: Настройки на администратора.
+Public Profile: Публичен профил
+This is an Administrator Only View.: Това е само изглед на администратор.
+Updated User Status.: Актуализирано състояние на потребителя.
+Manage {0} {1}'s Roles: Управление на ролите на {0} {1}
+Roles Updated: Роли Актуализирани!
+Search For User Roles: Търсене на потребителски роли
+Update User Roles: Актуализиране на потребителски роли
+Active: Активен
+Email Confirmation: Потвърждение по имейл
+Filtered Users exported: Филтрирани потребители експортирани
+Manage Roles: Управление на роли
+Manage Users: Управление на потребители
+Not Allowed.: Не е позволено.
+PhoneNumber: ТелефонНомер
+Register New User: Регистриране на нов потребител
+Search For Users: Търсене на потребители
+UserName: Потребителско име
+Users: Потребители
+Users exported: Потребителите изнесени
+View Profile: Преглед на профил
+Audit Trails: Одитни пътеки
+Audit Trails exported: Изнесени одитни пътеки
+Clear: Ясен
+Columns Affected: Засегнати колони
+Date: Дата
+Date Range For Searching: Период от време за търсене
+Details for Trail ID: Подробности за Trail ID
+Export To Excel: Експортиране в Excel
+Filtered Audit Trails exported: Филтрирани одитни пътеки изнесени
+Hide: Крия
+Local: Местен
+New Values: Нови стойности
+Ok: OK
+Old Values: Стари ценности
+Primary Key: Първичен ключ
+Search for Trails: Търсене на Пътеки
+Search in New Values: Търсене в Нови стойности
+Search in Old Values: Търсене в Стари ценности
+Show: Показвам
+Table Name: Име на таблица
+Trail Details: Подробности за пътеката
+UTC: UTC
+Your Recent Activities.: Вашите Последни Дейности.
+Add Document: Добавяне на документ
+Document Type: Вид документ
+Download: Свалям
+Is Public?: Публичен ли е?
+Update Document: Актуализиране на документ
+Add Document Type: Добавяне на тип документ
+Update Document Type: Актуализиране на типа документ
+Browse Available Documents.: Разгледайте наличните документи.
+Date Created: Дата на създаване
+Document Store: Хранилище на документи
+Is Public: Е публичен
+Manage Extended Attributes: Управление на разширени атрибути
+Owner: Собственик
+you: ти
+Document Types exported: Експортирани видове документи
+Filtered Document Types exported: Филтрирани видове документи, експортирани
+Manage Document Types.: Управление на типове документи.
+Search for Document Types: Търсене на типове документи
+Chat?: Чат?
+Community: Общност
+Logout: Изход
+Logout Confirmation: Наистина ли искаш да Logout?
+Refreshed Token.: Освежен токен.
+Support: Поддръжка
+Toggle right-to-left/left-to-right: Превключване отдясно наляво/отляво надясно
+You are logged out because the Permissions of one of your Roles have been updated.: Вие сте излезли, защото разрешенията на една от вашите Роли са актуализирани.
+You are logged out because the user with your Token has been deleted.: Вие сте излезли, защото потребителят с вашия Маркер е изтрит.
+You are Logged Out.: Вие сте излезли.
+Administrator: Администратор
+Catalog Management: Управление на каталога
+Chat: Чат
+Communication: Общуване
+Document Management: Управление на документи
+FAQs: Често задавани въпроси
+Features: Функции
+Home: Дом
+Mail: Поща
+Personal: Личен
+Quick Start Guide: Ръководство за бърз старт
+Swagger: Документация за API
+GoHome: Отивай си вкъщи!
+NotFoundMessage: Страницата, която търсеше, не съществува.
+Confirm: Потвърждавам
+Delete Confirmation: Изтриване на потвърждение
+Add Extended Attribute: Добавяне на разширен атрибут
+Decimal: Десетичен
+Entity Id: ИД на обект
+External Id: Външен ИД
+Group: Група
+Is Active: Е Активен
+Json: Джсън
+Key: Ключ
+Text: Текст
+Time: Час
+Update Extended Attribute: Актуализиране на разширен атрибут
+All Groups: Всички групи
+Delete Extended Attribute?: Изтриване на разширен атрибут?
+Extended Attributes exported: Експортирани разширени атрибути
+Filtered Extended Attributes exported: Експортирани филтрирани разширени атрибути
+Include Entity fields (Export): Включване на полета на обект (Експортиране)
+Manage {0} {1}'s Extended Attributes: Управление на разширените атрибути на {0} {1}
+Manage {0} Extended Attributes: Управление на {0} разширени атрибути
+Only Selected Group (Export): Само избрана група (експортиране)
+Search For {0} Extended Attributes: Търсене на {0} разширени атрибути
+Value: Стойност
+English: Английски
+Español: Еспаньол
+French: Френски
+German: Немски
+Indonesia: Индонезия
+Italian: Италиански
+Select Language: Избор на език
+Swedish: Шведски
+Russian: Руски
+RowsPerPageString: Редове на страница

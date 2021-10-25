@@ -1,5 +1,6 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RoleModal> _localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@RoleModel" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudDialog>

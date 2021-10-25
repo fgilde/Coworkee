@@ -3,7 +3,7 @@
 @layout MainLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> _localizer
-
+<ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudGrid>
@@ -20,7 +20,7 @@
         </MudItem>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudText>@_localizer["Description"]</MudText>
+                <MudText>@_localizer["LoginDescription"]</MudText>
             </div>
         </MudItem>
         <MudItem xs="12">

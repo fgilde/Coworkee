@@ -1,14 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Net.Http;
+using System.Threading;
 using Blazored.LocalStorage;
 using CleanArchitectureBase.Client.Infrastructure.Settings;
 using MudBlazor;
 using System.Threading.Tasks;
+using AKSoftware.Localization.MultiLanguages;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Managers.Theme;
 using CleanArchitectureBase.Client.Infrastructure.Theming;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Settings;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
+using Nextended.Core;
+using Nextended.Core.Helper;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
 {
@@ -17,15 +26,21 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
         private readonly ILocalStorageService _localStorageService;
         private readonly IStringLocalizer<ClientPreferenceManager> _localizer;
         private readonly IThemeManager _themeManager;
+        private readonly ILanguageContainerService _languageService;
+        private readonly HttpClient _httpClient;
 
         public ClientPreferenceManager(
             ILocalStorageService localStorageService,
             IStringLocalizer<ClientPreferenceManager> localizer,
-            IThemeManager themeManager)
+            IThemeManager themeManager, 
+            ILanguageContainerService languageService,
+            HttpClient httpClient)
         {
             _localStorageService = localStorageService;
             _localizer = localizer;
             _themeManager = themeManager;
+            _languageService = languageService;
+            _httpClient = httpClient;
         }
 
         public async Task SetCurrentThemeName(string themeName)
@@ -53,7 +68,12 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
             if (await GetPreference() is ClientPreference preference)
             {
                 preference.LanguageCode = languageCode;
+                var cultureInfo = CultureInfo.GetCultureInfo(languageCode);
+                _httpClient.UpdateAcceptLanguage(cultureInfo);
+                Check.TryCatch<Exception>(() => _languageService.SetLanguage(cultureInfo));
+
                 await SetPreference(preference);
+
                 return new Result
                 {
                     Succeeded = true,
@@ -86,7 +106,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
         }
 
         public async Task SetPreference(IPreference preference)
-        {
+        { 
             await _localStorageService.SetItemAsync(StorageConstants.Local.Preference, preference as ClientPreference);
         }
     }

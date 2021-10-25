@@ -2,6 +2,7 @@
 @using CleanArchitectureBase.Shared.Constants.Role
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserProfile> _localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@Title" Description="@Description" />
 @if (!_loaded)
 {

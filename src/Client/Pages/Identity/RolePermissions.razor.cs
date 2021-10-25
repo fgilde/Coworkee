@@ -134,9 +134,9 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                     var parameters = new DialogParameters
                     {
                         {nameof(PermissionsRequired.RequiredClaims), neededAdditionalPermissions},
-                        {nameof(PermissionsRequired.Message), string.Format(message, neededAdditionalPermissions.Length, context.ClaimValue)}
+                        {nameof(PermissionsRequired.Message), string.Format(message, neededAdditionalPermissions.Length, _localizer[context.ClaimValue])}
                     };
-                    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, FullScreen = false, DisableBackdropClick = true };
+                    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, FullScreen = false, DisableBackdropClick = true };
                     var dialog = _dialogService.Show<PermissionsRequired>(_localizer["Dependent permissions required"], parameters, options);
                     var result = await dialog.Result;
                     if (!result.Cancelled)

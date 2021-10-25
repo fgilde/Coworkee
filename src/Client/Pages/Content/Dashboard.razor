@@ -2,6 +2,7 @@
 @attribute [Authorize(Policy = Permissions.Dashboards.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Dashboard> _localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Dashboard"]" Description="@_localizer["Realtime Updates & Insights with SignalR."]" />
 @if (!_loaded)
 {

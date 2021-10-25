@@ -1,0 +1,276 @@
+Hello World: مرحبا بالعالم
+Account: حساب
+Done!: منجز!
+E-Mail: البريد الإلكتروني
+Enter email for password reset: أدخل عنوان البريد الإلكتروني المرتبط بحسابك وستتلقى رسالة إلكترونية تحتوي على رابط لإعادة تعيين كلمة المرور الخاصة بك
+Forgot password?: نسيت كلمة المرور؟
+Reset Password: إعادة تعيين كلمة المرور
+Already have an account?: هل لديك حساب بالفعل؟
+E-mail: البريد الإلكتروني
+I agree to the terms and privacy: أوافق على الشروط والخصوصية
+Password: شعار
+Phone Number: رقم الهاتف
+Register: سجل
+Sign In: تسجيل الدخول
+Sign Up: التسجيل
+Username: اسم المستخدم
+New Password: كلمة مرور جديدة
+Set new password: تعيين كلمة مرور جديدة
+Token Not Found!: الرمز المميز لم يتم العثور عليه!
+LoginDescription: تسجيل الدخول مع بيانات الاعتماد الخاصة بك.
+Description: وصف
+Don't have an account?: ليس لديك حساب؟
+Email is required!: البريد الإلكتروني مطلوب!
+Fill Administrator Credentials: تعبئة بيانات اعتماد المسؤول
+Fill Basic User Credentials: تعبئة بيانات اعتماد المستخدم الأساسية
+Register here: سجل هنا
+Remember me?: أتذكرني؟
+Title: تسجيل الدخول
+Welcome {0}: مرحبا بكم {0}
+Confirm Password: تأكيد كلمة المرور
+First Name: الاسم الأول
+Last Name: اسم العائلة
+User Name: اسم المستخدم
+Brand Saved: العلامة التجارية المحفوظة!
+Brand Updated: العلامة التجارية تحديث!
+Update Brand: تحديث العلامة التجارية
+Add Product: إضافة منتج
+Cancel: إلغاء الأمر
+Product Saved: المنتج المحفوظة!
+Product Updated: المنتج تحديث!
+Save: أنقذ
+Update: تحديث
+Update Product: تحديث المنتج
+Upload: رفع
+View: منظر
+Actions: الاجراءات
+Add Brand: إضافة علامة تجارية
+Bordered: تحدها
+Brands: العلامات التجاريه
+Brands exported: العلامات التجارية المصدرة
+Filtered Brands exported: العلامات التجارية المصفاة المصدرة
+Manage Brands.: إدارة العلامات التجارية.
+Search for Brands: البحث عن العلامات التجارية
+Tax: ضريبة
+Barcode: الباركود
+Brand: وسم
+Create: خلق
+Delete: حذف
+Delete Content: حذف المحتوى
+Dense: كثيف
+Edit: حرر
+Export: تصدير
+Filtered Products exported: المنتجات المصفاة المصدرة
+Id: معرف
+Manage Products.: إدارة المنتجات.
+Name: اسم
+No Allowed Actions: لا يسمح الإجراءات
+Products exported: المنتجات المصدرة
+Rate: معدل
+Reload: تحديث
+Search: بحث
+Striped: مخطط
+chat: ثَرْثَرَ
+contacts: جهات الاتصال
+detailed guide for more.: دليل مفصل لمزيد من المعلومات.
+Enter your message...: أدخل رسالتك...
+Logged In.: تسجيل الدخول.
+Logged Out.: تم تسجيل الخروج.
+New Message From {0}: رسالة جديدة من {0}
+Send: ارسل
+Apr: ابريل
+Aug: اغسطس
+Charts comming soon ish...: الرسوم البيانية قريبا العش...
+Dashboard: لوحه القياده
+Dec: ديسمبر
+Document Extended Attributes: سمات المستند الموسعة
+Document Types: أنواع المستندات
+Documents: الوثائق
+Feb: فبراير
+Jan: يناير
+Jul: يوليو
+Jun: يونيو
+Mar: مارس
+May: مايو
+Nov: نوفمبر
+Oct: اكتوبر
+Products: منتجات
+Quick Insights.: رؤى سريعة.
+Realtime Updates & Insights with SignalR.: تحديثات الوقت الحقيقي والرؤى مع SignalR.
+Registered Roles: الأدوار المسجلة
+Registered Users: المستخدمون المسجلون
+Sep: سبتمبر
+ApplicationDescription: نموذج التطبيق مع نمط هندسة WebAssembly ونظيفة
+Resources: موارد
+Manage your account: إدارة حسابك
+Security: أمن
+Delete Image: حذف الصورة
+Delete Picture: حذف صورة
+Do you want to delete the profile picture of {0}: هل تريد حذف صورة ملف التعريف {0}
+Email: البريد الإلكتروني
+Profile: ملف تعريف
+Profile Details: تفاصيل الملف الشخصي
+Profile picture added.: تمت إضافة صورة الملف الشخصي.
+Profile picture deleted.: تم حذف صورة ملف التعريف.
+Save Changes: حفظ التغييرات
+Upload Image: تحميل صورة
+Your Profile has been updated. Please Login to Continue.: تم تحديث ملف التعريف الخاص بك. يرجى تسجيل الدخول للمتابعة.
+Activate User?: تنشيط المستخدم؟
+Auto Confirm Email?: تأكيد تلقائي للبريد الإلكتروني؟
+Register User: تسجيل المستخدم
+User Registered: المستخدم المسجل!
+User Registered Mailbox: المستخدم المسجل. تم تسليم بريد التأكيد إلى علبة البريد.
+Reset password: إعادة تعيين كلمة المرور
+Add Role: إضافة دور
+Role ID: معرف الدور
+Role Name: اسم الدور
+Save Role: حفظ الدور
+Update Role: دور التحديث
+All Permissions: كافة الأذونات
+Apply: طبق
+Here you can leave a comment for this permission for the current role: هنا يمكنك ترك تعليق لهذا الإذن للدور الحالي
+Manage {0} {1}'s Permissions: إدارة أذونات {0} {1}
+Manage Permission: إدارة الإذن
+Permission Name: اسم الإذن
+Search For Permissions: البحث عن أذونات
+Status: حالة
+Type: نوع
+Update Role Permissions: تحديث أذونات الدور
+Will be saved only when selected Permission: سيتم حفظ فقط عند تحديد إذن
+Delete Role Content: هل تريد حذف الدور مع معرف {0}؟
+Manage Roles.: إدارة الأدوار.
+Role: دور
+Roles: ادوار
+Search for Roles...: البحث عن أدوار...
+Change Password: تغيير كلمة المرور
+Current Password: كلمة المرور الحالية
+Incorrect Password.: كلمة مرور غير صحيحة.
+Password Changed!: تم تغيير كلمة المرور!
+Password Confirmation: تأكيد كلمة المرور
+Password Confirmation is required!: مطلوب تأكيد كلمة المرور!
+Password is required!: كلمة المرور مطلوبة!
+Password must be at least of length 8: يجب أن تكون كلمة المرور على الأقل من طول 8
+Password must contain at least one capital letter: يجب أن تحتوي كلمة المرور على حرف واحد على الأقل
+Password must contain at least one digit: يجب أن تحتوي كلمة المرور على رقم واحد على الأقل
+Password must contain at least one lowercase letter: يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل
+Passwords don't match: كلمات المرور غير متطابقة
+Active?: نشط؟
+Administrator Settings.: إعدادات المسؤول.
+Public Profile: الملف الشخصي العام
+This is an Administrator Only View.: هذا هو "طريقة عرض المسؤول فقط".
+Updated User Status.: تحديث حالة المستخدم.
+Manage {0} {1}'s Roles: إدارة أدوار {0} {1}
+Roles Updated: تم تحديث الأدوار!
+Search For User Roles: البحث عن أدوار المستخدم
+Update User Roles: تحديث أدوار المستخدم
+Active: نشط
+Email Confirmation: تأكيد البريد الإلكتروني
+Filtered Users exported: تم تصدير المستخدمين المصفاة
+Manage Roles: إدارة الأدوار
+Manage Users: إدارة المستخدمين
+Not Allowed.: غير مسموح به.
+PhoneNumber: رقم الهاتف
+Register New User: تسجيل مستخدم جديد
+Search For Users: البحث عن المستخدمين
+UserName: اسم المستخدم
+Users: المستعملون
+Users exported: المستخدمون المصدرون
+View Profile: عرض ملف التعريف
+Audit Trails: مسارات التدقيق
+Audit Trails exported: مسارات التدقيق المصدرة
+Clear: واضح
+Columns Affected: الأعمدة المتأثرة
+Date: تاريخ
+Date Range For Searching: نطاق التاريخ للبحث
+Details for Trail ID: تفاصيل معرف تريل
+Export To Excel: التصدير إلى Excel
+Filtered Audit Trails exported: مسارات التدقيق المصفاة المصدرة
+Hide: أخفى
+Local: محلي
+New Values: قيم جديدة
+Ok: موافق
+Old Values: القيم القديمة
+Primary Key: المفتاح الأساسي
+Search for Trails: البحث عن مسارات
+Search in New Values: البحث في قيم جديدة
+Search in Old Values: البحث في القيم القديمة
+Show: عرض
+Table Name: اسم الجدول
+Trail Details: تفاصيل تريل
+UTC: UTC
+Your Recent Activities.: أنشطتك الأخيرة.
+Add Document: إضافة مستند
+Document Type: نوع المستند
+Download: تحميل
+Is Public?: هل الجمهور؟
+Update Document: تحديث المستند
+Add Document Type: إضافة نوع المستند
+Update Document Type: تحديث نوع المستند
+Browse Available Documents.: تصفح المستندات المتوفرة.
+Date Created: تاريخ الإنشاء
+Document Store: مخزن المستندات
+Is Public: هو عام
+Manage Extended Attributes: إدارة السمات الموسعة
+Owner: مالك
+you: أنت
+Document Types exported: أنواع المستندات المصدرة
+Filtered Document Types exported: أنواع المستندات المصفاة المصدرة
+Manage Document Types.: إدارة أنواع المستندات.
+Search for Document Types: البحث عن أنواع المستندات
+Chat?: ثَرْثَرَ؟
+Community: مجتمع
+Logout: الخروج
+Logout Confirmation: هل تريد حقا تسجيل الخروج؟
+Refreshed Token.: الرمز المميز التحديث.
+Support: دعم
+Toggle right-to-left/left-to-right: التبديل من اليمين إلى اليسار/من اليسار إلى اليمين
+You are logged out because the Permissions of one of your Roles have been updated.: لقد قمت بتسجيل الخروج لأنه تم تحديث أذونات أحد الأدوار الخاصة بك.
+You are logged out because the user with your Token has been deleted.: لقد قمت بتسجيل الخروج لأنه تم حذف المستخدم الذي يحمل الرمز المميز الخاص بك.
+You are Logged Out.: لقد قمت بتسجيل الخروج.
+Administrator: مدير
+Catalog Management: إدارة الكتالوجات
+Chat: ثَرْثَرَ
+Communication: انتقال
+Document Management: إدارة الوثائق
+FAQs: الأسئلة الشائعة
+Features: ملامح
+Home: وطن
+Mail: بريد
+Personal: شخصي
+Quick Start Guide: دليل البدء السريع
+Swagger: وثائق API
+GoHome: عد للمنزل!
+NotFoundMessage: الصفحة التي كنت تبحث عنها غير موجودة.
+Confirm: أكد
+Delete Confirmation: حذف التأكيد
+Add Extended Attribute: إضافة سمة موسعة
+Decimal: عشري
+Entity Id: معرف الكيان
+External Id: معرف خارجي
+Group: مجموعة
+Is Active: نشط
+Json: جوسون
+Key: مفتاح
+Text: نص
+Time: الوقت
+Update Extended Attribute: تحديث سمة موسعة
+All Groups: جميع المجموعات
+Delete Extended Attribute?: حذف سمة موسعة؟
+Extended Attributes exported: السمات الموسعة المصدرة
+Filtered Extended Attributes exported: السمات الموسعة المصفاة المصدرة
+Include Entity fields (Export): تضمين حقول الكيان (تصدير)
+Manage {0} {1}'s Extended Attributes: إدارة سمات {0} {1} الموسعة
+Manage {0} Extended Attributes: إدارة {0} السمات الموسعة
+Only Selected Group (Export): المجموعة المحددة فقط (تصدير)
+Search For {0} Extended Attributes: البحث عن سمات موسعة {0}
+Value: قيمة
+English: الإنكليزية
+Español: إسبانيول
+French: الفرنسية
+German: الألمانية
+Indonesia: إندونيسيا
+Italian: الإيطالية
+Select Language: حدد اللغة
+Swedish: السويدية
+Russian: الروسية
+RowsPerPageString: صفوف لكل صفحة

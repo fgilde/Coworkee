@@ -1,6 +1,7 @@
 @page "/account"
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Account> localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@localizer["Account"]" Description="@localizer["Manage your account"]" />
 <MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
     <MudTabPanel Text="@localizer["Profile"]">

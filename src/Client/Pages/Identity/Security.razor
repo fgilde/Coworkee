@@ -1,5 +1,6 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Security> _localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@_passwordModel" OnValidSubmit="ChangePasswordAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudCard Elevation="25">

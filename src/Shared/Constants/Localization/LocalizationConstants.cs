@@ -10,13 +10,14 @@
             },
             new LanguageCode
             {
-                Code = "fr-FR",
-                DisplayName = "French"
+                IsRTL = true,
+                Code = "ar-SA",
+                DisplayName= "Saudi Arabia"
             },
             new LanguageCode
             {
-                Code = "km_KH",
-                DisplayName= "Khmer"
+                Code = "fr-FR",
+                DisplayName = "French"
             },
             new LanguageCode
             {
@@ -31,7 +32,7 @@
             new LanguageCode
             {
                 Code = "ru-RU",
-                DisplayName = "Русский"
+                DisplayName = "Russian"
             },
             new LanguageCode
             {
@@ -47,6 +48,11 @@
             {
                 Code = "it-IT",
                 DisplayName = "Italian"
+            },
+            new LanguageCode
+            {
+                Code = "bg-BG",
+                DisplayName = "Bulgarian"
             }
         };
     }

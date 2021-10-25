@@ -1,0 +1,276 @@
+Hello World: Salve, mondo
+Account: Conto
+Done!: Fatto!
+E-Mail: Posta elettronica
+Enter email for password reset: Inserisci l'indirizzo email collegato al tuo account e riceverai un'email contenente un link per reimpostare la password
+Forgot password?: Hai dimenticato la password?
+Reset Password: Reimposta password
+Already have an account?: Hai già un account?
+E-mail: Posta elettronica
+I agree to the terms and privacy: Accetto i termini e la privacy
+Password: Parola d’ordine
+Phone Number: Numero di telefono
+Register: Registro
+Sign In: Accedi
+Sign Up: Registrati
+Username: Nome utente
+New Password: Nuova password
+Set new password: Impostare una nuova password
+Token Not Found!: Token non trovato!
+LoginDescription: Accedi con le tue credenziali.
+Description: Descrizione
+Don't have an account?: Non hai un account?
+Email is required!: L'e-mail è obbligatoria!
+Fill Administrator Credentials: Compilare le credenziali di amministratore
+Fill Basic User Credentials: Compilare le credenziali utente di base
+Register here: Registrati qui
+Remember me?: Ti ricordi di me?
+Title: Accedi
+Welcome {0}: Benvenuto {0}
+Confirm Password: Conferma password
+First Name: Nome di battesimo
+Last Name: Cognome
+User Name: Nome utente
+Brand Saved: Marchio salvato!
+Brand Updated: Marchio aggiornato!
+Update Brand: Aggiorna marchio
+Add Product: Aggiungi prodotto
+Cancel: Annulla
+Product Saved: Prodotto salvato!
+Product Updated: Prodotto aggiornato!
+Save: Salvare
+Update: Aggiornare
+Update Product: Aggiorna prodotto
+Upload: Caricare
+View: Vista
+Actions: Azioni
+Add Brand: Aggiungi marca
+Bordered: Orlato
+Brands: Marche
+Brands exported: Marchi esportati
+Filtered Brands exported: Marchi filtrati esportati
+Manage Brands.: Gestisci i marchi.
+Search for Brands: Ricerca di Marchi
+Tax: Tassa
+Barcode: Codice a barre
+Brand: Marchio
+Create: Creare
+Delete: Cancellare
+Delete Content: Elimina contenuto
+Dense: Denso
+Edit: Redigere
+Export: Esportazione
+Filtered Products exported: Prodotti filtrati esportati
+Id: Id
+Manage Products.: Gestire i prodotti.
+Name: Nome
+No Allowed Actions: Azioni non consentite
+Products exported: Prodotti esportati
+Rate: Tasso
+Reload: Ricaricare
+Search: Ricerca
+Striped: A strisce
+chat: Chiacchierare
+contacts: Contatti
+detailed guide for more.: guida dettagliata per saperne di più.
+Enter your message...: Inserisci il tuo messaggio...
+Logged In.: Connesso.
+Logged Out.: Disconnesso.
+New Message From {0}: Nuovo messaggio da {0}
+Send: Invia
+Apr: Apr
+Aug: Ago
+Charts comming soon ish...: Classifiche in arrivo ish...
+Dashboard: Cruscotto
+Dec: Dic
+Document Extended Attributes: Attributi estesi del documento
+Document Types: Tipi di documento
+Documents: Documenti
+Feb: Feb
+Jan: Giovanna
+Jul: Lug
+Jun: Giu
+Mar: Guastare
+May: Maggio
+Nov: Nov
+Oct: Ott
+Products: Prodotti
+Quick Insights.: Approfondimenti rapidi.
+Realtime Updates & Insights with SignalR.: Aggiornamenti e approfondimenti in tempo reale con SignalR.
+Registered Roles: Ruoli registrati
+Registered Users: Utenti registrati
+Sep: Set
+ApplicationDescription: Applicazione di esempio con WebAssembly e modello di architettura pulita
+Resources: Risorse
+Manage your account: Gestisci il tuo account
+Security: Sicurezza
+Delete Image: Elimina immagine
+Delete Picture: Elimina immagine
+Do you want to delete the profile picture of {0}: Vuoi eliminare l'immagine del profilo di {0}
+Email: E-mail
+Profile: Profilo
+Profile Details: Dettagli del profilo
+Profile picture added.: Aggiunta l'immagine del profilo.
+Profile picture deleted.: Immagine del profilo eliminata.
+Save Changes: Salva modifiche
+Upload Image: Carica immagine
+Your Profile has been updated. Please Login to Continue.: Il tuo profilo è stato aggiornato. Effettua il login per continuare.
+Activate User?: Attivare l'utente?
+Auto Confirm Email?: Email di conferma automatica?
+Register User: Registra utente
+User Registered: Utente registrato!
+User Registered Mailbox: Utente registrato. La posta di conferma è stata recapitata alla cassetta postale.
+Reset password: Reimposta password
+Add Role: Aggiungi ruolo
+Role ID: ID ruolo
+Role Name: Nome ruolo
+Save Role: Salva ruolo
+Update Role: Aggiorna ruolo
+All Permissions: Tutte le autorizzazioni
+Apply: Applicare
+Here you can leave a comment for this permission for the current role: Qui puoi lasciare un commento per questa autorizzazione per il ruolo corrente
+Manage {0} {1}'s Permissions: Gestire le autorizzazioni di {0} {1}
+Manage Permission: Gestisci autorizzazioni
+Permission Name: Nome autorizzazione
+Search For Permissions: Cerca autorizzazioni
+Status: Stato
+Type: Digitare
+Update Role Permissions: Aggiornare le autorizzazioni del ruolo
+Will be saved only when selected Permission: Verrà salvato solo quando è selezionata l'autorizzazione
+Delete Role Content: Si desidera eliminare il ruolo con id {0}?
+Manage Roles.: Gestire i ruoli.
+Role: Ruolo
+Roles: Ruoli
+Search for Roles...: Cerca ruoli...
+Change Password: Cambia password
+Current Password: Password corrente
+Incorrect Password.: Password errata.
+Password Changed!: Password cambiata!
+Password Confirmation: Conferma password
+Password Confirmation is required!: È richiesta la conferma della password!
+Password is required!: La password è obbligatoria!
+Password must be at least of length 8: La password deve essere di almeno 8 lunghezza
+Password must contain at least one capital letter: La password deve contenere almeno una lettera maiuscola
+Password must contain at least one digit: La password deve contenere almeno una cifra
+Password must contain at least one lowercase letter: La password deve contenere almeno una lettera minuscola
+Passwords don't match: Le password non corrispondono
+Active?: Attivo?
+Administrator Settings.: Impostazioni dell'amministratore.
+Public Profile: Profilo Pubblico
+This is an Administrator Only View.: Si tratta di una visualizzazione solo amministratore.
+Updated User Status.: Stato utente aggiornato.
+Manage {0} {1}'s Roles: Gestire i ruoli di {0} {1}
+Roles Updated: Ruoli aggiornati!
+Search For User Roles: Ricerca di ruoli utente
+Update User Roles: Aggiornare i ruoli utente
+Active: Attivo
+Email Confirmation: Conferma via e-mail
+Filtered Users exported: Utenti filtrati esportati
+Manage Roles: Gestire i ruoli
+Manage Users: Gestisci utenti
+Not Allowed.: Non consentito.
+PhoneNumber: Numero di telefono
+Register New User: Registra nuovo utente
+Search For Users: Ricerca di utenti
+UserName: Nome utente
+Users: Gli utenti
+Users exported: Utenti esportati
+View Profile: Visualizza profilo
+Audit Trails: Audit Trail
+Audit Trails exported: Audit Trail esportati
+Clear: Chiaro
+Columns Affected: Colonne interessate
+Date: Dattero
+Date Range For Searching: Intervallo di date per la ricerca
+Details for Trail ID: Dettagli per Trail ID
+Export To Excel: Esporta in Excel
+Filtered Audit Trails exported: Audit trail filtrati esportati
+Hide: Nascondere
+Local: Locale
+New Values: Nuovi valori
+Ok: Ok
+Old Values: Vecchi valori
+Primary Key: Chiave primaria
+Search for Trails: Cerca sentieri
+Search in New Values: Cerca in Nuovi valori
+Search in Old Values: Cerca in Vecchi valori
+Show: Mostrare
+Table Name: Nome tabella
+Trail Details: Dettagli del percorso
+UTC: UTC
+Your Recent Activities.: Le tue attività recenti.
+Add Document: Aggiungi documento
+Document Type: Tipo di documento
+Download: Scaricare
+Is Public?: È pubblico?
+Update Document: Aggiorna documento
+Add Document Type: Aggiungi tipo di documento
+Update Document Type: Aggiorna tipo di documento
+Browse Available Documents.: Sfoglia i documenti disponibili.
+Date Created: Data di creazione
+Document Store: Archivio documenti
+Is Public: È pubblico
+Manage Extended Attributes: Gestire gli attributi estesi
+Owner: Proprietario
+you: tu
+Document Types exported: Tipi di documento esportati
+Filtered Document Types exported: Tipi di documento filtrati esportati
+Manage Document Types.: Gestire i tipi di documento.
+Search for Document Types: Ricerca di tipi di documento
+Chat?: Chiacchierare?
+Community: Comunità
+Logout: Logout
+Logout Confirmation: Vuoi davvero disconnetterti?
+Refreshed Token.: Token aggiornato.
+Support: Appoggiare
+Toggle right-to-left/left-to-right: Attiva/disattiva da destra a sinistra/da sinistra a destra
+You are logged out because the Permissions of one of your Roles have been updated.: Sei disconnesso perché le autorizzazioni di uno dei tuoi ruoli sono state aggiornate.
+You are logged out because the user with your Token has been deleted.: Sei disconnesso perché l'utente con il tuo token è stato eliminato.
+You are Logged Out.: Sei disconnesso.
+Administrator: Amministratore
+Catalog Management: Gestione cataloghi
+Chat: Chiacchierare
+Communication: Comunicazione
+Document Management: Gestione Documentale
+FAQs: Domande frequenti
+Features: Tratti somatici
+Home: Casa
+Mail: Posta
+Personal: Personale
+Quick Start Guide: Guida rapida
+Swagger: Documentazione API
+GoHome: Va' a casa!
+NotFoundMessage: La pagina che stavi cercando non esiste.
+Confirm: Confermare
+Delete Confirmation: Elimina conferma
+Add Extended Attribute: Aggiungi attributo esteso
+Decimal: Decimale
+Entity Id: ID entità
+External Id: ID esterno
+Group: Gruppo
+Is Active: È attivo
+Json: Json ·
+Key: Chiave
+Text: Testo
+Time: Ore
+Update Extended Attribute: Aggiorna attributo esteso
+All Groups: Tutti i gruppi
+Delete Extended Attribute?: Eliminare l'attributo esteso?
+Extended Attributes exported: Attributi estesi esportati
+Filtered Extended Attributes exported: Attributi estesi filtrati esportati
+Include Entity fields (Export): Includi campi Entità (Esporta)
+Manage {0} {1}'s Extended Attributes: Gestire gli attributi estesi di {0} {1}
+Manage {0} Extended Attributes: Gestire {0} attributi estesi
+Only Selected Group (Export): Solo gruppo selezionato (esportazione)
+Search For {0} Extended Attributes: Ricerca di attributi estesi {0}
+Value: Valore
+English: Inglese
+Español: Español
+French: Francese
+German: Tedesco
+Indonesia: Indonesia
+Italian: Italiano
+Select Language: Seleziona lingua
+Swedish: Svedese
+Russian: Russo
+RowsPerPageString: Righe per pagina

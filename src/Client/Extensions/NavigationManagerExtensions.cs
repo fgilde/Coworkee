@@ -21,6 +21,11 @@ namespace CleanArchitectureBase.Client.Extensions
             return !string.IsNullOrWhiteSpace(url) ? url.Replace($"?{returnUrlParamName}=", "").Replace($"{returnUrlParamName}=", "") : "/";
         }
 
+        public static void Reload(this NavigationManager navigationManager, bool forceLoad = false)
+        {
+            navigationManager.NavigateTo(navigationManager.Uri, forceLoad);
+        }
+
         public static string GetReturnUrlValue(this NavigationManager navigationManager)
         {
             var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);

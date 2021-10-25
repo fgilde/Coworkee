@@ -1,0 +1,276 @@
+Hello World: Halo dunia
+Account: Rekening
+Done!: Selesai!
+E-Mail: Email
+Enter email for password reset: Masukkan alamat email yang ditautkan ke akun Anda dan Anda akan menerima email yang berisi tautan untuk mengatur ulang kata sandi Anda
+Forgot password?: Lupa kata sandi?
+Reset Password: Reset Kata Sandi
+Already have an account?: Sudah punya akun?
+E-mail: Email
+I agree to the terms and privacy: Saya setuju dengan persyaratan dan privasi
+Password: Kata sandi
+Phone Number: Nomor Telepon
+Register: Daftar
+Sign In: Tandatangan
+Sign Up: Tandatangan
+Username: Nama pengguna
+New Password: Kata Sandi Baru
+Set new password: Mengatur kata sandi baru
+Token Not Found!: Token tidak ditemukan!
+LoginDescription: Login dengan kredensial Anda.
+Description: Keterangan
+Don't have an account?: Tidak punya akun?
+Email is required!: Email diperlukan!
+Fill Administrator Credentials: Mengisi Kredensial Administrator
+Fill Basic User Credentials: Mengisi Kredensial Pengguna Dasar
+Register here: Daftar di sini
+Remember me?: Ingat aku?
+Title: Tandatangan
+Welcome {0}: Selamat datang {0}
+Confirm Password: Konfirmasi Kata Sandi
+First Name: Nama Depan
+Last Name: Nama Belakang
+User Name: Nama Pengguna
+Brand Saved: Merek Disimpan!
+Brand Updated: Brand Diperbarui!
+Update Brand: Memperbarui Merek
+Add Product: Menambahkan Produk
+Cancel: Membatalkan
+Product Saved: Produk disimpan!
+Product Updated: Produk Diperbarui!
+Save: Simpan
+Update: Pemutakhiran
+Update Product: Memperbarui Produk
+Upload: Unggah
+View: Melihat
+Actions: Tindakan
+Add Brand: Tambahkan Merek
+Bordered: Berbatasan
+Brands: Merek
+Brands exported: Merek yang diekspor
+Filtered Brands exported: Merek yang Difilter diekspor
+Manage Brands.: Kelola Merek.
+Search for Brands: Mencari Merek
+Tax: Pajak
+Barcode: Barcode
+Brand: Merek
+Create: Menciptakan
+Delete: Menghapus
+Delete Content: Menghapus Konten
+Dense: Padat
+Edit: Mengedit
+Export: Ekspor
+Filtered Products exported: Produk yang Difilter diekspor
+Id: Id
+Manage Products.: Kelola Produk.
+Name: Nama
+No Allowed Actions: Tidak Ada Tindakan yang Diizinkan
+Products exported: Produk yang diekspor
+Rate: Menilai
+Reload: Reload
+Search: Mencari
+Striped: Bergaris
+chat: Mengobrol
+contacts: Kontak
+detailed guide for more.: panduan terperinci untuk informasi lebih lanjut.
+Enter your message...: Masukkan pesan Anda...
+Logged In.: Login.
+Logged Out.: Logd Out.
+New Message From {0}: Pesan Baru dari {0}
+Send: Kirim
+Apr: Apr
+Aug: Agustus
+Charts comming soon ish...: Grafik datang segera ish...
+Dashboard: Dashboard
+Dec: Desember
+Document Extended Attributes: Atribut Dokumen Diperpanjang
+Document Types: Tipe Dokumen
+Documents: Dokumen
+Feb: Feb
+Jan: Jan
+Jul: Jul
+Jun: Jun
+Mar: Mar
+May: Mei
+Nov: Nov
+Oct: Oktober
+Products: Produk
+Quick Insights.: Wawasan Cepat.
+Realtime Updates & Insights with SignalR.: Pembaruan &Wawasan Realtime dengan SignalR.
+Registered Roles: Peran Terdaftar
+Registered Users: Pengguna Terdaftar
+Sep: Sep
+ApplicationDescription: Contoh Aplikasi dengan WebAssembly dan Pola Arsitektur Bersih
+Resources: Sumber daya
+Manage your account: Mengelola akun Anda
+Security: Keamanan
+Delete Image: Hapus Gambar
+Delete Picture: Hapus Gambar
+Do you want to delete the profile picture of {0}: Apakah Anda ingin menghapus gambar profil {0}
+Email: Email
+Profile: Profil
+Profile Details: Detail Profil
+Profile picture added.: Gambar profil ditambahkan.
+Profile picture deleted.: Gambar profil dihapus.
+Save Changes: Simpan Perubahan
+Upload Image: Unggah Gambar
+Your Profile has been updated. Please Login to Continue.: Profil Anda telah diperbarui. Silahkan login untuk melanjutkan.
+Activate User?: Aktifkan Pengguna?
+Auto Confirm Email?: Konfirmasi Email Otomatis?
+Register User: Daftarkan Pengguna
+User Registered: Pengguna Terdaftar!
+User Registered Mailbox: Pengguna terdaftar. Surat Konfirmasi telah dikirim ke Kotak Surat.
+Reset password: Mereset kata sandi
+Add Role: Menambahkan Peran
+Role ID: ID Peran
+Role Name: Nama Peran
+Save Role: Simpan Peran
+Update Role: Perbarui Peran
+All Permissions: Semua Izin
+Apply: Berlaku
+Here you can leave a comment for this permission for the current role: Di sini Anda dapat meninggalkan komentar untuk izin ini untuk peran saat ini
+Manage {0} {1}'s Permissions: Mengelola Izin {0} {1}
+Manage Permission: Kelola Izin
+Permission Name: Nama Izin
+Search For Permissions: Mencari Izin
+Status: Keadaan
+Type: Jenis
+Update Role Permissions: Memperbarui Izin Peran
+Will be saved only when selected Permission: Akan disimpan hanya ketika izin yang dipilih
+Delete Role Content: Apakah Anda ingin menghapus peran dengan Id {0}?
+Manage Roles.: Mengelola Peran.
+Role: Peranan
+Roles: Peran
+Search for Roles...: Cari peran...
+Change Password: Ubah Kata Sandi
+Current Password: Kata Sandi Saat Ini
+Incorrect Password.: Kata sandi yang salah.
+Password Changed!: Password Berubah!
+Password Confirmation: Konfirmasi Kata Sandi
+Password Confirmation is required!: Konfirmasi kata sandi diperlukan!
+Password is required!: Password diperlukan!
+Password must be at least of length 8: Kata sandi harus setidaknya panjang 8
+Password must contain at least one capital letter: Kata sandi harus berisi setidaknya satu huruf kapital.
+Password must contain at least one digit: Kata sandi harus berisi setidaknya satu digit
+Password must contain at least one lowercase letter: Kata sandi harus berisi setidaknya satu huruf kecil
+Passwords don't match: Kata sandi tidak cocok
+Active?: Aktif?
+Administrator Settings.: Pengaturan Administrator.
+Public Profile: Profil Publik
+This is an Administrator Only View.: Ini adalah Tampilan Hanya Administrator.
+Updated User Status.: Status Pengguna yang Diperbarui.
+Manage {0} {1}'s Roles: Mengelola Peran {0} {1}
+Roles Updated: Peran Diperbarui!
+Search For User Roles: Mencari Peran Pengguna
+Update User Roles: Memperbarui Peran Pengguna
+Active: Aktif
+Email Confirmation: Konfirmasi Email
+Filtered Users exported: Pengguna yang Difilter diekspor
+Manage Roles: Mengelola Peran
+Manage Users: Kelola Pengguna
+Not Allowed.: Dilarang.
+PhoneNumber: PhoneNumber
+Register New User: Daftarkan Pengguna Baru
+Search For Users: Mencari Pengguna
+UserName: UserName
+Users: Pengguna
+Users exported: Pengguna diekspor
+View Profile: Tampilkan Profil
+Audit Trails: Jalur Audit
+Audit Trails exported: Jalur Audit diekspor
+Clear: Jelas
+Columns Affected: Kolom terpengaruh
+Date: Tanggal
+Date Range For Searching: Rentang tanggal untuk pencarian
+Details for Trail ID: Detail untuk Trail ID
+Export To Excel: Ekspor ke Excel
+Filtered Audit Trails exported: Jalur Audit yang Difilter diekspor
+Hide: Menyembunyikan
+Local: Lokal
+New Values: Nilai Baru
+Ok: Oke
+Old Values: Nilai Lama
+Primary Key: Kunci Utama
+Search for Trails: Mencari Jalur
+Search in New Values: Mencari di Nilai Baru
+Search in Old Values: Mencari di Nilai Lama
+Show: Memperlihatkan
+Table Name: Nama Tabel
+Trail Details: Detail Jejak
+UTC: UTC
+Your Recent Activities.: Aktivitas anda baru-baru ini.
+Add Document: Menambahkan Dokumen
+Document Type: Tipe Dokumen
+Download: Mengunduh
+Is Public?: Apakah publik?
+Update Document: Memperbarui Dokumen
+Add Document Type: Menambahkan Tipe Dokumen
+Update Document Type: Perbarui Tipe Dokumen
+Browse Available Documents.: Telusuri Dokumen yang Tersedia.
+Date Created: Tanggal Dibuat
+Document Store: Penyimpanan Dokumen
+Is Public: Apakah publik
+Manage Extended Attributes: Mengelola Atribut Diperpanjang
+Owner: Pemilik
+you: kamu
+Document Types exported: Tipe Dokumen diekspor
+Filtered Document Types exported: Tipe Dokumen yang Difilter diekspor
+Manage Document Types.: Mengelola Tipe Dokumen.
+Search for Document Types: Mencari Tipe Dokumen
+Chat?: Mengobrol?
+Community: Masyarakat
+Logout: Logout
+Logout Confirmation: Apakah Anda benar-benar ingin logout?
+Refreshed Token.: Token yang disegarkan.
+Support: Dukung
+Toggle right-to-left/left-to-right: Beralih kanan-ke-kiri/kiri-ke-kanan
+You are logged out because the Permissions of one of your Roles have been updated.: Anda keluar karena Izin salah satu Peran Anda telah diperbarui.
+You are logged out because the user with your Token has been deleted.: Anda keluar karena pengguna dengan Token Anda telah dihapus.
+You are Logged Out.: Anda log out.
+Administrator: Administrator
+Catalog Management: Manajemen Katalog
+Chat: Mengobrol
+Communication: Komunikasi
+Document Management: Manajemen Dokumen
+FAQs: FAQ
+Features: Fitur
+Home: Rumah
+Mail: Pos
+Personal: Pribadi
+Quick Start Guide: Panduan Mulai Cepat
+Swagger: Dokumentasi API
+GoHome: Pulang sana!
+NotFoundMessage: Halaman yang Anda cari tidak ada.
+Confirm: Mengkonfirmasi
+Delete Confirmation: Hapus Konfirmasi
+Add Extended Attribute: Menambahkan Atribut Diperpanjang
+Decimal: Desimal
+Entity Id: Id Entitas
+External Id: Id Eksternal
+Group: Kelompok
+Is Active: Aktif
+Json: Json
+Key: Kunci
+Text: Teks
+Time: Waktu
+Update Extended Attribute: Memperbarui Atribut Diperpanjang
+All Groups: Semua Grup
+Delete Extended Attribute?: Menghapus Atribut Diperpanjang?
+Extended Attributes exported: Atribut Diperpanjang diekspor
+Filtered Extended Attributes exported: Atribut Diperpanjang yang Difilter diekspor
+Include Entity fields (Export): Termasuk bidang Entitas (Ekspor)
+Manage {0} {1}'s Extended Attributes: Mengelola Atribut Diperpanjang {0} {1}
+Manage {0} Extended Attributes: Mengelola Atribut {0} Diperpanjang
+Only Selected Group (Export): Hanya Grup Terpilih (Ekspor)
+Search For {0} Extended Attributes: Cari Atribut diperpanjang {0}
+Value: Nilai
+English: Inggris
+Español: Español
+French: Prancis
+German: Jerman
+Indonesia: Indonesia
+Italian: Italia
+Select Language: Pilih Bahasa
+Swedish: Swedia
+Russian: Rusia
+RowsPerPageString: Baris per halaman

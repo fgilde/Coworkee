@@ -14,11 +14,14 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using AKSoftware.Localization.MultiLanguages;
+using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Resources;
 using Nextended.Core.Extensions;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
@@ -41,6 +44,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 {
                     options.ResourcesPath = "Resources";
                 })
+                .AddYamlLocalizationWithFallback()
                 .AddAuthorizationCore(RegisterPermissionClaims)
                 .AddBlazoredLocalStorage()
                 .AddMudServices(configuration =>
@@ -62,8 +66,7 @@ namespace CleanArchitectureBase.Client.Extensions
                     .CreateClient(ApplicationConstants.ApplicationClientName).EnableIntercept(sp))
                 .AddHttpClient(ApplicationConstants.ApplicationClientName, client =>
                 {
-                    client.DefaultRequestHeaders.AcceptLanguage.Clear();
-                    client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
+                    client.UpdateAcceptLanguage();
                     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 })
                 .AddTypedClient<IBlazorHeroClient>((_, services) =>

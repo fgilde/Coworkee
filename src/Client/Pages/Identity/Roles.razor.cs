@@ -71,7 +71,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task Delete(string id)
         {
-            string deleteContent = _localizer["Delete Content"];
+            string deleteContent = _localizer["Delete Role Content"];
             var parameters = new DialogParameters
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}

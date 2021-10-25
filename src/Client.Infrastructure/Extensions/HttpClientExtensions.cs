@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Globalization;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Nextended.Core.Extensions;
@@ -7,6 +8,15 @@ namespace CleanArchitectureBase.Client.Infrastructure.Extensions
 {
     public static class HttpClientExtensions
     {
+
+        public static HttpRequestHeaders UpdateAcceptLanguage(this HttpRequestHeaders headers, CultureInfo cultureInfo = null)
+        {
+            if (cultureInfo != null)
+                CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            headers.AcceptLanguage.Clear();
+            headers.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
+            return headers;
+        }
 
         public static HttpRequestHeaders SetAuthorization(this HttpRequestHeaders headers, string token)
         {
@@ -23,6 +33,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Extensions
             return headers;
         }
 
+        public static void UpdateAcceptLanguage(this HttpClient client, CultureInfo cultureInfo = null) => client.DefaultRequestHeaders.UpdateAcceptLanguage(cultureInfo);
         public static void SetActiveRoleId(this HttpClient client, params string[] roleIds) => client.DefaultRequestHeaders.SetActiveRoleId(roleIds);
         public static void SetActiveRoleId(this HttpRequestMessage request, string roleId) => request.Headers.SetActiveRoleId(roleId);
         public static void SetAuthorization(this HttpClient httpClient, string token) => httpClient.DefaultRequestHeaders.SetAuthorization(token);

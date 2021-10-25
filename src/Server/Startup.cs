@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Server.Filters;
@@ -37,6 +38,7 @@ namespace CleanArchitectureBase.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var l = Thread.CurrentThread.CurrentCulture;
             services.AddTransient(p => ApplicationConfiguration.Create(_configuration));
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors();

@@ -1,5 +1,6 @@
 ﻿@using CleanArchitectureBase.Shared.Constants.Localization
 @using CleanArchitectureBase.Shared.Settings
+@using System.Globalization
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
 
 @{
@@ -10,7 +11,7 @@
         @{
             foreach (var language in LocalizationConstants.SupportedLanguages)
             {
-                <MudMenuItem Disabled="language.Code == actual" OnClick="(() => ChangeLanguageAsync(language.Code))">
+                <MudMenuItem Disabled="language.Code == actual" OnClick="(() => ChangeLanguageAsync(language))">
                     <MudText Typo="Typo.body2">
                         @if (language.Code == actual)
                         {
@@ -34,16 +35,28 @@
     IPreference preference;
     protected override async Task OnInitializedAsync()
     {
+        await LoadPreferenceAsync();
+    }
+
+    private async Task LoadPreferenceAsync()
+    {
         preference = await _clientPreferenceManager.GetPreference();
     }
 
-    private async Task ChangeLanguageAsync(string languageCode)
+    private async Task ChangeLanguageAsync(LanguageCode languageCode)
     {
-        var result = await _clientPreferenceManager.ChangeLanguageAsync(languageCode);
+        var result = await _clientPreferenceManager.ChangeLanguageAsync(languageCode.Code);
+        if (languageCode.IsRTL.HasValue && ((ClientPreference)preference).IsRTL != languageCode.IsRTL.Value)
+        {
+            await _clientPreferenceManager.ToggleLayoutDirection();
+        }
         if (result.Succeeded)
         {
             _snackBar.Add(result.Messages[0], Severity.Success);
-            _navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: true);
+            await LoadPreferenceAsync();
+            StateHasChanged();
+            _navigationManager.Reload();
+    //_navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: true);
         }
         else
         {

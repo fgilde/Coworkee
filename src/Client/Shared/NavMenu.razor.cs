@@ -17,8 +17,6 @@ namespace CleanArchitectureBase.Client.Shared
         private ClaimsPrincipal _user;
         private ExpandMode _expandMode;
 
-        public NavigationEntry SelectedEntry { get; private set; }
-
         [Parameter] public bool ShowUserCard { get; set; } = true;     
         
         [Parameter] public bool ShowApplicationLogo { get; set; } = false;
@@ -32,7 +30,7 @@ namespace CleanArchitectureBase.Client.Shared
                 if (value != _expandMode)
                 {
                     _expandMode = value;
-                    CollapseExpandAll(ExpandMode != ExpandMode.SingleExpand);
+                    SetAllExpanded(ExpandMode != ExpandMode.SingleExpand);
                 }
             }
         }
@@ -58,11 +56,14 @@ namespace CleanArchitectureBase.Client.Shared
         private void ExpandToCurrentUrl()
         {
             var url = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
-            if (ExpandMode != ExpandMode.None && !string.IsNullOrWhiteSpace(url) && url != "/")
+            if (ExpandMode != ExpandMode.None)
             {
-                FindEntriesForUrl(url)
-                    .SelectMany(e => e.Path)
-                    .Apply(e => e.IsExpanded = true);
+                if (!string.IsNullOrWhiteSpace(url) && url != "/")
+                {
+                    FindEntriesForUrl(url)
+                        .SelectMany(e => e.Path)
+                        .Apply(e => e.IsExpanded = true);
+                }
             }
         }
 
@@ -77,20 +78,20 @@ namespace CleanArchitectureBase.Client.Shared
             return Entries.Find(e => e.Href.EnsureStartsWith("/").ToLower() == url);
         }
 
-        private void ToggleExpand(NavigationEntry entry)
+        private void OnExpandCollapseClick(NavigationEntry entry)
         {
             if (ExpandMode != ExpandMode.None)
             {
                 var state = !entry.IsExpanded;
                 if (ExpandMode == ExpandMode.SingleExpand)
-                    CollapseExpandAll(false, e => e != entry && !e.ContainsChild(entry));
+                    SetAllExpanded(false, e => e != entry && !e.ContainsChild(entry));
                 entry.IsExpanded = state;
             }
         }
 
-        private void CollapseExpandAll(bool expand, Func<NavigationEntry, bool> predicate = null)
+        private void SetAllExpanded(bool expand, Func<NavigationEntry, bool> predicate = null)
         {
-            predicate ??= (n) => true;
+            predicate ??= n => ExpandMode == ExpandMode.SingleExpand || n.Parent == null;
             Entries.Recursive(n => n.Children.EmptyIfNull()).Where(predicate).Apply(e => e.IsExpanded = expand);
         }
 
@@ -102,7 +103,7 @@ namespace CleanArchitectureBase.Client.Shared
 
         private bool CanExpand(NavigationEntry context)
         {
-            return context.HasChildren && ExpandMode != ExpandMode.None;
+            return context.HasChildren && ExpandMode != ExpandMode.None && (context.Parent == null || context.Parent.IsExpanded);
         }
     }
 

@@ -1,0 +1,284 @@
+Hello World: Hallo Welt
+Account: Konto
+Done!: Fertig!
+E-Mail: E-Mail
+Enter email for password reset: Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und Sie erhalten eine E-Mail mit einem Link zum Zurücksetzen Ihres Passworts
+Forgot password?: Passwort vergessen?
+Reset Password: Passwort zurücksetzen
+Already have an account?: Haben Sie bereits ein Konto?
+E-mail: E-Mail
+I agree to the terms and privacy: Ich stimme den Bedingungen und dem Datenschutz zu
+Password: Passwort
+Phone Number: Telefonnummer
+Register: Registrieren
+Sign In: Anmelden
+Sign Up: Anmelden
+Username: Nutzername
+New Password: Neues Passwort
+Set new password: Neues Passwort festlegen
+Token Not Found!: Token nicht gefunden!
+LoginDescription: Melden Sie sich mit Ihren Anmeldeinformationen an.
+Description: Beschreibung
+Don't have an account?: Sie haben noch kein Konto?
+Email is required!: E-Mail ist erforderlich!
+Fill Administrator Credentials: Administratoranmeldeinformationen ausfüllen
+Fill Basic User Credentials: Grundlegende Benutzeranmeldeinformationen ausfüllen
+Register here: Registrieren Sie sich hier
+Remember me?: Erinnern Sie sich an mich?
+Title: Anmelden
+Welcome {0}: Willkommen {0}
+Confirm Password: Passwort bestätigen
+First Name: Vorname
+Last Name: Nachname
+User Name: Benutzername
+Brand Saved: Marke gerettet!
+Brand Updated: Marke aktualisiert!
+Update Brand: Marke aktualisieren
+Add Product: Produkt hinzufügen
+Cancel: Abbrechen
+Product Saved: Produkt gespeichert!
+Product Updated: Produkt aktualisiert!
+Save: Speichern
+Update: Aktualisieren
+Update Product: Produkt aktualisieren
+Upload: Hochladen
+View: Ansehen
+Actions: Aktionen
+Add Brand: Marke hinzufügen
+Bordered: Rahmen
+Brands: Marken
+Brands exported: Exportierte Marken
+Filtered Brands exported: Exportierte gefilterte Marken
+Manage Brands.: Marken verwalten.
+Search for Brands: Suche nach Marken
+Tax: Steuer
+Barcode: Barcode
+Brand: Marke
+Create: Erstellen
+Delete: Löschen
+Delete Content: Inhalt löschen
+Dense: Dicht
+Edit: Bearbeiten
+Export: Exportieren
+Filtered Products exported: Exportierte gefilterte Produkte
+Id: Id
+Manage Products.: Produkte verwalten.
+Name: Name
+No Allowed Actions: Keine zulässigen Aktionen
+Products exported: Exportierte Produkte
+Rate: Rate
+Reload: Neu laden
+Search: Suchen
+Striped: Gestreift
+chat: Chat
+contacts: Kontakte
+detailed guide for more.: detaillierte Anleitung für mehr.
+Enter your message...: Geben Sie Ihre Nachricht ein...
+Logged In.: Angemeldet.
+Logged Out.: Abgemeldet.
+New Message From {0}: Neue Nachricht von {0}
+Send: Senden
+Aug: Aug
+Charts comming soon ish...: Charts kommen bald...
+Dashboard: Dashboard
+Document Extended Attributes: Erweiterte Dokumentattribute
+Document Types: Dokumenttypen
+Documents: Dokumente
+Jan: Jan
+Feb: Feb
+Mar: Mrz
+Apr: Apr
+May: Mai
+Jul: Jul
+Jun: Jun
+Oct: Okt
+Nov: Nov
+Dec: Dez
+Products: Produkte
+Quick Insights.: Schnelle Einblicke.
+Realtime Updates & Insights with SignalR.: Echtzeit-Updates & Einblicke mit SignalR.
+Registered Roles: Registrierte Rollen
+Registered Users: Registrierte Benutzer
+Sep: Sep
+ApplicationDescription: Beispielanwendung mit WebAssembly und Clean Architecture Pattern
+Resources: Betriebsmittel
+Manage your account: Konto verwalten
+Security: Sicherheit
+Delete Image: Bild löschen
+Delete Picture: Bild löschen
+Do you want to delete the profile picture of {0}: Möchten Sie das Profilbild von {0}
+Email: E-Mail
+Profile: Profil
+Profile Details: Profildetails
+Profile picture added.: Profilbild hinzugefügt.
+Profile picture deleted.: Profilbild gelöscht.
+Save Changes: Änderungen speichern
+Upload Image: Bild hochladen
+Your Profile has been updated. Please Login to Continue.: Ihr Profil wurde aktualisiert. Bitte melden Sie sich an, um fortzufahren.
+Activate User?: Benutzer aktivieren?
+Auto Confirm Email?: E-Mail automatisch bestätigen?
+Register User: Benutzer registrieren
+User Registered: Benutzer registriert!
+User Registered Mailbox: Benutzer registriert. Die Bestätigungsmail wurde an das Postfach zugestellt.
+Reset password: Passwort zurücksetzen
+Add Role: Rolle hinzufügen
+Role ID: Rollen-ID
+Role Name: Rollenname
+Save Role: Rolle speichern
+Update Role: Rolle aktualisieren
+All Permissions: Alle Berechtigungen
+Apply: Anwenden
+Here you can leave a comment for this permission for the current role: Hier können Sie einen Kommentar für diese Berechtigung für die aktuelle Rolle hinterlassen
+Manage {0} {1}'s Permissions: Berechtigungen von {0} {1} verwalten
+Manage Permission: Berechtigung verwalten
+Permission Name: Berechtigungsname
+Search For Permissions: Nach Berechtigungen suchen
+Status: Status
+Type: Art
+Update Role Permissions: Aktualisieren von Rollenberechtigungen
+Will be saved only when selected Permission: Wird nur gespeichert, wenn Berechtigung ausgewählt ist
+Delete Role Content: Möchten Sie die Rolle mit ID {0} löschen?
+Manage Roles.: Rollen verwalten.
+Role: Rolle
+Roles: Rollen
+Search for Roles...: Nach Rollen suchen...
+Change Password: Passwort ändern
+Current Password: Aktuelles Passwort
+Incorrect Password.: Falsches Passwort.
+Password Changed!: Passwort geändert!
+Password Confirmation: Passwort-Bestätigung
+Password Confirmation is required!: Passwortbestätigung erforderlich!
+Password is required!: Passwort ist erforderlich!
+Password must be at least of length 8: Das Passwort muss mindestens die Länge 8 haben
+Password must contain at least one capital letter: Passwort muss mindestens einen Großbuchstaben enthalten
+Password must contain at least one digit: Passwort muss mindestens eine Ziffer enthalten
+Password must contain at least one lowercase letter: Das Kennwort muss mindestens einen Kleinbuchstaben enthalten
+Passwords don't match: Kennwörter stimmen nicht überein
+Active?: Aktiv?
+Administrator Settings.: Administratoreinstellungen.
+Public Profile: Horst Schmidt
+This is an Administrator Only View.: Dies ist eine nur für Administratoren angezeigte Ansicht.
+Updated User Status.: Aktualisierter Benutzerstatus.
+Manage {0} {1}'s Roles: Verwalten der Rollen von {0} {1}
+Roles Updated: Rollen aktualisiert!
+Search For User Roles: Suchen nach Benutzerrollen
+Update User Roles: Aktualisieren von Benutzerrollen
+Active: Aktiv
+Email Confirmation: E-Mail-Bestätigung
+Filtered Users exported: Exportierte gefilterte Benutzer
+Manage Roles: Verwalten von Rollen
+Manage Users: Benutzer verwalten
+Not Allowed.: Unstatthaft.
+PhoneNumber: Telefonnummer
+Register New User: Neuen Benutzer registrieren
+Search For Users: Nach Benutzern suchen
+UserName: Nutzername
+Users: Benutzer
+Users exported: Exportierte Benutzer
+View Profile: Profil anzeigen
+Audit Trails: Audit-Trails
+Audit Trails exported: Exportierte Audit Trails
+Clear: Klar
+Columns Affected: Betroffene Spalten
+Date: Datum
+Date Range For Searching: Datumsbereich für die Suche
+Details for Trail ID: Details zur Trail ID
+Export To Excel: Exportieren nach Excel
+Filtered Audit Trails exported: Exportierte gefilterte Audit-Trails
+Hide: Verstecken
+Local: Lokal
+New Values: Neue Werte
+Ok: Okay
+Old Values: Alte Werte
+Primary Key: Primärschlüssel
+Search for Trails: Suche nach Trails
+Search in New Values: Suche in neuen Werten
+Search in Old Values: Suche in alten Werten
+Show: Zeigen
+Table Name: Tabellenname
+Trail Details: Trail-Details
+UTC: UTC
+Your Recent Activities.: Ihre letzten Aktivitäten.
+Add Document: Dokument hinzufügen
+Document Type: Dokumenttyp
+Download: Herunterladen
+Is Public?: Ist öffentlich?
+Update Document: Dokument aktualisieren
+Add Document Type: Dokumenttyp hinzufügen
+Update Document Type: Dokumenttyp aktualisieren
+Browse Available Documents.: Verfügbare Dokumente durchsuchen.
+Date Created: Erstellungsdatum
+Document Store: Dokumentspeicher
+Is Public: Ist öffentlich
+Manage Extended Attributes: Erweiterte Attribute verwalten
+Owner: Eigentümer
+you: du
+Document Types exported: Exportierte Dokumenttypen
+Filtered Document Types exported: Exportierte gefilterte Dokumenttypen
+Manage Document Types.: Verwalten von Dokumenttypen.
+Search for Document Types: Suche nach Dokumenttypen
+Chat?: Chat?
+Community: Gemeinschaft
+Logout: Abmelden
+Logout Confirmation: Möchten Sie sich wirklich abmelden?
+Refreshed Token.: Aktualisiertes Token.
+Support: Unterstützen
+Toggle right-to-left/left-to-right: Umschalten von rechts nach links/von links nach rechts
+You are logged out because the Permissions of one of your Roles have been updated.: Sie sind abgemeldet, weil die Berechtigungen einer Ihrer Rollen aktualisiert wurden.
+You are logged out because the user with your Token has been deleted.: Sie sind abgemeldet, weil der Benutzer mit Ihrem Token gelöscht wurde.
+You are Logged Out.: Sie sind abgemeldet.
+Administrator: Administrator
+Catalog Management: Katalogverwaltung
+Chat: Chat
+Communication: Kommunikation
+Document Management: Dokumente
+FAQs: Häufig gestellte Fragen
+Features: Funktionen
+Home: Home
+Mail: Mail
+Personal: Persönlich
+Quick Start Guide: Kurzanleitung
+Swagger: API-Dokumentation
+GoHome: Geh nach Hause!
+NotFoundMessage: Die Seite, nach der Sie gesucht haben, existiert nicht.
+Confirm: Bestätigen
+Delete Confirmation: Bestätigung löschen
+Add Extended Attribute: Erweitertes Attribut hinzufügen
+Decimal: Dezimal
+Entity Id: Entitäts-ID
+External Id: Externe ID
+Group: Gruppe
+Is Active: Ist aktiv
+Json: Json
+Key: Schlüssel
+Text: Text
+Time: Zeit
+Update Extended Attribute: Erweitertes Attribut aktualisieren
+All Groups: Alle Gruppen
+Delete Extended Attribute?: Erweitertes Attribut löschen?
+Extended Attributes exported: Exportierte erweiterte Attribute
+Filtered Extended Attributes exported: Exportierte gefilterte erweiterte Attribute
+Include Entity fields (Export): Entitätsfelder einschließen (Exportieren)
+Manage {0} {1}'s Extended Attributes: Erweiterte Attribute von {0} {1} verwalten
+Manage {0} Extended Attributes: Verwalten {0} erweiterter Attribute
+Only Selected Group (Export): Nur ausgewählte Gruppe (Exportieren)
+Search For {0} Extended Attributes: Suche nach {0} erweiterten Attributen
+Value: Wert
+English: Englisch
+Español: Español
+French: Französisch
+German: Deutsch
+Indonesia: Indonesien
+Italian: Italienisch
+Select Language: Sprache auswählen
+Swedish: Schwedisch
+Russian: Russisch
+RowsPerPageString: Zeilen pro Seite
+Delete these {0} elements: Diese {0} Elemente löschen?
+Delete this element: Dieses Element löschen?
+Confirm and Ignore: Übernehmen und fehlende ignorieren
+Confirm and Set Required: Übernehmen und fehlende setzen
+The following permission is also required for permission {1}: Die folgende Berechtigung ist für die Berechtigung "{1}" ebenfalls erforderlich
+The following {0} permissions are also required for permission {1}: Für die Berechtigung "{1}" sind ebenfalls diese {0} Berechtigungen erforderlich
+Dependent permissions required: Abhängige Berechtigung(en) erforderlich
+Update Permissions: Berechtigungen aktualisieren

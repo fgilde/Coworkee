@@ -1,5 +1,6 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RegisterUserModal> _localizer
 
+<ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@_registerUserModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudDialog>

@@ -1,0 +1,287 @@
+﻿#https://akmultilanguages.azurewebsites.net/LanguagesCenter
+Hello World: Hello world
+Account: Account
+Done!: Done!
+E-Mail: E-Mail
+Enter email for password reset: Enter the email address linked to your account and you will recieve an email containing a link to reset your password
+Forgot password?: Forgot password?
+Reset Password: Reset Password
+Already have an account?: Already have an account?
+E-mail: E-mail
+I agree to the terms and privacy: I agree to the terms and privacy
+Password: Password
+Phone Number: Phone Number
+Register: Register
+Sign In: Sign In
+Sign Up: Sign Up
+Username: Username
+New Password: New Password
+Set new password: Set new password
+Token Not Found!: Token Not Found!
+LoginDescription: Login with your Credentials.
+Description: Description
+Don't have an account?: Don't have an account?
+Email is required!: Email is required!
+Fill Administrator Credentials: Fill Administrator Credentials
+Fill Basic User Credentials: Fill Basic User Credentials
+Register here: Register here
+Remember me?: Remember me?
+Title: Sign In
+Welcome {0}: Welcome {0}
+Confirm Password: Confirm Password
+First Name: First Name
+Last Name: Last Name
+User Name: User Name
+Brand Saved: Brand Saved!
+Brand Updated: Brand Updated!
+Update Brand: Update Brand
+Add Product: Add Product
+Cancel: Cancel
+Product Saved: Product Saved!
+Product Updated: Product Updated!
+Save: Save
+Update: Update
+Update Product: Update Product
+Upload: Upload
+View: View
+Actions: Actions
+Add Brand: Add Brand
+Bordered: Bordered
+Brands: Brands
+Brands exported: Brands exported
+Filtered Brands exported: Filtered Brands exported
+Manage Brands.: Manage Brands.
+Search for Brands: Search for Brands
+Tax: Tax
+Barcode: Barcode
+Brand: Brand
+Create: Create
+Delete: Delete
+Delete Content: Delete Content
+Dense: Dense
+Edit: Edit
+Export: Export
+Filtered Products exported: Filtered Products exported
+Id: Id
+Manage Products.: Manage Products.
+Name: Name
+No Allowed Actions: No Allowed Actions
+Products exported: Products exported
+Rate: Rate
+Reload: Reload
+Search: Search
+Striped: Striped
+#chat
+chat: Chat
+contacts: Contacts
+detailed guide for more.: detailed guide for more.
+Enter your message...: Enter your message...
+Logged In.: Logged In.
+Logged Out.: Logged Out.
+New Message From {0}: New Message From {0}
+Send: Send
+#Dashboard
+Apr: Apr
+Aug: Aug
+Charts comming soon ish...: Charts comming soon ish...
+Dashboard: Dashboard
+Dec: Dec
+Document Extended Attributes: Document Extended Attributes
+Document Types: Document Types
+Documents: Documents
+Feb: Feb
+Jan: Jan
+Jul: Jul
+Jun: Jun
+Mar: Mar
+May: May
+Nov: Nov
+Oct: Oct
+Products: Products
+Quick Insights.: Quick Insights.
+Realtime Updates & Insights with SignalR.: Realtime Updates & Insights with SignalR.
+Registered Roles: Registered Roles
+Registered Users: Registered Users
+Sep: Sep
+ApplicationDescription: Sample Application with WebAssembly and Clean Architecture Pattern
+Resources: Resources
+Manage your account: Manage your account
+Security: Security
+Delete Image: Delete Image
+Delete Picture: Delete Picture
+Do you want to delete the profile picture of {0}: Do you want to delete the profile picture of {0}
+Email: Email
+Profile: Profile
+Profile Details: Profile Details
+Profile picture added.: Profile picture added.
+Profile picture deleted.: Profile picture deleted.
+Save Changes: Save Changes
+Upload Image: Upload Image
+Your Profile has been updated. Please Login to Continue.: Your Profile has been updated. Please Login to Continue.
+Activate User?: Activate User?
+Auto Confirm Email?: Auto Confirm Email?
+Register User: Register User
+User Registered: User Registered!
+User Registered Mailbox: User Registered. Confirmation Mail has been delivered to the Mailbox.
+Reset password: Reset password
+Add Role: Add Role
+Role ID: Role ID
+Role Name: Role Name
+Save Role: Save Role
+Update Role: Update Role
+All Permissions: All Permissions
+Apply: Apply
+Here you can leave a comment for this permission for the current role: Here you can leave a comment for this permission for the current role
+Manage {0} {1}'s Permissions: Manage {0} {1}'s Permissions
+Manage Permission: Manage Permission
+Permission Name: Permission Name
+Search For Permissions: Search For Permissions
+Status: Status
+Type: Type
+Update Role Permissions: Update Role Permissions
+Will be saved only when selected Permission: Will be saved only when selected Permission
+Delete Role Content: Do you want to delete the role with Id {0}?
+Manage Roles.: Manage Roles.
+Role: Role
+Roles: Roles
+Search for Roles...: Search for Roles...
+Change Password: Change Password
+Current Password: Current Password
+Incorrect Password.: Incorrect Password.
+Password Changed!: Password Changed!
+Password Confirmation: Password Confirmation
+Password Confirmation is required!: Password Confirmation is required!
+Password is required!: Password is required!
+Password must be at least of length 8: Password must be at least of length 8
+Password must contain at least one capital letter: Password must contain at least one capital letter
+Password must contain at least one digit: Password must contain at least one digit
+Password must contain at least one lowercase letter: Password must contain at least one lowercase letter
+Passwords don't match: Passwords don't match
+Active?: Active?
+Administrator Settings.: Administrator Settings.
+Public Profile: Public Profile
+This is an Administrator Only View.: This is an Administrator Only View.
+Updated User Status.: Updated User Status.
+Manage {0} {1}'s Roles: Manage {0} {1}'s Roles
+Roles Updated: Roles Updated!
+Search For User Roles: Search For User Roles
+Update User Roles: Update User Roles
+Active: Active
+Email Confirmation: Email Confirmation
+Filtered Users exported: Filtered Users exported
+Manage Roles: Manage Roles
+Manage Users: Manage Users
+Not Allowed.: Not Allowed.
+PhoneNumber: PhoneNumber
+Register New User: Register New User
+Search For Users: Search For Users
+UserName: UserName
+Users: Users
+Users exported: Users exported
+View Profile: View Profile
+Audit Trails: Audit Trails
+Audit Trails exported: Audit Trails exported
+Clear: Clear
+Columns Affected: Columns Affected
+Date: Date
+Date Range For Searching: Date Range For Searching
+Details for Trail ID: Details for Trail ID
+Export To Excel: Export To Excel
+Filtered Audit Trails exported: Filtered Audit Trails exported
+Hide: Hide
+Local: Local
+New Values: New Values
+Ok: Ok
+Old Values: Old Values
+Primary Key: Primary Key
+Search for Trails: Search for Trails
+Search in New Values: Search in New Values
+Search in Old Values: Search in Old Values
+Show: Show
+Table Name: Table Name
+Trail Details: Trail Details
+UTC: UTC
+Your Recent Activities.: Your Recent Activities.
+Add Document: Add Document
+Document Type: Document Type
+Download: Download
+Is Public?: Is Public?
+Update Document: Update Document
+Add Document Type: Add Document Type
+Update Document Type: Update Document Type
+Browse Available Documents.: Browse Available Documents.
+Date Created: Date Created
+Document Store: Document Store
+Is Public: Is Public
+Manage Extended Attributes: Manage Extended Attributes
+Owner: Owner
+you: you
+Document Types exported: Document Types exported
+Filtered Document Types exported: Filtered Document Types exported
+Manage Document Types.: Manage Document Types.
+Search for Document Types: Search for Document Types
+Chat?: Chat?
+Community: Community
+Logout: Logout
+Logout Confirmation: Do you really want to Logout?
+Refreshed Token.: Refreshed Token.
+Support: Support
+Toggle right-to-left/left-to-right: Toggle right-to-left/left-to-right
+You are logged out because the Permissions of one of your Roles have been updated.: You are logged out because the Permissions of one of your Roles have been updated.
+You are logged out because the user with your Token has been deleted.: You are logged out because the user with your Token has been deleted.
+You are Logged Out.: You are Logged Out.
+Administrator: Administrator
+Catalog Management: Catalog Management
+Chat: Chat
+Communication: Communication
+Document Management: Document Management
+FAQs: FAQs
+Features: Features
+Home: Home
+Mail: Mail
+Personal: Personal
+Quick Start Guide: Quick Start Guide
+Swagger: API Documentation
+GoHome: Go Home!
+NotFoundMessage: The page you were looking for doesn't exist.
+Confirm: Confirm
+Delete Confirmation: Delete Confirmation
+Add Extended Attribute: Add Extended Attribute
+Decimal: Decimal
+Entity Id: Entity Id
+External Id: External Id
+Group: Group
+Is Active: Is Active
+Json: Json
+Key: Key
+Text: Text
+Time: Time
+Update Extended Attribute: Update Extended Attribute
+All Groups: All Groups
+Delete Extended Attribute?: Delete Extended Attribute?
+Extended Attributes exported: Extended Attributes exported
+Filtered Extended Attributes exported: Filtered Extended Attributes exported
+Include Entity fields (Export): Include Entity fields (Export)
+Manage {0} {1}'s Extended Attributes: Manage {0} {1}'s Extended Attributes
+Manage {0} Extended Attributes: Manage {0} Extended Attributes
+Only Selected Group (Export): Only Selected Group (Export)
+Search For {0} Extended Attributes: Search For {0} Extended Attributes
+Value: Value
+English: English
+Español: Español
+French: French
+German: German
+Indonesia: Indonesia
+Italian: Italian
+Select Language: Select Language
+Swedish: Swedish
+Russian: Russian
+RowsPerPageString: Rows per page
+Delete these {0} elements: Delete these {0} elements?
+Delete this element: Delete this element?
+Confirm and Ignore: Confirm and Ignore
+Confirm and Set Required: Confirm and Set Required
+The following permission is also required for permission {1}: The following permission is also required for permission {1}
+The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
+Dependent permissions required: Dependent permissions required
+Update Permissions: Update Permissions

@@ -1,150 +1,170 @@
-Hello World: Hej världen
-Account: Konto
-Done!: Färdig!
-E-Mail: E-post
-Enter email for password reset: Ange den e-postadress som är länkad till ditt konto så får du ett e-postmeddelande som innehåller en länk för att återställa ditt lösenord
-Forgot password?: Har du glömt lösenordet?
-Reset Password: Återställa lösenord
+﻿Account: Konto
+Actions: Åtgärder
+Activate User?: Vill du aktivera användare?
+Active: Aktiv
+Active?: Aktiv?
+Add Brand: Lägg till varumärke
+Add Document: Lägga till dokument
+Add Document Type: Lägg till dokumenttyp
+Add Extended Attribute: Lägg till utökat attribut
+Add Product: Lägg till produkt
+Add Role: Lägg till roll
+Administrator: Administratör
+Administrator Settings.: Administratörsinställningar.
+All Groups: Alla grupper
+All Permissions: Alla behörigheter
 Already have an account?: Har du redan ett konto?
-E-mail: E-post
-I agree to the terms and privacy: Jag godkänner villkoren och integriteten
-Password: Lösenord
-Phone Number: Telefonnummer
-Register: Registrera dig
-Sign In: Logga in
-Sign Up: Registrera sig
-Username: Användarnamn
-New Password: Nytt lösenord
-Set new password: Ange nytt lösenord
-Token Not Found!: Token hittades inte!
-LoginDescription: Logga in med dina inloggningsuppgifter.
-Description: Beskrivning
-Don't have an account?: Har du inget konto?
-Email is required!: E-post krävs!
-Fill Administrator Credentials: Fyll i administratörsbehörighet
-Fill Basic User Credentials: Fyll i grundläggande användarautentiseringsuppgifter
-Register here: Registrera dig här
-Remember me?: Kommer du ihåg mig?
-Title: Logga in
-Welcome {0}: Välkommen {0}
-Confirm Password: Bekräfta lösenord
-First Name: Förnamn
-Last Name: Efternamn
-User Name: Användarnamn
+ApplicationDescription: Exempelprogram med WebAssembly och mönstret Ren arkitektur
+Apply: Använda
+Apr: Apr
+Audit Trails: Granskningsspår
+Audit Trails exported: Exporterade granskningsspår
+Aug: Aug
+Auto Confirm Email?: Vill du bekräfta e-post automatiskt?
+Barcode: Streckkod
+Bordered: Gränsar
+Brand: Märke
 Brand Saved: Brand Räddad!
 Brand Updated: Varumärkes uppdaterad!
-Update Brand: Uppdatera varumärke
-Add Product: Lägg till produkt
-Cancel: Annullera
-Product Saved: Produkt sparad!
-Product Updated: Produkten uppdaterad!
-Save: Spara
-Update: Uppdatera
-Update Product: Uppdatera produkt
-Upload: Ladda upp
-View: Utsikt
-Actions: Åtgärder
-Add Brand: Lägg till varumärke
-Bordered: Gränsar
 Brands: Märken
 Brands exported: Exporterade varumärken
-Filtered Brands exported: Filtrerade varumärken exporterade
-Manage Brands.: Hantera varumärken.
-Search for Brands: Sök efter varumärken
-Tax: Skatt
-Barcode: Streckkod
-Brand: Märke
-Create: Skapa
-Delete: Ta bort
-Delete Content: Ta bort innehåll
-Dense: Tät
-Edit: Redigera
-Export: Export
-Filtered Products exported: Exporterade filtrerade produkter
-Id: Id
-Manage Products.: Hantera produkter.
-Name: Namn
-No Allowed Actions: Inga tillåtna åtgärder
-Products exported: Exporterade produkter
-Rate: Taxera
-Reload: Reload
-Search: Söka
-Striped: Randig
-chat: Chatta
-contacts: Kontakter
-detailed guide for more.: detaljerad guide för mer.
-Enter your message...: Ange ditt meddelande...
-Logged In.: Inloggade har inte varit med.
-Logged Out.: Loggade ut.
-New Message From {0}: Nytt meddelande från {0}
-Send: Sända
-Apr: Apr
-Aug: Aug
+Browse Available Documents.: Bläddra bland tillgängliga dokument.
+Cancel: Annullera
+Catalog Management: Kataloghantering
+Change Password: Ändra lösenord
 Charts comming soon ish...: Diagram kommer snart ish ...
+chat: Chatta
+Chat: Chatta
+Chat?: Chatta?
+Clear: Klar
+Columns Affected: Berörda kolumner
+Communication: Kommunikation
+Community: Gemenskap
+Confirm: Bekräfta
+Confirm and Ignore: Bekräfta och ignorera
+Confirm and Set Required: Bekräfta och ange obligatoriskt
+Confirm Password: Bekräfta lösenord
+contacts: Kontakter
+Create: Skapa
+Current Password: Aktuellt lösenord
 Dashboard: Instrumentbräda
+Date: Datum
+Date Created: Datum skapat
+Date Range For Searching: Datumintervall för sökning
 Dec: Dec
-Document Extended Attributes: Utökade attribut för dokument
-Document Types: Dokumenttyper
-Documents: Dokument
-Feb: Feb
-Jan: Jan
-Jul: Jul (jul)
-Jun: Jun
-Mar: Fördärva
-May: Maj
-Nov: Nov
-Oct: Okt
-Products: Produkter
-Quick Insights.: Snabba insikter.
-Realtime Updates & Insights with SignalR.: Realtidsuppdateringar & Insikter med SignalR.
-Registered Roles: Registrerade roller
-Registered Users: Registrerade användare
-Sep: Sep (sep)
-ApplicationDescription: Exempelprogram med WebAssembly och mönstret Ren arkitektur
-Resources: Resurser
-Manage your account: Hantera ditt konto
-Security: Säkerhet
+Decimal: Decimal
+Delete: Ta bort
+Delete Confirmation: Ta bort bekräftelse
+Delete Content: Ta bort innehåll
+Delete Extended Attribute?: Vill du ta bort utökat attribut?
 Delete Image: Ta bort bild
 Delete Picture: Ta bort bild
-Do you want to delete the profile picture of {0}: Vill du ta bort profilbilden av {0}
-Email: E-post
-Profile: Profil
-Profile Details: Profilinformation
-Profile picture added.: Profilbild har lagts till.
-Profile picture deleted.: Profilbilden har tagits bort.
-Save Changes: Spara ändringar
-Upload Image: Ladda upp bild
-Your Profile has been updated. Please Login to Continue.: Din profil har uppdaterats. Logga in för att fortsätta.
-Activate User?: Vill du aktivera användare?
-Auto Confirm Email?: Vill du bekräfta e-post automatiskt?
-Register User: Registrera användare
-User Registered: Registrerad användare!
-User Registered Mailbox: Registrerad användare. Bekräftelsepost har levererats till postlådan.
-Reset password: Återställ lösenord
-Add Role: Lägg till roll
-Role ID: Roll-ID
-Role Name: Rollnamn
-Save Role: Spara roll
-Update Role: Uppdatera roll
-All Permissions: Alla behörigheter
-Apply: Använda
-Here you can leave a comment for this permission for the current role: Här kan du lämna en kommentar för den här behörigheten för den aktuella rollen
-Manage {0} {1}'s Permissions: Hantera {0} {1}:s behörigheter
-Manage Permission: Hantera behörighet
-Permission Name: Namn på behörighet
-Search For Permissions: Söka efter behörigheter
-Status: Status
-Type: Typ
-Update Role Permissions: Uppdatera rollbehörigheter
-Will be saved only when selected Permission: Sparas bara när du väljer Behörighet
 Delete Role Content: Vill du ta bort rollen med ID-{0}?
-Manage Roles.: Hantera roller.
-Role: Roll
-Roles: Roller
-Search for Roles...: Sök efter roller...
-Change Password: Ändra lösenord
-Current Password: Aktuellt lösenord
+Delete these {0} elements: Vill du ta bort {0} element?
+Delete this element: Vill du ta bort det här elementet?
+Dense: Tät
+Dependent permissions required: Beroende behörigheter krävs
+Description: Beskrivning
+detailed guide for more.: detaljerad guide för mer.
+Details for Trail ID: Information om Trail ID
+Do you want to delete the profile picture of {0}: Vill du ta bort profilbilden av {0}
+Document Extended Attributes: Utökade attribut för dokument
+Document Management: Dokumenthantering
+Document Store: Dokumentarkiv
+Document Type: Dokumenttyp
+Document Types: Dokumenttyper
+Document Types exported: Exporterade dokumenttyper
+Documents: Dokument
+Don't have an account?: Har du inget konto?
+Done!: Färdig!
+Download: Ladda ned
+E-mail: E-post
+E-Mail: E-post
+Edit: Redigera
+Email: E-post
+Email Confirmation: Bekräftelse via e-post
+Email is required!: E-post krävs!
+English: Engelska
+Enter email for password reset: Ange den e-postadress som är länkad till ditt konto så får du ett e-postmeddelande som innehåller en länk för att återställa ditt lösenord
+Enter your message...: Ange ditt meddelande...
+Entity Id: Enhets-ID
+Español: Español (på andra)
+Export: Export
+Export To Excel: Exportera till Excel
+Extended Attributes exported: Utökade attribut exporterade
+External Id: Externt ID
+FAQs: Vanliga frågor och svar
+Features: Funktioner
+Feb: Feb
+Fill Administrator Credentials: Fyll i administratörsbehörighet
+Fill Basic User Credentials: Fyll i grundläggande användarautentiseringsuppgifter
+Filtered Audit Trails exported: Filtrerade granskningsspår exporterade
+Filtered Brands exported: Filtrerade varumärken exporterade
+Filtered Document Types exported: Filtrerade dokumenttyper exporterade
+Filtered Extended Attributes exported: Filtrerade utökade attribut exporterade
+Filtered Products exported: Exporterade filtrerade produkter
+Filtered Users exported: Filtrerade användare exporterade
+First Name: Förnamn
+Forgot password?: Har du glömt lösenordet?
+French: Franska
+German: Tyska
+GoHome: Gå hem!
+Group: Grupp
+Hello World: Hej världen
+Here you can leave a comment for this permission for the current role: Här kan du lämna en kommentar för den här behörigheten för den aktuella rollen
+Hide: Gömma
+Home: Hem
+I agree to the terms and privacy: Jag godkänner villkoren och integriteten
+Id: Id
+Include Entity fields (Export): Inkludera entitetsfält (Exportera)
 Incorrect Password.: Felaktigt lösenord.
+Indonesia: Indonesien
+Is Active: Är aktiv
+Is Public: Är offentlig
+Is Public?: Är Public?
+Italian: Italienska
+Jan: Jan
+Json: Json ((flera betydelser)
+Jul: Jul (jul)
+Jun: Jun
+Key: Nyckel
+Last Name: Efternamn
+Local: Lokal
+Logged In.: Inloggade har inte varit med.
+Logged Out.: Loggade ut.
+LoginDescription: Logga in med dina inloggningsuppgifter.
+Logout: Utloggning
+Logout Confirmation: Vill du verkligen logga ut?
+Mail: Post
+Manage {0} {1}'s Extended Attributes: Hantera {0} {1}:s utökade attribut
+Manage {0} {1}'s Permissions: Hantera {0} {1}:s behörigheter
+Manage {0} {1}'s Roles: Hantera {0} {1}:s roller
+Manage {0} Extended Attributes: Hantera {0} utökade attribut
+Manage Brands.: Hantera varumärken.
+Manage Document Types.: Hantera dokumenttyper.
+Manage Extended Attributes: Hantera utökade attribut
+Manage Permission: Hantera behörighet
+Manage Products.: Hantera produkter.
+Manage Roles: Hantera roller
+Manage Roles.: Hantera roller.
+Manage Users: Hantera användare
+Manage your account: Hantera ditt konto
+Mar: Fördärva
+May: Maj
+Name: Namn
+New Message From {0}: Nytt meddelande från {0}
+New Password: Nytt lösenord
+New Values: Nya värden
+No Allowed Actions: Inga tillåtna åtgärder
+Not Allowed.: Inte tillåtet.
+NotFoundMessage: Sidan du letade efter finns inte.
+Nov: Nov
+Oct: Okt
+Ok: Okej
+Old Values: Gamla värden
+Only Selected Group (Export): Endast markerad grupp (export)
+Owner: Ägare
+Password: Lösenord
 Password Changed!: Lösenordet har ändrats!
 Password Confirmation: Lösenordsbekräftelse
 Password Confirmation is required!: Lösenordsbekräftelse krävs!
@@ -154,123 +174,111 @@ Password must contain at least one capital letter: Lösenordet måste innehålla
 Password must contain at least one digit: Lösenordet måste innehålla minst en siffra
 Password must contain at least one lowercase letter: Lösenordet måste innehålla minst en gemen bokstav
 Passwords don't match: Lösenord matchar inte
-Active?: Aktiv?
-Administrator Settings.: Administratörsinställningar.
-Public Profile: Offentlig profil
-This is an Administrator Only View.: Det här är bara administratörsvyn.
-Updated User Status.: Uppdaterad användarstatus.
-Manage {0} {1}'s Roles: Hantera {0} {1}:s roller
-Roles Updated: Roller uppdaterade!
-Search For User Roles: Söka efter användarroller
-Update User Roles: Uppdatera användarroller
-Active: Aktiv
-Email Confirmation: Bekräftelse via e-post
-Filtered Users exported: Filtrerade användare exporterade
-Manage Roles: Hantera roller
-Manage Users: Hantera användare
-Not Allowed.: Inte tillåtet.
+Permission Name: Namn på behörighet
+Personal: Personlig
+Phone Number: Telefonnummer
 PhoneNumber: Telefonnummer
+Primary Key: Primärnyckel
+Product Saved: Produkt sparad!
+Product Updated: Produkten uppdaterad!
+Products: Produkter
+Products exported: Exporterade produkter
+Profile: Profil
+Profile Details: Profilinformation
+Profile picture added.: Profilbild har lagts till.
+Profile picture deleted.: Profilbilden har tagits bort.
+Public Profile: Offentlig profil
+Quick Insights.: Snabba insikter.
+Quick Start Guide: Snabbstartsguide
+Rate: Taxera
+Realtime Updates & Insights with SignalR.: Realtidsuppdateringar & Insikter med SignalR.
+Refreshed Token.: Uppdaterad token.
+Register: Registrera dig
+Register here: Registrera dig här
 Register New User: Registrera ny användare
+Register User: Registrera användare
+Registered Roles: Registrerade roller
+Registered Users: Registrerade användare
+Reload: Reload
+Remember me?: Kommer du ihåg mig?
+Reset password: Återställ lösenord
+Reset Password: Återställa lösenord
+Resources: Resurser
+Role: Roll
+Role ID: Roll-ID
+Role Name: Rollnamn
+Roles: Roller
+Roles Updated: Roller uppdaterade!
+RowsPerPageString: Rader per sida
+Russian: Ryska
+Save: Spara
+Save Changes: Spara ändringar
+Save Role: Spara roll
+Search: Söka
+Search For {0} Extended Attributes: Sök efter {0} utökade attribut
+Search for Brands: Sök efter varumärken
+Search for Document Types: Söka efter dokumenttyper
+Search For Permissions: Söka efter behörigheter
+Search for Roles...: Sök efter roller...
+Search for Trails: Sök efter spår
+Search For User Roles: Söka efter användarroller
 Search For Users: Sök efter användare
+Search in New Values: Söka i nya värden
+Search in Old Values: Söka i gamla värden
+Security: Säkerhet
+Select Language: Välj språk
+Send: Sända
+Sep: Sep (sep)
+Set new password: Ange nytt lösenord
+Show: Visa
+Sign In: Logga in
+Sign Up: Registrera sig
+Status: Status
+Striped: Randig
+Support: Stöd
+Swagger: API-dokumentation
+Swedish: Svenska
+Table Name: Tabellnamn
+Tax: Skatt
+Text: SMS
+The following {0} permissions are also required for permission {1}: Följande {0} behörigheter krävs också för behörighet {1}
+The following permission is also required for permission {1}: Följande behörighet krävs också för behörighet {1}
+This is an Administrator Only View.: Det här är bara administratörsvyn.
+Time: Tid
+Title: Logga in
+Toggle right-to-left/left-to-right: Växla från höger till vänster/vänster till höger
+Token Not Found!: Token hittades inte!
+Trail Details: Information om spår
+Type: Typ
+Update: Uppdatera
+Update Brand: Uppdatera varumärke
+Update Document: Uppdatera dokument
+Update Document Type: Uppdatera dokumenttyp
+Update Extended Attribute: Uppdatera utökat attribut
+Update Permissions: Uppdatera behörigheter
+Update Product: Uppdatera produkt
+Update Role: Uppdatera roll
+Update Role Permissions: Uppdatera rollbehörigheter
+Update User Roles: Uppdatera användarroller
+Updated User Status.: Uppdaterad användarstatus.
+Upload: Ladda upp
+Upload Image: Ladda upp bild
+User Name: Användarnamn
+User Registered: Registrerad användare!
+User Registered Mailbox: Registrerad användare. Bekräftelsepost har levererats till postlådan.
+Username: Användarnamn
 UserName: Användarnamn
 Users: Användare
 Users exported: Exporterade användare
-View Profile: Visa profil
-Audit Trails: Granskningsspår
-Audit Trails exported: Exporterade granskningsspår
-Clear: Klar
-Columns Affected: Berörda kolumner
-Date: Datum
-Date Range For Searching: Datumintervall för sökning
-Details for Trail ID: Information om Trail ID
-Export To Excel: Exportera till Excel
-Filtered Audit Trails exported: Filtrerade granskningsspår exporterade
-Hide: Gömma
-Local: Lokal
-New Values: Nya värden
-Ok: Okej
-Old Values: Gamla värden
-Primary Key: Primärnyckel
-Search for Trails: Sök efter spår
-Search in New Values: Söka i nya värden
-Search in Old Values: Söka i gamla värden
-Show: Visa
-Table Name: Tabellnamn
-Trail Details: Information om spår
 UTC: UTC
-Your Recent Activities.: Dina senaste aktiviteter.
-Add Document: Lägga till dokument
-Document Type: Dokumenttyp
-Download: Ladda ned
-Is Public?: Är Public?
-Update Document: Uppdatera dokument
-Add Document Type: Lägg till dokumenttyp
-Update Document Type: Uppdatera dokumenttyp
-Browse Available Documents.: Bläddra bland tillgängliga dokument.
-Date Created: Datum skapat
-Document Store: Dokumentarkiv
-Is Public: Är offentlig
-Manage Extended Attributes: Hantera utökade attribut
-Owner: Ägare
+Value: Värde
+View: Utsikt
+View Profile: Visa profil
+Welcome {0}: Välkommen {0}
+Will be saved only when selected Permission: Sparas bara när du väljer Behörighet
 you: du
-Document Types exported: Exporterade dokumenttyper
-Filtered Document Types exported: Filtrerade dokumenttyper exporterade
-Manage Document Types.: Hantera dokumenttyper.
-Search for Document Types: Söka efter dokumenttyper
-Chat?: Chatta?
-Community: Gemenskap
-Logout: Utloggning
-Logout Confirmation: Vill du verkligen logga ut?
-Refreshed Token.: Uppdaterad token.
-Support: Stöd
-Toggle right-to-left/left-to-right: Växla från höger till vänster/vänster till höger
 You are logged out because the Permissions of one of your Roles have been updated.: Du är utloggad eftersom behörigheterna för en av dina roller har uppdaterats.
 You are logged out because the user with your Token has been deleted.: Du är utloggad eftersom användaren med token har tagits bort.
 You are Logged Out.: Du är utloggad.
-Administrator: Administratör
-Catalog Management: Kataloghantering
-Chat: Chatta
-Communication: Kommunikation
-Document Management: Dokumenthantering
-FAQs: Vanliga frågor och svar
-Features: Funktioner
-Home: Hem
-Mail: Post
-Personal: Personlig
-Quick Start Guide: Snabbstartsguide
-Swagger: API-dokumentation
-GoHome: Gå hem!
-NotFoundMessage: Sidan du letade efter finns inte.
-Confirm: Bekräfta
-Delete Confirmation: Ta bort bekräftelse
-Add Extended Attribute: Lägg till utökat attribut
-Decimal: Decimal
-Entity Id: Enhets-ID
-External Id: Externt ID
-Group: Grupp
-Is Active: Är aktiv
-Json: Json ((flera betydelser)
-Key: Nyckel
-Text: SMS
-Time: Tid
-Update Extended Attribute: Uppdatera utökat attribut
-All Groups: Alla grupper
-Delete Extended Attribute?: Vill du ta bort utökat attribut?
-Extended Attributes exported: Utökade attribut exporterade
-Filtered Extended Attributes exported: Filtrerade utökade attribut exporterade
-Include Entity fields (Export): Inkludera entitetsfält (Exportera)
-Manage {0} {1}'s Extended Attributes: Hantera {0} {1}:s utökade attribut
-Manage {0} Extended Attributes: Hantera {0} utökade attribut
-Only Selected Group (Export): Endast markerad grupp (export)
-Search For {0} Extended Attributes: Sök efter {0} utökade attribut
-Value: Värde
-English: Engelska
-Español: Español (på andra)
-French: Franska
-German: Tyska
-Indonesia: Indonesien
-Italian: Italienska
-Select Language: Välj språk
-Swedish: Svenska
-Russian: Ryska
-RowsPerPageString: Rader per sida
+Your Profile has been updated. Please Login to Continue.: Din profil har uppdaterats. Logga in för att fortsätta.
+Your Recent Activities.: Dina senaste aktiviteter.

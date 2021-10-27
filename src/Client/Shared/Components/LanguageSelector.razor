@@ -1,11 +1,11 @@
 ﻿@using CleanArchitectureBase.Shared.Constants.Localization
 @using CleanArchitectureBase.Shared.Settings
-@using System.Globalization
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
 
 @{
     string actual = preference?.LanguageCode;
-    string displayName = localizer[LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual)?.DisplayName ?? "Select Language"];
+    var actualLanguge = LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual);
+    string displayName = actualLanguge!= null ? DisplayStr(actualLanguge) : localizer["Select Language"];
 
     <MudMenu MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
         @{
@@ -17,7 +17,7 @@
                         {
                             <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1" />
                         }
-                        @localizer[language.DisplayName]
+                        @DisplayStr(language)
                         <span class="culture-code">@language.Code</span>
                     </MudText>
                 </MudMenuItem>
@@ -36,6 +36,14 @@
     protected override async Task OnInitializedAsync()
     {
         await LoadPreferenceAsync();
+    }
+
+    private string DisplayStr(LanguageCode language)
+    {
+        string display = localizer[language.Code];
+        if (display == language.Code)
+            display = language.DisplayName;
+        return display;
     }
 
     private async Task LoadPreferenceAsync()

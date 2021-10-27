@@ -1,59 +1,33 @@
-﻿namespace CleanArchitectureBase.Shared.Constants.Localization
+﻿using System.Globalization;
+using System.IO;
+using System.Linq;
+
+namespace CleanArchitectureBase.Shared.Constants.Localization
 {
     public static class LocalizationConstants
     {
-        public static readonly LanguageCode[] SupportedLanguages = {
-            new LanguageCode
+        private static LanguageCode[] _languages;
+        private static string[] resourceNames;
+        public static readonly string DefaultLanguageCode = "en-US";
+
+        public static LanguageCode[] SupportedLanguages
+        {
+            get
             {
-                Code = "en-US",
-                DisplayName= "English"
-            },
-            new LanguageCode
-            {
-                IsRTL = true,
-                Code = "ar-SA",
-                DisplayName= "Saudi Arabia"
-            },
-            new LanguageCode
-            {
-                Code = "fr-FR",
-                DisplayName = "French"
-            },
-            new LanguageCode
-            {
-                Code = "de-DE",
-                DisplayName = "German"
-            },
-            new LanguageCode
-            {
-                Code = "es-ES",
-                DisplayName = "Español"
-            },
-            new LanguageCode
-            {
-                Code = "ru-RU",
-                DisplayName = "Russian"
-            },
-            new LanguageCode
-            {
-                Code = "sv-SE",
-                DisplayName = "Swedish"
-            },
-            new LanguageCode
-            {
-                Code = "id-ID",
-                DisplayName = "Indonesia"
-            },
-            new LanguageCode
-            {
-                Code = "it-IT",
-                DisplayName = "Italian"
-            },
-            new LanguageCode
-            {
-                Code = "bg-BG",
-                DisplayName = "Bulgarian"
+                _languages ??= CultureInfo.GetCultures(CultureTypes.AllCultures).Where(i => !string.IsNullOrWhiteSpace(i.Name) && IsTranslated(i.Name)).Select(LanguageCode.FromCulture).ToArray();
+                return _languages;
             }
-        };
+        }
+
+        private static bool IsTranslated(string code)
+        {
+            return GetEmbeddedResourceNames().Any(n => n.Contains($".{code}."));
+        }
+
+        private static string[] GetEmbeddedResourceNames()
+        {
+            resourceNames ??= typeof(LocalizationConstants).Assembly.GetManifestResourceNames();
+            return resourceNames;
+        }
     }
 }

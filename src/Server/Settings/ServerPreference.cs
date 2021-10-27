@@ -6,7 +6,7 @@ namespace CleanArchitectureBase.Server.Settings
 {
     public record ServerPreference : IPreference
     {
-        public string LanguageCode { get; set; } = LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US";
+        public string LanguageCode { get; set; } = LocalizationConstants.DefaultLanguageCode;
 
         //TODO - add server preferences
     }

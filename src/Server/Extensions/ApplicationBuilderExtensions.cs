@@ -76,12 +76,12 @@ namespace CleanArchitectureBase.Server.Extensions
 
         internal static IApplicationBuilder UseRequestLocalizationByCulture(this IApplicationBuilder app)
         {
-            var supportedCultures = LocalizationConstants.SupportedLanguages.Select(l => new CultureInfo(l.Code)).ToArray();
+            var supportedCultures = LocalizationConstants.SupportedLanguages.Select(l => l.ToCulture()).ToArray();
             app.UseRequestLocalization(options =>
             {
                 options.SupportedUICultures = supportedCultures;
                 options.SupportedCultures = supportedCultures;
-                options.DefaultRequestCulture = new RequestCulture(supportedCultures.First());
+                options.DefaultRequestCulture = new RequestCulture(supportedCultures.FirstOrDefault(c => c.Name == LocalizationConstants.DefaultLanguageCode) ?? supportedCultures.First());
                 options.ApplyCurrentCultureToResponseHeaders = true;
             });
 

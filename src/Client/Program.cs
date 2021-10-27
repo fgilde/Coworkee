@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Settings;
-using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Localization;
 
 namespace CleanArchitectureBase.Client
@@ -27,7 +26,7 @@ namespace CleanArchitectureBase.Client
                 if (await storageService.GetPreference() is ClientPreference preference)
                     culture = new CultureInfo(preference.LanguageCode);
                 else
-                    culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US");
+                    culture = new CultureInfo(LocalizationConstants.DefaultLanguageCode);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
             }

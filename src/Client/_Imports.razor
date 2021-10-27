@@ -1,44 +1,44 @@
 ﻿@*Libraries*@
-@using System.Net.Http
-@using System.Net.Http.Json
+@using System.Net.Http;
+@using System.Net.Http.Json;
 @using AKSoftware.Localization.MultiLanguages
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Components.Routing
-@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Components.Web.Virtualization
-@using Microsoft.AspNetCore.Components.WebAssembly.Http
-@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Components.Forms;
+@using Microsoft.AspNetCore.Components.Routing;
+@using Microsoft.AspNetCore.Components.Web;
+@using Microsoft.AspNetCore.Components.Web.Virtualization;
+@using Microsoft.AspNetCore.Components.WebAssembly.Http;
+@using Microsoft.JSInterop;
 @using Microsoft.AspNetCore.Identity;
 @using MudBlazor
-@using MudBlazor.ThemeManager
+@using MudBlazor.ThemeManager;
 @using Blazored.LocalStorage;
-@using Blazored.FluentValidation
+@using Blazored.FluentValidation;
 
 @*Client Services*@
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
-@using CleanArchitectureBase.Client.Infrastructure.Enums
+@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication;
+@using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences;
+@using CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors;
+@using CleanArchitectureBase.Client.Infrastructure.Enums;
 
 
 @*Shared Libraries*@
-@using CleanArchitectureBase.Shared.Constants.Permission
-@using CleanArchitectureBase.Client.Shared.Components
+@using CleanArchitectureBase.Shared.Constants.Permission;
+@using CleanArchitectureBase.Client.Shared.Components;
 
-@using CleanArchitectureBase.Client
-@using CleanArchitectureBase.Client.Shared
-@using CleanArchitectureBase.Client.Shared.Dialogs
-@using CleanArchitectureBase.Client.Infrastructure.Settings
+@using CleanArchitectureBase.Client;
+@using CleanArchitectureBase.Client.Shared;
+@using CleanArchitectureBase.Client.Shared.Dialogs;
+@using CleanArchitectureBase.Client.Infrastructure.Settings;
 
-@using CleanArchitectureBase.Application.Requests.Identity
+@using CleanArchitectureBase.Application.Requests.Identity;
 
-@using CleanArchitectureBase.Client.Pages.Authentication
+@using CleanArchitectureBase.Client.Pages.Authentication;
 
-@using CleanArchitectureBase.Client.Infrastructure.Authentication
-@using CleanArchitectureBase.Client.Extensions
-@using CleanArchitectureBase.SDK
+@using CleanArchitectureBase.Client.Infrastructure.Authentication;
+@using CleanArchitectureBase.Client.Extensions;
+@using CleanArchitectureBase.SDK;
 
 @attribute [Authorize]
 @inject IClientAuthenticationManager _clientAuthenticationManager

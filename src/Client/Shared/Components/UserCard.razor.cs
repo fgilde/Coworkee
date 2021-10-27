@@ -2,7 +2,7 @@
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-
+using CleanArchitectureBase.Client.Infrastructure.Authentication;
 namespace CleanArchitectureBase.Client.Shared.Components
 {
     public partial class UserCard
@@ -12,11 +12,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public bool ShowLogout { get; set; }
         [Parameter] public ClaimsPrincipal User { get; set; }
         [Parameter] public EventCallback Logout { get; set; }
-
         private string FirstName { get; set; }
         private string SecondName { get; set; }
         private string Email { get; set; }
-
 
         protected override async Task OnInitializedAsync()
         {

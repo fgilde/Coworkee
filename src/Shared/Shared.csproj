@@ -5,12 +5,12 @@
     <RootNamespace>CleanArchitectureBase.Shared</RootNamespace>
     <AssemblyName>CleanArchitectureBase.Shared</AssemblyName>
   </PropertyGroup>
-
   
   <ItemGroup>
     <EmbeddedResource Include="Resources\ar-SA.yml" />
     <EmbeddedResource Include="Resources\bg-BG.yml" />
     <EmbeddedResource Include="Resources\de-DE.yml" />
+    <EmbeddedResource Include="Resources\en-GB.yml" />
     <EmbeddedResource Include="Resources\en-US.yml" />
     <EmbeddedResource Include="Resources\es-ES.yml" />
     <EmbeddedResource Include="Resources\fr-FR.yml" />

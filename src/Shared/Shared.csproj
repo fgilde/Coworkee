@@ -6,19 +6,7 @@
     <AssemblyName>CleanArchitectureBase.Shared</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\ar-SA.yml" />
-    <None Remove="Resources\bg-BG.yml" />
-    <None Remove="Resources\de-DE.yml" />
-    <None Remove="Resources\en-US.yml" />
-    <None Remove="Resources\es-ES.yml" />
-    <None Remove="Resources\fr-FR.yml" />
-    <None Remove="Resources\id-ID.yml" />
-    <None Remove="Resources\it-IT.yml" />
-    <None Remove="Resources\ru-RU.yml" />
-    <None Remove="Resources\sv-SE.yml" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <EmbeddedResource Include="Resources\ar-SA.yml" />
     <EmbeddedResource Include="Resources\bg-BG.yml" />

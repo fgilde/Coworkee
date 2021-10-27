@@ -5,7 +5,7 @@ using CleanArchitectureBase.Shared.Localizers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Shared.Resources
+namespace CleanArchitectureBase.Shared
 {
     public static class Resource
     {

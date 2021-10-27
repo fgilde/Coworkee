@@ -47,6 +47,13 @@ namespace CleanArchitectureBase.Client.Shared
             return result;
         }
 
+        protected override Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+                SetAllExpanded(ExpandMode != ExpandMode.SingleExpand);
+            return base.OnAfterRenderAsync(firstRender);
+        }
+
         protected override async Task OnParametersSetAsync()
         {
             _user = await _stateProvider.GetAuthenticationStateProviderUserAsync();

@@ -1,16 +1,25 @@
 ﻿@using System.Security.Claims
+@using System.Security.Cryptography
+@using System.Text
 @using CleanArchitectureBase.Application.Responses.Identity
 
-@if (string.IsNullOrEmpty(ImageDataUrl))
-{
-    <MudAvatar Color="Color.Secondary" Style="@StyleStr()">@Initials?.ToUpper()</MudAvatar>
-}
-else
-{
-    <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()"> </MudAvatar>
-}
-    
+
+<div @onclick="GotoAccountOrProfile" class="@(CanNavigateToProfile() ? "cursor-pointer": "") mud-button-text mud-button-text-size-medium">
+    @if (string.IsNullOrEmpty(ImageDataUrl))
+    {
+        <MudAvatar Style="@StyleStr()">@Initials?.ToUpper()</MudAvatar>
+    }
+    else
+    {
+        <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()"> </MudAvatar>
+    }
+</div>
+
+
 @code {
+
+    [Parameter]
+    public bool LinkToProfile { get; set; } = true;
 
     [Parameter]
     public ClaimsPrincipal User { get; set; }
@@ -29,14 +38,25 @@ else
 
     private string ImageDataUrl { get; set; }
     private string Initials { get; set; }
+    private ClaimsPrincipal _currentUser;
 
     private string StyleStr()
     {
-        return $"height: {Height}px; width: {Width}px;";
+        string color = GetColor();
+        return $"transition-property: background-color; transition-duration: 2s; height: {Height}px; width: {Width}px; background-color: "+color+";";
+    }
+
+    string GetColor()
+    {
+        var id = UserData?.Id ?? _currentUser?.GetUserId();
+        if (string.IsNullOrWhiteSpace(id))
+            return "transparent";
+        return ColorUtils.Random(id);
     }
 
     protected override async Task OnInitializedAsync()
     {
+        _currentUser = (await _stateProvider.GetAuthenticationStateAsync()).User;
         if (string.IsNullOrWhiteSpace(UserId) && UserData == null)
             await LoadCurrentUserData();
         else
@@ -45,7 +65,7 @@ else
 
     private async Task LoadCurrentUserData()
     {
-        var user = User ?? (await _stateProvider.GetAuthenticationStateAsync()).User;
+        var user = User ?? _currentUser;
         if (user?.Identity?.IsAuthenticated == true)
         {
             Initials = user.GetInitials();
@@ -67,12 +87,34 @@ else
         }
         if (UserData != null)
         {
-            Initials = new(new[] { UserData.FirstName.FirstOrDefault(), UserData.LastName.FirstOrDefault()});
+            Initials = new(new[] { UserData.FirstName.FirstOrDefault(), UserData.LastName.FirstOrDefault() });
             var data = await _api.Account_GetProfilePictureAsync(UserData.Id);
             if (data.Succeeded)
             {
                 ImageDataUrl = data.Data;
             }
         }
+    }
+
+    private string TargetProfileUrl()
+    {
+        if (User != null || UserData?.Id == _currentUser?.GetUserId())
+            return "account";
+        if (UserData != null)
+            return $"user-profile/{UserData.Id}";
+        return string.Empty;
+    }
+
+    private bool CanNavigateToProfile()
+    {
+        var url = TargetProfileUrl();
+        var currentUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+        return LinkToProfile && !string.IsNullOrWhiteSpace(url) && currentUrl != url;
+    }
+
+    private void GotoAccountOrProfile()
+    {
+        if (CanNavigateToProfile())
+            _navigationManager.NavigateTo(TargetProfileUrl());
     }
 }

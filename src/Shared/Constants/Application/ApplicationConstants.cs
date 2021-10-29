@@ -6,6 +6,7 @@
         public static string ApplicationClientName = $"{ApplicationName}Client";
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string Version = "v2.2";
+        public const string DefaultLanguageCode = "en-US";
 
         public static class ParameterNames
         {

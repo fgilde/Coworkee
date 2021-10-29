@@ -71,7 +71,6 @@ namespace CleanArchitectureBase.Server.Extensions
                 endpoints.MapFallbackToFile("index.html");
                 endpoints.MapHub<SignalRHub>(ApplicationConstants.SignalR.HubUrl);
                 endpoints.MapHub<ClientEventHub>(ApplicationConstants.SignalR.EventHubUrl);
-
             });
 
         internal static IApplicationBuilder UseRequestLocalizationByCulture(this IApplicationBuilder app)
@@ -81,7 +80,7 @@ namespace CleanArchitectureBase.Server.Extensions
             {
                 options.SupportedUICultures = supportedCultures;
                 options.SupportedCultures = supportedCultures;
-                options.DefaultRequestCulture = new RequestCulture(supportedCultures.FirstOrDefault(c => c.Name == LocalizationConstants.DefaultLanguageCode) ?? supportedCultures.First());
+                options.DefaultRequestCulture = new RequestCulture(supportedCultures.FirstOrDefault(c => c.Name == ApplicationConstants.DefaultLanguageCode) ?? supportedCultures.First());
                 options.ApplyCurrentCultureToResponseHeaders = true;
             });
 

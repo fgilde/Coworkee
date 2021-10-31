@@ -91,7 +91,7 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
 
         public async Task<T> GetByIdAsync(TId id, CancellationToken cancellation = default)
         {
-            return await _dbContext.Set<T>().FindAsync(new [] {id}, cancellation);
+            return await _dbContext.Set<T>().FindAsync(new object[] { id }, cancellation);
         }
 
         public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default)

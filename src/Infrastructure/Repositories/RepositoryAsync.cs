@@ -4,7 +4,9 @@ using CleanArchitectureBase.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Exceptions;
 
 namespace CleanArchitectureBase.Infrastructure.Repositories
 {
@@ -19,19 +21,56 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
 
         public IQueryable<T> Entities => _dbContext.Set<T>();
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<T> AddAsync(T entity, CancellationToken cancellation = default)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.Set<T>().AddAsync(entity, cancellation);
             return entity;
         }
 
-        public Task DeleteAsync(T entity)
+        public Task AddManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default)
+        {
+            return _dbContext.Set<T>().AddRangeAsync(entities, cancellation);
+        }
+
+        public Task AddManyAsync(params T[] entities)
+        {
+            return _dbContext.Set<T>().AddRangeAsync(entities);
+        }
+
+        public async Task UpdateAsync(TId id, object values, CancellationToken cancellation = default)
+        {
+            var existingEntity = await GetByIdAsync(id, cancellation);
+            if (existingEntity == null)
+                throw new NotFoundException(typeof(T).Name, id);
+
+            _dbContext.Entry(existingEntity).CurrentValues.SetValues(values);
+        }
+
+        public Task UpdateAsync(T entity, CancellationToken cancellation = default)
+        {
+            _dbContext.Set<T>().Update(entity);
+            return Task.CompletedTask;
+            //return UpdateAsync(entity.Id, entity);
+        }
+
+        public Task UpdateManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default)
+        {
+            _dbContext.Set<T>().UpdateRange(entities);
+            return Task.CompletedTask;
+        }
+        public Task UpdateManyAsync(params T[] entities)
+        {
+            _dbContext.Set<T>().UpdateRange(entities);
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteAsync(T entity, CancellationToken cancellation = default)
         {
             _dbContext.Set<T>().Remove(entity);
             return Task.CompletedTask;
         }
 
-        public Task DeleteManyAsync(IEnumerable<T> entities)
+        public Task DeleteManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default)
         {
             _dbContext.Set<T>().RemoveRange(entities);
             return Task.CompletedTask;
@@ -43,33 +82,26 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(CancellationToken cancellation = default)
         {
             return await _dbContext
                 .Set<T>()
-                .ToListAsync();
+                .ToListAsync(cancellation);
         }
 
-        public async Task<T> GetByIdAsync(TId id)
+        public async Task<T> GetByIdAsync(TId id, CancellationToken cancellation = default)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await _dbContext.Set<T>().FindAsync(new [] {id}, cancellation);
         }
 
-        public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize)
+        public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default)
         {
             return await _dbContext
                 .Set<T>()
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .AsNoTracking()
-                .ToListAsync();
-        }
-
-        public Task UpdateAsync(T entity)
-        {
-            T exist = _dbContext.Set<T>().Find(entity.Id);
-            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
-            return Task.CompletedTask;
+                .ToListAsync(cancellation);
         }
     }
 }

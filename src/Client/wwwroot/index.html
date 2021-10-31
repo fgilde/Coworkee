@@ -49,7 +49,8 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
     </div>
 
     <script>
-        (function() {
+        (function () {
+            //window.localStorage.clear();
             document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
             document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
             document.title = Application.ApplicationConstants.ApplicationName + ' - Home';

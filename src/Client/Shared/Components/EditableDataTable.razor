@@ -16,7 +16,8 @@
 }
 else
 {
-    <MudTable MultiSelection="true" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)" @bind-SelectedItems="_selectedItems" Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)" ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)" Hover="true" Dense="false" Bordered="false" Striped="true" @ref="_table">
+    <MudTable CanCancelEdit="true" CommitEditTooltip="Commit Edit" OnCommitEditClick="InlineEditCommitClick" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
+        MultiSelection="true" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)" @bind-SelectedItems="_selectedItems" Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)" ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)" Hover="true" Dense="false" Bordered="false" Striped="true" @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreate)
@@ -128,6 +129,23 @@ else
                 }
             </MudTd>
         </RowTemplate>
+        
+        <RowEditingTemplate>
+            @foreach (var prop in TableProperties.Select(n => PropertyFor(context, n)))
+            {
+            <MudTd DataLabel="@prop.Name">
+                @if (prop.PropertyType == typeof(int))
+                    {
+                        <MudNumericField Value="PropertyValueForAs<int>(context, prop.Name)" Required Min="1" />
+                    }
+                    else
+                    {
+                    <MudTextField Value="PropertyValueFor(context, prop.Name)" Required />
+                    }
+            </MudTd>
+            }
+        </RowEditingTemplate>
+
         <FooterContent>
             <MudItem xs="12" sm="12" md="12">
                 <MudText Style="margin-top: 17px; justify-content: center">@_localizer["{0} Selected", _selectedItems.Count]</MudText>

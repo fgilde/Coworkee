@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Pages.Catalog;
 using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
+using Newtonsoft.Json;
 using Nextended.Core;
 using Nextended.Core.Extensions;
 
@@ -22,7 +23,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
     {
         [Parameter] public string InitialAction { get; set; }
         [Parameter] public string InitialIdString { get; set; }
-        
+
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         [Parameter]
@@ -33,7 +34,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         [Parameter]
         public Func<TResult, Task<bool>> ApiCreateOrEdit { get; set; }
-        
+
         [Parameter]
         public Func<TIdType[], Task<Result>> ApiDelete { get; set; }
 
@@ -51,7 +52,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         [Parameter]
         public Func<TResult, string> Display { get; set; }
-        
+
         [Parameter]
         public string[] TableProperties { get; set; }
 
@@ -81,7 +82,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private int _totalItems;
         private int _currentPage;
         private string _searchString = "";
-   
+
         private ClaimsPrincipal _currentUser;
         private bool _canCreate;
         private bool _canEdit;
@@ -89,7 +90,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private bool _canExport;
         private bool _canSearch;
         private bool _loaded;
-        
+
         protected override async Task OnInitializedAsync()
         {
             ImmediateSearch ??= ApiLoadPaged == null;
@@ -212,7 +213,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             HandleExportResponse(response);
 
         }
-        
+
         private async Task ExportToExcel()
         {
             var response = await Export(_searchString);
@@ -226,7 +227,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
                     ByteArray = response.Data,
-                    FileName = $"{nameof(Products).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
+                    FileName = $"{typeof(TResult).Name.ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
                     MimeType = ApplicationConstants.MimeTypes.OpenXml
                 });
                 _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
@@ -246,7 +247,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);
             string u = !isDefaultId ? "edit" : "add";
-            
+
             _navigationManager.NavigateTo($"{_pageUrl}{u}/{(!isDefaultId ? id : string.Empty)}");
             bool success = await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData()));
 
@@ -254,7 +255,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             {
                 await Reset();
             }
-            
+
             _navigationManager.NavigateTo(_pageUrl);
         }
 
@@ -269,7 +270,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             try
             {
                 var names = await GetDisplayNamesAsync(ids);
-                var value = ids.Length > 1 ? _localizer["Delete these {0} elements"]: _localizer["Delete this element"];
+                var value = ids.Length > 1 ? _localizer["Delete these {0} elements"] : _localizer["Delete this element"];
                 var parameters = new DialogParameters
                 {
                     {nameof(DeleteConfirmation.Details), names},
@@ -316,7 +317,20 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private string PropertyValueFor(TResult context, string prop)
         {
-            return Check.TryCatch<string, Exception>(() => context.ExposeField<object>(prop)?.ToString());
+            return PropertyValueForAs<string>(context, prop);
+        }
+
+        private T PropertyValueForAs<T>(TResult context, string prop)
+        {
+            return Check.TryCatch<T, Exception>(() => context.ExposeField<object>(prop).MapTo<T>());
+        }
+
+        private PropertyInfo PropertyFor(TResult context, string prop)
+        {
+            var bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.GetField;
+            return Check.TryCatch<PropertyInfo, Exception>(() =>
+                context.GetProperties(bindingFlags)?.FirstOrDefault(info => info.Name == prop)
+            );
         }
 
         private async Task DeleteSelected()
@@ -330,7 +344,37 @@ namespace CleanArchitectureBase.Client.Shared.Components
             return TableProperties.Select(p => PropertyValueFor(item, p)).Any(s =>
                 s.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true);
         }
-        
+
+        #region Inline edit
+
+        private TResult elementBeforeEdit;
+        private void InlineEditBackupItem(object element)
+        {
+            elementBeforeEdit = element.MapTo<TResult>();
+        }
+
+        private void InlineEditItemHasBeenCommitted(object element)
+        {
+            _snackBar.Add("Commit InlineEditItemHasBeenCommitted " + JsonConvert.ToString(element));
+        }
+
+        private void InlineEditCommitClick()
+        {
+            _snackBar.Add("Commit click");
+        }
+
+        private void InlineEditResetItemToOriginalValues(object element)
+        {
+            //element = elementBeforeEdit;
+            //((Element)element).Sign = elementBeforeEdit.Sign;
+            //((Element)element).Name = elementBeforeEdit.Name;
+            //((Element)element).Molar = elementBeforeEdit.Molar;
+            //((Element)element).Position = elementBeforeEdit.Position;
+        }
+
+        #endregion
+
+
         public async ValueTask DisposeAsync()
         {
             if (HubConnection != null)

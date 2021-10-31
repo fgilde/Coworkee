@@ -1,66 +1,45 @@
 ﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Entities.Catalog;
-using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Features.Base.Export;
+using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Catalog;
-using CleanArchitectureBase.Shared.Wrapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Products.Queries.Export
 {
-    public class ExportProductsQuery : IRequest<Result<string>>
+    public class ExportProductsQuery: ExportQueryBase<int>
     {
-        public string SearchString { get; set; }
-        public int[] ProductIds { get; }
+        public ExportProductsQuery(int[] ids) : base(ids)
+        {}
 
-        public ExportProductsQuery(int[] productIds)
-        {
-            ProductIds = productIds;
-        }
-
-        public ExportProductsQuery(string searchString = "")
-        {
-            SearchString = searchString;
-        }
+        public ExportProductsQuery(string searchString) : base(searchString)
+        {}
     }
 
-    internal class ExportProductsQueryHandler : IRequestHandler<ExportProductsQuery, Result<string>>
-    {
-        private readonly IExcelService _excelService;
-        private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IStringLocalizer<ExportProductsQueryHandler> _localizer;
+    internal class ExportProductsQueryHandler: ExportQueryHandlerBase<ExportProductsQuery, int, Product> {
 
-        public ExportProductsQueryHandler(IExcelService excelService
-            , IUnitOfWork<int> unitOfWork
-            , IStringLocalizer<ExportProductsQueryHandler> localizer)
+        public ExportProductsQueryHandler(IExcelService excelService, IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportProductsQueryHandler> localizer) 
+            : base(excelService, unitOfWork, localizer)
+        {}
+
+        protected override Dictionary<string, Func<Product, object>> PropertyMappers()
         {
-            _excelService = excelService;
-            _unitOfWork = unitOfWork;
-            _localizer = localizer;
+            return new Dictionary<string, Func<Product, object>>
+            {
+                {Localizer["Id"], item => item.Id},
+                {Localizer["Name"], item => item.Name},
+                {Localizer["Barcode"], item => item.Barcode},
+                {Localizer["Description"], item => item.Description},
+                {Localizer["Rate"], item => item.Rate}
+            };
         }
 
-        public async Task<Result<string>> Handle(ExportProductsQuery request, CancellationToken cancellationToken)
+        protected override ISpecification<Product> GetFilterSpecification(ExportProductsQuery query)
         {
-            var products = request.ProductIds is {Length: > 0} 
-                ? await _unitOfWork.Repository<Product>().Entities.Where(p => request.ProductIds.Contains(p.Id)).ToListAsync(cancellationToken)
-                : await _unitOfWork.Repository<Product>().Entities.Specify(new ProductFilterSpecification(request.SearchString)).ToListAsync(cancellationToken);
-            var data = await _excelService.ExportAsync(products, mappers: new Dictionary<string, Func<Product, object>>
-            {
-                { _localizer["Id"], item => item.Id },
-                { _localizer["Name"], item => item.Name },
-                { _localizer["Barcode"], item => item.Barcode },
-                { _localizer["Description"], item => item.Description },
-                { _localizer["Rate"], item => item.Rate }
-            }, sheetName: _localizer["Products"]);
-
-            return await Result<string>.SuccessAsync(data: data);
+            return new ProductFilterSpecification(query.SearchString);
         }
     }
 }

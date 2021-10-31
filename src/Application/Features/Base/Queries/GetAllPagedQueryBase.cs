@@ -1,0 +1,94 @@
+﻿using System;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Specifications.Base;
+using CleanArchitectureBase.Domain.Contracts;
+using CleanArchitectureBase.Shared.Wrapper;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Extensions;
+
+namespace CleanArchitectureBase.Application.Features.Base.Queries
+{
+    public class GetAllPagedQueryBase<TDto> : IRequest<PaginatedResult<TDto>>
+        where TDto : IDtoBase
+    {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public string SearchString { get; set; }
+        public string[] OrderBy { get; set; }
+
+        public GetAllPagedQueryBase()
+        { }
+
+        public GetAllPagedQueryBase(int pageNumber, int pageSize, string searchString, string orderBy = "")
+        {
+            PageNumber = pageNumber;
+            PageSize = pageSize;
+            SearchString = searchString;
+            if (!string.IsNullOrWhiteSpace(orderBy))
+            {
+                OrderBy = orderBy.Split(',');
+            }
+        }
+    }
+
+    internal class GetAllPagedQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, PaginatedResult<TDto>>
+        where TQuery : GetAllPagedQueryBase<TDto>
+        where TEntity : AuditableEntity<TEntityId>
+        where TDto : class, IDtoBase
+    {
+        protected readonly IUnitOfWork<TEntityId> UnitOfWork;
+        protected readonly IMediator Mediator;
+        protected readonly IServiceProvider Provider;
+        protected T Get<T>() => Provider.GetService<T>();
+
+        public GetAllPagedQueryHandlerBase(
+            IUnitOfWork<TEntityId> unitOfWork, 
+            IMediator mediator,
+            IServiceProvider provider)
+        {
+            UnitOfWork = unitOfWork;
+            Mediator = mediator;
+            Provider = provider;
+        }
+
+        protected virtual ISpecification<TEntity> GetFilterSpecification(TQuery query)
+        {
+            return null;
+        }
+
+        public async Task<PaginatedResult<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
+        {
+            Expression<Func<TEntity, TDto>> expression = e => e.MapTo<TDto>();
+            var filterSpec = GetFilterSpecification(request);
+
+            var orderBy = request.OrderBy?.Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+            if (orderBy?.Any() != true)
+            {
+                var data = await UnitOfWork.Repository<TEntity>().Entities
+                   .Specify(filterSpec)
+                   .Select(expression)
+                   .ToPaginatedListAsync(request.PageNumber, request.PageSize);
+                return data;
+            }
+            else
+            {
+                var ordering = string.Join(",", orderBy); // of the form fieldname [ascending|descending], ...
+                var data = await UnitOfWork.Repository<TEntity>().Entities
+                   .Specify(filterSpec)
+                   .OrderBy(ordering) // require system.linq.dynamic.core
+                   .Select(expression)
+                   .ToPaginatedListAsync(request.PageNumber, request.PageSize);
+                return data;
+
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Domain.Contracts;
 
@@ -9,20 +10,21 @@ namespace CleanArchitectureBase.Application.Interfaces.Repositories
     {
         IQueryable<T> Entities { get; }
 
-        Task<T> GetByIdAsync(TId id);
+        Task<T> GetByIdAsync(TId id, CancellationToken cancellation = default);
+        Task<List<T>> GetAllAsync(CancellationToken cancellation = default);
+        Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default);
 
-        Task<List<T>> GetAllAsync();
+        Task<T> AddAsync(T entity, CancellationToken cancellation = default);
+        Task AddManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default);
+        Task AddManyAsync(params T[] entities);
 
-        Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize);
+        Task UpdateAsync(TId id, object values, CancellationToken cancellation = default);
+        Task UpdateAsync(T entity, CancellationToken cancellation = default);
+        Task UpdateManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default);
+        Task UpdateManyAsync(params T[] entities);
 
-        Task<T> AddAsync(T entity);
-
-        Task UpdateAsync(T entity);
-
-        Task DeleteAsync(T entity);
-
-        Task DeleteManyAsync(IEnumerable<T> entities);
-
+        Task DeleteAsync(T entity, CancellationToken cancellation = default);
+        Task DeleteManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default);
         Task DeleteManyAsync(params T[] entities);
     }
 }

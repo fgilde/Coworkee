@@ -38,8 +38,8 @@ namespace CleanArchitectureBase.Client.Models.Navigation
                     {
                         Children = new()
                         {
-                            new NavigationEntry("Languages", Icons.Material.Outlined.Language, "/identity/users").WithPolicies(Permissions.Users.View),
-                            new NavigationEntry("Translations", Icons.Material.Outlined.Translate, "/identity/roles").WithPolicies()
+                            new NavigationEntry("Languages", Icons.Material.Outlined.Language, "/localization/languages").WithPolicies(Permissions.Users.View),
+                            new NavigationEntry("Translations", Icons.Material.Outlined.Translate, "/localization/translations").WithPolicies()
                         }
                     }
                 }

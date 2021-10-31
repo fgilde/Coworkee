@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
+using CleanArchitectureBase.Domain.Entities.Localization;
 using CleanArchitectureBase.Domain.Entities.Misc;
 
 namespace CleanArchitectureBase.Infrastructure.Contexts
@@ -26,6 +27,7 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
         }
 
         public DbSet<ChatHistory<BlazorHeroUser>> ChatHistories { get; set; }
+        public DbSet<Translation> Translations { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Document> Documents { get; set; }

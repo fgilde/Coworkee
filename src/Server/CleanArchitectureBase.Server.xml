@@ -311,6 +311,35 @@
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAll(CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged.GetAllTranslationsQuery,System.Threading.CancellationToken)">
+            <summary>
+            Get All Products
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get a translation by id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Post(CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit.AddEditTranslationsCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add/Edit a Product
+            </summary>
+            <param name="command"></param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Delete(System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            Delete a Product
+            </summary>
+            <param name="ids">Products to delete</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK response</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.Threading.CancellationToken)">
             <summary>
             Get Current User Audit Trails

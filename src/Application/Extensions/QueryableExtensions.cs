@@ -24,6 +24,8 @@ namespace CleanArchitectureBase.Application.Extensions
 
         public static IQueryable<T> Specify<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntity
         {
+            if (spec == null)
+                return query;
             var queryableResultWithIncludes = spec.Includes
                 .Aggregate(query,
                     (current, include) => current.Include(include));

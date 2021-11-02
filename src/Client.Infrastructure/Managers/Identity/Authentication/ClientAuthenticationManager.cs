@@ -81,22 +81,30 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
 
         public async Task<string> RefreshToken()
         {
-            var token = await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
-            var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.Local.RefreshToken);
-
-            var result = await _api.Token_RefreshAsync(new RefreshTokenRequest {Token = token, RefreshToken = refreshToken});
-
-            if (!result.Succeeded)
+            try
             {
-                throw new ApplicationException(_localizer["Something went wrong during the refresh token action"]);
-            }
+                var token = await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
+                var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.Local.RefreshToken);
 
-            token = result.Data.Token;
-            refreshToken = result.Data.RefreshToken;
-            await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
-            await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, refreshToken);
-            _httpClient.SetAuthorization(token);
-            return token;
+                var result = await _api.Token_RefreshAsync(new RefreshTokenRequest {Token = token, RefreshToken = refreshToken});
+
+                if (!result.Succeeded)
+                {
+                    throw new ApplicationException(_localizer["Something went wrong during the refresh token action"]);
+                }
+
+                token = result.Data.Token;
+                refreshToken = result.Data.RefreshToken;
+                await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
+                await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, refreshToken);
+                _httpClient.SetAuthorization(token);
+                return token;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public async Task<string> TryRefreshToken()

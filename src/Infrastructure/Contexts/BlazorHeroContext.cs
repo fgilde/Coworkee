@@ -55,10 +55,8 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
             {
                 return await base.SaveChangesAsync(cancellationToken);
             }
-            else
-            {
-                return await base.SaveChangesAsync(_currentUserService.UserId, cancellationToken);
-            }
+
+            return await base.SaveChangesAsync(_currentUserService.UserId, cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

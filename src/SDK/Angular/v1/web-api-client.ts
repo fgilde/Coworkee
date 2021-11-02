@@ -1342,7 +1342,7 @@ export class DocumentExtendedAttributesClient implements IDocumentExtendedAttrib
 
 export interface ITranslationsClient {
     /**
-     * Get All Products
+     * Get All Translations
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param searchString (optional) 
@@ -1351,12 +1351,12 @@ export interface ITranslationsClient {
      */
     getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto>;
     /**
-     * Add/Edit a Product
+     * Add/Edit one or more Translations
      * @return Status 200 OK
      */
     post(command: AddEditTranslationsCommand): Observable<FileResponse>;
     /**
-     * Delete a Product
+     * Delete a Translations with given ids
      * @param ids Products to delete
      * @return Status 200 OK response
      */
@@ -1382,7 +1382,7 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     /**
-     * Get All Products
+     * Get All Translations
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param searchString (optional) 
@@ -1450,7 +1450,7 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     /**
-     * Add/Edit a Product
+     * Add/Edit one or more Translations
      * @return Status 200 OK
      */
     post(command: AddEditTranslationsCommand): Observable<FileResponse> {
@@ -1504,7 +1504,7 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     /**
-     * Delete a Product
+     * Delete a Translations with given ids
      * @param ids Products to delete
      * @return Status 200 OK response
      */

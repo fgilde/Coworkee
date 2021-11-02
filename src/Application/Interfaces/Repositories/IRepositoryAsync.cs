@@ -11,6 +11,8 @@ namespace CleanArchitectureBase.Application.Interfaces.Repositories
         IQueryable<T> Entities { get; }
 
         Task<T> GetByIdAsync(TId id, CancellationToken cancellation = default);
+        Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default);
+
         Task<List<T>> GetAllAsync(CancellationToken cancellation = default);
         Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default);
 
@@ -26,5 +28,6 @@ namespace CleanArchitectureBase.Application.Interfaces.Repositories
         Task DeleteAsync(T entity, CancellationToken cancellation = default);
         Task DeleteManyAsync(IEnumerable<T> entities, CancellationToken cancellation = default);
         Task DeleteManyAsync(params T[] entities);
+        Task DeleteAllAsync();
     }
 }

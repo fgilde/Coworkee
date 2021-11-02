@@ -48,24 +48,24 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
         <a class="dismiss">🗙</a>
     </div>
 
-    <script>
-        (function () {
-            //window.localStorage.clear();
-            document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
-            document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
-            document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
-            var app = document.getElementById('app');
-            app.addEventListener('DOMSubtreeModified', contentChanged, false);
+<script>
+    //window.localStorage.clear();
+    (function () {
+        document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
+        document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
+        document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
+        var app = document.getElementById('app');
+        app.addEventListener('DOMSubtreeModified', contentChanged, false);
 
-            function contentChanged() {
-                app.removeEventListener('DOMSubtreeModified', contentChanged);
-                var overlay = document.getElementById('overlay-app-load');
-                overlay.classList.add('fade-out');
-                setTimeout(function() { overlay.remove(); }, 2000); // Remove element after fadeout
-            }
+        function contentChanged() {
+            app.removeEventListener('DOMSubtreeModified', contentChanged);
+            var overlay = document.getElementById('overlay-app-load');
+            overlay.classList.add('fade-out');
+            setTimeout(function() { overlay.remove(); }, 2000); // Remove element after fadeout
+        }
 
-        })();
-    </script>
+    })();
+</script>
 
     <script async src="js/site.es5.min.js"></script>
     <script async src="_framework/blazor.webassembly.js"></script>

@@ -6,6 +6,7 @@ using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Contracts;
+using CleanArchitectureBase.Shared.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
@@ -21,7 +22,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
     internal class AddEditCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand>
         where TCommand: AddEditCommandBase<TDto>
         where TEntity : AuditableEntity<TEntityId>
-        where TDto : IDtoBase
+        where TDto : IDtoBase<TEntityId>
     {
         
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;
@@ -47,16 +48,22 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             var toCreate = command.Items.Where(t => t.IsNew).ToArray();
             var toUpdate = command.Items.Where(t => !t.IsNew).ToArray();
 
+            var repository = UnitOfWork.Repository<TEntity>();
             if (toCreate.Any())
             {
                 // await _permissionService.EnsurePolicyAsync(Permissions.Products.Create);
-                await UnitOfWork.Repository<TEntity>().AddManyAsync(toCreate.MapElementsTo<TEntity>(), cancellationToken);
+                await repository.AddManyAsync(toCreate.MapElementsTo<TEntity>(), cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken): UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
             }
             if (toUpdate.Any())
             {
                 //await _permissionService.EnsurePolicyAsync(Permissions.Products.Edit);
-                await UnitOfWork.Repository<TEntity>().UpdateManyAsync(toUpdate.MapElementsTo<TEntity>(), cancellationToken);
+
+                // TODO: Ugly currently but To ensure correct audit trail we need to load entities to change and update only changed properties. So toUpdate.MapElementsTo<TEntity>(); is badly not enough but working in general
+                var entitiesToUpdate = (await repository.GetByIdsAsync(toUpdate.Select(dto => dto.Id), cancellationToken))
+                    .Select(e => toUpdate.First(dto => Equals(dto.Id, e.Id)).MapTo<TEntity>().CopyChangedValuesTo(e)).ToArray();
+                
+                await repository.UpdateManyAsync(entitiesToUpdate, cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
 
             }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
@@ -7,20 +9,23 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
-using Newtonsoft.Json;
 using Nextended.Core;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
-    public partial class EditableDataTable<TResult, TIdType>
+    public partial class EditableDataTable<TResult, TIdType> 
     {
+        [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
+        [Parameter] public bool MultiSelect { get; set; } = true;
+
         [Parameter] public string InitialAction { get; set; }
         [Parameter] public string InitialIdString { get; set; }
 
@@ -106,13 +111,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 await LoadAllData();
 
             _loaded = true;
-            HubConnection = HubConnection.TryInitialize(_navigationManager);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_navigationManager);
 
             await ExecuteInitialPageActionAsync();
+        }
+
+        public async void Reload()
+        {
+            await Reset(true);
         }
 
         private async Task<bool> HasPermission(string permission)
@@ -156,18 +162,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
             }
 
             var response = await ApiLoadPaged(pageNumber + 1, pageSize, _searchString, orderings);
-            if (response.Succeeded)
+            if (_errorService.EnsureResultSuccess(response))
             {
                 _totalItems = response.TotalCount;
                 _currentPage = response.CurrentPage;
-                _pagedData = response.Data;
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
+                _pagedData = CheckForTemporaryChanges(response.Data);
             }
         }
 
@@ -176,17 +175,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
             if (ApiLoad != null)
             {
                 var response = await ApiLoad();
-                if (response.Succeeded)
-                {
-                    _flatList = response.Data.ToList();
-                }
-                else
-                {
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
-                }
+                if (_errorService.EnsureResultSuccess(response))
+                    _flatList = CheckForTemporaryChanges(response.Data).ToList();
             }
         }
 
@@ -222,7 +212,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async void HandleExportResponse(Result<string> response)
         {
-            if (response.Succeeded)
+            if (_errorService.EnsureResultSuccess(response))
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
@@ -233,13 +223,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
                     ? _localizer["Products exported"]
                     : _localizer["Filtered Products exported"], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 
@@ -282,7 +265,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 if (!result.Cancelled)
                 {
                     var response = await ApiDelete(ids);
-                    if (response.Succeeded)
+                    if (_errorService.EnsureResultSuccess(response))
                     {
                         await Reset(true);
                         await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
@@ -291,10 +274,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     else
                     {
                         await Reset(true);
-                        foreach (var message in response.Messages)
-                        {
-                            _snackBar.Add(message, Severity.Error);
-                        }
                     }
 
                     return response.Succeeded;
@@ -342,34 +321,65 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
             return TableProperties.Select(p => PropertyValueFor(item, p)).Any(s =>
-                s.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true);
+                s.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
         }
 
         #region Inline edit
 
-        private TResult elementBeforeEdit;
+        private TResult currentBackup;
+        private Dictionary<TResult, TResult> toUpdate = new();
         private void InlineEditBackupItem(object element)
         {
-            elementBeforeEdit = element.MapTo<TResult>();
+            if (element != null)
+                currentBackup = element.MapTo<TResult>();
         }
 
         private void InlineEditItemHasBeenCommitted(object element)
         {
-            _snackBar.Add("Commit InlineEditItemHasBeenCommitted " + JsonConvert.ToString(element));
+            if (element == null)
+                return;
+
+            var changed = (TResult)element;
+            //var changed = element.MapTo<TResult>();
+            if (EditMode == EditMode.InlineLive)
+                ApiCreateOrEdit(changed);
+            else if (EditMode == EditMode.InlineBulk && currentBackup != null)
+            {
+                toUpdate.TryAdd(changed, currentBackup.MapTo<TResult>());
+            }
         }
 
-        private void InlineEditCommitClick()
+        private IEnumerable<TResult> CheckForTemporaryChanges(IList<TResult> loaded)
         {
-            _snackBar.Add("Commit click");
+            foreach (var result in loaded)
+            {
+                var temporary = toUpdate.FirstOrDefault(pair => Equals(GetId(pair.Key), GetId(result)));
+                yield return temporary.Key ?? result;
+            }
+        }
+
+
+        private void SaveBulk()
+        {
+            _snackBar.Add("Geht klar", Severity.Success);
+            toUpdate.Clear();
+        }
+
+        private bool HasChanges(TResult context)
+        {
+            return toUpdate?.ContainsKey(context) == true;
+        }
+
+        private void UndoBulk(TResult context)
+        {
+            toUpdate[context].CopyChangedValuesTo(context);
+            toUpdate.Remove(context);
         }
 
         private void InlineEditResetItemToOriginalValues(object element)
         {
-            //element = elementBeforeEdit;
-            //((Element)element).Sign = elementBeforeEdit.Sign;
-            //((Element)element).Name = elementBeforeEdit.Name;
-            //((Element)element).Molar = elementBeforeEdit.Molar;
-            //((Element)element).Position = elementBeforeEdit.Position;
+            if(element != null)
+                currentBackup?.CopyChangedValuesTo(element);
         }
 
         #endregion

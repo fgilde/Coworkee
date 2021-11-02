@@ -7,7 +7,7 @@ namespace CleanArchitectureBase.Application.Dtos
         public TId Id { get; set; }
 
         [Newtonsoft.Json.JsonIgnore] [JsonIgnore]
-        public bool IsNew => Id == null || Id.Equals(default);
+        public bool IsNew => Id == null || Id.Equals(default(TId));
     }
 
     public interface IDtoBase<TId> : IDtoBase

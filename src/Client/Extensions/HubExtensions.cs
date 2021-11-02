@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using CleanArchitectureBase.Shared.Constants.Application;
 
@@ -14,6 +15,17 @@ namespace CleanArchitectureBase.Client.Extensions
                                   .WithUrl(navigationManager.ToAbsoluteUri(ApplicationConstants.SignalR.HubUrl))
                                   .Build();
             }
+            return hubConnection;
+        }
+
+        public static async Task<HubConnection> EnsureStartedAsync(this HubConnection hubConnection, NavigationManager navigationManager)
+        {
+            hubConnection = hubConnection.TryInitialize(navigationManager);
+            if (hubConnection.State == HubConnectionState.Disconnected)
+            {
+                await hubConnection.StartAsync();
+            }
+
             return hubConnection;
         }
     }

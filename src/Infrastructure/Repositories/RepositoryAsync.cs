@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public IQueryable<T> Entities => _dbContext.Set<T>();
+        public IQueryable<T> Entities => _dbContext.Set<T>(); // this.context.Set<T>().AsQueryable().AsNoTracking();
 
         public async Task<T> AddAsync(T entity, CancellationToken cancellation = default)
         {
@@ -82,6 +82,12 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
+        public Task DeleteAllAsync()
+        {
+            _dbContext.RemoveRange(Entities);
+            return Task.CompletedTask;
+        }
+
         public async Task<List<T>> GetAllAsync(CancellationToken cancellation = default)
         {
             return await _dbContext
@@ -92,6 +98,12 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
         public async Task<T> GetByIdAsync(TId id, CancellationToken cancellation = default)
         {
             return await _dbContext.Set<T>().FindAsync(new object[] { id }, cancellation);
+        }
+
+        public async Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default)
+        {
+            return _dbContext.Set<T>().Where(e => ids.Contains(e.Id));
+            // return await Task.WhenAll(ids.Select(id => GetByIdAsync(id, cancellation)));
         }
 
         public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default)

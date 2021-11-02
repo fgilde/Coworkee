@@ -60,6 +60,9 @@
   margin: 0;
   position: fixed; }
 
+html, body, #app, .mud-main-content, .mud-rtl-provider {
+  height: 100%; }
+
 body * {
   transition-property: background-color, opacity;
   transition-duration: 0.3s;

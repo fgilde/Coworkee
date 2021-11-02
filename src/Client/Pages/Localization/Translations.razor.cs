@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Client.Pages.Localization
@@ -30,7 +31,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private int GetId(TranslationDto translation)
         {
-            return translation.Id;
+            return translation?.Id ?? default(int);
         }
 
         private async Task<Result> DeleteTranslations(int[] ids)
@@ -56,7 +57,16 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private Task<bool> CreateOrEditProduct(TranslationDto productOrNull)
         {
-            return Task.FromResult(false);
+            if (productOrNull != null)
+            {
+                _api.Translations_PostAsync(new AddEditTranslationsCommand {Items = new[] {productOrNull}});
+                return Task.FromResult(true);
+            }
+            else
+            {
+
+                return Task.FromResult(false);
+            }
             //var parameters = new DialogParameters();
             //if (productOrNull != null)
             //{

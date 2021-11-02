@@ -1,4 +1,4 @@
-﻿@page "/localization/translations"
+﻿@page "/localization/translations/{Action?}/{Id?}"
 @attribute [Authorize(Policy = Permissions.Products.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Translations> _localizer
 @using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
@@ -14,22 +14,22 @@
 <ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations."]" />
 
-<EditableDataTable
-    ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<TranslationDto>>>(Load))"
-    ApiDelete="@(new Func<int[], Task<Result>>(DeleteTranslations))"
-    ApiCreateOrEdit="@(new Func<TranslationDto, Task<bool>>(CreateOrEditProduct))"
-    Export="@(new Func<string, Task<Result<string>>>(Export))"
-    ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
-    GetById="@(new Func<int, IEnumerable<TranslationDto>, Task<TranslationDto>>(FindById))"
-    GetId="@(new Func<TranslationDto,int>(GetId))"
-    Display="@(new Func<TranslationDto, string>(GetName))"
-    TableProperties="@(new []{"Id", "Key", "Value", "CultureCode"})"
-    InitialAction="@Action"
-    InitialIdString="@Id"
-    CreatePermission="@Permissions.Products.Create"
-    DeletePermission="@Permissions.Products.Delete"
-    EditPermission="@Permissions.Products.Edit"
-    ExportPermission="@Permissions.Products.Export"
-    SearchPermission="@Permissions.Products.Search"
->
+<EditableDataTable MultiSelect="true"
+                   EditMode="EditMode.SelfHandled"
+                   ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<TranslationDto>>>(Load))"
+                   ApiDelete="@(new Func<int[], Task<Result>>(DeleteTranslations))"
+                   ApiCreateOrEdit="@(new Func<TranslationDto, Task<bool>>(CreateOrEditProduct))"
+                   Export="@(new Func<string, Task<Result<string>>>(Export))"
+                   ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
+                   GetById="@(new Func<int, IEnumerable<TranslationDto>, Task<TranslationDto>>(FindById))"
+                   GetId="@(new Func<TranslationDto,int>(GetId))"
+                   Display="@(new Func<TranslationDto, string>(GetName))"
+                   TableProperties="@(new []{"Id", "Key", "Value", "CultureCode"})"
+                   InitialAction="@Action"
+                   InitialIdString="@Id"
+                   CreatePermission="@Permissions.Products.Create"
+                   DeletePermission="@Permissions.Products.Delete"
+                   EditPermission="@Permissions.Products.Edit"
+                   ExportPermission="@Permissions.Products.Export"
+                   SearchPermission="@Permissions.Products.Search">
 </EditableDataTable>

@@ -313,7 +313,7 @@
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAll(CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged.GetAllTranslationsQuery,System.Threading.CancellationToken)">
             <summary>
-            Get All Products
+            Get All Translations
             </summary>
             <returns>Status 200 OK</returns>
         </member>
@@ -326,7 +326,7 @@
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Post(CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit.AddEditTranslationsCommand,System.Threading.CancellationToken)">
             <summary>
-            Add/Edit a Product
+            Add/Edit one or more Translations
             </summary>
             <param name="command"></param>
             <param name="cancellationToken">Cancellation token</param>
@@ -334,7 +334,7 @@
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Delete(System.Int32[],System.Threading.CancellationToken)">
             <summary>
-            Delete a Product
+            Delete a Translations with given ids
             </summary>
             <param name="ids">Products to delete</param>
             <param name="cancellationToken">Cancellation token</param>

@@ -16,7 +16,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
     public class TranslationsController : BaseApiController<TranslationsController>
     {
         /// <summary>
-        /// Get All Products
+        /// Get All Translations
         /// </summary>
         /// <returns>Status 200 OK</returns>
         // [Authorize(Policy = Permissions.Products.View)]
@@ -44,7 +44,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         }
 
         /// <summary>
-        /// Add/Edit a Product
+        /// Add/Edit one or more Translations
         /// </summary>
         /// <param name="command"></param>
         /// <param name="cancellationToken">Cancellation token</param>
@@ -57,7 +57,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         }
 
         /// <summary>
-        /// Delete a Product
+        /// Delete a Translations with given ids
         /// </summary>
         /// <param name="ids">Products to delete</param>
         /// <param name="cancellationToken">Cancellation token</param>

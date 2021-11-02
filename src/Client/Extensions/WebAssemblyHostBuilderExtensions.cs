@@ -56,6 +56,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddScoped<ClientPreferenceManager>()
                 .AddScoped<BlazorHeroStateProvider>()
                 .AddScoped<AuthenticationStateProvider, BlazorHeroStateProvider>()
+                .AddTransient<ErrorHandler>()
                 .AddManagers()
                 .AddExtendedAttributeManagers()
                 .AddTransient<AuthenticationHeaderHandler>()

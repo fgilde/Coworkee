@@ -243,36 +243,36 @@ namespace SDK
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<FileResponse> DocumentExtendedAttributes_ExportAsync(string searchString = null, int? entityId = null, bool? includeEntity = null, bool? onlyCurrentGroup = null, string currentGroup = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Get All Products</summary>
+        /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         PaginatedResult<TranslationDto> Translations_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Get All Products</summary>
+        /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<PaginatedResult<TranslationDto>> Translations_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Add/Edit a Product</summary>
+        /// <summary>Add/Edit one or more Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse Translations_Post(AddEditTranslationsCommand command);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Add/Edit a Product</summary>
+        /// <summary>Add/Edit one or more Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<FileResponse> Translations_PostAsync(AddEditTranslationsCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Delete a Product</summary>
+        /// <summary>Delete a Translations with given ids</summary>
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         Result Translations_Delete(System.Collections.Generic.IList<int> ids);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Delete a Product</summary>
+        /// <summary>Delete a Translations with given ids</summary>
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2441,7 +2441,7 @@ namespace SDK
             }
         }
     
-        /// <summary>Get All Products</summary>
+        /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public PaginatedResult<TranslationDto> Translations_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
@@ -2450,7 +2450,7 @@ namespace SDK
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Get All Products</summary>
+        /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<PaginatedResult<TranslationDto>> Translations_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -2534,7 +2534,7 @@ namespace SDK
             }
         }
     
-        /// <summary>Add/Edit a Product</summary>
+        /// <summary>Add/Edit one or more Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public FileResponse Translations_Post(AddEditTranslationsCommand command)
@@ -2543,7 +2543,7 @@ namespace SDK
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Add/Edit a Product</summary>
+        /// <summary>Add/Edit one or more Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<FileResponse> Translations_PostAsync(AddEditTranslationsCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -2614,7 +2614,7 @@ namespace SDK
             }
         }
     
-        /// <summary>Delete a Product</summary>
+        /// <summary>Delete a Translations with given ids</summary>
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2624,7 +2624,7 @@ namespace SDK
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Delete a Product</summary>
+        /// <summary>Delete a Translations with given ids</summary>
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>

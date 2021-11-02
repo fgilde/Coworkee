@@ -1,8 +1,7 @@
-﻿namespace CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged
+﻿namespace CleanArchitectureBase.Application.Dtos
 {
-    public class GetAllPagedProductsResponse
+    public class ProductDto : DtoBase<int>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Barcode { get; set; }
         public string Description { get; set; }

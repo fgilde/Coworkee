@@ -1,14 +1,11 @@
-﻿using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
-using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
-using Microsoft.JSInterop;
 using MudBlazor.Extensions;
 using Nextended.Core.Extensions;
 
@@ -24,18 +21,18 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         public string Id { get; set; }
 
         
-        private async Task<PaginatedResult<GetAllPagedProductsResponse>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings)
+        private async Task<PaginatedResult<ProductDto>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings)
         {
             return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings);
         }
 
-        private async Task<GetAllPagedProductsResponse> FindById(int id, IEnumerable<GetAllPagedProductsResponse> loaded)
+        private async Task<ProductDto> FindById(int id, IEnumerable<ProductDto> loaded)
         {
             var res = loaded.FirstOrDefault(p => p.Id == id) ?? (await _api.Products_GetByIdAsync(id))?.Data;
             return res;
         }
 
-        private int GetId(GetAllPagedProductsResponse product)
+        private int GetId(ProductDto product)
         {
             return product.Id;
         }
@@ -45,7 +42,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return await _api.Products_DeleteAsync(ids.ToList());
         }
 
-        private string GetName(GetAllPagedProductsResponse arg)
+        private string GetName(ProductDto arg)
         {
             return arg.Name;
         }
@@ -61,7 +58,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         }
 
 
-        private async Task<bool> CreateOrEditProduct(GetAllPagedProductsResponse productOrNull)
+        private async Task<bool> CreateOrEditProduct(ProductDto productOrNull)
         {
             var parameters = new DialogParameters();
             if (productOrNull != null)

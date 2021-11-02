@@ -12,14 +12,14 @@ namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
     public class GetAllTranslationsQuery : GetAllPagedQueryBase<TranslationDto>
     {}
 
-    internal class GetAllProductsQueryHandler : GetAllPagedQueryHandlerBase<GetAllTranslationsQuery, int, TranslationDto, Translation>
+    internal class GetAllTranslationsQueryHandler : GetAllPagedQueryHandlerBase<GetAllTranslationsQuery, int, TranslationDto, Translation>
     {
         protected override ISpecification<Translation> GetFilterSpecification(GetAllTranslationsQuery query)
         {
             return new TranslationFilterSpecification(query.SearchString);
         }
 
-        public GetAllProductsQueryHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IServiceProvider provider) 
+        public GetAllTranslationsQueryHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IServiceProvider provider) 
             : base(unitOfWork, mediator, provider)
         { }
     }

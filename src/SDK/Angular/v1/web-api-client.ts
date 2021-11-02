@@ -3837,7 +3837,7 @@ export interface IProductsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfGetAllPagedProductsResponse>;
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfProductDto>;
     /**
      * Add/Edit a Product
      * @return Status 200 OK
@@ -3859,7 +3859,7 @@ export interface IProductsClient {
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ResultOfGetAllPagedProductsResponse>;
+    getById(id: number): Observable<ResultOfProductDto>;
     /**
      * Search Products and Export to Excel
      * @param searchString (optional) 
@@ -3895,7 +3895,7 @@ export class ProductsClient implements IProductsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfGetAllPagedProductsResponse> {
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfProductDto> {
         let url_ = this.baseUrl + "/Products?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
@@ -3926,14 +3926,14 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<PaginatedResultOfGetAllPagedProductsResponse>><any>_observableThrow(e);
+                    return <Observable<PaginatedResultOfProductDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<PaginatedResultOfGetAllPagedProductsResponse>><any>_observableThrow(response_);
+                return <Observable<PaginatedResultOfProductDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<PaginatedResultOfGetAllPagedProductsResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<PaginatedResultOfProductDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3944,7 +3944,7 @@ export class ProductsClient implements IProductsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginatedResultOfGetAllPagedProductsResponse.fromJS(resultData200);
+            result200 = PaginatedResultOfProductDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -3952,7 +3952,7 @@ export class ProductsClient implements IProductsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PaginatedResultOfGetAllPagedProductsResponse>(<any>null);
+        return _observableOf<PaginatedResultOfProductDto>(<any>null);
     }
 
     /**
@@ -4128,7 +4128,7 @@ export class ProductsClient implements IProductsClient {
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ResultOfGetAllPagedProductsResponse> {
+    getById(id: number): Observable<ResultOfProductDto> {
         let url_ = this.baseUrl + "/Products/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4150,14 +4150,14 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfGetAllPagedProductsResponse>><any>_observableThrow(e);
+                    return <Observable<ResultOfProductDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfGetAllPagedProductsResponse>><any>_observableThrow(response_);
+                return <Observable<ResultOfProductDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<ResultOfGetAllPagedProductsResponse> {
+    protected processGetById(response: HttpResponseBase): Observable<ResultOfProductDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4168,7 +4168,7 @@ export class ProductsClient implements IProductsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfGetAllPagedProductsResponse.fromJS(resultData200);
+            result200 = ResultOfProductDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -4176,7 +4176,7 @@ export class ProductsClient implements IProductsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfGetAllPagedProductsResponse>(<any>null);
+        return _observableOf<ResultOfProductDto>(<any>null);
     }
 
     /**
@@ -7329,8 +7329,8 @@ export interface IAddEditBrandCommand {
     tax: number;
 }
 
-export class PaginatedResultOfGetAllPagedProductsResponse extends Result implements IPaginatedResultOfGetAllPagedProductsResponse {
-    data?: GetAllPagedProductsResponse[] | undefined;
+export class PaginatedResultOfProductDto extends Result implements IPaginatedResultOfProductDto {
+    data?: ProductDto[] | undefined;
     currentPage?: number;
     totalPages?: number;
     totalCount?: number;
@@ -7338,7 +7338,7 @@ export class PaginatedResultOfGetAllPagedProductsResponse extends Result impleme
     hasPreviousPage?: boolean;
     hasNextPage?: boolean;
 
-    constructor(data?: IPaginatedResultOfGetAllPagedProductsResponse) {
+    constructor(data?: IPaginatedResultOfProductDto) {
         super(data);
     }
 
@@ -7348,7 +7348,7 @@ export class PaginatedResultOfGetAllPagedProductsResponse extends Result impleme
             if (Array.isArray(_data["data"])) {
                 this.data = [] as any;
                 for (let item of _data["data"])
-                    this.data!.push(GetAllPagedProductsResponse.fromJS(item));
+                    this.data!.push(ProductDto.fromJS(item));
             }
             this.currentPage = _data["currentPage"];
             this.totalPages = _data["totalPages"];
@@ -7359,9 +7359,9 @@ export class PaginatedResultOfGetAllPagedProductsResponse extends Result impleme
         }
     }
 
-    static fromJS(data: any): PaginatedResultOfGetAllPagedProductsResponse {
+    static fromJS(data: any): PaginatedResultOfProductDto {
         data = typeof data === 'object' ? data : {};
-        let result = new PaginatedResultOfGetAllPagedProductsResponse();
+        let result = new PaginatedResultOfProductDto();
         result.init(data);
         return result;
     }
@@ -7384,8 +7384,8 @@ export class PaginatedResultOfGetAllPagedProductsResponse extends Result impleme
     }
 }
 
-export interface IPaginatedResultOfGetAllPagedProductsResponse extends IResult {
-    data?: GetAllPagedProductsResponse[] | undefined;
+export interface IPaginatedResultOfProductDto extends IResult {
+    data?: ProductDto[] | undefined;
     currentPage?: number;
     totalPages?: number;
     totalCount?: number;
@@ -7394,8 +7394,7 @@ export interface IPaginatedResultOfGetAllPagedProductsResponse extends IResult {
     hasNextPage?: boolean;
 }
 
-export class GetAllPagedProductsResponse implements IGetAllPagedProductsResponse {
-    id?: number;
+export class ProductDto extends DtoBaseOfInteger implements IProductDto {
     name?: string | undefined;
     barcode?: string | undefined;
     description?: string | undefined;
@@ -7403,18 +7402,13 @@ export class GetAllPagedProductsResponse implements IGetAllPagedProductsResponse
     brand?: string | undefined;
     brandId?: number;
 
-    constructor(data?: IGetAllPagedProductsResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
+    constructor(data?: IProductDto) {
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.id = _data["id"];
             this.name = _data["name"];
             this.barcode = _data["barcode"];
             this.description = _data["description"];
@@ -7424,28 +7418,27 @@ export class GetAllPagedProductsResponse implements IGetAllPagedProductsResponse
         }
     }
 
-    static fromJS(data: any): GetAllPagedProductsResponse {
+    static fromJS(data: any): ProductDto {
         data = typeof data === 'object' ? data : {};
-        let result = new GetAllPagedProductsResponse();
+        let result = new ProductDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
         data["name"] = this.name;
         data["barcode"] = this.barcode;
         data["description"] = this.description;
         data["rate"] = this.rate;
         data["brand"] = this.brand;
         data["brandId"] = this.brandId;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IGetAllPagedProductsResponse {
-    id?: number;
+export interface IProductDto extends IDtoBaseOfInteger {
     name?: string | undefined;
     barcode?: string | undefined;
     description?: string | undefined;
@@ -7454,23 +7447,23 @@ export interface IGetAllPagedProductsResponse {
     brandId?: number;
 }
 
-export class ResultOfGetAllPagedProductsResponse extends Result implements IResultOfGetAllPagedProductsResponse {
-    data?: GetAllPagedProductsResponse | undefined;
+export class ResultOfProductDto extends Result implements IResultOfProductDto {
+    data?: ProductDto | undefined;
 
-    constructor(data?: IResultOfGetAllPagedProductsResponse) {
+    constructor(data?: IResultOfProductDto) {
         super(data);
     }
 
     init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.data = _data["data"] ? GetAllPagedProductsResponse.fromJS(_data["data"]) : <any>undefined;
+            this.data = _data["data"] ? ProductDto.fromJS(_data["data"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): ResultOfGetAllPagedProductsResponse {
+    static fromJS(data: any): ResultOfProductDto {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultOfGetAllPagedProductsResponse();
+        let result = new ResultOfProductDto();
         result.init(data);
         return result;
     }
@@ -7483,8 +7476,8 @@ export class ResultOfGetAllPagedProductsResponse extends Result implements IResu
     }
 }
 
-export interface IResultOfGetAllPagedProductsResponse extends IResult {
-    data?: GetAllPagedProductsResponse | undefined;
+export interface IResultOfProductDto extends IResult {
+    data?: ProductDto | undefined;
 }
 
 export class AddEditProductCommand implements IAddEditProductCommand {

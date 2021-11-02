@@ -2273,7 +2273,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResultOfGetAllPagedProductsResponse"
+                  "$ref": "#/components/schemas/PaginatedResultOfProductDto"
                 }
               }
             }
@@ -2417,7 +2417,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfGetAllPagedProductsResponse"
+                  "$ref": "#/components/schemas/ResultOfProductDto"
                 }
               }
             }
@@ -4084,7 +4084,7 @@
           }
         }
       },
-      "PaginatedResultOfGetAllPagedProductsResponse": {
+      "PaginatedResultOfProductDto": {
         "allOf": [
           {
             "$ref": "#/components/schemas/Result"
@@ -4097,7 +4097,7 @@
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/GetAllPagedProductsResponse"
+                  "$ref": "#/components/schemas/ProductDto"
                 }
               },
               "currentPage": {
@@ -4126,41 +4126,44 @@
           }
         ]
       },
-      "GetAllPagedProductsResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
+      "ProductDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DtoBaseOfInteger"
           },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "barcode": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "rate": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "brand": {
-            "type": "string",
-            "nullable": true
-          },
-          "brandId": {
-            "type": "integer",
-            "format": "int32"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "barcode": {
+                "type": "string",
+                "nullable": true
+              },
+              "description": {
+                "type": "string",
+                "nullable": true
+              },
+              "rate": {
+                "type": "number",
+                "format": "decimal"
+              },
+              "brand": {
+                "type": "string",
+                "nullable": true
+              },
+              "brandId": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           }
-        }
+        ]
       },
-      "ResultOfGetAllPagedProductsResponse": {
+      "ResultOfProductDto": {
         "allOf": [
           {
             "$ref": "#/components/schemas/Result"
@@ -4171,7 +4174,7 @@
             "properties": {
               "data": {
                 "nullable": true,
-                "$ref": "#/components/schemas/GetAllPagedProductsResponse"
+                "$ref": "#/components/schemas/ProductDto"
               }
             }
           }

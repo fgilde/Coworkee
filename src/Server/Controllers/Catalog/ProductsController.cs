@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Products.Queries.Export;
@@ -23,7 +24,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         // [Authorize(Policy = Permissions.Products.View)]
         [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet]
-        [Produces(typeof(PaginatedResult<GetAllPagedProductsResponse>))]
+        [Produces(typeof(PaginatedResult<ProductDto>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, CancellationToken cancellationToken = default)
         {
             return Ok(await _mediator.Send(query, cancellationToken));
@@ -51,7 +52,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <returns>Status 200 Ok</returns>
         [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet("{id}")]
-        [Produces(typeof(Result<GetAllPagedProductsResponse>))]
+        [Produces(typeof(Result<ProductDto>))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
             var product = await _mediator.Send(new GetProductByIdQuery(id), cancellationToken);

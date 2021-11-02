@@ -3,6 +3,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer
 @using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
 @using CleanArchitectureBase.Shared.Wrapper
+@using CleanArchitectureBase.Application.Dtos
 
 <style>
     .mud-table-container {
@@ -14,14 +15,14 @@
 <HeroTitle Title="@_localizer["Products"]" Description="@_localizer["Manage Products."]" />
 
 <EditableDataTable
-    ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<GetAllPagedProductsResponse>>>(Load))"
+    ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<ProductDto>>>(Load))"
     ApiDelete="@(new Func<int[], Task<Result>>(DeleteProducts))"
-    ApiCreateOrEdit="@(new Func<GetAllPagedProductsResponse, Task<bool>>(CreateOrEditProduct))"
+    ApiCreateOrEdit="@(new Func<ProductDto, Task<bool>>(CreateOrEditProduct))"
     Export="@(new Func<string, Task<Result<string>>>(Export))"
     ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
-    GetById="@(new Func<int, IEnumerable<GetAllPagedProductsResponse>, Task<GetAllPagedProductsResponse>>(FindById))"
-    GetId="@(new Func<GetAllPagedProductsResponse,int>(GetId))"
-    Display="@(new Func<GetAllPagedProductsResponse, string>(GetName))"
+    GetById="@(new Func<int, IEnumerable<ProductDto>, Task<ProductDto>>(FindById))"
+    GetId="@(new Func<ProductDto,int>(GetId))"
+    Display="@(new Func<ProductDto, string>(GetName))"
     TableProperties="@(new []{"Id", "Name", "Brand", "Description", "Barcode", "Rate"})"
     InitialAction="@Action"
     InitialIdString="@Id"

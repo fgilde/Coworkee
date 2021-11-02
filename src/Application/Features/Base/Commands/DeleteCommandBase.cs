@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
@@ -38,12 +37,9 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
 
         public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
         {
-            var translations = await Task.WhenAll(command.Ids.Select(id => UnitOfWork.Repository<TEntity>().GetByIdAsync(id, cancellationToken)));
-            if (translations.Any())
-            {
-                await UnitOfWork.Repository<TEntity>().DeleteManyAsync(translations);
-                await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
-            }
+            var entities = await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken);
+            await UnitOfWork.Repository<TEntity>().DeleteManyAsync(entities, cancellationToken);
+            await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
 
             return Unit.Value;
         }

@@ -16,6 +16,11 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
     public abstract class AddEditCommandBase<TDto> : IRequest
         where TDto : IDtoBase
     {
+        protected AddEditCommandBase(params TDto[] items)
+        {
+            Items = items;
+        }
+
         public TDto[] Items { get; set; }
     }
 
@@ -31,6 +36,9 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         protected readonly IServiceProvider Provider;
         protected T Get<T>() => Provider.GetService<T>();
         protected virtual string CacheKey => null;
+        protected virtual string EditPermission => null;
+        protected virtual string CreatePermission => null;
+
 
         public AddEditCommandHandlerBase(IUnitOfWork<TEntityId> unitOfWork,
             IMediator mediator,
@@ -51,13 +59,15 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             var repository = UnitOfWork.Repository<TEntity>();
             if (toCreate.Any())
             {
-                // await _permissionService.EnsurePolicyAsync(Permissions.Products.Create);
+                if (CreatePermission != null)
+                    await PermissionService.EnsurePolicyAsync(CreatePermission);
                 await repository.AddManyAsync(toCreate.MapElementsTo<TEntity>(), cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken): UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
             }
             if (toUpdate.Any())
             {
-                //await _permissionService.EnsurePolicyAsync(Permissions.Products.Edit);
+                if (EditPermission != null)
+                    await PermissionService.EnsurePolicyAsync(EditPermission);
 
                 // TODO: Ugly currently but To ensure correct audit trail we need to load entities to change and update only changed properties. So toUpdate.MapElementsTo<TEntity>(); is badly not enough but working in general
                 var entitiesToUpdate = (await repository.GetByIdsAsync(toUpdate.Select(dto => dto.Id), cancellationToken))

@@ -1,10 +1,22 @@
-﻿using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Validators.Features.Products.Commands.AddEdit
 {
-    public class AddEditProductCommandValidator : AbstractValidator<AddEditProductCommand>
+
+    public class AddEditProductsCommandValidator : AbstractValidator<AddEditProductsCommand>
+    {
+        public AddEditProductsCommandValidator(IStringLocalizer<AddEditProductCommandValidator> localizer)
+        {
+            RuleForEach(x => x.Items).SetValidator(new AddEditProductCommandValidator(localizer));
+        }
+    }
+    
+
+    public class AddEditProductCommandValidator : AbstractValidator<UpdateProductDto>
     {
         public AddEditProductCommandValidator(IStringLocalizer<AddEditProductCommandValidator> localizer)
         {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
-using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Shared.Wrapper;
 using MudBlazor.Extensions;
 using Nextended.Core.Extensions;
@@ -28,8 +27,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task<ProductDto> FindById(int id, IEnumerable<ProductDto> loaded)
         {
-            var res = loaded.FirstOrDefault(p => p.Id == id) ?? (await _api.Products_GetByIdAsync(id))?.Data;
-            return res;
+            return loaded.FirstOrDefault(p => p.Id == id) ?? await _api.Products_GetByIdAsync(id);
         }
 
         private int GetId(ProductDto product)
@@ -39,7 +37,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task<Result> DeleteProducts(int[] ids)
         {
-            return await _api.Products_DeleteAsync(ids.ToList());
+            await _api.Products_DeleteAsync(ids.ToList());
+            return await Result.SuccessAsync(_localizer["Product Deleted"]) as Result;
         }
 
         private string GetName(ProductDto arg)
@@ -63,7 +62,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             var parameters = new DialogParameters();
             if (productOrNull != null)
             {
-                parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<AddEditProductCommand>());
+                parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<UpdateProductDto>());
             }
 
             var options = new DialogOptionsEx { MaximizeButton = true, DragMode = MudDialogDragMode.Simple, CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };

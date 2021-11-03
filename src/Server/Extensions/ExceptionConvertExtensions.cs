@@ -11,6 +11,7 @@ namespace CleanArchitectureBase.Server.Extensions
         {
             return exception switch
             {
+                ApiException ex => ex.ToActionResult(),
                 ValidationException ex => ex.ToActionResult(),
                 NotFoundException ex => ex.ToActionResult(),
                 UnauthorizedAccessException ex => ex.ToActionResult(),
@@ -60,6 +61,19 @@ namespace CleanArchitectureBase.Server.Extensions
             })
             {
                 StatusCode = StatusCodes.Status401Unauthorized
+            };
+        }
+
+        public static IActionResult ToActionResult(this ApiException exception)
+        {
+            return new ObjectResult(new ProblemDetails
+            {
+                Status = exception.StatusCode,
+                Title = exception.Message,
+                Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
+            })
+            {
+                StatusCode = exception.StatusCode
             };
         }
 

@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Infrastructure.ErrorHandling;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using Microsoft.Extensions.Localization;
 using Toolbelt.Blazor;
@@ -12,6 +12,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
 {
     public class HttpInterceptorManager : IHttpInterceptorManager
     {
+        private readonly IErrorHandler _errorHandler;
         private readonly HttpClientInterceptor _interceptor;
         private readonly IClientAuthenticationManager _clientAuthenticationManager;
         private readonly NavigationManager _navigationManager;
@@ -23,16 +24,30 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
             IClientAuthenticationManager clientAuthenticationManager,
             NavigationManager navigationManager,
             ISnackbar snackBar,
-            IStringLocalizer<HttpInterceptorManager> localizer)
+            IStringLocalizer<HttpInterceptorManager> localizer, IErrorHandler errorHandler)
         {
             _interceptor = interceptor;
             _clientAuthenticationManager = clientAuthenticationManager;
             _navigationManager = navigationManager;
             _snackBar = snackBar;
             _localizer = localizer;
+            _errorHandler = errorHandler;
         }
 
-        public void RegisterEvent() => _interceptor.BeforeSendAsync += InterceptBeforeHttpAsync;
+        public void RegisterEvent()
+        {
+            _interceptor.BeforeSendAsync += InterceptBeforeHttpAsync;
+            _interceptor.AfterSendAsync += InterceptAfterHttpAsync;
+        }
+
+        private async Task InterceptAfterHttpAsync(object sender, HttpClientInterceptorEventArgs e)
+        {
+            if (e?.Response?.IsSuccessStatusCode == false)
+            {
+                e.Cancel = true;
+                await _errorHandler.HandleAsync(e.Response);
+            }
+        }
 
         public async Task InterceptBeforeHttpAsync(object sender, HttpClientInterceptorEventArgs e)
         {
@@ -58,6 +73,10 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors
             }
         }
 
-        public void DisposeEvent() => _interceptor.BeforeSendAsync -= InterceptBeforeHttpAsync;
+        public void DisposeEvent()
+        {
+            _interceptor.BeforeSendAsync -= InterceptBeforeHttpAsync;
+            _interceptor.AfterSendAsync -= InterceptAfterHttpAsync;
+        }
     }
 }

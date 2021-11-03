@@ -11,6 +11,14 @@ namespace CleanArchitectureBase.SDK
 
     public interface IBlazorHeroClient : IGeneratedClient
     {
+        /// <summary>
+        /// Delegate function to catch prepare request event
+        /// </summary>
+        GeneratedClient.PrepareRequestDelegate PrepareRequestDelegateFunction { get; set; }
 
+        /// <summary>
+        /// Delegate function to catch process response event
+        /// </summary>
+        GeneratedClient.ProcessResponseDelegate ProcessResponseDelegateFunction { get; set; }
     }
 }

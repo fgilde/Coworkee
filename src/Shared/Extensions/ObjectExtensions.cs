@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -14,12 +15,24 @@ namespace CleanArchitectureBase.Shared.Extensions
 
             foreach (var prop in properties)
             {
-                var value = prop.GetValue(source);
-                if (value != null && !value.Equals(prop.GetValue(target)))
-                    prop.SetValue(target, value, null);
+                try
+                {
+                    var value = prop.GetValue(source);
+                    
+                    if (value != null && !value.Equals(prop.GetValue(target)) && !value.Equals(prop.PropertyType.GetDefaultValue()))
+                        prop.SetValue(target, value, null);
+                }
+                catch
+                {}
             }
 
             return target;
+        }
+        private static object GetDefaultValue(this Type t)
+        {
+            if (t.IsValueType && Nullable.GetUnderlyingType(t) == null)
+                return Activator.CreateInstance(t);
+            return null;
         }
     }
 }

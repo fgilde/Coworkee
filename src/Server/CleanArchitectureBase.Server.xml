@@ -74,7 +74,7 @@
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductCommand,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductsCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit a Product
             </summary>

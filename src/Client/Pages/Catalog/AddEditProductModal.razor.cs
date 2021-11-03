@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
@@ -20,8 +21,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
     public partial class AddEditProductModal
     {
         [Inject] private IBlazorHeroClient Api { get; set; }
-        
-        [Parameter] public AddEditProductCommand AddEditProductModel { get; set; } = new();
+
+        [Parameter] public UpdateProductDto AddEditProductModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
 
@@ -36,20 +37,11 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task SaveAsync()
         {
-            var response = await Api.Products_PostAsync(AddEditProductModel);
-            if (response.Succeeded)
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-                MudDialog.Close();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
+            await Api.Products_PostAsync(new AddEditProductsCommand(AddEditProductModel));
+            
+            _snackBar.Add(_localizer["Product Updated"], Severity.Success);
+            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            MudDialog.Close();
         }
 
         protected override async Task OnInitializedAsync()
@@ -103,13 +95,14 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             _file = e.File;
             if (_file != null)
             {
+                
                 var extension = Path.GetExtension(_file.Name);
                 var format = "image/png";
                 var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
                 AddEditProductModel.ImageDataURL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, UploadType = Application.Enums.UploadType.Product, Extension = extension };
+                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name ,UploadType = Application.Enums.UploadType.Product, Extension = extension };
             }
         }
 

@@ -1,21 +1,39 @@
 ﻿using System;
-using System.Globalization;
+using System.Net;
 
 namespace CleanArchitectureBase.Application.Exceptions
 {
     public class ApiException : Exception
     {
-        public ApiException() : base()
+        public ApiException(HttpStatusCode statusCode = HttpStatusCode.InternalServerError, params object[] arguments)
         {
+            Arguments = arguments;
+            StatusCode = (int)statusCode;
         }
 
-        public ApiException(string message) : base(message)
+        public ApiException(
+            string messageOrResourceKey,
+            HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
+            params object[] arguments)
+            : base(messageOrResourceKey)
         {
+            Arguments = arguments;
+            StatusCode = (int)statusCode;
         }
 
-        public ApiException(string message, params object[] args)
-            : base(string.Format(CultureInfo.CurrentCulture, message, args))
+        public ApiException(
+            string messageOrResourceKey,
+            Exception innerException,
+            HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
+            params object[] arguments)
+            : base(messageOrResourceKey, innerException)
         {
+            Arguments = arguments;
+            StatusCode = (int)statusCode;
         }
+
+        public object[] Arguments { get; protected set; }
+
+        public int? StatusCode { get; set; }
     }
 }

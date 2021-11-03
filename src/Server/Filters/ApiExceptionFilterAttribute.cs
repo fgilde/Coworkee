@@ -18,19 +18,14 @@ namespace CleanArchitectureBase.Server.Filters
         public ApiExceptionFilterAttribute(ILogger<ApiExceptionFilterAttribute> logger)
         {
             _logger = logger;
-            // Register known exception types and handlers.
             _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
             {
-                { typeof(ValidationException), HandleValidationException },
-                { typeof(NotFoundException), HandleNotFoundException },
-                { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
-                { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
+                { typeof(ApiException), HandleKnownException },
+                { typeof(ValidationException), HandleKnownException },
+                { typeof(NotFoundException), HandleKnownException },
+                { typeof(UnauthorizedAccessException), HandleKnownException },
+                { typeof(ForbiddenAccessException), HandleKnownException },
             };
-        }
-
-        public IActionResult ActionResultFor(Exception exception)
-        {
-            return exception.ToActionResult();
         }
 
         public override void OnException(ExceptionContext context)
@@ -73,12 +68,6 @@ namespace CleanArchitectureBase.Server.Filters
             return _exceptionHandlers.Where(p => p.Key == type || p.Key.IsAssignableFrom(type)).Select(p => p.Value).FirstOrDefault();
         }
 
-        private void HandleValidationException(ExceptionContext context)
-        {
-            context.Result = ActionResultFor(context.Exception);
-            context.ExceptionHandled = true;
-        }
-
         private void HandleInvalidModelStateException(ExceptionContext context)
         {
             var details = new ValidationProblemDetails(context.ModelState)
@@ -91,27 +80,16 @@ namespace CleanArchitectureBase.Server.Filters
             context.ExceptionHandled = true;
         }
 
-        private void HandleNotFoundException(ExceptionContext context)
-        {
-            context.Result = ActionResultFor(context.Exception);
-            context.ExceptionHandled = true;
-        }
-
-        private void HandleUnauthorizedAccessException(ExceptionContext context)
-        {
-            context.Result = ActionResultFor(context.Exception);
-            context.ExceptionHandled = true;
-        }
-
-        private void HandleForbiddenAccessException(ExceptionContext context)
-        {
-            context.Result = ActionResultFor(context.Exception);
-            context.ExceptionHandled = true;
-        }
 
         private void HandleUnknownException(ExceptionContext context)
         {
-            context.Result = ActionResultFor(context.Exception);
+            context.Result = context.Exception.ToActionResult();
+            context.ExceptionHandled = false;
+        }
+
+        private void HandleKnownException(ExceptionContext context)
+        {
+            context.Result = context.Exception.ToActionResult();
             context.ExceptionHandled = true;
         }
     }

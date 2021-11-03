@@ -33,11 +33,13 @@
 @using CleanArchitectureBase.Client.Infrastructure.Settings;
 
 @using CleanArchitectureBase.Application.Requests.Identity;
+@using CleanArchitectureBase.Client.ErrorHandling
 
 @using CleanArchitectureBase.Client.Pages.Authentication;
 
 @using CleanArchitectureBase.Client.Infrastructure.Authentication;
 @using CleanArchitectureBase.Client.Extensions;
+@using CleanArchitectureBase.Client.Infrastructure.ErrorHandling
 @using CleanArchitectureBase.SDK;
 
 @attribute [Authorize]
@@ -54,4 +56,4 @@
 @inject ILocalStorageService _localStorage;
 @inject IJSRuntime _jsRuntime;
 @inject ILanguageContainerService _languageService;
-@inject ErrorHandler _errorService
+@inject IErrorHandler _errorService

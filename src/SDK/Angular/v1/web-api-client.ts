@@ -3842,13 +3842,13 @@ export interface IProductsClient {
      * Add/Edit a Product
      * @return Status 200 OK
      */
-    post(command: AddEditProductCommand): Observable<ResultOfInteger>;
+    post(command: AddEditProductsCommand): Observable<FileResponse>;
     /**
      * Delete a Product
      * @param ids Products to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<Result>;
+    delete(ids: number[]): Observable<FileResponse>;
     /**
      * Get a Product Image by Id
      * @param id Product Id
@@ -3859,7 +3859,7 @@ export interface IProductsClient {
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ResultOfProductDto>;
+    getById(id: number): Observable<ProductDto>;
     /**
      * Search Products and Export to Excel
      * @param searchString (optional) 
@@ -3959,7 +3959,7 @@ export class ProductsClient implements IProductsClient {
      * Add/Edit a Product
      * @return Status 200 OK
      */
-    post(command: AddEditProductCommand): Observable<ResultOfInteger> {
+    post(command: AddEditProductsCommand): Observable<FileResponse> {
         let url_ = this.baseUrl + "/Products";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3971,7 +3971,7 @@ export class ProductsClient implements IProductsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/octet-stream"
             })
         };
 
@@ -3982,33 +3982,31 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<ResultOfInteger> {
+    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfInteger.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfInteger>(<any>null);
+        return _observableOf<FileResponse>(<any>null);
     }
 
     /**
@@ -4016,7 +4014,7 @@ export class ProductsClient implements IProductsClient {
      * @param ids Products to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<Result> {
+    delete(ids: number[]): Observable<FileResponse> {
         let url_ = this.baseUrl + "/Products";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4028,7 +4026,7 @@ export class ProductsClient implements IProductsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/octet-stream"
             })
         };
 
@@ -4039,33 +4037,31 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<Result> {
+    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return _observableOf<FileResponse>(<any>null);
     }
 
     /**
@@ -4128,7 +4124,7 @@ export class ProductsClient implements IProductsClient {
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ResultOfProductDto> {
+    getById(id: number): Observable<ProductDto> {
         let url_ = this.baseUrl + "/Products/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4150,14 +4146,14 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfProductDto>><any>_observableThrow(e);
+                    return <Observable<ProductDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfProductDto>><any>_observableThrow(response_);
+                return <Observable<ProductDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<ResultOfProductDto> {
+    protected processGetById(response: HttpResponseBase): Observable<ProductDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4168,7 +4164,7 @@ export class ProductsClient implements IProductsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfProductDto.fromJS(resultData200);
+            result200 = ProductDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -4176,7 +4172,7 @@ export class ProductsClient implements IProductsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfProductDto>(<any>null);
+        return _observableOf<ProductDto>(<any>null);
     }
 
     /**
@@ -7401,6 +7397,7 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
     rate?: number;
     brand?: string | undefined;
     brandId?: number;
+    imageDataURL?: string | undefined;
 
     constructor(data?: IProductDto) {
         super(data);
@@ -7415,6 +7412,7 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
             this.rate = _data["rate"];
             this.brand = _data["brand"];
             this.brandId = _data["brandId"];
+            this.imageDataURL = _data["imageDataURL"];
         }
     }
 
@@ -7433,6 +7431,7 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
         data["rate"] = this.rate;
         data["brand"] = this.brand;
         data["brandId"] = this.brandId;
+        data["imageDataURL"] = this.imageDataURL;
         super.toJSON(data);
         return data; 
     }
@@ -7445,52 +7444,13 @@ export interface IProductDto extends IDtoBaseOfInteger {
     rate?: number;
     brand?: string | undefined;
     brandId?: number;
-}
-
-export class ResultOfProductDto extends Result implements IResultOfProductDto {
-    data?: ProductDto | undefined;
-
-    constructor(data?: IResultOfProductDto) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.data = _data["data"] ? ProductDto.fromJS(_data["data"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): ResultOfProductDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfProductDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IResultOfProductDto extends IResult {
-    data?: ProductDto | undefined;
-}
-
-export class AddEditProductCommand implements IAddEditProductCommand {
-    id?: number;
-    name!: string;
-    barcode!: string;
-    description!: string;
     imageDataURL?: string | undefined;
-    rate!: number;
-    brandId!: number;
-    uploadRequest?: UploadRequest | undefined;
+}
 
-    constructor(data?: IAddEditProductCommand) {
+export abstract class AddEditCommandBaseOfUpdateProductDto implements IAddEditCommandBaseOfUpdateProductDto {
+    items?: UpdateProductDto[] | undefined;
+
+    constructor(data?: IAddEditCommandBaseOfUpdateProductDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7501,46 +7461,115 @@ export class AddEditProductCommand implements IAddEditProductCommand {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.barcode = _data["barcode"];
-            this.description = _data["description"];
-            this.imageDataURL = _data["imageDataURL"];
-            this.rate = _data["rate"];
-            this.brandId = _data["brandId"];
-            this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(UpdateProductDto.fromJS(item));
+            }
         }
     }
 
-    static fromJS(data: any): AddEditProductCommand {
+    static fromJS(data: any): AddEditCommandBaseOfUpdateProductDto {
         data = typeof data === 'object' ? data : {};
-        let result = new AddEditProductCommand();
+        throw new Error("The abstract class 'AddEditCommandBaseOfUpdateProductDto' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IAddEditCommandBaseOfUpdateProductDto {
+    items?: UpdateProductDto[] | undefined;
+}
+
+export class AddEditProductsCommand extends AddEditCommandBaseOfUpdateProductDto implements IAddEditProductsCommand {
+
+    constructor(data?: IAddEditProductsCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): AddEditProductsCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddEditProductsCommand();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["barcode"] = this.barcode;
-        data["description"] = this.description;
-        data["imageDataURL"] = this.imageDataURL;
-        data["rate"] = this.rate;
-        data["brandId"] = this.brandId;
-        data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IAddEditProductCommand {
-    id?: number;
-    name: string;
-    barcode: string;
-    description: string;
+export interface IAddEditProductsCommand extends IAddEditCommandBaseOfUpdateProductDto {
+}
+
+export class UpdateProductDto extends DtoBaseOfInteger implements IUpdateProductDto {
+    name?: string | undefined;
+    barcode?: string | undefined;
+    description?: string | undefined;
+    rate?: number;
+    brandId?: number;
     imageDataURL?: string | undefined;
-    rate: number;
-    brandId: number;
+    uploadRequest?: UploadRequest | undefined;
+
+    constructor(data?: IUpdateProductDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.barcode = _data["barcode"];
+            this.description = _data["description"];
+            this.rate = _data["rate"];
+            this.brandId = _data["brandId"];
+            this.imageDataURL = _data["imageDataURL"];
+            this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): UpdateProductDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateProductDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["barcode"] = this.barcode;
+        data["description"] = this.description;
+        data["rate"] = this.rate;
+        data["brandId"] = this.brandId;
+        data["imageDataURL"] = this.imageDataURL;
+        data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IUpdateProductDto extends IDtoBaseOfInteger {
+    name?: string | undefined;
+    barcode?: string | undefined;
+    description?: string | undefined;
+    rate?: number;
+    brandId?: number;
+    imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
 }
 
@@ -7551,7 +7580,7 @@ export interface FileResponse {
     headers?: { [name: string]: any };
 }
 
-export class SwaggerException extends Error {
+export class ApiException extends Error {
     message: string;
     status: number;
     response: string;
@@ -7568,10 +7597,10 @@ export class SwaggerException extends Error {
         this.result = result;
     }
 
-    protected isSwaggerException = true;
+    protected isApiException = true;
 
-    static isSwaggerException(obj: any): obj is SwaggerException {
-        return obj.isSwaggerException === true;
+    static isApiException(obj: any): obj is ApiException {
+        return obj.isApiException === true;
     }
 }
 
@@ -7579,7 +7608,7 @@ function throwException(message: string, status: number, response: string, heade
     if (result !== null && result !== undefined)
         return _observableThrow(result);
     else
-        return _observableThrow(new SwaggerException(message, status, response, headers, null));
+        return _observableThrow(new ApiException(message, status, response, headers, null));
 }
 
 function blobToText(blob: any): Observable<string> {

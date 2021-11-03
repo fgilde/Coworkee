@@ -13,6 +13,8 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using CleanArchitectureBase.Client.ErrorHandling;
+using CleanArchitectureBase.Client.Infrastructure.ErrorHandling;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
@@ -56,7 +58,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddScoped<ClientPreferenceManager>()
                 .AddScoped<BlazorHeroStateProvider>()
                 .AddScoped<AuthenticationStateProvider, BlazorHeroStateProvider>()
-                .AddTransient<ErrorHandler>()
+                .AddTransient<IErrorHandler, ErrorHandler>()
                 .AddManagers()
                 .AddExtendedAttributeManagers()
                 .AddTransient<AuthenticationHeaderHandler>()

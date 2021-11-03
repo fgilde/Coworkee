@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Theming;
-using MudBlazor.ThemeManager;
+using CleanArchitectureBase.Client.Shared.Components;
 
 namespace CleanArchitectureBase.Client.Shared
 {
@@ -16,6 +16,7 @@ namespace CleanArchitectureBase.Client.Shared
     {
         private string CurrentUserId { get; set; }
         private NavMenu navMenu;
+        private AppBarHeader appBarHeader;
         private async Task LoadDataAsync()
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
@@ -171,7 +172,7 @@ namespace CleanArchitectureBase.Client.Shared
         private string GetTitle()
         {
             var menuItem = navMenu?.FindEntriesForUrl()?.FirstOrDefault();
-            return navMenu?.Locale(menuItem?.Parent?.Text ?? menuItem?.Text);
+            return navMenu?.Locale(menuItem?.Parent?.Text ?? menuItem?.Text ?? appBarHeader?.Title);
         }
     }
 }

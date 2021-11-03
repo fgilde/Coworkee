@@ -162,7 +162,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             }
 
             var response = await ApiLoadPaged(pageNumber + 1, pageSize, _searchString, orderings);
-            if (_errorService.EnsureResultSuccess(response))
+            if (_errorService.IsSuccessFull(response))
             {
                 _totalItems = response.TotalCount;
                 _currentPage = response.CurrentPage;
@@ -175,7 +175,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             if (ApiLoad != null)
             {
                 var response = await ApiLoad();
-                if (_errorService.EnsureResultSuccess(response))
+                if (_errorService.IsSuccessFull(response))
                     _flatList = CheckForTemporaryChanges(response.Data).ToList();
             }
         }
@@ -212,7 +212,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async void HandleExportResponse(Result<string> response)
         {
-            if (_errorService.EnsureResultSuccess(response))
+            if (_errorService.IsSuccessFull(response))
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
@@ -265,17 +265,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 if (!result.Cancelled)
                 {
                     var response = await ApiDelete(ids);
-                    if (_errorService.EnsureResultSuccess(response))
-                    {
-                        await Reset(true);
-                        await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                    await Reset(true);
+                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                    if (_errorService.IsSuccessFull(response))
                         _snackBar.Add(response.Messages[0], Severity.Success);
-                    }
-                    else
-                    {
-                        await Reset(true);
-                    }
-
+                    
                     return response.Succeeded;
                 }
                 return false;

@@ -1,3 +1,18 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<TablePager> localizer
 
-<MudTablePager RowsPerPageString="@localizer["RowsPerPageString"]" InfoFormat="{first_item}-{last_item} of {all_items}" />
+<MudTablePager PageSizeOptions="@pagingSize" RowsPerPageString="@localizer["RowsPerPageString"]" InfoFormat="{first_item}-{last_item} of {all_items}" />
+
+@code
+{
+    private int[] pagingSize = {
+        10,
+        25,
+        50,
+        100,
+        150,
+        250,
+        500,
+        700,
+        1000
+    };
+}

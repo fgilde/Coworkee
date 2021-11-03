@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Application.Dtos;
@@ -14,6 +15,7 @@ namespace CleanArchitectureBase.Application.Features.Translations.Commands.AddEd
 
     internal class AddEditTranslationsCommandCommandHandler : AddEditCommandHandlerBase<AddEditTranslationsCommand, int, TranslationDto, Translation>
     {
+        protected override string CacheKey => $"{base.CacheKey}-{Thread.CurrentThread.CurrentCulture.Name}";
         public AddEditTranslationsCommandCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider) 
             : base(unitOfWork, mediator, permissionService, provider)
         { }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Contracts;
+using CleanArchitectureBase.Shared.Constants.Application;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
@@ -24,7 +25,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         protected readonly IMediator Mediator;
         protected readonly IServiceProvider Provider;
         protected T Get<T>() => Provider.GetService<T>();
-        protected virtual string CacheKey => null;
+        protected virtual string CacheKey => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
         public DeleteCommandHandlerBase(IUnitOfWork<TEntityId> unitOfWork,
             IMediator mediator,
             IPermissionService permissionService, IServiceProvider provider)

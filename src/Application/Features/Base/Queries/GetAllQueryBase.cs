@@ -2,38 +2,50 @@
 using LazyCache;
 using MediatR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Domain.Contracts;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Base.Queries
 {
     public class GetAllQueryBase<TDto> : IRequest<IReadOnlyCollection<TDto>>
         where TDto : IDtoBase
-    {}
+    {
+        /// <summary>
+        /// If true cache is cleared first
+        /// </summary>
+        public bool Force { get; set; } = false;
+    }
 
     internal class GetAllQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, IReadOnlyCollection<TDto>>
         where TQuery : GetAllQueryBase<TDto>
         where TEntity : AuditableEntity<TEntityId>
         where TDto : class, IDtoBase
     {
-        private readonly IUnitOfWork<TEntityId> _unitOfWork;
-        private readonly IAppCache _cache;
+        protected readonly IUnitOfWork<TEntityId> UnitOfWork;
+        protected readonly IAppCache Cache;
 
-        protected virtual string CacheKey => null;
+        protected virtual string CacheKey => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
 
         public GetAllQueryHandlerBase(IUnitOfWork<TEntityId> unitOfWork, IAppCache cache)
         {
-            _unitOfWork = unitOfWork;
-            _cache = cache;
+            UnitOfWork = unitOfWork;
+            Cache = cache;
         }
 
-        public async Task<IReadOnlyCollection<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
+        protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
+
+        public virtual async Task<IReadOnlyCollection<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
         {
-            Task<List<TEntity>> GetAll() => _unitOfWork.Repository<TEntity>().GetAllAsync(cancellationToken);
-            var resultList = await (CacheKey.IsNullOrWhiteSpace() ? GetAll() : _cache.GetOrAddAsync(CacheKey, GetAll));
+            if(request.Force && !string.IsNullOrWhiteSpace(CacheKey))
+                Cache.Remove(CacheKey);
+            Task<List<TEntity>> GetAll() => Queryable.ToListAsync(cancellationToken);
+            var resultList = await (CacheKey.IsNullOrWhiteSpace() ? GetAll() : Cache.GetOrAddAsync(CacheKey, GetAll));
             return resultList.MapTo<List<TDto>>().AsReadOnly();
         }
     }

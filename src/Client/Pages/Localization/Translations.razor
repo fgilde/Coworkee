@@ -5,26 +5,30 @@
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Dtos
 
-<style>
-    .mud-table-container {
-        overflow: auto;
-    }
-</style>
 
 <ReactOnPreferenceChanged Component="this" />
-<HeroTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations."]" />
+<HeroTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
 
-<EditableDataTable MultiSelect="true"
-                   EditMode="EditMode.SelfHandled"
-                   ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<TranslationDto>>>(Load))"
+<MudSwitch Checked="@advancedMode" CheckedChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="Advanced Mode" Color="Color.Warning" />
+@if (!advancedMode)
+{
+    <MudSwitch Checked="@showCultureTranslations" CheckedChanged="@(new Action<bool>(e => CultureTranslationToggle(e)))" Label="Show Culture code Translations" Color="Color.Primary"/>
+}
+
+<EditableDataTable @ref="dataTable"
+                   MultiSelect="@advancedMode"
+                   EditMode="EditMode.InlineBulk"
+                   ApiLoad="@(advancedMode ? null : new Func<Task<Result<List<TranslationDto>>>>(Load))"
+                   ApiLoadPaged="@(!advancedMode ? null : new Func<int, int, string, string[], Task<PaginatedResult<TranslationDto>>>(LoadPaged))"
                    ApiDelete="@(new Func<int[], Task<Result>>(DeleteTranslations))"
-                   ApiCreateOrEdit="@(new Func<TranslationDto, Task<bool>>(CreateOrEditProduct))"
+                   ApiCreateOrEdit="@(new Func<TranslationDto, Task<bool>>(CreateOrEdit))"
+                   ApiEditMany="@(new Func<TranslationDto[], Task<bool>>(SaveAll))"
                    Export="@(new Func<string, Task<Result<string>>>(Export))"
                    ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
                    GetById="@(new Func<int, IEnumerable<TranslationDto>, Task<TranslationDto>>(FindById))"
                    GetId="@(new Func<TranslationDto,int>(GetId))"
                    Display="@(new Func<TranslationDto, string>(GetName))"
-                   TableProperties="@(new []{"Id", "Key", "Value", "CultureCode"})"
+                   TableProperties="@(advancedMode ? new []{"Id", "Key", "Value", "CultureCode"} : new []{"Key", "Value"})"
                    InitialAction="@Action"
                    InitialIdString="@Id"
                    CreatePermission="@Permissions.Products.Create"
@@ -33,3 +37,26 @@
                    ExportPermission="@Permissions.Products.Export"
                    SearchPermission="@Permissions.Products.Search">
 </EditableDataTable>
+
+@code{
+    private bool advancedMode;
+    private bool showCultureTranslations;
+    private EditableDataTable<TranslationDto, int> dataTable;
+
+    private async Task CultureTranslationToggle(bool isChecked)
+    {
+        showCultureTranslations = isChecked;
+        await dataTable.Reload();
+        StateHasChanged();
+    }
+
+    private async Task AdvancedModeToggled(bool isChecked)
+    {
+        advancedMode = isChecked;
+        await dataTable.Reload();
+        StateHasChanged();
+        await dataTable.Reload();
+        StateHasChanged();
+    }
+
+}

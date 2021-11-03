@@ -40,10 +40,4 @@
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="MudBlazor.Extensions">
-      <HintPath>..\..\..\MudBlazor.Extensions\MudBlazor.Extensions\bin\Debug\net5.0\MudBlazor.Extensions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

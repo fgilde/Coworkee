@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Theming;
+using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
 
 namespace CleanArchitectureBase.Client.Shared
@@ -64,6 +66,12 @@ namespace CleanArchitectureBase.Client.Shared
             _interceptor.RegisterEvent();
             hubConnection = hubConnection.TryInitialize(_navigationManager);
             await hubConnection.StartAsync();
+            hubConnection.On(ApplicationConstants.SignalR.TranslationsChanged, async () =>
+            {
+                await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, true);
+                await _clientPreferenceManager.ChangeLanguageAsync((await _clientPreferenceManager.GetPreference()).LanguageCode);
+                StateHasChanged();
+            });
             hubConnection.On<string, string, string>(ApplicationConstants.SignalR.ReceiveChatNotification, (message, receiverUserId, senderUserId) =>
             {
                 if (CurrentUserId == receiverUserId)

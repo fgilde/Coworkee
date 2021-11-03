@@ -5,22 +5,26 @@
 @using Nextended.Core.Extensions
 
 <style>
-      .mud-table-container {
-        overflow: auto;
+    .mud-container {
+        height: 98%
+    }
+    .mud-table {
+        height: 90%
     }
 </style>
 
+<ReactOnPreferenceChanged Component="this" OnPreferenceChanged="OnPreferenceChanged" />
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
 }
 else
 {
-    <MudTable ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" CommitEditTooltip="Commit Edit" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
+    <MudTable FixedHeader="true" Height="87%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
               MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)" @bind-SelectedItems="_selectedItems" Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)" ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)" Hover="true" Dense="false" Bordered="false" Striped="true" @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
-                @if (_canEdit && EditMode == EditMode.InlineBulk && toUpdate.Any())
+                @if (_canEdit && EditMode == EditMode.InlineBulk && ApiEditMany != null && toUpdate.Any())
                     {
                     <MudButton Style="margin-right: 5px;" DisableElevation Variant="Variant.Filled" Color="Color.Success" @onclick="@(() => SaveBulk())" StartIcon="@Icons.Material.Filled.Save" IconColor="Color.Surface">@_localizer["Save {0} Changes", toUpdate.Count]</MudButton>
                     }
@@ -43,8 +47,8 @@ else
                     }
                 @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
                     {
-                    <MudMenu FullWidth="true" DisableElevation Style="margin-left: 5px; margin-top: 1px;" Label="@_localizer["{0} Selected", _selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true">
-                        @if (_canEdit)
+                    <MudMenu DisableElevation Style="margin-left: 5px; margin-top: 1px;" Label="@_localizer["{0} Selected", _selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                        @if (_canEdit && EditMode == EditMode.SelfHandled && ApiEditMany != null)
                             {
                             <MudMenuItem>
                                 <MudText>
@@ -52,7 +56,6 @@ else
                                     @_localizer["Edit"]
                                 </MudText>
                             </MudMenuItem>
-
                             }
                         @if (_canDelete)
                             {
@@ -106,37 +109,41 @@ else
 
             <MudTd DataLabel="@_localizer["Actions"]" Style="text-align: right">
                 @if (_canEdit || _canDelete) {
-                    @if (EditMode == EditMode.InlineBulk && HasChanges(context))
-                    {
+                    @if (EditMode == EditMode.InlineBulk && HasChanges(context)) {
                         <MudTooltip Text="@_localizer["Undo"]">
                             <MudIconButton @onclick="@(() => UndoBulk(context))" Color="Color.Primary" Icon="@Icons.Material.Filled.Undo" aria-label="@_localizer["Undo"]"></MudIconButton>
                         </MudTooltip>
                     }
 
-                    @if (_canEdit && EditMode == EditMode.SelfHandled)
-                        {
+                    @if (_canEdit && EditMode == EditMode.SelfHandled) {
                         <MudTooltip Text="@_localizer["Edit"]">
                             <MudIconButton @onclick="@(() => InvokeModal(GetId(context)))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" aria-label="@_localizer["Edit"]"></MudIconButton>
                         </MudTooltip>
-                        }
-                    @if (_canDelete)
+                    }
+                    @if (_canDelete) {
+                        @if (!GetId(context).Equals(default(TIdType)))
                         {
-                        <MudTooltip Text="@_localizer["Delete"]">
-                            <MudIconButton @onclick="@(() => Delete(GetId(context)))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIconButton>
-                        </MudTooltip>
+                            <MudTooltip Text="@_localizer["Delete"]">
+                                <MudIconButton @onclick="@(() => Delete(GetId(context)))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIconButton>
+                            </MudTooltip>
+                        }
+                        else
+                        {
+                            <MudIcon Color="Color.Transparent" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIcon>
                         }
                     }
-                    else
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
-                        @_localizer["No Allowed Actions"]
-                    </MudButton>
-                    }
+                }
+                else
+                {
+                <MudButton Variant="Variant.Filled"
+                           DisableElevation="true"
+                           StartIcon="@Icons.Material.Filled.DoNotTouch"
+                           IconColor="Color.Secondary"
+                           Size="Size.Small"
+                           Color="Color.Surface">
+                    @_localizer["No Allowed Actions"]
+                </MudButton>
+                }
             </MudTd>
         </RowTemplate>
 
@@ -152,14 +159,14 @@ else
         </RowEditingTemplate>
 
 
-        <FooterContent>
+        @*<FooterContent>
             @if (MultiSelect)
                 {
                 <MudItem xs="12" sm="12" md="12">
                     <MudText Style="margin-top: 17px; justify-content: center">@_localizer["{0} Selected", _selectedItems.Count]</MudText>
                 </MudItem>
                 }
-        </FooterContent>
+        </FooterContent>*@
         <PagerContent>
             <TablePager />
         </PagerContent>

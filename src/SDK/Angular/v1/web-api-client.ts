@@ -1349,7 +1349,18 @@ export interface ITranslationsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto>;
+    getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto>;
+    /**
+     * Get All Translations
+     * @param force (optional) 
+     * @return Status 200 OK
+     */
+    getAll(force: boolean | undefined): Observable<TranslationDto[]>;
+    /**
+     * Get a translation by id
+     * @return Status 200 Ok
+     */
+    getById(id: number): Observable<ResultOfTranslationDto>;
     /**
      * Add/Edit one or more Translations
      * @return Status 200 OK
@@ -1361,11 +1372,6 @@ export interface ITranslationsClient {
      * @return Status 200 OK response
      */
     delete(ids: number[]): Observable<Result>;
-    /**
-     * Get a translation by id
-     * @return Status 200 Ok
-     */
-    getById(id: number): Observable<ResultOfTranslationDto>;
 }
 
 @Injectable({
@@ -1389,8 +1395,8 @@ export class TranslationsClient implements ITranslationsClient {
      * @param orderBy (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto> {
-        let url_ = this.baseUrl + "/Translations?";
+    getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto> {
+        let url_ = this.baseUrl + "/Translations/GetAllPaged?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -1414,11 +1420,11 @@ export class TranslationsClient implements ITranslationsClient {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAll(response_);
+            return this.processGetAllPaged(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetAll(<any>response_);
+                    return this.processGetAllPaged(<any>response_);
                 } catch (e) {
                     return <Observable<PaginatedResultOfTranslationDto>><any>_observableThrow(e);
                 }
@@ -1427,7 +1433,7 @@ export class TranslationsClient implements ITranslationsClient {
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<PaginatedResultOfTranslationDto> {
+    protected processGetAllPaged(response: HttpResponseBase): Observable<PaginatedResultOfTranslationDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1447,6 +1453,125 @@ export class TranslationsClient implements ITranslationsClient {
             }));
         }
         return _observableOf<PaginatedResultOfTranslationDto>(<any>null);
+    }
+
+    /**
+     * Get All Translations
+     * @param force (optional) 
+     * @return Status 200 OK
+     */
+    getAll(force: boolean | undefined): Observable<TranslationDto[]> {
+        let url_ = this.baseUrl + "/Translations/GetAll?";
+        if (force === null)
+            throw new Error("The parameter 'force' cannot be null.");
+        else if (force !== undefined)
+            url_ += "Force=" + encodeURIComponent("" + force) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<TranslationDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<TranslationDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<TranslationDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(TranslationDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<TranslationDto[]>(<any>null);
+    }
+
+    /**
+     * Get a translation by id
+     * @return Status 200 Ok
+     */
+    getById(id: number): Observable<ResultOfTranslationDto> {
+        let url_ = this.baseUrl + "/Translations/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetById(<any>response_);
+                } catch (e) {
+                    return <Observable<ResultOfTranslationDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ResultOfTranslationDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetById(response: HttpResponseBase): Observable<ResultOfTranslationDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfTranslationDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfTranslationDto>(<any>null);
     }
 
     /**
@@ -1558,61 +1683,6 @@ export class TranslationsClient implements ITranslationsClient {
             }));
         }
         return _observableOf<Result>(<any>null);
-    }
-
-    /**
-     * Get a translation by id
-     * @return Status 200 Ok
-     */
-    getById(id: number): Observable<ResultOfTranslationDto> {
-        let url_ = this.baseUrl + "/Translations/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetById(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetById(<any>response_);
-                } catch (e) {
-                    return <Observable<ResultOfTranslationDto>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<ResultOfTranslationDto>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetById(response: HttpResponseBase): Observable<ResultOfTranslationDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfTranslationDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<ResultOfTranslationDto>(<any>null);
     }
 }
 

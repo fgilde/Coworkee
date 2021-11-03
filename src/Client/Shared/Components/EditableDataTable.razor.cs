@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
@@ -39,6 +37,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         [Parameter]
         public Func<TResult, Task<bool>> ApiCreateOrEdit { get; set; }
+
+        [Parameter]
+        public Func<TResult[], Task<bool>> ApiEditMany { get; set; }
 
         [Parameter]
         public Func<TIdType[], Task<Result>> ApiDelete { get; set; }
@@ -116,7 +117,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             await ExecuteInitialPageActionAsync();
         }
 
-        public async void Reload()
+        public async Task Reload()
         {
             await Reset(true);
         }
@@ -194,6 +195,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             else
                 await LoadAllData();
             _selectedItems.Clear();
+            StateHasChanged();
         }
 
         private async Task ExportSelectedToExcel()
@@ -313,8 +315,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private bool LocalFilter(TResult item)
         {
-            if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            return TableProperties.Select(p => PropertyValueFor(item, p)).Any(s =>
+            if (item == null || string.IsNullOrWhiteSpace(_searchString)) return true;
+            return TableProperties.Select(p => PropertyValueFor(item, p)).Where(s => s != null).Any(s =>
                 s.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
         }
 
@@ -328,7 +330,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 currentBackup = element.MapTo<TResult>();
         }
 
-        private void InlineEditItemHasBeenCommitted(object element)
+        private async void InlineEditItemHasBeenCommitted(object element)
         {
             if (element == null)
                 return;
@@ -336,10 +338,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
             var changed = (TResult)element;
             //var changed = element.MapTo<TResult>();
             if (EditMode == EditMode.InlineLive)
-                ApiCreateOrEdit(changed);
+                await ApiCreateOrEdit(changed);
             else if (EditMode == EditMode.InlineBulk && currentBackup != null)
             {
                 toUpdate.TryAdd(changed, currentBackup.MapTo<TResult>());
+                StateHasChanged();
             }
         }
 
@@ -353,10 +356,12 @@ namespace CleanArchitectureBase.Client.Shared.Components
         }
 
 
-        private void SaveBulk()
+        private async void SaveBulk()
         {
-            _snackBar.Add("Geht klar", Severity.Success);
+            await ApiEditMany(toUpdate.Keys.ToArray());
+            _snackBar.Add(_localizer["saved"], Severity.Success);
             toUpdate.Clear();
+            await Reload();
         }
 
         private bool HasChanges(TResult context)
@@ -385,5 +390,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 await HubConnection.DisposeAsync();
         }
 
+        private async void OnPreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs arg)
+        {
+            if (arg.NewValue.LanguageCode != arg.OldValue?.LanguageCode)
+                await Reload();
+        }
     }
 }

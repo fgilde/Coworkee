@@ -1,26 +1,64 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
+using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.Localization;
+using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.AspNetCore.SignalR.Client;
+using MudBlazor;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Localization
 {
     public partial class Translations
     {
-        
+        private Dictionary<string, List<TranslationDto>> clientLocalizationCache = new();
+
         [Parameter]
         public string Action { get; set; }
 
         [Parameter]
         public string Id { get; set; }
 
-        
-        private async Task<PaginatedResult<TranslationDto>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings)
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
-            return await _api.Translations_GetAllAsync(pageNumber, pageSize, _searchString, orderings);
+            HubConnection = await HubConnection.EnsureStartedAsync(_navigationManager);
+        }
+
+        private async Task<PaginatedResult<TranslationDto>> LoadPaged(int pageNumber, int pageSize, string _searchString, string[] orderings)
+        {
+            return await _api.Translations_GetAllPagedAsync(pageNumber, pageSize, _searchString, orderings);
+        }
+
+        private async Task<Result<List<TranslationDto>>> Load()
+        {
+            var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
+            var local = clientLocalizationCache.ContainsKey(cultureCode)
+                ? clientLocalizationCache[cultureCode]
+                : clientLocalizationCache.AddOrUpdate(cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto {CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value}).ToList())[cultureCode];
+
+            if (!showCultureTranslations)
+            {
+                //local = local.Where(dto => !Regex.IsMatch(dto.Key, @"^[a-z]{2}(-[A-Z]{2})*$")).ToList();
+                local = local.Where(dto => !Regex.IsMatch(dto.Key, @"^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$")).ToList();
+            }
+
+            var server = await _api.Translations_GetAllAsync();
+
+            var res = server.Concat(local).DistinctBy(d => d.Key);
+            return new Result<List<TranslationDto>>()
+            {
+                Succeeded = true,
+                Data = res.ToList()
+            };
         }
 
         private async Task<TranslationDto> FindById(int id, IEnumerable<TranslationDto> loaded)
@@ -36,7 +74,9 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task<Result> DeleteTranslations(int[] ids)
         {
-            return await _api.Translations_DeleteAsync(ids.ToList());
+            var res =await _api.Translations_DeleteAsync(ids.ToList());
+            await SendUpdates();
+            return res;
         }
 
         private string GetName(TranslationDto arg)
@@ -54,18 +94,31 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             return await _api.Products_ExportByIdsAsync(ids.ToList());
         }
 
+        private async Task<bool> SaveAll(TranslationDto[] arg)
+        {
+            await _api.Translations_PostAsync(new AddEditTranslationsCommand { Items = arg });
+            await SendUpdates();
+            return true;
+        }
 
-        private Task<bool> CreateOrEditProduct(TranslationDto productOrNull)
+        private async Task SendUpdates()
+        {
+            clientLocalizationCache.Clear();
+            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendTranslationsChanged);
+        }
+
+        private async Task<bool> CreateOrEdit(TranslationDto productOrNull)
         {
             if (productOrNull != null)
             {
-                _api.Translations_PostAsync(new AddEditTranslationsCommand {Items = new[] {productOrNull}});
-                return Task.FromResult(true);
+                await _api.Translations_PostAsync(new AddEditTranslationsCommand { Items = new[] { productOrNull } });
+                await SendUpdates();
+                return true;
             }
             else
             {
 
-                return Task.FromResult(false);
+                return false;
             }
             //var parameters = new DialogParameters();
             //if (productOrNull != null)
@@ -80,5 +133,6 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             //var result = await dialog.Result;
             //return !result.Cancelled;
         }
+
     }
 }

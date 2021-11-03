@@ -38,6 +38,11 @@ namespace CleanArchitectureBase.Application.Hubs
             await Clients.All.SendAsync(ApplicationConstants.SignalR.ReceiveUpdateDashboard);
         }
 
+        public async Task TranslationsChanged()
+        {
+            await Clients.All.SendAsync(ApplicationConstants.SignalR.TranslationsChanged);
+        }
+
         public async Task RegenerateTokensAsync()
         {
             await Clients.All.SendAsync(ApplicationConstants.SignalR.ReceiveRegenerateTokens);

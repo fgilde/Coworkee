@@ -17,11 +17,13 @@ using CleanArchitectureBase.Client.ErrorHandling;
 using CleanArchitectureBase.Client.Infrastructure.ErrorHandling;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
+using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
@@ -44,6 +46,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 {
                     options.ResourcesPath = "Resources";
                 })
+                .AddTransient(typeof(IStringLocalizer<>), typeof(ApiLocalizer<>))
                 .AddYamlLocalizationWithFallback()
                 .AddAuthorizationCore(RegisterPermissionClaims)
                 .AddBlazoredLocalStorage()

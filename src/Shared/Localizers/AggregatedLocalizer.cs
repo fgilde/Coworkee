@@ -10,7 +10,8 @@ namespace CleanArchitectureBase.Shared.Localizers
     {
         private readonly IServiceProvider _provider;
 
-        private IEnumerable<IStringLocalizer<T>> _localizers => _provider.GetServices<IStringLocalizer<T>>().Where(l => l.GetType() != GetType());
+        private IEnumerable<IStringLocalizer<T>> _localizers => _provider.GetServices<IStringLocalizer<T>>().Where(l => l != null && l.GetType() != GetType())
+            .OrderBy(l => l.GetType().Name);
 
         public AggregatedLocalizer(IServiceProvider provider)
         {
@@ -19,7 +20,18 @@ namespace CleanArchitectureBase.Shared.Localizers
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
-            return _localizers.SelectMany(l => l.GetAllStrings()).Distinct();
+            var result = new List<List<LocalizedString>>();
+            foreach (var localizer in _localizers)
+            {
+                try
+                {
+                    // We need to enumerate completely here to ensure we can catch exception for blazor 
+                    result.Add(localizer.GetAllStrings(includeParentCultures).ToList());
+                }
+                catch
+                {}
+            }
+            return result.SelectMany(l => l).Distinct();
         }
 
         public LocalizedString this[string name]

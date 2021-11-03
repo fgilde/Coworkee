@@ -1,8 +1,10 @@
-﻿using System.Threading;
+﻿using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Translations.Commands.Delete;
+using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetById;
 using CleanArchitectureBase.Application.Security;
@@ -21,8 +23,21 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// <returns>Status 200 OK</returns>
         // [Authorize(Policy = Permissions.Products.View)]
         [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
-        [HttpGet]
+        [HttpGet(nameof(GetAllPaged))]
         [Produces(typeof(PaginatedResult<TranslationDto>))]
+        public async Task<IActionResult> GetAllPaged([FromQuery] GetAllTranslationsPagedQuery query, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _mediator.Send(query, cancellationToken));
+        }
+
+        /// <summary>
+        /// Get All Translations
+        /// </summary>
+        /// <returns>Status 200 OK</returns>
+        // [Authorize(Policy = Permissions.Products.View)]
+        [AllowAnonymous]
+        [HttpGet(nameof(GetAll))]
+        [Produces(typeof(ReadOnlyCollection<TranslationDto>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllTranslationsQuery query, CancellationToken cancellationToken = default)
         {
             return Ok(await _mediator.Send(query, cancellationToken));

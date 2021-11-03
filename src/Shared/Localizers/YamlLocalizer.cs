@@ -5,13 +5,15 @@ using System.Reflection;
 using AKSoftware.Localization.MultiLanguages;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace CleanArchitectureBase.Shared.Localizers
 {
 
     public class YamlLocalizer<T> : IStringLocalizer<T>
     {
-        private MethodInfo methodInfo;
+        private MethodInfo getValueMethod;
+        private FieldInfo keyValuesField;
         private readonly ILanguageContainerService _originalService;
         private readonly ILogger<YamlLocalizer<T>> _logger;
 
@@ -23,7 +25,15 @@ namespace CleanArchitectureBase.Shared.Localizers
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
-            yield break;
+            keyValuesField ??= _originalService.Keys.GetType().GetField("keyValues", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (keyValuesField != null)
+            {
+                var keyValues = keyValuesField.GetValue(_originalService.Keys) as JObject;
+                foreach (JProperty property in keyValues.Properties())
+                {
+                    yield return this[property.Name];
+                }
+            }
         }
 
         public LocalizedString this[string name] => this[name, null];
@@ -50,8 +60,8 @@ namespace CleanArchitectureBase.Shared.Localizers
             try
             {
                 //string res = _originalService[key];
-                methodInfo ??=_originalService.Keys.GetType().GetMethod("GetValue", BindingFlags.Instance | BindingFlags.NonPublic);
-                string res = methodInfo?.Invoke(_originalService.Keys, new[] {key})?.ToString();
+                getValueMethod ??=_originalService.Keys.GetType().GetMethod("GetValue", BindingFlags.Instance | BindingFlags.NonPublic);
+                string res = getValueMethod?.Invoke(_originalService.Keys, new[] {key})?.ToString();
                 res ??= _originalService[key];
                 return (res, res != key);
             }

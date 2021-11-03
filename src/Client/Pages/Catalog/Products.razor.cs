@@ -65,10 +65,9 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
                 parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<UpdateProductDto>());
             }
 
-            var options = new DialogOptionsEx { MaximizeButton = true, DragMode = MudDialogDragMode.Simple, CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowEx<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             
-            var x = dialog.Dialog;
             var result = await dialog.Result;
             return !result.Cancelled;
         }

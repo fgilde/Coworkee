@@ -815,13 +815,13 @@
         ]
       }
     },
-    "/Translations": {
+    "/Translations/GetAllPaged": {
       "get": {
         "tags": [
           "Translations"
         ],
         "summary": "Get All Translations",
-        "operationId": "Translations_GetAll",
+        "operationId": "Translations_GetAllPaged",
         "parameters": [
           {
             "name": "PageNumber",
@@ -877,7 +877,76 @@
             }
           }
         }
-      },
+      }
+    },
+    "/Translations/GetAll": {
+      "get": {
+        "tags": [
+          "Translations"
+        ],
+        "summary": "Get All Translations",
+        "operationId": "Translations_GetAll",
+        "parameters": [
+          {
+            "name": "Force",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TranslationDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Translations/{id}": {
+      "get": {
+        "tags": [
+          "Translations"
+        ],
+        "summary": "Get a translation by id",
+        "operationId": "Translations_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200 Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfTranslationDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Translations": {
       "post": {
         "tags": [
           "Translations"
@@ -950,39 +1019,6 @@
             "JWT": []
           }
         ]
-      }
-    },
-    "/Translations/{id}": {
-      "get": {
-        "tags": [
-          "Translations"
-        ],
-        "summary": "Get a translation by id",
-        "operationId": "Translations_GetById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status 200 Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultOfTranslationDto"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/identity/Account/UpdateProfile": {

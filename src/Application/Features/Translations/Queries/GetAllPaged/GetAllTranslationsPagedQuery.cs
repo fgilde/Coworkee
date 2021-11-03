@@ -9,17 +9,17 @@ using CleanArchitectureBase.Domain.Entities.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged
 {
-    public class GetAllTranslationsQuery : GetAllPagedQueryBase<TranslationDto>
+    public class GetAllTranslationsPagedQuery : GetAllPagedQueryBase<TranslationDto>
     {}
 
-    internal class GetAllTranslationsQueryHandler : GetAllPagedQueryHandlerBase<GetAllTranslationsQuery, int, TranslationDto, Translation>
+    internal class GetAllTranslationsPagedQueryHandler : GetAllPagedQueryHandlerBase<GetAllTranslationsPagedQuery, int, TranslationDto, Translation>
     {
-        protected override ISpecification<Translation> GetFilterSpecification(GetAllTranslationsQuery query)
+        protected override ISpecification<Translation> GetFilterSpecification(GetAllTranslationsPagedQuery query)
         {
             return new TranslationFilterSpecification(query.SearchString);
         }
 
-        public GetAllTranslationsQueryHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IServiceProvider provider) 
+        public GetAllTranslationsPagedQueryHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IServiceProvider provider) 
             : base(unitOfWork, mediator, provider)
         { }
     }

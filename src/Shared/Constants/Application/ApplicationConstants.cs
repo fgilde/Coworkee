@@ -1,4 +1,6 @@
-﻿namespace CleanArchitectureBase.Shared.Constants.Application
+﻿using System;
+
+namespace CleanArchitectureBase.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {
@@ -52,6 +54,8 @@
         {
             public const string EventHubUrl = "/eventHub";
             public const string HubUrl = "/signalRHub";
+            public const string SendTranslationsChanged = "TranslationsChanged";
+            public const string TranslationsChanged = "TranslationsChanged";
             public const string SendUpdateDashboard = "UpdateDashboardAsync";
             public const string ReceiveUpdateDashboard = "UpdateDashboard";
             public const string SendRegenerateTokens = "RegenerateTokensAsync";
@@ -70,6 +74,8 @@
         }
         public static class Cache
         {
+            public static string CacheKeyFor(Type type) => $"{CacheKey}-{type.FullName}";
+            public const string CacheKey = "all-of";
             public const string GetAllBrandsCacheKey = "all-brands";
             public const string GetAllDocumentTypesCacheKey = "all-document-types";
 

@@ -311,7 +311,13 @@
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAll(CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged.GetAllTranslationsQuery,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAllPaged(CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged.GetAllTranslationsPagedQuery,System.Threading.CancellationToken)">
+            <summary>
+            Get All Translations
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAll(CleanArchitectureBase.Application.Features.Translations.Queries.GetAll.GetAllTranslationsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Translations
             </summary>

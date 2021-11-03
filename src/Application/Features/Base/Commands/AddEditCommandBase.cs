@@ -6,6 +6,7 @@ using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Contracts;
+using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +36,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         protected readonly IMediator Mediator;
         protected readonly IServiceProvider Provider;
         protected T Get<T>() => Provider.GetService<T>();
-        protected virtual string CacheKey => null;
+        protected virtual string CacheKey => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
         protected virtual string EditPermission => null;
         protected virtual string CreatePermission => null;
 

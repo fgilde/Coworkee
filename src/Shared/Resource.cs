@@ -15,7 +15,7 @@ namespace CleanArchitectureBase.Shared
         {
             var descriptor = ServiceDescriptor.Transient(typeof(IStringLocalizer<>), typeof(YamlLocalizer<>));
             var existing = services.FirstOrDefault(d => d.ServiceType == descriptor.ServiceType);
-            services.Add(descriptor);
+            services.Insert(0, descriptor);
             if (existing != null)
             {
                 services.Add(ServiceDescriptor.Transient(typeof(IStringLocalizer<>), typeof(AggregatedLocalizer<>)));

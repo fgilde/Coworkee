@@ -158,6 +158,8 @@
         "CleanArchitectureBase.Application.Features.Documents.Queries.GetById",
         "CleanArchitectureBase.Application.Features.Products.Commands.AddEdit",
         "CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit",
+        "CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged",
+        "CleanArchitectureBase.Application.Features.Translations.Queries.GetAll",
         "CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit",
         "CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll",
         "CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById",

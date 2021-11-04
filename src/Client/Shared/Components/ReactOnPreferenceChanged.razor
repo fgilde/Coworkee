@@ -19,7 +19,7 @@
                 var newValue = args.NewValue as ClientPreference;
                 if (oldValue?.LanguageCode != newValue?.LanguageCode)
                 {
-                    var methodInfo = Component?.GetType()?.GetMethod("StateHasChanged", BindingFlags.Instance | BindingFlags.NonPublic);
+                    var methodInfo = Component?.GetType()?.GetMethod(nameof(StateHasChanged), BindingFlags.Instance | BindingFlags.NonPublic);
                     methodInfo?.Invoke(Component, Array.Empty<object>());
                 }
                 OnPreferenceChanged.InvokeAsync(new PreferenceChangedArgs(oldValue, newValue));

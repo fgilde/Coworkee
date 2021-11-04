@@ -1,0 +1,102 @@
+﻿@using Microsoft.Extensions.Localization
+@using CleanArchitectureBase.Shared.Constants.Application
+@using Microsoft.AspNetCore.SignalR.Client
+@using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
+@using CleanArchitectureBase.Application.Dtos
+@using System.Globalization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TranslationInlineEdit> localizer
+
+<div @onclick="ElementClick" @onmouseover="ElementMouseOver" @onmouseout="ElementMouseLeave">
+    @if (!inEditMode || usePopover)
+    {
+        @GetLocalizer()[Key]
+    }
+    else if (!usePopover)
+    {
+        <MudTextField AdornmentColor="Color.Success" OnAdornmentClick="@ConfirmChange" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Check" AutoFocus="true" @onkeydown="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value"/>
+    }
+    @if (mouseOverElement && !inEditMode)
+    {
+        <MudIconButton OnClick="OnEditClick" Style="opacity: 0.5; position: absolute; margin-top: 2px; margin-left: 2px;" Size="Size.Small" Icon="@Icons.Material.Outlined.Edit"/>
+    }
+</div>
+<MudPopover Style="padding: 10px;" RelativeWidth="true" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter" Open="@inEditMode" Fixed="true">
+    <MudTextField AutoFocus="true" @onkeydown="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value" />
+    <MudIconButton OnClick="@ConfirmChange" Icon="@Icons.Material.Filled.Check" Color="Color.Success"/>
+    <MudIconButton OnClick="@CancelChange" Icon="@Icons.Material.Filled.Cancel" Color="Color.Error"/>
+</MudPopover>
+
+@code {
+
+    private bool usePopover = true;
+    private MudTextField<string> textField;
+
+    [Parameter]
+    public IStringLocalizer Localizer { get; set; }
+
+    [Parameter]
+    public string Key { get; set; }
+
+    [CascadingParameter] private HubConnection HubConnection { get; set; }
+
+    private bool inEditMode;
+    private bool mouseOverElement;
+
+    private IStringLocalizer GetLocalizer()
+    {
+        return Localizer ?? localizer;
+    }
+
+    private async void ElementClick(MouseEventArgs obj)
+    {
+        if (obj.CtrlKey)
+        {
+            inEditMode = true;
+        }
+    }
+
+    private void ElementMouseOver(MouseEventArgs obj)
+    {
+        mouseOverElement = true;
+    }
+
+    private void ElementMouseLeave(MouseEventArgs obj)
+    {
+        Task.Delay(1000).ContinueWith(t =>
+        {
+            mouseOverElement = false;
+            StateHasChanged();
+        });
+    }
+
+    public async void ConfirmChange()
+    {
+        var value = textField.Value;
+        var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
+        var arg = (await _api.Translations_GetAllAsync()).FirstOrDefault(t => t.Key == Key) ?? new TranslationDto {Key = Key, CultureCode = cultureCode};
+        arg.Value = value;
+        await _api.Translations_PostAsync(new AddEditTranslationsCommand(arg));
+        inEditMode = false;
+        await (await HubConnection.EnsureStartedAsync(_navigationManager)).SendAsync(ApplicationConstants.SignalR.SendTranslationsChanged);
+    }
+
+    public void CancelChange()
+    {
+        inEditMode = false;
+    }
+
+
+    private void OnEditClick(MouseEventArgs obj)
+    {
+        inEditMode = !inEditMode;
+    }
+
+    private void TextFieldKeyDown(KeyboardEventArgs obj)
+    {
+        if (obj.Code == "Enter")
+            ConfirmChange();
+        else if(obj.Code == "Escape")
+            CancelChange();
+    }
+
+}

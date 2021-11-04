@@ -11,7 +11,10 @@ namespace CleanArchitectureBase.Application.Features.Translations.Commands.AddEd
 {
     //[CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
     public class AddEditTranslationsCommand : AddEditCommandBase<TranslationDto>
-    {}
+    {
+        public AddEditTranslationsCommand(params TranslationDto[] items) : base(items)
+        { }
+    }
 
     internal class AddEditTranslationsCommandCommandHandler : AddEditCommandHandlerBase<AddEditTranslationsCommand, int, TranslationDto, Translation>
     {

@@ -5,6 +5,14 @@ html, body, #app, .mud-main-content, .mud-rtl-provider {
     height: 100%;
 }
 
+.app-main-container {
+    height: 96%;
+}
+
+.sf-license-warning {
+    display: none;
+}
+
 body * {
     transition-property: background-color, opacity;
     transition-duration: 0.3s;

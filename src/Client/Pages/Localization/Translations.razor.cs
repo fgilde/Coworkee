@@ -9,9 +9,9 @@ using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Constants.Localization;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.SignalR.Client;
-using MudBlazor;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Localization
@@ -46,10 +46,8 @@ namespace CleanArchitectureBase.Client.Pages.Localization
                 : clientLocalizationCache.AddOrUpdate(cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto {CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value}).ToList())[cultureCode];
 
             if (!showCultureTranslations)
-            {
-                //local = local.Where(dto => !Regex.IsMatch(dto.Key, @"^[a-z]{2}(-[A-Z]{2})*$")).ToList();
-                local = local.Where(dto => !Regex.IsMatch(dto.Key, @"^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$")).ToList();
-            }
+                local = local.Where(dto => !LocalizationConstants.ValidCultureName(dto.Key)).ToList();
+           
 
             var server = await _api.Translations_GetAllAsync();
 

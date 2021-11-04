@@ -66,6 +66,10 @@ namespace CleanArchitectureBase.Client.Shared
             _interceptor.RegisterEvent();
             hubConnection = hubConnection.TryInitialize(_navigationManager);
             await hubConnection.StartAsync();
+            hubConnection.On<object>("BeforeRequest", async (a) =>
+            {
+
+            });
             hubConnection.On(ApplicationConstants.SignalR.TranslationsChanged, async () =>
             {
                 await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, true);

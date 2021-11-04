@@ -12,7 +12,7 @@ namespace CleanArchitectureBase.Client.Extensions
             if (hubConnection == null)
             {
                 hubConnection = new HubConnectionBuilder()
-                                  .WithUrl(navigationManager.ToAbsoluteUri(ApplicationConstants.SignalR.HubUrl))
+                                  .WithUrl(navigationManager.ToAbsoluteUri(ApplicationConstants.SignalR.EventHubUrl))
                                   .Build();
             }
             return hubConnection;

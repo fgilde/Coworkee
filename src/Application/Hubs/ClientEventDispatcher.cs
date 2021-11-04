@@ -23,7 +23,11 @@ namespace CleanArchitectureBase.Application.Hubs
             var targetProxy = clientEvent.Target == TargetClient.Current
                 ? _hubContext.Clients.Group(_sessionProvider.SessionId)
                 : _hubContext.Clients.All;
-            return targetProxy.SendAsync(ApplicationConstants.EventNames.ClientEventName, clientEvent, cancellationToken);
+            
+            return Task.WhenAll(
+                targetProxy.SendAsync(ApplicationConstants.SignalR.ClientEventName, clientEvent, cancellationToken), 
+                targetProxy.SendAsync(clientEvent.EventName, clientEvent.Arguments, cancellationToken)
+            );
         }
     }
 }

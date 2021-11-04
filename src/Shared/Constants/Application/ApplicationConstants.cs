@@ -38,11 +38,6 @@ namespace CleanArchitectureBase.Shared.Constants.Application
             public const string DashboardRoute = "/jobs";
         }
 
-        public static class EventNames
-        {
-            public const string ClientEventName = "EventRecieved";
-        }
-
         public static class ServiceBusQueues
         {
             public const string TestQueue = nameof(TestQueue);
@@ -53,7 +48,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public static class SignalR
         {
             public const string EventHubUrl = "/eventHub";
-            public const string HubUrl = "/signalRHub";
+            public const string ClientEventName = "EventRecieved";
             public const string SendTranslationsChanged = "TranslationsChanged";
             public const string TranslationsChanged = "TranslationsChanged";
             public const string SendUpdateDashboard = "UpdateDashboardAsync";

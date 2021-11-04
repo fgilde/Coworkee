@@ -31,7 +31,7 @@ namespace CleanArchitectureBase.Client.Pages.Content
             await LoadDataAsync();
             _loaded = true;
             HubConnection = new HubConnectionBuilder()
-            .WithUrl(_navigationManager.ToAbsoluteUri(ApplicationConstants.SignalR.HubUrl))
+            .WithUrl(_navigationManager.ToAbsoluteUri(ApplicationConstants.SignalR.EventHubUrl))
             .Build();
             HubConnection.On(ApplicationConstants.SignalR.ReceiveUpdateDashboard, async () =>
             {

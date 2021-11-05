@@ -135,7 +135,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Theming
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
-            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always, 
+            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
             t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
 
 

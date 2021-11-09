@@ -128,9 +128,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return verificationUri;
         }
 
+        public UserResponse Get(string userId)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            return user?.MapTo<UserResponse>();
+        }
+
         public async Task<IResult<UserResponse>> GetAsync(string userId)
         {
-            var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             var result = user.MapTo<UserResponse>();
             return await Result<UserResponse>.SuccessAsync(result);
         }

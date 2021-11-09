@@ -22,7 +22,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
     {
         [Inject] private IBlazorHeroClient Api { get; set; }
 
-        [Parameter] public UpdateProductDto AddEditProductModel { get; set; } = new();
+        [Parameter] public ProductDto AddEditProductModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
 

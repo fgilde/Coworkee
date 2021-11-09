@@ -80,6 +80,7 @@ br-FR: Bretonisch (Frankreich)
 Brand: Marke
 Brand Saved: Marke gerettet!
 Brand Updated: Marke aktualisiert!
+BrandName: Marke
 Brands: Marken
 Brands exported: Exportierte Marken
 Browse Available Documents.: Verfügbare Dokumente durchsuchen.
@@ -673,6 +674,7 @@ Register User: Benutzer registrieren
 Registered Roles: Registrierte Rollen
 Registered Users: Registrierte Benutzer
 Reload: Neu laden
+Reload Data: Daten neu laden
 Remember me?: Erinnern Sie sich an mich?
 Reset password: Passwort zurücksetzen
 Reset Password: Passwort zurücksetzen
@@ -793,6 +795,7 @@ tg-Cyrl-TJ: Tadschikisch (Kyrillisch, Tadschikistan)
 th-TH: Thai (Thailand)
 The following {0} permissions are also required for permission {1}: Für die Berechtigung "{1}" sind ebenfalls diese {0} Berechtigungen erforderlich
 The following permission is also required for permission {1}: Die folgende Berechtigung ist für die Berechtigung "{1}" ebenfalls erforderlich
+The User {0} has just edited, created or deleted entries here. You should reload the data: Der User {0} hat hier soeben Einträge bearbeitet, angelegt oder gelöscht. Sie sollten die Daten neu laden
 This is an Administrator Only View.: Dies ist eine nur für Administratoren angezeigte Ansicht.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Äthiopien)

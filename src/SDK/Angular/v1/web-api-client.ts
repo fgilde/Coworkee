@@ -6385,6 +6385,7 @@ export class UserResponse implements IUserResponse {
     emailConfirmed?: boolean;
     phoneNumber?: string | undefined;
     profilePictureDataUrl?: string | undefined;
+    fullName?: string | undefined;
 
     constructor(data?: IUserResponse) {
         if (data) {
@@ -6406,6 +6407,7 @@ export class UserResponse implements IUserResponse {
             this.emailConfirmed = _data["emailConfirmed"];
             this.phoneNumber = _data["phoneNumber"];
             this.profilePictureDataUrl = _data["profilePictureDataUrl"];
+            this.fullName = _data["fullName"];
         }
     }
 
@@ -6427,6 +6429,7 @@ export class UserResponse implements IUserResponse {
         data["emailConfirmed"] = this.emailConfirmed;
         data["phoneNumber"] = this.phoneNumber;
         data["profilePictureDataUrl"] = this.profilePictureDataUrl;
+        data["fullName"] = this.fullName;
         return data; 
     }
 }
@@ -6441,6 +6444,7 @@ export interface IUserResponse {
     emailConfirmed?: boolean;
     phoneNumber?: string | undefined;
     profilePictureDataUrl?: string | undefined;
+    fullName?: string | undefined;
 }
 
 export class ResultOfUserResponse extends Result implements IResultOfUserResponse {
@@ -7465,9 +7469,10 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
     barcode?: string | undefined;
     description?: string | undefined;
     rate?: number;
-    brand?: string | undefined;
+    brandName?: string | undefined;
     brandId?: number;
     imageDataURL?: string | undefined;
+    uploadRequest?: UploadRequest | undefined;
 
     constructor(data?: IProductDto) {
         super(data);
@@ -7480,9 +7485,10 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
             this.barcode = _data["barcode"];
             this.description = _data["description"];
             this.rate = _data["rate"];
-            this.brand = _data["brand"];
+            this.brandName = _data["brandName"];
             this.brandId = _data["brandId"];
             this.imageDataURL = _data["imageDataURL"];
+            this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
         }
     }
 
@@ -7499,9 +7505,10 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
         data["barcode"] = this.barcode;
         data["description"] = this.description;
         data["rate"] = this.rate;
-        data["brand"] = this.brand;
+        data["brandName"] = this.brandName;
         data["brandId"] = this.brandId;
         data["imageDataURL"] = this.imageDataURL;
+        data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
         super.toJSON(data);
         return data; 
     }
@@ -7512,15 +7519,16 @@ export interface IProductDto extends IDtoBaseOfInteger {
     barcode?: string | undefined;
     description?: string | undefined;
     rate?: number;
-    brand?: string | undefined;
+    brandName?: string | undefined;
     brandId?: number;
     imageDataURL?: string | undefined;
+    uploadRequest?: UploadRequest | undefined;
 }
 
-export abstract class AddEditCommandBaseOfUpdateProductDto implements IAddEditCommandBaseOfUpdateProductDto {
-    items?: UpdateProductDto[] | undefined;
+export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandBaseOfProductDto {
+    items?: ProductDto[] | undefined;
 
-    constructor(data?: IAddEditCommandBaseOfUpdateProductDto) {
+    constructor(data?: IAddEditCommandBaseOfProductDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7534,14 +7542,14 @@ export abstract class AddEditCommandBaseOfUpdateProductDto implements IAddEditCo
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
-                    this.items!.push(UpdateProductDto.fromJS(item));
+                    this.items!.push(ProductDto.fromJS(item));
             }
         }
     }
 
-    static fromJS(data: any): AddEditCommandBaseOfUpdateProductDto {
+    static fromJS(data: any): AddEditCommandBaseOfProductDto {
         data = typeof data === 'object' ? data : {};
-        throw new Error("The abstract class 'AddEditCommandBaseOfUpdateProductDto' cannot be instantiated.");
+        throw new Error("The abstract class 'AddEditCommandBaseOfProductDto' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
@@ -7555,11 +7563,11 @@ export abstract class AddEditCommandBaseOfUpdateProductDto implements IAddEditCo
     }
 }
 
-export interface IAddEditCommandBaseOfUpdateProductDto {
-    items?: UpdateProductDto[] | undefined;
+export interface IAddEditCommandBaseOfProductDto {
+    items?: ProductDto[] | undefined;
 }
 
-export class AddEditProductsCommand extends AddEditCommandBaseOfUpdateProductDto implements IAddEditProductsCommand {
+export class AddEditProductsCommand extends AddEditCommandBaseOfProductDto implements IAddEditProductsCommand {
 
     constructor(data?: IAddEditProductsCommand) {
         super(data);
@@ -7583,64 +7591,7 @@ export class AddEditProductsCommand extends AddEditCommandBaseOfUpdateProductDto
     }
 }
 
-export interface IAddEditProductsCommand extends IAddEditCommandBaseOfUpdateProductDto {
-}
-
-export class UpdateProductDto extends DtoBaseOfInteger implements IUpdateProductDto {
-    name?: string | undefined;
-    barcode?: string | undefined;
-    description?: string | undefined;
-    rate?: number;
-    brandId?: number;
-    imageDataURL?: string | undefined;
-    uploadRequest?: UploadRequest | undefined;
-
-    constructor(data?: IUpdateProductDto) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.name = _data["name"];
-            this.barcode = _data["barcode"];
-            this.description = _data["description"];
-            this.rate = _data["rate"];
-            this.brandId = _data["brandId"];
-            this.imageDataURL = _data["imageDataURL"];
-            this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): UpdateProductDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new UpdateProductDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["barcode"] = this.barcode;
-        data["description"] = this.description;
-        data["rate"] = this.rate;
-        data["brandId"] = this.brandId;
-        data["imageDataURL"] = this.imageDataURL;
-        data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IUpdateProductDto extends IDtoBaseOfInteger {
-    name?: string | undefined;
-    barcode?: string | undefined;
-    description?: string | undefined;
-    rate?: number;
-    brandId?: number;
-    imageDataURL?: string | undefined;
-    uploadRequest?: UploadRequest | undefined;
+export interface IAddEditProductsCommand extends IAddEditCommandBaseOfProductDto {
 }
 
 export interface FileResponse {

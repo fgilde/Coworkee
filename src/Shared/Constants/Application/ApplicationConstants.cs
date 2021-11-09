@@ -49,8 +49,6 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         {
             public const string EventHubUrl = "/eventHub";
             public const string ClientEventName = "EventRecieved";
-            public const string SendTranslationsChanged = "TranslationsChanged";
-            public const string TranslationsChanged = "TranslationsChanged";
             public const string SendUpdateDashboard = "UpdateDashboardAsync";
             public const string ReceiveUpdateDashboard = "UpdateDashboard";
             public const string SendRegenerateTokens = "RegenerateTokensAsync";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Commands;
 using CleanArchitectureBase.Application.Interfaces.Services;
@@ -11,7 +12,7 @@ namespace CleanArchitectureBase.Application.Features.Translations.Commands.Delet
     public class DeleteTranslationsCommand : DeleteCommandBase<int>
     {}
 
-    internal class DeleteTranslationsCommandHandler : DeleteCommandHandlerBase<DeleteTranslationsCommand, int, Translation>
+    internal class DeleteTranslationsCommandHandler : DeleteCommandHandlerBase<DeleteTranslationsCommand, int, TranslationDto, Translation>
     {
         protected override string CacheKey => $"{base.CacheKey}-{Thread.CurrentThread.CurrentCulture.Name}";
         public DeleteTranslationsCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider) 

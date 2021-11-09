@@ -16,7 +16,7 @@ namespace CleanArchitectureBase.Application.Validators.Features.Products.Command
     }
     
 
-    public class AddEditProductCommandValidator : AbstractValidator<UpdateProductDto>
+    public class AddEditProductCommandValidator : AbstractValidator<ProductDto>
     {
         public AddEditProductCommandValidator(IStringLocalizer<AddEditProductCommandValidator> localizer)
         {

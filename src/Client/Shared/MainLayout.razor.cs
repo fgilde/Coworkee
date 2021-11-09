@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
+using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Theming;
 using CleanArchitectureBase.Client.Localization;
@@ -62,15 +66,13 @@ namespace CleanArchitectureBase.Client.Shared
         protected override async Task OnInitializedAsync()
         {
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
+            await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, false);
             _rightToLeft = await _clientPreferenceManager.IsRTL();
             _interceptor.RegisterEvent();
             hubConnection = hubConnection.TryInitialize(_navigationManager);
             await hubConnection.StartAsync();
-            hubConnection.On<object>("BeforeRequest", async (a) =>
-            {
-
-            });
-            hubConnection.On(ApplicationConstants.SignalR.TranslationsChanged, async () =>
+  
+            hubConnection.On<EntitiesUpdated<TranslationDto>>(async (arg) =>
             {
                 await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, true);
                 await _clientPreferenceManager.ChangeLanguageAsync((await _clientPreferenceManager.GetPreference()).LanguageCode);

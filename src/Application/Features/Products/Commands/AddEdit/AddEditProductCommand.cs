@@ -16,13 +16,13 @@ using Microsoft.Extensions.Localization;
 namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 {
     [CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
-    public class AddEditProductsCommand : AddEditCommandBase<UpdateProductDto>
+    public class AddEditProductsCommand : AddEditCommandBase<ProductDto>
     {
-        public AddEditProductsCommand(params UpdateProductDto[] items) : base(items)
+        public AddEditProductsCommand(params ProductDto[] items) : base(items)
         {}
     }
 
-    internal class AddEditProductsCommandHandler : AddEditCommandHandlerBase<AddEditProductsCommand, int, UpdateProductDto, Product>
+    internal class AddEditProductsCommandHandler : AddEditCommandHandlerBase<AddEditProductsCommand, int, ProductDto, Product>
     {
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AddEditProductsCommandHandler> _localizer;

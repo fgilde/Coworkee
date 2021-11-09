@@ -8,7 +8,10 @@ namespace CleanArchitectureBase.Client.Extensions
     {
         internal static string GetInitials(this ClaimsPrincipal claimsPrincipal)
             => new(new []{claimsPrincipal.GetFirstName().FirstOrDefault(), claimsPrincipal.GetLastName().FirstOrDefault()});
-        
+
+        internal static string GetFullName(this ClaimsPrincipal claimsPrincipal)
+            => $"{claimsPrincipal.GetFirstName()} {claimsPrincipal.GetLastName()}";
+
         internal static string GetEmail(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.Email);
 

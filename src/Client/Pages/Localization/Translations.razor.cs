@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Localization;
-using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Localization;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -72,8 +69,8 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task<Result> DeleteTranslations(int[] ids)
         {
-            var res =await _api.Translations_DeleteAsync(ids.ToList());
-            await SendUpdates();
+            var res = await _api.Translations_DeleteAsync(ids.ToList());
+            AfterSend();
             return res;
         }
 
@@ -95,14 +92,13 @@ namespace CleanArchitectureBase.Client.Pages.Localization
         private async Task<bool> SaveAll(TranslationDto[] arg)
         {
             await _api.Translations_PostAsync(new AddEditTranslationsCommand { Items = arg });
-            await SendUpdates();
+            AfterSend();
             return true;
         }
 
-        private async Task SendUpdates()
+        private void AfterSend()
         {
             clientLocalizationCache.Clear();
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendTranslationsChanged);
         }
 
         private async Task<bool> CreateOrEdit(TranslationDto productOrNull)
@@ -110,7 +106,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             if (productOrNull != null)
             {
                 await _api.Translations_PostAsync(new AddEditTranslationsCommand { Items = new[] { productOrNull } });
-                await SendUpdates();
+                AfterSend();
                 return true;
             }
             else

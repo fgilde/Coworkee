@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Contracts;
@@ -16,8 +20,9 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         public TId[] Ids { get; set; }
     }
 
-    internal class DeleteCommandHandlerBase<TCommand, TEntityId, TEntity> : IRequestHandler<TCommand>
+    internal class DeleteCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand>
         where TEntity : AuditableEntity<TEntityId>
+        where TDto : IDtoBase<TEntityId>
         where TCommand : DeleteCommandBase<TEntityId>
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;
@@ -38,9 +43,15 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
 
         public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
         {
-            var entities = await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken);
+            var user = Get<ICurrentUserService>().CurrentUser();
+            var entities = (await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken)).ToArray();
             await UnitOfWork.Repository<TEntity>().DeleteManyAsync(entities, cancellationToken);
             await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
+            var deletedItemsAsDto = entities.MapElementsTo<TDto>().ToArray();
+
+            await Mediator.PublishClientEvents(cancellationToken, 
+                new EntitiesDeleted<TDto>(user, deletedItemsAsDto),
+                new EntitiesUpdated<TDto>(user, deletedItemsAsDto));
 
             return Unit.Value;
         }

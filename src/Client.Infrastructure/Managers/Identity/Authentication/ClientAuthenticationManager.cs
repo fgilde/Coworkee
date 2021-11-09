@@ -1,14 +1,11 @@
 ﻿using Blazored.LocalStorage;
 using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Client.Infrastructure.Authentication;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.SDK;
@@ -32,7 +29,6 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             IStringLocalizer<ClientAuthenticationManager> localizer, 
             IBlazorHeroClient api)
         {
-            //_localStorage.ClearAsync();
             _httpClient = httpClient;
             _localStorage = localStorage;
             _authenticationStateProvider = authenticationStateProvider;

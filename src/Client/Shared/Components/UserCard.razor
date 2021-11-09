@@ -3,7 +3,7 @@
 <MudCard Elevation="0" Square="true" Class="@Class">
     <MudCardHeader>
         <CardHeaderAvatar>
-            <UserAvatar User="User" />
+            <UserAvatar IsUserOnline="@IsUserOnline" UserId="@UserId" User="@User" UserData="@UserData" />
         </CardHeaderAvatar>
         <CardHeaderContent>
             <MudText Typo="Typo.body2">@FirstName @SecondName</MudText>

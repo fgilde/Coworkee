@@ -3639,6 +3639,10 @@
           "profilePictureDataUrl": {
             "type": "string",
             "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -4189,71 +4193,9 @@
                 "type": "number",
                 "format": "decimal"
               },
-              "brand": {
+              "brandName": {
                 "type": "string",
                 "nullable": true
-              },
-              "brandId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "imageDataURL": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "AddEditProductsCommand": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AddEditCommandBaseOfUpdateProductDto"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
-        ]
-      },
-      "AddEditCommandBaseOfUpdateProductDto": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/UpdateProductDto"
-            }
-          }
-        }
-      },
-      "UpdateProductDto": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DtoBaseOfInteger"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string",
-                "nullable": true
-              },
-              "barcode": {
-                "type": "string",
-                "nullable": true
-              },
-              "description": {
-                "type": "string",
-                "nullable": true
-              },
-              "rate": {
-                "type": "number",
-                "format": "decimal"
               },
               "brandId": {
                 "type": "integer",
@@ -4270,6 +4212,31 @@
             }
           }
         ]
+      },
+      "AddEditProductsCommand": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AddEditCommandBaseOfProductDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "AddEditCommandBaseOfProductDto": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ProductDto"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {

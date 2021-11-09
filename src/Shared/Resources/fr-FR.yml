@@ -80,6 +80,7 @@ br-FR: Breton (France)
 Brand: Marque
 Brand Saved: Marque sauvée!
 Brand Updated: Marque mise à jour!
+BrandName: Marque
 Brands: Marques
 Brands exported: Marques exportées
 Browse Available Documents.: Parcourez les documents disponibles.
@@ -673,6 +674,7 @@ Register User: Enregistrer l’utilisateur
 Registered Roles: Rôles enregistrés
 Registered Users: Utilisateurs enregistrés
 Reload: Recharger
+Reload Data: Recharger les données
 Remember me?: Souvenez-vous de moi?
 Reset password: Réinitialiser le mot de passe
 Reset Password: Réinitialiser le mot de passe
@@ -793,6 +795,7 @@ tg-Cyrl-TJ: Tadjik (cyrillique, Tadjikistan)
 th-TH: Thaï (Thaïlande)
 The following {0} permissions are also required for permission {1}: Les autorisations de {0} suivantes sont également requises pour les autorisations {1}
 The following permission is also required for permission {1}: L’autorisation suivante est également requise pour l’autorisation {1}
+The User {0} has just edited, created or deleted entries here. You should reload the data: L’Utilisateur {0} vient de modifier, créer ou supprimer des entrées ici. Vous devez recharger les données
 This is an Administrator Only View.: Il s’agit d’une vue Administrateur uniquement.
 ti-ER: Tigrinya (Érythrée)
 ti-ET: Tigrinya (Éthiopie)

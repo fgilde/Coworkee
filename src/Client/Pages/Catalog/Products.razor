@@ -5,11 +5,6 @@
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Dtos
 
-<style>
-    .mud-table-container {
-        overflow: auto;
-    }
-</style>
 
 <ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Products"]" Description="@_localizer["Manage Products."]" />
@@ -23,7 +18,7 @@
     GetById="@(new Func<int, IEnumerable<ProductDto>, Task<ProductDto>>(FindById))"
     GetId="@(new Func<ProductDto,int>(GetId))"
     Display="@(new Func<ProductDto, string>(GetName))"
-    TableProperties="@(new []{"Id", "Name", "Brand", "Description", "Barcode", "Rate"})"
+    TableProperties="@(new []{nameof(ProductDto.Id), nameof(ProductDto.Name), nameof(ProductDto.BrandName), nameof(ProductDto.Description), nameof(ProductDto.Barcode), nameof(ProductDto.Rate)})"
     InitialAction="@Action"
     InitialIdString="@Id"
     CreatePermission="@Permissions.Products.Create"

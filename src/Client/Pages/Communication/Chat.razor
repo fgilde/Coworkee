@@ -28,16 +28,9 @@
         <div class="d-flex flex-column px-4" style="max-height:75vh;min-height:75vh; overflow:scroll;" id="chatContainer">
             @foreach (var message in _messages)
             {
-                <div class="d-flex flex-row my-4">
+                <div class="d-flex @(message.FromUserId == CurrentUserId ? "flex-row-reverse" : "flex-row") my-4"> @*My messages to right with flex-row-reverse*@
                     <div class="mr-4">
-                        @if (string.IsNullOrEmpty(message.FromUserImageURL))
-                        {
-                            <MudAvatar Color="Color.Secondary" Style="height:50px; width:50px;">@message.FromUserFullName.ToUpper().FirstOrDefault()</MudAvatar>
-                        }
-                        else
-                        {
-                            <MudAvatar Image="@message.FromUserImageURL" Style="height:50px; width:50px;"> </MudAvatar>
-                        }
+                        <UserAvatar UserId="@message.FromUserId" />
                     </div>
                     <div>
                         <MudText Typo="Typo.body1">@message.FromUserFullName</MudText>
@@ -64,31 +57,7 @@
                     @foreach (var user in UserList)
                     {
                         <MudListItem Class="pa-0 px-2" OnClick="@(() => LoadUserChat(user.Id))">
-                            <div class="d-flex flex-row mt-n1 mb-n1">
-                                <div class="mr-4">
-                                    <MudBadge Class="my-2" Color="@(GetUserStatusBadgeColor(user.IsOnline))" Overlap="true" Bottom="true" Dot="true">
-                                        @if (string.IsNullOrEmpty(user.ProfilePictureDataUrl))
-                                        {
-                                            @if (user.Id == CId)
-                                            {
-                                                <MudAvatar Color="Color.Secondary" Style="height:50px; width:50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
-                                            }
-                                            else
-                                            {
-                                                <MudAvatar Color="Color.Dark" Style="height:50px; width:50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <MudAvatar Image="@user.ProfilePictureDataUrl" Style="height:50px; width:50px;"> </MudAvatar>
-                                        }
-                                    </MudBadge>
-                                </div>
-                                <div>
-                                    <MudText Typo="Typo.body2" Class="mt-3 mb-n2">@user.FirstName @user.LastName</MudText>
-                                    <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@user.EmailAddress</MudText>
-                                </div>
-                            </div>
+                            <UserCard IsUserOnline="@user.IsOnline" UserId="@user.Id" />
                         </MudListItem>
                     }
                 </MudList>
@@ -102,31 +71,7 @@
             @foreach (var user in UserList)
             {
                 <MudListItem Class="pa-0 px-2" OnClick="@(() => LoadUserChat(user.Id))">
-                    <div class="d-flex flex-row mt-n1 mb-n1">
-                        <div class="mr-4">
-                            <MudBadge Class="my-2" Color="@(GetUserStatusBadgeColor(user.IsOnline))" Overlap="true" Bottom="true" Dot="true">
-                                @if (string.IsNullOrEmpty(user.ProfilePictureDataUrl))
-                                {
-                                    @if (user.Id == CId)
-                                    {
-                                        <MudAvatar Color="Color.Secondary" Style="height: 50px; width: 50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
-                                    }
-                                    else
-                                    {
-                                        <MudAvatar Color="Color.Dark" Style="height: 50px; width: 50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
-                                    }
-                                }
-                                else
-                                {
-                                    <MudAvatar Image="@user.ProfilePictureDataUrl" Style="height: 50px; width: 50px;"> </MudAvatar>
-                                }
-                            </MudBadge>
-                        </div>
-                        <div>
-                            <MudText Typo="Typo.body2" Class="mt-3 mb-n2">@user.FirstName @user.LastName</MudText>
-                            <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@user.EmailAddress</MudText>
-                        </div>
-                    </div>
+                    <UserCard IsUserOnline="@user.IsOnline" UserId="@user.Id" />
                 </MudListItem>
             }
         </MudList>

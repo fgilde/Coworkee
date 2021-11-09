@@ -5,37 +5,36 @@
 @using CleanArchitectureBase.Client.Utils
 
 
-<div @onclick="GotoAccountOrProfile" class="@(CanNavigateToProfile() ? "cursor-pointer": "") mud-button-text mud-button-text-size-medium">
-    @if (string.IsNullOrEmpty(ImageDataUrl))
+<div @onclick="GotoAccountOrProfile" class="@(CanNavigateToProfile() ? "cursor-pointer" : "") mud-button-text mud-button-text-size-medium">
+    @if (IsUserOnline.HasValue)
     {
-        <MudAvatar Style="@StyleStr()">@Initials?.ToUpper()</MudAvatar>
+        <MudBadge Class="my-2" Color="@(IsUserOnline.Value ? Color.Success : Color.Error)" Style="width:100%" Overlap="true" Bottom="true" Dot="true">
+            <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()">@(string.IsNullOrEmpty(ImageDataUrl) ? Initials?.ToUpper() : "")</MudAvatar>
+        </MudBadge>
     }
     else
     {
-        <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()"> </MudAvatar>
+        <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()">@(string.IsNullOrEmpty(ImageDataUrl) ? Initials?.ToUpper() : "")</MudAvatar>
     }
+    
 </div>
 
 
 @code {
 
-    [Parameter]
-    public bool LinkToProfile { get; set; } = true;
+    [Parameter] public bool LinkToProfile { get; set; } = true;
 
-    [Parameter]
-    public ClaimsPrincipal User { get; set; }
+    [Parameter] public ClaimsPrincipal User { get; set; }
 
-    [Parameter]
-    public UserResponse UserData { get; set; }
+    [Parameter] public UserResponse UserData { get; set; }
 
-    [Parameter]
-    public string UserId { get; set; }
+    [Parameter] public string UserId { get; set; }
 
-    [Parameter]
-    public int Height { get; set; } = 50;
+    [Parameter] public int Height { get; set; } = 50;
 
-    [Parameter]
-    public int Width { get; set; } = 50;
+    [Parameter] public int Width { get; set; } = 50;
+
+    [Parameter] public bool? IsUserOnline { get; set; }
 
     private string ImageDataUrl { get; set; }
     private string Initials { get; set; }
@@ -44,7 +43,7 @@
     private string StyleStr()
     {
         string color = GetColor();
-        return $"transition-property: background-color; transition-duration: 2s; height: {Height}px; width: {Width}px; background-color: "+color+";";
+        return $"transition-property: background-color; transition-duration: 1s; height: {Height}px; width: {Width}px; background-color: "+color+";";
     }
 
     string GetColor()

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -19,7 +21,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
-    public partial class EditableDataTable<TResult, TIdType> 
+    public partial class EditableDataTable<TResult, TIdType>
     {
         [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
         [Parameter] public bool MultiSelect { get; set; } = true;
@@ -97,22 +99,54 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private bool _canSearch;
         private bool _loaded;
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
             ImmediateSearch ??= ApiLoadPaged == null;
-            _pageUrl = _navigationManager.Uri.Split(InitialAction)[0].EnsureEndsWith("/");
-            _currentUser = await _clientAuthenticationManager.CurrentUser();
             _canCreate = ApiCreateOrEdit != null && await HasPermission(CreatePermission);
             _canEdit = ApiCreateOrEdit != null && GetId != null && await HasPermission(EditPermission);
             _canDelete = ApiDelete != null && GetId != null && await HasPermission(DeletePermission);
             _canExport = await HasPermission(ExportPermission);
             _canSearch = await HasPermission(SearchPermission);
+            await base.OnParametersSetAsync();
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            _pageUrl = _navigationManager.Uri.Split(InitialAction)[0].EnsureEndsWith("/");
+            _currentUser = await _clientAuthenticationManager.CurrentUser();
+
 
             if (ApiLoadPaged == null)
                 await LoadAllData();
 
             _loaded = true;
             HubConnection = await HubConnection.EnsureStartedAsync(_navigationManager);
+
+            HubConnection.On<EntitiesUpdated<TResult>>(async (a) =>
+            {
+                if (a.User.Id != _currentUser.GetUserId())
+                {
+                    var position = _snackBar.Configuration.PositionClass;
+                    _snackBar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                    _snackBar.Add(
+                        _localizer[
+                            "The User {0} has just edited, created or deleted entries here. You should reload the data",
+                            a.User.FullName], Severity.Normal, (config) =>
+                        {
+                            config.Icon = Icons.Material.Filled.Refresh;
+                            config.CloseAfterNavigation = true;
+                            config.ShowCloseIcon = true;
+                            config.RequireInteraction = true;
+                            config.Action = _localizer["Reload Data"];
+                            config.ActionColor = Color.Primary;
+                            config.Onclick = async snackbar =>
+                            {
+                                _snackBar.Configuration.PositionClass = position;
+                                await Reload();
+                            };
+                        });
+                }
+            });
 
             await ExecuteInitialPageActionAsync();
         }

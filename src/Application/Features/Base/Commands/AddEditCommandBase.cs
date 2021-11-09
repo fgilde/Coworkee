@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Interfaces.Repositories;
 using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Contracts;
@@ -11,6 +13,7 @@ using CleanArchitectureBase.Shared.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
+using Nextended.Core.Helper;
 
 namespace CleanArchitectureBase.Application.Features.Base.Commands
 {
@@ -54,6 +57,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         
         public virtual async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
         {
+            var user = Get<ICurrentUserService>().CurrentUser();
             var toCreate = command.Items.Where(t => t.IsNew).ToArray();
             var toUpdate = command.Items.Where(t => !t.IsNew).ToArray();
 
@@ -64,20 +68,24 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
                     await PermissionService.EnsurePolicyAsync(CreatePermission);
                 await repository.AddManyAsync(toCreate.MapElementsTo<TEntity>(), cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken): UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
+                await Mediator.PublishClientEvent(new EntitiesCreated<TDto>(user, command.Items), cancellationToken);
             }
             if (toUpdate.Any())
             {
                 if (EditPermission != null)
                     await PermissionService.EnsurePolicyAsync(EditPermission);
 
-                // TODO: Ugly currently but To ensure correct audit trail we need to load entities to change and update only changed properties. So toUpdate.MapElementsTo<TEntity>(); is badly not enough but working in general
                 var entitiesToUpdate = (await repository.GetByIdsAsync(toUpdate.Select(dto => dto.Id), cancellationToken))
                     .Select(e => toUpdate.First(dto => Equals(dto.Id, e.Id)).MapTo<TEntity>().CopyChangedValuesTo(e)).ToArray();
                 
                 await repository.UpdateManyAsync(entitiesToUpdate, cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
+                await Mediator.PublishClientEvent(new EntitiesChanged<TDto>(user, command.Items), cancellationToken);
 
             }
+
+            
+            await Mediator.PublishClientEvent(new EntitiesUpdated<TDto>(user, command.Items), cancellationToken);
             return Unit.Value;
         }
     }

@@ -116,12 +116,14 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                  {
                      if ((CId == chatHistory.ToUserId && CurrentUserId == chatHistory.FromUserId))
                      {
-                         _messages.Add(new ChatHistoryResponse { Message = chatHistory.Message, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CurrentUserImageURL });
+                         // On send out
+                         _messages.Add(new ChatHistoryResponse { Message = chatHistory.Message, FromUserId = CurrentUserId, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CurrentUserImageURL });
                          await HubConnection.SendAsync(ApplicationConstants.SignalR.SendChatNotification, string.Format(_localizer["New Message From {0}"], userName), CId, CurrentUserId);
                      }
                      else if ((CId == chatHistory.FromUserId && CurrentUserId == chatHistory.ToUserId))
                      {
-                         _messages.Add(new ChatHistoryResponse { Message = chatHistory.Message, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CImageURL });
+                         // On receive
+                         _messages.Add(new ChatHistoryResponse { Message = chatHistory.Message, FromUserId = chatHistory.FromUserId, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CImageURL });
                      }
                      await _jsRuntime.InvokeAsync<string>("ScrollToBottom", "chatContainer");
                      StateHasChanged();
@@ -204,17 +206,6 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         {
             ChatDrawer = anchor;
             _open = true;
-        }
-
-        private Color GetUserStatusBadgeColor(bool isOnline)
-        {
-            switch (isOnline)
-            {
-                case false:
-                    return Color.Error;
-                case true:
-                    return Color.Success;
-            }
         }
 
     }

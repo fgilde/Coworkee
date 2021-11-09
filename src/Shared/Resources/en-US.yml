@@ -80,6 +80,7 @@ br-FR: Breton (France)
 Brand: Brand
 Brand Saved: Brand Saved!
 Brand Updated: Brand Updated!
+BrandName: Brand
 Brands: Brands
 Brands exported: Brands exported
 Browse Available Documents.: Browse Available Documents.
@@ -673,6 +674,7 @@ Register User: Register User
 Registered Roles: Registered Roles
 Registered Users: Registered Users
 Reload: Reload
+Reload Data: Reload Data
 Remember me?: Remember me?
 Reset password: Reset password
 Reset Password: Reset Password
@@ -793,6 +795,7 @@ tg-Cyrl-TJ: Tajik (Cyrillic, Tajikistan)
 th-TH: Thai (Thailand)
 The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
 The following permission is also required for permission {1}: The following permission is also required for permission {1}
+The User {0} has just edited, created or deleted entries here. You should reload the data: The User {0} has just edited, created or deleted entries here. You should reload the data
 This is an Administrator Only View.: This is an Administrator Only View.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Ethiopia)

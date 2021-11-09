@@ -12,6 +12,76 @@ window.Download = (options) => {
         });
 }
 
+window.initialLoad = () => {
+    if (urlParams()['safemode']) {
+        window.localStorage.clear();
+        window.location.href = removeUrlParams(window.location.href, 'safemode');
+    }
+    document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
+    document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
+    document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
+    var app = document.getElementById('app');
+    app.addEventListener('DOMSubtreeModified', contentChanged, false);
+
+    function contentChanged() {
+        app.removeEventListener('DOMSubtreeModified', contentChanged);
+        var overlay = document.getElementById('overlay-app-load');
+        overlay.classList.add('fade-out');
+        setTimeout(function () { overlay.remove(); }, 3000); // Remove element after fadeout
+    }
+}
+
+window.reloadSilent = () => {
+    var unloadScripts = function (fileNames) {
+        var loadedScripts = Array.from(document.querySelectorAll('script'));
+        loadedScripts.forEach(script => {
+            script.parentNode.removeChild(script);
+        });
+    }
+    unloadScripts();
+    fetch(window.location.href, { method: 'GET', redirect: 'follow' })
+        .then(response => response.text())
+        .then(html => {
+            // Convert the HTML string into a document object
+            unloadScripts();
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(html, 'text/html');
+            document.replaceChild(
+                document.importNode(doc.documentElement, true),
+                document.documentElement
+            );
+            initialLoad();
+        }
+        ).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}
+
+window.removeUrlParams = (url, parameters) => {
+    ((parameters ? (typeof parameters === 'string' ? [parameters] : parameters) : ['[^#]*'])).forEach(
+        (parameter) => {
+            url = url
+                .replace(new RegExp('(?:&(' + parameter + '=?[^#&]*))'), '')
+                .replace(new RegExp('(?:\\?(' + parameter + '=?[^#&]*&))'), '?')
+                .replace(new RegExp('(?:\\?(' + parameter + '=?[^#&]*))'), '');
+        }
+    );
+    return url;
+}
+
+window.urlParams = (url) => {
+    try {
+        var search = url ? url.match(/(?:[^?]*)\??([^#]*)/)[1] : window.location.search.substring(1);
+        return JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+            (key, value) =>
+            key === '' ? value : decodeURIComponent(value)
+        );
+    } catch(e) {
+        return {};
+    }
+}
+
 window.ScrollToBottom = (elementName) => {
     var element = document.getElementById(elementName);
     element.scrollTop = element.scrollHeight - element.clientHeight;

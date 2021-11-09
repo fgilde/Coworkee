@@ -13,7 +13,7 @@
     }
     else if (!usePopover)
     {
-        <MudTextField AdornmentColor="Color.Success" OnAdornmentClick="@ConfirmChange" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Check" AutoFocus="true" @onkeydown="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value"/>
+        <MudTextField AdornmentColor="Color.Success" OnAdornmentClick="@ConfirmChange" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Check" AutoFocus="true" @onkeyup="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value"/>
     }
     @if (mouseOverElement && !inEditMode)
     {
@@ -21,7 +21,7 @@
     }
 </div>
 <MudPopover Style="padding: 10px;" RelativeWidth="true" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter" Open="@inEditMode" Fixed="true">
-    <MudTextField AutoFocus="true" @onkeydown="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value" />
+    <MudTextField AutoFocus="true" @onkeyup="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value" />
     <MudIconButton OnClick="@ConfirmChange" Icon="@Icons.Material.Filled.Check" Color="Color.Success"/>
     <MudIconButton OnClick="@CancelChange" Icon="@Icons.Material.Filled.Cancel" Color="Color.Error"/>
 </MudPopover>
@@ -72,12 +72,14 @@
     public async void ConfirmChange()
     {
         var value = textField.Value;
-        var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
-        var arg = (await _api.Translations_GetAllAsync()).FirstOrDefault(t => t.Key == Key) ?? new TranslationDto {Key = Key, CultureCode = cultureCode};
-        arg.Value = value;
-        await _api.Translations_PostAsync(new AddEditTranslationsCommand(arg));
+        if (value != GetLocalizer()[Key].Value)
+        {
+            var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
+            var arg = (await _api.Translations_GetAllAsync()).FirstOrDefault(t => t.Key == Key) ?? new TranslationDto {Key = Key, CultureCode = cultureCode};
+            arg.Value = value;
+            await _api.Translations_PostAsync(new AddEditTranslationsCommand(arg));
+        }
         inEditMode = false;
-        await (await HubConnection.EnsureStartedAsync(_navigationManager)).SendAsync(ApplicationConstants.SignalR.SendTranslationsChanged);
     }
 
     public void CancelChange()

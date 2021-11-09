@@ -62,7 +62,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             var parameters = new DialogParameters();
             if (productOrNull != null)
             {
-                parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<UpdateProductDto>());
+                parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull);
             }
 
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };

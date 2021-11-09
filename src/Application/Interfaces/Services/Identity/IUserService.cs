@@ -14,6 +14,7 @@ namespace CleanArchitectureBase.Application.Interfaces.Services.Identity
         Task<int> GetCountAsync();
 
         Task<IResult<UserResponse>> GetAsync(string userId);
+        UserResponse Get(string userId);
 
         Task<IResult> RegisterAsync(RegisterRequest request, string origin);
 

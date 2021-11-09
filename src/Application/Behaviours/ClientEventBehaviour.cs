@@ -1,5 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Hubs.Events;
 using MediatR;
 
 namespace CleanArchitectureBase.Application.Behaviours
@@ -16,18 +18,9 @@ namespace CleanArchitectureBase.Application.Behaviours
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            var requestInfo = new
-            {
-                Name = typeof(TRequest).FullName,
-                Request = request
-            };
-            await mediator.Publish(new ClientEvent(TargetClient.Current, "BeforeRequest", requestInfo), cancellationToken);
+            await mediator.PublishClientEvent(new BeforeRequest<TRequest>(request), cancellationToken);
             var response = await next();
-            await mediator.Publish(new ClientEvent(TargetClient.Current, "OnResponse", new
-            {
-                Request = requestInfo,
-                Response = response
-            }), cancellationToken);
+            await mediator.PublishClientEvent(new AfterRequest<TRequest, TResponse>(request, response), cancellationToken);
             return response;
         }
     }

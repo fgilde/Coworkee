@@ -6,7 +6,7 @@ html, body, #app, .mud-main-content, .mud-rtl-provider {
 }
 
 .app-main-container {
-    height: 96%;
+    height: 93%;
 }
 
 .sf-license-warning {
@@ -25,6 +25,10 @@ body * {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 .mud-menu.role-selector-menu {

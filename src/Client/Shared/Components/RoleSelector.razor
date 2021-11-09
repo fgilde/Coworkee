@@ -46,7 +46,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await UpdateDataAsync();
+        var currentUser = await _clientAuthenticationManager.CurrentUser();
+        if (currentUser?.Identity?.IsAuthenticated == true)
+        {
+            await UpdateDataAsync();
+        }
+        else
+        {
+            IsVisible = false;
+        }
     }
 
     private async Task UpdateDataAsync()

@@ -11,5 +11,6 @@
         public bool EmailConfirmed { get; set; }
         public string PhoneNumber { get; set; }
         public string ProfilePictureDataUrl { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

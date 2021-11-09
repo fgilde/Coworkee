@@ -7,11 +7,11 @@ namespace CleanArchitectureBase.Server
 {
     public class SessionProvider : ISessionProvider
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        
         public SessionProvider(IHttpContextAccessor httpContextAccessor)
         {
-            this.httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
             SessionId = httpContextAccessor?.HttpContext?.Session.GetString(ApplicationConstants.SessionIdKey) ?? Guid.NewGuid().ToString();
         }
 

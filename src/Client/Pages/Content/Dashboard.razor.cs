@@ -44,7 +44,7 @@ namespace CleanArchitectureBase.Client.Pages.Content
         private async Task LoadDataAsync()
         {
             var response = await Api.Dashboard_GetDataAsync();
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 ProductCount = response.Data.ProductCount;
                 BrandCount = response.Data.BrandCount;
@@ -58,13 +58,6 @@ namespace CleanArchitectureBase.Client.Pages.Content
                     _dataEnterBarChartSeries
                         .RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
                     _dataEnterBarChartSeries.Add(new ChartSeries { Name = item.Name, Data = item.Data });
-                }
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
                 }
             }
         }

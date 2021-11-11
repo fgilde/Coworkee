@@ -56,16 +56,9 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         private async Task GetDocumentTypesAsync()
         {
             var response = await _api.DocumentTypes_GetAllAsync();
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _documentTypeList = response.Data.ToList();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 
@@ -82,19 +75,11 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             if (!result.Cancelled)
             {
                 var response = await _api.DocumentTypes_DeleteAsync(id);
-                if (response.Succeeded)
+                await Reset();
+                if (_errorService.IsSuccessFull(response))
                 {
-                    await Reset();
                     await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    await Reset();
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
                 }
             }
         }
@@ -102,7 +87,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         private async Task ExportToExcel()
         {
             var response = await _api.DocumentTypes_ExportAsync(_searchString);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
@@ -113,13 +98,6 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
                     ? _localizer["Document Types exported"]
                     : _localizer["Filtered Document Types exported"], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 

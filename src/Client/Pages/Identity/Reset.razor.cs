@@ -29,17 +29,10 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (!string.IsNullOrEmpty(_resetPasswordModel.Token))
             {
                 var result = await _api.User_ResetPasswordAsync(_resetPasswordModel);
-                if (result.Succeeded)
+                if (_errorService.IsSuccessFull(result))
                 {
                     _snackBar.Add(result.Messages[0], Severity.Success);
                     _navigationManager.NavigateTo("/");
-                }
-                else
-                {
-                    foreach (var message in result.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
                 }
             }
             else

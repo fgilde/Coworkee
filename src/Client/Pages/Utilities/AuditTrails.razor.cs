@@ -85,7 +85,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
         private async Task GetDataAsync()
         {
             var response = await Api.Audits_GetUserTrailsAsync();
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 Trails = response.Data
                     .Select(x => new RelatedAuditTrail
@@ -102,13 +102,6 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
                         LocalTime = DateTime.SpecifyKind(x.DateTime, DateTimeKind.Utc).ToLocalTime()
                     }).ToList();
             }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
         }
 
         private void ShowBtnPress(int id)
@@ -124,7 +117,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
         private async Task ExportToExcelAsync()
         {
             var response = await Api.Audits_ExportExcelAsync(_searchString, _searchInOldValues, _searchInNewValues);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
@@ -135,13 +128,6 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
                 _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
                     ? _localizer["Audit Trails exported"]
                     : _localizer["Filtered Audit Trails exported"], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 

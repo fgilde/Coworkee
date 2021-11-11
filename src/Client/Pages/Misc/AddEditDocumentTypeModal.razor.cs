@@ -26,17 +26,10 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         private async Task SaveAsync()
         {
             var response = await _api.DocumentTypes_PostAsync(AddEditDocumentTypeModel);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 MudDialog.Close();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
             await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
         }

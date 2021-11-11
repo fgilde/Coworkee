@@ -45,7 +45,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                     CreatedDate = DateTime.Now
                 };
                 var response = await Api.Chats_SaveMessageAsync(chatHistory);
-                if (response.Succeeded)
+                if (_errorService.IsSuccessFull(response))
                 {
                     var state = await _stateProvider.GetAuthenticationStateAsync();
                     var user = state.User;
@@ -54,13 +54,6 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                     var userName = $"{user.GetFirstName()} {user.GetLastName()}";
                     await HubConnection.SendAsync(ApplicationConstants.SignalR.SendMessage, chatHistory, userName);
                     CurrentMessage = string.Empty;
-                }
-                else
-                {
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
                 }
             }
         }
@@ -150,7 +143,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         {
             _open = false;
             var response = await _api.User_GetByIdAsync(userId);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 var contact = response.Data;
                 CId = contact.Id;
@@ -161,23 +154,9 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                 //Load messages from db here
                 _messages = new List<ChatHistoryResponse>();
                 var historyResponse = await Api.Chats_GetChatHistoryAsync(CId);
-                if (historyResponse.Succeeded)
+                if (_errorService.IsSuccessFull(historyResponse))
                 {
                     _messages = historyResponse.Data.ToList();
-                }
-                else
-                {
-                    foreach (var message in historyResponse.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
                 }
             }
         }
@@ -186,16 +165,9 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         {
             //add get chat history from chat controller / manager
             var response = await Api.Chats_GetChatUsersAsync();
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 UserList = response.Data.ToList();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 

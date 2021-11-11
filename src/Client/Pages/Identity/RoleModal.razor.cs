@@ -36,18 +36,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task SaveAsync()
         {
             var response = await _api.Role_PostAsync(RoleModel);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                 MudDialog.Close();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
     }

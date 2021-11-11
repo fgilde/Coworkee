@@ -106,7 +106,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private async Task GetExtendedAttributesAsync()
         {
             var response = await ExtendedAttributeManager.GetAllByEntityIdAsync(EntityId);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 GroupedExtendedAttributes.Clear();
                 _model = response.Data;
@@ -133,10 +133,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
             }
             else
             {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
                 _navigationManager.NavigateTo("/");
             }
         }
@@ -152,7 +148,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 CurrentGroup = _mudTabs.Panels[_activeGroupIndex].Text
             };
             var response = await ExtendedAttributeManager.ExportToExcelAsync(request);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
@@ -163,13 +159,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 _snackBar.Add(string.IsNullOrWhiteSpace(request.SearchString) && !request.IncludeEntity && !request.OnlyCurrentGroup
                     ? _localizer["Extended Attributes exported"]
                     : _localizer["Filtered Extended Attributes exported"], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 
@@ -228,18 +217,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
             if (!result.Cancelled)
             {
                 var response = await ExtendedAttributeManager.DeleteAsync(id);
-                if (response.Succeeded)
+                await Reset();
+                if (_errorService.IsSuccessFull(response))
                 {
-                     await Reset();
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    await Reset();
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
                 }
             }
         }

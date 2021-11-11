@@ -34,17 +34,10 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private async Task SubmitAsync()
         {
             var result = await _clientAuthenticationManager.Login(_tokenModel);
-            if (result.Succeeded)
+            if (_errorService.IsSuccessFull(result))
             {
                 _snackBar.Add(string.Format(_localizer["Welcome {0}"], _tokenModel.Email), Severity.Success);
                 _navigationManager.NavigateToReturnUrlIf("/");
-            }
-            else
-            {
-                foreach (var message in result.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 

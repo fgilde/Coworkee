@@ -23,18 +23,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task UpdateProfileAsync()
         {
             var response = await _api.Account_UpdateProfileAsync(_profileModel);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 await _clientAuthenticationManager.Logout();
                 _snackBar.Add(_localizer["Your Profile has been updated. Please Login to Continue."], Severity.Success);
                 _navigationManager.NavigateTo("/");
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 
@@ -77,18 +70,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 await imageFile.OpenReadStream().ReadAsync(buffer);
                 var request = new UpdateProfilePictureRequest { Data = buffer, FileName = fileName, Extension = extension, UploadType = Application.Enums.UploadType.ProfilePicture };
                 var result = await _api.Account_UpdateProfilePictureAsync(request, UserId);
-                if (result.Succeeded)
+                if (_errorService.IsSuccessFull(result))
                 {
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, result.Data);
                     _snackBar.Add(_localizer["Profile picture added."], Severity.Success);
                     _navigationManager.NavigateTo("/account", true);
-                }
-                else
-                {
-                    foreach (var error in result.Messages)
-                    {
-                        _snackBar.Add(error, Severity.Error);
-                    }
                 }
             }
         }
@@ -106,19 +92,12 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             {
                 var request = new UpdateProfilePictureRequest { Data = null, FileName = string.Empty, UploadType = Application.Enums.UploadType.ProfilePicture };
                 var data = await _api.Account_UpdateProfilePictureAsync(request, UserId);
-                if (data.Succeeded)
+                if (_errorService.IsSuccessFull(data))
                 {
                     await _localStorage.RemoveItemAsync(StorageConstants.Local.UserImageURL);
                     ImageDataUrl = string.Empty;
                     _snackBar.Add(_localizer["Profile picture deleted."], Severity.Success);
                     _navigationManager.NavigateTo("/account", true);
-                }
-                else
-                {
-                    foreach (var error in data.Messages)
-                    {
-                        _snackBar.Add(error, Severity.Error);
-                    }
                 }
             }
         }

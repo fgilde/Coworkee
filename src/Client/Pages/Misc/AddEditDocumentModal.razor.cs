@@ -33,17 +33,10 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         private async Task SaveAsync()
         {
             var response = await _api.Documents_PostAsync(AddEditDocumentModel);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 MudDialog.Close();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 

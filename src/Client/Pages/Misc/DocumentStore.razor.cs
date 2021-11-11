@@ -66,7 +66,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         private async Task LoadData(int pageNumber, int pageSize, TableState state)
         {
             var response = await _api.Documents_GetAllAsync(pageNumber + 1, pageSize, _searchString);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _totalItems = response.TotalCount;
                 _currentPage = response.CurrentPage;
@@ -109,13 +109,6 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 }
                 data = loadedData.ToList();
                 _pagedData = data;
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 
@@ -166,25 +159,17 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             if (!result.Cancelled)
             {
                 var response = await _api.Documents_DeleteAsync(id);
-                if (response.Succeeded)
+                OnSearch("");
+                if (_errorService.IsSuccessFull(response))
                 {
-                    OnSearch("");
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    OnSearch("");
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
                 }
             }
         }
 
         private void ManageExtendedAttributes(int documentId)
         {
-            _navigationManager.NavigateTo($"/extended-attributes/{typeof(Document).Name}/{documentId}");
+            _navigationManager.NavigateTo($"/extended-attributes/{nameof(Document)}/{documentId}");
         }
     }
 }

@@ -14,18 +14,11 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private async Task SubmitAsync()
         {
             var response = await _api.User_RegisterAsync(_registerUserModel);
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 _navigationManager.NavigateTo("/login");
                 _registerUserModel = new RegisterRequest();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 

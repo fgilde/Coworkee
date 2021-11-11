@@ -59,8 +59,8 @@ namespace CleanArchitectureBase.Client.Extensions
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
                 .AddScoped<ClientPreferenceManager>()
-                .AddScoped<BlazorHeroStateProvider>()
-                .AddScoped<AuthenticationStateProvider, BlazorHeroStateProvider>()
+                .AddScoped<ApplicationStateProvider>()
+                .AddScoped<AuthenticationStateProvider, ApplicationStateProvider>()
                 .AddTransient<IErrorHandler, ErrorHandler>()
                 .AddManagers()
                 .AddExtendedAttributeManagers()
@@ -73,10 +73,10 @@ namespace CleanArchitectureBase.Client.Extensions
                     client.UpdateAcceptLanguage();
                     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 })
-                .AddTypedClient<IBlazorHeroClient>((_, services) =>
+                .AddTypedClient<IApplicationClient>((_, services) =>
                 {
                     var c = services.GetService<HttpClient>();
-                    return new BlazorHeroClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/")+"api/v1/", c);
+                    return new ApplicationClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/")+"api/v1/", c);
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();

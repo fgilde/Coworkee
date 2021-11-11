@@ -11,7 +11,7 @@ namespace CleanArchitectureBase.Client.Pages.Content
 {
     public partial class Dashboard
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
+        [Inject] private IApplicationClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public int ProductCount { get; set; }

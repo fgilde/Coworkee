@@ -25,16 +25,16 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
     {
         private const string InvalidErrorMessage = "Invalid email or password.";
 
-        private readonly UserManager<BlazorHeroUser> _userManager;
-        private readonly RoleManager<BlazorHeroRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly AppConfiguration _appConfig;
-        private readonly SignInManager<BlazorHeroUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IStringLocalizer<IdentityService> _localizer;
 
         public IdentityService(
-            UserManager<BlazorHeroUser> userManager, RoleManager<BlazorHeroRole> roleManager,
-            IOptions<AppConfiguration> appConfig, SignInManager<BlazorHeroUser> signInManager,
+            UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
+            IOptions<AppConfiguration> appConfig, SignInManager<ApplicationUser> signInManager,
             IStringLocalizer<IdentityService> localizer, IHttpContextAccessor contextAccessor)
         {
             _userManager = userManager;
@@ -97,13 +97,13 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
-        private async Task<string> GenerateJwtAsync(BlazorHeroUser user)
+        private async Task<string> GenerateJwtAsync(ApplicationUser user)
         {
             var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user));
             return token;
         }
 
-        private async Task<IEnumerable<Claim>> GetClaimsAsync(BlazorHeroUser user)
+        private async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);

@@ -45,12 +45,12 @@
 @attribute [Authorize]
 @inject IClientAuthenticationManager _clientAuthenticationManager
 @inject NavigationManager _navigationManager
-@inject BlazorHeroStateProvider _stateProvider
+@inject ApplicationStateProvider _stateProvider
 @inject IAuthorizationService _authorizationService
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService
 @inject HttpClient _httpClient
-@inject IBlazorHeroClient _api
+@inject IApplicationClient _api
 @inject IHttpInterceptorManager _interceptor
 @inject ClientPreferenceManager _clientPreferenceManager
 @inject ILocalStorageService _localStorage;

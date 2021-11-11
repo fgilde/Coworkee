@@ -20,15 +20,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
     public class RoleService : IRoleService
     {
-        private readonly RoleManager<BlazorHeroRole> _roleManager;
-        private readonly UserManager<BlazorHeroUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IRoleClaimService _roleClaimService;
         private readonly IStringLocalizer<RoleService> _localizer;
         private readonly ICurrentUserService _currentUserService;
         
         public RoleService(
-            RoleManager<BlazorHeroRole> roleManager,
-            UserManager<BlazorHeroUser> userManager,
+            RoleManager<ApplicationRole> roleManager,
+            UserManager<ApplicationUser> userManager,
             IRoleClaimService roleClaimService,
             IStringLocalizer<RoleService> localizer,
             ICurrentUserService currentUserService)
@@ -146,7 +146,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             {
                 var existingRole = await _roleManager.FindByNameAsync(request.Name);
                 if (existingRole != null) return await Result<string>.FailAsync(_localizer["Similar Role already exists."]);
-                var response = await _roleManager.CreateAsync(new BlazorHeroRole(request.Name, request.Description));
+                var response = await _roleManager.CreateAsync(new ApplicationRole(request.Name, request.Description));
                 if (response.Succeeded)
                 {
                     return await Result<string>.SuccessAsync(string.Format(_localizer["Role {0} Created."], request.Name));

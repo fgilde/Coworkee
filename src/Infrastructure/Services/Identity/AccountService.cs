@@ -15,21 +15,21 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
     public class AccountService : IAccountService
     {
-        private readonly UserManager<BlazorHeroUser> _userManager;
-        private readonly SignInManager<BlazorHeroUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AccountService> _localizer;
-        private readonly IUserClaimsPrincipalFactory<BlazorHeroUser> _userClaimsPrincipalFactory;
+        private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthorizationService _authorizationService;
 
 
         public AccountService(
-            UserManager<BlazorHeroUser> userManager,
-            SignInManager<BlazorHeroUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IUploadService uploadService,
             IStringLocalizer<AccountService> localizer, 
-            IUserClaimsPrincipalFactory<BlazorHeroUser> userClaimsPrincipalFactory,
+            IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
             IAuthorizationService authorizationService, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
@@ -122,7 +122,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         }
         public async Task<(IResult Result, string UserId)> CreateUserAsync(string userName, string password)
         {
-            var user = new BlazorHeroUser
+            var user = new ApplicationUser
             {
                 UserName = userName,
                 Email = userName,
@@ -169,7 +169,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<IResult> DeleteUserAsync(BlazorHeroUser user)
+        public async Task<IResult> DeleteUserAsync(ApplicationUser user)
         {
             var result = await _userManager.DeleteAsync(user);
 

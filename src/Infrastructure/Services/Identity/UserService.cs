@@ -28,16 +28,16 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<BlazorHeroUser> _userManager;
-        private readonly RoleManager<BlazorHeroRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IMailService _mailService;
         private readonly IStringLocalizer<UserService> _localizer;
         private readonly IExcelService _excelService;
         private readonly ICurrentUserService _currentUserService;
 
         public UserService(
-            UserManager<BlazorHeroUser> userManager,
-            RoleManager<BlazorHeroRole> roleManager,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager,
             IMailService mailService,
             IStringLocalizer<UserService> localizer,
             IExcelService excelService,
@@ -65,7 +65,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             {
                 return await Result.FailAsync(string.Format(_localizer["Username {0} is already taken."], request.UserName));
             }
-            var user = new BlazorHeroUser
+            var user = new ApplicationUser
             {
                 Email = request.Email,
                 FirstName = request.FirstName,
@@ -118,7 +118,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             }
         }
 
-        private async Task<string> SendVerificationEmail(BlazorHeroUser user, string origin)
+        private async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -291,7 +291,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 .OrderByDescending(a => a.CreatedOn)
                 .ToListAsync();
             var result = await _excelService.ExportAsync(users, sheetName: _localizer["Users"],
-                mappers: new Dictionary<string, Func<BlazorHeroUser, object>>
+                mappers: new Dictionary<string, Func<ApplicationUser, object>>
                 {
                     { _localizer["Id"], item => item.Id },
                     { _localizer["FirstName"], item => item.FirstName },

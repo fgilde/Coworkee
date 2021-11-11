@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
 {
     public partial class Chat
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
+        [Inject] private IApplicationClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public string CurrentMessage { get; set; }

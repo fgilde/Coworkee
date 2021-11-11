@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CleanArchitectureBase.Infrastructure.Migrations
 {
-    [DbContext(typeof(BlazorHeroContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20210413122110_initial")]
     partial class initial
     {
@@ -85,7 +85,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("ChatHistory");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -432,11 +432,11 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitectureBase.Application.Models.Chat.ChatHistory", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", "FromUser")
+                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", "FromUser")
                         .WithMany("ChatHistoryFromUsers")
                         .HasForeignKey("FromUserId");
 
-                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", "ToUser")
+                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", "ToUser")
                         .WithMany("ChatHistoryToUsers")
                         .HasForeignKey("ToUserId");
 
@@ -467,7 +467,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -476,7 +476,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -491,7 +491,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -500,14 +500,14 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("ChatHistoryFromUsers");
 

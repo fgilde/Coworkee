@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CleanArchitectureBase.Infrastructure.Models.Identity
 {
-    public class BlazorHeroRoleClaim : IdentityRoleClaim<string>, IAuditableEntity<int>
+    public class ApplicationRoleClaim : IdentityRoleClaim<string>, IAuditableEntity<int>
     {
         public string Description { get; set; }
         public string Group { get; set; }
@@ -12,13 +12,12 @@ namespace CleanArchitectureBase.Infrastructure.Models.Identity
         public DateTime CreatedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime? LastModifiedOn { get; set; }
-        public virtual BlazorHeroRole Role { get; set; }
+        public virtual ApplicationRole Role { get; set; }
 
-        public BlazorHeroRoleClaim() : base()
-        {
-        }
+        public ApplicationRoleClaim() : base()
+        {}
 
-        public BlazorHeroRoleClaim(string roleClaimDescription = null, string roleClaimGroup = null) : base()
+        public ApplicationRoleClaim(string roleClaimDescription = null, string roleClaimGroup = null) : base()
         {
             Description = roleClaimDescription;
             Group = roleClaimGroup;

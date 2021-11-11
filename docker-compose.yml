@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  blazorhero:
-    image: ${DOCKER_REGISTRY-}blazorhero
+  cleanarchitecturebase:
+    image: ${DOCKER_REGISTRY-}cleanarchitecturebase
     build:
       context: .
       dockerfile: src/Server/Dockerfile
     environment:
-      - "ConnectionStrings__DefaultConnection=Server=db;Database=BlazorHero;User=sa;Password=Your_password123;MultipleActiveResultSets=true"
+      - "ConnectionStrings__DefaultConnection=Server=db;Database=CleanArchitectureBase;User=sa;Password=Your_password123;MultipleActiveResultSets=true"
       - "ASPNETCORE_Kestrel__Certificates__Default__Password=securePassword123"
       - "ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx"
     volumes:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     restart: on-failure
-    container_name: blazorhero
+    container_name: cleanarchitecturebase
 
   db:
     image: "mcr.microsoft.com/mssql/server"

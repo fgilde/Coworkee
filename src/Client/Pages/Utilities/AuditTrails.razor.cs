@@ -16,7 +16,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 {
     public partial class AuditTrails
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
+        [Inject] private IApplicationClient Api { get; set; }
 
         public List<RelatedAuditTrail> Trails = new();
 

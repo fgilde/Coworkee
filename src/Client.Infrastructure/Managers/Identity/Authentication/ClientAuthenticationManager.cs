@@ -20,14 +20,14 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
         private readonly ILocalStorageService _localStorage;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
         private readonly IStringLocalizer<ClientAuthenticationManager> _localizer;
-        private readonly IBlazorHeroClient _api;
+        private readonly IApplicationClient _api;
 
         public ClientAuthenticationManager(
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
             IStringLocalizer<ClientAuthenticationManager> localizer, 
-            IBlazorHeroClient api)
+            IApplicationClient api)
         {
             _httpClient = httpClient;
             _localStorage = localStorage;
@@ -56,7 +56,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
                 {
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageUrl);
                 }
-                ((BlazorHeroStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
+                ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
                 _httpClient.SetAuthorization(token);
                 return await Result.SuccessAsync();
             }
@@ -70,7 +70,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authenti
             await _localStorage.RemoveItemAsync(StorageConstants.Local.AuthToken);
             await _localStorage.RemoveItemAsync(StorageConstants.Local.RefreshToken);
             await _localStorage.RemoveItemAsync(StorageConstants.Local.UserImageURL);
-            ((BlazorHeroStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+            ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
             _httpClient.SetAuthorization(null);
             return await Result.SuccessAsync();
         }

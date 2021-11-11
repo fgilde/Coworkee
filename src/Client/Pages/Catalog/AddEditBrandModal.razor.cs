@@ -12,7 +12,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class AddEditBrandModal
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
+        [Inject] private IApplicationClient Api { get; set; }
 
         [Parameter] public AddEditBrandCommand AddEditBrandModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }

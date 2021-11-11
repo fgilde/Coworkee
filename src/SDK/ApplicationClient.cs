@@ -3,13 +3,13 @@ using SDK;
 
 namespace CleanArchitectureBase.SDK
 {
-    public class BlazorHeroClient: GeneratedClient, IBlazorHeroClient
+    public class ApplicationClient: GeneratedClient, IApplicationClient
     {
-        public BlazorHeroClient(string baseUrl, HttpClient httpClient) : base(baseUrl, httpClient)
+        public ApplicationClient(string baseUrl, HttpClient httpClient) : base(baseUrl, httpClient)
         {}
     }
 
-    public interface IBlazorHeroClient : IGeneratedClient
+    public interface IApplicationClient : IGeneratedClient
     {
         /// <summary>
         /// Delegate function to catch prepare request event

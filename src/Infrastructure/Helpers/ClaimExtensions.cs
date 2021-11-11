@@ -32,7 +32,7 @@ namespace CleanArchitectureBase.Infrastructure.Helpers
 
         }
 
-        public static async Task<IdentityResult> AddPermissionClaim(this RoleManager<BlazorHeroRole> roleManager, BlazorHeroRole role, string permission)
+        public static async Task<IdentityResult> AddPermissionClaim(this RoleManager<ApplicationRole> roleManager, ApplicationRole role, string permission)
         {
             var allClaims = await roleManager.GetClaimsAsync(role);
             if (!allClaims.Any(a => a.Type == ApplicationClaimTypes.Permission && a.Value == permission))

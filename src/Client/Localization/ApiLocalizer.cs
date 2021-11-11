@@ -18,7 +18,7 @@ namespace CleanArchitectureBase.Client.Localization
         private static Task updateTask;
         private static readonly CancellationTokenSource cts = new();
 
-        internal static Task UpdateEntries(IBlazorHeroClient api, CultureInfo culture, bool force)
+        internal static Task UpdateEntries(IApplicationClient api, CultureInfo culture, bool force)
         {
             if (force || (updateTask == null && !ApiTranslations.ContainsKey(culture)))
             {
@@ -49,11 +49,11 @@ namespace CleanArchitectureBase.Client.Localization
     /// <typeparam name="T"></typeparam>
     public class ApiLocalizer<T> : IStringLocalizer<T>
     {
-        private readonly IBlazorHeroClient _api;
+        private readonly IApplicationClient _api;
 
         private CultureInfo culture => CultureInfo.CurrentCulture;
 
-        public ApiLocalizer(IBlazorHeroClient api)
+        public ApiLocalizer(IApplicationClient api)
         {
             _api = api;
             ApiResources.UpdateEntries(_api, culture, false);

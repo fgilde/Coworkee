@@ -4,22 +4,24 @@ using CleanArchitectureBase.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CleanArchitectureBase.Infrastructure.Migrations
 {
-    [DbContext(typeof(BlazorHeroContext))]
-    partial class BlazorHeroContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20210528104232_AddApplicationRoleClaim")]
+    partial class AddApplicationRoleClaim
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Chat.ChatHistory<CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser>", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Chat.ChatHistory<CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser>", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,100 +126,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.ExtendedAttributes.DocumentExtendedAttribute", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("Decimal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Group")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Json")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Type")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId");
-
-                    b.ToTable("DocumentExtendedAttributes");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Localization.Translation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CultureCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Translations");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.Document", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Document", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,9 +141,6 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DocumentTypeId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
@@ -253,39 +159,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DocumentTypeId");
-
                     b.ToTable("Documents");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.DocumentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Audit.Audit", b =>
@@ -324,7 +198,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("AuditTrails");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroRole", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -366,7 +240,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("Roles", "Identity");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroRoleClaim", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationRoleClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -408,10 +282,9 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("RoleClaims", "Identity");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -590,13 +463,13 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("UserTokens", "Identity");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Chat.ChatHistory<CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser>", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Application.Models.Chat.ChatHistory<CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", "FromUser")
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", "FromUser")
                         .WithMany("ChatHistoryFromUsers")
                         .HasForeignKey("FromUserId");
 
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", "ToUser")
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", "ToUser")
                         .WithMany("ChatHistoryToUsers")
                         .HasForeignKey("ToUserId");
 
@@ -616,42 +489,18 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.ExtendedAttributes.DocumentExtendedAttribute", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationRoleClaim", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Domain.Entities.Misc.Document", "Entity")
-                        .WithMany("ExtendedAttributes")
-                        .HasForeignKey("EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Entity");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.Document", b =>
-                {
-                    b.HasOne("CleanArchitectureBase.Domain.Entities.Misc.DocumentType", "DocumentType")
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationRole", null)
                         .WithMany()
-                        .HasForeignKey("DocumentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DocumentType");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroRoleClaim", b =>
-                {
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroRole", "Role")
-                        .WithMany("RoleClaims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -660,7 +509,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -669,13 +518,13 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroRole", null)
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -684,24 +533,14 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", null)
+                    b.HasOne("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.Document", b =>
-                {
-                    b.Navigation("ExtendedAttributes");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroRole", b =>
-                {
-                    b.Navigation("RoleClaims");
-                });
-
-            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.BlazorHeroUser", b =>
+            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("ChatHistoryFromUsers");
 

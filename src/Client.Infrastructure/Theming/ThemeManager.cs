@@ -9,9 +9,9 @@ namespace CleanArchitectureBase.Client.Infrastructure.Theming
 {
     public class ThemeManager: IThemeManager
     {
-        private readonly IBlazorHeroClient _client;
+        private readonly IApplicationClient _client;
 
-        public ThemeManager(IBlazorHeroClient client)
+        public ThemeManager(IApplicationClient client)
         {
             _client = client;
         }

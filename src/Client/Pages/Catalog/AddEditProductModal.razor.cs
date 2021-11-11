@@ -20,7 +20,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class AddEditProductModal
     {
-        [Inject] private IBlazorHeroClient Api { get; set; }
+        [Inject] private IApplicationClient Api { get; set; }
 
         [Parameter] public ProductDto AddEditProductModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }

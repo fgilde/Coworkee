@@ -8,7 +8,7 @@ using CleanArchitectureBase.Application.Models.Chat;
 
 namespace CleanArchitectureBase.Infrastructure.Models.Identity
 {
-    public class BlazorHeroUser : IdentityUser<string>, IChatUser, IAuditableEntity<string>
+    public class ApplicationUser : IdentityUser<string>, IChatUser, IAuditableEntity<string>
     {
         public string FirstName { get; set; }
 
@@ -30,13 +30,13 @@ namespace CleanArchitectureBase.Infrastructure.Models.Identity
         public bool IsActive { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
-        public virtual ICollection<ChatHistory<BlazorHeroUser>> ChatHistoryFromUsers { get; set; }
-        public virtual ICollection<ChatHistory<BlazorHeroUser>> ChatHistoryToUsers { get; set; }
+        public virtual ICollection<ChatHistory<ApplicationUser>> ChatHistoryFromUsers { get; set; }
+        public virtual ICollection<ChatHistory<ApplicationUser>> ChatHistoryToUsers { get; set; }
 
-        public BlazorHeroUser()
+        public ApplicationUser()
         {
-            ChatHistoryFromUsers = new HashSet<ChatHistory<BlazorHeroUser>>();
-            ChatHistoryToUsers = new HashSet<ChatHistory<BlazorHeroUser>>();
+            ChatHistoryFromUsers = new HashSet<ChatHistory<ApplicationUser>>();
+            ChatHistoryToUsers = new HashSet<ChatHistory<ApplicationUser>>();
         }
     }
 }

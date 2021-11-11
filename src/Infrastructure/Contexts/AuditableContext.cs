@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitectureBase.Infrastructure.Contexts
 {
-    public abstract class AuditableContext : IdentityDbContext<BlazorHeroUser, BlazorHeroRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, BlazorHeroRoleClaim, IdentityUserToken<string>>
+    public abstract class AuditableContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, ApplicationRoleClaim, IdentityUserToken<string>>
     {
         protected AuditableContext(DbContextOptions options) : base(options)
         {

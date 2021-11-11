@@ -11,7 +11,7 @@ namespace CleanArchitectureBase.Client.Extensions
     {
         //internal static ErrorHandler Handler { get; } = ServiceAccessor.Get<ErrorHandler>();
 
-        //public static async Task<TResult> CallAsync<TResult>(this IBlazorHeroClient api, Func<IBlazorHeroClient, Task<TResult>> action)
+        //public static async Task<TResult> CallAsync<TResult>(this IApplicationClient api, Func<IApplicationClient, Task<TResult>> action)
         //{
         //    try
         //    {

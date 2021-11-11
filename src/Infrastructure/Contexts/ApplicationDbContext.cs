@@ -14,19 +14,19 @@ using CleanArchitectureBase.Domain.Entities.Misc;
 
 namespace CleanArchitectureBase.Infrastructure.Contexts
 {
-    public class BlazorHeroContext : AuditableContext
+    public class ApplicationDbContext : AuditableContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTimeService _dateTimeService;
 
-        public BlazorHeroContext(DbContextOptions<BlazorHeroContext> options, ICurrentUserService currentUserService, IDateTimeService dateTimeService)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ICurrentUserService currentUserService, IDateTimeService dateTimeService)
             : base(options)
         {
             _currentUserService = currentUserService;
             _dateTimeService = dateTimeService;
         }
 
-        public DbSet<ChatHistory<BlazorHeroUser>> ChatHistories { get; set; }
+        public DbSet<ChatHistory<ApplicationUser>> ChatHistories { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -68,7 +68,7 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
                 property.SetColumnType("decimal(18,2)");
             }
             base.OnModelCreating(builder);
-            builder.Entity<ChatHistory<BlazorHeroUser>>(entity =>
+            builder.Entity<ChatHistory<ApplicationUser>>(entity =>
             {
                 entity.ToTable("ChatHistory");
 
@@ -82,13 +82,13 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
                     .HasForeignKey(d => d.ToUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
-            builder.Entity<BlazorHeroUser>(entity =>
+            builder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable(name: "Users", "Identity");
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
-            builder.Entity<BlazorHeroRole>(entity =>
+            builder.Entity<ApplicationRole>(entity =>
             {
                 entity.ToTable(name: "Roles", "Identity");
             });
@@ -107,7 +107,7 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
                 entity.ToTable("UserLogins", "Identity");
             });
 
-            builder.Entity<BlazorHeroRoleClaim>(entity =>
+            builder.Entity<ApplicationRoleClaim>(entity =>
             {
                 entity.ToTable(name: "RoleClaims", "Identity");
 

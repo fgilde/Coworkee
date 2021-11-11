@@ -18,12 +18,12 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
     {
         private readonly IStringLocalizer<RoleClaimService> _localizer;
         private readonly ICurrentUserService _currentUserService;
-        private readonly BlazorHeroContext _db;
+        private readonly ApplicationDbContext _db;
 
         public RoleClaimService(
             IStringLocalizer<RoleClaimService> localizer,
             ICurrentUserService currentUserService,
-            BlazorHeroContext db)
+            ApplicationDbContext db)
         {
             _localizer = localizer;
             _currentUserService = currentUserService;
@@ -78,7 +78,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 {
                     return await Result<string>.FailAsync(_localizer["Similar Role Claim already exists."]);
                 }
-                var roleClaim = request.MapTo<BlazorHeroRoleClaim>();
+                var roleClaim = request.MapTo<ApplicationRoleClaim>();
                 await _db.RoleClaims.AddAsync(roleClaim);
                 await _db.SaveChangesAsync(_currentUserService.UserId);
                 return await Result<string>.SuccessAsync(string.Format(_localizer["Role Claim {0} created."], request.ClaimValue));

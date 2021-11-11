@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,12 +13,12 @@ using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Authentication
 {
-    public class BlazorHeroStateProvider : AuthenticationStateProvider
+    public class ApplicationStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
 
-        public BlazorHeroStateProvider(
+        public ApplicationStateProvider(
             HttpClient httpClient,
             ILocalStorageService localStorage)
         {

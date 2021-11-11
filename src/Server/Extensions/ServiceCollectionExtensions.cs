@@ -192,7 +192,7 @@ namespace CleanArchitectureBase.Server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddDbContext<BlazorHeroContext>(options => options
+                .AddDbContext<ApplicationDbContext>(options => options
                     .UseSqlServer(configuration.GetConnectionString("DefaultConnection")))
             .AddTransient<IDatabaseSeeder, DatabaseSeeder>();
 
@@ -202,7 +202,7 @@ namespace CleanArchitectureBase.Server.Extensions
             services
                 .AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>()
                 .AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>()
-                .AddIdentity<BlazorHeroUser, BlazorHeroRole>(options =>
+                .AddIdentity<ApplicationUser, ApplicationRole>(options =>
                 {
                     options.Password.RequiredLength = 6;
                     options.Password.RequireDigit = false;
@@ -211,7 +211,7 @@ namespace CleanArchitectureBase.Server.Extensions
                     options.Password.RequireUppercase = false;
                     options.User.RequireUniqueEmail = true;
                 })
-                .AddEntityFrameworkStores<BlazorHeroContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             return services;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CleanArchitectureBase.Infrastructure.Migrations
 {
-    public partial class AddBlazorHeroRoleClaim : Migration
+    public partial class AddApplicationRoleClaim : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

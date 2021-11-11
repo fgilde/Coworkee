@@ -13,7 +13,7 @@
     <AuthorizeView>
         <NotAuthorized>
             <MudAppBar Elevation="4" Color="Color.Primary">
-                <MudAppBarSpacer />
+                <MudSpacer />
                 <LanguageSelector />
                 <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
             </MudAppBar>
@@ -40,7 +40,7 @@
                                   IsLogoVisible="_currentTheme.LayoutProperties.ShowLogoInAppBar"
                                   OnMenuIconClick="(e) => DrawerToggle()" />
 
-                    <MudAppBarSpacer />
+                    <MudSpacer />
                     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
                         <RoleSelector />
                         <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />

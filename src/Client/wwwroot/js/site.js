@@ -58,6 +58,10 @@ window.reloadSilent = () => {
     });
 }
 
+window.ChangeUrl = function (url) {
+    history.pushState(null, '', url);
+}
+
 window.removeUrlParams = (url, parameters) => {
     ((parameters ? (typeof parameters === 'string' ? [parameters] : parameters) : ['[^#]*'])).forEach(
         (parameter) => {

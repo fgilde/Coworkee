@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>CleanArchitectureBase.Shared</RootNamespace>
     <AssemblyName>CleanArchitectureBase.Shared</AssemblyName>
   </PropertyGroup>
@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.11" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

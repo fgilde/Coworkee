@@ -58,6 +58,10 @@ window.reloadSilent = function () {
     });
 };
 
+window.ChangeUrl = function (url) {
+    history.pushState(null, '', url);
+};
+
 window.removeUrlParams = function (url, parameters) {
     (parameters ? typeof parameters === 'string' ? [parameters] : parameters : ['[^#]*']).forEach(function (parameter) {
         url = url.replace(new RegExp('(?:&(' + parameter + '=?[^#&]*))'), '').replace(new RegExp('(?:\\?(' + parameter + '=?[^#&]*&))'), '?').replace(new RegExp('(?:\\?(' + parameter + '=?[^#&]*))'), '');

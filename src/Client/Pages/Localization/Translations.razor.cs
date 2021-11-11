@@ -9,7 +9,7 @@ using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Localization;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.SignalR.Client;
-using Nextended.Core.Extensions;
+
 
 namespace CleanArchitectureBase.Client.Pages.Localization
 {
@@ -40,7 +40,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
             var local = clientLocalizationCache.ContainsKey(cultureCode)
                 ? clientLocalizationCache[cultureCode]
-                : clientLocalizationCache.AddOrUpdate(cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto {CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value}).ToList())[cultureCode];
+                : Nextended.Core.Extensions.EnumerableExtensions.AddOrUpdate(clientLocalizationCache, cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto {CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value}).ToList())[cultureCode];
 
             if (!showCultureTranslations)
                 local = local.Where(dto => !LocalizationConstants.ValidCultureName(dto.Key)).ToList();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Hubs.Events;
@@ -107,6 +108,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             _canDelete = ApiDelete != null && GetId != null && await HasPermission(DeletePermission);
             _canExport = await HasPermission(ExportPermission);
             _canSearch = await HasPermission(SearchPermission);
+            await ExecuteInitialPageActionAsync();
             await base.OnParametersSetAsync();
         }
 
@@ -114,8 +116,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             _pageUrl = _navigationManager.Uri.Split(InitialAction)[0].EnsureEndsWith("/");
             _currentUser = await _clientAuthenticationManager.CurrentUser();
-
-
+            
             if (ApiLoadPaged == null)
                 await LoadAllData();
 
@@ -147,9 +148,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
                         });
                 }
             });
-
-            await ExecuteInitialPageActionAsync();
         }
+
 
         public async Task Reload()
         {
@@ -162,19 +162,30 @@ namespace CleanArchitectureBase.Client.Shared.Components
             return string.IsNullOrWhiteSpace(permission) || (await _authorizationService.AuthorizeAsync(_currentUser, permission)).Succeeded;
         }
 
+        private bool inAction;
         private async Task ExecuteInitialPageActionAsync()
         {
-            if (InitialAction?.ToLower() == "add")
+            if(inAction)
+                return;
+            try
             {
-                await InvokeModal();
+                inAction = true;
+                if (InitialAction?.ToLower() == "add")
+                {
+                    await InvokeModal();
+                }
+                if (InitialAction?.ToLower() == "edit" && !string.IsNullOrWhiteSpace(InitialIdString))
+                {
+                    await InvokeModal(InitialIdString.MapTo<TIdType>());
+                }
+                if (InitialAction?.ToLower() == "delete" && !string.IsNullOrWhiteSpace(InitialIdString))
+                {
+                    await Delete(InitialIdString.Split(',').MapTo<TIdType[]>());
+                }
             }
-            if (InitialAction?.ToLower() == "edit" && !string.IsNullOrWhiteSpace(InitialIdString))
+            finally
             {
-                await InvokeModal(InitialIdString.MapTo<TIdType>());
-            }
-            if (InitialAction?.ToLower() == "delete" && !string.IsNullOrWhiteSpace(InitialIdString))
-            {
-                await Delete(InitialIdString.Split(',').MapTo<TIdType[]>());
+                inAction = false;
             }
         }
 
@@ -262,20 +273,38 @@ namespace CleanArchitectureBase.Client.Shared.Components
             }
         }
 
-        private async Task InvokeModal(TIdType id = default)
+        private string ActionUrl(TIdType id)
         {
             bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);
             string u = !isDefaultId ? "edit" : "add";
+            return $"{_pageUrl}{u}/{(!isDefaultId ? id : string.Empty)}";
+        }
 
-            _navigationManager.NavigateTo($"{_pageUrl}{u}/{(!isDefaultId ? id : string.Empty)}");
-            bool success = await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData()));
-
-            if (success)
+        private async Task InvokeModal(TIdType id = default)
+        {
+            bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);
+            await WithUrl(ActionUrl(id), async () =>
             {
-                await Reset();
-            }
+                if (await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData())))
+                {
+                    await Reset();
+                }
+            });
+        }
 
-            _navigationManager.NavigateTo(_pageUrl);
+        private async Task WithUrl(string url, Func<Task> action)
+        {
+            var currentUrl = _navigationManager.Uri;
+            if (currentUrl != url)
+                await _jsRuntime.InvokeVoidAsync("ChangeUrl", url);
+            try
+            {
+                await action();
+            }
+            finally
+            {
+                await _jsRuntime.InvokeVoidAsync("ChangeUrl", _pageUrl);
+            }
         }
 
         private IEnumerable<TResult> GetLoadedData()
@@ -285,8 +314,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task<bool> Delete(params TIdType[] ids)
         {
-            _navigationManager.NavigateTo($"{_pageUrl}delete/{string.Join(',', ids)}");
-            try
+            bool returnValue = false;
+            var uri = $"{_pageUrl}delete/{string.Join(',', ids)}";
+            await WithUrl(uri, async () =>
             {
                 var names = await GetDisplayNamesAsync(ids);
                 var value = ids.Length > 1 ? _localizer["Delete these {0} elements"] : _localizer["Delete this element"];
@@ -305,15 +335,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                     if (_errorService.IsSuccessFull(response))
                         _snackBar.Add(response.Messages[0], Severity.Success);
-                    
-                    return response.Succeeded;
+
+                    returnValue = response.Succeeded;
                 }
-                return false;
-            }
-            finally
-            {
-                _navigationManager.NavigateTo(_pageUrl);
-            }
+            });
+            return returnValue;
         }
 
         private async Task<IEnumerable<string>> GetDisplayNamesAsync(TIdType[] ids)

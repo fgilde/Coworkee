@@ -14,6 +14,7 @@ using CleanArchitectureBase.Application.Requests.Mail;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Infrastructure.Specifications;
+using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Role;
 using CleanArchitectureBase.Shared.Wrapper;
 using Hangfire;
@@ -96,7 +97,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                         var verificationUri = await SendVerificationEmail(user, origin);
                         var mailRequest = new MailRequest
                         {
-                            From = "mail@codewithmukesh.com",
+                            From = ApplicationConstants.Defaults.DefaultAdminUserEmail,
                             To = user.Email,
                             Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
                             Subject = _localizer["Confirm Registration"]
@@ -191,7 +192,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
-            if (user.Email == "mukesh@blazorhero.com")
+            if (user.Email == ApplicationConstants.Defaults.DefaultAdminUserEmail)
             {
                 return await Result.FailAsync(_localizer["Not Allowed."]);
             }

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\Images\ProfilePictures\" />
+    <Folder Include="Logs\" />
     <Folder Include="wwwroot\api\" />
   </ItemGroup>
 

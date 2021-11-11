@@ -10,6 +10,14 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public const string Version = "v2.2";
         public const string DefaultLanguageCode = "en-US";
 
+        public static class Defaults
+        {
+            public const string DefaultAdminUserEmail = "info@coworkee.de";
+            public const string DefaultAdminUserPassword = "123Pa$$word!";
+            public const string DefaultBasicUserEmail = "john@coworkee.de";
+            public const string DefaultBasicUserPassword = "123Pa$$word!";
+        }
+
         public static class ParameterNames
         {
             public const string ReturnUrl = nameof(ReturnUrl);

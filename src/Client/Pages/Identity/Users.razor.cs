@@ -43,16 +43,9 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task GetUsersAsync()
         {
             var response = await _api.User_GetAllAsync();
-            if (response.Succeeded)
+            if (_errorService.IsSuccessFull(response))
             {
                 _userList = response.Data.ToList();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
             }
         }
 
@@ -115,7 +108,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private void ManageRoles(string userId, string email)
         {
-            if (email == "mukesh@blazorhero.com") _snackBar.Add(_localizer["Not Allowed."], Severity.Error);
+            if (email == ApplicationConstants.Defaults.DefaultAdminUserEmail) _snackBar.Add(_localizer["Not Allowed."], Severity.Error);
             else _navigationManager.NavigateTo($"/identity/user-roles/{userId}");
         }
     }

@@ -4,14 +4,12 @@ using CleanArchitectureBase.Infrastructure.Helpers;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Role;
-using CleanArchitectureBase.Shared.Constants.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Infrastructure
 {
@@ -60,10 +58,10 @@ namespace CleanArchitectureBase.Infrastructure
                 //Check if User Exists
                 var superUser = new BlazorHeroUser
                 {
-                    FirstName = "Mukesh",
-                    LastName = "Murugan",
-                    Email = "mukesh@blazorhero.com",
-                    UserName = "mukesh",
+                    FirstName = "Florian",
+                    LastName = "Gilde",
+                    Email = ApplicationConstants.Defaults.DefaultAdminUserEmail,
+                    UserName = "fgilde",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
                     CreatedOn = DateTime.Now,
@@ -72,7 +70,7 @@ namespace CleanArchitectureBase.Infrastructure
                 var superUserInDb = await _userManager.FindByEmailAsync(superUser.Email);
                 if (superUserInDb == null)
                 {
-                    await _userManager.CreateAsync(superUser, UserConstants.DefaultPassword);
+                    await _userManager.CreateAsync(superUser, ApplicationConstants.Defaults.DefaultAdminUserPassword);
                     var result = await _userManager.AddToRoleAsync(superUser, RoleConstants.AdministratorRole);
                     if (result.Succeeded)
                     {
@@ -110,7 +108,7 @@ namespace CleanArchitectureBase.Infrastructure
                 {
                     FirstName = "John",
                     LastName = "Doe",
-                    Email = "john@blazorhero.com",
+                    Email = ApplicationConstants.Defaults.DefaultBasicUserEmail,
                     UserName = "johndoe",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
@@ -120,7 +118,7 @@ namespace CleanArchitectureBase.Infrastructure
                 var basicUserInDb = await _userManager.FindByEmailAsync(basicUser.Email);
                 if (basicUserInDb == null)
                 {
-                    await _userManager.CreateAsync(basicUser, UserConstants.DefaultPassword);
+                    await _userManager.CreateAsync(basicUser, ApplicationConstants.Defaults.DefaultBasicUserPassword);
                     await _userManager.AddToRoleAsync(basicUser, RoleConstants.BasicRole);
                     _logger.LogInformation(_localizer["Seeded User with Basic Role."]);
                 }

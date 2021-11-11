@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
@@ -69,14 +70,14 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         private void FillAdministratorCredentials()
         {
-            _tokenModel.Email = "mukesh@blazorhero.com";
-            _tokenModel.Password = "123Pa$$word!";
+            _tokenModel.Email = ApplicationConstants.Defaults.DefaultAdminUserEmail;
+            _tokenModel.Password = ApplicationConstants.Defaults.DefaultAdminUserPassword;
         }
 
         private void FillBasicUserCredentials()
         {
-            _tokenModel.Email = "john@blazorhero.com";
-            _tokenModel.Password = "123Pa$$word!";
+            _tokenModel.Email = ApplicationConstants.Defaults.DefaultBasicUserEmail;
+            _tokenModel.Password = ApplicationConstants.Defaults.DefaultBasicUserPassword;
         }
     }
 }

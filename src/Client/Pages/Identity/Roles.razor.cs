@@ -17,7 +17,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 {
     public partial class Roles
     {
-        
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private List<RoleResponse> _roleList = new();
@@ -56,17 +55,8 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task GetRolesAsync()
         {
             var response = await _api.Role_GetAllAsync();
-            if (response.Succeeded)
-            {
+            if(_errorService.IsSuccessFull(response))
                 _roleList = response.Data.ToList();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
         }
 
         private async Task Delete(string id)
@@ -82,19 +72,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (!result.Cancelled)
             {
                 var response = await _api.Role_DeleteAsync(id);
-                if (response.Succeeded)
+                if (_errorService.IsSuccessFull(response))
                 {
                     await Reset();
                     await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                }
-                else
-                {
-                    await Reset();
-                    foreach (var message in response.Messages)
-                    {
-                        _snackBar.Add(message, Severity.Error);
-                    }
                 }
             }
         }
@@ -132,16 +114,9 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private bool Search(RoleResponse role)
         {
-            if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (role.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (role.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            return false;
+            return string.IsNullOrWhiteSpace(_searchString) ||
+                   (role.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true ||
+                    role.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true);
         }
 
         private void ManagePermissions(string roleId)

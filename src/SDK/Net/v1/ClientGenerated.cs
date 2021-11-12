@@ -259,13 +259,13 @@ namespace SDK
         /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? force = null);
+        System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? filterByCurrentCulture = null, bool? force = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? filterByCurrentCulture = null, bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get a translation by id</summary>
         /// <returns>Status 200 Ok</returns>
@@ -2550,19 +2550,23 @@ namespace SDK
         /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? force = null)
+        public System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? filterByCurrentCulture = null, bool? force = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Translations_GetAllAsync(force, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Translations_GetAllAsync(filterByCurrentCulture, force, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get All Translations</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? filterByCurrentCulture = null, bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Translations/GetAll?");
+            if (filterByCurrentCulture != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("FilterByCurrentCulture") + "=").Append(System.Uri.EscapeDataString(ConvertToString(filterByCurrentCulture, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (force != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Force") + "=").Append(System.Uri.EscapeDataString(ConvertToString(force, System.Globalization.CultureInfo.InvariantCulture))).Append("&");

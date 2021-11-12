@@ -7,6 +7,7 @@ using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Localization;
+using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -37,7 +38,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task<Result<List<TranslationDto>>> Load()
         {
-            var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
+            var cultureCode = CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode();
             var local = clientLocalizationCache.ContainsKey(cultureCode)
                 ? clientLocalizationCache[cultureCode]
                 : Nextended.Core.Extensions.EnumerableExtensions.AddOrUpdate(clientLocalizationCache, cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto {CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value}).ToList())[cultureCode];

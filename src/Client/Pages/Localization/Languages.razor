@@ -1,0 +1,43 @@
+﻿@page "/localization/languages"
+@attribute [Authorize(Policy = Permissions.Products.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Languages> _localizer
+@using CleanArchitectureBase.Shared.Constants.Localization
+
+<style>
+    .culture-code {
+        font-size: x-small;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+</style>
+
+<ReactOnPreferenceChanged Component="this" />
+<HeroTitle Title="@_localizer["Languages"]" Description="@_localizer["Manage Languages"]" />
+
+
+@{
+    var languageCodes = LocalizationConstants.AvailableLanguages;
+}
+
+<MudExpansionPanels>
+    @foreach (var lang in languageCodes.GroupBy(l => l.Code.Split("-")[0]))
+    {
+        var neutralLangLabel = (_localizer[lang.FirstOrDefault(c => c.Code.Contains("-"))?.Code ?? lang.Key]).Value.Split("(")[0];
+        <MudExpansionPanel Text="@neutralLangLabel">
+            <MudList>
+                @foreach (var l in lang)
+                {
+                    var isUsed = LocalizationConstants.SupportedLanguages.Any(c => c.Code == l.Code && c.DisplayName == l.DisplayName);
+                    <MudListItem>
+                        <MudSwitch Checked="@isUsed" Label="@(l.Code.Contains('-') ? _localizer[l.Code] : neutralLangLabel)" Color="Color.Warning"/>
+                        <span class="culture-code">@l.Code</span>
+                    </MudListItem>
+                }
+            </MudList>
+        </MudExpansionPanel>
+    }
+</MudExpansionPanels>
+
+
+
+

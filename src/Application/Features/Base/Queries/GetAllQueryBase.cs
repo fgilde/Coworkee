@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
+﻿using System;
+using CleanArchitectureBase.Application.Interfaces.Repositories;
 using LazyCache;
 using MediatR;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;
         protected readonly IAppCache Cache;
 
-        protected virtual string CacheKey => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
+        protected virtual string CacheKey(TQuery query) => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
 
         public GetAllQueryHandlerBase(IUnitOfWork<TEntityId> unitOfWork, IAppCache cache)
         {
@@ -38,14 +39,20 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             Cache = cache;
         }
 
+        protected virtual IQueryable<TEntity> Query(TQuery query)
+        {
+            return Queryable;
+        }
+
         protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
 
         public virtual async Task<IReadOnlyCollection<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
         {
-            if(request.Force && !string.IsNullOrWhiteSpace(CacheKey))
-                Cache.Remove(CacheKey);
-            Task<List<TEntity>> GetAll() => Queryable.ToListAsync(cancellationToken);
-            var resultList = await (CacheKey.IsNullOrWhiteSpace() ? GetAll() : Cache.GetOrAddAsync(CacheKey, GetAll));
+            string cacheKey = CacheKey(request);
+            if(request.Force && !string.IsNullOrWhiteSpace(cacheKey))
+                Cache.Remove(cacheKey);
+            Task<List<TEntity>> GetAll() => Query(request).ToListAsync(cancellationToken);
+            var resultList = await (cacheKey.IsNullOrWhiteSpace() ? GetAll() : Cache.GetOrAddAsync(cacheKey, GetAll));
             return resultList.MapTo<List<TDto>>().AsReadOnly();
         }
     }

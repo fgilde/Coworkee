@@ -4,6 +4,7 @@
 @using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
 @using CleanArchitectureBase.Application.Dtos
 @using System.Globalization
+@using CleanArchitectureBase.Shared.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<TranslationInlineEdit> localizer
 
 <div @onclick="ElementClick" @onmouseover="ElementMouseOver" @onmouseout="ElementMouseLeave">
@@ -74,7 +75,7 @@
         var value = textField.Value;
         if (value != GetLocalizer()[Key].Value)
         {
-            var cultureCode = CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName;
+            var cultureCode = CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode();
             var arg = (await _api.Translations_GetAllAsync()).FirstOrDefault(t => t.Key == Key) ?? new TranslationDto {Key = Key, CultureCode = cultureCode};
             arg.Value = value;
             await _api.Translations_PostAsync(new AddEditTranslationsCommand(arg));

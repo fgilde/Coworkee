@@ -9,7 +9,9 @@ using LazyCache;
 namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
 {
     public class GetAllTranslationsQuery : GetAllQueryBase<TranslationDto>
-    {}
+    {
+        public bool FilterByCurrentCulture { get; set; } = true;
+    }
 
     internal class GetAllTranslationsQueryHandler : GetAllQueryHandlerBase<GetAllTranslationsQuery, int, TranslationDto, Translation>
     {
@@ -18,8 +20,8 @@ namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
 
         private string currentCulture => Thread.CurrentThread.CurrentCulture.Name;
 
-        protected override string CacheKey => $"{base.CacheKey}-{currentCulture}";
+        protected override string CacheKey (GetAllTranslationsQuery query)=> $"{base.CacheKey(query)}-{(query.FilterByCurrentCulture ? currentCulture: "all")}";
 
-        protected override IQueryable<Translation> Queryable => base.Queryable.Where(t => t.CultureCode == currentCulture);
+        protected override IQueryable<Translation> Query(GetAllTranslationsQuery query) => base.Query(query).Where(t => !query.FilterByCurrentCulture || t.CultureCode == currentCulture);
     }
 }

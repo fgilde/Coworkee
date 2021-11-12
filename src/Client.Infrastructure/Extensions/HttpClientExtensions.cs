@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Extensions;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Infrastructure.Extensions
@@ -14,7 +15,7 @@ namespace CleanArchitectureBase.Client.Infrastructure.Extensions
             if (cultureInfo != null)
                 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             headers.AcceptLanguage.Clear();
-            headers.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
+            headers.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode());
             return headers;
         }
 

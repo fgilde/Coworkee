@@ -1352,10 +1352,11 @@ export interface ITranslationsClient {
     getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto>;
     /**
      * Get All Translations
+     * @param filterByCurrentCulture (optional) 
      * @param force (optional) 
      * @return Status 200 OK
      */
-    getAll(force: boolean | undefined): Observable<TranslationDto[]>;
+    getAll(filterByCurrentCulture: boolean | undefined, force: boolean | undefined): Observable<TranslationDto[]>;
     /**
      * Get a translation by id
      * @return Status 200 Ok
@@ -1457,11 +1458,16 @@ export class TranslationsClient implements ITranslationsClient {
 
     /**
      * Get All Translations
+     * @param filterByCurrentCulture (optional) 
      * @param force (optional) 
      * @return Status 200 OK
      */
-    getAll(force: boolean | undefined): Observable<TranslationDto[]> {
+    getAll(filterByCurrentCulture: boolean | undefined, force: boolean | undefined): Observable<TranslationDto[]> {
         let url_ = this.baseUrl + "/Translations/GetAll?";
+        if (filterByCurrentCulture === null)
+            throw new Error("The parameter 'filterByCurrentCulture' cannot be null.");
+        else if (filterByCurrentCulture !== undefined)
+            url_ += "FilterByCurrentCulture=" + encodeURIComponent("" + filterByCurrentCulture) + "&";
         if (force === null)
             throw new Error("The parameter 'force' cannot be null.");
         else if (force !== undefined)

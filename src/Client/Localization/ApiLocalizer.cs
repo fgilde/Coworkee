@@ -31,7 +31,7 @@ namespace CleanArchitectureBase.Client.Localization
                 {
                     try
                     {
-                        var translations = await api.Translations_GetAllAsync(null, cts.Token);
+                        var translations = await api.Translations_GetAllAsync(true, null, cts.Token);
                         ApiTranslations.AddOrUpdate(culture, _ => translations, (_, l) => translations);
                     }
                     catch (Exception e)

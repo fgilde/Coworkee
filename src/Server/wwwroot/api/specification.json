@@ -888,12 +888,20 @@
         "operationId": "Translations_GetAll",
         "parameters": [
           {
-            "name": "Force",
+            "name": "FilterByCurrentCulture",
             "in": "query",
             "schema": {
               "type": "boolean"
             },
             "x-position": 1
+          },
+          {
+            "name": "Force",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "x-position": 2
           }
         ],
         "responses": {

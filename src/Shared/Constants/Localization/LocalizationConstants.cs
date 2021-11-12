@@ -13,6 +13,14 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
         private static string[] resourceNames;
         public static readonly string DefaultLanguageCode = "en-US";
 
+        public static LanguageCode[] AvailableLanguages
+        {
+            get
+            {
+                return (systemCultures ??= CultureInfo.GetCultures(CultureTypes.AllCultures)).Where(i => !string.IsNullOrWhiteSpace(i.Name)).Select(LanguageCode.FromCulture).ToArray();
+            }
+        }
+
         public static LanguageCode[] SupportedLanguages
         {
             get

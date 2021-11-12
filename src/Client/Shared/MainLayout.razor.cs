@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Dtos;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Client.Infrastructure.Theming;
@@ -27,7 +25,6 @@ namespace CleanArchitectureBase.Client.Shared
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
             var user = state.User;
-            if (user == null) return;
             if (user.Identity?.IsAuthenticated == true)
             {
                 CurrentUserId = user.GetUserId();                

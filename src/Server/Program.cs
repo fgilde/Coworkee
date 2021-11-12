@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CleanArchitectureBase.Server
 {
@@ -31,10 +32,8 @@ namespace CleanArchitectureBase.Server
                 }
                 catch (Exception ex)
                 {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
-                    logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-
+                    scope.ServiceProvider.GetRequiredService<ILogger<Program>>()
+                        .LogError(ex, "Error occurred while migrating/seeding database.");
                     throw;
                 }
             }
@@ -44,11 +43,15 @@ namespace CleanArchitectureBase.Server
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((context, configBuiler) =>
+                    {
+                        configBuiler.AddConfigurations();
+                    });
                     webBuilder.UseStaticWebAssets();
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseSerilog();
     }
 }

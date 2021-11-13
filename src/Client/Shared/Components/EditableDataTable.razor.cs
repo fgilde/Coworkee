@@ -135,9 +135,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
                             a.User.FullName], Severity.Normal, (config) =>
                         {
                             config.Icon = Icons.Material.Filled.Refresh;
+                            config.VisibleStateDuration = 10000;
                             config.CloseAfterNavigation = true;
                             config.ShowCloseIcon = true;
-                            config.RequireInteraction = true;
                             config.Action = _localizer["Reload Data"];
                             config.ActionColor = Color.Primary;
                             config.Onclick = async snackbar =>

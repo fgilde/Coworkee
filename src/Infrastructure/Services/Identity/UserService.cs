@@ -107,15 +107,11 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                     }
                     return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["User {0} Registered."], user.UserName));
                 }
-                else
-                {
-                    return await Result.FailAsync(result.Errors.Select(a => _localizer[a.Description].ToString()).ToList());
-                }
+
+                return await Result.FailAsync(result.Errors.Select(a => _localizer[a.Description].ToString()).ToList());
             }
-            else
-            {
-                return await Result.FailAsync(string.Format(_localizer["Email {0} is already registered."], request.Email));
-            }
+
+            return await Result.FailAsync(string.Format(_localizer["Email {0} is already registered."], request.Email));
         }
 
         private async Task<string> SendVerificationEmail(ApplicationUser user, string origin)

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Interfaces;
 using CleanArchitectureBase.Application.Interfaces.Chat;
+using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Application.Models.Chat;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR;
@@ -9,7 +10,8 @@ namespace CleanArchitectureBase.Application.Hubs
 {
     public class ClientEventHub : HubBase
     {
-        public ClientEventHub(ISessionProvider sessionProvider) : base(sessionProvider)
+        public ClientEventHub(ISessionProvider sessionProvider, IUserService userService, IRoleClaimService roleService) 
+            : base(sessionProvider, userService, roleService)
         { }
 
         public async Task OnConnectAsync(string userId)

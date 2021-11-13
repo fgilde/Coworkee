@@ -6,6 +6,7 @@ namespace CleanArchitectureBase.Application.Interfaces
     public interface ISessionProvider
     {
         string SessionId { get; }
+        string UserIdFromSession { get; }
     }
 
     public class SimpleSessionProvider : ISessionProvider
@@ -16,5 +17,6 @@ namespace CleanArchitectureBase.Application.Interfaces
         }
 
         public string SessionId { get; }
+        public string UserIdFromSession => null;
     }
 }

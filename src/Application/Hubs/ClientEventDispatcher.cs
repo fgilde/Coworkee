@@ -31,12 +31,9 @@ namespace CleanArchitectureBase.Application.Hubs
 
         private IClientProxy GetTargetProxy(EventTarget target)
         {
-            return target switch
-            {
-                EventTarget.Current => _hubContext.Clients.Group(_sessionProvider.SessionId),
-                EventTarget.All => _hubContext.Clients.All,
-                _ => _hubContext.Clients.Group(_sessionProvider.SessionId),
-            };
+            if (target == EventTarget.All) return _hubContext.Clients.All;
+            if (target == EventTarget.Current) return _hubContext.Clients.Group(_sessionProvider.SessionId);
+            return _hubContext.Clients.Groups(target.Groups);
         }
     }
 }

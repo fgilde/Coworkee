@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
+﻿using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Entities.Misc;
 
 namespace CleanArchitectureBase.Infrastructure.Repositories

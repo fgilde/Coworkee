@@ -1,13 +1,13 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Products.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Products.Queries.Export;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage;
-using CleanArchitectureBase.Application.Security;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;

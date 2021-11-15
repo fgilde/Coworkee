@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Client.Infrastructure.Enums;
+﻿using CleanArchitectureBase.Client.Enums;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;

@@ -1,4 +1,3 @@
-using CleanArchitectureBase.Application.Extensions;
 using CleanArchitectureBase.Infrastructure.Extensions;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Server.Middlewares;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;

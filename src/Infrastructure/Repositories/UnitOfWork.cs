@@ -1,6 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Domain.Contracts;
+﻿using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Infrastructure.Contexts;
 using LazyCache;
 using System;
@@ -8,6 +6,8 @@ using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 
 namespace CleanArchitectureBase.Infrastructure.Repositories
 {

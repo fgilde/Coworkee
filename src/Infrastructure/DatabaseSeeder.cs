@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Infrastructure.Contexts;
+﻿using CleanArchitectureBase.Infrastructure.Contexts;
 using CleanArchitectureBase.Infrastructure.Helpers;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Infrastructure

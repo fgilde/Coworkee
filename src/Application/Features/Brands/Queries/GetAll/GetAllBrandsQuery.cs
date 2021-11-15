@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;
 using LazyCache;
@@ -8,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetAll

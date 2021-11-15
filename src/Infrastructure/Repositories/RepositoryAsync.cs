@@ -1,12 +1,12 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
+﻿using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Exceptions;
+using CleanArchitectureBase.Application.Common.Exceptions;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 
 namespace CleanArchitectureBase.Infrastructure.Repositories
 {

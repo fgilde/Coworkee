@@ -1,7 +1,7 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using MediatR;
-using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Features.Base.Queries;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Translations;

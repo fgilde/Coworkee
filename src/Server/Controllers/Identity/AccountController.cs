@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Interfaces.Services.Account;
-using CleanArchitectureBase.Application.Requests.Identity;
+﻿using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Account;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity

@@ -3,7 +3,7 @@ using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Shared.Wrapper;
 using MudBlazor.Extensions;
 using Nextended.Core.Extensions;

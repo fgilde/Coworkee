@@ -1,11 +1,11 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Models.Chat;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Chat;
+using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Contracts.Chat;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;

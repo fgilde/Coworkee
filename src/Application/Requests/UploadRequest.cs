@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Enums;
+﻿using CleanArchitectureBase.Application.Contracts.Enums;
 
 namespace CleanArchitectureBase.Application.Requests
 {

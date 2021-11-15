@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Translations.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetById;
-using CleanArchitectureBase.Application.Security;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;

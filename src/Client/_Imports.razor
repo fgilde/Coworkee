@@ -17,10 +17,6 @@
 @using Blazored.FluentValidation;
 
 @*Client Services*@
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Identity.Authentication;
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences;
-@using CleanArchitectureBase.Client.Infrastructure.Managers.Interceptors;
-@using CleanArchitectureBase.Client.Infrastructure.Enums;
 
 
 @*Shared Libraries*@
@@ -30,17 +26,17 @@
 @using CleanArchitectureBase.Client;
 @using CleanArchitectureBase.Client.Shared;
 @using CleanArchitectureBase.Client.Shared.Dialogs;
-@using CleanArchitectureBase.Client.Infrastructure.Settings;
 
 @using CleanArchitectureBase.Application.Requests.Identity;
+@using CleanArchitectureBase.Client.Authentication
 @using CleanArchitectureBase.Client.Configuration
 @using CleanArchitectureBase.Client.ErrorHandling
 
 @using CleanArchitectureBase.Client.Pages.Authentication;
-
-@using CleanArchitectureBase.Client.Infrastructure.Authentication;
 @using CleanArchitectureBase.Client.Extensions;
-@using CleanArchitectureBase.Client.Infrastructure.ErrorHandling
+@using CleanArchitectureBase.Client.Managers.Identity.Authentication
+@using CleanArchitectureBase.Client.Managers.Interceptors
+@using CleanArchitectureBase.Client.Managers.Preferences
 @using CleanArchitectureBase.SDK;
 
 @attribute [Authorize]

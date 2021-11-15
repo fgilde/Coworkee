@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Wrapper;

@@ -1,6 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Models.Chat;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
+﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Localization;
 using CleanArchitectureBase.Domain.Entities.Misc;

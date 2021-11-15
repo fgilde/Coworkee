@@ -7,7 +7,7 @@ using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.Add
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
+using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
 using CleanArchitectureBase.Shared.Constants.Application;

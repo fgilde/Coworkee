@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CleanArchitectureBase.Application.Security;
+using CleanArchitectureBase.Application.Common.Security;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Models.Navigation

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Security;
+using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;

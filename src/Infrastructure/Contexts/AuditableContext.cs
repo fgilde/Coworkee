@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Enums;
-using CleanArchitectureBase.Infrastructure.Models.Audit;
+﻿using CleanArchitectureBase.Infrastructure.Models.Audit;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Enums;
 
 namespace CleanArchitectureBase.Infrastructure.Contexts
 {

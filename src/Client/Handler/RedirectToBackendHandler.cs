@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Infrastructure.Extensions;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Handler

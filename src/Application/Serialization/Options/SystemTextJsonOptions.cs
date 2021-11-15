@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using CleanArchitectureBase.Application.Interfaces.Serialization.Options;
+using CleanArchitectureBase.Application.Contracts.Serialization.Options;
 
 namespace CleanArchitectureBase.Application.Serialization.Options
 {

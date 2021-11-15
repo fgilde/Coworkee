@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "Server.csproj",
+      "project": "WebServer.csproj",
       "msBuildProjectExtensionsPath": null,
       "configuration": null,
       "runtime": null,
@@ -147,7 +147,7 @@
         "System.Collections.Generic",
         "CleanArchitectureBase.SDK",
         "CleanArchitectureBase.Domain.Entities",
-        "CleanArchitectureBase.Application.Dtos",
+        "CleanArchitectureBase.Application.Common.Models",
         "CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit",
         "CleanArchitectureBase.Application.Features.Brands.Queries.GetAll",
         "CleanArchitectureBase.Application.Features.Brands.Queries.GetById",
@@ -165,8 +165,8 @@
         "CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById",
         "CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit",
         "CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged",
-        "CleanArchitectureBase.Application.Interfaces.Chat",
-        "CleanArchitectureBase.Application.Models.Chat",
+        "CleanArchitectureBase.Application.Contracts.Chat",
+        "CleanArchitectureBase.Application.Common.Models.Chat",
         "CleanArchitectureBase.Application.Responses.Audit",
         "CleanArchitectureBase.Application.Responses.Identity",
         "CleanArchitectureBase.Domain.Entities.ExtendedAttributes",

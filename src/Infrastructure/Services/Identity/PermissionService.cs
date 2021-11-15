@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Exceptions;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Interfaces.Services.Account;
-using CleanArchitectureBase.Application.Security;
+using CleanArchitectureBase.Application.Common.Exceptions;
+using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Account;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {

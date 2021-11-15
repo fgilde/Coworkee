@@ -1,11 +1,11 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Services;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Infrastructure.Services

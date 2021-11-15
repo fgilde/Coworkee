@@ -1,5 +1,4 @@
-﻿
-using CleanArchitectureBase.Application.Interfaces.Serialization.Settings;
+﻿using CleanArchitectureBase.Application.Contracts.Serialization.Settings;
 using Newtonsoft.Json;
 
 namespace CleanArchitectureBase.Application.Serialization.Settings

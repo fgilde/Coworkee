@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Security;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Server.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;

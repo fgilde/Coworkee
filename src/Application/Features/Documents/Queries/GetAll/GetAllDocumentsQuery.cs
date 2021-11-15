@@ -1,7 +1,4 @@
-﻿using CleanArchitectureBase.Application.Extensions;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Specifications.Misc;
+﻿using CleanArchitectureBase.Application.Specifications.Misc;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
@@ -10,6 +7,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Queries.GetAll
 {

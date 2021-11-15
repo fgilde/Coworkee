@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Specifications.Catalog;
+﻿using CleanArchitectureBase.Application.Specifications.Catalog;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using MediatR;
 using System;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Queries;
 using CleanArchitectureBase.Application.Specifications.Base;
 

@@ -1,6 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +6,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using Microsoft.Extensions.Localization;

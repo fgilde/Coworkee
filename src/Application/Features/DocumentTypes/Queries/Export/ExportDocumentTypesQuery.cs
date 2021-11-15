@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Extensions;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Specifications.Misc;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Wrapper;

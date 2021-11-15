@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces;
-using CleanArchitectureBase.Application.Interfaces.Chat;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
-using CleanArchitectureBase.Application.Models.Chat;
+using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Contracts;
+using CleanArchitectureBase.Application.Contracts.Chat;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR;
 

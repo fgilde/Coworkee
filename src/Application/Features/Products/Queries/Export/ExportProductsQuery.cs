@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using System;
 using System.Collections.Generic;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Export;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Catalog;

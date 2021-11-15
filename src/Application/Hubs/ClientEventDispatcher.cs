@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts;
 using CleanArchitectureBase.Application.Hubs.Events.Base;
-using CleanArchitectureBase.Application.Interfaces;
 using CleanArchitectureBase.Shared.Constants.Application;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;

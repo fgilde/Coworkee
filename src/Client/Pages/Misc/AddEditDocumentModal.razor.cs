@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
 
@@ -71,7 +72,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 var format = "application/octet-stream";
                 await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
                 AddEditDocumentModel.URL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, UploadType = Application.Enums.UploadType.Document, Extension = extension };
+                AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, UploadType = UploadType.Document, Extension = extension };
             }
         }
 

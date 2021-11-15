@@ -1,12 +1,12 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
 using LazyCache;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;

@@ -64,6 +64,8 @@ az-Cyrl-AZ: Aserbaidschanisch (Kyrillisch, Aserbaidschan)
 az-Latn-AZ: Aserbaidschanisch (Latein, Aserbaidschan)
 ba-RU: Bashkir (Russland)
 Barcode: Barcode
+Barcode already exists.: Barcode ist bereits vorhanden.
+Barcode is required!: Barcode ist erforderlich!
 bas-CM: Basaa (Kamerun)
 be-BY: Weißrussisch (Weißrussland)
 bem-ZM: Bemba (Sambia)
@@ -78,6 +80,9 @@ bo-IN: Tibetisch (Indien)
 Bordered: Rahmen
 br-FR: Bretonisch (Frankreich)
 Brand: Marke
+Brand Deleted: Marke gelöscht
+Brand is required!: Marke ist gefragt!
+Brand Not Found!: Marke nicht gefunden!
 Brand Saved: Marke gerettet!
 Brand Updated: Marke aktualisiert!
 BrandName: Marke
@@ -120,6 +125,7 @@ Create: Erstellen
 cs-CZ: Tschechisch (Tschechien)
 cu-RU: Kirchenslawisch (Russland)
 Current Password: Aktuelles Passwort
+Current Password is required!: Aktuelles Passwort ist erforderlich!
 cy-GB: Walisisch (Vereinigtes Königreich)
 da-DK: Dänisch (Dänemark)
 da-GL: Dänisch (Grönland)
@@ -127,6 +133,7 @@ Dashboard: Dashboard
 Date: Datum
 Date Created: Erstellungsdatum
 Date Range For Searching: Datumsbereich für die Suche
+DateTime value is required using {0} type!: Der DateTime-Wert ist für {0} Typ erforderlich!
 dav-KE: Taita (Kenia)
 de-AT: Deutsch (Österreich)
 de-BE: Deutsch (Belgien)
@@ -137,6 +144,7 @@ de-LI: Deutsch (Liechtenstein)
 de-LU: Deutsch (Luxemburg)
 Dec: Dez
 Decimal: Dezimal
+Decimal value is required using {0} type!: Dezimalwert ist bei verwendung {0} Typ erforderlich!
 Delete: Löschen
 Delete Confirmation: Bestätigung löschen
 Delete Content: Inhalt löschen
@@ -146,19 +154,31 @@ Delete Picture: Bild löschen
 Delete Role Content: Möchten Sie die Rolle mit ID {0} löschen?
 Delete these {0} elements: Diese {0} Elemente löschen?
 Delete this element: Dieses Element löschen?
+Deletion Not Allowed: Löschen nicht zulässig
 Dense: Dicht
 Dependent permissions required: Abhängige Berechtigung(en) erforderlich
 Description: Beschreibung
+Description is required!: Beschreibung ist erforderlich!
 detailed guide for more.: detaillierte Anleitung für mehr.
 Details for Trail ID: Details zur Trail ID
 dje-NE: Zarma (Niger)
 Do you want to delete the profile picture of {0}: Möchten Sie das Profilbild von {0}
+Document Deleted: Dokument gelöscht
 Document Extended Attributes: Erweiterte Dokumentattribute
 Document Management: Dokumente
+Document Not Found!: Dokument nicht gefunden!
+Document Saved: Dokument gespeichert
 Document Store: Dokumentspeicher
 Document Type: Dokumenttyp
+Document Type Deleted: Dokumenttyp gelöscht
+Document Type is required!: Dokumenttyp ist erforderlich!
+Document Type Not Found!: Dokumenttyp nicht gefunden!
+Document Type Saved: Dokumenttyp gespeichert
+Document Type Updated: Dokumenttyp aktualisiert
+Document type with this name already exists.: Der Dokumenttyp mit diesem Namen ist bereits vorhanden.
 Document Types: Dokumenttypen
 Document Types exported: Exportierte Dokumenttypen
+Document Updated: Dokument aktualisiert
 Documents: Dokumente
 doi-Deva-IN: Dogri (Devanagari, Indien)
 Don't have an account?: Sie haben noch kein Konto?
@@ -179,6 +199,8 @@ el-CY: Griechisch (Zypern)
 el-GR: Griechisch (Griechenland)
 Email: E-Mail
 Email Confirmation: E-Mail-Bestätigung
+Email is not correct: E-Mail ist nicht korrekt
+Email is required: E-Mail ist erforderlich
 Email is required!: E-Mail ist erforderlich!
 en-001: Englisch (Welt)
 en-029: Englisch (Karibik)
@@ -291,6 +313,14 @@ English: Englisch
 Enter email for password reset: Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und Sie erhalten eine E-Mail mit einem Link zum Zurücksetzen Ihres Passworts
 Enter your message...: Geben Sie Ihre Nachricht ein...
 Entity Id: Entitäts-ID
+Entity is required!: Entität ist erforderlich!
+EntityCreatedBy: EntityCreatedBy
+EntityCreatedOn (Local): EntityCreatedOn (Lokal)
+EntityCreatedOn (UTC): EntityCreatedOn (UTC)
+EntityId: EntityId
+EntityLastModifiedBy: EntityLastModifiedBy
+EntityLastModifiedOn (Local): EntityLastModifiedOn (lokal)
+EntityLastModifiedOn (UTC): EntityLastModifiedOn (UTC)
 eo-001: Esperanto (Welt)
 es-419: Spanisch (Lateinamerika)
 es-AR: Spanisch (Argentinien)
@@ -324,9 +354,17 @@ eu-ES: Baskisch (Spanien)
 ewo-CM: Ewondo (Kamerun)
 Export: Exportieren
 Export To Excel: Exportieren nach Excel
+Extended Attribute Deleted: Erweitertes Attribut gelöscht
+Extended Attribute Not Found!: Erweitertes Attribut nicht gefunden!
+Extended Attribute Saved: Erweitertes Attribut gespeichert
+Extended Attribute Updated: Erweitertes Attribut aktualisiert
+Extended Attribute with this Key already exists.: Erweitertes Attribut mit diesem Schlüssel ist bereits vorhanden.
+Extended Attributes: '\{0}\ Erweiterte Attribute'
 Extended Attributes exported: Exportierte erweiterte Attribute
 External Id: Externe ID
+ExternalId: Externe Id
 fa-IR: Persisch (Iran)
+Failed to get client preferences: Clienteinstellungen konnten nicht abbekommen werden
 FAQs: Häufig gestellte Fragen
 Features: Funktionen
 Feb: Feb
@@ -356,6 +394,7 @@ ff-Latn-SL: Fulah (Latein, Sierra Leone)
 ff-Latn-SN: Fulah (lateinisch, Senegal)
 fi-FI: Finnisch (Finnland)
 fil-PH: Filipino (Philippinen)
+File is required!: Datei ist erforderlich!
 Fill Administrator Credentials: Administratoranmeldeinformationen ausfüllen
 Fill Basic User Credentials: Grundlegende Benutzeranmeldeinformationen ausfüllen
 Filtered Audit Trails exported: Exportierte gefilterte Audit-Trails
@@ -365,6 +404,7 @@ Filtered Extended Attributes exported: Exportierte gefilterte erweiterte Attribu
 Filtered Products exported: Exportierte gefilterte Produkte
 Filtered Users exported: Exportierte gefilterte Benutzer
 First Name: Vorname
+First Name is required: Vorname ist erforderlich
 fo-DK: Färöisch (Dänemark)
 fo-FO: Färöisch (Färöer)
 Forgot password?: Passwort vergessen?
@@ -461,6 +501,7 @@ Is Active: Ist aktiv
 Is Public: Ist öffentlich
 Is Public?: Ist öffentlich?
 is-IS: Isländisch (Island)
+IsActive: IsActive
 it-CH: Italienisch (Schweiz)
 it-IT: Italienisch (Italien)
 it-SM: Italienisch (San Marino)
@@ -473,6 +514,8 @@ Jan: Jan
 jgo-CM: Ngomba (Kamerun)
 jmc-TZ: Machame (Tansania)
 Json: Json
+Json value is required using {0} type!: Json-Wert ist erforderlich, indem {0} Typ verwendet wird!
+Json value must be a valid json string using {0} type!: Der JSON-Wert muss eine gültige JSON-Zeichenfolge mit {0} Typ sein!
 Jul: Jul
 Jun: Jun
 jv-Java-ID: Javanisch (Javanisch, Indonesisch)
@@ -483,6 +526,7 @@ kam-KE: Kamba (Kenia)
 kde-TZ: Makonde (Tansania)
 kea-CV: Kabuverdianu (Kap Verde)
 Key: Schlüssel
+Key is required!: Schlüssel ist erforderlich!
 khq-ML: Koyra Chiini (Mali)
 ki-KE: Kikuyu (Kenia)
 kk-KZ: Kasachisch (Kasachstan)
@@ -508,6 +552,7 @@ la-VA: Latein (Vatikanstadt)
 lag-TZ: Langi (Tansania)
 Languages: Sprachen
 Last Name: Nachname
+Last Name is required: Nachname ist erforderlich
 lb-LU: Luxemburgisch (Luxemburg)
 lg-UG: Shell (Uganda)
 lkt-US: Lakota (Vereinigte Staaten)
@@ -573,6 +618,8 @@ mua-CM: Mundang (Kamerun)
 my-MM: Burmesisch (Myanmar)
 mzn-IR: Mazanderani (Iran)
 Name: Name
+Name is required: Name ist erforderlich
+Name is required!: Name ist Pflichtfeld!
 naq-NA: Name (Namibia)
 nb-NO: Englisch (Norwegen)
 nb-SJ: Norwegisches Bokmål (Svalbard &Jan Mayen)
@@ -636,6 +683,7 @@ pl-PL: Polnisch (Polen)
 prg-001: Preußisch (Welt)
 Primary Key: Primärschlüssel
 Product Deleted: Produkt gelöscht!
+Product Not Found!: Produkt nicht gefunden!
 Product Saved: Produkt gespeichert!
 Product Updated: Produkt aktualisiert!
 Products: Produkte
@@ -667,6 +715,7 @@ quz-BO: Quz (Bolivien)
 quz-EC: quz (Ecuador)
 quz-PE: quz (Peru)
 Rate: Rate
+Rate must be greater than 0: Rate muss größer als 0 sein
 Realtime Updates & Insights with SignalR.: Echtzeit-Updates & Einblicke mit SignalR.
 Refreshed Token.: Aktualisiertes Token.
 Register: Registrieren
@@ -753,6 +802,7 @@ so-DJ: Somali (Dschibuti)
 so-ET: Somali (Äthiopien)
 so-KE: Somali (Kenia)
 so-SO: Somali (Somalia)
+Something went wrong during the refresh token action: Während der Aktualisierungstokenaktion ist etwas schief gelaufen
 sq-AL: Albanisch (Albanien)
 sq-MK: Albanisch (Nordmazedonien)
 sq-XK: Albanisch (Kosovo)
@@ -789,10 +839,12 @@ ta-MY: Nor (Malaysia)
 ta-SG: Tamil (Singapur)
 Table Name: Tabellenname
 Tax: Steuer
+Tax must be greater than 0: Die Steuer muss größer als 0 sein
 te-IN: Telugu (Indien)
 teo-KE: Teso (Kenia)
 teo-UG: Teso (Uganda)
 Text: Text
+Text value is required using {0} type!: Textwert ist bei verwendung {0} Typs erforderlich!
 tg-Cyrl-TJ: Tadschikisch (Kyrillisch, Tadschikistan)
 th-TH: Thai (Thailand)
 The following {0} permissions are also required for permission {1}: Für die Berechtigung "{1}" sind ebenfalls diese {0} Berechtigungen erforderlich
@@ -804,11 +856,13 @@ ti-ET: Tigrinya (Äthiopien)
 tig-ER: Tigre (Eritrea)
 Time: Zeit
 Title: Anmelden
+Title is required!: Titel ist erforderlich!
 tk-TM: Turkmenisch (Turkmenistan)
 tn-BW: Setswana (Botsuana)
 tn-ZA: Setswana (Südafrika)
 to-TO: Tongan (Tonga)
 Toggle right-to-left/left-to-right: Umschalten von rechts nach links/von links nach rechts
+Token is required: Token ist erforderlich
 Token Not Found!: Token nicht gefunden!
 tr-CY: Türkisch (Zypern)
 tr-TR: Türkisch (Türkei)
@@ -818,6 +872,7 @@ ts-ZA: Xitsonga (Südafrika)
 tt-RU: Tatarisch (Russland)
 twq-NE: Tasawaq (Niger)
 Type: Art
+Type should be valid: Typ sollte gültig sein
 tzm-Arab-MA: Zentralatlas Tamazight (Arabisch, Marokko)
 tzm-Latn-DZ: Zentralatlas Tamazight (Latein, Algerien)
 tzm-Latn-MA: Zentralatlas Tamazight (Latein, Marokko)
@@ -844,6 +899,8 @@ User Registered: Benutzer registriert!
 User Registered Mailbox: Benutzer registriert. Die Bestätigungsmail wurde an das Postfach zugestellt.
 Username: Nutzername
 UserName: Nutzername
+UserName is required: Benutzername ist erforderlich
+UserName must be at least of length 6: UserName muss mindestens die Länge 6 haben
 Users: Benutzer
 Users exported: Exportierte Benutzer
 UTC: UTC

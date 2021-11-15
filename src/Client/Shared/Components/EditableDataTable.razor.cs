@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Policy;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Shared.Dialogs;

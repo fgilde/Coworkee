@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Models.Chat;
-using CleanArchitectureBase.Application.Responses.Identity;
+﻿using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
@@ -11,7 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Chat;
+using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Storage;
 

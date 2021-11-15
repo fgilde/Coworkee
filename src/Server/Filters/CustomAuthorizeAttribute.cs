@@ -1,5 +1,5 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Security;
+using CleanArchitectureBase.Application.Common.Security;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitectureBase.Server.Filters

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Interfaces.Services.Storage.Provider;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Storage.Provider
 {

@@ -30,6 +30,7 @@
             Get a Brand By Id
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand,System.Threading.CancellationToken)">
@@ -37,6 +38,7 @@
             Create/Update a Brand
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.Int32,System.Threading.CancellationToken)">
@@ -44,6 +46,7 @@
             Delete a Brand
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Export(System.String,System.Threading.CancellationToken)">
@@ -51,6 +54,7 @@
             Search Brands and Export to Excel
             </summary>
             <param name="searchString"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
@@ -72,6 +76,7 @@
             Get a Brand By Id
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductsCommand,System.Threading.CancellationToken)">
@@ -119,7 +124,7 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.SaveMessageAsync(CleanArchitectureBase.Application.Models.Chat.ChatHistory{CleanArchitectureBase.Application.Interfaces.Chat.IChatUser})">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.SaveMessageAsync(CleanArchitectureBase.Application.Common.Models.Chat.ChatHistory{CleanArchitectureBase.Application.Contracts.Chat.IChatUser})">
             <summary>
             Save Chat Message
             </summary>
@@ -328,6 +333,7 @@
             Get a translation by id
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Post(CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit.AddEditTranslationsCommand,System.Threading.CancellationToken)">
@@ -422,6 +428,7 @@
             Get Document By Id
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Post(CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit.AddEditDocumentCommand,System.Threading.CancellationToken)">
@@ -429,6 +436,7 @@
             Add/Edit Document
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32,System.Threading.CancellationToken)">
@@ -436,6 +444,7 @@
             Delete a Document
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll(System.Threading.CancellationToken)">
@@ -449,6 +458,7 @@
             Get Document Type By Id
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypeCommand,System.Threading.CancellationToken)">
@@ -456,6 +466,7 @@
             Create/Update a Document Type
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32,System.Threading.CancellationToken)">
@@ -463,6 +474,7 @@
             Delete a Document Type
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(System.String,System.Threading.CancellationToken)">
@@ -470,6 +482,7 @@
             Search Document Types and Export to Excel
             </summary>
             <param name="searchString"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.PreferencesController.ChangeLanguageAsync(System.String)">

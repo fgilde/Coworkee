@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using CleanArchitectureBase.Application.Exceptions;
+using CleanArchitectureBase.Application.Common.Exceptions;
 using FluentValidation.Results;
 
 namespace CleanArchitectureBase.Application

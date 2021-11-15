@@ -1,11 +1,11 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Interfaces.Services.Account;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
+﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;

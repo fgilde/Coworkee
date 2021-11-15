@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Server.Middlewares;
 using CleanArchitectureBase.Shared.Constants.Localization;
 using Microsoft.AspNetCore.Builder;

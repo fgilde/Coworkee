@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
+using CleanArchitectureBase.Application.Contracts;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CleanArchitectureBase.Application.Hubs

@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Extensions;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Requests;
+﻿using CleanArchitectureBase.Application.Requests;
 using System.IO;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Services;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {

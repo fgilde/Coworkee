@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
+using CleanArchitectureBase.Application.Contracts.Services.Storage;
+using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
 using Microsoft.Extensions.DependencyInjection;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services.Storage;
-using CleanArchitectureBase.Application.Interfaces.Services.Storage.Provider;
-using CleanArchitectureBase.Application.Interfaces.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.JsonConverters;
 using CleanArchitectureBase.Infrastructure.Repositories;
 using CleanArchitectureBase.Infrastructure.Services.Storage;

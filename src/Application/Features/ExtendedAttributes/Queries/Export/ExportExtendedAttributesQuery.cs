@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Extensions;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Specifications.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
@@ -119,7 +119,7 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
             }
 
             var data = await _excelService.ExportAsync(extendedAttributes, mappers: mappers,
-                sheetName: string.Format(_localizer["{0} Extended Attributes"], typeof(TEntity).Name));
+                sheetName: string.Format(_localizer["Extended Attributes"], typeof(TEntity).Name));
 
             return await Result<string>.SuccessAsync(data: data);
         }

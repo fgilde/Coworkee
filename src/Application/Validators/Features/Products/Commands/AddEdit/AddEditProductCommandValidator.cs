@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;

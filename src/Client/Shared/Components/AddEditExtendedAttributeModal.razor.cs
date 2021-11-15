@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Managers.ExtendedAttribute;
+using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
 using CleanArchitectureBase.Shared.Constants.Application;

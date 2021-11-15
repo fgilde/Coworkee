@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
+﻿using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Infrastructure.Helpers;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
@@ -12,7 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Services;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Nextended.Core.Extensions;
 

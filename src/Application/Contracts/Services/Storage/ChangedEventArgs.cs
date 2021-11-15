@@ -1,0 +1,12 @@
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace CleanArchitectureBase.Application.Contracts.Services.Storage
+{
+    [ExcludeFromCodeCoverage]
+    public class ChangedEventArgs
+    {
+        public string Key { get; set; }
+        public object OldValue { get; set; }
+        public object NewValue { get; set; }
+    }
+}

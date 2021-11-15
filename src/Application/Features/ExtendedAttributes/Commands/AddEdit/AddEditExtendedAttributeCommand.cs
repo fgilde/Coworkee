@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
 using CleanArchitectureBase.Shared.Constants.Application;

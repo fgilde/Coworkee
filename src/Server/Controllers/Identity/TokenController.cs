@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
+﻿using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 

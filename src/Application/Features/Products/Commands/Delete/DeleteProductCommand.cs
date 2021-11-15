@@ -1,10 +1,10 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Dtos;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using MediatR;
 using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Application.Interfaces.Services;
 
 namespace CleanArchitectureBase.Application.Features.Products.Commands.Delete
 {

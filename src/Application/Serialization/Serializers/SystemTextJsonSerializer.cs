@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using CleanArchitectureBase.Application.Interfaces.Serialization.Serializers;
+using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Options;
 using Microsoft.Extensions.Options;
 

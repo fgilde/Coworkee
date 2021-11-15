@@ -13,7 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
@@ -102,7 +103,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
                 AddEditProductModel.ImageDataURL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name ,UploadType = Application.Enums.UploadType.Product, Extension = extension };
+                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name ,UploadType = UploadType.Product, Extension = extension };
             }
         }
 

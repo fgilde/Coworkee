@@ -1,13 +1,13 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Wrapper;

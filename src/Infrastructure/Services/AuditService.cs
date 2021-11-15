@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Infrastructure.Models.Audit;
+﻿using CleanArchitectureBase.Infrastructure.Models.Audit;
 using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Infrastructure.Contexts;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -9,7 +8,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Extensions;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Infrastructure.Specifications;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;

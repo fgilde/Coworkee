@@ -1,15 +1,15 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Application.Security;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 

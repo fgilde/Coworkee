@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Services.Storage;
+using CleanArchitectureBase.Application.Contracts.Services.Storage;
 using CleanArchitectureBase.Server.Settings;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Settings;

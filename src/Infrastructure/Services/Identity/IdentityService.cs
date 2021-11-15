@@ -1,5 +1,4 @@
 ﻿using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
@@ -15,6 +14,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;

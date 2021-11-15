@@ -1,6 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Application.Interfaces.Services;
-using CleanArchitectureBase.Application.Requests;
+﻿using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
@@ -8,6 +6,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 

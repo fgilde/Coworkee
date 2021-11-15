@@ -1,5 +1,5 @@
 using System;
-using CleanArchitectureBase.Application.Interfaces;
+using CleanArchitectureBase.Application.Contracts;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 

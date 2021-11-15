@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Application.Models.Chat;
-using System.Collections.Generic;
-using CleanArchitectureBase.Application.Interfaces.Chat;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Contracts.Chat;
 
 namespace CleanArchitectureBase.Application.Responses.Identity
 {

@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 
 namespace CleanArchitectureBase.Infrastructure.Repositories
 {

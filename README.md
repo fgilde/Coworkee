@@ -18,7 +18,7 @@ This is a solution a seperate Single Page App (Blazor) and an ASP.NET Core Serve
 
 1. Install the latest [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
 2. Navigate to `src/Server` and run `dotnet run` to launch the back end and the webassembly client (ASP.NET Core Web API) or open Solution in Visual Studio and launch Server
-	(Notice to seperate client completly from server just remove reference to client project in Server.csproj)
+	(Notice to seperate client completly from server just remove reference to client project in WebServer.csproj)
 
 
 ### Docker Configuration

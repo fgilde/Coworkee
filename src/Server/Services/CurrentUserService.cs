@@ -1,10 +1,10 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using CleanArchitectureBase.Application.Interfaces.Services.Identity;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;

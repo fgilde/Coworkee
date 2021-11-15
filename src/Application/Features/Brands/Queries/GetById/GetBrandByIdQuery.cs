@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Repositories;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Repositories;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetById

@@ -1,10 +1,10 @@
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Settings;
+using CleanArchitectureBase.Client.Configuration;
+using CleanArchitectureBase.Client.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.Extensions.Configuration;
 

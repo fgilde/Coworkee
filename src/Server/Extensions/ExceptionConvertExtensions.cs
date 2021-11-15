@@ -1,5 +1,5 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Exceptions;
+using CleanArchitectureBase.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

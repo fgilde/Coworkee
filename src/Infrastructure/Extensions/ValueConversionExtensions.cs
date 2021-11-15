@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Serialization.Serializers;
+﻿using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

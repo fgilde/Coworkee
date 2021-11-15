@@ -7,12 +7,11 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Dtos;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Client.Infrastructure.Extensions;
-using CleanArchitectureBase.Client.Infrastructure.Theming;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
+using CleanArchitectureBase.Client.Theming;
 
 namespace CleanArchitectureBase.Client.Shared
 {

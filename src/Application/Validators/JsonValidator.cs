@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Serialization.Serializers;
+﻿using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using FluentValidation;
 using FluentValidation.Validators;
 

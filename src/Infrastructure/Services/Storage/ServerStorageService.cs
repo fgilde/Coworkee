@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Interfaces.Services.Storage;
-using CleanArchitectureBase.Application.Interfaces.Services.Storage.Provider;
-using CleanArchitectureBase.Application.Interfaces.Serialization.Serializers;
+using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
+using CleanArchitectureBase.Application.Contracts.Services.Storage;
+using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Storage
 {

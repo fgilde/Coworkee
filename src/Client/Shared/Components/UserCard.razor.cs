@@ -2,7 +2,6 @@
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Infrastructure.Authentication;
 using CleanArchitectureBase.Application.Responses.Identity;
 
 namespace CleanArchitectureBase.Client.Shared.Components

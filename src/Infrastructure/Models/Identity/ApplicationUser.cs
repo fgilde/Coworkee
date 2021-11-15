@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using CleanArchitectureBase.Application.Interfaces.Chat;
-using CleanArchitectureBase.Application.Models.Chat;
+using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Contracts.Chat;
 
 namespace CleanArchitectureBase.Infrastructure.Models.Identity
 {

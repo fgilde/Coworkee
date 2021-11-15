@@ -1,11 +1,8 @@
 ﻿@page "/extended-attributes/{EntityName}/{EntityIdString}"
 @attribute [Authorize(Policy = Permissions.DocumentExtendedAttributes.View)]
-
-@using CleanArchitectureBase.Domain.Entities.Misc
-@using CleanArchitectureBase.Domain.Entities.ExtendedAttributes
 @namespace CleanArchitectureBase.Client.Pages.Misc.ExtendedAttribute
 
-@inherits ExtendedAttributes<int, int, Document, DocumentExtendedAttribute>
+@inherits ExtendedAttributes<int, int, CleanArchitectureBase.Domain.Entities.Misc.Document, CleanArchitectureBase.Domain.Entities.ExtendedAttributes.DocumentExtendedAttribute>
 
 @Inherited()
 

@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Interfaces.Serialization.Serializers;
+﻿using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;

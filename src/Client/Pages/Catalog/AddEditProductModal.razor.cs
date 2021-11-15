@@ -29,7 +29,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private List<GetAllBrandsResponse> _brands = new();
+        private IList<BrandDto> _brands = new List<BrandDto>();
 
         public void Cancel()
         {
@@ -63,11 +63,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task LoadBrandsAsync()
         {
-            var data = await Api.Brands_GetAllAsync();
-            if (data.Succeeded)
-            {
-                _brands = data.Data;
-            }
+            _brands = await Api.Brands_GetAllAsync();
         }
 
         private async Task LoadImageAsync()

@@ -70,9 +70,9 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task<Result> DeleteTranslations(int[] ids)
         {
-            var res = await _api.Translations_DeleteAsync(ids.ToList());
+            await _api.Translations_DeleteAsync(ids.ToList());
             AfterSend();
-            return res;
+            return await Result.SuccessAsync() as Result;
         }
 
         private string GetName(TranslationDto arg)

@@ -35,11 +35,10 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             Provider = provider;
         }
 
-        public async Task<TDto> Handle(TQuery request, CancellationToken cancellationToken)
+        public virtual async Task<TDto> Handle(TQuery request, CancellationToken cancellationToken)
         {
             var result = await UnitOfWork.Repository<TEntity>().GetByIdAsync(request.Id, cancellationToken);
             return result?.MapTo<TDto>();
-
         }
     }
 }

@@ -1,59 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Export;
+using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Catalog;
 using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Shared.Wrapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.Export
 {
-    public class ExportBrandsQuery : IRequest<Result<string>>
+    public class ExportBrandsQuery : ExportQueryBase<int>
     {
-        public string SearchString { get; set; }
+        public ExportBrandsQuery(int[] ids) : base(ids)
+        { }
 
-        public ExportBrandsQuery(string searchString = "")
-        {
-            SearchString = searchString;
-        }
+        public ExportBrandsQuery(string searchString) : base(searchString)
+        { }
     }
 
-    internal class ExportBrandsQueryHandler : IRequestHandler<ExportBrandsQuery, Result<string>>
+    internal class ExportBrandsQueryHandler : ExportQueryHandlerBase<ExportBrandsQuery, int, Brand>
     {
-        private readonly IExcelService _excelService;
-        private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IStringLocalizer<ExportBrandsQueryHandler> _localizer;
 
-        public ExportBrandsQueryHandler(IExcelService excelService
-            , IUnitOfWork<int> unitOfWork
-            , IStringLocalizer<ExportBrandsQueryHandler> localizer)
+        public ExportBrandsQueryHandler(IExcelService excelService, IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportBrandsQueryHandler> localizer)
+            : base(excelService, unitOfWork, localizer)
+        { }
+
+        protected override Dictionary<string, Func<Brand, object>> PropertyMappers()
         {
-            _excelService = excelService;
-            _unitOfWork = unitOfWork;
-            _localizer = localizer;
+            return new Dictionary<string, Func<Brand, object>>
+            {
+                {Localizer["Id"], item => item.Id},
+                {Localizer["Name"], item => item.Name},
+                {Localizer["Description"], item => item.Description},
+                {Localizer["Tax"], item => item.Tax}
+            };
         }
 
-        public async Task<Result<string>> Handle(ExportBrandsQuery request, CancellationToken cancellationToken)
+        protected override ISpecification<Brand> GetFilterSpecification(ExportBrandsQuery query)
         {
-            var brandFilterSpec = new BrandFilterSpecification(request.SearchString);
-            var brands = await _unitOfWork.Repository<Brand>().Entities
-                .Specify(brandFilterSpec)
-                .ToListAsync(cancellationToken);
-            var data = await _excelService.ExportAsync(brands, mappers: new Dictionary<string, Func<Brand, object>>
-            {
-                { _localizer["Id"], item => item.Id },
-                { _localizer["Name"], item => item.Name },
-                { _localizer["Description"], item => item.Description },
-                { _localizer["Tax"], item => item.Tax }
-            }, sheetName: _localizer["Brands"]);
-
-            return await Result<string>.SuccessAsync(data: data);
+            return new BrandFilterSpecification(query.SearchString);
         }
     }
 }

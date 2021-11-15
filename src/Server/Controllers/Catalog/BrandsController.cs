@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Brands.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Brands.Queries.Export;
@@ -21,7 +22,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.View)]
         [HttpGet]
-        [Produces(typeof(Result<List<GetAllBrandsResponse>>))]
+        [Produces(typeof(ReadOnlyCollection<BrandDto>))]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
             var brands = await Mediator.Send(new GetAllBrandsQuery(), cancellationToken);
@@ -36,10 +37,10 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.Brands.View)]
         [HttpGet("{id}")]
-        [Produces(typeof(Result<GetBrandByIdResponse>))]
+        [Produces(typeof(BrandDto))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            var brand = await Mediator.Send(new GetBrandByIdQuery { Id = id }, cancellationToken);
+            var brand = await Mediator.Send(new GetBrandByIdQuery(id), cancellationToken);
             return Ok(brand);
         }
 
@@ -51,8 +52,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.Create)]
         [HttpPost]
-        [Produces(typeof(Result<int>))]
-        public async Task<IActionResult> Post(AddEditBrandCommand command, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Post(AddEditBrandsCommand command, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
         }
@@ -60,15 +60,14 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <summary>
         /// Delete a Brand
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ids"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.Delete)]
-        [HttpDelete("{id}")]
-        [Produces(typeof(Result<int>))]
-        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteBrandCommand { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteBrandCommand { Ids = ids }, cancellationToken));
         }
 
         /// <summary>

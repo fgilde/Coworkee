@@ -1,21 +1,21 @@
 ﻿@page "/catalog/brands/{Action?}/{Id?}"
 @attribute [Authorize(Policy = Permissions.Brands.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Brands> _localizer
-@using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll
 @using CleanArchitectureBase.Shared.Wrapper
+@using CleanArchitectureBase.Application.Common.Models
 
 
 <ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Brands"]" Description="@_localizer["Manage Brands."]" />
 
-<EditableDataTable ApiLoad="@(new Func<Task<Result<List<GetAllBrandsResponse>>>>(Load))"
+<EditableDataTable ApiLoad="@(new Func<Task<Result<List<BrandDto>>>>(Load))"
                    ApiDelete="@(new Func<int[], Task<Result>>(DeleteBrands))"
-                   ApiCreateOrEdit="@(new Func<GetAllBrandsResponse, Task<bool>>(CreateOrEditBrand))"
+                   ApiCreateOrEdit="@(new Func<BrandDto, Task<bool>>(CreateOrEditBrand))"
                    Export="@(new Func<string, Task<Result<string>>>(Export))"
                    ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
-                   GetById="@(new Func<int, IEnumerable<GetAllBrandsResponse>, Task<GetAllBrandsResponse>>(FindById))"
-                   GetId="@(new Func<GetAllBrandsResponse,int>(GetId))"
-                   Display="@(new Func<GetAllBrandsResponse, string>(GetName))"
+                   GetById="@(new Func<int, IEnumerable<BrandDto>, Task<BrandDto>>(FindById))"
+                   GetId="@(new Func<BrandDto,int>(GetId))"
+                   Display="@(new Func<BrandDto, string>(GetName))"
                    TableProperties="@(new []{"Id", "Name", "Description", "Tax"})"
                    InitialAction="@Action"
                    InitialIdString="@Id"

@@ -13,7 +13,6 @@ using CleanArchitectureBase.Shared.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
-using Nextended.Core.Helper;
 
 namespace CleanArchitectureBase.Application.Features.Base.Commands
 {
@@ -42,7 +41,6 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         protected virtual string CacheKey => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
         protected virtual string EditPermission => null;
         protected virtual string CreatePermission => null;
-
 
         public AddEditCommandHandlerBase(IUnitOfWork<TEntityId> unitOfWork,
             IMediator mediator,

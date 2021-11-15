@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Shared.Wrapper;
 using Nextended.Core.Extensions;
 
@@ -21,27 +21,32 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         public string Id { get; set; }
 
 
-        private async Task<Result<List<GetAllBrandsResponse>>> Load()
+        private async Task<Result<List<BrandDto>>> Load()
         {
-            return await _api.Brands_GetAllAsync();
+            return new Result<List<BrandDto>>()
+            {
+                Succeeded = true,
+                Data = (await _api.Brands_GetAllAsync()).ToList()
+            };
         }
 
-        private Task<GetAllBrandsResponse> FindById(int id, IEnumerable<GetAllBrandsResponse> loaded)
+        private Task<BrandDto> FindById(int id, IEnumerable<BrandDto> loaded)
         {
             return Task.FromResult(loaded.FirstOrDefault(p => p.Id == id));
         }
 
-        private int GetId(GetAllBrandsResponse brand)
+        private int GetId(BrandDto brand)
         {
             return brand.Id;
         }
 
         private async Task<Result> DeleteBrands(int[] ids)
         {
-            return await _api.Brands_DeleteAsync(ids.First()); // TODO: Delete many
+            await _api.Brands_DeleteAsync(ids.ToList());
+            return new Result {Succeeded = true};
         }
 
-        private string GetName(GetAllBrandsResponse arg)
+        private string GetName(BrandDto arg)
         {
             return arg.Name;
         }
@@ -57,12 +62,12 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             //return await _api.Products_ExportByIdsAsync(ids.ToList());
         }
 
-        private async Task<bool> CreateOrEditBrand(GetAllBrandsResponse brandOrNull)
+        private async Task<bool> CreateOrEditBrand(BrandDto brandOrNull)
         {
             var parameters = new DialogParameters();
             if (brandOrNull != null)
             {
-                parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<AddEditBrandCommand>());
+                parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<BrandDto>());
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);

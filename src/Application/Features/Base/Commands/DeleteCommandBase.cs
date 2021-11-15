@@ -41,7 +41,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             Mediator = mediator;
         }
 
-        public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
+        public virtual async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
         {
             var user = Get<ICurrentUserService>().CurrentUser();
             var entities = (await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken)).ToArray();

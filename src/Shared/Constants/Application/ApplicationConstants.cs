@@ -77,7 +77,6 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         {
             public static string CacheKeyFor(Type type) => $"{CacheKey}-{type.FullName}";
             public const string CacheKey = "all-of";
-            public const string GetAllBrandsCacheKey = "all-brands";
             public const string GetAllDocumentTypesCacheKey = "all-document-types";
 
             public static string GetAllEntityExtendedAttributesCacheKey(string entityFullName)

@@ -33,7 +33,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandsCommand,System.Threading.CancellationToken)">
             <summary>
             Create/Update a Brand
             </summary>
@@ -41,11 +41,11 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.Int32[],System.Threading.CancellationToken)">
             <summary>
             Delete a Brand
             </summary>
-            <param name="id"></param>
+            <param name="ids"></param>
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>

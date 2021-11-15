@@ -12,9 +12,9 @@ namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetByI
         {}
     }
 
-    internal class GetTranslationQueryHandler : GetByIdQueryHandlerBase<GetTranslationByIdQuery, int, TranslationDto, Translation>
+    internal class GetTranslationByIdQueryHandler : GetByIdQueryHandlerBase<GetTranslationByIdQuery, int, TranslationDto, Translation>
     {
-        public GetTranslationQueryHandler(IUnitOfWork<int> unitOfWork, IServiceProvider provider) : base(unitOfWork, provider)
+        public GetTranslationByIdQueryHandler(IUnitOfWork<int> unitOfWork, IServiceProvider provider) : base(unitOfWork, provider)
         {}
     }
 }

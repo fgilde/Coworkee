@@ -1,62 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
-using Microsoft.Extensions.Localization;
-using CleanArchitectureBase.Shared.Constants.Application;
-using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Commands;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit
 {
-    public partial class AddEditBrandCommand : IRequest<Result<int>>
+    [CustomAuthorize(Policies = new[] { Permissions.Brands.Create, Permissions.Brands.Edit }, PolicyMatch = PolicyMatch.Any)]
+    public class AddEditBrandsCommand : AddEditCommandBase<BrandDto>
     {
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Description { get; set; }
-        [Required]
-        public decimal Tax { get; set; }
+        public AddEditBrandsCommand(params BrandDto[] items) : base(items)
+        { }
     }
 
-    internal class AddEditBrandCommandHandler : IRequestHandler<AddEditBrandCommand, Result<int>>
+    internal class AddEditBrandCommandHandler : AddEditCommandHandlerBase<AddEditBrandsCommand, int, BrandDto, Brand>
     {
-        private readonly IStringLocalizer<AddEditBrandCommandHandler> _localizer;
-        private readonly IUnitOfWork<int> _unitOfWork;
-
-        public AddEditBrandCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<AddEditBrandCommandHandler> localizer)
-        {
-            _unitOfWork = unitOfWork;
-            _localizer = localizer;
-        }
-
-        public async Task<Result<int>> Handle(AddEditBrandCommand command, CancellationToken cancellationToken)
-        {
-            if (command.Id == 0)
-            {
-                var brand = command.MapTo<Brand>();
-                await _unitOfWork.Repository<Brand>().AddAsync(brand);
-                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllBrandsCacheKey);
-                return await Result<int>.SuccessAsync(brand.Id, _localizer["Brand Saved"]);
-            }
-            else
-            {
-                var brand = await _unitOfWork.Repository<Brand>().GetByIdAsync(command.Id);
-                if (brand != null)
-                {
-                    brand.Name = command.Name ?? brand.Name;
-                    brand.Tax = (command.Tax == 0) ? brand.Tax : command.Tax;
-                    brand.Description = command.Description ?? brand.Description;
-                    await _unitOfWork.Repository<Brand>().UpdateAsync(brand);
-                    await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllBrandsCacheKey);
-                    return await Result<int>.SuccessAsync(brand.Id, _localizer["Brand Updated"]);
-                }
-
-                return await Result<int>.FailAsync(_localizer["Brand Not Found!"]);
-            }
-        }
+        protected override string EditPermission => Permissions.Brands.Edit;
+        protected override string CreatePermission => Permissions.Brands.Create;
+        public AddEditBrandCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider)
+            : base(unitOfWork, mediator, permissionService, provider)
+        { }
     }
 }

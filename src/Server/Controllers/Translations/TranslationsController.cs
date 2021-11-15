@@ -80,7 +80,6 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// <returns>Status 200 OK response</returns>
         [Authorize(Policy = Permissions.Products.Delete)]
         [HttpDelete]
-        [Produces(typeof(Result))]
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new DeleteTranslationsCommand { Ids = ids }, cancellationToken));

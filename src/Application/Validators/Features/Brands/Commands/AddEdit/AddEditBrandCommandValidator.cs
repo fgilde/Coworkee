@@ -1,10 +1,18 @@
-﻿using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
+﻿using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Validators.Features.Brands.Commands.AddEdit
 {
-    public class AddEditBrandCommandValidator : AbstractValidator<AddEditBrandCommand>
+    public class AddEditBrandsCommandValidator : AbstractValidator<AddEditBrandsCommand>
+    {
+        public AddEditBrandsCommandValidator(IStringLocalizer<AddEditBrandCommandValidator> localizer)
+        {
+            RuleForEach(x => x.Items).SetValidator(new AddEditBrandCommandValidator(localizer));
+        }
+    }
+    public class AddEditBrandCommandValidator : AbstractValidator<BrandDto>
     {
         public AddEditBrandCommandValidator(IStringLocalizer<AddEditBrandCommandValidator> localizer)
         {

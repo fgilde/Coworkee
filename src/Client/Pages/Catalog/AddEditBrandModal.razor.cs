@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.SDK;
 
@@ -14,7 +15,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
     {
         [Inject] private IApplicationClient Api { get; set; }
 
-        [Parameter] public AddEditBrandCommand AddEditBrandModel { get; set; } = new();
+        [Parameter] public BrandDto AddEditBrandModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -28,13 +29,10 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task SaveAsync()
         {
-            var response = await Api.Brands_PostAsync(AddEditBrandModel);
-            if (_errorService.IsSuccessFull(response))
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                MudDialog.Close();
-            }
+            await Api.Brands_PostAsync(new AddEditBrandsCommand(AddEditBrandModel));
+            _snackBar.Add(_localizer["Brand Updated"], Severity.Success);
             await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            MudDialog.Close();
         }
 
         protected override async Task OnInitializedAsync()

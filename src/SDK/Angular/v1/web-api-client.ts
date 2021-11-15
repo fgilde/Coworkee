@@ -1372,7 +1372,7 @@ export interface ITranslationsClient {
      * @param ids Products to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<Result>;
+    delete(ids: number[]): Observable<FileResponse>;
 }
 
 @Injectable({
@@ -1639,7 +1639,7 @@ export class TranslationsClient implements ITranslationsClient {
      * @param ids Products to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<Result> {
+    delete(ids: number[]): Observable<FileResponse> {
         let url_ = this.baseUrl + "/Translations";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1651,7 +1651,7 @@ export class TranslationsClient implements ITranslationsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/octet-stream"
             })
         };
 
@@ -1662,33 +1662,31 @@ export class TranslationsClient implements ITranslationsClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<Result> {
+    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return _observableOf<FileResponse>(<any>null);
     }
 }
 
@@ -3595,22 +3593,22 @@ export interface IBrandsClient {
      * Get All Brands
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfGetAllBrandsResponse>;
+    getAll(): Observable<BrandDto[]>;
     /**
      * Create/Update a Brand
      * @return Status 200 OK
      */
-    post(command: AddEditBrandCommand): Observable<ResultOfInteger>;
-    /**
-     * Get a Brand By Id
-     * @return Status 200 Ok
-     */
-    getById(id: number): Observable<ResultOfGetBrandByIdResponse>;
+    post(command: AddEditBrandsCommand): Observable<FileResponse>;
     /**
      * Delete a Brand
      * @return Status 200 OK
      */
-    delete(id: number): Observable<ResultOfInteger>;
+    delete(ids: number[]): Observable<FileResponse>;
+    /**
+     * Get a Brand By Id
+     * @return Status 200 Ok
+     */
+    getById(id: number): Observable<BrandDto>;
     /**
      * Search Brands and Export to Excel
      * @param searchString (optional) 
@@ -3635,7 +3633,7 @@ export class BrandsClient implements IBrandsClient {
      * Get All Brands
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfGetAllBrandsResponse> {
+    getAll(): Observable<BrandDto[]> {
         let url_ = this.baseUrl + "/Brands";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3654,14 +3652,14 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfListOfGetAllBrandsResponse>><any>_observableThrow(e);
+                    return <Observable<BrandDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfListOfGetAllBrandsResponse>><any>_observableThrow(response_);
+                return <Observable<BrandDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfGetAllBrandsResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<BrandDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3672,7 +3670,14 @@ export class BrandsClient implements IBrandsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfListOfGetAllBrandsResponse.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(BrandDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -3680,14 +3685,14 @@ export class BrandsClient implements IBrandsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfListOfGetAllBrandsResponse>(<any>null);
+        return _observableOf<BrandDto[]>(<any>null);
     }
 
     /**
      * Create/Update a Brand
      * @return Status 200 OK
      */
-    post(command: AddEditBrandCommand): Observable<ResultOfInteger> {
+    post(command: AddEditBrandsCommand): Observable<FileResponse> {
         let url_ = this.baseUrl + "/Brands";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3699,7 +3704,7 @@ export class BrandsClient implements IBrandsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/octet-stream"
             })
         };
 
@@ -3710,40 +3715,92 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<ResultOfInteger> {
+    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfInteger.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfInteger>(<any>null);
+        return _observableOf<FileResponse>(<any>null);
+    }
+
+    /**
+     * Delete a Brand
+     * @return Status 200 OK
+     */
+    delete(ids: number[]): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/Brands";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(ids);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse>(<any>null);
     }
 
     /**
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ResultOfGetBrandByIdResponse> {
+    getById(id: number): Observable<BrandDto> {
         let url_ = this.baseUrl + "/Brands/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3765,14 +3822,14 @@ export class BrandsClient implements IBrandsClient {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfGetBrandByIdResponse>><any>_observableThrow(e);
+                    return <Observable<BrandDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfGetBrandByIdResponse>><any>_observableThrow(response_);
+                return <Observable<BrandDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<ResultOfGetBrandByIdResponse> {
+    protected processGetById(response: HttpResponseBase): Observable<BrandDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3783,7 +3840,7 @@ export class BrandsClient implements IBrandsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfGetBrandByIdResponse.fromJS(resultData200);
+            result200 = BrandDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -3791,62 +3848,7 @@ export class BrandsClient implements IBrandsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfGetBrandByIdResponse>(<any>null);
-    }
-
-    /**
-     * Delete a Brand
-     * @return Status 200 OK
-     */
-    delete(id: number): Observable<ResultOfInteger> {
-        let url_ = this.baseUrl + "/Brands/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processDelete(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processDelete(<any>response_);
-                } catch (e) {
-                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processDelete(response: HttpResponseBase): Observable<ResultOfInteger> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfInteger.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<ResultOfInteger>(<any>null);
+        return _observableOf<BrandDto>(<any>null);
     }
 
     /**
@@ -7187,54 +7189,51 @@ export interface IIChatUser {
     profilePictureDataUrl?: string | undefined;
 }
 
-export class ResultOfListOfGetAllBrandsResponse extends Result implements IResultOfListOfGetAllBrandsResponse {
-    data?: GetAllBrandsResponse[] | undefined;
+export class BrandDto extends DtoBaseOfInteger implements IBrandDto {
+    name?: string | undefined;
+    description?: string | undefined;
+    tax?: number;
 
-    constructor(data?: IResultOfListOfGetAllBrandsResponse) {
+    constructor(data?: IBrandDto) {
         super(data);
     }
 
     init(_data?: any) {
         super.init(_data);
         if (_data) {
-            if (Array.isArray(_data["data"])) {
-                this.data = [] as any;
-                for (let item of _data["data"])
-                    this.data!.push(GetAllBrandsResponse.fromJS(item));
-            }
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.tax = _data["tax"];
         }
     }
 
-    static fromJS(data: any): ResultOfListOfGetAllBrandsResponse {
+    static fromJS(data: any): BrandDto {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultOfListOfGetAllBrandsResponse();
+        let result = new BrandDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.data)) {
-            data["data"] = [];
-            for (let item of this.data)
-                data["data"].push(item.toJSON());
-        }
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["tax"] = this.tax;
         super.toJSON(data);
         return data; 
     }
 }
 
-export interface IResultOfListOfGetAllBrandsResponse extends IResult {
-    data?: GetAllBrandsResponse[] | undefined;
-}
-
-export class GetAllBrandsResponse implements IGetAllBrandsResponse {
-    id?: number;
+export interface IBrandDto extends IDtoBaseOfInteger {
     name?: string | undefined;
     description?: string | undefined;
     tax?: number;
+}
 
-    constructor(data?: IGetAllBrandsResponse) {
+export abstract class AddEditCommandBaseOfBrandDto implements IAddEditCommandBaseOfBrandDto {
+    items?: BrandDto[] | undefined;
+
+    constructor(data?: IAddEditCommandBaseOfBrandDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7245,164 +7244,59 @@ export class GetAllBrandsResponse implements IGetAllBrandsResponse {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-            this.tax = _data["tax"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(BrandDto.fromJS(item));
+            }
         }
     }
 
-    static fromJS(data: any): GetAllBrandsResponse {
+    static fromJS(data: any): AddEditCommandBaseOfBrandDto {
         data = typeof data === 'object' ? data : {};
-        let result = new GetAllBrandsResponse();
-        result.init(data);
-        return result;
+        throw new Error("The abstract class 'AddEditCommandBaseOfBrandDto' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["tax"] = this.tax;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
         return data; 
     }
 }
 
-export interface IGetAllBrandsResponse {
-    id?: number;
-    name?: string | undefined;
-    description?: string | undefined;
-    tax?: number;
+export interface IAddEditCommandBaseOfBrandDto {
+    items?: BrandDto[] | undefined;
 }
 
-export class ResultOfGetBrandByIdResponse extends Result implements IResultOfGetBrandByIdResponse {
-    data?: GetBrandByIdResponse | undefined;
+export class AddEditBrandsCommand extends AddEditCommandBaseOfBrandDto implements IAddEditBrandsCommand {
 
-    constructor(data?: IResultOfGetBrandByIdResponse) {
+    constructor(data?: IAddEditBrandsCommand) {
         super(data);
     }
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.data = _data["data"] ? GetBrandByIdResponse.fromJS(_data["data"]) : <any>undefined;
-        }
     }
 
-    static fromJS(data: any): ResultOfGetBrandByIdResponse {
+    static fromJS(data: any): AddEditBrandsCommand {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultOfGetBrandByIdResponse();
+        let result = new AddEditBrandsCommand();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
         super.toJSON(data);
         return data; 
     }
 }
 
-export interface IResultOfGetBrandByIdResponse extends IResult {
-    data?: GetBrandByIdResponse | undefined;
-}
-
-export class GetBrandByIdResponse implements IGetBrandByIdResponse {
-    id?: number;
-    name?: string | undefined;
-    tax?: number;
-    description?: string | undefined;
-
-    constructor(data?: IGetBrandByIdResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.tax = _data["tax"];
-            this.description = _data["description"];
-        }
-    }
-
-    static fromJS(data: any): GetBrandByIdResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new GetBrandByIdResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["tax"] = this.tax;
-        data["description"] = this.description;
-        return data; 
-    }
-}
-
-export interface IGetBrandByIdResponse {
-    id?: number;
-    name?: string | undefined;
-    tax?: number;
-    description?: string | undefined;
-}
-
-export class AddEditBrandCommand implements IAddEditBrandCommand {
-    id?: number;
-    name!: string;
-    description!: string;
-    tax!: number;
-
-    constructor(data?: IAddEditBrandCommand) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-            this.tax = _data["tax"];
-        }
-    }
-
-    static fromJS(data: any): AddEditBrandCommand {
-        data = typeof data === 'object' ? data : {};
-        let result = new AddEditBrandCommand();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["tax"] = this.tax;
-        return data; 
-    }
-}
-
-export interface IAddEditBrandCommand {
-    id?: number;
-    name: string;
-    description: string;
-    tax: number;
+export interface IAddEditBrandsCommand extends IAddEditCommandBaseOfBrandDto {
 }
 
 export class PaginatedResultOfProductDto extends Result implements IPaginatedResultOfProductDto {

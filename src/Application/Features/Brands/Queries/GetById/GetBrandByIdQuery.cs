@@ -1,32 +1,20 @@
-﻿using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Shared.Wrapper;
-using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
+using CleanArchitectureBase.Domain.Entities.Catalog;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Repositories;
-using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Features.Base.Queries;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetById
 {
-    public class GetBrandByIdQuery : IRequest<Result<GetBrandByIdResponse>>
+    public class GetBrandByIdQuery : GetByIdQueryBase<int, BrandDto>
     {
-        public int Id { get; set; }
+        public GetBrandByIdQuery(int id) : base(id)
+        { }
     }
 
-    internal class GetProductByIdQueryHandler : IRequestHandler<GetBrandByIdQuery, Result<GetBrandByIdResponse>>
+    internal class GetBrandByIdQueryHandler : GetByIdQueryHandlerBase<GetBrandByIdQuery, int, BrandDto, Brand>
     {
-        private readonly IUnitOfWork<int> _unitOfWork;
-        
-        public GetProductByIdQueryHandler(IUnitOfWork<int> unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        public async Task<Result<GetBrandByIdResponse>> Handle(GetBrandByIdQuery query, CancellationToken cancellationToken)
-        {
-            var brand = await _unitOfWork.Repository<Brand>().GetByIdAsync(query.Id);
-            var mappedBrand = brand.MapTo<GetBrandByIdResponse>();
-            return await Result<GetBrandByIdResponse>.SuccessAsync(mappedBrand);
-        }
+        public GetBrandByIdQueryHandler(IUnitOfWork<int> unitOfWork, IServiceProvider provider) : base(unitOfWork, provider)
+        { }
     }
 }

@@ -27,7 +27,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Produces(typeof(PaginatedResult<ProductDto>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductsQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(query, cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> GetProductImageAsync(int id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetProductImageQuery(id), cancellationToken);
+            var result = await Mediator.Send(new GetProductImageQuery(id), cancellationToken);
             return Ok(result);
         }
 
@@ -49,13 +49,14 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// Get a Brand By Id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 Ok</returns>
         [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet("{id}")]
         [Produces(typeof(ProductDto))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            var product = await _mediator.Send(new GetProductByIdQuery(id), cancellationToken);
+            var product = await Mediator.Send(new GetProductByIdQuery(id), cancellationToken);
             return Ok(product);
         }
 
@@ -69,7 +70,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [HttpPost]
         public async Task<IActionResult> Post(AddEditProductsCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command, cancellationToken));
+            return Ok(await Mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [HttpDelete]
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteProductCommand { Ids = ids }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteProductCommand { Ids = ids }, cancellationToken));
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new ExportProductsQuery(searchString), cancellationToken));
+            return Ok(await Mediator.Send(new ExportProductsQuery(searchString), cancellationToken));
         }
 
         /// <summary>
@@ -110,7 +111,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new ExportProductsQuery(ids), cancellationToken));
+            return Ok(await Mediator.Send(new ExportProductsQuery(ids), cancellationToken));
         }
     }
 }

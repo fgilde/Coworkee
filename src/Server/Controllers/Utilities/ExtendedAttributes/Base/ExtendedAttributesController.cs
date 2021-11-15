@@ -28,7 +28,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.
         [HttpGet]
         public virtual async Task<IActionResult> GetAll()
         {
-            var extendedAttributes = await _mediator.Send(new GetAllExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute>());
+            var extendedAttributes = await Mediator.Send(new GetAllExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute>());
             return Ok(extendedAttributes);
         }
 
@@ -40,7 +40,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.
         [HttpGet("by-entity/{entityId}")]
         public virtual async Task<IActionResult> GetAllByEntityId(TEntityId entityId)
         {
-            var extendedAttributes = await _mediator.Send(new GetAllExtendedAttributesByEntityIdQuery<TId, TEntityId, TEntity, TExtendedAttribute>(entityId));
+            var extendedAttributes = await Mediator.Send(new GetAllExtendedAttributesByEntityIdQuery<TId, TEntityId, TEntity, TExtendedAttribute>(entityId));
             return Ok(extendedAttributes);
         }
 
@@ -52,7 +52,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.
         [HttpGet("{id}")]
         public virtual async Task<IActionResult> GetById(TId id)
         {
-            var extendedAttribute = await _mediator.Send(new GetExtendedAttributeByIdQuery<TId, TEntityId, TEntity, TExtendedAttribute> { Id = id });
+            var extendedAttribute = await Mediator.Send(new GetExtendedAttributeByIdQuery<TId, TEntityId, TEntity, TExtendedAttribute> { Id = id });
             return Ok(extendedAttribute);
         }
 
@@ -64,7 +64,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.
         [HttpPost]
         public virtual async Task<IActionResult> Post(AddEditExtendedAttributeCommand<TId, TEntityId, TEntity, TExtendedAttribute> command)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await Mediator.Send(command));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete(TId id)
         {
-            return Ok(await _mediator.Send(new DeleteExtendedAttributeCommand<TId, TEntityId, TEntity, TExtendedAttribute> { Id = id }));
+            return Ok(await Mediator.Send(new DeleteExtendedAttributeCommand<TId, TEntityId, TEntity, TExtendedAttribute> { Id = id }));
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.
         [HttpGet("export")]
         public virtual async Task<IActionResult> Export(string searchString = "", TEntityId entityId = default, bool includeEntity = false, bool onlyCurrentGroup = false, string currentGroup = "")
         {
-            return Ok(await _mediator.Send(new ExportExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute>(searchString, entityId, includeEntity, onlyCurrentGroup, currentGroup)));
+            return Ok(await Mediator.Send(new ExportExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute>(searchString, entityId, includeEntity, onlyCurrentGroup, currentGroup)));
         }
     }
 }

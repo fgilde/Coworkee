@@ -23,13 +23,14 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         [Produces(typeof(PaginatedResult<GetAllDocumentsResponse>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllDocumentsQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(query, cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
         /// <summary>
         /// Get Document By Id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.Documents.View)]
         [HttpGet("{id}")]
@@ -37,13 +38,14 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
 
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new GetDocumentByIdQuery { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new GetDocumentByIdQuery { Id = id }, cancellationToken));
         }
 
         /// <summary>
         /// Add/Edit Document
         /// </summary>
         /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Create)]
         [HttpPost]
@@ -51,20 +53,21 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
 
         public async Task<IActionResult> Post(AddEditDocumentCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command, cancellationToken));
+            return Ok(await Mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
         /// Delete a Document
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Delete)]
         [HttpDelete("{id}")]
         [Produces(typeof(Result<int>))]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteDocumentCommand { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteDocumentCommand { Id = id }, cancellationToken));
         }
     }
 }

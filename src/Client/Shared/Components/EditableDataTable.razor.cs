@@ -127,25 +127,26 @@ namespace CleanArchitectureBase.Client.Shared.Components
             {
                 if (a.User.Id != _currentUser.GetUserId())
                 {
-                    var position = _snackBar.Configuration.PositionClass;
-                    _snackBar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
-                    _snackBar.Add(
-                        _localizer[
-                            "The User {0} has just edited, created or deleted entries here. You should reload the data",
-                            a.User.FullName], Severity.Normal, (config) =>
-                        {
-                            config.Icon = Icons.Material.Filled.Refresh;
-                            config.VisibleStateDuration = 10000;
-                            config.CloseAfterNavigation = true;
-                            config.ShowCloseIcon = true;
-                            config.Action = _localizer["Reload Data"];
-                            config.ActionColor = Color.Primary;
-                            config.Onclick = async snackbar =>
-                            {
-                                _snackBar.Configuration.PositionClass = position;
-                                await Reload();
-                            };
-                        });
+                    await Reload();
+                    //var position = _snackBar.Configuration.PositionClass;
+                    //_snackBar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+                    //_snackBar.Add(
+                    //    _localizer[
+                    //        "The User {0} has just edited, created or deleted entries here. You should reload the data",
+                    //        a.User.FullName], Severity.Normal, (config) =>
+                    //    {
+                    //        config.Icon = Icons.Material.Filled.Refresh;
+                    //        config.VisibleStateDuration = 10000;
+                    //        config.CloseAfterNavigation = true;
+                    //        config.ShowCloseIcon = true;
+                    //        config.Action = _localizer["Reload Data"];
+                    //        config.ActionColor = Color.Primary;
+                    //        config.Onclick = async snackbar =>
+                    //        {
+                    //            _snackBar.Configuration.PositionClass = position;
+                    //            await Reload();
+                    //        };
+                    //    });
                 }
             });
         }

@@ -15,10 +15,10 @@ namespace CleanArchitectureBase.Server.Controllers
     {
         private IMediator _mediatorInstance;
         private ILogger<T> _loggerInstance;
-        protected IMediator _mediator => _mediatorInstance ??= Get<IMediator>();
-        protected ILogger<T> _logger => _loggerInstance ??= Get<ILogger<T>>();
+        protected IMediator Mediator => _mediatorInstance ??= Get<IMediator>();
+        protected ILogger<T> Logger => _loggerInstance ??= Get<ILogger<T>>();
 
-        protected T Get<T>() => HttpContext.RequestServices.GetService<T>();
+        protected TService Get<TService>() => HttpContext.RequestServices.GetService<TService>();
 
     }
 }

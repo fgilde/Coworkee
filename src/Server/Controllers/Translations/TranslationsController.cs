@@ -27,7 +27,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         [Produces(typeof(PaginatedResult<TranslationDto>))]
         public async Task<IActionResult> GetAllPaged([FromQuery] GetAllTranslationsPagedQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(query, cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         [Produces(typeof(ReadOnlyCollection<TranslationDto>))]
         public async Task<IActionResult> GetAll([FromQuery] GetAllTranslationsQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(query, cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
 
@@ -48,13 +48,14 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// Get a translation by id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 Ok</returns>
         [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet("{id}")]
         [Produces(typeof(Result<TranslationDto>))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            var product = await _mediator.Send(new GetTranslationByIdQuery(id), cancellationToken);
+            var product = await Mediator.Send(new GetTranslationByIdQuery(id), cancellationToken);
             return Ok(product);
         }
 
@@ -68,7 +69,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         [HttpPost]
         public async Task<IActionResult> Post(AddEditTranslationsCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command, cancellationToken));
+            return Ok(await Mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         [Produces(typeof(Result))]
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteTranslationsCommand { Ids = ids }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteTranslationsCommand { Ids = ids }, cancellationToken));
         }
 
     }

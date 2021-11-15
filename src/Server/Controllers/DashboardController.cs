@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Server.Controllers
         [Produces(typeof(Result<DashboardDataResponse>))]
         public async Task<IActionResult> GetDataAsync()
         {
-            return Ok(await _mediator.Send(new GetDashboardDataQuery()));
+            return Ok(await Mediator.Send(new GetDashboardDataQuery()));
         }
     }
 }

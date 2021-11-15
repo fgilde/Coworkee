@@ -25,59 +25,63 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         [Produces(typeof(Result<List<GetAllDocumentTypesResponse>>))]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new GetAllDocumentTypesQuery(), cancellationToken));
+            return Ok(await Mediator.Send(new GetAllDocumentTypesQuery(), cancellationToken));
         }
 
         /// <summary>
         /// Get Document Type By Id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.DocumentTypes.View)]
         [HttpGet("{id}")]
         [Produces(typeof(Result<GetDocumentTypeByIdResponse>))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new GetDocumentTypeByIdQuery { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new GetDocumentTypeByIdQuery { Id = id }, cancellationToken));
         }
 
         /// <summary>
         /// Create/Update a Document Type
         /// </summary>
         /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.Create)]
         [HttpPost]
         [Produces(typeof(Result<int>))]
         public async Task<IActionResult> Post(AddEditDocumentTypeCommand command, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(command, cancellationToken));
+            return Ok(await Mediator.Send(command, cancellationToken));
         }
 
         /// <summary>
         /// Delete a Document Type
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.Delete)]
         [HttpDelete("{id}")]
         [Produces(typeof(Result<int>))]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new DeleteDocumentTypeCommand { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteDocumentTypeCommand { Id = id }, cancellationToken));
         }
 
         /// <summary>
         /// Search Document Types and Export to Excel
         /// </summary>
         /// <param name="searchString"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [Authorize(Policy = Permissions.DocumentTypes.Export)]
         [HttpGet("export")]
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new ExportDocumentTypesQuery(searchString), cancellationToken));
+            return Ok(await Mediator.Send(new ExportDocumentTypesQuery(searchString), cancellationToken));
         }
     }
 }

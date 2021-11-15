@@ -26,9 +26,9 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return await _api.Brands_GetAllAsync();
         }
 
-        private async Task<GetAllBrandsResponse> FindById(int id, IEnumerable<GetAllBrandsResponse> loaded)
+        private Task<GetAllBrandsResponse> FindById(int id, IEnumerable<GetAllBrandsResponse> loaded)
         {
-            return loaded.FirstOrDefault(p => p.Id == id);
+            return Task.FromResult(loaded.FirstOrDefault(p => p.Id == id));
         }
 
         private int GetId(GetAllBrandsResponse brand)
@@ -51,7 +51,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return await _api.Brands_ExportAsync(search);
         }
 
-        private async Task<Result<string>> ExportSelected(int[] ids)
+        private Task<Result<string>> ExportSelected(int[] ids)
         {
             throw new NotImplementedException("Not implemented");
             //return await _api.Products_ExportByIdsAsync(ids.ToList());

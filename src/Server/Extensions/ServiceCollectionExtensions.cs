@@ -269,11 +269,12 @@ namespace CleanArchitectureBase.Server.Extensions
 
                     bearer.Events = new JwtBearerEvents
                     {
-                        OnTokenValidated = async c =>
+                        OnTokenValidated = c =>
                         {
                             var userId = c.Principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                             if (!string.IsNullOrEmpty(userId))
                                 c.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, userId);
+                            return Task.CompletedTask;
                         },
                         OnAuthenticationFailed = c =>
                         {

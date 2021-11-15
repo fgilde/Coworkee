@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
 using Nextended.Core;
@@ -13,10 +14,12 @@ namespace CleanArchitectureBase.Client.ErrorHandling
     public class ErrorHandler: IErrorHandler
     {
         private readonly ISnackbar _snackbar;
+        private readonly IStringLocalizer<ErrorHandler> _localizer;
 
-        public ErrorHandler(ISnackbar snackbar)
+        public ErrorHandler(ISnackbar snackbar, IStringLocalizer<ErrorHandler> localizer)
         {
             _snackbar = snackbar;
+            _localizer = localizer;
         }
 
         public void ShowError(params string[] errors)
@@ -27,7 +30,7 @@ namespace CleanArchitectureBase.Client.ErrorHandling
         public void ShowErrors(IEnumerable<string> errors)
         {
             foreach (var message in errors)
-                _snackbar.Add(message, Severity.Error);
+                _snackbar.Add(_localizer[message], Severity.Error);
         }
 
         public async Task<bool> HandleAsync(HttpResponseMessage response)
@@ -36,7 +39,7 @@ namespace CleanArchitectureBase.Client.ErrorHandling
             {
                 var content = await response.Content?.ReadAsStringAsync();
                 var details = Check.TryCatch<ClientProblemDetails, Exception>(() => JsonConvert.DeserializeObject<ClientProblemDetails>(content));
-                _snackbar.Add(details?.Title ?? content, Severity.Error);
+                ShowError(details?.Title ?? content);
                 //if (details != null && response.StatusCode != HttpStatusCode.InternalServerError)
                 //{
                 //    // Error Handled // TODO: Find better solution

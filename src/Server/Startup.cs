@@ -1,4 +1,3 @@
-using CleanArchitectureBase.Infrastructure.Extensions;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Server.Middlewares;
 using Hangfire;
@@ -9,7 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application;
+using CleanArchitectureBase.Infrastructure;
 using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
@@ -52,7 +52,7 @@ namespace CleanArchitectureBase.Server
             services.AddServerLocalization();
             services.AddIdentity();
             services.AddJwtAuthentication(services.GetApplicationSettings(_configuration));
-            services.AddApplicationLayer();
+            services.AddApplication();
             services.AddApplicationServices();
             services.AddRepositories();
             services.AddExtendedAttributesUnitOfWork();

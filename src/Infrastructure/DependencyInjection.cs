@@ -4,17 +4,17 @@ using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using CleanArchitectureBase.Application.Contracts.Services.Storage;
 using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
-using Microsoft.Extensions.DependencyInjection;
 using CleanArchitectureBase.Application.Serialization.JsonConverters;
+using CleanArchitectureBase.Application.Serialization.Options;
+using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Infrastructure.Repositories;
 using CleanArchitectureBase.Infrastructure.Services.Storage;
-using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Infrastructure.Services.Storage.Provider;
-using CleanArchitectureBase.Application.Serialization.Serializers;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitectureBase.Infrastructure.Extensions
+namespace CleanArchitectureBase.Infrastructure
 {
-    public static class ServiceCollectionExtensions
+    public static class DependencyInjection
     {
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)

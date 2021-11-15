@@ -17,11 +17,11 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace CleanArchitectureBase.Application.Common.Extensions
+namespace CleanArchitectureBase.Application
 {
-    public static class ServiceCollectionExtensions
+    public static class DependencyInjection
     {
-        public static void AddApplicationLayer(this IServiceCollection services)
+        public static void AddApplication(this IServiceCollection services)
         {
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
             services.AddTransient<ICustomAuthorizeAttributeHandler, CustomAuthorizeAttributeHandler>();

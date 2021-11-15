@@ -3,11 +3,10 @@ using CleanArchitectureBase.Client.Infrastructure.Managers.Preferences;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Infrastructure.Settings;
 using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Localization;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitectureBase.Client
 {
@@ -31,6 +30,7 @@ namespace CleanArchitectureBase.Client
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
             }
+            //builder.RootComponents.RegisterAsCustomElement<Inventory>("inventory-grid");
             await builder.Build().RunAsync();
         }
     }

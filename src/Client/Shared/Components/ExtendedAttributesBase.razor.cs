@@ -90,13 +90,12 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
             var state = await _stateProvider.GetAuthenticationStateAsync();
             var user = state.User;
-            if (user == null) return;
             if (user.Identity?.IsAuthenticated == true)
             {
                 CurrentUserId = user.GetUserId();
             }
 
-            HubConnection = HubConnection.TryInitialize(_navigationManager);
+            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
             if (HubConnection.State == HubConnectionState.Disconnected)
             {
                 await HubConnection.StartAsync();

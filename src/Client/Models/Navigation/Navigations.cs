@@ -6,11 +6,11 @@ namespace CleanArchitectureBase.Client.Models.Navigation
 {
     public static class Navigations
     {
-        public static HashSet<NavigationEntry> Default = new()
+        public static HashSet<NavigationEntry> Default(string backendOrigin) => new()
         {
             new NavigationEntry("Home", Icons.Material.Outlined.Home, "/"),
-            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, "/jobs", "_blank").WithPolicies(Permissions.Hangfire.View),
-            new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, "/swagger/index.html", "_blank").WithPolicies(Permissions.Swagger.View),
+            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}/jobs", "_blank").WithPolicies(Permissions.Hangfire.View),
+            new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, $"{backendOrigin}/swagger/index.html", "_blank").WithPolicies(Permissions.Swagger.View),
             new NavigationEntry("Personal")
             {
                 Children = new()

@@ -28,7 +28,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         protected override async Task OnInitializedAsync()
         {
-            HubConnection = await HubConnection.EnsureStartedAsync(_navigationManager);
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task<PaginatedResult<TranslationDto>> LoadPaged(int pageNumber, int pageSize, string _searchString, string[] orderings)
@@ -92,6 +92,9 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task<bool> SaveAll(TranslationDto[] arg)
         {
+            foreach (var translationDto in arg.Where(dto => string.IsNullOrEmpty(dto.CultureCode)))
+                translationDto.CultureCode = CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode();
+            
             await _api.Translations_PostAsync(new AddEditTranslationsCommand { Items = arg });
             AfterSend();
             return true;

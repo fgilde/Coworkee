@@ -121,7 +121,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 await LoadAllData();
 
             _loaded = true;
-            HubConnection = await HubConnection.EnsureStartedAsync(_navigationManager);
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
 
             HubConnection.On<EntitiesUpdated<TResult>>(async (a) =>
             {
@@ -282,6 +282,15 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task InvokeModal(TIdType id = default)
         {
+            if (EditMode == EditMode.InlineBulk || EditMode == EditMode.InlineLive)
+            {
+                var item = typeof(TResult).CreateInstance<TResult>();
+                if (ApiLoadPaged != null)
+                    _pagedData = _pagedData.Concat(new[] {item}).ToList();
+                else
+                    _flatList.Insert(0, item);
+                return;
+            }
             bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);
             await WithUrl(ActionUrl(id), async () =>
             {

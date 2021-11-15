@@ -13,6 +13,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.ErrorHandling;
 using CleanArchitectureBase.Client.Infrastructure.ErrorHandling;
 using CleanArchitectureBase.Client.Infrastructure.Extensions;
@@ -23,6 +24,7 @@ using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
@@ -33,15 +35,17 @@ namespace CleanArchitectureBase.Client.Extensions
     {
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
-            builder.RootComponents.Add<App>("#app");
-
+            //builder.RootComponents.Add<App>("#app");
+            builder.RootComponents.RegisterAsCustomElement<App>("blazor-app");
             return builder;
         }
 
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
+            var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
             builder
                 .Services
+                .AddTransient(p => clientSettings)
                 .AddLocalization(options =>
                 {
                     options.ResourcesPath = "Resources";
@@ -71,7 +75,8 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddHttpClient(ApplicationConstants.ApplicationClientName, client =>
                 {
                     client.UpdateAcceptLanguage();
-                    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+                    client.BaseAddress = new Uri(clientSettings.BackendOrigin);
+                    //client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 })
                 .AddTypedClient<IApplicationClient>((_, services) =>
                 {
@@ -80,6 +85,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();
+            
             return builder;
         }
 

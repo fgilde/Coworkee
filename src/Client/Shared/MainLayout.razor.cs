@@ -66,7 +66,7 @@ namespace CleanArchitectureBase.Client.Shared
             await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, false);
             _rightToLeft = await _clientPreferenceManager.IsRTL();
             _interceptor.RegisterEvent();
-            hubConnection = hubConnection.TryInitialize(_navigationManager);
+            hubConnection = hubConnection.TryInitialize(_config.BackendOrigin);
             await hubConnection.StartAsync();
   
             hubConnection.On<EntitiesUpdated<TranslationDto>>(async (arg) =>

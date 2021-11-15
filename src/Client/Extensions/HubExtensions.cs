@@ -23,20 +23,20 @@ namespace CleanArchitectureBase.Client.Extensions
             return hubConnection.On(e.EventName, handler);
         }
 
-        public static HubConnection TryInitialize(this HubConnection hubConnection, NavigationManager navigationManager)
+        public static HubConnection TryInitialize(this HubConnection hubConnection, string backendOrigin)
         {
             if (hubConnection == null)
             {
                 hubConnection = new HubConnectionBuilder()
-                                  .WithUrl(navigationManager.ToAbsoluteUri(ApplicationConstants.SignalR.EventHubUrl))
+                                  .WithUrl($"{backendOrigin}{ApplicationConstants.SignalR.EventHubUrl}")
                                   .Build();
             }
             return hubConnection;
         }
 
-        public static async Task<HubConnection> EnsureStartedAsync(this HubConnection hubConnection, NavigationManager navigationManager)
+        public static async Task<HubConnection> EnsureStartedAsync(this HubConnection hubConnection, string backendOrigin)
         {
-            hubConnection = hubConnection.TryInitialize(navigationManager);
+            hubConnection = hubConnection.TryInitialize(backendOrigin);
             if (hubConnection.State == HubConnectionState.Disconnected)
             {
                 await hubConnection.StartAsync();

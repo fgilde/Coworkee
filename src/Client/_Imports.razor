@@ -33,6 +33,7 @@
 @using CleanArchitectureBase.Client.Infrastructure.Settings;
 
 @using CleanArchitectureBase.Application.Requests.Identity;
+@using CleanArchitectureBase.Client.Configuration
 @using CleanArchitectureBase.Client.ErrorHandling
 
 @using CleanArchitectureBase.Client.Pages.Authentication;
@@ -57,3 +58,4 @@
 @inject IJSRuntime _jsRuntime;
 @inject ILanguageContainerService _languageService;
 @inject IErrorHandler _errorService
+@inject ClientApplicationConfiguration _config;

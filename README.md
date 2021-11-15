@@ -6,7 +6,7 @@ This is a solution a seperate Single Page App (Blazor) and an ASP.NET Core Serve
 
 ## Technologies
 
-* ASP.NET Core 5
+* ASP.NET Core 6
 * [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
 * [Angular 10](https://angular.io/)
 * [MediatR](https://github.com/jbogard/MediatR)
@@ -18,7 +18,7 @@ This is a solution a seperate Single Page App (Blazor) and an ASP.NET Core Serve
 
 1. Install the latest [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
 2. Navigate to `src/Server` and run `dotnet run` to launch the back end and the webassembly client (ASP.NET Core Web API) or open Solution in Visual Studio and launch Server
-
+	(Notice to seperate client completly from server just remove reference to client project in Server.csproj)
 
 
 ### Docker Configuration

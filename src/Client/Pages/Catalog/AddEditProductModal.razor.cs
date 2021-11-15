@@ -47,7 +47,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            HubConnection = HubConnection.TryInitialize(_navigationManager);
+            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
             if (HubConnection.State == HubConnectionState.Disconnected)
             {
                 await HubConnection.StartAsync();

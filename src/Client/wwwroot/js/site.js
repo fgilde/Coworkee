@@ -12,23 +12,45 @@ window.Download = (options) => {
         });
 }
 
+window.ChangeFavIcon = (url) => {
+    var link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
+    link.href = url;
+}
+
 window.initialLoad = () => {
     if (urlParams()['safemode']) {
         window.localStorage.clear();
         window.location.href = removeUrlParams(window.location.href, 'safemode');
     }
-    document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
-    document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
-    document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
-    var app = document.getElementById('app');
-    app.addEventListener('DOMSubtreeModified', contentChanged, false);
+    
+    fetch('appsettings.json', { method: 'GET', redirect: 'follow' })
+        .then(response => response.json())
+        .then(json => {
+            ChangeFavIcon(json.BackendOrigin + '/favicon.ico');
+            var script = document.createElement('script');
+            script.onload = function () {
+                document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
+                document.querySelector('#sub-text').innerHTML = `${Application.ApplicationConstants.ApplicationName} ${Application.ApplicationConstants.Version}`;
+                document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
+                var app = document.getElementById('app');
+                app.addEventListener('DOMSubtreeModified', contentChanged, false);
 
-    function contentChanged() {
-        app.removeEventListener('DOMSubtreeModified', contentChanged);
-        var overlay = document.getElementById('overlay-app-load');
-        overlay.classList.add('fade-out');
-        setTimeout(function () { overlay.remove(); }, 3000); // Remove element after fadeout
-    }
+                function contentChanged() {
+                    app.removeEventListener('DOMSubtreeModified', contentChanged);
+                    var overlay = document.getElementById('overlay-app-load');
+                    overlay.classList.add('fade-out');
+                    setTimeout(function () { overlay.remove(); }, 3000); // Remove element after fadeout
+                }
+            };
+            script.src = json.BackendOrigin + '/Application/resources.js';
+
+            document.head.appendChild(script); //or something of the likes
+        });
 }
 
 window.reloadSilent = () => {

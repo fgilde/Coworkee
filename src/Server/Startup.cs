@@ -36,7 +36,7 @@ namespace CleanArchitectureBase.Server
         {
             services.AddTransient(p => ApplicationConfiguration.Create(_configuration));
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
-            services.AddCors();
+            services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalR();
             services.AddCurrentUserServiceAndSession();
 

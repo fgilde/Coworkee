@@ -35,7 +35,7 @@ namespace CleanArchitectureBase.Client.Shared
             }
         }
 
-        [Parameter] public HashSet<NavigationEntry> Entries { get; set; } = Navigations.Default;
+        [Parameter] public HashSet<NavigationEntry> Entries { get; set; } 
         
         [Parameter] public EventCallback Logout { get; set; }
         
@@ -56,6 +56,7 @@ namespace CleanArchitectureBase.Client.Shared
 
         protected override async Task OnParametersSetAsync()
         {
+            Entries ??= Navigations.Default(_config.BackendOrigin);
             _user = await _stateProvider.GetAuthenticationStateProviderUserAsync();
             ExpandToCurrentUrl();
         }

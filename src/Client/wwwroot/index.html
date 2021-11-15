@@ -17,8 +17,8 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!--<link href="https://use.fontawesome.com/releases/v5.15.0/css/all.css" rel="stylesheet">-->
-    <script src="/Application/resources.js"></script> <!--Comes from server see resource controller-->
     <script src="js/site.es5.min.js"></script>
+    <script src="Application/resources.js"></script>
 
     <!--Own Client only resources -->
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
@@ -40,25 +40,22 @@ https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-autho
         </div>
     </div>
 
-    <div id="app">
-
-    </div>
-
+    <blazor-app id="app"/>
+    
     <div id="blazor-error-ui" style="background: transparent;">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
 
-<script>
-    if (urlParams()['safemode']) {
-        window.localStorage.clear();
-    }
-    (function () {
-        initialLoad();
-    })();
-</script>
-
+    <script>
+        (function () {
+            initialLoad();
+        })();
+    </script>
+    <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
+    <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
+    <!--<script>navigator.serviceWorker.register('service-worker.js');</script>-->
     <script async src="_framework/blazor.webassembly.js"></script>
     <script async src="_content/MudBlazor/MudBlazor.min.js"></script>
 </body>

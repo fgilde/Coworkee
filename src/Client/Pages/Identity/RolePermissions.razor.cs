@@ -47,7 +47,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
             await GetRolePermissionsAsync();
             _loaded = true;
-            HubConnection = HubConnection.TryInitialize(_navigationManager);
+            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
             if (HubConnection.State == HubConnectionState.Disconnected)
             {
                 await HubConnection.StartAsync();

@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
+using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.AspNetCore.SignalR.Client;
 
 
 namespace CleanArchitectureBase.Client.Pages.Misc
@@ -21,10 +23,11 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         [Parameter] public DocumentDto AddEditDocumentModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private List<GetAllDocumentTypesResponse> _documentTypes = new();
+        private IList<DocumentTypeDto> _documentTypes = new List<DocumentTypeDto>();
 
         public void Cancel()
         {
@@ -36,11 +39,17 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             await _api.Documents_PostAsync(new AddEditDocumentsCommand(AddEditDocumentModel));
             _snackBar.Add(_localizer["Document Updated"], Severity.Success);
             MudDialog.Close();
+            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
         }
 
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
+            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
+            if (HubConnection.State == HubConnectionState.Disconnected)
+            {
+                await HubConnection.StartAsync();
+            }
         }
 
         private async Task LoadDataAsync()
@@ -50,11 +59,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task LoadDocumentTypesAsync()
         {
-            var data = await _api.DocumentTypes_GetAllAsync();
-            if (data.Succeeded)
-            {
-                _documentTypes = data.Data;
-            }
+            _documentTypes = await _api.DocumentTypes_GetAllAsync();
         }
 
         private IBrowserFile _file;

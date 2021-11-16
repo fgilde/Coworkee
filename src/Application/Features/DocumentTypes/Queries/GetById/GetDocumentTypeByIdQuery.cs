@@ -1,32 +1,23 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Features.Base.Queries;
 using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Wrapper;
-using MediatR;
-using Nextended.Core.Extensions;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById
 {
-    public class GetDocumentTypeByIdQuery : IRequest<Result<GetDocumentTypeByIdResponse>>
+    [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.View })]
+    public class GetDocumentTypeByIdQuery : GetByIdQueryBase<int, DocumentTypeDto>
     {
-        public int Id { get; set; }
+        public GetDocumentTypeByIdQuery(int id) : base(id)
+        { }
     }
 
-    internal class GetDocumentTypeByIdQueryHandler : IRequestHandler<GetDocumentTypeByIdQuery, Result<GetDocumentTypeByIdResponse>>
+    internal class GetDocumentTypeByIdQueryHandler : GetByIdQueryHandlerBase<GetDocumentTypeByIdQuery, int, DocumentTypeDto, Document>
     {
-        private readonly IUnitOfWork<int> _unitOfWork;
-
-        public GetDocumentTypeByIdQueryHandler(IUnitOfWork<int> unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        public async Task<Result<GetDocumentTypeByIdResponse>> Handle(GetDocumentTypeByIdQuery query, CancellationToken cancellationToken)
-        {
-            var documentType = await _unitOfWork.Repository<DocumentType>().GetByIdAsync(query.Id);
-            var mappedDocumentType = documentType.MapTo<GetDocumentTypeByIdResponse>();
-            return await Result<GetDocumentTypeByIdResponse>.SuccessAsync(mappedDocumentType);
-        }
+        public GetDocumentTypeByIdQueryHandler(IUnitOfWork<int> unitOfWork, IServiceProvider provider) : base(unitOfWork, provider)
+        { }
     }
 }

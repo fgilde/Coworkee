@@ -1,14 +1,17 @@
 ﻿using System;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using MediatR;
 using CleanArchitectureBase.Application.Features.Base.Queries;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Translations;
 using CleanArchitectureBase.Domain.Entities.Localization;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged
 {
+    [CustomAuthorize(Policies = new[] { Permissions.Translations.View })]
     public class GetAllTranslationsPagedQuery : GetAllPagedQueryBase<TranslationDto>
     {}
 

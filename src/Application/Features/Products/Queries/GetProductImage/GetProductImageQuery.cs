@@ -5,10 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage
 {
+    [CustomAuthorize(Policies = new[] { Permissions.Products.View })]
     public class GetProductImageQuery : IRequest<Result<string>>
     {
         public int Id { get; set; }

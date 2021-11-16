@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
@@ -20,8 +19,8 @@ namespace CleanArchitectureBase.Client.Pages.Misc
     {
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
-        private List<GetAllDocumentTypesResponse> _documentTypeList = new();
-        private GetAllDocumentTypesResponse _documentType = new();
+        private IList<DocumentTypeDto> _documentTypeList = new List<DocumentTypeDto>();
+        private DocumentTypeDto _documentType = new();
         private string _searchString = "";
         private bool _dense = false;
         private bool _striped = true;
@@ -55,11 +54,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task GetDocumentTypesAsync()
         {
-            var response = await _api.DocumentTypes_GetAllAsync();
-            if (_errorService.IsSuccessFull(response))
-            {
-                _documentTypeList = response.Data.ToList();
-            }
+            _documentTypeList = await _api.DocumentTypes_GetAllAsync();
         }
 
         private async Task Delete(int id)
@@ -74,13 +69,10 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await _api.DocumentTypes_DeleteAsync(id);
+                var response = await _api.DocumentTypes_DeleteAsync(new List<int> {id});
                 await Reset();
-                if (_errorService.IsSuccessFull(response))
-                {
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
-                    _snackBar.Add(response.Messages[0], Severity.Success);
-                }
+                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                _snackBar.Add("Document Type Deleted", Severity.Success);
             }
         }
 
@@ -109,12 +101,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 _documentType = _documentTypeList.FirstOrDefault(c => c.Id == id);
                 if (_documentType != null)
                 {
-                    parameters.Add(nameof(AddEditDocumentTypeModal.AddEditDocumentTypeModel), new AddEditDocumentTypeCommand
-                    {
-                        Id = _documentType.Id,
-                        Name = _documentType.Name,
-                        Description = _documentType.Description
-                    });
+                    parameters.Add(nameof(AddEditDocumentTypeModal.AddEditDocumentTypeModel), _documentType);
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
@@ -128,18 +115,18 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task Reset()
         {
-            _documentType = new GetAllDocumentTypesResponse();
+            _documentType = new();
             await GetDocumentTypesAsync();
         }
 
-        private bool Search(GetAllDocumentTypesResponse brand)
+        private bool Search(DocumentTypeDto documentType)
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (brand.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (documentType.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (brand.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (documentType.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }

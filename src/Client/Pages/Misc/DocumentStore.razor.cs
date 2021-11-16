@@ -7,13 +7,18 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Domain.Entities.Misc;
+using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Misc
 {
     public partial class DocumentStore
     {
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
+
         private IEnumerable<DocumentDto> _pagedData;
         private MudTable<DocumentDto> _table;
         private string CurrentUserId { get; set; }
@@ -47,6 +52,11 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             if (user.Identity?.IsAuthenticated == true)
             {
                 CurrentUserId = user.GetUserId();
+            }
+            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
+            if (HubConnection.State == HubConnectionState.Disconnected)
+            {
+                await HubConnection.StartAsync();
             }
         }
 
@@ -151,6 +161,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 await _api.Documents_DeleteAsync(toDelete);
                 OnSearch("");
                 _snackBar.Add(_localizer["Document Deleted"], Severity.Success);
+                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
             }
         }
 

@@ -22,7 +22,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// </summary>
         /// <returns>Status 200 OK</returns>
         // [Authorize(Policy = Permissions.Products.View)]
-        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Translations.View })]
         [HttpGet(nameof(GetAllPaged))]
         [Produces(typeof(PaginatedResult<TranslationDto>))]
         public async Task<IActionResult> GetAllPaged([FromQuery] GetAllTranslationsPagedQuery query, CancellationToken cancellationToken = default)
@@ -50,7 +50,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Status 200 Ok</returns>
-        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Translations.View })]
         [HttpGet("{id}")]
         [Produces(typeof(Result<TranslationDto>))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// <param name="command"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
-        [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
+        [Filters.CustomAuthorize(Policies = new[] { Permissions.Translations.Create, Permissions.Translations.Edit }, PolicyMatch = PolicyMatch.Any)]
         [HttpPost]
         public async Task<IActionResult> Post(AddEditTranslationsCommand command, CancellationToken cancellationToken = default)
         {
@@ -78,7 +78,7 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         /// <param name="ids">Products to delete</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK response</returns>
-        [Authorize(Policy = Permissions.Products.Delete)]
+        [Authorize(Policy = Permissions.Translations.Delete)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {

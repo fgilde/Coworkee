@@ -65,6 +65,21 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
             public const string Search = "Permissions.DocumentTypes.Search";
         }
 
+        public static class Translations
+        {
+            public const string View = "Permissions.Translations.View";
+            [RequiresPermissions(View)]
+            public const string Create = "Permissions.Translations.Create";
+            [RequiresPermissions(View)]
+            public const string Edit = "Permissions.Translations.Edit";
+            [RequiresPermissions(View)]
+            public const string Delete = "Permissions.Translations.Delete";
+            [RequiresPermissions(View)]
+            public const string Export = "Permissions.Translations.Export";
+            [RequiresPermissions(View)]
+            public const string Search = "Permissions.Translations.Search";
+        }
+
         public static class DocumentExtendedAttributes
         {
             public const string View = "Permissions.DocumentExtendedAttributes.View";

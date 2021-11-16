@@ -1,15 +1,18 @@
 ﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using System;
 using System.Collections.Generic;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Export;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Catalog;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Products.Queries.Export
 {
+    [CustomAuthorize(Policies = new[] { Permissions.Products.Export })]
     public class ExportProductsQuery: ExportQueryBase<int>
     {
         public ExportProductsQuery(int[] ids) : base(ids)

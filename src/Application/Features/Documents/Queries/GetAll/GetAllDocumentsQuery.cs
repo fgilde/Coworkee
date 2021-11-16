@@ -3,14 +3,16 @@ using CleanArchitectureBase.Domain.Entities.Misc;
 using MediatR;
 using System;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Queries;
 using CleanArchitectureBase.Application.Specifications.Base;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Queries.GetAll
 {
-
+    [CustomAuthorize(Policies = new[] { Permissions.Documents.View })]
     public class GetAllDocumentsQuery : GetAllPagedQueryBase<DocumentDto>
     { }
 

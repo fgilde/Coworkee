@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Net;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Commands;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Features.Brands.Commands.Delete
 {
+    [CustomAuthorize(Policies = new[] { Permissions.Brands.Delete })]
     public class DeleteBrandCommand : DeleteCommandBase<int>
     { }
 
@@ -25,7 +29,7 @@ namespace CleanArchitectureBase.Application.Features.Brands.Commands.Delete
             foreach (var id in command.Ids)
             {
                 if (await productRepository.IsBrandUsed(id))
-                    throw new Exception("Deletion Not Allowed");
+                    throw Errors.Create("Deletion Not Allowed", HttpStatusCode.Conflict);
             }
             return await base.Handle(command, cancellationToken);
         }

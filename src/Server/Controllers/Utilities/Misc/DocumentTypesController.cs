@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.Delete;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export;
@@ -22,7 +23,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.View)]
         [HttpGet]
-        [Produces(typeof(Result<List<GetAllDocumentTypesResponse>>))]
+        [Produces(typeof(ReadOnlyCollection<DocumentTypeDto>))]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new GetAllDocumentTypesQuery(), cancellationToken));
@@ -36,10 +37,10 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.DocumentTypes.View)]
         [HttpGet("{id}")]
-        [Produces(typeof(Result<GetDocumentTypeByIdResponse>))]
+        [Produces(typeof(DocumentTypeDto))]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new GetDocumentTypeByIdQuery { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new GetDocumentTypeByIdQuery(id), cancellationToken));
         }
 
         /// <summary>
@@ -50,8 +51,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.Create)]
         [HttpPost]
-        [Produces(typeof(Result<int>))]
-        public async Task<IActionResult> Post(AddEditDocumentTypeCommand command, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Post(AddEditDocumentTypesCommand command, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
         }
@@ -59,15 +59,14 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <summary>
         /// Delete a Document Type
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ids"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.DocumentTypes.Delete)]
-        [HttpDelete("{id}")]
-        [Produces(typeof(Result<int>))]
-        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteDocumentTypeCommand { Id = id }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteDocumentTypesCommand { Ids = ids }, cancellationToken));
         }
 
         /// <summary>

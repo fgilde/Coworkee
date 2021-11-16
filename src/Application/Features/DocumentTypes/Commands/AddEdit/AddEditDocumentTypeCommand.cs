@@ -1,69 +1,52 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Commands;
 using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Wrapper;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit
 {
-    public class AddEditDocumentTypeCommand : IRequest<Result<int>>
+
+    [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Create, Permissions.DocumentTypes.Edit }, PolicyMatch = PolicyMatch.Any)]
+    public class AddEditDocumentTypesCommand : AddEditCommandBase<DocumentTypeDto>
     {
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Description { get; set; }
+        public AddEditDocumentTypesCommand(params DocumentTypeDto[] items) : base(items)
+        { }
     }
 
-    internal class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>
+    internal class AddEditDocumentTypesCommandHandler : AddEditCommandHandlerBase<AddEditDocumentTypesCommand, int, DocumentTypeDto, DocumentType>
     {
-        private readonly IStringLocalizer<AddEditDocumentTypeCommandHandler> _localizer;
-        private readonly IUnitOfWork<int> _unitOfWork;
+        private readonly IStringLocalizer<AddEditDocumentTypesCommandHandler> _localizer;
+        protected override string EditPermission => Permissions.DocumentTypes.Edit;
+        protected override string CreatePermission => Permissions.DocumentTypes.Create;
 
-        public AddEditDocumentTypeCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<AddEditDocumentTypeCommandHandler> localizer)
+        public AddEditDocumentTypesCommandHandler(
+            IUnitOfWork<int> unitOfWork,
+            IMediator mediator,
+            IPermissionService permissionService,
+            IServiceProvider provider,
+            IStringLocalizer<AddEditDocumentTypesCommandHandler> localizer)
+            : base(unitOfWork, mediator, permissionService, provider)
         {
-            _unitOfWork = unitOfWork;
             _localizer = localizer;
         }
 
-        public async Task<Result<int>> Handle(AddEditDocumentTypeCommand command, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(AddEditDocumentTypesCommand command, CancellationToken cancellationToken)
         {
-            if (await _unitOfWork.Repository<DocumentType>().Entities.Where(p => p.Id != command.Id)
-                .AnyAsync(p => p.Name == command.Name, cancellationToken))
-            {
-                return await Result<int>.FailAsync(_localizer["Document type with this name already exists."]);
-            }
+            if (command.Items.Any(item => UnitOfWork.Repository<DocumentType>().Entities.Any(p => p.Id != item.Id && p.Name == item.Name)))
+                throw Errors.Create(_localizer["Document type with this name already exists."], HttpStatusCode.Conflict);
 
-            if (command.Id == 0)
-            {
-                var documentType = command.MapTo<DocumentType>();
-                await _unitOfWork.Repository<DocumentType>().AddAsync(documentType);
-                await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllDocumentTypesCacheKey);
-                return await Result<int>.SuccessAsync(documentType.Id, _localizer["Document Type Saved"]);
-            }
-            else
-            {
-                var documentType = await _unitOfWork.Repository<DocumentType>().GetByIdAsync(command.Id);
-                if (documentType != null)
-                {
-                    documentType.Name = command.Name ?? documentType.Name;
-                    documentType.Description = command.Description ?? documentType.Description;
-                    await _unitOfWork.Repository<DocumentType>().UpdateAsync(documentType);
-                    await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllDocumentTypesCacheKey);
-                    return await Result<int>.SuccessAsync(documentType.Id, _localizer["Document Type Updated"]);
-                }
-                else
-                {
-                    return await Result<int>.FailAsync(_localizer["Document Type Not Found!"]);
-                }
-            }
+            await base.Handle(command, cancellationToken);
+            return Unit.Value;
         }
     }
 }

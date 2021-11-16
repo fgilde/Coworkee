@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Threading;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Commands;
 using CleanArchitectureBase.Domain.Entities.Localization;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using MediatR;
 
 namespace CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
 {
-    //[CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
+    [CustomAuthorize(Policies = new[] { Permissions.Translations.Create, Permissions.Translations.Edit }, PolicyMatch = PolicyMatch.Any)]
     public class AddEditTranslationsCommand : AddEditCommandBase<TranslationDto>
     {
         public AddEditTranslationsCommand(params TranslationDto[] items) : base(items)

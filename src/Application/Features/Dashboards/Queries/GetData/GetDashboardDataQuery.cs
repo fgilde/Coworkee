@@ -6,14 +6,17 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData
 {
+    [CustomAuthorize(Policies = new[] { Permissions.Dashboards.View })]
     public class GetDashboardDataQuery : IRequest<Result<DashboardDataResponse>>
     {}
 

@@ -1,58 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Export;
+using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Misc;
 using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Wrapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export
 {
-    public class ExportDocumentTypesQuery : IRequest<Result<string>>
+    [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Export })]
+    public class ExportDocumentTypesQuery : ExportQueryBase<int>
     {
-        public string SearchString { get; set; }
+        public ExportDocumentTypesQuery(int[] ids) : base(ids)
+        { }
 
-        public ExportDocumentTypesQuery(string searchString = "")
-        {
-            SearchString = searchString;
-        }
+        public ExportDocumentTypesQuery(string searchString) : base(searchString)
+        { }
     }
 
-    internal class ExportDocumentTypesQueryHandler : IRequestHandler<ExportDocumentTypesQuery, Result<string>>
+    internal class ExportDocumentTypesQueryHandler : ExportQueryHandlerBase<ExportDocumentTypesQuery, int, DocumentType>
     {
-        private readonly IExcelService _excelService;
-        private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IStringLocalizer<ExportDocumentTypesQueryHandler> _localizer;
+        public ExportDocumentTypesQueryHandler(IExcelService excelService, IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportDocumentTypesQueryHandler> localizer)
+            : base(excelService, unitOfWork, localizer)
+        { }
 
-        public ExportDocumentTypesQueryHandler(IExcelService excelService
-            , IUnitOfWork<int> unitOfWork
-            , IStringLocalizer<ExportDocumentTypesQueryHandler> localizer)
+        protected override Dictionary<string, Func<DocumentType, object>> PropertyMappers()
         {
-            _excelService = excelService;
-            _unitOfWork = unitOfWork;
-            _localizer = localizer;
-        }
-
-        public async Task<Result<string>> Handle(ExportDocumentTypesQuery request, CancellationToken cancellationToken)
-        {
-            var documentTypeFilterSpec = new DocumentTypeFilterSpecification(request.SearchString);
-            var documentTypes = await _unitOfWork.Repository<DocumentType>().Entities
-                .Specify(documentTypeFilterSpec)
-                .ToListAsync(cancellationToken);
-            var data = await _excelService.ExportAsync(documentTypes, mappers: new Dictionary<string, Func<DocumentType, object>>
+            return new Dictionary<string, Func<DocumentType, object>>
             {
-                { _localizer["Id"], item => item.Id },
-                { _localizer["Name"], item => item.Name },
-                { _localizer["Description"], item => item.Description }
-            }, sheetName: _localizer["Document Types"]);
+                {Localizer["Id"], item => item.Id},
+                {Localizer["Name"], item => item.Name},
+                {Localizer["Description"], item => item.Description},
+            };
+        }
 
-            return await Result<string>.SuccessAsync(data: data);
+        protected override ISpecification<DocumentType> GetFilterSpecification(ExportDocumentTypesQuery query)
+        {
+            return new DocumentTypeFilterSpecification(query.SearchString);
         }
     }
+
 }

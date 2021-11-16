@@ -5,16 +5,18 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Commands;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using LazyCache;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Commands.Delete
 {
-
+    [CustomAuthorize(Policies = new[] { Permissions.Documents.Delete })]
     public class DeleteDocumentsCommand : DeleteCommandBase<int>
     { }
 

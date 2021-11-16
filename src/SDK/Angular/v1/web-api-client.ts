@@ -704,22 +704,22 @@ export interface IDocumentTypesClient {
      * Get All Document Types
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfGetAllDocumentTypesResponse>;
+    getAll(): Observable<DocumentTypeDto[]>;
     /**
      * Create/Update a Document Type
      * @return Status 200 OK
      */
-    post(command: AddEditDocumentTypeCommand): Observable<ResultOfInteger>;
-    /**
-     * Get Document Type By Id
-     * @return Status 200 Ok
-     */
-    getById(id: number): Observable<ResultOfGetDocumentTypeByIdResponse>;
+    post(command: AddEditDocumentTypesCommand): Observable<FileResponse>;
     /**
      * Delete a Document Type
      * @return Status 200 OK
      */
-    delete(id: number): Observable<ResultOfInteger>;
+    delete(ids: number[]): Observable<FileResponse>;
+    /**
+     * Get Document Type By Id
+     * @return Status 200 Ok
+     */
+    getById(id: number): Observable<DocumentTypeDto>;
     /**
      * Search Document Types and Export to Excel
      * @param searchString (optional) 
@@ -744,7 +744,7 @@ export class DocumentTypesClient implements IDocumentTypesClient {
      * Get All Document Types
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfGetAllDocumentTypesResponse> {
+    getAll(): Observable<DocumentTypeDto[]> {
         let url_ = this.baseUrl + "/DocumentTypes";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -763,14 +763,14 @@ export class DocumentTypesClient implements IDocumentTypesClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfListOfGetAllDocumentTypesResponse>><any>_observableThrow(e);
+                    return <Observable<DocumentTypeDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfListOfGetAllDocumentTypesResponse>><any>_observableThrow(response_);
+                return <Observable<DocumentTypeDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfGetAllDocumentTypesResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<DocumentTypeDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -781,7 +781,14 @@ export class DocumentTypesClient implements IDocumentTypesClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfListOfGetAllDocumentTypesResponse.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(DocumentTypeDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -789,14 +796,14 @@ export class DocumentTypesClient implements IDocumentTypesClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfListOfGetAllDocumentTypesResponse>(<any>null);
+        return _observableOf<DocumentTypeDto[]>(<any>null);
     }
 
     /**
      * Create/Update a Document Type
      * @return Status 200 OK
      */
-    post(command: AddEditDocumentTypeCommand): Observable<ResultOfInteger> {
+    post(command: AddEditDocumentTypesCommand): Observable<FileResponse> {
         let url_ = this.baseUrl + "/DocumentTypes";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -808,7 +815,7 @@ export class DocumentTypesClient implements IDocumentTypesClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/octet-stream"
             })
         };
 
@@ -819,40 +826,92 @@ export class DocumentTypesClient implements IDocumentTypesClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<ResultOfInteger> {
+    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfInteger.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfInteger>(<any>null);
+        return _observableOf<FileResponse>(<any>null);
+    }
+
+    /**
+     * Delete a Document Type
+     * @return Status 200 OK
+     */
+    delete(ids: number[]): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/DocumentTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(ids);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse>(<any>null);
     }
 
     /**
      * Get Document Type By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ResultOfGetDocumentTypeByIdResponse> {
+    getById(id: number): Observable<DocumentTypeDto> {
         let url_ = this.baseUrl + "/DocumentTypes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -874,14 +933,14 @@ export class DocumentTypesClient implements IDocumentTypesClient {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfGetDocumentTypeByIdResponse>><any>_observableThrow(e);
+                    return <Observable<DocumentTypeDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfGetDocumentTypeByIdResponse>><any>_observableThrow(response_);
+                return <Observable<DocumentTypeDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<ResultOfGetDocumentTypeByIdResponse> {
+    protected processGetById(response: HttpResponseBase): Observable<DocumentTypeDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -892,7 +951,7 @@ export class DocumentTypesClient implements IDocumentTypesClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfGetDocumentTypeByIdResponse.fromJS(resultData200);
+            result200 = DocumentTypeDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -900,62 +959,7 @@ export class DocumentTypesClient implements IDocumentTypesClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfGetDocumentTypeByIdResponse>(<any>null);
-    }
-
-    /**
-     * Delete a Document Type
-     * @return Status 200 OK
-     */
-    delete(id: number): Observable<ResultOfInteger> {
-        let url_ = this.baseUrl + "/DocumentTypes/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processDelete(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processDelete(<any>response_);
-                } catch (e) {
-                    return <Observable<ResultOfInteger>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<ResultOfInteger>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processDelete(response: HttpResponseBase): Observable<ResultOfInteger> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfInteger.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<ResultOfInteger>(<any>null);
+        return _observableOf<DocumentTypeDto>(<any>null);
     }
 
     /**
@@ -5011,53 +5015,47 @@ export class AddEditDocumentsCommand extends AddEditCommandBaseOfDocumentDto imp
 export interface IAddEditDocumentsCommand extends IAddEditCommandBaseOfDocumentDto {
 }
 
-export class ResultOfListOfGetAllDocumentTypesResponse extends Result implements IResultOfListOfGetAllDocumentTypesResponse {
-    data?: GetAllDocumentTypesResponse[] | undefined;
+export class DocumentTypeDto extends DtoBaseOfInteger implements IDocumentTypeDto {
+    name?: string | undefined;
+    description?: string | undefined;
 
-    constructor(data?: IResultOfListOfGetAllDocumentTypesResponse) {
+    constructor(data?: IDocumentTypeDto) {
         super(data);
     }
 
     init(_data?: any) {
         super.init(_data);
         if (_data) {
-            if (Array.isArray(_data["data"])) {
-                this.data = [] as any;
-                for (let item of _data["data"])
-                    this.data!.push(GetAllDocumentTypesResponse.fromJS(item));
-            }
+            this.name = _data["name"];
+            this.description = _data["description"];
         }
     }
 
-    static fromJS(data: any): ResultOfListOfGetAllDocumentTypesResponse {
+    static fromJS(data: any): DocumentTypeDto {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultOfListOfGetAllDocumentTypesResponse();
+        let result = new DocumentTypeDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.data)) {
-            data["data"] = [];
-            for (let item of this.data)
-                data["data"].push(item.toJSON());
-        }
+        data["name"] = this.name;
+        data["description"] = this.description;
         super.toJSON(data);
         return data; 
     }
 }
 
-export interface IResultOfListOfGetAllDocumentTypesResponse extends IResult {
-    data?: GetAllDocumentTypesResponse[] | undefined;
-}
-
-export class GetAllDocumentTypesResponse implements IGetAllDocumentTypesResponse {
-    id?: number;
+export interface IDocumentTypeDto extends IDtoBaseOfInteger {
     name?: string | undefined;
     description?: string | undefined;
+}
 
-    constructor(data?: IGetAllDocumentTypesResponse) {
+export abstract class AddEditCommandBaseOfDocumentTypeDto implements IAddEditCommandBaseOfDocumentTypeDto {
+    items?: DocumentTypeDto[] | undefined;
+
+    constructor(data?: IAddEditCommandBaseOfDocumentTypeDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -5068,186 +5066,59 @@ export class GetAllDocumentTypesResponse implements IGetAllDocumentTypesResponse
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(DocumentTypeDto.fromJS(item));
+            }
         }
     }
 
-    static fromJS(data: any): GetAllDocumentTypesResponse {
+    static fromJS(data: any): AddEditCommandBaseOfDocumentTypeDto {
         data = typeof data === 'object' ? data : {};
-        let result = new GetAllDocumentTypesResponse();
-        result.init(data);
-        return result;
+        throw new Error("The abstract class 'AddEditCommandBaseOfDocumentTypeDto' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
         return data; 
     }
 }
 
-export interface IGetAllDocumentTypesResponse {
-    id?: number;
-    name?: string | undefined;
-    description?: string | undefined;
+export interface IAddEditCommandBaseOfDocumentTypeDto {
+    items?: DocumentTypeDto[] | undefined;
 }
 
-export class ResultOfGetDocumentTypeByIdResponse extends Result implements IResultOfGetDocumentTypeByIdResponse {
-    data?: GetDocumentTypeByIdResponse | undefined;
+export class AddEditDocumentTypesCommand extends AddEditCommandBaseOfDocumentTypeDto implements IAddEditDocumentTypesCommand {
 
-    constructor(data?: IResultOfGetDocumentTypeByIdResponse) {
+    constructor(data?: IAddEditDocumentTypesCommand) {
         super(data);
     }
 
     init(_data?: any) {
         super.init(_data);
-        if (_data) {
-            this.data = _data["data"] ? GetDocumentTypeByIdResponse.fromJS(_data["data"]) : <any>undefined;
-        }
     }
 
-    static fromJS(data: any): ResultOfGetDocumentTypeByIdResponse {
+    static fromJS(data: any): AddEditDocumentTypesCommand {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultOfGetDocumentTypeByIdResponse();
+        let result = new AddEditDocumentTypesCommand();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
         super.toJSON(data);
         return data; 
     }
 }
 
-export interface IResultOfGetDocumentTypeByIdResponse extends IResult {
-    data?: GetDocumentTypeByIdResponse | undefined;
-}
-
-export class GetDocumentTypeByIdResponse implements IGetDocumentTypeByIdResponse {
-    id?: number;
-    name?: string | undefined;
-    description?: string | undefined;
-
-    constructor(data?: IGetDocumentTypeByIdResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-        }
-    }
-
-    static fromJS(data: any): GetDocumentTypeByIdResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new GetDocumentTypeByIdResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        return data; 
-    }
-}
-
-export interface IGetDocumentTypeByIdResponse {
-    id?: number;
-    name?: string | undefined;
-    description?: string | undefined;
-}
-
-export class ResultOfInteger extends Result implements IResultOfInteger {
-    data?: number;
-
-    constructor(data?: IResultOfInteger) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.data = _data["data"];
-        }
-    }
-
-    static fromJS(data: any): ResultOfInteger {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfInteger();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["data"] = this.data;
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IResultOfInteger extends IResult {
-    data?: number;
-}
-
-export class AddEditDocumentTypeCommand implements IAddEditDocumentTypeCommand {
-    id?: number;
-    name!: string;
-    description!: string;
-
-    constructor(data?: IAddEditDocumentTypeCommand) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-        }
-    }
-
-    static fromJS(data: any): AddEditDocumentTypeCommand {
-        data = typeof data === 'object' ? data : {};
-        let result = new AddEditDocumentTypeCommand();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        return data; 
-    }
-}
-
-export interface IAddEditDocumentTypeCommand {
-    id?: number;
-    name: string;
-    description: string;
+export interface IAddEditDocumentTypesCommand extends IAddEditCommandBaseOfDocumentTypeDto {
 }
 
 export class AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute implements IAddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute {

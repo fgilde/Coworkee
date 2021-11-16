@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -11,7 +12,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 {
     public partial class AddEditDocumentTypeModal
     {
-        [Parameter] public AddEditDocumentTypeCommand AddEditDocumentTypeModel { get; set; } = new();
+        [Parameter] public DocumentTypeDto AddEditDocumentTypeModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -25,12 +26,9 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task SaveAsync()
         {
-            var response = await _api.DocumentTypes_PostAsync(AddEditDocumentTypeModel);
-            if (_errorService.IsSuccessFull(response))
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                MudDialog.Close();
-            }
+            await _api.DocumentTypes_PostAsync(new AddEditDocumentTypesCommand(AddEditDocumentTypeModel));
+            _snackBar.Add(_localizer["DocumentType Updated"], Severity.Success);
+            MudDialog.Close();
             await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
         }
 

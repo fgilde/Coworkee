@@ -1,53 +1,43 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Repositories;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Commands;
 using CleanArchitectureBase.Shared.Constants.Application;
+using LazyCache;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Commands.Delete
 {
-    public class DeleteDocumentCommand : IRequest<Result<int>>
-    {
-        public int Id { get; set; }
-    }
 
-    internal class DeleteDocumentCommandHandler : IRequestHandler<DeleteDocumentCommand, Result<int>>
-    {
-        private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IStringLocalizer<DeleteDocumentCommandHandler> _localizer;
+    public class DeleteDocumentsCommand : DeleteCommandBase<int>
+    { }
 
-        public DeleteDocumentCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteDocumentCommandHandler> localizer)
+    internal class DeleteDocumentsCommandHandler : DeleteCommandHandlerBase<DeleteDocumentsCommand, int, DocumentDto, Document>
+    {
+        private readonly IAppCache _cache;
+
+        public DeleteDocumentsCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider, IAppCache cache)
+            : base(unitOfWork, mediator, permissionService, provider)
         {
-            _unitOfWork = unitOfWork;
-            _localizer = localizer;
+            _cache = cache;
         }
 
-        public async Task<Result<int>> Handle(DeleteDocumentCommand command, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(DeleteDocumentsCommand command, CancellationToken cancellationToken)
         {
-            var documentsWithExtendedAttributes = _unitOfWork.Repository<Document>().Entities.Include(x => x.ExtendedAttributes);
-
-            var document = await _unitOfWork.Repository<Document>().GetByIdAsync(command.Id);
-            if (document != null)
-            {
-                await _unitOfWork.Repository<Document>().DeleteAsync(document);
-
-                // delete all caches related with deleted entity
-                var cacheKeys = await documentsWithExtendedAttributes.SelectMany(x => x.ExtendedAttributes).Where(x => x.EntityId == command.Id).Distinct().Select(x => ApplicationConstants.Cache.GetAllEntityExtendedAttributesByEntityIdCacheKey(nameof(Document), x.EntityId))
-                    .ToListAsync(cancellationToken);
-                cacheKeys.Add(ApplicationConstants.Cache.GetAllEntityExtendedAttributesCacheKey(nameof(Document)));
-                await _unitOfWork.CommitAndRemoveCache(cancellationToken, cacheKeys.ToArray());
-
-                return await Result<int>.SuccessAsync(document.Id, _localizer["Document Deleted"]);
-            }
-            else
-            {
-                return await Result<int>.FailAsync(_localizer["Document Not Found!"]);
-            }
+            var documentsWithExtendedAttributes = UnitOfWork.Repository<Document>().Entities.Include(x => x.ExtendedAttributes);
+            
+            var cacheKeys = await documentsWithExtendedAttributes.SelectMany(x => x.ExtendedAttributes).Where(x => command.Ids.Contains(x.EntityId))
+                .Distinct().Select(x => ApplicationConstants.Cache.GetAllEntityExtendedAttributesByEntityIdCacheKey(nameof(Document), x.EntityId))
+                .ToListAsync(cancellationToken);
+            cacheKeys.Add(ApplicationConstants.Cache.GetAllEntityExtendedAttributesCacheKey(nameof(Document)));
+            cacheKeys.ForEach(s => _cache.Remove(s));
+            return await base.Handle(command, cancellationToken);
         }
     }
 }

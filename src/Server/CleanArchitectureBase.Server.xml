@@ -431,7 +431,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Post(CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit.AddEditDocumentCommand,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Post(CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit.AddEditDocumentsCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit Document
             </summary>
@@ -439,11 +439,11 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32[],System.Threading.CancellationToken)">
             <summary>
             Delete a Document
             </summary>
-            <param name="id"></param>
+            <param name="ids"></param>
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>

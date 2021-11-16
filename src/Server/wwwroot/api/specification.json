@@ -260,6 +260,20 @@
               "nullable": true
             },
             "x-position": 3
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-position": 4
           }
         ],
         "responses": {
@@ -268,7 +282,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedResultOfGetAllDocumentsResponse"
+                  "$ref": "#/components/schemas/PaginatedResultOfDocumentDto"
                 }
               }
             }
@@ -291,7 +305,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddEditDocumentCommand"
+                "$ref": "#/components/schemas/AddEditDocumentsCommand"
               }
             }
           },
@@ -302,9 +316,51 @@
           "200": {
             "description": "Status 200 OK",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfInteger"
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Delete a Document",
+        "operationId": "Documents_Delete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -342,43 +398,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfGetDocumentByIdResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Documents"
-        ],
-        "summary": "Delete a Document",
-        "operationId": "Documents_Delete",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status 200 OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultOfInteger"
+                  "$ref": "#/components/schemas/DocumentDto"
                 }
               }
             }
@@ -2745,7 +2765,7 @@
           }
         ]
       },
-      "PaginatedResultOfGetAllDocumentsResponse": {
+      "PaginatedResultOfDocumentDto": {
         "allOf": [
           {
             "$ref": "#/components/schemas/Result"
@@ -2758,7 +2778,7 @@
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/GetAllDocumentsResponse"
+                  "$ref": "#/components/schemas/DocumentDto"
                 }
               },
               "currentPage": {
@@ -2787,160 +2807,53 @@
           }
         ]
       },
-      "GetAllDocumentsResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "documentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "documentTypeId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ResultOfGetDocumentByIdResponse": {
+      "DocumentDto": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Result"
+            "$ref": "#/components/schemas/DtoBaseOfInteger"
           },
           {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "data": {
-                "nullable": true,
-                "$ref": "#/components/schemas/GetDocumentByIdResponse"
-              }
-            }
-          }
-        ]
-      },
-      "GetDocumentByIdResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "documentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "documentTypeId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ResultOfInteger": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Result"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
+              "title": {
+                "type": "string",
+                "nullable": true
+              },
+              "description": {
+                "type": "string",
+                "nullable": true
+              },
+              "isPublic": {
+                "type": "boolean"
+              },
+              "createdBy": {
+                "type": "string",
+                "nullable": true
+              },
+              "createdOn": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "url": {
+                "type": "string",
+                "nullable": true
+              },
+              "documentTypeName": {
+                "type": "string",
+                "nullable": true
+              },
+              "documentTypeId": {
                 "type": "integer",
                 "format": "int32"
+              },
+              "uploadRequest": {
+                "nullable": true,
+                "$ref": "#/components/schemas/UploadRequest"
               }
             }
           }
         ]
-      },
-      "AddEditDocumentCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "title",
-          "description",
-          "url",
-          "documentTypeId"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "title": {
-            "type": "string",
-            "minLength": 1
-          },
-          "description": {
-            "type": "string",
-            "minLength": 1
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "url": {
-            "type": "string",
-            "minLength": 1
-          },
-          "documentTypeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "uploadRequest": {
-            "nullable": true,
-            "$ref": "#/components/schemas/UploadRequest"
-          }
-        }
       },
       "UploadRequest": {
         "type": "object",
@@ -2977,6 +2890,42 @@
           1,
           2
         ]
+      },
+      "DtoBaseOfInteger": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "AddEditDocumentsCommand": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AddEditCommandBaseOfDocumentDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "AddEditCommandBaseOfDocumentDto": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/DocumentDto"
+            }
+          }
+        }
       },
       "ResultOfListOfGetAllDocumentTypesResponse": {
         "allOf": [
@@ -3050,6 +2999,23 @@
             "nullable": true
           }
         }
+      },
+      "ResultOfInteger": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
       },
       "AddEditDocumentTypeCommand": {
         "type": "object",
@@ -3212,17 +3178,6 @@
             }
           }
         ]
-      },
-      "DtoBaseOfInteger": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
       },
       "ResultOfTranslationDto": {
         "allOf": [

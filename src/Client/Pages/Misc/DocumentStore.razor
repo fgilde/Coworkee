@@ -1,7 +1,8 @@
 ﻿@page "/document-store"
 @attribute [Authorize(Policy = Permissions.Documents.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<DocumentStore> _localizer
-@using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll
+@using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Shared.Constants.Role
 
 <style>
     .mud-table-container {
@@ -17,7 +18,7 @@
 }
 else
 {
-    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllDocumentsResponse>>>(ServerReload))" Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
+    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<DocumentDto>>>(ServerReload))" Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateDocuments)
@@ -37,13 +38,13 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentIdField">@_localizer["Id"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentTitleField">@_localizer["Title"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentDescriptionField">@_localizer["Description"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentDocumentTypeField">@_localizer["Document Type"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentIsPublicField">@_localizer["Is Public"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentDateCreatedField">@_localizer["Date Created"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="GetAllDocumentsResponse" SortLabel="documentOwnerField">@_localizer["Owner"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentIdField">@_localizer["Id"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentTitleField">@_localizer["Title"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentDescriptionField">@_localizer["Description"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentDocumentTypeField">@_localizer["Document Type"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentIsPublicField">@_localizer["Is Public"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentDateCreatedField">@_localizer["Date Created"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentOwnerField">@_localizer["Owner"]</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -55,22 +56,12 @@ else
                 <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
             </MudTd>
             <MudTd DataLabel="DocumentType">
-                <MudHighlighter Text="@context.DocumentType" HighlightedText="@_searchString" />
+                <MudHighlighter Text="@context.DocumentTypeName" HighlightedText="@_searchString" />
             </MudTd>
             <MudTd DataLabel="IsPublic"><MudCheckBox @bind-Checked="@context.IsPublic" ReadOnly="true" Color="Color.Secondary" /></MudTd>
             <MudTd DataLabel="Date Created">@context.CreatedOn</MudTd>
             <MudTd DataLabel="Owner">
-                @if (context.CreatedBy == CurrentUserId)
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               StartIcon="@Icons.Material.Filled.Face"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface"
-                               Link="/account">
-                        @_localizer["you"]
-                    </MudButton>
-                    }
+                <UserCard Class="no-padding" UserId="@context.CreatedBy" />
             </MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditDocuments || _canDeleteDocuments || _canViewDocumentExtendedAttributes)
@@ -80,7 +71,7 @@ else
                             {
                             <MudMenuItem @onclick="@(() => ManageExtendedAttributes(@context.Id))">@_localizer["Manage Extended Attributes"]</MudMenuItem>
                             }
-                        @if (context.CreatedBy == CurrentUserId)
+                        @if (context.CreatedBy == CurrentUserId || _currentUser.IsInRole(RoleConstants.AdministratorRole))
                             {
                             @if (_canEditDocuments)
                                 {

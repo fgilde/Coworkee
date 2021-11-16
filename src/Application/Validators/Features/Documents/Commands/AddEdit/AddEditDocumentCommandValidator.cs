@@ -1,10 +1,19 @@
-﻿using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
+﻿using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Validators.Features.Documents.Commands.AddEdit
 {
-    public class AddEditDocumentCommandValidator : AbstractValidator<AddEditDocumentCommand>
+    public class AddEditDocumentsCommandValidator : AbstractValidator<AddEditDocumentsCommand>
+    {
+        public AddEditDocumentsCommandValidator(IStringLocalizer<AddEditDocumentCommandValidator> localizer)
+        {
+            RuleForEach(x => x.Items).SetValidator(new AddEditDocumentCommandValidator(localizer));
+        }
+    }
+
+    public class AddEditDocumentCommandValidator : AbstractValidator<DocumentDto>
     {
         public AddEditDocumentCommandValidator(IStringLocalizer<AddEditDocumentCommandValidator> localizer)
         {

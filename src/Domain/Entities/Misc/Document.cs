@@ -11,5 +11,6 @@ namespace CleanArchitectureBase.Domain.Entities.Misc
         public string URL { get; set; }
         public int DocumentTypeId { get; set; }
         public virtual DocumentType DocumentType { get; set; }
+        public string DocumentTypeName => DocumentType?.Name;
     }
 }

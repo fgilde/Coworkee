@@ -18,7 +18,12 @@
 else
 {
     <MudTable FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
-              RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)" @bind-SelectedItems="_selectedItems" Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)" ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)" Hover="true" Dense="false" Bordered="false" Striped="true" @ref="_table">
+              RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)" 
+              
+              Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)" 
+              ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
+              Hover="true" Dense="false" Bordered="false" Striped="true" 
+              @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canEdit && EditMode == EditMode.InlineBulk && ApiEditMany != null && toUpdate.Any())

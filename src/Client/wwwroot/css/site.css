@@ -89,6 +89,12 @@ body * {
   transition-duration: 0.3s;
   transition-timing-function: ease; }
 
+.no-padding {
+  padding: 0; }
+
+.transparent {
+  background-color: transparent; }
+
 .cursor-pointer {
   cursor: pointer; }
 

@@ -1,87 +1,53 @@
-﻿using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Wrapper;
+﻿using CleanArchitectureBase.Domain.Entities.Misc;
 using MediatR;
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Commands;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit
 {
-    public partial class AddEditDocumentCommand : IRequest<Result<int>>
+    [CustomAuthorize(Policies = new[] { Permissions.Documents.Create, Permissions.Documents.Edit }, PolicyMatch = PolicyMatch.Any)]
+    public class AddEditDocumentsCommand : AddEditCommandBase<DocumentDto>
     {
-        public int Id { get; set; }
-        [Required]
-        public string Title { get; set; }
-        [Required]
-        public string Description { get; set; }
-        public bool IsPublic { get; set; } = false;
-        [Required]
-        public string URL { get; set; }
-        [Required]
-        public int DocumentTypeId { get; set; }
-        public UploadRequest UploadRequest { get; set; }
+        public AddEditDocumentsCommand(params DocumentDto[] items) : base(items)
+        { }
     }
 
-    internal class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentCommand, Result<int>>
+    internal class AddEditDocumentsCommandHandler : AddEditCommandHandlerBase<AddEditDocumentsCommand, int, DocumentDto, Document>
     {
-        private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IUploadService _uploadService;
-        private readonly IStringLocalizer<AddEditDocumentCommandHandler> _localizer;
+        private readonly IStringLocalizer<AddEditDocumentsCommandHandler> _localizer;
+        protected override string EditPermission => Permissions.Documents.Edit;
+        protected override string CreatePermission => Permissions.Documents.Create;
 
-        public AddEditDocumentCommandHandler(IUnitOfWork<int> unitOfWork, IUploadService uploadService, IStringLocalizer<AddEditDocumentCommandHandler> localizer)
+        public AddEditDocumentsCommandHandler(
+            IUnitOfWork<int> unitOfWork,
+            IMediator mediator,
+            IPermissionService permissionService,
+            IServiceProvider provider,
+            IUploadService uploadService, IStringLocalizer<AddEditDocumentsCommandHandler> localizer)
+            : base(unitOfWork, mediator, permissionService, provider)
         {
-            _unitOfWork = unitOfWork;
             _uploadService = uploadService;
             _localizer = localizer;
         }
 
-        public async Task<Result<int>> Handle(AddEditDocumentCommand command, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(AddEditDocumentsCommand command, CancellationToken cancellationToken)
         {
-            var uploadRequest = command.UploadRequest;
-            if (uploadRequest != null)
-            {
-                uploadRequest.FileName = $"D-{Guid.NewGuid()}{uploadRequest.Extension}";
-            }
-
-            if (command.Id == 0)
-            {
-                var doc = command.MapTo<Document>();
-                if (uploadRequest != null)
-                {
-                    doc.URL = _uploadService.UploadAsync(uploadRequest);
-                }
-                await _unitOfWork.Repository<Document>().AddAsync(doc);
-                await _unitOfWork.Commit(cancellationToken);
-                return await Result<int>.SuccessAsync(doc.Id, _localizer["Document Saved"]);
-            }
-            else
-            {
-                var doc = await _unitOfWork.Repository<Document>().GetByIdAsync(command.Id);
-                if (doc != null)
-                {
-                    doc.Title = command.Title ?? doc.Title;
-                    doc.Description = command.Description ?? doc.Description;
-                    doc.IsPublic = command.IsPublic;
-                    if (uploadRequest != null)
-                    {
-                        doc.URL = _uploadService.UploadAsync(uploadRequest);
-                    }
-                    doc.DocumentTypeId = (command.DocumentTypeId == 0) ? doc.DocumentTypeId : command.DocumentTypeId;
-                    await _unitOfWork.Repository<Document>().UpdateAsync(doc);
-                    await _unitOfWork.Commit(cancellationToken);
-                    return await Result<int>.SuccessAsync(doc.Id, _localizer["Document Updated"]);
-                }
-                else
-                {
-                    return await Result<int>.FailAsync(_localizer["Document Not Found!"]);
-                }
-            }
+            var uploadTasks = command.Items.Where(dto => dto.UploadRequest != null).Select(dto =>
+                Task.Run(() => _uploadService.UploadAsync(dto.UploadRequest), cancellationToken)
+                    .ContinueWith(task => dto.URL = task.Result, cancellationToken));
+            await Task.WhenAll(uploadTasks);
+            await base.Handle(command, cancellationToken);
+            return Unit.Value;
         }
     }
 }

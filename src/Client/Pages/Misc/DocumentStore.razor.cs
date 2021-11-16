@@ -1,12 +1,11 @@
-﻿using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
-using CleanArchitectureBase.Client.Extensions;
+﻿using CleanArchitectureBase.Client.Extensions;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -15,8 +14,8 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 {
     public partial class DocumentStore
     {
-        private IEnumerable<GetAllDocumentsResponse> _pagedData;
-        private MudTable<GetAllDocumentsResponse> _table;
+        private IEnumerable<DocumentDto> _pagedData;
+        private MudTable<DocumentDto> _table;
         private string CurrentUserId { get; set; }
         private int _totalItems;
         private int _currentPage;
@@ -41,26 +40,24 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             _canDeleteDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Documents.Delete)).Succeeded;
             _canSearchDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Documents.Search)).Succeeded;
             _canViewDocumentExtendedAttributes = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.DocumentExtendedAttributes.View)).Succeeded;
-
             _loaded = true;
 
             var state = await _stateProvider.GetAuthenticationStateAsync();
             var user = state.User;
-            if (user == null) return;
             if (user.Identity?.IsAuthenticated == true)
             {
                 CurrentUserId = user.GetUserId();
             }
         }
 
-        private async Task<TableData<GetAllDocumentsResponse>> ServerReload(TableState state)
+        private async Task<TableData<DocumentDto>> ServerReload(TableState state)
         {
             if (!string.IsNullOrWhiteSpace(_searchString))
             {
                 state.Page = 0;
             }
             await LoadData(state.Page, state.PageSize, state);
-            return new TableData<GetAllDocumentsResponse> { TotalItems = _totalItems, Items = _pagedData };
+            return new TableData<DocumentDto> { TotalItems = _totalItems, Items = _pagedData };
         }
 
         private async Task LoadData(int pageNumber, int pageSize, TableState state)
@@ -79,7 +76,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                         return true;
                     if (element.Description.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
                         return true;
-                    if (element.DocumentType.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                    if (element.DocumentTypeName.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
                         return true;
                     return false;
                 });
@@ -95,7 +92,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                         loadedData = loadedData.OrderByDirection(state.SortDirection, d => d.Description);
                         break;
                     case "documentDocumentTypeField":
-                        loadedData = loadedData.OrderByDirection(state.SortDirection, p => p.DocumentType);
+                        loadedData = loadedData.OrderByDirection(state.SortDirection, p => p.DocumentTypeName);
                         break;
                     case "documentIsPublicField":
                         loadedData = loadedData.OrderByDirection(state.SortDirection, d => d.IsPublic);
@@ -126,15 +123,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 var doc = _pagedData.FirstOrDefault(c => c.Id == id);
                 if (doc != null)
                 {
-                    parameters.Add(nameof(AddEditDocumentModal.AddEditDocumentModel), new AddEditDocumentCommand
-                    {
-                        Id = doc.Id,
-                        Title = doc.Title,
-                        Description = doc.Description,
-                        URL = doc.URL,
-                        IsPublic = doc.IsPublic,
-                        DocumentTypeId = doc.DocumentTypeId
-                    });
+                    parameters.Add(nameof(AddEditDocumentModal.AddEditDocumentModel), doc);
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
@@ -148,7 +137,8 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task Delete(int id)
         {
-            string deleteContent = _localizer["Delete Content"];
+            var toDelete = new List<int> {id};
+            string deleteContent = _localizer["Delete Content {0}"];
             var parameters = new DialogParameters
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
@@ -158,12 +148,9 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await _api.Documents_DeleteAsync(id);
+                await _api.Documents_DeleteAsync(toDelete);
                 OnSearch("");
-                if (_errorService.IsSuccessFull(response))
-                {
-                    _snackBar.Add(response.Messages[0], Severity.Success);
-                }
+                _snackBar.Add(_localizer["Document Deleted"], Severity.Success);
             }
         }
 

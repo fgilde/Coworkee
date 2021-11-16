@@ -1,7 +1,7 @@
 ﻿@using CleanArchitectureBase.Client.Shared.Components
 
-<MudCard Elevation="0" Square="true" Class="@Class">
-    <MudCardHeader>
+<MudCard Class="@($"transparent {Class}")" Elevation="0" Square="true">
+    <MudCardHeader Class="@($"transparent {Class}")" Style="@Style">
         <CardHeaderAvatar>
             <UserAvatar IsUserOnline="@IsUserOnline" UserId="@UserId" User="@User" UserData="@UserData" />
         </CardHeaderAvatar>

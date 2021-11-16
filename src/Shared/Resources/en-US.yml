@@ -148,6 +148,7 @@ Decimal value is required using {0} type!: Decimal value is required using {0} t
 Delete: Delete
 Delete Confirmation: Delete Confirmation
 Delete Content: Delete Content
+Delete Content {0}: Delete Content '{0}'
 Delete Extended Attribute?: Delete Extended Attribute?
 Delete Image: Delete Image
 Delete Picture: Delete Picture
@@ -855,7 +856,7 @@ ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Ethiopia)
 tig-ER: Tigre (Eritrea)
 Time: Time
-Title: Sign In
+Title: Title
 Title is required!: Title is required!
 tk-TM: Turkmen (Turkmenistan)
 tn-BW: Setswana (Botswana)

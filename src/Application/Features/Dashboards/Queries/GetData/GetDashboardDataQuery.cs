@@ -15,9 +15,7 @@ using Microsoft.Extensions.Localization;
 namespace CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData
 {
     public class GetDashboardDataQuery : IRequest<Result<DashboardDataResponse>>
-    {
-
-    }
+    {}
 
     internal class GetDashboardDataQueryHandler : IRequestHandler<GetDashboardDataQuery, Result<DashboardDataResponse>>
     {

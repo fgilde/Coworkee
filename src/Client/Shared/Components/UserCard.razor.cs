@@ -9,6 +9,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
     public partial class UserCard
     {
         [Parameter] public string Class { get; set; }
+        [Parameter] public string Style { get; set; }
         [Parameter] public bool ShowEmail { get; set; } = true;
         [Parameter] public bool ShowLogout { get; set; }
         [Parameter] public ClaimsPrincipal User { get; set; }

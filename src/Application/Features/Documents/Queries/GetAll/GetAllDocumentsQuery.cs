@@ -1,67 +1,32 @@
 ﻿using CleanArchitectureBase.Application.Specifications.Misc;
 using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Features.Base.Queries;
+using CleanArchitectureBase.Application.Specifications.Base;
 
 namespace CleanArchitectureBase.Application.Features.Documents.Queries.GetAll
 {
-    public class GetAllDocumentsQuery : IRequest<PaginatedResult<GetAllDocumentsResponse>>
+
+    public class GetAllDocumentsQuery : GetAllPagedQueryBase<DocumentDto>
+    { }
+
+    internal class GetAllDocumentsQueryHandler : GetAllPagedQueryHandlerBase<GetAllDocumentsQuery, int, DocumentDto, Document>
     {
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
-        public string SearchString { get; set; }
-
-        public GetAllDocumentsQuery()
-        {}
-
-        public GetAllDocumentsQuery(int pageNumber, int pageSize, string searchString)
-        {
-            PageNumber = pageNumber;
-            PageSize = pageSize;
-            SearchString = searchString;
-        }
-    }
-
-    internal class GetAllDocumentsQueryHandler : IRequestHandler<GetAllDocumentsQuery, PaginatedResult<GetAllDocumentsResponse>>
-    {
-        private readonly IUnitOfWork<int> _unitOfWork;
-
         private readonly ICurrentUserService _currentUserService;
 
-        public GetAllDocumentsQueryHandler(IUnitOfWork<int> unitOfWork, ICurrentUserService currentUserService)
+        protected override ISpecification<Document> GetFilterSpecification(GetAllDocumentsQuery query)
         {
-            _unitOfWork = unitOfWork;
-            _currentUserService = currentUserService;
+            return new DocumentFilterSpecification(query.SearchString, _currentUserService.UserId);
         }
 
-        public async Task<PaginatedResult<GetAllDocumentsResponse>> Handle(GetAllDocumentsQuery request, CancellationToken cancellationToken)
+        public GetAllDocumentsQueryHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IServiceProvider provider, ICurrentUserService currentUserService)
+            : base(unitOfWork, mediator, provider)
         {
-            Expression<Func<Document, GetAllDocumentsResponse>> expression = e => new GetAllDocumentsResponse
-            {
-                Id = e.Id,
-                Title = e.Title,
-                CreatedBy = e.CreatedBy,
-                IsPublic = e.IsPublic,
-                CreatedOn = e.CreatedOn,
-                Description = e.Description,
-                URL = e.URL,
-                DocumentType = e.DocumentType.Name,
-                DocumentTypeId = e.DocumentTypeId
-            };
-            var docSpec = new DocumentFilterSpecification(request.SearchString, _currentUserService.UserId);
-            var data = await _unitOfWork.Repository<Document>().Entities
-               .Specify(docSpec)
-               .Select(expression)
-               .ToPaginatedListAsync(request.PageNumber, request.PageSize);
-            return data;
+            _currentUserService = currentUserService;
         }
     }
 }

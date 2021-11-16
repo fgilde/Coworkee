@@ -21,7 +21,6 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.Export
 
     internal class ExportBrandsQueryHandler : ExportQueryHandlerBase<ExportBrandsQuery, int, Brand>
     {
-
         public ExportBrandsQueryHandler(IExcelService excelService, IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportBrandsQueryHandler> localizer)
             : base(excelService, unitOfWork, localizer)
         { }

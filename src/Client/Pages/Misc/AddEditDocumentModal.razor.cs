@@ -9,8 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
 
 
@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
     public partial class AddEditDocumentModal
     {
 
-        [Parameter] public AddEditDocumentCommand AddEditDocumentModel { get; set; } = new();
+        [Parameter] public DocumentDto AddEditDocumentModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;
@@ -33,12 +33,9 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task SaveAsync()
         {
-            var response = await _api.Documents_PostAsync(AddEditDocumentModel);
-            if (_errorService.IsSuccessFull(response))
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                MudDialog.Close();
-            }
+            await _api.Documents_PostAsync(new AddEditDocumentsCommand(AddEditDocumentModel));
+            _snackBar.Add(_localizer["Document Updated"], Severity.Success);
+            MudDialog.Close();
         }
 
         protected override async Task OnInitializedAsync()
@@ -72,7 +69,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 var format = "application/octet-stream";
                 await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
                 AddEditDocumentModel.URL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, UploadType = UploadType.Document, Extension = extension };
+                AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name, UploadType = UploadType.Document, Extension = extension };
             }
         }
 

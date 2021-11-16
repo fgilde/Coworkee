@@ -556,7 +556,7 @@
         ]
       }
     },
-    "/DocumentTypes/export": {
+    "/DocumentTypes/Export": {
       "get": {
         "tags": [
           "DocumentTypes"
@@ -571,6 +571,49 @@
               "type": "string",
               "default": "",
               "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/DocumentTypes/ExportByIds": {
+      "get": {
+        "tags": [
+          "DocumentTypes"
+        ],
+        "summary": "Search Document Types and Export to Excel",
+        "operationId": "DocumentTypes_ExportByIds",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
             },
             "x-position": 1
           }
@@ -2262,7 +2305,7 @@
         ]
       }
     },
-    "/Brands/export": {
+    "/Brands/Export": {
       "get": {
         "tags": [
           "Brands"
@@ -2284,6 +2327,50 @@
         "responses": {
           "200": {
             "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/Brands/ExportByIds": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Exports specific products as excel",
+        "operationId": "Brands_ExportByIds",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "description": "Brand ids to export",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -2510,7 +2597,7 @@
         }
       }
     },
-    "/Products/export": {
+    "/Products/Export": {
       "get": {
         "tags": [
           "Products"
@@ -2548,7 +2635,7 @@
         ]
       }
     },
-    "/Products/exportByIds": {
+    "/Products/ExportByIds": {
       "get": {
         "tags": [
           "Products"

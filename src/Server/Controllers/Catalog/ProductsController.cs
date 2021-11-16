@@ -93,7 +93,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.Export)]
-        [HttpGet("export")]
+        [HttpGet(nameof(Export))]
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
@@ -107,7 +107,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.Export)]
-        [HttpGet("exportByIds")]
+        [HttpGet(nameof(ExportByIds))]
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
         {

@@ -77,11 +77,25 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [Authorize(Policy = Permissions.Brands.Export)]
-        [HttpGet("export")]
+        [HttpGet(nameof(Export))]
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new ExportBrandsQuery(searchString), cancellationToken));
+        }
+
+        /// <summary>
+        /// Exports specific products as excel
+        /// </summary>
+        /// <param name="ids">Brand ids to export</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Brands.Export)]
+        [HttpGet(nameof(ExportByIds))]
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
+        {
+            return Ok(await Mediator.Send(new ExportBrandsQuery(ids), cancellationToken));
         }
     }
 }

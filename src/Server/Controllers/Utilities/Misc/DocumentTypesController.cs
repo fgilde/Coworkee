@@ -76,11 +76,26 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [Authorize(Policy = Permissions.DocumentTypes.Export)]
-        [HttpGet("export")]
+        [HttpGet(nameof(Export))]
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new ExportDocumentTypesQuery(searchString), cancellationToken));
+        }
+
+
+        /// <summary>
+        /// Search Document Types and Export to Excel
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [Authorize(Policy = Permissions.DocumentTypes.Export)]
+        [HttpGet(nameof(ExportByIds))]
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
+        {
+            return Ok(await Mediator.Send(new ExportDocumentTypesQuery(ids), cancellationToken));
         }
     }
 }

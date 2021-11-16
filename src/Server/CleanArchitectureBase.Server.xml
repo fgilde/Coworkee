@@ -57,6 +57,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            Exports specific products as excel
+            </summary>
+            <param name="ids">Brand ids to export</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Products
@@ -482,6 +490,14 @@
             Search Document Types and Export to Excel
             </summary>
             <param name="searchString"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
+            <summary>
+            Search Document Types and Export to Excel
+            </summary>
+            <param name="ids"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>

@@ -725,6 +725,11 @@ export interface IDocumentTypesClient {
      * @param searchString (optional) 
      */
     export(searchString: string | null | undefined): Observable<ResultOfString>;
+    /**
+     * Search Document Types and Export to Excel
+     * @param ids (optional) 
+     */
+    exportByIds(ids: number[] | null | undefined): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -967,7 +972,7 @@ export class DocumentTypesClient implements IDocumentTypesClient {
      * @param searchString (optional) 
      */
     export(searchString: string | null | undefined): Observable<ResultOfString> {
-        let url_ = this.baseUrl + "/DocumentTypes/export?";
+        let url_ = this.baseUrl + "/DocumentTypes/Export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -995,6 +1000,60 @@ export class DocumentTypesClient implements IDocumentTypesClient {
     }
 
     protected processExport(response: HttpResponseBase): Observable<ResultOfString> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfString>(<any>null);
+    }
+
+    /**
+     * Search Document Types and Export to Excel
+     * @param ids (optional) 
+     */
+    exportByIds(ids: number[] | null | undefined): Observable<ResultOfString> {
+        let url_ = this.baseUrl + "/DocumentTypes/ExportByIds?";
+        if (ids !== undefined && ids !== null)
+            ids && ids.forEach(item => { url_ += "ids=" + encodeURIComponent("" + item) + "&"; });
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportByIds(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportByIds(<any>response_);
+                } catch (e) {
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processExportByIds(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3619,6 +3678,12 @@ export interface IBrandsClient {
      * @param searchString (optional) 
      */
     export(searchString: string | null | undefined): Observable<ResultOfString>;
+    /**
+     * Exports specific products as excel
+     * @param ids (optional) Brand ids to export
+     * @return Status 200 OK
+     */
+    exportByIds(ids: number[] | null | undefined): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -3861,7 +3926,7 @@ export class BrandsClient implements IBrandsClient {
      * @param searchString (optional) 
      */
     export(searchString: string | null | undefined): Observable<ResultOfString> {
-        let url_ = this.baseUrl + "/Brands/export?";
+        let url_ = this.baseUrl + "/Brands/Export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -3889,6 +3954,61 @@ export class BrandsClient implements IBrandsClient {
     }
 
     protected processExport(response: HttpResponseBase): Observable<ResultOfString> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfString>(<any>null);
+    }
+
+    /**
+     * Exports specific products as excel
+     * @param ids (optional) Brand ids to export
+     * @return Status 200 OK
+     */
+    exportByIds(ids: number[] | null | undefined): Observable<ResultOfString> {
+        let url_ = this.baseUrl + "/Brands/ExportByIds?";
+        if (ids !== undefined && ids !== null)
+            ids && ids.forEach(item => { url_ += "ids=" + encodeURIComponent("" + item) + "&"; });
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportByIds(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportByIds(<any>response_);
+                } catch (e) {
+                    return <Observable<ResultOfString>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ResultOfString>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processExportByIds(response: HttpResponseBase): Observable<ResultOfString> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4264,7 +4384,7 @@ export class ProductsClient implements IProductsClient {
      * @return Status 200 OK
      */
     export(searchString: string | null | undefined): Observable<ResultOfString> {
-        let url_ = this.baseUrl + "/Products/export?";
+        let url_ = this.baseUrl + "/Products/Export?";
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -4319,7 +4439,7 @@ export class ProductsClient implements IProductsClient {
      * @return Status 200 OK
      */
     exportByIds(ids: number[] | null | undefined): Observable<ResultOfString> {
-        let url_ = this.baseUrl + "/Products/exportByIds?";
+        let url_ = this.baseUrl + "/Products/ExportByIds?";
         if (ids !== undefined && ids !== null)
             ids && ids.forEach(item => { url_ += "ids=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");

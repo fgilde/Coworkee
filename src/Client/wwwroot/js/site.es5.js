@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 window.Download = function (options) {
-    var fileUrl = "data:" + options.mimeType + ";base64," + options.byteArray;
+    var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
     fetch(fileUrl).then(function (response) {
         return response.blob();
     }).then(function (blob) {

@@ -1,27 +1,40 @@
-﻿using OfficeOpenXml;
-using OfficeOpenXml.Style;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using Microsoft.Extensions.Localization;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace CleanArchitectureBase.Infrastructure.Services.ExportImport
 {
-    public class ExcelService : IExcelService
+    public class ExcelExportService : IExportService
     {
-        private readonly IStringLocalizer<ExcelService> _localizer;
+        private readonly IStringLocalizer<ExcelExportService> _localizer;
 
-        public ExcelService(IStringLocalizer<ExcelService> localizer)
+        public ExportServiceType ExportService => ExportServiceType.Excel;
+
+        public Task<byte[]> ExportAsync<TData>(
+            IEnumerable<TData> data, Dictionary<string, 
+            Func<TData, object>> mappers, 
+            CancellationToken cancellationToken = default)
+        {
+            return ExportAsync(data, mappers, _localizer["Export_SheetName"], cancellationToken);
+        }
+
+        public ExcelExportService(IStringLocalizer<ExcelExportService> localizer)
         {
             _localizer = localizer;
         }
 
-        public async Task<string> ExportAsync<TData>(IEnumerable<TData> data
-            , Dictionary<string, Func<TData, object>> mappers
-            , string sheetName = "Sheet1")
+        public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, 
+            Dictionary<string, Func<TData, object>> mappers,
+            string sheetName,
+            CancellationToken cancellationToken = default)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using var p = new ExcelPackage();
@@ -76,8 +89,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
                 autoFilterCells.AutoFitColumns();
             }
 
-            var byteArray = await p.GetAsByteArrayAsync();
-            return Convert.ToBase64String(byteArray);
+            return await p.GetAsByteArrayAsync(cancellationToken);
         }
     }
 }

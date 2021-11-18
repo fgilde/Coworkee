@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Export;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Misc;
@@ -14,18 +13,12 @@ namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Expor
 {
     [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Export })]
     public class ExportDocumentTypesQuery : ExportQueryBase<int>
-    {
-        public ExportDocumentTypesQuery(int[] ids) : base(ids)
-        { }
-
-        public ExportDocumentTypesQuery(string searchString) : base(searchString)
-        { }
-    }
+    {}
 
     internal class ExportDocumentTypesQueryHandler : ExportQueryHandlerBase<ExportDocumentTypesQuery, int, DocumentType>
     {
-        public ExportDocumentTypesQueryHandler(IExcelService excelService, IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportDocumentTypesQueryHandler> localizer)
-            : base(excelService, unitOfWork, localizer)
+        public ExportDocumentTypesQueryHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportDocumentTypesQueryHandler> localizer, IServiceProvider serviceProvider)
+            : base(unitOfWork, localizer, serviceProvider)
         { }
 
         protected override Dictionary<string, Func<DocumentType, object>> PropertyMappers()
@@ -43,5 +36,4 @@ namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Expor
             return new DocumentTypeFilterSpecification(query.SearchString);
         }
     }
-
 }

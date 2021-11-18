@@ -6,45 +6,38 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.Base.Export
 {
-    public class ExportQueryBase<TId> : IRequest<Result<string>>
+    public class ExportQueryBase<TId> : IRequest<byte[]>
     {
+        public ExportServiceType ExportServiceType { get; set; } = ExportServiceType.Excel;
         public string SearchString { get; set; }
-        public TId[] Ids { get; }
-
-        public ExportQueryBase(TId[] ids)
-        {
-            Ids = ids;
-        }
-
-        public ExportQueryBase(string searchString = "")
-        {
-            SearchString = searchString;
-        }
+        public TId[] Ids { get; set; }
     }
 
-    internal abstract class ExportQueryHandlerBase<TQuery, TEntityId, TEntity> : IRequestHandler<TQuery, Result<string>>
+    internal abstract class ExportQueryHandlerBase<TQuery, TEntityId, TEntity> : IRequestHandler<TQuery, byte[]>
         where TQuery : ExportQueryBase<TEntityId>
         where TEntity : AuditableEntity<TEntityId>
     {
-        protected readonly IExcelService ExcelService;
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;
         protected readonly IStringLocalizer Localizer;
+        protected readonly IServiceProvider Provider;
+        protected T Get<T>() => Provider.GetService<T>();
 
-        public ExportQueryHandlerBase(IExcelService excelService, IUnitOfWork<TEntityId> unitOfWork, IStringLocalizer localizer)
+        protected ExportQueryHandlerBase(IUnitOfWork<TEntityId> unitOfWork, IStringLocalizer localizer, IServiceProvider serviceProvider)
         {
-            ExcelService = excelService;
             UnitOfWork = unitOfWork;
             Localizer = localizer;
+            Provider = serviceProvider;
         }
 
         protected abstract ISpecification<TEntity> GetFilterSpecification(TQuery query);
@@ -55,14 +48,19 @@ namespace CleanArchitectureBase.Application.Features.Base.Export
                 .ToDictionary(info => info.Name, info => new Func<TEntity, object>(e => info?.GetValue(e)));
         }
 
-        public async Task<Result<string>> Handle(TQuery request, CancellationToken cancellationToken)
+        protected virtual IExportService GetExportService(TQuery query)
         {
+            return Provider.GetServices<IExportService>()
+                .FirstOrDefault(s => s.ExportService == query.ExportServiceType);
+        }
+
+        public async Task<byte[]> Handle(TQuery request, CancellationToken cancellationToken)
+        {
+            var service = GetExportService(request);
             var products = request.Ids is {Length: > 0} 
                 ? await UnitOfWork.Repository<TEntity>().Entities.Where(p => request.Ids.Contains(p.Id)).ToListAsync(cancellationToken)
                 : await UnitOfWork.Repository<TEntity>().Entities.Specify(GetFilterSpecification(request)).ToListAsync(cancellationToken);
-            var data = await ExcelService.ExportAsync(products, PropertyMappers(), Localizer[typeof(TEntity).Name]);
-
-            return await Result<string>.SuccessAsync(data: data);
+            return await service.ExportAsync(products, PropertyMappers(), cancellationToken);
         }
     }
 }

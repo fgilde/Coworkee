@@ -9,8 +9,11 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CleanArchitectureBase.Infrastructure.Specifications;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
@@ -19,16 +22,16 @@ namespace CleanArchitectureBase.Infrastructure.Services
     public class AuditService : IAuditService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IExcelService _excelService;
+        private readonly IExportService _excelService;
         private readonly IStringLocalizer<AuditService> _localizer;
 
         public AuditService(
             ApplicationDbContext context,
-            IExcelService excelService,
-            IStringLocalizer<AuditService> localizer)
+            IStringLocalizer<AuditService> localizer,
+            IServiceProvider serviceProvider)
         {
             _context = context;
-            _excelService = excelService;
+            _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel); 
             _localizer = localizer;
         }
 
@@ -46,7 +49,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
                 .Specify(auditSpec)
                 .OrderByDescending(a => a.DateTime)
                 .ToListAsync();
-            var data = await _excelService.ExportAsync(trails, sheetName: _localizer["Audit trails"],
+            var data = await _excelService.ExportAsync(trails,
                 mappers: new Dictionary<string, Func<Audit, object>>
                 {
                     { _localizer["Table Name"], item => item.TableName },
@@ -58,7 +61,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
                     { _localizer["New Values"], item => item.NewValues },
                 });
 
-            return await Result<string>.SuccessAsync(data: data);
+            return await Result<string>.SuccessAsync(data: Convert.ToBase64String(data));
         }
     }
 }

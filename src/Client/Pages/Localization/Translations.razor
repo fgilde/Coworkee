@@ -1,9 +1,9 @@
 ﻿@page "/localization/translations/{Action?}/{Id?}"
 @attribute [Authorize(Policy = Permissions.Products.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Translations> _localizer
-@using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Contracts.Enums
 
 
 <ReactOnPreferenceChanged Component="this" />
@@ -23,19 +23,19 @@
                    ApiDelete="@(new Func<int[], Task<Result>>(DeleteTranslations))"
                    ApiCreateOrEdit="@(new Func<TranslationDto, Task<bool>>(CreateOrEdit))"
                    ApiEditMany="@(new Func<TranslationDto[], Task<bool>>(SaveAll))"
-                   Export="@(new Func<string, Task<Result<string>>>(Export))"
-                   ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
+                   Export="@(new Func<ExportServiceType, string, Task>(Export))"
+                   ExportSelected="@(new Func<ExportServiceType, int[], Task>(ExportSelected))"
                    GetById="@(new Func<int, IEnumerable<TranslationDto>, Task<TranslationDto>>(FindById))"
                    GetId="@(new Func<TranslationDto,int>(GetId))"
                    Display="@(new Func<TranslationDto, string>(GetName))"
                    TableProperties="@(advancedMode ? new []{"Id", "Key", "Value", "CultureCode"} : new []{"Key", "Value"})"
                    InitialAction="@Action"
                    InitialIdString="@Id"
-                   CreatePermission="@Permissions.Products.Create"
-                   DeletePermission="@Permissions.Products.Delete"
-                   EditPermission="@Permissions.Products.Edit"
-                   ExportPermission="@Permissions.Products.Export"
-                   SearchPermission="@Permissions.Products.Search">
+                   CreatePermission="@Permissions.Translations.Create"
+                   DeletePermission="@Permissions.Translations.Delete"
+                   EditPermission="@Permissions.Translations.Edit"
+                   ExportPermission="@Permissions.Translations.Export"
+                   SearchPermission="@Permissions.Translations.Search">
 </EditableDataTable>
 
 @code{

@@ -3,6 +3,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<DocumentTypes> _localizer
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Contracts.Enums
 
 
 <ReactOnPreferenceChanged Component="this" />
@@ -11,8 +12,8 @@
 <EditableDataTable ApiLoad="@(new Func<Task<Result<List<DocumentTypeDto>>>>(Load))"
                    ApiDelete="@(new Func<int[], Task<Result>>(Delete))"
                    ApiCreateOrEdit="@(new Func<DocumentTypeDto, Task<bool>>(CreateOrEdit))"
-                   Export="@(new Func<string, Task<Result<string>>>(Export))"
-                   ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
+                   Export="@(new Func<ExportServiceType, string, Task>(Export))"
+                   ExportSelected="@(new Func<ExportServiceType, int[], Task>(ExportSelected))"
                    GetById="@(new Func<int, IEnumerable<DocumentTypeDto>, Task<DocumentTypeDto>>(FindById))"
                    GetId="@(new Func<DocumentTypeDto,int>(GetId))"
                    Display="@(new Func<DocumentTypeDto, string>(GetName))"

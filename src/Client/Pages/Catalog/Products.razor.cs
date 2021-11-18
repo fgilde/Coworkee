@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
-using MudBlazor.Extensions;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
@@ -46,14 +46,14 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return arg.Name;
         }
 
-        private async Task<Result<string>> Export(string search)
+        private async Task Export(ExportServiceType exportServiceType, string search)
         {
-            return await _api.Products_ExportAsync(search);
+            await (await _api.Products_ExportAsync(exportServiceType, search)).ForceDownloadAsync(_jsRuntime);
         }
 
-        private async Task<Result<string>> ExportSelected(int[] ids)
+        private async Task ExportSelected(ExportServiceType exportServiceType, int[] ids)
         {
-            return await _api.Products_ExportByIdsAsync(ids.ToList());
+            await (await _api.Products_ExportAsync(exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
         }
 
 

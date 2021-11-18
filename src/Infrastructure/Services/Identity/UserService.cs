@@ -7,7 +7,9 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Requests.Mail;
@@ -21,6 +23,7 @@ using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
@@ -32,7 +35,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IMailService _mailService;
         private readonly IStringLocalizer<UserService> _localizer;
-        private readonly IExcelService _excelService;
+        private readonly IExportService _excelService;
         private readonly ICurrentUserService _currentUserService;
 
         public UserService(
@@ -40,14 +43,14 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             RoleManager<ApplicationRole> roleManager,
             IMailService mailService,
             IStringLocalizer<UserService> localizer,
-            IExcelService excelService,
-            ICurrentUserService currentUserService)
+            ICurrentUserService currentUserService,
+            IServiceProvider serviceProvider)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mailService = mailService;
             _localizer = localizer;
-            _excelService = excelService;
+            _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel);
             _currentUserService = currentUserService;
         }
 
@@ -286,8 +289,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 .Specify(userSpec)
                 .OrderByDescending(a => a.CreatedOn)
                 .ToListAsync();
-            var result = await _excelService.ExportAsync(users, sheetName: _localizer["Users"],
-                mappers: new Dictionary<string, Func<ApplicationUser, object>>
+            var result = await _excelService.ExportAsync(users,
+                new Dictionary<string, Func<ApplicationUser, object>>
                 {
                     { _localizer["Id"], item => item.Id },
                     { _localizer["FirstName"], item => item.FirstName },
@@ -303,7 +306,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                     { _localizer["ProfilePictureDataUrl"], item => item.ProfilePictureDataUrl },
                 });
 
-            return result;
+            return Convert.ToBase64String(result);
         }
     }
 }

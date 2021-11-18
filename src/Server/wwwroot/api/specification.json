@@ -561,49 +561,28 @@
         "tags": [
           "DocumentTypes"
         ],
-        "summary": "Search Document Types and Export to Excel",
+        "summary": "Exports Document Types",
         "operationId": "DocumentTypes_Export",
         "parameters": [
           {
-            "name": "searchString",
+            "name": "ExportServiceType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ExportServiceType"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "SearchString",
             "in": "query",
             "schema": {
               "type": "string",
-              "default": "",
               "nullable": true
             },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
-                }
-              }
-            }
-          }
-        },
-        "security": [
+            "x-position": 2
+          },
           {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/DocumentTypes/ExportByIds": {
-      "get": {
-        "tags": [
-          "DocumentTypes"
-        ],
-        "summary": "Search Document Types and Export to Excel",
-        "operationId": "DocumentTypes_ExportByIds",
-        "parameters": [
-          {
-            "name": "ids",
+            "name": "Ids",
             "in": "query",
             "style": "form",
             "explode": true,
@@ -615,16 +594,17 @@
                 "format": "int32"
               }
             },
-            "x-position": 1
+            "x-position": 3
           }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -2310,53 +2290,31 @@
         "tags": [
           "Brands"
         ],
-        "summary": "Search Brands and Export to Excel",
+        "summary": "Exports brands",
         "operationId": "Brands_Export",
         "parameters": [
           {
-            "name": "searchString",
+            "name": "ExportServiceType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ExportServiceType"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "SearchString",
             "in": "query",
             "schema": {
               "type": "string",
-              "default": "",
               "nullable": true
             },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
-                }
-              }
-            }
-          }
-        },
-        "security": [
+            "x-position": 2
+          },
           {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/Brands/ExportByIds": {
-      "get": {
-        "tags": [
-          "Brands"
-        ],
-        "summary": "Exports specific products as excel",
-        "operationId": "Brands_ExportByIds",
-        "parameters": [
-          {
-            "name": "ids",
+            "name": "Ids",
             "in": "query",
             "style": "form",
             "explode": true,
-            "description": "Brand ids to export",
             "schema": {
               "type": "array",
               "nullable": true,
@@ -2365,16 +2323,17 @@
                 "format": "int32"
               }
             },
-            "x-position": 1
+            "x-position": 3
           }
         ],
         "responses": {
           "200": {
-            "description": "Status 200 OK",
+            "description": "",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -2602,53 +2561,31 @@
         "tags": [
           "Products"
         ],
-        "summary": "Search Products and Export to Excel",
+        "summary": "Exports products",
         "operationId": "Products_Export",
         "parameters": [
           {
-            "name": "searchString",
+            "name": "ExportServiceType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ExportServiceType"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "SearchString",
             "in": "query",
             "schema": {
               "type": "string",
-              "default": "",
               "nullable": true
             },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status 200 OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
-                }
-              }
-            }
-          }
-        },
-        "security": [
+            "x-position": 2
+          },
           {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/Products/ExportByIds": {
-      "get": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Exports specific products as excel",
-        "operationId": "Products_ExportByIds",
-        "parameters": [
-          {
-            "name": "ids",
+            "name": "Ids",
             "in": "query",
             "style": "form",
             "explode": true,
-            "description": "Produc ids to export",
             "schema": {
               "type": "array",
               "nullable": true,
@@ -2657,16 +2594,17 @@
                 "format": "int32"
               }
             },
-            "x-position": 1
+            "x-position": 3
           }
         ],
         "responses": {
           "200": {
-            "description": "Status 200 OK",
+            "description": "",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -3068,6 +3006,18 @@
             }
           }
         }
+      },
+      "ExportServiceType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Excel",
+          "Json"
+        ],
+        "enum": [
+          0,
+          1
+        ]
       },
       "AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute": {
         "type": "object",

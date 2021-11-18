@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using Nextended.Core.Extensions;
 
@@ -51,15 +53,14 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return arg.Name;
         }
 
-        private async Task<Result<string>> Export(string search)
+        private async Task Export(ExportServiceType serviceType, string search)
         {
-            return await _api.Brands_ExportAsync(search);
+            await (await _api.Brands_ExportAsync(serviceType, search)).ForceDownloadAsync(_jsRuntime);
         }
 
-        private Task<Result<string>> ExportSelected(int[] ids)
+        private async Task ExportSelected(ExportServiceType serviceType, int[] ids)
         {
-            throw new NotImplementedException("Not implemented");
-            //return await _api.Products_ExportByIdsAsync(ids.ToList());
+            await(await _api.Brands_ExportAsync(serviceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
         }
 
         private async Task<bool> CreateOrEditBrand(BrandDto brandOrNull)

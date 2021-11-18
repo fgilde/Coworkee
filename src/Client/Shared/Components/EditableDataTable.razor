@@ -36,7 +36,7 @@ else
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(Reload)" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                     @if (Export != null && _canExport)
                         {
-                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExecExport" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
                         }
                     }
                     else
@@ -44,7 +44,7 @@ else
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(Reload)" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                     @if (Export != null && _canExport)
                         {
-                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExecExport" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
                         }
                     }
                 @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
@@ -70,7 +70,7 @@ else
                             }
                         @if (ExportSelected != null && _canExport)
                             {
-                            <MudMenuItem @onclick="@(ExportSelectedToExcel)">
+                            <MudMenuItem @onclick="@(ExecExportSelected)">
                                 <MudText>
                                     <MudIcon Color="Color.Secondary" Icon="@Icons.Custom.FileFormats.FileExcel" Class="mr-3 mb-n1" />
                                     @_localizer["Export"]

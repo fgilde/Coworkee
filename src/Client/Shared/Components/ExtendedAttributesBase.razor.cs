@@ -151,7 +151,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
-                    ByteArray = response.Data,
+                    Base64String = response.Data,
                     FileName = $"{typeof(TExtendedAttribute).Name.ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
                     MimeType = ApplicationConstants.MimeTypes.OpenXml
                 });

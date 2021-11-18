@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Policy;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Shared.Dialogs;
@@ -47,10 +48,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
         public Func<TIdType[], Task<Result>> ApiDelete { get; set; }
 
         [Parameter]
-        public Func<string, Task<Result<string>>> Export { get; set; }
+        public Func<ExportServiceType, string, Task> Export { get; set; }
 
         [Parameter]
-        public Func<TIdType[], Task<Result<string>>> ExportSelected { get; set; }
+        public Func<ExportServiceType, TIdType[], Task> ExportSelected { get; set; }
 
         [Parameter]
         public Func<TIdType, IEnumerable<TResult>, Task<TResult>> GetById { get; set; }
@@ -243,36 +244,17 @@ namespace CleanArchitectureBase.Client.Shared.Components
             StateHasChanged();
         }
 
-        private async Task ExportSelectedToExcel()
+        private async Task ExecExportSelected()
         {
             var ids = _selectedItems.Select(item => GetId(item)).ToArray();
-            var response = await ExportSelected(ids);
-            HandleExportResponse(response);
-
+            await ExportSelected(ExportServiceType.Excel, ids);
         }
 
-        private async Task ExportToExcel()
+        private async Task ExecExport()
         {
-            var response = await Export(_searchString);
-            HandleExportResponse(response);
+            await Export(ExportServiceType.Excel, _searchString);
         }
-
-        private async void HandleExportResponse(Result<string> response)
-        {
-            if (_errorService.IsSuccessFull(response))
-            {
-                await _jsRuntime.InvokeVoidAsync("Download", new
-                {
-                    ByteArray = response.Data,
-                    FileName = $"{typeof(TResult).Name.ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
-                    MimeType = ApplicationConstants.MimeTypes.OpenXml
-                });
-                _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
-                    ? _localizer["Products exported"]
-                    : _localizer["Filtered Products exported"], Severity.Success);
-            }
-        }
-
+        
         private string ActionUrl(TIdType id)
         {
             bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);

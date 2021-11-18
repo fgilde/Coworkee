@@ -1,5 +1,5 @@
 window.Download = (options) => {
-    var fileUrl = "data:" + options.mimeType + ";base64," + options.byteArray;
+    var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
     fetch(fileUrl)
         .then(response => response.blob())
         .then(blob => {

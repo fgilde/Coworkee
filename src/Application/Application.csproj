@@ -24,6 +24,7 @@
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Contracts\Services\ExportImport\" />
     <Folder Include="Features\Base\Commands\" />
   </ItemGroup>
 

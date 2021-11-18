@@ -5,14 +5,16 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CleanArchitectureBase.Application.Specifications.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export
@@ -50,15 +52,15 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
             where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
             where TId : IEquatable<TId>
     {
-        private readonly IExcelService _excelService;
+        private readonly IExportService _excelService;
         private readonly IUnitOfWork<TId> _unitOfWork;
         private readonly IStringLocalizer<ExportExtendedAttributesQueryLocalization> _localizer;
 
-        public ExportExtendedAttributesQueryHandler(IExcelService excelService
+        public ExportExtendedAttributesQueryHandler(IServiceProvider serviceProvider
             , IUnitOfWork<TId> unitOfWork
             , IStringLocalizer<ExportExtendedAttributesQueryLocalization> localizer)
         {
-            _excelService = excelService;
+            _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel);
             _unitOfWork = unitOfWork;
             _localizer = localizer;
         }
@@ -118,10 +120,10 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
                 mappers.Add(_localizer["EntityLastModifiedOn (UTC)"], item => item.Entity.LastModifiedOn != null ? DateTime.SpecifyKind((DateTime)item.Entity.LastModifiedOn, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) : string.Empty);
             }
 
-            var data = await _excelService.ExportAsync(extendedAttributes, mappers: mappers,
-                sheetName: string.Format(_localizer["Extended Attributes"], typeof(TEntity).Name));
+            //var sheetName = string.Format(_localizer["Extended Attributes"], typeof(TEntity).Name);
+            var data = await _excelService.ExportAsync(extendedAttributes, mappers: mappers, cancellationToken);
 
-            return await Result<string>.SuccessAsync(data: data);
+            return await Result<string>.SuccessAsync(data: Convert.ToBase64String(data));
         }
     }
 }

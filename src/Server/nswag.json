@@ -171,6 +171,7 @@
         "CleanArchitectureBase.Application.Responses.Identity",
         "CleanArchitectureBase.Domain.Entities.ExtendedAttributes",
         "CleanArchitectureBase.Domain.Entities.Misc",
+        "CleanArchitectureBase.Application.Contracts.Enums",
         "CleanArchitectureBase.Shared.Wrapper"
       ],
       "additionalContractNamespaceUsages": [],

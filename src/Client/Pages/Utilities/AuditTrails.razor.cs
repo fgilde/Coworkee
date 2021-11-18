@@ -121,7 +121,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
                 {
-                    ByteArray = response.Data,
+                    Base64String = response.Data,
                     FileName = $"{nameof(AuditTrails).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
                     MimeType = ApplicationConstants.MimeTypes.OpenXml
                 });

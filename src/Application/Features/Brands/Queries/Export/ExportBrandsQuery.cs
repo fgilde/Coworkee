@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Base.Export;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Application.Specifications.Catalog;
@@ -14,18 +13,13 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.Export
 {
     [CustomAuthorize(Policies = new[] { Permissions.Brands.Export })]
     public class ExportBrandsQuery : ExportQueryBase<int>
-    {
-        public ExportBrandsQuery(int[] ids) : base(ids)
-        { }
-
-        public ExportBrandsQuery(string searchString) : base(searchString)
-        { }
-    }
+    {}
 
     internal class ExportBrandsQueryHandler : ExportQueryHandlerBase<ExportBrandsQuery, int, Brand>
     {
-        public ExportBrandsQueryHandler(IExcelService excelService, IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportBrandsQueryHandler> localizer)
-            : base(excelService, unitOfWork, localizer)
+        public ExportBrandsQueryHandler(IUnitOfWork<int> unitOfWork, 
+            IStringLocalizer<ExportBrandsQueryHandler> localizer, IServiceProvider serviceProvider)
+            : base(unitOfWork, localizer, serviceProvider)
         { }
 
         protected override Dictionary<string, Func<Brand, object>> PropertyMappers()

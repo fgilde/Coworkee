@@ -31,6 +31,7 @@ using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Shared.Wrapper;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
@@ -194,23 +195,14 @@ namespace SDK
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<DocumentTypeDto> DocumentTypes_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Search Document Types and Export to Excel</summary>
+        /// <summary>Exports Document Types</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> DocumentTypes_Export(string searchString = null);
+        FileResponse DocumentTypes_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Document Types and Export to Excel</summary>
+        /// <summary>Exports Document Types</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
-        /// <summary>Search Document Types and Export to Excel</summary>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> DocumentTypes_ExportByIds(System.Collections.Generic.IList<int> ids = null);
-    
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Document Types and Export to Excel</summary>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> DocumentTypes_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse DocumentExtendedAttributes_GetAll();
@@ -679,27 +671,14 @@ namespace SDK
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<BrandDto> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Search Brands and Export to Excel</summary>
+        /// <summary>Exports brands</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Brands_Export(string searchString = null);
+        FileResponse Brands_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Brands and Export to Excel</summary>
+        /// <summary>Exports brands</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Brand ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Brands_ExportByIds(System.Collections.Generic.IList<int> ids = null);
-    
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Brand ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Brands_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Get All Products</summary>
         /// <returns>Status 200 OK</returns>
@@ -760,29 +739,14 @@ namespace SDK
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ProductDto> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Search Products and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Products_Export(string searchString = null);
+        FileResponse Products_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Products and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Produc ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Products_ExportByIds(System.Collections.Generic.IList<int> ids = null);
-    
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Produc ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Products_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -1938,102 +1902,31 @@ namespace SDK
             }
         }
     
-        /// <summary>Search Document Types and Export to Excel</summary>
+        /// <summary>Exports Document Types</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> DocumentTypes_Export(string searchString = null)
+        public FileResponse DocumentTypes_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportAsync(exportServiceType, searchString, ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Document Types and Export to Excel</summary>
+        /// <summary>Exports Document Types</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> DocumentTypes_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes/Export?");
+            if (exportServiceType != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ExportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (searchString != null)
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("searchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-    
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-    
-        /// <summary>Search Document Types and Export to Excel</summary>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> DocumentTypes_ExportByIds(System.Collections.Generic.IList<int> ids = null)
-        {
-            return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportByIdsAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
-        }
-    
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Document Types and Export to Excel</summary>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> DocumentTypes_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes/ExportByIds?");
             if (ids != null)
             {
-                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
     
@@ -2044,7 +1937,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
     
@@ -2067,14 +1960,12 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ == 200 || status_ == 206)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
+                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
+                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
+                            return fileResponse_;
                         }
                         else
                         {
@@ -5681,106 +5572,31 @@ namespace SDK
             }
         }
     
-        /// <summary>Search Brands and Export to Excel</summary>
+        /// <summary>Exports brands</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> Brands_Export(string searchString = null)
+        public FileResponse Brands_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Brands_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Brands_ExportAsync(exportServiceType, searchString, ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Brands and Export to Excel</summary>
+        /// <summary>Exports brands</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> Brands_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands/Export?");
+            if (exportServiceType != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ExportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (searchString != null)
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("searchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-    
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-    
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Brand ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> Brands_ExportByIds(System.Collections.Generic.IList<int> ids = null)
-        {
-            return System.Threading.Tasks.Task.Run(async () => await Brands_ExportByIdsAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
-        }
-    
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Brand ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> Brands_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands/ExportByIds?");
             if (ids != null)
             {
-                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
     
@@ -5791,7 +5607,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
     
@@ -5814,14 +5630,12 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ == 200 || status_ == 206)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
+                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
+                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
+                            return fileResponse_;
                         }
                         else
                         {
@@ -6260,108 +6074,31 @@ namespace SDK
             }
         }
     
-        /// <summary>Search Products and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> Products_Export(string searchString = null)
+        public FileResponse Products_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Products_ExportAsync(searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Products_ExportAsync(exportServiceType, searchString, ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Products and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> Products_ExportAsync(string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/Export?");
+            if (exportServiceType != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ExportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (searchString != null)
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("searchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-    
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-    
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-    
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Produc ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> Products_ExportByIds(System.Collections.Generic.IList<int> ids = null)
-        {
-            return System.Threading.Tasks.Task.Run(async () => await Products_ExportByIdsAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
-        }
-    
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Exports specific products as excel</summary>
-        /// <param name="ids">Produc ids to export</param>
-        /// <returns>Status 200 OK</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> Products_ExportByIdsAsync(System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/ExportByIds?");
             if (ids != null)
             {
-                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
     
@@ -6372,7 +6109,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
     
@@ -6395,14 +6132,12 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ == 200 || status_ == 206)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
+                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
+                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
+                            return fileResponse_;
                         }
                         else
                         {

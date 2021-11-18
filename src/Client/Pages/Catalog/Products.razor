@@ -1,23 +1,22 @@
 ﻿@page "/catalog/products/{Action?}/{Id?}"
 @attribute [Authorize(Policy = Permissions.Products.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer
-@using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-@using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Contracts.Enums
 
 
 <ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Products"]" Description="@_localizer["Manage Products."]" />
 
 <EditableDataTable
-    ApiLoadPaged="@(new Func<int, int, string, string[], Task<PaginatedResult<ProductDto>>>(Load))"
-    ApiDelete="@(new Func<int[], Task<Result>>(DeleteProducts))"
-    ApiCreateOrEdit="@(new Func<ProductDto, Task<bool>>(CreateOrEditProduct))"
-    Export="@(new Func<string, Task<Result<string>>>(Export))"
-    ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
-    GetById="@(new Func<int, IEnumerable<ProductDto>, Task<ProductDto>>(FindById))"
-    GetId="@(new Func<ProductDto,int>(GetId))"
-    Display="@(new Func<ProductDto, string>(GetName))"
+    ApiLoadPaged="@(Load)"
+    ApiDelete="@(DeleteProducts)"
+    ApiCreateOrEdit="@(CreateOrEditProduct)"
+    Export="@(new Func<ExportServiceType, string, Task>(Export))"
+    ExportSelected="@(new Func<ExportServiceType, int[], Task>(ExportSelected))"
+    GetById="@(FindById)"
+    GetId="@(GetId)"
+    Display="@(GetName)"
     TableProperties="@(new []{nameof(ProductDto.Id), nameof(ProductDto.Name), nameof(ProductDto.BrandName), nameof(ProductDto.Description), nameof(ProductDto.Barcode), nameof(ProductDto.Rate)})"
     InitialAction="@Action"
     InitialIdString="@Id"

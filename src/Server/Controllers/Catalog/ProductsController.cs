@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
@@ -8,8 +9,10 @@ using CleanArchitectureBase.Application.Features.Products.Queries.Export;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage;
+using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
+using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -85,33 +88,20 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         {
             return Ok(await Mediator.Send(new DeleteProductCommand { Ids = ids }, cancellationToken));
         }
-
+        
         /// <summary>
-        /// Search Products and Export to Excel
+        /// Exports products
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Status 200 OK</returns>
+        /// <returns></returns>
         [Authorize(Policy = Permissions.Products.Export)]
         [HttpGet(nameof(Export))]
-        [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
+        [AllowSynchronousIo]
+        public async Task<IActionResult> Export([FromQuery]ExportProductsQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new ExportProductsQuery(searchString), cancellationToken));
-        }
-
-        /// <summary>
-        /// Exports specific products as excel
-        /// </summary>
-        /// <param name="ids">Produc ids to export</param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Products.Export)]
-        [HttpGet(nameof(ExportByIds))]
-        [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
-        {
-            return Ok(await Mediator.Send(new ExportProductsQuery(ids), cancellationToken));
+            var res = await Mediator.Send(query, cancellationToken);
+            var mimeType = MimeGuesser.GuessMimeType(res);
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            return File(res, mimeType, fileDownloadName);
         }
     }
 }

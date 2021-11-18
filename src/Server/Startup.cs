@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using System.Text.Json.Serialization;
 using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Infrastructure;
 using CleanArchitectureBase.Server.Configuration;
@@ -61,8 +62,10 @@ namespace CleanArchitectureBase.Server
             services.AddOpenApiDocumentation(_configuration);
             services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
-            //services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>()).AddValidators();
-            services.AddControllersWithViews(options => options.Filters.Add<ApiExceptionFilterAttribute>()).AddValidators();
+            
+            services.AddControllersWithViews(options => options.Filters.Add<ApiExceptionFilterAttribute>())
+                .AddValidators();
+                //.AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             services.AddExtendedAttributesValidators();
             services.AddExtendedAttributesHandlers();
             services.AddRazorPages();

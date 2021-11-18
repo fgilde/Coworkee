@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -7,8 +8,9 @@ using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.Delete;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById;
+using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,32 +72,18 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         }
 
         /// <summary>
-        /// Search Document Types and Export to Excel
+        /// Exports Document Types
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [Authorize(Policy = Permissions.DocumentTypes.Export)]
         [HttpGet(nameof(Export))]
-        [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
+        [AllowSynchronousIo]
+        public async Task<IActionResult> Export([FromQuery] ExportDocumentTypesQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new ExportDocumentTypesQuery(searchString), cancellationToken));
-        }
-
-
-        /// <summary>
-        /// Search Document Types and Export to Excel
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [Authorize(Policy = Permissions.DocumentTypes.Export)]
-        [HttpGet(nameof(ExportByIds))]
-        [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
-        {
-            return Ok(await Mediator.Send(new ExportDocumentTypesQuery(ids), cancellationToken));
+            var res = await Mediator.Send(query, cancellationToken);
+            var mimeType = MimeGuesser.GuessMimeType(res);
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            return File(res, mimeType, fileDownloadName);
         }
     }
 }

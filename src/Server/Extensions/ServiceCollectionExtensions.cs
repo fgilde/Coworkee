@@ -37,11 +37,13 @@ using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using CleanArchitectureBase.Application.Contracts.Serialization.Settings;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
+using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Serialization.JsonConverters;
 using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
+using CleanArchitectureBase.Infrastructure.Services.ExportImport;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -138,7 +140,6 @@ namespace CleanArchitectureBase.Server.Extensions
                     options.DocumentName = ApiVersions.DocumentVersionPrefix + version.MajorVersion;
                     options.ApiGroupNames = new[] { ApiVersions.DocumentVersionPrefix + version.MajorVersion };
                     options.Version = ApiVersions.VersionString(version);
-
                     // Patch document for Azure API Management
                     options.AllowReferencesWithProperties = true;
                     options.PostProcess = document => configSection.ConfigureDocument(document, version);
@@ -236,7 +237,8 @@ namespace CleanArchitectureBase.Server.Extensions
             services.AddTransient<IChatService, ChatService>();
             services.AddTransient<IUploadService, UploadService>();
             services.AddTransient<IAuditService, AuditService>();
-            services.AddScoped<IExcelService, ExcelService>();
+            services.AddScoped<IExportService, ExcelExportService>();
+            services.AddScoped<IExportService, JsonExportService>();
             return services;
         }
 

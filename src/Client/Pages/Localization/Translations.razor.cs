@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Localization;
@@ -80,14 +82,16 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             return arg.Key;
         }
 
-        private async Task<Result<string>> Export(string search)
+        private async Task Export(ExportServiceType exportServiceType,string search)
         {
-            return await _api.Products_ExportAsync(search);
+            throw new NotSupportedException();
+            //return await _api.Translations_ExportAsync(search);
         }
 
-        private async Task<Result<string>> ExportSelected(int[] ids)
+        private async Task ExportSelected(ExportServiceType exportServiceType, int[] ids)
         {
-            return await _api.Products_ExportByIdsAsync(ids.ToList());
+            throw new NotSupportedException();
+
         }
 
         private async Task<bool> SaveAll(TranslationDto[] arg)

@@ -49,21 +49,11 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Export(System.String,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Export(CleanArchitectureBase.Application.Features.Brands.Queries.Export.ExportBrandsQuery,System.Threading.CancellationToken)">
             <summary>
-            Search Brands and Export to Excel
+            Exports brands
             </summary>
-            <param name="searchString"></param>
-            <param name="cancellationToken"></param>
             <returns></returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
-            <summary>
-            Exports specific products as excel
-            </summary>
-            <param name="ids">Brand ids to export</param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
             <summary>
@@ -103,21 +93,11 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Export(System.String,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Export(CleanArchitectureBase.Application.Features.Products.Queries.Export.ExportProductsQuery,System.Threading.CancellationToken)">
             <summary>
-            Search Products and Export to Excel
+            Exports products
             </summary>
-            <param name="searchString"></param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
-            <summary>
-            Exports specific products as excel
-            </summary>
-            <param name="ids">Produc ids to export</param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Status 200 OK</returns>
+            <returns></returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
             <summary>
@@ -485,20 +465,10 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(System.String,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export.ExportDocumentTypesQuery,System.Threading.CancellationToken)">
             <summary>
-            Search Document Types and Export to Excel
+            Exports Document Types
             </summary>
-            <param name="searchString"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.ExportByIds(System.Int32[],System.Threading.CancellationToken)">
-            <summary>
-            Search Document Types and Export to Excel
-            </summary>
-            <param name="ids"></param>
-            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.PreferencesController.ChangeLanguageAsync(System.String)">
@@ -510,6 +480,23 @@
         </member>
         <member name="M:CleanArchitectureBase.Server.CustomTypeNameGenerator.Generate(NJsonSchema.JsonSchema,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <inheritdoc />
+        </member>
+        <member name="T:CleanArchitectureBase.Server.Filters.AllowSynchronousIoAttribute">
+             <summary>
+             Use this attribute to enable Synchronous IO on a per-request basis:
+             
+             https://github.com/aspnet/AspNetCore/issues/7644
+             https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.0#synchronous-io
+            
+             AllowSynchronousIO enables or disables synchronous IO APIs, such as HttpRequest.Body.Read, HttpResponse.Body.Write, and
+             Stream.Flush.
+             These APIs are a source of thread starvation leading to app crashes. In 3.0, AllowSynchronousIO is disabled by default.
+             For more information, see the Synchronous IO section in the Kestrel article.
+             If synchronous IO is needed, it can be enabled by configuring the AllowSynchronousIO option on the server being used
+             (when calling ConfigureKestrel, for example, if using Kestrel). Note that servers (Kestrel, HttpSys, TestServer, etc.) all have
+             their own AllowSynchronousIO option that won't affect other servers. Synchronous IO can be enabled for all servers on a per-request
+             basis using the IHttpBodyControlFeature.AllowSynchronousIO option
+             </summary>
         </member>
         <member name="M:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.#ctor">
             <summary>

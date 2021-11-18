@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -7,8 +8,9 @@ using CleanArchitectureBase.Application.Features.Brands.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Brands.Queries.Export;
 using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
+using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,31 +73,18 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         }
 
         /// <summary>
-        /// Search Brands and Export to Excel
+        /// Exports brands
         /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [Authorize(Policy = Permissions.Brands.Export)]
         [HttpGet(nameof(Export))]
-        [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> Export(string searchString = "", CancellationToken cancellationToken = default)
+        [AllowSynchronousIo]
+        public async Task<IActionResult> Export([FromQuery] ExportBrandsQuery query, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new ExportBrandsQuery(searchString), cancellationToken));
-        }
-
-        /// <summary>
-        /// Exports specific products as excel
-        /// </summary>
-        /// <param name="ids">Brand ids to export</param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Brands.Export)]
-        [HttpGet(nameof(ExportByIds))]
-        [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> ExportByIds([FromQuery] int[] ids, CancellationToken cancellationToken = default)
-        {
-            return Ok(await Mediator.Send(new ExportBrandsQuery(ids), cancellationToken));
+            var res = await Mediator.Send(query, cancellationToken);
+            var mimeType = MimeGuesser.GuessMimeType(res);
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            return File(res, mimeType, fileDownloadName);
         }
     }
 }

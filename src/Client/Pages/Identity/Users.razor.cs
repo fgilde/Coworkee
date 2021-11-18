@@ -80,7 +80,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             var base64 = await _api.User_ExportAsync(_searchString);
             await _jsRuntime.InvokeVoidAsync("Download", new
             {
-                ByteArray = base64,
+                Base64String = base64,
                 FileName = $"{nameof(Users).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
                 MimeType = ApplicationConstants.MimeTypes.OpenXml
             });

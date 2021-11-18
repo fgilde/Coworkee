@@ -3,6 +3,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Brands> _localizer
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Contracts.Enums
 
 
 <ReactOnPreferenceChanged Component="this" />
@@ -11,8 +12,8 @@
 <EditableDataTable ApiLoad="@(new Func<Task<Result<List<BrandDto>>>>(Load))"
                    ApiDelete="@(new Func<int[], Task<Result>>(DeleteBrands))"
                    ApiCreateOrEdit="@(new Func<BrandDto, Task<bool>>(CreateOrEditBrand))"
-                   Export="@(new Func<string, Task<Result<string>>>(Export))"
-                   ExportSelected="@(new Func<int[], Task<Result<string>>>(ExportSelected))"
+                   Export="@(new Func<ExportServiceType, string, Task>(Export))"
+                   ExportSelected="@(new Func<ExportServiceType, int[], Task>(ExportSelected))"
                    GetById="@(new Func<int, IEnumerable<BrandDto>, Task<BrandDto>>(FindById))"
                    GetId="@(new Func<BrandDto,int>(GetId))"
                    Display="@(new Func<BrandDto, string>(GetName))"

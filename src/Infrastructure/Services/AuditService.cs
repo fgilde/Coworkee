@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Responses.Audit;
-using CleanArchitectureBase.Infrastructure.Contexts;
+﻿using CleanArchitectureBase.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
@@ -33,10 +33,10 @@ namespace CleanArchitectureBase.Infrastructure.Services
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<IReadOnlyCollection<AuditResponse>> GetTrailsAsync(int limit = 1000, params string[] userIds)
+        public async Task<IReadOnlyCollection<AuditDto>> GetTrailsAsync(int limit = 1000, params string[] userIds)
         {
             var trails = await _context.AuditTrails.Where(a => !userIds.Any() || userIds.Contains(a.UserId)).OrderByDescending(a => a.Id).Take(limit).ToListAsync();
-            return trails.MapTo<List<AuditResponse>>().AsReadOnly();
+            return trails.MapTo<List<AuditDto>>().AsReadOnly();
         }
 
         public async Task<byte[]> ExportAsync(

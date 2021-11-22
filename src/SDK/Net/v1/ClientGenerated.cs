@@ -9,25 +9,17 @@ using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Domain.Entities;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Misc;
@@ -77,13 +69,13 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Collections.Generic.IList<AuditResponse> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null);
+        System.Collections.Generic.IList<AuditDto> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IList<AuditResponse>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<System.Collections.Generic.IList<AuditDto>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1009,7 +1001,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Collections.Generic.IList<AuditResponse> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null)
+        public System.Collections.Generic.IList<AuditDto> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Audits_GetUserTrailsAsync(userIds, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1018,7 +1010,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IList<AuditResponse>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IList<AuditDto>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits?");
@@ -1060,7 +1052,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.IList<AuditResponse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.IList<AuditDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

@@ -210,7 +210,7 @@ export interface IAuditsClient {
      * @param userIds (optional) 
      * @return Status 200 OK
      */
-    getUserTrails(userIds: string[] | null | undefined): Observable<AuditResponse[]>;
+    getUserTrails(userIds: string[] | null | undefined): Observable<AuditDto[]>;
     /**
      * Exports products
      * @param exportServiceType (optional) 
@@ -240,7 +240,7 @@ export class AuditsClient implements IAuditsClient {
      * @param userIds (optional) 
      * @return Status 200 OK
      */
-    getUserTrails(userIds: string[] | null | undefined): Observable<AuditResponse[]> {
+    getUserTrails(userIds: string[] | null | undefined): Observable<AuditDto[]> {
         let url_ = this.baseUrl + "/Audits?";
         if (userIds !== undefined && userIds !== null)
             userIds && userIds.forEach(item => { url_ += "userIds=" + encodeURIComponent("" + item) + "&"; });
@@ -261,14 +261,14 @@ export class AuditsClient implements IAuditsClient {
                 try {
                     return this.processGetUserTrails(<any>response_);
                 } catch (e) {
-                    return <Observable<AuditResponse[]>><any>_observableThrow(e);
+                    return <Observable<AuditDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<AuditResponse[]>><any>_observableThrow(response_);
+                return <Observable<AuditDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetUserTrails(response: HttpResponseBase): Observable<AuditResponse[]> {
+    protected processGetUserTrails(response: HttpResponseBase): Observable<AuditDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -282,7 +282,7 @@ export class AuditsClient implements IAuditsClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(AuditResponse.fromJS(item));
+                    result200!.push(AuditDto.fromJS(item));
             }
             else {
                 result200 = <any>null;
@@ -294,7 +294,7 @@ export class AuditsClient implements IAuditsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AuditResponse[]>(<any>null);
+        return _observableOf<AuditDto[]>(<any>null);
     }
 
     /**
@@ -4564,7 +4564,7 @@ export interface IChartSeries {
     data?: number[] | undefined;
 }
 
-export class AuditResponse implements IAuditResponse {
+export class AuditDto implements IAuditDto {
     id?: number;
     userId?: string | undefined;
     type?: string | undefined;
@@ -4575,7 +4575,7 @@ export class AuditResponse implements IAuditResponse {
     affectedColumns?: string | undefined;
     primaryKey?: string | undefined;
 
-    constructor(data?: IAuditResponse) {
+    constructor(data?: IAuditDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -4598,9 +4598,9 @@ export class AuditResponse implements IAuditResponse {
         }
     }
 
-    static fromJS(data: any): AuditResponse {
+    static fromJS(data: any): AuditDto {
         data = typeof data === 'object' ? data : {};
-        let result = new AuditResponse();
+        let result = new AuditDto();
         result.init(data);
         return result;
     }
@@ -4620,7 +4620,7 @@ export class AuditResponse implements IAuditResponse {
     }
 }
 
-export interface IAuditResponse {
+export interface IAuditDto {
     id?: number;
     userId?: string | undefined;
     type?: string | undefined;

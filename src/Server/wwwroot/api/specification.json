@@ -137,7 +137,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AuditResponse"
+                    "$ref": "#/components/schemas/AuditDto"
                   }
                 }
               }
@@ -2762,7 +2762,7 @@
           }
         }
       },
-      "AuditResponse": {
+      "AuditDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {

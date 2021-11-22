@@ -4,9 +4,9 @@ using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Role;
@@ -33,7 +33,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.AuditTrails.View)]
         [HttpGet]
-        [Produces(typeof(IReadOnlyCollection<AuditResponse>))]
+        [Produces(typeof(IReadOnlyCollection<AuditDto>))]
         public async Task<IActionResult> GetUserTrailsAsync([FromQuery] string[] userIds, CancellationToken cancellationToken = default)
         {
             userIds ??= new[] {_currentUserService.UserId};

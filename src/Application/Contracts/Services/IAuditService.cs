@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Responses.Audit;
 
 namespace CleanArchitectureBase.Application.Contracts.Services
 {
     public interface IAuditService
     {
-        Task<IReadOnlyCollection<AuditResponse>> GetTrailsAsync(int limit = 1000, params string[] userIds);
+        Task<IReadOnlyCollection<AuditDto>> GetTrailsAsync(int limit = 1000, params string[] userIds);
 
         Task<byte[]> ExportAsync(
                 ExportServiceType exportServiceType,

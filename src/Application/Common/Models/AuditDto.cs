@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CleanArchitectureBase.Application.Responses.Audit
+namespace CleanArchitectureBase.Application.Common.Models
 {
-    public class AuditResponse
+    public class AuditDto
     {
         public int Id { get; set; }
         public string UserId { get; set; }

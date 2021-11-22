@@ -1,17 +1,15 @@
-﻿using CleanArchitectureBase.Application.Responses.Audit;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Role;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +38,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
         private IList<UserResponse> currentUserFilter;
         private IList<UserResponse> allUsers;
 
-        private bool Search(AuditResponse response)
+        private bool Search(AuditDto response)
         {
             bool result = string.IsNullOrWhiteSpace(_searchString);
 
@@ -150,7 +148,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
             StateHasChanged();
         }
 
-        public class RelatedAuditTrail : AuditResponse
+        public class RelatedAuditTrail : AuditDto
         {
             public bool ShowDetails { get; set; } = false;
             public DateTime LocalTime { get; set; }

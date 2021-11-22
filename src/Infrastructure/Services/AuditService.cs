@@ -35,16 +35,16 @@ namespace CleanArchitectureBase.Infrastructure.Services
             _localizer = localizer;
         }
 
-        public async Task<IResult<IEnumerable<AuditResponse>>> GetCurrentUserTrailsAsync(string userId)
+        public async Task<IResult<IEnumerable<AuditResponse>>> GetTrailsAsync(int limit = 1000, params string[] userIds)
         {
-            var trails = await _context.AuditTrails.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync();
+            var trails = await _context.AuditTrails.Where(a => !userIds.Any() || userIds.Contains(a.UserId)).OrderByDescending(a => a.Id).Take(limit).ToListAsync();
             var mappedLogs = trails.MapTo<List<AuditResponse>>();
             return await Result<IEnumerable<AuditResponse>>.SuccessAsync(mappedLogs);
         }
 
-        public async Task<IResult<string>> ExportToExcelAsync(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
+        public async Task<IResult<string>> ExportAsync(string[] userIds, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
         {
-            var auditSpec = new AuditFilterSpecification(userId, searchString, searchInOldValues, searchInNewValues);
+            var auditSpec = new AuditFilterSpecification(userIds, searchString, searchInOldValues, searchInNewValues);
             var trails = await _context.AuditTrails
                 .Specify(auditSpec)
                 .OrderByDescending(a => a.DateTime)

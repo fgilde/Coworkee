@@ -207,17 +207,19 @@ export class ResourceClient implements IResourceClient {
 export interface IAuditsClient {
     /**
      * Get Current User Audit Trails
+     * @param userIds (optional) 
      * @return Status 200 OK
      */
-    getUserTrails(): Observable<ResultOfIEnumerableOfAuditResponse>;
+    getUserTrails(userIds: string[] | null | undefined): Observable<ResultOfIEnumerableOfAuditResponse>;
     /**
      * Search Audit Trails and Export to Excel
+     * @param userIds (optional) 
      * @param searchString (optional) 
      * @param searchInOldValues (optional) 
      * @param searchInNewValues (optional) 
      * @return Status 200 OK
      */
-    exportExcel(searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString>;
+    exportExcel(userIds: string[] | null | undefined, searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString>;
 }
 
 @Injectable({
@@ -235,10 +237,13 @@ export class AuditsClient implements IAuditsClient {
 
     /**
      * Get Current User Audit Trails
+     * @param userIds (optional) 
      * @return Status 200 OK
      */
-    getUserTrails(): Observable<ResultOfIEnumerableOfAuditResponse> {
-        let url_ = this.baseUrl + "/Audits";
+    getUserTrails(userIds: string[] | null | undefined): Observable<ResultOfIEnumerableOfAuditResponse> {
+        let url_ = this.baseUrl + "/Audits?";
+        if (userIds !== undefined && userIds !== null)
+            userIds && userIds.forEach(item => { url_ += "userIds=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -287,13 +292,16 @@ export class AuditsClient implements IAuditsClient {
 
     /**
      * Search Audit Trails and Export to Excel
+     * @param userIds (optional) 
      * @param searchString (optional) 
      * @param searchInOldValues (optional) 
      * @param searchInNewValues (optional) 
      * @return Status 200 OK
      */
-    exportExcel(searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString> {
+    exportExcel(userIds: string[] | null | undefined, searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/Audits/export?";
+        if (userIds !== undefined && userIds !== null)
+            userIds && userIds.forEach(item => { url_ += "userIds=" + encodeURIComponent("" + item) + "&"; });
         if (searchString !== undefined && searchString !== null)
             url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
         if (searchInOldValues === null)

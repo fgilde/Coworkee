@@ -7,8 +7,11 @@ namespace CleanArchitectureBase.Application.Contracts.Services
 {
     public interface IAuditService
     {
-        Task<IResult<IEnumerable<AuditResponse>>> GetCurrentUserTrailsAsync(string userId);
+        Task<IResult<IEnumerable<AuditResponse>>> GetTrailsAsync(int limit = 1000, params string[] userIds);
 
-        Task<IResult<string>> ExportToExcelAsync(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false);
+        Task<IResult<string>> ExportAsync(string[] userId, 
+                string searchString = "", 
+                bool searchInOldValues = false, 
+                bool searchInNewValues = false);
     }
 }

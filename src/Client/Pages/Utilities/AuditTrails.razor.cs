@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Constants.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
@@ -16,17 +19,12 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 {
     public partial class AuditTrails
     {
-        [Inject] private IApplicationClient Api { get; set; }
-
+        
         public List<RelatedAuditTrail> Trails = new();
 
-        private RelatedAuditTrail _trail = new();
         private string _searchString = "";
-        private bool _dense = true;
-        private bool _striped = true;
-        private bool _bordered = false;
-        private bool _searchInOldValues = false;
-        private bool _searchInNewValues = false;
+        private bool _searchInOldValues;
+        private bool _searchInNewValues;
         private MudDateRangePicker _dateRangePicker;
         private DateRange _dateRange;
 
@@ -34,6 +32,9 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
         private bool _canExportAuditTrails;
         private bool _canSearchAuditTrails;
         private bool _loaded;
+        private IList<string> userFilter;
+        private IList<UserResponse> currentUserFilter;
+        private IList<UserResponse> allUsers;
 
         private bool Search(AuditResponse response)
         {
@@ -78,13 +79,28 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
             _canExportAuditTrails = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.AuditTrails.Export)).Succeeded;
             _canSearchAuditTrails = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.AuditTrails.Search)).Succeeded;
 
+            if (_currentUser.IsInRole(RoleConstants.AdministratorRole)) // Current user is admin and can filter for users
+            {
+                userFilter = new List<string> {_currentUser.GetUserId()};
+                if ((await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.View)).Succeeded)
+                {
+                    allUsers = (await _api.User_GetAllAsync()).Data;
+                    currentUserFilter = new List<UserResponse> {allUsers.First(r => r.Id == _currentUser.GetUserId())};
+                }
+                else
+                {
+                    var currentAsResponse = (await _api.User_GetByIdAsync(_currentUser.GetUserId())).Data;
+                    currentUserFilter = new List<UserResponse> {currentAsResponse};
+                }
+            }
+
             await GetDataAsync();
             _loaded = true;
         }
 
         private async Task GetDataAsync()
         {
-            var response = await Api.Audits_GetUserTrailsAsync();
+            var response = await _api.Audits_GetUserTrailsAsync(userFilter);
             if (_errorService.IsSuccessFull(response))
             {
                 Trails = response.Data
@@ -104,19 +120,14 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
             }
         }
 
-        private void ShowBtnPress(int id)
+        private void ShowBtnPress(RelatedAuditTrail trail)
         {
-            _trail = Trails.First(f => f.Id == id);
-            foreach (var trial in Trails.Where(a => a.Id != id))
-            {
-                trial.ShowDetails = false;
-            }
-            _trail.ShowDetails = !_trail.ShowDetails;
+            trail.ShowDetails = !trail.ShowDetails;
         }
 
         private async Task ExportToExcelAsync()
         {
-            var response = await Api.Audits_ExportExcelAsync(_searchString, _searchInOldValues, _searchInNewValues);
+            var response = await _api.Audits_ExportExcelAsync(userFilter, _searchString, _searchInOldValues, _searchInNewValues);
             if (_errorService.IsSuccessFull(response))
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
@@ -129,6 +140,14 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
                     ? _localizer["Audit Trails exported"]
                     : _localizer["Filtered Audit Trails exported"], Severity.Success);
             }
+        }
+
+        private async void UserChanged(IEnumerable<UserResponse> filteredUsers)
+        {
+            currentUserFilter = new List<UserResponse>(filteredUsers);
+            userFilter = new List<string>(currentUserFilter.Select(r => r.Id));
+            await GetDataAsync();
+            StateHasChanged();
         }
 
         public class RelatedAuditTrail : AuditResponse

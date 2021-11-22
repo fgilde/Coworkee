@@ -1,0 +1,78 @@
+﻿@using CleanArchitectureBase.Application.Responses.Identity
+@using Nextended.Core.Extensions
+@inject Microsoft.Extensions.Localization.IStringLocalizer<UserFilter> _localizer
+
+<MudGrid>
+    <MudItem xs="12" md="12">
+        <MudSelect T="UserResponse" MultiSelectionTextFunc="MultiSelectionTextFunc" Label="@_localizer["User"]" HelperText="@_localizer["Search by users"]"
+                   MultiSelection="true" AnchorOrigin="Origin.BottomCenter"
+                   @bind-Value="value" @bind-SelectedValues="SelectedUser" AdornmentIcon="@Icons.Material.Filled.Search">
+            @foreach (var user in _userList)
+            {
+                <MudSelectItem Style="height: 70px;" T="UserResponse" Value="@user">
+                    <UserCard UserData="@user"/>
+                </MudSelectItem>
+            }
+        </MudSelect>
+    </MudItem>
+    
+    <MudItem xs="12" md="12">
+        @foreach (var user in SelectedUser)
+        {
+            <MudChip Size="Size.Large" Variant="Variant.Outlined" OnClose="@(chip => Remove(chip, user))" Color="Color.Primary" CloseIcon="@Icons.Material.Filled.Close">
+                <UserCard ShowEmail="false" UserData="@user" />
+            </MudChip>
+        }
+    </MudItem>
+
+</MudGrid>
+
+@code {
+    [Parameter]
+    public EventCallback<IEnumerable<UserResponse>> SelectedUserChanged { get; set; }
+
+    [Parameter]
+    public IEnumerable<UserResponse> SelectedUser
+    {
+        get => selectedUser ??= new HashSet<UserResponse>();
+        set
+        {
+            var set = (value ?? new HashSet<UserResponse>()).ToList();
+            if (SelectedUser.Count() != set.Count || !selectedUser.All(x => set.Contains(x)))
+            {
+                selectedUser = new HashSet<UserResponse>(set);
+                SelectedUserChanged.InvokeAsync(new HashSet<UserResponse>(SelectedUser));
+            }
+        }
+    }
+
+    private IEnumerable<UserResponse> selectedUser;
+    private bool multiselectionTextChoice;
+    private UserResponse value { get; set; } = null;
+    private List<UserResponse> _userList;
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUsersAsync();
+    }
+
+    private async Task GetUsersAsync()
+    {
+        var response = await _api.User_GetAllAsync();
+        if (_errorService.IsSuccessFull(response))
+        {
+            _userList = response.Data.ToList();
+        }
+    }
+
+    private void Remove(MudChip chip, UserResponse user)
+    {
+        ((HashSet<UserResponse>)selectedUser).Remove(user);
+        SelectedUserChanged.InvokeAsync(new HashSet<UserResponse>(selectedUser));
+    }
+
+    private string MultiSelectionTextFunc(List<string> arg)
+    {
+        return string.Join(", ", selectedUser.Select(r => r.FullName.ToUpper(true)));
+    }
+
+}

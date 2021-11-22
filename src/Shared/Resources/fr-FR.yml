@@ -53,6 +53,7 @@ ar-TD: Arabe (Tchad)
 ar-TN: Arabe (Tunisie)
 ar-YE: Arabe (Yémen)
 arn-CL: Mapuche (Chili)
+As Admin you can filter for users here: En tant qu'administrateur, vous pouvez filtrer par utilisateurs ici
 as-IN: Assamais (Inde)
 asa-TZ: Asu (Tanzanie)
 ast-ES: Asturien (Espagne)
@@ -767,6 +768,7 @@ se-FI: Sami du Nord (Finlande)
 se-NO: Sami du Nord (Norvège)
 se-SE: Sami du Nord (Suède)
 Search: Rechercher
+Search by users: Recherche par utilisateurs
 Search For {0} Extended Attributes: Rechercher des attributs étendus {0}
 Search for Brands: Rechercher des marques
 Search for Document Types: Rechercher des types de documents
@@ -896,6 +898,7 @@ Upload: Télécharger
 Upload Image: Télécharger l’image
 ur-IN: Ourdou (Inde)
 ur-PK: Ourdou (Pakistan)
+User: Utilisateur
 User Name: Nom d’utilisateur
 User Registered: Utilisateur enregistré!
 User Registered Mailbox: Utilisateur enregistré. Le courrier de confirmation a été remis à la boîte aux lettres.

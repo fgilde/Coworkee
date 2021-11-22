@@ -113,6 +113,22 @@
         ],
         "summary": "Get Current User Audit Trails",
         "operationId": "Audits_GetUserTrails",
+        "parameters": [
+          {
+            "name": "userIds",
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
             "description": "Status 200 OK",
@@ -141,6 +157,20 @@
         "operationId": "Audits_ExportExcel",
         "parameters": [
           {
+            "name": "userIds",
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          },
+          {
             "name": "searchString",
             "in": "query",
             "schema": {
@@ -148,7 +178,7 @@
               "default": "",
               "nullable": true
             },
-            "x-position": 1
+            "x-position": 2
           },
           {
             "name": "searchInOldValues",
@@ -157,7 +187,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 2
+            "x-position": 3
           },
           {
             "name": "searchInNewValues",
@@ -166,7 +196,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 3
+            "x-position": 4
           }
         ],
         "responses": {

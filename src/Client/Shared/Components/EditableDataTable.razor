@@ -22,7 +22,7 @@ else
               @bind-SelectedItems="@_selectedItems"
               Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)" 
               ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
-              Hover="true" Dense="false" Bordered="false" Striped="true" 
+              Hover="true" Dense="true" Bordered="false" Striped="true" 
               @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Responses.Audit;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Constants.Role;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Utilities
@@ -30,9 +32,12 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities
         [Authorize(Policy = Permissions.AuditTrails.View)]
         [HttpGet]
         [Produces(typeof(Result<IEnumerable<AuditResponse>>))]
-        public async Task<IActionResult> GetUserTrailsAsync(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetUserTrailsAsync([FromQuery] string[] userIds, CancellationToken cancellationToken = default)
         {
-            return Ok(await _auditService.GetCurrentUserTrailsAsync(_currentUserService.UserId));
+            userIds ??= new[] {_currentUserService.UserId};
+            if (userIds.Length != 1 || userIds[0] != _currentUserService.UserId) // if a user filter is applied that is different than current user, only allowed by admins
+                await Get<IPermissionService>().EnsureRoleAsync(RoleConstants.AdministratorRole);
+            return Ok(await _auditService.GetTrailsAsync(1000, userIds));
         }
 
         /// <summary>
@@ -45,9 +50,12 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities
         [Authorize(Policy = Permissions.AuditTrails.Export)]
         [HttpGet("export")]
         [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> ExportExcel(string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
+        public async Task<IActionResult> ExportExcel([FromQuery] string[] userIds, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
         {
-            var data = await _auditService.ExportToExcelAsync(_currentUserService.UserId, searchString, searchInOldValues, searchInNewValues);
+            userIds ??= new[] { _currentUserService.UserId };
+            if (userIds.Length != 1 || userIds[0] != _currentUserService.UserId) // if a user filter is applied that is different than current user, only allowed by admins
+                await Get<IPermissionService>().EnsureRoleAsync(RoleConstants.AdministratorRole);
+            var data = await _auditService.ExportAsync(userIds, searchString, searchInOldValues, searchInNewValues);
             return Ok(data);
         }
     }

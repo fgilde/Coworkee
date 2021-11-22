@@ -1,13 +1,13 @@
 @page "/audit-trails"
 @using System.Globalization
+@using CleanArchitectureBase.Shared.Constants.Role
+@using Microsoft.AspNetCore.Components
+@using CleanArchitectureBase.Client.Shared.Components
+
 @attribute [Authorize(Policy = Permissions.AuditTrails.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AuditTrails> _localizer
 
-<style>
-    .mud-table-container {
-        overflow: auto;
-    }
-</style>
+
 
 <ReactOnPreferenceChanged Component="this" />
 <HeroTitle Title="@_localizer["Audit Trails"]" Description="@_localizer["Your Recent Activities."]" />
@@ -17,7 +17,22 @@
 }
 else
 {
-    <MudTable Hover="false" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Elevation="25" Items="Trails" Filter="new Func<RelatedAuditTrail, bool>(Search)" @bind-trail="_trail" CustomHeader="true">
+    <AuthorizeView Roles="@RoleConstants.AdministratorRole">
+        <MudItem xs="12" sm="12" md="12">
+            <MudCard Elevation="25">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.body2">@_localizer["As Admin you can filter for users here"]</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="pa-46" Style="padding:26px!important">
+                    <UserFilter SelectedUser="@currentUserFilter" SelectedUserChanged="@UserChanged"></UserFilter>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </AuthorizeView>
+
+    <MudTable Hover="false" Dense="true" Bordered="false" Striped="true" Elevation="25" Items="Trails" Filter="new Func<RelatedAuditTrail, bool>(Search)" CustomHeader="true">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canExportAuditTrails)
@@ -55,6 +70,7 @@ else
                 <MudTh><MudTableSortLabel SortBy="new Func<RelatedAuditTrail, object>(x => x.TableName)">@_localizer["Table Name"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<RelatedAuditTrail, object>(x => x.DateTime)">@_localizer["Date"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<RelatedAuditTrail, object>(x => x.Type)">@_localizer["Type"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<RelatedAuditTrail, object>(x => x.UserId)">@_localizer["User"]</MudTableSortLabel></MudTh>
                 <MudTh Style="text-align: right"></MudTh>
             </MudTHeadRow>
         </HeaderContent>
@@ -71,9 +87,12 @@ else
                     <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Secondary" Label="true" Color="Color.Surface">@_localizer["UTC"] : @context.DateTime.ToString("G", CultureInfo.CurrentCulture)</MudChip>
                 </MudItem>
             </MudTd>
-            <MudTd DataLabel="Tax">@context.Type</MudTd>
+            <MudTd DataLabel="Type">@context.Type</MudTd>
+            <MudTd DataLabel="User">
+                <UserCard UserData="@(allUsers?.Any() == true ? allUsers.FirstOrDefault(r => r.Id == context.UserId) : currentUserFilter.FirstOrDefault(r => r.Id == context.UserId))" UserId="@context.UserId"></UserCard>
+            </MudTd>
             <MudTd Style="text-align:right">
-                <MudButton Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" OnClick="@(() => ShowBtnPress(context.Id))">@((context.ShowDetails == true)? _localizer["Hide"] : _localizer["Show"]) @_localizer["Trail Details"]</MudButton>
+                <MudButton Variant="Variant.Filled" DisableElevation="true" EndIcon="@(context.ShowDetails ? Icons.Filled.KeyboardArrowUp: Icons.Filled.KeyboardArrowDown)" IconColor="Color.Secondary" OnClick="@(() => ShowBtnPress(context))">@_localizer["Trail Details"]</MudButton>
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
@@ -168,11 +187,7 @@ else
                     </td>
                 </MudTr>}
         </ChildRowContent>
-        <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
-        </FooterContent>
+
         <PagerContent>
             <TablePager />
         </PagerContent>

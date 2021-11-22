@@ -340,13 +340,13 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.String[],System.Threading.CancellationToken)">
             <summary>
             Get Current User Audit Trails
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.ExportExcel(System.String,System.Boolean,System.Boolean)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.ExportExcel(System.String[],System.String,System.Boolean,System.Boolean)">
             <summary>
             Search Audit Trails and Export to Excel
             </summary>

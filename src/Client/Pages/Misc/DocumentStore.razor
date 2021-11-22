@@ -18,7 +18,7 @@
 }
 else
 {
-    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<DocumentDto>>>(ServerReload))" Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
+    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<DocumentDto>>>(ServerReload))" Hover="true" Dense="true" Bordered="false" Striped="true"  @ref="_table">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateDocuments)
@@ -98,11 +98,7 @@ else
                     }
             </MudTd>
         </RowTemplate>
-        <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
-        </FooterContent>
+
         <PagerContent>
             <TablePager />
         </PagerContent>

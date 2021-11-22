@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Common;
 using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Application.Contracts.Services.Identity

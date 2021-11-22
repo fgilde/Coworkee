@@ -1,8 +1,8 @@
 ﻿@page "/identity/roles"
 @attribute [Authorize(Policy = Permissions.Roles.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Roles> _localizer
-@using CleanArchitectureBase.Application.Responses.Identity
 @using System.ComponentModel.Design
+@using CleanArchitectureBase.Application.Common.Models.Identity
 
 <style>
     .mud-table-container {

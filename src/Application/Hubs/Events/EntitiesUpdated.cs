@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs.Events.Base;
-using CleanArchitectureBase.Application.Responses.Identity;
 
 namespace CleanArchitectureBase.Application.Hubs.Events
 {

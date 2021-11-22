@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Common;
-using CleanArchitectureBase.Application.Responses.Identity;
 
 namespace CleanArchitectureBase.Application.Contracts.Services
 {

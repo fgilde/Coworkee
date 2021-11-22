@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {

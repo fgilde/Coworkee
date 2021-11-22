@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CleanArchitectureBase.Application.Responses.Identity
+namespace CleanArchitectureBase.Application.Common.Models.Identity
 {
     public partial class ChatHistoryResponse
     {

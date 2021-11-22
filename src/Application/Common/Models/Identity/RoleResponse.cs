@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CleanArchitectureBase.Application.Responses.Identity
+namespace CleanArchitectureBase.Application.Common.Models.Identity
 {
     public class RoleResponse
     {

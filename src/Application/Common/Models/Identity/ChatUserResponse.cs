@@ -2,7 +2,7 @@
 using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Contracts.Chat;
 
-namespace CleanArchitectureBase.Application.Responses.Identity
+namespace CleanArchitectureBase.Application.Common.Models.Identity
 {
     public class ChatUserResponse
     {

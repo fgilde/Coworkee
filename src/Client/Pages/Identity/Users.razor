@@ -1,7 +1,7 @@
 ﻿@page "/identity/users"
+@using CleanArchitectureBase.Application.Common.Models.Identity
 @attribute [Authorize(Policy = Permissions.Users.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Users> _localizer
-@using CleanArchitectureBase.Application.Responses.Identity
 
 <style>
     .mud-table-container {

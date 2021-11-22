@@ -1,5 +1,4 @@
 ﻿using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Infrastructure.Helpers;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Shared.Constants.Role;
@@ -11,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;

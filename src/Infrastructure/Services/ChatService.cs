@@ -1,5 +1,4 @@
-﻿using CleanArchitectureBase.Application.Responses.Identity;
-using CleanArchitectureBase.Infrastructure.Contexts;
+﻿using CleanArchitectureBase.Infrastructure.Contexts;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;

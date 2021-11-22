@@ -2,7 +2,7 @@
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Responses.Identity;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {

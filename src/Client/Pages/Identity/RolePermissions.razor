@@ -1,5 +1,5 @@
 ﻿@page "/identity/role-permissions/{Id}"
-@using CleanArchitectureBase.Application.Responses.Identity
+@using CleanArchitectureBase.Application.Common.Models.Identity
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RolePermissions> _localizer
 @attribute [Authorize(Policy = Permissions.RoleClaims.View)]
 

@@ -1,5 +1,5 @@
-﻿using CleanArchitectureBase.Application.Responses.Identity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 
 namespace CleanArchitectureBase.Application.Requests.Identity
 {

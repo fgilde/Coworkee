@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Chat;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Application.Contracts.Services

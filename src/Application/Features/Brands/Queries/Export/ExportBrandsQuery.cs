@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Export;
@@ -21,17 +20,6 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.Export
             IStringLocalizer<ExportBrandsQueryHandler> localizer, IServiceProvider serviceProvider)
             : base(unitOfWork, localizer, serviceProvider)
         { }
-
-        protected override Dictionary<string, Func<Brand, object>> PropertyMappers()
-        {
-            return new Dictionary<string, Func<Brand, object>>
-            {
-                {Localizer["Id"], item => item.Id},
-                {Localizer["Name"], item => item.Name},
-                {Localizer["Description"], item => item.Description},
-                {Localizer["Tax"], item => item.Tax}
-            };
-        }
 
         protected override ISpecification<Brand> GetFilterSpecification(ExportBrandsQuery query)
         {

@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using CleanArchitectureBase.Application.Responses.Identity;
+﻿using CleanArchitectureBase.Application.Responses.Identity;
 
 namespace CleanArchitectureBase.Application.Hubs.Events
 {
@@ -10,5 +9,14 @@ namespace CleanArchitectureBase.Application.Hubs.Events
 
         public EntitiesCreated(UserResponse user, TDto[] entities) : base(user, entities)
         {}
+    }
+
+    public class EntitiesCreated : EntitiesUpdated
+    {
+        public EntitiesCreated()
+        { }
+
+        public EntitiesCreated(UserResponse user, string[] idsAsString) : base(user, idsAsString)
+        { }
     }
 }

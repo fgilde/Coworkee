@@ -346,14 +346,11 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.ExportExcel(System.String[],System.String,System.Boolean,System.Boolean)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.Export(CleanArchitectureBase.Application.Contracts.Enums.ExportServiceType,System.String[],System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <summary>
-            Search Audit Trails and Export to Excel
+            Exports products
             </summary>
-            <param name="searchString"></param>
-            <param name="searchInOldValues"></param>
-            <param name="searchInNewValues"></param>
-            <returns>Status 200 OK</returns>
+            <returns></returns>
         </member>
         <member name="T:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4">
             <summary>

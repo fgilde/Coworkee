@@ -77,24 +77,22 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<IEnumerable<AuditResponse>> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null);
+        System.Collections.Generic.IList<AuditResponse> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<IEnumerable<AuditResponse>>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<System.Collections.Generic.IList<AuditResponse>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Search Audit Trails and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Audits_ExportExcel(System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null);
+        FileResponse Audits_Export(ExportServiceType? exportServiceType = null, System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Audit Trails and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Audits_ExportExcelAsync(System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Audits_ExportAsync(ExportServiceType? exportServiceType = null, System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Change Language Preference</summary>
         /// <returns>Status 200 OK</returns>
@@ -1011,7 +1009,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<IEnumerable<AuditResponse>> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null)
+        public System.Collections.Generic.IList<AuditResponse> Audits_GetUserTrails(System.Collections.Generic.IList<string> userIds = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Audits_GetUserTrailsAsync(userIds, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -1020,7 +1018,7 @@ namespace SDK
         /// <summary>Get Current User Audit Trails</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<IEnumerable<AuditResponse>>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IList<AuditResponse>> Audits_GetUserTrailsAsync(System.Collections.Generic.IList<string> userIds = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits?");
@@ -1062,7 +1060,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<IEnumerable<AuditResponse>>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.IList<AuditResponse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1089,22 +1087,24 @@ namespace SDK
             }
         }
     
-        /// <summary>Search Audit Trails and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> Audits_ExportExcel(System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null)
+        public FileResponse Audits_Export(ExportServiceType? exportServiceType = null, System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Audits_ExportExcelAsync(userIds, searchString, searchInOldValues, searchInNewValues, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Audits_ExportAsync(exportServiceType, userIds, searchString, searchInOldValues, searchInNewValues, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Search Audit Trails and Export to Excel</summary>
-        /// <returns>Status 200 OK</returns>
+        /// <summary>Exports products</summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> Audits_ExportExcelAsync(System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileResponse> Audits_ExportAsync(ExportServiceType? exportServiceType = null, System.Collections.Generic.IList<string> userIds = null, string searchString = null, bool? searchInOldValues = null, bool? searchInNewValues = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits/export?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Audits/Export?");
+            if (exportServiceType != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("exportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (userIds != null)
             {
                 foreach (var item_ in userIds) { urlBuilder_.Append(System.Uri.EscapeDataString("userIds") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
@@ -1130,7 +1130,7 @@ namespace SDK
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
     
@@ -1153,14 +1153,12 @@ namespace SDK
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ == 200 || status_ == 206)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
+                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_); 
+                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
+                            return fileResponse_;
                         }
                         else
                         {

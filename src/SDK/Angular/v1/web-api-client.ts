@@ -210,16 +210,16 @@ export interface IAuditsClient {
      * @param userIds (optional) 
      * @return Status 200 OK
      */
-    getUserTrails(userIds: string[] | null | undefined): Observable<ResultOfIEnumerableOfAuditResponse>;
+    getUserTrails(userIds: string[] | null | undefined): Observable<AuditResponse[]>;
     /**
-     * Search Audit Trails and Export to Excel
+     * Exports products
+     * @param exportServiceType (optional) 
      * @param userIds (optional) 
      * @param searchString (optional) 
      * @param searchInOldValues (optional) 
      * @param searchInNewValues (optional) 
-     * @return Status 200 OK
      */
-    exportExcel(userIds: string[] | null | undefined, searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString>;
+    export(exportServiceType: ExportServiceType | undefined, userIds: string[] | null | undefined, searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<FileResponse>;
 }
 
 @Injectable({
@@ -240,7 +240,7 @@ export class AuditsClient implements IAuditsClient {
      * @param userIds (optional) 
      * @return Status 200 OK
      */
-    getUserTrails(userIds: string[] | null | undefined): Observable<ResultOfIEnumerableOfAuditResponse> {
+    getUserTrails(userIds: string[] | null | undefined): Observable<AuditResponse[]> {
         let url_ = this.baseUrl + "/Audits?";
         if (userIds !== undefined && userIds !== null)
             userIds && userIds.forEach(item => { url_ += "userIds=" + encodeURIComponent("" + item) + "&"; });
@@ -261,14 +261,14 @@ export class AuditsClient implements IAuditsClient {
                 try {
                     return this.processGetUserTrails(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfIEnumerableOfAuditResponse>><any>_observableThrow(e);
+                    return <Observable<AuditResponse[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfIEnumerableOfAuditResponse>><any>_observableThrow(response_);
+                return <Observable<AuditResponse[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetUserTrails(response: HttpResponseBase): Observable<ResultOfIEnumerableOfAuditResponse> {
+    protected processGetUserTrails(response: HttpResponseBase): Observable<AuditResponse[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -279,7 +279,14 @@ export class AuditsClient implements IAuditsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfIEnumerableOfAuditResponse.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(AuditResponse.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -287,19 +294,23 @@ export class AuditsClient implements IAuditsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfIEnumerableOfAuditResponse>(<any>null);
+        return _observableOf<AuditResponse[]>(<any>null);
     }
 
     /**
-     * Search Audit Trails and Export to Excel
+     * Exports products
+     * @param exportServiceType (optional) 
      * @param userIds (optional) 
      * @param searchString (optional) 
      * @param searchInOldValues (optional) 
      * @param searchInNewValues (optional) 
-     * @return Status 200 OK
      */
-    exportExcel(userIds: string[] | null | undefined, searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<ResultOfString> {
-        let url_ = this.baseUrl + "/Audits/export?";
+    export(exportServiceType: ExportServiceType | undefined, userIds: string[] | null | undefined, searchString: string | null | undefined, searchInOldValues: boolean | undefined, searchInNewValues: boolean | undefined): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/Audits/Export?";
+        if (exportServiceType === null)
+            throw new Error("The parameter 'exportServiceType' cannot be null.");
+        else if (exportServiceType !== undefined)
+            url_ += "exportServiceType=" + encodeURIComponent("" + exportServiceType) + "&";
         if (userIds !== undefined && userIds !== null)
             userIds && userIds.forEach(item => { url_ += "userIds=" + encodeURIComponent("" + item) + "&"; });
         if (searchString !== undefined && searchString !== null)
@@ -318,44 +329,42 @@ export class AuditsClient implements IAuditsClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/json"
+                "Accept": "application/octet-stream"
             })
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processExportExcel(response_);
+            return this.processExport(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processExportExcel(<any>response_);
+                    return this.processExport(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfString>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfString>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processExportExcel(response: HttpResponseBase): Observable<ResultOfString> {
+    protected processExport(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfString.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfString>(<any>null);
+        return _observableOf<FileResponse>(<any>null);
     }
 }
 
@@ -4555,47 +4564,6 @@ export interface IChartSeries {
     data?: number[] | undefined;
 }
 
-export class ResultOfIEnumerableOfAuditResponse extends Result implements IResultOfIEnumerableOfAuditResponse {
-    data?: AuditResponse[] | undefined;
-
-    constructor(data?: IResultOfIEnumerableOfAuditResponse) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            if (Array.isArray(_data["data"])) {
-                this.data = [] as any;
-                for (let item of _data["data"])
-                    this.data!.push(AuditResponse.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): ResultOfIEnumerableOfAuditResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfIEnumerableOfAuditResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.data)) {
-            data["data"] = [];
-            for (let item of this.data)
-                data["data"].push(item.toJSON());
-        }
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IResultOfIEnumerableOfAuditResponse extends IResult {
-    data?: AuditResponse[] | undefined;
-}
-
 export class AuditResponse implements IAuditResponse {
     id?: number;
     userId?: string | undefined;
@@ -4664,37 +4632,9 @@ export interface IAuditResponse {
     primaryKey?: string | undefined;
 }
 
-export class ResultOfString extends Result implements IResultOfString {
-    data?: string | undefined;
-
-    constructor(data?: IResultOfString) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.data = _data["data"];
-        }
-    }
-
-    static fromJS(data: any): ResultOfString {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfString();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["data"] = this.data;
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IResultOfString extends IResult {
-    data?: string | undefined;
+export enum ExportServiceType {
+    Excel = 0,
+    Json = 1,
 }
 
 export class PaginatedResultOfDocumentDto extends Result implements IPaginatedResultOfDocumentDto {
@@ -5090,11 +5030,6 @@ export class AddEditDocumentTypesCommand extends AddEditCommandBaseOfDocumentTyp
 export interface IAddEditDocumentTypesCommand extends IAddEditCommandBaseOfDocumentTypeDto {
 }
 
-export enum ExportServiceType {
-    Excel = 0,
-    Json = 1,
-}
-
 export class AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute implements IAddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute {
     id?: number;
     entityId?: number;
@@ -5480,6 +5415,39 @@ export interface IChangePasswordRequest {
     password: string;
     newPassword: string;
     confirmNewPassword: string;
+}
+
+export class ResultOfString extends Result implements IResultOfString {
+    data?: string | undefined;
+
+    constructor(data?: IResultOfString) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"];
+        }
+    }
+
+    static fromJS(data: any): ResultOfString {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfString();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfString extends IResult {
+    data?: string | undefined;
 }
 
 export class UpdateProfilePictureRequest extends UploadRequest implements IUpdateProfilePictureRequest {

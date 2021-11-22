@@ -10,4 +10,13 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesDeleted(UserResponse user, TDto[] entities) : base(user, entities)
         {}
     }
+
+    public class EntitiesDeleted : EntitiesUpdated
+    {
+        public EntitiesDeleted()
+        { }
+
+        public EntitiesDeleted(UserResponse user, string[] idsAsString) : base(user, idsAsString)
+        { }
+    }
 }

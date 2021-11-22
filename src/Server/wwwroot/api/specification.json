@@ -135,7 +135,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfIEnumerableOfAuditResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuditResponse"
+                  }
                 }
               }
             }
@@ -148,14 +151,22 @@
         ]
       }
     },
-    "/Audits/export": {
+    "/Audits/Export": {
       "get": {
         "tags": [
           "Audits"
         ],
-        "summary": "Search Audit Trails and Export to Excel",
-        "operationId": "Audits_ExportExcel",
+        "summary": "Exports products",
+        "operationId": "Audits_Export",
         "parameters": [
+          {
+            "name": "exportServiceType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ExportServiceType"
+            },
+            "x-position": 1
+          },
           {
             "name": "userIds",
             "in": "query",
@@ -168,7 +179,7 @@
                 "type": "string"
               }
             },
-            "x-position": 1
+            "x-position": 2
           },
           {
             "name": "searchString",
@@ -178,7 +189,7 @@
               "default": "",
               "nullable": true
             },
-            "x-position": 2
+            "x-position": 3
           },
           {
             "name": "searchInOldValues",
@@ -187,7 +198,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 3
+            "x-position": 4
           },
           {
             "name": "searchInNewValues",
@@ -196,16 +207,17 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 4
+            "x-position": 5
           }
         ],
         "responses": {
           "200": {
-            "description": "Status 200 OK",
+            "description": "",
             "content": {
-              "application/json": {
+              "application/octet-stream": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -2750,26 +2762,6 @@
           }
         }
       },
-      "ResultOfIEnumerableOfAuditResponse": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Result"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/AuditResponse"
-                }
-              }
-            }
-          }
-        ]
-      },
       "AuditResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -2812,21 +2804,16 @@
           }
         }
       },
-      "ResultOfString": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Result"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
+      "ExportServiceType": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Excel",
+          "Json"
+        ],
+        "enum": [
+          0,
+          1
         ]
       },
       "PaginatedResultOfDocumentDto": {
@@ -3036,18 +3023,6 @@
             }
           }
         }
-      },
-      "ExportServiceType": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "Excel",
-          "Json"
-        ],
-        "enum": [
-          0,
-          1
-        ]
       },
       "AddEditExtendedAttributeCommandOfIntegerAndIntegerAndDocumentAndDocumentExtendedAttribute": {
         "type": "object",
@@ -3279,6 +3254,23 @@
             "minLength": 1
           }
         }
+      },
+      "ResultOfString": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
       },
       "UpdateProfilePictureRequest": {
         "allOf": [

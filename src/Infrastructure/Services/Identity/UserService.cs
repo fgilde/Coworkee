@@ -289,22 +289,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 .Specify(userSpec)
                 .OrderByDescending(a => a.CreatedOn)
                 .ToListAsync();
-            var result = await _excelService.ExportAsync(users,
-                new Dictionary<string, Func<ApplicationUser, object>>
-                {
-                    { _localizer["Id"], item => item.Id },
-                    { _localizer["FirstName"], item => item.FirstName },
-                    { _localizer["LastName"], item => item.LastName },
-                    { _localizer["UserName"], item => item.UserName },
-                    { _localizer["Email"], item => item.Email },
-                    { _localizer["EmailConfirmed"], item => item.EmailConfirmed },
-                    { _localizer["PhoneNumber"], item => item.PhoneNumber },
-                    { _localizer["PhoneNumberConfirmed"], item => item.PhoneNumberConfirmed },
-                    { _localizer["IsActive"], item => item.IsActive },
-                    { _localizer["CreatedOn (Local)"], item => DateTime.SpecifyKind(item.CreatedOn, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
-                    { _localizer["CreatedOn (UTC)"], item => item.CreatedOn.ToString("G", CultureInfo.CurrentCulture) },
-                    { _localizer["ProfilePictureDataUrl"], item => item.ProfilePictureDataUrl },
-                });
+            var result = await _excelService.ExportAsync(users);
 
             return Convert.ToBase64String(result);
         }

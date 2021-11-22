@@ -66,7 +66,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
                     await PermissionService.EnsurePolicyAsync(CreatePermission);
                 await repository.AddManyAsync(toCreate.MapElementsTo<TEntity>(), cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken): UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
-                await Mediator.PublishClientEvent(new EntitiesCreated<TDto>(user, command.Items), cancellationToken);
+                await Mediator.PublishClientEvents(cancellationToken, new EntitiesCreated<TDto>(user, toCreate), new EntitiesCreated(user, toCreate.Select(d => d.Id?.ToString()).ToArray()));
             }
             if (toUpdate.Any())
             {
@@ -78,12 +78,12 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
                 
                 await repository.UpdateManyAsync(entitiesToUpdate, cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
-                await Mediator.PublishClientEvent(new EntitiesChanged<TDto>(user, command.Items), cancellationToken);
+                await Mediator.PublishClientEvents(cancellationToken, new EntitiesChanged<TDto>(user, toUpdate), new EntitiesChanged(user, toUpdate.Select(d => d.Id?.ToString()).ToArray()));
 
             }
 
             
-            await Mediator.PublishClientEvent(new EntitiesUpdated<TDto>(user, command.Items), cancellationToken);
+            await Mediator.PublishClientEvents(cancellationToken, new EntitiesUpdated<TDto>(user, command.Items), new EntitiesUpdated(user, command.Items.Select(d => d.Id?.ToString()).ToArray()));
             return Unit.Value;
         }
     }

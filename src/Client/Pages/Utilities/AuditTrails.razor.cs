@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Responses.Identity;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.SDK;
@@ -14,12 +16,14 @@ using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Utilities
 {
     public partial class AuditTrails
     {
-        
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
+
         public List<RelatedAuditTrail> Trails = new();
 
         private string _searchString = "";
@@ -95,29 +99,36 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
             }
 
             await GetDataAsync();
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+
+            HubConnection.On<EntitiesUpdated>(async (a) =>
+            {
+                await GetDataAsync();
+                StateHasChanged();
+            });
+
             _loaded = true;
         }
 
         private async Task GetDataAsync()
         {
             var response = await _api.Audits_GetUserTrailsAsync(userFilter);
-            if (_errorService.IsSuccessFull(response))
-            {
-                Trails = response.Data
-                    .Select(x => new RelatedAuditTrail
-                    {
-                        AffectedColumns = x.AffectedColumns,
-                        DateTime = x.DateTime,
-                        Id = x.Id,
-                        NewValues = x.NewValues,
-                        OldValues = x.OldValues,
-                        PrimaryKey = x.PrimaryKey,
-                        TableName = x.TableName,
-                        Type = x.Type,
-                        UserId = x.UserId,
-                        LocalTime = DateTime.SpecifyKind(x.DateTime, DateTimeKind.Utc).ToLocalTime()
-                    }).ToList();
-            }
+
+            Trails = response
+                .Select(x => new RelatedAuditTrail
+                {
+                    AffectedColumns = x.AffectedColumns,
+                    DateTime = x.DateTime,
+                    Id = x.Id,
+                    NewValues = x.NewValues,
+                    OldValues = x.OldValues,
+                    PrimaryKey = x.PrimaryKey,
+                    TableName = x.TableName,
+                    Type = x.Type,
+                    UserId = x.UserId,
+                    LocalTime = DateTime.SpecifyKind(x.DateTime, DateTimeKind.Utc).ToLocalTime()
+                }).ToList();
+            
         }
 
         private void ShowBtnPress(RelatedAuditTrail trail)
@@ -127,19 +138,8 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
 
         private async Task ExportToExcelAsync()
         {
-            var response = await _api.Audits_ExportExcelAsync(userFilter, _searchString, _searchInOldValues, _searchInNewValues);
-            if (_errorService.IsSuccessFull(response))
-            {
-                await _jsRuntime.InvokeVoidAsync("Download", new
-                {
-                    Base64String = response.Data,
-                    FileName = $"{nameof(AuditTrails).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
-                    MimeType = ApplicationConstants.MimeTypes.OpenXml
-                });
-                _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
-                    ? _localizer["Audit Trails exported"]
-                    : _localizer["Filtered Audit Trails exported"], Severity.Success);
-            }
+            var res = await _api.Audits_ExportAsync(ExportServiceType.Excel, userFilter, _searchString, _searchInOldValues, _searchInNewValues);
+            await res.ForceDownloadAsync(_jsRuntime);
         }
 
         private async void UserChanged(IEnumerable<UserResponse> filteredUsers)

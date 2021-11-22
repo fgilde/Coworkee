@@ -1,6 +1,5 @@
 ﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using System;
-using System.Collections.Generic;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Export;
@@ -20,18 +19,6 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.Export
         public ExportProductsQueryHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportProductsQueryHandler> localizer, IServiceProvider serviceProvider) 
             : base(unitOfWork, localizer, serviceProvider)
         {}
-
-        protected override Dictionary<string, Func<Product, object>> PropertyMappers()
-        {
-            return new Dictionary<string, Func<Product, object>>
-            {
-                {Localizer["Id"], item => item.Id},
-                {Localizer["Name"], item => item.Name},
-                {Localizer["Barcode"], item => item.Barcode},
-                {Localizer["Description"], item => item.Description},
-                {Localizer["Rate"], item => item.Rate}
-            };
-        }
 
         protected override ISpecification<Product> GetFilterSpecification(ExportProductsQuery query)
         {

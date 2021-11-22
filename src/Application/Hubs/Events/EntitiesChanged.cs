@@ -11,4 +11,13 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesChanged(UserResponse user, TDto[] entities) : base(user, entities)
         {}
     }
+
+    public class EntitiesChanged : EntitiesUpdated
+    {
+        public EntitiesChanged()
+        { }
+
+        public EntitiesChanged(UserResponse user, string[] idsAsString) : base(user, idsAsString)
+        { }
+    }
 }

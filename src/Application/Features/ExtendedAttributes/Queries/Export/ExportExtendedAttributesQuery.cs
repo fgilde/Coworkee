@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -88,41 +87,8 @@ namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.
                     .ToList();
             }
 
-            var mappers = new Dictionary<string, Func<TExtendedAttribute, object>>
-            {
-                {_localizer["Id"], item => item.Id},
-                {_localizer["EntityId"], item => item.EntityId},
-                {_localizer["Type"], item => item.Type},
-                {_localizer["Key"], item => item.Key},
-                {
-                    _localizer["Value"], item => item.Type switch
-                    {
-                        EntityExtendedAttributeType.Decimal => item.Decimal,
-                        EntityExtendedAttributeType.Text => item.Text,
-                        EntityExtendedAttributeType.DateTime => item.DateTime != null ? DateTime.SpecifyKind((DateTime)item.DateTime, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) : string.Empty,
-                        EntityExtendedAttributeType.Json => item.Json,
-                        _ => throw new ArgumentOutOfRangeException(nameof(item.Type), _localizer["Type should be valid"])
-                    }
-                },
-                {_localizer["ExternalId"], item => item.ExternalId},
-                {_localizer["Group"], item => item.Group},
-                {_localizer["Description"], item => item.Description},
-                {_localizer["IsActive"], item => item.IsActive}
-            };
 
-            if (request.IncludeEntity)
-            {
-                mappers.Add(_localizer["EntityCreatedBy"], item => item.Entity.CreatedBy);
-                mappers.Add(_localizer["EntityCreatedOn (Local)"], item => item.Entity.CreatedOn.ToString("G", CultureInfo.CurrentCulture));
-                mappers.Add(_localizer["EntityCreatedOn (UTC)"], item => DateTime.SpecifyKind(item.Entity.CreatedOn, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture));
-                mappers.Add(_localizer["EntityLastModifiedBy"], item => item.Entity.LastModifiedBy);
-                mappers.Add(_localizer["EntityLastModifiedOn (Local)"], item => item.Entity.LastModifiedOn?.ToString("G", CultureInfo.CurrentCulture));
-                mappers.Add(_localizer["EntityLastModifiedOn (UTC)"], item => item.Entity.LastModifiedOn != null ? DateTime.SpecifyKind((DateTime)item.Entity.LastModifiedOn, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) : string.Empty);
-            }
-
-            //var sheetName = string.Format(_localizer["Extended Attributes"], typeof(TEntity).Name);
-            var data = await _excelService.ExportAsync(extendedAttributes, mappers: mappers, cancellationToken);
-
+            var data = await _excelService.ExportAsync(extendedAttributes, cancellationToken);
             return await Result<string>.SuccessAsync(data: Convert.ToBase64String(data));
         }
     }

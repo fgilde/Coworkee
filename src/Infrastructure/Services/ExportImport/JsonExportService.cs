@@ -12,7 +12,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.ExportImport;
 public class JsonExportService: IExportService
 {
     public ExportServiceType ExportService => ExportServiceType.Json;
-    public Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, Dictionary<string, Func<TData, object>> mappers, CancellationToken cancellationToken = default)
+    public Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, CancellationToken cancellationToken = default)
     {
         return Task.Run(() => Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)), cancellationToken);
     }

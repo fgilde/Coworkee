@@ -10,6 +10,5 @@ public interface IExportService
 {
     public ExportServiceType ExportService { get; }
 
-    Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data
-        , Dictionary<string, Func<TData, object>> mappers, CancellationToken cancellationToken = default);
+    Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, CancellationToken cancellationToken = default);
 }

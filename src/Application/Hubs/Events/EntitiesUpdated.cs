@@ -1,14 +1,12 @@
-﻿using CleanArchitectureBase.Application.Hubs.Events.Base;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Hubs.Events.Base;
 using CleanArchitectureBase.Application.Responses.Identity;
 
 namespace CleanArchitectureBase.Application.Hubs.Events
 {
-    public class EntitiesUpdated<TDto> : ClientEventBase
+    public class EntitiesUpdated<TDto> : EntitiesUpdated
     {
-        public EntitiesUpdated()
-        {
-            Target = EventTarget.All;
-        }
+        public EntitiesUpdated(){}
 
         public EntitiesUpdated(UserResponse user, TDto[] entities): this()
         {
@@ -16,8 +14,23 @@ namespace CleanArchitectureBase.Application.Hubs.Events
             User = user;
         }
 
-        public UserResponse User { get; set; }
-
         public TDto[] Entities { get; set; }
+    }
+
+    public class EntitiesUpdated : ClientEventBase
+    {
+        public EntitiesUpdated()
+        {
+            Target = EventTarget.All;
+        }
+
+        public EntitiesUpdated(UserResponse user, string[] idsAsString) : this()
+        {
+            User = user;
+            IdsAsString = idsAsString;
+        }
+
+        public string[] IdsAsString { get; set; }
+        public UserResponse User { get; set; }
     }
 }

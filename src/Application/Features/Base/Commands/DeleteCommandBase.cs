@@ -49,9 +49,12 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
             var deletedItemsAsDto = entities.MapElementsTo<TDto>().ToArray();
 
+            var ids = command.Ids.Select(id => id.ToString()).ToArray();
             await Mediator.PublishClientEvents(cancellationToken, 
                 new EntitiesDeleted<TDto>(user, deletedItemsAsDto),
-                new EntitiesUpdated<TDto>(user, deletedItemsAsDto));
+                new EntitiesUpdated<TDto>(user, deletedItemsAsDto),
+                new EntitiesDeleted(user, ids),
+                new EntitiesUpdated(user, ids));
 
             return Unit.Value;
         }

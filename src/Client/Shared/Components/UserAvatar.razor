@@ -56,9 +56,7 @@
     string GetColor()
     {
         var id = UserData?.Id ?? _currentUser?.GetUserId();
-        if (string.IsNullOrWhiteSpace(id))
-            return "transparent";
-        return ColorUtils.Random(id);
+        return string.IsNullOrWhiteSpace(id) ? "transparent" : ColorUtils.Random(id);
     }
 
     protected override async Task OnParametersSetAsync()
@@ -69,23 +67,27 @@
 
         HubConnection.On<UserProfileChanged>(a =>
         {
-            if (a.User.Id == UserId || a.User.Id == UserData?.Id || a.User.Id == User?.GetUserId())
+            var actualDisplayedUserId = UserId ?? UserData?.Id ?? User?.GetUserId();
+            if (a.User.Id == actualDisplayedUserId)
             {
-                UserData = a.User;
-                SetImageDataUrl(UserData.ProfilePictureDataUrl);
+                ImageDataUrl = string.Empty;
+                Task.Delay(50).ContinueWith(t =>
+                {
+                    UserData = a.User;
+                    SetImageDataUrl(UserData.ProfilePictureDataUrl);
+                });
             }
         });
         _localStorage.Changed += async (sender, args) =>
         {
             if (args.Key == StorageConstants.Local.AuthToken && (User != null || _currentUser != null))
             {
-                User = (await _stateProvider.GetAuthenticationStateAsync()).User;
+                User = _currentUser = (await _stateProvider.GetAuthenticationStateAsync()).User;
                 StateHasChanged();
             }
             else if (args.Key == StorageConstants.Local.UserImageURL && (User != null || _currentUser != null))
             {
-                ImageDataUrl = args.NewValue as string;
-                StateHasChanged();
+                SetImageDataUrl(args.NewValue as string);
             }
         };
 

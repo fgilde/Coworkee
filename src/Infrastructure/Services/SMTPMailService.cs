@@ -12,10 +12,10 @@ namespace CleanArchitectureBase.Infrastructure.Services
 {
     public class SMTPMailService : IMailService
     {
-        private readonly MailConfiguration _config;
+        private readonly ServerConfiguration _config;
         private readonly ILogger<SMTPMailService> _logger;
 
-        public SMTPMailService(IOptions<MailConfiguration> config, ILogger<SMTPMailService> logger)
+        public SMTPMailService(IOptions<ServerConfiguration> config, ILogger<SMTPMailService> logger)
         {
             _config = config.Value;
             _logger = logger;
@@ -27,7 +27,8 @@ namespace CleanArchitectureBase.Infrastructure.Services
             {
                 var email = new MimeMessage
                 {
-                    Sender = new MailboxAddress(_config.DisplayName, request.From ?? _config.From),
+                    To = { new MailboxAddress(request.RecipientName, request.To) },
+                    Sender = new MailboxAddress(_config.MailConfiguration.DisplayName, request.From ?? _config.MailConfiguration.From),
                     Subject = request.Subject,
                     Body = new BodyBuilder
                     {
@@ -35,8 +36,8 @@ namespace CleanArchitectureBase.Infrastructure.Services
                     }.ToMessageBody()
                 };
                 using var smtp = new SmtpClient();
-                await smtp.ConnectAsync(_config.Host, _config.Port, SecureSocketOptions.StartTls);
-                await smtp.AuthenticateAsync(_config.UserName, _config.Password);
+                await smtp.ConnectAsync(_config.MailConfiguration.Host, _config.MailConfiguration.Port, SecureSocketOptions.StartTls);
+                await smtp.AuthenticateAsync(_config.MailConfiguration.UserName, _config.MailConfiguration.Password);
                 await smtp.SendAsync(email);
                 await smtp.DisconnectAsync(true);
             }

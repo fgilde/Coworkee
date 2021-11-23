@@ -27,20 +27,18 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly AppConfiguration _appConfig;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ServerConfiguration _appConfig;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IStringLocalizer<IdentityService> _localizer;
 
         public IdentityService(
             UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
-            IOptions<AppConfiguration> appConfig, SignInManager<ApplicationUser> signInManager,
+            IOptions<ServerConfiguration> appConfig, SignInManager<ApplicationUser> signInManager,
             IStringLocalizer<IdentityService> localizer, IHttpContextAccessor contextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _appConfig = appConfig.Value;
-            _signInManager = signInManager;
             _localizer = localizer;
             _contextAccessor = contextAccessor;
         }
@@ -156,7 +154,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appConfig.Secret)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appConfig.AppConfiguration.Secret)),
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 RoleClaimType = ClaimTypes.Role,
@@ -175,7 +173,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         private SigningCredentials GetSigningCredentials()
         {
-            var secret = Encoding.UTF8.GetBytes(_appConfig.Secret);
+            var secret = Encoding.UTF8.GetBytes(_appConfig.AppConfiguration.Secret);
             return new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256);
         }
     }

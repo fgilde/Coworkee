@@ -44,7 +44,6 @@ using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
 using CleanArchitectureBase.Infrastructure.Services.ExportImport;
-using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -99,13 +98,13 @@ namespace CleanArchitectureBase.Server.Extensions
             return services;
         }
 
-        internal static AppConfiguration GetApplicationSettings(
+        internal static ServerConfiguration AddApplicationSettings(
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var applicationSettingsConfiguration = configuration.GetSection(nameof(AppConfiguration));
-            services.Configure<AppConfiguration>(applicationSettingsConfiguration);
-            return applicationSettingsConfiguration.Get<AppConfiguration>();
+            services.AddTransient(p => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings
+            services.Configure<ServerConfiguration>(configuration);
+            return configuration.Get<ServerConfiguration>();
         }
 
         public static IServiceCollection AddApiVersions(this IServiceCollection services)
@@ -134,8 +133,6 @@ namespace CleanArchitectureBase.Server.Extensions
                 {
                     var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
 
-                    //options.SchemaNameGenerator = new CustomSchemaNameGenerator();
-                    //options.TypeNameGenerator = new CustomTypeNameGenerator();
                     options.Title = configSection.GetValue<string>(nameof(options.Title));
                     options.Description = configSection.GetValue<string>(nameof(options.Description));
                     options.DocumentName = ApiVersions.DocumentVersionPrefix + version.MajorVersion;
@@ -149,8 +146,6 @@ namespace CleanArchitectureBase.Server.Extensions
                         Type = OpenApiSecuritySchemeType.ApiKey,
                         Name = "Authorization",
                         In = OpenApiSecurityApiKeyLocation.Header,
-                        //Scheme = "Bearer",
-                        //BearerFormat = "JWT",
                         Description = localizer["Input your Bearer token in this format - Bearer {your token here} to access this API"],
                     }).OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
                 });
@@ -221,7 +216,6 @@ namespace CleanArchitectureBase.Server.Extensions
         internal static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IDateTimeService, SystemDateTimeService>();
-            services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
             return services;
         }
@@ -245,9 +239,9 @@ namespace CleanArchitectureBase.Server.Extensions
         }
 
         internal static IServiceCollection AddJwtAuthentication(
-            this IServiceCollection services, AppConfiguration config)
+            this IServiceCollection services, ServerConfiguration config)
         {
-            var key = Encoding.ASCII.GetBytes(config.Secret);
+            var key = Encoding.ASCII.GetBytes(config.AppConfiguration.Secret);
             services
                 .AddAuthentication(authentication =>
                 {

@@ -100,6 +100,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                         var verificationUri = await SendVerificationEmail(user, origin);
                         var mailRequest = new MailRequest
                         {
+                            RecipientName = $"{user.FirstName} {user.LastName}",
                             From = ApplicationConstants.Defaults.DefaultAdminUserEmail,
                             To = user.Email,
                             Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
@@ -248,6 +249,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var passwordResetURL = QueryHelpers.AddQueryString(endpointUri.ToString(), "Token", code);
             var mailRequest = new MailRequest
             {
+                RecipientName = $"{user.FirstName} {user.LastName}",
                 Body = string.Format(_localizer["Please reset your password by <a href='{0}>clicking here</a>."], HtmlEncoder.Default.Encode(passwordResetURL)),
                 Subject = _localizer["Reset Password"],
                 To = request.Email

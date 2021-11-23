@@ -1,21 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace CleanArchitectureBase.Server.Configuration
+﻿
+namespace CleanArchitectureBase.Application.Configurations
 {
-    public class ApplicationConfiguration : Rootobject
+    public class ServerConfiguration : Rootobject
     {
-        private ApplicationConfiguration()
+        public ServerConfiguration()
         { }
-
-        public static ApplicationConfiguration Create(IConfiguration configuration)
-        {
-            var result = new ApplicationConfiguration();
-            configuration.Bind(result);
-            return result;
-        }
     }
 
-    // Content here is generated. To generate new open appsettings.json select all and copy content. After wards here in this class use VS->Edit->Paste Special -> Paste JSON as classes
+    // Content here is generated. To generate new open appsettings.json from WebServer project select all and copy content. After wards here in this class use VS->Edit->Paste Special -> Paste JSON as classes
     
     public class Rootobject
     {

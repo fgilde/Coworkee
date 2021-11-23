@@ -12,7 +12,7 @@ namespace CleanArchitectureBase.Server.Extensions
     {
         internal static IMvcBuilder AddValidators(this IMvcBuilder builder)
         {
-            builder.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AppConfiguration>());
+            builder.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ServerConfiguration>());
             return builder;
         }
 

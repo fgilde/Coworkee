@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Server.Configuration;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Builder;
@@ -11,9 +11,9 @@ namespace CleanArchitectureBase.Server.Middlewares
     public class SwaggerAuthorizedMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ApplicationConfiguration _configuration;
+        private readonly ServerConfiguration _configuration;
 
-        public SwaggerAuthorizedMiddleware(RequestDelegate next, ApplicationConfiguration configuration)
+        public SwaggerAuthorizedMiddleware(RequestDelegate next, ServerConfiguration configuration)
         {
             _next = next;
             _configuration = configuration;

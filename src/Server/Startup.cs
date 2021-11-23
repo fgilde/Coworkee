@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using CleanArchitectureBase.Application;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Infrastructure;
-using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -34,7 +34,7 @@ namespace CleanArchitectureBase.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient(p => ApplicationConfiguration.Create(_configuration)); // Important as func to have always updated settings
+            var serverConfig = services.AddApplicationSettings(_configuration);
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalR();
@@ -51,8 +51,8 @@ namespace CleanArchitectureBase.Server
             services.AddScoped<ServerPreferenceManager>();
             services.AddServerLocalization();
             services.AddIdentity();
-            //services.AddJwtAuthentication(ApplicationConfiguration.Create(_configuration));
-            services.AddJwtAuthentication(services.GetApplicationSettings(_configuration));
+            //services.AddJwtAuthentication(ServerConfiguration.Create(_configuration));
+            services.AddJwtAuthentication(serverConfig);
             services.AddApplication();
             services.AddApplicationServices();
             services.AddRepositories();

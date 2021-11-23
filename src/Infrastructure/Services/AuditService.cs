@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
@@ -17,6 +18,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
+    [RegisterAs(typeof(IAuditService), 8)]
     public class AuditService : IAuditService
     {
         private readonly ApplicationDbContext _context;

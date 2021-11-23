@@ -14,13 +14,16 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
+    [RegisterAs(typeof(ITokenService), 1, RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Transient)]
     public class IdentityService : ITokenService
     {
         private const string InvalidErrorMessage = "Invalid email or password.";

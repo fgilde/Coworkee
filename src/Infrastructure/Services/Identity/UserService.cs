@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
@@ -29,6 +30,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
+    [RegisterAs(typeof(IUserService), 5)]
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;

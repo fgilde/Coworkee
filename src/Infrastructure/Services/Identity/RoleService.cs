@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
@@ -18,6 +19,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
+    [RegisterAs(typeof(IRoleService), 2)]
     public class RoleService : IRoleService
     {
         private readonly RoleManager<ApplicationRole> _roleManager;

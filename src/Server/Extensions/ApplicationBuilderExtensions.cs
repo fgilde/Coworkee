@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Hubs;
@@ -92,13 +91,9 @@ namespace CleanArchitectureBase.Server.Extensions
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
 
-            var initializers = serviceScope.ServiceProvider.GetServices<IDatabaseSeeder>();
-
-            foreach (var initializer in initializers)
-            {
+            foreach (var initializer in serviceScope.ServiceProvider.GetServices<IDatabaseSeeder>())
                 initializer.Initialize();
-            }
-
+            
             return app;
         }
     }

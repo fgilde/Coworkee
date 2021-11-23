@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
@@ -14,6 +15,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
+    [RegisterAs(typeof(IRoleClaimService), 0)]
     public class RoleClaimService : IRoleClaimService
     {
         private readonly IStringLocalizer<RoleClaimService> _localizer;

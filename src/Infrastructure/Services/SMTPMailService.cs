@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Configurations;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Requests.Mail;
 using MailKit.Net.Smtp;
@@ -10,6 +11,7 @@ using MimeKit;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
+    [RegisterAs(typeof(IMailService))]
     public class SMTPMailService : IMailService
     {
         private readonly ServerConfiguration _config;

@@ -3,11 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
+    [RegisterAs(typeof(IPermissionService), 4)]
     public class PermissionService: IPermissionService
     {
         private readonly ICurrentUserService _currentUserService;

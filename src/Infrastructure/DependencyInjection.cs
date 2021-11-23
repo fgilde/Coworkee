@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using CleanArchitectureBase.Application.Contracts.Services.Storage;
@@ -16,8 +17,16 @@ namespace CleanArchitectureBase.Infrastructure
 {
     public static class DependencyInjection
     {
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        {
+            return services
+                .AddAllWithRegisterAttribute(typeof(DependencyInjection).Assembly)
+                .AddRepositories()
+                .AddServerStorage() //TODO - should implement ServerStorageProvider to work correctly!
+                .AddExtendedAttributesUnitOfWork();
+        }
 
-        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
                 .AddTransient(typeof(IRepositoryAsync<,>), typeof(RepositoryAsync<,>))
@@ -28,16 +37,16 @@ namespace CleanArchitectureBase.Infrastructure
                 .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }
 
-        public static IServiceCollection AddExtendedAttributesUnitOfWork(this IServiceCollection services)
+        private static IServiceCollection AddExtendedAttributesUnitOfWork(this IServiceCollection services)
         {
             return services
                 .AddTransient(typeof(IExtendedAttributeUnitOfWork<,,>), typeof(ExtendedAttributeUnitOfWork<,,>));
         }
 
-        public static IServiceCollection AddServerStorage(this IServiceCollection services)
+        private static IServiceCollection AddServerStorage(this IServiceCollection services)
             => AddServerStorage(services, null);
 
-        public static IServiceCollection AddServerStorage(this IServiceCollection services, Action<SystemTextJsonOptions> configure)
+        private static IServiceCollection AddServerStorage(this IServiceCollection services, Action<SystemTextJsonOptions> configure)
         {
             return services
                 .AddScoped<IJsonSerializer, SystemTextJsonSerializer>()

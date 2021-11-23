@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Infrastructure;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
@@ -47,17 +46,12 @@ namespace CleanArchitectureBase.Server
             services.AddHealthChecks();
             services.AddSerialization();
             services.AddDatabase(_configuration);
-            services.AddServerStorage(); //TODO - should implement ServerStorageProvider to work correctly!
             services.AddScoped<ServerPreferenceManager>();
             services.AddServerLocalization();
             services.AddIdentity();
-            //services.AddJwtAuthentication(ServerConfiguration.Create(_configuration));
             services.AddJwtAuthentication(serverConfig);
             services.AddApplication();
-            services.AddApplicationServices();
-            services.AddRepositories();
-            services.AddExtendedAttributesUnitOfWork();
-            services.AddSharedInfrastructure(_configuration);
+            services.AddInfrastructure();
             services.AddApiVersions();
             services.AddOpenApiDocumentation(_configuration);
             services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));

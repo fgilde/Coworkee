@@ -3,14 +3,17 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CsvHelper.Excel;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
 
 namespace CleanArchitectureBase.Infrastructure.Services.ExportImport
 {
+    [RegisterAs(typeof(IExportService), RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Scoped)]
     public class ExcelExportService : IExportService
     {
         private readonly IStringLocalizer<ExcelExportService> _localizer;

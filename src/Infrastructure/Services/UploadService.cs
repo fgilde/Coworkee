@@ -1,10 +1,12 @@
 ﻿using CleanArchitectureBase.Application.Requests;
 using System.IO;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
+    [RegisterAs(typeof(IUploadService),7)]
     public class UploadService : IUploadService
     {
         public string UploadAsync(UploadRequest request)

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
 using CleanArchitectureBase.Application.Hubs.Events;
@@ -17,12 +18,12 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
+    [RegisterAs(typeof(IAccountService), 3)]
     public class AccountService : IAccountService
     {
         private readonly IdentityService _identityService;

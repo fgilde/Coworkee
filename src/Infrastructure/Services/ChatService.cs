@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
@@ -17,6 +18,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
+    [RegisterAs(typeof(IChatService), 6)]
     public class ChatService : IChatService
     {
         private readonly ApplicationDbContext _context;

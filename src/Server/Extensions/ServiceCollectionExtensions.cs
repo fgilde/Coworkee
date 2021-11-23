@@ -2,8 +2,6 @@
 using CleanArchitectureBase.Infrastructure;
 using CleanArchitectureBase.Infrastructure.Contexts;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Infrastructure.Services;
-using CleanArchitectureBase.Infrastructure.Services.Identity;
 using CleanArchitectureBase.Server.Localization;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Server.Permission;
@@ -37,13 +35,10 @@ using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
 using CleanArchitectureBase.Application.Contracts.Serialization.Settings;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
-using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Serialization.JsonConverters;
 using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
-using CleanArchitectureBase.Infrastructure.Services.ExportImport;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -212,32 +207,7 @@ namespace CleanArchitectureBase.Server.Extensions
 
             return services;
         }
-
-        internal static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddTransient<IDateTimeService, SystemDateTimeService>();
-            services.AddTransient<IMailService, SMTPMailService>();
-            return services;
-        }
-
-        internal static IServiceCollection AddApplicationServices(this IServiceCollection services)
-        {
-            // TODO: Reflect by base Interface or Attribute
-            services.AddTransient<IRoleClaimService, RoleClaimService>();
-            services.AddTransient<ITokenService, IdentityService>();
-            services.AddTransient<IdentityService, IdentityService>();
-            services.AddTransient<IRoleService, RoleService>();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IPermissionService, PermissionService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IChatService, ChatService>();
-            services.AddTransient<IUploadService, UploadService>();
-            services.AddTransient<IAuditService, AuditService>();
-            services.AddScoped<IExportService, ExcelExportService>();
-            services.AddScoped<IExportService, JsonExportService>();
-            return services;
-        }
-
+        
         internal static IServiceCollection AddJwtAuthentication(
             this IServiceCollection services, ServerConfiguration config)
         {

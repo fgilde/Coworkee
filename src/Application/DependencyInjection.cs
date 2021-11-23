@@ -4,6 +4,7 @@ using System.Reflection;
 using CleanArchitectureBase.Application.Common.Behaviours;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts;
+using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.Delete;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
@@ -16,12 +17,13 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application
 {
     public static class DependencyInjection
     {
-        public static void AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
             services.AddTransient<ICustomAuthorizeAttributeHandler, CustomAuthorizeAttributeHandler>();
@@ -32,6 +34,17 @@ namespace CleanArchitectureBase.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+            return services;
+        }
+
+        public static IServiceCollection AddAllWithRegisterAttribute(this IServiceCollection services, Assembly locatedInAssembly)
+        {
+            locatedInAssembly.GetTypes()
+                .SelectMany(t => t.GetCustomAttributes<RegisterAsAttribute>().Select(a => a.SetImplementationType(t)))
+                .OrderBy(a => a.Order)
+                .SelectMany(a => a.GetServiceDescriptor())
+                .Apply(services.Add);
+            return services;
         }
 
         public static void AddExtendedAttributesHandlers(this IServiceCollection services)

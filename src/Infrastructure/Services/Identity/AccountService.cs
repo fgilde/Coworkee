@@ -1,37 +1,52 @@
-﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
+﻿using System;
+using System.IO;
+using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
+using CleanArchitectureBase.Application.Hubs.Events;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
     public class AccountService : IAccountService
     {
+        private readonly IdentityService _identityService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUploadService _uploadService;
         private readonly IStringLocalizer<AccountService> _localizer;
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMediator _mediator;
         private readonly IAuthorizationService _authorizationService;
 
 
         public AccountService(
+            IdentityService identityService,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IUploadService uploadService,
             IStringLocalizer<AccountService> localizer, 
             IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
-            IAuthorizationService authorizationService, IHttpContextAccessor httpContextAccessor)
+            IAuthorizationService authorizationService, IHttpContextAccessor httpContextAccessor,
+            IMediator mediator)
         {
+            _identityService = identityService;
             _userManager = userManager;
             _signInManager = signInManager;
             _uploadService = uploadService;
@@ -39,6 +54,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _authorizationService = authorizationService;
             _httpContextAccessor = httpContextAccessor;
+            _mediator = mediator;
         }
 
         public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId)
@@ -57,15 +73,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
         }
 
-        public async Task<IResult> UpdateProfileAsync(UpdateProfileRequest request, string userId)
+        /// <summary>
+        /// Updates the profile and returns the new JWT token
+        /// </summary>
+        public async Task<string> UpdateProfileAsync(UpdateProfileRequest request, string userId)
         {
             if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
             {
-                var userWithSamePhoneNumber = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == request.PhoneNumber);
-                if (userWithSamePhoneNumber != null)
-                {
-                    return await Result.FailAsync(string.Format(_localizer["Phone number {0} is already used."], request.PhoneNumber));
-                }
+                if (await _userManager.Users.AnyAsync(x => x.PhoneNumber == request.PhoneNumber))
+                    throw Errors.Create(_localizer["Phone number {0} is already used.", request.PhoneNumber], HttpStatusCode.Conflict);
             }
 
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
@@ -74,23 +90,22 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 var user = await _userManager.FindByIdAsync(userId);
                 if (user == null)
                 {
-                    return await Result.FailAsync(_localizer["User Not Found."]);
+                    throw Errors.NotFound("User Not found");
                 }
                 user.FirstName = request.FirstName;
                 user.LastName = request.LastName;
                 user.PhoneNumber = request.PhoneNumber;
                 var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
                 if (request.PhoneNumber != phoneNumber)
-                {
-                    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, request.PhoneNumber);
-                }
-                var identityResult = await _userManager.UpdateAsync(user);
-                var errors = identityResult.Errors.Select(e => _localizer[e.Description].ToString()).ToList();
-                await _signInManager.RefreshSignInAsync(user);
-                return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
-            }
+                    await _userManager.SetPhoneNumberAsync(user, request.PhoneNumber).EnsureSuccess();
 
-            return await Result.FailAsync(string.Format(_localizer["Email {0} is already used."], request.Email));
+                await _userManager.UpdateAsync(user).EnsureSuccess();
+                await _signInManager.RefreshSignInAsync(user);
+                await _mediator.PublishClientEvent(new UserProfileChanged(user.MapTo<UserResponse>()));
+                return await _identityService.GenerateJwtAsync(user);
+
+            }
+            throw Errors.Create(_localizer["Email {0} is already used.", request.Email], HttpStatusCode.Conflict);
         }
 
         public async Task<IResult<string>> GetProfilePictureAsync(string userId)
@@ -103,15 +118,25 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result<string>.SuccessAsync(data: user.ProfilePictureDataUrl);
         }
 
-        public async Task<IResult<string>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId)
+        public async Task<IResult<TokenResponse>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return await Result<string>.FailAsync(message: _localizer["User Not Found"]);
+            if (user == null) return await Result<TokenResponse>.FailAsync(message: _localizer["User Not Found"]);
+            if (File.Exists(user.ProfilePictureDataUrl))
+                File.Delete(user.ProfilePictureDataUrl);
             var filePath = _uploadService.UploadAsync(request);
             user.ProfilePictureDataUrl = filePath;
             var identityResult = await _userManager.UpdateAsync(user);
             var errors = identityResult.Errors.Select(e => _localizer[e.Description].ToString()).ToList();
-            return identityResult.Succeeded ? await Result<string>.SuccessAsync(data: filePath) : await Result<string>.FailAsync(errors);
+            if (identityResult.Succeeded)
+                await _mediator.PublishClientEvent(new UserProfileChanged(user.MapTo<UserResponse>()));
+            return identityResult.Succeeded 
+                ? await Result<TokenResponse>.SuccessAsync(new TokenResponse()
+                {
+                    Token = await _identityService.GenerateJwtAsync(user),
+                    UserImageURL = filePath,
+                }) 
+                : await Result<TokenResponse>.FailAsync(errors);
         }
 
         public async Task<string> GetUserNameAsync(string userId)

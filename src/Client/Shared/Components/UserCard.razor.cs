@@ -1,13 +1,21 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Reflection;
+using System.Security.Claims;
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Hubs.Events;
+using CleanArchitectureBase.Client.Configuration;
+using CleanArchitectureBase.Shared.Constants.Storage;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
     public partial class UserCard
     {
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
+
         [Parameter] public string Class { get; set; }
         [Parameter] public string Style { get; set; }
         [Parameter] public bool ShowEmail { get; set; } = true;
@@ -23,6 +31,33 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         protected override async Task OnInitializedAsync()
         {            
+            await Load();
+
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+
+            HubConnection.On<UserProfileChanged>(async a =>
+            {
+                if (a.User.Id == UserId || a.User.Id == UserData?.Id || a.User.Id == User?.GetUserId())
+                {
+                    UserData = a.User;
+                    FirstName = a.User.FirstName;
+                    SecondName = a.User.LastName;
+                    Email = a.User.Email;
+                    StateHasChanged();
+                }
+            });
+            _localStorage.Changed += async (sender, args) =>
+            {
+                if (args.Key == StorageConstants.Local.AuthToken && User != null)
+                {
+                    User = (await _stateProvider.GetAuthenticationStateAsync()).User;
+                    StateHasChanged();
+                }
+            };
+        }
+
+        private async Task Load()
+        {
             if (string.IsNullOrWhiteSpace(UserId) && UserData == null)
                 await LoadCurrentUserData();
             else
@@ -51,6 +86,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 FirstName = UserData.FirstName;
                 SecondName = UserData.LastName;
             }
+        }
+        public async ValueTask DisposeAsync()
+        {
+            if (HubConnection != null)
+                await HubConnection.DisposeAsync();
         }
     }
 }

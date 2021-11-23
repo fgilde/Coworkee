@@ -97,7 +97,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
-        private async Task<string> GenerateJwtAsync(ApplicationUser user)
+        internal async Task<string> GenerateJwtAsync(ApplicationUser user)
         {
             var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user));
             return token;

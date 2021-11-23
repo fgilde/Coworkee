@@ -1149,7 +1149,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "type": "string"
                 }
               }
             }
@@ -1272,7 +1272,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultOfString"
+                  "$ref": "#/components/schemas/ResultOfTokenResponse"
                 }
               }
             }
@@ -3272,6 +3272,45 @@
           }
         ]
       },
+      "ResultOfTokenResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "nullable": true,
+                "$ref": "#/components/schemas/TokenResponse"
+              }
+            }
+          }
+        ]
+      },
+      "TokenResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "userImageURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshTokenExpiryTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "UpdateProfilePictureRequest": {
         "allOf": [
           {
@@ -3483,45 +3522,6 @@
             "items": {
               "$ref": "#/components/schemas/RoleClaimRequest"
             }
-          }
-        }
-      },
-      "ResultOfTokenResponse": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Result"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "data": {
-                "nullable": true,
-                "$ref": "#/components/schemas/TokenResponse"
-              }
-            }
-          }
-        ]
-      },
-      "TokenResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "token": {
-            "type": "string",
-            "nullable": true
-          },
-          "refreshToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "userImageURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "refreshTokenExpiryTime": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },

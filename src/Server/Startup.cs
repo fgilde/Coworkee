@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using System.Text.Json.Serialization;
 using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Infrastructure;
 using CleanArchitectureBase.Server.Configuration;
@@ -35,7 +34,7 @@ namespace CleanArchitectureBase.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient(p => ApplicationConfiguration.Create(_configuration));
+            services.AddTransient(p => ApplicationConfiguration.Create(_configuration)); // Important as func to have always updated settings
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalR();
@@ -52,6 +51,7 @@ namespace CleanArchitectureBase.Server
             services.AddScoped<ServerPreferenceManager>();
             services.AddServerLocalization();
             services.AddIdentity();
+            //services.AddJwtAuthentication(ApplicationConfiguration.Create(_configuration));
             services.AddJwtAuthentication(services.GetApplicationSettings(_configuration));
             services.AddApplication();
             services.AddApplicationServices();

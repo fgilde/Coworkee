@@ -9,18 +9,20 @@ namespace CleanArchitectureBase.Client.Extensions
 {
     public static class HubExtensions
     {
-        public static IDisposable On<TClientEvent>(this HubConnection hubConnection, Action<TClientEvent> handler)
+        public static HubConnection On<TClientEvent>(this HubConnection hubConnection, Action<TClientEvent> handler)
             where TClientEvent : ClientEventBase, new()
         {
             var e = new TClientEvent();
-            return hubConnection.On(e.EventName, handler);
+            hubConnection.On(e.EventName, handler);
+            return hubConnection;
         }
 
-        public static IDisposable On<TClientEvent>(this HubConnection hubConnection, Func<TClientEvent, Task> handler)
+        public static HubConnection On<TClientEvent>(this HubConnection hubConnection, Func<TClientEvent, Task> handler)
             where TClientEvent: ClientEventBase, new()
         {
             var e = new TClientEvent();
-            return hubConnection.On(e.EventName, handler);
+            hubConnection.On(e.EventName, handler);
+            return hubConnection;
         }
 
         public static HubConnection TryInitialize(this HubConnection hubConnection, string backendOrigin)

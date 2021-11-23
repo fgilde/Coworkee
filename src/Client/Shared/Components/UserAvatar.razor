@@ -2,7 +2,10 @@
 @using System.Security.Cryptography
 @using System.Text
 @using CleanArchitectureBase.Application.Common.Models.Identity
+@using CleanArchitectureBase.Application.Hubs.Events
 @using CleanArchitectureBase.Client.Utils
+@using CleanArchitectureBase.Shared.Constants.Storage
+@using Microsoft.AspNetCore.SignalR.Client
 
 
 <div @onclick="GotoAccountOrProfile" class="@(CanNavigateToProfile() ? "cursor-pointer" : "") mud-button-text mud-button-text-size-medium">
@@ -22,6 +25,10 @@
 
 @code {
 
+    [CascadingParameter] private HubConnection HubConnection { get; set; }
+
+    [Parameter] public string ImageDataUrl { get; set; }
+
     [Parameter] public bool LinkToProfile { get; set; } = true;
 
     [Parameter] public ClaimsPrincipal User { get; set; }
@@ -36,7 +43,7 @@
 
     [Parameter] public bool? IsUserOnline { get; set; }
 
-    private string ImageDataUrl { get; set; }
+
     private string Initials { get; set; }
     private ClaimsPrincipal _currentUser;
 
@@ -54,9 +61,43 @@
         return ColorUtils.Random(id);
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        await Load();
+
+        HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+
+        HubConnection.On<UserProfileChanged>(a =>
+        {
+            if (a.User.Id == UserId || a.User.Id == UserData?.Id || a.User.Id == User?.GetUserId())
+            {
+                UserData = a.User;
+                SetImageDataUrl(UserData.ProfilePictureDataUrl);
+            }
+        });
+        _localStorage.Changed += async (sender, args) =>
+        {
+            if (args.Key == StorageConstants.Local.AuthToken && (User != null || _currentUser != null))
+            {
+                User = (await _stateProvider.GetAuthenticationStateAsync()).User;
+                StateHasChanged();
+            }
+            else if (args.Key == StorageConstants.Local.UserImageURL && (User != null || _currentUser != null))
+            {
+                ImageDataUrl = args.NewValue as string;
+                StateHasChanged();
+            }
+        };
+
+    }
+
     protected override async Task OnInitializedAsync()
     {
         _currentUser = (await _stateProvider.GetAuthenticationStateAsync()).User;
+    }
+
+    private async Task Load()
+    {
         if (string.IsNullOrWhiteSpace(UserId) && UserData == null)
             await LoadCurrentUserData();
         else
@@ -117,4 +158,17 @@
         if (CanNavigateToProfile())
             _navigationManager.NavigateTo(TargetProfileUrl());
     }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (HubConnection != null)
+            await HubConnection.DisposeAsync();
+    }
+
+    public void SetImageDataUrl(string uri)
+    {
+        ImageDataUrl = uri;
+        StateHasChanged();
+    }
+
 }

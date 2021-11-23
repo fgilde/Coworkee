@@ -44,6 +44,7 @@ using CleanArchitectureBase.Application.Serialization.Options;
 using CleanArchitectureBase.Application.Serialization.Serializers;
 using CleanArchitectureBase.Application.Serialization.Settings;
 using CleanArchitectureBase.Infrastructure.Services.ExportImport;
+using CleanArchitectureBase.Server.Configuration;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -99,8 +100,8 @@ namespace CleanArchitectureBase.Server.Extensions
         }
 
         internal static AppConfiguration GetApplicationSettings(
-           this IServiceCollection services,
-           IConfiguration configuration)
+            this IServiceCollection services,
+            IConfiguration configuration)
         {
             var applicationSettingsConfiguration = configuration.GetSection(nameof(AppConfiguration));
             services.Configure<AppConfiguration>(applicationSettingsConfiguration);
@@ -230,6 +231,7 @@ namespace CleanArchitectureBase.Server.Extensions
             // TODO: Reflect by base Interface or Attribute
             services.AddTransient<IRoleClaimService, RoleClaimService>();
             services.AddTransient<ITokenService, IdentityService>();
+            services.AddTransient<IdentityService, IdentityService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IPermissionService, PermissionService>();

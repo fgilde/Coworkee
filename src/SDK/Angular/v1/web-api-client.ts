@@ -1725,7 +1725,7 @@ export interface IAccountClient {
      * Update Profile
      * @return Status 200 OK
      */
-    updateProfile(model: UpdateProfileRequest): Observable<Result>;
+    updateProfile(model: UpdateProfileRequest): Observable<string>;
     /**
      * Change Password
      * @return Status 200 OK
@@ -1740,7 +1740,7 @@ export interface IAccountClient {
      * Update Profile Picture
      * @return Status 200 OK
      */
-    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<ResultOfString>;
+    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<ResultOfTokenResponse>;
     logout(): Observable<FileResponse>;
 }
 
@@ -1761,7 +1761,7 @@ export class AccountClient implements IAccountClient {
      * Update Profile
      * @return Status 200 OK
      */
-    updateProfile(model: UpdateProfileRequest): Observable<Result> {
+    updateProfile(model: UpdateProfileRequest): Observable<string> {
         let url_ = this.baseUrl + "/identity/Account/UpdateProfile";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1784,14 +1784,14 @@ export class AccountClient implements IAccountClient {
                 try {
                     return this.processUpdateProfile(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<string>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<string>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdateProfile(response: HttpResponseBase): Observable<Result> {
+    protected processUpdateProfile(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1802,7 +1802,7 @@ export class AccountClient implements IAccountClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Result.fromJS(resultData200);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1810,7 +1810,7 @@ export class AccountClient implements IAccountClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return _observableOf<string>(<any>null);
     }
 
     /**
@@ -1928,7 +1928,7 @@ export class AccountClient implements IAccountClient {
      * Update Profile Picture
      * @return Status 200 OK
      */
-    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<ResultOfString> {
+    updateProfilePicture(userId: string, request: UpdateProfilePictureRequest): Observable<ResultOfTokenResponse> {
         let url_ = this.baseUrl + "/identity/Account/profile-picture/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -1954,14 +1954,14 @@ export class AccountClient implements IAccountClient {
                 try {
                     return this.processUpdateProfilePicture(<any>response_);
                 } catch (e) {
-                    return <Observable<ResultOfString>><any>_observableThrow(e);
+                    return <Observable<ResultOfTokenResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ResultOfString>><any>_observableThrow(response_);
+                return <Observable<ResultOfTokenResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdateProfilePicture(response: HttpResponseBase): Observable<ResultOfString> {
+    protected processUpdateProfilePicture(response: HttpResponseBase): Observable<ResultOfTokenResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1972,7 +1972,7 @@ export class AccountClient implements IAccountClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfString.fromJS(resultData200);
+            result200 = ResultOfTokenResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1980,7 +1980,7 @@ export class AccountClient implements IAccountClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfString>(<any>null);
+        return _observableOf<ResultOfTokenResponse>(<any>null);
     }
 
     logout(): Observable<FileResponse> {
@@ -5450,6 +5450,87 @@ export interface IResultOfString extends IResult {
     data?: string | undefined;
 }
 
+export class ResultOfTokenResponse extends Result implements IResultOfTokenResponse {
+    data?: TokenResponse | undefined;
+
+    constructor(data?: IResultOfTokenResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? TokenResponse.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfTokenResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfTokenResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IResultOfTokenResponse extends IResult {
+    data?: TokenResponse | undefined;
+}
+
+export class TokenResponse implements ITokenResponse {
+    token?: string | undefined;
+    refreshToken?: string | undefined;
+    userImageURL?: string | undefined;
+    refreshTokenExpiryTime?: Date;
+
+    constructor(data?: ITokenResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.token = _data["token"];
+            this.refreshToken = _data["refreshToken"];
+            this.userImageURL = _data["userImageURL"];
+            this.refreshTokenExpiryTime = _data["refreshTokenExpiryTime"] ? new Date(_data["refreshTokenExpiryTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): TokenResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new TokenResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["token"] = this.token;
+        data["refreshToken"] = this.refreshToken;
+        data["userImageURL"] = this.userImageURL;
+        data["refreshTokenExpiryTime"] = this.refreshTokenExpiryTime ? this.refreshTokenExpiryTime.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface ITokenResponse {
+    token?: string | undefined;
+    refreshToken?: string | undefined;
+    userImageURL?: string | undefined;
+    refreshTokenExpiryTime?: Date;
+}
+
 export class UpdateProfilePictureRequest extends UploadRequest implements IUpdateProfilePictureRequest {
 
     constructor(data?: IUpdateProfilePictureRequest) {
@@ -5898,87 +5979,6 @@ export class PermissionRequest implements IPermissionRequest {
 export interface IPermissionRequest {
     roleId?: string | undefined;
     roleClaims?: RoleClaimRequest[] | undefined;
-}
-
-export class ResultOfTokenResponse extends Result implements IResultOfTokenResponse {
-    data?: TokenResponse | undefined;
-
-    constructor(data?: IResultOfTokenResponse) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.data = _data["data"] ? TokenResponse.fromJS(_data["data"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): ResultOfTokenResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfTokenResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
-        super.toJSON(data);
-        return data; 
-    }
-}
-
-export interface IResultOfTokenResponse extends IResult {
-    data?: TokenResponse | undefined;
-}
-
-export class TokenResponse implements ITokenResponse {
-    token?: string | undefined;
-    refreshToken?: string | undefined;
-    userImageURL?: string | undefined;
-    refreshTokenExpiryTime?: Date;
-
-    constructor(data?: ITokenResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.token = _data["token"];
-            this.refreshToken = _data["refreshToken"];
-            this.userImageURL = _data["userImageURL"];
-            this.refreshTokenExpiryTime = _data["refreshTokenExpiryTime"] ? new Date(_data["refreshTokenExpiryTime"].toString()) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): TokenResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new TokenResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["token"] = this.token;
-        data["refreshToken"] = this.refreshToken;
-        data["userImageURL"] = this.userImageURL;
-        data["refreshTokenExpiryTime"] = this.refreshTokenExpiryTime ? this.refreshTokenExpiryTime.toISOString() : <any>undefined;
-        return data; 
-    }
-}
-
-export interface ITokenResponse {
-    token?: string | undefined;
-    refreshToken?: string | undefined;
-    userImageURL?: string | undefined;
-    refreshTokenExpiryTime?: Date;
 }
 
 export class TokenRequest implements ITokenRequest {

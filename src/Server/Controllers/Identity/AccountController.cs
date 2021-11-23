@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -29,11 +30,10 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="model"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPut(nameof(UpdateProfile))]
-        [Produces(typeof(Result))]
+        [Produces(typeof(string))]
         public async Task<ActionResult> UpdateProfile(UpdateProfileRequest model)
         {
-            var response = await _accountService.UpdateProfileAsync(model, _currentUser.UserId);
-            return Ok(response);
+            return Ok(await _accountService.UpdateProfileAsync(model, _currentUser.UserId));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// <param name="request"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost("profile-picture/{userId}")]
-        [Produces(typeof(Result<string>))]
+        [Produces(typeof(Result<TokenResponse>))]
         public async Task<IActionResult> UpdateProfilePictureAsync(UpdateProfilePictureRequest request)
         {
             return Ok(await _accountService.UpdateProfilePictureAsync(request, _currentUser.UserId));

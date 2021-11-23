@@ -57,7 +57,7 @@
                     @foreach (var user in UserList)
                     {
                         <MudListItem Class="pa-0 px-2" OnClick="@(() => LoadUserChat(user.Id))">
-                            <UserCard IsUserOnline="@user.IsOnline" UserId="@user.Id" />
+                            <UserCard Class="pa-0" IsUserOnline="@user.IsOnline" UserId="@user.Id" />
                         </MudListItem>
                     }
                 </MudList>

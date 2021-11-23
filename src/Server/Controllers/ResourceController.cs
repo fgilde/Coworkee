@@ -18,7 +18,7 @@ namespace CleanArchitectureBase.Server.Controllers
 
         public ResourceController(IMemoryCache memoryCache)
         {
-            this._memoryCache = memoryCache;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet("~/favicon.ico")]
@@ -35,15 +35,12 @@ namespace CleanArchitectureBase.Server.Controllers
         [HttpGet("~/{objectName}/resources.js")]
         public async Task<IActionResult> GetResources(string objectName, string cacheBuster = "")
         {
-            string jsonResources = await _memoryCache.GetOrCreateAsync(
-                CultureInfo.CurrentUICulture.TwoLetterISOLanguageName + objectName +"_resources.js" + cacheBuster,
-                cacheEntry =>
-                    new JsStringBuilder(false, objectName)
+            return Ok(await _memoryCache.GetOrCreateAsync(
+                CultureInfo.CurrentUICulture.TwoLetterISOLanguageName + objectName + "_resources.js" + cacheBuster,
+                _ => new JsStringBuilder(false, objectName)
                         .Append(typeof(ApplicationConstants))
                         .Append(typeof(CustomIcons))
-                        .ToJsonAsync());
-
-            return Ok(jsonResources);
+                        .ToJsonAsync()));
         }
     }
 

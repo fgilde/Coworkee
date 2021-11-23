@@ -6,6 +6,7 @@ using MudBlazor;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Hubs.Events;
@@ -20,6 +21,7 @@ namespace CleanArchitectureBase.Client.Shared
         private string CurrentUserId { get; set; }
         private NavMenu navMenu;
         private AppBarHeader appBarHeader;
+        private ClaimsPrincipal currentUser;
         private async Task LoadDataAsync()
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
@@ -54,7 +56,7 @@ namespace CleanArchitectureBase.Client.Shared
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
-            var currentUser = await _clientAuthenticationManager.CurrentUser();
+            currentUser = await _clientAuthenticationManager.CurrentUser();
             if (currentUser is {Identity: {IsAuthenticated: true}})
                 _navigationManager.NavigateToReturnUrlIf();
         }
@@ -74,6 +76,7 @@ namespace CleanArchitectureBase.Client.Shared
                 await _clientPreferenceManager.ChangeLanguageAsync((await _clientPreferenceManager.GetPreference()).LanguageCode);
                 StateHasChanged();
             });
+
             hubConnection.On<string, string, string>(ApplicationConstants.SignalR.ReceiveChatNotification, (message, receiverUserId, senderUserId) =>
             {
                 if (CurrentUserId == receiverUserId)

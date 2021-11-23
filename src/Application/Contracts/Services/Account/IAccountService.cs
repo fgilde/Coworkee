@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Common;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -7,13 +8,13 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Account
 {
     public interface IAccountService : IService
     {
-        Task<IResult> UpdateProfileAsync(UpdateProfileRequest model, string userId);
+        Task<string> UpdateProfileAsync(UpdateProfileRequest model, string userId);
 
         Task<IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId);
 
         Task<IResult<string>> GetProfilePictureAsync(string userId);
 
-        Task<IResult<string>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId);
+        Task<IResult<TokenResponse>> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId);
 
         Task<string> GetUserNameAsync(string userId);
 

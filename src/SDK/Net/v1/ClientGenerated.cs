@@ -294,13 +294,13 @@ namespace SDK
         /// <summary>Update Profile</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result Account_UpdateProfile(UpdateProfileRequest model);
+        string Account_UpdateProfile(UpdateProfileRequest model);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Update Profile</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result> Account_UpdateProfileAsync(UpdateProfileRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<string> Account_UpdateProfileAsync(UpdateProfileRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <summary>Change Password</summary>
         /// <returns>Status 200 OK</returns>
@@ -327,13 +327,13 @@ namespace SDK
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId);
+        Result<TokenResponse> Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<TokenResponse>> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse Account_Logout();
@@ -2866,7 +2866,7 @@ namespace SDK
         /// <summary>Update Profile</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result Account_UpdateProfile(UpdateProfileRequest model)
+        public string Account_UpdateProfile(UpdateProfileRequest model)
         {
             return System.Threading.Tasks.Task.Run(async () => await Account_UpdateProfileAsync(model, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2875,7 +2875,7 @@ namespace SDK
         /// <summary>Update Profile</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result> Account_UpdateProfileAsync(UpdateProfileRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<string> Account_UpdateProfileAsync(UpdateProfileRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (model == null)
                 throw new System.ArgumentNullException("model");
@@ -2918,7 +2918,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<string>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3107,7 +3107,7 @@ namespace SDK
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Result<string> Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId)
+        public Result<TokenResponse> Account_UpdateProfilePicture(UpdateProfilePictureRequest request, string userId)
         {
             return System.Threading.Tasks.Task.Run(async () => await Account_UpdateProfilePictureAsync(request, userId, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3116,7 +3116,7 @@ namespace SDK
         /// <summary>Update Profile Picture</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Result<string>> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Result<TokenResponse>> Account_UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (userId == null)
                 throw new System.ArgumentNullException("userId");
@@ -3163,7 +3163,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Result<string>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Result<TokenResponse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

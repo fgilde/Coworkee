@@ -53,7 +53,7 @@ window.initialLoad = function () {
         };
         script.src = json.BackendOrigin + '/Application/resources.js';
 
-        document.head.appendChild(script); //or something of the likes
+        document.head.appendChild(script);
     });
 };
 

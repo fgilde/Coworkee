@@ -1,0 +1,31 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Forbidden> _localizer
+@using CleanArchitectureBase.Shared.Wrapper
+@using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Contracts.Enums
+@using CleanArchitectureBase.Shared.Constants.Application
+@using Microsoft.AspNetCore.SignalR.Client
+
+
+<ReactOnPreferenceChanged Component="this" />
+<HeroTitle Title="@_localizer["Forbidden"]" Description="@_localizer["You're are not allowed to access this Page"]" />
+<MudAlert Icon="@Icons.Material.Filled.NotAccessible" Severity="Severity.Error">@_localizer["The requested page or resource could not be loaded because you lack the required permissions."]</MudAlert>
+
+@if (!string.IsNullOrEmpty(ReturnUrl))
+{
+    <div class="pa-4 justify-center my-4 mud-text-align-center">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="@ReturnUrl">@_localizer["Try again"]</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@LoginWithAnotherAccount" >@_localizer["Sign in with a different account"]</MudButton>
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public string ReturnUrl { get; set; }
+
+    private async Task LoginWithAnotherAccount()
+    {
+        await _clientAuthenticationManager.Logout();
+        _navigationManager.NavigateToHomeWithReturnTo(ReturnUrl);
+    }
+}

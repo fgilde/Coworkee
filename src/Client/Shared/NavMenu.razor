@@ -8,7 +8,7 @@
         </div>
         <MudDivider Class="mb-2" />
     }
-    @if (ShowUserCard)
+    @if (ShowUserCard && _user?.Identity?.IsAuthenticated == true && !_user.IsGuest())
     {
         <UserCard Logout="Logout" ShowEmail="false" ShowLogout="true" />
         <MudDivider Class="mb-2" />

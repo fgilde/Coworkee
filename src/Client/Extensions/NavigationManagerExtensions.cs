@@ -8,7 +8,7 @@ namespace CleanArchitectureBase.Client.Extensions
 {
     public static class NavigationManagerExtensions
     {
-        private static readonly string[] ForbiddenReturnUrls = {"login", "register"};
+        private static readonly string[] ForbiddenReturnUrls = {"login", "register", "forbidden"};
 
         private static bool IsForbidden(string url)
         {
@@ -44,20 +44,25 @@ namespace CleanArchitectureBase.Client.Extensions
 
         public static void NavigateToHomeWithReturnTo(this NavigationManager navigationManager, string returnUrl = null)
         {
+            navigationManager.NavigateToWithReturnTo("/", returnUrl);
+        }
+
+        public static void NavigateToWithReturnTo(this NavigationManager navigationManager, string url, string returnUrl = null)
+        {
             returnUrl ??= navigationManager.ToBaseRelativePath(navigationManager.Uri);
             returnUrl = CleanReturnUrl(returnUrl);
             navigationManager.NavigateTo(string.IsNullOrWhiteSpace(returnUrl) || returnUrl == "/" || IsForbidden(returnUrl)
-                ? "/"
-                : $"/?{ApplicationConstants.ParameterNames.ReturnUrl}=" + returnUrl);
+                ? url
+                : $"{url}?{ApplicationConstants.ParameterNames.ReturnUrl}=" + returnUrl);
         }
 
         public static void NavigateToReturnUrlIf(this NavigationManager navigationManager, string fallback = null)
         {
             var uri = navigationManager.GetReturnUrlValue();
             if (!string.IsNullOrEmpty(uri))
-                navigationManager.NavigateTo(uri, true);
+                navigationManager.NavigateTo(uri, false);
             else if (!string.IsNullOrEmpty(fallback))
-                navigationManager.NavigateTo(fallback, true);
+                navigationManager.NavigateTo(fallback, false);
         }
     }
 }

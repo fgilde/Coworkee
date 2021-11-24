@@ -1,30 +1,48 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using CleanArchitectureBase.Application.Common.Security;
 
 namespace CleanArchitectureBase.Client.Extensions
 {
     internal static class ClaimsPrincipalExtensions
     {
-        internal static string GetInitials(this ClaimsPrincipal claimsPrincipal)
+        public static string GetInitials(this ClaimsPrincipal claimsPrincipal)
             => new(new []{claimsPrincipal.GetFirstName().FirstOrDefault(), claimsPrincipal.GetLastName().FirstOrDefault()});
 
-        internal static string GetFullName(this ClaimsPrincipal claimsPrincipal)
+        public static string GetFullName(this ClaimsPrincipal claimsPrincipal)
             => $"{claimsPrincipal.GetFirstName()} {claimsPrincipal.GetLastName()}";
 
-        internal static string GetEmail(this ClaimsPrincipal claimsPrincipal)
+        public static string GetEmail(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.Email);
 
-        internal static string GetFirstName(this ClaimsPrincipal claimsPrincipal)
+        public static string GetFirstName(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.Name);
 
-        internal static string GetLastName(this ClaimsPrincipal claimsPrincipal)
+        public static string GetLastName(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.Surname);
 
-        internal static string GetPhoneNumber(this ClaimsPrincipal claimsPrincipal)
+        public static string GetPhoneNumber(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.MobilePhone);
 
-        internal static string GetUserId(this ClaimsPrincipal claimsPrincipal)
+        public static string GetUserId(this ClaimsPrincipal claimsPrincipal)
            => claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        public static bool IsGuest(this ClaimsPrincipal claimsPrincipal)
+            => claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier) == Guid.Empty.ToString();
+        
+        public static bool HasRoles(this ClaimsPrincipal user, RoleMatch match, string[] roles)
+        {
+            var granted = true;
+            foreach (var role in roles ?? Enumerable.Empty<string>().ToArray())
+            {
+                granted = user.IsInRole(role);
+                if (!granted && match == RoleMatch.All)
+                    return false;
+                if (granted && match == RoleMatch.Any)
+                    return true;
+            }
+            return granted;
+        }
     }
 }

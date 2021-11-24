@@ -41,7 +41,9 @@ namespace CleanArchitectureBase.Client.Shared
         
         private bool IsAuthorized(NavigationEntry entry)
         {
-            bool result = _authorizationService.HasPoliciesAsync(_user, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
+            bool result = (!entry.IsAuthenticationRequired || (_user?.Identity?.IsAuthenticated == true && !_user.IsGuest()))
+                          && _user?.HasRoles(entry.RoleMatch, entry.Roles) == true
+                          && _authorizationService.HasPoliciesAsync(_user, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
             if (entry.HasChildren)
                 return result && entry.Children.Any(IsAuthorized);
             return result;

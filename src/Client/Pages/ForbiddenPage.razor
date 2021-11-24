@@ -1,0 +1,8 @@
+﻿@page "/forbidden/{ReturnUrl?}"
+<Forbidden ReturnUrl="@ReturnUrl"/>
+
+@code
+{
+    [Parameter]
+    public string ReturnUrl { get; set; }
+}

@@ -17,9 +17,18 @@
         </Found>
         <NotFound>
             <CascadingAuthenticationState>
-                <LayoutView Layout="@typeof(NotFoundLayout)">
-                    <p>Sorry, there's nothing at this address.</p>
-                </LayoutView>
+                <AuthorizeView>
+                    <Authorized>
+                        <LayoutView Layout="@typeof(MainLayout)">
+                            <NotFoundComponent/>
+                        </LayoutView>
+                    </Authorized>
+                    <NotAuthorized>
+                        <LayoutView Layout="@typeof(NotFoundLayout)">
+                            <p>Sorry, there's nothing at this address.</p>
+                        </LayoutView>
+                    </NotAuthorized>
+                </AuthorizeView>
             </CascadingAuthenticationState>
         </NotFound>
     </Router>

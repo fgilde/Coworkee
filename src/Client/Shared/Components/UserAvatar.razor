@@ -109,7 +109,7 @@
     private async Task LoadCurrentUserData()
     {
         var user = User ?? _currentUser;
-        if (user?.Identity?.IsAuthenticated == true)
+        if (user?.Identity?.IsAuthenticated == true && !user.IsGuest())
         {
             Initials = user.GetInitials();
             var imageResponse = await _api.Account_GetProfilePictureAsync(user.GetUserId());

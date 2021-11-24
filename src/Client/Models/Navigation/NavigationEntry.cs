@@ -20,7 +20,16 @@ namespace CleanArchitectureBase.Client.Models.Navigation
         public string Target { get; set; }
         public string[] Policies { get; set; }
         public PolicyMatch PolicyMatch { get; set; }
+        public string[] Roles { get; set; }
+        public RoleMatch RoleMatch { get; set; }
+        public bool IsAuthenticationRequired { get; set; }
         public bool IsExpanded { get; set; }
+
+        public NavigationEntry WithAuthentication()
+        {
+            IsAuthenticationRequired = true;
+            return this;
+        }
 
         public NavigationEntry WithPolicies(PolicyMatch match, params string[] policies)
         {
@@ -31,6 +40,18 @@ namespace CleanArchitectureBase.Client.Models.Navigation
         public NavigationEntry WithPolicies(params string[] policies)
         {
             Policies = policies;
+            return this;
+        }
+
+        public NavigationEntry WithRoles(RoleMatch match, params string[] roles)
+        {
+            RoleMatch = match;
+            return WithRoles(roles);
+        }
+
+        public NavigationEntry WithRoles(params string[] roles)
+        {
+            Roles = roles;
             return this;
         }
 

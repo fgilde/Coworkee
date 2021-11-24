@@ -26,25 +26,14 @@ namespace CleanArchitectureBase.Client.Authentication
             _localStorage = localStorage;
         }
 
-        public void MarkUserAsAuthenticated(string userName)
+        public void MarkUserAsAuthenticated()
         {
-            var authenticatedUser = new ClaimsPrincipal(
-                new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, userName)
-                }, "apiauth"));
-
-            var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
-
-            NotifyAuthenticationStateChanged(authState);
+            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
         public void MarkUserAsLoggedOut()
         {
-            var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
-            var authState = Task.FromResult(new AuthenticationState(anonymousUser));
-
-            NotifyAuthenticationStateChanged(authState);
+            NotifyAuthenticationStateChanged(Task.FromResult(GetAnonymousState()));
         }
 
         public async Task<ClaimsPrincipal> GetAuthenticationStateProviderUserAsync()
@@ -60,14 +49,18 @@ namespace CleanArchitectureBase.Client.Authentication
         {
             var savedToken = await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
             if (string.IsNullOrWhiteSpace(savedToken))
-            {
-                return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
-            }
-
+                return GetAnonymousState();
+            
             _httpClient.SetAuthorization(savedToken);
             var state = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(GetClaimsFromJwt(savedToken), "jwt")));
             AuthenticationStateUser = state.User;
             return state;
+        }
+
+        private AuthenticationState GetAnonymousState()
+        {
+            //return AuthenticationStates.None;
+            return AuthenticationStates.Guest;
         }
 
         private IEnumerable<Claim> GetClaimsFromJwt(string jwt)

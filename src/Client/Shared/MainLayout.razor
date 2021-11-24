@@ -40,29 +40,38 @@
                                   IsLogoVisible="_currentTheme.LayoutProperties.ShowLogoInAppBar"
                                   OnMenuIconClick="(e) => DrawerToggle()" />
 
-                    <MudSpacer />
+                    <MudSpacer/>
                     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
-                        <RoleSelector />
-                        <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
-                        <LanguageSelector />
+                        @if (!(currentUser?.Identity?.IsAuthenticated ?? false) || currentUser.IsGuest())
+                        {
+                            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary" Link="/login" StartIcon="@Icons.Material.Filled.SwitchAccount">@localizer["Sign In"]</MudButton>
+                            <MudButton Style="margin-left:5px;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NewLabel" Color="Color.Info" Link="/register" >@localizer["Register"]</MudButton>
+                        }
+                        <RoleSelector/>
+                        <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5"/>
+                        <LanguageSelector/>
                         <MudTooltip Text="@localizer["Toggle right-to-left/left-to-right"]">
-                            <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())" />
+                            <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())"/>
                         </MudTooltip>
-                        <ThemeSelector OnThemeSelected="@ThemeChanged" />
-                        <MudTooltip Text="@localizer["Notifications"]">
-                            <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit" />
-                        </MudTooltip>
-                        <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
-                            <ActivatorContent>
-                                <UserAvatar LinkToProfile="false" />
-                            </ActivatorContent>
-                            <ChildContent>
-                                <UserCard Class="mt-n2" />
-                                <MudDivider Class="mb-2" />
-                                <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-                                <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
-                            </ChildContent>
-                        </MudMenu>
+                        <ThemeSelector OnThemeSelected="@ThemeChanged"/>
+                        @if (currentUser?.Identity?.IsAuthenticated == true && !currentUser.IsGuest())
+                        {
+                            <MudTooltip Text="@localizer["Notifications"]">
+                                <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit"/>
+                            </MudTooltip>
+
+                            <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                                <ActivatorContent>
+                                    <UserAvatar LinkToProfile="false"/>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    <UserCard Class="mt-n2"/>
+                                    <MudDivider Class="mb-2"/>
+                                    <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person"/>
+                                    <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout"/>
+                                </ChildContent>
+                            </MudMenu>
+                        }
                     </MudHidden>
                     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
                         <RoleSelector Small="true" />

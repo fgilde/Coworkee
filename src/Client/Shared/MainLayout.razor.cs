@@ -26,7 +26,7 @@ namespace CleanArchitectureBase.Client.Shared
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
             var user = state.User;
-            if (user.Identity?.IsAuthenticated == true)
+            if (user.Identity?.IsAuthenticated == true && !user.IsGuest())
             {
                 CurrentUserId = user.GetUserId();                
                 

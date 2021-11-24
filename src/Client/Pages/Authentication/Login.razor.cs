@@ -5,6 +5,7 @@ using MudBlazor;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Client.Authentication;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
@@ -25,9 +26,16 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         protected override async Task OnInitializedAsync()
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
-            if (state != new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())))
+            if (state != AuthenticationStates.None && !state.IsGuest())
             {
-                _navigationManager.NavigateToHomeWithReturnTo();
+                if (state?.User.Identity?.IsAuthenticated == true)
+                {
+                    _navigationManager.NavigateTo("/forbidden/"+ _navigationManager.ToBaseRelativePath(_navigationManager.Uri));
+                }
+                else
+                {
+                    _navigationManager.NavigateToHomeWithReturnTo();
+                }
             }
         }
 

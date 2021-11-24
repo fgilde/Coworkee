@@ -15,8 +15,8 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             {
                 Children = new()
                 {
-                    new NavigationEntry("Dashboard", Icons.Material.Outlined.Dashboard, "/dashboard"),
-                    new NavigationEntry("Account", Icons.Material.Outlined.SupervisorAccount, "/account"),
+                    new NavigationEntry("Dashboard", Icons.Material.Outlined.Dashboard, "/dashboard").WithPolicies(Permissions.Dashboards.View),
+                    new NavigationEntry("Account", Icons.Material.Outlined.SupervisorAccount, "/account").WithAuthentication(),
                     new NavigationEntry("Audit Trails", Icons.Material.Outlined.Security, "/audit-trails").WithPolicies(Permissions.AuditTrails.View),
                 }
             },
@@ -38,8 +38,8 @@ namespace CleanArchitectureBase.Client.Models.Navigation
                     {
                         Children = new()
                         {
-                            new NavigationEntry("Languages", Icons.Material.Outlined.Language, "/localization/languages").WithPolicies(Permissions.Users.View),
-                            new NavigationEntry("Translations", Icons.Material.Outlined.Translate, "/localization/translations").WithPolicies()
+                            new NavigationEntry("Languages", Icons.Material.Outlined.Language, "/localization/languages").WithPolicies(Permissions.Translations.Edit),
+                            new NavigationEntry("Translations", Icons.Material.Outlined.Translate, "/localization/translations").WithPolicies(Permissions.Translations.Edit)
                         }
                     }
                 }

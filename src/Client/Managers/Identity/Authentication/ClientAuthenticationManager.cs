@@ -18,7 +18,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
     {
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
-        private readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly ApplicationStateProvider _authenticationStateProvider;
         private readonly IStringLocalizer<ClientAuthenticationManager> _localizer;
         private readonly IApplicationClient _api;
 
@@ -31,7 +31,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
         {
             _httpClient = httpClient;
             _localStorage = localStorage;
-            _authenticationStateProvider = authenticationStateProvider;
+            _authenticationStateProvider = authenticationStateProvider as ApplicationStateProvider;
             _localizer = localizer;
             _api = api;
         }
@@ -56,7 +56,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
                 {
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageUrl);
                 }
-                ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
+                _authenticationStateProvider.MarkUserAsAuthenticated();
                 _httpClient.SetAuthorization(token);
                 return await Result.SuccessAsync();
             }
@@ -67,10 +67,10 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
         public async Task<IResult> Logout()
         {
             await _api.Account_LogoutAsync();
-            await _localStorage.RemoveItemAsync(StorageConstants.Local.AuthToken);
-            await _localStorage.RemoveItemAsync(StorageConstants.Local.RefreshToken);
-            await _localStorage.RemoveItemAsync(StorageConstants.Local.UserImageURL);
-            ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+            await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, string.Empty);
+            await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, string.Empty);
+            await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
+            _authenticationStateProvider.MarkUserAsLoggedOut();
             _httpClient.SetAuthorization(null);
             return await Result.SuccessAsync();
         }

@@ -1,5 +1,5 @@
 ﻿@page "/localization/translations/{Action?}/{Id?}"
-@attribute [Authorize(Policy = Permissions.Products.View)]
+@attribute [Authorize(Policy = Permissions.Translations.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Translations> _localizer
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Common.Models

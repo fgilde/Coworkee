@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CleanArchitectureBase.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
@@ -16,9 +17,6 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 {
     public partial class Login
     {
-        //[Parameter]
-        //public string ReturnUrl { get; set; }
-
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private TokenRequest _tokenModel = new();
@@ -30,7 +28,9 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
             {
                 if (state?.User.Identity?.IsAuthenticated == true)
                 {
-                    _navigationManager.NavigateTo("/forbidden/"+ _navigationManager.ToBaseRelativePath(_navigationManager.Uri));
+                    var url = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+                    url = Uri.EscapeDataString(url);
+                    _navigationManager.NavigateTo("/forbidden/"+  url);
                 }
                 else
                 {

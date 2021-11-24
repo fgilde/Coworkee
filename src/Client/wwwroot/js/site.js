@@ -27,7 +27,7 @@ window.initialLoad = () => {
         window.localStorage.clear();
         window.location.href = removeUrlParams(window.location.href, 'safemode');
     }
-    
+
     fetch('appsettings.json', { method: 'GET', redirect: 'follow' })
         .then(response => response.json())
         .then(json => {
@@ -49,7 +49,7 @@ window.initialLoad = () => {
             };
             script.src = json.BackendOrigin + '/Application/resources.js';
 
-            document.head.appendChild(script); 
+            document.head.appendChild(script);
         });
 }
 
@@ -75,9 +75,9 @@ window.reloadSilent = () => {
             initialLoad();
         }
         ).catch(function (err) {
-        // There was an error
-        console.warn('Something went wrong.', err);
-    });
+            // There was an error
+            console.warn('Something went wrong.', err);
+        });
 }
 
 window.ChangeUrl = function (url) {
@@ -101,9 +101,9 @@ window.urlParams = (url) => {
         var search = url ? url.match(/(?:[^?]*)\??([^#]*)/)[1] : window.location.search.substring(1);
         return JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
             (key, value) =>
-            key === '' ? value : decodeURIComponent(value)
+                key === '' ? value : decodeURIComponent(value)
         );
-    } catch(e) {
+    } catch (e) {
         return {};
     }
 }
@@ -124,4 +124,13 @@ window.SetTitle = (title) => {
 
 window.PlayAudio = (elementName) => {
     document.getElementById(elementName).play();
+}
+
+window.getCssVars = () => {
+    return Array.from(document.styleSheets)
+        .filter(sheet => sheet.href === null || sheet.href.startsWith(window.location.origin))
+        .reduce(
+            (acc, sheet) => (acc = [...acc, ...Array.from(sheet.cssRules).reduce((def, rule) => (def = rule.selectorText === ":root"
+                ? [...def,...Array.from(rule.style).filter(name => name.startsWith("--"))]
+                : def),[])]),[] );
 }

@@ -1,9 +1,18 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
 
 namespace CleanArchitectureBase.Application.Contracts.Enums;
 
 public enum ExportServiceType
 {
-    [JsonPropertyName(nameof(Excel))] Excel,
-    [JsonPropertyName(nameof(Json))] Json
+    /// <summary>
+    /// Export as Excel
+    /// </summary>
+    [Description(nameof(Excel))] 
+    Excel,
+
+    /// <summary>
+    /// Export as Json
+    /// </summary>
+    [Description(nameof(Json))] 
+    Json
 }

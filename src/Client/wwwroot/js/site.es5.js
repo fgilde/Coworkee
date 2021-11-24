@@ -1,5 +1,7 @@
 ﻿"use strict";
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
 window.Download = function (options) {
     var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
     fetch(fileUrl).then(function (response) {
@@ -118,5 +120,17 @@ window.SetTitle = function (title) {
 
 window.PlayAudio = function (elementName) {
     document.getElementById(elementName).play();
+};
+
+window.getCssVars = function () {
+    return Array.from(document.styleSheets).filter(function (sheet) {
+        return sheet.href === null || sheet.href.startsWith(window.location.origin);
+    }).reduce(function (acc, sheet) {
+        return acc = [].concat(_toConsumableArray(acc), _toConsumableArray(Array.from(sheet.cssRules).reduce(function (def, rule) {
+            return def = rule.selectorText === ":root" ? [].concat(_toConsumableArray(def), _toConsumableArray(Array.from(rule.style).filter(function (name) {
+                return name.startsWith("--");
+            }))) : def;
+        }, [])));
+    }, []);
 };
 

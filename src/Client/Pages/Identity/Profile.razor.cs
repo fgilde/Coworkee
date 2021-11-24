@@ -8,7 +8,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
@@ -19,7 +18,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         
         private readonly UpdateProfileRequest _profileModel = new();
-        private UserAvatar avatar;
         public string UserId { get; set; }
 
         private async Task UpdateProfileAsync()
@@ -57,6 +55,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task UploadFiles(InputFileChangeEventArgs e)
         {
+            _dragEnterStyle = null;
             _file = e.File;
             if (_file != null)
             {
@@ -73,7 +72,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, result.Data.UserImageURL);
                     await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, result.Data.Token);
                     ImageDataUrl = result.Data.UserImageURL;
-                    avatar.SetImageDataUrl(ImageDataUrl);
                     StateHasChanged();
                     _snackBar.Add(_localizer["Profile picture added."], Severity.Success);
                 }
@@ -98,7 +96,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                     await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
                     await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, data.Data.Token);
                     ImageDataUrl = string.Empty;
-                    avatar.SetImageDataUrl(ImageDataUrl);
                     StateHasChanged();
                     _snackBar.Add(_localizer["Profile picture deleted."], Severity.Success);
                 }

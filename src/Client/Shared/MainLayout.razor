@@ -10,24 +10,7 @@
     <MudThemeProvider Theme="_currentTheme" />
     <MudDialogProvider />
     <MudSnackbarProvider />
-    <AuthorizeView>
-        <NotAuthorized>
-            <MudAppBar Elevation="4" Color="Color.Primary">
-                <MudSpacer />
-                <LanguageSelector />
-                <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
-            </MudAppBar>
-
-            <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
-                <MudPaper Elevation="25" Class="pa-8" Style="width: 500px;">
-                    <CascadingValue Value="hubConnection">
-                        @Body
-                    </CascadingValue>
-                </MudPaper>
-            </MudContainer>
-        </NotAuthorized>
-        <Authorized>
-            @{
+    @{
                 LoadDataAsync();
             }
             <MudLayout>
@@ -107,6 +90,4 @@
                     </MudContainer>
                 </MudMainContent>
             </MudLayout>
-        </Authorized>
-    </AuthorizeView>
 </MudRTLProvider>

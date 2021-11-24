@@ -59,8 +59,8 @@ namespace CleanArchitectureBase.Client.Authentication
 
         private AuthenticationState GetAnonymousState()
         {
-            //return AuthenticationStates.None;
-            return AuthenticationStates.Guest;
+            return AuthenticationStates.None;
+            // return AuthenticationStates.Guest;
         }
 
         private IEnumerable<Claim> GetClaimsFromJwt(string jwt)

@@ -1,22 +1,29 @@
 @inject NavigationManager NavigationManager
 <Error>
-    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
-        <Found Context="routeData">
+    <CascadingAuthenticationState>
+        <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+            <Found Context="routeData">
+                <AuthorizeView>
+                    <Authorized>
+                        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
 
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-                <NotAuthorized>
-                    <Login/>
-                </NotAuthorized>
-            </AuthorizeRouteView>
+                        </AuthorizeRouteView>
+                    </Authorized>
+                    <NotAuthorized>
+                        <LayoutView Layout="@typeof(LoginLayout)">
+                            <Login/>
+                        </LayoutView>
+                    </NotAuthorized>
+                </AuthorizeView>
 
-            @*<CascadingAuthenticationState>
-                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-                </RouteView>
-            </CascadingAuthenticationState>*@
 
-        </Found>
-        <NotFound>
-            <CascadingAuthenticationState>
+                @*<CascadingAuthenticationState>
+                    <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                    </RouteView>
+                </CascadingAuthenticationState>*@
+
+            </Found>
+            <NotFound>
                 <AuthorizeView>
                     <Authorized>
                         <LayoutView Layout="@typeof(MainLayout)">
@@ -29,7 +36,7 @@
                         </LayoutView>
                     </NotAuthorized>
                 </AuthorizeView>
-            </CascadingAuthenticationState>
-        </NotFound>
-    </Router>
+            </NotFound>
+        </Router>
+    </CascadingAuthenticationState>
 </Error>

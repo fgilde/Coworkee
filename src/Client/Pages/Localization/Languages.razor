@@ -4,6 +4,9 @@
 @using CleanArchitectureBase.Shared.Constants.Localization
 
 <style>
+    .lang-active .mud-expand-panel-header {
+        color: var(--mud-palette-secondary);
+    }
     .culture-code {
         font-size: x-small;
         font-weight: bold;
@@ -17,17 +20,20 @@
 
 @{
     var languageCodes = LocalizationConstants.AvailableLanguages;
+    var usedLanguages = LocalizationConstants.SupportedLanguages;
 }
 
 <MudExpansionPanels>
     @foreach (var lang in languageCodes.GroupBy(l => l.Code.Split("-")[0]))
     {
         var neutralLangLabel = (_localizer[lang.FirstOrDefault(c => c.Code.Contains("-"))?.Code ?? lang.Key]).Value.Split("(")[0];
-        <MudExpansionPanel Text="@neutralLangLabel">
+        var isAnyUsed = usedLanguages.Any(c => lang.Any(l => c.Code == l.Code && c.DisplayName == l.DisplayName));
+
+        <MudExpansionPanel Class="@(isAnyUsed ? "lang-active" : "")" Text="@neutralLangLabel">
             <MudList>
                 @foreach (var l in lang)
                 {
-                    var isUsed = LocalizationConstants.SupportedLanguages.Any(c => c.Code == l.Code && c.DisplayName == l.DisplayName);
+                    var isUsed = usedLanguages.Any(c => c.Code == l.Code && c.DisplayName == l.DisplayName);
                     <MudListItem>
                         <MudSwitch Checked="@isUsed" Label="@(l.Code.Contains('-') ? _localizer[l.Code] : neutralLangLabel)" Color="Color.Warning"/>
                         <span class="culture-code">@l.Code</span>

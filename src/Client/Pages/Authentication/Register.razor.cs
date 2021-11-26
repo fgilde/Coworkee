@@ -2,6 +2,7 @@
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Client.Pages.Authentication
 {
@@ -17,7 +18,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
             if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
-                _navigationManager.NavigateTo("/login");
+                _navigationManager.NavigateTo(ApplicationConstants.Routes.Login);
                 _registerUserModel = new RegisterRequest();
             }
         }

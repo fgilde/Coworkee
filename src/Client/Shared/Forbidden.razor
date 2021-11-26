@@ -26,6 +26,6 @@
     private async Task LoginWithAnotherAccount()
     {
         await _clientAuthenticationManager.Logout();
-        _navigationManager.NavigateToHomeWithReturnTo(ReturnUrl);
+        _navigationManager.NavigateToWithReturnTo(ApplicationConstants.Routes.Login, ReturnUrl);
     }
 }

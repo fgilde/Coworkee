@@ -1,5 +1,6 @@
 @page "/register"
 @using CleanArchitectureBase.Shared.Constants
+@using CleanArchitectureBase.Shared.Constants.Application
 @layout LoginLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Register> _localizer
@@ -19,7 +20,7 @@
         </MudItem>
         <MudItem  xs="12">
             <div class="d-flex justify-center">
-                <MudText>@_localizer["Already have an account?"] <MudLink Href="/login">@_localizer["Sign In"]</MudLink></MudText>
+                <MudText>@_localizer["Already have an account?"] <MudLink Href="@ApplicationConstants.Routes.Login">@_localizer["Sign In"]</MudLink></MudText>
             </div>
         </MudItem>
         <MudItem  xs="12">

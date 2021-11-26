@@ -13,6 +13,7 @@ using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
+using Microsoft.AspNetCore.Components;
 
 namespace CleanArchitectureBase.Client.Shared
 {
@@ -22,6 +23,12 @@ namespace CleanArchitectureBase.Client.Shared
         private NavMenu navMenu;
         private AppBarHeader appBarHeader;
         private ClaimsPrincipal currentUser;
+
+        [CascadingParameter]
+        private HubConnection hubConnection { get; set; }
+
+        public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+
         private async Task LoadDataAsync()
         {
             var state = await _stateProvider.GetAuthenticationStateAsync();
@@ -43,7 +50,7 @@ namespace CleanArchitectureBase.Client.Shared
 
         private ClientTheme _currentTheme = ClientTheme.DefaultTheme;
         private bool _drawerOpen = true;
-        private bool _rightToLeft = false;
+        private bool _rightToLeft;
         private async Task RightToLeftToggle()
         {
             var isRtl = await _clientPreferenceManager.ToggleLayoutDirection();
@@ -57,19 +64,14 @@ namespace CleanArchitectureBase.Client.Shared
         {
             await base.OnParametersSetAsync();
             currentUser = await _clientAuthenticationManager.CurrentUser();
-            if (currentUser is {Identity: {IsAuthenticated: true}})
-                _navigationManager.NavigateToReturnUrlIf();
         }
 
         protected override async Task OnInitializedAsync()
         {
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
-            await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, false);
             _rightToLeft = await _clientPreferenceManager.IsRTL();
-            _interceptor.RegisterEvent();
-            hubConnection = hubConnection.TryInitialize(_config.BackendOrigin);
-            await hubConnection.StartAsync();
-  
+            hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);
+            
             hubConnection.On<EntitiesUpdated<TranslationDto>>(async (arg) =>
             {
                 await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, true);
@@ -175,13 +177,8 @@ namespace CleanArchitectureBase.Client.Shared
 
         public void Dispose()
         {
-            _interceptor.DisposeEvent();
-            //_ = hubConnection.DisposeAsync();
         }
-
-        private HubConnection hubConnection;
-        public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
-
+        
         private string GetTitle()
         {
             var menuItem = navMenu?.FindEntriesForUrl()?.FirstOrDefault();

@@ -20,25 +20,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private TokenRequest _tokenModel = new();
-
-        protected override async Task OnInitializedAsync()
-        {
-            var state = await _stateProvider.GetAuthenticationStateAsync();
-            if (state != AuthenticationStates.None && !state.IsGuest())
-            {
-                if (state?.User.Identity?.IsAuthenticated == true)
-                {
-                    var url = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
-                    url = Uri.EscapeDataString(url);
-                    _navigationManager.NavigateTo("/forbidden/"+  url);
-                }
-                else
-                {
-                    _navigationManager.NavigateToHomeWithReturnTo();
-                }
-            }
-        }
-
+        
         private async Task SubmitAsync()
         {
             var result = await _clientAuthenticationManager.Login(_tokenModel);

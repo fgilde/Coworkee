@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Storage;
@@ -16,13 +17,16 @@ namespace CleanArchitectureBase.Client.Authentication
     public class ApplicationStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _httpClient;
+        private readonly ClientApplicationConfiguration _config;
         private readonly ILocalStorageService _localStorage;
 
         public ApplicationStateProvider(
             HttpClient httpClient,
+            ClientApplicationConfiguration config,
             ILocalStorageService localStorage)
         {
             _httpClient = httpClient;
+            _config = config;
             _localStorage = localStorage;
         }
 
@@ -59,8 +63,7 @@ namespace CleanArchitectureBase.Client.Authentication
 
         private AuthenticationState GetAnonymousState()
         {
-            return AuthenticationStates.None;
-            // return AuthenticationStates.Guest;
+            return _config.AllowAnonymousPageAccess ? AuthenticationStates.Guest : AuthenticationStates.None;
         }
 
         private IEnumerable<Claim> GetClaimsFromJwt(string jwt)

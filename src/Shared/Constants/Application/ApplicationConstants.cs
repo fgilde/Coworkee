@@ -18,6 +18,13 @@ namespace CleanArchitectureBase.Shared.Constants.Application
             public const string DefaultBasicUserPassword = "123Pa$$word!";
         }
 
+        public static class Routes
+        {
+            public const string Login = nameof(Login);
+            public const string Register = nameof(Register);
+            public const string Forbidden = nameof(Forbidden);
+        }
+
         public static class ParameterNames
         {
             public const string ReturnUrl = nameof(ReturnUrl);

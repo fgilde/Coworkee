@@ -120,6 +120,7 @@ namespace CleanArchitectureBase.Client.Theming
 
         #endregion
 
+        public static ClientTheme LastUsedTheme { get; set; }
 
         public static ClientTheme DefaultTheme = new ClientTheme()
         {

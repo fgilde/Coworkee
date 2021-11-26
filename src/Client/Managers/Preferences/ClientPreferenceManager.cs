@@ -87,7 +87,7 @@ namespace CleanArchitectureBase.Client.Managers.Preferences
         public async Task<ClientTheme> GetCurrentThemeAsync()
         {
             if (await GetPreference() is ClientPreference preference)
-                return await _themeManager.GetByNameAsync(preference.ThemeName) ?? ClientTheme.DefaultTheme;
+                return ClientTheme.LastUsedTheme = await _themeManager.GetByNameAsync(preference.ThemeName) ?? ClientTheme.DefaultTheme;
             return ClientTheme.DefaultTheme;
         }
         public async Task<bool> IsRTL()

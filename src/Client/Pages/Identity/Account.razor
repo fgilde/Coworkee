@@ -1,4 +1,5 @@
 @page "/account"
+@using CleanArchitectureBase.Shared.Constants.Application
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Account> localizer
 
 <ReactOnPreferenceChanged Component="this" />
@@ -11,3 +12,14 @@
         <Security />
     </MudTabPanel>
 </MudTabs>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        if((await _stateProvider.GetAuthenticationStateAsync()).IsGuest())
+        {
+            _navigationManager.NavigateTo($"{ApplicationConstants.Routes.Forbidden}/{Uri.EscapeDataString(_navigationManager.ToBaseRelativePath(_navigationManager.Uri))}");
+        }
+    }
+}

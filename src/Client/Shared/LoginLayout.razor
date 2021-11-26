@@ -1,12 +1,12 @@
 @using CleanArchitectureBase.Client.Theming
 @inherits LayoutComponentBase
 
-<MudThemeProvider Theme="ClientTheme.DefaultTheme" />
+<MudThemeProvider Theme="@(ClientTheme.LastUsedTheme ?? ClientTheme.DefaultTheme)" />
 <MudSnackbarProvider />
-<MudAppBar Elevation="4" Color="Color.Primary">
+<MudAppBar Elevation="4">
     <MudSpacer />
     <LanguageSelector />
-    <ThemeSelector Mode="ThemeSelector.SelectionMode.ToggleCircle" />
+    <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
 </MudAppBar>
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
@@ -17,5 +17,8 @@
 
 @code
 {
-
+    private void ThemeChanged(ClientTheme theme)
+    {
+        StateHasChanged();
+    }
 }

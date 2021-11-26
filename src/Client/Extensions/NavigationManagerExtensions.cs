@@ -67,9 +67,14 @@ namespace CleanArchitectureBase.Client.Extensions
         {
             var uri = navigationManager.GetReturnUrlValue();
             if (!string.IsNullOrEmpty(uri))
-                navigationManager.NavigateTo(uri, false);
+                navigationManager.NavigateTo(uri, NeedReload(uri));
             else if (!string.IsNullOrEmpty(fallback))
-                navigationManager.NavigateTo(fallback, false);
+                navigationManager.NavigateTo(fallback, NeedReload(fallback));
+        }
+
+        private static bool NeedReload(string url)
+        {
+            return url.StartsWith("http:", StringComparison.CurrentCultureIgnoreCase) || url.StartsWith("https:", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

@@ -182,7 +182,10 @@ namespace CleanArchitectureBase.Client.Shared
         private string GetTitle()
         {
             var menuItem = navMenu?.FindEntriesForUrl()?.FirstOrDefault();
-            return navMenu?.Locale(menuItem?.Parent?.Text ?? menuItem?.Text ?? appBarHeader?.Title);
+            var res = navMenu?.Locale(menuItem?.Parent?.Text ?? menuItem?.Text ?? appBarHeader?.Title);
+            if (string.IsNullOrEmpty(res))
+                return _navigationManager.ToBaseRelativePath(_navigationManager.Uri).Split("/").FirstOrDefault()?.ToUpper() ?? "404";
+            return res;
         }
     }
 }

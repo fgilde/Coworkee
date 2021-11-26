@@ -1,17 +1,9 @@
-﻿using System;
-using System.Linq;
-using CleanArchitectureBase.Application.Requests.Identity;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using CleanArchitectureBase.Application.Requests.Identity;
 using MudBlazor;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Client.Authentication;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Authentication
 {

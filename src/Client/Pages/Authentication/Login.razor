@@ -5,6 +5,7 @@
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> _localizer
 <ReactOnPreferenceChanged Component="this" />
+@*<PageTitle>@_localizer["Sign In"]</PageTitle>*@
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudGrid>

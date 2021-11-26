@@ -1124,6 +1124,45 @@
         ]
       }
     },
+    "/Translations/Export": {
+      "post": {
+        "tags": [
+          "Translations"
+        ],
+        "summary": "Exports products",
+        "operationId": "Translations_Export",
+        "requestBody": {
+          "x-name": "query",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportTranslationsQuery"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/identity/Account/UpdateProfile": {
       "put": {
         "tags": [
@@ -3202,6 +3241,50 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/TranslationDto"
+            }
+          }
+        }
+      },
+      "ExportTranslationsQuery": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ExportQueryBaseOfInteger"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "translationsToExport": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/TranslationDto"
+                }
+              },
+              "filterByCurrentCulture": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "ExportQueryBaseOfInteger": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "exportServiceType": {
+            "$ref": "#/components/schemas/ExportServiceType"
+          },
+          "searchString": {
+            "type": "string",
+            "nullable": true
+          },
+          "ids": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         }

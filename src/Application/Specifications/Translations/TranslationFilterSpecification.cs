@@ -5,15 +5,15 @@ namespace CleanArchitectureBase.Application.Specifications.Translations
 {
     public class TranslationFilterSpecification : HeroSpecification<Translation>
     {
-        public TranslationFilterSpecification(string searchString)
+        public TranslationFilterSpecification(string searchString, string culture = null)
         {
             if (!string.IsNullOrEmpty(searchString))
             {
-                Criteria = p => p.Key != null && (p.Key.Contains(searchString) || p.Value.Contains(searchString));
+                Criteria = p => p.Key != null && (p.Key.Contains(searchString) || p.Value.Contains(searchString)) && (culture == null || p.CultureCode == culture);
             }
             else
             {
-                Criteria = p => p.Key != null;
+                Criteria = p => p.Key != null && (culture == null || p.CultureCode == culture);
             }
         }
     }

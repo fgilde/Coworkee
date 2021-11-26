@@ -340,6 +340,12 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Export(CleanArchitectureBase.Application.Features.Translations.Export.ExportTranslationsQuery,System.Threading.CancellationToken)">
+            <summary>
+            Exports products
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.String[],System.Threading.CancellationToken)">
             <summary>
             Get Current User Audit Trails

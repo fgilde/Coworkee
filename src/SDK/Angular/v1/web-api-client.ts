@@ -1403,6 +1403,10 @@ export interface ITranslationsClient {
      * @return Status 200 OK response
      */
     delete(ids: number[]): Observable<FileResponse>;
+    /**
+     * Exports products
+     */
+    export(query: ExportTranslationsQuery): Observable<FileResponse>;
 }
 
 @Injectable({
@@ -1700,6 +1704,59 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse>(<any>null);
+    }
+
+    /**
+     * Exports products
+     */
+    export(query: ExportTranslationsQuery): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/Translations/Export";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(query);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExport(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExport(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processExport(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5323,6 +5380,103 @@ export class AddEditTranslationsCommand extends AddEditCommandBaseOfTranslationD
 }
 
 export interface IAddEditTranslationsCommand extends IAddEditCommandBaseOfTranslationDto {
+}
+
+export class ExportQueryBaseOfInteger implements IExportQueryBaseOfInteger {
+    exportServiceType?: ExportServiceType;
+    searchString?: string | undefined;
+    ids?: number[] | undefined;
+
+    constructor(data?: IExportQueryBaseOfInteger) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exportServiceType = _data["exportServiceType"];
+            this.searchString = _data["searchString"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ExportQueryBaseOfInteger {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportQueryBaseOfInteger();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exportServiceType"] = this.exportServiceType;
+        data["searchString"] = this.searchString;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IExportQueryBaseOfInteger {
+    exportServiceType?: ExportServiceType;
+    searchString?: string | undefined;
+    ids?: number[] | undefined;
+}
+
+export class ExportTranslationsQuery extends ExportQueryBaseOfInteger implements IExportTranslationsQuery {
+    translationsToExport?: TranslationDto[] | undefined;
+    filterByCurrentCulture?: boolean;
+
+    constructor(data?: IExportTranslationsQuery) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["translationsToExport"])) {
+                this.translationsToExport = [] as any;
+                for (let item of _data["translationsToExport"])
+                    this.translationsToExport!.push(TranslationDto.fromJS(item));
+            }
+            this.filterByCurrentCulture = _data["filterByCurrentCulture"];
+        }
+    }
+
+    static fromJS(data: any): ExportTranslationsQuery {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportTranslationsQuery();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.translationsToExport)) {
+            data["translationsToExport"] = [];
+            for (let item of this.translationsToExport)
+                data["translationsToExport"].push(item.toJSON());
+        }
+        data["filterByCurrentCulture"] = this.filterByCurrentCulture;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IExportTranslationsQuery extends IExportQueryBaseOfInteger {
+    translationsToExport?: TranslationDto[] | undefined;
+    filterByCurrentCulture?: boolean;
 }
 
 export class UpdateProfileRequest implements IUpdateProfileRequest {

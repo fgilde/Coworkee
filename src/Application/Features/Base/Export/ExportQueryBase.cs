@@ -47,13 +47,13 @@ namespace CleanArchitectureBase.Application.Features.Base.Export
                 .FirstOrDefault(s => s.ExportService == query.ExportServiceType);
         }
 
-        public async Task<byte[]> Handle(TQuery request, CancellationToken cancellationToken)
+        public virtual async Task<byte[]> Handle(TQuery request, CancellationToken cancellationToken)
         {
             var service = GetExportService(request);
-            var products = request.Ids is {Length: > 0} 
+            var results = request.Ids is {Length: > 0} 
                 ? await UnitOfWork.Repository<TEntity>().Entities.Where(p => request.Ids.Contains(p.Id)).ToListAsync(cancellationToken)
                 : await UnitOfWork.Repository<TEntity>().Entities.Specify(GetFilterSpecification(request)).ToListAsync(cancellationToken);
-            return await service.ExportAsync(products, cancellationToken);
+            return await service.ExportAsync(results, cancellationToken);
         }
     }
 }

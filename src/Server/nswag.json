@@ -163,7 +163,8 @@
         "CleanArchitectureBase.Domain.Entities.Misc",
         "CleanArchitectureBase.Application.Contracts.Enums",
         "CleanArchitectureBase.Shared.Wrapper",
-        "CleanArchitectureBase.Application.Features.Translations.Export"
+        "CleanArchitectureBase.Application.Features.Translations.Export",
+        "CleanArchitectureBase.Application.Features.Translations.Import"
       ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": true,

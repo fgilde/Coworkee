@@ -191,8 +191,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task LogoutAsync()
         {
-            _httpContextAccessor?.HttpContext?.Session.Clear();
-            await _signInManager.SignOutAsync();
+            try
+            {
+                _httpContextAccessor?.HttpContext?.Session.Clear();
+                await _signInManager.SignOutAsync();
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         public async Task<IResult> DeleteUserAsync(ApplicationUser user)

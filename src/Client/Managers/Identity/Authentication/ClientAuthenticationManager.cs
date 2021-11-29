@@ -66,11 +66,16 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
 
         public async Task<IResult> Logout()
         {
-            await _api.Account_LogoutAsync();
             await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
             _authenticationStateProvider.MarkUserAsLoggedOut();
+            try
+            {
+                await _api.Account_LogoutAsync();
+            }
+            catch { /* ignored*/ }
+
             _httpClient.SetAuthorization(null);
             return await Result.SuccessAsync();
         }

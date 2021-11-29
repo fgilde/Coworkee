@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs.Events.Base;
 
@@ -8,9 +9,9 @@ namespace CleanArchitectureBase.Application.Hubs.Events
     {
         public EntitiesUpdated(){}
 
-        public EntitiesUpdated(UserResponse user, TDto[] entities): this()
+        public EntitiesUpdated(UserResponse user, IEnumerable<TDto> entities): this()
         {
-            Entities = entities;
+            Entities = entities.ToArray(); // we need to enumerate class will be transferred
             User = user;
         }
 
@@ -24,10 +25,10 @@ namespace CleanArchitectureBase.Application.Hubs.Events
             Target = EventTarget.All;
         }
 
-        public EntitiesUpdated(UserResponse user, string[] idsAsString) : this()
+        public EntitiesUpdated(UserResponse user, IEnumerable<string> idsAsString) : this()
         {
             User = user;
-            IdsAsString = idsAsString;
+            IdsAsString = idsAsString.Where(s => !string.IsNullOrEmpty(s)).ToArray(); // we need to enumerate class will be transferred
         }
 
         public string[] IdsAsString { get; set; }

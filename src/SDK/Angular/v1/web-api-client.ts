@@ -1407,6 +1407,17 @@ export interface ITranslationsClient {
      * Exports products
      */
     export(query: ExportTranslationsQuery): Observable<FileResponse>;
+    /**
+     * Update Profile Picture
+     * @param file (optional) 
+     * @return Status 200 OK
+     */
+    importFile(file: FileParameter | null | undefined): Observable<FileResponse>;
+    /**
+     * Update Profile Picture
+     * @return Status 200 OK
+     */
+    import(request: ImportTranslationsQuery): Observable<FileResponse>;
 }
 
 @Injectable({
@@ -1757,6 +1768,116 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     protected processExport(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse>(<any>null);
+    }
+
+    /**
+     * Update Profile Picture
+     * @param file (optional) 
+     * @return Status 200 OK
+     */
+    importFile(file: FileParameter | null | undefined): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/Translations/ImportFile";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImportFile(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImportFile(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processImportFile(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse>(<any>null);
+    }
+
+    /**
+     * Update Profile Picture
+     * @return Status 200 OK
+     */
+    import(request: ImportTranslationsQuery): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/Translations/Import";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImport(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImport(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processImport(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4913,6 +5034,7 @@ export enum UploadType {
 }
 
 export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommandBaseOfDocumentDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: DocumentDto[] | undefined;
 
     constructor(data?: IAddEditCommandBaseOfDocumentDto) {
@@ -4926,6 +5048,7 @@ export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommand
 
     init(_data?: any) {
         if (_data) {
+            this.createNewIfToUpdateNotExists = _data["createNewIfToUpdateNotExists"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -4941,6 +5064,7 @@ export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommand
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["createNewIfToUpdateNotExists"] = this.createNewIfToUpdateNotExists;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -4951,6 +5075,7 @@ export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommand
 }
 
 export interface IAddEditCommandBaseOfDocumentDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: DocumentDto[] | undefined;
 }
 
@@ -5019,6 +5144,7 @@ export interface IDocumentTypeDto extends IDtoBaseOfInteger {
 }
 
 export abstract class AddEditCommandBaseOfDocumentTypeDto implements IAddEditCommandBaseOfDocumentTypeDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: DocumentTypeDto[] | undefined;
 
     constructor(data?: IAddEditCommandBaseOfDocumentTypeDto) {
@@ -5032,6 +5158,7 @@ export abstract class AddEditCommandBaseOfDocumentTypeDto implements IAddEditCom
 
     init(_data?: any) {
         if (_data) {
+            this.createNewIfToUpdateNotExists = _data["createNewIfToUpdateNotExists"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -5047,6 +5174,7 @@ export abstract class AddEditCommandBaseOfDocumentTypeDto implements IAddEditCom
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["createNewIfToUpdateNotExists"] = this.createNewIfToUpdateNotExists;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -5057,6 +5185,7 @@ export abstract class AddEditCommandBaseOfDocumentTypeDto implements IAddEditCom
 }
 
 export interface IAddEditCommandBaseOfDocumentTypeDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: DocumentTypeDto[] | undefined;
 }
 
@@ -5314,6 +5443,7 @@ export interface IResultOfTranslationDto extends IResult {
 }
 
 export abstract class AddEditCommandBaseOfTranslationDto implements IAddEditCommandBaseOfTranslationDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: TranslationDto[] | undefined;
 
     constructor(data?: IAddEditCommandBaseOfTranslationDto) {
@@ -5327,6 +5457,7 @@ export abstract class AddEditCommandBaseOfTranslationDto implements IAddEditComm
 
     init(_data?: any) {
         if (_data) {
+            this.createNewIfToUpdateNotExists = _data["createNewIfToUpdateNotExists"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -5342,6 +5473,7 @@ export abstract class AddEditCommandBaseOfTranslationDto implements IAddEditComm
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["createNewIfToUpdateNotExists"] = this.createNewIfToUpdateNotExists;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -5352,6 +5484,7 @@ export abstract class AddEditCommandBaseOfTranslationDto implements IAddEditComm
 }
 
 export interface IAddEditCommandBaseOfTranslationDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: TranslationDto[] | undefined;
 }
 
@@ -5477,6 +5610,73 @@ export class ExportTranslationsQuery extends ExportQueryBaseOfInteger implements
 export interface IExportTranslationsQuery extends IExportQueryBaseOfInteger {
     translationsToExport?: TranslationDto[] | undefined;
     filterByCurrentCulture?: boolean;
+}
+
+export class ImportQueryBaseOfTranslationDto implements IImportQueryBaseOfTranslationDto {
+    contentType?: string | undefined;
+    data?: string | undefined;
+
+    constructor(data?: IImportQueryBaseOfTranslationDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.contentType = _data["contentType"];
+            this.data = _data["data"];
+        }
+    }
+
+    static fromJS(data: any): ImportQueryBaseOfTranslationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ImportQueryBaseOfTranslationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["contentType"] = this.contentType;
+        data["data"] = this.data;
+        return data; 
+    }
+}
+
+export interface IImportQueryBaseOfTranslationDto {
+    contentType?: string | undefined;
+    data?: string | undefined;
+}
+
+export class ImportTranslationsQuery extends ImportQueryBaseOfTranslationDto implements IImportTranslationsQuery {
+
+    constructor(data?: IImportTranslationsQuery) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): ImportTranslationsQuery {
+        data = typeof data === 'object' ? data : {};
+        let result = new ImportTranslationsQuery();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IImportTranslationsQuery extends IImportQueryBaseOfTranslationDto {
 }
 
 export class UpdateProfileRequest implements IUpdateProfileRequest {
@@ -7104,6 +7304,7 @@ export interface IBrandDto extends IDtoBaseOfInteger {
 }
 
 export abstract class AddEditCommandBaseOfBrandDto implements IAddEditCommandBaseOfBrandDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: BrandDto[] | undefined;
 
     constructor(data?: IAddEditCommandBaseOfBrandDto) {
@@ -7117,6 +7318,7 @@ export abstract class AddEditCommandBaseOfBrandDto implements IAddEditCommandBas
 
     init(_data?: any) {
         if (_data) {
+            this.createNewIfToUpdateNotExists = _data["createNewIfToUpdateNotExists"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -7132,6 +7334,7 @@ export abstract class AddEditCommandBaseOfBrandDto implements IAddEditCommandBas
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["createNewIfToUpdateNotExists"] = this.createNewIfToUpdateNotExists;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -7142,6 +7345,7 @@ export abstract class AddEditCommandBaseOfBrandDto implements IAddEditCommandBas
 }
 
 export interface IAddEditCommandBaseOfBrandDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: BrandDto[] | undefined;
 }
 
@@ -7299,6 +7503,7 @@ export interface IProductDto extends IDtoBaseOfInteger {
 }
 
 export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandBaseOfProductDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: ProductDto[] | undefined;
 
     constructor(data?: IAddEditCommandBaseOfProductDto) {
@@ -7312,6 +7517,7 @@ export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandB
 
     init(_data?: any) {
         if (_data) {
+            this.createNewIfToUpdateNotExists = _data["createNewIfToUpdateNotExists"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -7327,6 +7533,7 @@ export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandB
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["createNewIfToUpdateNotExists"] = this.createNewIfToUpdateNotExists;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -7337,6 +7544,7 @@ export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandB
 }
 
 export interface IAddEditCommandBaseOfProductDto {
+    createNewIfToUpdateNotExists?: boolean;
     items?: ProductDto[] | undefined;
 }
 
@@ -7365,6 +7573,11 @@ export class AddEditProductsCommand extends AddEditCommandBaseOfProductDto imple
 }
 
 export interface IAddEditProductsCommand extends IAddEditCommandBaseOfProductDto {
+}
+
+export interface FileParameter {
+    data: any;
+    fileName: string;
 }
 
 export interface FileResponse {

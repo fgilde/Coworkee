@@ -11,7 +11,6 @@ using CleanArchitectureBase.Application.Specifications.Translations;
 using CleanArchitectureBase.Domain.Entities.Localization;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Translations.Export
 {
@@ -22,7 +21,7 @@ namespace CleanArchitectureBase.Application.Features.Translations.Export
         public bool FilterByCurrentCulture { get; set; } = true;
     }
 
-    internal class ExportTranslationsQueryHandler : ExportQueryHandlerBase<ExportTranslationsQuery, int, Translation>
+    internal class ExportTranslationsQueryHandler : ExportQueryHandlerBase<ExportTranslationsQuery, int, TranslationDto, Translation>
     {
 
         public ExportTranslationsQueryHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportTranslationsQueryHandler> localizer, IServiceProvider serviceProvider)
@@ -42,7 +41,7 @@ namespace CleanArchitectureBase.Application.Features.Translations.Export
                     request.TranslationsToExport
                         .Where(p => string.IsNullOrEmpty(request.SearchString) || p.Key.Contains(request.SearchString, StringComparison.CurrentCultureIgnoreCase) || p.Value.Contains(request.SearchString,StringComparison.InvariantCultureIgnoreCase))
                         .Where(p => !request.FilterByCurrentCulture || p.CultureCode == Thread.CurrentThread.CurrentCulture.Name)
-                        .MapElementsTo<Translation>(), cancellationToken);
+                        , cancellationToken);
             }
 
             return await base.Handle(request, cancellationToken);

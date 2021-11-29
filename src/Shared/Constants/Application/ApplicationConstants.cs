@@ -93,6 +93,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public static class MimeTypes
         {
             public const string OpenXml = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            public const string Xls = "application/vnd.ms-excel";
         }
     }
 }

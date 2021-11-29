@@ -8,14 +8,17 @@ using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Translations.Commands.Delete;
 using CleanArchitectureBase.Application.Features.Translations.Export;
+using CleanArchitectureBase.Application.Features.Translations.Import;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetById;
+using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitectureBase.Server.Controllers.Translations
@@ -104,6 +107,36 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
             var culturePart = query.FilterByCurrentCulture ? $"{CultureInfo.CurrentUICulture}-" : "";
             var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{culturePart}{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
             return File(res, mimeType, fileDownloadName);
+        }
+
+        /// <summary>
+        /// Update Profile Picture
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost(nameof(ImportFile))]
+
+        public async Task<IActionResult> ImportFile(IFormFile file, CancellationToken cancellationToken = default)
+        {
+            var bytes = await file.GetBytesAsync(cancellationToken);
+            return Ok(await Mediator.Send(new ImportTranslationsQuery
+            {
+                ContentType = MimeGuesser.GuessMimeType(bytes),
+                Data = bytes
+            }, cancellationToken));
+        }
+
+        /// <summary>
+        /// Update Profile Picture
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost(nameof(Import))]
+
+        public async Task<IActionResult> Import(ImportTranslationsQuery request, CancellationToken cancellationToken = default)
+        {
+            request.ContentType = MimeGuesser.GuessMimeType(request.Data);
+            return Ok(await Mediator.Send(request, cancellationToken));
         }
 
     }

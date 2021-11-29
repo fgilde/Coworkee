@@ -1163,6 +1163,78 @@
         ]
       }
     },
+    "/Translations/ImportFile": {
+      "post": {
+        "tags": [
+          "Translations"
+        ],
+        "summary": "Update Profile Picture",
+        "operationId": "Translations_ImportFile",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Translations/Import": {
+      "post": {
+        "tags": [
+          "Translations"
+        ],
+        "summary": "Update Profile Picture",
+        "operationId": "Translations_Import",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportTranslationsQuery"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "Status 200 OK",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/identity/Account/UpdateProfile": {
       "put": {
         "tags": [
@@ -1342,12 +1414,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/identity/RoleClaim": {
@@ -3008,6 +3075,9 @@
         "x-abstract": true,
         "additionalProperties": false,
         "properties": {
+          "createNewIfToUpdateNotExists": {
+            "type": "boolean"
+          },
           "items": {
             "type": "array",
             "nullable": true,
@@ -3054,6 +3124,9 @@
         "x-abstract": true,
         "additionalProperties": false,
         "properties": {
+          "createNewIfToUpdateNotExists": {
+            "type": "boolean"
+          },
           "items": {
             "type": "array",
             "nullable": true,
@@ -3236,6 +3309,9 @@
         "x-abstract": true,
         "additionalProperties": false,
         "properties": {
+          "createNewIfToUpdateNotExists": {
+            "type": "boolean"
+          },
           "items": {
             "type": "array",
             "nullable": true,
@@ -3286,6 +3362,32 @@
               "type": "integer",
               "format": "int32"
             }
+          }
+        }
+      },
+      "ImportTranslationsQuery": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ImportQueryBaseOfTranslationDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ImportQueryBaseOfTranslationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -4117,6 +4219,9 @@
         "x-abstract": true,
         "additionalProperties": false,
         "properties": {
+          "createNewIfToUpdateNotExists": {
+            "type": "boolean"
+          },
           "items": {
             "type": "array",
             "nullable": true,
@@ -4229,6 +4334,9 @@
         "x-abstract": true,
         "additionalProperties": false,
         "properties": {
+          "createNewIfToUpdateNotExists": {
+            "type": "boolean"
+          },
           "items": {
             "type": "array",
             "nullable": true,

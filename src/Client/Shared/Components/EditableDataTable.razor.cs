@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Features.Translations.Import;
 using CleanArchitectureBase.Application.Hubs.Events;
+using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using Nextended.Core;
 using Nextended.Core.Extensions;
+using SDK;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
@@ -127,25 +133,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 if (a.User.Id != _currentUser.GetUserId())
                 {
                     await Reload();
-                    //var position = _snackBar.Configuration.PositionClass;
-                    //_snackBar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
-                    //_snackBar.Add(
-                    //    _localizer[
-                    //        "The User {0} has just edited, created or deleted entries here. You should reload the data",
-                    //        a.User.FullName], Severity.Normal, (config) =>
-                    //    {
-                    //        config.Icon = Icons.Material.Filled.Refresh;
-                    //        config.VisibleStateDuration = 10000;
-                    //        config.CloseAfterNavigation = true;
-                    //        config.ShowCloseIcon = true;
-                    //        config.Action = _localizer["Reload Data"];
-                    //        config.ActionColor = Color.Primary;
-                    //        config.Onclick = async snackbar =>
-                    //        {
-                    //            _snackBar.Configuration.PositionClass = position;
-                    //            await Reload();
-                    //        };
-                    //    });
                 }
             });
         }
@@ -243,17 +230,23 @@ namespace CleanArchitectureBase.Client.Shared.Components
             StateHasChanged();
         }
 
-        private async Task ExecExportSelected()
+        private async Task ExecExportSelected(ExportServiceType serviceType)
         {
             var ids = _selectedItems.Select(item => GetId(item)).ToArray();
-            await ExportSelected(ExportServiceType.Excel, ids);
+            await ExportSelected(serviceType, ids);
         }
 
-        private async Task ExecExport()
+        private async Task ExecExport(ExportServiceType serviceType)
         {
-            await Export(ExportServiceType.Excel, _searchString);
+            await Export(serviceType, _searchString);
         }
-        
+
+        private async Task ExecImport(InputFileChangeEventArgs e)
+        {
+            // var request = new ImportTranslationsQuery { Data = await e.File.GetBytesAsync() };
+            await _api.Translations_ImportFileAsync(new FileParameter(e.File.OpenReadStream(), e.File.Name, e.File.ContentType));
+        }
+
         private string ActionUrl(TIdType id)
         {
             bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);
@@ -263,7 +256,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task InvokeModal(TIdType id = default)
         {
-            if (EditMode == EditMode.InlineBulk || EditMode == EditMode.InlineLive)
+            if (EditMode is EditMode.InlineBulk or EditMode.InlineLive)
             {
                 var item = typeof(TResult).CreateInstance<TResult>();
                 if (ApiLoadPaged != null)
@@ -276,9 +269,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             await WithUrl(ActionUrl(id), async () =>
             {
                 if (await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData())))
-                {
                     await Reset();
-                }
             });
         }
 

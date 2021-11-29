@@ -1,0 +1,29 @@
+﻿@namespace CleanArchitectureBase.Client.Shared.Dialogs
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MessageDialog> localizer
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Color="Color.Error" Icon="@Icon" Class="mr-3 mb-n1" />
+            @MudDialog.Title
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@Message</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Cancel">@localizer["Close"]</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string Message { get; set; }
+    [Parameter] public string Icon { get; set; }
+    [Parameter] public IEnumerable<string> Details { get; set; }
+
+    //void Submit()
+    //{
+    //    MudDialog.Close(DialogResult.Ok(true));
+    //}
+    void Cancel() => MudDialog.Cancel();
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Export;
@@ -15,7 +16,7 @@ namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Expor
     public class ExportDocumentTypesQuery : ExportQueryBase<int>
     {}
 
-    internal class ExportDocumentTypesQueryHandler : ExportQueryHandlerBase<ExportDocumentTypesQuery, int, DocumentType>
+    internal class ExportDocumentTypesQueryHandler : ExportQueryHandlerBase<ExportDocumentTypesQuery, int, DocumentTypeDto, DocumentType>
     {
         public ExportDocumentTypesQueryHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportDocumentTypesQueryHandler> localizer, IServiceProvider serviceProvider)
             : base(unitOfWork, localizer, serviceProvider)

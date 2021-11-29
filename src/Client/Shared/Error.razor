@@ -1,6 +1,3 @@
-@using Microsoft.Extensions.Logging
-@inject ILogger<Error> Logger
-
 <CascadingValue Value=this>
     @ChildContent
 </CascadingValue>
@@ -11,8 +8,6 @@
 
     public void ProcessError(Exception ex)
     {
-        Logger.LogError("Error:ProcessError - Type: {Type} Message: {Message}",
-            ex.GetType(), ex.Message);
-        //StateHasChanged();
+        _errorService.HandleAsync(ex);
     }
 }

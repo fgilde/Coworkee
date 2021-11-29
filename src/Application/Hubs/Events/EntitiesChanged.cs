@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 
 namespace CleanArchitectureBase.Application.Hubs.Events
@@ -8,7 +9,7 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesChanged()
         {}
 
-        public EntitiesChanged(UserResponse user, TDto[] entities) : base(user, entities)
+        public EntitiesChanged(UserResponse user, IEnumerable<TDto> entities) : base(user, entities)
         {}
     }
 
@@ -17,7 +18,7 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesChanged()
         { }
 
-        public EntitiesChanged(UserResponse user, string[] idsAsString) : base(user, idsAsString)
+        public EntitiesChanged(UserResponse user, IEnumerable<string> idsAsString) : base(user, idsAsString)
         { }
     }
 }

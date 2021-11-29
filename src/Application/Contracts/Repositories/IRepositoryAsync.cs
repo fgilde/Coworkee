@@ -11,7 +11,9 @@ namespace CleanArchitectureBase.Application.Contracts.Repositories
         IQueryable<T> Entities { get; }
 
         Task<T> GetByIdAsync(TId id, CancellationToken cancellation = default);
+        T GetById(TId id);
         Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default);
+        IEnumerable<T> GetByIds(IEnumerable<TId> ids);
 
         Task<List<T>> GetAllAsync(CancellationToken cancellation = default);
         Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default);

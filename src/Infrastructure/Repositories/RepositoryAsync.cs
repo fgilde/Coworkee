@@ -88,6 +88,16 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
+        public T GetById(TId id)
+        {
+            return _dbContext.Set<T>().Find(id);
+        }
+
+        public async Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default)
+        {
+            return await Task.WhenAll(ids.Select(id => GetByIdAsync(id, cancellation)));
+        }
+
         public async Task<List<T>> GetAllAsync(CancellationToken cancellation = default)
         {
             return await _dbContext
@@ -100,10 +110,9 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             return await _dbContext.Set<T>().FindAsync(new object[] { id }, cancellation);
         }
 
-        public async Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default)
+        public IEnumerable<T> GetByIds(IEnumerable<TId> ids)
         {
             return _dbContext.Set<T>().Where(e => ids.Contains(e.Id));
-            // return await Task.WhenAll(ids.Select(id => GetByIdAsync(id, cancellation)));
         }
 
         public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize, CancellationToken cancellation = default)

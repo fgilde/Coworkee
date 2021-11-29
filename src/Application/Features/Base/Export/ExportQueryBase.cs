@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
@@ -12,6 +13,7 @@ using CleanArchitectureBase.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Base.Export
 {
@@ -22,9 +24,10 @@ namespace CleanArchitectureBase.Application.Features.Base.Export
         public TId[] Ids { get; set; }
     }
 
-    internal abstract class ExportQueryHandlerBase<TQuery, TEntityId, TEntity> : IRequestHandler<TQuery, byte[]>
+    internal abstract class ExportQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, byte[]>
         where TQuery : ExportQueryBase<TEntityId>
         where TEntity : AuditableEntity<TEntityId>
+        where TDto : class, IDtoBase
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;
         protected readonly IStringLocalizer Localizer;
@@ -53,7 +56,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Export
             var results = request.Ids is {Length: > 0} 
                 ? await UnitOfWork.Repository<TEntity>().Entities.Where(p => request.Ids.Contains(p.Id)).ToListAsync(cancellationToken)
                 : await UnitOfWork.Repository<TEntity>().Entities.Specify(GetFilterSpecification(request)).ToListAsync(cancellationToken);
-            return await service.ExportAsync(results, cancellationToken);
+            return await service.ExportAsync(results.MapElementsTo<TDto>(), cancellationToken);
         }
     }
 }

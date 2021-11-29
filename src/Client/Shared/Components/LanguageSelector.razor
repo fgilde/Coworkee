@@ -7,7 +7,7 @@
     var actualLanguge = LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual);
     string displayName = actualLanguge!= null ? DisplayStr(actualLanguge) : localizer["Select Language"];
 
-    <MudMenu MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
+    <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
         @{
             foreach (var language in LocalizationConstants.SupportedLanguages)
             {

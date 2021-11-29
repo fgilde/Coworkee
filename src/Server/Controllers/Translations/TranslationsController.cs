@@ -110,9 +110,10 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         }
 
         /// <summary>
-        /// Update Profile Picture
+        /// Imports translations from file
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="file"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost(nameof(ImportFile))]
 
@@ -127,9 +128,10 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         }
 
         /// <summary>
-        /// Update Profile Picture
+        /// Imports translations from byte array
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost(nameof(Import))]
 

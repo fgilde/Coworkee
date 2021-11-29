@@ -1168,7 +1168,7 @@
         "tags": [
           "Translations"
         ],
-        "summary": "Update Profile Picture",
+        "summary": "Imports translations from file",
         "operationId": "Translations_ImportFile",
         "requestBody": {
           "content": {
@@ -1206,7 +1206,7 @@
         "tags": [
           "Translations"
         ],
-        "summary": "Update Profile Picture",
+        "summary": "Imports translations from byte array",
         "operationId": "Translations_Import",
         "requestBody": {
           "x-name": "request",

@@ -348,16 +348,18 @@
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.ImportFile(Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
             <summary>
-            Update Profile Picture
+            Imports translations from file
             </summary>
-            <param name="request"></param>
+            <param name="file"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Import(CleanArchitectureBase.Application.Features.Translations.Import.ImportTranslationsQuery,System.Threading.CancellationToken)">
             <summary>
-            Update Profile Picture
+            Imports translations from byte array
             </summary>
             <param name="request"></param>
+            <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.String[],System.Threading.CancellationToken)">

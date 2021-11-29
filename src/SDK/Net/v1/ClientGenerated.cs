@@ -302,24 +302,24 @@ namespace SDK
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<FileResponse> Translations_ExportAsync(ExportTranslationsQuery query, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from file</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse Translations_ImportFile(FileParameter file = null);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from file</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<FileResponse> Translations_ImportFileAsync(FileParameter file = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from byte array</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse Translations_Import(ImportTranslationsQuery request);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from byte array</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<FileResponse> Translations_ImportAsync(ImportTranslationsQuery request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
@@ -2974,7 +2974,7 @@ namespace SDK
             }
         }
     
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from file</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public FileResponse Translations_ImportFile(FileParameter file = null)
@@ -2983,7 +2983,7 @@ namespace SDK
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from file</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<FileResponse> Translations_ImportFileAsync(FileParameter file = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -3060,7 +3060,7 @@ namespace SDK
             }
         }
     
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from byte array</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public FileResponse Translations_Import(ImportTranslationsQuery request)
@@ -3069,7 +3069,7 @@ namespace SDK
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>Update Profile Picture</summary>
+        /// <summary>Imports translations from byte array</summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<FileResponse> Translations_ImportAsync(ImportTranslationsQuery request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace CleanArchitectureBase.Shared.Localizers
 {
     public class AggregatedLocalizer<T> :IStringLocalizer<T>
     {
         private readonly IServiceProvider _provider;
+        private readonly ILogger<AggregatedLocalizer<T>> _logger;
 
         private IEnumerable<IStringLocalizer<T>> _localizers => _provider.GetServices<IStringLocalizer<T>>().Where(l => l != null && l.GetType() != GetType())
             .OrderBy(l => l.GetType().Name);
 
-        public AggregatedLocalizer(IServiceProvider provider)
+        public AggregatedLocalizer(IServiceProvider provider, ILogger<AggregatedLocalizer<T>> logger)
         {
             _provider = provider;
+            _logger = logger;
         }
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
@@ -38,8 +41,11 @@ namespace CleanArchitectureBase.Shared.Localizers
         {
             get
             {
-                return _localizers.Select(l => l[name]).FirstOrDefault(s => !s.ResourceNotFound) ??
+                var result = _localizers.Select(l => l[name]).FirstOrDefault(s => !s.ResourceNotFound) ??
                        _localizers.Select(l => l[name]).FirstOrDefault(s => !string.IsNullOrEmpty(s.Value));
+                //if (result == null || result.ResourceNotFound)
+                //    _logger.LogWarning($"Resource Not found. Key: {name}");
+                return result;
             }
         }
 
@@ -47,8 +53,11 @@ namespace CleanArchitectureBase.Shared.Localizers
         {
             get
             {
-                return _localizers.Select(l => l[name, arguments]).FirstOrDefault(s => !s.ResourceNotFound) ??
+                var result = _localizers.Select(l => l[name, arguments]).FirstOrDefault(s => !s.ResourceNotFound) ??
                        _localizers.Select(l => l[name, arguments]).FirstOrDefault(s => !string.IsNullOrEmpty(s.Value));
+                //if (result == null || result.ResourceNotFound)
+                //    _logger.LogWarning($"Resource Not found. Key: {name}");
+                return result;
             }
         }
     }

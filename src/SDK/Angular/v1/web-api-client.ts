@@ -1408,13 +1408,13 @@ export interface ITranslationsClient {
      */
     export(query: ExportTranslationsQuery): Observable<FileResponse>;
     /**
-     * Update Profile Picture
+     * Imports translations from file
      * @param file (optional) 
      * @return Status 200 OK
      */
     importFile(file: FileParameter | null | undefined): Observable<FileResponse>;
     /**
-     * Update Profile Picture
+     * Imports translations from byte array
      * @return Status 200 OK
      */
     import(request: ImportTranslationsQuery): Observable<FileResponse>;
@@ -1788,7 +1788,7 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     /**
-     * Update Profile Picture
+     * Imports translations from file
      * @param file (optional) 
      * @return Status 200 OK
      */
@@ -1844,7 +1844,7 @@ export class TranslationsClient implements ITranslationsClient {
     }
 
     /**
-     * Update Profile Picture
+     * Imports translations from byte array
      * @return Status 200 OK
      */
     import(request: ImportTranslationsQuery) : Observable<FileResponse> {

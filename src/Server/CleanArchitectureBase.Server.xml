@@ -19,7 +19,7 @@
             Abstract BaseApi Controller Class
             </summary>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetAll(System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.BrandDto},System.Threading.CancellationToken)">
             <summary>
             Get All Brands
             </summary>

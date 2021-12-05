@@ -5,7 +5,7 @@ using CleanArchitectureBase.Domain.Contracts;
 
 namespace CleanArchitectureBase.Application.Specifications.Base
 {
-    public abstract class HeroSpecification<T> : ISpecification<T> where T : class, IEntity
+    public abstract class SpecificationBase<T> : ISpecification<T> where T : class, IEntity
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
         public List<Expression<Func<T, object>>> Includes { get; } = new();

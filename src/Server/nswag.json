@@ -144,7 +144,10 @@
       "className": "GeneratedClient",
       "operationGenerationMode": "SingleClientFromOperationId",
       "additionalNamespaceUsages": [
+        "System",
+        "System.Linq.Expressions",
         "System.Collections.Generic",
+        "CleanArchitectureBase.Shared",
         "CleanArchitectureBase.SDK",
         "CleanArchitectureBase.Domain.Entities",
         "CleanArchitectureBase.Application.Common.Models",

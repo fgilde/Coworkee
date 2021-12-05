@@ -4,7 +4,7 @@ using CleanArchitectureBase.Application.Specifications.Base;
 
 namespace CleanArchitectureBase.Infrastructure.Specifications
 {
-    public class AuditFilterSpecification : HeroSpecification<Audit>
+    public class AuditFilterSpecification : SpecificationBase<Audit>
     {
         public AuditFilterSpecification(string[] userIds, string searchString, bool searchInOldValues, bool searchInNewValues)
         {

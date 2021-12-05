@@ -8,3 +8,10 @@
 
 # Usefull links
 	https://chrissainty.com/securing-your-blazor-apps-configuring-policy-based-authorization-with-blazor/  // Policy and requirements
+
+# Odata
+    https://devblogs.microsoft.com/odata/up-running-w-odata-in-asp-net-6/
+	https://github.com/OData/WebApi/issues/555
+            //$filter=contains(Name,'li')&$select=Id,Name,Classification,RunningTime
+    https://docs.microsoft.com/en-us/odata/webapi/query-options-in-request-body
+    https://stackoverflow.com/questions/10781309/asp-net-mvc-4-webapi-manually-handle-odata-queries

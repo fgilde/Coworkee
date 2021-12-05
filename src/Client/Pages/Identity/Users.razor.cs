@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -93,7 +94,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             var parameters = new DialogParameters();
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<RegisterUserModal>(_localizer["Register New User"], parameters, options);
+            var dialog = await _dialogService.ShowAsync<RegisterUserModal>(_localizer["Register New User"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

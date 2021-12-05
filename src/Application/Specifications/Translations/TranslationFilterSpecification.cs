@@ -3,7 +3,7 @@ using CleanArchitectureBase.Domain.Entities.Localization;
 
 namespace CleanArchitectureBase.Application.Specifications.Translations
 {
-    public class TranslationFilterSpecification : HeroSpecification<Translation>
+    public class TranslationFilterSpecification : SpecificationBase<Translation>
     {
         public TranslationFilterSpecification(string searchString, string culture = null)
         {

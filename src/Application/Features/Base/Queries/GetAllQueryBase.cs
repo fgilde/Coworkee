@@ -3,6 +3,7 @@ using LazyCache;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -11,12 +12,15 @@ using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Common.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Base.Queries
 {
     public class GetAllQueryBase<TDto> : IRequest<IReadOnlyCollection<TDto>>
         where TDto : IDtoBase
     {
+        public string OdataFilterQuery { get; set; } = null;
+
         /// <summary>
         /// If true cache is cleared first
         /// </summary>
@@ -41,7 +45,8 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
 
         protected virtual IQueryable<TEntity> Query(TQuery query)
         {
-            return Queryable;
+            var expression = ODataQueryOptionsExtensions.ParseExpression<TEntity>(query.OdataFilterQuery);
+            return expression == null ? Queryable : Queryable.Where(expression);
         }
 
         protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;

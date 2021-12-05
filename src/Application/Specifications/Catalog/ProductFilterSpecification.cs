@@ -3,7 +3,7 @@ using CleanArchitectureBase.Domain.Entities.Catalog;
 
 namespace CleanArchitectureBase.Application.Specifications.Catalog
 {
-    public class ProductFilterSpecification : HeroSpecification<Product>
+    public class ProductFilterSpecification : SpecificationBase<Product>
     {
         public ProductFilterSpecification(string searchString)
         {

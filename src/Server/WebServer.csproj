@@ -14,8 +14,8 @@
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
-    <PackageReference Include="Nextended.Imaging" Version="5.0.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.5" />
+    <PackageReference Include="Nextended.Imaging" Version="6.0.0" />
     <PackageReference Include="Hangfire" Version="1.7.27" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
@@ -26,14 +26,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
-    <PackageReference Include="Mime" Version="3.2.3" />
-
+    <PackageReference Include="Mime" Version="3.3.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-
-    <PackageReference Include="NSwag.AspNetCore" Version="13.14.7" />
-    <PackageReference Include="NSwag.MSBuild" Version="13.14.7">
+    <PackageReference Include="NSwag.AspNetCore" Version="13.14.8" />
+    <PackageReference Include="NSwag.MSBuild" Version="13.14.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -50,7 +48,8 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
- 
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.4" />
+
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />

@@ -6,7 +6,7 @@ using CleanArchitectureBase.Domain.Contracts;
 namespace CleanArchitectureBase.Application.Specifications.ExtendedAttribute
 {
     public class ExtendedAttributeFilterSpecification<TId, TEntityId, TEntity, TExtendedAttribute>
-        : HeroSpecification<TExtendedAttribute>
+        : SpecificationBase<TExtendedAttribute>
             where TEntity : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
             where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
             where TId : IEquatable<TId>

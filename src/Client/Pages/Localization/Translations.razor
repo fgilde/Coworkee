@@ -7,7 +7,7 @@
 
 
 <ReactOnPreferenceChanged Component="this" />
-<HeroTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
+<PageHeaderTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
 
 <MudSwitch Checked="@advancedMode" CheckedChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="@_localizer["Advanced Mode"]" Color="Color.Warning" />
 @if (!advancedMode)

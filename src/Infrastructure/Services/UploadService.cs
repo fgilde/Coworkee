@@ -1,8 +1,8 @@
 ﻿using CleanArchitectureBase.Application.Requests;
 using System.IO;
-using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
+using Nextended.Core.Helper;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {

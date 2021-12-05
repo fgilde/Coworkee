@@ -4,10 +4,12 @@ using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Wrapper;
 using Nextended.Core.Extensions;
 
@@ -24,7 +26,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
 
         private async Task<Result<List<BrandDto>>> Load()
-        {
+        {            
             return new Result<List<BrandDto>>()
             {
                 Succeeded = true,
@@ -71,7 +73,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
                 parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<BrandDto>());
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = await _dialogService.ShowAsync<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
             var result = await dialog.Result;
 
             return !result.Cancelled;

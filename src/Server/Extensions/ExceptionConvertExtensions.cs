@@ -2,6 +2,7 @@
 using CleanArchitectureBase.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Server.Extensions
 {
@@ -25,6 +26,7 @@ namespace CleanArchitectureBase.Server.Extensions
             return new ObjectResult(new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
+                Detail = Detail(exception),
                 Title = "An error occurred while processing your request.",
                 Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1"
             })
@@ -57,6 +59,7 @@ namespace CleanArchitectureBase.Server.Extensions
             {
                 Status = StatusCodes.Status401Unauthorized,
                 Title = "Unauthorized",
+                Detail = Detail(exception),
                 Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
             })
             {
@@ -69,6 +72,7 @@ namespace CleanArchitectureBase.Server.Extensions
             return new ObjectResult(new ProblemDetails
             {
                 Status = exception.StatusCode,
+                // Detail = Detail(exception), // TODO: Not sure currently if we should include details for handled and expected exceptions
                 Title = exception.Message,
                 Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
             })
@@ -82,12 +86,19 @@ namespace CleanArchitectureBase.Server.Extensions
             return new ObjectResult(new ProblemDetails
             {
                 Status = StatusCodes.Status403Forbidden,
+                Detail = Detail(exception),
                 Title = "Forbidden",
                 Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3"
             })
             {
                 StatusCode = StatusCodes.Status403Forbidden
             };
+        }
+
+        private static string? Detail(Exception exception)
+        {
+            // TODO: If full details return exception.ExtractDescription()
+            return exception.ExtractFriendlyMessage() ?? exception.ExtractMessage();
         }
     }
 }

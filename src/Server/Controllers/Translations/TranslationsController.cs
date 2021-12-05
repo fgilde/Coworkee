@@ -1,16 +1,24 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.Translations.Commands.Delete;
+using CleanArchitectureBase.Application.Features.Translations.Export;
+using CleanArchitectureBase.Application.Features.Translations.Import;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
 using CleanArchitectureBase.Application.Features.Translations.Queries.GetById;
+using CleanArchitectureBase.Server.Extensions;
+using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
+using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitectureBase.Server.Controllers.Translations
@@ -83,6 +91,54 @@ namespace CleanArchitectureBase.Server.Controllers.Translations
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new DeleteTranslationsCommand { Ids = ids }, cancellationToken));
+        }
+
+        /// <summary>
+        /// Exports products
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Policy = Permissions.Translations.Export)]
+        [HttpPost(nameof(Export))]
+        [AllowSynchronousIo]
+        public async Task<IActionResult> Export(ExportTranslationsQuery query, CancellationToken cancellationToken = default)
+        {
+            var res = await Mediator.Send(query, cancellationToken);
+            var mimeType = MimeGuesser.GuessMimeType(res);
+            var culturePart = query.FilterByCurrentCulture ? $"{CultureInfo.CurrentUICulture}-" : "";
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{culturePart}{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            return File(res, mimeType, fileDownloadName);
+        }
+
+        /// <summary>
+        /// Imports translations from file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost(nameof(ImportFile))]
+
+        public async Task<IActionResult> ImportFile(IFormFile file, CancellationToken cancellationToken = default)
+        {
+            var bytes = await file.GetBytesAsync(cancellationToken);
+            return Ok(await Mediator.Send(new ImportTranslationsQuery
+            {
+                ContentType = MimeGuesser.GuessMimeType(bytes),
+                Data = bytes
+            }, cancellationToken));
+        }
+
+        /// <summary>
+        /// Imports translations from byte array
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost(nameof(Import))]
+
+        public async Task<IActionResult> Import(ImportTranslationsQuery request, CancellationToken cancellationToken = default)
+        {
+            request.ContentType = MimeGuesser.GuessMimeType(request.Data);
+            return Ok(await Mediator.Send(request, cancellationToken));
         }
 
     }

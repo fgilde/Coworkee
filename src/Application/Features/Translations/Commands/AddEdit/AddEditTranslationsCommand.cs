@@ -14,6 +14,9 @@ namespace CleanArchitectureBase.Application.Features.Translations.Commands.AddEd
     [CustomAuthorize(Policies = new[] { Permissions.Translations.Create, Permissions.Translations.Edit }, PolicyMatch = PolicyMatch.Any)]
     public class AddEditTranslationsCommand : AddEditCommandBase<TranslationDto>
     {
+        public AddEditTranslationsCommand()
+        { }
+
         public AddEditTranslationsCommand(params TranslationDto[] items) : base(items)
         { }
     }

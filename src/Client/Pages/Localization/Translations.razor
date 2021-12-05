@@ -7,12 +7,12 @@
 
 
 <ReactOnPreferenceChanged Component="this" />
-<HeroTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
+<PageHeaderTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
 
-<MudSwitch Checked="@advancedMode" CheckedChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="Advanced Mode" Color="Color.Warning" />
+<MudSwitch Checked="@advancedMode" CheckedChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="@_localizer["Advanced Mode"]" Color="Color.Warning" />
 @if (!advancedMode)
 {
-    <MudSwitch Checked="@showCultureTranslations" CheckedChanged="@(new Action<bool>(e => CultureTranslationToggle(e)))" Label="Show Culture code Translations" Color="Color.Primary"/>
+    <MudSwitch Checked="@showCultureTranslations" CheckedChanged="@(new Action<bool>(e => CultureTranslationToggle(e)))" Label="@_localizer["Show Culture code Translations"]" Color="Color.Primary"/>
 }
 
 <EditableDataTable @ref="dataTable"

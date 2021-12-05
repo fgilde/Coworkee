@@ -1,5 +1,6 @@
 ﻿using CleanArchitectureBase.Domain.Entities.Catalog;
 using System;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Export;
@@ -14,7 +15,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Queries.Export
     public class ExportProductsQuery: ExportQueryBase<int>
     {}
 
-    internal class ExportProductsQueryHandler: ExportQueryHandlerBase<ExportProductsQuery, int, Product> {
+    internal class ExportProductsQueryHandler: ExportQueryHandlerBase<ExportProductsQuery, int, ProductDto, Product> {
 
         public ExportProductsQueryHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<ExportProductsQueryHandler> localizer, IServiceProvider serviceProvider) 
             : base(unitOfWork, localizer, serviceProvider)

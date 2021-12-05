@@ -6,8 +6,9 @@ namespace CleanArchitectureBase.Application.Common.Models
     {
         public TId Id { get; set; }
 
-        [Newtonsoft.Json.JsonIgnore] [JsonIgnore]
-        public bool IsNew => Id == null || Id.Equals(default(TId));
+        internal bool IsNew => Id == null || Id.Equals(default(TId));
+
+        bool IDtoBase.IsNew => IsNew;
     }
 
     public interface IDtoBase<TId> : IDtoBase

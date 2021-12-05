@@ -14,6 +14,7 @@ using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Hangfire.Dashboard;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Server
@@ -57,9 +58,19 @@ namespace CleanArchitectureBase.Server
             services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
             
-            services.AddControllersWithViews(options => options.Filters.Add<ApiExceptionFilterAttribute>())
-                .AddValidators();
-                //.AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            services.AddControllersWithViews(options =>
+                {
+                    options.Filters.Add<ApiExceptionFilterAttribute>();
+                    options.ModelBinderProviders.Insert(0, new TransferableExpressionModelBinderProvider());
+                })
+                .AddValidators()
+                .AddXmlDataContractSerializerFormatters()
+                .AddOData(options =>
+                {
+                    options.EnableQueryFeatures().SetMaxTop(1000);
+                    //options.AddRouteComponents("odata", modelBuilder.GetEdmModel());
+                });
+            //.AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); // TODO: Currently not working with extended attributes (EntityExtendedAttributeType) and all other enums inherit from byte
             services.AddExtendedAttributesValidators();
             services.AddExtendedAttributesHandlers();
             services.AddRazorPages();

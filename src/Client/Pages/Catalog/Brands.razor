@@ -7,7 +7,7 @@
 
 
 <ReactOnPreferenceChanged Component="this" />
-<HeroTitle Title="@_localizer["Brands"]" Description="@_localizer["Manage Brands."]" />
+<PageHeaderTitle Title="@_localizer["Brands"]" Description="@_localizer["Manage Brands."]" />
 
 <EditableDataTable ApiLoad="@(new Func<Task<Result<List<BrandDto>>>>(Load))"
                    ApiDelete="@(new Func<int[], Task<Result>>(DeleteBrands))"

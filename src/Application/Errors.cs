@@ -45,28 +45,28 @@ namespace CleanArchitectureBase.Application
         }
 
         public static Exception Create(
-            string resourceKey,
+            string messageOrKey,
             Exception inner,
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
             params object[] arguments)
         {
-            return new ApiException(resourceKey, inner, statusCode, arguments);
+            return new ApiException(TryFormat(messageOrKey, arguments), inner, statusCode, arguments);
         }
 
         public static Exception Create(
-            string resourceKey,
+            string messageOrKey,
             params object[] arguments)
         {
-            return new ApiException(resourceKey, null, HttpStatusCode.InternalServerError, arguments);
+            return new ApiException(TryFormat(messageOrKey, arguments), null, HttpStatusCode.InternalServerError, arguments);
         }
 
         
         public static Exception Create(
-            string resourceKey,
+            string messageOrKey,
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
             params object[] arguments)
         {
-            return Create(resourceKey, null, statusCode, arguments);
+            return Create(messageOrKey, null, statusCode, arguments);
         }
 
 
@@ -78,6 +78,11 @@ namespace CleanArchitectureBase.Application
         public static Exception IdentityFail(IdentityResult identityResult)
         {
             return ValidationFailed(identityResult.Errors.Select(e => (e.Code, e.Description)).ToArray());
+        }
+
+        private static string TryFormat(string s, object[] arguments)
+        {
+            return arguments?.Any() == true ? string.Format(s, arguments) : s;
         }
     }
 }

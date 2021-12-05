@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
+using CleanArchitectureBase.Application.Features.Translations.Export;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Localization;
 using CleanArchitectureBase.Shared.Extensions;
@@ -27,6 +28,8 @@ namespace CleanArchitectureBase.Client.Pages.Localization
         public string Id { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
+
+        private List<TranslationDto> _translations;
 
         protected override async Task OnInitializedAsync()
         {
@@ -51,11 +54,11 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
             var server = await _api.Translations_GetAllAsync();
 
-            var res = server.Concat(local).DistinctBy(d => d.Key);
+            _translations = server.Concat(local).DistinctBy(d => d.Key).ToList();
             return new Result<List<TranslationDto>>()
             {
                 Succeeded = true,
-                Data = res.ToList()
+                Data = _translations
             };
         }
 
@@ -82,16 +85,20 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             return arg.Key;
         }
 
-        private async Task Export(ExportServiceType exportServiceType,string search)
+        private async Task Export(ExportServiceType exportServiceType, string search)
         {
-            throw new NotSupportedException();
-            //return await _api.Translations_ExportAsync(search);
+            var query = new ExportTranslationsQuery { ExportServiceType = exportServiceType, SearchString = search, FilterByCurrentCulture = !advancedMode };
+            if (!advancedMode)
+                query.TranslationsToExport = _translations.ToArray();
+            await (await _api.Translations_ExportAsync(query)).ForceDownloadAsync(_jsRuntime);
         }
 
         private async Task ExportSelected(ExportServiceType exportServiceType, int[] ids)
         {
-            throw new NotSupportedException();
-
+            var query = new ExportTranslationsQuery {ExportServiceType = exportServiceType, Ids = ids, FilterByCurrentCulture = !advancedMode};
+            if (!advancedMode)
+                query.TranslationsToExport = _translations.ToArray();
+            await (await _api.Translations_ExportAsync(query)).ForceDownloadAsync(_jsRuntime);
         }
 
         private async Task<bool> SaveAll(TranslationDto[] arg)

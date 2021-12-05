@@ -23,6 +23,7 @@ All Permissions: Alle Berechtigungen
 Already have an account?: Haben Sie bereits ein Konto?
 am-ET: Amharisch (Äthiopien)
 ApplicationDescription: Beispielanwendung mit WebAssembly und Clean Architecture Pattern
+ApplicationSubDescription: Willkommen auf dieser Blazor Seite
 Apply: Anwenden
 Apr: Apr
 ar-001: Arabisch (Welt)
@@ -758,6 +759,7 @@ sah-RU: Sacha (Russland)
 saq-KE: Samburu (Kenia)
 sat-Olck-IN: Santali (Ol Chiki, Indien)
 Save: Speichern
+Save {0} Changes: '{0} Änderungen speichern'
 Save Changes: Änderungen speichern
 Save Role: Rolle speichern
 saved: Gespeichert!
@@ -925,6 +927,7 @@ wae-CH: Walser (Schweiz)
 wal-ET: Wolaytta (Äthiopien)
 Welcome {0}: Willkommen {0}
 Will be saved only when selected Permission: Wird nur gespeichert, wenn Berechtigung ausgewählt ist
+With_Selected: '{0} Ausgewählt'
 wo-SN: Wolof (Senegal)
 xh-ZA: isiXhosa (Südafrika)
 xog-UG: Soga (Uganda)
@@ -934,7 +937,7 @@ yo-BJ: Yoruba (Benin)
 yo-NG: Yoruba (Nigeria)
 you: du
 You are logged out because the Permissions of one of your Roles have been updated.: Sie sind abgemeldet, weil die Berechtigungen einer Ihrer Rollen aktualisiert wurden.
-You are logged out because the user with your Token has been deleted.: Sie sind abgemeldet, weil der Benutzer mit Ihrem Token gelöscht wurde.
+You are logged out because the user with your Token has been deleted or token is expired.: Sie sind abgemeldet, weil der Benutzer mit Ihrem Token gelöscht wurde, oder der Token nicht mehr gültig ist.
 You are Logged Out.: Sie sind abgemeldet.
 Your Profile has been updated.: Ihr Profil wurde aktualisiert.
 Your Recent Activities.: Ihre letzten Aktivitäten.

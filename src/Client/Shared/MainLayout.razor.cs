@@ -9,11 +9,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
 using Microsoft.AspNetCore.Components;
+using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Client.Shared
 {
@@ -35,13 +37,19 @@ namespace CleanArchitectureBase.Client.Shared
             var user = state.User;
             if (user.Identity?.IsAuthenticated == true && !user.IsGuest())
             {
-                CurrentUserId = user.GetUserId();                
-                
-                var currentUserResult = await _api.User_GetByIdAsync(CurrentUserId);
+                CurrentUserId = user.GetUserId();
+                var currentUserResult = Result<UserResponse>.Fail();
+                try
+                {
+                    currentUserResult = await _api.User_GetByIdAsync(CurrentUserId);
+                }
+                catch { /* ignored*/ }
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
-                    _snackBar.Add(localizer["You are logged out because the user with your Token has been deleted."], Severity.Error);
+                    _snackBar.Add(localizer["You are logged out because the user with your Token has been deleted or token is expired."], Severity.Error);
                     await _clientAuthenticationManager.Logout();
+                    _navigationManager.NavigateToWithReturnTo("login");
+                    return;
                 }
 
                 await hubConnection.SendAsync(ApplicationConstants.SignalR.OnConnect, CurrentUserId);

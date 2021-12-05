@@ -40,13 +40,12 @@ namespace CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddE
             _localizer = localizer;
         }
 
-        public override async Task<Unit> Handle(AddEditDocumentTypesCommand command, CancellationToken cancellationToken)
+        public override async Task<AddUpdateResult<DocumentTypeDto>> Handle(AddEditDocumentTypesCommand command, CancellationToken cancellationToken)
         {
             if (command.Items.Any(item => UnitOfWork.Repository<DocumentType>().Entities.Any(p => p.Id != item.Id && p.Name == item.Name)))
                 throw Errors.Create(_localizer["Document type with this name already exists."], HttpStatusCode.Conflict);
 
-            await base.Handle(command, cancellationToken);
-            return Unit.Value;
+            return await base.Handle(command, cancellationToken);
         }
     }
 }

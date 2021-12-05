@@ -1,4 +1,5 @@
 ﻿using System;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Export;
@@ -14,7 +15,7 @@ namespace CleanArchitectureBase.Application.Features.Brands.Queries.Export
     public class ExportBrandsQuery : ExportQueryBase<int>
     {}
 
-    internal class ExportBrandsQueryHandler : ExportQueryHandlerBase<ExportBrandsQuery, int, Brand>
+    internal class ExportBrandsQueryHandler : ExportQueryHandlerBase<ExportBrandsQuery, int, BrandDto, Brand>
     {
         public ExportBrandsQueryHandler(IUnitOfWork<int> unitOfWork, 
             IStringLocalizer<ExportBrandsQueryHandler> localizer, IServiceProvider serviceProvider)

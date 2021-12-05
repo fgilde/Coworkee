@@ -144,7 +144,10 @@
       "className": "GeneratedClient",
       "operationGenerationMode": "SingleClientFromOperationId",
       "additionalNamespaceUsages": [
+        "System",
+        "System.Linq.Expressions",
         "System.Collections.Generic",
+        "CleanArchitectureBase.Shared",
         "CleanArchitectureBase.SDK",
         "CleanArchitectureBase.Domain.Entities",
         "CleanArchitectureBase.Application.Common.Models",
@@ -162,7 +165,9 @@
         "CleanArchitectureBase.Domain.Entities.ExtendedAttributes",
         "CleanArchitectureBase.Domain.Entities.Misc",
         "CleanArchitectureBase.Application.Contracts.Enums",
-        "CleanArchitectureBase.Shared.Wrapper"
+        "CleanArchitectureBase.Shared.Wrapper",
+        "CleanArchitectureBase.Application.Features.Translations.Export",
+        "CleanArchitectureBase.Application.Features.Translations.Import"
       ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": true,

@@ -40,14 +40,13 @@ namespace CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit
             _localizer = localizer;
         }
 
-        public override async Task<Unit> Handle(AddEditDocumentsCommand command, CancellationToken cancellationToken)
+        public override async Task<AddUpdateResult<DocumentDto>> Handle(AddEditDocumentsCommand command, CancellationToken cancellationToken)
         {
             var uploadTasks = command.Items.Where(dto => dto.UploadRequest != null).Select(dto =>
                 Task.Run(() => _uploadService.UploadAsync(dto.UploadRequest), cancellationToken)
                     .ContinueWith(task => dto.URL = task.Result, cancellationToken));
             await Task.WhenAll(uploadTasks);
-            await base.Handle(command, cancellationToken);
-            return Unit.Value;
+            return await base.Handle(command, cancellationToken);
         }
     }
 }

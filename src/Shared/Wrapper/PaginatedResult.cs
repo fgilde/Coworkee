@@ -5,6 +5,9 @@ namespace CleanArchitectureBase.Shared.Wrapper
 {
     public class PaginatedResult<T> : Result
     {
+        public PaginatedResult()
+        {}
+
         public PaginatedResult(List<T> data)
         {
             Data = data;

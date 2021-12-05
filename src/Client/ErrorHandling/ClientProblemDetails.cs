@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace CleanArchitectureBase.Client.ErrorHandling
 {
@@ -54,5 +55,6 @@ namespace CleanArchitectureBase.Client.ErrorHandling
         /// </remarks>
         [JsonExtensionData]
         public IDictionary<string, object> Extensions { get; } = new Dictionary<string, object>(StringComparer.Ordinal);
+
     }
 }

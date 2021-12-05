@@ -12,3 +12,10 @@ public interface IExportService
 
     Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, CancellationToken cancellationToken = default);
 }
+
+public interface IImportService
+{
+    public IEnumerable<string> SupportedContentTypes { get; }
+
+    Task<IEnumerable<TData>> ImportAsync<TData>(byte[] bytes, CancellationToken cancellationToken = default);
+}

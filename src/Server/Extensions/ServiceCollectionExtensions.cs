@@ -43,6 +43,7 @@ using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using NSwag;
+using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors.Security;
 
 namespace CleanArchitectureBase.Server.Extensions
@@ -124,10 +125,9 @@ namespace CleanArchitectureBase.Server.Extensions
             var configSection = configuration.GetSection("ApiDocumentation");
             foreach (var version in ApiVersions.All.Reverse())
             {
-                services.AddOpenApiDocument(async options =>
+                async void Configure(AspNetCoreOpenApiDocumentGeneratorSettings options)
                 {
                     var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
-
                     options.Title = configSection.GetValue<string>(nameof(options.Title));
                     options.Description = configSection.GetValue<string>(nameof(options.Description));
                     options.DocumentName = ApiVersions.DocumentVersionPrefix + version.MajorVersion;
@@ -142,8 +142,18 @@ namespace CleanArchitectureBase.Server.Extensions
                         Name = "Authorization",
                         In = OpenApiSecurityApiKeyLocation.Header,
                         Description = localizer["Input your Bearer token in this format - Bearer {your token here} to access this API"],
-                    }).OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-                });
+                    })
+                        .OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+                }
+
+                services.AddSwaggerDocument(document => {
+                            Configure(document);
+                            // document.DocumentName = "swagger/" + document.DocumentName;
+                        }).AddOpenApiDocument(document =>
+                        {
+                            Configure(document);
+                            document.DocumentName = "openapi/" + document.DocumentName;
+                        });
             }
 
             return services;
@@ -207,7 +217,7 @@ namespace CleanArchitectureBase.Server.Extensions
 
             return services;
         }
-        
+
         internal static IServiceCollection AddJwtAuthentication(
             this IServiceCollection services, ServerConfiguration config)
         {

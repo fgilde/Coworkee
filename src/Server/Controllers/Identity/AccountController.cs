@@ -75,6 +75,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         }
 
         [HttpPost("[action]")]
+        [AllowAnonymous] // To ensure no error if call comes with expired session
         public async Task<IActionResult> Logout()
         {
             await _accountService.LogoutAsync();

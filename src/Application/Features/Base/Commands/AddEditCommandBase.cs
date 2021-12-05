@@ -16,7 +16,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Base.Commands
 {
-    public abstract class AddEditCommandBase<TDto> : IRequest
+    public abstract class AddEditCommandBase<TDto> : IRequest<AddUpdateResult<TDto>>
         where TDto : IDtoBase
     {
         protected AddEditCommandBase(params TDto[] items)
@@ -24,10 +24,11 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             Items = items;
         }
 
+        public bool CreateNewIfToUpdateNotExists { get; set; } = false;
         public TDto[] Items { get; set; }
     }
 
-    internal class AddEditCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand>
+    internal class AddEditCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand, AddUpdateResult<TDto>>
         where TCommand: AddEditCommandBase<TDto>
         where TEntity : AuditableEntity<TEntityId>
         where TDto : IDtoBase<TEntityId>
@@ -53,38 +54,63 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             Mediator = mediator;
         }
         
-        public virtual async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
+        public virtual async Task<AddUpdateResult<TDto>> Handle(TCommand command, CancellationToken cancellationToken)
         {
             var user = Get<ICurrentUserService>().CurrentUser();
-            var toCreate = command.Items.Where(t => t.IsNew).ToArray();
-            var toUpdate = command.Items.Where(t => !t.IsNew).ToArray();
+            var all = command.Items.Select(dto => GetPreparedEntity(dto, command.CreateNewIfToUpdateNotExists)).ToLookup(t => t.IsNew); 
+            var toCreate = all[true].ToArray();
+            var toUpdate = all[false].Where(t => t.Exists).ToArray();
+
+            TDto[] created = Array.Empty<TDto>();
+            TDto[] updated = Array.Empty<TDto>();
 
             var repository = UnitOfWork.Repository<TEntity>();
+
             if (toCreate.Any())
             {
-                if (CreatePermission != null)
-                    await PermissionService.EnsurePolicyAsync(CreatePermission);
-                await repository.AddManyAsync(toCreate.MapElementsTo<TEntity>(), cancellationToken);
+                await PermissionService.EnsurePolicyAsync(CreatePermission);
+                var entitiesToCreate = toCreate.Select(t => t.Entity).ToArray();
+                await repository.AddManyAsync(entitiesToCreate, cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken): UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
-                await Mediator.PublishClientEvents(cancellationToken, new EntitiesCreated<TDto>(user, toCreate), new EntitiesCreated(user, toCreate.Select(d => d.Id?.ToString()).ToArray()));
+                for (var index = 0; index < entitiesToCreate.Length; index++)
+                {
+                    var entity = entitiesToCreate[index];
+                    toCreate[index].Dto.Id = entity.Id;
+                }
+
+                await Mediator.PublishClientEvents(cancellationToken, 
+                    new EntitiesCreated<TDto>(user, created = toCreate.Select(t => t.Dto).ToArray()), 
+                    new EntitiesCreated(user, entitiesToCreate.Select(e => e.Id?.ToString()))
+                );
             }
             if (toUpdate.Any())
             {
-                if (EditPermission != null)
-                    await PermissionService.EnsurePolicyAsync(EditPermission);
-
-                var entitiesToUpdate = (await repository.GetByIdsAsync(toUpdate.Select(dto => dto.Id), cancellationToken))
-                    .Select(e => toUpdate.First(dto => Equals(dto.Id, e.Id)).MapTo<TEntity>().CopyChangedValuesTo(e)).ToArray();
-                
-                await repository.UpdateManyAsync(entitiesToUpdate, cancellationToken);
+                await PermissionService.EnsurePolicyAsync(EditPermission);
+                await repository.UpdateManyAsync(toUpdate.Select(t => t.Entity), cancellationToken);
                 await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
-                await Mediator.PublishClientEvents(cancellationToken, new EntitiesChanged<TDto>(user, toUpdate), new EntitiesChanged(user, toUpdate.Select(d => d.Id?.ToString()).ToArray()));
-
+                await Mediator.PublishClientEvents(cancellationToken, 
+                    new EntitiesChanged<TDto>(user, updated = toUpdate.Select(t => t.Dto).ToArray()), 
+                    new EntitiesChanged(user, updated.Select(d => d.Id?.ToString()))
+                );
             }
 
-            
-            await Mediator.PublishClientEvents(cancellationToken, new EntitiesUpdated<TDto>(user, command.Items), new EntitiesUpdated(user, command.Items.Select(d => d.Id?.ToString()).ToArray()));
-            return Unit.Value;
+            var createdAndUpdated = created.Concat(updated).ToArray();
+            var skipped = command.Items.Where(dto => !created.Contains(dto) && !updated.Contains(dto)).ToArray();
+            await Mediator.PublishClientEvents(cancellationToken, 
+                new EntitiesUpdated<TDto>(user, createdAndUpdated), 
+                new EntitiesUpdated(user, createdAndUpdated.Select(d => d.Id?.ToString()))
+            );
+            return new AddUpdateResult<TDto>(created, updated, skipped);
+        }
+
+        private (bool IsNew, bool Exists, TEntity Entity, TDto Dto) GetPreparedEntity(TDto dto, bool createNewIfToUpdateNotExists)
+        {
+            var mappedEntity = dto.MapTo<TEntity>();
+            var entity = dto.IsNew ? mappedEntity : UnitOfWork.Repository<TEntity>().GetById(dto.Id);
+            var exists = !dto.IsNew && !Equals(entity, default(TEntity));
+            var isNew = createNewIfToUpdateNotExists ? dto.IsNew || !exists: dto.IsNew;
+            mappedEntity.SetProperties(e => e.Id = isNew ? default : e.Id);
+            return (isNew, exists, isNew || !exists ? mappedEntity : mappedEntity.CopyChangedValuesTo(entity), dto);
         }
     }
 

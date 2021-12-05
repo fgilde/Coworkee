@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Common.Models.Identity;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 
 namespace CleanArchitectureBase.Application.Hubs.Events
 {
@@ -7,7 +8,7 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesDeleted()
         {}
 
-        public EntitiesDeleted(UserResponse user, TDto[] entities) : base(user, entities)
+        public EntitiesDeleted(UserResponse user, IEnumerable<TDto> entities) : base(user, entities)
         {}
     }
 

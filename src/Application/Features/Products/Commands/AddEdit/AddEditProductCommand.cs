@@ -41,7 +41,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
             _localizer = localizer;
         }
 
-        public override async Task<Unit> Handle(AddEditProductsCommand command, CancellationToken cancellationToken)
+        public override async Task<AddUpdateResult<ProductDto>> Handle(AddEditProductsCommand command, CancellationToken cancellationToken)
         {
             if (command.Items.Any(item => UnitOfWork.Repository<Product>().Entities.Any(p => p.Id != item.Id && p.Barcode == item.Barcode)))
                 throw Errors.Create(_localizer["Barcode already exists."], HttpStatusCode.Conflict);
@@ -50,8 +50,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
                 Task.Run(() => _uploadService.UploadAsync(dto.UploadRequest), cancellationToken)
                     .ContinueWith(task => dto.ImageDataURL = task.Result, cancellationToken));
             await Task.WhenAll(uploadTasks);
-            await base.Handle(command, cancellationToken);
-            return Unit.Value;
+            return await base.Handle(command, cancellationToken);
         }
     }
 }

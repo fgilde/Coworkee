@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -9,25 +9,30 @@ using CleanArchitectureBase.Application.Features.Brands.Queries.Export;
 using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
 using CleanArchitectureBase.Application.Features.Brands.Queries.GetById;
 using CleanArchitectureBase.Server.Filters;
+using CleanArchitectureBase.Server.Middlewares;
+using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CleanArchitectureBase.Server.Controllers.Catalog
 {
     public class BrandsController : BaseApiController<BrandsController>
     {
+
         /// <summary>
         /// Get All Brands
         /// </summary>
         /// <returns>Status 200 OK</returns>
+        //[ApiExplorerSettings(IgnoreApi = true)]
         [Authorize(Policy = Permissions.Brands.View)]
         [HttpGet]
-        [Produces(typeof(ReadOnlyCollection<BrandDto>))]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
+        [Produces(typeof(IReadOnlyCollection<BrandDto>))]        
+        public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<BrandDto> filter = null, CancellationToken cancellationToken = default)
         {
-            var brands = await Mediator.Send(new GetAllBrandsQuery(), cancellationToken);
+            var brands = await Mediator.Send(new GetAllBrandsQuery { OdataFilterQuery = filter}, cancellationToken);
             return Ok(brands);
         }
 

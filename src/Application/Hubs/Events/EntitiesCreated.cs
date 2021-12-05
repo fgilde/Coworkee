@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Common.Models.Identity;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 
 namespace CleanArchitectureBase.Application.Hubs.Events
 {
@@ -7,7 +8,7 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesCreated()
         {}
 
-        public EntitiesCreated(UserResponse user, TDto[] entities) : base(user, entities)
+        public EntitiesCreated(UserResponse user, IEnumerable<TDto> entities) : base(user, entities)
         {}
     }
 
@@ -16,7 +17,7 @@ namespace CleanArchitectureBase.Application.Hubs.Events
         public EntitiesCreated()
         { }
 
-        public EntitiesCreated(UserResponse user, string[] idsAsString) : base(user, idsAsString)
+        public EntitiesCreated(UserResponse user, IEnumerable<string> idsAsString) : base(user, idsAsString)
         { }
     }
 }

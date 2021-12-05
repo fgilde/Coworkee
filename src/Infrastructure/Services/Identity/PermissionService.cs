@@ -70,14 +70,14 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task EnsurePolicyAsync(string policy, string userId = null)
         {
             userId = UserId(userId);
-            if (!await HasPolicyAsync(policy))
+            if (!string.IsNullOrEmpty(policy) && !await HasPolicyAsync(policy))
                 throw CreateException(userId);
         }
 
         public async Task EnsureRoleAsync(string role, string userId = null)
         {
             userId = UserId(userId);
-            if (!await HasRoleAsync(role))
+            if (!string.IsNullOrEmpty(role) && !await HasRoleAsync(role))
                 throw CreateException(userId);
         }
 

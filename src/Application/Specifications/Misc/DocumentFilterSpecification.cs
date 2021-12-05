@@ -3,7 +3,7 @@ using CleanArchitectureBase.Domain.Entities.Misc;
 
 namespace CleanArchitectureBase.Application.Specifications.Misc
 {
-    public class DocumentFilterSpecification : HeroSpecification<Document>
+    public class DocumentFilterSpecification : SpecificationBase<Document>
     {
         public DocumentFilterSpecification(string searchString, string userId)
         {

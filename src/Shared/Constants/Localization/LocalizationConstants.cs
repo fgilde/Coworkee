@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text.RegularExpressions;
 
 namespace CleanArchitectureBase.Shared.Constants.Localization
@@ -34,14 +36,24 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
         {
             return Regex.IsMatch(cultureName, @"^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$")
                    && cultureName.Contains("-");
-            //&& (systemCultures ??= CultureInfo.GetCultures(CultureTypes.AllCultures)).Any(culture => string.Equals(culture.Name, cultureName, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public static IDictionary<string, string> GetDefaultLanguageResources()
+        {
+            var file = GetEmbeddedResourceNames().FirstOrDefault(n => n.Contains($".{DefaultLanguageCode}."));
+            if (file == null)
+                throw new MissingManifestResourceException("There is no resource found for " + DefaultLanguageCode);
+            var serializer = new YamlDotNet.Serialization.Deserializer();
+            var stream = typeof(LocalizationConstants).Assembly.GetManifestResourceStream(file);
+            using var streamReader = new StreamReader(stream);
+            return serializer.Deserialize<Dictionary<string, string>>(streamReader);
         }
 
         private static bool IsTranslated(string code)
         {
             return GetEmbeddedResourceNames().Any(n => n.Contains($".{code}."));
         }
-
+        
         private static string[] GetEmbeddedResourceNames()
         {
             resourceNames ??= typeof(LocalizationConstants).Assembly.GetManifestResourceNames();

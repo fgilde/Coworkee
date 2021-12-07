@@ -183,7 +183,8 @@
             "x-nullable": false,
             "enum": [
               0,
-              1
+              1,
+              2
             ]
           },
           {
@@ -722,7 +723,8 @@
             "x-nullable": false,
             "enum": [
               0,
-              1
+              1,
+              2
             ]
           },
           {
@@ -984,6 +986,123 @@
             "JWT": []
           }
         ]
+      }
+    },
+    "/Language": {
+      "post": {
+        "tags": [
+          "Language"
+        ],
+        "summary": "Add/Edit languages",
+        "operationId": "Language_Post",
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/json",
+          "application/*+json",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "command",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddEditLanguagesCommand"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Status 200 OK",
+            "schema": {
+              "$ref": "#/definitions/AddUpdateResultOfLanguageDto"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Language"
+        ],
+        "summary": "Get All Languages",
+        "operationId": "Language_GetAll",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "type": "object",
+            "name": "$filter",
+            "x-originalName": "filter",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfLanguageDto"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Status 200 OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LanguageDto"
+              }
+            }
+          }
+        }
       }
     },
     "/Translations/GetAllPaged": {
@@ -3374,7 +3493,8 @@
             "x-nullable": false,
             "enum": [
               0,
-              1
+              1,
+              2
             ]
           },
           {
@@ -3702,7 +3822,8 @@
             "x-nullable": false,
             "enum": [
               0,
-              1
+              1,
+              2
             ]
           },
           {
@@ -3886,11 +4007,13 @@
       "description": "",
       "x-enumNames": [
         "Excel",
+        "Csv",
         "Json"
       ],
       "enum": [
         0,
-        1
+        1,
+        2
       ]
     },
     "PaginatedResultOfDocumentDto": {
@@ -4177,6 +4300,95 @@
         3,
         4
       ]
+    },
+    "AddUpdateResultOfLanguageDto": {
+      "type": "object",
+      "properties": {
+        "added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageDto"
+          }
+        },
+        "updated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageDto"
+          }
+        },
+        "skipped": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageDto"
+          }
+        }
+      }
+    },
+    "LanguageDto": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfInteger"
+        },
+        {
+          "type": "object",
+          "required": [
+            "isActive"
+          ],
+          "properties": {
+            "isRTL": {
+              "type": "boolean"
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "cultureCode": {
+              "type": "string"
+            },
+            "isActive": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "AddEditLanguagesCommand": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AddEditCommandBaseOfLanguageDto"
+        },
+        {
+          "type": "object",
+          "required": [
+            "autoCreateTranslations"
+          ],
+          "properties": {
+            "autoCreateTranslations": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "AddEditCommandBaseOfLanguageDto": {
+      "type": "object",
+      "x-abstract": true,
+      "required": [
+        "createNewIfToUpdateNotExists"
+      ],
+      "properties": {
+        "createNewIfToUpdateNotExists": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageDto"
+          }
+        }
+      }
+    },
+    "TransferableExpressionOfLanguageDto": {
+      "type": "object"
     },
     "PaginatedResultOfTranslationDto": {
       "allOf": [

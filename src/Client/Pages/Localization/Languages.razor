@@ -1,7 +1,12 @@
 ﻿@page "/localization/languages"
-@attribute [Authorize(Policy = Permissions.Products.View)]
+@attribute [Authorize(Policy = Permissions.Translations.Edit)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Languages> _localizer
 @using CleanArchitectureBase.Shared.Constants.Localization
+@using Nextended.Core.Extensions
+@using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
+@using CleanArchitectureBase.Application.Hubs.Events
+@using Microsoft.AspNetCore.SignalR.Client
 
 <style>
     .lang-active .mud-expand-panel-header {
@@ -18,32 +23,76 @@
 <PageHeaderTitle Title="@_localizer["Languages"]" Description="@_localizer["Manage Languages"]" />
 
 
-@{
-    var languageCodes = LocalizationConstants.AvailableLanguages;
-    var usedLanguages = LocalizationConstants.SupportedLanguages;
-}
-
 <MudExpansionPanels>
-    @foreach (var lang in languageCodes.GroupBy(l => l.Code.Split("-")[0]))
+    @foreach (var lang in availableLanguages.GroupBy(l => l.CultureCode.Split("-")[0]))
     {
-        var neutralLangLabel = (_localizer[lang.FirstOrDefault(c => c.Code.Contains("-"))?.Code ?? lang.Key]).Value.Split("(")[0];
-        var isAnyUsed = usedLanguages.Any(c => lang.Any(l => c.Code == l.Code && c.DisplayName == l.DisplayName));
+        var neutralLangLabel = (_localizer[lang.FirstOrDefault(c => c.CultureCode.Contains("-"))?.CultureCode ?? lang.Key]).Value.Split("(")[0];
+        var isAnyUsed = usedLanguages.Any(c => lang.Any(l => c.CultureCode == l.CultureCode && c.DisplayName == l.DisplayName));
 
         <MudExpansionPanel Class="@(isAnyUsed ? "lang-active" : "")" Text="@neutralLangLabel">
-            <MudList>
+        <MudGrid>
                 @foreach (var l in lang)
                 {
-                    var isUsed = usedLanguages.Any(c => c.Code == l.Code && c.DisplayName == l.DisplayName);
-                    <MudListItem>
-                        <MudSwitch Checked="@isUsed" Label="@(l.Code.Contains('-') ? _localizer[l.Code] : neutralLangLabel)" Color="Color.Warning"/>
-                        <span class="culture-code">@l.Code</span>
-                    </MudListItem>
+                    <MudItem xs="12" md="6">
+                        <MudSwitch CheckedChanged="@(new Action<bool>(e => Activate(l, e)))" Checked="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning"/>
+                        <span class="culture-code">@l.CultureCode</span>
+                    </MudItem>
                 }
-            </MudList>
+            </MudGrid>
         </MudExpansionPanel>
     }
 </MudExpansionPanels>
 
+@code
+{
+    [CascadingParameter] private HubConnection HubConnection { get; set; }
+    IList<LanguageDto> usedLanguages;
+    IList<LanguageDto> availableLanguages;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await Load();
+        var currentUser = await _clientAuthenticationManager.CurrentUser();
 
+        HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+        HubConnection.On<EntitiesUpdated<LanguageDto>>(async (a) =>
+        {
+            if (a.User.Id != currentUser.GetUserId())
+            {
+                await Load();
+            }
+        });
+    }
 
+    private async Task Load()
+    {
+        var server = await _api.Language_GetAllAsync();
+        usedLanguages = server.Where(l => l.IsActive).ToList();
+        if (usedLanguages == null || !usedLanguages.Any())
+        {
+            usedLanguages = LocalizationConstants.SupportedLanguages.MapElementsTo<LanguageDto>().ToList();
+            var res = await _api.Language_PostAsync(new AddEditLanguagesCommand(usedLanguages.Select(l => Prepare(l, true)).ToArray()) {AutoCreateTranslations = false});
+            usedLanguages = res.Added;
+            server.AddRange(usedLanguages);
+        }
 
+        var local = LocalizationConstants.AvailableLanguages.MapElementsTo<LanguageDto>().Apply(l =>
+            l.IsActive = usedLanguages.Any(c => c.CultureCode == l.CultureCode && c.DisplayName == l.DisplayName));
+        availableLanguages = server.Concat(local).DistinctBy(dto => dto.CultureCode).ToList();
+    }
+
+    private LanguageDto Prepare(LanguageDto language, bool active)
+    {
+        language.IsActive = active;
+        language.DisplayName = _localizer[language.CultureCode];
+        return language;
+    }
+
+    private async void Activate(LanguageDto language, bool active)
+    {
+        await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) {AutoCreateTranslations = LocalizationConstants.SupportedLanguages.All(l => l.CultureCode != language.CultureCode)});
+        language.IsActive = active;
+        usedLanguages = availableLanguages.Where(dto => dto.IsActive).ToList();
+        StateHasChanged();
+    }
+}

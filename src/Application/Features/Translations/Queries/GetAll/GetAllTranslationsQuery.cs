@@ -4,6 +4,7 @@ using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Features.Base.Queries;
 using CleanArchitectureBase.Domain.Entities.Localization;
+using CleanArchitectureBase.Shared.Constants.Application;
 using LazyCache;
 
 namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
@@ -20,7 +21,12 @@ namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
 
         private string currentCulture => Thread.CurrentThread.CurrentCulture.Name;
 
-        protected override string CacheKey (GetAllTranslationsQuery query)=> $"{base.CacheKey(query)}-{(query.FilterByCurrentCulture ? currentCulture: "all")}";
+        protected override string CacheKey (GetAllTranslationsQuery query)
+        {
+            if (query.FilterByCurrentCulture)
+                return ApplicationConstants.Cache.CacheKeyFor(typeof(Translation), query.OdataFilterQuery, currentCulture);
+            return ApplicationConstants.Cache.CacheKeyFor(typeof(Translation), query.OdataFilterQuery);
+        }
 
         protected override IQueryable<Translation> Query(GetAllTranslationsQuery query) => base.Query(query).Where(t => !query.FilterByCurrentCulture || t.CultureCode == currentCulture);
     }

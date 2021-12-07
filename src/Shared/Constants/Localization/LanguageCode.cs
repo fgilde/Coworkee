@@ -8,6 +8,13 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
         public string DisplayName { get; set; }
         public string Code { get; set; }
 
+        public string CultureCode
+        {
+            get => Code;
+            set => Code = value;
+        }
+
+
         public CultureInfo ToCulture()
         {
             return new CultureInfo(Code);

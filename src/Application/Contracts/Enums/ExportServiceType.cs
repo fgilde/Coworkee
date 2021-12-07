@@ -11,6 +11,12 @@ public enum ExportServiceType
     Excel,
 
     /// <summary>
+    /// Export as CSV
+    /// </summary>
+    [Description(nameof(Csv))]
+    Csv,
+
+    /// <summary>
     /// Export as Json
     /// </summary>
     [Description(nameof(Json))] 

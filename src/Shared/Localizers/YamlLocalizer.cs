@@ -43,14 +43,9 @@ namespace CleanArchitectureBase.Shared.Localizers
             get
             {
                 var str = Get(name);
-                if (!str.found)
-                {
-                    
-                }
                 if (arguments != null && arguments.Any())
-                {
                     str.value = string.Format(str.value ?? string.Empty, arguments);
-                }
+                
                 return new LocalizedString(name, str.value);
             }
         }
@@ -59,13 +54,16 @@ namespace CleanArchitectureBase.Shared.Localizers
         {
             try
             {
-                //string res = _originalService[key];
-                getValueMethod ??=_originalService.Keys.GetType().GetMethod("GetValue", BindingFlags.Instance | BindingFlags.NonPublic);
-                string res = getValueMethod?.Invoke(_originalService.Keys, new[] {key})?.ToString();
-                res ??= _originalService[key];
-                return (res, res != key);
+                if (_originalService?.Keys != null)
+                {
+                    getValueMethod ??= _originalService?.Keys?.GetType().GetMethod("GetValue", BindingFlags.Instance | BindingFlags.NonPublic);
+                    string res = getValueMethod?.Invoke(_originalService?.Keys, new[] {key})?.ToString();
+                    res ??= _originalService?[key];
+                    return (res, res != key);
+                }
+                return (key, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
                 return (key, false);

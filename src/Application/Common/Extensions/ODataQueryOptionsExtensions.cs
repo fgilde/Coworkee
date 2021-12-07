@@ -22,6 +22,6 @@ public static class ODataQueryOptionsExtensions
 
     public static Expression<Func<T, bool>> ParseExpression<T>(string odataFilter)
     {
-        return !string.IsNullOrEmpty(odataFilter) ? new ODataFilterLanguage().Parse<T>(odataFilter) : null;
+        return !string.IsNullOrEmpty(odataFilter) && odataFilter != "{}" ? new ODataFilterLanguage().Parse<T>(odataFilter) : null;
     }
 }

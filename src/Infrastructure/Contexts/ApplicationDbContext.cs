@@ -27,6 +27,7 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
         }
 
         public DbSet<ChatHistory<ApplicationUser>> ChatHistories { get; set; }
+        public DbSet<Language> Languages { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }

@@ -1,0 +1,952 @@
+﻿aa-DJ: Afar (Džibuti, BiH)
+aa-ER: Afar (Eritreja, BiH)
+aa-ET: Afar (Etiopija)
+Account: Račun
+Actions: Akcije
+Activate User?: Želite li aktivirati korisnika?
+Active: Aktivan
+Active?: Aktivan?
+Add Brand: Dodaj robnu marku
+Add Document: Dodaj dokument
+Add Document Type: Dodaj vrstu dokumenta
+Add Extended Attribute: Dodaj prošireni atribut
+Add Product: Dodaj proizvod
+Add Role: Dodaj ulogu
+Administrator: Administrator
+Administrator Settings.: Administratorske postavke.
+af-NA: Afrikaans (Namibija)
+af-ZA: Afrikaans (Južna Afrika)
+agq-CM: Aghem (Kamerun, BiH)
+ak-GH: Will (Gana, BiH)
+All Groups: Sve grupe
+All Permissions: Sve dozvole
+Already have an account?: Već imate račun?
+am-ET: Amharski (Etiopija)
+ApplicationDescription: Ogledna aplikacija s webAssembly i čistim uzorkom arhitekture
+ApplicationSubDescription: Dobrodošli na ovu Blazor stranicu
+Apply: Primijeniti
+Apr: Travnja
+ar-001: Arapski (svijet)
+ar-AE: Arapski (Ujedinjeni Arapski Emirati)
+ar-BH: Arapski (Bahrein)
+ar-DJ: Arapski (Džibuti)
+ar-DZ: Arapski (Alžir)
+ar-EG: Arapski (Egipat)
+ar-ER: Arapski (Eritreja)
+ar-IL: Arapski (Izrael)
+ar-IQ: Arapski (Irak)
+ar-JO: Arapski (Jordan)
+ar-KM: Arapski (Komori)
+ar-KW: Arapski (Kuvajt)
+ar-LB: Arapski (Libanon)
+ar-LY: Arapski (Libija)
+ar-MA: Arapski (Maroko)
+ar-MR: Arapski (Mauritanija)
+ar-OM: Arapski (Oman, BiH)
+ar-PS: Arapski (Palestinska samouprava)
+ar-QA: Arapski (Katar)
+ar-SA: Arapski (Saudijska Arabija)
+ar-SD: Arapski (Sudan)
+ar-SO: Arapski (Somalija)
+ar-SS: Arapski (Južni Sudan)
+ar-SY: Arapski (Sirija)
+ar-TD: Arapski (Čad)
+ar-TN: Arapski (Tunis)
+ar-YE: Arapski (Jemen)
+arn-CL: Mapuche (Čile)
+As Admin you can filter for users here: Kao administrator možete filtrirati za korisnike ovdje
+as-IN: Asamski (Indija)
+asa-TZ: Asu (Tanzanija, BiH)
+ast-ES: Asturijanski (Španjolska)
+Audit Trails: Revizijski tragovi
+Audit Trails exported: Izvezeni tragovi nadzora
+Aug: Kolovoz
+Auto Confirm Email?: Automatska potvrda e-pošte?
+az-Cyrl-AZ: Azerbajdžanski (ćirilica, Azerbajdžan)
+az-Latn-AZ: Azerbajdžanski (latinica, Azerbajdžan)
+ba-RU: Baškir (Rusija)
+Barcode: Crtični kod
+Barcode already exists.: Crtični kod već postoji.
+Barcode is required!: Potreban je crtični kod!
+bas-CM: Basaa (Kamerun, BiH)
+be-BY: Bjeloruski (Bjelorusija)
+bem-ZM: Bemba (Zambija, BiH)
+bez-TZ: Noge (Tanzanija)
+bg-BG: Bugarski (Bugarska)
+bin-NG: Edo (Nigerija)
+bm-Latn-ML: Bamanankan (latinica, Mali)
+bn-BD: Bangla (Bangladeš)
+bn-IN: Bangla (Indija)
+bo-CN: Tibetanski (Kina)
+bo-IN: Tibetanski (Indija)
+Bordered: Graniči
+br-FR: Breton (Francuska)
+Brand: Marka
+Brand Deleted: Robna marka je izbrisana
+Brand is required!: Marka je potrebna!
+Brand Not Found!: Marka nije pronađena!
+Brand Saved: Marka spremljena!
+Brand Updated: Marka ažurirana!
+BrandName: Marka
+Brands: Brandova
+Brands exported: Robne marke koje se izvoze
+Browse Available Documents.: Pregledajte dostupne dokumente.
+brx-IN: Bodo (Indija)
+bs-Cyrl-BA: Bosanski (ćirilica, Bosna i Hercegovina)
+bs-Latn-BA: Bosanski (latinica, Bosna i Hercegovina)
+byn-ER: Blin (Eritreja, BiH)
+ca-AD: Katalonski (Andora, BiH)
+ca-ES: Katalonski (Španjolska)
+ca-FR: Katalonski (Francuska)
+ca-IT: Katalonski (Italija)
+Cancel: Otkazati
+Catalog Management: Upravljanje katalogom
+ccp-Cakm-BD: Chakma (Chakma, Bangladeš)
+ccp-Cakm-IN: Chakma (Chakma, Indija)
+ce-RU: Čečenski (Rusija)
+ceb-Latn-PH: Cebuano (latinica, Filipini)
+cgg-UG: Chiga (Uganda, BiH)
+Change Password: Promijeni lozinku
+Charts comming soon ish...: Karte uskoro stižu...
+chat: Čavrljanje
+Chat: Čavrljanje
+Chat?: Čavrljanje?
+chr-Cher-US: Cherokee (Cherokee, Sjedinjene Američke Države)
+Clear: Jasan
+Client Language has been changed: Jezik klijenta je promijenjen
+co-FR: Korzikanski (Francuska)
+Columns Affected: Zahvaćeni stupci
+Communication: Komunikacija
+Community: Zajednica
+Confirm: Potvrditi
+Confirm and Ignore: Potvrdi i zanemari
+Confirm and Set Required: Potvrda i postavljanje obaveznog
+Confirm Password: Potvrda lozinke
+contacts: Kontakte
+Create: Stvoriti
+cs-CZ: Češki (Češka)
+cu-RU: Crkveni slavenski (Rusija)
+Current Password: Trenutna lozinka
+Current Password is required!: Potrebna je trenutna lozinka!
+cy-GB: Velški (Ujedinjeno Kraljevstvo)
+da-DK: Danski (Danska)
+da-GL: Danski (Grenland)
+Dashboard: Nadzorna ploča
+Date: Datum
+Date Created: Datum stvaranja
+Date Range For Searching: Raspon datuma za pretraživanje
+DateTime value is required using {0} type!: Vrijednost DateTime potrebna je pomoću vrste {0}!
+dav-KE: Taita (Kenija)
+de-AT: Njemački (Austrija)
+de-BE: Njemački (Belgija)
+de-CH: Njemački (Švicarska)
+de-DE: Njemački (Njemačka)
+de-IT: Njemački (Italija)
+de-LI: Njemački (Lihtenštajn)
+de-LU: Njemački (Luksemburg)
+Dec: Prosinac
+Decimal: Decimala
+Decimal value is required using {0} type!: Decimalna vrijednost potrebna je pomoću vrste {0}!
+Delete: Izbrisati
+Delete Confirmation: Potvrda brisanja
+Delete Content: Izbriši sadržaj
+Delete Content {0}: Izbriši sadržaj '{0}'
+Delete Extended Attribute?: Želite li izbrisati prošireni atribut?
+Delete Image: Izbriši sliku
+Delete Picture: Izbriši sliku
+Delete Role Content: Želite li izbrisati ulogu s ID-om {0}?
+Delete these {0} elements: Želite li izbrisati ove {0} elemente?
+Delete this element: Želite li izbrisati ovaj element?
+Deletion Not Allowed: Brisanje nije dopušteno
+Dense: Gust
+Dependent permissions required: Potrebne su zavisne dozvole
+Description: Opis
+Description is required!: Opis je obavezan!
+detailed guide for more.: detaljan vodič za više.
+Details for Trail ID: Detalji za ID staze
+dje-NE: Zarma (Niger, BiH)
+Do you want to delete the profile picture of {0}: Želite li izbrisati profilnu sliku {0}
+Document Deleted: Dokument je izbrisan
+Document Extended Attributes: Prošireni atributi dokumenta
+Document Management: Upravljanje dokumentima
+Document Not Found!: Dokument nije pronađen!
+Document Saved: Dokument je spremljen
+Document Store: Spremište dokumenata
+Document Type: Vrsta dokumenta
+Document Type Deleted: Vrsta dokumenta je izbrisana
+Document Type is required!: Potrebna je vrsta dokumenta!
+Document Type Not Found!: Vrsta dokumenta nije pronađena!
+Document Type Saved: Spremljena vrsta dokumenta
+Document Type Updated: Vrsta dokumenta je ažurirana
+Document type with this name already exists.: Vrsta dokumenta s tim nazivom već postoji.
+Document Types: Vrste dokumenata
+Document Types exported: Izvezene vrste dokumenata
+Document Updated: Dokument je ažuriran
+Documents: Dokumenata
+doi-Deva-IN: Dogri (Devanagari, Indija)
+Don't have an account?: Nemate račun?
+Done!: Učinjeno!
+Download: Preuzimanje
+dsb-DE: Donji Sorbian (Njemačka)
+dua-CM: Duala (Kamerun, BiH)
+dv-MV: Divehi (Maldivi)
+dyo-SN: Jola-Fonyi (Senegal)
+dz-BT: Dzongkha (Butan)
+E-mail: E-pošta
+E-Mail: E-pošta
+ebu-KE: Embu (Kenija)
+Edit: Urediti
+ee-GH: Ovce (Gana)
+ee-TG: Ovce (Togo)
+el-CY: Grčki (Cipar)
+el-GR: Grčki (Grčka)
+Email: E-pošta
+Email Confirmation: Potvrda e-pošte
+Email is not correct: E-pošta nije ispravna
+Email is required: Potrebna je e-pošta
+Email is required!: Potrebna je e-pošta!
+en-001: Engleski (svijet)
+en-029: Engleski (Karibi)
+en-150: Engleski (Europa)
+en-AE: Engleski (Ujedinjeni Arapski Emirati)
+en-AG: Engleski (Antigva i Barbuda)
+en-AI: Engleski (Anguilla)
+en-AS: Engleski (Američka Samoa)
+en-AT: Engleski (Austrija)
+en-AU: Engleski (Australija)
+en-BB: Engleski (Barbados)
+en-BE: Engleski (Belgija)
+en-BI: Engleski (Burundi)
+en-BM: Engleski (Bermuda)
+en-BS: Engleski (Bahami)
+en-BW: Engleski (Bocvana)
+en-BZ: Engleski (Belize)
+en-CA: Engleski (Kanada)
+en-CC: Engleski (Otoci Cocos [Keeling])
+en-CH: Engleski (Švicarska)
+en-CK: Engleski (Cookovi otoci)
+en-CM: Engleski (Kamerun)
+en-CX: Engleski (Božićni otok)
+en-CY: Engleski (Cipar)
+en-DE: Engleski (Njemačka)
+en-DK: Engleski (Danska)
+en-DM: Engleski (Dominika, BiH)
+en-ER: Engleski (Eritreja)
+en-FI: Engleski (Finska)
+en-FJ: Engleski (Fidži)
+en-FK: Engleski (Falklandski otoci)
+en-FM: Engleski (Mikronezija)
+en-GB: Engleski (Ujedinjeno Kraljevstvo)
+en-GD: Engleski (Grenada)
+en-GG: Engleski (Guernsey)
+en-GH: Engleski (Gana)
+en-GI: Engleski (Gibraltar)
+en-GM: Engleski (Gambija)
+en-GU: Engleski (Guam)
+en-GY: Engleski (Gvajana)
+en-HK: Engleski (Hong Kong SAR)
+en-ID: Engleski (Indonezija)
+en-IE: Engleski (Irska)
+en-IL: Engleski (Izrael)
+en-IM: Engleski (Otok Man)
+en-IN: Engleski (Indija)
+en-IO: Engleski (teritorij Britanskog Indijskog oceana)
+en-JE: Engleski (Jersey)
+en-JM: Engleski (Jamajka)
+en-KE: Engleski (Kenija)
+en-KI: Engleski (Kiribati)
+en-KN: Engleski (St. Kitts & Nevis)
+en-KY: Engleski (Kajmanski otoci)
+en-LC: Engleski (Sv. Lucija)
+en-LR: Engleski (Liberija)
+en-LS: Engleski (Lesoto)
+en-MG: Engleski (Madagaskar)
+en-MH: Engleski (Maršalovi Otoci)
+en-MO: Engleski (Macao SAR)
+en-MP: Engleski (Sjeverni Marijanski Otoci)
+en-MS: Engleski (Montserrat)
+en-MT: Engleski (Malta)
+en-MU: Engleski (Mauricijus)
+en-MW: Engleski (Malavi)
+en-MY: Engleski (Malezija)
+en-NA: Engleski (Namibija)
+en-NF: Engleski (otok Norfolk)
+en-NG: Engleski (Nigerija)
+en-NL: Engleski (Nizozemska)
+en-NR: Engleski (Nauru)
+en-NU: Engleski (Niue)
+en-NZ: Engleski (Novi Zeland)
+en-PG: Engleski (Papua Nova Gvineja)
+en-PH: Engleski (Filipini)
+en-PK: Engleski (Pakistan)
+en-PN: Engleski (Pitcairn Islands)
+en-PR: Engleski (Portoriko)
+en-PW: Engleski (Palau)
+en-RW: Engleski (Ruanda)
+en-SB: Engleski (Salomonovi Otoci)
+en-SC: Engleski (Sejšeli)
+en-SD: Engleski (Sudan)
+en-SE: Engleski (Švedska)
+en-SG: Engleski (Singapur)
+en-SH: Engleski (Sveta Helena, Uzašašće, Tristan da Cunha)
+en-SI: Engleski (Slovenija)
+en-SL: Engleski (Sierra Leone)
+en-SS: Engleski (Južni Sudan)
+en-SX: Nederlands (Sint Maarten)
+en-SZ: Engleski (Eswatini)
+en-TC: Engleski (Otoci Turks i Caicos)
+en-TK: Engleski (Tokelau)
+en-TO: Engleski (Tonga)
+en-TT: Engleski (Trinidad & Tobago)
+en-TV: Engleski (Tuvalu)
+en-TZ: Engleski (Tanzanija)
+en-UG: Engleski (Uganda)
+en-UM: Engleski (Američki udaljeni otoci)
+en-US: Engleski (Sjedinjene Američke Države)
+en-US-posix: Engleski (Sjedinjene Američke Države, Računalo)
+en-VC: Engleski (St. Vincent & Grenadines)
+en-VG: Engleski (Britanski Djevičanski Otoci)
+en-VI: Engleski (Američki Djevičanski Otoci)
+en-VU: Engleski (Vanuatu)
+en-WS: Engleski (Samoa)
+en-ZA: Engleski (Južna Afrika)
+en-ZM: Engleski (Zambia)
+en-ZW: Engleski (Zimbabve)
+English: Engleski
+Enter email for password reset: Unesite adresu e-pošte povezanu s vašim računom i primit ćete poruku e-pošte koja sadrži vezu za ponovno postavljanje lozinke
+Enter your message...: Unesite poruku...
+Entity Id: ID entiteta
+Entity is required!: Entitet je obavezan!
+EntityCreatedBy: EntityCreatedBy
+EntityCreatedOn (Local): EntityCreatedOn (lokalno)
+EntityCreatedOn (UTC): EntityCreatedOn (UTC)
+EntityId: ID entiteta
+EntityLastModifiedBy: EntityLastModifiedBy
+EntityLastModifiedOn (Local): EntityLastModifiedOn (lokalno)
+EntityLastModifiedOn (UTC): EntityLastModifiedOn (UTC)
+eo-001: Esperanto (svijet)
+es-419: Španjolski (Latinska Amerika)
+es-AR: Španjolski (Argentina)
+es-BO: Španjolski (Bolivija)
+es-BR: Španjolski (Brazil)
+es-BZ: Španjolski (Belize)
+es-CL: Španjolski (Čile)
+es-CO: Španjolski (Kolumbija)
+es-CR: Španjolski (Kostarika)
+es-CU: Španjolski (Kuba)
+es-DO: Španjolski (Dominikanska Republika)
+es-EC: Španjolski (Ekvador)
+es-ES: Španjolski (Španjolska)
+es-GQ: Španjolski (Ekvatorska Gvineja)
+es-GT: Španjolski (Gvatemala)
+es-HN: Španjolski (Honduras)
+es-MX: Španjolski (Meksiko)
+es-NI: Španjolski (Nikaragva)
+es-PA: Španjolski (Panama)
+es-PE: Španjolski (Peru)
+es-PH: Španjolski (Filipini)
+es-PR: Španjolski (Portoriko)
+es-PY: Španjolski (Paragvaj)
+es-SV: Španjolski (El Salvador)
+es-US: Španjolski (Sjedinjene Američke Države)
+es-UY: Španjolski (Urugvaj)
+es-VE: Španjolski (Venezuela)
+Español: Španjolski
+et-EE: Estonski (Estonija)
+eu-ES: Baskijski (Španjolska)
+ewo-CM: Ewondo (Kamerun)
+Export: Izvoz
+Export To Excel: Izvoz u Excel
+Export_SheetName: Podaci
+Extended Attribute Deleted: Prošireni atribut je izbrisan
+Extended Attribute Not Found!: Prošireni atribut nije pronađen!
+Extended Attribute Saved: Prošireni atribut spremljen
+Extended Attribute Updated: Prošireni atribut je ažuriran
+Extended Attribute with this Key already exists.: Prošireni atribut s ovim ključem već postoji.
+Extended Attributes: '\{0}\ Prošireni atributi'
+Extended Attributes exported: Izvezeni prošireni atributi
+External Id: Vanjski ID
+ExternalId: Vanjski ID
+fa-IR: Perzijski (Iran)
+Failed to get client preferences: Dohvaćanje preferenci klijenta nije uspjelo
+FAQs: Najčešća pitanja
+Features: Značajkama
+Feb: Veljača
+ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
+ff-Adlm-CM: Fulah (Adlam, Kamerun)
+ff-Adlm-GH: Fulah (Adlam, Gana)
+ff-Adlm-GM: Fulah (Adlam, Gambija)
+ff-Adlm-GN: Fulah (Adlam, Gvineja)
+ff-Adlm-GW: Fulah (Adlam, Gvineja Bisau)
+ff-Adlm-LR: Fulah (Adlam, Liberija)
+ff-Adlm-MR: Fulah (Adlam, Mauritanija)
+ff-Adlm-NE: Fulah (Adlam, Niger)
+ff-Adlm-NG: Fulah (Adlam, Nigerija)
+ff-Adlm-SL: Fulah (Adlam, Sijera Leone)
+ff-Adlm-SN: Fulah (Adlam, Senegal)
+ff-Latn-BF: Fulah (latinica, Burkina Faso)
+ff-Latn-CM: Fulah (latinica, Kamerun)
+ff-Latn-GH: Fulah (latinica, Gana)
+ff-Latn-GM: Fulah (latinica, Gambija)
+ff-Latn-GN: Fulah (latinica, Gvineja)
+ff-Latn-GW: Fulah (latinica, Gvineja Bisau)
+ff-Latn-LR: Fulah (latinica, Liberija)
+ff-Latn-MR: Fulah (latinica, Mauritanija)
+ff-Latn-NE: Fulah (latinica, Niger)
+ff-Latn-NG: Fulah (latinica, Nigerija)
+ff-Latn-SL: Fulah (latinica, Sijera Leone)
+ff-Latn-SN: Fulah (latinica, Senegal)
+fi-FI: Finski (Finska)
+fil-PH: Filipinski (Filipini)
+File is required!: Datoteka je obavezna!
+Fill Administrator Credentials: Ispunjavanje administratorskih vjerodajnica
+Fill Basic User Credentials: Ispunjavanje osnovnih korisničkih vjerodajnica
+Filtered Audit Trails exported: Izvezeni filtrirani tragovi nadzora
+Filtered Brands exported: Izvezene filtrirane robne marke
+Filtered Document Types exported: Izvezene filtrirane vrste dokumenata
+Filtered Extended Attributes exported: Izvezeni filtrirani prošireni atributi
+Filtered Products exported: Izvezeni filtrirani proizvodi
+Filtered Users exported: Izvezeni filtrirani korisnici
+First Name: Ime
+First Name is required: Potrebno je ime
+fo-DK: Farski (Danska)
+fo-FO: Farski (Farski Otoci)
+Forgot password?: Zaboravili ste lozinku?
+fr-029: Francuski (Karibi)
+fr-BE: Francuski (Belgija)
+fr-BF: Francuski (Burkina Faso)
+fr-BI: Francuski (Burundi, BiH)
+fr-BJ: Francuski (Benin, BiH)
+fr-BL: Francuski (St. Barthélemy)
+fr-CA: Francuski (Kanada)
+fr-CD: francuski (Kongo [DR Kongo])
+fr-CF: Francuski (Srednjoafrička Republika)
+fr-CG: Francuski (Kongo)
+fr-CH: Francuski (Švicarska)
+fr-CI: Francuski (Obala Bjelokosti)
+fr-CM: Francuski (Kamerun)
+fr-DJ: Francuski (Džibuti, BiH)
+fr-DZ: Francuski (Alžir)
+fr-FR: Francuski (Francuska)
+fr-GA: Francuski (Gabon)
+fr-GF: Francuski (Francuska Gvajana)
+fr-GN: Francuski (Gvineja)
+fr-GP: Francuski (Guadeloupe)
+fr-GQ: Francuski (Ekvatorska Gvineja)
+fr-HT: Francuski (Haiti)
+fr-KM: Francuski (Komori)
+fr-LU: Francuski (Luksemburg)
+fr-MA: Francuski (Maroko)
+fr-MC: Francuski (Monako)
+fr-MF: Francuski (Sv. Martin, BiH)
+fr-MG: Francuski (Madagaskar)
+fr-ML: Francuski (Mali)
+fr-MQ: Francuski (Martinique, BiH)
+fr-MR: Francuski (Mauritanija)
+fr-MU: Francuski (Mauricijus)
+fr-NC: Francuski (Nova Kaledonija)
+fr-NE: Francuski (Niger)
+fr-PF: Francuski (Francuska Polinezija)
+fr-PM: Francuski (St. Pierre & Miquelon)
+fr-RE: Engleski (Reunion)
+fr-RW: Francuski (Ruanda)
+fr-SC: Francuski (Sejšeli)
+fr-SN: Francuski (Senegal)
+fr-SY: Francuski (Sirija)
+fr-TD: Francuski (Čad)
+fr-TG: Francuski (Togo, BiH)
+fr-TN: Francuski (Tunis)
+fr-VU: Francuski (Vanuatu)
+fr-WF: Francuski (Wallis & Futuna)
+fr-YT: Francuski (Mayotte)
+French: Francuski
+fur-IT: Friulian (Italija)
+fy-NL: Zapadni frizijski (Nizozemska)
+ga-GB: Irski (Ujedinjeno Kraljevstvo)
+ga-IE: Irski (Irska)
+gd-GB: Škotski galski (Ujedinjeno Kraljevstvo)
+German: Njemački
+gl-ES: Galicijski (Španjolska)
+gn-PY: Guarani (Paragvaj)
+GoHome: Idi doma!
+Group: Grupa
+gsw-CH: Švicarski njemački (Švicarska)
+gsw-FR: Švicarski njemački (Francuska)
+gsw-LI: Švicarski njemački (Lihtenštajn)
+gu-IN: Gujarati (Indija)
+guz-KE: Gusii (Kenija)
+gv-IM: Manx (Otok Man)
+ha-Latn-GH: Hausa (latinica, Gana)
+ha-Latn-NE: Hausa (latinica, Niger)
+ha-Latn-NG: Hausa (latinica, Nigerija)
+haw-US: Havajski (Sjedinjene Američke Države)
+he-IL: Hebrejski (Izrael)
+Hello World: Zdravo svijete
+Here you can leave a comment for this permission for the current role: Ovdje možete ostaviti komentar za ovu dozvolu za trenutnu ulogu
+hi-IN: Hindski (Indija)
+Hide: Sakriti
+Home: Dom
+hr-BA: Hrvatski (Bosna i Hercegovina)
+hr-HR: Hrvatski (Hrvatska)
+hsb-DE: Gornji Sorbian (Njemačka)
+hu-HU: Mađarski (Mađarska)
+hy-AM: Armenski (Armenija)
+I agree to the terms and privacy: Slažem se s uvjetima i privatnošću
+ia-001: Interlingua (svijet)
+ibb-NG: Ibibio (Nigerija)
+Id: Id
+id-ID: Indonezijski (indonezijski)
+ig-NG: Igbo (Nigerija)
+ii-CN: Yi (Kina)
+Include Entity fields (Export): Uključi polja entiteta (izvoz)
+Incorrect Password.: Neispravna lozinka.
+Indonesia: Indonezijski
+Is Active: Je aktivno
+Is Public: Je javno
+Is Public?: Je li javno?
+is-IS: Islandski (Island)
+IsActive: IsActive
+it-CH: Talijanski (Švicarska)
+it-IT: Talijanski (Italija)
+it-SM: Talijanski (San Marino, BiH)
+it-VA: Talijanski (Vatikan)
+Italian: Talijanski
+iu-CA: Inuktitut (Kanada)
+iu-Latn-CA: Inuktitut (latinica, Kanada)
+ja-JP: Japanski (Japan)
+Jan: Siječanj
+jgo-CM: Ngomba (Kamerun, BiH)
+jmc-TZ: Machame (Tanzanija)
+Json: Json
+Json value is required using {0} type!: Json vrijednost je potrebna pomoću {0} vrste!
+Json value must be a valid json string using {0} type!: Jsonova vrijednost mora biti valjani json niz koji koristi {0} vrstu!
+Jul: Srpnja
+Jun: Lipanj
+jv-Java-ID: Javanski (javanski, indonezijski)
+jv-Latn-ID: Javanski (latinica, indonezijski)
+ka-GE: Gruzijski (Gruzija)
+kab-DZ: Kabyle (Alžir)
+kam-KE: Kamba (Kenija)
+kde-TZ: Makonde (Tanzanija, BiH)
+kea-CV: Kabuverdianu (Cape Verde, BiH)
+Key: Ključ
+Key is required!: Potreban je ključ!
+khq-ML: Koyra Chiini (Mali, BiH)
+ki-KE: Kikuyu (Kenija)
+kk-KZ: Kazahstan (Kazahstan)
+kkj-CM: Kako (Kamerun)
+kl-GL: Kalaallisut (Grenland)
+kln-KE: Kalenjin (Kenija)
+km-KH: Kmer (Kambodža)
+kn-IN: Kannada (Indija)
+ko-KP: Korejski (Sjeverna Koreja)
+ko-KR: Korejski (Koreja)
+kok-IN: Konkani (Indija)
+kr-Latn-NG: Kanuri (latinica, Nigerija)
+ks-Arab-IN: Kašmirski (arapski, Indija)
+ks-Deva-IN: Kašmirski (Devanagari, Indija)
+ksb-TZ: Shambala (Tanzanija, BiH)
+ksf-CM: Bafia (Kamerun, BiH)
+ksh-DE: Kologonski (Njemačka)
+ku-Arab-IQ: Kurdski (arapski, Irak)
+ku-Arab-IR: Kurdski (arapski, Iran)
+kw-GB: Cornish (Ujedinjeno Kraljevstvo)
+ky-KG: Kirgistan (Kirgistan, BiH)
+la-VA: Latinski (Vatikan)
+lag-TZ: Langi (Tanzanija, BiH)
+Languages: Jezici
+Last Name: Prezime
+Last Name is required: Potrebno je prezime
+lb-LU: Luksemburški (Luksemburg)
+lg-UG: Ljuska (Uganda)
+lkt-US: Lakota (Sjedinjene Američke Države)
+ln-AO: Lingala (Angola, BiH)
+ln-CD: Lingala (Kongo [DR Kongo])
+ln-CF: Lingala (Srednjoafrička Republika)
+ln-CG: Lingala (Kongo)
+lo-LA: Lao (Laos, BiH)
+Local: Lokalan
+Logged In.: Prijavljeni.
+Logged Out.: Odjavljeno.
+LoginDescription: Prijavite se sa svojim vjerodajnicama.
+Logout: Odjava
+Logout Confirmation: Želite li se zaista odjaviti?
+lrc-IQ: Sjeverni Luri (Irak)
+lrc-IR: Sjeverni Luri (Iran)
+lt-LT: Litavski (Litva)
+lu-CD: Luba-Katanga (Kongo [DR Kongo])
+luo-KE: Luo (Kenija)
+luy-KE: Luyia (Kenija)
+lv-LV: Latvijski (Latvija)
+mai-IN: Maithili (Indija)
+Mail: Pošta
+Manage {0} {1}'s Extended Attributes: Upravljanje proširenim atributima {0} {1}
+Manage {0} {1}'s Permissions: Upravljanje dozvolama {0} {1}
+Manage {0} {1}'s Roles: Upravljanje ulogama {0} {1}
+Manage {0} Extended Attributes: Upravljanje proširenim atributima {0}
+Manage Brands.: Upravljajte robnim markama.
+Manage Document Types.: Upravljanje vrstama dokumenata.
+Manage Extended Attributes: Upravljanje proširenim atributima
+Manage Languages: Upravljanje jezicima
+Manage Permission: Upravljanje dozvolama
+Manage Products.: Upravljanje proizvodima.
+Manage Roles: Upravljanje ulogama
+Manage Roles.: Upravljanje ulogama.
+Manage Translations: Upravljanje prijevodima
+Manage Users: Upravljanje korisnicima
+Manage your account: Upravljanje računom
+Mar: Pokvariti
+mas-KE: Masai (Kenija)
+mas-TZ: Masai (Tanzanija, BiH)
+May: Svibanj
+mer-KE: Meru (Kenija)
+mfe-MU: Morisyen (Mauricijus)
+mg-MG: Malagaški (Madagaskar)
+mgh-MZ: Makhuwa-Meetto (Mozambik)
+mgo-CM: Metaʼ (Kamerun)
+mi-NZ: Maori (Novi Zeland)
+mk-MK: Makedonski (Sjeverna Makedonija)
+ml-IN: Malajalam (Indija)
+mn-MN: Mongolski (Mongolija)
+mn-Mong-CN: Mongolski (mongolski, Kina)
+mn-Mong-MN: Mongolski (mongolski, Mongolski)
+mni-IN: Manipuri (Indija)
+moh-CA: Mohawk (Kanada)
+mr-IN: Marathi (Indija)
+ms-BN: Malajski (Brunej, BiH)
+ms-ID: Malajski (Indonezija)
+ms-MY: Malajski (Malezija)
+ms-SG: Malajski (Singapur)
+mt-MT: Malteški (Malta)
+mua-CM: Mundang (Kamerun)
+my-MM: Burmanci (Mjanmar)
+mzn-IR: Mazanderani (Iran)
+Name: Ime
+Name is required: Naziv je obavezan
+Name is required!: Ime je obavezno!
+naq-NA: Ime (Namibija)
+nb-NO: Engleski (Norveška)
+nb-SJ: Norveški Bokmål (Svalbard i Jan Mayen)
+nd-ZW: Sjeverni Ndebele (Zimbabve)
+nds-DE: Niskonjemački (Njemačka)
+nds-NL: Niskonjemački (Nizozemska)
+ne-IN: Nepalski (Indija)
+ne-NP: Nepalski (Nepal)
+New Message From {0}: Nova poruka iz {0}
+New Password: Nova lozinka
+New Values: Nove vrijednosti
+nl-AW: Nizozemski (Aruba)
+nl-BE: Nizozemski (Belgija)
+nl-BQ: Nizozemski (Bonaire, Sint Eustatius i Saba)
+nl-CW: Nizozemski (Curaçao)
+nl-NL: Nizozemski (Nizozemska)
+nl-SR: Nizozemski (Surinam)
+nl-SX: Engleski (Sint Maarten)
+nmg-CM: Kwasio (Kamerun, BiH)
+nn-NO: Norveški Nynorsk (Norveška)
+nnh-CM: Ngiemboon (Kamerun)
+No Allowed Actions: Nema dopuštenih akcija
+Not Allowed.: Nije dozvoljeno.
+NotFoundMessage: Stranica koju ste tražili ne postoji.
+Nov: Studeni
+nqo-GN: N'Ko (Gvineja)
+nr-ZA: Južni Ndebele (Južna Afrika)
+nso-ZA: Sesotho sa Leboa (Južna Afrika)
+nus-SS: Nuer (Južni Sudan)
+nyn-UG: Nyankole (Uganda)
+oc-FR: Okcitan (Francuska)
+Oct: Listopad
+Ok: Ok
+Old Values: Stare vrijednosti
+om-ET: Oromo (Etiopija)
+om-KE: Oromo (Kenija)
+Only Selected Group (Export): Samo odabrana grupa (izvoz)
+or-IN: Odia (Indija)
+os-GE: Ossetić (Gruzija)
+os-RU: Ossetić (Rusija)
+Owner: Vlasnik
+pa-Arab-PK: Pandžapski (arapski, Pakistan)
+pa-IN: Pandžapski (Indija)
+pap-029: Papiamento (Karibi)
+Password: Lozinka
+Password Changed!: Lozinka promijenjena!
+Password Confirmation: Potvrda lozinke
+Password Confirmation is required!: Potrebna je potvrda lozinke!
+Password is required!: Lozinka je obavezna!
+Password must be at least of length 8: Lozinka mora biti najmanje duljine 8
+Password must contain at least one capital letter: Lozinka mora sadržavati najmanje jedno veliko slovo
+Password must contain at least one digit: Lozinka mora sadržavati najmanje jednu znamenku
+Password must contain at least one lowercase letter: Lozinka mora sadržavati najmanje jedno malo slovo
+Passwords don't match: Lozinke se ne podudaraju
+pcm-Latn-NG: Nigerijski Pidgin (latinica, Nigerija)
+Permission Name: Naziv dozvole
+Personal: Ličan
+Phone Number: Telefonski broj
+PhoneNumber: Broj telefona
+pl-PL: Poljski (Poljska)
+prg-001: Pruski (svijet)
+Primary Key: Primarni ključ
+Product Deleted: Proizvod izbrisan!
+Product Not Found!: Proizvod nije pronađen!
+Product Saved: Proizvod spremljen!
+Product Updated: Proizvod ažuriran!
+Products: Prerađevina
+Products exported: Izvezeni proizvodi
+Profile: Profil
+Profile Details: Detalji o profilu
+Profile picture added.: Dodana je slika profila.
+Profile picture deleted.: Slika profila je izbrisana.
+prs-AF: prs (Afganistan)
+ps-AF: Paštu (Afganistan)
+ps-PK: Paštu (Pakistan)
+pt-AO: Portugalski (Angola)
+pt-BR: Portugalski (Brazil)
+pt-CH: Portugalski (Švicarska)
+pt-CV: Engleski (Cape Verde)
+pt-GQ: Portugalski (Ekvatorska Gvineja)
+pt-GW: Portugalski (Gvineja Bisau)
+pt-LU: Portugalski (Luksemburg)
+pt-MO: Portugalski (Makao SAR)
+pt-MZ: Portugalski (Mozambik)
+pt-PT: Portugalski (Portugal)
+pt-ST: Engleski (Sao Tome & Principe)
+pt-TL: Engleski (Timor-Leste)
+Public Profile: Javni profil
+quc-GT: Kʼicheʼ (Gvatemala)
+Quick Insights.: Brzi uvidi.
+Quick Start Guide: Vodič za brzi početak rada
+quz-BO: Quz (Bolivija)
+quz-EC: quz (Ekvador)
+quz-PE: quz (Peru)
+Rate: Stopa
+Rate must be greater than 0: Stopa mora biti veća od 0
+Realtime Updates & Insights with SignalR.: Ažuriranja u stvarnom vremenu i uvidi pomoću SignalR-a.
+Refreshed Token.: Osvježeni token.
+Register: Registar
+Register here: Registrirajte se ovdje
+Register New User: Registriraj novog korisnika
+Register User: Registriraj korisnika
+Registered Roles: Registrirane uloge
+Registered Users: Registrirani korisnici
+Reload: Ponovno učitati
+Reload Data: Ponovno učitaj podatke
+Remember me?: Sjećaš li me se?
+Reset password: Ponovno postavljanje lozinke
+Reset Password: Vrati izvornu lozinku
+Resources: Resursi
+rm-CH: Romansh (Švicarska)
+rn-BI: Rundi (Burundi, BiH)
+ro-MD: Engleski (Moldavija)
+ro-RO: Engleski (Rumunjska)
+rof-TZ: Rombo (Tanzanija, BiH)
+Role: Uloga
+Role ID: ID uloge
+Role Name: Naziv uloge
+Roles: Uloge
+Roles Updated: Uloge ažurirane!
+RowsPerPageString: Reci po stranici
+ru-BY: Ruski (Bjelorusija)
+ru-KG: Ruski (Kirgistan, BiH)
+ru-KZ: Ruski (Kazahstan)
+ru-MD: Ruski (Moldavija)
+ru-RU: Ruski (Rusija)
+ru-UA: Ruski (Ukrajina)
+Russian: Ruski
+rw-RW: Kinyarwanda (Ruanda)
+rwk-TZ: Rwa (Tanzanija, BiH)
+sa-IN: Sanskrit (Indija)
+sah-RU: Sakha (Rusija)
+saq-KE: Samburu (Kenija)
+sat-Olck-IN: Santali (Ol Chiki, Indija)
+Save: Spasiti
+Save {0} Changes: spremi {0} promjene
+Save Changes: Spremi promjene
+Save Role: Spremi ulogu
+saved: Spremljeni!
+sbp-TZ: Sangu (Tanzanija, BiH)
+sd-Arab-PK: Sindhi (arapski, Pakistan)
+sd-Deva-IN: Sindhi (Devanagari, Indija)
+se-FI: Sjeverni Sami (Finska)
+se-NO: Sjeverni Sami (Norveška)
+se-SE: Sjeverni Sami (Švedska)
+Search: Pretraživanje
+Search by users: Pretraživanje po korisnicima
+Search For {0} Extended Attributes: Traženje proširenih atributa {0}
+Search for Brands: Traženje robnih marki
+Search for Document Types: Traženje vrsta dokumenata
+Search For Permissions: Traži dozvole
+Search for Roles...: Traženje uloga...
+Search for Trails: Traži staze
+Search For User Roles: Traženje korisničkih uloga
+Search For Users: Traži korisnike
+Search in New Values: Pretraživanje u novim vrijednostima
+Search in Old Values: Pretraživanje u starim vrijednostima
+Security: Sigurnost
+seh-MZ: Sena (Mozambik, BiH)
+Select Language: Odaberi jezik
+Send: Slati
+Sep: Rujan
+ses-ML: Koyraboro Senni (Mali)
+Set new password: Postavljanje nove lozinke
+sg-CF: Sango (Srednjoafrička Republika)
+shi-Latn-MA: Tachelhit (latinica, Maroko)
+shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
+Show: Pokazati
+si-LK: Sinhala (Šri Lanka, BiH)
+Sign In: Prijavi se
+Sign Up: Prijavi se
+sk-SK: Slovački (Slovačka)
+sl-SI: Slovenski (Slovenija)
+sma-NO: Južni Sami (Norveška)
+sma-SE: Južni Sami (Švedska)
+smj-NO: Lule Sami (Norveška)
+smj-SE: Lule Sami (Švedska)
+smn-FI: Inari Sami (Finska)
+sms-FI: Skolt Sami (Finska)
+sn-Latn-ZW: Shona (latinica, Zimbabve)
+so-DJ: Somalija (Džibuti, BiH)
+so-ET: Somalija (Etiopija)
+so-KE: Somalija (Kenija)
+so-SO: Somalija (Somalija)
+Something went wrong during the refresh token action: Nešto je pošlo po zlu tijekom akcije osvježavanja tokena
+sq-AL: Albanski (Albanija)
+sq-MK: Albanski (Sjeverna Makedonija)
+sq-XK: Albanski (Kosovo)
+sr-Cyrl-BA: Srpski (ćirilica, Bosna i Hercegovina)
+sr-Cyrl-ME: Srpski (ćirilica, Crna Gora)
+sr-Cyrl-RS: Srpski (ćirilica, Srbija)
+sr-Cyrl-XK: Srpski (ćirilica, Kosovo)
+sr-Latn-BA: Srpski (latinica, Bosna i Hercegovina)
+sr-Latn-ME: Srpski (latinica, Crna Gora)
+sr-Latn-RS: Srpski (latinica, Srbija)
+sr-Latn-XK: Srpski (latinica, Kosovo)
+ss-SZ: siSwati (Eswatini)
+ss-ZA: siSwati (Južna Afrika)
+ssy-ER: Saho (Eritreja, BiH)
+st-LS: Sesotho (Lesoto, BiH)
+st-ZA: Sesotho (Južna Afrika)
+Status: Status
+Striped: Prugasta
+su-Latn-ID: Sundanski (latinica, Indonezija)
+Support: Podrška
+sv-AX: Švedski (Ålandski otoci)
+sv-FI: Švedski (Finska)
+sv-SE: Švedski (Švedska)
+sw-CD: Kiswahili (Kongo [DR Kongo])
+sw-KE: Svahili (Kenija)
+sw-TZ: Svahili (Tanzanija)
+sw-UG: Svahili (Uganda)
+Swagger: API dokumentacija
+Swedish: Švedski
+syr-SY: Sirijski (Sirija)
+ta-IN: Tamil (Indija)
+ta-LK: Tamil (Šri Lanka, BiH)
+ta-MY: Nor (Malezija)
+ta-SG: Tamil (Singapur)
+Table Name: Naziv tablice
+Tax: Porez
+Tax must be greater than 0: Porez mora biti veći od 0
+te-IN: Telugu (Indija)
+teo-KE: Teso (Kenija)
+teo-UG: Teso (Uganda, BiH)
+Text: Tekstualna poruka
+Text value is required using {0} type!: Tekstna vrijednost potrebna je pomoću vrste {0}!
+tg-Cyrl-TJ: Tadžikistanac (ćirilica, Tadžikistan)
+th-TH: Tajlandski (Tajland)
+The following {0} permissions are also required for permission {1}: Za {1} dozvole potrebne su i sljedeće dozvole za {0}
+The following permission is also required for permission {1}: Za {1} dozvole potrebna je i sljedeća dozvola
+The User {0} has just edited, created or deleted entries here. You should reload the data: Korisnički {0} ovdje je upravo uređivao, kreirao ili brisao unose. Trebali biste ponovno učitati podatke
+This is an Administrator Only View.: Ovo je prikaz samo za administratore.
+ti-ER: Tigrinya (Eritreja, BiH)
+ti-ET: Tigrinya (Etiopija)
+tig-ER: Tigr (Eritreja, BiH)
+Time: Vrijeme
+Title: Naslov
+Title is required!: Naslov je obavezan!
+tk-TM: Turkmen (Turkmenistan, BiH)
+tn-BW: Setswana (Bocvana, BiH)
+tn-ZA: Setswana (Južna Afrika)
+to-TO: Tongan (Tonga, BiH)
+Toggle right-to-left/left-to-right: Uključivanje/isključivanje zdesna nalijevo/slijeva nadesno
+Token is required: Token je obavezan
+Token Not Found!: Token nije pronađen!
+tr-CY: Turski (Cipar)
+tr-TR: Turski (Turska)
+Trail Details: Detalji staze
+Translations: Prijevodi
+ts-ZA: Xitsonga (Južna Afrika)
+tt-RU: Tatar (Rusija)
+twq-NE: Tasawaq (Niger)
+Type: Tip
+Type should be valid: Vrsta bi trebala biti valjana
+tzm-Arab-MA: Središnji atlas Tamazight (arapski, Maroko)
+tzm-Latn-DZ: Središnji atlas Tamazight (latinica, Alžir)
+tzm-Latn-MA: Središnji atlas Tamazight (latinica, Maroko)
+tzm-Tfng-MA: Središnji atlas Tamazight (Tifinagh, Maroko)
+ug-CN: Ujgur (Kina)
+uk-UA: Ukrajinski (Ukrajina)
+Update: Ažurirati
+Update Brand: Ažuriraj robnu marku
+Update Document: Ažuriraj dokument
+Update Document Type: Ažuriraj vrstu dokumenta
+Update Extended Attribute: Ažuriraj prošireni atribut
+Update Permissions: Ažuriraj dozvole
+Update Product: Ažuriraj proizvod
+Update Role: Ažuriraj ulogu
+Update Role Permissions: Ažuriraj dozvole za ulogu
+Update User Roles: Ažuriraj korisničke uloge
+Updated User Status.: Ažurirani status korisnika.
+Upload: Otpremanje
+Upload Image: Prenesi sliku
+ur-IN: Urdu (Indija)
+ur-PK: Urdu (Pakistan)
+User: Korisnik
+User Name: Korisničko ime
+User Registered: Korisnik registriran!
+User Registered Mailbox: Korisnik registriran. Pošta potvrde dostavljena je u poštanski sandučić.
+Username: Korisničko ime
+UserName: Korisničko ime
+UserName is required: Korisničko ime je obavezno
+UserName must be at least of length 6: Korisničko ime mora biti najmanje duljine 6
+Users: Korisnici
+Users exported: Izvezeni korisnici
+UTC: UTC
+uz-Arab-AF: Uzbečki (arapski, Afganistan)
+uz-Cyrl-UZ: Uzbečki (ćirilica, Uzbekistan)
+uz-Latn-UZ: Uzbečki (latinica, Uzbekistan)
+vai-Latn-LR: Vai (latinica, Liberija)
+vai-Vaii-LR: Idi (Vai, Liberija)
+Value: Vrijednost
+ve-ZA: Venda (Južna Afrika)
+vi-VN: Vijetnamski (Vijetnam)
+View: Pogled
+View Profile: Prikaz profila
+vo-001: Volapük (svijet)
+vun-TZ: Vunjo (Tanzanija, BiH)
+wae-CH: Walser (Švicarska)
+wal-ET: Wolaytta (Etiopija)
+Welcome {0}: Dobrodošao {0}
+Will be saved only when selected Permission: Spremit će se samo kada je odabrana dozvola
+With_Selected: '{0} odabrano'
+wo-SN: Wolof (Senegal, BiH)
+xh-ZA: isiXhosa (Južna Afrika)
+xog-UG: Soga (Uganda, BiH)
+yav-CM: Yangben (Kamerun, BiH)
+yi-001: Jidiš (svijet)
+yo-BJ: Yoruba (Benin, BiH)
+yo-NG: Yoruba (Nigerija)
+you: ti
+You are logged out because the Permissions of one of your Roles have been updated.: Odjavljeni ste jer su ažurirane dozvole jedne od vaših uloga.
+You are logged out because the user with your Token has been deleted or token is expired.: Odjavljeni ste jer je korisnik s vašim tokenom izbrisan ili je token istekao.
+You are Logged Out.: Odjavljeni ste.
+Your Profile has been updated.: Vaš profil je ažuriran.
+Your Recent Activities.: Vaše nedavne aktivnosti.
+zgh-Tfng-MA: Standardni marokanski Tamazight (Tifinagh, Maroko)
+zh-CN: Kineski (Kina)
+zh-Hans-HK: Kineski (pojednostavljeni, Hong Kong SAR)
+zh-Hans-MO: Kineski (pojednostavljeni, Makao SAR)
+zh-HK: Kineski (Hong Kong SAR)
+zh-MO: Kineski (Makao SAR)
+zh-SG: Kineski (Singapur)
+zh-TW: Kineski (Tajvan)
+zu-ZA: isiZulu (Južna Afrika)

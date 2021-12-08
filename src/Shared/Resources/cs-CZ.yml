@@ -1,0 +1,952 @@
+﻿aa-DJ: Afar (Džibutsko)
+aa-ER: Afar (Eritrea)
+aa-ET: Afar (Etiopie)
+Account: Účet
+Actions: Akce
+Activate User?: Aktivovat uživatele?
+Active: Aktivní
+Active?: Aktivní?
+Add Brand: Přidat značku
+Add Document: Přidat dokument
+Add Document Type: Přidat typ dokumentu
+Add Extended Attribute: Přidat rozšířený atribut
+Add Product: Přidat produkt
+Add Role: Přidat roli
+Administrator: Správce
+Administrator Settings.: Nastavení správce.
+af-NA: Afrikánština (Namibie)
+af-ZA: Afrikánština (Jižní Afrika)
+agq-CM: Aghem (Kamerun)
+ak-GH: Will (Ghana)
+All Groups: Všechny skupiny
+All Permissions: Všechna oprávnění
+Already have an account?: Už máte účet?
+am-ET: Amharština (Etiopie)
+ApplicationDescription: Ukázková aplikace se vzorem WebAssembly a čisté architektury
+ApplicationSubDescription: Vítejte na této blazor stránce
+Apply: Použít
+Apr: Dubna
+ar-001: Arabština (svět)
+ar-AE: Arabština (Spojené arabské emiráty)
+ar-BH: Arabština (Bahrajn)
+ar-DJ: Arabština (Džibutsko)
+ar-DZ: Arabština (Alžírsko)
+ar-EG: Arabština (Egypt)
+ar-ER: Arabština (Eritrea)
+ar-IL: Arabština (Izrael)
+ar-IQ: Arabština (Irák)
+ar-JO: Arabština (Jordánsko)
+ar-KM: Arabština (Komory)
+ar-KW: Arabština (Kuvajt)
+ar-LB: Arabština (Libanon)
+ar-LY: Arabština (Libye)
+ar-MA: Arabština (Maroko)
+ar-MR: Arabština (Mauritánie)
+ar-OM: Arabština (Omán)
+ar-PS: Arabština (Palestinská samospráva)
+ar-QA: Arabština (Katar)
+ar-SA: Arabština (Saúdská Arábie)
+ar-SD: Arabština (Súdán)
+ar-SO: Arabština (Somálsko)
+ar-SS: Arabština (Jižní Súdán)
+ar-SY: Arabština (Sýrie)
+ar-TD: Arabština (Čad)
+ar-TN: Arabština (Tunisko)
+ar-YE: Arabština (Jemen)
+arn-CL: Mapučche (Chile)
+As Admin you can filter for users here: Jako správce můžete filtrovat pro uživatele zde
+as-IN: Ásámština (Indie)
+asa-TZ: Asu (Tanzanie)
+ast-ES: Asturština (Španělsko)
+Audit Trails: Auditní stopy
+Audit Trails exported: Exportované auditní záznamy
+Aug: Srpen
+Auto Confirm Email?: Automatické potvrzení e-mailu?
+az-Cyrl-AZ: Ázerbájdžánština (cyrilice, Ázerbájdžán)
+az-Latn-AZ: Ázerbájdžánština (latinka, Ázerbájdžán)
+ba-RU: Baškir (Rusko)
+Barcode: Čárový kód
+Barcode already exists.: Čárový kód již existuje.
+Barcode is required!: Čárový kód je vyžadován!
+bas-CM: Basaa (Kamerun)
+be-BY: Běloruština (Bělorusko)
+bem-ZM: Bemba (Zambie)
+bez-TZ: Nohy (Tanzanie)
+bg-BG: Bulharština (Bulharsko)
+bin-NG: Edo (Nigérie)
+bm-Latn-ML: Bamanankan (latinka, Mali)
+bn-BD: Bangla (Bangladéš)
+bn-IN: Bangla (Indie)
+bo-CN: Tibetština (Čína)
+bo-IN: Tibetština (Indie)
+Bordered: Ohraničený
+br-FR: Bretonštinu (Francie)
+Brand: Značka
+Brand Deleted: Značka odstraněna
+Brand is required!: Značka je nutná!
+Brand Not Found!: Značka nebyla nalezena!
+Brand Saved: Značka zachráněna!
+Brand Updated: Značka aktualizována!
+BrandName: Značka
+Brands: Značky
+Brands exported: Exportované značky
+Browse Available Documents.: Procházet dostupné dokumenty.
+brx-IN: Bodo (Indie)
+bs-Cyrl-BA: Bosenština (cyrilice, Bosna a Hercegovina)
+bs-Latn-BA: Bosenština (latinka, Bosna a Hercegovina)
+byn-ER: Blin (Eritrea)
+ca-AD: Katalánština (Andorra)
+ca-ES: Katalánština (Španělsko)
+ca-FR: Katalánština (Francie)
+ca-IT: Katalánština (Itálie)
+Cancel: Zrušit
+Catalog Management: Správa katalogu
+ccp-Cakm-BD: Chakma (Chakma, Bangladéš)
+ccp-Cakm-IN: Chakma (Chakma, Indie)
+ce-RU: Čečensko (Rusko)
+ceb-Latn-PH: Cebuano (latinka, Filipíny)
+cgg-UG: Chiga (Uganda)
+Change Password: Změnit heslo
+Charts comming soon ish...: Grafy již brzy ish...
+chat: Povídat si
+Chat: Povídat si
+Chat?: Povídat si?
+chr-Cher-US: Cherokee (Cherokee, Spojené státy americké)
+Clear: Jasný
+Client Language has been changed: Jazyk klienta byl změněn
+co-FR: Korsičtí (Francie)
+Columns Affected: Ovlivněné sloupce
+Communication: Komunikace
+Community: Komunita
+Confirm: Potvrdit
+Confirm and Ignore: Potvrdit a ignorovat
+Confirm and Set Required: Potvrdit a nastavit povinné
+Confirm Password: Potvrdit heslo
+contacts: Kontakty
+Create: Vytvářet
+cs-CZ: Čeština (Česko)
+cu-RU: Slovanská církev (Rusko)
+Current Password: Aktuální heslo
+Current Password is required!: Aktuální heslo je vyžadováno!
+cy-GB: Velština (Spojené království)
+da-DK: Dánština (Dánsko)
+da-GL: Dánština (Grónsko)
+Dashboard: Palubní deska
+Date: Rande
+Date Created: Datum vytvoření
+Date Range For Searching: Časové období pro vyhledávání
+DateTime value is required using {0} type!: Hodnota DateTime je vyžadována pomocí {0} typu!
+dav-KE: Taita (Keňa)
+de-AT: Němčina (Rakousko)
+de-BE: Němčina (Belgie)
+de-CH: Němčina (Švýcarsko)
+de-DE: Němčina (Německo)
+de-IT: Němčina (Itálie)
+de-LI: Němčina (Lichtenštejnsko)
+de-LU: Němčina (Lucembursko)
+Dec: Prosince
+Decimal: Desetinný
+Decimal value is required using {0} type!: Desetinná hodnota je vyžadována pomocí typu {0}!
+Delete: Vymazat
+Delete Confirmation: Potvrzení o odstranění
+Delete Content: Odstranit obsah
+Delete Content {0}: Smazat obsah "{0}"
+Delete Extended Attribute?: Odstranit rozšířený atribut?
+Delete Image: Odstranit obrázek
+Delete Picture: Odstranit obrázek
+Delete Role Content: Chcete odstranit roli pomocí Id {0}?
+Delete these {0} elements: Odstranit tyto {0} prvky?
+Delete this element: Odstranit tento prvek?
+Deletion Not Allowed: Odstranění není povoleno
+Dense: Hustý
+Dependent permissions required: Požadovaná závislá oprávnění
+Description: Popis
+Description is required!: Popis je nutný!
+detailed guide for more.: podrobný průvodce pro více informací.
+Details for Trail ID: Podrobnosti o ID stezky
+dje-NE: Zarma (Niger)
+Do you want to delete the profile picture of {0}: Chcete odstranit profilový obrázek {0}
+Document Deleted: Dokument odstraněn
+Document Extended Attributes: Rozšířené atributy dokumentu
+Document Management: Správa dokumentů
+Document Not Found!: Dokument nebyl nalezen!
+Document Saved: Uložený dokument
+Document Store: Úložiště dokumentů
+Document Type: Typ dokumentu
+Document Type Deleted: Typ dokumentu odstraněn
+Document Type is required!: Typ dokumentu je povinný!
+Document Type Not Found!: Typ dokumentu nebyl nalezen!
+Document Type Saved: Uložený typ dokumentu
+Document Type Updated: Typ dokumentu byl aktualizován
+Document type with this name already exists.: Typ dokumentu s tímto názvem již existuje.
+Document Types: Typy dokumentů
+Document Types exported: Exportované typy dokumentů
+Document Updated: Dokument byl aktualizován
+Documents: Dokumenty
+doi-Deva-IN: Dogri (Devanagari, Indie)
+Don't have an account?: Nemáte účet?
+Done!: Hotový!
+Download: Stáhnout
+dsb-DE: Dolnolužická srbština (Německo)
+dua-CM: Duala (Kamerun)
+dv-MV: Divehi (Maledivy)
+dyo-SN: Jola-Fonyi (Senegal)
+dz-BT: Dzongkha (Bhútán)
+E-mail: E-mail
+E-Mail: E-mail
+ebu-KE: Embu (Keňa)
+Edit: Upravit
+ee-GH: Ovce (Ghana)
+ee-TG: Ovce (Togo)
+el-CY: Řečtina (Kypr)
+el-GR: Řečtina (Řecko)
+Email: E-mail
+Email Confirmation: Potvrzení e-mailem
+Email is not correct: E-mail není správný
+Email is required: E-mail je vyžadován
+Email is required!: E-mail je vyžadován!
+en-001: Angličtina (svět)
+en-029: Angličtina (Karibik)
+en-150: Angličtina (Evropa)
+en-AE: Angličtina (Spojené arabské emiráty)
+en-AG: Angličtina (Antigua & Barbuda)
+en-AI: Angličtina (Anguilla)
+en-AS: Angličtina (Americká Samoa)
+en-AT: Angličtina (Rakousko)
+en-AU: Angličtina (Austrálie)
+en-BB: Angličtina (Barbados)
+en-BE: Angličtina (Belgie)
+en-BI: Angličtina (Burundi)
+en-BM: Angličtina (Bermudy)
+en-BS: Angličtina (Bahamy)
+en-BW: Angličtina (Botswana)
+en-BZ: Angličtina (Belize)
+en-CA: Angličtina (Kanada)
+en-CC: Angličtina (Kokosové [Keelingovy] ostrovy)
+en-CH: Angličtina (Švýcarsko)
+en-CK: Angličtina (Cookovy ostrovy)
+en-CM: Angličtina (Kamerun)
+en-CX: Angličtina (Vánoční ostrov)
+en-CY: Angličtina (Kypr)
+en-DE: Angličtina (Německo)
+en-DK: Angličtina (Dánsko)
+en-DM: Angličtina (Dominika)
+en-ER: Angličtina (Eritrea)
+en-FI: Angličtina (Finsko)
+en-FJ: Angličtina (Fidži)
+en-FK: Angličtina (Falklandské ostrovy)
+en-FM: Angličtina (Mikronésie)
+en-GB: Čeština (Velká Británie)
+en-GD: Angličtina (Grenada)
+en-GG: Angličtina (Guernsey)
+en-GH: Angličtina (Ghana)
+en-GI: Angličtina (Gibraltar)
+en-GM: Angličtina (Gambie)
+en-GU: Angličtina (Guam)
+en-GY: Angličtina (Guyana)
+en-HK: Angličtina (Hongkong – zvláštní správní oblast)
+en-ID: Angličtina (Indonésie)
+en-IE: Angličtina (Irsko)
+en-IL: Angličtina (Izrael)
+en-IM: Angličtina (ostrov Man)
+en-IN: Angličtina (Indie)
+en-IO: Angličtina (Britské indickooceánské území)
+en-JE: Angličtina (Jersey)
+en-JM: Angličtina (Jamajka)
+en-KE: Angličtina (Keňa)
+en-KI: Angličtina (Kiribati)
+en-KN: Angličtina (Svatý Kryštof a Nevis)
+en-KY: Angličtina (Kajmanské ostrovy)
+en-LC: Angličtina (Svatá Lucie)
+en-LR: Angličtina (Libérie)
+en-LS: Angličtina (Lesotho)
+en-MG: Angličtina (Madagaskar)
+en-MH: Angličtina (Marshallovy ostrovy)
+en-MO: Angličtina (Macao – zvláštní správní oblast)
+en-MP: Angličtina (Severní Mariany)
+en-MS: Angličtina (Montserrat)
+en-MT: Angličtina (Malta)
+en-MU: Angličtina (Mauricius)
+en-MW: Angličtina (Malawi)
+en-MY: Angličtina (Malajsie)
+en-NA: Angličtina (Namibie)
+en-NF: Angličtina (Ostrov Norfolk)
+en-NG: Angličtina (Nigérie)
+en-NL: Angličtina (Nizozemsko)
+en-NR: Angličtina (Nauru)
+en-NU: Angličtina (Niue)
+en-NZ: Angličtina (Nový Zéland)
+en-PG: Angličtina (Papua-Nová Guinea)
+en-PH: Angličtina (Filipíny)
+en-PK: Angličtina (Pákistán)
+en-PN: Angličtina (Pitcairnovy ostrovy)
+en-PR: Angličtina (Portoriko)
+en-PW: Angličtina (Palau)
+en-RW: Angličtina (Rwanda)
+en-SB: Angličtina (Šalamounovy ostrovy)
+en-SC: Angličtina (Seychely)
+en-SD: Angličtina (Súdán)
+en-SE: Angličtina (Švédsko)
+en-SG: Angličtina (Singapur)
+en-SH: Angličtina (Svatá Helena, Nanebevstoupení Páně, Tristan da Cunha)
+en-SI: Angličtina (Slovinsko)
+en-SL: Angličtina (Sierra Leone)
+en-SS: Angličtina (Jižní Súdán)
+en-SX: Nederlands (Sint Maarten)
+en-SZ: Angličtina (Eswatini)
+en-TC: Angličtina (ostrovy Turks a Caicos)
+en-TK: Angličtina (Tokelau)
+en-TO: Angličtina (Tonga)
+en-TT: Angličtina (Trinidad a Tobago)
+en-TV: Angličtina (Tuvalu)
+en-TZ: Angličtina (Tanzanie)
+en-UG: Angličtina (Uganda)
+en-UM: Angličtina (Americké odlá ostrovy)
+en-US: Angličtina (Spojené státy)
+en-US-posix: Angličtina (Spojené státy, počítač)
+en-VC: Angličtina (Svatý Vincenc a Grenadiny)
+en-VG: Angličtina (Britské Panenské ostrovy)
+en-VI: Angličtina (Americké Panenské ostrovy)
+en-VU: Angličtina (Vanuatu)
+en-WS: Angličtina (Samoa)
+en-ZA: Angličtina (Jižní Afrika)
+en-ZM: Angličtina (Zambie)
+en-ZW: Angličtina (Zimbabwe)
+English: Angličtina
+Enter email for password reset: Zadejte e-mailovou adresu propojenou s vaším účtem a obdržíte e-mail s odkazem na obnovení hesla
+Enter your message...: Zadejte zprávu...
+Entity Id: Entity Id
+Entity is required!: Entita je povinná!
+EntityCreatedBy: EntityCreatedBy
+EntityCreatedOn (Local): EntityCreatedOn (místní)
+EntityCreatedOn (UTC): EntityCreatedOn (UTC)
+EntityId: EntityId
+EntityLastModifiedBy: EntityLastModifiedBy
+EntityLastModifiedOn (Local): EntityLastModifiedOn (místní)
+EntityLastModifiedOn (UTC): EntityLastModifiedOn (UTC)
+eo-001: Esperanto (svět)
+es-419: Španělština (Latinská Amerika)
+es-AR: Španělština (Argentina)
+es-BO: Španělština (Bolívie)
+es-BR: Španělština (Brazílie)
+es-BZ: Španělština (Belize)
+es-CL: Španělština (Chile)
+es-CO: Španělština (Kolumbie)
+es-CR: Španělština (Kostarika)
+es-CU: Španělština (Kuba)
+es-DO: Španělština (Dominikánská republika)
+es-EC: Španělština (Ekvádor)
+es-ES: Španělština (Španělsko)
+es-GQ: Španělština (Rovníková Guinea)
+es-GT: Španělština (Guatemala)
+es-HN: Španělština (Honduras)
+es-MX: Španělština (Mexiko)
+es-NI: Španělština (Nikaragua)
+es-PA: Španělština (Panama)
+es-PE: Španělština (Peru)
+es-PH: Španělština (Filipíny)
+es-PR: Španělština (Portoriko)
+es-PY: Španělština (Paraguay)
+es-SV: Španělština (Salvador)
+es-US: Španělština (Spojené státy)
+es-UY: Španělština (Uruguay)
+es-VE: Španělština (Venezuela)
+Español: Španělština
+et-EE: Estonština (Estonsko)
+eu-ES: Baskičtina (Španělsko)
+ewo-CM: Ewondo (Kamerun)
+Export: Vývoz
+Export To Excel: Export do aplikace Excel
+Export_SheetName: Data
+Extended Attribute Deleted: Rozšířený atribut odstraněn
+Extended Attribute Not Found!: Rozšířený atribut nebyl nalezen!
+Extended Attribute Saved: Rozšířený atribut uložen
+Extended Attribute Updated: Rozšířený atribut byl aktualizován
+Extended Attribute with this Key already exists.: Rozšířený atribut s tímto klíčem již existuje.
+Extended Attributes: '\{0}\ Rozšířené atributy'
+Extended Attributes exported: Export rozšířené atributy
+External Id: Externí ID
+ExternalId: ExternalId
+fa-IR: Perština (Írán)
+Failed to get client preferences: Nepodařilo se získat předvolby klienta
+FAQs: Nejčastější dotazy
+Features: Rysy
+Feb: Únor
+ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
+ff-Adlm-CM: Fulah (Adlam, Kamerun)
+ff-Adlm-GH: Fulah (Adlam, Ghana)
+ff-Adlm-GM: Fulah (Adlam, Gambie)
+ff-Adlm-GN: Fulah (Adlam, Guinea)
+ff-Adlm-GW: Fulah (Adlam, Guinea-Bissau)
+ff-Adlm-LR: Fulah (Adlam, Libérie)
+ff-Adlm-MR: Fulah (Adlam, Mauritánie)
+ff-Adlm-NE: Fulah (Adlam, Niger)
+ff-Adlm-NG: Fulah (Adlam, Nigérie)
+ff-Adlm-SL: Fulah (Adlam, Sierra Leone)
+ff-Adlm-SN: Fulah (Adlam, Senegal)
+ff-Latn-BF: Fulah (latina, Burkina Faso)
+ff-Latn-CM: Fulah (latinka, Kamerun)
+ff-Latn-GH: Fulah (latinka, Ghana)
+ff-Latn-GM: Fulah (latinka, Gambie)
+ff-Latn-GN: Fulah (latinka, Guinea)
+ff-Latn-GW: Fulah (latinsky, Guinea-Bissau)
+ff-Latn-LR: Fulah (latinka, Libérie)
+ff-Latn-MR: Fulah (latinka, Mauritánie)
+ff-Latn-NE: Fulah (latinka, Niger)
+ff-Latn-NG: Fulah (latinka, Nigérie)
+ff-Latn-SL: Fulah (latina, Sierra Leone)
+ff-Latn-SN: Fulah (latinka, Senegal)
+fi-FI: Finština (Finsko)
+fil-PH: Filipínština (Filipíny)
+File is required!: Soubor je povinný!
+Fill Administrator Credentials: Vyplnění přihlašovacích údajů správce
+Fill Basic User Credentials: Vyplňte základní pověření uživatele
+Filtered Audit Trails exported: Exportované filtrované auditní záznamy
+Filtered Brands exported: Exportované filtrované značky
+Filtered Document Types exported: Exportované typy filtrovaných dokumentů
+Filtered Extended Attributes exported: Exportované rozšířené atributy filtrů
+Filtered Products exported: Exportované filtrované produkty
+Filtered Users exported: Exportovaných filtrovaných uživatelů
+First Name: Křestní jméno
+First Name is required: Křestní jméno je povinné
+fo-DK: Faerština (Dánsko)
+fo-FO: Faerské ostrovy (Faerské ostrovy)
+Forgot password?: Zapomněli jste heslo?
+fr-029: Francouzština (Karibik)
+fr-BE: Francouzština (Belgie)
+fr-BF: Francouzština (Burkina Faso)
+fr-BI: Francouzština (Burundi)
+fr-BJ: Francouzština (Benin)
+fr-BL: Francouzština (Sv. Bartoloměj)
+fr-CA: Francouzština (Kanada)
+fr-CD: Francouzština (Kongo [DRK])
+fr-CF: Francouzština (Středoafrická republika)
+fr-CG: Francouzština (Kongo)
+fr-CH: Francouzština (Švýcarsko)
+fr-CI: Francouzština (Pobřeží slonoviny)
+fr-CM: Francouzština (Kamerun)
+fr-DJ: Francouzština (Džibutsko)
+fr-DZ: Francouzština (Alžírsko)
+fr-FR: Francouzština (Francie)
+fr-GA: Francouzština (Gabon)
+fr-GF: Francouzština (Francouzská Guyana)
+fr-GN: Francouzština (Guinea)
+fr-GP: Francouzština (Guadeloupe)
+fr-GQ: Francouzština (Rovníková Guinea)
+fr-HT: Francouzština (Haiti)
+fr-KM: Francouzština (Komory)
+fr-LU: Francouzština (Lucembursko)
+fr-MA: Francouzština (Maroko)
+fr-MC: Francouzština (Monako)
+fr-MF: Francouzština (Svatý Martin)
+fr-MG: Francouzština (Madagaskar)
+fr-ML: Francouzština (Mali)
+fr-MQ: Francouzština (Martinik)
+fr-MR: Francouzština (Mauritánie)
+fr-MU: Francouzština (Mauricius)
+fr-NC: Francouzština (Nová Kaledonie)
+fr-NE: Francouzština (Niger)
+fr-PF: Francouzština (Francouzská Polynésie)
+fr-PM: Francouzština (St. Pierre & Miquelon)
+fr-RE: Angličtina (Réunion)
+fr-RW: Francouzština (Rwanda)
+fr-SC: Francouzština (Seychely)
+fr-SN: Francouzština (Senegal)
+fr-SY: Francouzština (Sýrie)
+fr-TD: Francouzština (Čad)
+fr-TG: Francouzština (Togo)
+fr-TN: Francouzština (Tunisko)
+fr-VU: Francouzština (Vanuatu)
+fr-WF: Francouzština (Wallis & Futuna)
+fr-YT: Francouzština (Mayotte)
+French: Francouzština
+fur-IT: Friulian (Itálie)
+fy-NL: Západní Fríština (Nizozemsko)
+ga-GB: Irština (Spojené království)
+ga-IE: Irština (Irsko)
+gd-GB: Skotská gaelština (Spojené království)
+German: Němčina
+gl-ES: Galicijština (Španělsko)
+gn-PY: Guarani (Paraguay)
+GoHome: Jdi domů!
+Group: Skupina
+gsw-CH: Švýcarská němčina (Švýcarsko)
+gsw-FR: Švýcarská němčina (Francie)
+gsw-LI: Švýcarská němčina (Lichtenštejnsko)
+gu-IN: Gudžarát (Indie)
+guz-KE: Gusii (Keňa)
+gv-IM: Manx (Ostrov Man)
+ha-Latn-GH: Hausa (latinka, Ghana)
+ha-Latn-NE: Hausa (latinka, Niger)
+ha-Latn-NG: Hausa (latinka, Nigérie)
+haw-US: Havajština (Spojené státy)
+he-IL: Hebrejština (Izrael)
+Hello World: Ahoj světe
+Here you can leave a comment for this permission for the current role: Zde můžete zanechat komentář k tomuto oprávnění pro aktuální roli
+hi-IN: Hindština (Indie)
+Hide: Schovat
+Home: Domov
+hr-BA: Chorvatština (Bosna a Hercegovina)
+hr-HR: Chorvatština (Chorvatsko)
+hsb-DE: Hornolužická srbština (Německo)
+hu-HU: Maďarština (Maďarsko)
+hy-AM: Arménština (Arménie)
+I agree to the terms and privacy: Souhlasím s podmínkami a ochranou osobních údajů
+ia-001: Interlingua (Svět)
+ibb-NG: Ibibio (Nigérie)
+Id: Id
+id-ID: Indonéština (Indonéština)
+ig-NG: Igbo (Nigérie)
+ii-CN: Yi (Čína)
+Include Entity fields (Export): Zahrnout pole entity (Export)
+Incorrect Password.: Nesprávné heslo.
+Indonesia: Indonéština
+Is Active: Je aktivní
+Is Public: Je veřejná
+Is Public?: Je veřejný?
+is-IS: Islandština (Island)
+IsActive: IsActive
+it-CH: Italština (Švýcarsko)
+it-IT: Italština (Itálie)
+it-SM: Italština (San Marino)
+it-VA: Italština (Vatikán)
+Italian: Italština
+iu-CA: Inuktitut (Kanada)
+iu-Latn-CA: Inuktitutština (latinka, Kanada)
+ja-JP: Japonština (Japonsko)
+Jan: Jaroslav
+jgo-CM: Ngomba (Kamerun)
+jmc-TZ: Machame (Tanzanie)
+Json: Moderátor
+Json value is required using {0} type!: Hodnota Json je vyžadována pomocí {0} typu!
+Json value must be a valid json string using {0} type!: Hodnota Json musí být platný řetězec JSON pomocí {0} typu!
+Jul: Červenec
+Jun: Jun
+jv-Java-ID: Javánština (javánština, indonéština)
+jv-Latn-ID: Javánština (latinka, indonéština)
+ka-GE: Gruzínština (Gruzie)
+kab-DZ: Kabyle (Alžírsko)
+kam-KE: Kamba (Keňa)
+kde-TZ: Makonde (Tanzanie)
+kea-CV: Kabuverdianu (Kapverdy)
+Key: Klíč
+Key is required!: Klíč je vyžadován!
+khq-ML: Koyra Chiini (Mali)
+ki-KE: Kikuyu (Keňa)
+kk-KZ: Kazaština (Kazachstán)
+kkj-CM: Kako (Kamerun)
+kl-GL: Kalaallisut (Grónsko)
+kln-KE: Kalenjin (Keňa)
+km-KH: Khmerština (Kambodža)
+kn-IN: Kannada (Indie)
+ko-KP: Korejština (Severní Korea)
+ko-KR: Korejština (Korea)
+kok-IN: Konkani (Indie)
+kr-Latn-NG: Kanuri (latinka, Nigérie)
+ks-Arab-IN: Kašmírština (arabština, Indie)
+ks-Deva-IN: Kašmírština (Devanagari, Indie)
+ksb-TZ: Šambala (Tanzanie)
+ksf-CM: Bafia (Kamerun)
+ksh-DE: Colognian (Německo)
+ku-Arab-IQ: Kurdština (arabština, Irák)
+ku-Arab-IR: Kurdština (arabština, Írán)
+kw-GB: Cornish (Velká Británie)
+ky-KG: Kyrgyz (Kyrgyzstán)
+la-VA: Latina (Vatikán)
+lag-TZ: Langi (Tanzanie)
+Languages: Jazyky
+Last Name: Příjmení
+Last Name is required: Příjmení je povinné
+lb-LU: Lucemburština (Lucembursko)
+lg-UG: Shell (Uganda)
+lkt-US: Lakota (Spojené státy)
+ln-AO: Lingala (Angola)
+ln-CD: Lingala (Kongo [DRK])
+ln-CF: Lingala (Středoafrická republika)
+ln-CG: Lingala (Kongo)
+lo-LA: Lao (Laos)
+Local: Místní
+Logged In.: Přihlášen.
+Logged Out.: Odhlášen.
+LoginDescription: Přihlaste se pomocí svých přihlašovacích údajů.
+Logout: Odhlášení od sítě
+Logout Confirmation: Opravdu se chcete od odsout?
+lrc-IQ: Severní Luri (Irák)
+lrc-IR: Severní Luri (Írán)
+lt-LT: Litevština (Litva)
+lu-CD: Luba-Katanga (Kongo [DRK])
+luo-KE: Luo (Keňa)
+luy-KE: Luyia (Keňa)
+lv-LV: Lotyština (Lotyšsko)
+mai-IN: Maithili (Indie)
+Mail: Pošta
+Manage {0} {1}'s Extended Attributes: Správa rozšířených atributů {0} {1}
+Manage {0} {1}'s Permissions: Správa oprávnění {0} {1}
+Manage {0} {1}'s Roles: Správa rolí {0} {1}
+Manage {0} Extended Attributes: Správa rozšířených atributů {0}
+Manage Brands.: Spravujte značky.
+Manage Document Types.: Správa typů dokumentů.
+Manage Extended Attributes: Správa rozšířených atributů
+Manage Languages: Správa jazyků
+Manage Permission: Správa oprávnění
+Manage Products.: Správa produktů.
+Manage Roles: Správa rolí
+Manage Roles.: Správa rolí.
+Manage Translations: Správa překladů
+Manage Users: Správa uživatelů
+Manage your account: Správa účtu
+Mar: Ničit
+mas-KE: Masai (Keňa)
+mas-TZ: Masai (Tanzanie)
+May: Květen
+mer-KE: Meru (Keňa)
+mfe-MU: Morisyen (Mauricius)
+mg-MG: Malgašština (Madagaskar)
+mgh-MZ: Makhuwa-Meetto (Mosambik)
+mgo-CM: Metaʼ (Kamerun)
+mi-NZ: Maorština (Nový Zéland)
+mk-MK: Makedonština (Severní Makedonie)
+ml-IN: Malayalam (Indie)
+mn-MN: Mongolština (Mongolsko)
+mn-Mong-CN: Mongolština (Mongolština, Čína)
+mn-Mong-MN: Mongolština (Mongolština, Mongolsko)
+mni-IN: Manipuri (Indie)
+moh-CA: Mohawk (Kanada)
+mr-IN: Marathi (Indie)
+ms-BN: Malajština (Brunej)
+ms-ID: Malajština (Indonésie)
+ms-MY: Malajština (Malajsie)
+ms-SG: Malajština (Singapur)
+mt-MT: Maltština (Malta)
+mua-CM: Mundang (Kamerun)
+my-MM: Barmština (Myanmar)
+mzn-IR: Mazanderani (Írán)
+Name: Jméno
+Name is required: Jméno je povinné
+Name is required!: Jméno je povinné!
+naq-NA: Jméno (Namibie)
+nb-NO: Angličtina (Norsko)
+nb-SJ: Norský Bokmål (Špicberky & Jan Mayen)
+nd-ZW: Severní Ndebele (Zimbabwe)
+nds-DE: Dolní němčina (Německo)
+nds-NL: Dolní němčina (Nizozemsko)
+ne-IN: Nepálská (Indie)
+ne-NP: Nepál (Nepál)
+New Message From {0}: Nová zpráva od {0}
+New Password: Nové heslo
+New Values: Nové hodnoty
+nl-AW: Holandština (Aruba)
+nl-BE: Nizozemština (Belgie)
+nl-BQ: Nizozemština (Bonaire, Sint Eustatius a Saba)
+nl-CW: Holandština (Curaçao)
+nl-NL: Nizozemština (Nizozemsko)
+nl-SR: Holandština (Surinam)
+nl-SX: Angličtina (Sint Maarten)
+nmg-CM: Kwasio (Kamerun)
+nn-NO: Norština Nynorsk (Norsko)
+nnh-CM: Ngiemboon (Kamerun)
+No Allowed Actions: Žádné povolené akce
+Not Allowed.: Není povoleno.
+NotFoundMessage: Stránka, kterou jste hledali, neexistuje.
+Nov: Listopad
+nqo-GN: N'Ko (Guinea)
+nr-ZA: South Ndebele (Jižní Afrika)
+nso-ZA: Sesotho sa Leboa (Jižní Afrika)
+nus-SS: Nuer (Jižní Súdán)
+nyn-UG: Nyankole (Uganda)
+oc-FR: Okcitánština (Francie)
+Oct: Osmičkový
+Ok: Ok
+Old Values: Staré hodnoty
+om-ET: Oromo (Etiopie)
+om-KE: Oromo (Keňa)
+Only Selected Group (Export): Pouze vybraná skupina (Export)
+or-IN: Odia (Indie)
+os-GE: Ossetic (Gruzie)
+os-RU: Ossetic (Rusko)
+Owner: Vlastník
+pa-Arab-PK: Paňdžábština (arabština, Pákistán)
+pa-IN: Paňdžábština (Indie)
+pap-029: Papiamento (Karibik)
+Password: Heslo
+Password Changed!: Heslo změněno!
+Password Confirmation: Potvrzení hesla
+Password Confirmation is required!: Je vyžadováno potvrzení hesla!
+Password is required!: Heslo je vyžadováno!
+Password must be at least of length 8: Heslo musí mít alespoň délku 8
+Password must contain at least one capital letter: Heslo musí obsahovat alespoň jedno velké písmeno
+Password must contain at least one digit: Heslo musí obsahovat alespoň jednu číslici
+Password must contain at least one lowercase letter: Heslo musí obsahovat alespoň jedno malé písmeno
+Passwords don't match: Hesla se neshodují
+pcm-Latn-NG: Nigerijský Pidgin (latina, Nigérie)
+Permission Name: Název oprávnění
+Personal: Osobní
+Phone Number: Telefonní číslo
+PhoneNumber: Telefonní číslo
+pl-PL: Polština (Polsko)
+prg-001: Pruský (svět)
+Primary Key: Primární klíč
+Product Deleted: Produkt smazán!
+Product Not Found!: Produkt nebyl nalezen!
+Product Saved: Produkt uložen!
+Product Updated: Produkt aktualizován!
+Products: Produkty
+Products exported: Vyvážené produkty
+Profile: Profil
+Profile Details: Podrobnosti o profilu
+Profile picture added.: Přidán profilový obrázek.
+Profile picture deleted.: Profilový obrázek byl odstraněn.
+prs-AF: prs (Afghánistán)
+ps-AF: Paštové (Afghánistán)
+ps-PK: Paštská (Pákistán)
+pt-AO: Portugalština (Angola)
+pt-BR: Portugalština (Brazílie)
+pt-CH: Portugalština (Švýcarsko)
+pt-CV: Angličtina (Kapverdy)
+pt-GQ: Portugalština (Rovníková Guinea)
+pt-GW: Portugalština (Guinea-Bissau)
+pt-LU: Portugalština (Lucembursko)
+pt-MO: Portugalština (Macao – zvláštní správní oblast)
+pt-MZ: Portugalština (Mosambik)
+pt-PT: Portugalština (Portugalsko)
+pt-ST: Angličtina (Svatá Tomáše a Princův ostrov)
+pt-TL: Angličtina (Východní Timor)
+Public Profile: Moderátor
+quc-GT: Kʼicheʼ (Guatemala)
+Quick Insights.: Rychlé přehledy.
+Quick Start Guide: Stručná úvodní příručka
+quz-BO: Quz (Bolívie)
+quz-EC: quz (Ekvádor)
+quz-PE: quz (Peru)
+Rate: Sazba
+Rate must be greater than 0: Sazba musí být větší než 0
+Realtime Updates & Insights with SignalR.: Aktualizace a přehledy v reálném čase pomocí SignalR.
+Refreshed Token.: Obnovený token.
+Register: Registrace
+Register here: Zaregistrujte se zde
+Register New User: Registrovat nového uživatele
+Register User: Registrovat uživatele
+Registered Roles: Registrované role
+Registered Users: Registrovaní uživatelé
+Reload: Dobít
+Reload Data: Opětovné načtení dat
+Remember me?: Pamatuješ si mě?
+Reset password: Resetovat heslo
+Reset Password: Obnovit heslo
+Resources: Prostředky
+rm-CH: Romansh (Švýcarsko)
+rn-BI: Rundi (Burundi)
+ro-MD: Angličtina (Moldavsko)
+ro-RO: Angličtina (Rumunsko)
+rof-TZ: Rombo (Tanzanie)
+Role: Role
+Role ID: Role ID
+Role Name: Název role
+Roles: Role
+Roles Updated: Role aktualizovány!
+RowsPerPageString: Řádky na stránku
+ru-BY: Ruština (Bělorusko)
+ru-KG: Ruština (Kyrgyzstán)
+ru-KZ: Ruština (Kazachstán)
+ru-MD: Ruština (Moldavsko)
+ru-RU: Ruština (Rusko)
+ru-UA: Ruština (Ukrajina)
+Russian: Ruština
+rw-RW: Kinyarwanda (Rwanda)
+rwk-TZ: Rwa (Tanzanie)
+sa-IN: Sanskrt (Indie)
+sah-RU: Sakha (Rusko)
+saq-KE: Samburu (Keňa)
+sat-Olck-IN: Santali (Ol Chiki, Indie)
+Save: Uložit
+Save {0} Changes: Uložení {0} změn
+Save Changes: Uložit změny
+Save Role: Uložit roli
+saved: Uložený!
+sbp-TZ: Sangu (Tanzanie)
+sd-Arab-PK: Sindhština (arabština, Pákistán)
+sd-Deva-IN: Sindhi (Devanagari, Indie)
+se-FI: Severní sámština (Finsko)
+se-NO: Severní sámština (Norsko)
+se-SE: Severní Sámština (Švédsko)
+Search: Hledání
+Search by users: Vyhledávání podle uživatelů
+Search For {0} Extended Attributes: Hledání {0} rozšířených atributů
+Search for Brands: Vyhledávání značek
+Search for Document Types: Hledání typů dokumentů
+Search For Permissions: Vyhledat oprávnění
+Search for Roles...: Hledání rolí...
+Search for Trails: Vyhledávání stezek
+Search For User Roles: Hledání uživatelských rolí
+Search For Users: Vyhledávání uživatelů
+Search in New Values: Vyhledávání v nových hodnotách
+Search in Old Values: Vyhledávání ve starých hodnotách
+Security: Bezpečnost
+seh-MZ: Sena (Mosambik)
+Select Language: Vybrat jazyk
+Send: Poslat
+Sep: Září
+ses-ML: Koyraboro Senni (Mali)
+Set new password: Nastavit nové heslo
+sg-CF: Sango (Středoafrická republika)
+shi-Latn-MA: Tachelhit (latinka, Maroko)
+shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
+Show: Ukázat
+si-LK: Sinhálština (Srí Lanka)
+Sign In: Přihlásit se
+Sign Up: Registrace
+sk-SK: Slovenština (Slovensko)
+sl-SI: Slovinština (Slovinsko)
+sma-NO: Jižní sámština (Norsko)
+sma-SE: Jižní Sámština (Švédsko)
+smj-NO: Lule Sami (Norsko)
+smj-SE: Lule Sami (Švédsko)
+smn-FI: Inari Sami (Finsko)
+sms-FI: Skoltská sámština (Finsko)
+sn-Latn-ZW: Shona (latinka, Zimbabwe)
+so-DJ: Somálština (Džibutsko)
+so-ET: Somálština (Etiopie)
+so-KE: Somálština (Keňa)
+so-SO: Somálština (Somálsko)
+Something went wrong during the refresh token action: Během akce aktualizačního tokenu se něco pokazilo
+sq-AL: Albánština (Albánie)
+sq-MK: Albánština (Severní Makedonie)
+sq-XK: Albánština (Kosovo)
+sr-Cyrl-BA: Srbština (cyrilice, Bosna a Hercegovina)
+sr-Cyrl-ME: Srbština (cyrilice, Černá Hora)
+sr-Cyrl-RS: Srbština (cyrilice, Srbsko)
+sr-Cyrl-XK: Srbština (cyrilice, Kosovo)
+sr-Latn-BA: Srbština (latinka, Bosna a Hercegovina)
+sr-Latn-ME: Srbština (latinka, Černá Hora)
+sr-Latn-RS: Srbština (latinka, Srbsko)
+sr-Latn-XK: Srbština (latinka, Kosovo)
+ss-SZ: siSwati (Eswatini)
+ss-ZA: siSwati (Jižní Afrika)
+ssy-ER: Saho (Eritrea)
+st-LS: Sesotho (Lesotho)
+st-ZA: Sesotho (Jižní Afrika)
+Status: Stav
+Striped: Proužkovaný
+su-Latn-ID: Sundanština (latinka, Indonésie)
+Support: Podpora
+sv-AX: Švédština (Ålandy)
+sv-FI: Švédština (Finsko)
+sv-SE: Švédština (Švédsko)
+sw-CD: Svahilština (Kongo [DRK])
+sw-KE: Svahilština (Keňa)
+sw-TZ: Svahilština (Tanzanie)
+sw-UG: Svahilština (Uganda)
+Swagger: Dokumentace API
+Swedish: Švédština
+syr-SY: Syrština (Sýrie)
+ta-IN: Tamilština (Indie)
+ta-LK: Tamilština (Srí Lanka)
+ta-MY: Nor (Malajsie)
+ta-SG: Tamilština (Singapur)
+Table Name: Název tabulky
+Tax: Daň
+Tax must be greater than 0: Daň musí být vyšší než 0
+te-IN: Telugu (Indie)
+teo-KE: Teso (Keňa)
+teo-UG: Teso (Uganda)
+Text: Text
+Text value is required using {0} type!: Textová hodnota je vyžadována pomocí {0} typu!
+tg-Cyrl-TJ: Tádžik (cyrilice, Tádžikistán)
+th-TH: Thajská (Thajsko)
+The following {0} permissions are also required for permission {1}: Následující oprávnění {0} jsou také vyžadována pro {1} oprávnění
+The following permission is also required for permission {1}: Následující oprávnění je také vyžadováno pro oprávnění {1}
+The User {0} has just edited, created or deleted entries here. You should reload the data: Uživatel {0} zde právě upravil, vytvořil nebo smazal záznamy. Měli byste znovu načíst data
+This is an Administrator Only View.: Toto je zobrazení pouze pro správce.
+ti-ER: Tigrinya (Eritrea)
+ti-ET: Tigrinya (Etiopie)
+tig-ER: Tigre (Eritrea)
+Time: Čas
+Title: Titul
+Title is required!: Titul je vyžadován!
+tk-TM: Turkmen (Turkmenistán)
+tn-BW: Setswana (Botswana)
+tn-ZA: Setswana (Jižní Afrika)
+to-TO: Tongan (Tonga)
+Toggle right-to-left/left-to-right: Přepínání zprava doleva/zleva doprava
+Token is required: Je vyžadován token
+Token Not Found!: Token nebyl nalezen!
+tr-CY: Turečtina (Kypr)
+tr-TR: Turečtina (Turecko)
+Trail Details: Podrobnosti o stezce
+Translations: Překlady
+ts-ZA: Xitsonga (Jižní Afrika)
+tt-RU: Tatarština (Rusko)
+twq-NE: Tasawaq (Niger)
+Type: Typ
+Type should be valid: Typ by měl být platný
+tzm-Arab-MA: Centrální Atlas Tamazight (arabština, Maroko)
+tzm-Latn-DZ: Centrální Atlas Tamazight (latinka, Alžírsko)
+tzm-Latn-MA: Centrální Atlas Tamazight (latinka, Maroko)
+tzm-Tfng-MA: Centrální Atlas Tamazight (Tifinagh, Maroko)
+ug-CN: Ujgurština (Čína)
+uk-UA: Ukrajinština (Ukrajina)
+Update: Aktualizace
+Update Brand: Aktualizovat značku
+Update Document: Aktualizovat dokument
+Update Document Type: Aktualizovat typ dokumentu
+Update Extended Attribute: Rozšířený atribut aktualizace
+Update Permissions: Aktualizovat oprávnění
+Update Product: Aktualizovat produkt
+Update Role: Aktualizační role
+Update Role Permissions: Aktualizace oprávnění role
+Update User Roles: Aktualizace rolí uživatelů
+Updated User Status.: Aktualizovaný stav uživatele.
+Upload: Upload
+Upload Image: Nahrát obrázek
+ur-IN: Urdština (Indie)
+ur-PK: Urdština (Pákistán)
+User: Uživatel
+User Name: Uživatelské jméno
+User Registered: Uživatel zaregistrován!
+User Registered Mailbox: Uživatel zaregistrován. Potvrzovací pošta byla doručena do poštovní schránky.
+Username: Uživatelské jméno
+UserName: Uživatelské jméno
+UserName is required: Uživatelské jméno je povinné
+UserName must be at least of length 6: Uživatelské jméno musí mít alespoň délku 6
+Users: Uživatelé
+Users exported: Exportované uživatele
+UTC: UTC
+uz-Arab-AF: Uzbečti (arabština, Afghánistán)
+uz-Cyrl-UZ: Uzbečtina (cyrilice, Uzbekistán)
+uz-Latn-UZ: Uzbečti (latinka, Uzbekistán)
+vai-Latn-LR: Vai (latinka, Libérie)
+vai-Vaii-LR: Go (Vai, Libérie)
+Value: Hodnota
+ve-ZA: Venda (Jihoafrická republika)
+vi-VN: Vietnamština (Vietnam)
+View: Pohled
+View Profile: Zobrazit profil
+vo-001: Volapük (Svět)
+vun-TZ: Vunjo (Tanzanie)
+wae-CH: Walser (Švýcarsko)
+wal-ET: Wolaytta (Etiopie)
+Welcome {0}: Uvítací {0}
+Will be saved only when selected Permission: Uloží se pouze v případě, že je vybrána možnost Oprávnění
+With_Selected: '{0} Vybráno'
+wo-SN: Wolof (Senegal)
+xh-ZA: isiXhosa (Jižní Afrika)
+xog-UG: Soga (Uganda)
+yav-CM: Yangben (Kamerun)
+yi-001: Toidiš (svět)
+yo-BJ: Joruba (Benin)
+yo-NG: Yoruba (Nigérie)
+you: ty
+You are logged out because the Permissions of one of your Roles have been updated.: Jste odhlášeni, protože byla aktualizována oprávnění jedné z vašich rolí.
+You are logged out because the user with your Token has been deleted or token is expired.: Jste odhlášeni, protože uživatel s vaším tokenem byl odstraněn nebo vypršela platnost tokenu.
+You are Logged Out.: Jste odhlášeni.
+Your Profile has been updated.: Váš profil byl aktualizován.
+Your Recent Activities.: Vaše nedávné aktivity.
+zgh-Tfng-MA: Standardní marocký Tamazight (Tifinagh, Maroko)
+zh-CN: Čínština (Čína)
+zh-Hans-HK: Čínština (zjednodušená, Hongkong – zvláštní správní oblast)
+zh-Hans-MO: Čínština (zjednodušená, Macao – zvláštní správní oblast)
+zh-HK: Čínština (Hongkong – zvláštní správní oblast)
+zh-MO: Čínština (Macao – zvláštní správní oblast)
+zh-SG: Čínština (Singapur)
+zh-TW: Čínština (Tchaj-wan)
+zu-ZA: isiZulu (Jižní Afrika)

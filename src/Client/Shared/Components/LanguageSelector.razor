@@ -54,7 +54,7 @@
         await LoadPreferenceAsync();
         languages = await _api.Language_GetAllAsync(new(l => l.IsActive));
         if (languages == null || !languages.Any())
-            languages = LocalizationConstants.SupportedLanguages.MapElementsTo<LanguageDto>().ToList();
+            languages = LocalizationConstants.DefaultUILanguages.MapElementsTo<LanguageDto>().ToList();
     }
 
     private string DisplayStr(LanguageDto language)

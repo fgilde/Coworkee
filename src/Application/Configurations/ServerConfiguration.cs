@@ -18,7 +18,6 @@ namespace CleanArchitectureBase.Application.Configurations
         public Connectionstrings ConnectionStrings { get; set; }
         public Cognitiveservices CognitiveServices { get; set; }
         public Apidocumentation ApiDocumentation { get; set; }
-        public Translationservice TranslationService { get; set; }
         public Mailconfiguration MailConfiguration { get; set; }
         public Serilog Serilog { get; set; }
     }
@@ -45,7 +44,7 @@ namespace CleanArchitectureBase.Application.Configurations
     {
         public string DefaultConnection { get; set; }
     }
-
+    
     public class Cognitiveservices
     {
         public Translation Translation { get; set; }
@@ -56,6 +55,7 @@ namespace CleanArchitectureBase.Application.Configurations
         public string Key { get; set; }
         public string TextTranslationEndpoint { get; set; }
         public string DocumentTranslationEndpoint { get; set; }
+        public string Region { get; set; }
     }
 
     public class Apidocumentation
@@ -80,13 +80,6 @@ namespace CleanArchitectureBase.Application.Configurations
         public string Name { get; set; }
         public string spdx_id { get; set; }
         public string Url { get; set; }
-    }
-
-    public class Translationservice
-    {
-        public string TextTranslationEndpoint { get; set; }
-        public string ApiKey { get; set; }
-        public string Region { get; set; }
     }
 
     public class Mailconfiguration
@@ -138,5 +131,6 @@ namespace CleanArchitectureBase.Application.Configurations
         public string path { get; set; }
         public string rollingInterval { get; set; }
     }
+
 
 }

@@ -1,0 +1,952 @@
+﻿aa-DJ: Afar (Djibouti)
+aa-ER: Afar (Eritrea)
+aa-ET: Afar (Ethiopië)
+Account: Rekening
+Actions: Acties
+Activate User?: Gebruiker activeren?
+Active: Actief
+Active?: Actief?
+Add Brand: Merk toevoegen
+Add Document: Document toevoegen
+Add Document Type: Documenttype toevoegen
+Add Extended Attribute: Uitgebreid kenmerk toevoegen
+Add Product: Product toevoegen
+Add Role: Rol toevoegen
+Administrator: Administrateur
+Administrator Settings.: Beheerdersinstellingen.
+af-NA: Afrikaans (Namibië)
+af-ZA: Afrikaans (Zuid-Afrika)
+agq-CM: Aghem (Kameroen)
+ak-GH: Will (Ghana)
+All Groups: Alle groepen
+All Permissions: Alle machtigingen
+Already have an account?: Heb je al een account?
+am-ET: Amhaars (Ethiopië)
+ApplicationDescription: Voorbeeldtoepassing met WebAssembly en Clean Architecture Pattern
+ApplicationSubDescription: Welkom op deze Blazor Pagina
+Apply: Toepassen
+Apr: Apr
+ar-001: Arabisch (Wereld)
+ar-AE: Arabisch (Verenigde Arabische Emiraten)
+ar-BH: Arabisch (Bahrein)
+ar-DJ: Arabisch (Djibouti)
+ar-DZ: Arabisch (Algerije)
+ar-EG: Arabisch (Egypte)
+ar-ER: Arabisch (Eritrea)
+ar-IL: Arabisch (Israël)
+ar-IQ: Arabisch (Irak)
+ar-JO: Arabisch (Jordanië)
+ar-KM: Arabisch (Comoren)
+ar-KW: Arabisch (Koeweit)
+ar-LB: Arabisch (Libanon)
+ar-LY: Arabisch (Libië)
+ar-MA: Arabisch (Marokko)
+ar-MR: Arabisch (Mauritanië)
+ar-OM: Arabisch (Oman)
+ar-PS: Arabisch (Palestijnse Autoriteit)
+ar-QA: Arabisch (Qatar)
+ar-SA: Arabisch (Saoedi-Arabië)
+ar-SD: Arabisch (Soedan)
+ar-SO: Arabisch (Somalië)
+ar-SS: Arabisch (Zuid-Soedan)
+ar-SY: Arabisch (Syrië)
+ar-TD: Arabisch (Tsjaad)
+ar-TN: Arabisch (Tunesië)
+ar-YE: Arabisch (Jemen)
+arn-CL: Mapuche (Chili)
+As Admin you can filter for users here: Als Admin kunt u hier filteren op gebruikers
+as-IN: Assamees (India)
+asa-TZ: Asu (Tanzania)
+ast-ES: Asturian (Spanje)
+Audit Trails: Audittrails
+Audit Trails exported: Geëxporteerde audittrails
+Aug: Aug
+Auto Confirm Email?: E-mail automatisch bevestigen?
+az-Cyrl-AZ: Azerbeidzjaans (Cyrillisch, Azerbeidzjan)
+az-Latn-AZ: Azerbeidzjaans (Latijn, Azerbeidzjan)
+ba-RU: Basjkiers (Rusland)
+Barcode: Barcode
+Barcode already exists.: Barcode bestaat al.
+Barcode is required!: Barcode is verplicht!
+bas-CM: Basaa (Kameroen)
+be-BY: Wit-Russisch (Wit-Rusland)
+bem-ZM: Bemba (Zambia)
+bez-TZ: Benen (Tanzania)
+bg-BG: Bulgaars (Bulgarije)
+bin-NG: Edo (Nigeria)
+bm-Latn-ML: Bamanankan (Latijn, Mali)
+bn-BD: Bangla (Bangladesh)
+bn-IN: Bangla (Indië)
+bo-CN: Tibetaans (China)
+bo-IN: Tibetaans (India)
+Bordered: Grenst aan
+br-FR: Breton (Frankrijk)
+Brand: Merk
+Brand Deleted: Merk verwijderd
+Brand is required!: Merk is verplicht!
+Brand Not Found!: Merk niet gevonden!
+Brand Saved: Merk gered!
+Brand Updated: Merk bijgewerkt!
+BrandName: Merk
+Brands: Merken
+Brands exported: Geëxporteerde merken
+Browse Available Documents.: Blader door beschikbare documenten.
+brx-IN: Bodo (Indië)
+bs-Cyrl-BA: Bosnisch (Cyrillisch, Bosnië & Herzegovina)
+bs-Latn-BA: Bosnisch (Latijn, Bosnië & Herzegovina)
+byn-ER: Blin (Eritrea)
+ca-AD: Catalaans (Andorra)
+ca-ES: Catalaans (Spanje)
+ca-FR: Catalaans (Frankrijk)
+ca-IT: Catalaans (Italië)
+Cancel: Annuleren
+Catalog Management: Catalogusbeheer
+ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
+ccp-Cakm-IN: Chakma (Chakma, India)
+ce-RU: Tsjetsjeens (Rusland)
+ceb-Latn-PH: Cebuano (Latijn, Filipijnen)
+cgg-UG: Chiga (Oeganda)
+Change Password: Wachtwoord wijzigen
+Charts comming soon ish...: Hitlijsten binnenkort ish...
+chat: Babbelen
+Chat: Babbelen
+Chat?: Babbelen?
+chr-Cher-US: Cherokee (Cherokee, Verenigde Staten)
+Clear: Duidelijk
+Client Language has been changed: Clienttaal is gewijzigd
+co-FR: Corsicaans (Frankrijk)
+Columns Affected: Kolommen waarin dit van invloed is
+Communication: Communicatie
+Community: Gemeenschap
+Confirm: Bevestigen
+Confirm and Ignore: Bevestigen en negeren
+Confirm and Set Required: Bevestigen en instellen Vereist
+Confirm Password: Bevestig wachtwoord
+contacts: Contactpersonen
+Create: Scheppen
+cs-CZ: Tsjechisch (Tsjechië)
+cu-RU: Kerk Slavisch (Rusland)
+Current Password: Huidig wachtwoord
+Current Password is required!: Huidig wachtwoord is vereist!
+cy-GB: Welsh (Verenigd Koninkrijk)
+da-DK: Deens (Denemarken)
+da-GL: Deens (Groenland)
+Dashboard: Dashboard
+Date: Datum
+Date Created: Datum van aansning
+Date Range For Searching: Datumbereik voor zoeken
+DateTime value is required using {0} type!: DateTime-waarde is vereist met {0} type!
+dav-KE: Taita (Kenia)
+de-AT: Duits (Oostenrijk)
+de-BE: Duits (België)
+de-CH: Duits (Zwitserland)
+de-DE: Duits (Duitsland)
+de-IT: Duits (Italië)
+de-LI: Duits (Liechtenstein)
+de-LU: Duits (Luxemburg)
+Dec: Dec
+Decimal: Decimaal
+Decimal value is required using {0} type!: Decimale waarde is vereist met behulp van {0} type!
+Delete: Verwijderen
+Delete Confirmation: Bevestiging verwijderen
+Delete Content: Inhoud verwijderen
+Delete Content {0}: Inhoud '{0}' verwijderen
+Delete Extended Attribute?: Uitgebreid kenmerk verwijderen?
+Delete Image: Afbeelding verwijderen
+Delete Picture: Afbeelding verwijderen
+Delete Role Content: Wilt u de rol verwijderen met Id {0}?
+Delete these {0} elements: Deze {0} elementen verwijderen?
+Delete this element: Dit element verwijderen?
+Deletion Not Allowed: Verwijdering niet toegestaan
+Dense: Dicht
+Dependent permissions required: Afhankelijke machtigingen vereist
+Description: Beschrijving
+Description is required!: Beschrijving is vereist!
+detailed guide for more.: gedetailleerde gids voor meer.
+Details for Trail ID: Details voor Trail ID
+dje-NE: Djerma (Niger)
+Do you want to delete the profile picture of {0}: Wil je de profielfoto van {0} verwijderen
+Document Deleted: Document verwijderd
+Document Extended Attributes: Uitgebreide documentkenmerken
+Document Management: Documentbeheer
+Document Not Found!: Document niet gevonden!
+Document Saved: Document opgeslagen
+Document Store: Documentenarchief
+Document Type: Documenttype
+Document Type Deleted: Documenttype verwijderd
+Document Type is required!: Documenttype is vereist!
+Document Type Not Found!: Documenttype niet gevonden!
+Document Type Saved: Documenttype opgeslagen
+Document Type Updated: Documenttype bijgewerkt
+Document type with this name already exists.: Documenttype met deze naam bestaat al.
+Document Types: Documenttypen
+Document Types exported: Geëxporteerde documenttypen
+Document Updated: Document bijgewerkt
+Documents: Documenten
+doi-Deva-IN: Dogri (Devanagari, India)
+Don't have an account?: Heb je nog geen account?
+Done!: Klaar!
+Download: Downloaden
+dsb-DE: Nedersorbisch (Duitsland)
+dua-CM: Duala (Kameroen)
+dv-MV: Divehi (Malediven)
+dyo-SN: Jola-Fonyi (Senegal)
+dz-BT: Dzongkha (Bhutan)
+E-mail: E-mail
+E-Mail: E-mail
+ebu-KE: Embu (Kenia)
+Edit: Bewerken
+ee-GH: Ooi (Ghana)
+ee-TG: Ooi (Togo)
+el-CY: Grieks (Cyprus)
+el-GR: Grieks (Griekenland)
+Email: E-mail
+Email Confirmation: E-mail bevestiging
+Email is not correct: E-mail is niet correct
+Email is required: E-mail is verplicht
+Email is required!: E-mail is verplicht!
+en-001: Engels (Wereld)
+en-029: Engels (Caraïben)
+en-150: Engels (Europa)
+en-AE: Engels (Verenigde Arabische Emiraten)
+en-AG: Engels (Antigua & Barbuda)
+en-AI: Engels (Anguilla)
+en-AS: Engels (Amerikaans Samoa)
+en-AT: Engels (Oostenrijk)
+en-AU: Engels (Australië)
+en-BB: Engels (Barbados)
+en-BE: Engels (België)
+en-BI: Engels (Burundi)
+en-BM: Engels (Bermuda)
+en-BS: Engels (Bahama's)
+en-BW: Engels (Botswana)
+en-BZ: Engels (Belize)
+en-CA: Engels (Canada)
+en-CC: Engels (Cocoseilanden)
+en-CH: Engels (Zwitserland)
+en-CK: Engels (Cookeilanden)
+en-CM: Engels (Kameroen)
+en-CX: Engels (Christmas Island)
+en-CY: Engels (Cyprus)
+en-DE: Engels (Duitsland)
+en-DK: Engels (Denemarken)
+en-DM: Engels (Dominica)
+en-ER: Engels (Eritrea)
+en-FI: Engels (Finland)
+en-FJ: Engels (Fiji)
+en-FK: Engels (Falklandeilanden)
+en-FM: Engels (Micronesië)
+en-GB: Engels (Verenigd Koninkrijk)
+en-GD: Engels (Grenada)
+en-GG: Engels (Guernsey)
+en-GH: Engels (Ghana)
+en-GI: Engels (Gibraltar)
+en-GM: Engels (Gambia)
+en-GU: Engels (Guam)
+en-GY: Engels (Guyana)
+en-HK: Engels (Hong Kong SAR)
+en-ID: Engels (Indonesië)
+en-IE: Engels (Ierland)
+en-IL: Engels (Israël)
+en-IM: Engels (Isle of Man)
+en-IN: Engels (India)
+en-IO: Engels (Brits Territorium in de Indische Oceaan)
+en-JE: Engels (Jersey)
+en-JM: Engels (Jamaica)
+en-KE: Engels (Kenia)
+en-KI: Engels (Kiribati)
+en-KN: Engels (St. Kitts & Nevis)
+en-KY: Engels (Kaaimaneilanden)
+en-LC: Engels (St. Lucia)
+en-LR: Engels (Liberia)
+en-LS: Engels (Lesotho)
+en-MG: Engels (Madagaskar)
+en-MH: Engels (Marshalleilanden)
+en-MO: Engels (Macao SAR)
+en-MP: Engels (Noordelijke Marianen)
+en-MS: Engels (Montserrat)
+en-MT: Engels (Malta)
+en-MU: Engels (Mauritius)
+en-MW: Engels (Malawi)
+en-MY: Engels (Maleisië)
+en-NA: Engels (Namibië)
+en-NF: Engels (Norfolkeiland)
+en-NG: Engels (Nigeria)
+en-NL: Engels (Nederland)
+en-NR: Engels (Nauru)
+en-NU: Engels (Niue)
+en-NZ: Engels (Nieuw-Zeeland)
+en-PG: Engels (Papoea-Nieuw-Guinea)
+en-PH: Engels (Filipijnen)
+en-PK: Engels (Pakistan)
+en-PN: Engels (Pitcairneilanden)
+en-PR: Engels (Puerto Rico)
+en-PW: Engels (Palau)
+en-RW: Engels (Rwanda)
+en-SB: Engels (Salomonseilanden)
+en-SC: Engels (Seychellen)
+en-SD: Engels (Soedan)
+en-SE: Engels (Zweden)
+en-SG: Engels (Singapore)
+en-SH: Engels (St Helena, Ascension, Tristan da Cunha)
+en-SI: Engels (Slovenië)
+en-SL: Engels (Sierra Leone)
+en-SS: Engels (Zuid-Soedan)
+en-SX: English (Sint Maarten)
+en-SZ: Engels (Eswatini)
+en-TC: Engels (Turks - en Caicoseilanden)
+en-TK: Engels (Tokelau)
+en-TO: Engels (Tonga)
+en-TT: Engels (Trinidad & Tobago)
+en-TV: Engels (Tuvalu)
+en-TZ: Engels (Tanzania)
+en-UG: Engels (Oeganda)
+en-UM: Engels (Amerikaanse eilanden)
+en-US: Engels (Verenigde Staten)
+en-US-posix: Engels (Verenigde Staten, Computer)
+en-VC: Engels (St. Vincent & Grenadines)
+en-VG: Engels (Britse Maagdeneilanden)
+en-VI: Engels (Amerikaanse Maagdeneilanden)
+en-VU: Engels (Vanuatu)
+en-WS: Engels (Samoa)
+en-ZA: Engels (Zuid-Afrika)
+en-ZM: Engels (Zambia)
+en-ZW: Engels (Zimbabwe)
+English: Engels
+Enter email for password reset: Voer het e-mailadres in dat aan uw account is gekoppeld en u ontvangt een e-mail met een link om uw wachtwoord opnieuw in te stellen
+Enter your message...: Voer uw bericht in...
+Entity Id: Entiteits-id
+Entity is required!: Entiteit is verplicht!
+EntityCreatedBy: EntiteitGecreteerdDoor
+EntityCreatedOn (Local): EntityCreatedOn (Lokaal)
+EntityCreatedOn (UTC): EntityCreatedOn (UTC)
+EntityId: EntityId
+EntityLastModifiedBy: EntityLastModifiedBy
+EntityLastModifiedOn (Local): EntityLastModifiedOn (Lokaal)
+EntityLastModifiedOn (UTC): EntityLastModifiedOn (UTC)
+eo-001: Esperanto (Wereld)
+es-419: Spaans (Latijns-Amerika)
+es-AR: Spaans (Argentinië)
+es-BO: Spaans (Bolivia)
+es-BR: Spaans (Brazilië)
+es-BZ: Spaans (Belize)
+es-CL: Spaans (Chili)
+es-CO: Spaans (Colombia)
+es-CR: Spaans (Costa Rica)
+es-CU: Spaans (Cuba)
+es-DO: Spaans (Dominicaanse Republiek)
+es-EC: Spaans (Ecuador)
+es-ES: Spaans (Spanje)
+es-GQ: Spaans (Equatoriaal-Guinea)
+es-GT: Spaans (Guatemala)
+es-HN: Spaans (Honduras)
+es-MX: Spaans (Mexico)
+es-NI: Spaans (Nicaragua)
+es-PA: Spaans (Panama)
+es-PE: Spaans (Peru)
+es-PH: Spaans (Filipijnen)
+es-PR: Spaans (Puerto Rico)
+es-PY: Spaans (Paraguay)
+es-SV: Spaans (El Salvador)
+es-US: Spaans (Verenigde Staten)
+es-UY: Spaans (Uruguay)
+es-VE: Spaans (Venezuela)
+Español: Spaans
+et-EE: Estisch (Estland)
+eu-ES: Baskisch (Spanje)
+ewo-CM: Ewondo (Kameroen)
+Export: Exporteren
+Export To Excel: Exporteren naar Excel
+Export_SheetName: Gegevens
+Extended Attribute Deleted: Uitgebreid kenmerk verwijderd
+Extended Attribute Not Found!: Uitgebreid attribuut niet gevonden!
+Extended Attribute Saved: Uitgebreid attribuut opgeslagen
+Extended Attribute Updated: Uitgebreid attribuut bijgewerkt
+Extended Attribute with this Key already exists.: Uitgebreid attribuut met deze sleutel bestaat al.
+Extended Attributes: '\{0}\ Uitgebreide kenmerken'
+Extended Attributes exported: Geëxporteerde uitgebreide kenmerken
+External Id: Externe id
+ExternalId: ExternalId
+fa-IR: Perzisch (Iran)
+Failed to get client preferences: Kan de voorkeuren van de klant niet ophalen
+FAQs: Veelgestelde vragen
+Features: Functies
+Feb: feb
+ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
+ff-Adlm-CM: Fulah (Adlam, Kameroen)
+ff-Adlm-GH: Fulah (Adlam, Ghana)
+ff-Adlm-GM: Fulah (Adlam, Gambia)
+ff-Adlm-GN: Fulah (Adlam, Guinee)
+ff-Adlm-GW: Fulah (Adlam, Guinee-Bissau)
+ff-Adlm-LR: Fulah (Adlam, Liberia)
+ff-Adlm-MR: Fulah (Adlam, Mauritanië)
+ff-Adlm-NE: Fulah (Adlam, Niger)
+ff-Adlm-NG: Fulah (Adlam, Nigeria)
+ff-Adlm-SL: Fulah (Adlam, Sierra Leone)
+ff-Adlm-SN: Fulah (Adlam, Senegal)
+ff-Latn-BF: Fulah (Latijn, Burkina Faso)
+ff-Latn-CM: Fulah (Latijn, Kameroen)
+ff-Latn-GH: Fulah (Latijn, Ghana)
+ff-Latn-GM: Fulah (Latijn, Gambia)
+ff-Latn-GN: Fulah (Latijn, Guinee)
+ff-Latn-GW: Fulah (Latijn, Guinee-Bissau)
+ff-Latn-LR: Fulah (Latijn, Liberia)
+ff-Latn-MR: Fulah (Latijn, Mauritanië)
+ff-Latn-NE: Fulah (Latijn, Niger)
+ff-Latn-NG: Fulah (Latijn, Nigeria)
+ff-Latn-SL: Fulah (Latijn, Sierra Leone)
+ff-Latn-SN: Fulah (Latijn, Senegal)
+fi-FI: Fins (Finland)
+fil-PH: Filipijns (Filipijnen)
+File is required!: Bestand is vereist!
+Fill Administrator Credentials: Beheerdersreferenties invullen
+Fill Basic User Credentials: Basisgebruikersreferenties invullen
+Filtered Audit Trails exported: Geëxporteerde gefilterde audittrails
+Filtered Brands exported: Gefilterde merken geëxporteerd
+Filtered Document Types exported: Geëxporteerde gefilterde documenttypen
+Filtered Extended Attributes exported: Gefilterde uitgebreide kenmerken geëxporteerd
+Filtered Products exported: Geëxporteerde gefilterde producten
+Filtered Users exported: Gefilterde gebruikers geëxporteerd
+First Name: Voornaam
+First Name is required: Voornaam is verplicht
+fo-DK: Faeröers (Denemarken)
+fo-FO: Faeröers (Faeröer)
+Forgot password?: Wachtwoord vergeten?
+fr-029: Frans (Caraïben)
+fr-BE: Frans (België)
+fr-BF: Frans (Burkina Faso)
+fr-BI: Frans (Burundi)
+fr-BJ: Frans (Benin)
+fr-BL: Frans (St. Barthélemy)
+fr-CA: Frans (Canada)
+fr-CD: Frans (Congo [DRC])
+fr-CF: Frans (Centraal-Afrikaanse Republiek)
+fr-CG: Frans (Congo)
+fr-CH: Frans (Zwitserland)
+fr-CI: Frans (Ivoorkust)
+fr-CM: Frans (Kameroen)
+fr-DJ: Frans (Djibouti)
+fr-DZ: Frans (Algerije)
+fr-FR: Frans (Frankrijk)
+fr-GA: Frans (Gabon)
+fr-GF: Frans (Frans Guyana)
+fr-GN: Frans (Guinee)
+fr-GP: Frans (Guadeloupe)
+fr-GQ: Frans (Equatoriaal-Guinea)
+fr-HT: Frans (Haïti)
+fr-KM: Frans (Comoren)
+fr-LU: Frans (Luxemburg)
+fr-MA: Frans (Marokko)
+fr-MC: Frans (Monaco)
+fr-MF: Frans (St. Martin)
+fr-MG: Frans (Madagaskar)
+fr-ML: Frans (Mali)
+fr-MQ: Frans (Martinique)
+fr-MR: Frans (Mauritanië)
+fr-MU: Frans (Mauritius)
+fr-NC: Frans (Nieuw-Caledonië)
+fr-NE: Frans (Niger)
+fr-PF: Frans (Frans-Polynesië)
+fr-PM: Frans (St. Pierre & Miquelon)
+fr-RE: Engels (Reünie)
+fr-RW: Frans (Rwanda)
+fr-SC: Frans (Seychellen)
+fr-SN: Frans (Senegal)
+fr-SY: Frans (Syrië)
+fr-TD: Frans (Tsjaad)
+fr-TG: Frans (Togo)
+fr-TN: Frans (Tunesië)
+fr-VU: Frans (Vanuatu)
+fr-WF: Frans (Wallis & Futuna)
+fr-YT: Frans (Mayotte)
+French: Frans
+fur-IT: Friulisch (Italië)
+fy-NL: West-Fries (Nederland)
+ga-GB: Iers (Verenigd Koninkrijk)
+ga-IE: Iers (Ierland)
+gd-GB: Schots-Gaelisch (Verenigd Koninkrijk)
+German: Duits
+gl-ES: Galicisch (Spanje)
+gn-PY: Guarani (Paraguay)
+GoHome: Ga naar huis!
+Group: Groep
+gsw-CH: Zwitsers Duits (Zwitserland)
+gsw-FR: Zwitsers Duits (Frankrijk)
+gsw-LI: Zwitsers Duits (Liechtenstein)
+gu-IN: Gujarati (Indië)
+guz-KE: Gusii (Kenia)
+gv-IM: Manx (Eiland Man)
+ha-Latn-GH: Hausa (Latijn, Ghana)
+ha-Latn-NE: Hausa (Latijn, Niger)
+ha-Latn-NG: Hausa (Latijn, Nigeria)
+haw-US: Hawaiian (Verenigde Staten)
+he-IL: Hebreeuws (Israël)
+Hello World: Hallo mensen
+Here you can leave a comment for this permission for the current role: Hier kunt u een reactie achterlaten voor deze toestemming voor de huidige rol
+hi-IN: Hindi (Indië)
+Hide: Verbergen
+Home: Thuis
+hr-BA: Kroatisch (Bosnië & Herzegovina)
+hr-HR: Kroatisch (Kroatië)
+hsb-DE: Opper-Sorbisch (Duitsland)
+hu-HU: Hongaars (Hongarije)
+hy-AM: Armeens (Armenië)
+I agree to the terms and privacy: Ik ga akkoord met de voorwaarden en privacy
+ia-001: Interlingua (Wereld)
+ibb-NG: Ibibio (Nigeria)
+Id: Legitimatiebewijs
+id-ID: Indonesisch (Indonesisch)
+ig-NG: Igbo (Nigeria)
+ii-CN: Yi (China)
+Include Entity fields (Export): Entiteitsvelden opnemen (exporteren)
+Incorrect Password.: Onjuist wachtwoord.
+Indonesia: Indonesisch
+Is Active: Is actief
+Is Public: Is openbaar
+Is Public?: Is openbaar?
+is-IS: IJslands (IJsland)
+IsActive: IsActive
+it-CH: Italiaans (Zwitserland)
+it-IT: Italiaans (Italië)
+it-SM: Italiaans (San Marino)
+it-VA: Italiaans (Vaticaanstad)
+Italian: Italiaans
+iu-CA: Inuktitut (Canada)
+iu-Latn-CA: Inuktitut (Latijn, Canada)
+ja-JP: Japans (Japan)
+Jan: Jan
+jgo-CM: Ngomba (Kameroen)
+jmc-TZ: Machame (Tanzania)
+Json: Json
+Json value is required using {0} type!: Json-waarde is vereist met behulp van {0} type!
+Json value must be a valid json string using {0} type!: Json-waarde moet een geldige json-tekenreeks zijn met {0}-type!
+Jul: Jul
+Jun: Jun
+jv-Java-ID: Javaans (Javaans, Indonesisch)
+jv-Latn-ID: Javaans (Latijn, Indonesisch)
+ka-GE: Georgisch (Georgië)
+kab-DZ: Kabyle (Algerije)
+kam-KE: Kamba (Kenia)
+kde-TZ: Makonde (Tanzania)
+kea-CV: Kabuverdianu (Kaapverdië)
+Key: Sleutel
+Key is required!: Sleutel is vereist!
+khq-ML: Koyra Chiini (Mali)
+ki-KE: Kikuyu (Kenia)
+kk-KZ: Kazachs (Kazachstan)
+kkj-CM: Kako (Kameroen)
+kl-GL: Kalaallisut (Groenland)
+kln-KE: Kalenjin (Kenia)
+km-KH: Khmer (Cambodja)
+kn-IN: Kannada (Indië)
+ko-KP: Koreaans (Noord-Korea)
+ko-KR: Koreaans (Korea)
+kok-IN: Konkani (Indië)
+kr-Latn-NG: Kanuri (Latijn, Nigeria)
+ks-Arab-IN: Kashmiri (Arabisch, India)
+ks-Deva-IN: Kashmiri (Devanagari, India)
+ksb-TZ: Shambala (Tanzania)
+ksf-CM: Bafia (Kameroen)
+ksh-DE: Colognian (Duitsland)
+ku-Arab-IQ: Koerdisch (Arabisch, Irak)
+ku-Arab-IR: Koerdisch (Arabisch, Iran)
+kw-GB: Cornish (Verenigd Koninkrijk)
+ky-KG: Kirgizisch (Kirgizië)
+la-VA: Latijn (Vaticaanstad)
+lag-TZ: Langi (Tanzania)
+Languages: Talen
+Last Name: Achternaam
+Last Name is required: Achternaam is verplicht
+lb-LU: Luxemburgs (Luxemburg)
+lg-UG: Shell (Oeganda)
+lkt-US: Lakota (Verenigde Staten)
+ln-AO: Lingala (Angola)
+ln-CD: Lingala (Congo [DRC])
+ln-CF: Lingala (Centraal-Afrikaanse Republiek)
+ln-CG: Lingala (Congo)
+lo-LA: Lao (Laos)
+Local: Lokaal
+Logged In.: Ingelogd.
+Logged Out.: Uitgelogd.
+LoginDescription: Log in met uw inloggegevens.
+Logout: Logout
+Logout Confirmation: Wil je echt uitloggen?
+lrc-IQ: Noord-Luri (Irak)
+lrc-IR: Noord-Luri (Iran)
+lt-LT: Litouws (Litouwen)
+lu-CD: Luba-Katanga (Congo [DRC])
+luo-KE: Luo (Kenia)
+luy-KE: Luyia (Kenia)
+lv-LV: Lets (Letland)
+mai-IN: Maithili (Indië)
+Mail: Post
+Manage {0} {1}'s Extended Attributes: Uitgebreide kenmerken van {0} {1} beheren
+Manage {0} {1}'s Permissions: De machtigingen van {0} {1} beheren
+Manage {0} {1}'s Roles: De rollen van {0} {1} beheren
+Manage {0} Extended Attributes: Uitgebreide kenmerken van {0} beheren
+Manage Brands.: Merken beheren.
+Manage Document Types.: Documenttypen beheren.
+Manage Extended Attributes: Uitgebreide kenmerken beheren
+Manage Languages: Talen beheren
+Manage Permission: Toestemming beheren
+Manage Products.: Producten beheren.
+Manage Roles: Rollen beheren
+Manage Roles.: Rollen beheren.
+Manage Translations: Vertalingen beheren
+Manage Users: Gebruikers beheren
+Manage your account: Uw account beheren
+Mar: Mar
+mas-KE: Masai (Kenia)
+mas-TZ: Masai (Tanzania)
+May: Mei
+mer-KE: Meru (Kenia)
+mfe-MU: Morisyen (Mauritius)
+mg-MG: Malagasi (Madagaskar)
+mgh-MZ: Makhuwa-Meetto (Mozambique)
+mgo-CM: Metaʼ (Kameroen)
+mi-NZ: Maori (Nieuw-Zeeland)
+mk-MK: Macedonisch (Noord-Macedonië)
+ml-IN: Malayalam (Indië)
+mn-MN: Mongools (Mongolië)
+mn-Mong-CN: Mongools (Mongools, China)
+mn-Mong-MN: Mongools (Mongools, Mongolië)
+mni-IN: Manipuri (Indië)
+moh-CA: Mohawk (Canada)
+mr-IN: Marathi (Indië)
+ms-BN: Maleis (Brunei)
+ms-ID: Maleis (Indonesië)
+ms-MY: Maleis (Maleisië)
+ms-SG: Maleis (Singapore)
+mt-MT: Maltees (Malta)
+mua-CM: Mundang (Kameroen)
+my-MM: Birmaans (Myanmar)
+mzn-IR: Mazanderani (Iran)
+Name: Naam
+Name is required: Naam is verplicht
+Name is required!: Naam is verplicht!
+naq-NA: Naam (Namibia)
+nb-NO: Engels (Noorwegen)
+nb-SJ: Noors Bokmål (Spitsbergen &Jan Mayen)
+nd-ZW: Noord-Ndebele (Zimbabwe)
+nds-DE: Laagduits (Duitsland)
+nds-NL: Laagduits (Nederland)
+ne-IN: Nepalees (India)
+ne-NP: Nepalees (Nepal)
+New Message From {0}: Nieuw bericht van {0}
+New Password: Nieuw wachtwoord
+New Values: Nieuwe waarden
+nl-AW: Nederlands (Aruba)
+nl-BE: Nederlands (België)
+nl-BQ: Nederlands (Bonaire, Sint Eustatius en Saba)
+nl-CW: Nederlands (Curaçao)
+nl-NL: Nederlands (Nederland)
+nl-SR: Nederlands (Suriname)
+nl-SX: Dutch (Sint Maarten)
+nmg-CM: Kwasio (Kameroen)
+nn-NO: Noors Nynorsk (Noorwegen)
+nnh-CM: Ngiemboon (Kameroen)
+No Allowed Actions: Geen toegestane acties
+Not Allowed.: Niet toegestaan.
+NotFoundMessage: De pagina die u zocht, bestaat niet.
+Nov: Nov
+nqo-GN: N'Ko (Guinee)
+nr-ZA: South Ndebele (Zuid-Afrika)
+nso-ZA: Sesotho sa Leboa (Zuid-Afrika)
+nus-SS: Nuer (Zuid-Soedan)
+nyn-UG: Nyankole (Oeganda)
+oc-FR: Occitaans (Frankrijk)
+Oct: Oct
+Ok: OK
+Old Values: Oude waarden
+om-ET: Oromo (Ethiopië)
+om-KE: Oromo (Kenia)
+Only Selected Group (Export): Alleen geselecteerde groep (exporteren)
+or-IN: Odia (Indië)
+os-GE: Ossetic (Georgië)
+os-RU: Ossetic (Rusland)
+Owner: Eigenaar
+pa-Arab-PK: Punjabi (Arabisch, Pakistan)
+pa-IN: Punjabi (Indië)
+pap-029: Papiaments (Caraïben)
+Password: Wachtwoord
+Password Changed!: Wachtwoord gewijzigd!
+Password Confirmation: Wachtwoord bevestiging
+Password Confirmation is required!: Wachtwoordbevestiging is vereist!
+Password is required!: Wachtwoord is vereist!
+Password must be at least of length 8: Wachtwoord moet minimaal lengte 8 hebben
+Password must contain at least one capital letter: Wachtwoord moet ten minste één hoofdletter bevatten
+Password must contain at least one digit: Wachtwoord moet ten minste één cijfer bevatten
+Password must contain at least one lowercase letter: Wachtwoord moet ten minste één kleine letter bevatten
+Passwords don't match: Wachtwoorden komen niet overeen
+pcm-Latn-NG: Nigeriaanse Pidgin (Latijn, Nigeria)
+Permission Name: Naam machtiging
+Personal: Persoonlijk
+Phone Number: Telefoonnummer
+PhoneNumber: Telefoonnummer
+pl-PL: Pools (Polen)
+prg-001: Pruisisch (Wereld)
+Primary Key: Primaire sleutel
+Product Deleted: Product verwijderd!
+Product Not Found!: Product niet gevonden!
+Product Saved: Product opgeslagen!
+Product Updated: Product bijgewerkt!
+Products: Producten
+Products exported: Exportproducten
+Profile: Profiel
+Profile Details: Profiel details
+Profile picture added.: Profielfoto toegevoegd.
+Profile picture deleted.: Profielfoto verwijderd.
+prs-AF: prs (Afghanistan)
+ps-AF: Pashto (Afghanistan)
+ps-PK: Pashto (Pakistan)
+pt-AO: Portugees (Angola)
+pt-BR: Portugees (Brazilië)
+pt-CH: Portugees (Zwitserland)
+pt-CV: Engels (Kaapverdië)
+pt-GQ: Portugees (Equatoriaal-Guinea)
+pt-GW: Portugees (Guinee-Bissau)
+pt-LU: Portugees (Luxemburg)
+pt-MO: Portugees (Macao SAR)
+pt-MZ: Portugees (Mozambique)
+pt-PT: Portugees (Portugal)
+pt-ST: Engels (Sao Tomé & Principe)
+pt-TL: Engels (Oost-Timor)
+Public Profile: 'Profiel: Openbaar'
+quc-GT: Kʼicheʼ (Guatemala)
+Quick Insights.: Snelle inzichten.
+Quick Start Guide: Snelstartgids
+quz-BO: Quz (Bolivië)
+quz-EC: quz (Ecuador)
+quz-PE: quz (Peru)
+Rate: Verhouding
+Rate must be greater than 0: Tarief moet groter zijn dan 0
+Realtime Updates & Insights with SignalR.: Realtime Updates & Insights met SignalR.
+Refreshed Token.: Vernieuwd token.
+Register: Registreren
+Register here: Registreer hier
+Register New User: Registreer nieuwe gebruiker
+Register User: Gebruiker registreren
+Registered Roles: Geregistreerde rollen
+Registered Users: Geregistreerde gebruikers
+Reload: Herladen
+Reload Data: Gegevens opnieuw laden
+Remember me?: Ken je me nog?
+Reset password: Wachtwoord opnieuw instellen
+Reset Password: Wachtwoord opnieuw instellen
+Resources: Weg
+rm-CH: Reto-Romas (Zwitserland)
+rn-BI: Rundi (Burundi)
+ro-MD: Engels (Moldavië)
+ro-RO: Engels (Roemenië)
+rof-TZ: Rombo (Tanzania)
+Role: Rol
+Role ID: Rol-ID
+Role Name: Rolnaam
+Roles: Rollen
+Roles Updated: Rollen bijgewerkt!
+RowsPerPageString: Rijen per pagina
+ru-BY: Russisch (Wit-Rusland)
+ru-KG: Russisch (Kirgizië)
+ru-KZ: Russisch (Kazachstan)
+ru-MD: Russisch (Moldavië)
+ru-RU: Russisch (Rusland)
+ru-UA: Russisch (Oekraïne)
+Russian: Russisch
+rw-RW: Kinyarwanda (Rwanda)
+rwk-TZ: Rwa (Tanzania)
+sa-IN: Sanskriet (India)
+sah-RU: Jakoetië (Rusland)
+saq-KE: Samburu (Kenia)
+sat-Olck-IN: Santali (Ol Chiki, India)
+Save: Redden
+Save {0} Changes: '{0} wijzigingen opslaan'
+Save Changes: Wijzigingen opslaan
+Save Role: Rol opslaan
+saved: Opgeslagen!
+sbp-TZ: Sangu (Tanzania)
+sd-Arab-PK: Sindhi (Arabisch, Pakistan)
+sd-Deva-IN: Sindhi (Devanagari, India)
+se-FI: Noord-Sami (Finland)
+se-NO: Noordelijke Sami (Noorwegen)
+se-SE: Noordelijke Sami (Zweden)
+Search: Zoeken
+Search by users: Zoeken op gebruikers
+Search For {0} Extended Attributes: Zoeken naar {0} uitgebreide kenmerken
+Search for Brands: Zoeken naar merken
+Search for Document Types: Zoeken naar documenttypen
+Search For Permissions: Zoeken naar machtigingen
+Search for Roles...: Zoeken naar rollen...
+Search for Trails: Zoeken naar Trails
+Search For User Roles: Zoeken naar gebruikersrollen
+Search For Users: Zoeken naar gebruikers
+Search in New Values: Zoeken in Nieuwe waarden
+Search in Old Values: Zoeken in Oude waarden
+Security: Veiligheid
+seh-MZ: Sena (Mozambique)
+Select Language: Taal selecteren
+Send: Verzenden
+Sep: Sep
+ses-ML: Koyraboro Senni (Mali)
+Set new password: Nieuw wachtwoord instellen
+sg-CF: Sango (Centraal-Afrikaanse Republiek)
+shi-Latn-MA: Tachelhit (Latijn, Marokko)
+shi-Tfng-MA: Tachelhit (Tifinagh, Marokko)
+Show: Tonen
+si-LK: Singalees (Sri Lanka)
+Sign In: Aanmelden
+Sign Up: Inschrijven
+sk-SK: Slowaaks (Slowakije)
+sl-SI: Sloveens (Slovenië)
+sma-NO: Zuidelijke Sami (Noorwegen)
+sma-SE: Zuid-Sami (Zweden)
+smj-NO: Lule Sami (Noorwegen)
+smj-SE: Lule Sami (Zweden)
+smn-FI: Inari Sami (Finland)
+sms-FI: Skolt Sami (Finland)
+sn-Latn-ZW: Shona (Latijn, Zimbabwe)
+so-DJ: Somalisch (Djibouti)
+so-ET: Somalisch (Ethiopië)
+so-KE: Somalisch (Kenia)
+so-SO: Somalië (Somalië)
+Something went wrong during the refresh token action: Er is iets misgegaan tijdens de vernieuwingstokenactie
+sq-AL: Albanees (Albanië)
+sq-MK: Albanees (Noord-Macedonië)
+sq-XK: Albanees (Kosovo)
+sr-Cyrl-BA: Servisch (Cyrillisch, Bosnië & Herzegovina)
+sr-Cyrl-ME: Servisch (Cyrillisch, Montenegro)
+sr-Cyrl-RS: Servisch (Cyrillisch, Servië)
+sr-Cyrl-XK: Servisch (Cyrillisch, Kosovo)
+sr-Latn-BA: Servisch (Latijn, Bosnië & Herzegovina)
+sr-Latn-ME: Servisch (Latijns, Montenegro)
+sr-Latn-RS: Servisch (Latijns, Servië)
+sr-Latn-XK: Servisch (Latijn, Kosovo)
+ss-SZ: siSwati (Eswatini)
+ss-ZA: siSwati (Zuid-Afrika)
+ssy-ER: Saho (Eritrea)
+st-LS: Sesotho (Lesotho)
+st-ZA: Sesotho (Zuid-Afrika)
+Status: Status
+Striped: Gestreept
+su-Latn-ID: Sundanese (Latijn, Indonesië)
+Support: Steunen
+sv-AX: Zweeds (Ålandeilanden)
+sv-FI: Zweeds (Finland)
+sv-SE: Zweeds (Zweden)
+sw-CD: Kiswahili (Congo [DRC])
+sw-KE: Swahili (Kenia)
+sw-TZ: Swahili (Tanzania)
+sw-UG: Swahili (Oeganda)
+Swagger: API-documentatie
+Swedish: Zweeds
+syr-SY: Syrisch (Syrië)
+ta-IN: Tamil (Indië)
+ta-LK: Tamil (Sri Lanka)
+ta-MY: Nor (Maleisië)
+ta-SG: Tamil (Singapore)
+Table Name: Tabelnaam
+Tax: Belasting
+Tax must be greater than 0: Belasting moet hoger zijn dan 0
+te-IN: Telugu (Indië)
+teo-KE: Teso (Kenia)
+teo-UG: Teso (Oeganda)
+Text: Sms
+Text value is required using {0} type!: Tekstwaarde is vereist met behulp van {0} type!
+tg-Cyrl-TJ: Tadzjieks (Cyrillisch, Tadzjikistan)
+th-TH: Thais (Thailand)
+The following {0} permissions are also required for permission {1}: De volgende {0} machtigingen zijn ook vereist voor toestemming {1}
+The following permission is also required for permission {1}: De volgende toestemming is ook vereist voor toestemming {1}
+The User {0} has just edited, created or deleted entries here. You should reload the data: De Gebruiker {0} heeft hier zojuist items bewerkt, gemaakt of verwijderd. U moet de gegevens opnieuw laden
+This is an Administrator Only View.: Dit is een weergave alleen voor beheerders.
+ti-ER: Tigrinya (Eritrea)
+ti-ET: Tigrinya (Ethiopië)
+tig-ER: Tigre (Eritrea)
+Time: Tijd
+Title: Titel
+Title is required!: Titel is verplicht!
+tk-TM: Turkmeens (Turkmenistan)
+tn-BW: Setswana (Botswana)
+tn-ZA: Setswana (Zuid-Afrika)
+to-TO: Tongaans (Tonga)
+Toggle right-to-left/left-to-right: Schakel van rechts naar links/van links naar rechts
+Token is required: Token is vereist
+Token Not Found!: Token niet gevonden!
+tr-CY: Turks (Cyprus)
+tr-TR: Turks (Turkije)
+Trail Details: Trail Details
+Translations: Translations
+ts-ZA: Xitsonga (Zuid-Afrika)
+tt-RU: Tatar (Rusland)
+twq-NE: Tasawaq (Niger)
+Type: Type
+Type should be valid: Type moet geldig zijn
+tzm-Arab-MA: Central Atlas Tamazight (Arabisch, Marokko)
+tzm-Latn-DZ: Central Atlas Tamazight (Latijn, Algerije)
+tzm-Latn-MA: Central Atlas Tamazight (Latijn, Marokko)
+tzm-Tfng-MA: Central Atlas Tamazight (Tifinagh, Marokko)
+ug-CN: Oeigoers (China)
+uk-UA: Oekraïens (Oekraïne)
+Update: Update
+Update Brand: Merk bijwerken
+Update Document: Document bijwerken
+Update Document Type: Documenttype bijwerken
+Update Extended Attribute: Uitgebreid kenmerk bijwerken
+Update Permissions: Machtigingen voor bijwerken
+Update Product: Product bijwerken
+Update Role: Rol bijwerken
+Update Role Permissions: Rolmachtigingen bijwerken
+Update User Roles: Gebruikersrollen bijwerken
+Updated User Status.: Bijgewerkte gebruikersstatus.
+Upload: Uploaden
+Upload Image: Afbeelding uploaden
+ur-IN: Urdu (India)
+ur-PK: Urdu (Pakistan)
+User: Gebruiker
+User Name: Gebruikersnaam
+User Registered: Gebruiker geregistreerd!
+User Registered Mailbox: Gebruiker geregistreerd. Bevestigingsmail is afgeleverd in de mailbox.
+Username: Gebruikersnaam
+UserName: Gebruikersnaam
+UserName is required: Gebruikersnaam is vereist
+UserName must be at least of length 6: Gebruikersnaam moet ten minste lengte 6 hebben
+Users: Gebruikers
+Users exported: Gebruikers geëxporteerd
+UTC: UTC
+uz-Arab-AF: Oezbeeks (Arabisch, Afghanistan)
+uz-Cyrl-UZ: Oezbeeks (Cyrillisch, Oezbekistan)
+uz-Latn-UZ: Oezbeeks (Latijn, Oezbekistan)
+vai-Latn-LR: Vai (Latijn, Liberia)
+vai-Vaii-LR: Go (Vai, Liberia)
+Value: Waarde
+ve-ZA: Venda (Zuid-Afrika)
+vi-VN: Vietnamees (Vietnam)
+View: Bekijken
+View Profile: Bekijk profiel
+vo-001: Volapük (Wereld)
+vun-TZ: Vunjo (Tanzania)
+wae-CH: Walser (Zwitserland)
+wal-ET: Wolaytta (Ethiopië)
+Welcome {0}: Welkom {0}
+Will be saved only when selected Permission: Wordt alleen opgeslagen als de optie Toestemming is geselecteerd
+With_Selected: '{0} geselecteerd'
+wo-SN: Wolof (Senegal)
+xh-ZA: isiXhosa (Zuid-Afrika)
+xog-UG: Soga (Oeganda)
+yav-CM: Yangben (Kameroen)
+yi-001: Jiddisch (Wereld)
+yo-BJ: Yoruba (Benin)
+yo-NG: Yoruba (Nigeria)
+you: jij
+You are logged out because the Permissions of one of your Roles have been updated.: U bent uitgelogd omdat de machtigingen van een van uw rollen zijn bijgewerkt.
+You are logged out because the user with your Token has been deleted or token is expired.: U bent uitgelogd omdat de gebruiker met uw token is verwijderd of het token is verlopen.
+You are Logged Out.: U bent uitgelogd.
+Your Profile has been updated.: Uw profiel is bijgewerkt.
+Your Recent Activities.: Uw recente activiteiten.
+zgh-Tfng-MA: Standaard Marokkaanse Tamazight (Tifinagh, Marokko)
+zh-CN: Chinees (China)
+zh-Hans-HK: Chinees (Vereenvoudigd, Hongkong SAR)
+zh-Hans-MO: Chinees (Vereenvoudigd, Macao SAR)
+zh-HK: Chinees (Hongkong SAR)
+zh-MO: Chinees (Macao SAR)
+zh-SG: Chinees (Singapore)
+zh-TW: Chinees (Taiwan)
+zu-ZA: isiZulu (Zuid-Afrika)

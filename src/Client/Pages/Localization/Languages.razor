@@ -33,7 +33,7 @@
         <MudGrid>
                 @foreach (var l in lang)
                 {
-                    <MudItem xs="12" md="6">
+                    <MudItem xs="6" md="3">
                         <MudSwitch CheckedChanged="@(new Action<bool>(e => Activate(l, e)))" Checked="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning"/>
                         <span class="culture-code">@l.CultureCode</span>
                     </MudItem>
@@ -70,13 +70,13 @@
         usedLanguages = server.Where(l => l.IsActive).ToList();
         if (usedLanguages == null || !usedLanguages.Any())
         {
-            usedLanguages = LocalizationConstants.SupportedLanguages.MapElementsTo<LanguageDto>().ToList();
+            usedLanguages = LocalizationConstants.DefaultUILanguages.MapElementsTo<LanguageDto>().ToList();
             var res = await _api.Language_PostAsync(new AddEditLanguagesCommand(usedLanguages.Select(l => Prepare(l, true)).ToArray()) {AutoCreateTranslations = false});
             usedLanguages = res.Added;
             server.AddRange(usedLanguages);
         }
 
-        var local = LocalizationConstants.AvailableLanguages.MapElementsTo<LanguageDto>().Apply(l =>
+        var local = LocalizationConstants.SystemCultures.MapElementsTo<LanguageDto>().Apply(l =>
             l.IsActive = usedLanguages.Any(c => c.CultureCode == l.CultureCode && c.DisplayName == l.DisplayName));
         availableLanguages = server.Concat(local).DistinctBy(dto => dto.CultureCode).ToList();
     }
@@ -90,7 +90,7 @@
 
     private async void Activate(LanguageDto language, bool active)
     {
-        await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) {AutoCreateTranslations = LocalizationConstants.SupportedLanguages.All(l => l.CultureCode != language.CultureCode)});
+        await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) {AutoCreateTranslations = LocalizationConstants.ExistingTranslations.All(l => l.CultureCode != language.CultureCode)});
         language.IsActive = active;
         usedLanguages = availableLanguages.Where(dto => dto.IsActive).ToList();
         StateHasChanged();

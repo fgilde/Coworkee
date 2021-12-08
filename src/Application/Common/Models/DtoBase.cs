@@ -6,7 +6,7 @@ namespace CleanArchitectureBase.Application.Common.Models
     {
         public TId Id { get; set; }
 
-        internal bool IsNew => Id == null || Id.Equals(default(TId));
+        internal virtual bool IsNew => Id == null || Id.Equals(default(TId));
 
         bool IDtoBase.IsNew => IsNew;
     }

@@ -4327,22 +4327,22 @@
     "LanguageDto": {
       "allOf": [
         {
-          "$ref": "#/definitions/DtoBaseOfInteger"
+          "$ref": "#/definitions/LanguageCode"
         },
         {
           "type": "object",
           "required": [
+            "isNew",
+            "id",
             "isActive"
           ],
           "properties": {
-            "isRTL": {
+            "isNew": {
               "type": "boolean"
             },
-            "displayName": {
-              "type": "string"
-            },
-            "cultureCode": {
-              "type": "string"
+            "id": {
+              "type": "integer",
+              "format": "int32"
             },
             "isActive": {
               "type": "boolean"
@@ -4350,6 +4350,20 @@
           }
         }
       ]
+    },
+    "LanguageCode": {
+      "type": "object",
+      "properties": {
+        "isRTL": {
+          "type": "boolean"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "cultureCode": {
+          "type": "string"
+        }
+      }
     },
     "AddEditLanguagesCommand": {
       "allOf": [

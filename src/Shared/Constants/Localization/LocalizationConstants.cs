@@ -10,27 +10,24 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
 {
     public static class LocalizationConstants
     {
+        #region Private fields for caching only
+
         private static LanguageCode[] _languages;
         private static CultureInfo[] systemCultures;
         private static string[] resourceNames;
-        public static readonly string DefaultLanguageCode = "en-US";
 
-        public static LanguageCode[] AvailableLanguages
-        {
-            get
-            {
-                return (systemCultures ??= CultureInfo.GetCultures(CultureTypes.AllCultures)).Where(i => !string.IsNullOrWhiteSpace(i.Name)).Select(LanguageCode.FromCulture).ToArray();
-            }
-        }
+        #endregion
+        
+        public static readonly string DefaultLanguageCode = "en-US"; // Default and pre selected language
+        public static readonly string[] DefaultUILanguageCodes = {"en-US", "de-DE", "it-IT", "es-ES", "fr-FR"}; // Default UI Cultures if no admin has specified specific cultures to use
 
-        public static LanguageCode[] SupportedLanguages
-        {
-            get
-            {
-                _languages ??= (systemCultures ??= CultureInfo.GetCultures(CultureTypes.AllCultures)).Where(i => !string.IsNullOrWhiteSpace(i.Name) && IsTranslated(i.Name)).Select(LanguageCode.FromCulture).ToArray();
-                return _languages;
-            }
-        }
+        public static LanguageCode[] SystemCultures =>
+            (systemCultures ??= CultureInfo.GetCultures(CultureTypes.AllCultures)).Where(i => !string.IsNullOrWhiteSpace(i.Name)).Select(LanguageCode.FromCulture).ToArray();
+        
+        public static LanguageCode[] DefaultUILanguages => DefaultUILanguageCodes.Select(LanguageCode.FromCultureCode).ToArray();
+
+        public static LanguageCode[] ExistingTranslations =>
+            _languages ??= (systemCultures ??= CultureInfo.GetCultures(CultureTypes.AllCultures)).Where(i => !string.IsNullOrWhiteSpace(i.Name) && IsTranslated(i.Name)).Select(LanguageCode.FromCulture).ToArray();
 
         public static bool ValidCultureName(string cultureName)
         {

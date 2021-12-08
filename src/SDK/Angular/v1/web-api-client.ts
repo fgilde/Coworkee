@@ -5526,10 +5526,53 @@ export interface IAddUpdateResultOfLanguageDto {
     skipped?: LanguageDto[] | undefined;
 }
 
-export class LanguageDto extends DtoBaseOfInteger implements ILanguageDto {
+export class LanguageCode implements ILanguageCode {
     isRTL?: boolean | undefined;
     displayName?: string | undefined;
     cultureCode?: string | undefined;
+
+    constructor(data?: ILanguageCode) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isRTL = _data["isRTL"];
+            this.displayName = _data["displayName"];
+            this.cultureCode = _data["cultureCode"];
+        }
+    }
+
+    static fromJS(data: any): LanguageCode {
+        data = typeof data === 'object' ? data : {};
+        let result = new LanguageCode();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isRTL"] = this.isRTL;
+        data["displayName"] = this.displayName;
+        data["cultureCode"] = this.cultureCode;
+        return data; 
+    }
+}
+
+export interface ILanguageCode {
+    isRTL?: boolean | undefined;
+    displayName?: string | undefined;
+    cultureCode?: string | undefined;
+}
+
+export class LanguageDto extends LanguageCode implements ILanguageDto {
+    isNew!: boolean;
+    id!: number;
     isActive!: boolean;
 
     constructor(data?: ILanguageDto) {
@@ -5539,9 +5582,8 @@ export class LanguageDto extends DtoBaseOfInteger implements ILanguageDto {
     init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.isRTL = _data["isRTL"];
-            this.displayName = _data["displayName"];
-            this.cultureCode = _data["cultureCode"];
+            this.isNew = _data["isNew"];
+            this.id = _data["id"];
             this.isActive = _data["isActive"];
         }
     }
@@ -5555,19 +5597,17 @@ export class LanguageDto extends DtoBaseOfInteger implements ILanguageDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["isRTL"] = this.isRTL;
-        data["displayName"] = this.displayName;
-        data["cultureCode"] = this.cultureCode;
+        data["isNew"] = this.isNew;
+        data["id"] = this.id;
         data["isActive"] = this.isActive;
         super.toJSON(data);
         return data; 
     }
 }
 
-export interface ILanguageDto extends IDtoBaseOfInteger {
-    isRTL?: boolean | undefined;
-    displayName?: string | undefined;
-    cultureCode?: string | undefined;
+export interface ILanguageDto extends ILanguageCode {
+    isNew: boolean;
+    id: number;
     isActive: boolean;
 }
 

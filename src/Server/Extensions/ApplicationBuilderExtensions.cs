@@ -73,7 +73,7 @@ namespace CleanArchitectureBase.Server.Extensions
 
         internal static IApplicationBuilder UseRequestLocalizationByCulture(this IApplicationBuilder app)
         {
-            var supportedCultures = LocalizationConstants.SupportedLanguages.Select(l => l.ToCulture()).ToArray();
+            var supportedCultures = LocalizationConstants.ExistingTranslations.Select(l => l.ToCulture()).ToArray();
             app.UseRequestLocalization(options =>
             {
                 options.SupportedUICultures = supportedCultures;

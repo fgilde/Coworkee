@@ -1,0 +1,952 @@
+﻿aa-DJ: Afar (Cibuti)
+aa-ER: Afar (Eritre)
+aa-ET: Afar (Etiyopya)
+Account: Hesap
+Actions: Eylemler
+Activate User?: Kullanıcı Etkinleştirilensin mi?
+Active: Etkin
+Active?: Etkin?
+Add Brand: Marka Ekle
+Add Document: Belge Ekle
+Add Document Type: Belge Türü Ekle
+Add Extended Attribute: Genişletilmiş Öznitelik Ekle
+Add Product: Ürün Ekle
+Add Role: Rol Ekle
+Administrator: Yönetici
+Administrator Settings.: Yönetici Ayarları.
+af-NA: Afrikaanlar (Namibya)
+af-ZA: Afrikaans (Güney Afrika)
+agq-CM: Aghem (Kamerun)
+ak-GH: Will (Gana)
+All Groups: Tüm Gruplar
+All Permissions: Tüm İzinler
+Already have an account?: Zaten bir hesabınız var mı?
+am-ET: Amharik (Etiyopya)
+ApplicationDescription: WebAssembly ve Temiz Mimari Desenli Örnek Uygulama
+ApplicationSubDescription: Bu Blazor Sayfasına Hoş Geldiniz
+Apply: Uygulamak
+Apr: Nisan
+ar-001: Arapça (Dünya)
+ar-AE: Arapça (Birleşik Arap Emirlikleri)
+ar-BH: Arapça (Bahreyn)
+ar-DJ: Arapça (Cibuti)
+ar-DZ: Arapça (Cezayir)
+ar-EG: Arapça (Mısır)
+ar-ER: Arapça (Eritre)
+ar-IL: Arapça (İsrail)
+ar-IQ: Arapça (Irak)
+ar-JO: Arapça (Ürdün)
+ar-KM: Arapça (Komorlar)
+ar-KW: Arapça (Kuveyt)
+ar-LB: Arapça (Lübnan)
+ar-LY: Arapça (Libya)
+ar-MA: Arapça (Fas)
+ar-MR: Arapça (Moritanya)
+ar-OM: Arapça (Umman)
+ar-PS: Arapça (Filistin Yönetimi)
+ar-QA: Arapça (Katar)
+ar-SA: Arapça (Suudi Arabistan)
+ar-SD: Arapça (Sudan)
+ar-SO: Arapça (Somali)
+ar-SS: Arapça (Güney Sudan)
+ar-SY: Arapça (Suriye)
+ar-TD: Arapça (Çad)
+ar-TN: Arapça (Tunus)
+ar-YE: Arapça (Yemen)
+arn-CL: Mapuche (Şili)
+As Admin you can filter for users here: Yönetici olarak kullanıcılar için burada filtreleyebilirsiniz
+as-IN: Assamca (Hindistan)
+asa-TZ: Asu (Tanzanya)
+ast-ES: Asturya (İspanya)
+Audit Trails: Denetim İzleri
+Audit Trails exported: Verilen Denetim İzleri
+Aug: Ağustos
+Auto Confirm Email?: E-postayı Otomatik Onayla?
+az-Cyrl-AZ: Azerice (Kiril, Azerbaycan)
+az-Latn-AZ: Azerice (Latince, Azerbaycan)
+ba-RU: Başçeri (Rusya)
+Barcode: Barkod
+Barcode already exists.: Barkod zaten var.
+Barcode is required!: Barkod gereklidir!
+bas-CM: Basaa (Kamerun)
+be-BY: Beyaz Rusya (Beyaz Rusya)
+bem-ZM: Bemba (Zambiya)
+bez-TZ: Bacaklar (Tanzanya)
+bg-BG: Bulgar (Bulgaristan)
+bin-NG: Edo (Nijerya)
+bm-Latn-ML: Bamanankan (Latince, Mali)
+bn-BD: Bangla (Bangladeş)
+bn-IN: Bangla (Hindistan)
+bo-CN: Tibetçe (Çin)
+bo-IN: Tibetçe (Hindistan)
+Bordered: Sınırlan
+br-FR: Breton (Fransa)
+Brand: Dağlamak
+Brand Deleted: Marka Silindi
+Brand is required!: Marka gereklidir!
+Brand Not Found!: Marka Bulunamadı!
+Brand Saved: Marka Kurtarıldı!
+Brand Updated: Marka Güncellendi!
+BrandName: Dağlamak
+Brands: Marka
+Brands exported: İhraç edilen markalar
+Browse Available Documents.: Kullanılabilir Belgelere göz atın.
+brx-IN: Bodo (Hindistan)
+bs-Cyrl-BA: Boşnakça (Kiril, Bosna Hersek)
+bs-Latn-BA: Boşnakça (Latince, Bosna Hersek)
+byn-ER: Blin (Eritre)
+ca-AD: Katalanca (Andorra)
+ca-ES: Katalanca (İspanya)
+ca-FR: Katalanca (Fransa)
+ca-IT: Katalanca (İtalya)
+Cancel: İptal
+Catalog Management: Katalog Yönetimi
+ccp-Cakm-BD: Chakma (Chakma, Bangladeş)
+ccp-Cakm-IN: Chakma (Chakma, Hindistan)
+ce-RU: Çeçen (Rusya)
+ceb-Latn-PH: Cebuano (Latince, Filipinler)
+cgg-UG: Chiga (Uganda)
+Change Password: Parolayı Değiştir
+Charts comming soon ish...: Grafikler yakında geliyor...
+chat: Sohbet
+Chat: Sohbet
+Chat?: Sohbet?
+chr-Cher-US: Cherokee (Cherokee, Amerika Birleşik Devletleri)
+Clear: Berrak
+Client Language has been changed: İstemci Dili değiştirildi
+co-FR: Korsika (Fransa)
+Columns Affected: Etkilenen Sütunlar
+Communication: İletişim
+Community: Topluluk
+Confirm: Onaylamak
+Confirm and Ignore: Onayla ve Yoksay
+Confirm and Set Required: Onayla ve Ayarla Gerekli
+Confirm Password: Parolayı Onayla
+contacts: Kişiler
+Create: Yaratmak
+cs-CZ: Çekçe (Çekya)
+cu-RU: Kilise Slav (Rusya)
+Current Password: Geçerli Parola
+Current Password is required!: Geçerli Şifre gereklidir!
+cy-GB: Galce (Birleşik Krallık)
+da-DK: Danca (Danimarka)
+da-GL: Danca (Grönland)
+Dashboard: Tablo
+Date: Tarih
+Date Created: Oluşturulma Tarihi
+Date Range For Searching: Arama için Tarih Aralığı
+DateTime value is required using {0} type!: DateTime değeri {0} türü kullanılarak gereklidir!
+dav-KE: Taita (Kenya)
+de-AT: Almanca (Avusturya)
+de-BE: Almanca (Belçika)
+de-CH: Almanca (İsviçre)
+de-DE: Almanca (Almanya)
+de-IT: Almanca (İtalya)
+de-LI: Almanca (Lihtenştayn)
+de-LU: Almanca (Lüksemburg)
+Dec: Aralık
+Decimal: On -da -lık
+Decimal value is required using {0} type!: '{0} türü kullanılarak ondalık değer gereklidir!'
+Delete: Silmek
+Delete Confirmation: Onayı Sil
+Delete Content: İçeriği Sil
+Delete Content {0}: İçeriği '{0}' Sil
+Delete Extended Attribute?: Genişletilmiş Öznitelik Silinsin mi?
+Delete Image: Resmi Sil
+Delete Picture: Resmi Sil
+Delete Role Content: Kimliği {0} rolü silmek istiyor musunuz?
+Delete these {0} elements: Bu {0} öğeler silinsin mi?
+Delete this element: Bu öğe silinsin mi?
+Deletion Not Allowed: Silmeye İzin Verilmiyor
+Dense: Yoğun
+Dependent permissions required: Bağımlı izinler gerekli
+Description: Tarif
+Description is required!: Açıklama gereklidir!
+detailed guide for more.: daha fazlası için ayrıntılı kılavuz.
+Details for Trail ID: İz Kimliği için ayrıntılar
+dje-NE: Zarma (Nijer)
+Do you want to delete the profile picture of {0}: '{0} profil resmini silmek istiyor musunuz?'
+Document Deleted: Silinen Belge
+Document Extended Attributes: Genişletilmiş Öznitelikleri Belgele
+Document Management: Belge Yönetimi
+Document Not Found!: Belge Bulunamadı!
+Document Saved: Kaydedilen Belge
+Document Store: Belge Deposu
+Document Type: Belge Türü
+Document Type Deleted: Silinen Belge Türü
+Document Type is required!: Belge Türü gereklidir!
+Document Type Not Found!: Belge Türü Bulunamadı!
+Document Type Saved: Kaydedilen Belge Türü
+Document Type Updated: Belge Türü Güncelleştirildi
+Document type with this name already exists.: Bu ada sahip belge türü zaten var.
+Document Types: Belge Türleri
+Document Types exported: Dışa aktarılan Belge Türleri
+Document Updated: Belge Güncelleştirildi
+Documents: Evrak
+doi-Deva-IN: Dogri (Devanagari, Hindistan)
+Don't have an account?: Hesabınız yok mu?
+Done!: Yapılmış!
+Download: İndirmek
+dsb-DE: Aşağı Sorbian (Almanya)
+dua-CM: Duala (Kamerun)
+dv-MV: Divehi (Maldivler)
+dyo-SN: Jola-Fonyi (Senegal)
+dz-BT: Dzongkha (Butan)
+E-mail: E-posta
+E-Mail: E-posta
+ebu-KE: Embu (Kenya)
+Edit: Düzenlemek
+ee-GH: Ewe (Gana)
+ee-TG: Ewe (Togo)
+el-CY: Yunanca (Kıbrıs)
+el-GR: Yunanca (Yunanistan)
+Email: E-posta
+Email Confirmation: E-posta Onayı
+Email is not correct: E-posta doğru değil
+Email is required: E-posta gereklidir
+Email is required!: E-posta gereklidir!
+en-001: İngilizce (Dünya)
+en-029: İngilizce (Karayipler)
+en-150: İngilizce (Avrupa)
+en-AE: İngilizce (Birleşik Arap Emirlikleri)
+en-AG: İngilizce (Antigua & Barbuda)
+en-AI: İngilizce (Anguilla)
+en-AS: İngilizce (Amerikan Samoası)
+en-AT: İngilizce (Avusturya)
+en-AU: İngilizce (Avustralya)
+en-BB: İngilizce (Barbados)
+en-BE: İngilizce (Belçika)
+en-BI: İngilizce (Burundi)
+en-BM: İngilizce (Bermuda)
+en-BS: İngilizce (Bahamalar)
+en-BW: İngilizce (Botsvana)
+en-BZ: İngilizce (Belize)
+en-CA: İngilizce (Kanada)
+en-CC: İngilizce (Cocos [Keeling] Adaları)
+en-CH: İngilizce (İsviçre)
+en-CK: İngilizce (Cook Adaları)
+en-CM: İngilizce (Kamerun)
+en-CX: İngilizce (Christmas Island)
+en-CY: İngilizce (Kıbrıs)
+en-DE: İngilizce (Almanya)
+en-DK: İngilizce (Danimarka)
+en-DM: İngilizce (Dominika)
+en-ER: İngilizce (Eritre)
+en-FI: İngilizce (Finlandiya)
+en-FJ: İngilizce (Fiji)
+en-FK: İngilizce (Falkland Adaları)
+en-FM: İngilizce (Mikronezya)
+en-GB: İngilizce (Birleşik Krallık)
+en-GD: İngilizce (Grenada)
+en-GG: İngilizce (Guernsey)
+en-GH: İngilizce (Gana)
+en-GI: İngilizce (Cebelitarık)
+en-GM: İngilizce (Gambiya)
+en-GU: İngilizce (Guam)
+en-GY: İngilizce (Guyana)
+en-HK: İngilizce (Hong Kong Öİb)
+en-ID: İngilizce (Endonezya)
+en-IE: İngilizce (İrlanda)
+en-IL: İngilizce (İsrail)
+en-IM: İngilizce (Man Isle)
+en-IN: İngilizce (Hindistan)
+en-IO: İngilizce (İngiliz Hint Okyanusu Bölgesi)
+en-JE: İngilizce (Jersey)
+en-JM: İngilizce (Jamaika)
+en-KE: İngilizce (Kenya)
+en-KI: İngilizce (Kiribati)
+en-KN: İngilizce (St. Kitts & Nevis)
+en-KY: İngilizce (Cayman Adaları)
+en-LC: İngilizce (St. Lucia)
+en-LR: İngilizce (Liberya)
+en-LS: İngilizce (Lesotho)
+en-MG: İngilizce (Madagaskar)
+en-MH: İngilizce (Marshall Adaları)
+en-MO: İngilizce (Macao SAR)
+en-MP: İngilizce (Kuzey Mariana Adaları)
+en-MS: İngilizce (Montserrat)
+en-MT: İngilizce (Malta)
+en-MU: İngilizce (Mauritius)
+en-MW: İngilizce (Malavi)
+en-MY: İngilizce (Malezya)
+en-NA: İngilizce (Namibya)
+en-NF: İngilizce (Norfolk Adası)
+en-NG: İngilizce (Nijerya)
+en-NL: İngilizce (Hollanda)
+en-NR: İngilizce (Nauru)
+en-NU: İngilizce (Niue)
+en-NZ: İngilizce (Yeni Zelanda)
+en-PG: İngilizce (Papua Yeni Gine)
+en-PH: İngilizce (Filipinler)
+en-PK: İngilizce (Pakistan)
+en-PN: İngilizce (Pitcairn Adaları)
+en-PR: İngilizce (Porto Riko)
+en-PW: İngilizce (Palau)
+en-RW: İngilizce (Ruanda)
+en-SB: İngilizce (Solomon Adaları)
+en-SC: İngilizce (Seyşeller)
+en-SD: İngilizce (Sudan)
+en-SE: İngilizce (İsveç)
+en-SG: İngilizce (Singapur)
+en-SH: İngilizce (St Helena, Ascension, Tristan da Cunha)
+en-SI: İngilizce (Slovenya)
+en-SL: İngilizce (Sierra Leone)
+en-SS: İngilizce (Güney Sudan)
+en-SX: Nederlands (Sint Maarten)
+en-SZ: İngilizce (Eswatini)
+en-TC: İngilizce (Turks & Caicos Islands)
+en-TK: İngilizce (Tokelau)
+en-TO: İngilizce (Tonga)
+en-TT: İngilizce (Trinidad &tobago)
+en-TV: İngilizce (Tuvalu)
+en-TZ: İngilizce (Tanzanya)
+en-UG: İngilizce (Uganda)
+en-UM: İngilizce (ABD Dış Adaları)
+en-US: İngilizce (Amerika Birleşik Devletleri)
+en-US-posix: İngilizce (Amerika Birleşik Devletleri, Bilgisayar)
+en-VC: İngilizce (St. Vincent & Grenadinler)
+en-VG: İngilizce (İngiliz Virgin Adaları)
+en-VI: İngilizce (ABD Virgin Adaları)
+en-VU: İngilizce (Vanuatu)
+en-WS: İngilizce (Samoa)
+en-ZA: İngilizce (Güney Afrika)
+en-ZM: İngilizce (Zambiya)
+en-ZW: İngilizce (Zimbabve)
+English: İngilizce
+Enter email for password reset: Hesabınıza bağlı e-posta adresini girin ve şifrenizi sıfırlamak için bir bağlantı içeren bir e-posta alacaksınız
+Enter your message...: mesajınızı girin...
+Entity Id: Varlık Kimliği
+Entity is required!: Varlık gereklidir!
+EntityCreatedBy: EntityCreatedBy
+EntityCreatedOn (Local): EntityCreatedOn (Yerel)
+EntityCreatedOn (UTC): EntityCreatedOn (UTC)
+EntityId: EntityId
+EntityLastModifiedBy: EntityLastModifiedBy
+EntityLastModifiedOn (Local): EntityLastModifiedOn (Yerel)
+EntityLastModifiedOn (UTC): EntityLastModifiedOn (UTC)
+eo-001: Esperanto (Dünya)
+es-419: İspanyolca (Latin Amerika)
+es-AR: İspanyolca (Arjantin)
+es-BO: İspanyolca (Bolivya)
+es-BR: İspanyolca (Brezilya)
+es-BZ: İspanyolca (Belize)
+es-CL: İspanyolca (Şili)
+es-CO: İspanyolca (Kolombiya)
+es-CR: İspanyolca (Kosta Rika)
+es-CU: İspanyolca (Küba)
+es-DO: İspanyolca (Dominik Cumhuriyeti)
+es-EC: İspanyolca (Ekvador)
+es-ES: İspanyolca (İspanya)
+es-GQ: İspanyolca (Ekvator Ginesi)
+es-GT: İspanyolca (Guatemala)
+es-HN: İspanyolca (Honduras)
+es-MX: İspanyolca (Meksika)
+es-NI: İspanyolca (Nikaragua)
+es-PA: İspanyolca (Panama)
+es-PE: İspanyolca (Peru)
+es-PH: İspanyolca (Filipinler)
+es-PR: İspanyolca (Porto Riko)
+es-PY: İspanyolca (Paraguay)
+es-SV: İspanyolca (El Salvador)
+es-US: İspanyolca (Amerika Birleşik Devletleri)
+es-UY: İspanyolca (Uruguay)
+es-VE: İspanyolca (Venezuela)
+Español: İspanyolca
+et-EE: Estonca (Estonya)
+eu-ES: Bask (İspanya)
+ewo-CM: Ewondo (Kamerun)
+Export: Ihracat
+Export To Excel: Excel'e Ver
+Export_SheetName: Veri
+Extended Attribute Deleted: Genişletilmiş Öznitelik Silindi
+Extended Attribute Not Found!: Genişletilmiş Öznitelik Bulunamadı!
+Extended Attribute Saved: Genişletilmiş Öznitelik Kaydedildi
+Extended Attribute Updated: Genişletilmiş Öznitelik Güncelleştirildi
+Extended Attribute with this Key already exists.: Bu Anahtara sahip Genişletilmiş Öznitelik zaten var.
+Extended Attributes: '\{0}\ Genişletilmiş Öznitelikler'
+Extended Attributes exported: Verilen Genişletilmiş Öznitelikler
+External Id: Harici Kimlik
+ExternalId: ExternalId
+fa-IR: Farsça (İran)
+Failed to get client preferences: İstemci tercihleri alınamadı
+FAQs: SSS
+Features: Özellik
+Feb: Şubat
+ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
+ff-Adlm-CM: Fulah (Adlam, Kamerun)
+ff-Adlm-GH: Fulah (Adlam, Gana)
+ff-Adlm-GM: Fulah (Adlam, Gambiya)
+ff-Adlm-GN: Fulah (Adlam, Gine)
+ff-Adlm-GW: Fulah (Adlam, Gine Bissau)
+ff-Adlm-LR: Fulah (Adlam, Liberya)
+ff-Adlm-MR: Fulah (Adlam, Moritanya)
+ff-Adlm-NE: Fulah (Adlam, Nijer)
+ff-Adlm-NG: Fulah (Adlam, Nijerya)
+ff-Adlm-SL: Fulah (Adlam, Sierra Leone)
+ff-Adlm-SN: Fulah (Adlam, Senegal)
+ff-Latn-BF: Fulah (Latince, Burkina Faso)
+ff-Latn-CM: Fulah (Latince, Kamerun)
+ff-Latn-GH: Fulah (Latince, Gana)
+ff-Latn-GM: Fulah (Latince, Gambiya)
+ff-Latn-GN: Fulah (Latince, Gine)
+ff-Latn-GW: Fulah (Latince, Gine Bissau)
+ff-Latn-LR: Fulah (Latince, Liberya)
+ff-Latn-MR: Fulah (Latince, Moritanya)
+ff-Latn-NE: Fulah (Latince, Nijer)
+ff-Latn-NG: Fulah (Latince, Nijerya)
+ff-Latn-SL: Fulah (Latince, Sierra Leone)
+ff-Latn-SN: Fulah (Latince, Senegal)
+fi-FI: Fince (Finlandiya)
+fil-PH: Filipinli (Filipinler)
+File is required!: Dosya gereklidir!
+Fill Administrator Credentials: Yönetici Kimlik Bilgilerini Doldur
+Fill Basic User Credentials: Temel Kullanıcı Kimlik Bilgilerini Doldur
+Filtered Audit Trails exported: Filtre Uygulanmış Denetim İzleri dışa aktarıldı
+Filtered Brands exported: Filtre uygulanmış Markalar ihraç ediliyor
+Filtered Document Types exported: Filtre Uygulanmış Belge Türleri dışa aktarıldı
+Filtered Extended Attributes exported: Filtre Uygulanmış Genişletilmiş Öznitelikler dışa aktarıldı
+Filtered Products exported: Filtre Uygulanmış Ürünler dışa aktarıldı
+Filtered Users exported: Filtre Uygulanmış Kullanıcılar dışa aktarıldı
+First Name: Ad
+First Name is required: Ad gereklidir
+fo-DK: Faroe dili (Danimarka)
+fo-FO: Faroe dili (Faroe Adaları)
+Forgot password?: Şifreyi mi unuttun?
+fr-029: Fransızca (Karayipler)
+fr-BE: Fransızca (Belçika)
+fr-BF: Fransızca (Burkina Faso)
+fr-BI: Fransızca (Burundi)
+fr-BJ: Fransızca (Benin)
+fr-BL: Fransızca (St. Barthélemy)
+fr-CA: Fransızca (Kanada)
+fr-CD: Fransızca (Kongo [DRC])
+fr-CF: Fransızca (Orta Afrika Cumhuriyeti)
+fr-CG: Fransızca (Kongo)
+fr-CH: Fransızca (İsviçre)
+fr-CI: Fransızca (Fildişi Sahili)
+fr-CM: Fransızca (Kamerun)
+fr-DJ: Fransızca (Cibuti)
+fr-DZ: Fransızca (Cezayir)
+fr-FR: Fransızca (Fransa)
+fr-GA: Fransızca (Gabon)
+fr-GF: Fransızca (Fransız Guyanası)
+fr-GN: Fransızca (Gine)
+fr-GP: Fransızca (Guadeloupe)
+fr-GQ: Fransızca (Ekvator Ginesi)
+fr-HT: Fransızca (Haiti)
+fr-KM: Fransızca (Komorlar)
+fr-LU: Fransızca (Lüksemburg)
+fr-MA: Fransızca (Fas)
+fr-MC: Fransızca (Monako)
+fr-MF: Fransızca (St. Martin)
+fr-MG: Fransızca (Madagaskar)
+fr-ML: Fransızca (Mali)
+fr-MQ: Fransızca (Martinik)
+fr-MR: Fransızca (Moritanya)
+fr-MU: Fransızca (Mauritius)
+fr-NC: Fransızca (Yeni Kaledonya)
+fr-NE: Fransızca (Nijer)
+fr-PF: Fransızca (Fransız Polinezyası)
+fr-PM: Fransızca (St. Pierre & Miquelon)
+fr-RE: İngilizce (Reunion)
+fr-RW: Fransızca (Ruanda)
+fr-SC: Fransızca (Seyşeller)
+fr-SN: Fransızca (Senegal)
+fr-SY: Fransızca (Suriye)
+fr-TD: Fransızca (Çad)
+fr-TG: Fransızca (Togo)
+fr-TN: Fransızca (Tunus)
+fr-VU: Fransızca (Vanuatu)
+fr-WF: Fransızca (Wallis & Futuna)
+fr-YT: Fransızca (Mayotte)
+French: Fransızca
+fur-IT: Friulian (İtalya)
+fy-NL: Batı Frizya (Hollanda)
+ga-GB: İrlanda (Birleşik Krallık)
+ga-IE: İrlanda (İrlanda)
+gd-GB: İskoç Galcesi (Birleşik Krallık)
+German: Almanca
+gl-ES: Galiçyaca (İspanya)
+gn-PY: Guarani (Paraguay)
+GoHome: Eve Gidin!
+Group: Grup
+gsw-CH: İsviçre Almancası (İsviçre)
+gsw-FR: İsviçre Almancası (Fransa)
+gsw-LI: İsviçre Almancası (Lihtenştayn)
+gu-IN: Gujarati (Hindistan)
+guz-KE: Gusii (Kenya)
+gv-IM: Manx (Mans)
+ha-Latn-GH: Hausa (Latince, Gana)
+ha-Latn-NE: Hausa (Latince, Nijer)
+ha-Latn-NG: Hausa (Latince, Nijerya)
+haw-US: Hawaii (Amerika Birleşik Devletleri)
+he-IL: İbranice (İsrail)
+Hello World: Merhaba Dünya
+Here you can leave a comment for this permission for the current role: Burada, geçerli rol için bu izin için bir yorum bırakabilirsiniz
+hi-IN: Hintçe (Hindistan)
+Hide: Gizlemek
+Home: Ev
+hr-BA: Hırvatça (Bosna Hersek)
+hr-HR: Hırvatça (Hırvatistan)
+hsb-DE: Yukarı Sorbian (Almanya)
+hu-HU: Macarca (Macaristan)
+hy-AM: Ermenice (Ermenistan)
+I agree to the terms and privacy: Şartları ve gizliliği kabul ediyorum
+ia-001: Interlingua (Dünya)
+ibb-NG: Ibibio (Nijerya)
+Id: Kimliği
+id-ID: Endonezyaca (Endonezyaca)
+ig-NG: Igbo (Nijerya)
+ii-CN: Yi (Çin)
+Include Entity fields (Export): Varlık alanlarını dahil et (Dışarı Aktar)
+Incorrect Password.: Yanlış Parola.
+Indonesia: Endonezya dili
+Is Active: Etkin
+Is Public: Herkese Açık mı
+Is Public?: Halka açık mı?
+is-IS: İzlandaca (İzlanda)
+IsActive: Etkin
+it-CH: İtalyanca (İsviçre)
+it-IT: İtalyanca (İtalya)
+it-SM: İtalyanca (San Marino)
+it-VA: İtalyanca (Vatikan)
+Italian: İtalyanca
+iu-CA: Inuktitut (Kanada)
+iu-Latn-CA: Inuktitut (Latince, Kanada)
+ja-JP: Japonca (Japonya)
+Jan: Jan
+jgo-CM: Ngomba (Kamerun)
+jmc-TZ: Machame (Tanzanya)
+Json: Json
+Json value is required using {0} type!: Json değeri {0} türü kullanılarak gereklidir!
+Json value must be a valid json string using {0} type!: Json değeri, {0} türü kullanılarak geçerli bir json dizesi olmalıdır!
+Jul: Temmuz
+Jun: Haz
+jv-Java-ID: Cava dili (Javanese, Endonezyaca)
+jv-Latn-ID: Cava dili (Latince, Endonezyaca)
+ka-GE: Gürcüce (Gürcistan)
+kab-DZ: Kabyle (Cezayir)
+kam-KE: Kamba (Kenya)
+kde-TZ: Makonde (Tanzanya)
+kea-CV: Kabuverdianu (Cape Verde)
+Key: Anahtar
+Key is required!: Anahtar gereklidir!
+khq-ML: Koyra Chiini (Mali)
+ki-KE: Kikuyu (Kenya)
+kk-KZ: Kazakça (Kazakistan)
+kkj-CM: Kako (Kamerun)
+kl-GL: Kalaallisut (Grönland)
+kln-KE: Kalenjin (Kenya)
+km-KH: Khmer (Kamboçya)
+kn-IN: Kannada (Hindistan)
+ko-KP: Kore dili (Kuzey Kore)
+ko-KR: Korece (Kore)
+kok-IN: Konkani (Hindistan)
+kr-Latn-NG: Kanuri (Latince, Nijerya)
+ks-Arab-IN: Keşmir dili (Arapça, Hindistan)
+ks-Deva-IN: Keşmir (Devanagari, Hindistan)
+ksb-TZ: Shambala (Tanzanya)
+ksf-CM: Bafia (Kamerun)
+ksh-DE: olog (Almanya)
+ku-Arab-IQ: Kürtçe (Arapça, Irak)
+ku-Arab-IR: Kürtçe (Arapça, İran)
+kw-GB: Cornish (Birleşik Krallık)
+ky-KG: Kırgız (Kırgızistan)
+la-VA: Latince (Vatikan)
+lag-TZ: Langi (Tanzanya)
+Languages: Diller
+Last Name: Soyadı
+Last Name is required: Soyadı gereklidir
+lb-LU: Lüksemburg (Lüksemburg)
+lg-UG: Kabuk (Uganda)
+lkt-US: Lakota (Amerika Birleşik Devletleri)
+ln-AO: Lingala (Angola)
+ln-CD: Lingala (Kongo [DRC])
+ln-CF: Lingala (Orta Afrika Cumhuriyeti)
+ln-CG: Lingala (Kongo)
+lo-LA: Lao (Laos)
+Local: Yöresel
+Logged In.: Oturum açtı.
+Logged Out.: Oturumu kapattım.
+LoginDescription: Kimlik Bilgilerinizle giriş yapın.
+Logout: Oturum kapatma
+Logout Confirmation: Gerçekten çıkış yapmak istiyor musunuz?
+lrc-IQ: Kuzey Luri (Irak)
+lrc-IR: Kuzey Luri (İran)
+lt-LT: Litvanca (Litvanya)
+lu-CD: Luba-Katanga (Kongo [DRC])
+luo-KE: Luo (Kenya)
+luy-KE: Luyia (Kenya)
+lv-LV: Letonca (Letonya)
+mai-IN: Maithili (Hindistan)
+Mail: Posta
+Manage {0} {1}'s Extended Attributes: '{0} {1} Genişletilmiş Özniteliklerini Yönetme'
+Manage {0} {1}'s Permissions: '{0} {1} İzinlerini Yönetme'
+Manage {0} {1}'s Roles: '{0} {1} Rollerini Yönetme'
+Manage {0} Extended Attributes: Genişletilmiş Öznitelikleri Yönetme {0}
+Manage Brands.: Markaları Yönetin.
+Manage Document Types.: Belge Türlerini Yönetin.
+Manage Extended Attributes: Genişletilmiş Öznitelikleri Yönetme
+Manage Languages: Dilleri Yönet
+Manage Permission: İzni Yönet
+Manage Products.: Ürünleri Yönetin.
+Manage Roles: Rolleri Yönetme
+Manage Roles.: Rolleri Yönetin.
+Manage Translations: Çevirileri Yönet
+Manage Users: Kullanıcıları Yönetme
+Manage your account: Hesabınızı yönetme
+Mar: Mar
+mas-KE: Masai (Kenya)
+mas-TZ: Masai (Tanzanya)
+May: Mayıs
+mer-KE: Meru (Kenya)
+mfe-MU: Morisyen (Mauritius)
+mg-MG: Malagasy (Madagaskar)
+mgh-MZ: Makhuwa-Meetto (Mozambik)
+mgo-CM: Meta¹ (Kamerun)
+mi-NZ: Maori (Yeni Zelanda)
+mk-MK: Makedon (Kuzey Makedonya)
+ml-IN: Malayalam (Hindistan)
+mn-MN: Moğolca (Moğolistan)
+mn-Mong-CN: Moğolca (Moğolca, Çin)
+mn-Mong-MN: Moğolca (Moğolca, Moğolistan)
+mni-IN: Manipuri (Hindistan)
+moh-CA: Mohawk (Kanada)
+mr-IN: Marathi (Hindistan)
+ms-BN: Malay (Brunei)
+ms-ID: Malay (Endonezya)
+ms-MY: Malay (Malezya)
+ms-SG: Malay (Singapur)
+mt-MT: Malta (Malta)
+mua-CM: Mundang (Kamerun)
+my-MM: Birmanya (Myanmar)
+mzn-IR: Mazanderani (İran)
+Name: Ad
+Name is required: Ad gerekli
+Name is required!: İsim gereklidir!
+naq-NA: İsim (Namibya)
+nb-NO: İngilizce (Norveç)
+nb-SJ: Norveç Bokmål (Svalbard & Jan Mayen)
+nd-ZW: Kuzey Ndebele (Zimbabve)
+nds-DE: Düşük Almanca (Almanya)
+nds-NL: Düşük Almanca (Hollanda)
+ne-IN: Nepal (Hindistan)
+ne-NP: Nepal (Nepal)
+New Message From {0}: "{0}'dan Yeni Mesaj"
+New Password: Yeni Parola
+New Values: Yeni Değerler
+nl-AW: Felemenkçe (Aruba)
+nl-BE: Felemenkçe (Belçika)
+nl-BQ: Felemenkçe (Bonaire, Sint Eustatius ve Saba)
+nl-CW: Felemenkçe (Curaçao)
+nl-NL: Felemenkçe (Hollanda)
+nl-SR: Felemenkçe (Surinam)
+nl-SX: İngilizce (Sint Maarten)
+nmg-CM: Kwasio (Kamerun)
+nn-NO: Norveç Nynorsk (Norveç)
+nnh-CM: Ngiemboon (Kamerun)
+No Allowed Actions: İzin Verilen Eylem Yok
+Not Allowed.: İzin verilmiyor.
+NotFoundMessage: Aradığınız sayfa yok.
+Nov: Kasım
+nqo-GN: N'Ko (Gine)
+nr-ZA: Güney Ndebele (Güney Afrika)
+nso-ZA: Sesotho sa Leboa (Güney Afrika)
+nus-SS: Nuer (Güney Sudan)
+nyn-UG: Nyankole (Uganda)
+oc-FR: Occitan (Fransa)
+Oct: Ekim
+Ok: Tamam
+Old Values: Eski Değerler
+om-ET: Oromo (Etiyopya)
+om-KE: Oromo (Kenya)
+Only Selected Group (Export): Yalnızca Seçili Grup (Dışarı Aktar)
+or-IN: Odia (Hindistan)
+os-GE: Ossetic (Gürcistan)
+os-RU: Ossetic (Rusya)
+Owner: Sahip
+pa-Arab-PK: Pencap dili (Arapça, Pakistan)
+pa-IN: Pencap (Hindistan)
+pap-029: Papiamento (Karayipler)
+Password: Parola
+Password Changed!: Şifre Değişti!
+Password Confirmation: Parola Onayı
+Password Confirmation is required!: Şifre Onayı gereklidir!
+Password is required!: Şifre gereklidir!
+Password must be at least of length 8: Parola en az 8 uzunluğunda olmalıdır
+Password must contain at least one capital letter: Parola en az bir büyük harf içermelidir
+Password must contain at least one digit: Parola en az bir basamak içermelidir
+Password must contain at least one lowercase letter: Parola en az bir küçük harf içermelidir
+Passwords don't match: Parolalar eşleşmiyor
+pcm-Latn-NG: Nijerya Pidgin (Latince, Nijerya)
+Permission Name: İzin Adı
+Personal: Kişisel
+Phone Number: Telefon numarası
+PhoneNumber: Telefon Numarası
+pl-PL: Lehçe (Polonya)
+prg-001: Prusya (Dünya)
+Primary Key: Birincil anahtar
+Product Deleted: Ürün silindi!
+Product Not Found!: Ürün Bulunamadı!
+Product Saved: Ürün Kaydedildi!
+Product Updated: Ürün Güncellendi!
+Products: Ürünler
+Products exported: İhraç edilen ürünler
+Profile: Profil
+Profile Details: Profil Ayrıntıları
+Profile picture added.: Profil resmi eklendi.
+Profile picture deleted.: Profil resmi silindi.
+prs-AF: prs (Afganistan)
+ps-AF: Peşto (Afganistan)
+ps-PK: Peşto (Pakistan)
+pt-AO: Portekizce (Angola)
+pt-BR: Portekizce (Brezilya)
+pt-CH: Portekizce (İsviçre)
+pt-CV: İngilizce (Cape Verde)
+pt-GQ: Portekizce (Ekvator Ginesi)
+pt-GW: Portekizce (Gine Bissau)
+pt-LU: Portekizce (Lüksemburg)
+pt-MO: Portekizce (Macao SAR)
+pt-MZ: Portekizce (Mozambik)
+pt-PT: Portekizce (Portekiz)
+pt-ST: İngilizce (Sao Tome & Principe)
+pt-TL: İngilizce (Timor-Leste)
+Public Profile: Ortak Profil
+quc-GT: K¹iche¹ (Guatemala)
+Quick Insights.: Hızlı İçgörüler.
+Quick Start Guide: Hızlı Başlangıç Kılavuzu
+quz-BO: Quz (Bolivya)
+quz-EC: quz (Ekvador)
+quz-PE: quz (Peru)
+Rate: Oran
+Rate must be greater than 0: Oran 0'dan büyük olmalıdır
+Realtime Updates & Insights with SignalR.: SignalR ile Gerçek Zamanlı Güncellemeler ve İçgörüler.
+Refreshed Token.: Yenilenmiş Belirteç.
+Register: Kaydolmak
+Register here: Buradan kaydolun
+Register New User: Yeni Kullanıcı Kaydet
+Register User: Kullanıcı Kaydet
+Registered Roles: Kayıtlı Roller
+Registered Users: Kayıtlı Kullanıcılar
+Reload: Yeni -den yükle
+Reload Data: Verileri Yeniden Yükle
+Remember me?: Beni hatırladın mı?
+Reset password: Parolayı sıfırla
+Reset Password: Parolayı Sıfırla
+Resources: Kaynaklar
+rm-CH: Romansh (İsviçre)
+rn-BI: Rundi (Burundi)
+ro-MD: İngilizce (Moldova)
+ro-RO: İngilizce (Romanya)
+rof-TZ: Rombo (Tanzanya)
+Role: Rol
+Role ID: Rol Kimliği
+Role Name: Rol Adı
+Roles: Rolleri
+Roles Updated: Roller Güncellendi!
+RowsPerPageString: Sayfa başına satırlar
+ru-BY: Rusça (Beyaz Rusya)
+ru-KG: Rusça (Kırgızistan)
+ru-KZ: Rusça (Kazakistan)
+ru-MD: Rusça (Moldova)
+ru-RU: Rusça (Rusya)
+ru-UA: Rusça (Ukrayna)
+Russian: Rusça
+rw-RW: Kinyarwanda (Ruanda)
+rwk-TZ: Rwa (Tanzanya)
+sa-IN: Sanskritçe (Hindistan)
+sah-RU: Sakha (Rusya)
+saq-KE: Samburu (Kenya)
+sat-Olck-IN: Santali (Ol Chiki, Hindistan)
+Save: Kurtarmak
+Save {0} Changes: değişiklikleri kaydetme {0}
+Save Changes: Değişiklikleri Kaydet
+Save Role: Rolü Kaydet
+saved: Kaydedilmiş!
+sbp-TZ: Sangu (Tanzanya)
+sd-Arab-PK: Sindhi (Arapça, Pakistan)
+sd-Deva-IN: Sindhi (Devanagari, Hindistan)
+se-FI: Kuzey Sami (Finlandiya)
+se-NO: Kuzey Sami (Norveç)
+se-SE: Kuzey Sami (İsveç)
+Search: Aramak
+Search by users: Kullanıcılara göre ara
+Search For {0} Extended Attributes: Genişletilmiş Öznitelikleri {0} Ara
+Search for Brands: Marka Ara
+Search for Document Types: Belge Türlerini Ara
+Search For Permissions: İzinleri Ara
+Search for Roles...: Rolleri Ara...
+Search for Trails: İzleri Ara
+Search For User Roles: Kullanıcı Rollerini Ara
+Search For Users: Kullanıcıları ara
+Search in New Values: Yeni Değerlerde Ara
+Search in Old Values: Eski Değerlerde Ara
+Security: Güvenlik
+seh-MZ: Sena (Mozambik)
+Select Language: Dil seçin
+Send: Gönder
+Sep: Eylül
+ses-ML: Koyraboro Senni (Mali)
+Set new password: Yeni parola ayarlama
+sg-CF: Sango (Orta Afrika Cumhuriyeti)
+shi-Latn-MA: Tachelhit (Latince, Fas)
+shi-Tfng-MA: Tachelhit (Tifinagh, Fas)
+Show: Göstermek
+si-LK: Sinhala (Sri Lanka)
+Sign In: Oturum Aç
+Sign Up: Kaydol
+sk-SK: Slovak (Slovakya)
+sl-SI: Sloven (Slovenya)
+sma-NO: Güney Sami (Norveç)
+sma-SE: Güney Sami (İsveç)
+smj-NO: Lule Sami (Norveç)
+smj-SE: Lule Sami (İsveç)
+smn-FI: Inari Sami (Finlandiya)
+sms-FI: Skolt Sami (Finlandiya)
+sn-Latn-ZW: Shona (Latince, Zimbabve)
+so-DJ: Somalice (Cibuti)
+so-ET: Somali (Etiyopya)
+so-KE: Somalice (Kenya)
+so-SO: Somali (Somali)
+Something went wrong during the refresh token action: Yenileme belirteci eylemi sırasında bir şeyler ters gitti
+sq-AL: Arnavutça (Arnavutluk)
+sq-MK: Arnavutça (Kuzey Makedonya)
+sq-XK: Arnavutça (Kosova)
+sr-Cyrl-BA: Sırpça (Kiril, Bosna Hersek)
+sr-Cyrl-ME: Sırpça (Kiril, Karadağ)
+sr-Cyrl-RS: Sırpça (Kiril, Sırbistan)
+sr-Cyrl-XK: Sırpça (Kiril, Kosova)
+sr-Latn-BA: Sırpça (Latince, Bosna Hersek)
+sr-Latn-ME: Sırpça (Latince, Karadağca)
+sr-Latn-RS: Sırpça (Latince, Sırbistan)
+sr-Latn-XK: Sırpça (Latince, Kosova)
+ss-SZ: siSwati (Eswatini)
+ss-ZA: siSwati (Güney Afrika)
+ssy-ER: Saho (Eritre)
+st-LS: Sesotho (Lesotho)
+st-ZA: Sesotho (Güney Afrika)
+Status: Durum
+Striped: Çizgili
+su-Latn-ID: Sundan dili (Latince, Endonezya)
+Support: Destek
+sv-AX: İsveççe (Åland Adaları)
+sv-FI: İsveççe (Finlandiya)
+sv-SE: İsveççe (İsveç)
+sw-CD: Kiswahili (Kongo [DRC])
+sw-KE: Svahili (Kenya)
+sw-TZ: Svahili (Tanzanya)
+sw-UG: Svahili (Uganda)
+Swagger: API Belgeleri
+Swedish: İsveç dili
+syr-SY: Süryani (Suriye)
+ta-IN: Tamil (Hindistan)
+ta-LK: Tamilce (Sri Lanka)
+ta-MY: Ne de (Malezya)
+ta-SG: Tamil (Singapur)
+Table Name: Tablo Adı
+Tax: Vergi
+Tax must be greater than 0: Vergi 0'dan büyük olmalıdır
+te-IN: Telugu (Hindistan)
+teo-KE: Teso (Kenya)
+teo-UG: Teso (Uganda)
+Text: Metin
+Text value is required using {0} type!: Metin değeri {0} türü kullanılarak gereklidir!
+tg-Cyrl-TJ: Tacik (Kiril, Tacikistan)
+th-TH: Tay dili (Tayland)
+The following {0} permissions are also required for permission {1}: İzin {1} için aşağıdaki {0} izinler de gereklidir
+The following permission is also required for permission {1}: İzin {1} için aşağıdaki izin de gereklidir
+The User {0} has just edited, created or deleted entries here. You should reload the data: Kullanıcı {0} burada girişleri yeni düzenledi, oluşturdu veya sildi. Verileri yeniden yüklemelisiniz
+This is an Administrator Only View.: Bu yalnızca Yönetici Görünümüdür.
+ti-ER: Tigrinya (Eritre)
+ti-ET: Tigrinya (Etiyopya)
+tig-ER: Tigre (Eritre)
+Time: Saat
+Title: Başlık
+Title is required!: Başlık gereklidir!
+tk-TM: Türkmen (Türkmenistan)
+tn-BW: Setswana (Botsvana)
+tn-ZA: Setswana (Güney Afrika)
+to-TO: Tongan (Tonga)
+Toggle right-to-left/left-to-right: Sağdan sola/soldan sağa geçiş yapma
+Token is required: Belirteç gerekli
+Token Not Found!: Belirteç Bulunamadı!
+tr-CY: Türkçe (Kıbrıs)
+tr-TR: Türkçe (Türkiye)
+Trail Details: İz Ayrıntıları
+Translations: Çeviri -leri
+ts-ZA: Xitsonga (Güney Afrika)
+tt-RU: Tatar (Rusya)
+twq-NE: Tasawaq (Nijer)
+Type: Tür
+Type should be valid: Tür geçerli olmalıdır
+tzm-Arab-MA: Central Atlas Tamazight (Arapça, Fas)
+tzm-Latn-DZ: Central Atlas Tamazight (Latince, Cezayir)
+tzm-Latn-MA: Central Atlas Tamazight (Latince, Fas)
+tzm-Tfng-MA: Merkezi Atlas Tamazight (Tifinagh, Fas)
+ug-CN: Uygur (Çin)
+uk-UA: Ukrayna (Ukrayna)
+Update: Güncelleştirmek
+Update Brand: Markayı Güncelleştir
+Update Document: Belgeyi Güncelleştir
+Update Document Type: Belge Türünü Güncelleştir
+Update Extended Attribute: Genişletilmiş Özniteliği Güncelleştir
+Update Permissions: İzinleri Güncelleştir
+Update Product: Ürünü Güncelleştir
+Update Role: Rolü Güncelleştir
+Update Role Permissions: Rol İzinlerini Güncelleştir
+Update User Roles: Kullanıcı Rollerini Güncelleştir
+Updated User Status.: Kullanıcı Durumu Güncelleştirildi.
+Upload: Karşıya yükleme
+Upload Image: Resmi Karşıya Yükle
+ur-IN: Urduca (Hindistan)
+ur-PK: Urduca (Pakistan)
+User: Kullanıcı
+User Name: Kullanıcı Adı
+User Registered: Kullanıcı Kayıtlı!
+User Registered Mailbox: Kullanıcı Kayıtlı. Onay Postası Posta Kutusu'na teslim edildi.
+Username: Kullanıcı adı
+UserName: Kullanıcı adı
+UserName is required: KullanıcıAdı gerekli
+UserName must be at least of length 6: UserName en az 6 uzunluğunda olmalıdır
+Users: Kullanıcı
+Users exported: Dışa aktarılan kullanıcılar
+UTC: UTC
+uz-Arab-AF: Özbekçe (Arapça, Afganistan)
+uz-Cyrl-UZ: Özbekçe (Kiril, Özbekistan)
+uz-Latn-UZ: Özbekçe (Latince, Özbekistan)
+vai-Latn-LR: Vai (Latince, Liberya)
+vai-Vaii-LR: Git (Vai, Liberya)
+Value: Değer
+ve-ZA: Venda (Güney Afrika)
+vi-VN: Vietnamca (Vietnam)
+View: Görünüm
+View Profile: Profili Görüntüle
+vo-001: Volapük (Dünya)
+vun-TZ: Vunjo (Tanzanya)
+wae-CH: Walser (İsviçre)
+wal-ET: Wolaytta (Etiyopya)
+Welcome {0}: Hoş geldin {0}
+Will be saved only when selected Permission: Yalnızca seçili İzin seçildiğinde kaydedilir
+With_Selected: '{0} Seçildi'
+wo-SN: Wolof (Senegal)
+xh-ZA: isiXhosa (Güney Afrika)
+xog-UG: Soga (Uganda)
+yav-CM: Yangben (Kamerun)
+yi-001: Yidiş (Dünya)
+yo-BJ: Yoruba (Benin)
+yo-NG: Yoruba (Nijerya)
+you: sen
+You are logged out because the Permissions of one of your Roles have been updated.: Rollerinizden birinin İzinleri güncelleştirildiği için oturumunuz kapatılıyor.
+You are logged out because the user with your Token has been deleted or token is expired.: Belirtecinizin olduğu kullanıcı silindiği veya belirtecinin süresi dolduğu için oturumunuz kapatılıyor.
+You are Logged Out.: Oturumunuz Tükendi.
+Your Profile has been updated.: Profiliniz güncellendi.
+Your Recent Activities.: Son aktivitelerin.
+zgh-Tfng-MA: Standart Fas Tamazight (Tifinagh, Fas)
+zh-CN: Çince (Çin)
+zh-Hans-HK: Çince (Basitleştirilmiş, Hong Kong Öİb)
+zh-Hans-MO: Çince (Basitleştirilmiş, Makao SAR)
+zh-HK: Çince (Hong Kong Öİb)
+zh-MO: Çince (Makao SAR)
+zh-SG: Çince (Singapur)
+zh-TW: Çince (Tayvan)
+zu-ZA: isiZulu (Güney Afrika)

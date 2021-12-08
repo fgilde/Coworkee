@@ -50,7 +50,7 @@ public class TranslationService: ITranslationService
 
     private TranslatorClient CreateClient()
     {
-        return new TranslatorClient(_configuration.TranslationService.ApiKey, _configuration.TranslationService.Region);
+        return new TranslatorClient(_configuration.CognitiveServices.Translation.Key, _configuration.CognitiveServices.Translation.Region);
     }
 
     private async Task<IList<TranslationResponse>> TranslateAsync(IEnumerable<string> inputs, string[] target)

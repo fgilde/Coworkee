@@ -6,11 +6,16 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
     {
         public bool? IsRTL { get; set; }
         public string DisplayName { get; set; }
-        public string Code { get; set; }
-
+        public string CultureCode { get; set; }
+        
         public CultureInfo ToCulture()
         {
-            return new CultureInfo(Code);
+            return new CultureInfo(CultureCode);
+        }
+
+        public static LanguageCode FromCultureCode(string cultureCode)
+        {
+            return FromCulture(CultureInfo.GetCultureInfo(cultureCode));
         }
 
         public static LanguageCode FromCulture(CultureInfo cultureInfo)
@@ -19,7 +24,7 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
             return new LanguageCode
             {
                 DisplayName = displayName,
-                Code = cultureInfo.IetfLanguageTag
+                CultureCode = cultureInfo.IetfLanguageTag
             };
         }
     }

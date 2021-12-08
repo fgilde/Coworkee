@@ -1370,6 +1370,152 @@ export class DocumentExtendedAttributesClient implements IDocumentExtendedAttrib
     }
 }
 
+export interface ILanguageClient {
+    /**
+     * Add/Edit languages
+     * @return Status 200 OK
+     */
+    post(command: AddEditLanguagesCommand): Observable<AddUpdateResultOfLanguageDto>;
+    /**
+     * Get All Languages
+     * @param filter (optional) 
+     * @return Status 200 OK
+     */
+    getAll(filter: TransferableExpressionOfLanguageDto | null | undefined): Observable<LanguageDto[]>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class LanguageClient implements ILanguageClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * Add/Edit languages
+     * @return Status 200 OK
+     */
+    post(command: AddEditLanguagesCommand) : Observable<AddUpdateResultOfLanguageDto> {
+        let url_ = this.baseUrl + "/Language";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(command);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPost(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPost(<any>response_);
+                } catch (e) {
+                    return <Observable<AddUpdateResultOfLanguageDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AddUpdateResultOfLanguageDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processPost(response: HttpResponseBase): Observable<AddUpdateResultOfLanguageDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AddUpdateResultOfLanguageDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AddUpdateResultOfLanguageDto>(<any>null);
+    }
+
+    /**
+     * Get All Languages
+     * @param filter (optional) 
+     * @return Status 200 OK
+     */
+    getAll(filter: TransferableExpressionOfLanguageDto | null | undefined) : Observable<LanguageDto[]> {
+        let url_ = this.baseUrl + "/Language?";
+        if (filter !== undefined && filter !== null)
+            url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<LanguageDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<LanguageDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<LanguageDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(LanguageDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<LanguageDto[]>(<any>null);
+    }
+}
+
 export interface ITranslationsClient {
     /**
      * Get All Translations
@@ -4820,7 +4966,8 @@ export interface IAuditDto {
 
 export enum ExportServiceType {
     Excel = 0,
-    Json = 1,
+    Csv = 1,
+    Json = 2,
 }
 
 export class PaginatedResultOfDocumentDto extends Result implements IPaginatedResultOfDocumentDto {
@@ -5309,6 +5456,268 @@ export enum EntityExtendedAttributeType {
     Text = 2,
     DateTime = 3,
     Json = 4,
+}
+
+export class AddUpdateResultOfLanguageDto implements IAddUpdateResultOfLanguageDto {
+    added?: LanguageDto[] | undefined;
+    updated?: LanguageDto[] | undefined;
+    skipped?: LanguageDto[] | undefined;
+
+    constructor(data?: IAddUpdateResultOfLanguageDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["added"])) {
+                this.added = [] as any;
+                for (let item of _data["added"])
+                    this.added!.push(LanguageDto.fromJS(item));
+            }
+            if (Array.isArray(_data["updated"])) {
+                this.updated = [] as any;
+                for (let item of _data["updated"])
+                    this.updated!.push(LanguageDto.fromJS(item));
+            }
+            if (Array.isArray(_data["skipped"])) {
+                this.skipped = [] as any;
+                for (let item of _data["skipped"])
+                    this.skipped!.push(LanguageDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AddUpdateResultOfLanguageDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddUpdateResultOfLanguageDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.added)) {
+            data["added"] = [];
+            for (let item of this.added)
+                data["added"].push(item.toJSON());
+        }
+        if (Array.isArray(this.updated)) {
+            data["updated"] = [];
+            for (let item of this.updated)
+                data["updated"].push(item.toJSON());
+        }
+        if (Array.isArray(this.skipped)) {
+            data["skipped"] = [];
+            for (let item of this.skipped)
+                data["skipped"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IAddUpdateResultOfLanguageDto {
+    added?: LanguageDto[] | undefined;
+    updated?: LanguageDto[] | undefined;
+    skipped?: LanguageDto[] | undefined;
+}
+
+export class LanguageCode implements ILanguageCode {
+    isRTL?: boolean | undefined;
+    displayName?: string | undefined;
+    cultureCode?: string | undefined;
+
+    constructor(data?: ILanguageCode) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.isRTL = _data["isRTL"];
+            this.displayName = _data["displayName"];
+            this.cultureCode = _data["cultureCode"];
+        }
+    }
+
+    static fromJS(data: any): LanguageCode {
+        data = typeof data === 'object' ? data : {};
+        let result = new LanguageCode();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isRTL"] = this.isRTL;
+        data["displayName"] = this.displayName;
+        data["cultureCode"] = this.cultureCode;
+        return data; 
+    }
+}
+
+export interface ILanguageCode {
+    isRTL?: boolean | undefined;
+    displayName?: string | undefined;
+    cultureCode?: string | undefined;
+}
+
+export class LanguageDto extends LanguageCode implements ILanguageDto {
+    isNew!: boolean;
+    id!: number;
+    isActive!: boolean;
+
+    constructor(data?: ILanguageDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.isNew = _data["isNew"];
+            this.id = _data["id"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): LanguageDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new LanguageDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isNew"] = this.isNew;
+        data["id"] = this.id;
+        data["isActive"] = this.isActive;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface ILanguageDto extends ILanguageCode {
+    isNew: boolean;
+    id: number;
+    isActive: boolean;
+}
+
+export abstract class AddEditCommandBaseOfLanguageDto implements IAddEditCommandBaseOfLanguageDto {
+    createNewIfToUpdateNotExists!: boolean;
+    items?: LanguageDto[] | undefined;
+
+    constructor(data?: IAddEditCommandBaseOfLanguageDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.createNewIfToUpdateNotExists = _data["createNewIfToUpdateNotExists"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(LanguageDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AddEditCommandBaseOfLanguageDto {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'AddEditCommandBaseOfLanguageDto' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["createNewIfToUpdateNotExists"] = this.createNewIfToUpdateNotExists;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IAddEditCommandBaseOfLanguageDto {
+    createNewIfToUpdateNotExists: boolean;
+    items?: LanguageDto[] | undefined;
+}
+
+export class AddEditLanguagesCommand extends AddEditCommandBaseOfLanguageDto implements IAddEditLanguagesCommand {
+    autoCreateTranslations!: boolean;
+
+    constructor(data?: IAddEditLanguagesCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.autoCreateTranslations = _data["autoCreateTranslations"];
+        }
+    }
+
+    static fromJS(data: any): AddEditLanguagesCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddEditLanguagesCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["autoCreateTranslations"] = this.autoCreateTranslations;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IAddEditLanguagesCommand extends IAddEditCommandBaseOfLanguageDto {
+    autoCreateTranslations: boolean;
+}
+
+export class TransferableExpressionOfLanguageDto implements ITransferableExpressionOfLanguageDto {
+
+    constructor(data?: ITransferableExpressionOfLanguageDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfLanguageDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfLanguageDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data; 
+    }
+}
+
+export interface ITransferableExpressionOfLanguageDto {
 }
 
 export class PaginatedResultOfTranslationDto extends Result implements IPaginatedResultOfTranslationDto {

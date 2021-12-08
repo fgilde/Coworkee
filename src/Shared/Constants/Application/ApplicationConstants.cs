@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CleanArchitectureBase.Shared.Constants.Application
 {
@@ -75,9 +76,12 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         }
         public static class Cache
         {
-            public static string CacheKeyFor(Type type) => $"{CacheKey}-{type.FullName}";
+            public static string CacheKeyFor(Type type, params string[] keys)
+            {
+                return keys.Where(s => !string.IsNullOrWhiteSpace(s)).Aggregate($"{CacheKey}-{type.FullName}", (current, key) => current + ("-" + key));
+            }
+
             public const string CacheKey = "all-of";
-            public const string GetAllDocumentTypesCacheKey = "all-document-types";
 
             public static string GetAllEntityExtendedAttributesCacheKey(string entityFullName)
             {
@@ -92,6 +96,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
 
         public static class MimeTypes
         {
+            public const string Csv = "text/csv";
             public const string OpenXml = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             public const string Xls = "application/vnd.ms-excel";
         }

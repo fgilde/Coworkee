@@ -39,7 +39,7 @@ namespace CleanArchitectureBase.Server
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalR();
             services.AddCurrentUserServiceAndSession();
-
+            services.AddAllWithRegisterAttribute(typeof(Startup).Assembly);
             services.AddLocalization(options =>
             {
                 options.ResourcesPath = "Resources";

@@ -19,7 +19,7 @@ namespace CleanArchitectureBase.Shared.Extensions
                 {
                     var value = prop.GetValue(source);
                     
-                    if (value != null && !value.Equals(prop.GetValue(target)) && !value.Equals(prop.PropertyType.GetDefaultValue()))
+                    if (value != null && !value.Equals(prop.GetValue(target)) && ShouldSet(value, prop) )
                         prop.SetValue(target, value, null);
                 }
                 catch
@@ -28,6 +28,12 @@ namespace CleanArchitectureBase.Shared.Extensions
 
             return target;
         }
+
+        private static bool ShouldSet(object value, PropertyInfo prop)
+        {
+            return prop.PropertyType.IsValueType || !value.Equals(prop.PropertyType.GetDefaultValue());
+        }
+
         private static object GetDefaultValue(this Type t)
         {
             if (t.IsValueType && Nullable.GetUnderlyingType(t) == null)

@@ -1,24 +1,26 @@
 ﻿@using CleanArchitectureBase.Shared.Constants.Localization
 @using CleanArchitectureBase.Shared.Settings
+@using Nextended.Core.Extensions
+@using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Hubs.Events
+@using Microsoft.AspNetCore.SignalR.Client
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
 
 @{
-    string actual = preference?.LanguageCode;
-    var actualLanguge = LocalizationConstants.SupportedLanguages.FirstOrDefault(l => l.Code == actual);
-    string displayName = actualLanguge!= null ? DisplayStr(actualLanguge) : localizer["Select Language"];
-
+    actuaLanguage = languages?.FirstOrDefault(l => l.CultureCode == preference?.LanguageCode);
+    displayName = actuaLanguage != null ? DisplayStr(actuaLanguage) : localizer["Select Language"];
     <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
         @{
-            foreach (var language in LocalizationConstants.SupportedLanguages)
+            foreach (var language in languages)
             {
-                <MudMenuItem Disabled="language.Code == actual" OnClick="(() => ChangeLanguageAsync(language))">
+                <MudMenuItem Disabled="language.CultureCode == preference?.LanguageCode" OnClick="(() => ChangeLanguageAsync(language))">
                     <MudText Typo="Typo.body2">
-                        @if (language.Code == actual)
+                        @if (language.CultureCode == preference?.LanguageCode)
                         {
                             <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1" />
                         }
                         @DisplayStr(language)
-                        <span class="culture-code">@language.Code</span>
+                        <span class="culture-code">@language.CultureCode</span>
                     </MudText>
                 </MudMenuItem>
             }
@@ -29,19 +31,36 @@
 
 @code
 {
-    [Parameter]
-    public bool Small { get; set; } = false;
+    [Parameter] public bool Small { get; set; } = false;
+    [CascadingParameter] private HubConnection HubConnection { get; set; }
+
+    string displayName;
+    IList<LanguageDto> languages;
+    LanguageDto actuaLanguage;
 
     IPreference preference;
     protected override async Task OnInitializedAsync()
     {
-        await LoadPreferenceAsync();
+        await Load();
+        HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+        HubConnection.On<EntitiesUpdated<LanguageDto>>(async (a) =>
+        {
+            await Load();
+        });
     }
 
-    private string DisplayStr(LanguageCode language)
+    private async Task Load()
     {
-        string display = localizer[language.Code];
-        if (display == language.Code)
+        await LoadPreferenceAsync();
+        languages = await _api.Language_GetAllAsync(new(l => l.IsActive));
+        if (languages == null || !languages.Any())
+            languages = LocalizationConstants.DefaultUILanguages.MapElementsTo<LanguageDto>().ToList();
+    }
+
+    private string DisplayStr(LanguageDto language)
+    {
+        string display = localizer[language.CultureCode];
+        if (display == language.CultureCode)
             display = language.DisplayName;
         return display;
     }
@@ -51,27 +70,20 @@
         preference = await _clientPreferenceManager.GetPreference();
     }
 
-    private async Task ChangeLanguageAsync(LanguageCode languageCode)
+    private async Task ChangeLanguageAsync(LanguageDto languageCode)
     {
-        var result = await _clientPreferenceManager.ChangeLanguageAsync(languageCode.Code);
+        var result = await _clientPreferenceManager.ChangeLanguageAsync(languageCode.CultureCode);
         if (languageCode.IsRTL.HasValue && ((ClientPreference)preference).IsRTL != languageCode.IsRTL.Value)
         {
             await _clientPreferenceManager.ToggleLayoutDirection();
         }
-        if (result.Succeeded)
+        
+        if (_errorService.IsSuccessFull(result))
         {
             _snackBar.Add(result.Messages[0], Severity.Success);
             await LoadPreferenceAsync();
             StateHasChanged();
             _navigationManager.Reload();
-    //_navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: true);
-        }
-        else
-        {
-            foreach (var error in result.Messages)
-            {
-                _snackBar.Add(error, Severity.Error);
-            }
         }
     }
 }

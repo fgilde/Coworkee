@@ -8,13 +8,15 @@ namespace CleanArchitectureBase.Application.Configurations
     }
 
     // Content here is generated. To generate new open appsettings.json from WebServer project select all and copy content. After wards here in this class use VS->Edit->Paste Special -> Paste JSON as classes
-    
+
+
     public class Rootobject
     {
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
         public Appconfiguration AppConfiguration { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
+        public Cognitiveservices CognitiveServices { get; set; }
         public Apidocumentation ApiDocumentation { get; set; }
         public Mailconfiguration MailConfiguration { get; set; }
         public Serilog Serilog { get; set; }
@@ -41,6 +43,19 @@ namespace CleanArchitectureBase.Application.Configurations
     public class Connectionstrings
     {
         public string DefaultConnection { get; set; }
+    }
+    
+    public class Cognitiveservices
+    {
+        public Translation Translation { get; set; }
+    }
+
+    public class Translation
+    {
+        public string Key { get; set; }
+        public string TextTranslationEndpoint { get; set; }
+        public string DocumentTranslationEndpoint { get; set; }
+        public string Region { get; set; }
     }
 
     public class Apidocumentation

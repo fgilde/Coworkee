@@ -3,7 +3,6 @@ using LazyCache;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -35,7 +34,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;
         protected readonly IAppCache Cache;
 
-        protected virtual string CacheKey(TQuery query) => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity));
+        protected virtual string CacheKey(TQuery query) => ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity), query.OdataFilterQuery);
 
         public GetAllQueryHandlerBase(IUnitOfWork<TEntityId> unitOfWork, IAppCache cache)
         {

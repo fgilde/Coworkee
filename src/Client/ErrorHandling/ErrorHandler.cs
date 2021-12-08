@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -63,7 +64,7 @@ namespace CleanArchitectureBase.Client.ErrorHandling
 
         public void ShowErrors(IEnumerable<string> errors)
         {
-            foreach (var message in errors)
+            foreach (var message in errors.Where(s => !string.IsNullOrWhiteSpace(s)))
                 _snackbar.Add(_localizer[message], Severity.Error);
         }
 
@@ -73,7 +74,7 @@ namespace CleanArchitectureBase.Client.ErrorHandling
             {
                 var content = await response.Content?.ReadAsStringAsync();
                 var details = Check.TryCatch<ClientProblemDetails, Exception>(() => JsonConvert.DeserializeObject<ClientProblemDetails>(content));
-                if (details != null)
+                if (details?.Title != null)
                     ShowError(details);
                 else
                     ShowError(content);

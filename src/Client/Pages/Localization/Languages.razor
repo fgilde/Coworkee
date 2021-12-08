@@ -28,17 +28,31 @@
     {
         var neutralLangLabel = (_localizer[lang.FirstOrDefault(c => c.CultureCode.Contains("-"))?.CultureCode ?? lang.Key]).Value.Split("(")[0];
         var isAnyUsed = usedLanguages.Any(c => lang.Any(l => c.CultureCode == l.CultureCode && c.DisplayName == l.DisplayName));
+        var isAnyUpdating = updating.Any(c => lang.Any(l => c.CultureCode == l.CultureCode && c.DisplayName == l.DisplayName));
 
         <MudExpansionPanel Class="@(isAnyUsed ? "lang-active" : "")" Text="@neutralLangLabel">
-        <MudGrid>
-                @foreach (var l in lang)
-                {
-                    <MudItem xs="6" md="3">
-                        <MudSwitch CheckedChanged="@(new Action<bool>(e => Activate(l, e)))" Checked="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning"/>
-                        <span class="culture-code">@l.CultureCode</span>
-                    </MudItem>
-                }
-            </MudGrid>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudText>@neutralLangLabel</MudText>
+                    @if (isAnyUpdating)
+                    {
+                        <MudSpacer />
+                        <MudProgressCircular Color="Color.Primary" Class="mr-4 ml-4" Size="Size.Small" Indeterminate="true"/>
+                        <MudText Class="mr-5" Typo="Typo.subtitle2">@_localizer["Translations are being imported"]</MudText>
+                    }
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudGrid>
+                    @foreach (var l in lang)
+                    {
+                        <MudItem xs="6" md="3">
+                            <MudSwitch CheckedChanged="@(new Action<bool>(e => Activate(l, e)))" Checked="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning"/>
+                            <span class="culture-code">@l.CultureCode</span>
+                        </MudItem>
+                    }
+                </MudGrid>
+            </ChildContent>
         </MudExpansionPanel>
     }
 </MudExpansionPanels>
@@ -48,7 +62,8 @@
     [CascadingParameter] private HubConnection HubConnection { get; set; }
     IList<LanguageDto> usedLanguages;
     IList<LanguageDto> availableLanguages;
-    
+    readonly IList<LanguageDto> updating = new List<LanguageDto>();
+
     protected override async Task OnInitializedAsync()
     {
         await Load();
@@ -58,9 +73,7 @@
         HubConnection.On<EntitiesUpdated<LanguageDto>>(async (a) =>
         {
             if (a.User.Id != currentUser.GetUserId())
-            {
                 await Load();
-            }
         });
     }
 
@@ -90,9 +103,17 @@
 
     private async void Activate(LanguageDto language, bool active)
     {
-        await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) {AutoCreateTranslations = LocalizationConstants.ExistingTranslations.All(l => l.CultureCode != language.CultureCode)});
+        var autoCreateTranslations = active && LocalizationConstants.ExistingTranslations.All(l => l.CultureCode != language.CultureCode);
+        if (autoCreateTranslations) 
+            updating.Add(language);
+
+        await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) {AutoCreateTranslations = autoCreateTranslations});
         language.IsActive = active;
         usedLanguages = availableLanguages.Where(dto => dto.IsActive).ToList();
+
+        if (autoCreateTranslations) 
+            updating.Remove(language);
+
         StateHasChanged();
     }
 }

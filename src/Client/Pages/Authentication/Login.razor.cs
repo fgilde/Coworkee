@@ -1,17 +1,9 @@
-﻿using System;
-using System.Linq;
-using CleanArchitectureBase.Application.Requests.Identity;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using CleanArchitectureBase.Application.Requests.Identity;
 using MudBlazor;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Client.Authentication;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Authentication
 {
@@ -20,25 +12,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private TokenRequest _tokenModel = new();
-
-        protected override async Task OnInitializedAsync()
-        {
-            var state = await _stateProvider.GetAuthenticationStateAsync();
-            if (state != AuthenticationStates.None && !state.IsGuest())
-            {
-                if (state?.User.Identity?.IsAuthenticated == true)
-                {
-                    var url = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
-                    url = Uri.EscapeDataString(url);
-                    _navigationManager.NavigateTo("/forbidden/"+  url);
-                }
-                else
-                {
-                    _navigationManager.NavigateToHomeWithReturnTo();
-                }
-            }
-        }
-
+        
         private async Task SubmitAsync()
         {
             var result = await _clientAuthenticationManager.Login(_tokenModel);

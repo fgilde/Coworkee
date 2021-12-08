@@ -1,9 +1,11 @@
 @page "/login"
 @using CleanArchitectureBase.Shared.Constants
-@layout MainLayout
+@using CleanArchitectureBase.Shared.Constants.Application
+@layout LoginLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> _localizer
 <ReactOnPreferenceChanged Component="this" />
+@*<PageTitle>@_localizer["Sign In"]</PageTitle>*@
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudGrid>
@@ -25,7 +27,7 @@
         </MudItem>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudText>@_localizer["Don't have an account?"] <MudLink Href="/register">@_localizer["Register here"]</MudLink></MudText>
+                <MudText>@_localizer["Don't have an account?"] <MudLink Href="@ApplicationConstants.Routes.Register">@_localizer["Register here"]</MudLink></MudText>
             </div>
         </MudItem>
         <MudItem xs="12">

@@ -39,7 +39,7 @@ namespace CleanArchitectureBase.Client.Extensions
         public static async Task<HubConnection> EnsureStartedAsync(this HubConnection hubConnection, string backendOrigin)
         {
             hubConnection = hubConnection.TryInitialize(backendOrigin);
-            if (hubConnection.State == HubConnectionState.Disconnected)
+            if (hubConnection.State != HubConnectionState.Connected)
             {
                 await hubConnection.StartAsync();
             }

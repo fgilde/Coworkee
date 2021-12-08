@@ -3,12 +3,17 @@ using System.Linq;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Extensions
 {
     public static class NavigationManagerExtensions
     {
-        private static readonly string[] ForbiddenReturnUrls = {"login", "register", "forbidden"};
+        private static readonly string[] ForbiddenReturnUrls = {
+            ApplicationConstants.Routes.Login,
+            ApplicationConstants.Routes.Register,
+            ApplicationConstants.Routes.Forbidden
+        };
 
         private static bool IsForbidden(string url)
         {
@@ -18,7 +23,9 @@ namespace CleanArchitectureBase.Client.Extensions
         private static string CleanReturnUrl(string url)
         {
             var returnUrlParamName = ApplicationConstants.ParameterNames.ReturnUrl;
-            return !string.IsNullOrWhiteSpace(url) ? url.Replace($"?{returnUrlParamName}=", "").Replace($"{returnUrlParamName}=", "") : "/";
+            var r = !string.IsNullOrWhiteSpace(url) ? url.Replace($"?{returnUrlParamName}=", "").Replace($"{returnUrlParamName}=", "") : "/";
+            ForbiddenReturnUrls.Where(u => r.StartsWith(u, StringComparison.InvariantCultureIgnoreCase)).Apply(u => r = r.Substring(u.Length));
+            return r;
         }
 
         public static void Reload(this NavigationManager navigationManager, bool forceLoad = false)
@@ -60,9 +67,14 @@ namespace CleanArchitectureBase.Client.Extensions
         {
             var uri = navigationManager.GetReturnUrlValue();
             if (!string.IsNullOrEmpty(uri))
-                navigationManager.NavigateTo(uri, false);
+                navigationManager.NavigateTo(uri, NeedReload(uri));
             else if (!string.IsNullOrEmpty(fallback))
-                navigationManager.NavigateTo(fallback, false);
+                navigationManager.NavigateTo(fallback, NeedReload(fallback));
+        }
+
+        private static bool NeedReload(string url)
+        {
+            return url.StartsWith("http:", StringComparison.CurrentCultureIgnoreCase) || url.StartsWith("https:", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

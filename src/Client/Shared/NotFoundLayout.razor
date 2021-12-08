@@ -1,6 +1,6 @@
 @using CleanArchitectureBase.Client.Theming
 @inherits LayoutComponentBase
 
-<MudThemeProvider Theme="ClientTheme.DefaultTheme" />
+<MudThemeProvider Theme="@(ClientTheme.LastUsedTheme ?? ClientTheme.DefaultTheme)" />
 <MudSnackbarProvider />
 <NotFoundComponent/>

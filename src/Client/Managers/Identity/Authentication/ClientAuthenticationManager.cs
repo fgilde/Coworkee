@@ -66,6 +66,9 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
 
         public async Task<IResult> Logout()
         {
+            var state = await _authenticationStateProvider.GetAuthenticationStateAsync();
+            if (state?.User.Identity?.IsAuthenticated == true && !state.IsGuest())
+                await _api.Account_LogoutAsync();
             await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);

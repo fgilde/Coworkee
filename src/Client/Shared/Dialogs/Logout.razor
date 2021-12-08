@@ -34,7 +34,10 @@
     {
         await HubConnection.SendAsync(ApplicationConstants.SignalR.OnDisconnect, CurrentUserId);
         await _clientAuthenticationManager.Logout();
-        _navigationManager.NavigateToHomeWithReturnTo();
+        if ((await _stateProvider.GetAuthenticationStateAsync()).IsGuest())
+            _navigationManager.NavigateToHomeWithReturnTo();
+        else
+            _navigationManager.NavigateToWithReturnTo(ApplicationConstants.Routes.Login);
         MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();

@@ -18,7 +18,7 @@ namespace CleanArchitectureBase.Shared.Extensions
                 try
                 {
                     var value = prop.GetValue(source);
-                    
+
                     if (value != null && !value.Equals(prop.GetValue(target)) && ShouldSet(value, prop) )
                         prop.SetValue(target, value, null);
                 }
@@ -31,7 +31,7 @@ namespace CleanArchitectureBase.Shared.Extensions
 
         private static bool ShouldSet(object value, PropertyInfo prop)
         {
-            return prop.PropertyType.IsValueType || !value.Equals(prop.PropertyType.GetDefaultValue());
+            return (prop.PropertyType.IsValueType && prop.PropertyType != typeof(DateTime)) || !value.Equals(prop.PropertyType.GetDefaultValue());
         }
 
         private static object GetDefaultValue(this Type t)

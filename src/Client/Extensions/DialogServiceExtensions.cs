@@ -15,6 +15,9 @@ public static class DialogServiceExtensions
         var optionsEx = options.MapTo<DialogOptionsEx>();
         optionsEx.MaximizeButton = true;
         optionsEx.DragMode = MudDialogDragMode.Simple;
+        //optionsEx.Position = DialogPosition.CenterRight;
+        //optionsEx.FullWidth = true;
+        //optionsEx.MaxWidth = MaxWidth.False;
         return await dialogService.ShowEx<TDialog>(title, parameters, optionsEx);
     }
 }

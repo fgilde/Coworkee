@@ -17,6 +17,12 @@ html, body, #app, .mud-main-content, .mud-rtl-provider {
     min-width: 310px;
 }
 
+.mud-dialog-actions { /* Dialog buttons bottom right */    
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
 body * {
     transition-property: background-color, opacity;
     transition-duration: 0.3s;

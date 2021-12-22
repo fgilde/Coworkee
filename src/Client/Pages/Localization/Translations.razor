@@ -25,6 +25,7 @@
                    ApiEditMany="@(new Func<TranslationDto[], Task<bool>>(SaveAll))"
                    Export="@(new Func<ExportServiceType, string, Task>(Export))"
                    ExportSelected="@(new Func<ExportServiceType, int[], Task>(ExportSelected))"
+                   Import="@(new Func<InputFileChangeEventArgs, Task>(ImportAsync))"
                    GetById="@(new Func<int, IEnumerable<TranslationDto>, Task<TranslationDto>>(FindById))"
                    GetId="@(new Func<TranslationDto,int>(GetId))"
                    Display="@(new Func<TranslationDto, string>(GetName))"

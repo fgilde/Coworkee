@@ -19,7 +19,10 @@
 }
 else
 {
-    <InputFile id="importInput" OnChange="ExecImport" hidden />
+    @if (Import != null)
+    {
+        <InputFile id="importInput" OnChange="ExecImport" hidden/>
+    }
 
     <MudTable FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
           RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
@@ -35,17 +38,20 @@ else
             }
         <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]" />
         <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh" />
-        <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
-            @foreach (var e in Enum<ExportServiceType>.GetValues())
+            <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                @foreach (var e in Enum<ExportServiceType>.GetValues())
                 {
-                <MudMenuItem OnClick="@(() => ExecExport(e))">
-                    <MudText>
-                        @_localizer[e.ToString()]
-                    </MudText>
-                </MudMenuItem>
+                    <MudMenuItem OnClick="@(() => ExecExport(e))">
+                        <MudText>
+                            @_localizer[e.ToString()]
+                        </MudText>
+                    </MudMenuItem>
                 }
-        </MudMenu>
-        <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit" />
+            </MudMenu>
+        @if (Import != null)
+        {
+            <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit"/>
+        }
 
         @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
             {

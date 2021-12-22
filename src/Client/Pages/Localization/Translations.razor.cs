@@ -12,7 +12,9 @@ using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Localization;
 using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
+using SDK;
 
 
 namespace CleanArchitectureBase.Client.Pages.Localization
@@ -100,6 +102,10 @@ namespace CleanArchitectureBase.Client.Pages.Localization
                 query.TranslationsToExport = _translations.ToArray();
             await (await _api.Translations_ExportAsync(query)).ForceDownloadAsync(_jsRuntime);
         }
+        private Task ImportAsync(InputFileChangeEventArgs e)
+        {
+            return _api.Translations_ImportFileAsync(new FileParameter(e.File.OpenReadStream(), e.File.Name, e.File.ContentType));
+        }
 
         private async Task<bool> SaveAll(TranslationDto[] arg)
         {
@@ -124,23 +130,9 @@ namespace CleanArchitectureBase.Client.Pages.Localization
                 AfterSend();
                 return true;
             }
-            else
-            {
 
-                return false;
-            }
-            //var parameters = new DialogParameters();
-            //if (productOrNull != null)
-            //{
-            //    parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull.MapTo<AddEditProductCommand>());
-            //}
+            return false;
 
-            //var options = new DialogOptionsEx { MaximizeButton = true, DragMode = MudDialogDragMode.Simple, CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            //var dialog = await _dialogService.ShowEx<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
-
-            //var x = dialog.Dialog;
-            //var result = await dialog.Result;
-            //return !result.Cancelled;
         }
 
     }

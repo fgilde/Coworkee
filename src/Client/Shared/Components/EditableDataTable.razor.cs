@@ -59,6 +59,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
         public Func<ExportServiceType, TIdType[], Task> ExportSelected { get; set; }
 
         [Parameter]
+        public Func<InputFileChangeEventArgs, Task> Import { get; set; }
+
+        [Parameter]
         public Func<TIdType, IEnumerable<TResult>, Task<TResult>> GetById { get; set; }
 
         [Parameter]
@@ -243,8 +246,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task ExecImport(InputFileChangeEventArgs e)
         {
-            // var request = new ImportTranslationsQuery { Data = await e.File.GetBytesAsync() };
-            await _api.Translations_ImportFileAsync(new FileParameter(e.File.OpenReadStream(), e.File.Name, e.File.ContentType));
+            await Import(e);
         }
 
         private string ActionUrl(TIdType id)

@@ -5424,8 +5424,8 @@
               "type": "number",
               "format": "decimal"
             },
-            "brandName": {
-              "type": "string"
+            "brand": {
+              "$ref": "#/definitions/BrandDto"
             },
             "brandId": {
               "type": "integer",

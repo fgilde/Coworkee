@@ -82,6 +82,7 @@ namespace CleanArchitectureBase.Client.Shared
             
             hubConnection.On<EntitiesUpdated<TranslationDto>>(async (arg) =>
             {
+                _snackBar.Add(localizer["Translations updated"], Severity.Normal, options => options.Icon = Icons.Filled.Translate);
                 await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, true);
                 await _clientPreferenceManager.ChangeLanguageAsync((await _clientPreferenceManager.GetPreference()).LanguageCode);
                 StateHasChanged();

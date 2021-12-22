@@ -15,6 +15,5 @@ namespace CleanArchitectureBase.Domain.Entities.Catalog
         public decimal Rate { get; set; }
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; }
-        public string BrandName => Brand?.Name;
     }
 }

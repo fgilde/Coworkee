@@ -7893,7 +7893,7 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
     barcode?: string | undefined;
     description?: string | undefined;
     rate!: number;
-    brandName?: string | undefined;
+    brand?: BrandDto | undefined;
     brandId!: number;
     imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
@@ -7909,7 +7909,7 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
             this.barcode = _data["barcode"];
             this.description = _data["description"];
             this.rate = _data["rate"];
-            this.brandName = _data["brandName"];
+            this.brand = _data["brand"] ? BrandDto.fromJS(_data["brand"]) : <any>undefined;
             this.brandId = _data["brandId"];
             this.imageDataURL = _data["imageDataURL"];
             this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
@@ -7929,7 +7929,7 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
         data["barcode"] = this.barcode;
         data["description"] = this.description;
         data["rate"] = this.rate;
-        data["brandName"] = this.brandName;
+        data["brand"] = this.brand ? this.brand.toJSON() : <any>undefined;
         data["brandId"] = this.brandId;
         data["imageDataURL"] = this.imageDataURL;
         data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
@@ -7943,7 +7943,7 @@ export interface IProductDto extends IDtoBaseOfInteger {
     barcode?: string | undefined;
     description?: string | undefined;
     rate: number;
-    brandName?: string | undefined;
+    brand?: BrandDto | undefined;
     brandId: number;
     imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;

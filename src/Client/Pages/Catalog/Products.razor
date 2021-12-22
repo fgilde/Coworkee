@@ -17,7 +17,7 @@
     GetById="@(FindById)"
     GetId="@(GetId)"
     Display="@(GetName)"
-    TableProperties="@(new []{nameof(ProductDto.Id), nameof(ProductDto.Name), nameof(ProductDto.BrandName), nameof(ProductDto.Description), nameof(ProductDto.Barcode), nameof(ProductDto.Rate)})"
+    TableProperties="@(new []{nameof(ProductDto.Id), nameof(ProductDto.Name), nameof(ProductDto.Brand), nameof(ProductDto.Description), nameof(ProductDto.Barcode), nameof(ProductDto.Rate)})"
     InitialAction="@Action"
     InitialIdString="@Id"
     CreatePermission="@Permissions.Products.Create"

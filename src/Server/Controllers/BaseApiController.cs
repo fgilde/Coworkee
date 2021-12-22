@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -10,7 +9,7 @@ namespace CleanArchitectureBase.Server.Controllers
     /// Abstract BaseApi Controller Class
     /// </summary>
     [ApiController]
-    [EnableQuery]
+    //[EnableQuery]
     [ApiVersion(ApiVersions.V1)]
     [Route("api/v{version:apiVersion}/[controller]")]
     public abstract class BaseApiController<T> : ControllerBase

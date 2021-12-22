@@ -2,7 +2,7 @@
   "TextTranslationEndpoint": "https://api.cognitive.microsofttranslator.com/",
   "ApiKey": "901f0e1f3e3143b5b82fb984990bcad8",
   "FileOutputFormat": "{FileName}.{Culture}.{Extension}",  
-  "TargetCultures": "de-DE, fr-FR, bg-BG, it-IT, tr-TR, ar-SA, cs-CZ, da-DK, el-CY, es-ES, hr-HR, ja-JP, ko-KR, nl-NL, pl-PL, sv-SE, tr-TR",
+  "TargetCultures": "de-DE, fr-FR, bg-BG, it-IT, tr-TR, ar-SA, cs-CZ, da-DK, el-CY, es-ES, hr-HR, ja-JP, ko-KR, nl-NL, pl-PL, sv-SE",
   "Region": "germanywestcentral",
   "AutoSort": true
 }

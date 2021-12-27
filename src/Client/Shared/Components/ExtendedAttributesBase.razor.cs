@@ -194,8 +194,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     Type = EntityExtendedAttributeType.Text
                 });
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowAsync<AddEditExtendedAttributeModal<TId, TEntityId, TEntity, TExtendedAttribute>>(id.Equals(default) ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditExtendedAttributeModal<TId, TEntityId, TEntity, TExtendedAttribute>>(id.Equals(default) ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

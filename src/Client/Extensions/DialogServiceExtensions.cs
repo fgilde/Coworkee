@@ -1,23 +1,41 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudBlazor.Extensions;
-using Nextended.Core.Extensions;
+using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Extensions;
 
 public static class DialogServiceExtensions
 {
-    public static async Task<IDialogReference> ShowAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters, DialogOptions options) 
+    public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters) 
         where TDialog : ComponentBase
     {
-        // return dialogService.Show<TDialog>(title, parameters, options);
-        var optionsEx = options.MapTo<DialogOptionsEx>();
-        optionsEx.MaximizeButton = true;
-        optionsEx.DragMode = MudDialogDragMode.Simple;
-        //optionsEx.Position = DialogPosition.CenterRight;
-        //optionsEx.FullWidth = true;
-        //optionsEx.MaxWidth = MaxWidth.False;
+         //return dialogService.Show<TDialog>(title, parameters, new DialogOptions()
+         //{
+         //    CloseButton = true,
+         //    MaxWidth = MaxWidth.Medium,
+         //    FullWidth = true,
+         //    DisableBackdropClick = true
+         //});
+        
+        var optionsEx = new DialogOptionsEx
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            DisableBackdropClick = false,
+            // Extended
+            MaximizeButton = true,
+            DragMode = MudDialogDragMode.Simple,
+            Position = DialogPosition.CenterRight,
+            Animation = AnimationType.SlideIn,
+            FullHeight = true,
+            DisableSizeMarginY = true,
+            DisablePositionMargin = true
+        };
+
         return await dialogService.ShowEx<TDialog>(title, parameters, optionsEx);
     }
 }

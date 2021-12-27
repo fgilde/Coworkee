@@ -65,8 +65,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
                 parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull);
             }
 
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowAsync<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
             return !result.Cancelled;
         }

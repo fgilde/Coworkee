@@ -68,8 +68,8 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             {
                 parameters.Add(nameof(AddEditDocumentTypeModal.AddEditDocumentTypeModel), arg);
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowAsync<AddEditDocumentTypeModal>(arg == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            
+            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditDocumentTypeModal>(arg == null ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
 
             return !result.Cancelled;

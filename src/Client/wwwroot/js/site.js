@@ -27,7 +27,6 @@ window.initialLoad = () => {
         window.localStorage.clear();
         window.location.href = removeUrlParams(window.location.href, 'safemode');
     }
-
     fetch('appsettings.json', { method: 'GET', redirect: 'follow' })
         .then(response => response.json())
         .then(json => {

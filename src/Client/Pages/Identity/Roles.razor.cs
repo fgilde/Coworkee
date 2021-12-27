@@ -97,8 +97,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                     });
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowAsync<RoleModal>(id == null ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<RoleModal>(id == null ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

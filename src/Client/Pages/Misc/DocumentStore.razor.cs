@@ -133,8 +133,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                     parameters.Add(nameof(AddEditDocumentModal.AddEditDocumentModel), doc);
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowAsync<AddEditDocumentModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditDocumentModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

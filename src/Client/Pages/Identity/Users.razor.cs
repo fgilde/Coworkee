@@ -93,8 +93,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task InvokeModal()
         {
             var parameters = new DialogParameters();
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = await _dialogService.ShowAsync<RegisterUserModal>(_localizer["Register New User"], parameters, options);
+            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<RegisterUserModal>(_localizer["Register New User"], parameters);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

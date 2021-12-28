@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Yibuti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopía)
+about: Acerca de
 Account: Cuenta
 Actions: Acciones
 Activate User?: ¿Activar usuario?
@@ -22,6 +23,8 @@ All Groups: Todos los grupos
 All Permissions: Todos los permisos
 Already have an account?: ¿Ya tienes una cuenta?
 am-ET: Amárico (Etiopía)
+Api: API
+API-Versions: Versiones de API
 ApplicationDescription: Aplicación de ejemplo con WebAssembly y patrón de arquitectura limpia
 ApplicationSubDescription: Bienvenido a esta página de Blazor
 Apply: Aplicar
@@ -114,6 +117,7 @@ Chat?: ¿Charlar?
 chr-Cher-US: Cherokee (Cherokee, Estados Unidos)
 Clear: Claro
 Client Language has been changed: Se ha cambiado el idioma del cliente
+Close: Cerrar
 co-FR: Corso (Francia)
 Columns Affected: Columnas afectadas
 Communication: Comunicación
@@ -751,6 +755,7 @@ ru-KZ: Ruso (Kazajstán)
 ru-MD: Ruso (Moldavia)
 ru-RU: Ruso (Rusia)
 ru-UA: Ruso (Ucrania)
+Runtime: Ejecución
 Russian: Ruso
 rw-RW: Kinyarwanda (Ruanda)
 rwk-TZ: Rwa (Tanzania)
@@ -839,6 +844,7 @@ sw-UG: Swahili (Uganda)
 Swagger: Documentación de la API
 Swedish: Sueco
 syr-SY: Siríaco (Siria)
+System: Sistema
 ta-IN: Tamil (India)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Malasia)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (latín, Liberia)
 vai-Vaii-LR: Go (Vai, Liberia)
 Value: Valor
 ve-ZA: Venda (Sudáfrica)
+Version: Versión
 vi-VN: Vietnamita (Vietnam)
 View: Vista
 View Profile: Ver perfil

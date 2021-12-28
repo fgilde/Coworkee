@@ -1,6 +1,7 @@
 ﻿aa-DJ: Афар (Джибути)
 aa-ER: Афар (Еритрея)
 aa-ET: Афар (Етиопия)
+about: За
 Account: Сметка
 Actions: Действия
 Activate User?: Активиране на потребител?
@@ -22,6 +23,8 @@ All Groups: Всички групи
 All Permissions: Всички разрешения
 Already have an account?: Вече имате сметка?
 am-ET: Амхарик (Етиопия)
+Api: Апи
+API-Versions: API-версии
 ApplicationDescription: Примерно приложение с webAssembly и модел чиста архитектура
 ApplicationSubDescription: Добре дошли в тази Страница Блазор
 Apply: Прилагам
@@ -114,6 +117,7 @@ Chat?: Чат?
 chr-Cher-US: Чероки (Чероки, САЩ)
 Clear: Ясен
 Client Language has been changed: Клиентски език е променен
+Close: Затварям
 co-FR: Корсикан (Франция)
 Columns Affected: Засегнати колони
 Communication: Общуване
@@ -751,6 +755,7 @@ ru-KZ: Руски (Казахстан)
 ru-MD: Руски (Молдова)
 ru-RU: Руски (Русия)
 ru-UA: Руски (Украйна)
+Runtime: Времетраене
 Russian: Руски
 rw-RW: Кинярванда (Руанда)
 rwk-TZ: Rwa (Танзания)
@@ -839,6 +844,7 @@ sw-UG: Суахили (Уганда)
 Swagger: Документация за API
 Swedish: Шведски
 syr-SY: Сирияк (Сирия)
+System: Система
 ta-IN: Тамил (Индия)
 ta-LK: Тамил (Шри Ланка)
 ta-MY: Нито (Малайзия)
@@ -920,6 +926,7 @@ vai-Latn-LR: Вай (латински, Либерия)
 vai-Vaii-LR: Върви (Вай, Либерия)
 Value: Стойност
 ve-ZA: Венда (Южна Африка)
+Version: Версия
 vi-VN: Виетнамски (Виетнам)
 View: Изглед
 View Profile: Преглед на профил

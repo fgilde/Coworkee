@@ -1,6 +1,7 @@
 ﻿aa-DJ: 아파르 (지부티)
 aa-ER: 아파르 (에리트레아)
 aa-ET: 아파르 (에티오피아)
+about: 약
 Account: 계좌
 Actions: 작업
 Activate User?: 사용자를 활성화?
@@ -22,6 +23,8 @@ All Groups: 모든 그룹
 All Permissions: 모든 사용 권한
 Already have an account?: 이미 계정이 있습니까?
 am-ET: 암하라어 (에티오피아)
+Api: Api
+API-Versions: API 버전
 ApplicationDescription: 웹어셈블리 및 클린 아키텍처 패턴이 있는 샘플 응용 프로그램
 ApplicationSubDescription: 이 블레저 페이지에 오신 것을 환영합니다.
 Apply: 적용하다
@@ -114,6 +117,7 @@ Chat?: 잡담?
 chr-Cher-US: 체로키 (체로키, 미국)
 Clear: 맑다
 Client Language has been changed: 클라이언트 언어가 변경되었습니다.
+Close: 닫다
 co-FR: 코르시칸 (프랑스)
 Columns Affected: 영향을 받는 열
 Communication: 통신
@@ -751,6 +755,7 @@ ru-KZ: 러시아어(카자흐스탄)
 ru-MD: 러시아어 (몰도바)
 ru-RU: 러시아어 (러시아)
 ru-UA: 러시아어 (우크라이나)
+Runtime: 런타임
 Russian: 러시아어
 rw-RW: 키냐르완다 (르완다)
 rwk-TZ: 와 (탄자니아)
@@ -839,6 +844,7 @@ sw-UG: 스와힐리어 (우간다)
 Swagger: API 설명서
 Swedish: 스웨덴어
 syr-SY: 시리아 (시리아)
+System: 체계
 ta-IN: 타밀 (인도)
 ta-LK: 타밀 (스리랑카)
 ta-MY: 노 (말레이시아)
@@ -920,6 +926,7 @@ vai-Latn-LR: 바이 (라틴어, 라이베리아)
 vai-Vaii-LR: 이동 (바이, 라이베리아)
 Value: 값
 ve-ZA: 벤다 (남아프리카 공화국)
+Version: 버전
 vi-VN: 베트남어(베트남)
 View: 보기
 View Profile: 프로필 보기

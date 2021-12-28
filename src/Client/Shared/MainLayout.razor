@@ -41,7 +41,7 @@
                                 <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Inherit"/>
                             </MudTooltip>
 
-                            <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                            <MudMenu AnchorOrigin="Origin.BottomCenter" Dense="true" Class="mt-1 ml-4">
                                 <ActivatorContent>
                                     <UserAvatar LinkToProfile="false"/>
                                 </ActivatorContent>
@@ -53,6 +53,9 @@
                                 </ChildContent>
                             </MudMenu>
                         }
+                        <MudTooltip Text="@localizer["about"]">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Info" Size="Size.Small" Color="Color.Inherit" OnClick="ShowAbout"/>
+                        </MudTooltip>
                     </MudHidden>
                     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
                         <RoleSelector Small="true"/>

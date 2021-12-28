@@ -1,0 +1,45 @@
+@using Nextended.Core.Extensions
+@using System.Reflection
+@inject Microsoft.Extensions.Localization.IStringLocalizer<About> localizer
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Info" Class="mr-3 mb-n1" />
+            @localizer["about"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <div class="d-flex justify-center mt-4 mb-4">
+            <ApplicationLogo Height="200" Width="200"/>
+        </div>
+        <MudCard Class="m-4">
+            <MudCardContent>
+                <MudText GutterBottom="true" Typo="Typo.button"><b>Server</b></MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@serverInfo.ApplicationName</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @serverInfo.ApplicationVersion</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @serverInfo.Runtime</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @serverInfo.System</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Api"]</b> <MudLink Typo="Typo.body2" Href="@(new Uri(_api.BaseUrl).Host + "/swagger/index.html")">@_api.BaseUrl</MudLink></MudText>
+                <MudText Align="Align.Center" Typo="Typo.subtitle2">@localizer["API-Versions"]</MudText>
+                @foreach (var v in apiVersions)
+                {
+                    <MudText Align="Align.Center" Typo="Typo.body2">@v</MudText>
+                }
+            </MudCardContent>
+        </MudCard>
+        
+        <MudCard Class="m-4">
+            <MudCardContent>
+                <MudText GutterBottom="true" Typo="Typo.button"><b>Client</b></MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@clientInfo.ApplicationName</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @clientInfo.ApplicationVersion</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @clientInfo.Runtime</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @clientInfo.System</MudText>
+            </MudCardContent>
+        </MudCard>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Close">@localizer["Close"]</MudButton>
+    </DialogActions>
+</MudDialog>

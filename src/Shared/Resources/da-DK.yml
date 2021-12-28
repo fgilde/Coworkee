@@ -1,6 +1,7 @@
 ﻿aa-DJ: Langvejs (Djibouti)
 aa-ER: Langvejs (Eritrea)
 aa-ET: Langvejs (Etiopien)
+about: Omtrent
 Account: Konto
 Actions: Handlinger
 Activate User?: Skal brugeren aktiveres?
@@ -22,6 +23,8 @@ All Groups: Alle grupper
 All Permissions: Alle tilladelser
 Already have an account?: Har du allerede en konto?
 am-ET: Amharic (Etiopien)
+Api: Api
+API-Versions: API-versioner
 ApplicationDescription: Eksempelprogram med webassembly- og rent arkitekturmønster
 ApplicationSubDescription: Velkommen til denne Blazor Side
 Apply: Anvende
@@ -114,6 +117,7 @@ Chat?: Chatte?
 chr-Cher-US: Cherokee (Cherokee, USA)
 Clear: Tydelig
 Client Language has been changed: Klientsproget er blevet ændret
+Close: Lukke
 co-FR: Korsikanske (Frankrig)
 Columns Affected: Berørte kolonner
 Communication: Kommunikation
@@ -751,6 +755,7 @@ ru-KZ: Russisk (Kasakhstan)
 ru-MD: Russisk (Moldova)
 ru-RU: Russisk (Rusland)
 ru-UA: Russisk (Ukraine)
+Runtime: Runtime
 Russian: Russisk
 rw-RW: Kinyarwanda (Rwanda)
 rwk-TZ: Rwa (Tanzania)
@@ -839,6 +844,7 @@ sw-UG: Swahili (Uganda)
 Swagger: API-dokumentation
 Swedish: Svensk
 syr-SY: Syrisk (Syrien)
+System: System
 ta-IN: Tamil (Indien)
 ta-LK: Tamilsk (Sri Lanka)
 ta-MY: Heller ikke (Malaysia)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (Latin, Liberia)
 vai-Vaii-LR: Go (Vai, Liberia)
 Value: Værdi
 ve-ZA: Venda (Sydafrika)
+Version: Version
 vi-VN: Vietnamesisk (Vietnam)
 View: Udsigt
 View Profile: Vis profil

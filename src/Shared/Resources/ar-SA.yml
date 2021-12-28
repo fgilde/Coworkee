@@ -1,6 +1,7 @@
 ﻿aa-DJ: عفر (جيبوتي)
 aa-ER: عفر (إريتريا)
 aa-ET: عفر (إثيوبيا)
+about: عن
 Account: حساب
 Actions: الاجراءات
 Activate User?: تنشيط المستخدم؟
@@ -22,6 +23,8 @@ All Groups: جميع المجموعات
 All Permissions: كافة الأذونات
 Already have an account?: هل لديك حساب بالفعل؟
 am-ET: أمهرية (إثيوبيا)
+Api: Api
+API-Versions: API-إصدارات
 ApplicationDescription: نموذج التطبيق مع نمط هندسة WebAssembly ونظيفة
 ApplicationSubDescription: مرحبا بكم في صفحة بلازور هذه
 Apply: طبق
@@ -114,6 +117,7 @@ Chat?: ثَرْثَرَ؟
 chr-Cher-US: شيروكي (شيروكي، الولايات المتحدة)
 Clear: واضح
 Client Language has been changed: تم تغيير لغة العميل
+Close: غلق
 co-FR: كورسيكية (فرنسا)
 Columns Affected: الأعمدة المتأثرة
 Communication: انتقال
@@ -751,6 +755,7 @@ ru-KZ: الروسية (كازاخستان)
 ru-MD: الروسية (مولدوفا)
 ru-RU: الروسية (روسيا)
 ru-UA: الروسية (أوكرانيا)
+Runtime: وقت التشغيل
 Russian: الروسية
 rw-RW: كينيارواندا (رواندا)
 rwk-TZ: روا (تنزانيا)
@@ -839,6 +844,7 @@ sw-UG: السواحلية (أوغندا)
 Swagger: وثائق API
 Swedish: السويدية
 syr-SY: السريان (سوريا)
+System: نظام
 ta-IN: التاميل (الهند)
 ta-LK: التاميل (سريلانكا)
 ta-MY: ولا (ماليزيا)
@@ -920,6 +926,7 @@ vai-Latn-LR: فاي (اللاتينية، ليبيريا)
 vai-Vaii-LR: الذهاب (فاي، ليبيريا)
 Value: قيمة
 ve-ZA: فيندا (جنوب أفريقيا)
+Version: الإصدار
 vi-VN: الفيتنامية (فيتنام)
 View: منظر
 View Profile: عرض ملف التعريف

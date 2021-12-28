@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Gibuti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopia)
+about: Circa
 Account: Conto
 Actions: Azioni
 Activate User?: Attivare l'utente?
@@ -22,6 +23,8 @@ All Groups: Tutti i gruppi
 All Permissions: Tutte le autorizzazioni
 Already have an account?: Hai già un account?
 am-ET: Amarico (Etiopia)
+Api: API
+API-Versions: API-Versioni
 ApplicationDescription: Applicazione di esempio con WebAssembly e modello di architettura pulita
 ApplicationSubDescription: Benvenuti in questa pagina blazor
 Apply: Applicare
@@ -114,6 +117,7 @@ Chat?: Chiacchierare?
 chr-Cher-US: Cherokee (Cherokee, Stati Uniti)
 Clear: Chiaro
 Client Language has been changed: La lingua del client è stata modificata
+Close: Chiudere
 co-FR: Corso (Francia)
 Columns Affected: Colonne interessate
 Communication: Comunicazione
@@ -751,6 +755,7 @@ ru-KZ: Russo (Kazakistan)
 ru-MD: Russo (Moldavia)
 ru-RU: Russo (Russia)
 ru-UA: Russo (Ucraina)
+Runtime: Runtime
 Russian: Russo
 rw-RW: Kinyarwanda (Ruanda)
 rwk-TZ: Rwa (Tanzania)
@@ -839,6 +844,7 @@ sw-UG: Swahili (Uganda)
 Swagger: Documentazione API
 Swedish: Svedese
 syr-SY: Siriaco (Siria)
+System: Sistema
 ta-IN: Tamil (India)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Malesia)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (alfabeto latino, Liberia)
 vai-Vaii-LR: Go (Vai, Liberia)
 Value: Valore
 ve-ZA: Venda (Sudafrica)
+Version: Versione
 vi-VN: Vietnamita (Vietnam)
 View: Vista
 View Profile: Visualizza profilo

@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Cibuti)
 aa-ER: Afar (Eritre)
 aa-ET: Afar (Etiyopya)
+about: Hakkında
 Account: Hesap
 Actions: Eylemler
 Activate User?: Kullanıcı Etkinleştirilensin mi?
@@ -22,6 +23,8 @@ All Groups: Tüm Gruplar
 All Permissions: Tüm İzinler
 Already have an account?: Zaten bir hesabınız var mı?
 am-ET: Amharik (Etiyopya)
+Api: UPA
+API-Versions: API Sürümleri
 ApplicationDescription: WebAssembly ve Temiz Mimari Desenli Örnek Uygulama
 ApplicationSubDescription: Bu Blazor Sayfasına Hoş Geldiniz
 Apply: Uygulamak
@@ -114,6 +117,7 @@ Chat?: Sohbet?
 chr-Cher-US: Cherokee (Cherokee, Amerika Birleşik Devletleri)
 Clear: Berrak
 Client Language has been changed: İstemci Dili değiştirildi
+Close: Kapatmak
 co-FR: Korsika (Fransa)
 Columns Affected: Etkilenen Sütunlar
 Communication: İletişim
@@ -751,6 +755,7 @@ ru-KZ: Rusça (Kazakistan)
 ru-MD: Rusça (Moldova)
 ru-RU: Rusça (Rusya)
 ru-UA: Rusça (Ukrayna)
+Runtime: Çalışma zamanı
 Russian: Rusça
 rw-RW: Kinyarwanda (Ruanda)
 rwk-TZ: Rwa (Tanzanya)
@@ -839,6 +844,7 @@ sw-UG: Svahili (Uganda)
 Swagger: API Belgeleri
 Swedish: İsveç dili
 syr-SY: Süryani (Suriye)
+System: Sistem
 ta-IN: Tamil (Hindistan)
 ta-LK: Tamilce (Sri Lanka)
 ta-MY: Ne de (Malezya)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (Latince, Liberya)
 vai-Vaii-LR: Git (Vai, Liberya)
 Value: Değer
 ve-ZA: Venda (Güney Afrika)
+Version: Sürüm
 vi-VN: Vietnamca (Vietnam)
 View: Görünüm
 View Profile: Profili Görüntüle

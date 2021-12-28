@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Džibutsko)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopie)
+about: Asi
 Account: Účet
 Actions: Akce
 Activate User?: Aktivovat uživatele?
@@ -22,6 +23,8 @@ All Groups: Všechny skupiny
 All Permissions: Všechna oprávnění
 Already have an account?: Už máte účet?
 am-ET: Amharština (Etiopie)
+Api: Rozhraní api
+API-Versions: Verze API
 ApplicationDescription: Ukázková aplikace se vzorem WebAssembly a čisté architektury
 ApplicationSubDescription: Vítejte na této blazor stránce
 Apply: Použít
@@ -114,6 +117,7 @@ Chat?: Povídat si?
 chr-Cher-US: Cherokee (Cherokee, Spojené státy americké)
 Clear: Jasný
 Client Language has been changed: Jazyk klienta byl změněn
+Close: Zavřít
 co-FR: Korsičtí (Francie)
 Columns Affected: Ovlivněné sloupce
 Communication: Komunikace
@@ -751,6 +755,7 @@ ru-KZ: Ruština (Kazachstán)
 ru-MD: Ruština (Moldavsko)
 ru-RU: Ruština (Rusko)
 ru-UA: Ruština (Ukrajina)
+Runtime: Runtime
 Russian: Ruština
 rw-RW: Kinyarwanda (Rwanda)
 rwk-TZ: Rwa (Tanzanie)
@@ -839,6 +844,7 @@ sw-UG: Svahilština (Uganda)
 Swagger: Dokumentace API
 Swedish: Švédština
 syr-SY: Syrština (Sýrie)
+System: Systém
 ta-IN: Tamilština (Indie)
 ta-LK: Tamilština (Srí Lanka)
 ta-MY: Nor (Malajsie)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (latinka, Libérie)
 vai-Vaii-LR: Go (Vai, Libérie)
 Value: Hodnota
 ve-ZA: Venda (Jihoafrická republika)
+Version: Verze
 vi-VN: Vietnamština (Vietnam)
 View: Pohled
 View Profile: Zobrazit profil

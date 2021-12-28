@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Dżibuti)
 aa-ER: Afar (Erytrea)
 aa-ET: Afar (Etiopia)
+about: Około
 Account: Rachunek
 Actions: Akcje
 Activate User?: Aktywować użytkownika?
@@ -22,6 +23,8 @@ All Groups: Wszystkie grupy
 All Permissions: Wszystkie uprawnienia
 Already have an account?: Masz już konto?
 am-ET: Amharski (Etiopia)
+Api: Api
+API-Versions: Wersje API
 ApplicationDescription: Przykładowa aplikacja ze wzorcem WebAssembly i Clean Architecture
 ApplicationSubDescription: Witamy na tej stronie Blazor
 Apply: Zastosować
@@ -114,6 +117,7 @@ Chat?: Czat?
 chr-Cher-US: Cherokee (Cherokee, Stany Zjednoczone)
 Clear: Jasny
 Client Language has been changed: Język klienta został zmieniony
+Close: Zamykać
 co-FR: Korsykański (Francja)
 Columns Affected: Kolumny, których dotyczy problem
 Communication: Komunikacja
@@ -751,6 +755,7 @@ ru-KZ: Rosyjski (Kazachstan)
 ru-MD: Rosyjski (Mołdawia)
 ru-RU: Rosyjski (Rosja)
 ru-UA: Rosyjski (Ukraina)
+Runtime: Środowiska wykonawczego
 Russian: Rosyjski
 rw-RW: Kinyarwanda (Rwanda)
 rwk-TZ: Rwa (Tanzania)
@@ -839,6 +844,7 @@ sw-UG: suahili (Uganda)
 Swagger: Dokumentacja API
 Swedish: Szwedzki
 syr-SY: Syryjski (Syria)
+System: System
 ta-IN: Tamilski (Indie)
 ta-LK: tamilski (Sri Lanka)
 ta-MY: Nor (Malezja)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (łac. Liberia)
 vai-Vaii-LR: Go (Vai, Liberia)
 Value: Wartość
 ve-ZA: Venda (Republika Południowej Afryki)
+Version: Wersja
 vi-VN: Wietnamski (Wietnam)
 View: Widok
 View Profile: Zobacz profil

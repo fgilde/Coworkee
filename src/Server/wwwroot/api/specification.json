@@ -108,6 +108,136 @@
         }
       }
     },
+    "/System/Version": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_Version",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VersionInfoModel"
+            }
+          }
+        }
+      }
+    },
+    "/System/AvailableApiVersions": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_AvailableApiVersions",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/System/{queue}": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_SendOnServiceBus",
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/json",
+          "application/*+json",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "queue",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "name": "entity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductDto"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/Audits": {
       "get": {
         "tags": [
@@ -3964,6 +4094,138 @@
         }
       }
     },
+    "VersionInfoModel": {
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string"
+        },
+        "applicationVersion": {
+          "type": "string"
+        },
+        "runtime": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductDto": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfInteger"
+        },
+        {
+          "type": "object",
+          "required": [
+            "rate",
+            "brandId"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "barcode": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "rate": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "brand": {
+              "$ref": "#/definitions/BrandDto"
+            },
+            "brandId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "imageDataURL": {
+              "type": "string"
+            },
+            "uploadRequest": {
+              "$ref": "#/definitions/UploadRequest"
+            }
+          }
+        }
+      ]
+    },
+    "BrandDto": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfInteger"
+        },
+        {
+          "type": "object",
+          "required": [
+            "tax"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "tax": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      ]
+    },
+    "DtoBaseOfInteger": {
+      "type": "object",
+      "x-abstract": true,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "UploadRequest": {
+      "type": "object",
+      "required": [
+        "uploadType"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "uploadType": {
+          "$ref": "#/definitions/UploadType"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "UploadType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Product",
+        "ProfilePicture",
+        "Document"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
     "AuditDto": {
       "type": "object",
       "required": [
@@ -4109,54 +4371,6 @@
           }
         }
       ]
-    },
-    "UploadRequest": {
-      "type": "object",
-      "required": [
-        "uploadType"
-      ],
-      "properties": {
-        "fileName": {
-          "type": "string"
-        },
-        "extension": {
-          "type": "string"
-        },
-        "uploadType": {
-          "$ref": "#/definitions/UploadType"
-        },
-        "data": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "UploadType": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": [
-        "Product",
-        "ProfilePicture",
-        "Document"
-      ],
-      "enum": [
-        0,
-        1,
-        2
-      ]
-    },
-    "DtoBaseOfInteger": {
-      "type": "object",
-      "x-abstract": true,
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
     },
     "AddEditDocumentsCommand": {
       "allOf": [
@@ -5295,31 +5509,6 @@
         }
       }
     },
-    "BrandDto": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DtoBaseOfInteger"
-        },
-        {
-          "type": "object",
-          "required": [
-            "tax"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "tax": {
-              "type": "number",
-              "format": "decimal"
-            }
-          }
-        }
-      ]
-    },
     "TransferableExpressionOfBrandDto": {
       "type": "object"
     },
@@ -5394,48 +5583,6 @@
             },
             "hasNextPage": {
               "type": "boolean"
-            }
-          }
-        }
-      ]
-    },
-    "ProductDto": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DtoBaseOfInteger"
-        },
-        {
-          "type": "object",
-          "required": [
-            "rate",
-            "brandId"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "barcode": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "rate": {
-              "type": "number",
-              "format": "decimal"
-            },
-            "brand": {
-              "$ref": "#/definitions/BrandDto"
-            },
-            "brandId": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "imageDataURL": {
-              "type": "string"
-            },
-            "uploadRequest": {
-              "$ref": "#/definitions/UploadRequest"
             }
           }
         }

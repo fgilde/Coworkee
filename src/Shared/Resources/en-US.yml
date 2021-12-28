@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Ethiopia)
+about: About
 Account: Account
 Actions: Actions
 Activate User?: Activate User?
@@ -22,6 +23,8 @@ All Groups: All Groups
 All Permissions: All Permissions
 Already have an account?: Already have an account?
 am-ET: Amharic (Ethiopia)
+Api: Api
+API-Versions: API-Versions
 ApplicationDescription: Sample Application with WebAssembly and Clean Architecture Pattern
 ApplicationSubDescription: Welcome to this Blazor Page
 Apply: Apply
@@ -114,6 +117,7 @@ Chat?: Chat?
 chr-Cher-US: Cherokee (Cherokee, United States)
 Clear: Clear
 Client Language has been changed: Client Language has been changed
+Close: Close
 co-FR: Corsican (France)
 Columns Affected: Columns Affected
 Communication: Communication
@@ -751,6 +755,7 @@ ru-KZ: Russian (Kazakhstan)
 ru-MD: Russian (Moldova)
 ru-RU: Russian (Russia)
 ru-UA: Russian (Ukraine)
+Runtime: Runtime
 Russian: Russian
 rw-RW: Kinyarwanda (Rwanda)
 rwk-TZ: Rwa (Tanzania)
@@ -839,6 +844,7 @@ sw-UG: Kiswahili (Uganda)
 Swagger: API Documentation
 Swedish: Swedish
 syr-SY: Syriac (Syria)
+System: System
 ta-IN: Tamil (India)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Tamil (Malaysia)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (Latin, Liberia)
 vai-Vaii-LR: Vai (Vai, Liberia)
 Value: Value
 ve-ZA: Venda (South Africa)
+Version: Version
 vi-VN: Vietnamese (Vietnam)
 View: View
 View Profile: View Profile

@@ -1,6 +1,7 @@
 ﻿aa-DJ: Από μακριά (Τζιμπουτί)
 aa-ER: Από μακριά (Ερυθραία)
 aa-ET: Από μακριά (Αιθιοπία)
+about: Περίπου
 Account: Λογαριασμός
 Actions: Ενέργειες
 Activate User?: Ενεργοποίηση χρήστη;
@@ -22,6 +23,8 @@ All Groups: Όλες οι ομάδες
 All Permissions: Όλα τα δικαιώματα
 Already have an account?: Έχεις ήδη λογαριασμό;
 am-ET: Αμχαρικός (Αιθιοπία)
+Api: Διεπαφή προγραμματισμού εφαρμογών
+API-Versions: Εκδόσεις API
 ApplicationDescription: Δείγμα εφαρμογής με μοτίβο WebAssembly και καθαρής αρχιτεκτονικής
 ApplicationSubDescription: Καλώς ήρθατε σε αυτή τη σελίδα blazor
 Apply: Εφαρμόζω
@@ -114,6 +117,7 @@ Chat?: Κουβέντα?
 chr-Cher-US: Τσερόκι (Τσερόκι, Ηνωμένες Πολιτείες της Αμερικής)
 Clear: Σαφής
 Client Language has been changed: Η γλώσσα προγράμματος-πελάτη έχει αλλάξει
+Close: Κλείνω
 co-FR: Κορσικανικά (Γαλλία)
 Columns Affected: Στήλες που επηρεάζονται
 Communication: Επικοινωνία
@@ -751,6 +755,7 @@ ru-KZ: Ρωσικά (Καζακστάν)
 ru-MD: Ρωσικά (Μολδαβία)
 ru-RU: Ρωσικά (Ρωσία)
 ru-UA: Ρωσικά (Ουκρανία)
+Runtime: Χρόνου εκτέλεσης
 Russian: Ρωσικά
 rw-RW: Κινυαργουάντα (Ρουάντα)
 rwk-TZ: Ρουά (Τανζανία)
@@ -839,6 +844,7 @@ sw-UG: Σουαχίλι (Ουγκάντα)
 Swagger: Τεκμηρίωση API
 Swedish: Σουηδικά
 syr-SY: Συριακά (Συρία)
+System: Σύστημα
 ta-IN: Ταμίλ (Ινδία)
 ta-LK: Ταμίλ (Σρι Λάνκα)
 ta-MY: Ούτε (Μαλαισία)
@@ -920,6 +926,7 @@ vai-Latn-LR: Βάι (Λατινικά, Λιβερία)
 vai-Vaii-LR: Go (Βάι, Λιβερία)
 Value: Τιμή
 ve-ZA: Venda (Νότια Αφρική)
+Version: Εκδοχή
 vi-VN: Βιετναμέζικα (Βιετνάμ)
 View: Άποψη
 View Profile: Προβολή προφίλ

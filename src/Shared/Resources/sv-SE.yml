@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopien)
+about: Om
 Account: Konto
 Actions: Åtgärder
 Activate User?: Vill du aktivera användare?
@@ -22,6 +23,8 @@ All Groups: Alla grupper
 All Permissions: Alla behörigheter
 Already have an account?: Har du redan ett konto?
 am-ET: Amhariska (Etiopien)
+Api: Application Programming Interface
+API-Versions: API-versioner
 ApplicationDescription: Exempelprogram med WebAssembly och Clean Architecture Pattern
 ApplicationSubDescription: Välkommen till denna Blazor Page
 Apply: Använda
@@ -114,6 +117,7 @@ Chat?: Chatta?
 chr-Cher-US: Cherokee (Cherokee, FÖRENTA STATERNA)
 Clear: Klar
 Client Language has been changed: Klientspråk har ändrats
+Close: Stänga
 co-FR: Korsikanska (Frankrike)
 Columns Affected: Berörda kolumner
 Communication: Kommunikation
@@ -751,6 +755,7 @@ ru-KZ: Ryska (Kazakstan)
 ru-MD: Ryska (Moldavien)
 ru-RU: Ryska (Ryssland)
 ru-UA: Ryska (Ukraina)
+Runtime: Runtime
 Russian: Ryska
 rw-RW: Kinyarwanda (Rwanda)
 rwk-TZ: Rwa (Tanzania)
@@ -839,6 +844,7 @@ sw-UG: Swahili (Uganda)
 Swagger: API-dokumentation
 Swedish: Svenska
 syr-SY: Syriska (Syrien)
+System: System
 ta-IN: Tamil (Indien)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Inte heller (Malaysia)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (Latin, Liberia)
 vai-Vaii-LR: Gå (Vai, Liberia)
 Value: Värde
 ve-ZA: Venda (Sydafrika)
+Version: Version
 vi-VN: Vietnamesiska (Vietnam)
 View: Utsikt
 View Profile: Visa profil

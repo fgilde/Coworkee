@@ -16,6 +16,7 @@ using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
 using Microsoft.AspNetCore.Components;
 using CleanArchitectureBase.Shared.Wrapper;
+using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Shared
 {
@@ -167,6 +168,18 @@ namespace CleanArchitectureBase.Client.Shared
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
 
              _dialogService.Show<Dialogs.Logout>(localizer["Logout"], parameters, options);
+        }
+
+        private async void ShowAbout()
+        {
+            await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], null, o => {
+                o.MaxWidth = MaxWidth.Small;
+                o.DisableBackdropClick = false;
+                o.MaximizeButton = false;
+                o.FullHeight = false;
+                o.Position = DialogPosition.TopRight;
+                o.Animation = AnimationType.Default;
+            });
         }
 
         private void DrawerToggle()

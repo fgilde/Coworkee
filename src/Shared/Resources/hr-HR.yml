@@ -1,6 +1,7 @@
 ﻿aa-DJ: Afar (Džibuti, BiH)
 aa-ER: Afar (Eritreja, BiH)
 aa-ET: Afar (Etiopija)
+about: O
 Account: Račun
 Actions: Akcije
 Activate User?: Želite li aktivirati korisnika?
@@ -22,6 +23,8 @@ All Groups: Sve grupe
 All Permissions: Sve dozvole
 Already have an account?: Već imate račun?
 am-ET: Amharski (Etiopija)
+Api: Api
+API-Versions: API verzije
 ApplicationDescription: Ogledna aplikacija s webAssembly i čistim uzorkom arhitekture
 ApplicationSubDescription: Dobrodošli na ovu Blazor stranicu
 Apply: Primijeniti
@@ -114,6 +117,7 @@ Chat?: Čavrljanje?
 chr-Cher-US: Cherokee (Cherokee, Sjedinjene Američke Države)
 Clear: Jasan
 Client Language has been changed: Jezik klijenta je promijenjen
+Close: Blizak
 co-FR: Korzikanski (Francuska)
 Columns Affected: Zahvaćeni stupci
 Communication: Komunikacija
@@ -751,6 +755,7 @@ ru-KZ: Ruski (Kazahstan)
 ru-MD: Ruski (Moldavija)
 ru-RU: Ruski (Rusija)
 ru-UA: Ruski (Ukrajina)
+Runtime: Runtime
 Russian: Ruski
 rw-RW: Kinyarwanda (Ruanda)
 rwk-TZ: Rwa (Tanzanija, BiH)
@@ -839,6 +844,7 @@ sw-UG: Svahili (Uganda)
 Swagger: API dokumentacija
 Swedish: Švedski
 syr-SY: Sirijski (Sirija)
+System: Sustav
 ta-IN: Tamil (Indija)
 ta-LK: Tamil (Šri Lanka, BiH)
 ta-MY: Nor (Malezija)
@@ -920,6 +926,7 @@ vai-Latn-LR: Vai (latinica, Liberija)
 vai-Vaii-LR: Idi (Vai, Liberija)
 Value: Vrijednost
 ve-ZA: Venda (Južna Afrika)
+Version: Verzija
 vi-VN: Vijetnamski (Vijetnam)
 View: Pogled
 View Profile: Prikaz profila

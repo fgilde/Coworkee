@@ -204,6 +204,182 @@ export class ResourceClient implements IResourceClient {
     }
 }
 
+export interface ISystemClient {
+    version(): Observable<VersionInfoModel>;
+    availableApiVersions(): Observable<string[]>;
+    sendOnServiceBus(queue: string | null, entity: ProductDto): Observable<FileResponse | null>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class SystemClient implements ISystemClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    version(): Observable<VersionInfoModel> {
+        let url_ = this.baseUrl + "/System/Version";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processVersion(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processVersion(<any>response_);
+                } catch (e) {
+                    return <Observable<VersionInfoModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VersionInfoModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processVersion(response: HttpResponseBase): Observable<VersionInfoModel> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VersionInfoModel.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VersionInfoModel>(<any>null);
+    }
+
+    availableApiVersions(): Observable<string[]> {
+        let url_ = this.baseUrl + "/System/AvailableApiVersions";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAvailableApiVersions(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAvailableApiVersions(<any>response_);
+                } catch (e) {
+                    return <Observable<string[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAvailableApiVersions(response: HttpResponseBase): Observable<string[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(item);
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<string[]>(<any>null);
+    }
+
+    sendOnServiceBus(queue: string | null, entity: ProductDto): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/System/{queue}";
+        if (queue === undefined || queue === null)
+            throw new Error("The parameter 'queue' must be defined.");
+        url_ = url_.replace("{queue}", encodeURIComponent("" + queue));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(entity);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSendOnServiceBus(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSendOnServiceBus(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processSendOnServiceBus(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(<any>null);
+    }
+}
+
 export interface IAuditsClient {
     /**
      * Get Current User Audit Trails
@@ -4898,6 +5074,244 @@ export interface IChartSeries {
     data?: number[] | undefined;
 }
 
+export class VersionInfoModel implements IVersionInfoModel {
+    applicationName?: string | undefined;
+    applicationVersion?: string | undefined;
+    runtime?: string | undefined;
+    system?: string | undefined;
+
+    constructor(data?: IVersionInfoModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.applicationName = _data["applicationName"];
+            this.applicationVersion = _data["applicationVersion"];
+            this.runtime = _data["runtime"];
+            this.system = _data["system"];
+        }
+    }
+
+    static fromJS(data: any): VersionInfoModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new VersionInfoModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["applicationName"] = this.applicationName;
+        data["applicationVersion"] = this.applicationVersion;
+        data["runtime"] = this.runtime;
+        data["system"] = this.system;
+        return data;
+    }
+}
+
+export interface IVersionInfoModel {
+    applicationName?: string | undefined;
+    applicationVersion?: string | undefined;
+    runtime?: string | undefined;
+    system?: string | undefined;
+}
+
+export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
+    id!: number;
+
+    constructor(data?: IDtoBaseOfInteger) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): DtoBaseOfInteger {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'DtoBaseOfInteger' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface IDtoBaseOfInteger {
+    id: number;
+}
+
+export class ProductDto extends DtoBaseOfInteger implements IProductDto {
+    name?: string | undefined;
+    barcode?: string | undefined;
+    description?: string | undefined;
+    rate!: number;
+    brand?: BrandDto | undefined;
+    brandId!: number;
+    imageDataURL?: string | undefined;
+    uploadRequest?: UploadRequest | undefined;
+
+    constructor(data?: IProductDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.barcode = _data["barcode"];
+            this.description = _data["description"];
+            this.rate = _data["rate"];
+            this.brand = _data["brand"] ? BrandDto.fromJS(_data["brand"]) : <any>undefined;
+            this.brandId = _data["brandId"];
+            this.imageDataURL = _data["imageDataURL"];
+            this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ProductDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProductDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["barcode"] = this.barcode;
+        data["description"] = this.description;
+        data["rate"] = this.rate;
+        data["brand"] = this.brand ? this.brand.toJSON() : <any>undefined;
+        data["brandId"] = this.brandId;
+        data["imageDataURL"] = this.imageDataURL;
+        data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IProductDto extends IDtoBaseOfInteger {
+    name?: string | undefined;
+    barcode?: string | undefined;
+    description?: string | undefined;
+    rate: number;
+    brand?: BrandDto | undefined;
+    brandId: number;
+    imageDataURL?: string | undefined;
+    uploadRequest?: UploadRequest | undefined;
+}
+
+export class BrandDto extends DtoBaseOfInteger implements IBrandDto {
+    name?: string | undefined;
+    description?: string | undefined;
+    tax!: number;
+
+    constructor(data?: IBrandDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.tax = _data["tax"];
+        }
+    }
+
+    static fromJS(data: any): BrandDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BrandDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["tax"] = this.tax;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IBrandDto extends IDtoBaseOfInteger {
+    name?: string | undefined;
+    description?: string | undefined;
+    tax: number;
+}
+
+export class UploadRequest implements IUploadRequest {
+    fileName?: string | undefined;
+    extension?: string | undefined;
+    uploadType!: UploadType;
+    data?: string | undefined;
+
+    constructor(data?: IUploadRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.fileName = _data["fileName"];
+            this.extension = _data["extension"];
+            this.uploadType = _data["uploadType"];
+            this.data = _data["data"];
+        }
+    }
+
+    static fromJS(data: any): UploadRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new UploadRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fileName"] = this.fileName;
+        data["extension"] = this.extension;
+        data["uploadType"] = this.uploadType;
+        data["data"] = this.data;
+        return data;
+    }
+}
+
+export interface IUploadRequest {
+    fileName?: string | undefined;
+    extension?: string | undefined;
+    uploadType: UploadType;
+    data?: string | undefined;
+}
+
+export enum UploadType {
+    Product = 0,
+    ProfilePicture = 1,
+    Document = 2,
+}
+
 export class AuditDto implements IAuditDto {
     id!: number;
     userId?: string | undefined;
@@ -5037,40 +5451,6 @@ export interface IPaginatedResultOfDocumentDto extends IResult {
     hasNextPage: boolean;
 }
 
-export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
-    id!: number;
-
-    constructor(data?: IDtoBaseOfInteger) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): DtoBaseOfInteger {
-        data = typeof data === 'object' ? data : {};
-        throw new Error("The abstract class 'DtoBaseOfInteger' cannot be instantiated.");
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        return data;
-    }
-}
-
-export interface IDtoBaseOfInteger {
-    id: number;
-}
-
 export class DocumentDto extends DtoBaseOfInteger implements IDocumentDto {
     title?: string | undefined;
     description?: string | undefined;
@@ -5134,60 +5514,6 @@ export interface IDocumentDto extends IDtoBaseOfInteger {
     documentTypeName?: string | undefined;
     documentTypeId: number;
     uploadRequest?: UploadRequest | undefined;
-}
-
-export class UploadRequest implements IUploadRequest {
-    fileName?: string | undefined;
-    extension?: string | undefined;
-    uploadType!: UploadType;
-    data?: string | undefined;
-
-    constructor(data?: IUploadRequest) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.fileName = _data["fileName"];
-            this.extension = _data["extension"];
-            this.uploadType = _data["uploadType"];
-            this.data = _data["data"];
-        }
-    }
-
-    static fromJS(data: any): UploadRequest {
-        data = typeof data === 'object' ? data : {};
-        let result = new UploadRequest();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["fileName"] = this.fileName;
-        data["extension"] = this.extension;
-        data["uploadType"] = this.uploadType;
-        data["data"] = this.data;
-        return data;
-    }
-}
-
-export interface IUploadRequest {
-    fileName?: string | undefined;
-    extension?: string | undefined;
-    uploadType: UploadType;
-    data?: string | undefined;
-}
-
-export enum UploadType {
-    Product = 0,
-    ProfilePicture = 1,
-    Document = 2,
 }
 
 export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommandBaseOfDocumentDto {
@@ -7681,47 +8007,6 @@ export interface IIChatUser {
     profilePictureDataUrl?: string | undefined;
 }
 
-export class BrandDto extends DtoBaseOfInteger implements IBrandDto {
-    name?: string | undefined;
-    description?: string | undefined;
-    tax!: number;
-
-    constructor(data?: IBrandDto) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.name = _data["name"];
-            this.description = _data["description"];
-            this.tax = _data["tax"];
-        }
-    }
-
-    static fromJS(data: any): BrandDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new BrandDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["tax"] = this.tax;
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface IBrandDto extends IDtoBaseOfInteger {
-    name?: string | undefined;
-    description?: string | undefined;
-    tax: number;
-}
-
 export class TransferableExpressionOfBrandDto implements ITransferableExpressionOfBrandDto {
 
     constructor(data?: ITransferableExpressionOfBrandDto) {
@@ -7888,67 +8173,6 @@ export interface IPaginatedResultOfProductDto extends IResult {
     pageSize: number;
     hasPreviousPage: boolean;
     hasNextPage: boolean;
-}
-
-export class ProductDto extends DtoBaseOfInteger implements IProductDto {
-    name?: string | undefined;
-    barcode?: string | undefined;
-    description?: string | undefined;
-    rate!: number;
-    brand?: BrandDto | undefined;
-    brandId!: number;
-    imageDataURL?: string | undefined;
-    uploadRequest?: UploadRequest | undefined;
-
-    constructor(data?: IProductDto) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.name = _data["name"];
-            this.barcode = _data["barcode"];
-            this.description = _data["description"];
-            this.rate = _data["rate"];
-            this.brand = _data["brand"] ? BrandDto.fromJS(_data["brand"]) : <any>undefined;
-            this.brandId = _data["brandId"];
-            this.imageDataURL = _data["imageDataURL"];
-            this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): ProductDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ProductDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["barcode"] = this.barcode;
-        data["description"] = this.description;
-        data["rate"] = this.rate;
-        data["brand"] = this.brand ? this.brand.toJSON() : <any>undefined;
-        data["brandId"] = this.brandId;
-        data["imageDataURL"] = this.imageDataURL;
-        data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface IProductDto extends IDtoBaseOfInteger {
-    name?: string | undefined;
-    barcode?: string | undefined;
-    description?: string | undefined;
-    rate: number;
-    brand?: BrandDto | undefined;
-    brandId: number;
-    imageDataURL?: string | undefined;
-    uploadRequest?: UploadRequest | undefined;
 }
 
 export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandBaseOfProductDto {

@@ -1,6 +1,7 @@
 ﻿aa-DJ: アファール (ジブチ)
 aa-ER: アファール (エリトリア)
 aa-ET: アファール (エチオピア)
+about: に関しては
 Account: アカウント
 Actions: アクション
 Activate User?: ユーザーをアクティブにしますか?
@@ -22,6 +23,8 @@ All Groups: すべてのグループ
 All Permissions: すべてのアクセス許可
 Already have an account?: すでにアカウントを持っていますか?
 am-ET: アムハラ語 (エチオピア)
+Api: アピ
+API-Versions: API バージョン
 ApplicationDescription: Web アセンブリとクリーン アーキテクチャ パターンを使用したサンプル アプリケーション
 ApplicationSubDescription: このブラゾールページへようこそ
 Apply: 申し込む
@@ -114,6 +117,7 @@ Chat?: チャット。
 chr-Cher-US: チェロキー(チェロキー、アメリカ)
 Clear: クリア
 Client Language has been changed: クライアント言語が変更されました
+Close: 閉める
 co-FR: コルシカ島 (フランス)
 Columns Affected: 影響を受ける列
 Communication: 通信
@@ -751,6 +755,7 @@ ru-KZ: ロシア語 (カザフスタン)
 ru-MD: ロシア語 (モルドバ)
 ru-RU: ロシア語 (ロシア)
 ru-UA: ロシア語 (ウクライナ)
+Runtime: 実行中
 Russian: ロシア語
 rw-RW: キンヤルワンダ (ルワンダ)
 rwk-TZ: ルワ (タンザニア)
@@ -839,6 +844,7 @@ sw-UG: スワヒリ語 (ウガンダ)
 Swagger: API ドキュメント
 Swedish: スウェーデン語
 syr-SY: シリア (シリア)
+System: 制
 ta-IN: タミル語 (インド)
 ta-LK: タミル語 (スリランカ)
 ta-MY: また(マレーシア)
@@ -920,6 +926,7 @@ vai-Latn-LR: ヴァイ(ラテン語、リベリア)
 vai-Vaii-LR: 囲碁(ヴァイ、リベリア)
 Value: 価値
 ve-ZA: ヴェンダ (南アフリカ)
+Version: バージョン
 vi-VN: ベトナム語 (ベトナム)
 View: 眺める
 View Profile: プロファイルの表示

@@ -11,6 +11,8 @@ namespace CleanArchitectureBase.SDK
 
     public interface IApplicationClient : IGeneratedClient
     {
+        string BaseUrl { get; }
+
         /// <summary>
         /// Delegate function to catch prepare request event
         /// </summary>

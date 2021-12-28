@@ -25,7 +25,7 @@
     </None>
   </ItemGroup>
 
-  <Target Name="Translate" AfterTargets="Build">
+  <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Exec IgnoreExitCode="true" Command="dotnet tool install --global ResourceTranslator.CLI" />
     <Exec Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources\en-US.yml" />
   </Target>

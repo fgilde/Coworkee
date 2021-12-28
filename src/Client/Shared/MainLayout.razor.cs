@@ -19,7 +19,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Client.Shared
 {
-    public partial class MainLayout : IDisposable
+    public partial class MainLayout : IAsyncDisposable
     {
         private string CurrentUserId { get; set; }
         private NavMenu navMenu;
@@ -28,8 +28,6 @@ namespace CleanArchitectureBase.Client.Shared
 
         [CascadingParameter]
         private HubConnection hubConnection { get; set; }
-
-        public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
 
         private async Task LoadDataAsync()
         {
@@ -184,10 +182,11 @@ namespace CleanArchitectureBase.Client.Shared
                 _drawerOpen = theme.LayoutProperties.DrawerVariant != DrawerVariant.Temporary;
         }
 
-        public void Dispose()
+        public ValueTask DisposeAsync()
         {
+            return hubConnection.TryDisposeAsync();
         }
-        
+
         private string GetTitle()
         {
             var menuItem = navMenu?.FindEntriesForUrl()?.FirstOrDefault();

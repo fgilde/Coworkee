@@ -19,7 +19,7 @@ using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
-    public partial class AddEditProductModal
+    public partial class AddEditProductModal: IAsyncDisposable
     {
         [Inject] private IApplicationClient Api { get; set; }
 
@@ -48,11 +48,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task LoadDataAsync()
@@ -114,6 +110,11 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
             return _brands.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase))
                 .Select(x => x.Id);
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

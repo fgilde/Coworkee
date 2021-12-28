@@ -27,7 +27,7 @@ using SDK;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
-    public partial class EditableDataTable<TResult, TIdType>
+    public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {
         [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
         [Parameter] public bool MultiSelect { get; set; } = true;
@@ -427,10 +427,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
         #endregion
 
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
-            if (HubConnection != null)
-                await HubConnection.DisposeAsync();
+            return HubConnection.TryDisposeAsync();
         }
 
         private async void OnPreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs arg)

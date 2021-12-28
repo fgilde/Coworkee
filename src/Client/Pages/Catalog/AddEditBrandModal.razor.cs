@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Client.Extensions;
+﻿using System;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -11,7 +12,7 @@ using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
-    public partial class AddEditBrandModal
+    public partial class AddEditBrandModal: IAsyncDisposable
     {
         [Inject] private IApplicationClient Api { get; set; }
 
@@ -38,16 +39,16 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task LoadDataAsync()
         {
             await Task.CompletedTask;
+        }
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

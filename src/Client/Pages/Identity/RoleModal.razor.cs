@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+﻿using System;
+using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
@@ -9,7 +10,7 @@ using Blazored.FluentValidation;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
-    public partial class RoleModal
+    public partial class RoleModal: IAsyncDisposable
     {
         
         [Parameter] public RoleRequest RoleModel { get; set; } = new();
@@ -26,11 +27,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         protected override async Task OnInitializedAsync()
         {
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task SaveAsync()
@@ -42,6 +39,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
                 MudDialog.Close();
             }
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
-    public partial class UserCard
+    public partial class UserCard : IAsyncDisposable
     {
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -87,10 +86,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 SecondName = UserData.LastName;
             }
         }
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
-            if (HubConnection != null)
-                await HubConnection.DisposeAsync();
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

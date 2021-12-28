@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Client.Pages.Content
 {
-    public partial class Dashboard
+    public partial class Dashboard: IAsyncDisposable
     {
         [Inject] private IApplicationClient Api { get; set; }
 
@@ -30,15 +31,12 @@ namespace CleanArchitectureBase.Client.Pages.Content
         {
             await LoadDataAsync();
             _loaded = true;
-            HubConnection = new HubConnectionBuilder()
-            .WithUrl($"{_config.BackendOrigin}{ApplicationConstants.SignalR.EventHubUrl}")
-            .Build();
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
             HubConnection.On(ApplicationConstants.SignalR.ReceiveUpdateDashboard, async () =>
             {
                 await LoadDataAsync();
                 StateHasChanged();
             });
-            await HubConnection.StartAsync();
         }
 
         private async Task LoadDataAsync()
@@ -60,6 +58,11 @@ namespace CleanArchitectureBase.Client.Pages.Content
                     _dataEnterBarChartSeries.Add(new ChartSeries { Name = item.Name, Data = item.Data });
                 }
             }
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

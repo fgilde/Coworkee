@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
@@ -10,7 +11,7 @@ using MudBlazor;
 
 namespace CleanArchitectureBase.Client.Pages.Misc
 {
-    public partial class AddEditDocumentTypeModal
+    public partial class AddEditDocumentTypeModal: IAsyncDisposable
     {
         [Parameter] public DocumentTypeDto AddEditDocumentTypeModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
@@ -35,16 +36,17 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task LoadDataAsync()
         {
             await Task.CompletedTask;
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

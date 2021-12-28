@@ -6,7 +6,7 @@
 @using CleanArchitectureBase.Client.Utils
 @using CleanArchitectureBase.Shared.Constants.Storage
 @using Microsoft.AspNetCore.SignalR.Client
-
+@implements IAsyncDisposable
 
 <div @onclick="GotoAccountOrProfile" class="@(CanNavigateToProfile() ? "cursor-pointer" : "") mud-button-text mud-button-text-size-medium">
     @if (IsUserOnline.HasValue)
@@ -161,10 +161,9 @@
             _navigationManager.NavigateTo(TargetProfileUrl());
     }
 
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
-        if (HubConnection != null)
-            await HubConnection.DisposeAsync();
+        return HubConnection.TryDisposeAsync();
     }
 
     public void SetImageDataUrl(string uri)

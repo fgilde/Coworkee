@@ -17,7 +17,7 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
-    public partial class RolePermissions
+    public partial class RolePermissions: IAsyncDisposable
     {
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -47,11 +47,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
             await GetRolePermissionsAsync();
             _loaded = true;
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task GetRolePermissionsAsync()
@@ -154,6 +150,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 }
             }
             context.Selected = isChecked;
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

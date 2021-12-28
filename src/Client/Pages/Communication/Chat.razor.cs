@@ -17,7 +17,7 @@ using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Pages.Communication
 {
-    public partial class Chat
+    public partial class Chat: IAsyncDisposable
     {
         [Inject] private IApplicationClient Api { get; set; }
 
@@ -77,11 +77,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
 
         protected override async Task OnInitializedAsync()
         {
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
 
             HubConnection.On<string>(ApplicationConstants.SignalR.ConnectUser, (userId) =>
             {
@@ -178,6 +174,11 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         {
             ChatDrawer = anchor;
             _open = true;
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
 
     }

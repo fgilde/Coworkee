@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
-    public partial class Roles
+    public partial class Roles: IAsyncDisposable
     {
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -45,11 +45,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
             await GetRolesAsync();
             _loaded = true;
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task GetRolesAsync()
@@ -121,6 +117,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private void ManagePermissions(string roleId)
         {
             _navigationManager.NavigateTo($"/identity/role-permissions/{roleId}");
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

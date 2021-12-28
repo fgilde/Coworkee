@@ -17,8 +17,7 @@ public partial class App : IDisposable
         authenticationState = await _stateProvider.GetAuthenticationStateAsync();
         await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, false);
         _interceptor.RegisterEvent();
-        hubConnection = hubConnection.TryInitialize(_config.BackendOrigin);
-        await hubConnection.StartAsync();
+        hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);
     }
 
     public void Dispose()

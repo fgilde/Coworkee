@@ -31,31 +31,38 @@ window.initialLoad = function () {
         window.localStorage.clear();
         window.location.href = removeUrlParams(window.location.href, 'safemode');
     }
-    fetch('appsettings.json', { method: 'GET', redirect: 'follow' }).then(function (response) {
-        return response.json();
-    }).then(function (json) {
-        ChangeFavIcon(json.BackendOrigin + '/favicon.ico');
-        var script = document.createElement('script');
-        script.onload = function () {
-            document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
-            document.querySelector('#sub-text').innerHTML = Application.ApplicationConstants.ApplicationName + " " + Application.ApplicationConstants.Version;
-            document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
-            var app = document.getElementById('app');
-            app.addEventListener('DOMSubtreeModified', contentChanged, false);
+    var loaded = function loaded() {
+        document.querySelector('#app-logo').insertAdjacentHTML('beforeend', Application.CustomIcons.ApplicationMainIcon);
+        document.querySelector('#sub-text').innerHTML = Application.ApplicationConstants.ApplicationName + " " + Application.ApplicationConstants.Version;
+        document.title = Application.ApplicationConstants.ApplicationName + ' - Home';
+        var app = document.getElementById('app');
+        app.addEventListener('DOMSubtreeModified', contentChanged, false);
 
-            function contentChanged() {
-                app.removeEventListener('DOMSubtreeModified', contentChanged);
-                var overlay = document.getElementById('overlay-app-load');
-                overlay.classList.add('fade-out');
-                setTimeout(function () {
-                    overlay.remove();
-                }, 3000); // Remove element after fadeout
-            }
-        };
-        script.src = json.BackendOrigin + '/Application/resources.js';
+        function contentChanged() {
+            app.removeEventListener('DOMSubtreeModified', contentChanged);
+            var overlay = document.getElementById('overlay-app-load');
+            overlay.classList.add('fade-out');
+            setTimeout(function () {
+                overlay.remove();
+            }, 3000); // Remove element after fadeout
+        }
+    };
+    if (window.Application != null && window.Application.ApplicationConstants != null) {
+        loaded();
+    } else {
+        fetch('appsettings.json', { method: 'GET', redirect: 'follow' }).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            ChangeFavIcon(json.BackendOrigin + '/favicon.ico');
+            var script = document.createElement('script');
+            script.onload = function () {
+                loaded();
+            };
+            script.src = json.BackendOrigin + '/Application/resources.js';
 
-        document.head.appendChild(script);
-    });
+            document.head.appendChild(script);
+        });
+    }
 };
 
 window.reloadSilent = function () {

@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Utilities
 {
-    public partial class AuditTrails
+    public partial class AuditTrails : IAsyncDisposable
     {
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -152,6 +152,11 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
         {
             public bool ShowDetails { get; set; } = false;
             public DateTime LocalTime { get; set; }
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Misc
 {
-    public partial class AddEditDocumentModal
+    public partial class AddEditDocumentModal: IAsyncDisposable
     {
 
         [Parameter] public DocumentDto AddEditDocumentModel { get; set; } = new();
@@ -45,11 +45,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task LoadDataAsync()
@@ -89,6 +85,11 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
             return _documentTypes.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase))
                 .Select(x => x.Id);
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

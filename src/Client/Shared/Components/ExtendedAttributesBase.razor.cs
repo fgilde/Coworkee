@@ -24,7 +24,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         // for localization
     }
 
-    public abstract partial class ExtendedAttributesBase<TId, TEntityId, TEntity, TExtendedAttribute>
+    public abstract partial class ExtendedAttributesBase<TId, TEntityId, TEntity, TExtendedAttribute>: IAsyncDisposable
         where TEntity : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
         where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
         where TId : IEquatable<TId>
@@ -95,11 +95,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 CurrentUserId = user.GetUserId();
             }
 
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task GetExtendedAttributesAsync()
@@ -293,6 +289,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 return Color.Success;
 
             return Color.Info;
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

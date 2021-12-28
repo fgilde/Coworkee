@@ -5,6 +5,7 @@
 @using CleanArchitectureBase.Application.Hubs.Events
 @using Microsoft.AspNetCore.SignalR.Client
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
+@implements IAsyncDisposable
 
 @{
     actuaLanguage = languages?.FirstOrDefault(l => l.CultureCode == preference?.LanguageCode);
@@ -85,5 +86,10 @@
             StateHasChanged();
             _navigationManager.Reload();
         }
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        return HubConnection.TryDisposeAsync();
     }
 }

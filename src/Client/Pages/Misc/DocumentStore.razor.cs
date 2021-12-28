@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Misc
 {
-    public partial class DocumentStore
+    public partial class DocumentStore: IAsyncDisposable
     {
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
@@ -50,11 +50,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             {
                 CurrentUserId = user.GetUserId();
             }
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task<TableData<DocumentDto>> ServerReload(TableState state)
@@ -164,6 +160,11 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         private void ManageExtendedAttributes(int documentId)
         {
             _navigationManager.NavigateTo($"/extended-attributes/{nameof(Document)}/{documentId}");
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

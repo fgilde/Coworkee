@@ -24,6 +24,7 @@ using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
@@ -84,7 +85,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();
-            
+           // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
             return builder;
         }
 

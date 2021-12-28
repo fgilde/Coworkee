@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
-using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitectureBase.Client
 {
@@ -30,7 +29,6 @@ namespace CleanArchitectureBase.Client
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
             }
-            //builder.RootComponents.RegisterAsCustomElement<Inventory>("inventory-grid");
             await builder.Build().RunAsync();
         }
     }

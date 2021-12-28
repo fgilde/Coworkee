@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Hubs.Events.Base;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using CleanArchitectureBase.Shared.Constants.Application;
 
@@ -24,27 +23,35 @@ namespace CleanArchitectureBase.Client.Extensions
             hubConnection.On(e.EventName, handler);
             return hubConnection;
         }
-
-        public static HubConnection TryInitialize(this HubConnection hubConnection, string backendOrigin)
-        {
-            if (hubConnection == null)
-            {
-                hubConnection = new HubConnectionBuilder()
-                                  .WithUrl($"{backendOrigin}{ApplicationConstants.SignalR.EventHubUrl}")
-                                  .Build();
-            }
-            return hubConnection;
-        }
-
+        
         public static async Task<HubConnection> EnsureStartedAsync(this HubConnection hubConnection, string backendOrigin)
         {
             hubConnection = hubConnection.TryInitialize(backendOrigin);
-            if (hubConnection.State != HubConnectionState.Connected)
+            if (hubConnection.State == HubConnectionState.Disconnected)
             {
                 await hubConnection.StartAsync();
             }
 
             return hubConnection;
+        }
+
+        public static ValueTask TryDisposeAsync(this HubConnection hubConnection)
+        {
+            return ValueTask.CompletedTask;
+            // return hubConnection?.DisposeAsync() ?? ValueTask.CompletedTask;
+        }
+
+        public static HubConnection BuildHubConnection(string backendOrigin)
+        {
+            return new HubConnectionBuilder()
+                .WithUrl($"{backendOrigin}{ApplicationConstants.SignalR.EventHubUrl}")
+                .WithAutomaticReconnect()
+                .Build();
+        }
+
+        private static HubConnection TryInitialize(this HubConnection hubConnection, string backendOrigin)
+        {
+            return hubConnection ?? BuildHubConnection(backendOrigin);
         }
     }
 }

@@ -19,7 +19,7 @@ using SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Localization
 {
-    public partial class Translations
+    public partial class Translations : IAsyncDisposable
     {
         private Dictionary<string, List<TranslationDto>> clientLocalizationCache = new();
 
@@ -135,5 +135,9 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         }
 
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
+        }
     }
 }

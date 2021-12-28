@@ -18,7 +18,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         // for localization
     }
 
-    public partial class AddEditExtendedAttributeModal<TId, TEntityId, TEntity, TExtendedAttribute>
+    public partial class AddEditExtendedAttributeModal<TId, TEntityId, TEntity, TExtendedAttribute> : IAsyncDisposable
         where TEntity : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
         where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
         where TId : IEquatable<TId>
@@ -81,16 +81,17 @@ namespace CleanArchitectureBase.Client.Shared.Components
         protected override async Task OnInitializedAsync()
         {
             await LoadDataAsync();
-            HubConnection = HubConnection.TryInitialize(_config.BackendOrigin);
-            if (HubConnection.State == HubConnectionState.Disconnected)
-            {
-                await HubConnection.StartAsync();
-            }
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
         private async Task LoadDataAsync()
         {
             await Task.CompletedTask;
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return HubConnection.TryDisposeAsync();
         }
     }
 }

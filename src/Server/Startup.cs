@@ -38,6 +38,10 @@ namespace CleanArchitectureBase.Server
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalR();
+            //services.AddSignalR().AddAzureSignalR(options =>
+            //{
+            //    options.ServerStickyMode = Microsoft.Azure.SignalR.ServerStickyMode.Required;
+            //});
             services.AddCurrentUserServiceAndSession();
             services.AddAllWithRegisterAttribute(typeof(Startup).Assembly);
             services.AddLocalization(options =>
@@ -78,8 +82,7 @@ namespace CleanArchitectureBase.Server
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
-            IStringLocalizer<Startup> localizer, 
-            IWebHostEnvironment environment,
+            IStringLocalizer<Startup> localizer,
             IDashboardAuthorizationFilter authorizationFilter)
         {
             app.UseSessionId();
@@ -101,7 +104,6 @@ namespace CleanArchitectureBase.Server
             app.UseHangfireDashboard(ApplicationConstants.Hangfire.DashboardRoute, new DashboardOptions
             {
                 DashboardTitle = localizer["{0} Jobs", ApplicationConstants.ApplicationName],
-                AppPath = "https://localhost:5001",
                 Authorization = new[] { authorizationFilter }
             });
             app.UseEndpoints();

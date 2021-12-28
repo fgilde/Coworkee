@@ -64,9 +64,9 @@ namespace CleanArchitectureBase.Server.Extensions
         {
             var serviceProvider = services.BuildServiceProvider();
             await SetCultureFromServerPreferenceAsync(serviceProvider);
-            var localizer = serviceProvider.GetService<IStringLocalizer<T>>();
+            var result = serviceProvider.GetService<IStringLocalizer<T>>();
             await serviceProvider.DisposeAsync();
-            return localizer;
+            return result;
         }
 
         private static async Task SetCultureFromServerPreferenceAsync(IServiceProvider serviceProvider)
@@ -75,12 +75,7 @@ namespace CleanArchitectureBase.Server.Extensions
             if (storageService != null)
             {
                 // TODO - should implement ServerStorageProvider to work correctly!
-                CultureInfo culture;
-                var preference = await storageService.GetPreference() as ServerPreference;
-                if (preference != null)
-                    culture = new CultureInfo(preference.LanguageCode);
-                else
-                    culture = new CultureInfo(LocalizationConstants.DefaultLanguageCode);
+                var culture = await storageService.GetPreference() is ServerPreference preference ? new CultureInfo(preference.LanguageCode) : new CultureInfo(LocalizationConstants.DefaultLanguageCode);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
                 CultureInfo.CurrentCulture = culture;
@@ -98,7 +93,7 @@ namespace CleanArchitectureBase.Server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddTransient(p => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings
+            services.AddTransient(_ => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings
             services.Configure<ServerConfiguration>(configuration);
             return configuration.Get<ServerConfiguration>();
         }
@@ -136,7 +131,7 @@ namespace CleanArchitectureBase.Server.Extensions
                     // Patch document for Azure API Management
                     options.AllowReferencesWithProperties = true;
                     options.PostProcess = document => configSection.ConfigureDocument(document, version);
-                    options.AddSecurity("JWT", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
+                    options.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
                     {
                         Type = OpenApiSecuritySchemeType.ApiKey,
                         Name = "Authorization",
@@ -146,14 +141,11 @@ namespace CleanArchitectureBase.Server.Extensions
                         .OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
                 }
 
-                services.AddSwaggerDocument(document => {
-                            Configure(document);
-                            // document.DocumentName = "swagger/" + document.DocumentName;
-                        }).AddOpenApiDocument(document =>
-                        {
-                            Configure(document);
-                            document.DocumentName = "openapi/" + document.DocumentName;
-                        });
+                services.AddSwaggerDocument(Configure).AddOpenApiDocument(document =>
+                {
+                    Configure(document);
+                    document.DocumentName = "openapi/" + document.DocumentName;
+                });
             }
 
             return services;
@@ -163,7 +155,7 @@ namespace CleanArchitectureBase.Server.Extensions
         {
             configSection.GetSection("Contact").Bind(document.Info.Contact ?? (document.Info.Contact = new OpenApiContact()));
             configSection.GetSection("License").Bind(document.Info.License ?? (document.Info.License = new OpenApiLicense()));
-            var prefix = $"/api/" + ApiVersions.DocumentVersionPrefix + version.MajorVersion;
+            var prefix = "/api/" + ApiVersions.DocumentVersionPrefix + version.MajorVersion;
             foreach (var pair in document.Paths.ToArray())
             {
                 if (pair.Key.Contains(prefix))
@@ -189,14 +181,15 @@ namespace CleanArchitectureBase.Server.Extensions
             return services;
         }
 
-        internal static IServiceCollection AddDatabase(
-            this IServiceCollection services,
-            IConfiguration configuration)
-            => services
-                .AddDbContext<ApplicationDbContext>(options => options
-                    .UseSqlServer(configuration.GetConnectionString("DefaultConnection")))
-            .AddTransient<IDatabaseSeeder, DatabaseSeeder>();
-
+        internal static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                {
+                    //options.UseInMemoryDatabase("CleanArchitectureBaseDb");
+                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
+            return services;
+        }
 
         internal static IServiceCollection AddIdentity(this IServiceCollection services)
         {
@@ -222,86 +215,88 @@ namespace CleanArchitectureBase.Server.Extensions
             this IServiceCollection services, ServerConfiguration config)
         {
             var key = Encoding.ASCII.GetBytes(config.AppConfiguration.Secret);
+
+            async void ConfigureOptions(JwtBearerOptions bearer)
+            {
+                bearer.RequireHttpsMetadata = false;
+                bearer.SaveToken = true;
+                bearer.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    RoleClaimType = ClaimTypes.Role,
+                    ClockSkew = TimeSpan.Zero
+                };
+
+                var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
+
+                bearer.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = c =>
+                    {
+                        var userId = c.Principal?.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                        if (!string.IsNullOrEmpty(userId)) c.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, userId);
+                        return Task.CompletedTask;
+                    },
+                    OnAuthenticationFailed = c =>
+                    {
+                        if (c.Exception is SecurityTokenExpiredException)
+                        {
+                            c.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
+                            c.Response.ContentType = "application/json";
+                            var result = JsonConvert.SerializeObject(Result.Fail(localizer["The Token is expired."]));
+                            c.HttpContext?.RequestServices?.GetService<IAccountService>()?.LogoutAsync();
+                            return c.Response.WriteAsync(result);
+                        }
+                        else
+                        {
+                            c.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                            c.Response.ContentType = "application/json";
+                            var result = JsonConvert.SerializeObject(Result.Fail(localizer["An unhandled error has occurred."]));
+                            return c.Response.WriteAsync(result);
+                        }
+                    },
+                    OnChallenge = context =>
+                    {
+                        context.HandleResponse();
+                        if (!context.Response.HasStarted)
+                        {
+                            context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
+                            context.Response.ContentType = "application/json";
+                            var result = JsonConvert.SerializeObject(Result.Fail(localizer["You are not Authorized."]));
+                            return context.Response.WriteAsync(result);
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    OnForbidden = context =>
+                    {
+                        context.Response.StatusCode = (int) HttpStatusCode.Forbidden;
+                        context.Response.ContentType = "application/json";
+                        var result = JsonConvert.SerializeObject(Result.Fail(localizer["You are not authorized to access this resource."]));
+                        return context.Response.WriteAsync(result);
+                    },
+                };
+            }
+
             services
                 .AddAuthentication(authentication =>
                 {
                     authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
-                .AddJwtBearer(async bearer =>
-                {
-                    bearer.RequireHttpsMetadata = false;
-                    bearer.SaveToken = true;
-                    bearer.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        RoleClaimType = ClaimTypes.Role,
-                        ClockSkew = TimeSpan.Zero
-                    };
-
-                    var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
-
-                    bearer.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = c =>
-                        {
-                            var userId = c.Principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-                            if (!string.IsNullOrEmpty(userId))
-                                c.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, userId);
-                            return Task.CompletedTask;
-                        },
-                        OnAuthenticationFailed = c =>
-                        {
-                            if (c.Exception is SecurityTokenExpiredException)
-                            {
-                                c.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                                c.Response.ContentType = "application/json";
-                                var result = JsonConvert.SerializeObject(Result.Fail(localizer["The Token is expired."]));
-                                c.HttpContext?.RequestServices?.GetService<IAccountService>()?.LogoutAsync();
-                                return c.Response.WriteAsync(result);
-                            }
-                            else
-                            {
-                                c.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                                c.Response.ContentType = "application/json";
-                                var result = JsonConvert.SerializeObject(Result.Fail(localizer["An unhandled error has occurred."]));
-                                return c.Response.WriteAsync(result);
-                            }
-                        },
-                        OnChallenge = context =>
-                        {
-                            context.HandleResponse();
-                            if (!context.Response.HasStarted)
-                            {
-                                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                                context.Response.ContentType = "application/json";
-                                var result = JsonConvert.SerializeObject(Result.Fail(localizer["You are not Authorized."]));
-                                return context.Response.WriteAsync(result);
-                            }
-
-                            return Task.CompletedTask;
-                        },
-                        OnForbidden = context =>
-                        {
-                            context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                            context.Response.ContentType = "application/json";
-                            var result = JsonConvert.SerializeObject(Result.Fail(localizer["You are not authorized to access this resource."]));
-                            return context.Response.WriteAsync(result);
-                        },
-                    };
-                });
+                .AddJwtBearer(ConfigureOptions);
             services.AddAuthorization(options =>
             {
                 // Here I stored necessary permissions/roles in a constant
                 foreach (var prop in typeof(Permissions).GetNestedTypes().SelectMany(c => c.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)))
                 {
-                    var propertyValue = prop.GetValue(null);
+                    var propertyValue = prop.GetValue(null)?.ToString();
                     if (propertyValue is not null)
                     {
-                        options.AddPolicy(propertyValue.ToString(), policy => policy.RequireClaim(ApplicationClaimTypes.Permission, propertyValue.ToString()));
+                        options.AddPolicy(propertyValue, policy => policy.RequireClaim(ApplicationClaimTypes.Permission, propertyValue));
                     }
                 }
             });

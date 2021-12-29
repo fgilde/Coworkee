@@ -15,13 +15,13 @@
         <MudCard Class="m-4">
             <MudCardContent>
                 <MudText GutterBottom="true" Typo="Typo.button"><b>Server</b></MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2">@serverInfo.ApplicationName</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @serverInfo.ApplicationVersion</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @serverInfo.Runtime</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @serverInfo.System</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@ServerInfo.ApplicationName</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @ServerInfo.ApplicationVersion</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ServerInfo.Runtime</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ServerInfo.System</MudText>
                 <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Api"]</b> <MudLink Typo="Typo.body2" Href="@(new Uri(_api.BaseUrl).Host + "/swagger/index.html")">@_api.BaseUrl</MudLink></MudText>
                 <MudText Align="Align.Center" Typo="Typo.subtitle2">@localizer["API-Versions"]</MudText>
-                @foreach (var v in apiVersions)
+                @foreach (var v in ApiVersions)
                 {
                     <MudText Align="Align.Center" Typo="Typo.body2">@v</MudText>
                 }
@@ -31,10 +31,10 @@
         <MudCard Class="m-4">
             <MudCardContent>
                 <MudText GutterBottom="true" Typo="Typo.button"><b>Client</b></MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2">@clientInfo.ApplicationName</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @clientInfo.ApplicationVersion</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @clientInfo.Runtime</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @clientInfo.System</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@ClientInfo.ApplicationName</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @ClientInfo.ApplicationVersion</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ClientInfo.Runtime</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ClientInfo.System</MudText>
             </MudCardContent>
         </MudCard>
 

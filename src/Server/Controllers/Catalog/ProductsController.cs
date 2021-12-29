@@ -100,7 +100,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         {
             var res = await Mediator.Send(query, cancellationToken);
             var mimeType = MimeGuesser.GuessMimeType(res);
-            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            var fileDownloadName = $"{ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
             return File(res, mimeType, fileDownloadName);
         }
     }

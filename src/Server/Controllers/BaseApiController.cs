@@ -18,8 +18,8 @@ namespace CleanArchitectureBase.Server.Controllers
         private ILogger<T> _loggerInstance;
         protected IMediator Mediator => _mediatorInstance ??= Get<IMediator>();
         protected ILogger<T> Logger => _loggerInstance ??= Get<ILogger<T>>();
-
         protected TService Get<TService>() => HttpContext.RequestServices.GetService<TService>();
-
+        protected string ControllerName => ControllerContext.ActionDescriptor.ControllerName;
     }
+
 }

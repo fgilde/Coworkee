@@ -10,7 +10,7 @@ namespace SDK
         public bool IsSuccessStatusCode => StatusCode is >= 200 and <= 299;
         public HttpResponseMessage Response => _response as HttpResponseMessage;
         public string MimeType => Response?.Content.Headers.ContentType?.MediaType ?? "application/octet-stream";
-        public string FileName => Response?.Content.Headers.ContentDisposition?.FileName;
+        public string FileName => Response?.Content.Headers.ContentDisposition?.FileName ?? "Dies das";
         public string Base64String => _base64 ??= AsBase64String();
         public object JsDownloadObject => new {Base64String, FileName, MimeType};
 

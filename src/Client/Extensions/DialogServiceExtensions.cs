@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Configuration;
+using CleanArchitectureBase.Client.Managers.Preferences;
 using CleanArchitectureBase.Shared.Extensions;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -14,6 +16,8 @@ public static class DialogServiceExtensions
     public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters = null, Action<DialogOptionsEx> options = null) 
         where TDialog : ComponentBase
     {
+        var clientPreferenceManager = ServiceAccessor.Get<ClientPreferenceManager>();
+        var isRtl = ((ClientPreference) await clientPreferenceManager.GetPreference()).IsRTL;
         var optionsEx = new DialogOptionsEx
         {
             CloseButton = true,
@@ -22,7 +26,7 @@ public static class DialogServiceExtensions
             DisableBackdropClick = true,
             MaximizeButton = true,
             DragMode = MudDialogDragMode.Simple,
-            Position = DialogPosition.CenterRight,
+            Position = !isRtl ? DialogPosition.CenterRight : DialogPosition.CenterLeft,
             Animation = AnimationType.SlideIn,
             FullHeight = true,
             DisableSizeMarginY = true,

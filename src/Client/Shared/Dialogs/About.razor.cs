@@ -9,9 +9,9 @@ namespace CleanArchitectureBase.Client.Shared.Dialogs
 {
     public partial class About
     {
-        private VersionInfoModel serverInfo;
-        private VersionInfoModel clientInfo;
-        private IList<string> apiVersions;
+        [Parameter] public VersionInfoModel ClientInfo { get; set; }
+        [Parameter] public VersionInfoModel ServerInfo { get; set; }
+        [Parameter] public IList<string> ApiVersions { get; set; }
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
 
@@ -23,9 +23,9 @@ namespace CleanArchitectureBase.Client.Shared.Dialogs
 
         protected override async Task OnInitializedAsync()
         {
-            clientInfo = new VersionInfoModel {ApplicationName = ApplicationConstants.ApplicationClientName};
-            serverInfo = await _api.System_VersionAsync();
-            apiVersions = await _api.System_AvailableApiVersionsAsync();
+            ClientInfo ??= new VersionInfoModel {ApplicationName = ApplicationConstants.ApplicationClientName};
+            ServerInfo ??= await _api.System_VersionAsync();
+            ApiVersions ??= await _api.System_AvailableApiVersionsAsync();
         }
     }
 }

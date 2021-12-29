@@ -37,11 +37,7 @@ namespace CleanArchitectureBase.Server
             var serverConfig = services.AddApplicationSettings(_configuration);
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
-            services.AddSignalR();
-            //services.AddSignalR().AddAzureSignalR(options =>
-            //{
-            //    options.ServerStickyMode = Microsoft.Azure.SignalR.ServerStickyMode.Required;
-            //});
+            services.AddSignalR().AddAzureSignalR();
             services.AddCurrentUserServiceAndSession();
             services.AddAllWithRegisterAttribute(typeof(Startup).Assembly);
             services.AddLocalization(options =>

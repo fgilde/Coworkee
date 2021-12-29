@@ -172,13 +172,19 @@ namespace CleanArchitectureBase.Client.Shared
 
         private async void ShowAbout()
         {
-            await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], null, o => {
+            var parameters = new DialogParameters
+            {
+                {nameof(Dialogs.About.ClientInfo), new VersionInfoModel { ApplicationName = ApplicationConstants.ApplicationClientName }},
+                {nameof(Dialogs.About.ServerInfo), await _api.System_VersionAsync()},
+                {nameof(Dialogs.About.ApiVersions),  await _api.System_AvailableApiVersionsAsync()},
+            };
+            await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], parameters, o => {
                 o.MaxWidth = MaxWidth.Small;
                 o.DisableBackdropClick = false;
                 o.MaximizeButton = false;
-                o.FullHeight = false;
-                o.Position = DialogPosition.TopRight;
-                o.Animation = AnimationType.Default;
+                //o.FullHeight = false;
+                //o.Position = DialogPosition.TopRight;
+                o.Animation = AnimationType.SlideIn;
             });
         }
 

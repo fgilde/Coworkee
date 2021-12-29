@@ -17,7 +17,8 @@ namespace CleanArchitectureBase.Client
                           .CreateDefault(args)
                           .AddRootComponents()
                           .AddClientServices();
-            var host = builder.Build();
+            var host = builder.Build().MakeStaticAccessible();
+
             var storageService = host.Services.GetRequiredService<ClientPreferenceManager>();
             if (storageService != null)
             {

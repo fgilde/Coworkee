@@ -5295,10 +5295,14 @@
     "ToggleUserStatusRequest": {
       "type": "object",
       "required": [
-        "activateUser"
+        "activateUser",
+        "emailConfirmed"
       ],
       "properties": {
         "activateUser": {
+          "type": "boolean"
+        },
+        "emailConfirmed": {
           "type": "boolean"
         },
         "userId": {

@@ -18,19 +18,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task ToggleUserStatus()
         {
-            var request = new ToggleUserStatusRequest { ActivateUser = user.IsActive, UserId = Id };
+            var request = new ToggleUserStatusRequest { ActivateUser = user.IsActive, EmailConfirmed = user.EmailConfirmed, UserId = Id };
             var result = await _api.User_ToggleUserStatusAsync(request);
-            if (result.Succeeded)
+            
+            if (_errorService.IsSuccessFull(result))
             {
                 _snackBar.Add(_localizer["Updated User Status."], Severity.Success);
                 _navigationManager.NavigateTo("/identity/users");
-            }
-            else
-            {
-                foreach (var error in result.Messages)
-                {
-                    _snackBar.Add(error, Severity.Error);
-                }
             }
         }
 

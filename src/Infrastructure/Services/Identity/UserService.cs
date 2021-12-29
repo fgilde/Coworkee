@@ -155,7 +155,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             if (user != null)
             {
                 user.IsActive = request.ActivateUser;
+                user.EmailConfirmed = request.EmailConfirmed;
                 var identityResult = await _userManager.UpdateAsync(user);
+                return identityResult.ToApplicationResult();
             }
             return await Result.SuccessAsync();
         }

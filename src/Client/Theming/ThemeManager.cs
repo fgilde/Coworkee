@@ -21,6 +21,7 @@ namespace CleanArchitectureBase.Client.Theming
             return Task.FromResult(new Dictionary<string, ClientTheme>()
             {
                 {nameof(ClientTheme.DefaultTheme), ClientTheme.DefaultTheme},
+                {nameof(ClientTheme.LuckyControl), ClientTheme.LuckyControl},
                 {nameof(ClientTheme.CodeBlue), ClientTheme.CodeBlue},
                 {nameof(ClientTheme.DarkTheme), ClientTheme.DarkTheme}
             });

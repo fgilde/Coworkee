@@ -7549,6 +7549,7 @@ export interface IRegisterRequest {
 
 export class ToggleUserStatusRequest implements IToggleUserStatusRequest {
     activateUser!: boolean;
+    emailConfirmed!: boolean;
     userId?: string | undefined;
 
     constructor(data?: IToggleUserStatusRequest) {
@@ -7563,6 +7564,7 @@ export class ToggleUserStatusRequest implements IToggleUserStatusRequest {
     init(_data?: any) {
         if (_data) {
             this.activateUser = _data["activateUser"];
+            this.emailConfirmed = _data["emailConfirmed"];
             this.userId = _data["userId"];
         }
     }
@@ -7577,6 +7579,7 @@ export class ToggleUserStatusRequest implements IToggleUserStatusRequest {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["activateUser"] = this.activateUser;
+        data["emailConfirmed"] = this.emailConfirmed;
         data["userId"] = this.userId;
         return data;
     }
@@ -7584,6 +7587,7 @@ export class ToggleUserStatusRequest implements IToggleUserStatusRequest {
 
 export interface IToggleUserStatusRequest {
     activateUser: boolean;
+    emailConfirmed: boolean;
     userId?: string | undefined;
 }
 

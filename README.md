@@ -6,7 +6,7 @@ Single Page App (Blazor) and an ASP.NET Core Server following the principles of 
 This solution is new Next Version of my project [CleanArchitectureBase](https://github.com/fgilde/CleanArchitectureBase) 
 Now with a Blazor Web Assembly Frontend.
 
-#[A running demo is available here](https://coworkee.azurewebsites.net/)
+[A running demo is available here](https://coworkee.azurewebsites.net/)
 
 ## Technologies
 

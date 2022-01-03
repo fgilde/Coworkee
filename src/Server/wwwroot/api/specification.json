@@ -4103,6 +4103,9 @@
         "applicationVersion": {
           "type": "string"
         },
+        "assemblyVersion": {
+          "type": "string"
+        },
         "runtime": {
           "type": "string"
         },

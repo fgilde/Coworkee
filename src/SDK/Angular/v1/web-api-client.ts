@@ -5077,6 +5077,7 @@ export interface IChartSeries {
 export class VersionInfoModel implements IVersionInfoModel {
     applicationName?: string | undefined;
     applicationVersion?: string | undefined;
+    assemblyVersion?: string | undefined;
     runtime?: string | undefined;
     system?: string | undefined;
 
@@ -5093,6 +5094,7 @@ export class VersionInfoModel implements IVersionInfoModel {
         if (_data) {
             this.applicationName = _data["applicationName"];
             this.applicationVersion = _data["applicationVersion"];
+            this.assemblyVersion = _data["assemblyVersion"];
             this.runtime = _data["runtime"];
             this.system = _data["system"];
         }
@@ -5109,6 +5111,7 @@ export class VersionInfoModel implements IVersionInfoModel {
         data = typeof data === 'object' ? data : {};
         data["applicationName"] = this.applicationName;
         data["applicationVersion"] = this.applicationVersion;
+        data["assemblyVersion"] = this.assemblyVersion;
         data["runtime"] = this.runtime;
         data["system"] = this.system;
         return data;
@@ -5118,6 +5121,7 @@ export class VersionInfoModel implements IVersionInfoModel {
 export interface IVersionInfoModel {
     applicationName?: string | undefined;
     applicationVersion?: string | undefined;
+    assemblyVersion?: string | undefined;
     runtime?: string | undefined;
     system?: string | undefined;
 }

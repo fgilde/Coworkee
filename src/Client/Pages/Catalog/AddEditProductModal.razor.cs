@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
@@ -41,7 +42,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             await Api.Products_PostAsync(new AddEditProductsCommand(AddEditProductModel));
             
             _snackBar.Add(_localizer["Product Updated"], Severity.Success);
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
             MudDialog.Close();
         }
 

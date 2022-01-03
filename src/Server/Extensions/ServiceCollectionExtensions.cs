@@ -50,6 +50,14 @@ namespace CleanArchitectureBase.Server.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
+        internal static IServiceCollection AddSignalRServices(this IServiceCollection services, ServerConfiguration configuration)
+        {
+            if (configuration.Azure.SignalR.Enabled && !string.IsNullOrEmpty(configuration.Azure.SignalR.ConnectionString))
+                services.AddSignalR().AddAzureSignalR();
+            else
+                services.AddSignalR();
+            return services;
+        }
 
         internal static IServiceCollection AddCurrentUserServiceAndSession(this IServiceCollection services)
         {

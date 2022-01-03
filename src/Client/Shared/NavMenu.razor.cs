@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Client.Enums;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Models;

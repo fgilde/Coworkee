@@ -1,5 +1,4 @@
 ﻿using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -9,9 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Chat;
+using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
@@ -26,9 +27,61 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         [Parameter] public string CurrentUserId { get; set; }
         [Parameter] public string CurrentUserImageURL { get; set; }
 
+        public List<ChatUserResponse> UserList = new();
+        [Parameter] public string CFullName { get; set; }
+        [Parameter] public string CId { get; set; }
+        [Parameter] public string CUserName { get; set; }
+        [Parameter] public string CImageURL { get; set; }
+
         private List<ChatHistoryResponse> _messages = new();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await ScrollToBottomAsync();
+        }
+        
+        protected override async Task OnInitializedAsync()
+        {
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+
+            HubConnection.On<string>(nameof(IClientEventHub.ConnectUser), (userId) =>
+            {
+                var connectedUser = UserList.Find(x => x.Id.Equals(userId));
+                if (connectedUser is {IsOnline: false})
+                {
+                    connectedUser.IsOnline = true;
+                    _snackBar.Add($"{connectedUser.UserName} {_localizer["Logged In."]}", Severity.Info);
+                    StateHasChanged();
+                }
+            });
+            HubConnection.On<string>(nameof(IClientEventHub.DisconnectUser), (userId) =>
+            {
+                var disconnectedUser = UserList.Find(x => x.Id.Equals(userId));
+                if (disconnectedUser is {IsOnline: true})
+                {
+                    disconnectedUser.IsOnline = false;
+                    _snackBar.Add($"{disconnectedUser.UserName} {_localizer["Logged Out."]}", Severity.Info);
+                    StateHasChanged();
+                }
+            });
+            HubConnection.On<ChatHistory<IChatUser>, string>(nameof(IClientEventHub.ReceiveMessage), async (chatHistory, userName) =>
+             {
+                 if (CId == chatHistory.FromUserId)
+                     await AddMessageAsync(new ChatHistoryResponse { Message = chatHistory.Message, FromUserId = chatHistory.FromUserId, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CImageURL });
+                 
+             });
+            await GetUsersAsync();
+            var state = await _stateProvider.GetAuthenticationStateAsync();
+            var user = state.User;
+            CurrentUserId = user.GetUserId();
+            CurrentUserImageURL = await _localStorage.GetItemAsync<string>(StorageConstants.Local.UserImageURL);
+            if (!string.IsNullOrEmpty(CId))
+            {
+                await LoadUserChat(CId);
+            }
+        }
+
+        private async Task ScrollToBottomAsync()
         {
             await _jsRuntime.InvokeAsync<string>("ScrollToBottom", "chatContainer");
         }
@@ -51,8 +104,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                     var user = state.User;
                     CurrentUserId = user.GetUserId();
                     chatHistory.FromUserId = CurrentUserId;
-                    var userName = $"{user.GetFirstName()} {user.GetLastName()}";
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendMessage, chatHistory, userName);
+                    await AddMessageAsync(new ChatHistoryResponse { Message = chatHistory.Message, FromUserId = chatHistory.FromUserId, FromUserFullName = user.GetFullName(), CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CImageURL });
                     CurrentMessage = string.Empty;
                 }
             }
@@ -68,72 +120,12 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         {
             if (e.Key == "Escape")
             {
-                CurrentMessage = string.Empty; 
+                CurrentMessage = string.Empty;
                 StateHasChanged();
             }
 
             return Task.CompletedTask;
         }
-
-        protected override async Task OnInitializedAsync()
-        {
-            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
-
-            HubConnection.On<string>(ApplicationConstants.SignalR.ConnectUser, (userId) =>
-            {
-                var connectedUser = UserList.Find(x => x.Id.Equals(userId));
-                if (connectedUser is {IsOnline: false})
-                {
-                    connectedUser.IsOnline = true;
-                    _snackBar.Add($"{connectedUser.UserName} {_localizer["Logged In."]}", Severity.Info);
-                    StateHasChanged();
-                }
-            });
-            HubConnection.On<string>(ApplicationConstants.SignalR.DisconnectUser, (userId) =>
-            {
-                var disconnectedUser = UserList.Find(x => x.Id.Equals(userId));
-                if (disconnectedUser is {IsOnline: true})
-                {
-                    disconnectedUser.IsOnline = false;
-                    _snackBar.Add($"{disconnectedUser.UserName} {_localizer["Logged Out."]}", Severity.Info);
-                    StateHasChanged();
-                }
-            });
-            HubConnection.On<ChatHistory<IChatUser>, string>(ApplicationConstants.SignalR.ReceiveMessage, async (chatHistory, userName) =>
-             {
-                 if ((CId == chatHistory.ToUserId && CurrentUserId == chatHistory.FromUserId) || (CId == chatHistory.FromUserId && CurrentUserId == chatHistory.ToUserId))
-                 {
-                     if ((CId == chatHistory.ToUserId && CurrentUserId == chatHistory.FromUserId))
-                     {
-                         // On send out
-                         _messages.Add(new ChatHistoryResponse { Message = chatHistory.Message, FromUserId = CurrentUserId, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CurrentUserImageURL });
-                         await HubConnection.SendAsync(ApplicationConstants.SignalR.SendChatNotification, string.Format(_localizer["New Message From {0}"], userName), CId, CurrentUserId);
-                     }
-                     else if ((CId == chatHistory.FromUserId && CurrentUserId == chatHistory.ToUserId))
-                     {
-                         // On receive
-                         _messages.Add(new ChatHistoryResponse { Message = chatHistory.Message, FromUserId = chatHistory.FromUserId, FromUserFullName = userName, CreatedDate = chatHistory.CreatedDate, FromUserImageURL = CImageURL });
-                     }
-                     await _jsRuntime.InvokeAsync<string>("ScrollToBottom", "chatContainer");
-                     StateHasChanged();
-                 }
-             });
-            await GetUsersAsync();
-            var state = await _stateProvider.GetAuthenticationStateAsync();
-            var user = state.User;
-            CurrentUserId = user.GetUserId();
-            CurrentUserImageURL = await _localStorage.GetItemAsync<string>(StorageConstants.Local.UserImageURL);
-            if (!string.IsNullOrEmpty(CId))
-            {
-                await LoadUserChat(CId);
-            }
-        }
-
-        public List<ChatUserResponse> UserList = new();
-        [Parameter] public string CFullName { get; set; }
-        [Parameter] public string CId { get; set; }
-        [Parameter] public string CUserName { get; set; }
-        [Parameter] public string CImageURL { get; set; }
 
         private async Task LoadUserChat(string userId)
         {
@@ -155,6 +147,13 @@ namespace CleanArchitectureBase.Client.Pages.Communication
                     _messages = historyResponse.Data.ToList();
                 }
             }
+        }
+
+        private async Task AddMessageAsync(ChatHistoryResponse message)
+        {
+            _messages.Add(message);
+            await ScrollToBottomAsync();
+            StateHasChanged();
         }
 
         private async Task GetUsersAsync()
@@ -180,6 +179,5 @@ namespace CleanArchitectureBase.Client.Pages.Communication
         {
             return HubConnection.TryDisposeAsync();
         }
-
     }
 }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -39,7 +40,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             await _api.Documents_PostAsync(new AddEditDocumentsCommand(AddEditDocumentModel));
             _snackBar.Add(_localizer["Document Updated"], Severity.Success);
             MudDialog.Close();
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
         }
 
         protected override async Task OnInitializedAsync()

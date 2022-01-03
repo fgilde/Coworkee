@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Shared.Constants.Storage;
 

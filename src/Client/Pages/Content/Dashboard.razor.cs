@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -32,7 +33,7 @@ namespace CleanArchitectureBase.Client.Pages.Content
             await LoadDataAsync();
             _loaded = true;
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
-            HubConnection.On(ApplicationConstants.SignalR.ReceiveUpdateDashboard, async () =>
+            HubConnection.On(nameof(IClientEventHub.UpdateDashboard), async () =>
             {
                 await LoadDataAsync();
                 StateHasChanged();

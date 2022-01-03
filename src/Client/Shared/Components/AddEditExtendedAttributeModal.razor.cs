@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Contracts;
@@ -75,7 +76,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 MudDialog.Close();
             }
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
         }
 
         protected override async Task OnInitializedAsync()

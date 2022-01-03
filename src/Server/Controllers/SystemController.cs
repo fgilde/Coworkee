@@ -26,7 +26,6 @@ namespace CleanArchitectureBase.Server.Controllers
             return Ok(ApiVersions.All.Select(v => v.ToVersion()));
         }
 
-        [AllowAnonymous]
         [HttpPost("{queue}")]
         public async Task<ActionResult> SendOnServiceBus(string queue, [FromBody] ProductDto entity)
         {

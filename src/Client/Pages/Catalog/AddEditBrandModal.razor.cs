@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
@@ -32,7 +33,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         {
             await Api.Brands_PostAsync(new AddEditBrandsCommand(AddEditBrandModel));
             _snackBar.Add(_localizer["Brand Updated"], Severity.Success);
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
             MudDialog.Close();
         }
 

@@ -34,6 +34,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             _authenticationStateProvider = authenticationStateProvider as ApplicationStateProvider;
             _localizer = localizer;
             _api = api;
+
         }
 
         public async Task<ClaimsPrincipal> CurrentUser()

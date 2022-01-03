@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -91,8 +93,8 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (result.Succeeded)
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);
-                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendRegenerateTokens);
-                await HubConnection.SendAsync(ApplicationConstants.SignalR.OnChangeRolePermissions, _currentUser.GetUserId(), request.RoleId);
+                await HubConnection.SendAsync(nameof(ClientEventHub.RegenerateTokensAsync));
+                await HubConnection.SendAsync(nameof(ClientEventHub.OnChangeRolePermissions), _currentUser.GetUserId(), request.RoleId);
                 _navigationManager.NavigateTo("/identity/roles");
             }
             else

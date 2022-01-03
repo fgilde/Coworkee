@@ -1,5 +1,8 @@
-﻿using MediatR;
+﻿using CleanArchitectureBase.Application.Contracts.Hubs;
+using CleanArchitectureBase.Application.Hubs;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -20,6 +23,7 @@ namespace CleanArchitectureBase.Server.Controllers
         protected ILogger<T> Logger => _loggerInstance ??= Get<ILogger<T>>();
         protected TService Get<TService>() => HttpContext.RequestServices.GetService<TService>();
         protected string ControllerName => ControllerContext.ActionDescriptor.ControllerName;
+        protected IHubContext<ClientEventHub, IClientEventHub> ClientEventHub => Get<IHubContext<ClientEventHub, IClientEventHub>>();
     }
 
 }

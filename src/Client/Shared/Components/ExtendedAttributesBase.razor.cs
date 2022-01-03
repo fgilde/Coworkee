@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;

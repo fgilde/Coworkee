@@ -5,8 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Features.Translations.Import;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
@@ -315,7 +317,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 {
                     var response = await ApiDelete(ids);
                     await Reset(true);
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                    await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
                     if (_errorService.IsSuccessFull(response))
                         _snackBar.Add(response.Messages[0], Severity.Success);
 

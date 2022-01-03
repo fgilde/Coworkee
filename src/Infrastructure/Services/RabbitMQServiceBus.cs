@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Contracts;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using Newtonsoft.Json;
@@ -14,7 +15,13 @@ namespace CleanArchitectureBase.Infrastructure.Services
     [RegisterAs(typeof(IServiceBus))]
     public class RabbitMQServiceBus : IServiceBus
     {
-        public bool Enabled { get; set; } = false;
+        private readonly ServerConfiguration _configuration;
+        public bool Enabled => _configuration.RabbitMQ.Enabled;
+
+        public RabbitMQServiceBus(ServerConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         private Task ExecuteWithChannel(Action<IModel> action, CancellationToken cancellationToken = default)
         {
@@ -22,12 +29,11 @@ namespace CleanArchitectureBase.Infrastructure.Services
             {
                 var factory = new ConnectionFactory
                 {
-                    //TODO: extract to a config
-                    HostName = "your-rabbit-mq-server.de",
-                    Port = 5672,
+                    HostName = _configuration.RabbitMQ.HostName,
+                    Port = _configuration.RabbitMQ.Port,
                     //Protocol = Protocols.AMQP_0_9_1,
-                    UserName = "admin",
-                    Password = "admin"
+                    UserName = _configuration.RabbitMQ.UserName,
+                    Password = _configuration.RabbitMQ.Password
                 };
 
                 using var connection = factory.CreateConnection();

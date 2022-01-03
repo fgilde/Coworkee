@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
@@ -153,7 +155,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 await _api.Documents_DeleteAsync(toDelete);
                 OnSearch("");
                 _snackBar.Add(_localizer["Document Deleted"], Severity.Success);
-                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
             }
         }
 

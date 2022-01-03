@@ -1,14 +1,11 @@
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Chat;
+using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Shared.Constants.Application;
-using Microsoft.AspNetCore.SignalR;
 
 namespace CleanArchitectureBase.Application.Hubs
 {
-    public class ClientEventHub : HubBase
+    public class ClientEventHub : HubBase<IClientEventHub>
     {
         public ClientEventHub(ISessionProvider sessionProvider, IUserService userService, IRoleClaimService roleService) 
             : base(sessionProvider, userService, roleService)
@@ -16,37 +13,29 @@ namespace CleanArchitectureBase.Application.Hubs
 
         public async Task OnConnectAsync(string userId)
         {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.ConnectUser, userId);
+            await JoinGroups(userId);
+            await Clients.All.ConnectUser(userId);
         }
 
         public async Task OnDisconnectAsync(string userId)
         {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.DisconnectUser, userId);
+            await LeaveGroups(userId);
+            await Clients.All.DisconnectUser(userId);
         }
 
         public async Task OnChangeRolePermissions(string userId, string roleId)
         {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.LogoutUsersByRole, userId, roleId);
+            await Clients.All.LogoutUsersByRole(userId, roleId);
         }
-
-        public async Task SendMessageAsync(ChatHistory<IChatUser> chatHistory, string userName)
-        {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.ReceiveMessage, chatHistory, userName);
-        }
-
-        public async Task ChatNotificationAsync(string message, string receiverUserId, string senderUserId)
-        {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.ReceiveChatNotification, message, receiverUserId, senderUserId);
-        }
-
+        
         public async Task UpdateDashboardAsync()
         {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.ReceiveUpdateDashboard);
+            await Clients.All.UpdateDashboard();
         }
 
         public async Task RegenerateTokensAsync()
         {
-            await Clients.All.SendAsync(ApplicationConstants.SignalR.ReceiveRegenerateTokens);
+            await Clients.All.RegenerateTokens();
         }
     }
 }

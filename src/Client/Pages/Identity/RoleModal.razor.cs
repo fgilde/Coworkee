@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Hubs;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
@@ -36,7 +37,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
-                await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
                 MudDialog.Close();
             }
         }

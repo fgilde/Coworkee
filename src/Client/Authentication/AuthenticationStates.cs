@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 

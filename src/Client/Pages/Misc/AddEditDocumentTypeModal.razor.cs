@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
@@ -30,7 +31,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             await _api.DocumentTypes_PostAsync(new AddEditDocumentTypesCommand(AddEditDocumentTypeModel));
             _snackBar.Add(_localizer["DocumentType Updated"], Severity.Success);
             MudDialog.Close();
-            await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
         }
 
         protected override async Task OnInitializedAsync()

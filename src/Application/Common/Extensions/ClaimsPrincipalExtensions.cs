@@ -3,9 +3,9 @@ using System.Linq;
 using System.Security.Claims;
 using CleanArchitectureBase.Application.Common.Security;
 
-namespace CleanArchitectureBase.Client.Extensions
+namespace CleanArchitectureBase.Application.Common.Extensions
 {
-    internal static class ClaimsPrincipalExtensions
+    public static class ClaimsPrincipalExtensions
     {
         public static string GetInitials(this ClaimsPrincipal claimsPrincipal)
             => new(new []{claimsPrincipal.GetFirstName().FirstOrDefault(), claimsPrincipal.GetLastName().FirstOrDefault()});

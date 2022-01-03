@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Communication
@@ -62,6 +65,8 @@ namespace CleanArchitectureBase.Server.Controllers.Communication
             message.FromUserId = _currentUserService.UserId;
             message.ToUserId = message.ToUserId;
             message.CreatedDate = DateTime.Now;
+            var name = _currentUserService.Principal.GetFullName();
+            await ClientEventHub.Clients.Group(message.ToUserId).ReceiveMessage(message, name);
             return Ok(await _chatService.SaveMessageAsync(message));
         }
     }

@@ -20,6 +20,8 @@ namespace CleanArchitectureBase.Application.Configurations
         public Apidocumentation ApiDocumentation { get; set; }
         public Mailconfiguration MailConfiguration { get; set; }
         public Serilog Serilog { get; set; }
+        public Azure Azure { get; set; }
+        public Rabbitmq RabbitMQ { get; set; }
     }
 
     public class Logging
@@ -44,7 +46,7 @@ namespace CleanArchitectureBase.Application.Configurations
     {
         public string DefaultConnection { get; set; }
     }
-    
+
     public class Cognitiveservices
     {
         public Translation Translation { get; set; }
@@ -132,5 +134,25 @@ namespace CleanArchitectureBase.Application.Configurations
         public string rollingInterval { get; set; }
     }
 
+    public class Azure
+    {
+        public Signalr SignalR { get; set; }
+    }
+
+    public class Signalr
+    {
+        public bool Enabled { get; set; }
+        public string StickyServerMode { get; set; }
+        public string ConnectionString { get; set; }
+    }
+
+    public class Rabbitmq
+    {
+        public bool Enabled { get; set; }
+        public string HostName { get; set; }
+        public int Port { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
 
 }

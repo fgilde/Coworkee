@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -71,7 +72,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 if (_errorService.IsSuccessFull(response))
                 {
                     await Reset();
-                    await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
+                    await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
                     _snackBar.Add(response.Messages[0], Severity.Success);
                 }
             }

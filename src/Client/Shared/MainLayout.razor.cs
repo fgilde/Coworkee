@@ -8,8 +8,13 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Contracts.Chat;
+using CleanArchitectureBase.Application.Contracts.Hubs;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
@@ -51,7 +56,7 @@ namespace CleanArchitectureBase.Client.Shared
                     return;
                 }
 
-                await hubConnection.SendAsync(ApplicationConstants.SignalR.OnConnect, CurrentUserId);
+                await hubConnection.SendAsync(nameof(ClientEventHub.OnConnectAsync), CurrentUserId);
             }
         }
 
@@ -87,31 +92,29 @@ namespace CleanArchitectureBase.Client.Shared
                 StateHasChanged();
             });
 
-            hubConnection.On<string, string, string>(ApplicationConstants.SignalR.ReceiveChatNotification, (message, receiverUserId, senderUserId) =>
+            hubConnection.On<ChatHistory<IChatUser>, string>(nameof(IClientEventHub.ReceiveMessage), async (chatHistory, userName) =>
             {
-                if (CurrentUserId == receiverUserId)
+                await _jsRuntime.InvokeAsync<string>("PlayAudio", "notification");
+                var chatUrlToUser = $"chat/{chatHistory.FromUserId}";
+                if (!_navigationManager.Uri.EndsWith(chatUrlToUser))
                 {
-                    _jsRuntime.InvokeAsync<string>("PlayAudio", "notification");
-                    var chatUrlToUser = $"chat/{senderUserId}";
-                    if (!_navigationManager.Uri.EndsWith(chatUrlToUser))
+                    _snackBar.Add(chatHistory.Message + " from "+ userName, Severity.Info, config =>
                     {
-                        _snackBar.Add(message, Severity.Info, config =>
+                        config.VisibleStateDuration = 10000;
+                        config.HideTransitionDuration = 500;
+                        config.ShowTransitionDuration = 500;
+                        config.Action = localizer["Chat?"];
+                        config.ActionColor = Color.Primary;
+                        config.Onclick = snackbar =>
                         {
-                            config.VisibleStateDuration = 10000;
-                            config.HideTransitionDuration = 500;
-                            config.ShowTransitionDuration = 500;
-                            config.Action = localizer["Chat?"];
-                            config.ActionColor = Color.Primary;
-                            config.Onclick = snackbar =>
-                            {
-                                _navigationManager.NavigateTo(chatUrlToUser);
-                                return Task.CompletedTask;
-                            };
-                        });
-                    }
+                            _navigationManager.NavigateTo(chatUrlToUser);
+                            return Task.CompletedTask;
+                        };
+                    });
                 }
             });
-            hubConnection.On(ApplicationConstants.SignalR.ReceiveRegenerateTokens, async () =>
+
+            hubConnection.On(nameof(IClientEventHub.RegenerateTokens), async () =>
             {
                 try
                 {
@@ -130,7 +133,7 @@ namespace CleanArchitectureBase.Client.Shared
                     _navigationManager.NavigateToHomeWithReturnTo();
                 }
             });
-            hubConnection.On<string, string>(ApplicationConstants.SignalR.LogoutUsersByRole, async (userId, roleId) =>
+            hubConnection.On<string, string>(nameof(IClientEventHub.LogoutUsersByRole), async (userId, roleId) =>
             {
                 if (CurrentUserId != userId)
                 {
@@ -144,7 +147,7 @@ namespace CleanArchitectureBase.Client.Shared
                             if (currentUserRolesResponse.Succeeded && currentUserRolesResponse.Data.UserRoles.Any(x => x.RoleName == role.Name))
                             {
                                 _snackBar.Add(localizer["You are logged out because the Permissions of one of your Roles have been updated."], Severity.Error);
-                                await hubConnection.SendAsync(ApplicationConstants.SignalR.OnDisconnect, CurrentUserId);
+                                await hubConnection.SendAsync(nameof(ClientEventHub.OnDisconnectAsync), CurrentUserId);
                                 await _clientAuthenticationManager.Logout();
                                 _navigationManager.NavigateToHomeWithReturnTo();
                             }
@@ -182,8 +185,6 @@ namespace CleanArchitectureBase.Client.Shared
                 o.MaxWidth = MaxWidth.Small;
                 o.DisableBackdropClick = false;
                 o.MaximizeButton = false;
-                //o.FullHeight = false;
-                //o.Position = DialogPosition.TopRight;
                 o.Animation = AnimationType.SlideIn;
             });
         }

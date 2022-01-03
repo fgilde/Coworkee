@@ -4,6 +4,7 @@ using System.Security.Claims;
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Shared.Constants.Storage;

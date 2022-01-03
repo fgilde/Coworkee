@@ -1,4 +1,4 @@
-﻿
+[![Build and deploy ASP.Net Core app to Azure Web App - Coworkee](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml/badge.svg)](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml)
 
 <br/>
 

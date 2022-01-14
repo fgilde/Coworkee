@@ -1,14 +1,20 @@
-﻿
+[![Build and deploy ASP.Net Core app to Azure Web App - Coworkee](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml/badge.svg)](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml)
 
+Single Page App (Blazor) and an ASP.NET Core Server following the principles of Clean Architecture. 
 <br/>
 
-This is a solution a seperate Single Page App (Blazor) and an ASP.NET Core Server following the principles of Clean Architecture. 
+This solution is new Next Version of my project [CleanArchitectureBase](https://github.com/fgilde/CleanArchitectureBase) 
+Now with a Blazor Web Assembly Frontend.
+
+[A running demo is available here](https://coworkee.azurewebsites.net/)
 
 ## Technologies
 
 * ASP.NET Core 6
-* [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
-* [Angular 10](https://angular.io/)
+* [Entity Framework Core 6](https://docs.microsoft.com/en-us/ef/core/)
+* [Signal R](https://docs.microsoft.com/en-US/aspnet/signalr/overview/getting-started/introduction-to-signalr)
+* [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor)
+* [Mud Blazor](https://mudblazor.com/getting-started/installation#manual-install)
 * [MediatR](https://github.com/jbogard/MediatR)
 * [FluentValidation](https://fluentvalidation.net/)
 * [NUnit](https://nunit.org/), [FluentAssertions](https://fluentassertions.com/), [Moq](https://github.com/moq) & [Respawn](https://github.com/jbogard/Respawn)
@@ -16,12 +22,12 @@ This is a solution a seperate Single Page App (Blazor) and an ASP.NET Core Serve
 
 ## Getting Started
 
-1. Install the latest [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+1. Install the latest [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 2. Navigate to `src/Server` and run `dotnet run` to launch the back end and the webassembly client (ASP.NET Core Web API) or open Solution in Visual Studio and launch Server
 	(Notice to seperate client completly from server just remove reference to client project in WebServer.csproj)
 
 
-### Docker Configuration
+### Docker Configuration (Unfinished)
 
 In order to get Docker working, you will need to add a temporary SSL cert and mount a volume to hold that cert.
 You can find [Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-3.1) that describe the steps required for Windows, macOS, and Linux.

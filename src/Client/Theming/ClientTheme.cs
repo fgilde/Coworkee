@@ -181,7 +181,7 @@ namespace CleanArchitectureBase.Client.Theming
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
             t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
+            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Mini);
 
 
         public static ClientTheme CodeBlue = new ClientTheme()

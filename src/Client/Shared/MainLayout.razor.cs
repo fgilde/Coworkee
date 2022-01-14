@@ -29,6 +29,7 @@ namespace CleanArchitectureBase.Client.Shared
     {
         private string CurrentUserId { get; set; }
         private NavMenu navMenu;
+        private MudDrawer drawer;
         private AppBarHeader appBarHeader;
         private ClaimsPrincipal currentUser;
 

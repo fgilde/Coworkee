@@ -94,7 +94,7 @@ namespace CleanArchitectureBase.Client.Shared
             if (ExpandMode != ExpandMode.None)
             {
                 var state = !entry.IsExpanded;
-                if (ExpandMode == ExpandMode.SingleExpand)
+                if (ExpandMode == ExpandMode.SingleExpand && !isMini)
                     SetAllExpanded(false, e => e != entry && !e.ContainsChild(entry));
                 entry.IsExpanded = state;
             }

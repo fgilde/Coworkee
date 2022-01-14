@@ -9,9 +9,19 @@
         </div>
         <MudDivider Class="mb-2" />
     }
+
     @if (ShowUserCard && _user?.Identity?.IsAuthenticated == true && !_user.IsGuest())
     {
-        <UserCard Logout="Logout" ShowEmail="false" ShowLogout="true" />
+        @if (isMini)
+        {
+            <div class="mini-avatar">
+                <UserAvatar />
+            </div>
+        }
+        else
+        {
+            <UserCard Logout="Logout" ShowEmail="false" ShowLogout="true" />
+        }
         <MudDivider Class="mb-2" />
     }
 
@@ -20,28 +30,49 @@
             <ItemTemplate>
                 @if (IsAuthorized(context))
                 {
+                    if (isMini)
+                    {
+                        context.IsExpanded = true;
+                    }
                     <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Children">
                         <Content>
                             @if (HasAction(context))
+                            {
+                            @if (isMini)
+                                {
+                                <MudTooltip Placement="Placement.End" Arrow="false" Inline="false" Text="@_localizer[context.Text]">
+                                    <MudNavLink Class="mini-nav-link" Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
+                                    </MudNavLink>
+                                </MudTooltip>
+                                }
+                                else
                                 {
                                 <MudNavLink Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
                                     @_localizer[context.Text]
                                 </MudNavLink>
                                 }
-                                else
+                            }
+                            else
+                            {
+                            @if (!context.Icon.IsNullOrWhiteSpace())
                                 {
-                                @if (!context.Icon.IsNullOrWhiteSpace())
-                                    {
-                                    <MudIcon Icon="@context.Icon" Class="ml-0 mr-2" Color="@Color.Default" />
-                                    }
+                                <MudIcon Icon="@context.Icon" Class="ml-0 mr-2" Color="@Color.Default" />
+                                }
+                            @if (!isMini)
+                                {
                                 <MudListSubheader Class="@(CanExpand(context) ? "cursor-pointer" : "")" @onclick="() => OnExpandCollapseClick(context)">@_localizer[context.Text]</MudListSubheader>
 
                                 <div class="apply-right">
                                     <MudTreeViewItemToggleButton Visible="CanExpand(context)" Expanded="context.IsExpanded" ExpandedChanged="() => OnExpandCollapseClick(context)" />
                                 </div>
                                 }
-                        </Content>
-                    </MudTreeViewItem>
+                                else
+                                {
+                                <MudDivider Class="mini-divider" />
+                                }
+                            }
+                    </Content>
+                </MudTreeViewItem>
                 }
             </ItemTemplate>
         </MudTreeView>
@@ -49,6 +80,18 @@
 
 </div>
 
+@code
+{
 
+    [Parameter] public bool isMini { get; set; }
+
+
+
+
+    private void Callback()
+    {
+
+    }
+}
 
 

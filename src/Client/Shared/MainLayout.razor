@@ -77,9 +77,10 @@
                         </MudMenu>
                     </MudHidden>
                 </MudAppBar>
-                <MudDrawer @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutProperties.DrawerVariant" ClipMode="_currentTheme.LayoutProperties.DrawerClipMode">
+                <MudDrawer @ref="drawer" @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutProperties.DrawerVariant" ClipMode="_currentTheme.LayoutProperties.DrawerClipMode">
                     <NavMenu @ref="navMenu"
                              Logout="Logout"
+                             isMini="(!drawer.Open && drawer.Variant == DrawerVariant.Mini)"
                              ShowApplicationLogo="_currentTheme.LayoutProperties.ShowLogoInNavMenu"
                              ShowUserCard="_currentTheme.LayoutProperties.ShowUserCardInNavigation"
                              ExpandMode="_currentTheme.LayoutProperties.NavMenuExpandMode"/>

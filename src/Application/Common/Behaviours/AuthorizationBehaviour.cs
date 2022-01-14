@@ -6,7 +6,8 @@ using MediatR;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours
 {
-    public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+        where TRequest : IRequest<TResponse>
     {
         private readonly ICustomAuthorizeAttributeHandler _authorizeAttributeHandler;
 

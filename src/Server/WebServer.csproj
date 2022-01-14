@@ -17,14 +17,14 @@
     <Content Include=".config\dotnet-tools.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.15.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
-    <PackageReference Include="Nextended.Imaging" Version="6.0.0" />
+    <PackageReference Include="Nextended.Imaging" Version="6.0.1" />
     <PackageReference Include="Hangfire" Version="1.7.28" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="Svg" Version="3.3.0" />
+    <PackageReference Include="Svg" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
@@ -52,7 +52,7 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.6" />
     <PackageReference Include="TranslatorService" Version="3.0.11" />
 
   </ItemGroup>

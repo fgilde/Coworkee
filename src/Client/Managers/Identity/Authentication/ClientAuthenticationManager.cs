@@ -26,7 +26,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
-            IStringLocalizer<ClientAuthenticationManager> localizer, 
+            IStringLocalizer<ClientAuthenticationManager> localizer,
             IApplicationClient api)
         {
             _httpClient = httpClient;
@@ -68,15 +68,14 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
         public async Task<IResult> Logout()
         {
             var state = await _authenticationStateProvider.GetAuthenticationStateAsync();
-            if (state?.User.Identity?.IsAuthenticated == true && !state.IsGuest())
-                await _api.Account_LogoutAsync();
             await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
             _authenticationStateProvider.MarkUserAsLoggedOut();
             try
             {
-                await _api.Account_LogoutAsync();
+                if (state?.User.Identity?.IsAuthenticated == true && !state.IsGuest())
+                    await _api.Account_LogoutAsync();
             }
             catch { /* ignored*/ }
 
@@ -91,7 +90,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
                 var token = await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
                 var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.Local.RefreshToken);
 
-                var result = await _api.Token_RefreshAsync(new RefreshTokenRequest {Token = token, RefreshToken = refreshToken});
+                var result = await _api.Token_RefreshAsync(new RefreshTokenRequest { Token = token, RefreshToken = refreshToken });
 
                 if (!result.Succeeded)
                 {

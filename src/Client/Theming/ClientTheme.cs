@@ -139,7 +139,34 @@ namespace CleanArchitectureBase.Client.Theming
             t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
             t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
 
-        public static ClientTheme LuckyControl = new ClientTheme()
+        public static ClientTheme DarkTheme = new ClientTheme()
+        {
+            Palette = new Palette()
+            {
+                Primary = "#1E88E5",
+                Success = "#007E33",
+                Black = "#27272f",
+                Background = "#32333d",
+                BackgroundGrey = "#27272f",
+                Surface = "#373740",
+                DrawerBackground = "#27272f",
+                DrawerText = "rgba(255,255,255, 0.50)",
+                AppbarBackground = "#373740",
+                AppbarText = "rgba(255,255,255, 0.70)",
+                TextPrimary = "rgba(255,255,255, 0.70)",
+                TextSecondary = "rgba(255,255,255, 0.50)",
+                ActionDefault = "#adadb1",
+                ActionDisabled = "rgba(255,255,255, 0.26)",
+                ActionDisabledBackground = "rgba(255,255,255, 0.12)",
+                DrawerIcon = "rgba(255,255,255, 0.50)"
+            },
+            Typography = DefaultTypography,
+            LayoutProperties = DefaultLayoutProperties
+        }.SetProperties(
+            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
+            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
+
+        public static ClientTheme LuckyGreen = new ClientTheme()
         {
             Palette = new Palette()
             {
@@ -182,35 +209,7 @@ namespace CleanArchitectureBase.Client.Theming
             t => t.LayoutProperties.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
             t => t.LayoutProperties.MenuTogglePosition = MenuTogglePosition.Start,
             t => t.LayoutProperties.NavMenuExpandMode = ExpandMode.SingleExpand);
-
-
-        public static ClientTheme DarkTheme = new ClientTheme() {
-            Palette = new Palette()
-            {
-                Primary = "#1E88E5",
-                Success = "#007E33",
-                Black = "#27272f",
-                Background = "#32333d",
-                BackgroundGrey = "#27272f",
-                Surface = "#373740",
-                DrawerBackground = "#27272f",
-                DrawerText = "rgba(255,255,255, 0.50)",
-                AppbarBackground = "#373740",
-                AppbarText = "rgba(255,255,255, 0.70)",
-                TextPrimary = "rgba(255,255,255, 0.70)",
-                TextSecondary = "rgba(255,255,255, 0.50)",
-                ActionDefault = "#adadb1",
-                ActionDisabled = "rgba(255,255,255, 0.26)",
-                ActionDisabledBackground = "rgba(255,255,255, 0.12)",
-                DrawerIcon = "rgba(255,255,255, 0.50)"
-            },
-            Typography = DefaultTypography,
-            LayoutProperties = DefaultLayoutProperties
-        }.SetProperties(
-            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
-
-
+        
         #endregion
     }
 }

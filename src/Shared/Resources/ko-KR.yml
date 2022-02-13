@@ -161,6 +161,7 @@ Delete Picture: 사진 삭제
 Delete Role Content: Id {0} 역할을 삭제하시겠습니까?
 Delete these {0} elements: 이러한 {0} 요소를 삭제?
 Delete this element: 이 요소를 삭제?
+Delete User: 사용자 삭제
 Deletion Not Allowed: 삭제 는 허용되지 않습니다.
 Dense: 빽빽한
 Dependent permissions required: 종속 사용 권한 필요
@@ -170,6 +171,7 @@ detailed guide for more.: 자세한 내용은 자세한 설명서입니다.
 Details for Trail ID: 트레일 ID에 대한 세부 정보
 dje-NE: 자르마 (니제르)
 Do you want to delete the profile picture of {0}: '{0} 프로필 사진을 삭제하시겠습니까?'
+Do you want to delete the User {0}: 사용자 {0} 삭제하시겠습니까?
 Document Deleted: 삭제된 문서
 Document Extended Attributes: 문서 확장 특성
 Document Management: 문서 관리
@@ -909,7 +911,9 @@ Upload Image: 이미지 업로드
 ur-IN: 우르두어 (인도)
 ur-PK: 우르두어 (파키스탄)
 User: 사용자
+User Deleted: 사용자 삭제
 User Name: 사용자 이름
+User Not Found!: 사용자가 찾을 수 없습니다!
 User Registered: 사용자 등록!
 User Registered Mailbox: 사용자 등록. 확인 메일이 사서함으로 배달되었습니다.
 Username: 사용자 이름
@@ -948,6 +952,7 @@ you: 너
 You are logged out because the Permissions of one of your Roles have been updated.: 역할 중 하나의 사용 권한이 업데이트되었기 때문에 로그아웃됩니다.
 You are logged out because the user with your Token has been deleted or token is expired.: 토큰을 가진 사용자가 삭제되었거나 토큰이 만료되었기 때문에 로그아웃됩니다.
 You are Logged Out.: 로그아웃됩니다.
+You cannot delete yourself: 직접 삭제할 수 없습니다.
 Your Profile has been updated.: 프로필이 업데이트되었습니다.
 Your Recent Activities.: 최근 활동.
 zgh-Tfng-MA: 스탠다드 모로코 타마지트 (티피나, 모로코)

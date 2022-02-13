@@ -161,6 +161,7 @@ Delete Picture: Eliminar imagen
 Delete Role Content: ¿Desea eliminar el rol con Id {0}?
 Delete these {0} elements: ¿Eliminar estos elementos {0}?
 Delete this element: ¿Eliminar este elemento?
+Delete User: Eliminar usuario
 Deletion Not Allowed: Eliminación no permitida
 Dense: Denso
 Dependent permissions required: Permisos dependientes requeridos
@@ -170,6 +171,7 @@ detailed guide for more.: guía detallada para más información.
 Details for Trail ID: Detalles de Trail ID
 dje-NE: Zarma (Níger)
 Do you want to delete the profile picture of {0}: ¿Desea eliminar la foto de perfil de {0}
+Do you want to delete the User {0}: ¿Desea eliminar el {0} de usuario
 Document Deleted: Documento eliminado
 Document Extended Attributes: Atributos extendidos del documento
 Document Management: Gestión Documental
@@ -909,7 +911,9 @@ Upload Image: Subir imagen
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistán)
 User: Usuario
+User Deleted: Usuario eliminado
 User Name: Nombre de usuario
+User Not Found!: ¡Usuario no encontrado!
 User Registered: ¡Usuario registrado!
 User Registered Mailbox: Usuario registrado. El correo de confirmación se ha entregado en el buzón.
 Username: Nombre de usuario
@@ -948,6 +952,7 @@ you: tú
 You are logged out because the Permissions of one of your Roles have been updated.: Ha cerrado la sesión porque se han actualizado los permisos de uno de sus roles.
 You are logged out because the user with your Token has been deleted or token is expired.: Ha cerrado la sesión porque el usuario con su token se ha eliminado o el token ha caducado.
 You are Logged Out.: Está desconectado.
+You cannot delete yourself: No puede eliminarse a sí mismo
 Your Profile has been updated.: Su perfil ha sido actualizado.
 Your Recent Activities.: Sus actividades recientes.
 zgh-Tfng-MA: Tamazight marroquí estándar (Tifinagh, Marruecos)

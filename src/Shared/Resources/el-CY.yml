@@ -161,6 +161,7 @@ Delete Picture: Διαγραφή εικόνας
 Delete Role Content: Θέλετε να διαγράψετε το ρόλο με το id {0};
 Delete these {0} elements: Διαγράψτε αυτά τα στοιχεία {0};
 Delete this element: Διαγραφή αυτού του στοιχείου;
+Delete User: Διαγραφή χρήστη
 Deletion Not Allowed: Η διαγραφή δεν επιτρέπεται
 Dense: Πυκνός
 Dependent permissions required: Απαιτούνται εξαρτώμενα δικαιώματα
@@ -170,6 +171,7 @@ detailed guide for more.: αναλυτικός οδηγός για περισσ�
 Details for Trail ID: Λεπτομέρειες για το αναγνωριστικό διαδρομής
 dje-NE: Ζέρμα (Νίγηρας)
 Do you want to delete the profile picture of {0}: Θέλετε να διαγράψετε την εικόνα προφίλ του {0}
+Do you want to delete the User {0}: Θέλετε να διαγράψετε το {0} χρήστη
 Document Deleted: Το έγγραφο διαγράφηκε
 Document Extended Attributes: Εκτεταμένα χαρακτηριστικά εγγράφου
 Document Management: Διαχείριση εγγράφων
@@ -909,7 +911,9 @@ Upload Image: Αποστολή εικόνας
 ur-IN: Ουρντού (Ινδία)
 ur-PK: Ουρντού (Πακιστάν)
 User: Χρήστης
+User Deleted: Ο χρήστης διαγράφηκε
 User Name: Όνομα χρήστη
+User Not Found!: Ο χρήστης δεν βρέθηκε!
 User Registered: Καταχωρημένος χρήστης!
 User Registered Mailbox: Καταχωρημένος χρήστης. Η αλληλογραφία επιβεβαίωσης παραδόθηκε στο γραμματοκιβώτιο.
 Username: Όνομα χρήστη
@@ -948,6 +952,7 @@ you: εσύ
 You are logged out because the Permissions of one of your Roles have been updated.: Είστε συνδεδεμένοι επειδή τα δικαιώματα ενός από τους ρόλους σας έχουν ενημερωθεί.
 You are logged out because the user with your Token has been deleted or token is expired.: Είστε συνδεδεμένοι επειδή ο χρήστης με το διακριτικό σας έχει διαγραφεί ή το διακριτικό έχει λήξει.
 You are Logged Out.: Είστε συνδεδεμένοι.
+You cannot delete yourself: Δεν μπορείτε να διαγράψετε τον εαυτό σας
 Your Profile has been updated.: Το προφίλ σας έχει ενημερωθεί.
 Your Recent Activities.: Οι πρόσφατες δραστηριότητές σου.
 zgh-Tfng-MA: Πρότυπο Μαροκινό Ταμαζάιτ (Τιφινάγκ, Μαρόκο)

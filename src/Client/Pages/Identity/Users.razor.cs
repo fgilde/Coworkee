@@ -26,6 +26,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private bool _canCreateUsers;
         private bool _canSearchUsers;
         private bool _canExportUsers;
+        private bool _canDeleteUsers;
         private bool _canViewRoles;
         private bool _loaded;
 
@@ -35,6 +36,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             _canCreateUsers = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.Create)).Succeeded;
             _canSearchUsers = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.Search)).Succeeded;
             _canExportUsers = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.Export)).Succeeded;
+            _canDeleteUsers = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.Delete)).Succeeded;
             _canViewRoles = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Roles.View)).Succeeded;
 
             await GetUsersAsync();
@@ -104,6 +106,23 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private void ViewProfile(string userId)
         {
             _navigationManager.NavigateTo($"/user-profile/{userId}");
+        }
+
+        private async void DeleteUser(UserResponse user)
+        {
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.Message), $"{string.Format(_localizer["Do you want to delete the User {0}"], user.FullName)}?"}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled && _errorService.IsSuccessFull(await _api.User_DeleteAsync(user.Id)))
+            {
+                _snackBar.Add(_localizer["User Deleted"], Severity.Success);
+                await GetUsersAsync();
+                StateHasChanged();
+            }
         }
 
         private void ManageRoles(string userId, string email)

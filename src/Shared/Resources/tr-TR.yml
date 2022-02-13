@@ -161,6 +161,7 @@ Delete Picture: Resmi Sil
 Delete Role Content: Kimliği {0} rolü silmek istiyor musunuz?
 Delete these {0} elements: Bu {0} öğeler silinsin mi?
 Delete this element: Bu öğe silinsin mi?
+Delete User: Kullanıcıyı Sil
 Deletion Not Allowed: Silmeye İzin Verilmiyor
 Dense: Yoğun
 Dependent permissions required: Bağımlı izinler gerekli
@@ -170,6 +171,7 @@ detailed guide for more.: daha fazlası için ayrıntılı kılavuz.
 Details for Trail ID: İz Kimliği için ayrıntılar
 dje-NE: Zarma (Nijer)
 Do you want to delete the profile picture of {0}: '{0} profil resmini silmek istiyor musunuz?'
+Do you want to delete the User {0}: Kullanıcı {0} silmek istiyor musunuz?
 Document Deleted: Silinen Belge
 Document Extended Attributes: Genişletilmiş Öznitelikleri Belgele
 Document Management: Belge Yönetimi
@@ -909,7 +911,9 @@ Upload Image: Resmi Karşıya Yükle
 ur-IN: Urduca (Hindistan)
 ur-PK: Urduca (Pakistan)
 User: Kullanıcı
+User Deleted: Kullanıcı Silindi
 User Name: Kullanıcı Adı
+User Not Found!: Kullanıcı Bulunamadı!
 User Registered: Kullanıcı Kayıtlı!
 User Registered Mailbox: Kullanıcı Kayıtlı. Onay Postası Posta Kutusu'na teslim edildi.
 Username: Kullanıcı adı
@@ -948,6 +952,7 @@ you: sen
 You are logged out because the Permissions of one of your Roles have been updated.: Rollerinizden birinin İzinleri güncelleştirildiği için oturumunuz kapatılıyor.
 You are logged out because the user with your Token has been deleted or token is expired.: Belirtecinizin olduğu kullanıcı silindiği veya belirtecinin süresi dolduğu için oturumunuz kapatılıyor.
 You are Logged Out.: Oturumunuz Tükendi.
+You cannot delete yourself: Kendinizi silemezsiniz
 Your Profile has been updated.: Profiliniz güncellendi.
 Your Recent Activities.: Son aktivitelerin.
 zgh-Tfng-MA: Standart Fas Tamazight (Tifinagh, Fas)

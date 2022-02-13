@@ -161,6 +161,7 @@ Delete Picture: Delete Picture
 Delete Role Content: Do you want to delete the role with Id {0}?
 Delete these {0} elements: Delete these {0} elements?
 Delete this element: Delete this element?
+Delete User: Delete User
 Deletion Not Allowed: Deletion Not Allowed
 Dense: Dense
 Dependent permissions required: Dependent permissions required
@@ -170,6 +171,7 @@ detailed guide for more.: detailed guide for more.
 Details for Trail ID: Details for Trail ID
 dje-NE: Zarma (Niger)
 Do you want to delete the profile picture of {0}: Do you want to delete the profile picture of {0}
+Do you want to delete the User {0}: Do you want to delete the User {0}
 Document Deleted: Document Deleted
 Document Extended Attributes: Document Extended Attributes
 Document Management: Document Management
@@ -909,7 +911,9 @@ Upload Image: Upload Image
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: User
+User Deleted: User Deleted
 User Name: User Name
+User Not Found!: User Not Found!
 User Registered: User Registered!
 User Registered Mailbox: User Registered. Confirmation Mail has been delivered to the Mailbox.
 Username: Username
@@ -948,6 +952,7 @@ you: you
 You are logged out because the Permissions of one of your Roles have been updated.: You are logged out because the Permissions of one of your Roles have been updated.
 You are logged out because the user with your Token has been deleted or token is expired.: You are logged out because the user with your Token has been deleted or token is expired.
 You are Logged Out.: You are Logged Out.
+You cannot delete yourself: You cannot delete yourself
 Your Profile has been updated.: Your Profile has been updated.
 Your Recent Activities.: Your Recent Activities.
 zgh-Tfng-MA: Standard Moroccan Tamazight (Tifinagh, Morocco)

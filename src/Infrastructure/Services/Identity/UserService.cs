@@ -4,7 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
@@ -298,6 +300,17 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var result = await _excelService.ExportAsync(users);
 
             return Convert.ToBase64String(result);
+        }
+
+        public async Task<IResult> DeleteAsync(string userId, CancellationToken cancellationToken = default)
+        {
+            if (_currentUserService.UserId == userId)
+                throw Errors.Create("You cannot delete yourself");
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                throw Errors.NotFound(_localizer["User Not Found!"]);
+            var result = await _userManager.DeleteAsync(user);
+            return result.ToApplicationResult();
         }
     }
 }

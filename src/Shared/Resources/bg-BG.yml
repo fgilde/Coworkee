@@ -161,6 +161,7 @@ Delete Picture: Изтриване на картина
 Delete Role Content: Искате ли да изтриете ролята с Id {0}?
 Delete these {0} elements: Да изтриете тези {0} елементи?
 Delete this element: Изтриване на този елемент?
+Delete User: Изтриване на потребител
 Deletion Not Allowed: Изтриването не е разрешено
 Dense: Гъст
 Dependent permissions required: Необходими са зависими разрешения
@@ -170,6 +171,7 @@ detailed guide for more.: подробно ръководство за пове�
 Details for Trail ID: Подробности за Trail ID
 dje-NE: Зарма (Нигер)
 Do you want to delete the profile picture of {0}: Искате ли да изтриете снимката на профила на {0}
+Do you want to delete the User {0}: Искате ли да изтриете потребителския {0}
 Document Deleted: Документът е изтрит
 Document Extended Attributes: Разширени атрибути на документа
 Document Management: Управление на документи
@@ -909,7 +911,9 @@ Upload Image: Качване на изображение
 ur-IN: Урду (Индия)
 ur-PK: Урду (Пакистан)
 User: Потребител
+User Deleted: Изтрит потребител
 User Name: Потребителско име
+User Not Found!: Потребител не е намерен!
 User Registered: Регистриран потребител!
 User Registered Mailbox: Регистриран потребител. Потвърждение Mail е доставено на пощенската кутия.
 Username: Потребителско име
@@ -948,6 +952,7 @@ you: ти
 You are logged out because the Permissions of one of your Roles have been updated.: Вие сте излезли, защото разрешенията на една от вашите Роли са актуализирани.
 You are logged out because the user with your Token has been deleted or token is expired.: Вие сте излезли, защото потребителят с вашия Маркер е изтрит или маркерът е изтекъл.
 You are Logged Out.: Вие сте излезли.
+You cannot delete yourself: Не можете да изтриете себе си
 Your Profile has been updated.: Вашият профил е актуализиран.
 Your Recent Activities.: Вашите Последни Дейности.
 zgh-Tfng-MA: Стандартна мароканска Tamazight (Тифина, Мароко)

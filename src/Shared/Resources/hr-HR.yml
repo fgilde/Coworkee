@@ -161,6 +161,7 @@ Delete Picture: Izbriši sliku
 Delete Role Content: Želite li izbrisati ulogu s ID-om {0}?
 Delete these {0} elements: Želite li izbrisati ove {0} elemente?
 Delete this element: Želite li izbrisati ovaj element?
+Delete User: Izbriši korisnika
 Deletion Not Allowed: Brisanje nije dopušteno
 Dense: Gust
 Dependent permissions required: Potrebne su zavisne dozvole
@@ -170,6 +171,7 @@ detailed guide for more.: detaljan vodič za više.
 Details for Trail ID: Detalji za ID staze
 dje-NE: Zarma (Niger, BiH)
 Do you want to delete the profile picture of {0}: Želite li izbrisati profilnu sliku {0}
+Do you want to delete the User {0}: Želite li izbrisati korisnički {0}
 Document Deleted: Dokument je izbrisan
 Document Extended Attributes: Prošireni atributi dokumenta
 Document Management: Upravljanje dokumentima
@@ -909,7 +911,9 @@ Upload Image: Prenesi sliku
 ur-IN: Urdu (Indija)
 ur-PK: Urdu (Pakistan)
 User: Korisnik
+User Deleted: Korisnik je izbrisan
 User Name: Korisničko ime
+User Not Found!: Korisnik nije pronađen!
 User Registered: Korisnik registriran!
 User Registered Mailbox: Korisnik registriran. Pošta potvrde dostavljena je u poštanski sandučić.
 Username: Korisničko ime
@@ -948,6 +952,7 @@ you: ti
 You are logged out because the Permissions of one of your Roles have been updated.: Odjavljeni ste jer su ažurirane dozvole jedne od vaših uloga.
 You are logged out because the user with your Token has been deleted or token is expired.: Odjavljeni ste jer je korisnik s vašim tokenom izbrisan ili je token istekao.
 You are Logged Out.: Odjavljeni ste.
+You cannot delete yourself: Ne možete se izbrisati
 Your Profile has been updated.: Vaš profil je ažuriran.
 Your Recent Activities.: Vaše nedavne aktivnosti.
 zgh-Tfng-MA: Standardni marokanski Tamazight (Tifinagh, Maroko)

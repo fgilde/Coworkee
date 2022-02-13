@@ -228,6 +228,12 @@
             <param name="model"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.Delete(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a user by id
+            </summary>
+            <param name="userId"></param>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.GetAll">
             <summary>
             Get User Details

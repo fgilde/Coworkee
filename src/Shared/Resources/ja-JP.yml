@@ -161,6 +161,7 @@ Delete Picture: 画像の削除
 Delete Role Content: Id {0}を持つロールを削除しますか?
 Delete these {0} elements: これらの{0}要素を削除しますか?
 Delete this element: この要素を削除しますか?
+Delete User: ユーザーの削除
 Deletion Not Allowed: 削除は許可されていません
 Dense: 濃い
 Dependent permissions required: 依存アクセス許可が必要
@@ -170,6 +171,7 @@ detailed guide for more.: 詳細なガイドを参照してください。
 Details for Trail ID: トレイル ID の詳細
 dje-NE: ザルマ (ニジェール)
 Do you want to delete the profile picture of {0}: '{0}のプロフィール写真を削除しますか?'
+Do you want to delete the User {0}: ユーザー {0}を削除しますか?
 Document Deleted: ドキュメントの削除
 Document Extended Attributes: ドキュメント拡張属性
 Document Management: ドキュメント管理
@@ -909,7 +911,9 @@ Upload Image: 画像のアップロード
 ur-IN: ウルドゥー語 (インド)
 ur-PK: ウルドゥー語 (パキスタン)
 User: 利用者
+User Deleted: ユーザーが削除されました
 User Name: ユーザー名
+User Not Found!: ユーザーが見つかりません!
 User Registered: ユーザー登録!
 User Registered Mailbox: ユーザー登録。確認メールはメールボックスに配信されました。
 Username: ユーザー名
@@ -948,6 +952,7 @@ you: あなたが
 You are logged out because the Permissions of one of your Roles have been updated.: ロールの 1 つのアクセス許可が更新されたため、ログアウトされます。
 You are logged out because the user with your Token has been deleted or token is expired.: トークンを持つユーザーが削除されているか、トークンの有効期限が切れているため、ログアウトされます。
 You are Logged Out.: ログアウトしています。
+You cannot delete yourself: 自分で削除することはできません。
 Your Profile has been updated.: プロフィールが更新されました。
 Your Recent Activities.: 最近のアクティビティ。
 zgh-Tfng-MA: モロッコ・タマジト(ティフィナ、モロッコ)

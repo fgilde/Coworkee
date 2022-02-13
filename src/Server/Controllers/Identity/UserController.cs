@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,18 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         }
 
         /// <summary>
+        /// Deletes a user by id
+        /// </summary>
+        /// <param name="userId"></param>
+        [Authorize(Policy = Permissions.Users.Delete)]
+        [HttpDelete]
+        [Produces(typeof(Result))]
+        public async Task<IActionResult> Delete(string userId, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _userService.DeleteAsync(userId, cancellationToken));
+        }
+
+        /// <summary>
         /// Get User Details
         /// </summary>
         /// <returns>Status 200 OK</returns>
@@ -41,7 +54,6 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 OK</returns>
-        //[Authorize(Policy = Permissions.Users.View)]
         [HttpGet("{id}")]
         [Produces(typeof(Result<UserResponse>))]
         public async Task<IActionResult> GetById(string id)

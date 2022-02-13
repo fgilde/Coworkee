@@ -161,6 +161,7 @@ Delete Picture: Odstranit obrázek
 Delete Role Content: Chcete odstranit roli pomocí Id {0}?
 Delete these {0} elements: Odstranit tyto {0} prvky?
 Delete this element: Odstranit tento prvek?
+Delete User: Odstranit uživatele
 Deletion Not Allowed: Odstranění není povoleno
 Dense: Hustý
 Dependent permissions required: Požadovaná závislá oprávnění
@@ -170,6 +171,7 @@ detailed guide for more.: podrobný průvodce pro více informací.
 Details for Trail ID: Podrobnosti o ID stezky
 dje-NE: Zarma (Niger)
 Do you want to delete the profile picture of {0}: Chcete odstranit profilový obrázek {0}
+Do you want to delete the User {0}: Chcete odstranit uživatelský {0}
 Document Deleted: Dokument odstraněn
 Document Extended Attributes: Rozšířené atributy dokumentu
 Document Management: Správa dokumentů
@@ -909,7 +911,9 @@ Upload Image: Nahrát obrázek
 ur-IN: Urdština (Indie)
 ur-PK: Urdština (Pákistán)
 User: Uživatel
+User Deleted: Uživatel byl odstraněn
 User Name: Uživatelské jméno
+User Not Found!: Uživatel nebyl nalezen!
 User Registered: Uživatel zaregistrován!
 User Registered Mailbox: Uživatel zaregistrován. Potvrzovací pošta byla doručena do poštovní schránky.
 Username: Uživatelské jméno
@@ -948,6 +952,7 @@ you: ty
 You are logged out because the Permissions of one of your Roles have been updated.: Jste odhlášeni, protože byla aktualizována oprávnění jedné z vašich rolí.
 You are logged out because the user with your Token has been deleted or token is expired.: Jste odhlášeni, protože uživatel s vaším tokenem byl odstraněn nebo vypršela platnost tokenu.
 You are Logged Out.: Jste odhlášeni.
+You cannot delete yourself: Nemůžete smazat sami sebe
 Your Profile has been updated.: Váš profil byl aktualizován.
 Your Recent Activities.: Vaše nedávné aktivity.
 zgh-Tfng-MA: Standardní marocký Tamazight (Tifinagh, Maroko)

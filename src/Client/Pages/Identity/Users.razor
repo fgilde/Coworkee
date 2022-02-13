@@ -79,6 +79,10 @@ else
                         {
                         <MudMenuItem OnClick="(()=>ManageRoles(context.Id, context.Email))">@_localizer["Manage Roles"]</MudMenuItem>
                         }
+                    @if (_canDeleteUsers)
+                    {
+                        <MudMenuItem OnClick="(() => DeleteUser(context))">@_localizer["Delete User"]</MudMenuItem>
+                    }
                 </MudMenu>
             </MudTd>
         </RowTemplate>

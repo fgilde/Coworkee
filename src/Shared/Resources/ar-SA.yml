@@ -161,6 +161,7 @@ Delete Picture: حذف صورة
 Delete Role Content: هل تريد حذف الدور مع معرف {0}؟
 Delete these {0} elements: حذف هذه العناصر {0}؟
 Delete this element: حذف هذا العنصر؟
+Delete User: حذف المستخدم
 Deletion Not Allowed: الحذف غير مسموح به
 Dense: كثيف
 Dependent permissions required: الأذونات التابعة المطلوبة
@@ -170,6 +171,7 @@ detailed guide for more.: دليل مفصل لمزيد من المعلومات.
 Details for Trail ID: تفاصيل معرف تريل
 dje-NE: زارما (النيجر)
 Do you want to delete the profile picture of {0}: هل تريد حذف صورة ملف التعريف {0}
+Do you want to delete the User {0}: هل تريد حذف {0} المستخدم
 Document Deleted: حذف المستند
 Document Extended Attributes: سمات المستند الموسعة
 Document Management: إدارة الوثائق
@@ -909,7 +911,9 @@ Upload Image: تحميل صورة
 ur-IN: الأوردو (الهند)
 ur-PK: الأوردو (باكستان)
 User: مستخدم
+User Deleted: حذف المستخدم
 User Name: اسم المستخدم
+User Not Found!: لم يتم العثور على المستخدم!
 User Registered: المستخدم المسجل!
 User Registered Mailbox: المستخدم المسجل. تم تسليم بريد التأكيد إلى علبة البريد.
 Username: اسم المستخدم
@@ -948,6 +952,7 @@ you: أنت
 You are logged out because the Permissions of one of your Roles have been updated.: لقد قمت بتسجيل الخروج لأنه تم تحديث أذونات أحد الأدوار الخاصة بك.
 You are logged out because the user with your Token has been deleted or token is expired.: لقد قمت بتسجيل الخروج بسبب حذف المستخدم الذي يحمل الرمز المميز أو انتهاء صلاحية الرمز المميز.
 You are Logged Out.: لقد قمت بتسجيل الخروج.
+You cannot delete yourself: لا يمكنك حذف نفسك
 Your Profile has been updated.: تم تحديث ملف التعريف الخاص بك.
 Your Recent Activities.: أنشطتك الأخيرة.
 zgh-Tfng-MA: الأمازيغية المغربية القياسية (تيفيناغ، المغرب)

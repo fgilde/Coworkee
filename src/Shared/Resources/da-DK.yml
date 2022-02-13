@@ -161,6 +161,7 @@ Delete Picture: Slet billede
 Delete Role Content: Vil du slette rollen med id-{0}?
 Delete these {0} elements: Vil du slette disse {0} elementer?
 Delete this element: Skal dette element slettes?
+Delete User: Slet bruger
 Deletion Not Allowed: Sletning er ikke tilladt
 Dense: Tæt
 Dependent permissions required: Afhængige tilladelser kræves
@@ -170,6 +171,7 @@ detailed guide for more.: detaljeret vejledning til mere.
 Details for Trail ID: Oplysninger om Trail ID
 dje-NE: Zarma (Niger)
 Do you want to delete the profile picture of {0}: Vil du slette profilbilledet af {0}
+Do you want to delete the User {0}: Vil du slette {0}
 Document Deleted: Dokumentet er slettet
 Document Extended Attributes: Udvidede attributter for dokumenter
 Document Management: Dokumentstyring
@@ -909,7 +911,9 @@ Upload Image: Overfør billede
 ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Bruger
+User Deleted: Brugeren er slettet
 User Name: Brugernavn
+User Not Found!: Brugeren blev ikke fundet!
 User Registered: Bruger registreret!
 User Registered Mailbox: Bruger registreret. Bekræftelsespost er leveret til postkassen.
 Username: Brugernavn
@@ -948,6 +952,7 @@ you: du
 You are logged out because the Permissions of one of your Roles have been updated.: Du er logget af, fordi tilladelserne for en af dine roller er blevet opdateret.
 You are logged out because the user with your Token has been deleted or token is expired.: Du er logget af, fordi brugeren med tokenet er blevet slettet, eller tokenet er udløbet.
 You are Logged Out.: Du er logget ud.
+You cannot delete yourself: Du kan ikke slette dig selv
 Your Profile has been updated.: Din profil er blevet opdateret.
 Your Recent Activities.: Dine seneste aktiviteter.
 zgh-Tfng-MA: Standard marokkanske Tamazight (Tifinagh, Marokko)

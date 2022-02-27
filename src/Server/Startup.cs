@@ -9,12 +9,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using CleanArchitectureBase.Application;
+using CleanArchitectureBase.Data;
 using CleanArchitectureBase.Infrastructure;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Server
@@ -57,7 +59,7 @@ namespace CleanArchitectureBase.Server
             services.AddOpenApiDocumentation(_configuration);
             services.AddHangfire(x => x.UseSqlServerStorage(_configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
-            
+            services.AddGrpc();
             services.AddControllersWithViews(options =>
                 {
                     options.Filters.Add<ApiExceptionFilterAttribute>();
@@ -95,6 +97,9 @@ namespace CleanArchitectureBase.Server
             });
             app.UseRequestLocalizationByCulture();
             app.UseRouting();
+
+
+            app.UseGrpcWeb();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseHangfireDashboard(ApplicationConstants.Hangfire.DashboardRoute, new DashboardOptions
@@ -102,9 +107,12 @@ namespace CleanArchitectureBase.Server
                 DashboardTitle = localizer["{0} Jobs", ApplicationConstants.ApplicationName],
                 Authorization = new[] { authorizationFilter }
             });
-            app.UseEndpoints();
+            app.UseApplicationEndpoints();
             app.UseSwaggerAuthorized();
             app.UseSwagger();
+
+    
+
             app.Initialize(_configuration);
         }
     }

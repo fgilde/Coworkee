@@ -1,0 +1,47 @@
+﻿syntax = "proto3"; 
+option csharp_namespace = "CleanArchitectureBase.Data";
+
+service CleanArchitectureBaseData { 
+	rpc GetDashboardData (DashboardRequest) returns (DashboardReply);
+	rpc GetProducts (ProductsRequest) returns (ProductsReply); 
+}
+
+message DashboardRequest {}
+message DashboardReply {
+	int32 projectsBookedValue = 1;
+	int64 nextDeliveryDueInMs = 2;
+	int32 staffOnSite = 3;
+	int64 factoryUptimeMs = 4;
+	int32 servicingTasksDue = 5;
+	int32 machinesStopped = 6;
+}
+
+message ProductsRequest {
+	int64 modifiedSince = 1;
+	int32 maxCount = 2;
+}
+
+message ProductsReply {
+	repeated Product products = 1;
+	int32 modifiedCount = 2;
+}
+
+message Product {
+	string id = 1;
+	int64 modifiedTicks = 2;
+	string category = 3;
+	string subcategory = 4; 
+	string name = 5;
+	string location = 6;
+	string image = 7;
+	string brand = 8;
+	string targetUrl = 9;
+	string thumbnail = 10;
+	string product = 11;
+	string salePercentage = 12;
+	string price = 13;
+	string salePrice = 14;
+	string shop = 15;
+	int64 dateCreated = 16;
+	//int64 dateUpdated = 17;
+}

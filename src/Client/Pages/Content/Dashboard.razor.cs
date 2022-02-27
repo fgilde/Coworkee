@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Data;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 
@@ -30,6 +31,8 @@ namespace CleanArchitectureBase.Client.Pages.Content
 
         protected override async Task OnInitializedAsync()
         {
+            //var dashboardData = await _gRpc.GetDashboardDataAsync(new DashboardRequest());
+
             await LoadDataAsync();
             _loaded = true;
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);

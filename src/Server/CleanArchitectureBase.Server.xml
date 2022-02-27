@@ -562,5 +562,110 @@
             Gets or sets the policy name or a a comma delimited list of that determines access to the resource.
             </summary>
         </member>
+        <member name="T:CleanArchitectureBase.Data.MainReflection">
+            <summary>Holder for reflection information generated from gRPC/Main.proto</summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Data.MainReflection.Descriptor">
+            <summary>File descriptor for gRPC/Main.proto</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.ProjectsBookedValueFieldNumber">
+            <summary>Field number for the "projectsBookedValue" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.NextDeliveryDueInMsFieldNumber">
+            <summary>Field number for the "nextDeliveryDueInMs" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.StaffOnSiteFieldNumber">
+            <summary>Field number for the "staffOnSite" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.FactoryUptimeMsFieldNumber">
+            <summary>Field number for the "factoryUptimeMs" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.ServicingTasksDueFieldNumber">
+            <summary>Field number for the "servicingTasksDue" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.MachinesStoppedFieldNumber">
+            <summary>Field number for the "machinesStopped" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.ProductsRequest.ModifiedSinceFieldNumber">
+            <summary>Field number for the "modifiedSince" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.ProductsRequest.MaxCountFieldNumber">
+            <summary>Field number for the "maxCount" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.ProductsReply.ProductsFieldNumber">
+            <summary>Field number for the "products" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.ProductsReply.ModifiedCountFieldNumber">
+            <summary>Field number for the "modifiedCount" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.IdFieldNumber">
+            <summary>Field number for the "id" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.ModifiedTicksFieldNumber">
+            <summary>Field number for the "modifiedTicks" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.CategoryFieldNumber">
+            <summary>Field number for the "category" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.SubcategoryFieldNumber">
+            <summary>Field number for the "subcategory" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.LocationFieldNumber">
+            <summary>Field number for the "location" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.ImageFieldNumber">
+            <summary>Field number for the "image" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.BrandFieldNumber">
+            <summary>Field number for the "brand" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.TargetUrlFieldNumber">
+            <summary>Field number for the "targetUrl" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.ThumbnailFieldNumber">
+            <summary>Field number for the "thumbnail" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.Product_FieldNumber">
+            <summary>Field number for the "product" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.SalePercentageFieldNumber">
+            <summary>Field number for the "salePercentage" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.PriceFieldNumber">
+            <summary>Field number for the "price" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.SalePriceFieldNumber">
+            <summary>Field number for the "salePrice" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.ShopFieldNumber">
+            <summary>Field number for the "shop" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.Product.DateCreatedFieldNumber">
+            <summary>Field number for the "dateCreated" field.</summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Data.Product.DateCreated">
+             <summary>
+            int64 dateUpdated = 17;
+             </summary>
+        </member>
+        <member name="P:CleanArchitectureBase.Data.CleanArchitectureBaseData.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataBase">
+            <summary>Base class for server-side implementations of CleanArchitectureBaseData</summary>
+        </member>
+        <member name="M:CleanArchitectureBase.Data.CleanArchitectureBaseData.BindService(CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:CleanArchitectureBase.Data.CleanArchitectureBaseData.BindService(Grpc.Core.ServiceBinderBase,CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
     </members>
 </doc>

@@ -43,6 +43,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.40.0" />
+    <Protobuf Include=".\gRPC\Main.proto" GrpcServices="Server" /> 
+
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />

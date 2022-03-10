@@ -97,11 +97,11 @@ namespace CleanArchitectureBase.Client.Extensions
                 //var authEnabledHandler = services.GetRequiredService<AuthorizationMessageHandler>();
                 //authEnabledHandler.ConfigureHandler(new[] { clientSettings.BackendOrigin });
                 //authEnabledHandler.InnerHandler = new HttpClientHandler();
-
-                var withAuth = false; //// TODO: IDENTITY builder.Configuration.GetValue<bool>("RequireAuth");
+                var authEnabledHandler = services.GetRequiredService<AuthenticationHeaderHandler>();
+                authEnabledHandler.InnerHandler = new HttpClientHandler();
 
                 options.BaseUri = clientSettings.BackendOrigin;
-                options.MessageHandler = new HttpClientHandler(); // TODO: IDENTITY withAuth ? authEnabledHandler : authEnabledHandler.InnerHandler;
+                options.MessageHandler = authEnabledHandler;
             });
 
             builder.Services.AddHttpClientInterceptor();

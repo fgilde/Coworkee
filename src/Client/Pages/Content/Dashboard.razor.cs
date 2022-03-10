@@ -9,6 +9,7 @@ using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Data;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.JSInterop;
 
 namespace CleanArchitectureBase.Client.Pages.Content
 {
@@ -31,8 +32,8 @@ namespace CleanArchitectureBase.Client.Pages.Content
 
         protected override async Task OnInitializedAsync()
         {
-            //var dashboardData = await _gRpc.GetDashboardDataAsync(new DashboardRequest());
-
+            var dashboardData = await _gRpc.GetDashboardDataAsync(new DashboardRequest());
+            await _jsRuntime.InvokeVoidAsync("alert", dashboardData.StaffOnSite);
             await LoadDataAsync();
             _loaded = true;
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);

@@ -5,12 +5,13 @@ using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
 using CleanArchitectureBase.Infrastructure.Contexts;
 using Grpc.Core;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 // Dont change this namespace it will be partial on client generator
 namespace CleanArchitectureBase.Data;
 
-//[Authorize]
+[Authorize]
 public class MainDataService : CleanArchitectureBaseData.CleanArchitectureBaseDataBase
 {
     private readonly ApplicationDbContext _db;

@@ -236,3 +236,4 @@ _Pvt_Extensions
 /CleanArchitectureBase.ndproj
 /src/Server/Logs
 /src/Server/Files/
+/.patches

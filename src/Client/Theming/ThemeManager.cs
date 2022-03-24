@@ -3,16 +3,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Managers.Theme;
 using CleanArchitectureBase.SDK;
+using Microsoft.JSInterop;
 
 namespace CleanArchitectureBase.Client.Theming
 {
     public class ThemeManager: IThemeManager
     {
         private readonly IApplicationClient _client;
+        private readonly IJSRuntime _jsRuntime;
 
-        public ThemeManager(IApplicationClient client)
+        public ThemeManager(IApplicationClient client, IJSRuntime jsRuntime)
         {
             _client = client;
+            _jsRuntime = jsRuntime;
+        }
+
+        public async Task<ClientTheme> BestBrowserMatch()
+        {
+            bool isDark = await _jsRuntime.InvokeAsync<bool>("isDarkMode");
+            var available = await ThemesAsync();
+            return isDark && available.ContainsValue(ClientTheme.DarkTheme) 
+                ? ClientTheme.DarkTheme 
+                : available.ContainsValue(ClientTheme.DefaultTheme) 
+                    ? ClientTheme.DefaultTheme : available.Count > 0 ? available.FirstOrDefault().Value : ClientTheme.DefaultTheme;
         }
 
         public Task<Dictionary<string, ClientTheme>> ThemesAsync()

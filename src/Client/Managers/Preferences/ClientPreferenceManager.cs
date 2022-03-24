@@ -23,22 +23,19 @@ namespace CleanArchitectureBase.Client.Managers.Preferences
         private readonly ILocalStorageService _localStorageService;
         private readonly IStringLocalizer<ClientPreferenceManager> _localizer;
         private readonly IThemeManager _themeManager;
-        private readonly IJSRuntime _jsRuntime;
         private readonly ILanguageContainerService _languageService;
         private readonly HttpClient _httpClient;
 
         public ClientPreferenceManager(
             ILocalStorageService localStorageService,
             IStringLocalizer<ClientPreferenceManager> localizer,
-            IThemeManager themeManager, 
-            IJSRuntime jsRuntime,
+            IThemeManager themeManager,
             ILanguageContainerService languageService,
             HttpClient httpClient)
         {
             _localStorageService = localStorageService;
             _localizer = localizer;
             _themeManager = themeManager;
-            _jsRuntime = jsRuntime;
             _languageService = languageService;
             _httpClient = httpClient;
         }
@@ -91,8 +88,8 @@ namespace CleanArchitectureBase.Client.Managers.Preferences
         public async Task<ClientTheme> GetCurrentThemeAsync()
         {
             if (await GetPreference() is ClientPreference preference)
-                return ClientTheme.LastUsedTheme = await _themeManager.GetByNameAsync(preference.ThemeName) ?? await ClientTheme.BestBrowserMatch(_jsRuntime);
-            return await ClientTheme.BestBrowserMatch(_jsRuntime);
+                return ClientTheme.LastUsedTheme = await _themeManager.GetByNameAsync(preference.ThemeName) ?? await _themeManager.BestBrowserMatch();
+            return await _themeManager.BestBrowserMatch();
         }
         public async Task<bool> IsRTL()
         {

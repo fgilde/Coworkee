@@ -8,5 +8,6 @@ namespace CleanArchitectureBase.Client.Managers.Theme
     {
         Task<Dictionary<string, ClientTheme>> ThemesAsync();
         Task<ClientTheme> GetByNameAsync(string name);
+        Task<ClientTheme> BestBrowserMatch();
     }
 }

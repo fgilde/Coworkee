@@ -2,6 +2,11 @@
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
+var jsAppData = {
+    mouseArgs: {},
+    browserDimensions: {}
+};
+
 window.Download = function (options) {
     var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
     fetch(fileUrl).then(function (response) {
@@ -26,7 +31,15 @@ window.ChangeFavIcon = function (url) {
     link.href = url;
 };
 
+window.onMouseUpdate = function (e) {
+    jsAppData.mouseArgs = e;
+};
+
 window.initialLoad = function () {
+
+    document.addEventListener('mousemove', onMouseUpdate, false);
+    document.addEventListener('mouseenter', onMouseUpdate, false);
+
     if (urlParams()['safemode']) {
         window.localStorage.clear();
         window.location.href = removeUrlParams(window.location.href, 'safemode');
@@ -138,6 +151,32 @@ window.getCssVars = function () {
             }))) : def;
         }, [])));
     }, []);
+};
+
+window.getJsAppData = function () {
+    var res = jsAppData;
+    res.browserDimensions = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+    res.mouseArgs = (function (_ref) {
+        var pageX = _ref.pageX;
+        var pageY = _ref.pageY;
+        var clientX = _ref.clientX;
+        var clientY = _ref.clientY;
+        var screenX = _ref.screenX;
+        var screenY = _ref.screenY;
+        var movementX = _ref.movementX;
+        var movementY = _ref.movementY;
+        var shiftKey = _ref.shiftKey;
+        var altKey = _ref.altKey;
+        var metaKey = _ref.metaKey;
+        var ctrlKey = _ref.ctrlKey;
+        var button = _ref.button;
+        var buttons = _ref.buttons;
+        return { pageX: pageX, pageY: pageY, clientX: clientX, clientY: clientY, screenX: screenX, screenY: screenY, movementX: movementX, movementY: movementY, shiftKey: shiftKey, altKey: altKey, metaKey: metaKey, ctrlKey: ctrlKey, button: button, buttons: buttons };
+    })(jsAppData.mouseArgs);
+    return res;
 };
 
 window.isDarkMode = function () {

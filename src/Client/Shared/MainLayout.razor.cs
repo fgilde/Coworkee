@@ -186,7 +186,6 @@ namespace CleanArchitectureBase.Client.Shared
                 o.MaxWidth = MaxWidth.Small;
                 o.DisableBackdropClick = false;
                 o.MaximizeButton = false;
-                o.Animation = AnimationType.SlideIn;
             });
         }
 

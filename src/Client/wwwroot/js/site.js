@@ -1,3 +1,8 @@
+var jsAppData = {
+    mouseArgs: { },
+    browserDimensions: { }
+}
+
 window.Download = (options) => {
     var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
     fetch(fileUrl)
@@ -22,7 +27,15 @@ window.ChangeFavIcon = (url) => {
     link.href = url;
 }
 
+window.onMouseUpdate = (e) => {
+    jsAppData.mouseArgs = e;
+}
+
 window.initialLoad = () => {
+
+    document.addEventListener('mousemove', onMouseUpdate, false);
+    document.addEventListener('mouseenter', onMouseUpdate, false);
+
     if (urlParams()['safemode']) {
         window.localStorage.clear();
         window.location.href = removeUrlParams(window.location.href, 'safemode');
@@ -140,5 +153,15 @@ window.getCssVars = () => {
                 ? [...def,...Array.from(rule.style).filter(name => name.startsWith("--"))]
                 : def),[])]),[] );
 }
+
+window.getJsAppData = () => {
+    var res = jsAppData;
+    res.browserDimensions = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+    res.mouseArgs = (({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }) => ({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }))(jsAppData.mouseArgs);
+    return res;
+};
 
 window.isDarkMode = () => (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)

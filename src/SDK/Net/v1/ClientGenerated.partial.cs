@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using CleanArchitectureBase.SDK;
 
@@ -6,6 +7,8 @@ namespace SDK
 {
     public partial class GeneratedClient : ClientBase
     {
+
+        public string SwaggerUrl => new UriBuilder(BaseUrl) { Path = "/swagger/index.html" }.ToString();
 
         public delegate void PrepareRequestDelegate(HttpClient client, HttpRequestMessage request, string url);
 

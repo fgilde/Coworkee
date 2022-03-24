@@ -13,6 +13,8 @@ namespace CleanArchitectureBase.SDK
     {
         string BaseUrl { get; }
 
+        string SwaggerUrl { get; }
+
         /// <summary>
         /// Delegate function to catch prepare request event
         /// </summary>

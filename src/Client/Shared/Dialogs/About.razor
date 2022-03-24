@@ -1,3 +1,4 @@
+@using Nextended.Core.Encryption
 @inject Microsoft.Extensions.Localization.IStringLocalizer<About> localizer
 <MudDialog>
     <TitleContent>
@@ -18,7 +19,7 @@
                 <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["AssemblyVersion"]</b> @ServerInfo.AssemblyVersion</MudText>
                 <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ServerInfo.Runtime</MudText>
                 <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ServerInfo.System</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Api"]</b> <MudLink Typo="Typo.body2" Href="@(new Uri(_api.BaseUrl).Host + "/swagger/index.html")">@_api.BaseUrl</MudLink></MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Api"]</b> <MudLink Typo="Typo.body2" Target="_blank" Href="@(_api.SwaggerUrl)">@_api.BaseUrl</MudLink></MudText>
                 <MudText Align="Align.Center" Typo="Typo.subtitle2">@localizer["API-Versions"]</MudText>
                 @foreach (var v in ApiVersions)
                 {
@@ -38,8 +39,13 @@
             </MudCardContent>
         </MudCard>
 
+     
+
     </DialogContent>
     <DialogActions>
+        <span class="copyright">
+            Created with <a href="https://github.com/fgilde/CleanArchitectureBaseBlazor" target="_blank">CleanArchitectureBase</a> Template © by <a target="_blank" href="https://github.com/fgilde">Florian Gilde </a>
+        </span>
         <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Close">@localizer["Close"]</MudButton>
     </DialogActions>
 </MudDialog>

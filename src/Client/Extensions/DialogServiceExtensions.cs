@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Managers.Preferences;
-using CleanArchitectureBase.Shared.Extensions;
+using CleanArchitectureBase.Client.JsInterop.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
-using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Extensions;
 
@@ -16,8 +14,6 @@ public static class DialogServiceExtensions
     public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters = null, Action<DialogOptionsEx> options = null) 
         where TDialog : ComponentBase
     {
-        var clientPreferenceManager = ServiceAccessor.Get<ClientPreferenceManager>();
-        var isRtl = ((ClientPreference) await clientPreferenceManager.GetPreference()).IsRTL;
         var optionsEx = new DialogOptionsEx
         {
             CloseButton = true,
@@ -26,7 +22,7 @@ public static class DialogServiceExtensions
             DisableBackdropClick = true,
             MaximizeButton = true,
             DragMode = MudDialogDragMode.Simple,
-            Position = !isRtl ? DialogPosition.CenterRight : DialogPosition.CenterLeft,
+            Position = await PositionBasedOnMouse(),
             Animation = AnimationType.SlideIn,
             FullHeight = true,
             DisableSizeMarginY = true,
@@ -35,5 +31,15 @@ public static class DialogServiceExtensions
         options?.Invoke(optionsEx);
 
         return await dialogService.ShowEx<TDialog>(title, parameters ?? new DialogParameters(), optionsEx);
+    }
+
+    internal static async Task<DialogPosition> PositionBasedOnMouse()
+    {
+        try
+        {
+            var data = await ServiceAccessor.Get<IJSRuntime>().InvokeAsync<JsAppData>("getJsAppData");
+            return data.MouseArgs.PageX < data.BrowserDimensions.Width / 2 ? DialogPosition.CenterLeft : DialogPosition.CenterRight;
+        }
+        catch { return DialogPosition.CenterRight; }
     }
 }

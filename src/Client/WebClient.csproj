@@ -37,7 +37,7 @@
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
     <PackageReference Include="MudBlazor" Version="6.0.4" />
     <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.5" />
-    <PackageReference Include="MudBlazor.Extensions " Version="1.2.0" />
+    <PackageReference Include="MudBlazor.Extensions " Version="1.2.1" />
     <!--<Reference Include="MudBlazor.Extensions">
       <HintPath>..\..\..\MudBlazor.Extensions\MudBlazor.Extensions\bin\Debug\net6.0\MudBlazor.Extensions.dll</HintPath>
     </Reference>-->

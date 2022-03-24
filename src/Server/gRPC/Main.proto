@@ -7,14 +7,24 @@ service CleanArchitectureBaseData {
 }
 
 message DashboardRequest {}
-message DashboardReply {
-	int32 projectsBookedValue = 1;
-	int64 nextDeliveryDueInMs = 2;
-	int32 staffOnSite = 3;
-	int64 factoryUptimeMs = 4;
-	int32 servicingTasksDue = 5;
-	int32 machinesStopped = 6;
+message DashboardChartSeries{
+	string name = 1;
+	repeated double data = 2 [packed=true];
 }
+message DashboardReply {
+	int32 productCount = 1;
+	int32 brandCount = 2;
+	int32 documentCount = 3;
+	int32 DocumentTypeCount = 4;
+	int32 documentExtendedAttributeCount = 5;
+	int32 userCount = 6;
+	int32 roleCount = 7;
+	repeated DashboardChartSeries dataEnterBarChart = 8;
+	map<string, double> productByBrandTypePieChart = 9;
+}
+
+
+
 
 message ProductsRequest {
 	int64 modifiedSince = 1;

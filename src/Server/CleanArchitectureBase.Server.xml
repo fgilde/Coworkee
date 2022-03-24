@@ -568,23 +568,38 @@
         <member name="P:CleanArchitectureBase.Data.MainReflection.Descriptor">
             <summary>File descriptor for gRPC/Main.proto</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.ProjectsBookedValueFieldNumber">
-            <summary>Field number for the "projectsBookedValue" field.</summary>
+        <member name="F:CleanArchitectureBase.Data.DashboardChartSeries.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.NextDeliveryDueInMsFieldNumber">
-            <summary>Field number for the "nextDeliveryDueInMs" field.</summary>
+        <member name="F:CleanArchitectureBase.Data.DashboardChartSeries.DataFieldNumber">
+            <summary>Field number for the "data" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.StaffOnSiteFieldNumber">
-            <summary>Field number for the "staffOnSite" field.</summary>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.ProductCountFieldNumber">
+            <summary>Field number for the "productCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.FactoryUptimeMsFieldNumber">
-            <summary>Field number for the "factoryUptimeMs" field.</summary>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.BrandCountFieldNumber">
+            <summary>Field number for the "brandCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.ServicingTasksDueFieldNumber">
-            <summary>Field number for the "servicingTasksDue" field.</summary>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.DocumentCountFieldNumber">
+            <summary>Field number for the "documentCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.MachinesStoppedFieldNumber">
-            <summary>Field number for the "machinesStopped" field.</summary>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.DocumentTypeCountFieldNumber">
+            <summary>Field number for the "DocumentTypeCount" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.DocumentExtendedAttributeCountFieldNumber">
+            <summary>Field number for the "documentExtendedAttributeCount" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.UserCountFieldNumber">
+            <summary>Field number for the "userCount" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.RoleCountFieldNumber">
+            <summary>Field number for the "roleCount" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.DataEnterBarChartFieldNumber">
+            <summary>Field number for the "dataEnterBarChart" field.</summary>
+        </member>
+        <member name="F:CleanArchitectureBase.Data.DashboardReply.ProductByBrandTypePieChartFieldNumber">
+            <summary>Field number for the "productByBrandTypePieChart" field.</summary>
         </member>
         <member name="F:CleanArchitectureBase.Data.ProductsRequest.ModifiedSinceFieldNumber">
             <summary>Field number for the "modifiedSince" field.</summary>

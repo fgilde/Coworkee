@@ -1,15 +1,13 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
-using MudBlazor;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Contracts.Hubs;
+using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Data;
 using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Application;
-using Microsoft.JSInterop;
+using ChartSeries = MudBlazor.ChartSeries;
 
 namespace CleanArchitectureBase.Client.Pages.Content
 {
@@ -32,8 +30,6 @@ namespace CleanArchitectureBase.Client.Pages.Content
 
         protected override async Task OnInitializedAsync()
         {
-            var dashboardData = await _gRpc.GetDashboardDataAsync(new DashboardRequest());
-            await _jsRuntime.InvokeVoidAsync("alert", dashboardData.StaffOnSite);
             await LoadDataAsync();
             _loaded = true;
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
@@ -48,20 +44,23 @@ namespace CleanArchitectureBase.Client.Pages.Content
         {
             var response = await Api.Dashboard_GetDataAsync();
             if (_errorService.IsSuccessFull(response))
+                UpdateDataFields(response.Data);
+        }
+
+        private void UpdateDataFields(DashboardDataResponse data)
+        {
+            ProductCount = data.ProductCount;
+            BrandCount = data.BrandCount;
+            DocumentCount = data.DocumentCount;
+            DocumentTypeCount = data.DocumentTypeCount;
+            DocumentExtendedAttributeCount = data.DocumentExtendedAttributeCount;
+            UserCount = data.UserCount;
+            RoleCount = data.RoleCount;
+            foreach (var item in data.DataEnterBarChart)
             {
-                ProductCount = response.Data.ProductCount;
-                BrandCount = response.Data.BrandCount;
-                DocumentCount = response.Data.DocumentCount;
-                DocumentTypeCount = response.Data.DocumentTypeCount;
-                DocumentExtendedAttributeCount = response.Data.DocumentExtendedAttributeCount;
-                UserCount = response.Data.UserCount;
-                RoleCount = response.Data.RoleCount;
-                foreach (var item in response.Data.DataEnterBarChart)
-                {
-                    _dataEnterBarChartSeries
-                        .RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
-                    _dataEnterBarChartSeries.Add(new ChartSeries { Name = item.Name, Data = item.Data });
-                }
+                _dataEnterBarChartSeries
+                    .RemoveAll(x => x.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                _dataEnterBarChartSeries.Add(new ChartSeries {Name = item.Name, Data = item.Data});
             }
         }
 

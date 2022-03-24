@@ -7,6 +7,7 @@ using Grpc.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Nextended.Core.Extensions;
 
 // Dont change this namespace it will be partial on client generator
 namespace CleanArchitectureBase.Data;
@@ -25,16 +26,8 @@ public class MainDataService : CleanArchitectureBaseData.CleanArchitectureBaseDa
 
     public override async Task<DashboardReply> GetDashboardData(DashboardRequest request, ServerCallContext context)
     {
-        //var dr = await _mediator.Send(new GetDashboardDataQuery());
-        return new DashboardReply
-        {
-            ProjectsBookedValue = 38_000_000,
-            NextDeliveryDueInMs = (long)TimeSpan.FromHours(53).TotalMilliseconds,
-            StaffOnSite = 441,
-            FactoryUptimeMs = (long)TimeSpan.FromDays(152).TotalMilliseconds,
-            ServicingTasksDue = 7,
-            MachinesStopped = 3,
-        };
+        var result = await _mediator.Send(new GetDashboardDataQuery());
+        return result.Data.MapTo<DashboardReply>();
     }
 
     public override async Task<ProductsReply> GetProducts(ProductsRequest request, ServerCallContext context)

@@ -2,6 +2,7 @@
 using System.Linq;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Hubs;
+using CleanArchitectureBase.Data;
 using CleanArchitectureBase.Server.Middlewares;
 using CleanArchitectureBase.Shared.Constants.Localization;
 using Microsoft.AspNetCore.Builder;
@@ -62,13 +63,14 @@ namespace CleanArchitectureBase.Server.Extensions
             return app;
         }
 
-        internal static IApplicationBuilder UseEndpoints(this IApplicationBuilder app)
+        internal static IApplicationBuilder UseApplicationEndpoints(this IApplicationBuilder app)
             => app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
                 endpoints.MapHub<ClientEventHub>(ApplicationConstants.SignalR.EventHubUrl);
+                endpoints.MapGrpcService<MainDataService>().EnableGrpcWeb();
             });
 
         internal static IApplicationBuilder UseRequestLocalizationByCulture(this IApplicationBuilder app)

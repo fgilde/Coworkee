@@ -8,26 +8,28 @@
 @implements IAsyncDisposable
 
 @{
-    actuaLanguage = languages?.FirstOrDefault(l => l.CultureCode == preference?.LanguageCode);
-    displayName = actuaLanguage != null ? DisplayStr(actuaLanguage) : localizer["Select Language"];
-    <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
-        @{
-            foreach (var language in languages)
-            {
-                <MudMenuItem Disabled="language.CultureCode == preference?.LanguageCode" OnClick="(() => ChangeLanguageAsync(language))">
-                    <MudText Typo="Typo.body2">
-                        @if (language.CultureCode == preference?.LanguageCode)
-                        {
-                            <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1" />
-                        }
-                        @DisplayStr(language)
-                        <span class="culture-code">@language.CultureCode</span>
-                    </MudText>
-                </MudMenuItem>
+    if (languages?.Count > 1)
+    {
+        displayName = actuaLanguage != null ? DisplayStr(actuaLanguage) : localizer["Select Language"];
+        <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="350" Label="@(Small ? "" : displayName)" Icon="@(Small ? Icons.Material.Outlined.Language : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" Direction="Direction.Right" OffsetY="true" Dense="true">
+            @{
+                foreach (var language in languages)
+                {
+                    <MudMenuItem Disabled="language.CultureCode == preference?.LanguageCode" OnClick="(() => ChangeLanguageAsync(language))">
+                        <MudText Typo="Typo.body2">
+                            @if (language.CultureCode == preference?.LanguageCode)
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-3 mb-n1"/>
+                            }
+                            @DisplayStr(language)
+                            <span class="culture-code">@language.CultureCode</span>
+                        </MudText>
+                    </MudMenuItem>
+                }
             }
-        }
 
-    </MudMenu>
+        </MudMenu>
+    }
 }
 
 @code
@@ -47,7 +49,16 @@
         HubConnection.On<EntitiesUpdated<LanguageDto>>(async (a) =>
         {
             await Load();
+            StateHasChanged();
         });
+    }
+
+    private async Task<LanguageDto> GetEnsuredActualLanguage()
+    {
+        var result = languages?.FirstOrDefault(l => l.CultureCode == preference?.LanguageCode) ?? languages?.FirstOrDefault();
+        if (result != null && result.CultureCode != preference?.LanguageCode)
+            await ChangeLanguageAsync(result);
+        return result;
     }
 
     private async Task Load()
@@ -56,6 +67,7 @@
         languages = await _api.Language_GetAllAsync(new(l => l.IsActive));
         if (languages == null || !languages.Any())
             languages = LocalizationConstants.DefaultUILanguages.MapElementsTo<LanguageDto>().ToList();
+        actuaLanguage = await GetEnsuredActualLanguage();
     }
 
     private string DisplayStr(LanguageDto language)

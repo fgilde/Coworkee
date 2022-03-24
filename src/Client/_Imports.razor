@@ -37,6 +37,7 @@
 @using CleanArchitectureBase.Client.Managers.Identity.Authentication
 @using CleanArchitectureBase.Client.Managers.Interceptors
 @using CleanArchitectureBase.Client.Managers.Preferences
+@using CleanArchitectureBase.Data
 @using CleanArchitectureBase.SDK;
 
 @attribute [Authorize]
@@ -48,6 +49,7 @@
 @inject IDialogService _dialogService
 @inject HttpClient _httpClient
 @inject IApplicationClient _api
+@inject CleanArchitectureBaseData.CleanArchitectureBaseDataClient _gRpc
 @inject IHttpInterceptorManager _interceptor
 @inject ClientPreferenceManager _clientPreferenceManager
 @inject ILocalStorageService _localStorage;

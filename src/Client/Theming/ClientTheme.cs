@@ -1,4 +1,6 @@
-﻿using CleanArchitectureBase.Client.Enums;
+﻿using System.Threading.Tasks;
+using CleanArchitectureBase.Client.Enums;
+using Microsoft.JSInterop;
 using MudBlazor;
 using Nextended.Core.Extensions;
 
@@ -119,6 +121,12 @@ namespace CleanArchitectureBase.Client.Theming
         };
 
         #endregion
+
+        public static async Task<ClientTheme> BestBrowserMatch(IJSRuntime jsRuntime)
+        {
+            bool isDark = await jsRuntime.InvokeAsync<bool>("isDarkMode");
+            return isDark ? DarkTheme : DefaultTheme;
+        }
 
         public static ClientTheme LastUsedTheme { get; set; }
 

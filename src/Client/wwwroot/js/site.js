@@ -140,3 +140,5 @@ window.getCssVars = () => {
                 ? [...def,...Array.from(rule.style).filter(name => name.startsWith("--"))]
                 : def),[])]),[] );
 }
+
+window.isDarkMode = () => (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)

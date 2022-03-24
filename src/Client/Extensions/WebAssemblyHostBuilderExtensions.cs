@@ -23,8 +23,12 @@ using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
+using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
@@ -76,20 +80,48 @@ namespace CleanArchitectureBase.Client.Extensions
                 {
                     client.UpdateAcceptLanguage();
                     client.BaseAddress = new Uri(clientSettings.BackendOrigin);
-                    //client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 })
                 .AddTypedClient<IApplicationClient>((_, services) =>
                 {
                     var c = services.GetService<HttpClient>();
                     return new ApplicationClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/")+"api/v1/", c);
                 })
-                .AddHttpMessageHandler<AuthenticationHeaderHandler>();
+                .AddHttpMessageHandler<AuthenticationHeaderHandler>()
+                // .AddHttpMessageHandler<AuthorizationMessageHandler>() // TODO: IDENTITY Not sure
+                ;
+
+            // gRPC-Web client with auth
+            builder.Services.AddDataClient((services, options) =>
+            {
+                // TODO: IDENTITY
+                //var authEnabledHandler = services.GetRequiredService<AuthorizationMessageHandler>();
+                //authEnabledHandler.ConfigureHandler(new[] { clientSettings.BackendOrigin });
+                //authEnabledHandler.InnerHandler = new HttpClientHandler();
+                var authEnabledHandler = services.GetRequiredService<AuthenticationHeaderHandler>();
+                authEnabledHandler.InnerHandler = new HttpClientHandler();
+
+                options.BaseUri = clientSettings.BackendOrigin;
+                options.MessageHandler = authEnabledHandler;
+            });
+
             builder.Services.AddHttpClientInterceptor();
            // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
             return builder;
         }
 
-        public static IServiceCollection AddManagers(this IServiceCollection services)
+        private static void AddDataClient(this IServiceCollection serviceCollection, Action<IServiceProvider, MainGrpcDataClientOptions> configure)
+        {
+            serviceCollection.AddScoped(services =>
+            {
+                var options = new MainGrpcDataClientOptions();
+                configure(services, options);
+                var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, options.MessageHandler!));
+                var channel = GrpcChannel.ForAddress(options.BaseUri!, new GrpcChannelOptions { HttpClient = httpClient, MaxReceiveMessageSize = null });
+                return new CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataClient(channel);
+            });
+        }
+
+        private static IServiceCollection AddManagers(this IServiceCollection services)
         {
             var managers = typeof(IManager);
 
@@ -115,7 +147,7 @@ namespace CleanArchitectureBase.Client.Extensions
             return services;
         }
 
-        public static IServiceCollection AddExtendedAttributeManagers(this IServiceCollection services)
+        private static IServiceCollection AddExtendedAttributeManagers(this IServiceCollection services)
         {
             //TODO - add managers with reflection!
 
@@ -134,5 +166,11 @@ namespace CleanArchitectureBase.Client.Extensions
                 }
             }
         }
+    }
+
+    public class MainGrpcDataClientOptions
+    {
+        public string? BaseUri { get; set; }
+        public HttpMessageHandler? MessageHandler { get; set; }
     }
 }

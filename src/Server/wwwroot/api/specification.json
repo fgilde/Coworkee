@@ -3940,7 +3940,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Get a Brand By Id",
+        "summary": "Get a Product by Id",
         "operationId": "Products_GetById",
         "produces": [
           "application/json;odata.metadata=minimal;odata.streaming=true",

@@ -4541,7 +4541,7 @@ export interface IProductsClient {
      */
     getProductImage(id: number): Observable<ResultOfString>;
     /**
-     * Get a Brand By Id
+     * Get a Product by Id
      * @return Status 200 Ok
      */
     getById(id: number): Observable<ProductDto>;
@@ -4801,7 +4801,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     /**
-     * Get a Brand By Id
+     * Get a Product by Id
      * @return Status 200 Ok
      */
     getById(id: number): Observable<ProductDto> {

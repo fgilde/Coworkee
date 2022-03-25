@@ -1053,7 +1053,7 @@ namespace SDK
         System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get a Brand By Id
+        /// Get a Product by Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1061,7 +1061,7 @@ namespace SDK
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get a Brand By Id
+        /// Get a Product by Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -7300,7 +7300,7 @@ namespace SDK
         }
 
         /// <summary>
-        /// Get a Brand By Id
+        /// Get a Product by Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -7311,7 +7311,7 @@ namespace SDK
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get a Brand By Id
+        /// Get a Product by Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>

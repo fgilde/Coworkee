@@ -54,7 +54,7 @@ Invoke-Expression "dotnet tool install -g vsrenamer";
 # dotnet tool install -g ModernRonin.ProjectRenamer
 
 $cmd = "vsrenamer.exe -a -c -f $($old) -t $($new) -w $($dir) --rename true --replacecontent true -m '$($mask)'"
-# Invoke-Expression $cmd
+Invoke-Expression $cmd
 
 $files = Get-ChildItem -Path $dir -Filter *.csproj -Recurse
 foreach ($f in $files){

@@ -49,7 +49,7 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         }
 
         /// <summary>
-        /// Get a Brand By Id
+        /// Get a Product by Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>

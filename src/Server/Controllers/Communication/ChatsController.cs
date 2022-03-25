@@ -8,9 +8,7 @@ using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Communication

@@ -13,12 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		rename.ps1 = rename.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServer", "src\Server\WebServer.csproj", "{E306E167-C5CB-470B-A55E-60843F143B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "src\Server\Server.csproj", "{E306E167-C5CB-470B-A55E-60843F143B05}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D22763DC-33FD-453E-AF00-A2028689F978} = {D22763DC-33FD-453E-AF00-A2028689F978}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "src\Client\WebClient.csproj", "{DB1309A5-3FAB-48EC-B5DF-582E8DFFE138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "src\Client\Client.csproj", "{DB1309A5-3FAB-48EC-B5DF-582E8DFFE138}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{A7B45D03-7C88-4D69-B932-40A9D5B755C2}"
 EndProject

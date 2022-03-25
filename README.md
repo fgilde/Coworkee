@@ -30,7 +30,7 @@ Now with a Blazor Web Assembly Frontend.
 
 1. Install the latest [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 2. Navigate to `src/Server` and run `dotnet run` to launch the back end and the webassembly client (ASP.NET Core Web API) or open Solution in Visual Studio and launch Server
-	(Notice to seperate client completly from server just remove reference to client project in WebServer.csproj)
+	(Notice to seperate client completly from server just remove reference to client project in Server.csproj)
 
 
 ### Docker Configuration (Unfinished)

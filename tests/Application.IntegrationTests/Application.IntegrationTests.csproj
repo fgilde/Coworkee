@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Server\WebServer.csproj" />
+    <ProjectReference Include="..\..\src\Server\Server.csproj" />
   </ItemGroup>
 
 </Project>

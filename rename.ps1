@@ -1,3 +1,4 @@
+#region Params
 param(
     [Parameter()]
     [String]$old,
@@ -5,10 +6,14 @@ param(
     [String]$dir,
     [String]$autoName
 )
+#endregion Params
 
+#region Options
+$compile = $false;
 $mask = "*.csproj *.cs *.xaml *.xml *.yml *.yaml *.json *.asax *.cshtml *.config *.js *.razor *.proto *.css *.html *.md *.razor.cs *.DotSettings *.user Dockerfile *.g.cs *.editorconfig";
-# $mask = "*.*";
+#endregion Options
 
+#region Param Handling
 if (!$dir) {
     $dir = Get-Location;
 }
@@ -37,12 +42,40 @@ if(!$old) {
 }
 
 Write-Host "Rename from $($old) to $($new)";
+#endregion Param Handling
 
-Invoke-Expression "dotnet build .\$($solutionFileName).sln";
+
+#region Executing
+if($compile) {
+    Invoke-Expression "dotnet build .\$($solutionFileName).sln";
+}
 
 Invoke-Expression "dotnet tool install -g vsrenamer";
 # dotnet tool install -g ModernRonin.ProjectRenamer
 
-$cmd = "vsrenamer.exe -a -f $($old) -t $($new) -w $($dir) --rename true --replacecontent true -m '$($mask)'"
-Invoke-Expression $cmd
-Invoke-Expression "dotnet build .\$($new).sln";
+$cmd = "vsrenamer.exe -a -c -f $($old) -t $($new) -w $($dir) --rename true --replacecontent true -m '$($mask)'"
+# Invoke-Expression $cmd
+
+$files = Get-ChildItem -Path $dir -Filter *.csproj -Recurse
+foreach ($f in $files){
+    #Write-Host $f.FullName
+    $ns = "$($new)." + $f.Name.Replace( ".csproj","")
+    Write-Host $ns
+
+
+    $xml = New-Object XML
+    $xml.Load($f.FullName)
+    $element =  $xml.SelectSingleNode("//RootNamespace")
+    $element.InnerText = $ns
+    $element =  $xml.SelectSingleNode("//AssemblyName")
+    $element.InnerText = $ns
+    $xml.Save($f.FullName)
+
+}
+
+
+
+if($compile) {
+    Invoke-Expression "dotnet build .\$($new).sln";
+}
+#endregion Executing

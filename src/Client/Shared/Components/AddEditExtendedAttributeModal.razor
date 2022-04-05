@@ -64,8 +64,8 @@
                 else if (AddEditExtendedAttributeModel.Type == EntityExtendedAttributeType.DateTime)
                 {
                     <MudItem xs="12" md="6">
-                        <MudDatePicker @ref="_datePicker" PickerVariant="PickerVariant.Dialog" @bind-Date="AddEditExtendedAttributeModel.DateTime" Label="@_localizer["Date"]">
-                            <PickerActions>
+                        <MudDatePicker @ref="_datePicker" PickerVariant="PickerVariant.Dialog" @bind-Date="_date" Label="@_localizer["Date"]">
+                            <PickerActions Context="date">
                                 <MudButton Class="mr-auto align-self-start" OnClick="@(() => _datePicker.Clear())">@_localizer["Clear"]</MudButton>
                                 <MudButton OnClick="@(() => _datePicker.Close(false))">@_localizer["Cancel"]</MudButton>
                                 <MudButton Color="Color.Primary" OnClick="@(() => _datePicker.Close())">@_localizer["Ok"]</MudButton>
@@ -73,7 +73,7 @@
                         </MudDatePicker>
 
                         <MudTimePicker @ref="_timePicker" PickerVariant="PickerVariant.Dialog" Label="@_localizer["Time"]" @bind-Time="_time">
-                            <PickerActions>
+                            <PickerActions Context="time">
                                 <MudButton Class="mr-auto align-self-start" OnClick="@(() => _timePicker.Clear())">@_localizer["Clear"]</MudButton>
                                 <MudButton OnClick="@(() => _timePicker.Close(false))">@_localizer["Cancel"]</MudButton>
                                 <MudButton Color="Color.Primary" OnClick="@(() => _timePicker.Close())">@_localizer["Ok"]</MudButton>

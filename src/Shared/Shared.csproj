@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.1" />
+    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.3" />
 
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
 

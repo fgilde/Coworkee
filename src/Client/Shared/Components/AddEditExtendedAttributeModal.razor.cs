@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
@@ -36,6 +37,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private MudDatePicker _datePicker;
         private MudTimePicker _timePicker;
         private TimeSpan? _time;
+        private DateTime? _date;
 
         public void Cancel()
         {
@@ -57,8 +59,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     AddEditExtendedAttributeModel.Json = null;
                     break;
                 case EntityExtendedAttributeType.DateTime:
-                    AddEditExtendedAttributeModel.DateTime ??= new DateTime(0, 0, 0);
-                    AddEditExtendedAttributeModel.DateTime += _time ?? new TimeSpan(0, 0, 0);
+                    var d = _date.HasValue ? _date.Value : DateTime.Now;
+                    var t = _time.HasValue ? _time.Value : d.TimeOfDay;
+                    AddEditExtendedAttributeModel.DateTime = DateOnly.FromDateTime(d).ToDateTime(TimeOnly.FromTimeSpan(t));
                     AddEditExtendedAttributeModel.Decimal = null;
                     AddEditExtendedAttributeModel.Text = null;
                     AddEditExtendedAttributeModel.Json = null;
@@ -87,6 +90,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task LoadDataAsync()
         {
+            if (AddEditExtendedAttributeModel.DateTime.HasValue)
+            {
+                var date = AddEditExtendedAttributeModel.DateTime.Value;
+                var time = TimeOnly.FromDateTime(date);
+                _time = time.ToTimeSpan();
+                _date = DateOnly.FromDateTime(date).ToDateTime(time);
+            }
+
             await Task.CompletedTask;
         }
 

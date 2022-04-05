@@ -17,6 +17,7 @@ using CleanArchitectureBase.Infrastructure.Contexts;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Infrastructure.Services.Identity;
 using CleanArchitectureBase.Server;
+using Respawn.Graph;
 
 [SetUpFixture]
 public class Testing
@@ -63,7 +64,7 @@ public class Testing
 
         _checkpoint = new Checkpoint
         {
-            TablesToIgnore = new[] { "__EFMigrationsHistory" }
+            TablesToIgnore = new []{new Table("__EFMigrationsHistory") }
         };
 
         EnsureDatabase();

@@ -59,9 +59,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     AddEditExtendedAttributeModel.Json = null;
                     break;
                 case EntityExtendedAttributeType.DateTime:
-                    var d = _date.HasValue ? _date.Value : DateTime.Now;
-                    var t = _time.HasValue ? _time.Value : d.TimeOfDay;
-                    AddEditExtendedAttributeModel.DateTime = DateOnly.FromDateTime(d).ToDateTime(TimeOnly.FromTimeSpan(t));
+                    var d = _date ?? DateTime.Now;
+                    AddEditExtendedAttributeModel.DateTime = DateOnly.FromDateTime(d).ToDateTime(TimeOnly.FromTimeSpan(_time ?? d.TimeOfDay));
                     AddEditExtendedAttributeModel.Decimal = null;
                     AddEditExtendedAttributeModel.Text = null;
                     AddEditExtendedAttributeModel.Json = null;

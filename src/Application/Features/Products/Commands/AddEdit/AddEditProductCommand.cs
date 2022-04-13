@@ -45,7 +45,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
         {
             if (command.Items.Any(item => UnitOfWork.Repository<Product>().Entities.Any(p => p.Id != item.Id && p.Barcode == item.Barcode)))
                 throw Errors.Create(_localizer["Barcode already exists."], HttpStatusCode.Conflict);
-            
+
             var uploadTasks = command.Items.Where(dto => dto.UploadRequest != null).Select(dto =>
                 Task.Run(() => _uploadService.UploadAsync(dto.UploadRequest), cancellationToken)
                     .ContinueWith(task => dto.ImageDataURL = task.Result, cancellationToken));

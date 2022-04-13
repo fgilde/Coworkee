@@ -11,6 +11,7 @@ using System.IO;
 using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Data;
 using CleanArchitectureBase.Infrastructure;
+using CleanArchitectureBase.Server.BackgroundServices;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;

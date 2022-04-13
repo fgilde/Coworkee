@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours
 {
+    // Will auto Injected
     public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
     {
         private readonly ILogger _logger;

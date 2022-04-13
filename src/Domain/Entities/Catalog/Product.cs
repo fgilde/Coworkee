@@ -15,5 +15,13 @@ namespace CleanArchitectureBase.Domain.Entities.Catalog
         public decimal Rate { get; set; }
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; }
+
+        public bool NeedsUpdate(Product other)
+        {
+            var clonedSelf = MemberwiseClone() as Product;
+            var clonedOther = other;//.Clone();
+            clonedOther.LastModifiedOn = clonedOther.LastModifiedOn = clonedSelf.LastModifiedOn = clonedSelf.LastModifiedOn = default;
+            return !clonedSelf.Equals(clonedOther);
+        }
     }
 }

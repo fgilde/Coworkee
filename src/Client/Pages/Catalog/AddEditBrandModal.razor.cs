@@ -1,6 +1,5 @@
 ﻿using System;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
@@ -9,14 +8,11 @@ using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class AddEditBrandModal: IAsyncDisposable
     {
-        [Inject] private IApplicationClient Api { get; set; }
-
         [Parameter] public BrandDto AddEditBrandModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -31,7 +27,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task SaveAsync()
         {
-            await Api.Brands_PostAsync(new AddEditBrandsCommand(AddEditBrandModel));
+            await _api.Brands_PostAsync(new AddEditBrandsCommand(AddEditBrandModel));
             _snackBar.Add(_localizer["Brand Updated"], Severity.Success);
             await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
             MudDialog.Close();

@@ -1,8 +1,6 @@
-﻿using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
+﻿using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
 using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -16,14 +14,11 @@ using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.SDK;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class AddEditProductModal: IAsyncDisposable
     {
-        [Inject] private IApplicationClient Api { get; set; }
-
         [Parameter] public ProductDto AddEditProductModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
@@ -39,7 +34,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task SaveAsync()
         {
-            await Api.Products_PostAsync(new AddEditProductsCommand(AddEditProductModel));
+            await _api.Products_PostAsync(new AddEditProductsCommand(AddEditProductModel));
             
             _snackBar.Add(_localizer["Product Updated"], Severity.Success);
             await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
@@ -60,12 +55,12 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task LoadBrandsAsync()
         {
-            _brands = await Api.Brands_GetAllAsync();
+            _brands = await _api.Brands_GetAllAsync();
         }
 
         private async Task LoadImageAsync()
         {
-            var data = await Api.Products_GetProductImageAsync(AddEditProductModel.Id);
+            var data = await _api.Products_GetProductImageAsync(AddEditProductModel.Id);
             if (data.Succeeded)
             {
                 var imageData = data.Data;

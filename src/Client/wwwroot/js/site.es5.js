@@ -153,6 +153,16 @@ window.getCssVars = function () {
     }, []);
 };
 
+//getCssVariableValue: function (varName) {
+//    return getComputedStyle(document.documentElement)
+//        .getPropertyValue(varName).trim();
+//},
+
+//setCssVariableValue: function (varName, value) {
+//    document.documentElement.style
+//        .setProperty(varName, value);
+//}
+
 window.getJsAppData = function () {
     var res = jsAppData;
     res.browserDimensions = {

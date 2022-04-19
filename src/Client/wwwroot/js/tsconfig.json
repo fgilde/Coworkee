@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "outDir": "./",
+    "target": "ES2022",
+    "module": "ES2022"
+
+    //"outFile": "./app.js",
+    //"module": "AMD" //es6 = esm... UMD fallback?
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}

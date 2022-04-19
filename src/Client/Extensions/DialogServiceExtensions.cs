@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.JsInterop.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -37,7 +38,7 @@ public static class DialogServiceExtensions
     {
         try
         {
-            var data = await ServiceAccessor.Get<IJSRuntime>().InvokeAsync<JsAppData>("getJsAppData");
+            var data = await ServiceAccessor.Get<IJSRuntime>().InvokeAsync<JsAppData>(JsNamespace.Get("getJsAppData"));
             return data.MouseArgs.PageX < data.BrowserDimensions.Width / 2 ? DialogPosition.CenterLeft : DialogPosition.CenterRight;
         }
         catch { return DialogPosition.CenterRight; }

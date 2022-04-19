@@ -10,7 +10,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string Version = "v2.2";
         public const string DefaultLanguageCode = "en-US";
-
+        
         public static class Defaults
         {
             public const string DefaultAdminUserEmail = "info@coworkee.de";

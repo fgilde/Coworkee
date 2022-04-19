@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -81,7 +82,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task ExportToExcel()
         {
             var base64 = await _api.User_ExportAsync(_searchString);
-            await _jsRuntime.InvokeVoidAsync("Download", new
+            await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "download"), new
             {
                 Base64String = base64,
                 FileName = $"{nameof(Users).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",

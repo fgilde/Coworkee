@@ -16,6 +16,7 @@ using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Hubs.Events;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
@@ -95,7 +96,7 @@ namespace CleanArchitectureBase.Client.Shared
 
             hubConnection.On<ChatHistory<IChatUser>, string>(nameof(IClientEventHub.ReceiveMessage), async (chatHistory, userName) =>
             {
-                await _jsRuntime.InvokeAsync<string>("PlayAudio", "notification");
+                await _jsRuntime.InvokeAsync<string>(JsNamespace.Get("BrowserHelper", "playAudio"), "notification");
                 var chatUrlToUser = $"chat/{chatHistory.FromUserId}";
                 if (!_navigationManager.Uri.EndsWith(chatUrlToUser))
                 {

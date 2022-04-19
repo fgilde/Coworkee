@@ -13,6 +13,7 @@ using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Hubs;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
@@ -83,7 +84,7 @@ namespace CleanArchitectureBase.Client.Pages.Communication
 
         private async Task ScrollToBottomAsync()
         {
-            await _jsRuntime.InvokeAsync<string>("ScrollToBottom", "chatContainer");
+            await _jsRuntime.InvokeAsync<string>(JsNamespace.Get("BrowserHelper","scrollToBottom"), "chatContainer");
         }
 
         private async Task SubmitAsync()

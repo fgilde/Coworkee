@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Managers.Theme;
 using CleanArchitectureBase.SDK;
 using Microsoft.JSInterop;
@@ -20,7 +21,7 @@ namespace CleanArchitectureBase.Client.Theming
 
         public async Task<ClientTheme> BestBrowserMatch()
         {
-            bool isDark = await _jsRuntime.InvokeAsync<bool>("isDarkMode");
+            bool isDark = await _jsRuntime.InvokeAsync<bool>(JsNamespace.Get("BrowserHelper", "isDarkMode"));
             var available = await ThemesAsync();
             return isDark && available.ContainsValue(ClientTheme.DarkTheme) 
                 ? ClientTheme.DarkTheme 

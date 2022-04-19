@@ -12,6 +12,7 @@ using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Storage;
@@ -281,14 +282,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             var currentUrl = _navigationManager.Uri;
             if (currentUrl != url)
-                await _jsRuntime.InvokeVoidAsync("ChangeUrl", url);
+                await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "changeUrl"), url);
             try
             {
                 await action();
             }
             finally
             {
-                await _jsRuntime.InvokeVoidAsync("ChangeUrl", _pageUrl);
+                await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "changeUrl"), _pageUrl);
             }
         }
 

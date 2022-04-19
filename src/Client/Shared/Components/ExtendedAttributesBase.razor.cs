@@ -8,6 +8,7 @@ using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.Add
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Enums;
@@ -146,7 +147,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             var response = await ExtendedAttributeManager.ExportToExcelAsync(request);
             if (_errorService.IsSuccessFull(response))
             {
-                await _jsRuntime.InvokeVoidAsync("Download", new
+                await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "download"), new
                 {
                     Base64String = response.Data,
                     FileName = $"{typeof(TExtendedAttribute).Name.ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",

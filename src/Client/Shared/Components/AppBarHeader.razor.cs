@@ -1,4 +1,5 @@
 ﻿using CleanArchitectureBase.Client.Enums;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -21,7 +22,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             set
             {
                 _title = value;
-                _jsRuntime.InvokeVoidAsync("SetTitle", value);
+                _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "setTitle"), value);
             }
         }
 

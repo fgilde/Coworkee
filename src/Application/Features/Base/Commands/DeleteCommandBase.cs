@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,15 +42,21 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             Mediator = mediator;
         }
 
+        protected virtual async Task<IEnumerable<TEntity>> FindEntitiesAsync(TCommand command, CancellationToken cancellationToken)
+        {
+            return (await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken));
+        }
+
         public virtual async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
         {
             var user = Get<ICurrentUserService>().CurrentUser();
-            var entities = (await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken)).ToArray();
+            var entities = (await FindEntitiesAsync(command, cancellationToken)).ToArray();
             await UnitOfWork.Repository<TEntity>().DeleteManyAsync(entities, cancellationToken);
             await (CacheKey.IsNullOrWhiteSpace() ? UnitOfWork.Commit(cancellationToken) : UnitOfWork.CommitAndRemoveCache(cancellationToken, CacheKey));
             var deletedItemsAsDto = entities.MapElementsTo<TDto>().ToArray();
 
-            var ids = command.Ids.Select(id => id.ToString()).ToArray();
+            //var ids = command.Ids.Select(id => id.ToString()).ToArray();
+            var ids = entities.Select(e => e.Id.ToString()).ToArray();
             await Mediator.PublishClientEvents(cancellationToken, 
                 new EntitiesDeleted<TDto>(user, deletedItemsAsDto),
                 new EntitiesUpdated<TDto>(user, deletedItemsAsDto),

@@ -8,6 +8,7 @@ namespace CleanArchitectureBase.Application.Contracts.Attributes;
 public class RegisterAsAttribute: System.Attribute
 {
     public Type RegisterAsType { get; }
+    public bool Enabled { get; set; }
 
     public bool RegisterAsImplementation { get; set; } = false;
 

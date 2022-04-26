@@ -75,7 +75,8 @@ namespace CleanArchitectureBase.Application.Hubs
                 .Select(r => r.ClaimValue).Distinct();
 
             await Task.WhenAll(permissions.Select(p => fn(p))); // For Target Permissions
-            await Task.WhenAll(userRoles.Select(r => fn(r.RoleName))); // For Target Role
+            await Task.WhenAll(userRoles.Select(r => fn(r.RoleName))); // For Target Role by name
+            await Task.WhenAll(userRoles.Select(r => fn(r.Id))); // For Target RoleId
             _groupsAdded = add;
         }
     }

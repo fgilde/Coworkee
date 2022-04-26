@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Extensions
@@ -15,17 +18,23 @@ namespace CleanArchitectureBase.Client.Extensions
             ApplicationConstants.Routes.Forbidden
         };
 
-        private static bool IsForbidden(string url)
+        /// <summary>
+        /// Checks if url needs opened in a new tab
+        /// </summary>
+        public static NavigationManager NavigateToUnknown(this NavigationManager navigationManager, string url)
         {
-            return !string.IsNullOrWhiteSpace(url) && ForbiddenReturnUrls.Contains(url.Replace("/", ""), StringComparer.InvariantCultureIgnoreCase);
+            if (!navigationManager.IsExternalUrl(url))
+                navigationManager.NavigateTo(url);
+            else
+                _= ServiceAccessor.Get<IJSRuntime>().InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "navigateToExternalUrl"), url);
+            return navigationManager;
         }
 
-        private static string CleanReturnUrl(string url)
+        public static bool IsExternalUrl(this NavigationManager navigationManager, string url)
         {
-            var returnUrlParamName = ApplicationConstants.ParameterNames.ReturnUrl;
-            var r = !string.IsNullOrWhiteSpace(url) ? url.Replace($"?{returnUrlParamName}=", "").Replace($"{returnUrlParamName}=", "") : "/";
-            ForbiddenReturnUrls.Where(u => r.StartsWith(u, StringComparison.InvariantCultureIgnoreCase)).Apply(u => r = r.Substring(u.Length));
-            return r;
+            var baseUrl = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+            var target = new Uri(url, UriKind.RelativeOrAbsolute);
+            return target.IsAbsoluteUri && target.Host != baseUrl.Host;
         }
 
         public static void Reload(this NavigationManager navigationManager, bool forceLoad = false)
@@ -70,6 +79,19 @@ namespace CleanArchitectureBase.Client.Extensions
                 navigationManager.NavigateTo(uri, NeedReload(uri));
             else if (!string.IsNullOrEmpty(fallback))
                 navigationManager.NavigateTo(fallback, NeedReload(fallback));
+        }
+
+        private static bool IsForbidden(string url)
+        {
+            return !string.IsNullOrWhiteSpace(url) && ForbiddenReturnUrls.Contains(url.Replace("/", ""), StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        private static string CleanReturnUrl(string url)
+        {
+            var returnUrlParamName = ApplicationConstants.ParameterNames.ReturnUrl;
+            var r = !string.IsNullOrWhiteSpace(url) ? url.Replace($"?{returnUrlParamName}=", "").Replace($"{returnUrlParamName}=", "") : "/";
+            ForbiddenReturnUrls.Where(u => r.StartsWith(u, StringComparison.InvariantCultureIgnoreCase)).Apply(u => r = r.Substring(u.Length));
+            return r;
         }
 
         private static bool NeedReload(string url)

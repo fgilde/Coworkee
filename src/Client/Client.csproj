@@ -86,5 +86,11 @@
     <PackageReference Update="MudBlazor.ThemeManager" Version="1.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <TypeScriptCompile Update="wwwroot\js\helper\eventHelper.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+  </ItemGroup>
+
 
 </Project>

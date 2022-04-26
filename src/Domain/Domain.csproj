@@ -6,4 +6,8 @@
     <AssemblyName>CleanArchitectureBase.Domain</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Notifications\" />
+  </ItemGroup>
+
 </Project>

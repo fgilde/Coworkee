@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CleanArchitectureBase.Shared.Wrapper
 {
@@ -14,6 +15,8 @@ namespace CleanArchitectureBase.Shared.Wrapper
         }
 
         public List<T> Data { get; set; }
+
+        public T First() => Data.FirstOrDefault();
 
         internal PaginatedResult(bool succeeded, List<T> data = default, List<string> messages = null, int count = 0, int page = 1, int pageSize = 10)
         {

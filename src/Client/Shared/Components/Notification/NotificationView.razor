@@ -1,0 +1,101 @@
+﻿@using Nextended.Core.Extensions
+@using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Requests
+@using CleanArchitectureBase.Shared.Wrapper
+@using Microsoft.AspNetCore.SignalR.Client
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NotificationView> localizer
+@{
+    <MudExpansionPanel HideIcon="@CanClose" @bind-IsExpanded="Notification.Expanded" Text="@Notification.Subject">
+        <TitleContent>
+            <div class="d-flex">
+
+                <MudTooltip Class="z-tt" Text="@Notification.Subject">
+                    <MudText Class="mt-1" Color="@(Notification.IsRead ? Color.Inherit : Color.Primary)">@(Notification.Expanded ? Notification.Subject : Notification.Subject.ToEllipsis(25))</MudText>
+                    @if (Notification.Expanded)
+                    {
+                        <span class="notification-label">@Notification.CreatedOn.AsClientLocalTime()</span>
+                    }
+                </MudTooltip>
+
+                @if (CanClose)
+                {
+                    <MudIconButton Style="height: 25px; margin-top: 5px;" OnClick="@(async () => await OnClose.InvokeAsync(Notification))" Size="Size.Small" Icon="@Icons.Material.Filled.Close" Color="Color.Default"/>
+                }
+
+            </div>
+
+        </TitleContent>
+        <ChildContent>
+            <MudText>@Notification.Content</MudText>
+            <br/>
+            <br/>
+            <div class="d-flex flex-column align-center">
+                <MudButtonGroup Size="Size.Small" Variant="Variant.Outlined">
+                    @if (Notification.Id != default)
+                    {
+                        <MudTooltip Class="z-tt" Text="@(Notification.IsRead ? localizer["Mark as unread"] : localizer["Mark as read"])">
+                            <MudIconButton OnClick="@(() => ToggleRead(Notification))" Color="@(Notification.IsRead ? Color.Inherit : Color.Primary)" Icon="@Icons.Material.Rounded.Check"></MudIconButton>
+                        </MudTooltip>
+                        <MudTooltip Class="z-tt" Text="@localizer["Delete"]">
+                            <MudIconButton OnClick="@(() => Delete(Notification))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                        </MudTooltip>
+                        <MudTooltip Class="z-tt" Text="@localizer["Show notification"]">
+                            <MudIconButton OnClick="@(() => Show(Notification))" Icon="@Icons.Material.Filled.Info"></MudIconButton>
+                        </MudTooltip>
+                    }
+                    @if (!string.IsNullOrEmpty(Notification.Url))
+                    {
+                        <MudTooltip Class="z-tt" Text="@localizer["Open Url {0}", Notification.Url]">
+                            <MudButton OnClick="@(() => OpenLink(Notification))" StartIcon="@Icons.Material.Filled.Link" IconColor="Color.Warning">Open</MudButton>
+                        </MudTooltip>
+                    }
+                </MudButtonGroup>
+            </div>
+        </ChildContent>
+    </MudExpansionPanel>
+}
+
+@code
+{
+    [Parameter] public bool CanClose { get; set; }
+    [Parameter] public NotificationDto Notification { get; set; }
+    [Parameter] public int NotificationId { get; set; }
+    [Parameter] public EventCallback<NotificationDto> OnRead { get; set; }
+    [Parameter] public EventCallback<NotificationDto> OnBeforeDelete { get; set; }
+    [Parameter] public EventCallback<NotificationDto> OnDelete { get; set; }
+    [Parameter] public EventCallback<NotificationDto> OnNavigateToUrl { get; set; }
+    [Parameter] public EventCallback<NotificationDto> OnClose { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Notification == null && NotificationId != default)
+            Notification = await _api.Notifications_GetByIdAsync(NotificationId);
+    }
+
+    private async Task ToggleRead(NotificationDto notification)
+    {
+        notification.IsRead = !notification.IsRead;
+        await _api.Notifications_MarkReadAsync(notification.Id, notification.IsRead);
+        await OnRead.InvokeAsync(notification);
+        StateHasChanged();
+    }
+
+    private async Task Delete(NotificationDto notification)
+    {
+        await OnBeforeDelete.InvokeAsync(notification);
+        await _api.Notifications_DeleteAsync(new List<int> { notification.Id });
+        await OnDelete.InvokeAsync(notification);
+    }
+
+    private async void OpenLink(NotificationDto notification)
+    {
+        await OnNavigateToUrl.InvokeAsync(notification);
+        _navigationManager.NavigateToUnknown(notification.Url);
+        //StateHasChanged();
+    }
+
+    private void Show(NotificationDto notification)
+    {
+        _navigationManager.NavigateTo($"/account/notifications/{notification.Id}");
+    }
+}

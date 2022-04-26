@@ -16,7 +16,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.18" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
-    <PackageReference Include="Nextended.Core" Version="6.0.3" />
+    <PackageReference Include="Nextended.Core" Version="6.0.4" />
     <PackageReference Include="StringToExpression" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
   </ItemGroup>
@@ -28,6 +28,8 @@
     <Folder Include="Contracts\Attributes\" />
     <Folder Include="Contracts\Services\ExportImport\" />
     <Folder Include="Features\Base\Commands\" />
+    <Folder Include="Features\Notifications\Commands\MarkAll\" />
+    <Folder Include="Features\Notifications\Queries\GetAllPaged\" />
   </ItemGroup>
 
 </Project>

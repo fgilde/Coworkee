@@ -85,5 +85,9 @@ export class BrowserHelper {
             return {};
         }
     }
+    navigateToExternalUrl(url) {
+        // noreferrer is important that's because otherwise the new window is opened in the same process with the opener window.
+        window.open(url, '_blank', 'noreferrer');
+    }
 }
 //# sourceMappingURL=browserHelper.js.map

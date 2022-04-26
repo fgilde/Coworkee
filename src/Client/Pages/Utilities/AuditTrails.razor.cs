@@ -125,7 +125,7 @@ namespace CleanArchitectureBase.Client.Pages.Utilities
                     TableName = x.TableName,
                     Type = x.Type,
                     UserId = x.UserId,
-                    LocalTime = DateTime.SpecifyKind(x.DateTime, DateTimeKind.Utc).ToLocalTime()
+                    LocalTime = x.DateTime.AsClientLocalTime()
                 }).ToList();
             
         }

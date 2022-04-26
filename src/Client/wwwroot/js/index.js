@@ -19,7 +19,8 @@ function getJsAppData() {
         width: window.innerWidth,
         height: window.innerHeight
     };
-    res.mouseArgs = (({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }) => ({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }))(jsAppData.mouseArgs);
+    //res.mouseArgs = (({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }:any) => ({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }))(jsAppData.mouseArgs);
+    res.mouseArgs = new helper.EventHelper().cloneEvent(jsAppData.mouseArgs, true);
     return res;
 }
 ;
@@ -52,7 +53,7 @@ function initialLoad() {
         .then(response => response.json())
         .then(json => {
         window['___appJsNameSpace'] = json.JsMainNamespace;
-        // TODO: BackendOrigin maybe wronmg. not using appsettings.development.json here currently
+        // TODO: BackendOrigin maybe wrong. not using appsettings.development.json here currently
         nav.changeFavIcon(json.BackendOrigin + '/favicon.ico');
         var script = document.createElement('script');
         script.onload = () => {

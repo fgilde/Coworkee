@@ -133,3 +133,23 @@ body * {
 .mini-avatar {
     margin-left: -4px;
 }
+
+.z-tt {
+    z-index: 3000;
+}
+
+.notification-badge {
+    margin-bottom: 20px;
+    margin-left: -5px;
+}
+
+.notifications-expansion-panel {
+    overflow: auto;
+    max-height: 800px;
+}
+
+.test {
+    background-color: pink !important;
+    font-family: Webdings;
+    font-size:2px;
+}

@@ -22,7 +22,6 @@ using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
 using Microsoft.AspNetCore.Components;
 using CleanArchitectureBase.Shared.Wrapper;
-using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Shared
 {
@@ -85,7 +84,7 @@ namespace CleanArchitectureBase.Client.Shared
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
             _rightToLeft = await _clientPreferenceManager.IsRTL();
             hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);
-            
+
             hubConnection.On<EntitiesUpdated<TranslationDto>>(async (arg) =>
             {
                 _snackBar.Add(localizer["Translations updated"], Severity.Normal, options => options.Icon = Icons.Filled.Translate);

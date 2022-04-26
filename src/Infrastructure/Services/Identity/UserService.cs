@@ -10,11 +10,13 @@ using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Common.Exceptions;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
+using CleanArchitectureBase.Application.Hubs.Events.Base;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Requests.Mail;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
@@ -35,6 +37,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
     [RegisterAs(typeof(IUserService), 5)]
     public class UserService : IUserService
     {
+        private readonly IPermissionService _permissionService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IMailService _mailService;
@@ -43,6 +46,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly ICurrentUserService _currentUserService;
 
         public UserService(
+            IPermissionService permissionService,
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IMailService mailService,
@@ -50,12 +54,30 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             ICurrentUserService currentUserService,
             IServiceProvider serviceProvider)
         {
+            _permissionService = permissionService;
             _userManager = userManager;
             _roleManager = roleManager;
             _mailService = mailService;
             _localizer = localizer;
             _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel);
             _currentUserService = currentUserService;
+        }
+
+        public async Task<IEnumerable<UserResponse>> GetAllForTargetAsync(EventTarget eventTarget)
+        {
+            var all = await GetAllAsync();
+            if (eventTarget == EventTarget.All)
+                return all.Data;
+            if (eventTarget == EventTarget.Current)
+                return all.Data.Where(r => r.Id == _currentUserService.UserId);
+            if (eventTarget.Key == nameof(EventTarget.User))
+                return all.Data.Where(r => eventTarget.Groups.Contains(r.Id));
+            if (eventTarget.Key == nameof(EventTarget.WithRole))
+                return all.Data.Where(r => GetRolesAsync(r.Id).Result.Data.UserRoles.Where(r => r.Selected).Any(role => eventTarget.Groups.Contains(role.Id) || eventTarget.Groups.Contains(role.RoleName)));
+            if (eventTarget.Key == nameof(EventTarget.WithPermission))
+                return all.Data.Where(r => _permissionService.HasPoliciesAsync(eventTarget.Groups, PolicyMatch.Any, r.Id).Result);
+
+            return Enumerable.Empty<UserResponse>();
         }
 
         public async Task<Result<List<UserResponse>>> GetAllAsync()

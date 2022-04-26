@@ -11,6 +11,7 @@ using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
 using CleanArchitectureBase.Domain.Entities.Localization;
 using CleanArchitectureBase.Domain.Entities.Misc;
+using CleanArchitectureBase.Domain.Entities.Notifications;
 
 namespace CleanArchitectureBase.Infrastructure.Contexts
 {
@@ -31,6 +32,7 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<DocumentExtendedAttribute> DocumentExtendedAttributes { get; set; }

@@ -2225,6 +2225,471 @@ export class TranslationsClient implements ITranslationsClient {
     }
 }
 
+export interface INotificationsClient {
+    /**
+     * Get All Notifications
+     * @param unreadOnly (optional) 
+     * @param notificationTypeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param searchString (optional) 
+     * @param orderBy (optional) 
+     * @return Status 200 OK
+     */
+    getAll(unreadOnly: boolean | undefined, notificationTypeId: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfNotificationDto>;
+    /**
+     * Deletes given notifications if they are for current user
+     * @param ids Notifications to delete
+     * @return Status 200 OK response
+     */
+    delete(ids: number[]): Observable<FileResponse | null>;
+    /**
+     * Returns count of unread notifications
+     * @return Status 200 OK
+     */
+    unread(): Observable<number>;
+    /**
+     * Deletes given notifications if they are for current user
+     * @return Status 200 OK response
+     */
+    deleteAll(): Observable<FileResponse | null>;
+    /**
+     * Gets a Specific Notification by an Id
+     * @return Status 200 Ok
+     */
+    getById(id: number): Observable<NotificationDto>;
+    /**
+     * Marks a notification as read or unread
+     * @param isRead (optional) read status
+     * @return Status 200 Ok
+     */
+    markRead(id: number, isRead: boolean | undefined): Observable<NotificationDto>;
+    /**
+     * Marks all users notifications as read or unread
+     * @param isRead (optional) read status
+     * @return Status 200 Ok
+     */
+    markAllRead(isRead: boolean | undefined): Observable<FileResponse | null>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class NotificationsClient implements INotificationsClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * Get All Notifications
+     * @param unreadOnly (optional) 
+     * @param notificationTypeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param searchString (optional) 
+     * @param orderBy (optional) 
+     * @return Status 200 OK
+     */
+    getAll(unreadOnly: boolean | undefined, notificationTypeId: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfNotificationDto> {
+        let url_ = this.baseUrl + "/Notifications?";
+        if (unreadOnly === null)
+            throw new Error("The parameter 'unreadOnly' cannot be null.");
+        else if (unreadOnly !== undefined)
+            url_ += "UnreadOnly=" + encodeURIComponent("" + unreadOnly) + "&";
+        if (notificationTypeId !== undefined && notificationTypeId !== null)
+            url_ += "NotificationTypeId=" + encodeURIComponent("" + notificationTypeId) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (searchString !== undefined && searchString !== null)
+            url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
+        if (orderBy !== undefined && orderBy !== null)
+            orderBy && orderBy.forEach(item => { url_ += "OrderBy=" + encodeURIComponent("" + item) + "&"; });
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<PaginatedResultOfNotificationDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<PaginatedResultOfNotificationDto>;
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PaginatedResultOfNotificationDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PaginatedResultOfNotificationDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PaginatedResultOfNotificationDto>(null as any);
+    }
+
+    /**
+     * Deletes given notifications if they are for current user
+     * @param ids Notifications to delete
+     * @return Status 200 OK response
+     */
+    delete(ids: number[]): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Notifications";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(ids);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+
+    /**
+     * Returns count of unread notifications
+     * @return Status 200 OK
+     */
+    unread(): Observable<number> {
+        let url_ = this.baseUrl + "/Notifications/Unread";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUnread(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUnread(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processUnread(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<number>(null as any);
+    }
+
+    /**
+     * Deletes given notifications if they are for current user
+     * @return Status 200 OK response
+     */
+    deleteAll(): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Notifications/DeleteAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processDeleteAll(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+
+    /**
+     * Gets a Specific Notification by an Id
+     * @return Status 200 Ok
+     */
+    getById(id: number): Observable<NotificationDto> {
+        let url_ = this.baseUrl + "/Notifications/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<NotificationDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<NotificationDto>;
+        }));
+    }
+
+    protected processGetById(response: HttpResponseBase): Observable<NotificationDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = NotificationDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NotificationDto>(null as any);
+    }
+
+    /**
+     * Marks a notification as read or unread
+     * @param isRead (optional) read status
+     * @return Status 200 Ok
+     */
+    markRead(id: number, isRead: boolean | undefined): Observable<NotificationDto> {
+        let url_ = this.baseUrl + "/Notifications/{id}?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        if (isRead === null)
+            throw new Error("The parameter 'isRead' cannot be null.");
+        else if (isRead !== undefined)
+            url_ += "isRead=" + encodeURIComponent("" + isRead) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMarkRead(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMarkRead(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<NotificationDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<NotificationDto>;
+        }));
+    }
+
+    protected processMarkRead(response: HttpResponseBase): Observable<NotificationDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = NotificationDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NotificationDto>(null as any);
+    }
+
+    /**
+     * Marks all users notifications as read or unread
+     * @param isRead (optional) read status
+     * @return Status 200 Ok
+     */
+    markAllRead(isRead: boolean | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Notifications/MarkAllRead?";
+        if (isRead === null)
+            throw new Error("The parameter 'isRead' cannot be null.");
+        else if (isRead !== undefined)
+            url_ += "isRead=" + encodeURIComponent("" + isRead) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMarkAllRead(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMarkAllRead(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processMarkAllRead(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+}
+
 export interface IAccountClient {
     /**
      * Update Profile
@@ -6486,6 +6951,140 @@ export class ImportTranslationsQuery extends ImportQueryBaseOfTranslationDto imp
 }
 
 export interface IImportTranslationsQuery extends IImportQueryBaseOfTranslationDto {
+}
+
+export class PaginatedResultOfNotificationDto extends Result implements IPaginatedResultOfNotificationDto {
+    data?: NotificationDto[] | undefined;
+    currentPage!: number;
+    totalPages!: number;
+    totalCount!: number;
+    pageSize!: number;
+    hasPreviousPage!: boolean;
+    hasNextPage!: boolean;
+
+    constructor(data?: IPaginatedResultOfNotificationDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(NotificationDto.fromJS(item));
+            }
+            this.currentPage = _data["currentPage"];
+            this.totalPages = _data["totalPages"];
+            this.totalCount = _data["totalCount"];
+            this.pageSize = _data["pageSize"];
+            this.hasPreviousPage = _data["hasPreviousPage"];
+            this.hasNextPage = _data["hasNextPage"];
+        }
+    }
+
+    static fromJS(data: any): PaginatedResultOfNotificationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PaginatedResultOfNotificationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["currentPage"] = this.currentPage;
+        data["totalPages"] = this.totalPages;
+        data["totalCount"] = this.totalCount;
+        data["pageSize"] = this.pageSize;
+        data["hasPreviousPage"] = this.hasPreviousPage;
+        data["hasNextPage"] = this.hasNextPage;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IPaginatedResultOfNotificationDto extends IResult {
+    data?: NotificationDto[] | undefined;
+    currentPage: number;
+    totalPages: number;
+    totalCount: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+}
+
+export class NotificationDto extends DtoBaseOfInteger implements INotificationDto {
+    subject?: string | undefined;
+    notificationTypeId?: string | undefined;
+    excerpt?: string | undefined;
+    content?: string | undefined;
+    url?: string | undefined;
+    isRead!: boolean;
+    sentAsMail!: boolean;
+    expanded!: boolean;
+    createdBy?: string | undefined;
+    createdOn!: Date;
+
+    constructor(data?: INotificationDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.subject = _data["subject"];
+            this.notificationTypeId = _data["notificationTypeId"];
+            this.excerpt = _data["excerpt"];
+            this.content = _data["content"];
+            this.url = _data["url"];
+            this.isRead = _data["isRead"];
+            this.sentAsMail = _data["sentAsMail"];
+            this.expanded = _data["expanded"];
+            this.createdBy = _data["createdBy"];
+            this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): NotificationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new NotificationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["subject"] = this.subject;
+        data["notificationTypeId"] = this.notificationTypeId;
+        data["excerpt"] = this.excerpt;
+        data["content"] = this.content;
+        data["url"] = this.url;
+        data["isRead"] = this.isRead;
+        data["sentAsMail"] = this.sentAsMail;
+        data["expanded"] = this.expanded;
+        data["createdBy"] = this.createdBy;
+        data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface INotificationDto extends IDtoBaseOfInteger {
+    subject?: string | undefined;
+    notificationTypeId?: string | undefined;
+    excerpt?: string | undefined;
+    content?: string | undefined;
+    url?: string | undefined;
+    isRead: boolean;
+    sentAsMail: boolean;
+    expanded: boolean;
+    createdBy?: string | undefined;
+    createdOn: Date;
 }
 
 export class UpdateProfileRequest implements IUpdateProfileRequest {

@@ -24,6 +24,19 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; }
 
+        public GetAllPagedQueryBase<TDto> SortBy(Expression<Func<TDto, object>> expression, string direction = "")
+        {
+            return SortBy(expression.GetMemberName(), direction);
+        }
+
+        public GetAllPagedQueryBase<TDto> SortBy(string propertyName, string direction = "")
+        {
+            var sorts = (OrderBy ?? Array.Empty<string>()).ToList();
+            sorts.Add($"{propertyName} {direction}");
+            OrderBy = sorts.ToArray();
+            return this;
+        }
+
         public GetAllPagedQueryBase()
         { }
 
@@ -64,7 +77,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             return null;
         }
 
-        public async Task<PaginatedResult<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
+        public virtual async Task<PaginatedResult<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<TEntity, TDto>> expression = e => e.MapTo<TDto>();
             var filterSpec = GetFilterSpecification(request);

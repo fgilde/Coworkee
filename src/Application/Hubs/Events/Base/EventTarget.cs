@@ -12,6 +12,7 @@ namespace CleanArchitectureBase.Application.Hubs.Events.Base
         private readonly List<string> _groups = new();
 
         public string[] Groups => _groups.ToArray();
+        public string Key => _key;
 
         public EventTarget() // For serializers
         { }

@@ -5,6 +5,8 @@
 ```go get -u github.com/NYTimes/openapi2proto/cmd/openapi2proto```
 
 
+// Update-Database Languages
+// Remove-migration
 
 Single Page App (Blazor) and an ASP.NET Core Server following the principles of Clean Architecture. 
 <br/>

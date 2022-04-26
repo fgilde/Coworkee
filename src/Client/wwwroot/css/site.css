@@ -83,6 +83,85 @@
   position: fixed;
 }
 
+.jiggle-shake {
+  animation: shake 0.5s linear;
+}
+@keyframes shake {
+  8%, 41% {
+    transform: translateX(-10px);
+  }
+  25%, 58% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  92% {
+    transform: translateX(5px);
+  }
+  0%, 100% {
+    transform: translateX(0);
+  }
+}
+
+.glow {
+  animation: glow 500ms ease-out infinite alternate;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--mud-palette-secondary), inset 0 0 5px var(--mud-palette-secondary), 0 1px 0 var(--mud-palette-secondary);
+  }
+  100% {
+    box-shadow: 0 0 10px var(--mud-palette-secondary), inset 0 0 10px var(--mud-palette-secondary), 0 1px 0 var(--mud-palette-secondary);
+  }
+}
+
+.slide-from-left {
+  transform: translateX(-100vw);
+}
+.slide-from-right {
+  transform: translateX(100vw);
+}
+.slide-from-bottom {
+  transform: translateY(100vh);
+}
+.slide-from-top {
+  transform: translateY(-100vh);
+}
+
+.slide-to-left {
+  transform: translateX(0);
+}
+.slide-to-right {
+  transform: translateX(0);
+}
+.slide-to-bottom {
+  transform: translateY(0);
+}
+.slide-to-top {
+  transform: translateY(0);
+}
+
+.animate-all-properties {
+  transition-property: all !important;
+}
+
+.slide-kf-from-right {
+  /*animation-iteration-count: 1 !important;*/
+  animation: slideIn-r 900ms ease-in-out 1 alternate;
+}
+@keyframes slideIn-r {
+  0% {
+    transform: translateX(100vw);
+  }
+  85% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 html, body, #app, .mud-main-content, .mud-rtl-provider {
   height: 100%;
 }
@@ -210,4 +289,24 @@ body * {
 
 .mini-avatar {
   margin-left: -4px;
+}
+
+.z-tt {
+  z-index: 3000;
+}
+
+.notification-badge {
+  margin-bottom: 20px;
+  margin-left: -5px;
+}
+
+.notifications-expansion-panel {
+  overflow: auto;
+  max-height: 800px;
+}
+
+.test {
+  background-color: pink !important;
+  font-family: Webdings;
+  font-size: 2px;
 }

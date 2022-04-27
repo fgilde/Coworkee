@@ -25,7 +25,7 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetById(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a Brand By Id
             </summary>
@@ -41,7 +41,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.Int32[],System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Delete a Brand
             </summary>
@@ -61,7 +61,7 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetProductImageAsync(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetProductImageAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a Product Image by Id
             </summary>
@@ -69,7 +69,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetById(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a Product by Id
             </summary>
@@ -85,7 +85,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Delete(System.Int32[],System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Delete a Product
             </summary>
@@ -322,7 +322,7 @@
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.Delete(System.Int32[],System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Deletes given notifications if they are for current user
             </summary>
@@ -338,7 +338,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.GetById(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets a Specific Notification by an Id
             </summary>
@@ -355,7 +355,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.MarkRead(System.Int32,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.MarkRead(System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Marks a notification as read or unread
             </summary>

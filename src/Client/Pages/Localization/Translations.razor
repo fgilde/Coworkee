@@ -4,6 +4,7 @@
 @using CleanArchitectureBase.Shared.Wrapper
 @using CleanArchitectureBase.Application.Common.Models
 @using CleanArchitectureBase.Application.Contracts.Enums
+@using System.Threading
 
 
 <ReactOnPreferenceChanged Component="this" />
@@ -18,8 +19,8 @@
 <EditableDataTable @ref="dataTable"
                    MultiSelect="@advancedMode"
                    EditMode="EditMode.InlineBulk"
-                   ApiLoad="@(advancedMode ? null : new Func<Task<Result<List<TranslationDto>>>>(Load))"
-                   ApiLoadPaged="@(!advancedMode ? null : new Func<int, int, string, string[], Task<PaginatedResult<TranslationDto>>>(LoadPaged))"
+                   ApiLoad="@(advancedMode ? null : new Func<CancellationToken, Task<Result<List<TranslationDto>>>>(Load))"
+                   ApiLoadPaged="@(!advancedMode ? null : new Func<int, int, string, string[], CancellationToken, Task<PaginatedResult<TranslationDto>>>(LoadPaged))"
                    ApiDelete="@(new Func<int[], Task<Result>>(DeleteTranslations))"
                    ApiCreateOrEdit="@(new Func<TranslationDto, Task<bool>>(CreateOrEdit))"
                    ApiEditMany="@(new Func<TranslationDto[], Task<bool>>(SaveAll))"

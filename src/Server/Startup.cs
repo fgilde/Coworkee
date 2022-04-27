@@ -9,15 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Data;
 using CleanArchitectureBase.Infrastructure;
-using CleanArchitectureBase.Server.BackgroundServices;
 using CleanArchitectureBase.Server.Filters;
 using CleanArchitectureBase.Server.Managers.Preferences;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Server
@@ -54,7 +51,7 @@ namespace CleanArchitectureBase.Server
             services.AddServerLocalization();
             services.AddIdentity();
             services.AddJwtAuthentication(serverConfig);
-            services.AddApplication();
+            services.AddApplication(serverConfig);
             services.AddInfrastructure();
             services.AddApiVersions();
             services.AddOpenApiDocumentation(_configuration);

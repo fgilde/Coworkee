@@ -15,6 +15,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace CleanArchitectureBase.Server.Controllers.Catalog
 {
@@ -42,9 +43,9 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet("image/{id}")]
         [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> GetProductImageAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetProductImageAsync(string id, CancellationToken cancellationToken = default)
         {
-            var result = await Mediator.Send(new GetProductImageQuery(id), cancellationToken);
+            var result = await Mediator.Send(new GetProductImageQuery(UnhashId(id)), cancellationToken);
             return Ok(result);
         }
 
@@ -57,9 +58,9 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Filters.CustomAuthorize(Policies = new[] { Permissions.Products.View })]
         [HttpGet("{id}")]
         [Produces(typeof(ProductDto))]
-        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken = default)
         {
-            var product = await Mediator.Send(new GetProductByIdQuery(id), cancellationToken);
+            var product = await Mediator.Send(new GetProductByIdQuery(UnhashId(id)), cancellationToken);
             return Ok(product);
         }
 
@@ -84,9 +85,9 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <returns>Status 200 OK response</returns>
         [Authorize(Policy = Permissions.Products.Delete)]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteProductCommand { Ids = ids }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteProductCommand { Ids = UnhashIds(ids) }, cancellationToken));
         }
         
         /// <summary>

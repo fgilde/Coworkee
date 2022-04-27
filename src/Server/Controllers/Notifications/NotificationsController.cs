@@ -48,9 +48,9 @@ namespace CleanArchitectureBase.Server.Controllers.Notifications
         /// <returns>Status 200 OK response</returns>
         [Authorize]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteNotificationsCommand { Ids = ids }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteNotificationsCommand { Ids = UnhashIds(ids) }, cancellationToken));
         }
 
         /// <summary>
@@ -75,9 +75,9 @@ namespace CleanArchitectureBase.Server.Controllers.Notifications
         [Authorize]
         [HttpGet("{id}")]
         [Produces(typeof(NotificationDto))]
-        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken = default)
         {
-            var result = await Mediator.Send(new GetNotificationByIdQuery(id), cancellationToken);
+            var result = await Mediator.Send(new GetNotificationByIdQuery(UnhashId(id)), cancellationToken);
             return Ok(result);
         }
 
@@ -106,9 +106,9 @@ namespace CleanArchitectureBase.Server.Controllers.Notifications
         [Authorize]
         [HttpPost("{id}")]
         [Produces(typeof(NotificationDto))]
-        public async Task<IActionResult> MarkRead(int id, bool isRead, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> MarkRead(string id, bool isRead, CancellationToken cancellationToken = default)
         {
-            var result = await Mediator.Send(new GetNotificationByIdQuery(id), cancellationToken);
+            var result = await Mediator.Send(new GetNotificationByIdQuery(UnhashId(id)), cancellationToken);
             result.IsRead = isRead;
             await Mediator.Send(new AddEditNotificationCommand(result), cancellationToken);
             return Ok(result);

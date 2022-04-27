@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
@@ -38,12 +39,12 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
-        private async Task<PaginatedResult<TranslationDto>> LoadPaged(int pageNumber, int pageSize, string _searchString, string[] orderings)
+        private async Task<PaginatedResult<TranslationDto>> LoadPaged(int pageNumber, int pageSize, string _searchString, string[] orderings, CancellationToken cancellationToken)
         {
-            return await _api.Translations_GetAllPagedAsync(pageNumber, pageSize, _searchString, orderings);
+            return await _api.Translations_GetAllPagedAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken);
         }
 
-        private async Task<Result<List<TranslationDto>>> Load()
+        private async Task<Result<List<TranslationDto>>> Load(CancellationToken cancellationToken)
         {
             var cultureCode = CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode();
             var local = clientLocalizationCache.ContainsKey(cultureCode)
@@ -54,7 +55,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
                 local = local.Where(dto => !LocalizationConstants.ValidCultureName(dto.Key)).ToList();
            
 
-            var server = await _api.Translations_GetAllAsync();
+            var server = await _api.Translations_GetAllAsync(cancellationToken: cancellationToken);
 
             _translations = server.Concat(local).DistinctBy(d => d.Key).ToList();
             return new Result<List<TranslationDto>>()

@@ -12,8 +12,8 @@ using Microsoft.Extensions.Localization;
 namespace CleanArchitectureBase.Application.Features.Brands.Queries.Export
 {
     [CustomAuthorize(Policies = new[] { Permissions.Brands.Export })]
-    public class ExportBrandsQuery : ExportQueryBase<int>
-    {}
+    public class ExportBrandsQuery : ExportQueryHashed
+    { }
 
     internal class ExportBrandsQueryHandler : ExportQueryHandlerBase<ExportBrandsQuery, int, BrandDto, Brand>
     {

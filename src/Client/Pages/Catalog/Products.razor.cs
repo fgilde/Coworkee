@@ -2,6 +2,7 @@
 using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
@@ -20,22 +21,22 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         public string Id { get; set; }
 
         
-        private async Task<PaginatedResult<ProductDto>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings)
+        private async Task<PaginatedResult<ProductDto>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings, CancellationToken cancellationToken)
         {
-            return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings);
+            return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken);
         }
 
-        private async Task<ProductDto> FindById(int id, IEnumerable<ProductDto> loaded)
+        private async Task<ProductDto> FindById(string id, IEnumerable<ProductDto> loaded)
         {
             return loaded.FirstOrDefault(p => p.Id == id) ?? await _api.Products_GetByIdAsync(id);
         }
 
-        private int GetId(ProductDto product)
+        private string GetId(ProductDto product)
         {
             return product.Id;
         }
 
-        private async Task<Result> DeleteProducts(int[] ids)
+        private async Task<Result> DeleteProducts(string[] ids)
         {
             await _api.Products_DeleteAsync(ids.ToList());
             return await Result.SuccessAsync(_localizer["Product Deleted"]) as Result;
@@ -48,12 +49,12 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task Export(ExportServiceType exportServiceType, string search)
         {
-            await (await _api.Products_ExportAsync(exportServiceType, search)).ForceDownloadAsync(_jsRuntime);
+            await (await _api.Products_ExportAsync(exportServiceType: exportServiceType, searchString: search)).ForceDownloadAsync(_jsRuntime);
         }
 
-        private async Task ExportSelected(ExportServiceType exportServiceType, int[] ids)
+        private async Task ExportSelected(ExportServiceType exportServiceType, string[] ids)
         {
-            await (await _api.Products_ExportAsync(exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
+            await (await _api.Products_ExportAsync(exportServiceType:exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
         }
 
 

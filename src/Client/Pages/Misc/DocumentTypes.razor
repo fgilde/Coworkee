@@ -9,7 +9,7 @@
 <ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@_localizer["Document Types"]" Description="@_localizer["Manage Document Types."]" />
 
-<EditableDataTable ApiLoad="@(new Func<Task<Result<List<DocumentTypeDto>>>>(Load))"
+<EditableDataTable ApiLoad="@(Load)"
                    ApiDelete="@(new Func<int[], Task<Result>>(Delete))"
                    ApiCreateOrEdit="@(new Func<DocumentTypeDto, Task<bool>>(CreateOrEdit))"
                    Export="@(new Func<ExportServiceType, string, Task>(Export))"

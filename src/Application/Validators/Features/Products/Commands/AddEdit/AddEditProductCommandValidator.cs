@@ -27,7 +27,7 @@ namespace CleanArchitectureBase.Application.Validators.Features.Products.Command
             RuleFor(request => request.Description)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Description is required!"]);
             RuleFor(request => request.BrandId)
-                .GreaterThan(0).WithMessage(x => localizer["Brand is required!"]);
+                .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Brand is required!"]);
             RuleFor(request => request.Rate)
                 .GreaterThan(0).WithMessage(x => localizer["Rate must be greater than 0"]);
         }

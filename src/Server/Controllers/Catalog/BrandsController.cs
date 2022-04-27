@@ -45,9 +45,9 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         [Authorize(Policy = Permissions.Brands.View)]
         [HttpGet("{id}")]
         [Produces(typeof(BrandDto))]
-        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken = default)
         {
-            var brand = await Mediator.Send(new GetBrandByIdQuery(id), cancellationToken);
+            var brand = await Mediator.Send(new GetBrandByIdQuery(UnhashId(id)), cancellationToken);
             return Ok(brand);
         }
 
@@ -72,9 +72,9 @@ namespace CleanArchitectureBase.Server.Controllers.Catalog
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Brands.Delete)]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteBrandCommand { Ids = ids }, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteBrandCommand { Ids = UnhashIds(ids) }, cancellationToken));
         }
 
         /// <summary>

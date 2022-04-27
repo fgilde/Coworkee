@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
@@ -21,12 +22,12 @@ namespace CleanArchitectureBase.Client.Pages.Misc
         public string Id { get; set; }
 
 
-        private async Task<Result<List<DocumentTypeDto>>> Load()
+        private async Task<Result<List<DocumentTypeDto>>> Load(CancellationToken cancellationToken)
         {
-            return new Result<List<DocumentTypeDto>>()
+            return new Result<List<DocumentTypeDto>>
             {
                 Succeeded = true,
-                Data = (await _api.DocumentTypes_GetAllAsync()).ToList()
+                Data = (await _api.DocumentTypes_GetAllAsync(cancellationToken)).ToList()
             };
         }
 
@@ -53,12 +54,12 @@ namespace CleanArchitectureBase.Client.Pages.Misc
 
         private async Task Export(ExportServiceType exportServiceType, string search)
         {
-            await (await _api.DocumentTypes_ExportAsync(exportServiceType, search)).ForceDownloadAsync(_jsRuntime);
+            await (await _api.DocumentTypes_ExportAsync(exportServiceType: exportServiceType, searchString: search)).ForceDownloadAsync(_jsRuntime);
         }
 
         private async Task ExportSelected(ExportServiceType exportServiceType, int[] ids)
         {
-            await (await _api.DocumentTypes_ExportAsync(exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
+            await (await _api.DocumentTypes_ExportAsync(exportServiceType: exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
         }
 
         private async Task<bool> CreateOrEdit(DocumentTypeDto arg)

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
@@ -25,26 +26,26 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         public string Id { get; set; }
 
 
-        private async Task<Result<List<BrandDto>>> Load()
+        private async Task<Result<List<BrandDto>>> Load(CancellationToken cancellationToken)
         {            
             return new Result<List<BrandDto>>()
             {
                 Succeeded = true,
-                Data = (await _api.Brands_GetAllAsync()).ToList()
+                Data = (await _api.Brands_GetAllAsync(cancellationToken: cancellationToken)).ToList()
             };
         }
 
-        private Task<BrandDto> FindById(int id, IEnumerable<BrandDto> loaded)
+        private Task<BrandDto> FindById(string id, IEnumerable<BrandDto> loaded)
         {
             return Task.FromResult(loaded.FirstOrDefault(p => p.Id == id));
         }
 
-        private int GetId(BrandDto brand)
+        private string GetId(BrandDto brand)
         {
             return brand.Id;
         }
 
-        private async Task<Result> DeleteBrands(int[] ids)
+        private async Task<Result> DeleteBrands(string[] ids)
         {
             await _api.Brands_DeleteAsync(ids.ToList());
             return new Result {Succeeded = true};
@@ -57,12 +58,12 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task Export(ExportServiceType serviceType, string search)
         {
-            await (await _api.Brands_ExportAsync(serviceType, search)).ForceDownloadAsync(_jsRuntime);
+            await (await _api.Brands_ExportAsync(exportServiceType: serviceType, searchString: search)).ForceDownloadAsync(_jsRuntime);
         }
 
-        private async Task ExportSelected(ExportServiceType serviceType, int[] ids)
+        private async Task ExportSelected(ExportServiceType serviceType, string[] ids)
         {
-            await(await _api.Brands_ExportAsync(serviceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
+            await(await _api.Brands_ExportAsync(exportServiceType: serviceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
         }
 
         private async Task<bool> CreateOrEditBrand(BrandDto brandOrNull)

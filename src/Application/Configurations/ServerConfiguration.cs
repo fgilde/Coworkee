@@ -12,16 +12,21 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Rootobject
     {
+        public Connectionstrings ConnectionStrings { get; set; }
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
         public Appconfiguration AppConfiguration { get; set; }
-        public Connectionstrings ConnectionStrings { get; set; }
         public Cognitiveservices CognitiveServices { get; set; }
         public Apidocumentation ApiDocumentation { get; set; }
         public Mailconfiguration MailConfiguration { get; set; }
         public Serilog Serilog { get; set; }
         public Azure Azure { get; set; }
         public Rabbitmq RabbitMQ { get; set; }
+    }
+
+    public class Connectionstrings
+    {
+        public string DefaultConnection { get; set; }
     }
 
     public class Logging
@@ -39,12 +44,16 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Appconfiguration
     {
+        public Idhashing IdHashing { get; set; }
         public string Secret { get; set; }
     }
 
-    public class Connectionstrings
+    public class Idhashing
     {
-        public string DefaultConnection { get; set; }
+        public bool AllowAccessWithNotHashedId { get; set; }
+        public bool Enabled { get; set; }
+        public int MinLength { get; set; }
+        public string Salt { get; set; }
     }
 
     public class Cognitiveservices

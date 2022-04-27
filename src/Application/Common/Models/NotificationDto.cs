@@ -1,10 +1,8 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Application.Common.Models
 {
-    public class NotificationDto : DtoBase<int>
+    public class NotificationDto : HashableDtoBase
     {
         public string Subject { get; set; }
         public string NotificationTypeId { get; set; }

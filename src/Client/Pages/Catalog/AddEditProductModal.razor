@@ -5,7 +5,7 @@
     <MudDialog>
         <TitleContent>
             @{
-                if (AddEditProductModel.Id == 0)
+                if (AddEditProductModel.IsNew)
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
@@ -23,7 +23,7 @@
         </TitleContent>
         <DialogContent>
             <MudGrid>
-                @if (AddEditProductModel.Id != 0)
+                @if (!AddEditProductModel.IsNew)
                 {
                     <MudItem xs="12" md="6">
                         <MudTextField Disabled For="@(() => AddEditProductModel.Id)" @bind-Value="AddEditProductModel.Id" Label="@_localizer["Id"]" />
@@ -36,12 +36,12 @@
                     <MudTextField For="@(() => AddEditProductModel.Description)" @bind-Value="AddEditProductModel.Description" Label="@_localizer["Description"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudAutocomplete T="int" Label="@_localizer["Brand"]" For="@(() => AddEditProductModel.BrandId)" @bind-Value="AddEditProductModel.BrandId" ResetValueOnEmptyText="true" SearchFunc="@SearchBrands" Variant="Variant.Filled" ToStringFunc="@(i => _brands.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
+                    <MudAutocomplete T="string" Label="@_localizer["Brand"]" For="@(() => AddEditProductModel.BrandId)" @bind-Value="AddEditProductModel.BrandId" ResetValueOnEmptyText="true" SearchFunc="@SearchBrands" Variant="Variant.Filled" ToStringFunc="@(i => _brands.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
                 </MudItem>
                 <MudItem xs="12" md="6">
                     <MudTextField For="@(() => AddEditProductModel.Rate)" @bind-Value="AddEditProductModel.Rate" Label="@_localizer["Rate"]" />
                 </MudItem>
-                @if (AddEditProductModel.Id == 0)
+                @if (AddEditProductModel.IsNew)
                 {
                     <MudItem xs="12" md="6">
                         <MudTextField For="@(() => AddEditProductModel.Barcode)" @bind-Value="AddEditProductModel.Barcode" Label="@_localizer["Barcode"]" />
@@ -92,7 +92,7 @@
         </DialogContent>
         <DialogActions>
             <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
-            @if (AddEditProductModel.Id != 0)
+            @if (!AddEditProductModel.IsNew)
             {
                 <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
             }

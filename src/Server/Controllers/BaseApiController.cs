@@ -1,10 +1,12 @@
-﻿using CleanArchitectureBase.Application.Contracts.Hubs;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Application.Hubs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Server.Controllers
 {
@@ -24,6 +26,9 @@ namespace CleanArchitectureBase.Server.Controllers
         protected TService Get<TService>() => HttpContext.RequestServices.GetService<TService>();
         protected string ControllerName => ControllerContext.ActionDescriptor.ControllerName;
         protected IHubContext<ClientEventHub, IClientEventHub> ClientEventHub => Get<IHubContext<ClientEventHub, IClientEventHub>>();
+        protected int UnhashId(string hash) => hash.MapTo<int>();
+        protected int[] UnhashIds(string hash) => hash.MapTo<int[]>();
+        protected int[] UnhashIds(string[] hashes) => hashes.MapElementsTo<int>().ToArray();
     }
 
 }

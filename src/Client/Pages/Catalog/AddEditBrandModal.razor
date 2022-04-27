@@ -5,7 +5,7 @@
     <MudDialog>
         <TitleContent>
             @{
-                if (AddEditBrandModel.Id == 0)
+                if (AddEditBrandModel.IsNew)
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
@@ -23,7 +23,7 @@
         </TitleContent>
         <DialogContent>
             <MudGrid>
-                @if (AddEditBrandModel.Id != 0)
+                @if (!AddEditBrandModel.IsNew)
                 {
                     <MudItem xs="12" md="6">
                         <MudTextField Disabled For="@(() => AddEditBrandModel.Id)" @bind-Value="AddEditBrandModel.Id" Label="@_localizer["Id"]" />
@@ -42,7 +42,7 @@
         </DialogContent>
         <DialogActions>
             <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
-            @if (AddEditBrandModel.Id != 0)
+            @if (!AddEditBrandModel.IsNew)
             {
                 <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
             }

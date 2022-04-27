@@ -49,7 +49,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task LoadDataAsync()
         {
-            await LoadImageAsync();
+            if(!AddEditProductModel.IsNew)
+                await LoadImageAsync();
             await LoadBrandsAsync();
         }
 
@@ -95,7 +96,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             }
         }
 
-        private async Task<IEnumerable<int>> SearchBrands(string value)
+        private async Task<IEnumerable<string>> SearchBrands(string value)
         {
             // In real life use an asynchronous function for fetching data from an api.
             await Task.Delay(5);

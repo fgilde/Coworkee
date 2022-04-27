@@ -10,7 +10,7 @@
             <div class="d-flex">
 
                 <MudTooltip Class="z-tt" Text="@Notification.Subject">
-                    <MudText Class="mt-1" Color="@(Notification.IsRead ? Color.Inherit : Color.Primary)">@(Notification.Expanded ? Notification.Subject : Notification.Subject.ToEllipsis(25))</MudText>
+                    <MudText Class="mt-1" Color="@(Notification.IsRead ? Color.Inherit : Color.Primary)">@(Notification.Expanded ? Notification.Subject : Notification.Subject.ToEllipsis(40))</MudText>
                     @if (Notification.Expanded)
                     {
                         <span class="notification-label">@Notification.CreatedOn.AsClientLocalTime()</span>
@@ -59,7 +59,7 @@
 {
     [Parameter] public bool CanClose { get; set; }
     [Parameter] public NotificationDto Notification { get; set; }
-    [Parameter] public int NotificationId { get; set; }
+    [Parameter] public string NotificationId { get; set; }
     [Parameter] public EventCallback<NotificationDto> OnRead { get; set; }
     [Parameter] public EventCallback<NotificationDto> OnBeforeDelete { get; set; }
     [Parameter] public EventCallback<NotificationDto> OnDelete { get; set; }
@@ -83,7 +83,7 @@
     private async Task Delete(NotificationDto notification)
     {
         await OnBeforeDelete.InvokeAsync(notification);
-        await _api.Notifications_DeleteAsync(new List<int> { notification.Id });
+        await _api.Notifications_DeleteAsync(new List<string> { notification.Id });
         await OnDelete.InvokeAsync(notification);
     }
 

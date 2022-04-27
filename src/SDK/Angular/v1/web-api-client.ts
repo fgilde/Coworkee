@@ -916,11 +916,11 @@ export interface IDocumentTypesClient {
     getById(id: number): Observable<DocumentTypeDto>;
     /**
      * Exports Document Types
+     * @param ids (optional) 
      * @param exportServiceType (optional) 
      * @param searchString (optional) 
-     * @param ids (optional) 
      */
-    export(exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined, ids: number[] | null | undefined): Observable<FileResponse | null>;
+    export(ids: number[] | null | undefined, exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined): Observable<FileResponse | null>;
 }
 
 @Injectable({
@@ -1160,20 +1160,20 @@ export class DocumentTypesClient implements IDocumentTypesClient {
 
     /**
      * Exports Document Types
+     * @param ids (optional) 
      * @param exportServiceType (optional) 
      * @param searchString (optional) 
-     * @param ids (optional) 
      */
-    export(exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined, ids: number[] | null | undefined): Observable<FileResponse | null> {
+    export(ids: number[] | null | undefined, exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/DocumentTypes/Export?";
+        if (ids !== undefined && ids !== null)
+            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         if (exportServiceType === null)
             throw new Error("The parameter 'exportServiceType' cannot be null.");
         else if (exportServiceType !== undefined)
             url_ += "ExportServiceType=" + encodeURIComponent("" + exportServiceType) + "&";
         if (searchString !== undefined && searchString !== null)
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
-        if (ids !== undefined && ids !== null)
-            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -2242,7 +2242,7 @@ export interface INotificationsClient {
      * @param ids Notifications to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<FileResponse | null>;
+    delete(ids: string[]): Observable<FileResponse | null>;
     /**
      * Returns count of unread notifications
      * @return Status 200 OK
@@ -2257,13 +2257,13 @@ export interface INotificationsClient {
      * Gets a Specific Notification by an Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<NotificationDto>;
+    getById(id: string | null): Observable<NotificationDto>;
     /**
      * Marks a notification as read or unread
      * @param isRead (optional) read status
      * @return Status 200 Ok
      */
-    markRead(id: number, isRead: boolean | undefined): Observable<NotificationDto>;
+    markRead(id: string | null, isRead: boolean | undefined): Observable<NotificationDto>;
     /**
      * Marks all users notifications as read or unread
      * @param isRead (optional) read status
@@ -2366,7 +2366,7 @@ export class NotificationsClient implements INotificationsClient {
      * @param ids Notifications to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<FileResponse | null> {
+    delete(ids: string[]): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Notifications";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2523,7 +2523,7 @@ export class NotificationsClient implements INotificationsClient {
      * Gets a Specific Notification by an Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<NotificationDto> {
+    getById(id: string | null): Observable<NotificationDto> {
         let url_ = this.baseUrl + "/Notifications/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2579,7 +2579,7 @@ export class NotificationsClient implements INotificationsClient {
      * @param isRead (optional) read status
      * @return Status 200 Ok
      */
-    markRead(id: number, isRead: boolean | undefined): Observable<NotificationDto> {
+    markRead(id: string | null, isRead: boolean | undefined): Observable<NotificationDto> {
         let url_ = this.baseUrl + "/Notifications/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4665,19 +4665,19 @@ export interface IBrandsClient {
      * Delete a Brand
      * @return Status 200 OK
      */
-    delete(ids: number[]): Observable<FileResponse | null>;
+    delete(ids: string[]): Observable<FileResponse | null>;
     /**
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<BrandDto>;
+    getById(id: string | null): Observable<BrandDto>;
     /**
      * Exports brands
+     * @param ids (optional) 
      * @param exportServiceType (optional) 
      * @param searchString (optional) 
-     * @param ids (optional) 
      */
-    export(exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined, ids: number[] | null | undefined): Observable<FileResponse | null>;
+    export(ids: string[] | null | undefined, exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined): Observable<FileResponse | null>;
 }
 
 @Injectable({
@@ -4813,7 +4813,7 @@ export class BrandsClient implements IBrandsClient {
      * Delete a Brand
      * @return Status 200 OK
      */
-    delete(ids: number[]): Observable<FileResponse | null> {
+    delete(ids: string[]): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Brands";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4867,7 +4867,7 @@ export class BrandsClient implements IBrandsClient {
      * Get a Brand By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<BrandDto> {
+    getById(id: string | null): Observable<BrandDto> {
         let url_ = this.baseUrl + "/Brands/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4920,20 +4920,20 @@ export class BrandsClient implements IBrandsClient {
 
     /**
      * Exports brands
+     * @param ids (optional) 
      * @param exportServiceType (optional) 
      * @param searchString (optional) 
-     * @param ids (optional) 
      */
-    export(exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined, ids: number[] | null | undefined): Observable<FileResponse | null> {
+    export(ids: string[] | null | undefined, exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Brands/Export?";
+        if (ids !== undefined && ids !== null)
+            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         if (exportServiceType === null)
             throw new Error("The parameter 'exportServiceType' cannot be null.");
         else if (exportServiceType !== undefined)
             url_ += "ExportServiceType=" + encodeURIComponent("" + exportServiceType) + "&";
         if (searchString !== undefined && searchString !== null)
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
-        if (ids !== undefined && ids !== null)
-            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -4999,25 +4999,25 @@ export interface IProductsClient {
      * @param ids Products to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<FileResponse | null>;
+    delete(ids: string[]): Observable<FileResponse | null>;
     /**
      * Get a Product Image by Id
      * @param id Product Id
      * @return Status 200 OK
      */
-    getProductImage(id: number): Observable<ResultOfString>;
+    getProductImage(id: string | null): Observable<ResultOfString>;
     /**
      * Get a Product by Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ProductDto>;
+    getById(id: string | null): Observable<ProductDto>;
     /**
      * Exports products
+     * @param ids (optional) 
      * @param exportServiceType (optional) 
      * @param searchString (optional) 
-     * @param ids (optional) 
      */
-    export(exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined, ids: number[] | null | undefined): Observable<FileResponse | null>;
+    export(ids: string[] | null | undefined, exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined): Observable<FileResponse | null>;
 }
 
 @Injectable({
@@ -5160,7 +5160,7 @@ export class ProductsClient implements IProductsClient {
      * @param ids Products to delete
      * @return Status 200 OK response
      */
-    delete(ids: number[]): Observable<FileResponse | null> {
+    delete(ids: string[]): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Products";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5215,7 +5215,7 @@ export class ProductsClient implements IProductsClient {
      * @param id Product Id
      * @return Status 200 OK
      */
-    getProductImage(id: number): Observable<ResultOfString> {
+    getProductImage(id: string | null): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/Products/image/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -5270,7 +5270,7 @@ export class ProductsClient implements IProductsClient {
      * Get a Product by Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<ProductDto> {
+    getById(id: string | null): Observable<ProductDto> {
         let url_ = this.baseUrl + "/Products/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -5323,20 +5323,20 @@ export class ProductsClient implements IProductsClient {
 
     /**
      * Exports products
+     * @param ids (optional) 
      * @param exportServiceType (optional) 
      * @param searchString (optional) 
-     * @param ids (optional) 
      */
-    export(exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined, ids: number[] | null | undefined): Observable<FileResponse | null> {
+    export(ids: string[] | null | undefined, exportServiceType: ExportServiceType | undefined, searchString: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Products/Export?";
+        if (ids !== undefined && ids !== null)
+            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         if (exportServiceType === null)
             throw new Error("The parameter 'exportServiceType' cannot be null.");
         else if (exportServiceType !== undefined)
             url_ += "ExportServiceType=" + encodeURIComponent("" + exportServiceType) + "&";
         if (searchString !== undefined && searchString !== null)
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
-        if (ids !== undefined && ids !== null)
-            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -5651,10 +5651,11 @@ export interface IVersionInfoModel {
     system?: string | undefined;
 }
 
-export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
-    id!: number;
+export abstract class HashableDtoBase implements IHashableDtoBase {
+    isNew!: boolean;
+    id?: string | undefined;
 
-    constructor(data?: IDtoBaseOfInteger) {
+    constructor(data?: IHashableDtoBase) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -5665,33 +5666,36 @@ export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
 
     init(_data?: any) {
         if (_data) {
+            this.isNew = _data["isNew"];
             this.id = _data["id"];
         }
     }
 
-    static fromJS(data: any): DtoBaseOfInteger {
+    static fromJS(data: any): HashableDtoBase {
         data = typeof data === 'object' ? data : {};
-        throw new Error("The abstract class 'DtoBaseOfInteger' cannot be instantiated.");
+        throw new Error("The abstract class 'HashableDtoBase' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["isNew"] = this.isNew;
         data["id"] = this.id;
         return data;
     }
 }
 
-export interface IDtoBaseOfInteger {
-    id: number;
+export interface IHashableDtoBase {
+    isNew: boolean;
+    id?: string | undefined;
 }
 
-export class ProductDto extends DtoBaseOfInteger implements IProductDto {
+export class ProductDto extends HashableDtoBase implements IProductDto {
     name?: string | undefined;
     barcode?: string | undefined;
     description?: string | undefined;
     rate!: number;
     brand?: BrandDto | undefined;
-    brandId!: number;
+    brandId?: string | undefined;
     imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
 
@@ -5735,18 +5739,18 @@ export class ProductDto extends DtoBaseOfInteger implements IProductDto {
     }
 }
 
-export interface IProductDto extends IDtoBaseOfInteger {
+export interface IProductDto extends IHashableDtoBase {
     name?: string | undefined;
     barcode?: string | undefined;
     description?: string | undefined;
     rate: number;
     brand?: BrandDto | undefined;
-    brandId: number;
+    brandId?: string | undefined;
     imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
 }
 
-export class BrandDto extends DtoBaseOfInteger implements IBrandDto {
+export class BrandDto extends HashableDtoBase implements IBrandDto {
     name?: string | undefined;
     description?: string | undefined;
     tax!: number;
@@ -5781,7 +5785,7 @@ export class BrandDto extends DtoBaseOfInteger implements IBrandDto {
     }
 }
 
-export interface IBrandDto extends IDtoBaseOfInteger {
+export interface IBrandDto extends IHashableDtoBase {
     name?: string | undefined;
     description?: string | undefined;
     tax: number;
@@ -5978,6 +5982,44 @@ export interface IPaginatedResultOfDocumentDto extends IResult {
     pageSize: number;
     hasPreviousPage: boolean;
     hasNextPage: boolean;
+}
+
+export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
+    id!: number;
+    isNew!: boolean;
+
+    constructor(data?: IDtoBaseOfInteger) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.isNew = _data["isNew"];
+        }
+    }
+
+    static fromJS(data: any): DtoBaseOfInteger {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'DtoBaseOfInteger' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["isNew"] = this.isNew;
+        return data;
+    }
+}
+
+export interface IDtoBaseOfInteger {
+    id: number;
+    isNew: boolean;
 }
 
 export class DocumentDto extends DtoBaseOfInteger implements IDocumentDto {
@@ -6789,12 +6831,11 @@ export class AddEditTranslationsCommand extends AddEditCommandBaseOfTranslationD
 export interface IAddEditTranslationsCommand extends IAddEditCommandBaseOfTranslationDto {
 }
 
-export class ExportQueryBaseOfInteger implements IExportQueryBaseOfInteger {
+export abstract class ExportQueryBase implements IExportQueryBase {
     exportServiceType!: ExportServiceType;
     searchString?: string | undefined;
-    ids?: number[] | undefined;
 
-    constructor(data?: IExportQueryBaseOfInteger) {
+    constructor(data?: IExportQueryBase) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -6807,6 +6848,37 @@ export class ExportQueryBaseOfInteger implements IExportQueryBaseOfInteger {
         if (_data) {
             this.exportServiceType = _data["exportServiceType"];
             this.searchString = _data["searchString"];
+        }
+    }
+
+    static fromJS(data: any): ExportQueryBase {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'ExportQueryBase' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exportServiceType"] = this.exportServiceType;
+        data["searchString"] = this.searchString;
+        return data;
+    }
+}
+
+export interface IExportQueryBase {
+    exportServiceType: ExportServiceType;
+    searchString?: string | undefined;
+}
+
+export class ExportQueryBaseOfInteger extends ExportQueryBase implements IExportQueryBaseOfInteger {
+    ids?: number[] | undefined;
+
+    constructor(data?: IExportQueryBaseOfInteger) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
             if (Array.isArray(_data["ids"])) {
                 this.ids = [] as any;
                 for (let item of _data["ids"])
@@ -6824,20 +6896,17 @@ export class ExportQueryBaseOfInteger implements IExportQueryBaseOfInteger {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["exportServiceType"] = this.exportServiceType;
-        data["searchString"] = this.searchString;
         if (Array.isArray(this.ids)) {
             data["ids"] = [];
             for (let item of this.ids)
                 data["ids"].push(item);
         }
+        super.toJSON(data);
         return data;
     }
 }
 
-export interface IExportQueryBaseOfInteger {
-    exportServiceType: ExportServiceType;
-    searchString?: string | undefined;
+export interface IExportQueryBaseOfInteger extends IExportQueryBase {
     ids?: number[] | undefined;
 }
 
@@ -7018,7 +7087,7 @@ export interface IPaginatedResultOfNotificationDto extends IResult {
     hasNextPage: boolean;
 }
 
-export class NotificationDto extends DtoBaseOfInteger implements INotificationDto {
+export class NotificationDto extends HashableDtoBase implements INotificationDto {
     subject?: string | undefined;
     notificationTypeId?: string | undefined;
     excerpt?: string | undefined;
@@ -7074,7 +7143,7 @@ export class NotificationDto extends DtoBaseOfInteger implements INotificationDt
     }
 }
 
-export interface INotificationDto extends IDtoBaseOfInteger {
+export interface INotificationDto extends IHashableDtoBase {
     subject?: string | undefined;
     notificationTypeId?: string | undefined;
     excerpt?: string | undefined;

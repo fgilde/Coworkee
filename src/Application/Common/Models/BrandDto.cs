@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitectureBase.Application.Common.Models
 {
-    public class BrandDto: DtoBase<int>
+    public class BrandDto: HashableDtoBase
     {
         public string Name { get; set; }
         public string Description { get; set; }

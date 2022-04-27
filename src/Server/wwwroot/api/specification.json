@@ -844,6 +844,17 @@
         "operationId": "DocumentTypes_Export",
         "parameters": [
           {
+            "type": "array",
+            "name": "Ids",
+            "in": "query",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
             "type": "integer",
             "name": "ExportServiceType",
             "in": "query",
@@ -862,17 +873,6 @@
             "name": "SearchString",
             "in": "query",
             "x-nullable": true
-          },
-          {
-            "type": "array",
-            "name": "Ids",
-            "in": "query",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
           }
         ],
         "responses": {
@@ -1769,8 +1769,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
               }
             },
             "x-nullable": false
@@ -1886,12 +1885,11 @@
         ],
         "parameters": [
           {
-            "type": "integer",
+            "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "format": "int32",
-            "x-nullable": false
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -1936,12 +1934,11 @@
         ],
         "parameters": [
           {
-            "type": "integer",
+            "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "format": "int32",
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "type": "boolean",
@@ -3928,8 +3925,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
               }
             },
             "x-nullable": false
@@ -3979,12 +3975,11 @@
         ],
         "parameters": [
           {
-            "type": "integer",
+            "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "format": "int32",
-            "x-nullable": false
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -4012,6 +4007,16 @@
         "operationId": "Brands_Export",
         "parameters": [
           {
+            "type": "array",
+            "name": "Ids",
+            "in": "query",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          {
             "type": "integer",
             "name": "ExportServiceType",
             "in": "query",
@@ -4030,17 +4035,6 @@
             "name": "SearchString",
             "in": "query",
             "x-nullable": true
-          },
-          {
-            "type": "array",
-            "name": "Ids",
-            "in": "query",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
           }
         ],
         "responses": {
@@ -4209,8 +4203,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
               }
             },
             "x-nullable": false
@@ -4260,13 +4253,12 @@
         ],
         "parameters": [
           {
-            "type": "integer",
+            "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
             "description": "Product Id",
-            "format": "int32",
-            "x-nullable": false
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -4313,12 +4305,11 @@
         ],
         "parameters": [
           {
-            "type": "integer",
+            "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "format": "int32",
-            "x-nullable": false
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -4341,6 +4332,16 @@
         "operationId": "Products_Export",
         "parameters": [
           {
+            "type": "array",
+            "name": "Ids",
+            "in": "query",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          {
             "type": "integer",
             "name": "ExportServiceType",
             "in": "query",
@@ -4359,17 +4360,6 @@
             "name": "SearchString",
             "in": "query",
             "x-nullable": true
-          },
-          {
-            "type": "array",
-            "name": "Ids",
-            "in": "query",
-            "collectionFormat": "multi",
-            "x-nullable": true,
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
           }
         ],
         "responses": {
@@ -4515,13 +4505,12 @@
     "ProductDto": {
       "allOf": [
         {
-          "$ref": "#/definitions/DtoBaseOfInteger"
+          "$ref": "#/definitions/HashableDtoBase"
         },
         {
           "type": "object",
           "required": [
-            "rate",
-            "brandId"
+            "rate"
           ],
           "properties": {
             "name": {
@@ -4541,8 +4530,7 @@
               "$ref": "#/definitions/BrandDto"
             },
             "brandId": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             },
             "imageDataURL": {
               "type": "string"
@@ -4557,7 +4545,7 @@
     "BrandDto": {
       "allOf": [
         {
-          "$ref": "#/definitions/DtoBaseOfInteger"
+          "$ref": "#/definitions/HashableDtoBase"
         },
         {
           "type": "object",
@@ -4579,16 +4567,18 @@
         }
       ]
     },
-    "DtoBaseOfInteger": {
+    "HashableDtoBase": {
       "type": "object",
       "x-abstract": true,
       "required": [
-        "id"
+        "isNew"
       ],
       "properties": {
+        "isNew": {
+          "type": "boolean"
+        },
         "id": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         }
       }
     },
@@ -4772,6 +4762,23 @@
           }
         }
       ]
+    },
+    "DtoBaseOfInteger": {
+      "type": "object",
+      "x-abstract": true,
+      "required": [
+        "id",
+        "isNew"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isNew": {
+          "type": "boolean"
+        }
+      }
     },
     "AddEditDocumentsCommand": {
       "allOf": [
@@ -5156,7 +5163,27 @@
       ]
     },
     "ExportQueryBaseOfInteger": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportQueryBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ExportQueryBase": {
       "type": "object",
+      "x-abstract": true,
       "required": [
         "exportServiceType"
       ],
@@ -5166,13 +5193,6 @@
         },
         "searchString": {
           "type": "string"
-        },
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
         }
       }
     },
@@ -5249,7 +5269,7 @@
     "NotificationDto": {
       "allOf": [
         {
-          "$ref": "#/definitions/DtoBaseOfInteger"
+          "$ref": "#/definitions/HashableDtoBase"
         },
         {
           "type": "object",

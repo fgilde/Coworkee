@@ -262,14 +262,14 @@ namespace SDK
         /// Exports Document Types
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse DocumentTypes_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null);
+        FileResponse DocumentTypes_Export(System.Collections.Generic.IList<int> ids = null, ExportServiceType? exportServiceType = null, string searchString = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Exports Document Types
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(System.Collections.Generic.IList<int> ids = null, ExportServiceType? exportServiceType = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse DocumentExtendedAttributes_GetAll();
@@ -484,7 +484,7 @@ namespace SDK
         /// <param name="ids">Notifications to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Notifications_Delete(System.Collections.Generic.IList<int> ids);
+        FileResponse Notifications_Delete(System.Collections.Generic.IList<string> ids);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -493,7 +493,7 @@ namespace SDK
         /// <param name="ids">Notifications to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Notifications_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Notifications_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Returns count of unread notifications
@@ -530,7 +530,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        NotificationDto Notifications_GetById(int id);
+        NotificationDto Notifications_GetById(string id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -538,7 +538,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<NotificationDto> Notifications_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<NotificationDto> Notifications_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Marks a notification as read or unread
@@ -546,7 +546,7 @@ namespace SDK
         /// <param name="isRead">read status</param>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        NotificationDto Notifications_MarkRead(int id, bool? isRead = null);
+        NotificationDto Notifications_MarkRead(string id, bool? isRead = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -555,7 +555,7 @@ namespace SDK
         /// <param name="isRead">read status</param>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<NotificationDto> Notifications_MarkReadAsync(int id, bool? isRead = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<NotificationDto> Notifications_MarkReadAsync(string id, bool? isRead = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Marks all users notifications as read or unread
@@ -1062,7 +1062,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_Delete(System.Collections.Generic.IList<int> ids);
+        FileResponse Brands_Delete(System.Collections.Generic.IList<string> ids);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1070,14 +1070,14 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Brands_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get a Brand By Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        BrandDto Brands_GetById(int id);
+        BrandDto Brands_GetById(string id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1085,20 +1085,20 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BrandDto> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<BrandDto> Brands_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Exports brands
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Brands_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null);
+        FileResponse Brands_Export(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Exports brands
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get All Products
@@ -1136,7 +1136,7 @@ namespace SDK
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_Delete(System.Collections.Generic.IList<int> ids);
+        FileResponse Products_Delete(System.Collections.Generic.IList<string> ids);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1145,7 +1145,7 @@ namespace SDK
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Products_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get a Product Image by Id
@@ -1153,7 +1153,7 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<string> Products_GetProductImage(int id);
+        Result<string> Products_GetProductImage(string id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1162,14 +1162,14 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get a Product by Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        ProductDto Products_GetById(int id);
+        ProductDto Products_GetById(string id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1177,20 +1177,20 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<ProductDto> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ProductDto> Products_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Exports products
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Products_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null);
+        FileResponse Products_Export(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Exports products
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -2627,9 +2627,9 @@ namespace SDK
         /// Exports Document Types
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse DocumentTypes_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null)
+        public virtual FileResponse DocumentTypes_Export(System.Collections.Generic.IList<int> ids = null, ExportServiceType? exportServiceType = null, string searchString = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportAsync(exportServiceType, searchString, ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await DocumentTypes_ExportAsync(ids, exportServiceType, searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2637,10 +2637,14 @@ namespace SDK
         /// Exports Document Types
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> DocumentTypes_ExportAsync(System.Collections.Generic.IList<int> ids = null, ExportServiceType? exportServiceType = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/DocumentTypes/Export?");
+            if (ids != null)
+            {
+                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
             if (exportServiceType != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("ExportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -2648,10 +2652,6 @@ namespace SDK
             if (searchString != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (ids != null)
-            {
-                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
 
@@ -4154,7 +4154,7 @@ namespace SDK
         /// <param name="ids">Notifications to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Notifications_Delete(System.Collections.Generic.IList<int> ids)
+        public virtual FileResponse Notifications_Delete(System.Collections.Generic.IList<string> ids)
         {
             return System.Threading.Tasks.Task.Run(async () => await Notifications_DeleteAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4166,7 +4166,7 @@ namespace SDK
         /// <param name="ids">Notifications to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Notifications_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Notifications_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
@@ -4397,7 +4397,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual NotificationDto Notifications_GetById(int id)
+        public virtual NotificationDto Notifications_GetById(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Notifications_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4408,11 +4408,8 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<NotificationDto> Notifications_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<NotificationDto> Notifications_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Notifications/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -4482,7 +4479,7 @@ namespace SDK
         /// <param name="isRead">read status</param>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual NotificationDto Notifications_MarkRead(int id, bool? isRead = null)
+        public virtual NotificationDto Notifications_MarkRead(string id, bool? isRead = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Notifications_MarkReadAsync(id, isRead, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -4494,11 +4491,8 @@ namespace SDK
         /// <param name="isRead">read status</param>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<NotificationDto> Notifications_MarkReadAsync(int id, bool? isRead = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<NotificationDto> Notifications_MarkReadAsync(string id, bool? isRead = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Notifications/{id}?");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -7417,7 +7411,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Brands_Delete(System.Collections.Generic.IList<int> ids)
+        public virtual FileResponse Brands_Delete(System.Collections.Generic.IList<string> ids)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_DeleteAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -7428,7 +7422,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Brands_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Brands_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
@@ -7501,7 +7495,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual BrandDto Brands_GetById(int id)
+        public virtual BrandDto Brands_GetById(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Brands_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -7512,11 +7506,8 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BrandDto> Brands_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<BrandDto> Brands_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -7584,9 +7575,9 @@ namespace SDK
         /// Exports brands
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Brands_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null)
+        public virtual FileResponse Brands_Export(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Brands_ExportAsync(exportServiceType, searchString, ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Brands_ExportAsync(ids, exportServiceType, searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7594,10 +7585,14 @@ namespace SDK
         /// Exports brands
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Brands_ExportAsync(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Brands/Export?");
+            if (ids != null)
+            {
+                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
             if (exportServiceType != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("ExportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -7605,10 +7600,6 @@ namespace SDK
             if (searchString != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (ids != null)
-            {
-                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
 
@@ -7856,7 +7847,7 @@ namespace SDK
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Products_Delete(System.Collections.Generic.IList<int> ids)
+        public virtual FileResponse Products_Delete(System.Collections.Generic.IList<string> ids)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_DeleteAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -7868,7 +7859,7 @@ namespace SDK
         /// <param name="ids">Products to delete</param>
         /// <returns>Status 200 OK response</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Products_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Products_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
@@ -7942,7 +7933,7 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual Result<string> Products_GetProductImage(int id)
+        public virtual Result<string> Products_GetProductImage(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetProductImageAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -7954,11 +7945,8 @@ namespace SDK
         /// <param name="id">Product Id</param>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Result<string>> Products_GetProductImageAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/image/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -8027,7 +8015,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual ProductDto Products_GetById(int id)
+        public virtual ProductDto Products_GetById(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Products_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -8038,11 +8026,8 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<ProductDto> Products_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<ProductDto> Products_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -8110,9 +8095,9 @@ namespace SDK
         /// Exports products
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Products_Export(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null)
+        public virtual FileResponse Products_Export(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Products_ExportAsync(exportServiceType, searchString, ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Products_ExportAsync(ids, exportServiceType, searchString, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -8120,10 +8105,14 @@ namespace SDK
         /// Exports products
         /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(ExportServiceType? exportServiceType = null, string searchString = null, System.Collections.Generic.IList<int> ids = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Products_ExportAsync(System.Collections.Generic.IList<string> ids = null, ExportServiceType? exportServiceType = null, string searchString = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products/Export?");
+            if (ids != null)
+            {
+                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
             if (exportServiceType != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("ExportServiceType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(exportServiceType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -8131,10 +8120,6 @@ namespace SDK
             if (searchString != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("SearchString") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchString, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (ids != null)
-            {
-                foreach (var item_ in ids) { urlBuilder_.Append(System.Uri.EscapeDataString("Ids") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
 

@@ -10,7 +10,7 @@ namespace CleanArchitectureBase.Application.Requests;
 
 public class NotificationRequest: ClientEventBase
 {
-    public string NotificationTypeId { get; set; } = Guid.NewGuid().ToString();
+    public string NotificationTypeId { get; set; } = Guid.NewGuid().ToString(); // Public setter is required for serializer but you should not use it
     public NotificationAsMail SendAsMail { get; set; }
     public bool SkipCurrentUser { get; set; }
 

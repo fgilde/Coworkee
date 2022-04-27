@@ -23,7 +23,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
 
     internal class DeleteCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand>
         where TEntity : AuditableEntity<TEntityId>
-        where TDto : IDtoBase<TEntityId>
+        where TDto : IDtoBase
         where TCommand : DeleteCommandBase<TEntityId>
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using CleanArchitectureBase.Application.Common.Behaviours;
 using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Contracts;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
@@ -14,6 +15,7 @@ using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetB
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Wrapper;
 using FluentValidation;
+using HashidsNet;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -23,8 +25,11 @@ namespace CleanArchitectureBase.Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddApplication(this IServiceCollection services, ServerConfiguration config)
         {
+            //services.AddTransient(_ => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings
+            services.AddSingleton(_ => new Hashids(config.AppConfiguration.IdHashing.Salt, config.AppConfiguration.IdHashing.MinLength));
+            ClassMappingConfiguration.RegisterConverters(config.AppConfiguration.IdHashing);
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
             services.AddTransient<ICustomAuthorizeAttributeHandler, CustomAuthorizeAttributeHandler>();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

@@ -4,29 +4,26 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Features.Translations.Import;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Shared.Dialogs;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using Nextended.Core;
 using Nextended.Core.Extensions;
-using SDK;
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
@@ -34,65 +31,27 @@ namespace CleanArchitectureBase.Client.Shared.Components
     {
         [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
         [Parameter] public bool MultiSelect { get; set; } = true;
-
         [Parameter] public string InitialAction { get; set; }
         [Parameter] public string InitialIdString { get; set; }
-
         [CascadingParameter] private HubConnection HubConnection { get; set; }
-
-        [Parameter]
-        public Func<int, int, string, string[], Task<PaginatedResult<TResult>>> ApiLoadPaged { get; set; }
-
-        [Parameter]
-        public Func<Task<Result<List<TResult>>>> ApiLoad { get; set; }
-
-        [Parameter]
-        public Func<TResult, Task<bool>> ApiCreateOrEdit { get; set; }
-
-        [Parameter]
-        public Func<TResult[], Task<bool>> ApiEditMany { get; set; }
-
-        [Parameter]
-        public Func<TIdType[], Task<Result>> ApiDelete { get; set; }
-
-        [Parameter]
-        public Func<ExportServiceType, string, Task> Export { get; set; }
-
-        [Parameter]
-        public Func<ExportServiceType, TIdType[], Task> ExportSelected { get; set; }
-
-        [Parameter]
-        public Func<InputFileChangeEventArgs, Task> Import { get; set; }
-
-        [Parameter]
-        public Func<TIdType, IEnumerable<TResult>, Task<TResult>> GetById { get; set; }
-
-        [Parameter]
-        public Func<TResult, TIdType> GetId { get; set; }
-
-        [Parameter]
-        public Func<TResult, string> Display { get; set; }
-
-        [Parameter]
-        public string[] TableProperties { get; set; }
-
-        [Parameter]
-        public string CreatePermission { get; set; }
-
-        [Parameter]
-        public string EditPermission { get; set; }
-
-        [Parameter]
-        public string DeletePermission { get; set; }
-
-        [Parameter]
-        public string ExportPermission { get; set; }
-
-        [Parameter]
-        public string SearchPermission { get; set; }
-
-        [Parameter]
-        public bool? ImmediateSearch { get; set; }
+        [Parameter] public Func<int, int, string, string[], CancellationToken, Task<PaginatedResult<TResult>>> ApiLoadPaged { get; set; }
+        [Parameter] public Func<CancellationToken ,Task<Result<List<TResult>>>> ApiLoad { get; set; }
+        [Parameter] public Func<TResult, Task<bool>> ApiCreateOrEdit { get; set; }
+        [Parameter] public Func<TResult[], Task<bool>> ApiEditMany { get; set; }
+        [Parameter] public Func<TIdType[], Task<Result>> ApiDelete { get; set; }
+        [Parameter] public Func<ExportServiceType, string, Task> Export { get; set; }
+        [Parameter] public Func<ExportServiceType, TIdType[], Task> ExportSelected { get; set; }
+        [Parameter] public Func<InputFileChangeEventArgs, Task> Import { get; set; }
+        [Parameter] public Func<TIdType, IEnumerable<TResult>, Task<TResult>> GetById { get; set; }
+        [Parameter] public Func<TResult, TIdType> GetId { get; set; }
+        [Parameter] public Func<TResult, string> Display { get; set; }
+        [Parameter] public string[] TableProperties { get; set; }
+        [Parameter] public string CreatePermission { get; set; }
+        [Parameter] public string EditPermission { get; set; }
+        [Parameter] public string DeletePermission { get; set; }
+        [Parameter] public string ExportPermission { get; set; }
+        [Parameter] public string SearchPermission { get; set; }
+        [Parameter] public bool? ImmediateSearch { get; set; }
 
         private string _pageUrl;
         private List<TResult> _flatList = new();
@@ -102,6 +61,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private int _totalItems;
         private int _currentPage;
         private string _searchString = "";
+        private CancellationTokenSource cancellationTokenSource;
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreate;
@@ -125,6 +85,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         protected override async Task OnInitializedAsync()
         {
+            _navigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+            cancellationTokenSource = new CancellationTokenSource();
             _pageUrl = _navigationManager.Uri.Split(InitialAction)[0].EnsureEndsWith("/");
             _currentUser = await _clientAuthenticationManager.CurrentUser();
             
@@ -141,6 +103,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
                     await Reload();
                 }
             });
+        }
+
+        private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+        {
+            Cancel();
         }
 
 
@@ -200,7 +167,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 orderings = state.SortDirection != SortDirection.None ? new[] { $"{state.SortLabel} {state.SortDirection}" } : new[] { $"{state.SortLabel}" };
             }
 
-            var response = await ApiLoadPaged(pageNumber + 1, pageSize, _searchString, orderings);
+            var response = await ApiLoadPaged(pageNumber + 1, pageSize, _searchString, orderings, cancellationTokenSource.Token);
             if (_errorService.IsSuccessFull(response))
             {
                 _totalItems = response.TotalCount;
@@ -213,7 +180,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             if (ApiLoad != null)
             {
-                var response = await ApiLoad();
+                var response = await ApiLoad(cancellationTokenSource.Token);
                 if (_errorService.IsSuccessFull(response))
                     _flatList = CheckForTemporaryChanges(response.Data).ToList();
             }
@@ -432,6 +399,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         public ValueTask DisposeAsync()
         {
+            _navigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
             return HubConnection.TryDisposeAsync();
         }
 
@@ -439,6 +407,15 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             if (arg.NewValue.LanguageCode != arg.OldValue?.LanguageCode)
                 await Reload();
+        }
+
+        private void Cancel()
+        {
+            if (cancellationTokenSource?.IsCancellationRequested == false)
+            {
+                cancellationTokenSource?.Cancel();
+                cancellationTokenSource = new CancellationTokenSource();
+            }
         }
     }
 }

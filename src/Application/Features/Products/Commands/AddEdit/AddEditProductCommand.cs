@@ -43,7 +43,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
 
         public override async Task<AddUpdateResult<ProductDto>> Handle(AddEditProductsCommand command, CancellationToken cancellationToken)
         {
-            if (command.Items.Any(item => UnitOfWork.Repository<Product>().Entities.Any(p => p.Id != item.Id && p.Barcode == item.Barcode)))
+            if (command.Items.Any(item => UnitOfWork.Repository<Product>().Entities.Any(p => p.Id != item.GetId() && p.Barcode == item.Barcode)))
                 throw Errors.Create(_localizer["Barcode already exists."], HttpStatusCode.Conflict);
 
             var uploadTasks = command.Items.Where(dto => dto.UploadRequest != null).Select(dto =>

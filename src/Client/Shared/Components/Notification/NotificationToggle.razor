@@ -108,6 +108,8 @@
     private HubConnection HubConnection { get; set; }
 
     [Parameter] public int PageSize { get; set; } = 10;
+    [Parameter] public AnimationBehavior Animate { get; set; } = AnimationBehavior.Always;
+
     private bool _animate;
 
     [Parameter]
@@ -119,8 +121,7 @@
             if (_isOpen != value)
             {
                 _isOpen = value;
-                if (!_isOpen)
-                    _animate = false;
+                _animate = Animate == AnimationBehavior.Always ? _isOpen : _isOpen && _animate;
                 if (_isOpen && _needsReload)
                     _ = LoadData(_currentPage);
             }
@@ -173,7 +174,7 @@
             {
                 notifications = new PaginatedResult<NotificationDto>(new List<NotificationDto> { notificationDto });
                 notifications.TotalCount = 1;
-                Open(false);
+                AutoOpen(false);
             }
 
             StateHasChanged();
@@ -193,10 +194,11 @@
         _needsReload = reloadOnNextOpen;
     }
 
-    private void Open(bool reload)
+    private void AutoOpen(bool reload)
     {
         _needsReload = reload;
-        SlideInOnNextOpen();
+        if (Animate == AnimationBehavior.OnNewEntry)
+            SlideInOnNextOpen();
         IsOpen = true;
         _needsReload = !reload;
     }

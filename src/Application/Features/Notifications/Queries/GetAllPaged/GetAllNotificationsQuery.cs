@@ -12,7 +12,6 @@ using CleanArchitectureBase.Application.Specifications.Notifications;
 using CleanArchitectureBase.Domain.Entities.Notifications;
 using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitectureBase.Application.Features.Notifications.Queries.GetAllPaged;
 

@@ -8,6 +8,7 @@ using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
+using CleanArchitectureBase.Application.Features.Base.Contracts;
 using CleanArchitectureBase.Application.Specifications.Base;
 using CleanArchitectureBase.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +18,25 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Features.Base.Export
 {
-    public class ExportQueryBase<TId> : IRequest<byte[]>
+    public abstract class ExportQueryBase
     {
         public ExportServiceType ExportServiceType { get; set; } = ExportServiceType.Excel;
         public string SearchString { get; set; }
+    }
+
+    public class ExportQueryBase<TId> : ExportQueryBase ,IExportQuery<TId>
+    {
         public TId[] Ids { get; set; }
     }
 
+    public class ExportQueryHashed : ExportQueryBase, IExportQuery<int>
+    {
+        public string[] Ids { get; set; }
+        int[] IExportQuery<int>.Ids => Ids?.Where(s=>!string.IsNullOrEmpty(s)).MapElementsTo<int>().ToArray();
+    }
+
     internal abstract class ExportQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, byte[]>
-        where TQuery : ExportQueryBase<TEntityId>
+        where TQuery : IExportQuery<TEntityId>
         where TEntity : AuditableEntity<TEntityId>
         where TDto : class, IDtoBase
     {
@@ -42,7 +53,6 @@ namespace CleanArchitectureBase.Application.Features.Base.Export
         }
 
         protected abstract ISpecification<TEntity> GetFilterSpecification(TQuery query);
-
 
         protected virtual IExportService GetExportService(TQuery query)
         {

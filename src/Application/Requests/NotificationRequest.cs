@@ -33,7 +33,7 @@ public class NotificationRequest: ClientEventBase
         return new MailRequest
         {
             RecipientName = $"{user.FirstName} {user.LastName}",
-            From = ApplicationConstants.Defaults.DefaultAdminUserEmail,
+            From = ApplicationConstants.Defaults.Users.System.Email,
             To = user.Email,
             Body = Content,
             Subject = Subject

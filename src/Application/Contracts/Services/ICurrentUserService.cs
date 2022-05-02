@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Common;
 
@@ -12,5 +14,6 @@ namespace CleanArchitectureBase.Application.Contracts.Services
         List<KeyValuePair<string, string>> Claims { get; }
         ClaimsPrincipal Principal { get; }
         UserResponse CurrentUser();
+        Task<IDisposable> AsSystemUser();
     }
 }

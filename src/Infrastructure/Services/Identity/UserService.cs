@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -19,10 +18,14 @@ using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Hubs.Events.Base;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Application.Requests.Mail;
+using CleanArchitectureBase.Infrastructure.Contexts;
+using CleanArchitectureBase.Infrastructure.Helpers;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Infrastructure.Specifications;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Role;
+using CleanArchitectureBase.Shared.Models;
 using CleanArchitectureBase.Shared.Wrapper;
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
@@ -44,6 +47,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IStringLocalizer<UserService> _localizer;
         private readonly IExportService _excelService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly ApplicationDbContext _db;
 
         public UserService(
             IPermissionService permissionService,
@@ -52,6 +56,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             IMailService mailService,
             IStringLocalizer<UserService> localizer,
             ICurrentUserService currentUserService,
+            ApplicationDbContext db,
             IServiceProvider serviceProvider)
         {
             _permissionService = permissionService;
@@ -61,6 +66,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             _localizer = localizer;
             _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel);
             _currentUserService = currentUserService;
+            _db = db;
         }
 
         public async Task<IEnumerable<UserResponse>> GetAllForTargetAsync(EventTarget eventTarget)
@@ -80,10 +86,67 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return Enumerable.Empty<UserResponse>();
         }
 
+        public async Task<UserResponse> SystemUserAsync()
+        {
+            var res = await GetOrAddUserAsync(ApplicationConstants.Defaults.Users.System);
+            return res.First();
+        }
+
+        public Task<UserResponse[]> GetOrAddUserAsync(params CreateUser[] userToCreateIfNotExists)
+        {
+            return Task.Run(async () =>
+            {
+                var result = new List<UserResponse>();
+                bool needSave = false;
+                foreach (var u in userToCreateIfNotExists)
+                {
+                    //Check if Role Exists
+                    var targetRoleName = u.RoleToAdd;
+                    var applicationRole = new ApplicationRole(targetRoleName, _localizer[targetRoleName + " role " + (u.IsSuperUser ? "with full permissions" : "with default permissions")]);
+                    var roleInDb = await _roleManager.FindByNameAsync(targetRoleName);
+                    if (roleInDb == null)
+                    {
+                        await _roleManager.CreateAsync(applicationRole);
+                        roleInDb = await _roleManager.FindByNameAsync(targetRoleName);
+                        needSave = true;
+                    }
+
+                    var user = u.MapTo<ApplicationUser>();
+                    user.EmailConfirmed = true;
+                    user.PhoneNumberConfirmed = true;
+                    user.CreatedOn = DateTime.Now;
+                    user.IsActive = true;
+                    //Check if User Exists
+
+                    var userInDb = await _userManager.FindByEmailAsync(user.Email);
+                    if (userInDb == null)
+                    {
+                        await _userManager.CreateAsync(user, u.Password);
+                        await _userManager.AddToRoleAsync(user, targetRoleName);
+                        needSave = true;
+                        userInDb = await _userManager.FindByEmailAsync(user.Email);
+                    }
+
+                    if (u.IsSuperUser)
+                    {
+                        foreach (var permission in Permissions.GetRegisteredPermissions())
+                        {
+                            await _roleManager.AddPermissionClaim(roleInDb, permission);
+                        }
+                    }
+                    result.Add((await GetAsync(userInDb.Id)).Data);
+                }
+
+                if (needSave)
+                    await _db.SaveChangesAsync();
+                return result.ToArray();
+            });
+        }
+
         public async Task<Result<List<UserResponse>>> GetAllAsync()
         {
             var users = await _userManager.Users.ToListAsync();
-            var result = users.MapTo<List<UserResponse>>();
+            var result = users.MapTo<List<UserResponse>>().Where(u => !u.IsSystemUser()).ToList();
             return await Result<List<UserResponse>>.SuccessAsync(result);
         }
 
@@ -127,7 +190,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                         var mailRequest = new MailRequest
                         {
                             RecipientName = $"{user.FirstName} {user.LastName}",
-                            From = ApplicationConstants.Defaults.DefaultAdminUserEmail,
+                            From = ApplicationConstants.Defaults.Users.System.Email,
                             To = user.Email,
                             Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
                             Subject = _localizer["Confirm Registration"]
@@ -220,7 +283,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
-            if (user.Email == ApplicationConstants.Defaults.DefaultAdminUserEmail)
+            if (user.Email == ApplicationConstants.Defaults.Users.System.Email || ApplicationConstants.Defaults.Users.Administrators.Any(u => u.Email == user.Email))
             {
                 return await Result.FailAsync(_localizer["Not Allowed."]);
             }
@@ -331,6 +394,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
                 throw Errors.NotFound(_localizer["User Not Found!"]);
+            if (user.IsSystemUser())
+                throw Errors.Create("Not allowed to Delete this user");
             var result = await _userManager.DeleteAsync(user);
             return result.ToApplicationResult();
         }

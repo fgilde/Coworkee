@@ -1,4 +1,7 @@
-﻿namespace CleanArchitectureBase.Application.Common.Models.Identity
+﻿using CleanArchitectureBase.Shared.Models;
+using Nextended.Core.Extensions;
+
+namespace CleanArchitectureBase.Application.Common.Models.Identity
 {
     public class UserResponse
     {
@@ -12,5 +15,7 @@
         public string PhoneNumber { get; set; }
         public string ProfilePictureDataUrl { get; set; }
         public string FullName => $"{FirstName} {LastName}";
+
+        public bool IsSystemUser() => this.MapTo<CreateUser>().IsSystemUser();
     }
 }

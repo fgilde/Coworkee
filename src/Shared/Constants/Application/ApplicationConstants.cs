@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using CleanArchitectureBase.Shared.Constants.Role;
+using CleanArchitectureBase.Shared.Models;
 
 namespace CleanArchitectureBase.Shared.Constants.Application
 {
@@ -13,10 +15,18 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         
         public static class Defaults
         {
-            public const string DefaultAdminUserEmail = "info@coworkee.de";
-            public const string DefaultAdminUserPassword = "123Pa$$word!";
-            public const string DefaultBasicUserEmail = "john@coworkee.de";
-            public const string DefaultBasicUserPassword = "123Pa$$word!";
+            public static class Users
+            {
+                public static CreateUser System => new(nameof(System), nameof(System), ApplicationName, $"{nameof(System)}@{ApplicationName}", "SystemUserPassw0rd4SystemUserAccess73F1985F3C1A4158B4BA70F7B65778BF", true, RoleConstants.AdministratorRole);
+                public static CreateUser[] Administrators => new[]
+                {
+                    new CreateUser("fgilde", "Florian", "Gilde", "info@coworkee.de","123Pa$$word!", true, RoleConstants.AdministratorRole) 
+                };
+                public static CreateUser[] Basic => new[]
+                {
+                    new CreateUser("johndoe", "John", "Doe", "john@coworkee.de","123Pa$$word!", false, RoleConstants.BasicRole)
+                };
+            }
         }
 
         public static class Routes
@@ -30,8 +40,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         {
             public const string ReturnUrl = nameof(ReturnUrl);
         }
-
-
+        
         public static class HeaderNames
         {
             public const string RoleIdHeader = "x-role-id";

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Contracts.Chat;
+using CleanArchitectureBase.Shared.Models;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Models.Identity
 {
@@ -32,6 +34,8 @@ namespace CleanArchitectureBase.Infrastructure.Models.Identity
         public DateTime RefreshTokenExpiryTime { get; set; }
         public virtual ICollection<ChatHistory<ApplicationUser>> ChatHistoryFromUsers { get; set; }
         public virtual ICollection<ChatHistory<ApplicationUser>> ChatHistoryToUsers { get; set; }
+
+        public bool IsSystemUser() => this.MapTo<CreateUser>().IsSystemUser();
 
         public ApplicationUser()
         {

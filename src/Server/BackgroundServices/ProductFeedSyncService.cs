@@ -6,12 +6,17 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Attributes;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
+using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
 using CleanArchitectureBase.Domain.Entities.Catalog;
 using CleanArchitectureBase.Infrastructure.Contexts;
+using CleanArchitectureBase.Server.Services;
 using CsvHelper;
+using Hangfire;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,16 +37,19 @@ public class ProductFeedSyncService : BackgroundService
         ScopeFactory = scopeFactory;
     }
 
+    public async Task RunImport(CancellationToken stoppingToken)
+    {
+        using var scope = await ScopeFactory.CreateScope().AsSystemUserAsync();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+        await ReadRemoteFeedAsync(mediator, db, stoppingToken);
+    }
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            using (var scope = ScopeFactory.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                var mediator = scope.ServiceProvider.GetRequiredService<IMediator> ();
-                await ReadRemoteFeedAsync(mediator, db, stoppingToken);
-            }
+            BackgroundJob.Enqueue(() => RunImport(stoppingToken) );
             await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
         }
     }
@@ -52,6 +60,9 @@ public class ProductFeedSyncService : BackgroundService
         {
             try
             {
+                
+                var data = await mediator.Send(new GetAllProductsQuery(), stoppingToken);
+                
                 return;
                 int index = 0;
                 Uri uri = new Uri(FeedUrl);

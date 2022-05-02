@@ -204,8 +204,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<IResult> DeleteUserAsync(ApplicationUser user)
         {
+            if (user.IsSystemUser())
+                throw Errors.Create("Not allowed to Delete this user");
             var result = await _userManager.DeleteAsync(user);
-
             return result.ToApplicationResult();
         }
     }

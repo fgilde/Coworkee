@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
@@ -45,14 +46,14 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         private void FillAdministratorCredentials()
         {
-            _tokenModel.Email = ApplicationConstants.Defaults.DefaultAdminUserEmail;
-            _tokenModel.Password = ApplicationConstants.Defaults.DefaultAdminUserPassword;
+            _tokenModel.Email = ApplicationConstants.Defaults.Users.Administrators.FirstOrDefault()?.Email;
+            _tokenModel.Password = ApplicationConstants.Defaults.Users.Administrators.FirstOrDefault()?.Password;
         }
 
         private void FillBasicUserCredentials()
         {
-            _tokenModel.Email = ApplicationConstants.Defaults.DefaultBasicUserEmail;
-            _tokenModel.Password = ApplicationConstants.Defaults.DefaultBasicUserPassword;
+            _tokenModel.Email = ApplicationConstants.Defaults.Users.Basic.FirstOrDefault()?.Email;
+            _tokenModel.Password = ApplicationConstants.Defaults.Users.Basic.FirstOrDefault()?.Password;
         }
     }
 }

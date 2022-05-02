@@ -5,13 +5,18 @@ using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Common;
 using CleanArchitectureBase.Application.Hubs.Events.Base;
 using CleanArchitectureBase.Application.Requests.Identity;
+using CleanArchitectureBase.Shared.Models;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Application.Contracts.Services.Identity
 {
     public interface IUserService : IService
     {
+        Task<UserResponse> SystemUserAsync();
+
         Task<IEnumerable<UserResponse>> GetAllForTargetAsync(EventTarget eventTarget);
+
+        Task<UserResponse[]> GetOrAddUserAsync(params CreateUser[] user);
 
         Task<Result<List<UserResponse>>> GetAllAsync();
 

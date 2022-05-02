@@ -128,7 +128,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private void ManageRoles(string userId, string email)
         {
-            if (email == ApplicationConstants.Defaults.DefaultAdminUserEmail) _snackBar.Add(_localizer["Not Allowed."], Severity.Error);
+            if (email == ApplicationConstants.Defaults.Users.System.Email || ApplicationConstants.Defaults.Users.Administrators.Any(u => u.Email == email)) _snackBar.Add(_localizer["Not Allowed."], Severity.Error);
             else _navigationManager.NavigateTo($"/identity/user-roles/{userId}");
         }
     }

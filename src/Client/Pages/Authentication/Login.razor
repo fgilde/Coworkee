@@ -47,12 +47,18 @@
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_localizer["Sign In"]</MudButton>
         </MudItem>
         @if(Debug.IsDebug()){
-            <MudItem xs="12">
-                <MudButton OnClick="FillAdministratorCredentials">@_localizer["Fill Administrator Credentials"]</MudButton>
-            </MudItem>
-            <MudItem xs="12">
-                <MudButton OnClick="FillBasicUserCredentials">@_localizer["Fill Basic User Credentials"]</MudButton>
-            </MudItem>
+            @if (ApplicationConstants.Defaults.Users.Administrators.Any())
+            {
+                <MudItem xs="12">
+                    <MudButton OnClick="FillAdministratorCredentials">@_localizer["Fill Administrator Credentials"]</MudButton>
+                </MudItem>
+            }
+            @if (ApplicationConstants.Defaults.Users.Basic.Any())
+            {
+                <MudItem xs="12">
+                    <MudButton OnClick="FillBasicUserCredentials">@_localizer["Fill Basic User Credentials"]</MudButton>
+                </MudItem>
+            }
         }
     </MudGrid>
 </EditForm>

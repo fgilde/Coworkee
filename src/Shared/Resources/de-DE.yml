@@ -58,6 +58,8 @@ ar-TN: Arabisch (Tunesien)
 ar-YE: Arabisch (Jemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Als Administrator können Sie hier nach Benutzern filtern
+as read: als gelesen
+as unread: als ungelesen
 as-IN: Assamesisch (Indien)
 asa-TZ: Asu (Tansania)
 ast-ES: Asturisch (Spanien)
@@ -152,6 +154,8 @@ Dec: Dez
 Decimal: Dezimal
 Decimal value is required using {0} type!: Dezimalwert ist bei verwendung {0} Typ erforderlich!
 Delete: Löschen
+Delete all: Alle löschen
+Delete all notifications: Alle Benachrichtigungen löschen
 Delete Confirmation: Bestätigung löschen
 Delete Content: Inhalt löschen
 Delete Content {0}: Inhalt löschen '{0}'
@@ -602,6 +606,11 @@ Manage Translations: Übersetzungen verwalten
 Manage Users: Benutzer verwalten
 Manage your account: Konto verwalten
 Mar: Mrz
+Mark all: Alle markieren
+Mark all as read: Alle als gelesen markieren
+Mark all as unread: Alle als ungelesen markieren
+Mark as read: Als gelesen markieren
+Mark as unread: Als ungelesen markieren
 mas-KE: Masai (Kenia)
 mas-TZ: Masai (Tansania)
 May: Mai
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kamerun)
 nn-NO: Norwegisch Nynorsk (Norwegen)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Keine zulässigen Aktionen
+No notifications: Keine Benachrichtigungen
 Not Allowed.: Unstatthaft.
 NotFoundMessage: Die Seite, nach der Sie gesucht haben, existiert nicht.
+Notifications: Benachrichtigungen
 Nov: Nov
 nqo-GN: N'Ko (Guinea)
 nr-ZA: South Ndebele (Südafrika)
@@ -667,6 +678,7 @@ Old Values: Alte Werte
 om-ET: Oromo (Äthiopien)
 om-KE: Oromo (Kenia)
 Only Selected Group (Export): Nur ausgewählte Gruppe (Exportieren)
+Open Url {0}: Zur Url "{0}" navigieren
 or-IN: Odia (Indien)
 os-GE: Ossetic (Georgien)
 os-RU: Ossetic (Russland)
@@ -799,6 +811,7 @@ sg-CF: Sango (Zentralafrikanische Republik)
 shi-Latn-MA: Tachelhit (Latein, Marokko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marokko)
 Show: Zeigen
+Show notification: Benachrichtigung anzeigen
 si-LK: Singhalesisch (Sri Lanka)
 Sign In: Anmelden
 Sign Up: Anmelden
@@ -864,6 +877,7 @@ th-TH: Thai (Thailand)
 The following {0} permissions are also required for permission {1}: Für die Berechtigung "{1}" sind ebenfalls diese {0} Berechtigungen erforderlich
 The following permission is also required for permission {1}: Die folgende Berechtigung ist für die Berechtigung "{1}" ebenfalls erforderlich
 The User {0} has just edited, created or deleted entries here. You should reload the data: Der User {0} hat hier soeben Einträge bearbeitet, angelegt oder gelöscht. Sie sollten die Daten neu laden
+There are no new notifications: Keine neuen Benachrichtigungen vorhanden
 This is an Administrator Only View.: Dies ist eine nur für Administratoren angezeigte Ansicht.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Äthiopien)
@@ -964,16 +978,3 @@ zh-MO: Chinesisch (Macao SAR)
 zh-SG: Chinesisch (Singapur)
 zh-TW: Chinesisch (Taiwan)
 zu-ZA: isiZulu (Südafrika)
-Notifications: Benachrichtigungen
-No notifications: Keine Benachrichtigungen
-There are no new notifications: Keine neuen Benachrichtigungen vorhanden
-Mark as unread: Als ungelesen markieren
-Mark as read: Als gelesen markieren
-Show notification: Benachrichtigung anzeigen
-Open Url {0}: Zur Url "{0}" navigieren
-Delete all: Alle löschen
-Mark all as read: Alle als gelesen markieren
-Mark all as unread: Alle als ungelesen markieren
-Mark all: Alle markieren
-as read: als gelesen
-as unread: als ungelesen

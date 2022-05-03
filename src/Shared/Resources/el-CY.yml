@@ -58,6 +58,8 @@ ar-TN: Αραβικά (Τυνησία)
 ar-YE: Αραβικά (Υεμένη)
 arn-CL: Μαπούτσε (Χιλή)
 As Admin you can filter for users here: Ως διαχειριστής μπορείτε να φιλτράρετε για χρήστες εδώ
+as read: όπως διαβάζεται
+as unread: τόσο αδιάβαστο
 as-IN: Ασαμέζικα (Ινδία)
 asa-TZ: Ασού (Τανζανία)
 ast-ES: Αστουριάν (Ισπανία)
@@ -152,6 +154,8 @@ Dec: Δεκ
 Decimal: Δεκαδικός
 Decimal value is required using {0} type!: Απαιτείται δεκαδική τιμή με {0} τύπο!
 Delete: Διαγράφω
+Delete all: Διαγραφή όλων
+Delete all notifications: Διαγραφή όλων των ειδοποιήσεων
 Delete Confirmation: Διαγραφή επιβεβαίωσης
 Delete Content: Διαγραφή περιεχομένου
 Delete Content {0}: Διαγραφή περιεχομένου '{0}'
@@ -602,6 +606,11 @@ Manage Translations: Διαχείριση μεταφράσεων
 Manage Users: Διαχείριση χρηστών
 Manage your account: Διαχείριση του λογαριασμού σας
 Mar: Μαρ
+Mark all: Σημειώστε όλα
+Mark all as read: Σήμανση όλων ως αναγνωσμένα
+Mark all as unread: Επισήμανση όλων ως μη αναγνωσμένων
+Mark as read: Σήμανση ανάγνωσης
+Mark as unread: Σήμανση ως μη αναγνωσμένου
 mas-KE: Μασάι (Κένυα)
 mas-TZ: Μασάι (Τανζανία)
 May: Μάιος
@@ -652,8 +661,10 @@ nmg-CM: Κουάσιο (Καμερούν)
 nn-NO: Νορβηγικό Νυνόρσκ (Νορβηγία)
 nnh-CM: Νγκιμπούν (Καμερούν)
 No Allowed Actions: Δεν επιτρέπονται ενέργειες
+No notifications: Χωρίς ειδοποιήσεις
 Not Allowed.: Δεν επιτρέπεται.
 NotFoundMessage: Η σελίδα που έψαχνες δεν υπάρχει.
+Notifications: Ειδοποιήσεις
 Nov: Νοε
 nqo-GN: Ν'Κο (Γουινέα)
 nr-ZA: Νότιο Ndebele (Νότια Αφρική)
@@ -667,6 +678,7 @@ Old Values: Παλαιές τιμές
 om-ET: Ορόμο (Αιθιοπία)
 om-KE: Ορόμο (Κένυα)
 Only Selected Group (Export): Μόνο επιλεγμένη ομάδα (εξαγωγή)
+Open Url {0}: Άνοιγμα {0} url
 or-IN: Όντια (Ινδία)
 os-GE: Οσετί (Γεωργία)
 os-RU: Οστετικός (Ρωσία)
@@ -799,6 +811,7 @@ sg-CF: Sango (Κεντροαφρικανική Δημοκρατία)
 shi-Latn-MA: Ταχελχίτ (Λατινικά, Μαρόκο)
 shi-Tfng-MA: Ταχέλχιτ (Τίφιναγκ, Μαρόκο)
 Show: Δείχνω
+Show notification: Εμφάνιση ειδοποίησης
 si-LK: Σινχάλα (Σρι Λάνκα)
 Sign In: Είσοδος
 Sign Up: Εγγραφή
@@ -864,6 +877,7 @@ th-TH: Ταϊλανδικά (Ταϊλάνδη)
 The following {0} permissions are also required for permission {1}: Τα ακόλουθα δικαιώματα {0} απαιτούνται επίσης για {1} δικαιωμάτων
 The following permission is also required for permission {1}: Απαιτείται επίσης το ακόλουθο δικαίωμα για την {1} δικαιωμάτων
 The User {0} has just edited, created or deleted entries here. You should reload the data: Η {0} χρήστη έχει μόλις επεξεργαστεί, δημιουργήσει ή διαγράψει καταχωρήσεις εδώ. Θα πρέπει να φορτώσετε ξανά τα δεδομένα
+There are no new notifications: Δεν υπάρχουν νέες ειδοποιήσεις
 This is an Administrator Only View.: Αυτή είναι μια προβολή μόνο διαχειριστή.
 ti-ER: Τιγκρίνια (Ερυθραία)
 ti-ET: Τιγκρίνια (Αιθιοπία)

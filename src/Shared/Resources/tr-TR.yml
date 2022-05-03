@@ -58,6 +58,8 @@ ar-TN: Arapça (Tunus)
 ar-YE: Arapça (Yemen)
 arn-CL: Mapuche (Şili)
 As Admin you can filter for users here: Yönetici olarak kullanıcılar için burada filtreleyebilirsiniz
+as read: okunduğu gibi
+as unread: okunmamış olarak
 as-IN: Assamca (Hindistan)
 asa-TZ: Asu (Tanzanya)
 ast-ES: Asturya (İspanya)
@@ -152,6 +154,8 @@ Dec: Aralık
 Decimal: On -da -lık
 Decimal value is required using {0} type!: '{0} türü kullanılarak ondalık değer gereklidir!'
 Delete: Silmek
+Delete all: Tümünü sil
+Delete all notifications: Tüm bildirimleri silme
 Delete Confirmation: Onayı Sil
 Delete Content: İçeriği Sil
 Delete Content {0}: İçeriği '{0}' Sil
@@ -602,6 +606,11 @@ Manage Translations: Çevirileri Yönet
 Manage Users: Kullanıcıları Yönetme
 Manage your account: Hesabınızı yönetme
 Mar: Mar
+Mark all: Tümünü işaretle
+Mark all as read: Tümünü okundu olarak işaretle
+Mark all as unread: Tümünü okunmamış olarak işaretleme
+Mark as read: Okundu olarak işaretleme
+Mark as unread: Okunmamış olarak işaretleme
 mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzanya)
 May: Mayıs
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kamerun)
 nn-NO: Norveç Nynorsk (Norveç)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: İzin Verilen Eylem Yok
+No notifications: Bildirim yok
 Not Allowed.: İzin verilmiyor.
 NotFoundMessage: Aradığınız sayfa yok.
+Notifications: Bildirim
 Nov: Kasım
 nqo-GN: N'Ko (Gine)
 nr-ZA: Güney Ndebele (Güney Afrika)
@@ -667,6 +678,7 @@ Old Values: Eski Değerler
 om-ET: Oromo (Etiyopya)
 om-KE: Oromo (Kenya)
 Only Selected Group (Export): Yalnızca Seçili Grup (Dışarı Aktar)
+Open Url {0}: Açık URL {0}
 or-IN: Odia (Hindistan)
 os-GE: Ossetic (Gürcistan)
 os-RU: Ossetic (Rusya)
@@ -799,6 +811,7 @@ sg-CF: Sango (Orta Afrika Cumhuriyeti)
 shi-Latn-MA: Tachelhit (Latince, Fas)
 shi-Tfng-MA: Tachelhit (Tifinagh, Fas)
 Show: Göstermek
+Show notification: Bildirimi göster
 si-LK: Sinhala (Sri Lanka)
 Sign In: Oturum Aç
 Sign Up: Kaydol
@@ -864,6 +877,7 @@ th-TH: Tay dili (Tayland)
 The following {0} permissions are also required for permission {1}: İzin {1} için aşağıdaki {0} izinler de gereklidir
 The following permission is also required for permission {1}: İzin {1} için aşağıdaki izin de gereklidir
 The User {0} has just edited, created or deleted entries here. You should reload the data: Kullanıcı {0} burada girişleri yeni düzenledi, oluşturdu veya sildi. Verileri yeniden yüklemelisiniz
+There are no new notifications: Yeni bildirim yok
 This is an Administrator Only View.: Bu yalnızca Yönetici Görünümüdür.
 ti-ER: Tigrinya (Eritre)
 ti-ET: Tigrinya (Etiyopya)

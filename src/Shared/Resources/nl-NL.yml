@@ -58,6 +58,8 @@ ar-TN: Arabisch (Tunesië)
 ar-YE: Arabisch (Jemen)
 arn-CL: Mapuche (Chili)
 As Admin you can filter for users here: Als Admin kunt u hier filteren op gebruikers
+as read: zoals gelezen
+as unread: als ongelezen
 as-IN: Assamees (India)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spanje)
@@ -152,6 +154,8 @@ Dec: Dec
 Decimal: Decimaal
 Decimal value is required using {0} type!: Decimale waarde is vereist met behulp van {0} type!
 Delete: Verwijderen
+Delete all: Alles verwijderen
+Delete all notifications: Alle meldingen verwijderen
 Delete Confirmation: Bevestiging verwijderen
 Delete Content: Inhoud verwijderen
 Delete Content {0}: Inhoud '{0}' verwijderen
@@ -602,6 +606,11 @@ Manage Translations: Vertalingen beheren
 Manage Users: Gebruikers beheren
 Manage your account: Uw account beheren
 Mar: Mar
+Mark all: Alles markeren
+Mark all as read: Alles markeren als gelezen
+Mark all as unread: Alles markeren als ongelezen
+Mark as read: Mark gelezen
+Mark as unread: Markeren als ongelezen
 mas-KE: Masai (Kenia)
 mas-TZ: Masai (Tanzania)
 May: Mei
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kameroen)
 nn-NO: Noors Nynorsk (Noorwegen)
 nnh-CM: Ngiemboon (Kameroen)
 No Allowed Actions: Geen toegestane acties
+No notifications: Geen meldingen
 Not Allowed.: Niet toegestaan.
 NotFoundMessage: De pagina die u zocht, bestaat niet.
+Notifications: Meldingen
 Nov: Nov
 nqo-GN: N'Ko (Guinee)
 nr-ZA: South Ndebele (Zuid-Afrika)
@@ -667,6 +678,7 @@ Old Values: Oude waarden
 om-ET: Oromo (Ethiopië)
 om-KE: Oromo (Kenia)
 Only Selected Group (Export): Alleen geselecteerde groep (exporteren)
+Open Url {0}: Url-{0} openen
 or-IN: Odia (Indië)
 os-GE: Ossetic (Georgië)
 os-RU: Ossetic (Rusland)
@@ -799,6 +811,7 @@ sg-CF: Sango (Centraal-Afrikaanse Republiek)
 shi-Latn-MA: Tachelhit (Latijn, Marokko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marokko)
 Show: Tonen
+Show notification: Toon melding
 si-LK: Singalees (Sri Lanka)
 Sign In: Aanmelden
 Sign Up: Inschrijven
@@ -864,6 +877,7 @@ th-TH: Thais (Thailand)
 The following {0} permissions are also required for permission {1}: De volgende {0} machtigingen zijn ook vereist voor toestemming {1}
 The following permission is also required for permission {1}: De volgende toestemming is ook vereist voor toestemming {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: De Gebruiker {0} heeft hier zojuist items bewerkt, gemaakt of verwijderd. U moet de gegevens opnieuw laden
+There are no new notifications: Er zijn geen nieuwe meldingen
 This is an Administrator Only View.: Dit is een weergave alleen voor beheerders.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Ethiopië)

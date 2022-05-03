@@ -58,6 +58,8 @@ ar-TN: Arabština (Tunisko)
 ar-YE: Arabština (Jemen)
 arn-CL: Mapučche (Chile)
 As Admin you can filter for users here: Jako správce můžete filtrovat pro uživatele zde
+as read: jak číst
+as unread: jako nepřečtené
 as-IN: Ásámština (Indie)
 asa-TZ: Asu (Tanzanie)
 ast-ES: Asturština (Španělsko)
@@ -152,6 +154,8 @@ Dec: Prosince
 Decimal: Desetinný
 Decimal value is required using {0} type!: Desetinná hodnota je vyžadována pomocí typu {0}!
 Delete: Vymazat
+Delete all: Smazat vše
+Delete all notifications: Smazat všechna oznámení
 Delete Confirmation: Potvrzení o odstranění
 Delete Content: Odstranit obsah
 Delete Content {0}: Smazat obsah "{0}"
@@ -602,6 +606,11 @@ Manage Translations: Správa překladů
 Manage Users: Správa uživatelů
 Manage your account: Správa účtu
 Mar: Ničit
+Mark all: Označit vše
+Mark all as read: Označit vše jako přečtené
+Mark all as unread: Označit vše jako nepřečtené
+Mark as read: Označit přečtené
+Mark as unread: Označit jako nepřečtené
 mas-KE: Masai (Keňa)
 mas-TZ: Masai (Tanzanie)
 May: Květen
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kamerun)
 nn-NO: Norština Nynorsk (Norsko)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Žádné povolené akce
+No notifications: Žádná oznámení
 Not Allowed.: Není povoleno.
 NotFoundMessage: Stránka, kterou jste hledali, neexistuje.
+Notifications: Upozornění
 Nov: Listopad
 nqo-GN: N'Ko (Guinea)
 nr-ZA: South Ndebele (Jižní Afrika)
@@ -667,6 +678,7 @@ Old Values: Staré hodnoty
 om-ET: Oromo (Etiopie)
 om-KE: Oromo (Keňa)
 Only Selected Group (Export): Pouze vybraná skupina (Export)
+Open Url {0}: Otevřít {0} adres URL
 or-IN: Odia (Indie)
 os-GE: Ossetic (Gruzie)
 os-RU: Ossetic (Rusko)
@@ -799,6 +811,7 @@ sg-CF: Sango (Středoafrická republika)
 shi-Latn-MA: Tachelhit (latinka, Maroko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
 Show: Ukázat
+Show notification: Zobrazit oznámení
 si-LK: Sinhálština (Srí Lanka)
 Sign In: Přihlásit se
 Sign Up: Registrace
@@ -864,6 +877,7 @@ th-TH: Thajská (Thajsko)
 The following {0} permissions are also required for permission {1}: Následující oprávnění {0} jsou také vyžadována pro {1} oprávnění
 The following permission is also required for permission {1}: Následující oprávnění je také vyžadováno pro oprávnění {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: Uživatel {0} zde právě upravil, vytvořil nebo smazal záznamy. Měli byste znovu načíst data
+There are no new notifications: Neexistují žádná nová oznámení
 This is an Administrator Only View.: Toto je zobrazení pouze pro správce.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Etiopie)

@@ -58,6 +58,8 @@ ar-TN: Arabisk (Tunesien)
 ar-YE: Arabisk (Yemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Som administrator kan du filtrere efter brugere her
+as read: som læst
+as unread: som ulæst
 as-IN: Assamesisk (Indien)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spanien)
@@ -152,6 +154,8 @@ Dec: Dec
 Decimal: Decimal
 Decimal value is required using {0} type!: Decimalværdien kræves ved hjælp af {0} type!
 Delete: Slette
+Delete all: Slet alle
+Delete all notifications: Slet alle meddelelser
 Delete Confirmation: Slet bekræftelse
 Delete Content: Slet indhold
 Delete Content {0}: Slet indhold '{0}'
@@ -602,6 +606,11 @@ Manage Translations: Administrer oversættelser
 Manage Users: Administrer brugere
 Manage your account: Administrere din konto
 Mar: Mar
+Mark all: Marker alle
+Mark all as read: Marker alle som læst
+Mark all as unread: Markér alle som ulæste
+Mark as read: Mark læs
+Mark as unread: Markér som ulæst
 mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: Maj
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Cameroun)
 nn-NO: Norsk Nynorsk (Norge)
 nnh-CM: Ngiemboon (Cameroun)
 No Allowed Actions: Ingen tilladte handlinger
+No notifications: Ingen meddelelser
 Not Allowed.: Ikke tilladt.
 NotFoundMessage: Den side, du ledte efter, findes ikke.
+Notifications: Meddelelser
 Nov: Nov
 nqo-GN: N'Ko (Guinea)
 nr-ZA: Syd Ndebele (Sydafrika)
@@ -667,6 +678,7 @@ Old Values: Gamle værdier
 om-ET: Oromo (Etiopien)
 om-KE: Oromo (Kenya)
 Only Selected Group (Export): Kun den valgte gruppe (eksport)
+Open Url {0}: Åbn url-{0}
 or-IN: Odia (Indien)
 os-GE: Ossetisk (Georgien)
 os-RU: Ossetisk (Rusland)
@@ -799,6 +811,7 @@ sg-CF: Sango (Den Centralafrikanske Republik)
 shi-Latn-MA: Tachelhit (latin, Marokko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marokko)
 Show: Vise
+Show notification: Vis notifikation
 si-LK: Sinhala (Sri Lanka)
 Sign In: Log på
 Sign Up: Tilmeld dig
@@ -864,6 +877,7 @@ th-TH: Thai (Thailand)
 The following {0} permissions are also required for permission {1}: Følgende {0} tilladelser kræves også for at få tilladelse {1}
 The following permission is also required for permission {1}: Følgende tilladelse kræves også for at få tilladelse {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: Brugeren {0} har netop redigeret, oprettet eller slettet poster her. Du bør genindlæse dataene
+There are no new notifications: Der er ingen nye meddelelser
 This is an Administrator Only View.: Dette er en administratorvisning.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Etiopien)

@@ -58,6 +58,8 @@ ar-TN: アラビア語 (チュニジア)
 ar-YE: アラビア語 (イエメン)
 arn-CL: マプチェ (チリ)
 As Admin you can filter for users here: 管理者として、ここでユーザーをフィルター処理できます
+as read: 読むように
+as unread: 未読として
 as-IN: アッサムス (インド)
 asa-TZ: アス (タンザニア)
 ast-ES: アストゥリアス (スペイン)
@@ -152,6 +154,8 @@ Dec: 12 月
 Decimal: 小数
 Decimal value is required using {0} type!: '{0}の種類を使用して 10 進数値が必要です。'
 Delete: 削除
+Delete all: すべて削除
+Delete all notifications: すべての通知を削除する
 Delete Confirmation: 削除確認
 Delete Content: コンテンツの削除
 Delete Content {0}: コンテンツ '{0}' を削除する
@@ -602,6 +606,11 @@ Manage Translations: 翻訳の管理
 Manage Users: ユーザーの管理
 Manage your account: アカウントの管理
 Mar: 台無しにする
+Mark all: すべてマーク
+Mark all as read: すべて既読にする
+Mark all as unread: すべて未読としてマークする
+Mark as read: マーク読み取り
+Mark as unread: 未読としてマークする
 mas-KE: マサイ (ケニア)
 mas-TZ: マサイ (タンザニア)
 May: 5 月
@@ -652,8 +661,10 @@ nmg-CM: クワシオ (カメルーン)
 nn-NO: ノルウェージャン・ニーノスク (ノルウェー)
 nnh-CM: ンギエンブーン (カメルーン)
 No Allowed Actions: 許可されたアクションはありません
+No notifications: 通知なし
 Not Allowed.: 禁じられた。
 NotFoundMessage: 探していたページは存在しません。
+Notifications: 通知
 Nov: 11 月
 nqo-GN: ンコ (ギニア)
 nr-ZA: 南ンデベレ (南アフリカ)
@@ -667,6 +678,7 @@ Old Values: 古い値
 om-ET: オロモ (エチオピア)
 om-KE: オロモ (ケニア)
 Only Selected Group (Export): 選択したグループのみ (エクスポート)
+Open Url {0}: URL{0}を開く
 or-IN: オディア (インド)
 os-GE: オセティック (ジョージア州)
 os-RU: オセティック(ロシア)
@@ -799,6 +811,7 @@ sg-CF: 三五 (中央アフリカ共和国)
 shi-Latn-MA: タチェヒット(ラテン語、モロッコ)
 shi-Tfng-MA: タチェヒット(ティフィナ、モロッコ)
 Show: 見せる
+Show notification: 通知を表示
 si-LK: シンハラ (スリランカ)
 Sign In: サインイン
 Sign Up: サインアップ
@@ -864,6 +877,7 @@ th-TH: タイ (タイ)
 The following {0} permissions are also required for permission {1}: アクセス許可の{1}には、次の{0}アクセス許可も必要です。
 The following permission is also required for permission {1}: アクセス許可の設定には、次のアクセス許可も必要{1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: ユーザー {0}は、ここでエントリを編集、作成、または削除したところです。データを再ロードする必要があります。
+There are no new notifications: 新しい通知はありません
 This is an Administrator Only View.: これは管理者専用ビューです。
 ti-ER: ティグリニャ (エリトリア)
 ti-ET: ティグリニャ (エチオピア)

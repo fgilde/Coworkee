@@ -58,6 +58,8 @@ ar-TN: Árabe (Túnez)
 ar-YE: Árabe (Yemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Como administrador, puede filtrar por usuarios aquí
+as read: como se lee
+as unread: como no leído
 as-IN: Assamese (India)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturiano (España)
@@ -152,6 +154,8 @@ Dec: Dic
 Decimal: Decimal
 Decimal value is required using {0} type!: ¡Se requiere un valor decimal usando {0} tipo!
 Delete: Borrar
+Delete all: Eliminar todo
+Delete all notifications: Eliminar todas las notificaciones
 Delete Confirmation: Eliminar confirmación
 Delete Content: Eliminar contenido
 Delete Content {0}: Eliminar contenido '{0}'
@@ -602,6 +606,11 @@ Manage Translations: Administrar traducciones
 Manage Users: Administrar usuarios
 Manage your account: Gestiona tu cuenta
 Mar: Estropear
+Mark all: Marcar todo
+Mark all as read: Marcar todo como leído
+Mark all as unread: Marcar todo como no leído
+Mark as read: Marcar leído
+Mark as unread: Marcar como no leído
 mas-KE: Masai (Kenia)
 mas-TZ: Masai (Tanzania)
 May: Mayo
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Camerún)
 nn-NO: Nynorsk noruego (Noruega)
 nnh-CM: Ngiemboon (Camerún)
 No Allowed Actions: Acciones no permitidas
+No notifications: Sin notificaciones
 Not Allowed.: No permitido.
 NotFoundMessage: La página que estabas buscando no existe.
+Notifications: Notificaciones
 Nov: Nov
 nqo-GN: N'Ko (Guinea)
 nr-ZA: South Ndebele (Sudáfrica)
@@ -667,6 +678,7 @@ Old Values: Valores antiguos
 om-ET: Oromo (Etiopía)
 om-KE: Oromo (Kenia)
 Only Selected Group (Export): Sólo grupo seleccionado (Exportar)
+Open Url {0}: Abrir url {0}
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Rusia)
@@ -799,6 +811,7 @@ sg-CF: Sango (República Centroafricana)
 shi-Latn-MA: Tachelhit (latín, Marruecos)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marruecos)
 Show: Mostrar
+Show notification: Mostrar notificación
 si-LK: Cingalés (Sri Lanka)
 Sign In: Inicia sesión
 Sign Up: Únete
@@ -864,6 +877,7 @@ th-TH: Tailandés (Tailandia)
 The following {0} permissions are also required for permission {1}: Los siguientes permisos de {0} también son necesarios para la {1} de permisos
 The following permission is also required for permission {1}: También se requiere el siguiente permiso para el permiso {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: El usuario {0} acaba de editar, crear o eliminar entradas aquí. Debe volver a cargar los datos
+There are no new notifications: No hay nuevas notificaciones
 This is an Administrator Only View.: Esta es una vista solo de administrador.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Etiopía)

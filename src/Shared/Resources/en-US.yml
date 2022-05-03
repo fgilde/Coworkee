@@ -58,6 +58,8 @@ ar-TN: Arabic (Tunisia)
 ar-YE: Arabic (Yemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: As Admin you can filter for users here
+as read: as read
+as unread: as unread
 as-IN: Assamese (India)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spain)
@@ -152,6 +154,8 @@ Dec: Dec
 Decimal: Decimal
 Decimal value is required using {0} type!: Decimal value is required using {0} type!
 Delete: Delete
+Delete all: Delete all
+Delete all notifications: Delete all notifications
 Delete Confirmation: Delete Confirmation
 Delete Content: Delete Content
 Delete Content {0}: Delete Content '{0}'
@@ -602,6 +606,11 @@ Manage Translations: Manage Translations
 Manage Users: Manage Users
 Manage your account: Manage your account
 Mar: Mar
+Mark all: Mark all
+Mark all as read: Mark all as read
+Mark all as unread: Mark all as unread
+Mark as read: Mark read
+Mark as unread: Mark as unread
 mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: May
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Cameroon)
 nn-NO: Norwegian Nynorsk (Norway)
 nnh-CM: Ngiemboon (Cameroon)
 No Allowed Actions: No Allowed Actions
+No notifications: No notifications
 Not Allowed.: Not Allowed.
 NotFoundMessage: The page you were looking for doesn't exist.
+Notifications: Notifications
 Nov: Nov
 nqo-GN: N’Ko (Guinea)
 nr-ZA: South Ndebele (South Africa)
@@ -667,6 +678,7 @@ Old Values: Old Values
 om-ET: Oromo (Ethiopia)
 om-KE: Oromo (Kenya)
 Only Selected Group (Export): Only Selected Group (Export)
+Open Url {0}: Open Url {0}
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Russia)
@@ -799,6 +811,7 @@ sg-CF: Sango (Central African Republic)
 shi-Latn-MA: Tachelhit (Latin, Morocco)
 shi-Tfng-MA: Tachelhit (Tifinagh, Morocco)
 Show: Show
+Show notification: Show notification
 si-LK: Sinhala (Sri Lanka)
 Sign In: Sign In
 Sign Up: Sign Up
@@ -864,6 +877,7 @@ th-TH: Thai (Thailand)
 The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
 The following permission is also required for permission {1}: The following permission is also required for permission {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: The User {0} has just edited, created or deleted entries here. You should reload the data
+There are no new notifications: There are no new notifications
 This is an Administrator Only View.: This is an Administrator Only View.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Ethiopia)
@@ -964,16 +978,3 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
-Notifications: Notifications
-No notifications: No notifications
-There are no new notifications: There are no new notifications
-Mark as unread: Mark as unread
-Mark as read: Mark read
-Show notification: Show notification
-Open Url {0}: Open Url {0}
-Delete all: Delete all
-Mark all as read: Mark all as read
-Mark all as unread: Mark all as unread
-Mark all: Mark all
-as read: as read
-as unread: as unread

@@ -58,6 +58,8 @@ ar-TN: Arabski (Tunezja)
 ar-YE: Arabski (Jemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Jako administrator możesz filtrować użytkowników tutaj
+as read: jak przeczytano
+as unread: jako nieprzeczytane
 as-IN: Asamski (Indie)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturia (Hiszpania)
@@ -152,6 +154,8 @@ Dec: Gru
 Decimal: Dziesiętny
 Decimal value is required using {0} type!: Wartość dziesiętna jest wymagana przy użyciu {0} typu!
 Delete: Usunąć
+Delete all: Usuń wszystko
+Delete all notifications: Usuwanie wszystkich powiadomień
 Delete Confirmation: Usuń potwierdzenie
 Delete Content: Usuwanie zawartości
 Delete Content {0}: Usuń zawartość "{0}"
@@ -602,6 +606,11 @@ Manage Translations: Zarządzanie tłumaczeniami
 Manage Users: Zarządzanie użytkownikami
 Manage your account: Zarządzaj swoim kontem
 Mar: Marzec
+Mark all: Zaznacz wszystko
+Mark all as read: Oznacz wszystko jako przeczytane
+Mark all as unread: Oznacz wszystkie jako nieprzeczytane
+Mark as read: Oznacz jako przeczytane
+Mark as unread: Oznacz jako nieprzeczytane
 mas-KE: Masaje (Kenia)
 mas-TZ: Masaje (Tanzania)
 May: Maj
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kamerun)
 nn-NO: Norweski Nynorsk (Norwegia)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Brak dozwolonych akcji
+No notifications: Brak powiadomień
 Not Allowed.: Niedozwolone.
 NotFoundMessage: Strona, której szukasz, nie istnieje.
+Notifications: Powiadomienia
 Nov: Lis
 nqo-GN: N'Ko (Gwinea)
 nr-ZA: South Ndebele (Republika Południowej Afryki)
@@ -667,6 +678,7 @@ Old Values: Stare wartości
 om-ET: Oromo (Etiopia)
 om-KE: Oromo (Kenia)
 Only Selected Group (Export): Tylko wybrana grupa (eksport)
+Open Url {0}: Otwórz {0} URL
 or-IN: Odia (Indie)
 os-GE: Ossetic (Gruzja)
 os-RU: Ossetic (Rosja)
@@ -799,6 +811,7 @@ sg-CF: Sango (Republika Środkowoafrykańska)
 shi-Latn-MA: Tachelhit (łacina, Maroko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
 Show: Pokazać
+Show notification: Pokaż powiadomienie
 si-LK: Syngaleski (Sri Lanka)
 Sign In: Rejestrowanie
 Sign Up: Zarejestruj się
@@ -864,6 +877,7 @@ th-TH: Tajski (Tajlandia)
 The following {0} permissions are also required for permission {1}: Następujące uprawnienia {0} są również wymagane do {1} uprawnień
 The following permission is also required for permission {1}: Następujące uprawnienie jest również wymagane do uzyskania uprawnień {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: Użytkownik {0} właśnie edytował, tworzył lub usuwał wpisy tutaj. Należy ponownie załadować dane
+There are no new notifications: Brak nowych powiadomień
 This is an Administrator Only View.: Jest to widok tylko dla administratorów.
 ti-ER: Tigrinya (Erytrea)
 ti-ET: Tigrinya (Etiopia)

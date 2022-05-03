@@ -58,6 +58,8 @@ ar-TN: Arabiska (Tunisien)
 ar-YE: Arabiska (Jemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Som administratör kan du filtrera efter användare här
+as read: som läst
+as unread: som oläst
 as-IN: Assamese (Indien)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturien (Spanien)
@@ -152,6 +154,8 @@ Dec: Dec
 Decimal: Decimal
 Decimal value is required using {0} type!: Decimalvärde krävs med {0} typ!
 Delete: Ta bort
+Delete all: Ta bort alla
+Delete all notifications: Ta bort alla aviseringar
 Delete Confirmation: Ta bort bekräftelse
 Delete Content: Ta bort innehåll
 Delete Content {0}: Ta bort innehåll "{0}"
@@ -602,6 +606,11 @@ Manage Translations: Hantera översättningar
 Manage Users: Hantera användare
 Manage your account: Hantera ditt konto
 Mar: Fördärva
+Mark all: Markera alla
+Mark all as read: Markera alla som lästa
+Mark all as unread: Markera alla som olästa
+Mark as read: Markera läsning
+Mark as unread: Markera som oläst
 mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: Maj
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kamerun)
 nn-NO: Norska Nynorsk (Norge)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Inga tillåtna åtgärder
+No notifications: Inga aviseringar
 Not Allowed.: Inte tillåtet.
 NotFoundMessage: Sidan du letade efter finns inte.
+Notifications: Meddelanden
 Nov: Nov
 nqo-GN: N'Ko (Guinea)
 nr-ZA: Södra Ndebele (Sydafrika)
@@ -667,6 +678,7 @@ Old Values: Gamla värden
 om-ET: Oromo (Etiopien)
 om-KE: Oromo (Kenya)
 Only Selected Group (Export): Endast markerad grupp (export)
+Open Url {0}: Öppna URL-{0}
 or-IN: Odia (Indien)
 os-GE: Ossetiska (Georgien)
 os-RU: Ossetic (Ryssland)
@@ -799,6 +811,7 @@ sg-CF: Sango (Centralafrikanska republiken)
 shi-Latn-MA: Tachelhit (latin, Marocko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marocko)
 Show: Visa
+Show notification: Visa avisering
 si-LK: Sinhala (Sri Lanka)
 Sign In: Logga in
 Sign Up: Registrera sig
@@ -864,6 +877,7 @@ th-TH: Thailändska (Thailand)
 The following {0} permissions are also required for permission {1}: Följande {0} behörigheter krävs också för behörighet {1}
 The following permission is also required for permission {1}: Följande behörighet krävs också för tillstånd {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: Den {0} har just redigerat, skapat eller tagit bort poster här. Du bör ladda om data
+There are no new notifications: Det finns inga nya aviseringar
 This is an Administrator Only View.: Det här är en administratörsvy.
 ti-ER: Tigrinya (Eritrea)
 ti-ET: Tigrinya (Etiopien)

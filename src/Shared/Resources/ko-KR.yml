@@ -58,6 +58,8 @@ ar-TN: 아랍어(튀니지)
 ar-YE: 아랍어(예멘)
 arn-CL: 마푸체 (칠레)
 As Admin you can filter for users here: 관리자로 당신은 여기 사용자를 위해 필터링 할 수 있습니다
+as read: 읽음으로
+as unread: 읽지 않은 것으로
 as-IN: 아사메 (인도)
 asa-TZ: 아수 (탄자니아)
 ast-ES: 아스투리아 (스페인)
@@ -152,6 +154,8 @@ Dec: 12월
 Decimal: 십진법
 Decimal value is required using {0} type!: 소수점 값이 {0} 타입을 사용 하 여 필요!
 Delete: 삭제하다
+Delete all: 모두 삭제
+Delete all notifications: 모든 알림 삭제
 Delete Confirmation: 확인 삭제
 Delete Content: 콘텐츠 삭제
 Delete Content {0}: 콘텐츠 '{0}' 삭제
@@ -602,6 +606,11 @@ Manage Translations: 번역 관리
 Manage Users: 사용자 관리
 Manage your account: 계정 관리
 Mar: 3월
+Mark all: 모두 표시
+Mark all as read: 모두 읽은 것으로 표시
+Mark all as unread: 모두 읽지 않은 것으로 표시
+Mark as read: 읽기 표시
+Mark as unread: 읽지 않은 것으로 표시
 mas-KE: 마사이 (케냐)
 mas-TZ: 마사이 (탄자니아)
 May: 5월
@@ -652,8 +661,10 @@ nmg-CM: 와시오 (카메룬)
 nn-NO: 노르웨이 니노르스크 (노르웨이)
 nnh-CM: 응임분 (카메룬)
 No Allowed Actions: 허용된 작업 없음
+No notifications: 알림 없음
 Not Allowed.: 허용되지 않습니다.
 NotFoundMessage: 찾고 있던 페이지가 존재하지 않습니다.
+Notifications: 알림을
 Nov: 11월
 nqo-GN: 은코 (기니)
 nr-ZA: 사우스 은데벨레 (남아프리카 공화국)
@@ -667,6 +678,7 @@ Old Values: 이전 값
 om-ET: 오로모 (에티오피아)
 om-KE: 오로모 (케냐)
 Only Selected Group (Export): 선택한 그룹만(내보내기)
+Open Url {0}: URL {0} 열기
 or-IN: 오디아 (인도)
 os-GE: 오세틱 (조지아 주)
 os-RU: 오세틱 (러시아)
@@ -799,6 +811,7 @@ sg-CF: 산고 (중앙 아프리카 공화국)
 shi-Latn-MA: 타첼히트 (라틴어, 모로코)
 shi-Tfng-MA: 타첼히트 (티피나, 모로코)
 Show: 보이다
+Show notification: 알림 표시
 si-LK: 신할라 (스리랑카)
 Sign In: 서명하세요
 Sign Up: 등록하세요
@@ -864,6 +877,7 @@ th-TH: 태국어 (태국)
 The following {0} permissions are also required for permission {1}: 권한 {1} 다음 {0} 사용 권한도 필요합니다.
 The following permission is also required for permission {1}: 권한 {1} 위해 다음 권한도 필요합니다.
 The User {0} has just edited, created or deleted entries here. You should reload the data: 사용자 {0} 여기에서 방금 편집, 생성 또는 삭제된 항목을 만들었습니다. 데이터를 다시 로드해야 합니다.
+There are no new notifications: 새 알림이 없습니다.
 This is an Administrator Only View.: 관리자 전용 보기입니다.
 ti-ER: 티그리냐 (에리트레아)
 ti-ET: 티그리냐 (에티오피아)

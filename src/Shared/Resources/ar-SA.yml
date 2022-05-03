@@ -58,6 +58,8 @@ ar-TN: العربية (تونس)
 ar-YE: العربية (اليمن)
 arn-CL: مابوشي (تشيلي)
 As Admin you can filter for users here: كمسؤول يمكنك تصفية للمستخدمين هنا
+as read: كما قرأت
+as unread: غير مقروءة
 as-IN: أسامي (الهند)
 asa-TZ: أسو (تنزانيا)
 ast-ES: أستوريان (إسبانيا)
@@ -152,6 +154,8 @@ Dec: ديسمبر
 Decimal: عشري
 Decimal value is required using {0} type!: القيمة العشرية مطلوبة باستخدام نوع {0}!
 Delete: حذف
+Delete all: حذف الكل
+Delete all notifications: حذف جميع الإشعارات
 Delete Confirmation: حذف التأكيد
 Delete Content: حذف المحتوى
 Delete Content {0}: حذف المحتوى '{0}'
@@ -602,6 +606,11 @@ Manage Translations: إدارة الترجمات
 Manage Users: إدارة المستخدمين
 Manage your account: إدارة حسابك
 Mar: مارس
+Mark all: وضع علامة على الكل
+Mark all as read: وضع علامة على الكل كمقروءة
+Mark all as unread: وضع علامة على الكل على أنه غير مقروء
+Mark as read: مارك ريد
+Mark as unread: وضع علامة "غير مقروءة"
 mas-KE: ماساي (كينيا)
 mas-TZ: ماساي (تنزانيا)
 May: مايو
@@ -652,8 +661,10 @@ nmg-CM: كواسيو (الكاميرون)
 nn-NO: نينورسك النرويجية (النرويج)
 nnh-CM: نغيمبون (الكاميرون)
 No Allowed Actions: لا يسمح الإجراءات
+No notifications: لا توجد إشعارات
 Not Allowed.: غير مسموح به.
 NotFoundMessage: الصفحة التي كنت تبحث عنها غير موجودة.
+Notifications: الاخطارات
 Nov: نوفمبر
 nqo-GN: نكو (غينيا)
 nr-ZA: جنوب نديبيلي (جنوب أفريقيا)
@@ -667,6 +678,7 @@ Old Values: القيم القديمة
 om-ET: أورومو (إثيوبيا)
 om-KE: أورومو (كينيا)
 Only Selected Group (Export): المجموعة المحددة فقط (تصدير)
+Open Url {0}: فتح {0} URL
 or-IN: أوديا (الهند)
 os-GE: أوسيتيك (جورجيا)
 os-RU: أوسيتيك (روسيا)
@@ -799,6 +811,7 @@ sg-CF: سانغو (جمهورية أفريقيا الوسطى)
 shi-Latn-MA: تاشلهيت (لاتيني، مغربي)
 shi-Tfng-MA: تشلهيت (تيفيناغ، المغرب)
 Show: عرض
+Show notification: إظهار الإشعار
 si-LK: سينهالا (سريلانكا)
 Sign In: تسجيل الدخول
 Sign Up: التسجيل
@@ -864,6 +877,7 @@ th-TH: تايلاند (تايلاند)
 The following {0} permissions are also required for permission {1}: كما يلزم الحصول على إذن {0} الأذونات التالية {1}
 The following permission is also required for permission {1}: إذن التالية مطلوب أيضا للحصول على إذن {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: قام {0} المستخدم بتحرير الإدخالات أو إنشائها أو حذفها هنا. يجب إعادة تحميل البيانات
+There are no new notifications: لا توجد إشعارات جديدة
 This is an Administrator Only View.: هذا هو "طريقة عرض المسؤول فقط".
 ti-ER: تيغرينيا (إريتريا)
 ti-ET: تيغرينيا (إثيوبيا)

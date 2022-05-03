@@ -58,6 +58,8 @@ ar-TN: Арабски (Тунис)
 ar-YE: Арабски (Йемен)
 arn-CL: Мапуш (Чили)
 As Admin you can filter for users here: Като Администратор можете да филтрирате за потребители тук
+as read: като прочетени
+as unread: като непрочетени
 as-IN: Асамски (Индия)
 asa-TZ: Asu (Танзания)
 ast-ES: Астурски (Испания)
@@ -152,6 +154,8 @@ Dec: Декември
 Decimal: Десетичен
 Decimal value is required using {0} type!: Десетична стойност се изисква с помощта на {0} тип!
 Delete: Изтривам
+Delete all: Изтриване на всички
+Delete all notifications: Изтриване на всички известия
 Delete Confirmation: Изтриване на потвърждение
 Delete Content: Изтриване на съдържание
 Delete Content {0}: Изтриване на съдържание "{0}"
@@ -602,6 +606,11 @@ Manage Translations: Управление на преводи
 Manage Users: Управление на потребители
 Manage your account: Управление на профила ви
 Mar: Мар
+Mark all: Маркирайте всички
+Mark all as read: Маркирайте всички като прочетени
+Mark all as unread: Маркирайте всички като непрочетени
+Mark as read: Маркирайте четенето
+Mark as unread: Маркирайте като непрочетени
 mas-KE: Масаи (Кения)
 mas-TZ: Масаи (Танзания)
 May: Май
@@ -652,8 +661,10 @@ nmg-CM: Квазио (Камерун)
 nn-NO: Норвежки Нинорк (Норвегия)
 nnh-CM: Нгимбоун (Камерун)
 No Allowed Actions: Без разрешени действия
+No notifications: Без известия
 Not Allowed.: Не е позволено.
 NotFoundMessage: Страницата, която търсеше, не съществува.
+Notifications: Уведомления
 Nov: Ноември
 nqo-GN: Н'Ко (Гвинея)
 nr-ZA: Южен Ндебеле (Южна Африка)
@@ -667,6 +678,7 @@ Old Values: Стари ценности
 om-ET: Оромо (Етиопия)
 om-KE: Оромо (Кения)
 Only Selected Group (Export): Само избрана група (експортиране)
+Open Url {0}: Отваряне на URL {0}
 or-IN: Одия (Индия)
 os-GE: Осетик (Грузия)
 os-RU: Осетик (Русия)
@@ -799,6 +811,7 @@ sg-CF: Sango (Централноафриканска република)
 shi-Latn-MA: Тачелит (латински, Мароко)
 shi-Tfng-MA: Тахелхит (Тифина, Мароко)
 Show: Показвам
+Show notification: Показване на известие
 si-LK: Синхала (Шри Ланка)
 Sign In: Влизане
 Sign Up: Регистрирайте се
@@ -864,6 +877,7 @@ th-TH: Тайландски (Тайланд)
 The following {0} permissions are also required for permission {1}: Следните {0} разрешения също са необходими за разрешение {1}
 The following permission is also required for permission {1}: Следното разрешение се изисква и за разрешение {1}
 The User {0} has just edited, created or deleted entries here. You should reload the data: Потребителският {0} току-що е редактирал, създал или изтрил записи тук. Трябва да презаредите данните
+There are no new notifications: Няма нови известия
 This is an Administrator Only View.: Това е само изглед на администратор.
 ti-ER: Тигриния (Еритрея)
 ti-ET: Тигриния (Етиопия)

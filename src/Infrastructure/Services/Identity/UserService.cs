@@ -372,7 +372,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<int> GetCountAsync()
         {
             var count = await _userManager.Users.CountAsync();
-            return count;
+            return count - 1; // We removing the system user here
         }
 
         public async Task<string> ExportToExcelAsync(string searchString = "")

@@ -58,6 +58,8 @@ ar-TN: Arapski (Tunis)
 ar-YE: Arapski (Jemen)
 arn-CL: Mapuche (Čile)
 As Admin you can filter for users here: Kao administrator možete filtrirati za korisnike ovdje
+as read: kao pročitano
+as unread: kao nepročitano
 as-IN: Asamski (Indija)
 asa-TZ: Asu (Tanzanija, BiH)
 ast-ES: Asturijanski (Španjolska)
@@ -152,6 +154,8 @@ Dec: Prosinac
 Decimal: Decimala
 Decimal value is required using {0} type!: Decimalna vrijednost potrebna je pomoću vrste {0}!
 Delete: Izbrisati
+Delete all: Izbriši sve
+Delete all notifications: Izbriši sve obavijesti
 Delete Confirmation: Potvrda brisanja
 Delete Content: Izbriši sadržaj
 Delete Content {0}: Izbriši sadržaj '{0}'
@@ -602,6 +606,11 @@ Manage Translations: Upravljanje prijevodima
 Manage Users: Upravljanje korisnicima
 Manage your account: Upravljanje računom
 Mar: Pokvariti
+Mark all: Označi sve
+Mark all as read: Označi sve kao pročitane
+Mark all as unread: Označi sve kao nepročitane
+Mark as read: Označi pročitano
+Mark as unread: Označi kao nepročitano
 mas-KE: Masai (Kenija)
 mas-TZ: Masai (Tanzanija, BiH)
 May: Svibanj
@@ -652,8 +661,10 @@ nmg-CM: Kwasio (Kamerun, BiH)
 nn-NO: Norveški Nynorsk (Norveška)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Nema dopuštenih akcija
+No notifications: Nema obavijesti
 Not Allowed.: Nije dozvoljeno.
 NotFoundMessage: Stranica koju ste tražili ne postoji.
+Notifications: Obavijesti
 Nov: Studeni
 nqo-GN: N'Ko (Gvineja)
 nr-ZA: Južni Ndebele (Južna Afrika)
@@ -667,6 +678,7 @@ Old Values: Stare vrijednosti
 om-ET: Oromo (Etiopija)
 om-KE: Oromo (Kenija)
 Only Selected Group (Export): Samo odabrana grupa (izvoz)
+Open Url {0}: Otvori {0} URL-a
 or-IN: Odia (Indija)
 os-GE: Ossetić (Gruzija)
 os-RU: Ossetić (Rusija)
@@ -799,6 +811,7 @@ sg-CF: Sango (Srednjoafrička Republika)
 shi-Latn-MA: Tachelhit (latinica, Maroko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
 Show: Pokazati
+Show notification: Pokaži obavijest
 si-LK: Sinhala (Šri Lanka, BiH)
 Sign In: Prijavi se
 Sign Up: Prijavi se
@@ -864,6 +877,7 @@ th-TH: Tajlandski (Tajland)
 The following {0} permissions are also required for permission {1}: Za {1} dozvole potrebne su i sljedeće dozvole za {0}
 The following permission is also required for permission {1}: Za {1} dozvole potrebna je i sljedeća dozvola
 The User {0} has just edited, created or deleted entries here. You should reload the data: Korisnički {0} ovdje je upravo uređivao, kreirao ili brisao unose. Trebali biste ponovno učitati podatke
+There are no new notifications: Nema novih obavijesti
 This is an Administrator Only View.: Ovo je prikaz samo za administratore.
 ti-ER: Tigrinya (Eritreja, BiH)
 ti-ET: Tigrinya (Etiopija)

@@ -71,7 +71,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
             var userRoles = await _userService.GetRolesAsync(userId);
             var userIsAdmin = userRoles.Data?.UserRoles?.Any(x => x.Selected && x.RoleName == RoleConstants.AdministratorRole) == true;
             var allUsers = await _context.Users.Where(user => user.Id != userId && (userIsAdmin || user.IsActive && user.EmailConfirmed)).ToListAsync();
-            var chatUsers = allUsers.MapTo<IEnumerable<ChatUserResponse>>();
+            var chatUsers = allUsers.Where(user => !user.IsSystemUser()).MapTo<IEnumerable<ChatUserResponse>>();
             return await Result<IEnumerable<ChatUserResponse>>.SuccessAsync(chatUsers);
         }
 

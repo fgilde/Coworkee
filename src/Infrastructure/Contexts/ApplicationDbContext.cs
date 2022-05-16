@@ -1,9 +1,9 @@
 ﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Domain.Entities.Catalog;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Chat;
@@ -65,65 +65,14 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             foreach (var property in builder.Model.GetEntityTypes()
-            .SelectMany(t => t.GetProperties())
-            .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+                         .SelectMany(t => t.GetProperties())
+                         .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
             {
                 property.SetColumnType("decimal(18,2)");
             }
+
             base.OnModelCreating(builder);
-            builder.Entity<ChatHistory<ApplicationUser>>(entity =>
-            {
-                entity.ToTable("ChatHistory");
-
-                entity.HasOne(d => d.FromUser)
-                    .WithMany(p => p.ChatHistoryFromUsers)
-                    .HasForeignKey(d => d.FromUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.ToUser)
-                    .WithMany(p => p.ChatHistoryToUsers)
-                    .HasForeignKey(d => d.ToUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-            builder.Entity<ApplicationUser>(entity =>
-            {
-                entity.ToTable(name: "Users", "Identity");
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            });
-
-            builder.Entity<ApplicationRole>(entity =>
-            {
-                entity.ToTable(name: "Roles", "Identity");
-            });
-            builder.Entity<IdentityUserRole<string>>(entity =>
-            {
-                entity.ToTable("UserRoles", "Identity");
-            });
-
-            builder.Entity<IdentityUserClaim<string>>(entity =>
-            {
-                entity.ToTable("UserClaims", "Identity");
-            });
-
-            builder.Entity<IdentityUserLogin<string>>(entity =>
-            {
-                entity.ToTable("UserLogins", "Identity");
-            });
-
-            builder.Entity<ApplicationRoleClaim>(entity =>
-            {
-                entity.ToTable(name: "RoleClaims", "Identity");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.RoleClaims)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            builder.Entity<IdentityUserToken<string>>(entity =>
-            {
-                entity.ToTable("UserTokens", "Identity");
-            });
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

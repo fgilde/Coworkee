@@ -87,6 +87,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Update="wwwroot\js\helper\colorHelper.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Update="wwwroot\js\helper\eventHelper.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -1,4 +1,5 @@
 import * as helper from './helper/index.js';
+// TODO: Rebuild whole file, its Horrable
 let jsAppData = {
     mouseArgs: {},
     browserDimensions: {}
@@ -24,7 +25,25 @@ function getJsAppData() {
     return res;
 }
 ;
+function onLoaded(appSettings) {
+    var nsObject = window[appSettings.JsMainNamespace];
+    nsObject['AppSettings'] = appSettings;
+    nsObject['getJsAppData'] = getJsAppData;
+    document.querySelector('#app-logo').insertAdjacentHTML('beforeend', nsObject.CustomIcons.ApplicationMainIcon);
+    document.querySelector('#sub-text').innerHTML = `${nsObject.ApplicationConstants.ApplicationName} ${nsObject.ApplicationConstants.Version}`;
+    document.title = nsObject.ApplicationConstants.ApplicationName + ' - Home';
+    loadHelper(appSettings.JsMainNamespace);
+    var app = document.getElementById('app');
+    app.addEventListener('DOMSubtreeModified', contentChanged, false);
+    function contentChanged() {
+        app.removeEventListener('DOMSubtreeModified', contentChanged);
+        var overlay = document.getElementById('overlay-app-load');
+        overlay.classList.add('fade-out');
+        setTimeout(() => { overlay.remove(); }, 3000); // Remove element after fadeout
+    }
+}
 function initialLoad() {
+    var appSettings = {}, isDebug = window.location.hostname.includes("localhost"); // TODO Find better way
     document.addEventListener('mousemove', onMouseUpdate, false);
     document.addEventListener('mouseenter', onMouseUpdate, false);
     const nav = new helper.BrowserHelper();
@@ -32,36 +51,32 @@ function initialLoad() {
         window.localStorage.clear();
         window.location.href = nav.removeUrlParams(window.location.href, 'safemode');
     }
-    var loaded = (appSettings) => {
-        var nsObject = window[appSettings.JsMainNamespace];
-        nsObject['AppSettings'] = appSettings;
-        nsObject['getJsAppData'] = getJsAppData;
-        document.querySelector('#app-logo').insertAdjacentHTML('beforeend', nsObject.CustomIcons.ApplicationMainIcon);
-        document.querySelector('#sub-text').innerHTML = `${nsObject.ApplicationConstants.ApplicationName} ${nsObject.ApplicationConstants.Version}`;
-        document.title = nsObject.ApplicationConstants.ApplicationName + ' - Home';
-        loadHelper(appSettings.JsMainNamespace);
-        var app = document.getElementById('app');
-        app.addEventListener('DOMSubtreeModified', contentChanged, false);
-        function contentChanged() {
-            app.removeEventListener('DOMSubtreeModified', contentChanged);
-            var overlay = document.getElementById('overlay-app-load');
-            overlay.classList.add('fade-out');
-            setTimeout(() => { overlay.remove(); }, 3000); // Remove element after fadeout
-        }
+    var configFetch = () => {
+        return fetch('appsettings.json', { method: 'GET', redirect: 'follow' })
+            .then(response => response.json())
+            .then(json => {
+            appSettings = Object.assign({ ...json }, { ...appSettings });
+            window['___appJsNameSpace'] = appSettings.JsMainNamespace;
+            nav.changeFavIcon(appSettings.BackendOrigin + '/favicon.ico');
+            var script = document.createElement('script');
+            script.onload = () => {
+                onLoaded(appSettings);
+            };
+            script.src = `${appSettings.BackendOrigin}/${appSettings.JsMainNamespace}/resources.js`;
+            document.head.appendChild(script);
+        });
     };
-    fetch('appsettings.json', { method: 'GET', redirect: 'follow' })
-        .then(response => response.json())
-        .then(json => {
-        window['___appJsNameSpace'] = json.JsMainNamespace;
-        // TODO: BackendOrigin maybe wrong. not using appsettings.development.json here currently
-        nav.changeFavIcon(json.BackendOrigin + '/favicon.ico');
-        var script = document.createElement('script');
-        script.onload = () => {
-            loaded(json);
-        };
-        script.src = `${json.BackendOrigin}/${json.JsMainNamespace}/resources.js`;
-        document.head.appendChild(script);
-    });
+    if (isDebug) {
+        fetch('appsettings.development.json', { method: 'GET', redirect: 'follow' })
+            .then(response => response.json())
+            .then(json => {
+            appSettings = json;
+            configFetch();
+        });
+    }
+    else {
+        configFetch();
+    }
 }
 initialLoad();
 //# sourceMappingURL=index.js.map

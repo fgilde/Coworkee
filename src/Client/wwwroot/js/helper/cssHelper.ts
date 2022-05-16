@@ -9,6 +9,12 @@
             .map(name => ({name: name, value: this.getCssVariableValue(name)}));
     }
 
+    public findCssVariables(value: string): Array<{ name: string; value: string }> {
+        value = value.toLowerCase();
+        const helper = window[window['___appJsNameSpace']]['ColorHelper'];
+        return this.getCssVariables().filter(v => v.value.toLowerCase().includes(value) || helper.ensureHex(v.value).includes(helper.ensureHex(value)));
+    }
+
     public getCssVariableValue(varName: string) {
         return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
     }

@@ -8,7 +8,7 @@ namespace CleanArchitectureBase.Client.Extensions
 {
     public static class AuthorizationServiceExtensions
     {
-        public static async Task<bool> HasPoliciesAsync(this IAuthorizationService authorizationService, ClaimsPrincipal user, PolicyMatch match, string[] policies)
+        public static async Task<bool> HasPoliciesAsync(this IAuthorizationService authorizationService, ClaimsPrincipal user, PolicyMatch match, params string[] policies)
         {
             var granted = true;
             foreach (var policy in policies ?? Enumerable.Empty<string>().ToArray())

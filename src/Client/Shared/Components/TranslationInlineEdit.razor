@@ -4,6 +4,7 @@
 @using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
 @using System.Globalization
 @using CleanArchitectureBase.Application.Common.Models
+@using CleanArchitectureBase.Application.Common.Security
 @using CleanArchitectureBase.Shared.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<TranslationInlineEdit> localizer
 
@@ -16,7 +17,7 @@
     {
         <MudTextField AdornmentColor="Color.Success" OnAdornmentClick="@ConfirmChange" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Check" AutoFocus="true" @onkeyup="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value"/>
     }
-    @if (mouseOverElement && !inEditMode)
+    @if (mouseOverElement && !inEditMode && allowedToEdit)
     {
         <MudIconButton OnClick="OnEditClick" Style="opacity: 0.5; position: absolute; margin-top: 2px; margin-left: 2px;" Size="Size.Small" Icon="@Icons.Material.Outlined.Edit"/>
     }
@@ -31,6 +32,7 @@
 
     private bool usePopover = true;
     private MudTextField<string> textField;
+    private bool allowedToEdit;
 
     [Parameter]
     public IStringLocalizer Localizer { get; set; }
@@ -43,6 +45,13 @@
     private bool inEditMode;
     private bool mouseOverElement;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var user = await _stateProvider.GetAuthenticationStateProviderUserAsync();
+        allowedToEdit = await _authorizationService.HasPoliciesAsync(user, PolicyMatch.All, Permissions.Translations.Edit);
+    }
+
     private IStringLocalizer GetLocalizer()
     {
         return Localizer ?? localizer;
@@ -50,7 +59,7 @@
 
     private async void ElementClick(MouseEventArgs obj)
     {
-        if (obj.CtrlKey)
+        if (obj.CtrlKey && allowedToEdit)
         {
             inEditMode = true;
         }

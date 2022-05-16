@@ -1,10 +1,14 @@
 ﻿@using CleanArchitectureBase.Shared.Constants
+@using Color = System.Drawing.Color
+@using CleanArchitectureBase.Client.Utils
 @namespace CleanArchitectureBase.Client.Shared.Components
 
-<MudIcon Icon="@CustomIcons.ApplicationMainIcon" Size="@Size" ViewBox="@ViewBox" Style="@Style()" />
+<MudIcon Class="@Class" Icon="@Icon" Size="@Size" @attributes="attributes" Style="@Style()" />
 
 @code
 {
+    private Dictionary<string, object> attributes;
+
     [Parameter]
     public int Height { get; set; } = 100;
     
@@ -17,8 +21,33 @@
     [Parameter]
     public Size Size { get; set; } = Size.Large;
 
+    [Parameter]
+    public Color StrokeColor { get; set; } = default;
+
+    [Parameter]
+    public string ExtraStyle { get; set; } = "";
+
+    [Parameter]
+    public bool ExtraStyleOnly { get; set; } = false;
+
+    [Parameter]
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public string Icon { get; set; } = CustomIcons.ApplicationMainIcon;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        attributes = new Dictionary<string, object>
+        {
+            ["ViewBox"] = !string.IsNullOrEmpty(ViewBox) ? ViewBox : $"0 0 {Width} {Height}"
+        };
+    }
+
     private string Style()
     {
-        return $"width:{Width}px; height:{Height}px;";
+        string stroke = StrokeColor != default ? $"stroke: {StrokeColor.ToHex()};" : string.Empty;
+        return ExtraStyleOnly ? ExtraStyle : $"width:{Width}px; height:{Height}px; {stroke} ${ExtraStyle}";
     }
 }

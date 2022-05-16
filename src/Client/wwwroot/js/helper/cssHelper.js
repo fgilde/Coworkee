@@ -7,7 +7,7 @@ export class CssHelper {
                 : def), [])]), [])
             .map(name => ({ name: name, value: this.getCssVariableValue(name) }));
     }
-    findCssVariable(value) {
+    findCssVariables(value) {
         value = value.toLowerCase();
         const helper = window[window['___appJsNameSpace']]['ColorHelper'];
         return this.getCssVariables().filter(v => v.value.toLowerCase().includes(value) || helper.ensureHex(v.value).includes(helper.ensureHex(value)));

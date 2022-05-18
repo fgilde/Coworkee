@@ -15,6 +15,7 @@ Add Product: 제품 추가
 Add Role: 역할 추가
 Administrator: 관리자
 Administrator Settings.: 관리자 설정.
+Administrators Profile's Status cannot be toggled: 관리자 프로필의 상태를 전환할 수 없습니다.
 af-NA: 아프리칸스 (나미비아)
 af-ZA: 아프리칸스 (남아프리카 공화국)
 agq-CM: 아젬 (카메룬)
@@ -23,6 +24,9 @@ All Groups: 모든 그룹
 All Permissions: 모든 사용 권한
 Already have an account?: 이미 계정이 있습니까?
 am-ET: 암하라어 (에티오피아)
+An Error has occured!: 오류가 발생했습니다!
+An Error has occurred!: 오류가 발생했습니다!
+An error occurred while confirming {0}: 확인하는 동안 오류가 발생했{0}
 Api: Api
 API-Versions: API 버전
 ApplicationDescription: 웹어셈블리 및 클린 아키텍처 패턴이 있는 샘플 응용 프로그램
@@ -59,6 +63,7 @@ ar-YE: 아랍어(예멘)
 arn-CL: 마푸체 (칠레)
 As Admin you can filter for users here: 관리자로 당신은 여기 사용자를 위해 필터링 할 수 있습니다
 as read: 읽음으로
+As soon as your account has been activated you can log in: 계정이 활성화되면 즉시 로그인 할 수 있습니다.
 as unread: 읽지 않은 것으로
 as-IN: 아사메 (인도)
 asa-TZ: 아수 (탄자니아)
@@ -128,6 +133,7 @@ Confirm: 확인하다
 Confirm and Ignore: 확인 및 무시
 Confirm and Set Required: 필요한 확인 및 설정
 Confirm Password: 암호 확인
+Confirm Registration: 등록 확인
 contacts: 연락처
 Create: 창조하다
 cs-CZ: 체코어(체코)
@@ -204,6 +210,7 @@ dyo-SN: 졸라 포니 (세네갈)
 dz-BT: 단카 (부탄)
 E-mail: 이메일
 E-Mail: 이메일
+E-Mail not confirmed.: 이메일이 확인되지 않았습니다. 사서함을 확인하고 전자 메일 주소를 확인하십시오. <a href='{0}'>이메일 확인 재전송</a>
 ebu-KE: 엠부 (케냐)
 Edit: 편집하다
 ee-GH: 에베 (가나)
@@ -211,6 +218,7 @@ ee-TG: 에베 (토고)
 el-CY: 그리스어 (키프로스)
 el-GR: 그리스어 (그리스)
 Email: 이메일
+Email {0} is already registered.: 이메일 {0}가 이미 등록되어 있습니다.
 Email Confirmation: 이메일 확인
 Email is not correct: 이메일이 올바르지 않습니다.
 Email is required: 이메일이 필요합니다.
@@ -324,6 +332,7 @@ en-ZM: 영어(잠비아)
 en-ZW: 영어 (짐바브웨)
 English: 영어
 Enter email for password reset: 계정에 연결된 이메일 주소를 입력하면 비밀번호를 재설정하는 링크가 포함된 이메일이 전송됩니다.
+Enter the email address for the confirmation mail: 확인 메일의 이메일 주소를 입력합니다.
 Enter your message...: 메시지를 입력...
 Entity Id: 엔터티 ID
 Entity is required!: 엔티티가 필요합니다!
@@ -511,6 +520,7 @@ ii-CN: 이순신 (중국)
 Include Entity fields (Export): 엔터티 필드 포함(내보내기)
 Incorrect Password.: 잘못된 암호입니다.
 Indonesia: 인도네시아어
+Invalid Credentials.: 잘못된 자격 증명입니다.
 Is Active: 활성 상태
 Is Public: 공개입니다
 Is Public?: 공개인가요?
@@ -662,6 +672,8 @@ nn-NO: 노르웨이 니노르스크 (노르웨이)
 nnh-CM: 응임분 (카메룬)
 No Allowed Actions: 허용된 작업 없음
 No notifications: 알림 없음
+Not Allowed to add or delete Administrator Role if you have not this role.: 이 역할이 없는 경우 관리자 역할을 추가하거나 삭제할 수 없습니다.
+Not allowed to Delete this user: 이 사용자를 삭제할 수 없음
 Not Allowed.: 허용되지 않습니다.
 NotFoundMessage: 찾고 있던 페이지가 존재하지 않습니다.
 Notifications: 알림을
@@ -695,13 +707,18 @@ Password must be at least of length 8: 암호는 길이 8 이상이어야 합니
 Password must contain at least one capital letter: 암호에는 하나 이상의 대문자가 포함되어야 합니다.
 Password must contain at least one digit: 암호에는 한 자리 이상이 포함되어야 합니다.
 Password must contain at least one lowercase letter: 암호에는 하나 이상의 소문자가 포함되어야 합니다.
+Password Reset Mail has been sent to your authorized Email.: 암호 재설정 메일이 승인된 이메일로 전송되었습니다.
+Password Reset Successful!: 암호 재설정 성공!
 Passwords don't match: 암호가 일치하지 않습니다.
 pcm-Latn-NG: 나이지리아 피진 (라틴어, 나이지리아)
 Permission Name: 권한 이름
 Personal: 개인
 Phone Number: 전화번호
+Phone number {0} is already registered.: 전화 번호 {0} 이미 등록되어 있습니다.
 PhoneNumber: 전화 번호
 pl-PL: 폴란드어 (폴란드)
+Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>여기를 클릭하여 계정을 확인하십시오</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'> 클릭하여 비밀번호를 재설정하십시오</a>.
 prg-001: 프로이센 (세계)
 Primary Key: 기본 키
 Product Deleted: 제품이 삭제되었습니다!
@@ -804,6 +821,7 @@ Security: 안전
 seh-MZ: 세나 (모잠비크)
 Select Language: 언어 선택
 Send: 보내기
+Send confirmation email: 확인 이메일 보내기
 Sep: 9월
 ses-ML: 코이라보로 세니 (말리)
 Set new password: 새 암호 설정
@@ -925,13 +943,17 @@ Upload Image: 이미지 업로드
 ur-IN: 우르두어 (인도)
 ur-PK: 우르두어 (파키스탄)
 User: 사용자
+User {0} Registered. Please check your Mailbox to verify!: 사용자 {0}가 등록되었습니다. 사서함을 확인하여 이메일 주소를 확인하십시오!
 User Deleted: 사용자 삭제
 User Name: 사용자 이름
+User Not Active. Please contact the administrator.: 사용자가 활성 상태가 아닙니다. 활성화를 기다리거나 관리자에게 문의하십시오.
 User Not Found!: 사용자가 찾을 수 없습니다!
 User Registered: 사용자 등록!
 User Registered Mailbox: 사용자 등록. 확인 메일이 사서함으로 배달되었습니다.
+User registration is not allowed: 사용자 등록이 허용되지 않습니다.
 Username: 사용자 이름
 UserName: 사용자 이름
+Username {0} is already taken.: 사용자 이름 {0}가 이미 사용 중입니다.
 UserName is required: 사용자 이름이 필요합니다.
 UserName must be at least of length 6: 사용자 이름은 길이 6 이상이어야 합니다.
 Users: 사용자
@@ -966,7 +988,10 @@ you: 너
 You are logged out because the Permissions of one of your Roles have been updated.: 역할 중 하나의 사용 권한이 업데이트되었기 때문에 로그아웃됩니다.
 You are logged out because the user with your Token has been deleted or token is expired.: 토큰을 가진 사용자가 삭제되었거나 토큰이 만료되었기 때문에 로그아웃됩니다.
 You are Logged Out.: 로그아웃됩니다.
+You can now Login with your credentials: 이제 자격 증명으로 로그인 할 수 있습니다.
 You cannot delete yourself: 직접 삭제할 수 없습니다.
+Your e-mail address has been confirmed!: 귀하의 이메일 주소가 확인되었습니다!
+Your email address could not be verified. If you have any problems, please contact {0}: 이메일 주소를 확인할 수 없습니다. 문제가 있으면 저희에게 연락하십시{0}.
 Your Profile has been updated.: 프로필이 업데이트되었습니다.
 Your Recent Activities.: 최근 활동.
 zgh-Tfng-MA: 스탠다드 모로코 타마지트 (티피나, 모로코)

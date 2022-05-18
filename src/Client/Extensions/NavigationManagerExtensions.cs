@@ -30,6 +30,12 @@ namespace CleanArchitectureBase.Client.Extensions
             return navigationManager;
         }
 
+        public static string ReadQueryParam(this NavigationManager navigationManager, string paramName)
+        {
+            var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+            return QueryHelpers.ParseQuery(uri.Query).TryGetValue(paramName, out var param) ? param.FirstOrDefault() : null;
+        }
+
         public static bool IsExternalUrl(this NavigationManager navigationManager, string url)
         {
             var baseUrl = navigationManager.ToAbsoluteUri(navigationManager.Uri);

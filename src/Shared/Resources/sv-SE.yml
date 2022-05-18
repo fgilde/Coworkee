@@ -15,6 +15,7 @@ Add Product: Lägg till produkt
 Add Role: Lägg till roll
 Administrator: Administratör
 Administrator Settings.: Administratörsinställningar.
+Administrators Profile's Status cannot be toggled: Administratörsprofilens status kan inte växlas
 af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (Sydafrika)
 agq-CM: Aghem (Kamerun)
@@ -23,6 +24,9 @@ All Groups: Alla grupper
 All Permissions: Alla behörigheter
 Already have an account?: Har du redan ett konto?
 am-ET: Amhariska (Etiopien)
+An Error has occured!: Ett fel har inträffat!
+An Error has occurred!: Ett fel har inträffat!
+An error occurred while confirming {0}: Ett fel uppstod vid bekräftelse av {0}
 Api: Application Programming Interface
 API-Versions: API-versioner
 ApplicationDescription: Exempelprogram med WebAssembly och Clean Architecture Pattern
@@ -59,6 +63,7 @@ ar-YE: Arabiska (Jemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Som administratör kan du filtrera efter användare här
 as read: som läst
+As soon as your account has been activated you can log in: Så snart ditt konto har aktiverats kan du logga in
 as unread: som oläst
 as-IN: Assamese (Indien)
 asa-TZ: Asu (Tanzania)
@@ -128,6 +133,7 @@ Confirm: Bekräfta
 Confirm and Ignore: Bekräfta och ignorera
 Confirm and Set Required: Bekräfta och ange obligatoriskt
 Confirm Password: Bekräfta lösenord
+Confirm Registration: Bekräfta registrering
 contacts: Kontakter
 Create: Skapa
 cs-CZ: Tjeckiska (Tjeckien)
@@ -204,6 +210,7 @@ dyo-SN: Jola-Fonyi (Senegal)
 dz-BT: Dzongkha (Bhutan)
 E-mail: E-post
 E-Mail: E-post
+E-Mail not confirmed.: E-post har inte bekräftats. Kontrollera din brevlåda och bekräfta din e-postadress. <a href='{0}'>Återställa e-postbekräftelse</a>
 ebu-KE: Embu (Kenya)
 Edit: Redigera
 ee-GH: Tack (Ghana)
@@ -211,6 +218,7 @@ ee-TG: Tack (Togo)
 el-CY: Grekiska (Cypern)
 el-GR: Grekiska (Grekland)
 Email: E-post
+Email {0} is already registered.: E-{0} är redan registrerat.
 Email Confirmation: E-postbekräftelse
 Email is not correct: E-post är inte korrekt
 Email is required: E-post krävs
@@ -324,6 +332,7 @@ en-ZM: Engelska (Zambia)
 en-ZW: Engelska (Zimbabwe)
 English: Engelska
 Enter email for password reset: Ange e-postadressen som är länkad till ditt konto så får du ett e-postmeddelande som innehåller en länk för att återställa ditt lösenord
+Enter the email address for the confirmation mail: Ange e-postadressen för bekräftelsemeddelandet
 Enter your message...: Skriv in ditt meddelande...
 Entity Id: Enhets-ID
 Entity is required!: Enhet krävs!
@@ -511,6 +520,7 @@ ii-CN: Yi (Kina)
 Include Entity fields (Export): Inkludera entitetsfält (exportera)
 Incorrect Password.: Felaktigt lösenord.
 Indonesia: Indonesiska
+Invalid Credentials.: Ogiltiga autentiseringsuppgifter.
 Is Active: Är aktiv
 Is Public: Är offentlig
 Is Public?: Är public?
@@ -662,6 +672,8 @@ nn-NO: Norska Nynorsk (Norge)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Inga tillåtna åtgärder
 No notifications: Inga aviseringar
+Not Allowed to add or delete Administrator Role if you have not this role.: Det är inte tillåtet att lägga till eller ta bort administratörsrollen om du inte har den här rollen.
+Not allowed to Delete this user: Får inte ta bort den här användaren
 Not Allowed.: Inte tillåtet.
 NotFoundMessage: Sidan du letade efter finns inte.
 Notifications: Meddelanden
@@ -695,13 +707,18 @@ Password must be at least of length 8: Lösenordet måste vara minst längd 8
 Password must contain at least one capital letter: Lösenordet måste innehålla minst en stor bokstav
 Password must contain at least one digit: Lösenordet måste innehålla minst en siffra
 Password must contain at least one lowercase letter: Lösenordet måste innehålla minst en gemen bokstav
+Password Reset Mail has been sent to your authorized Email.: E-post för återställning av lösenord har skickats till din auktoriserade e-postadress.
+Password Reset Successful!: Lösenordsåterställning lyckades!
 Passwords don't match: Lösenord matchar inte
 pcm-Latn-NG: Nigerianska Pidgin (latin, Nigeria)
 Permission Name: Behörighetsnamn
 Personal: Personlig
 Phone Number: Telefonnummer
+Phone number {0} is already registered.: Telefonnummer {0} är redan registrerat.
 PhoneNumber: Telefonnummer
 pl-PL: Polska (Polen)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Bekräfta ditt konto genom att <a href='{0}'>klicka här</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Återställ ditt lösenord genom att <a href='{0} >klicka här</a>.
 prg-001: Preussiska (Värld)
 Primary Key: Primärnyckel
 Product Deleted: Produkten har tagits bort!
@@ -804,6 +821,7 @@ Security: Säkerhet
 seh-MZ: Sena (Moçambique)
 Select Language: Välj språk
 Send: Sända
+Send confirmation email: Skicka bekräftelse via e-post
 Sep: Sep
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Ange nytt lösenord
@@ -925,13 +943,17 @@ Upload Image: Ladda upp bild
 ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Användare
+User {0} Registered. Please check your Mailbox to verify!: Användaren {0} registrerad. Kontrollera din brevlåda för att verifiera din e-postadress!
 User Deleted: Användaren har tagits bort
 User Name: Användarnamn
+User Not Active. Please contact the administrator.: Användaren är inte aktiv. Vänta på aktivivasion eller kontakta administratören.
 User Not Found!: Användaren hittades inte!
 User Registered: Användare registrerad!
 User Registered Mailbox: Användaren registrerad. Bekräftelsepost har levererats till postlådan.
+User registration is not allowed: Användarregistrering är inte tillåten
 Username: Användarnamn
 UserName: Användarnamn
+Username {0} is already taken.: Användarnamn {0} är redan taget.
 UserName is required: Användarnamn krävs
 UserName must be at least of length 6: Användarnamn måste vara minst längd 6
 Users: Användare
@@ -966,7 +988,10 @@ you: du
 You are logged out because the Permissions of one of your Roles have been updated.: Du är utloggad eftersom behörigheterna för en av dina roller har uppdaterats.
 You are logged out because the user with your Token has been deleted or token is expired.: Du är utloggad eftersom användaren med token har tagits bort eller token har upphört att gälla.
 You are Logged Out.: Du är utloggad.
+You can now Login with your credentials: Du kan nu logga in med dina uppgifter
 You cannot delete yourself: Du kan inte ta bort dig själv
+Your e-mail address has been confirmed!: Din e-postadress har bekräftats!
+Your email address could not be verified. If you have any problems, please contact {0}: Din e-postadress kunde inte verifieras. Om du har några problem, vänligen kontakta {0}
 Your Profile has been updated.: Din profil har uppdaterats.
 Your Recent Activities.: Dina senaste aktiviteter.
 zgh-Tfng-MA: Standard marockansk tamazight (Tifinagh, Marocko)

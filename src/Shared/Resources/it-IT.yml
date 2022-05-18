@@ -15,6 +15,7 @@ Add Product: Aggiungi prodotto
 Add Role: Aggiungi ruolo
 Administrator: Amministratore
 Administrator Settings.: Impostazioni dell'amministratore.
+Administrators Profile's Status cannot be toggled: Non è possibile attivare o disattivare lo stato del profilo degli amministratori
 af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (Sudafrica)
 agq-CM: Aghem (Camerun)
@@ -23,6 +24,9 @@ All Groups: Tutti i gruppi
 All Permissions: Tutte le autorizzazioni
 Already have an account?: Hai già un account?
 am-ET: Amarico (Etiopia)
+An Error has occured!: Si è verificato un errore!
+An Error has occurred!: Si è verificato un errore!
+An error occurred while confirming {0}: Si è verificato un errore durante la conferma di {0}
 Api: API
 API-Versions: API-Versioni
 ApplicationDescription: Applicazione di esempio con WebAssembly e modello di architettura pulita
@@ -59,6 +63,7 @@ ar-YE: Arabo (Yemen)
 arn-CL: Mapuche (Cile)
 As Admin you can filter for users here: Come amministratore puoi filtrare per gli utenti qui
 as read: come letto
+As soon as your account has been activated you can log in: Non appena il tuo account è stato attivato puoi accedere
 as unread: come non letto
 as-IN: Assamese (India)
 asa-TZ: Asu (Tanzania)
@@ -128,6 +133,7 @@ Confirm: Confermare
 Confirm and Ignore: Conferma e ignora
 Confirm and Set Required: Conferma e imposta richiesto
 Confirm Password: Conferma password
+Confirm Registration: Conferma registrazione
 contacts: Contatti
 Create: Creare
 cs-CZ: Ceco (Cechia)
@@ -204,6 +210,7 @@ dyo-SN: Jola-Fonyi (Senegal)
 dz-BT: Dzongkha (Bhutan)
 E-mail: E-mail
 E-Mail: E-mail
+E-Mail not confirmed.: Email non confermata. Controlla la tua casella di posta e conferma il tuo indirizzo email. <a href='{0}'>Invia e-mail di conferma</a>
 ebu-KE: Embu (Kenya)
 Edit: Redigere
 ee-GH: Pecora (Ghana)
@@ -211,6 +218,7 @@ ee-TG: Pecora (Togo)
 el-CY: Greco (Cipro)
 el-GR: Greco (Grecia)
 Email: E-mail
+Email {0} is already registered.: Email {0} è già registrato.
 Email Confirmation: Conferma via e-mail
 Email is not correct: L'e-mail non è corretta
 Email is required: L'e-mail è obbligatoria
@@ -324,6 +332,7 @@ en-ZM: Inglese (Zambia)
 en-ZW: Inglese (Zimbabwe)
 English: Inglese
 Enter email for password reset: Inserisci l'indirizzo email collegato al tuo account e riceverai un'email contenente un link per reimpostare la password
+Enter the email address for the confirmation mail: Inserisci l'indirizzo email per l'email di conferma
 Enter your message...: Inserisci il tuo messaggio...
 Entity Id: ID entità
 Entity is required!: L'entità è obbligatoria!
@@ -511,6 +520,7 @@ ii-CN: Yi (Cina)
 Include Entity fields (Export): Includi campi Entità (Esporta)
 Incorrect Password.: Password errata.
 Indonesia: Indonesiano
+Invalid Credentials.: Credenziali non valide.
 Is Active: È attivo
 Is Public: È pubblico
 Is Public?: È pubblico?
@@ -662,6 +672,8 @@ nn-NO: Norvegese Nynorsk (Norvegia)
 nnh-CM: Ngiemboon (Camerun)
 No Allowed Actions: Azioni non consentite
 No notifications: Nessuna notifica
+Not Allowed to add or delete Administrator Role if you have not this role.: Non è consentito aggiungere o eliminare il ruolo di amministratore se non si dispone di questo ruolo.
+Not allowed to Delete this user: Non è consentito eliminare questo utente
 Not Allowed.: Non consentito.
 NotFoundMessage: La pagina che stavi cercando non esiste.
 Notifications: Notifiche
@@ -695,13 +707,18 @@ Password must be at least of length 8: La password deve essere di almeno 8 lungh
 Password must contain at least one capital letter: La password deve contenere almeno una lettera maiuscola
 Password must contain at least one digit: La password deve contenere almeno una cifra
 Password must contain at least one lowercase letter: La password deve contenere almeno una lettera minuscola
+Password Reset Mail has been sent to your authorized Email.: La posta di reimpostazione della password è stata inviata all'indirizzo e-mail autorizzato.
+Password Reset Successful!: Reimpostazione della password riuscita!
 Passwords don't match: Le password non corrispondono
 pcm-Latn-NG: Nigerian Pidgin (latino, Nigeria)
 Permission Name: Nome autorizzazione
 Personal: Personale
 Phone Number: Numero di telefono
+Phone number {0} is already registered.: Il numero di telefono {0} è già registrato.
 PhoneNumber: Numero di telefono
 pl-PL: Polacco (Polonia)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Conferma il tuo account <a href='{0}'> cliccando qui</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Reimposta la password <a href='{0}'> cliccando qui</a>.
 prg-001: Prussiano (Mondo)
 Primary Key: Chiave primaria
 Product Deleted: Prodotto cancellato!
@@ -804,6 +821,7 @@ Security: Sicurezza
 seh-MZ: Sena (Mozambico)
 Select Language: Seleziona lingua
 Send: Invia
+Send confirmation email: Invia email di conferma
 Sep: Set
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Impostare una nuova password
@@ -925,13 +943,17 @@ Upload Image: Carica immagine
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: Utente
+User {0} Registered. Please check your Mailbox to verify!: Utente {0} Registrato. Controlla la tua casella di posta per verificare il tuo indirizzo email!
 User Deleted: Utente eliminato
 User Name: Nome utente
+User Not Active. Please contact the administrator.: Utente non attivo. Attendere l'attivazione o contattare l'amministratore.
 User Not Found!: Utente non trovato!
 User Registered: Utente registrato!
 User Registered Mailbox: Utente registrato. La posta di conferma è stata recapitata alla cassetta postale.
+User registration is not allowed: La registrazione dell'utente non è consentita
 Username: Nome utente
 UserName: Nome utente
+Username {0} is already taken.: Il nome utente {0} è già stato preso.
 UserName is required: UserName è obbligatorio
 UserName must be at least of length 6: UserName deve avere almeno una lunghezza 6
 Users: Gli utenti
@@ -966,7 +988,10 @@ you: tu
 You are logged out because the Permissions of one of your Roles have been updated.: Sei disconnesso perché le autorizzazioni di uno dei tuoi ruoli sono state aggiornate.
 You are logged out because the user with your Token has been deleted or token is expired.: Sei disconnesso perché l'utente con il tuo token è stato eliminato o il token è scaduto.
 You are Logged Out.: Sei disconnesso.
+You can now Login with your credentials: Ora puoi accedere con le tue credenziali
 You cannot delete yourself: Non puoi eliminare te stesso
+Your e-mail address has been confirmed!: Il tuo indirizzo e-mail è stato confermato!
+Your email address could not be verified. If you have any problems, please contact {0}: Impossibile verificare il tuo indirizzo email. In caso di problemi, si prega di contattare {0}
 Your Profile has been updated.: Il tuo profilo è stato aggiornato.
 Your Recent Activities.: Le tue attività recenti.
 zgh-Tfng-MA: Tamazight marocchino standard (Tifinagh, Marocco)

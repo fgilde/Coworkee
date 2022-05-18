@@ -53,13 +53,13 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             {
                 return await Result<TokenResponse>.FailAsync(_localizer["User Not Found."]);
             }
-            if (!user.IsActive)
-            {
-                return await Result<TokenResponse>.FailAsync(_localizer["User Not Active. Please contact the administrator."]);
-            }
             if (!user.EmailConfirmed)
             {
                 return await Result<TokenResponse>.FailAsync(_localizer["E-Mail not confirmed."]);
+            }
+            if (!user.IsActive)
+            {
+                return await Result<TokenResponse>.FailAsync(_localizer["User Not Active. Please contact the administrator."]);
             }
             var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
             if (!passwordValid)

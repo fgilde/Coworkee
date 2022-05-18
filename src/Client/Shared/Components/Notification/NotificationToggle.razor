@@ -11,8 +11,8 @@
 @{
     <MudTooltip Text="@localizer["Notifications"]">
 
-        <MudBadge Origin="Origin.CenterRight" BadgeClass="notification-badge" Content="@_unreadCount" Visible="@HasUnread()" Color="Color.Primary" Overlap="true">
-            <MudToggleIconButton Class="@($"{MainClass}-toggle-button")" @bind-Toggled="@IsOpen" Icon="@Icons.Material.Outlined.Notifications" Color="@(HasUnread() ? Color.Primary : Color.Inherit)" ToggledIcon="@Icons.Filled.Notifications" ToggledColor="@Color.Secondary" />
+        <MudBadge Origin="Origin.CenterRight" BadgeClass="notification-badge" Content="@_unreadCount" Visible="@HasUnread()" Color="Color.Warning" Overlap="true">
+            <MudToggleIconButton Class="@($"{MainClass}-toggle-button")" @bind-Toggled="@IsOpen" Icon="@Icons.Material.Outlined.Notifications" Color="@(HasUnread() ? Color.Warning : Color.Inherit)" ToggledIcon="@Icons.Filled.Notifications" ToggledColor="@Color.Secondary" />
         </MudBadge>
 
         <MudPopover Class="@(_animate ? $"{MainClass}-popover slide-kf-from-right" : $"{MainClass}-popover")" Style="margin-right: 5px; margin-top: 10px;" Open="@IsOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="900">

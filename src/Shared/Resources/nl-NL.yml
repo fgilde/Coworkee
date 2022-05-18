@@ -15,6 +15,7 @@ Add Product: Product toevoegen
 Add Role: Rol toevoegen
 Administrator: Administrateur
 Administrator Settings.: Beheerdersinstellingen.
+Administrators Profile's Status cannot be toggled: Status beheerdersprofiel kan niet worden omgeschakeld
 af-NA: Afrikaans (Namibië)
 af-ZA: Afrikaans (Zuid-Afrika)
 agq-CM: Aghem (Kameroen)
@@ -23,6 +24,9 @@ All Groups: Alle groepen
 All Permissions: Alle machtigingen
 Already have an account?: Heb je al een account?
 am-ET: Amhaars (Ethiopië)
+An Error has occured!: Er is een fout opgetreden!
+An Error has occurred!: Er is een fout opgetreden!
+An error occurred while confirming {0}: Er is een fout opgetreden tijdens het bevestigen van {0}
 Api: Api
 API-Versions: API-Versies
 ApplicationDescription: Voorbeeldtoepassing met WebAssembly en Clean Architecture Pattern
@@ -59,6 +63,7 @@ ar-YE: Arabisch (Jemen)
 arn-CL: Mapuche (Chili)
 As Admin you can filter for users here: Als Admin kunt u hier filteren op gebruikers
 as read: zoals gelezen
+As soon as your account has been activated you can log in: Zodra uw account is geactiveerd kunt u inloggen
 as unread: als ongelezen
 as-IN: Assamees (India)
 asa-TZ: Asu (Tanzania)
@@ -128,6 +133,7 @@ Confirm: Bevestigen
 Confirm and Ignore: Bevestigen en negeren
 Confirm and Set Required: Bevestigen en instellen Vereist
 Confirm Password: Bevestig wachtwoord
+Confirm Registration: Registratie bevestigen
 contacts: Contactpersonen
 Create: Scheppen
 cs-CZ: Tsjechisch (Tsjechië)
@@ -204,6 +210,7 @@ dyo-SN: Jola-Fonyi (Senegal)
 dz-BT: Dzongkha (Bhutan)
 E-mail: E-mail
 E-Mail: E-mail
+E-Mail not confirmed.: E-mail niet bevestigd. Controleer uw mailbox en bevestig uw e-mailadres. <a href='{0}'>Ere-mailbevestiging opnieuw</a>
 ebu-KE: Embu (Kenia)
 Edit: Bewerken
 ee-GH: Ooi (Ghana)
@@ -211,6 +218,7 @@ ee-TG: Ooi (Togo)
 el-CY: Grieks (Cyprus)
 el-GR: Grieks (Griekenland)
 Email: E-mail
+Email {0} is already registered.: E-{0} is al geregistreerd.
 Email Confirmation: E-mail bevestiging
 Email is not correct: E-mail is niet correct
 Email is required: E-mail is verplicht
@@ -324,6 +332,7 @@ en-ZM: Engels (Zambia)
 en-ZW: Engels (Zimbabwe)
 English: Engels
 Enter email for password reset: Voer het e-mailadres in dat aan uw account is gekoppeld en u ontvangt een e-mail met een link om uw wachtwoord opnieuw in te stellen
+Enter the email address for the confirmation mail: Voer het e-mailadres in voor de bevestigingsmail
 Enter your message...: Voer uw bericht in...
 Entity Id: Entiteits-id
 Entity is required!: Entiteit is verplicht!
@@ -511,6 +520,7 @@ ii-CN: Yi (China)
 Include Entity fields (Export): Entiteitsvelden opnemen (exporteren)
 Incorrect Password.: Onjuist wachtwoord.
 Indonesia: Indonesisch
+Invalid Credentials.: Ongeldige referenties.
 Is Active: Is actief
 Is Public: Is openbaar
 Is Public?: Is openbaar?
@@ -662,6 +672,8 @@ nn-NO: Noors Nynorsk (Noorwegen)
 nnh-CM: Ngiemboon (Kameroen)
 No Allowed Actions: Geen toegestane acties
 No notifications: Geen meldingen
+Not Allowed to add or delete Administrator Role if you have not this role.: Mag beheerdersrol niet worden toegevoegd of verwijderd als u deze rol niet hebt.
+Not allowed to Delete this user: Niet toegestaan om deze gebruiker te verwijderen
 Not Allowed.: Niet toegestaan.
 NotFoundMessage: De pagina die u zocht, bestaat niet.
 Notifications: Meldingen
@@ -695,13 +707,18 @@ Password must be at least of length 8: Wachtwoord moet minimaal lengte 8 hebben
 Password must contain at least one capital letter: Wachtwoord moet ten minste één hoofdletter bevatten
 Password must contain at least one digit: Wachtwoord moet ten minste één cijfer bevatten
 Password must contain at least one lowercase letter: Wachtwoord moet ten minste één kleine letter bevatten
+Password Reset Mail has been sent to your authorized Email.: Password Reset Mail is verzonden naar uw geautoriseerde e-mailadres.
+Password Reset Successful!: Wachtwoord opnieuw instellen geslaagd!
 Passwords don't match: Wachtwoorden komen niet overeen
 pcm-Latn-NG: Nigeriaanse Pidgin (Latijn, Nigeria)
 Permission Name: Naam machtiging
 Personal: Persoonlijk
 Phone Number: Telefoonnummer
+Phone number {0} is already registered.: Telefoonnummer {0} is al geregistreerd.
 PhoneNumber: Telefoonnummer
 pl-PL: Pools (Polen)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Bevestig uw account door hier <a href='{0}'> te klikken</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Stel uw wachtwoord opnieuw in door <a href='{0}'>klik hier</a>.
 prg-001: Pruisisch (Wereld)
 Primary Key: Primaire sleutel
 Product Deleted: Product verwijderd!
@@ -804,6 +821,7 @@ Security: Veiligheid
 seh-MZ: Sena (Mozambique)
 Select Language: Taal selecteren
 Send: Verzenden
+Send confirmation email: Stuur bevestigingsmail
 Sep: Sep
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Nieuw wachtwoord instellen
@@ -925,13 +943,17 @@ Upload Image: Afbeelding uploaden
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: Gebruiker
+User {0} Registered. Please check your Mailbox to verify!: Gebruiker {0} geregistreerd. Controleer uw mailbox om uw e-mailadres te verifiëren!
 User Deleted: Gebruiker verwijderd
 User Name: Gebruikersnaam
+User Not Active. Please contact the administrator.: Gebruiker niet actief. Wacht op activasion of neem contact op met de beheerder.
 User Not Found!: Gebruiker niet gevonden!
 User Registered: Gebruiker geregistreerd!
 User Registered Mailbox: Gebruiker geregistreerd. Bevestigingsmail is afgeleverd in de mailbox.
+User registration is not allowed: Gebruikersregistratie is niet toegestaan
 Username: Gebruikersnaam
 UserName: Gebruikersnaam
+Username {0} is already taken.: Gebruikersnaam {0} is al in gebruik.
 UserName is required: Gebruikersnaam is vereist
 UserName must be at least of length 6: Gebruikersnaam moet ten minste lengte 6 hebben
 Users: Gebruikers
@@ -966,7 +988,10 @@ you: jij
 You are logged out because the Permissions of one of your Roles have been updated.: U bent uitgelogd omdat de machtigingen van een van uw rollen zijn bijgewerkt.
 You are logged out because the user with your Token has been deleted or token is expired.: U bent uitgelogd omdat de gebruiker met uw token is verwijderd of het token is verlopen.
 You are Logged Out.: U bent uitgelogd.
+You can now Login with your credentials: U kunt nu inloggen met uw inloggegevens
 You cannot delete yourself: U kunt uzelf niet verwijderen
+Your e-mail address has been confirmed!: Uw e-mailadres is bevestigd!
+Your email address could not be verified. If you have any problems, please contact {0}: Uw e-mailadres kan niet worden geverifieerd. Als u problemen ondervindt, neem dan contact met {0}
 Your Profile has been updated.: Uw profiel is bijgewerkt.
 Your Recent Activities.: Uw recente activiteiten.
 zgh-Tfng-MA: Standaard Marokkaanse Tamazight (Tifinagh, Marokko)

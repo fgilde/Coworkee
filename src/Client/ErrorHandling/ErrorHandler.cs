@@ -12,7 +12,7 @@ using Nextended.Core;
 
 namespace CleanArchitectureBase.Client.ErrorHandling
 {
-    public class ErrorHandler: IErrorHandler
+    public class ErrorHandler : IErrorHandler
     {
         private readonly ISnackbar _snackbar;
         private readonly IStringLocalizer<ErrorHandler> _localizer;
@@ -83,9 +83,9 @@ namespace CleanArchitectureBase.Client.ErrorHandling
             return response.IsSuccessStatusCode;
         }
 
-        public bool IsSuccessFull(IResult result)
+        public bool IsSuccessFull(IResult result, bool displayErrors = true)
         {
-            if (!result.Succeeded)
+            if (!result.Succeeded && displayErrors)
                 ShowError(result.Messages.ToArray());
             return result.Succeeded;
         }

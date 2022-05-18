@@ -101,7 +101,8 @@ namespace CleanArchitectureBase.Server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddTransient(_ => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings
+            ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>(); // One time to have static instance filled as early as possible
+            services.AddTransient(_ => ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings static instance is updated as well on each read
             services.Configure<ServerConfiguration>(configuration);
             return configuration.Get<ServerConfiguration>();
         }

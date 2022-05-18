@@ -15,6 +15,7 @@ Add Product: Add Product
 Add Role: Add Role
 Administrator: Administrator
 Administrator Settings.: Administrator Settings.
+Administrators Profile's Status cannot be toggled: Administrators Profile's Status cannot be toggled
 af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (South Africa)
 agq-CM: Aghem (Cameroon)
@@ -23,10 +24,13 @@ All Groups: All Groups
 All Permissions: All Permissions
 Already have an account?: Already have an account?
 am-ET: Amharic (Ethiopia)
+An Error has occured!: An Error has occurred!
+An Error has occurred!: An Error has occurred!
+An error occurred while confirming {0}: An error occurred while confirming {0}
 Api: Api
 API-Versions: API-Versions
 ApplicationDescription: Sample Application with WebAssembly and Clean Architecture Pattern
-ApplicationSubDescription: Welcome to this Blazor Page
+ApplicationSubDescription: Welcome to CleanArchitectureBase
 Apply: Apply
 Apr: Apr
 ar-001: Arabic (World)
@@ -59,6 +63,7 @@ ar-YE: Arabic (Yemen)
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: As Admin you can filter for users here
 as read: as read
+As soon as your account has been activated you can log in: As soon as your account has been activated you can log in
 as unread: as unread
 as-IN: Assamese (India)
 asa-TZ: Asu (Tanzania)
@@ -128,6 +133,7 @@ Confirm: Confirm
 Confirm and Ignore: Confirm and Ignore
 Confirm and Set Required: Confirm and Set Required
 Confirm Password: Confirm Password
+Confirm Registration: Confirm Registration
 contacts: Contacts
 Create: Create
 cs-CZ: Czech (Czechia)
@@ -155,7 +161,6 @@ Decimal: Decimal
 Decimal value is required using {0} type!: Decimal value is required using {0} type!
 Delete: Delete
 Delete all: Delete all
-Delete all notifications: Delete all notifications
 Delete Confirmation: Delete Confirmation
 Delete Content: Delete Content
 Delete Content {0}: Delete Content '{0}'
@@ -204,6 +209,7 @@ dyo-SN: Jola-Fonyi (Senegal)
 dz-BT: Dzongkha (Bhutan)
 E-mail: E-mail
 E-Mail: E-Mail
+E-Mail not confirmed.: Email not confirmed. Please check your mailbox and confirm your email address. <a href='{0}'>Resend email confirmation</a>
 ebu-KE: Embu (Kenya)
 Edit: Edit
 ee-GH: Ewe (Ghana)
@@ -211,6 +217,7 @@ ee-TG: Ewe (Togo)
 el-CY: Greek (Cyprus)
 el-GR: Greek (Greece)
 Email: Email
+Email {0} is already registered.: Email {0} is already registered.
 Email Confirmation: Email Confirmation
 Email is not correct: Email is not correct
 Email is required: Email is required
@@ -324,6 +331,7 @@ en-ZM: English (Zambia)
 en-ZW: English (Zimbabwe)
 English: English
 Enter email for password reset: Enter the email address linked to your account and you will recieve an email containing a link to reset your password
+Enter the email address for the confirmation mail: Enter the email address for the confirmation mail
 Enter your message...: Enter your message...
 Entity Id: Entity Id
 Entity is required!: Entity is required!
@@ -511,6 +519,7 @@ ii-CN: Yi (China)
 Include Entity fields (Export): Include Entity fields (Export)
 Incorrect Password.: Incorrect Password.
 Indonesia: Indonesia
+Invalid Credentials.: Invalid Credentials.
 Is Active: Is Active
 Is Public: Is Public
 Is Public?: Is Public?
@@ -662,6 +671,8 @@ nn-NO: Norwegian Nynorsk (Norway)
 nnh-CM: Ngiemboon (Cameroon)
 No Allowed Actions: No Allowed Actions
 No notifications: No notifications
+Not Allowed to add or delete Administrator Role if you have not this role.: Not Allowed to add or delete Administrator Role if you have not this role.
+Not allowed to Delete this user: Not allowed to Delete this user
 Not Allowed.: Not Allowed.
 NotFoundMessage: The page you were looking for doesn't exist.
 Notifications: Notifications
@@ -695,13 +706,18 @@ Password must be at least of length 8: Password must be at least of length 8
 Password must contain at least one capital letter: Password must contain at least one capital letter
 Password must contain at least one digit: Password must contain at least one digit
 Password must contain at least one lowercase letter: Password must contain at least one lowercase letter
+Password Reset Mail has been sent to your authorized Email.: Password Reset Mail has been sent to your authorized Email.
+Password Reset Successful!: Password Reset Successful!
 Passwords don't match: Passwords don't match
 pcm-Latn-NG: Nigerian Pidgin (Latin, Nigeria)
 Permission Name: Permission Name
 Personal: Personal
 Phone Number: Phone Number
+Phone number {0} is already registered.: Phone number {0} is already registered.
 PhoneNumber: PhoneNumber
 pl-PL: Polish (Poland)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Please confirm your account by <a href='{0}'>clicking here</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Please reset your password by <a href='{0}'>clicking here</a>.
 prg-001: Prussian (World)
 Primary Key: Primary Key
 Product Deleted: Product deleted!
@@ -804,6 +820,7 @@ Security: Security
 seh-MZ: Sena (Mozambique)
 Select Language: Select Language
 Send: Send
+Send confirmation email: Send confirmation email
 Sep: Sep
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Set new password
@@ -925,13 +942,17 @@ Upload Image: Upload Image
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: User
+User {0} Registered. Please check your Mailbox to verify!: User {0} Registered. Please check your Mailbox to verify your email address!
 User Deleted: User Deleted
 User Name: User Name
+User Not Active. Please contact the administrator.: User Not Active. Please wait for activasion or contact the administrator.
 User Not Found!: User Not Found!
 User Registered: User Registered!
 User Registered Mailbox: User Registered. Confirmation Mail has been delivered to the Mailbox.
+User registration is not allowed: User registration is not allowed
 Username: Username
 UserName: UserName
+Username {0} is already taken.: Username {0} is already taken.
 UserName is required: UserName is required
 UserName must be at least of length 6: UserName must be at least of length 6
 Users: Users
@@ -966,7 +987,10 @@ you: you
 You are logged out because the Permissions of one of your Roles have been updated.: You are logged out because the Permissions of one of your Roles have been updated.
 You are logged out because the user with your Token has been deleted or token is expired.: You are logged out because the user with your Token has been deleted or token is expired.
 You are Logged Out.: You are Logged Out.
+You can now Login with your credentials: You can now Login with your credentials
 You cannot delete yourself: You cannot delete yourself
+Your e-mail address has been confirmed!: Your e-mail address has been confirmed!
+Your email address could not be verified. If you have any problems, please contact {0}: Your email address could not be verified. If you have any problems, please contact {0}
 Your Profile has been updated.: Your Profile has been updated.
 Your Recent Activities.: Your Recent Activities.
 zgh-Tfng-MA: Standard Moroccan Tamazight (Tifinagh, Morocco)

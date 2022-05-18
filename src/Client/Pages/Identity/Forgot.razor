@@ -15,19 +15,19 @@
         </MudItem>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudText Typo="Typo.h4">@_localizer["Forgot password?"]</MudText>
+                <MudText Typo="Typo.h4">@_localizer[_isEmailConfirm ? "Email Confirmation" : "Forgot password?"]</MudText>
             </div>
         </MudItem>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudText Typo="Typo.subtitle2" Class="mb-n4">@_localizer["Enter email for password reset"]</MudText>
+                <MudText Typo="Typo.subtitle2" Class="mb-n4">@_localizer[_isEmailConfirm ? "Enter the email address for the confirmation mail" : "Enter email for password reset"]</MudText>
             </div>
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="@_localizer["E-mail"]" @bind-Value="_emailModel.Email" For="@(() => _emailModel.Email)" Variant="Variant.Outlined"></MudTextField>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" ButtonType="ButtonType.Submit" FullWidth="true">@_localizer["Reset Password"]</MudButton>
+            <MudButton Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" ButtonType="ButtonType.Submit" FullWidth="true">@_localizer[_isEmailConfirm ? "Send confirmation email" : "Reset Password"]</MudButton>
         </MudItem>
     </MudGrid>
 </EditForm>

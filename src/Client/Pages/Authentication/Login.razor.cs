@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CleanArchitectureBase.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Components;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 
@@ -10,23 +13,79 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 {
     public partial class Login
     {
+        [Parameter] public string Message { get; set; }
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private TokenRequest _tokenModel = new();
-        
+
+        protected override async Task OnInitializedAsync()
+        {
+            _configuration = await _api.System_GetConfigurationAsync();
+            _tokenModel.Email = _navigationManager.ReadQueryParam("email");
+            SetMessage();
+            await base.OnInitializedAsync();
+        }
+
         private async Task SubmitAsync()
         {
             var result = await _clientAuthenticationManager.Login(_tokenModel);
-            if (_errorService.IsSuccessFull(result))
+            if (_errorService.IsSuccessFull(result, false))
             {
                 _snackBar.Add(string.Format(_localizer["Welcome {0}"], _tokenModel.Email), Severity.Success);
                 _navigationManager.NavigateToReturnUrlIf("/");
             }
+            else
+            {
+                var message = string.Join($"{Environment.NewLine}", result.Messages.Select(m => _localizer[m]));
+                SetMessage(string.Format(message, $"/account/forgot-password?email={_tokenModel.Email}&email-confirm=true"), Severity.Error);
+            }
         }
 
+        private string _message;
+        private Severity _messageSeverity = Severity.Info;
         private bool _passwordVisibility;
         private InputType _passwordInput = InputType.Password;
         private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+        private Publicsettings _configuration;
+
+        void SetMessage()
+        {
+            _message = Message;
+            _messageSeverity = Severity.Info;
+            var confirmationResult = _navigationManager.ReadQueryParam("email-confirmation-result");
+            if (confirmationResult != null)
+            {
+                var email = _configuration.ContactAddress;
+                var success = confirmationResult == "true";
+                var message = (success ? _localizer["Your e-mail address has been confirmed!"] : _localizer["Your email address could not be verified. If you have any problems, please contact {0}", email]).ToString();
+                var active = _navigationManager.ReadQueryParam("activated");
+                if (success && !string.IsNullOrWhiteSpace(active))
+                {
+                    message += " " + (active == "true" ? _localizer["You can now Login with your credentials"] : _localizer["As soon as your account has been activated you can log in"]);
+                }
+                SetMessage(message, success);
+            }
+            else
+            {
+                var s = _snackBar.ShownSnackbars.FirstOrDefault();
+                if (s != null)
+                {
+                    _message = s.Message;
+                    _messageSeverity = s.Severity;
+                }
+            }
+        }
+
+        void SetMessage(string message, bool? success)
+        {
+            SetMessage(message, success.HasValue ? (success.Value ? Severity.Success : Severity.Error) : Severity.Info);
+        }
+
+        void SetMessage(string message, Severity severity)
+        {
+            _message = message;
+            _messageSeverity = severity;
+        }
 
         void TogglePasswordVisibility()
         {

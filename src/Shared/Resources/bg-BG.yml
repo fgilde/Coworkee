@@ -15,6 +15,7 @@ Add Product: Добавяне на продукт
 Add Role: Добавяне на роля
 Administrator: Администратор
 Administrator Settings.: Настройки на администратора.
+Administrators Profile's Status cannot be toggled: Състоянието на профила на администраторите не може да бъде превключвано
 af-NA: Африкаанс (Намибия)
 af-ZA: Африкаанс (Южна Африка)
 agq-CM: Ахем (Камерун)
@@ -23,6 +24,9 @@ All Groups: Всички групи
 All Permissions: Всички разрешения
 Already have an account?: Вече имате сметка?
 am-ET: Амхарик (Етиопия)
+An Error has occured!: Възникна грешка!
+An Error has occurred!: Възникна грешка!
+An error occurred while confirming {0}: Възникна грешка при потвърждаване на {0}
 Api: Апи
 API-Versions: API-версии
 ApplicationDescription: Примерно приложение с webAssembly и модел чиста архитектура
@@ -59,6 +63,7 @@ ar-YE: Арабски (Йемен)
 arn-CL: Мапуш (Чили)
 As Admin you can filter for users here: Като Администратор можете да филтрирате за потребители тук
 as read: като прочетени
+As soon as your account has been activated you can log in: Веднага след активирането на профила ви можете да влезете в системата
 as unread: като непрочетени
 as-IN: Асамски (Индия)
 asa-TZ: Asu (Танзания)
@@ -128,6 +133,7 @@ Confirm: Потвърждавам
 Confirm and Ignore: Потвърдете и игнорирайте
 Confirm and Set Required: Потвърждаване и задаване на задължително
 Confirm Password: Потвърждаване на парола
+Confirm Registration: Потвърждаване на регистрацията
 contacts: Контакти
 Create: Създавам
 cs-CZ: Чешки (Чешки)
@@ -204,6 +210,7 @@ dyo-SN: Джола-Фони (Сенегал)
 dz-BT: Джунгха (Бутан)
 E-mail: Имейл
 E-Mail: Имейл
+E-Mail not confirmed.: Имейлът не е потвърден. Моля, проверете пощенската си кутия и потвърдете имейл адреса си. <a href='{0}'>Издаден имейл потвърждение</a>
 ebu-KE: Ембу (Кения)
 Edit: Редактирам
 ee-GH: Еве (Гана)
@@ -211,6 +218,7 @@ ee-TG: Ewe (Того)
 el-CY: Гръцки (Кипър)
 el-GR: Гръцки (Гърция)
 Email: Имейл
+Email {0} is already registered.: Имейл {0} вече е регистриран.
 Email Confirmation: Потвърждение по имейл
 Email is not correct: Имейлът не е правилен
 Email is required: Изисква се имейл
@@ -324,6 +332,7 @@ en-ZM: Английски (Замбия)
 en-ZW: Английски (Зимбабве)
 English: Английски
 Enter email for password reset: Въведете имейл адреса, свързан с профила ви, и ще получите имейл, съдържащ връзка, за да възстановите паролата си
+Enter the email address for the confirmation mail: Въведете имейл адреса за пощата за потвърждение
 Enter your message...: Въведете съобщението си...
 Entity Id: ИД на обект
 Entity is required!: Обектът е задължителен!
@@ -511,6 +520,7 @@ ii-CN: Yi (Китай)
 Include Entity fields (Export): Включване на полета на обект (Експортиране)
 Incorrect Password.: Неправилна парола.
 Indonesia: Индонезийски
+Invalid Credentials.: Невалидни идентификационни данни.
 Is Active: Е Активен
 Is Public: Е публичен
 Is Public?: Публичен ли е?
@@ -662,6 +672,8 @@ nn-NO: Норвежки Нинорк (Норвегия)
 nnh-CM: Нгимбоун (Камерун)
 No Allowed Actions: Без разрешени действия
 No notifications: Без известия
+Not Allowed to add or delete Administrator Role if you have not this role.: Не е разрешено да добавяте или изтривате роля на администратор, ако нямате тази роля.
+Not allowed to Delete this user: Не е разрешено изтриването на този потребител
 Not Allowed.: Не е позволено.
 NotFoundMessage: Страницата, която търсеше, не съществува.
 Notifications: Уведомления
@@ -695,13 +707,18 @@ Password must be at least of length 8: Паролата трябва да е н�
 Password must contain at least one capital letter: Паролата трябва да съдържа поне една главна буква
 Password must contain at least one digit: Паролата трябва да съдържа поне една цифри
 Password must contain at least one lowercase letter: Паролата трябва да съдържа поне една малка буква
+Password Reset Mail has been sent to your authorized Email.: Поща за нулиране на паролата е изпратена на вашия оторизиран Имейл.
+Password Reset Successful!: Възстановяване на паролата Успешно!
 Passwords don't match: Паролите не съвпадат
 pcm-Latn-NG: Нигерийски Пиджин (латински, Нигерия)
 Permission Name: Име на разрешение
 Personal: Личен
 Phone Number: Телефонен номер
+Phone number {0} is already registered.: Вече е регистриран телефонен номер {0}.
 PhoneNumber: ТелефонНомер
 pl-PL: Полски (Полша)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Моля, потвърдете профила си, като <a href='{0}'>натиснете тук</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Моля, върнете паролата си, като <a href='{0}'>натиснете тук</a>.
 prg-001: Пруски (Свят)
 Primary Key: Първичен ключ
 Product Deleted: Продукт изтрит!
@@ -804,6 +821,7 @@ Security: Безопасност
 seh-MZ: Сена (Мозамбик)
 Select Language: Избор на език
 Send: Изпращам
+Send confirmation email: Изпращане на имейл за потвърждение
 Sep: Септември
 ses-ML: Койраборо Сени (Мали)
 Set new password: Задаване на нова парола
@@ -925,13 +943,17 @@ Upload Image: Качване на изображение
 ur-IN: Урду (Индия)
 ur-PK: Урду (Пакистан)
 User: Потребител
+User {0} Registered. Please check your Mailbox to verify!: Регистриран потребителски {0}. Моля, проверете пощенската си кутия, за да потвърдите имейл адреса си!
 User Deleted: Изтрит потребител
 User Name: Потребителско име
+User Not Active. Please contact the administrator.: Потребител не активен. Моля, изчакайте activasion или се свържете с администратора.
 User Not Found!: Потребител не е намерен!
 User Registered: Регистриран потребител!
 User Registered Mailbox: Регистриран потребител. Потвърждение Mail е доставено на пощенската кутия.
+User registration is not allowed: Регистрацията на потребителя не е разрешена
 Username: Потребителско име
 UserName: Потребителско име
+Username {0} is already taken.: Вече е взето потребителско име {0}.
 UserName is required: Потребителско име е необходимо
 UserName must be at least of length 6: Потребителско име трябва да бъде най-малко с дължина 6
 Users: Потребители
@@ -966,7 +988,10 @@ you: ти
 You are logged out because the Permissions of one of your Roles have been updated.: Вие сте излезли, защото разрешенията на една от вашите Роли са актуализирани.
 You are logged out because the user with your Token has been deleted or token is expired.: Вие сте излезли, защото потребителят с вашия Маркер е изтрит или маркерът е изтекъл.
 You are Logged Out.: Вие сте излезли.
+You can now Login with your credentials: Вече можете да влезете с вашите идентификационни данни
 You cannot delete yourself: Не можете да изтриете себе си
+Your e-mail address has been confirmed!: Вашият имейл адрес е потвърден!
+Your email address could not be verified. If you have any problems, please contact {0}: Имейл адресът ви не можа да бъде проверен. Ако имате някакви проблеми, моля свържете се с {0}
 Your Profile has been updated.: Вашият профил е актуализиран.
 Your Recent Activities.: Вашите Последни Дейности.
 zgh-Tfng-MA: Стандартна мароканска Tamazight (Тифина, Мароко)

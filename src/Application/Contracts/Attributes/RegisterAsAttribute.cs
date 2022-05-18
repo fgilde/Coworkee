@@ -5,23 +5,28 @@ using Microsoft.Extensions.DependencyInjection;
 namespace CleanArchitectureBase.Application.Contracts.Attributes;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class RegisterAsAttribute: System.Attribute
+public class RegisterAsAttribute : System.Attribute
 {
     public Type RegisterAsType { get; }
-    public bool Enabled { get; set; }
+    public bool Enabled { get; set; } = true;
 
     public bool RegisterAsImplementation { get; set; } = false;
 
     public ServiceLifetime ServiceLifetime { get; set; } = ServiceLifetime.Transient;
 
-    public int Order { get; }
+    public int Order { get; set; }
 
-    internal Type ImplementationType { get; private set;  }
+    internal Type ImplementationType { get; private set; }
 
     internal RegisterAsAttribute SetImplementationType(Type implType)
     {
         ImplementationType = implType;
         return this;
+    }
+
+    protected virtual bool IsEnabled()
+    {
+        return Enabled;
     }
 
     public RegisterAsAttribute(Type registerAsType, int order = 99)
@@ -33,6 +38,12 @@ public class RegisterAsAttribute: System.Attribute
     public IEnumerable<ServiceDescriptor> GetServiceDescriptor()
     {
         var implementationType = ImplementationType;
+
+        if (!IsEnabled())
+        {
+            yield break;
+        }
+
         yield return new ServiceDescriptor(RegisterAsType, implementationType, ServiceLifetime);
         if (RegisterAsImplementation && RegisterAsType != implementationType)
             yield return new ServiceDescriptor(implementationType, implementationType, ServiceLifetime);

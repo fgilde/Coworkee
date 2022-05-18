@@ -183,6 +183,42 @@
         }
       }
     },
+    "/System/Configuration": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_GetConfiguration",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Publicsettings"
+            }
+          }
+        }
+      }
+    },
     "/System/{queue}": {
       "post": {
         "tags": [
@@ -4499,6 +4535,36 @@
         },
         "system": {
           "type": "string"
+        }
+      }
+    },
+    "Publicsettings": {
+      "type": "object",
+      "properties": {
+        "contactAddress": {
+          "type": "string"
+        },
+        "userRegistration": {
+          "$ref": "#/definitions/Userregistration"
+        }
+      }
+    },
+    "Userregistration": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "requiresAdministratorActivation",
+        "emailConfirmationRequired"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "requiresAdministratorActivation": {
+          "type": "boolean"
+        },
+        "emailConfirmationRequired": {
+          "type": "boolean"
         }
       }
     },

@@ -15,6 +15,7 @@ Add Product: Přidat produkt
 Add Role: Přidat roli
 Administrator: Správce
 Administrator Settings.: Nastavení správce.
+Administrators Profile's Status cannot be toggled: Stav profilu správce nelze přepínat
 af-NA: Afrikánština (Namibie)
 af-ZA: Afrikánština (Jižní Afrika)
 agq-CM: Aghem (Kamerun)
@@ -23,6 +24,9 @@ All Groups: Všechny skupiny
 All Permissions: Všechna oprávnění
 Already have an account?: Už máte účet?
 am-ET: Amharština (Etiopie)
+An Error has occured!: Došlo k chybě!
+An Error has occurred!: Došlo k chybě!
+An error occurred while confirming {0}: Při potvrzování {0} došlo k chybě
 Api: Rozhraní api
 API-Versions: Verze API
 ApplicationDescription: Ukázková aplikace se vzorem WebAssembly a čisté architektury
@@ -59,6 +63,7 @@ ar-YE: Arabština (Jemen)
 arn-CL: Mapučche (Chile)
 As Admin you can filter for users here: Jako správce můžete filtrovat pro uživatele zde
 as read: jak číst
+As soon as your account has been activated you can log in: Jakmile je váš účet aktivován, můžete se přihlásit
 as unread: jako nepřečtené
 as-IN: Ásámština (Indie)
 asa-TZ: Asu (Tanzanie)
@@ -128,6 +133,7 @@ Confirm: Potvrdit
 Confirm and Ignore: Potvrdit a ignorovat
 Confirm and Set Required: Potvrdit a nastavit povinné
 Confirm Password: Potvrdit heslo
+Confirm Registration: Potvrdit registraci
 contacts: Kontakty
 Create: Vytvářet
 cs-CZ: Čeština (Česko)
@@ -204,6 +210,7 @@ dyo-SN: Jola-Fonyi (Senegal)
 dz-BT: Dzongkha (Bhútán)
 E-mail: E-mail
 E-Mail: E-mail
+E-Mail not confirmed.: E-mail nebyl potvrzen. Zkontrolujte prosím svou poštovní schránku a potvrďte svou e-mailovou adresu. <a href='{0}'>Odobrazení potvrzení e-mailu</a>
 ebu-KE: Embu (Keňa)
 Edit: Upravit
 ee-GH: Ovce (Ghana)
@@ -211,6 +218,7 @@ ee-TG: Ovce (Togo)
 el-CY: Řečtina (Kypr)
 el-GR: Řečtina (Řecko)
 Email: E-mail
+Email {0} is already registered.: E-mailová {0} je již zaregistrována.
 Email Confirmation: Potvrzení e-mailem
 Email is not correct: E-mail není správný
 Email is required: E-mail je vyžadován
@@ -324,6 +332,7 @@ en-ZM: Angličtina (Zambie)
 en-ZW: Angličtina (Zimbabwe)
 English: Angličtina
 Enter email for password reset: Zadejte e-mailovou adresu propojenou s vaším účtem a obdržíte e-mail s odkazem na obnovení hesla
+Enter the email address for the confirmation mail: Zadejte e-mailovou adresu potvrzovacího e-mailu
 Enter your message...: Zadejte zprávu...
 Entity Id: Entity Id
 Entity is required!: Entita je povinná!
@@ -511,6 +520,7 @@ ii-CN: Yi (Čína)
 Include Entity fields (Export): Zahrnout pole entity (Export)
 Incorrect Password.: Nesprávné heslo.
 Indonesia: Indonéština
+Invalid Credentials.: Neplatné přihlašovací údaje.
 Is Active: Je aktivní
 Is Public: Je veřejná
 Is Public?: Je veřejný?
@@ -662,6 +672,8 @@ nn-NO: Norština Nynorsk (Norsko)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: Žádné povolené akce
 No notifications: Žádná oznámení
+Not Allowed to add or delete Administrator Role if you have not this role.: Není povoleno přidávat nebo odstraňovat roli správce, pokud tuto roli nemáte.
+Not allowed to Delete this user: Není povoleno odstranit tohoto uživatele
 Not Allowed.: Není povoleno.
 NotFoundMessage: Stránka, kterou jste hledali, neexistuje.
 Notifications: Upozornění
@@ -695,13 +707,18 @@ Password must be at least of length 8: Heslo musí mít alespoň délku 8
 Password must contain at least one capital letter: Heslo musí obsahovat alespoň jedno velké písmeno
 Password must contain at least one digit: Heslo musí obsahovat alespoň jednu číslici
 Password must contain at least one lowercase letter: Heslo musí obsahovat alespoň jedno malé písmeno
+Password Reset Mail has been sent to your authorized Email.: E-mail pro resetování hesla byl odeslán na váš autorizovaný e-mail.
+Password Reset Successful!: Resetování hesla úspěšné!
 Passwords don't match: Hesla se neshodují
 pcm-Latn-NG: Nigerijský Pidgin (latina, Nigérie)
 Permission Name: Název oprávnění
 Personal: Osobní
 Phone Number: Telefonní číslo
+Phone number {0} is already registered.: Telefonní číslo {0} je již zaregistrováno.
 PhoneNumber: Telefonní číslo
 pl-PL: Polština (Polsko)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrďte prosím svůj účet <a href='{0}'> kliknutím sem</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Resetujte prosím své heslo <a href='{0}'>kliknutím sem</a>.
 prg-001: Pruský (svět)
 Primary Key: Primární klíč
 Product Deleted: Produkt smazán!
@@ -804,6 +821,7 @@ Security: Bezpečnost
 seh-MZ: Sena (Mosambik)
 Select Language: Vybrat jazyk
 Send: Poslat
+Send confirmation email: Odeslat potvrzovací e-mail
 Sep: Září
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Nastavit nové heslo
@@ -925,13 +943,17 @@ Upload Image: Nahrát obrázek
 ur-IN: Urdština (Indie)
 ur-PK: Urdština (Pákistán)
 User: Uživatel
+User {0} Registered. Please check your Mailbox to verify!: Uživatel {0} zaregistrován. Zkontrolujte prosím svou poštovní schránku a ověřte svou e-mailovou adresu!
 User Deleted: Uživatel byl odstraněn
 User Name: Uživatelské jméno
+User Not Active. Please contact the administrator.: Uživatel není aktivní. Počkejte prosím na aktivaci nebo kontaktujte správce.
 User Not Found!: Uživatel nebyl nalezen!
 User Registered: Uživatel zaregistrován!
 User Registered Mailbox: Uživatel zaregistrován. Potvrzovací pošta byla doručena do poštovní schránky.
+User registration is not allowed: Registrace uživatele není povolena
 Username: Uživatelské jméno
 UserName: Uživatelské jméno
+Username {0} is already taken.: Uživatelské jméno {0} je již obsazeno.
 UserName is required: Uživatelské jméno je povinné
 UserName must be at least of length 6: Uživatelské jméno musí mít alespoň délku 6
 Users: Uživatelé
@@ -966,7 +988,10 @@ you: ty
 You are logged out because the Permissions of one of your Roles have been updated.: Jste odhlášeni, protože byla aktualizována oprávnění jedné z vašich rolí.
 You are logged out because the user with your Token has been deleted or token is expired.: Jste odhlášeni, protože uživatel s vaším tokenem byl odstraněn nebo vypršela platnost tokenu.
 You are Logged Out.: Jste odhlášeni.
+You can now Login with your credentials: Nyní se můžete přihlásit pomocí svých přihlašovacích údajů
 You cannot delete yourself: Nemůžete smazat sami sebe
+Your e-mail address has been confirmed!: Vaše e-mailová adresa byla potvrzena!
+Your email address could not be verified. If you have any problems, please contact {0}: Vaši e-mailovou adresu nelze ověřit. Máte-li jakékoli problémy, obraťte se na {0}
 Your Profile has been updated.: Váš profil byl aktualizován.
 Your Recent Activities.: Vaše nedávné aktivity.
 zgh-Tfng-MA: Standardní marocký Tamazight (Tifinagh, Maroko)

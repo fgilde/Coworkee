@@ -148,8 +148,11 @@ body * {
     max-height: 800px;
 }
 
-.test {
-    background-color: pink !important;
-    font-family: Webdings;
-    font-size:2px;
+.top-alert {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    /*animation-iteration-count: 1 !important;*/
+    animation: slideIn-t 1500ms ease-in-out 1 alternate;
 }

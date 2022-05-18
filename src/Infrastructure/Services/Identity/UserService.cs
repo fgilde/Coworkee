@@ -34,6 +34,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Configurations;
+using CleanArchitectureBase.Application.Requests;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -47,6 +49,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IStringLocalizer<UserService> _localizer;
         private readonly IExportService _excelService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly ApplicationDbContext _db;
 
         public UserService(
@@ -66,6 +69,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             _localizer = localizer;
             _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel);
             _currentUserService = currentUserService;
+            _serviceProvider = serviceProvider;
             _db = db;
         }
 
@@ -185,20 +189,12 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 {
                     await _userManager.AddToRoleAsync(user, RoleConstants.BasicRole);
                     if (!request.AutoConfirmEmail)
-                    {
-                        var verificationUri = await SendVerificationEmail(user, origin);
-                        var mailRequest = new MailRequest
-                        {
-                            RecipientName = $"{user.FirstName} {user.LastName}",
-                            From = ApplicationConstants.Defaults.Users.System.Email,
-                            To = user.Email,
-                            Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
-                            Subject = _localizer["Confirm Registration"]
-                        };
-                        BackgroundJob.Enqueue(() => _mailService.SendAsync(mailRequest));
-                        return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["User {0} Registered. Please check your Mailbox to verify!"], user.UserName));
-                    }
-                    return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["User {0} Registered."], user.UserName));
+                        await SendVerificationMailAsync(origin, user);
+                    if (user.EmailConfirmed && user.IsActive)
+                        SendUserActivatedMailAsync(user);
+
+                    var message = string.Format(request.AutoConfirmEmail ? _localizer["User {0} Registered."] : _localizer["User {0} Registered. Please check your Mailbox to verify!"], user.UserName);
+                    return await Result<string>.SuccessAsync(user.Id, message);
                 }
 
                 return await Result.FailAsync(result.Errors.Select(a => _localizer[a.Description].ToString()).ToList());
@@ -207,11 +203,42 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result.FailAsync(string.Format(_localizer["Email {0} is already registered."], request.Email));
         }
 
-        private async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
+        private void SendUserActivatedMailAsync(ApplicationUser user)
+        {
+            var url = _serviceProvider.GetService<ServerConfiguration>()?.ClientUrl;
+            var body = string.Format(_localizer["Your Account is confirmed and active, you can now Login"], url);
+            if (!string.IsNullOrEmpty(url))
+                body += $"<a href='{url.EnsureEndsWith("/")}{ApplicationConstants.Routes.Login}?email={user.Email}'> Login to {ApplicationConstants.ApplicationName} </a>";
+
+            var mailRequest = new MailRequest
+            {
+                RecipientName = $"{user.FirstName} {user.LastName}",
+                To = user.Email,
+                Body = body,
+                Subject = $"{ApplicationConstants.ApplicationName} - " + _localizer["Your Account is activated "]
+            };
+            BackgroundJob.Enqueue(() => _mailService.SendAsync(mailRequest));
+        }
+
+        private async Task SendVerificationMailAsync(string origin, ApplicationUser user)
+        {
+            var verificationUri = await GetVerificationUriAsync(user, origin);
+            var mailRequest = new MailRequest
+            {
+                RecipientName = $"{user.FirstName} {user.LastName}",
+                To = user.Email,
+                Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."],
+                    verificationUri),
+                Subject = _localizer["Confirm Registration"]
+            };
+            BackgroundJob.Enqueue(() => _mailService.SendAsync(mailRequest));
+        }
+
+        private async Task<string> GetVerificationUriAsync(ApplicationUser user, string origin)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var route = "api/identity/user/confirm-email/";
+            var route = "api/v1/identity/user/confirm-email/";
             var endpointUri = new Uri(string.Concat($"{origin}/", route));
             var verificationUri = QueryHelpers.AddQueryString(endpointUri.ToString(), "userId", user.Id);
             verificationUri = QueryHelpers.AddQueryString(verificationUri, "code", code);
@@ -227,8 +254,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<IResult<UserResponse>> GetAsync(string userId)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            var result = user.MapTo<UserResponse>();
-            return await Result<UserResponse>.SuccessAsync(result);
+            if (user == null)
+                return await Result<UserResponse>.FailAsync($"User with id {userId} not found");
+            return await Result<UserResponse>.SuccessAsync(user.MapTo<UserResponse>());
         }
 
         public async Task<IResult> ToggleUserStatusAsync(ToggleUserStatusRequest request)
@@ -244,6 +272,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 user.IsActive = request.ActivateUser;
                 user.EmailConfirmed = request.EmailConfirmed;
                 var identityResult = await _userManager.UpdateAsync(user);
+                if (user.EmailConfirmed && user.IsActive)
+                    SendUserActivatedMailAsync(user);
                 return identityResult.ToApplicationResult();
             }
             return await Result.SuccessAsync();
@@ -273,7 +303,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 {
                     userRolesViewModel.Selected = false;
                 }
-                if(!selectedOnly || userRolesViewModel.Selected)
+                if (!selectedOnly || userRolesViewModel.Selected)
                     viewModel.Add(userRolesViewModel);
             }
             var result = new UserRolesResponse { UserRoles = viewModel };
@@ -315,21 +345,30 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
             {
+                if (!user.IsActive)
+                    await SendAdminActivationNotification(user);
+                if (user.EmailConfirmed && user.IsActive)
+                    SendUserActivatedMailAsync(user);
                 return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["Account Confirmed for {0}. You can now use the /api/identity/token endpoint to generate JWT."], user.Email));
             }
-            else
-            {
-                throw new ApiException(string.Format(_localizer["An error occurred while confirming {0}"], user.Email));
-            }
+
+            throw new ApiException(string.Format(_localizer["An error occurred while confirming {0}"], user.Email));
         }
 
         public async Task<IResult> ForgotPasswordAsync(ForgotPasswordRequest request, string origin)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+            if (user == null)
             {
                 // Don't reveal that the user does not exist or is not confirmed
                 return await Result.FailAsync(_localizer["An Error has occurred!"]);
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                await SendVerificationMailAsync(origin, user);
+
+                return await Result.SuccessAsync(string.Format(_localizer["User {0} Registered. Please check your Mailbox to verify!"], user.UserName));
             }
             // For more information on how to enable account confirmation and password reset please
             // visit https://go.microsoft.com/fwlink/?LinkID=532713
@@ -341,7 +380,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var mailRequest = new MailRequest
             {
                 RecipientName = $"{user.FirstName} {user.LastName}",
-                Body = string.Format(_localizer["Please reset your password by <a href='{0}>clicking here</a>."], HtmlEncoder.Default.Encode(passwordResetURL)),
+                Body = string.Format(_localizer["Please reset your password by <a href='{0}'>clicking here</a>."], HtmlEncoder.Default.Encode(passwordResetURL)),
                 Subject = _localizer["Reset Password"],
                 To = request.Email
             };
@@ -355,7 +394,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return await Result.FailAsync(_localizer["An Error has occured!"]);
+                return await Result.FailAsync(_localizer["An Error has occurred!"]);
             }
 
             var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
@@ -365,7 +404,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             }
             else
             {
-                return await Result.FailAsync(_localizer["An Error has occured!"]);
+                return await Result.FailAsync(_localizer["An Error has occurred!"]);
             }
         }
 
@@ -398,6 +437,19 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 throw Errors.Create("Not allowed to Delete this user");
             var result = await _userManager.DeleteAsync(user);
             return result.ToApplicationResult();
+        }
+
+        private Task SendAdminActivationNotification(ApplicationUser user)
+        {
+            return _serviceProvider.GetService<INotificationService>()?.SendAsync(new NotificationRequest
+            {
+                PersistInDb = true,
+                SendAsMail = NotificationAsMail.Always,
+                Subject = $"{ApplicationConstants.ApplicationName} - New User with valid Email registered",
+                Content = $"The User '{user.FirstName} {user.LastName}' has recently confirmed his email address '{user.Email}' and is waiting for activation.",
+                Url = $"/user-profile/{user.Id}",
+                Target = EventTarget.WithRole(RoleConstants.AdministratorRole)
+            });
         }
     }
 }

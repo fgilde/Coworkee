@@ -11,7 +11,7 @@ using MimeKit;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
-    [RegisterAs(typeof(IMailService))]
+    [RegisterAsIfConfigValueIsEmpty(typeof(IMailService), new[] { nameof(Mailconfiguration), nameof(Mailconfiguration.SendGridApiKey) })]
     public class SMTPMailService : IMailService
     {
         private readonly ServerConfiguration _config;

@@ -150,6 +150,7 @@
         "CleanArchitectureBase.Shared",
         "CleanArchitectureBase.SDK",
         "CleanArchitectureBase.Domain.Entities",
+        "CleanArchitectureBase.Application.Configurations",
         "CleanArchitectureBase.Application.Common.Models",
         "CleanArchitectureBase.Application.Common.Models.Chat",
         "CleanArchitectureBase.Application.Common.Models.Identity",

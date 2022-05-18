@@ -3,6 +3,8 @@ namespace CleanArchitectureBase.Application.Configurations
 {
     public class ServerConfiguration : Rootobject
     {
+        public static ServerConfiguration Instance { get; set; }
+
         public ServerConfiguration()
         { }
     }
@@ -12,7 +14,9 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Rootobject
     {
+        public string ClientUrl { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
+        public Publicsettings PublicSettings { get; set; }
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
         public Appconfiguration AppConfiguration { get; set; }
@@ -27,6 +31,19 @@ namespace CleanArchitectureBase.Application.Configurations
     public class Connectionstrings
     {
         public string DefaultConnection { get; set; }
+    }
+
+    public class Publicsettings
+    {
+        public string ContactAddress { get; set; }
+        public Userregistration UserRegistration { get; set; }
+    }
+
+    public class Userregistration
+    {
+        public bool Enabled { get; set; }
+        public bool RequiresAdministratorActivation { get; set; }
+        public bool EmailConfirmationRequired { get; set; }
     }
 
     public class Logging
@@ -50,9 +67,9 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Idhashing
     {
-        public bool AllowAccessWithNotHashedId { get; set; }
         public bool Enabled { get; set; }
         public int MinLength { get; set; }
+        public bool AllowAccessWithNotHashedId { get; set; }
         public string Salt { get; set; }
     }
 
@@ -95,6 +112,7 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Mailconfiguration
     {
+        public string SendGridApiKey { get; set; }
         public string From { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
@@ -163,5 +181,4 @@ namespace CleanArchitectureBase.Application.Configurations
         public string UserName { get; set; }
         public string Password { get; set; }
     }
-
 }

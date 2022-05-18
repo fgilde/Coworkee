@@ -10,7 +10,7 @@ namespace CleanArchitectureBase.Client.ErrorHandling
     {
         public void ShowError(params string[] errors);
         public void ShowErrors(IEnumerable<string> errors);
-        public bool IsSuccessFull(IResult result);
+        public bool IsSuccessFull(IResult result, bool displayErrors = true);
         public Task<bool> HandleAsync(HttpResponseMessage response);
         public Task HandleAsync(Exception exception);
     }

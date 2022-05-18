@@ -208,6 +208,7 @@ export class ResourceClient implements IResourceClient {
 export interface ISystemClient {
     version(): Observable<VersionInfoModel>;
     availableApiVersions(): Observable<string[]>;
+    getConfiguration(): Observable<Publicsettings>;
     sendOnServiceBus(queue: string | null, entity: ProductDto): Observable<FileResponse | null>;
 }
 
@@ -325,6 +326,54 @@ export class SystemClient implements ISystemClient {
             }));
         }
         return _observableOf<string[]>(null as any);
+    }
+
+    getConfiguration(): Observable<Publicsettings> {
+        let url_ = this.baseUrl + "/System/Configuration";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetConfiguration(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetConfiguration(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Publicsettings>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Publicsettings>;
+        }));
+    }
+
+    protected processGetConfiguration(response: HttpResponseBase): Observable<Publicsettings> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Publicsettings.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Publicsettings>(null as any);
     }
 
     sendOnServiceBus(queue: string | null, entity: ProductDto): Observable<FileResponse | null> {
@@ -5649,6 +5698,90 @@ export interface IVersionInfoModel {
     assemblyVersion?: string | undefined;
     runtime?: string | undefined;
     system?: string | undefined;
+}
+
+export class Publicsettings implements IPublicsettings {
+    contactAddress?: string | undefined;
+    userRegistration?: Userregistration | undefined;
+
+    constructor(data?: IPublicsettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.contactAddress = _data["contactAddress"];
+            this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Publicsettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new Publicsettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["contactAddress"] = this.contactAddress;
+        data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IPublicsettings {
+    contactAddress?: string | undefined;
+    userRegistration?: Userregistration | undefined;
+}
+
+export class Userregistration implements IUserregistration {
+    enabled!: boolean;
+    requiresAdministratorActivation!: boolean;
+    emailConfirmationRequired!: boolean;
+
+    constructor(data?: IUserregistration) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.enabled = _data["enabled"];
+            this.requiresAdministratorActivation = _data["requiresAdministratorActivation"];
+            this.emailConfirmationRequired = _data["emailConfirmationRequired"];
+        }
+    }
+
+    static fromJS(data: any): Userregistration {
+        data = typeof data === 'object' ? data : {};
+        let result = new Userregistration();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["enabled"] = this.enabled;
+        data["requiresAdministratorActivation"] = this.requiresAdministratorActivation;
+        data["emailConfirmationRequired"] = this.emailConfirmationRequired;
+        return data;
+    }
+}
+
+export interface IUserregistration {
+    enabled: boolean;
+    requiresAdministratorActivation: boolean;
+    emailConfirmationRequired: boolean;
 }
 
 export abstract class HashableDtoBase implements IHashableDtoBase {

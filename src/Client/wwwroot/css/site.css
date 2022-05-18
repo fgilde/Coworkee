@@ -135,6 +135,14 @@
   100% {
     transform: translateX(0); } }
 
+@keyframes slideIn-t {
+  0% {
+    transform: translateY(-100vw); }
+  85% {
+    transform: translateY(20px); }
+  100% {
+    transform: translateY(0); } }
+
 html, body, #app, .mud-main-content, .mud-rtl-provider {
   height: 100%; }
 
@@ -253,7 +261,10 @@ body * {
   overflow: auto;
   max-height: 800px; }
 
-.test {
-  background-color: pink !important;
-  font-family: Webdings;
-  font-size: 2px; }
+.top-alert {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  /*animation-iteration-count: 1 !important;*/
+  animation: slideIn-t 1500ms ease-in-out 1 alternate; }

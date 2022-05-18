@@ -15,6 +15,7 @@ Add Product: إضافة منتج
 Add Role: إضافة دور
 Administrator: مدير
 Administrator Settings.: إعدادات المسؤول.
+Administrators Profile's Status cannot be toggled: لا يمكن تبديل حالة ملف تعريف المسؤولين
 af-NA: الأفريكانية (ناميبيا)
 af-ZA: الأفريكانية (جنوب أفريقيا)
 agq-CM: آغام (الكاميرون)
@@ -23,6 +24,9 @@ All Groups: جميع المجموعات
 All Permissions: كافة الأذونات
 Already have an account?: هل لديك حساب بالفعل؟
 am-ET: أمهرية (إثيوبيا)
+An Error has occured!: حدث خطأ!
+An Error has occurred!: حدث خطأ!
+An error occurred while confirming {0}: حدث خطأ أثناء تأكيد {0}
 Api: Api
 API-Versions: API-إصدارات
 ApplicationDescription: نموذج التطبيق مع نمط هندسة WebAssembly ونظيفة
@@ -59,6 +63,7 @@ ar-YE: العربية (اليمن)
 arn-CL: مابوشي (تشيلي)
 As Admin you can filter for users here: كمسؤول يمكنك تصفية للمستخدمين هنا
 as read: كما قرأت
+As soon as your account has been activated you can log in: بمجرد تنشيط حسابك يمكنك تسجيل الدخول
 as unread: غير مقروءة
 as-IN: أسامي (الهند)
 asa-TZ: أسو (تنزانيا)
@@ -128,6 +133,7 @@ Confirm: أكد
 Confirm and Ignore: تأكيد وتجاهل
 Confirm and Set Required: تأكيد وتعيين مطلوب
 Confirm Password: تأكيد كلمة المرور
+Confirm Registration: تأكيد التسجيل
 contacts: جهات الاتصال
 Create: خلق
 cs-CZ: تشيكية (تشيكيا)
@@ -204,6 +210,7 @@ dyo-SN: جالا - فونيي (السنغال)
 dz-BT: دزونغخا (بوتان)
 E-mail: البريد الإلكتروني
 E-Mail: البريد الإلكتروني
+E-Mail not confirmed.: البريد الإلكتروني غير مؤكد. يرجى التحقق من صندوق البريد الخاص بك وتأكيد عنوان بريدك الإلكتروني. <a href='{0}'>إعادة إرسال تأكيد البريد الإلكتروني</a>
 ebu-KE: إمبو (كينيا)
 Edit: حرر
 ee-GH: إيوي (غانا)
@@ -211,6 +218,7 @@ ee-TG: إيوي (توغو)
 el-CY: اليونانية (قبرص)
 el-GR: اليونانية (اليونان)
 Email: البريد الإلكتروني
+Email {0} is already registered.: البريد الإلكتروني {0} مسجل بالفعل.
 Email Confirmation: تأكيد البريد الإلكتروني
 Email is not correct: البريد الإلكتروني غير صحيح
 Email is required: البريد الإلكتروني مطلوب
@@ -324,6 +332,7 @@ en-ZM: الإنجليزية (زامبيا)
 en-ZW: الإنجليزية (زيمبابوي)
 English: الإنكليزية
 Enter email for password reset: أدخل عنوان البريد الإلكتروني المرتبط بحسابك وستتلقى رسالة إلكترونية تحتوي على رابط لإعادة تعيين كلمة المرور الخاصة بك
+Enter the email address for the confirmation mail: أدخل عنوان البريد الإلكتروني لرسالة التأكيد
 Enter your message...: أدخل رسالتك...
 Entity Id: معرف الكيان
 Entity is required!: الكيان مطلوب!
@@ -511,6 +520,7 @@ ii-CN: يي (الصين)
 Include Entity fields (Export): تضمين حقول الكيان (تصدير)
 Incorrect Password.: كلمة مرور غير صحيحة.
 Indonesia: الإندونيسية
+Invalid Credentials.: بيانات اعتماد غير صالحة.
 Is Active: نشط
 Is Public: هو عام
 Is Public?: هل الجمهور؟
@@ -662,6 +672,8 @@ nn-NO: نينورسك النرويجية (النرويج)
 nnh-CM: نغيمبون (الكاميرون)
 No Allowed Actions: لا يسمح الإجراءات
 No notifications: لا توجد إشعارات
+Not Allowed to add or delete Administrator Role if you have not this role.: غير مسموح بإضافة دور المسؤول أو حذفه إذا لم يكن لديك هذا الدور.
+Not allowed to Delete this user: غير مسموح بحذف هذا المستخدم
 Not Allowed.: غير مسموح به.
 NotFoundMessage: الصفحة التي كنت تبحث عنها غير موجودة.
 Notifications: الاخطارات
@@ -695,13 +707,18 @@ Password must be at least of length 8: يجب أن تكون كلمة المرو�
 Password must contain at least one capital letter: يجب أن تحتوي كلمة المرور على حرف واحد على الأقل
 Password must contain at least one digit: يجب أن تحتوي كلمة المرور على رقم واحد على الأقل
 Password must contain at least one lowercase letter: يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل
+Password Reset Mail has been sent to your authorized Email.: تم إرسال بريد إعادة تعيين كلمة المرور إلى بريدك الإلكتروني المعتمد.
+Password Reset Successful!: إعادة تعيين كلمة المرور بنجاح!
 Passwords don't match: كلمات المرور غير متطابقة
 pcm-Latn-NG: بيدجين النيجيرية (لاتينية، نيجيريا)
 Permission Name: اسم الإذن
 Personal: شخصي
 Phone Number: رقم الهاتف
+Phone number {0} is already registered.: رقم الهاتف {0} مسجل بالفعل.
 PhoneNumber: رقم الهاتف
 pl-PL: البولندية (بولندا)
+Please confirm your account by <a href='{0}'>clicking here</a>.: يرجى تأكيد حسابك عن طريق <a href='{0}'> انقر هنا</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: يرجى إعادة تعيين كلمة المرور الخاصة بك عن طريق <a href='{0}'> انقر هنا</a>.
 prg-001: البروسية (العالم)
 Primary Key: المفتاح الأساسي
 Product Deleted: تم حذف المنتج!
@@ -804,6 +821,7 @@ Security: أمن
 seh-MZ: سينا (موزمبيق)
 Select Language: حدد اللغة
 Send: ارسل
+Send confirmation email: إرسال رسالة تأكيد بالبريد الإلكتروني
 Sep: سبتمبر
 ses-ML: كويرابورو سيني (مالي)
 Set new password: تعيين كلمة مرور جديدة
@@ -925,13 +943,17 @@ Upload Image: تحميل صورة
 ur-IN: الأوردو (الهند)
 ur-PK: الأوردو (باكستان)
 User: مستخدم
+User {0} Registered. Please check your Mailbox to verify!: '{0} المستخدم المسجل. يرجى التحقق من صندوق البريد الخاص بك للتحقق من عنوان بريدك الإلكتروني!'
 User Deleted: حذف المستخدم
 User Name: اسم المستخدم
+User Not Active. Please contact the administrator.: المستخدم غير نشط. يرجى الانتظار حتى يتم إجراء الأنشطة أو الاتصال بالمسؤول.
 User Not Found!: لم يتم العثور على المستخدم!
 User Registered: المستخدم المسجل!
 User Registered Mailbox: المستخدم المسجل. تم تسليم بريد التأكيد إلى علبة البريد.
+User registration is not allowed: تسجيل المستخدم غير مسموح به
 Username: اسم المستخدم
 UserName: اسم المستخدم
+Username {0} is already taken.: تم بالفعل أخذ {0} اسم المستخدم.
 UserName is required: اسم المستخدم مطلوب
 UserName must be at least of length 6: يجب أن يكون اسم المستخدم على الأقل بطول 6
 Users: المستعملون
@@ -966,7 +988,10 @@ you: أنت
 You are logged out because the Permissions of one of your Roles have been updated.: لقد قمت بتسجيل الخروج لأنه تم تحديث أذونات أحد الأدوار الخاصة بك.
 You are logged out because the user with your Token has been deleted or token is expired.: لقد قمت بتسجيل الخروج بسبب حذف المستخدم الذي يحمل الرمز المميز أو انتهاء صلاحية الرمز المميز.
 You are Logged Out.: لقد قمت بتسجيل الخروج.
+You can now Login with your credentials: يمكنك الآن تسجيل الدخول باستخدام بيانات الاعتماد الخاصة بك
 You cannot delete yourself: لا يمكنك حذف نفسك
+Your e-mail address has been confirmed!: تم تأكيد عنوان بريدك الإلكتروني!
+Your email address could not be verified. If you have any problems, please contact {0}: تعذر التحقق من عنوان بريدك الإلكتروني. إذا كان لديك أي مشاكل، يرجى الاتصال {0}
 Your Profile has been updated.: تم تحديث ملف التعريف الخاص بك.
 Your Recent Activities.: أنشطتك الأخيرة.
 zgh-Tfng-MA: الأمازيغية المغربية القياسية (تيفيناغ، المغرب)

@@ -12,6 +12,19 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private RegisterRequest _registerUserModel = new();
 
+        protected override async Task OnInitializedAsync()
+        {
+            var config = await _api.System_GetConfigurationAsync();
+            if (!config.UserRegistration.Enabled)
+            {
+                _navigationManager.NavigateTo(ApplicationConstants.Routes.Login);
+            }
+            else
+            {
+                await base.OnInitializedAsync();
+            }
+        }
+
         private async Task SubmitAsync()
         {
             var response = await _api.User_RegisterAsync(_registerUserModel);

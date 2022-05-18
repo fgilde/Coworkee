@@ -1,12 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
+using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
+using CleanArchitectureBase.Server.Extensions;
+using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Constants.Role;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
@@ -113,6 +121,15 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> RegisterAsync(RegisterRequest request)
         {
             var origin = Request.Headers["origin"];
+            if (!HttpContext.User.IsInRole(RoleConstants.AdministratorRole))
+            {
+                if (!Configuration.PublicSettings.UserRegistration.Enabled)
+                {
+                    throw Errors.Create("User registration is not allowed");
+                }
+                request.ActivateUser = !Configuration.PublicSettings.UserRegistration.RequiresAdministratorActivation;
+                request.AutoConfirmEmail = !Configuration.PublicSettings.UserRegistration.EmailConfirmationRequired;
+            }
             return Ok(await _userService.RegisterAsync(request, origin));
         }
 
@@ -127,7 +144,16 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         [Produces(typeof(Result<string>))]
         public async Task<IActionResult> ConfirmEmailAsync([FromQuery] string userId, [FromQuery] string code)
         {
-            return Ok(await _userService.ConfirmEmailAsync(userId, code));
+            var result = await _userService.ConfirmEmailAsync(userId, code);
+            if (!Request.IsAjaxRequest())
+            {
+                var userResponse = (await _userService.GetAsync(userId)).Data;
+                var userMail = userResponse.Email;
+                var activated = userResponse.IsActive.ToString().ToLower();
+                var url = string.IsNullOrEmpty(Configuration.ClientUrl) ? $"{Request.Scheme}://{Request.Host}" : Configuration.ClientUrl;
+                return Redirect($"{url.EnsureEndsWith("/")}{ApplicationConstants.Routes.Login}?email-confirmation-result={result.Succeeded.ToString().ToLower()}&email={userMail}&activated={activated}");
+            }
+            return Ok(result);
         }
 
         /// <summary>

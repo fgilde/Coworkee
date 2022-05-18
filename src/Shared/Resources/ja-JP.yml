@@ -15,6 +15,7 @@ Add Product: 製品の追加
 Add Role: ロールの追加
 Administrator: 管理者
 Administrator Settings.: 管理者設定。
+Administrators Profile's Status cannot be toggled: 管理者プロファイルのステータスを切り替えることはできません
 af-NA: アフリカーンス語 (ナミビア)
 af-ZA: アフリカーンス語 (南アフリカ)
 agq-CM: アゲム (カメルーン)
@@ -23,6 +24,9 @@ All Groups: すべてのグループ
 All Permissions: すべてのアクセス許可
 Already have an account?: すでにアカウントを持っていますか?
 am-ET: アムハラ語 (エチオピア)
+An Error has occured!: エラーが発生しました!
+An Error has occurred!: エラーが発生しました!
+An error occurred while confirming {0}: 確認中にエラーが発生{0}
 Api: アピ
 API-Versions: API バージョン
 ApplicationDescription: Web アセンブリとクリーン アーキテクチャ パターンを使用したサンプル アプリケーション
@@ -59,6 +63,7 @@ ar-YE: アラビア語 (イエメン)
 arn-CL: マプチェ (チリ)
 As Admin you can filter for users here: 管理者として、ここでユーザーをフィルター処理できます
 as read: 読むように
+As soon as your account has been activated you can log in: アカウントが有効になるとすぐにログインできます
 as unread: 未読として
 as-IN: アッサムス (インド)
 asa-TZ: アス (タンザニア)
@@ -128,6 +133,7 @@ Confirm: 確認する
 Confirm and Ignore: 確認と無視
 Confirm and Set Required: 確認し、必要な設定
 Confirm Password: パスワードの確認
+Confirm Registration: 登録の確認
 contacts: 連絡先
 Create: 創造する
 cs-CZ: チェコ語 (チェコ)
@@ -204,6 +210,7 @@ dyo-SN: ジョラ・フォニ (セネガル)
 dz-BT: ゾンカ (ブータン)
 E-mail: 電子メール
 E-Mail: 電子メール
+E-Mail not confirmed.: メールが未確認です。メールボックスを確認し、メールアドレスを確認してください。<a href='{0}'>確認メールの再送信</a>
 ebu-KE: エンブ (ケニア)
 Edit: 編集
 ee-GH: エウェ (ガーナ)
@@ -211,6 +218,7 @@ ee-TG: エウェ (トーゴ)
 el-CY: ギリシャ語 (キプロス)
 el-GR: ギリシャ語 (ギリシャ)
 Email: 電子メール
+Email {0} is already registered.: メール{0}は既に登録されています。
 Email Confirmation: メールの確認
 Email is not correct: 電子メールが正しくない
 Email is required: 電子メールが必要です
@@ -324,6 +332,7 @@ en-ZM: 英語 (ザンビア)
 en-ZW: 英語 (ジンバブエ)
 English: 英語
 Enter email for password reset: アカウントにリンクされているメールアドレスを入力すると、パスワードをリセットするためのリンクを含むメールが届きます
+Enter the email address for the confirmation mail: 確認メールのメールアドレスを入力します。
 Enter your message...: メッセージを入力します。
 Entity Id: エンティティ ID
 Entity is required!: エンティティが必要です!
@@ -511,6 +520,7 @@ ii-CN: イ(中国)
 Include Entity fields (Export): エンティティ フィールドを含める (エクスポート)
 Incorrect Password.: パスワードが正しくありません。
 Indonesia: インドネシア語
+Invalid Credentials.: 資格情報が無効です。
 Is Active: アクティブ
 Is Public: パブリックです
 Is Public?: パブリックですか?
@@ -662,6 +672,8 @@ nn-NO: ノルウェージャン・ニーノスク (ノルウェー)
 nnh-CM: ンギエンブーン (カメルーン)
 No Allowed Actions: 許可されたアクションはありません
 No notifications: 通知なし
+Not Allowed to add or delete Administrator Role if you have not this role.: この役割を持っていない場合、管理者の役割を追加または削除することはできません。
+Not allowed to Delete this user: このユーザーの削除は許可されていません
 Not Allowed.: 禁じられた。
 NotFoundMessage: 探していたページは存在しません。
 Notifications: 通知
@@ -695,13 +707,18 @@ Password must be at least of length 8: パスワードは少なくとも 8 の�
 Password must contain at least one capital letter: パスワードには、少なくとも 1 つの大文字を含める必要があります。
 Password must contain at least one digit: パスワードには 1 桁以上の数字を含める必要があります
 Password must contain at least one lowercase letter: パスワードには、小文字を少なくとも 1 つ含める必要があります。
+Password Reset Mail has been sent to your authorized Email.: パスワードリセットメールが承認されたメールに送信されました。
+Password Reset Successful!: パスワードのリセットに成功しました!
 Passwords don't match: パスワードが一致しません
 pcm-Latn-NG: ナイジェリア・ピジン(ラテン語、ナイジェリア)
 Permission Name: アクセス許可名
 Personal: 個人的
 Phone Number: 電話番号
+Phone number {0} is already registered.: 電話番号{0}は既に登録されています。
 PhoneNumber: 電話番号
 pl-PL: ポーランド (ポーランド)
+Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>ここをクリックしてアカウントを確認してください</a>。
+Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'ここをクリックしてパスワードをリセットしてくだ>い</a>。
 prg-001: プロイセン (世界)
 Primary Key: 主キー
 Product Deleted: 製品が削除されました!
@@ -804,6 +821,7 @@ Security: 安全
 seh-MZ: セナ (モザンビーク)
 Select Language: 言語の選択
 Send: 送信
+Send confirmation email: 確認メールを送信する
 Sep: 9 月
 ses-ML: コイラボロ・セニ (マリ)
 Set new password: 新しいパスワードを設定する
@@ -925,13 +943,17 @@ Upload Image: 画像のアップロード
 ur-IN: ウルドゥー語 (インド)
 ur-PK: ウルドゥー語 (パキスタン)
 User: 利用者
+User {0} Registered. Please check your Mailbox to verify!: ユーザー{0}登録済みです。メールボックスをチェックしてメールアドレスを確認してください!
 User Deleted: ユーザーが削除されました
 User Name: ユーザー名
+User Not Active. Please contact the administrator.: ユーザーがアクティブではありません。アクティベーションを待つか、管理者に問い合わせてください。
 User Not Found!: ユーザーが見つかりません!
 User Registered: ユーザー登録!
 User Registered Mailbox: ユーザー登録。確認メールはメールボックスに配信されました。
+User registration is not allowed: ユーザー登録はできません
 Username: ユーザー名
 UserName: ユーザー名
+Username {0} is already taken.: ユーザー名{0}は既に取得されています。
 UserName is required: ユーザー名が必要です
 UserName must be at least of length 6: ユーザー名は少なくとも長さ 6 である必要があります。
 Users: ユーザー
@@ -966,7 +988,10 @@ you: あなたが
 You are logged out because the Permissions of one of your Roles have been updated.: ロールの 1 つのアクセス許可が更新されたため、ログアウトされます。
 You are logged out because the user with your Token has been deleted or token is expired.: トークンを持つユーザーが削除されているか、トークンの有効期限が切れているため、ログアウトされます。
 You are Logged Out.: ログアウトしています。
+You can now Login with your credentials: これで、資格情報でログインできます
 You cannot delete yourself: 自分で削除することはできません。
+Your e-mail address has been confirmed!: メールアドレスが確認できました!
+Your email address could not be verified. If you have any problems, please contact {0}: メールアドレスを確認できませんでした。何か問題がある場合は、お問い合わせくださ{0}
 Your Profile has been updated.: プロフィールが更新されました。
 Your Recent Activities.: 最近のアクティビティ。
 zgh-Tfng-MA: モロッコ・タマジト(ティフィナ、モロッコ)

@@ -10,7 +10,7 @@ namespace CleanArchitectureBase.Application.Requests;
 
 public class NotificationRequest: ClientEventBase
 {
-    public string NotificationTypeId { get; set; } = Guid.NewGuid().ToString(); // Public setter is required for serializer but you should not use it
+    public string NotificationTypeId { get; [Obsolete("Public setter is required for serializer but you should not use it")] set; } = Guid.NewGuid().ToString(); // Public setter is required for serializer but you should not use it
     public NotificationAsMail SendAsMail { get; set; }
     public bool SkipCurrentUser { get; set; }
 
@@ -33,7 +33,6 @@ public class NotificationRequest: ClientEventBase
         return new MailRequest
         {
             RecipientName = $"{user.FirstName} {user.LastName}",
-            From = ApplicationConstants.Defaults.Users.System.Email,
             To = user.Email,
             Body = Content,
             Subject = Subject

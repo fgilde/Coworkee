@@ -15,6 +15,7 @@ Add Product: Ürün Ekle
 Add Role: Rol Ekle
 Administrator: Yönetici
 Administrator Settings.: Yönetici Ayarları.
+Administrators Profile's Status cannot be toggled: Yönetici Profilinin Durumu değiştirilemez
 af-NA: Afrikaanlar (Namibya)
 af-ZA: Afrikaans (Güney Afrika)
 agq-CM: Aghem (Kamerun)
@@ -23,6 +24,9 @@ All Groups: Tüm Gruplar
 All Permissions: Tüm İzinler
 Already have an account?: Zaten bir hesabınız var mı?
 am-ET: Amharik (Etiyopya)
+An Error has occured!: Bir Hata Oluştu!
+An Error has occurred!: Bir Hata Oluştu!
+An error occurred while confirming {0}: '{0} onaylanırken bir hata oluştu'
 Api: UPA
 API-Versions: API Sürümleri
 ApplicationDescription: WebAssembly ve Temiz Mimari Desenli Örnek Uygulama
@@ -59,6 +63,7 @@ ar-YE: Arapça (Yemen)
 arn-CL: Mapuche (Şili)
 As Admin you can filter for users here: Yönetici olarak kullanıcılar için burada filtreleyebilirsiniz
 as read: okunduğu gibi
+As soon as your account has been activated you can log in: Hesabınız etkinleştirilir etkinleştirilmez giriş yapabilirsiniz
 as unread: okunmamış olarak
 as-IN: Assamca (Hindistan)
 asa-TZ: Asu (Tanzanya)
@@ -128,6 +133,7 @@ Confirm: Onaylamak
 Confirm and Ignore: Onayla ve Yoksay
 Confirm and Set Required: Onayla ve Ayarla Gerekli
 Confirm Password: Parolayı Onayla
+Confirm Registration: Kaydı Onayla
 contacts: Kişiler
 Create: Yaratmak
 cs-CZ: Çekçe (Çekya)
@@ -204,6 +210,7 @@ dyo-SN: Jola-Fonyi (Senegal)
 dz-BT: Dzongkha (Butan)
 E-mail: E-posta
 E-Mail: E-posta
+E-Mail not confirmed.: E-posta onaylanmadı. Lütfen posta kutunuzu kontrol edin ve e-posta adresinizi onaylayın. <a href='{0}'>E-posta onayını tekrar gönder</a>
 ebu-KE: Embu (Kenya)
 Edit: Düzenlemek
 ee-GH: Ewe (Gana)
@@ -211,6 +218,7 @@ ee-TG: Ewe (Togo)
 el-CY: Yunanca (Kıbrıs)
 el-GR: Yunanca (Yunanistan)
 Email: E-posta
+Email {0} is already registered.: E-posta {0} zaten kayıtlı.
 Email Confirmation: E-posta Onayı
 Email is not correct: E-posta doğru değil
 Email is required: E-posta gereklidir
@@ -324,6 +332,7 @@ en-ZM: İngilizce (Zambiya)
 en-ZW: İngilizce (Zimbabve)
 English: İngilizce
 Enter email for password reset: Hesabınıza bağlı e-posta adresini girin ve şifrenizi sıfırlamak için bir bağlantı içeren bir e-posta alacaksınız
+Enter the email address for the confirmation mail: Onay postası için e-posta adresini girin
 Enter your message...: mesajınızı girin...
 Entity Id: Varlık Kimliği
 Entity is required!: Varlık gereklidir!
@@ -511,6 +520,7 @@ ii-CN: Yi (Çin)
 Include Entity fields (Export): Varlık alanlarını dahil et (Dışarı Aktar)
 Incorrect Password.: Yanlış Parola.
 Indonesia: Endonezya dili
+Invalid Credentials.: Geçersiz Kimlik Bilgileri.
 Is Active: Etkin
 Is Public: Herkese Açık mı
 Is Public?: Halka açık mı?
@@ -662,6 +672,8 @@ nn-NO: Norveç Nynorsk (Norveç)
 nnh-CM: Ngiemboon (Kamerun)
 No Allowed Actions: İzin Verilen Eylem Yok
 No notifications: Bildirim yok
+Not Allowed to add or delete Administrator Role if you have not this role.: Bu role sahip değilseniz Yönetici Rolü eklemenize veya silmenize izin verilmez.
+Not allowed to Delete this user: Bu kullanıcının silinmesine izin verilmiyor
 Not Allowed.: İzin verilmiyor.
 NotFoundMessage: Aradığınız sayfa yok.
 Notifications: Bildirim
@@ -695,13 +707,18 @@ Password must be at least of length 8: Parola en az 8 uzunluğunda olmalıdır
 Password must contain at least one capital letter: Parola en az bir büyük harf içermelidir
 Password must contain at least one digit: Parola en az bir basamak içermelidir
 Password must contain at least one lowercase letter: Parola en az bir küçük harf içermelidir
+Password Reset Mail has been sent to your authorized Email.: Parola Sıfırlama Postası yetkili E-postanıza gönderildi.
+Password Reset Successful!: Şifre Sıfırlama Başarılı!
 Passwords don't match: Parolalar eşleşmiyor
 pcm-Latn-NG: Nijerya Pidgin (Latince, Nijerya)
 Permission Name: İzin Adı
 Personal: Kişisel
 Phone Number: Telefon numarası
+Phone number {0} is already registered.: Telefon numarası {0} zaten kayıtlı.
 PhoneNumber: Telefon Numarası
 pl-PL: Lehçe (Polonya)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Lütfen hesabınızı <a href='{0}'>buraya tıklayarak onaylayın</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Lütfen şifrenizi <a href='{0}'>buraya tıklayarak sıfırlayın</a>.
 prg-001: Prusya (Dünya)
 Primary Key: Birincil anahtar
 Product Deleted: Ürün silindi!
@@ -804,6 +821,7 @@ Security: Güvenlik
 seh-MZ: Sena (Mozambik)
 Select Language: Dil seçin
 Send: Gönder
+Send confirmation email: Onay e-postası gönder
 Sep: Eylül
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Yeni parola ayarlama
@@ -925,13 +943,17 @@ Upload Image: Resmi Karşıya Yükle
 ur-IN: Urduca (Hindistan)
 ur-PK: Urduca (Pakistan)
 User: Kullanıcı
+User {0} Registered. Please check your Mailbox to verify!: Kullanıcı {0} Kayıtlı. Lütfen e-posta adresinizi doğrulamak için Posta Kutunuzu kontrol edin!
 User Deleted: Kullanıcı Silindi
 User Name: Kullanıcı Adı
+User Not Active. Please contact the administrator.: Kullanıcı Aktif Değil. Lütfen etkinleştirme için bekleyin veya yöneticiye başvurun.
 User Not Found!: Kullanıcı Bulunamadı!
 User Registered: Kullanıcı Kayıtlı!
 User Registered Mailbox: Kullanıcı Kayıtlı. Onay Postası Posta Kutusu'na teslim edildi.
+User registration is not allowed: Kullanıcı kaydına izin verilmez
 Username: Kullanıcı adı
 UserName: Kullanıcı adı
+Username {0} is already taken.: Kullanıcı adı {0} zaten alınmış.
 UserName is required: KullanıcıAdı gerekli
 UserName must be at least of length 6: UserName en az 6 uzunluğunda olmalıdır
 Users: Kullanıcı
@@ -966,7 +988,10 @@ you: sen
 You are logged out because the Permissions of one of your Roles have been updated.: Rollerinizden birinin İzinleri güncelleştirildiği için oturumunuz kapatılıyor.
 You are logged out because the user with your Token has been deleted or token is expired.: Belirtecinizin olduğu kullanıcı silindiği veya belirtecinin süresi dolduğu için oturumunuz kapatılıyor.
 You are Logged Out.: Oturumunuz Tükendi.
+You can now Login with your credentials: Artık kimlik bilgilerinizle Giriş yapabilirsiniz
 You cannot delete yourself: Kendinizi silemezsiniz
+Your e-mail address has been confirmed!: E-posta adresiniz onaylandı!
+Your email address could not be verified. If you have any problems, please contact {0}: E-posta adresiniz doğrulanamadı. Herhangi bir sorun yaşarsanız, lütfen {0}
 Your Profile has been updated.: Profiliniz güncellendi.
 Your Recent Activities.: Son aktivitelerin.
 zgh-Tfng-MA: Standart Fas Tamazight (Tifinagh, Fas)

@@ -15,6 +15,7 @@ Add Product: Προσθήκη προϊόντος
 Add Role: Προσθήκη ρόλου
 Administrator: Διαχειριστής
 Administrator Settings.: Ρυθμίσεις διαχειριστή.
+Administrators Profile's Status cannot be toggled: Δεν είναι δυνατή η εναλλαγή της κατάστασης του προφίλ διαχειριστών
 af-NA: Αφρικανοί (Ναμίμπια)
 af-ZA: Αφρικανοί (Νότια Αφρική)
 agq-CM: Αγκέμ (Καμερούν)
@@ -23,6 +24,9 @@ All Groups: Όλες οι ομάδες
 All Permissions: Όλα τα δικαιώματα
 Already have an account?: Έχεις ήδη λογαριασμό;
 am-ET: Αμχαρικός (Αιθιοπία)
+An Error has occured!: Παρουσιάστηκε σφάλμα!
+An Error has occurred!: Παρουσιάστηκε σφάλμα!
+An error occurred while confirming {0}: Παρουσιάστηκε σφάλμα κατά την επιβεβαίωση {0}
 Api: Διεπαφή προγραμματισμού εφαρμογών
 API-Versions: Εκδόσεις API
 ApplicationDescription: Δείγμα εφαρμογής με μοτίβο WebAssembly και καθαρής αρχιτεκτονικής
@@ -59,6 +63,7 @@ ar-YE: Αραβικά (Υεμένη)
 arn-CL: Μαπούτσε (Χιλή)
 As Admin you can filter for users here: Ως διαχειριστής μπορείτε να φιλτράρετε για χρήστες εδώ
 as read: όπως διαβάζεται
+As soon as your account has been activated you can log in: Μόλις ενεργοποιηθεί ο λογαριασμός σας, μπορείτε να συνδεθείτε
 as unread: τόσο αδιάβαστο
 as-IN: Ασαμέζικα (Ινδία)
 asa-TZ: Ασού (Τανζανία)
@@ -128,6 +133,7 @@ Confirm: Επιβεβαιώνω
 Confirm and Ignore: Επιβεβαίωση και παράβλεψη
 Confirm and Set Required: Επιβεβαίωση και ορισμός απαιτείται
 Confirm Password: Επιβεβαίωση κωδικού πρόσβασης
+Confirm Registration: Επιβεβαίωση εγγραφής
 contacts: Επαφές
 Create: Δημιουργώ
 cs-CZ: Τσεχικά (Τσεχία)
@@ -204,6 +210,7 @@ dyo-SN: Τζόλα-Φονί (Σενεγάλη)
 dz-BT: Ντζόνγκκα (Μπουτάν)
 E-mail: Email
 E-Mail: Email
+E-Mail not confirmed.: Το μήνυμα ηλεκτρονικού ταχυδρομείου δεν επιβεβαιώθηκε. Ελέγξτε το γραμματοκιβώτιό σας και επιβεβαιώστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας. επιβεβαίωση ηλεκτρονικού ταχυδρομείου <a href={0}>Αναφορά email</a>
 ebu-KE: Εμπού (Κένυα)
 Edit: Επεξεργασία
 ee-GH: Προβατόσου (Γκάνα)
@@ -211,6 +218,7 @@ ee-TG: Προβατόσου (Τόγκο)
 el-CY: Ελληνικά (Κύπρος)
 el-GR: Ελληνικά (Ελλάδα)
 Email: Email
+Email {0} is already registered.: Το {0} ηλεκτρονικού ταχυδρομείου έχει ήδη καταχωρηθεί.
 Email Confirmation: Επιβεβαίωση ηλεκτρονικού ταχυδρομείου
 Email is not correct: Το ηλεκτρονικό ταχυδρομείο δεν είναι σωστό
 Email is required: Απαιτείται ηλεκτρονικό ταχυδρομείο
@@ -324,6 +332,7 @@ en-ZM: Αγγλικά (Ζάμπια)
 en-ZW: Αγγλικά (Ζιμπάμπουε)
 English: Αγγλικά
 Enter email for password reset: Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου που είναι συνδεδεμένη με το λογαριασμό σας και θα λάβετε ένα μήνυμα ηλεκτρονικού ταχυδρομείου που περιέχει έναν σύνδεσμο για την επαναφορά του κωδικού πρόσβασής σας
+Enter the email address for the confirmation mail: Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου για την αλληλογραφία επιβεβαίωσης
 Enter your message...: Εισαγάγετε το μήνυμά σας...
 Entity Id: Αναγνωριστικό οντότητας
 Entity is required!: Η οντότητα είναι απαραίτητη!
@@ -511,6 +520,7 @@ ii-CN: Yi (Κίνα)
 Include Entity fields (Export): Συμπερίληψη πεδίων οντότητας (Εξαγωγή)
 Incorrect Password.: Εσφαλμένος κωδικός πρόσβασης.
 Indonesia: Ινδονησιακά
+Invalid Credentials.: Μη έγκυρα διαπιστευτήρια.
 Is Active: Είναι ενεργός
 Is Public: Είναι δημόσιο
 Is Public?: Είναι δημόσιο;
@@ -662,6 +672,8 @@ nn-NO: Νορβηγικό Νυνόρσκ (Νορβηγία)
 nnh-CM: Νγκιμπούν (Καμερούν)
 No Allowed Actions: Δεν επιτρέπονται ενέργειες
 No notifications: Χωρίς ειδοποιήσεις
+Not Allowed to add or delete Administrator Role if you have not this role.: Δεν επιτρέπεται να προσθέσετε ή να διαγράψετε το ρόλο διαχειριστή εάν δεν έχετε αυτόν τον ρόλο.
+Not allowed to Delete this user: Δεν επιτρέπεται η διαγραφή αυτού του χρήστη
 Not Allowed.: Δεν επιτρέπεται.
 NotFoundMessage: Η σελίδα που έψαχνες δεν υπάρχει.
 Notifications: Ειδοποιήσεις
@@ -695,13 +707,18 @@ Password must be at least of length 8: Ο κωδικός πρόσβασης πρ
 Password must contain at least one capital letter: Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον ένα κεφαλαίο γράμμα
 Password must contain at least one digit: Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον ένα ψηφίο
 Password must contain at least one lowercase letter: Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον ένα πεζό γράμμα
+Password Reset Mail has been sent to your authorized Email.: Το Μήνυμα επαναφοράς κωδικού πρόσβασης έχει σταλεί στο εξουσιοδοτημένο email σας.
+Password Reset Successful!: Η επαναφορά κωδικού πρόσβασης ολοκληρώθηκε με επιτυχία!
 Passwords don't match: Οι κωδικοί πρόσβασης δεν ταιριάζουν
 pcm-Latn-NG: Νιγηριανός Πίτγκιν (Λατινικά, Νιγηρία)
 Permission Name: Όνομα δικαιώματος
 Personal: Προσωπικός
 Phone Number: Αριθμός τηλεφώνου
+Phone number {0} is already registered.: Ο αριθμός τηλεφώνου {0} είναι ήδη καταχωρημένος.
 PhoneNumber: Αριθμός τηλεφώνου
 pl-PL: Πολωνικά (Πολωνία)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Επιβεβαιώστε τον λογαριασμό σας με <a href={0}'> κλικ εδώ</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Παρακαλώ επαναφέρετε τον κωδικό πρόσβασής σας με <a href={0}'> κλικ εδώ</a>.
 prg-001: Πρωσικός (Κόσμος)
 Primary Key: Πρωτεύον κλειδί
 Product Deleted: Το προϊόν διαγράφηκε!
@@ -804,6 +821,7 @@ Security: Ασφάλεια
 seh-MZ: Σένα (Μοζαμβίκη)
 Select Language: Επιλογή γλώσσας
 Send: Αποστέλλω
+Send confirmation email: Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου επιβεβαίωσης
 Sep: Σεπ
 ses-ML: Κοϊραμπόρο Σέννι (Μάλι)
 Set new password: Ορισμός νέου κωδικού πρόσβασης
@@ -925,13 +943,17 @@ Upload Image: Αποστολή εικόνας
 ur-IN: Ουρντού (Ινδία)
 ur-PK: Ουρντού (Πακιστάν)
 User: Χρήστης
+User {0} Registered. Please check your Mailbox to verify!: Ο χρήστης {0} καταχωρημένος. Ελέγξτε το γραμματοκιβώτιό σας για να επαληθεύσετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας!
 User Deleted: Ο χρήστης διαγράφηκε
 User Name: Όνομα χρήστη
+User Not Active. Please contact the administrator.: Ο χρήστης δεν είναι ενεργός. Περιμένετε για αδράνεια ή επικοινωνήστε με το διαχειριστή.
 User Not Found!: Ο χρήστης δεν βρέθηκε!
 User Registered: Καταχωρημένος χρήστης!
 User Registered Mailbox: Καταχωρημένος χρήστης. Η αλληλογραφία επιβεβαίωσης παραδόθηκε στο γραμματοκιβώτιο.
+User registration is not allowed: Δεν επιτρέπεται η εγγραφή χρήστη
 Username: Όνομα χρήστη
 UserName: Όνομα χρήστη
+Username {0} is already taken.: Το όνομα χρήστη {0} έχει ήδη ληφθεί.
 UserName is required: Απαιτείται όνομα χρήστη
 UserName must be at least of length 6: Το όνομα χρήστη πρέπει να έχει τουλάχιστον μήκος 6
 Users: Χρήστες
@@ -966,7 +988,10 @@ you: εσύ
 You are logged out because the Permissions of one of your Roles have been updated.: Είστε συνδεδεμένοι επειδή τα δικαιώματα ενός από τους ρόλους σας έχουν ενημερωθεί.
 You are logged out because the user with your Token has been deleted or token is expired.: Είστε συνδεδεμένοι επειδή ο χρήστης με το διακριτικό σας έχει διαγραφεί ή το διακριτικό έχει λήξει.
 You are Logged Out.: Είστε συνδεδεμένοι.
+You can now Login with your credentials: Τώρα μπορείτε να συνδεθείτε με τα διαπιστευτήριά σας
 You cannot delete yourself: Δεν μπορείτε να διαγράψετε τον εαυτό σας
+Your e-mail address has been confirmed!: Η διεύθυνση του e-mail σας επιβεβαιώθηκε!
+Your email address could not be verified. If you have any problems, please contact {0}: Δεν ήταν δυνατή η επαλήθευση της διεύθυνσης ηλεκτρονικού ταχυδρομείου σας. Εάν έχετε οποιοδήποτε πρόβλημα, παρακαλούμε επικοινωνήστε μαζί {0}
 Your Profile has been updated.: Το προφίλ σας έχει ενημερωθεί.
 Your Recent Activities.: Οι πρόσφατες δραστηριότητές σου.
 zgh-Tfng-MA: Πρότυπο Μαροκινό Ταμαζάιτ (Τιφινάγκ, Μαρόκο)

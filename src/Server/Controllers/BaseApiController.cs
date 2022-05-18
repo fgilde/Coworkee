@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Application.Hubs;
 using MediatR;
@@ -22,6 +23,7 @@ namespace CleanArchitectureBase.Server.Controllers
         private IMediator _mediatorInstance;
         private ILogger<T> _loggerInstance;
         protected IMediator Mediator => _mediatorInstance ??= Get<IMediator>();
+        protected ServerConfiguration Configuration => Get<ServerConfiguration>();
         protected ILogger<T> Logger => _loggerInstance ??= Get<ILogger<T>>();
         protected TService Get<TService>() => HttpContext.RequestServices.GetService<TService>();
         protected string ControllerName => ControllerContext.ActionDescriptor.ControllerName;

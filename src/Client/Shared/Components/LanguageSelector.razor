@@ -93,6 +93,7 @@
         
         if (_errorService.IsSuccessFull(result))
         {
+            actuaLanguage = languageCode;
             _snackBar.Add(result.Messages[0], Severity.Success);
             await LoadPreferenceAsync();
             StateHasChanged();

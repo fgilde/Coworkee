@@ -1,17 +1,9 @@
 [![Build and deploy ASP.Net Core app to Azure Web App - Coworkee](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml/badge.svg)](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml)
 
-```winget install -e --id GoLang.Go```
-
-```go get -u github.com/NYTimes/openapi2proto/cmd/openapi2proto```
-
-
-// Update-Database Languages
-// Remove-migration
-
 Single Page App (Blazor) and an ASP.NET Core Server following the principles of Clean Architecture. 
 <br/>
 
-This solution is new Next Version of my project [CleanArchitectureBase](https://github.com/fgilde/CleanArchitectureBase) 
+This solution is new Next Version of [CleanArchitectureBase](https://github.com/fgilde/CleanArchitectureBase) 
 Now with a Blazor Web Assembly Frontend.
 
 [A running demo is available here](https://coworkee.azurewebsites.net/)

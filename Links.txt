@@ -15,3 +15,11 @@
             //$filter=contains(Name,'li')&$select=Id,Name,Classification,RunningTime
     https://docs.microsoft.com/en-us/odata/webapi/query-options-in-request-body
     https://stackoverflow.com/questions/10781309/asp-net-mvc-4-webapi-manually-handle-odata-queries
+
+```winget install -e --id GoLang.Go```
+
+```go get -u github.com/NYTimes/openapi2proto/cmd/openapi2proto```
+
+
+// Update-Database Languages
+// Remove-migration

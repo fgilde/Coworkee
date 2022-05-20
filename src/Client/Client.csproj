@@ -37,9 +37,10 @@
     </PackageReference>
    
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-    <PackageReference Include="MudBlazor" Version="6.0.9" />
-    <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.5" />
+    <PackageReference Include="MudBlazor" Version="6.0.10" />
+    <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.6" />
     <PackageReference Include="MudBlazor.Extensions " Version="1.2.2" />
+    <PackageReference Include="MudBlazor.Markdown" Version="0.0.10" />
     <!--<Reference Include="MudBlazor.Extensions">
       <HintPath>..\..\..\MudBlazor.Extensions\MudBlazor.Extensions\bin\Debug\net6.0\MudBlazor.Extensions.dll</HintPath>
     </Reference>-->
@@ -76,23 +77,6 @@
     <Content Update="wwwroot\appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="MudBlazor.ThemeManager" Version="1.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Update="wwwroot\js\helper\colorHelper.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Update="wwwroot\js\helper\eventHelper.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
   </ItemGroup>
 
 

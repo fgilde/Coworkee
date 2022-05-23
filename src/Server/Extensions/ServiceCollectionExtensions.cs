@@ -101,6 +101,9 @@ namespace CleanArchitectureBase.Server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
+            ApplicationConstants.HostClientInServer = ServerUtils.ClientRunsOnServer;
+            configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.HostClientInServer)}"] = ServerUtils.ClientRunsOnServer.ToString();
+
             ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>(); // One time to have static instance filled as early as possible
             services.AddTransient(_ => ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings static instance is updated as well on each read
             services.Configure<ServerConfiguration>(configuration);

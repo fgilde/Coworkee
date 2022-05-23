@@ -108,4 +108,20 @@
         window.open(url, '_blank', 'noreferrer');
     }
 
+    /**
+    * Resolves a promise filled with the value from given expression after the expression function returns a value.
+    * @param expression The expression to test
+    */
+    public when<T>(expression: () => T, timeout?: number): Promise<T> {
+        return new Promise((resolve) => {
+            const taskId = setInterval(() => {
+                const result = expression();
+                if (!!result) {
+                    clearInterval(taskId);
+                    resolve(result);
+                }
+            }, timeout || 50);
+        });
+    }
+
 }

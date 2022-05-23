@@ -12,7 +12,8 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string Version = "v2.2";
         public const string DefaultLanguageCode = "en-US";
-        
+        public static bool HostClientInServer { get; set; }
+
         public static class Defaults
         {
             public static class Users
@@ -34,11 +35,17 @@ namespace CleanArchitectureBase.Shared.Constants.Application
             public const string Login = nameof(Login);
             public const string Register = nameof(Register);
             public const string Forbidden = nameof(Forbidden);
+            public const string Dashboard = "/jobs";
+            public const string ApiDocumentation = "/swagger/index.html";
+
+            public static string[] AuthRequired = {Dashboard, ApiDocumentation};
+            public static bool IsAuthRequired(string route) => AuthRequired.Contains(route, StringComparer.InvariantCultureIgnoreCase);
         }
 
         public static class ParameterNames
         {
             public const string ReturnUrl = nameof(ReturnUrl);
+            public const string AuthedUrlParameter = "auth_token";
         }
         
         public static class HeaderNames
@@ -57,12 +64,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         {
             public const string SessionUserIdKey = nameof(Session) + "_" + nameof(SessionUserIdKey);
         }
-
-        public static class Hangfire
-        {
-            public const string DashboardRoute = "/jobs";
-        }
-
+        
         public static class ServiceBusQueues
         {
             public const string TestQueue = nameof(TestQueue);

@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Client.Authentication;
+using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.JsInterop;
+using CleanArchitectureBase.Client.Models.Navigation;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
@@ -18,6 +24,52 @@ namespace CleanArchitectureBase.Client.Extensions
             ApplicationConstants.Routes.Forbidden
         };
 
+        public static string ToAbsoluteServerUri(this NavigationManager navigationManager, string url)
+        {
+            if (!string.IsNullOrWhiteSpace(url) && !url.StartsWith("http", StringComparison.InvariantCultureIgnoreCase) && !url.StartsWith("blob:", StringComparison.InvariantCultureIgnoreCase) && !url.StartsWith("data:", StringComparison.InvariantCultureIgnoreCase))
+            {
+                try
+                {
+                    var config = ServiceAccessor.Get<ClientApplicationConfiguration>();
+                    return new UriBuilder(config.BackendOrigin).SetProperties(b => b.Path = url).Uri.AbsoluteUri;
+                }
+                catch (Exception)
+                {
+                    return url;
+                }
+            }
+            return url;
+        }
+
+        public static Task<string> EnsureUrlIsAccessable(this NavigationManager navigationManager, ClaimsPrincipal user, string url)
+        {
+            if (!navigationManager.ShouldBeAuthorized(url) || navigationManager.UriContainsAuth(url))
+                return Task.FromResult(url);
+            if (user.Identity?.IsAuthenticated == true && !user.IsGuest())
+                return ServiceAccessor.Get<IApplicationClient>().System_AuthorizeServerUrlAsync(url);
+
+            return Task.FromResult(url);
+        }
+
+        public static bool UriContainsAuth(this NavigationManager navigationManager, string url)
+        {
+            return !string.IsNullOrEmpty(navigationManager.ReadQueryParam(ApplicationConstants.ParameterNames.AuthedUrlParameter, url));
+        }
+
+        /// <summary>
+        /// Returns true if the given url is on our backend and our Backend isn't hosting the client
+        /// </summary>
+        public static bool ShouldBeAuthorized(this NavigationManager navigationManager, string url)
+        {
+            if (!url.ToLower().StartsWith("http") || !Uri.TryCreate(url, UriKind.Absolute, out var uri)) return false;
+            var config = ServiceAccessor.Get<ClientApplicationConfiguration>();
+            var clientOrigin = navigationManager.ToAbsoluteUri(navigationManager.BaseUri);
+            return Uri.TryCreate(config.BackendOrigin, UriKind.RelativeOrAbsolute, out var serverOrigin) 
+                   && uri.Origin() == serverOrigin.Origin() 
+                   && clientOrigin.Origin() != serverOrigin.Origin()
+                   && ApplicationConstants.Routes.IsAuthRequired(uri.LocalPath);
+        }
+
         /// <summary>
         /// Checks if url needs opened in a new tab
         /// </summary>
@@ -30,9 +82,9 @@ namespace CleanArchitectureBase.Client.Extensions
             return navigationManager;
         }
 
-        public static string ReadQueryParam(this NavigationManager navigationManager, string paramName)
+        public static string ReadQueryParam(this NavigationManager navigationManager, string paramName, string url = null)
         {
-            var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+            var uri = string.IsNullOrEmpty(url) ? navigationManager.ToAbsoluteUri(navigationManager.Uri) : new Uri(url, UriKind.RelativeOrAbsolute);
             return QueryHelpers.ParseQuery(uri.Query).TryGetValue(paramName, out var param) ? param.FirstOrDefault() : null;
         }
 
@@ -82,7 +134,18 @@ namespace CleanArchitectureBase.Client.Extensions
         {
             var uri = navigationManager.GetReturnUrlValue();
             if (!string.IsNullOrEmpty(uri))
-                navigationManager.NavigateTo(uri, NeedReload(uri));
+            {
+                if (navigationManager.ShouldBeAuthorized(uri))
+                {
+                    ServiceAccessor.Get<ApplicationStateProvider>().GetAuthenticationStateProviderUserAsync().ContinueWith(
+                        u => navigationManager.EnsureUrlIsAccessable(u.Result, uri).ContinueWith(
+                            t => navigationManager.NavigateTo(t.Result, NeedReload(t.Result))));
+                }
+                else
+                {
+                    navigationManager.NavigateTo(uri, NeedReload(uri));
+                }
+            }
             else if (!string.IsNullOrEmpty(fallback))
                 navigationManager.NavigateTo(fallback, NeedReload(fallback));
         }

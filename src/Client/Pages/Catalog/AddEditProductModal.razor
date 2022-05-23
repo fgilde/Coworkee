@@ -55,7 +55,7 @@
                 }
                 <MudItem xs="12" md="6">
                     <MudItem>
-                        <MudAvatar Image="@(AddEditProductModel.ImageDataURL)" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                        <MudAvatar Image="@(_navigationManager.ToAbsoluteServerUri(AddEditProductModel.ImageDataURL))" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
                     </MudItem>
                     <MudItem>
                         <InputFile id="fileInput" hidden OnChange="UploadFiles" />

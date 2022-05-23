@@ -108,6 +108,55 @@
         }
       }
     },
+    "/System/AuthorizeServerUrl": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_AuthorizeServerUrl",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "url",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/System/Version": {
       "get": {
         "tags": [
@@ -4540,7 +4589,13 @@
     },
     "Publicsettings": {
       "type": "object",
+      "required": [
+        "hostClientInServer"
+      ],
       "properties": {
+        "hostClientInServer": {
+          "type": "boolean"
+        },
         "contactAddress": {
           "type": "string"
         },

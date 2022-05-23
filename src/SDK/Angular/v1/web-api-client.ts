@@ -206,6 +206,7 @@ export class ResourceClient implements IResourceClient {
 }
 
 export interface ISystemClient {
+    authorizeServerUrl(url: string | null | undefined): Observable<string>;
     version(): Observable<VersionInfoModel>;
     availableApiVersions(): Observable<string[]>;
     getConfiguration(): Observable<Publicsettings>;
@@ -223,6 +224,57 @@ export class SystemClient implements ISystemClient {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    authorizeServerUrl(url: string | null | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/System/AuthorizeServerUrl?";
+        if (url !== undefined && url !== null)
+            url_ += "url=" + encodeURIComponent("" + url) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAuthorizeServerUrl(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAuthorizeServerUrl(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processAuthorizeServerUrl(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<string>(null as any);
     }
 
     version(): Observable<VersionInfoModel> {
@@ -5701,6 +5753,7 @@ export interface IVersionInfoModel {
 }
 
 export class Publicsettings implements IPublicsettings {
+    hostClientInServer!: boolean;
     contactAddress?: string | undefined;
     userRegistration?: Userregistration | undefined;
 
@@ -5715,6 +5768,7 @@ export class Publicsettings implements IPublicsettings {
 
     init(_data?: any) {
         if (_data) {
+            this.hostClientInServer = _data["hostClientInServer"];
             this.contactAddress = _data["contactAddress"];
             this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
         }
@@ -5729,6 +5783,7 @@ export class Publicsettings implements IPublicsettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["hostClientInServer"] = this.hostClientInServer;
         data["contactAddress"] = this.contactAddress;
         data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
         return data;
@@ -5736,6 +5791,7 @@ export class Publicsettings implements IPublicsettings {
 }
 
 export interface IPublicsettings {
+    hostClientInServer: boolean;
     contactAddress?: string | undefined;
     userRegistration?: Userregistration | undefined;
 }

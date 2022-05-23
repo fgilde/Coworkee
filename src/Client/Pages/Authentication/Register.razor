@@ -1,5 +1,4 @@
 @page "/register"
-@using CleanArchitectureBase.Shared.Constants
 @using CleanArchitectureBase.Shared.Constants.Application
 @layout LoginLayout
 @attribute [AllowAnonymous]
@@ -45,7 +44,17 @@
             <MudTextField For="@(() => _registerUserModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_registerUserModel.ConfirmPassword" Label="@_localizer["Confirm Password"]" />
         </MudItem>
         <MudItem  xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_localizer["Register"]</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated || _processing)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">
+                @if (_processing)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                    <MudText Class="ms-2">@_localizer["Please Wait"]</MudText>
+                }
+                else
+                {
+                    <MudText>@_localizer["Register"]</MudText>
+                }
+            </MudButton>
         </MudItem>
     </MudGrid>
 </EditForm>

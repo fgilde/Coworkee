@@ -11,6 +11,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private RegisterRequest _registerUserModel = new();
+        private bool _processing;
 
         protected override async Task OnInitializedAsync()
         {
@@ -27,12 +28,20 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         private async Task SubmitAsync()
         {
-            var response = await _api.User_RegisterAsync(_registerUserModel);
-            if (_errorService.IsSuccessFull(response))
+            try
             {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                _navigationManager.NavigateTo(ApplicationConstants.Routes.Login);
-                _registerUserModel = new RegisterRequest();
+                _processing = true;
+                var response = await _api.User_RegisterAsync(_registerUserModel);
+                if (_errorService.IsSuccessFull(response))
+                {
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+                    _navigationManager.NavigateTo(ApplicationConstants.Routes.Login);
+                    _registerUserModel = new RegisterRequest();
+                }
+            }
+            finally
+            {
+                _processing = false;
             }
         }
 

@@ -16,6 +16,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         [Parameter] public string Message { get; set; }
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+        private bool _processing;
         private TokenRequest _tokenModel = new();
 
         protected override async Task OnInitializedAsync()
@@ -28,16 +29,24 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         private async Task SubmitAsync()
         {
-            var result = await _clientAuthenticationManager.Login(_tokenModel);
-            if (_errorService.IsSuccessFull(result, false))
+            try
             {
-                _snackBar.Add(string.Format(_localizer["Welcome {0}"], _tokenModel.Email), Severity.Success);
-                _navigationManager.NavigateToReturnUrlIf("/");
+                _processing = true;
+                var result = await _clientAuthenticationManager.Login(_tokenModel);
+                if (_errorService.IsSuccessFull(result, false))
+                {
+                    _snackBar.Add(string.Format(_localizer["Welcome {0}"], _tokenModel.Email), Severity.Success);
+                    _navigationManager.NavigateToReturnUrlIf("/");
+                }
+                else
+                {
+                    var message = string.Join($"{Environment.NewLine}", result.Messages.Select(m => _localizer[m]));
+                    SetMessage(string.Format(message, $"/account/forgot-password?email={_tokenModel.Email}&email-confirm=true"), Severity.Error);
+                }
             }
-            else
+            finally
             {
-                var message = string.Join($"{Environment.NewLine}", result.Messages.Select(m => _localizer[m]));
-                SetMessage(string.Format(message, $"/account/forgot-password?email={_tokenModel.Email}&email-confirm=true"), Severity.Error);
+                _processing = false;
             }
         }
 

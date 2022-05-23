@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Security.Claims;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -56,7 +52,7 @@ namespace CleanArchitectureBase.Client.Authentication
                 return GetAnonymousState();
             
             _httpClient.SetAuthorization(savedToken);
-            var state = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(GetClaimsFromJwt(savedToken), "jwt")));
+            var state = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ClaimReader.ReadClaimsFromJwt(savedToken), "jwt")));
             AuthenticationStateUser = state.User;
             return state;
         }
@@ -65,63 +61,6 @@ namespace CleanArchitectureBase.Client.Authentication
         {
             return _config.AllowAnonymousPageAccess ? AuthenticationStates.Guest : AuthenticationStates.None;
         }
-
-        private IEnumerable<Claim> GetClaimsFromJwt(string jwt)
-        {
-            var claims = new List<Claim>();
-            var payload = jwt.Split('.')[1];
-            var jsonBytes = ParseBase64WithoutPadding(payload);
-            var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
-
-            if (keyValuePairs != null)
-            {
-                keyValuePairs.TryGetValue(ClaimTypes.Role, out var roles);
-
-                if (roles != null)
-                {
-                    if (roles.ToString().Trim().StartsWith("["))
-                    {
-                        var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString());
-
-                        claims.AddRange(parsedRoles.Select(role => new Claim(ClaimTypes.Role, role)));
-                    }
-                    else
-                    {
-                        claims.Add(new Claim(ClaimTypes.Role, roles.ToString()));
-                    }
-
-                    keyValuePairs.Remove(ClaimTypes.Role);
-                }
-
-                keyValuePairs.TryGetValue(ApplicationClaimTypes.Permission, out var permissions);
-                if (permissions != null)
-                {
-                    if (permissions.ToString().Trim().StartsWith("["))
-                    {
-                        var parsedPermissions = JsonSerializer.Deserialize<string[]>(permissions.ToString());
-                        claims.AddRange(parsedPermissions.Select(permission => new Claim(ApplicationClaimTypes.Permission, permission)));
-                    }
-                    else
-                    {
-                        claims.Add(new Claim(ApplicationClaimTypes.Permission, permissions.ToString()));
-                    }
-                    keyValuePairs.Remove(ApplicationClaimTypes.Permission);
-                }
-
-                claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString())));
-            }
-            return claims;
-        }
-
-        private byte[] ParseBase64WithoutPadding(string base64)
-        {
-            switch (base64.Length % 4)
-            {
-                case 2: base64 += "=="; break;
-                case 3: base64 += "="; break;
-            }
-
-            return Convert.FromBase64String(base64);
-        }
+        
     }
 }

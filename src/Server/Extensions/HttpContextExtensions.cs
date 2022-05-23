@@ -1,11 +1,13 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Extensions;
 
 
 namespace CleanArchitectureBase.Server.Extensions
@@ -26,10 +28,12 @@ namespace CleanArchitectureBase.Server.Extensions
         public static bool RedirectToLoginIfUnauthorized(this HttpContext context)
         {
             var userId = context.GetUserId() ?? context.Session.GetString(ApplicationConstants.Session.SessionUserIdKey);
+            var config = context.RequestServices.GetService<ServerConfiguration>();
 
             if (string.IsNullOrWhiteSpace(userId))
             {
-                context.RedirectToClient("/?ReturnUrl=" + context.Request.GetEncodedUrl());
+                var baseUrl = !ServerUtils.ClientRunsOnServer ? config?.ClientUrl.EnsureEndsWith("/") : "/";
+                context.RedirectToClient($"{baseUrl}{ApplicationConstants.Routes.Login}?{ApplicationConstants.ParameterNames.ReturnUrl}=" + context.Request.GetEncodedUrl());
                 return true;
             }
             return false;

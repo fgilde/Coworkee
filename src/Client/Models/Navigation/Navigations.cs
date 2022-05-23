@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using MudBlazor;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Models.Navigation
 {
@@ -9,8 +11,8 @@ namespace CleanArchitectureBase.Client.Models.Navigation
         public static HashSet<NavigationEntry> Default(string backendOrigin) => new()
         {
             new NavigationEntry("Home", Icons.Material.Outlined.Home, "/"),
-            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}/jobs", "_blank").WithPolicies(Permissions.Hangfire.View),
-            new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, $"{backendOrigin}/swagger/index.html", "_blank").WithPolicies(Permissions.Swagger.View),
+            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
+            new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, $"{backendOrigin}{ApplicationConstants.Routes.ApiDocumentation.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Swagger.View),
             new NavigationEntry("Personal")
             {
                 Children = new()

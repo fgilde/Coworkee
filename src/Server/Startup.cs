@@ -98,10 +98,13 @@ namespace CleanArchitectureBase.Server
 
 
             app.UseGrpcWeb();
+            if(!ServerUtils.ClientRunsOnServer)
+                app.UseAuthenticationFromQuery();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseHangfireDashboard(ApplicationConstants.Hangfire.DashboardRoute, new DashboardOptions
+            app.UseHangfireDashboard(ApplicationConstants.Routes.Dashboard, new DashboardOptions
             {
+                AppPath = !ServerUtils.ClientRunsOnServer ? _configuration["ClientUrl"] : "/",
                 DashboardTitle = localizer["{0} Jobs", ApplicationConstants.ApplicationName],
                 Authorization = new[] { authorizationFilter }
             });

@@ -53,7 +53,17 @@
             <MudCheckBox T="bool" Label="@_localizer["Remember me?"]" Color="Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="@($"/account/forgot-password?email={_tokenModel.Email}")">@_localizer["Forgot password?"]</MudLink>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_localizer["Sign In"]</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated || _processing)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">
+                @if (_processing)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                    <MudText Class="ms-2">@_localizer["Please Wait"]</MudText>
+                }
+                else
+                {
+                    <MudText>@_localizer["Sign In"]</MudText>
+                }
+            </MudButton>
         </MudItem>
         @if(Debug.IsDebug()){
             @if (ApplicationConstants.Defaults.Users.Administrators.Any())

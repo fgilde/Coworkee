@@ -38,6 +38,7 @@ namespace CleanArchitectureBase.Client.Extensions
         public static void SetActiveRoleId(this HttpClient client, params string[] roleIds) => client.DefaultRequestHeaders.SetActiveRoleId(roleIds);
         public static void SetActiveRoleId(this HttpRequestMessage request, string roleId) => request.Headers.SetActiveRoleId(roleId);
         public static void SetAuthorization(this HttpClient httpClient, string token) => httpClient.DefaultRequestHeaders.SetAuthorization(token);
+        public static string GetAuthorization(this HttpClient httpClient) => httpClient.DefaultRequestHeaders.Authorization?.Parameter;
         public static void SetAuthorization(this HttpRequestMessage request, string token) => request.Headers.SetAuthorization(token);
 
         private static string RoleIdHeaderValue(string roleId)

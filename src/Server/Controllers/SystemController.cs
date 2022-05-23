@@ -10,11 +10,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Server.Extensions;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Server.Controllers
 {
     public class SystemController : BaseApiController<SystemController>
     {
+        [Authorize]
+        [HttpGet(nameof(AuthorizeServerUrl))]
+        //[Produces(typeof(string))]
+        public ActionResult<string> AuthorizeServerUrl(string url)
+        {
+            var token = Request.Headers.Authorization.ToString().Split(" ")[1]; // remove Scheme
+            return Ok(UriExtensions.AddParameterToUrl(url, ApplicationConstants.ParameterNames.AuthedUrlParameter, token));
+        }
+
         [AllowAnonymous]
         [HttpGet(nameof(Version))]
         public async Task<ActionResult<VersionInfoModel>> Version()

@@ -89,5 +89,20 @@ export class BrowserHelper {
         // noreferrer is important that's because otherwise the new window is opened in the same process with the opener window.
         window.open(url, '_blank', 'noreferrer');
     }
+    /**
+    * Resolves a promise filled with the value from given expression after the expression function returns a value.
+    * @param expression The expression to test
+    */
+    when(expression, timeout) {
+        return new Promise((resolve) => {
+            const taskId = setInterval(() => {
+                const result = expression();
+                if (!!result) {
+                    clearInterval(taskId);
+                    resolve(result);
+                }
+            }, timeout || 50);
+        });
+    }
 }
 //# sourceMappingURL=browserHelper.js.map

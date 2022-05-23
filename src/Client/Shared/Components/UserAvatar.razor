@@ -116,7 +116,7 @@
             var imageResponse = await _api.Account_GetProfilePictureAsync(user.GetUserId());
             if (imageResponse.Succeeded)
             {
-                ImageDataUrl = imageResponse.Data;
+                SetImageDataUrl(imageResponse.Data);
             }
         }
     }
@@ -135,7 +135,7 @@
             var data = await _api.Account_GetProfilePictureAsync(UserData.Id);
             if (data.Succeeded)
             {
-                ImageDataUrl = data.Data;
+                SetImageDataUrl(data.Data);
             }
         }
     }
@@ -167,10 +167,11 @@
         return HubConnection.TryDisposeAsync();
     }
 
-    public void SetImageDataUrl(string uri)
+    public void SetImageDataUrl(string uri, bool stateChange = true)
     {
-        ImageDataUrl = uri;
-        StateHasChanged();
+        ImageDataUrl = _navigationManager.ToAbsoluteServerUri(uri);
+        if (stateChange)
+            StateHasChanged();
     }
 
 }

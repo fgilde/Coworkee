@@ -2,13 +2,15 @@
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using CleanArchitectureBase.SDK;
+using CleanArchitectureBase.Shared.Constants.Application;
+using Nextended.Core.Extensions;
 
 namespace SDK
 {
     public partial class GeneratedClient : ClientBase
     {
 
-        public string SwaggerUrl => new UriBuilder(BaseUrl) { Path = "/swagger/index.html" }.ToString();
+        public string SwaggerUrl => new UriBuilder(BaseUrl) { Path = ApplicationConstants.Routes.ApiDocumentation.EnsureStartsWith("/") }.ToString();
 
         public delegate void PrepareRequestDelegate(HttpClient client, HttpRequestMessage request, string url);
 

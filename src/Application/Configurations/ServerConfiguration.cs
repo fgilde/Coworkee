@@ -35,6 +35,7 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Publicsettings
     {
+        public bool HostClientInServer { get; set; }
         public string ContactAddress { get; set; }
         public Userregistration UserRegistration { get; set; }
     }

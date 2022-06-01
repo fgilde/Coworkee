@@ -12,13 +12,14 @@ using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Shared;
 
 namespace CleanArchitectureBase.Application.Features.Base.Queries
 {
     public class GetAllQueryBase<TDto> : IRequest<IReadOnlyCollection<TDto>>
         where TDto : IDtoBase
     {
-        public string OdataFilterQuery { get; set; } = null;
+        public TransferableExpression<TDto> OdataFilterQuery { get; set; } = null;
 
         /// <summary>
         /// If true cache is cleared first
@@ -42,10 +43,10 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             Cache = cache;
         }
 
-        protected virtual IQueryable<TEntity> Query(TQuery query)
+        protected virtual IQueryable<TEntity> Query(TQuery query, IQueryable<TEntity> entities)
         {
             var expression = ODataQueryOptionsExtensions.ParseExpression<TEntity>(query.OdataFilterQuery);
-            return expression == null ? Queryable : Queryable.Where(expression);
+            return expression == null ? entities : entities.Where(expression);
         }
 
         protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
@@ -53,9 +54,9 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         public virtual async Task<IReadOnlyCollection<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
         {
             string cacheKey = CacheKey(request);
-            if(request.Force && !string.IsNullOrWhiteSpace(cacheKey))
+            if (request.Force && !string.IsNullOrWhiteSpace(cacheKey))
                 Cache.Remove(cacheKey);
-            Task<List<TEntity>> GetAll() => Query(request).ToListAsync(cancellationToken);
+            Task<List<TEntity>> GetAll() => Query(request, Queryable).ToListAsync(cancellationToken);
             var resultList = await (cacheKey.IsNullOrWhiteSpace() ? GetAll() : Cache.GetOrAddAsync(cacheKey, GetAll));
             return resultList.MapTo<List<TDto>>().AsReadOnly();
         }

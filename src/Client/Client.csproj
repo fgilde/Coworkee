@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.4" />
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.3" />
@@ -35,11 +35,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-   
+    <PackageReference Include="PSC.Blazor.Components.BrowserDetect" Version="1.0.6" />
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
     <PackageReference Include="MudBlazor" Version="6.0.10" />
     <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.6" />
-    <PackageReference Include="MudBlazor.Extensions " Version="1.2.2" />
+    <PackageReference Include="MudBlazor.Extensions " Version="1.2.3" />
     <PackageReference Include="MudBlazor.Markdown" Version="0.0.10" />
     <!--<Reference Include="MudBlazor.Extensions">
       <HintPath>..\..\..\MudBlazor.Extensions\MudBlazor.Extensions\bin\Debug\net6.0\MudBlazor.Extensions.dll</HintPath>

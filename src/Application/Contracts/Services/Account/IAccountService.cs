@@ -25,6 +25,11 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Account
         Task<(IResult Result, string UserId)> CreateUserAsync(string userName, string password);
 
         Task<IResult> DeleteUserAsync(string userId);
+
+        Task WithRoles(params string[] roles);
+
+        Task WithPermissions(params string[] permissions);
+
         Task LogoutAsync();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -18,12 +17,13 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
-    [RegisterAs(typeof(IAccountService), 3)]
+    [RegisterAs(typeof(IAccountService), 3, ServiceLifetime = ServiceLifetime.Scoped)]
     public class AccountService : IAccountService
     {
         private readonly IdentityService _identityService;
@@ -35,14 +35,15 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMediator _mediator;
         private readonly IAuthorizationService _authorizationService;
-
+        private string[] _temporaryRoles;
+        private string[] _temporaryPermissions;
 
         public AccountService(
             IdentityService identityService,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IUploadService uploadService,
-            IStringLocalizer<AccountService> localizer, 
+            IStringLocalizer<AccountService> localizer,
             IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
             IAuthorizationService authorizationService, IHttpContextAccessor httpContextAccessor,
             IMediator mediator)
@@ -113,9 +114,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-            {
                 return await Result<string>.FailAsync(_localizer["User Not Found"]);
-            }
+
             return await Result<string>.SuccessAsync(data: user.ProfilePictureDataUrl);
         }
 
@@ -131,12 +131,12 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var errors = identityResult.Errors.Select(e => _localizer[e.Description].ToString()).ToList();
             if (identityResult.Succeeded)
                 await _mediator.PublishClientEvent(new UserProfileChanged(user.MapTo<UserResponse>()));
-            return identityResult.Succeeded 
+            return identityResult.Succeeded
                 ? await Result<TokenResponse>.SuccessAsync(new TokenResponse()
                 {
                     Token = await _identityService.GenerateJwtAsync(user),
                     UserImageURL = filePath,
-                }) 
+                })
                 : await Result<TokenResponse>.FailAsync(errors);
         }
 
@@ -161,17 +161,20 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<bool> IsInRoleAsync(string userId, string role)
         {
-            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+            if (_temporaryRoles?.Contains(role) == true)
+                return true;
 
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
             return await _userManager.IsInRoleAsync(user, role);
         }
 
         public async Task<bool> AuthorizeAsync(string userId, string policyName)
         {
+            if (_temporaryPermissions?.Contains(policyName) == true)
+                return true;
+
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
-
             var principal = await _userClaimsPrincipalFactory.CreateAsync(user);
-
             var result = await _authorizationService.AuthorizeAsync(principal, policyName);
 
             return result.Succeeded;
@@ -182,11 +185,21 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
 
             if (user != null)
-            {
                 return await DeleteUserAsync(user);
-            }
 
-            return Result.Success();
+            return await Result.SuccessAsync();
+        }
+
+        public Task WithRoles(params string[] roles)
+        {
+            _temporaryRoles = roles;
+            return Task.CompletedTask;
+        }
+
+        public Task WithPermissions(params string[] permissions)
+        {
+            _temporaryPermissions = permissions;
+            return Task.CompletedTask;
         }
 
         public async Task LogoutAsync()
@@ -196,10 +209,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 _httpContextAccessor?.HttpContext?.Session.Clear();
                 await _signInManager.SignOutAsync();
             }
-            catch
-            {
-                // ignored
-            }
+            catch {/*ingnored*/}
         }
 
         public async Task<IResult> DeleteUserAsync(ApplicationUser user)

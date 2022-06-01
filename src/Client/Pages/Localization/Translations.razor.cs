@@ -41,7 +41,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task<PaginatedResult<TranslationDto>> LoadPaged(int pageNumber, int pageSize, string _searchString, string[] orderings, CancellationToken cancellationToken)
         {
-            return await _api.Translations_GetAllPagedAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken);
+            return await _api.Translations_GetAllPagedAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken: cancellationToken);
         }
 
         private async Task<Result<List<TranslationDto>>> Load(CancellationToken cancellationToken)
@@ -49,11 +49,11 @@ namespace CleanArchitectureBase.Client.Pages.Localization
             var cultureCode = CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode();
             var local = clientLocalizationCache.ContainsKey(cultureCode)
                 ? clientLocalizationCache[cultureCode]
-                : Nextended.Core.Extensions.EnumerableExtensions.AddOrUpdate(clientLocalizationCache, cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto {CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value}).ToList())[cultureCode];
+                : Nextended.Core.Extensions.EnumerableExtensions.AddOrUpdate(clientLocalizationCache, cultureCode, _localizer.GetAllStrings(false).Select(s => new TranslationDto { CultureCode = cultureCode, Id = 0, Key = s.Name, Value = s.Value }).ToList())[cultureCode];
 
             if (!showCultureTranslations)
                 local = local.Where(dto => !LocalizationConstants.ValidCultureName(dto.Key)).ToList();
-           
+
 
             var server = await _api.Translations_GetAllAsync(cancellationToken: cancellationToken);
 
@@ -98,7 +98,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
 
         private async Task ExportSelected(ExportServiceType exportServiceType, int[] ids)
         {
-            var query = new ExportTranslationsQuery {ExportServiceType = exportServiceType, Ids = ids, FilterByCurrentCulture = !advancedMode};
+            var query = new ExportTranslationsQuery { ExportServiceType = exportServiceType, Ids = ids, FilterByCurrentCulture = !advancedMode };
             if (!advancedMode)
                 query.TranslationsToExport = _translations.ToArray();
             await (await _api.Translations_ExportAsync(query)).ForceDownloadAsync(_jsRuntime);
@@ -112,7 +112,7 @@ namespace CleanArchitectureBase.Client.Pages.Localization
         {
             foreach (var translationDto in arg.Where(dto => string.IsNullOrEmpty(dto.CultureCode)))
                 translationDto.CultureCode = CultureInfo.DefaultThreadCurrentCulture.AcceptHeaderCode();
-            
+
             await _api.Translations_PostAsync(new AddEditTranslationsCommand { Items = arg });
             AfterSend();
             return true;

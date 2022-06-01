@@ -22,7 +22,8 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         [Authorize(Policy = Permissions.Documents.View)]
         [HttpGet]
         [Produces(typeof(PaginatedResult<DocumentDto>))]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllDocumentsQuery query, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllDocumentsQuery query,
+            CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(query, cancellationToken));
         }
@@ -37,9 +38,9 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         [HttpGet("{id}")]
         [Produces(typeof(DocumentDto))]
 
-        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new GetDocumentByIdQuery(id), cancellationToken));
+            return Ok(await Mediator.Send(new GetDocumentByIdQuery(UnhashId(id)), cancellationToken));
         }
 
         /// <summary>
@@ -64,9 +65,9 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Delete)]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteDocumentsCommand {Ids = ids}, cancellationToken));
+            return Ok(await Mediator.Send(new DeleteDocumentsCommand { Ids = UnhashIds(ids) }, cancellationToken));
         }
     }
 }

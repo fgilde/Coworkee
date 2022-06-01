@@ -28,6 +28,7 @@ using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Contracts.Services;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace CleanArchitectureBase.Client.Extensions
@@ -47,6 +48,7 @@ namespace CleanArchitectureBase.Client.Extensions
             builder
                 .Services
                 .AddTransient(p => clientSettings)
+                .AddTransient(p => p.GetService<ClientApplicationConfiguration>()?.ServerConfiguration)
                 .AddLocalization(options =>
                 {
                     options.ResourcesPath = "Resources";
@@ -67,6 +69,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddScoped<ClientPreferenceManager>()
                 .AddScoped<ApplicationStateProvider>()
                 .AddScoped<AuthenticationStateProvider, ApplicationStateProvider>()
+                .AddScoped<ICurrentUserService, ApplicationStateProvider>(p => p.GetService<ApplicationStateProvider>())
                 .AddTransient<IErrorHandler, ErrorHandler>()
                 .AddManagers()
                 .AddExtendedAttributeManagers()
@@ -82,16 +85,16 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddTypedClient<IApplicationClient>((_, services) =>
                 {
                     var c = services.GetService<HttpClient>();
-                    return new ApplicationClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/")+"api/v1/", c);
+                    return new ApplicationClient(c.BaseAddress.AbsoluteUri.EnsureEndsWith("/") + "api/v1/", c);
                 })
-                .AddHttpMessageHandler<AuthenticationHeaderHandler>()
-                // .AddHttpMessageHandler<AuthorizationMessageHandler>() // TODO: IDENTITY Not sure
-                ;
+                .AddHttpMessageHandler<AuthenticationHeaderHandler>();
+            // .AddHttpMessageHandler<AuthorizationMessageHandler>() // TODO: IDENTITY SERVER Not sure
+
 
             // gRPC-Web client with auth
             builder.Services.AddDataClient((services, options) =>
             {
-                // TODO: IDENTITY
+                // TODO: IDENTITY SERVER
                 //var authEnabledHandler = services.GetRequiredService<AuthorizationMessageHandler>();
                 //authEnabledHandler.ConfigureHandler(new[] { clientSettings.BackendOrigin });
                 //authEnabledHandler.InnerHandler = new HttpClientHandler();
@@ -103,7 +106,8 @@ namespace CleanArchitectureBase.Client.Extensions
             });
 
             builder.Services.AddHttpClientInterceptor();
-           // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
+
+            // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
             return builder;
         }
 

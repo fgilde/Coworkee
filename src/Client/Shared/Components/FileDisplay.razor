@@ -1,0 +1,47 @@
+@using System.IO
+@namespace CleanArchitectureBase.Client.Shared.Components
+@inject Microsoft.Extensions.Localization.IStringLocalizer<FileDisplay> _localizer
+
+<BrowserDetect @bind-BrowserInfo="@Info" />
+
+<div class="file-display-container">
+    @if (_isZip)
+    {
+        <FileDisplayZip RootFolderName="@FileName" ContentStream="@ContentStream" Url="@Url"></FileDisplayZip>
+    }
+    else
+    {
+        <div class="file-display">
+            <MudElement UserAttributes="@renderInfos.attributes" HtmlTag="@renderInfos.tag" />
+        </div>
+    }
+    <div id="content-type-display-error">
+        <MudAlert Class="mud-alert-close-no-flex" Severity="Severity.Error" Variant="Variant.Outlined" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="CloseContentError">
+            <p>
+                @_localizer["The content type {0} cannot be displayed without a suitable plugin", ContentType]
+            </p>
+
+            @if (PossiblePlugin != null)
+            {
+                <MudButton HtmlTag="label"
+                       Class="w-100 my-4"
+                       Variant="Variant.Text"
+                       Color="Color.Primary"
+                       Size="Size.Small"
+                       Href="@PossiblePlugin.Url"
+                       Target="_blank"
+                       StartIcon="@(Icons.TwoTone.Shop)">
+                    @(_localizer["The Plugin '{0}' may be able to help", PossiblePlugin.Name])
+                </MudButton>
+            }
+        </MudAlert>
+    </div>
+    @if (AllowDownload)
+    {
+        <div class="download-file">
+            <MudTooltip Placement="Placement.Left" Delay="600" Color="Color.Primary" Text="@($"{_localizer["Download"]} ({FileName})")">
+                <MudIconButton Style="float: right;" OnClick="@(Download)" Icon="@Icons.Filled.Download"></MudIconButton>
+            </MudTooltip>
+        </div>
+    }
+</div>

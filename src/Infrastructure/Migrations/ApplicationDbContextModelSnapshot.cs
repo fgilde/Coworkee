@@ -191,6 +191,85 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.ToTable("DocumentExtendedAttributes");
                 });
 
+            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Identity.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HouseNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserInformationsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserInformationsId");
+
+                    b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsOnline")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastLoginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserInformations");
+                });
+
             modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Localization.Language", b =>
                 {
                     b.Property<int>("Id")
@@ -377,9 +456,11 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
                 });
@@ -591,6 +672,9 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("UserInfoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -604,6 +688,8 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("UserInfoId");
 
                     b.ToTable("Users", "Identity");
                 });
@@ -726,6 +812,13 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.Navigation("Entity");
                 });
 
+            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Identity.Address", b =>
+                {
+                    b.HasOne("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserInformationsId");
+                });
+
             modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.Document", b =>
                 {
                     b.HasOne("CleanArchitectureBase.Domain.Entities.Misc.DocumentType", "DocumentType")
@@ -746,6 +839,15 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("CleanArchitectureBase.Infrastructure.Models.Identity.ApplicationUser", b =>
+                {
+                    b.HasOne("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", "UserInfo")
+                        .WithMany()
+                        .HasForeignKey("UserInfoId");
+
+                    b.Navigation("UserInfo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -788,6 +890,11 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.Document", b =>

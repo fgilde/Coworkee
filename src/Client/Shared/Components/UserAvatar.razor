@@ -7,14 +7,17 @@
 @using CleanArchitectureBase.Client.Utils
 @using CleanArchitectureBase.Shared.Constants.Storage
 @using Microsoft.AspNetCore.SignalR.Client
+@inject Microsoft.Extensions.Localization.IStringLocalizer<UserAvatar> _localizer
 @implements IAsyncDisposable
 
 <div @onclick="GotoAccountOrProfile" class="@(CanNavigateToProfile() ? "cursor-pointer" : "") mud-button-text mud-button-text-size-medium">
     @if (IsUserOnline.HasValue)
     {
-        <MudBadge Class="my-2" Color="@(IsUserOnline.Value ? Color.Success : Color.Error)" Style="width:100%" Overlap="true" Bottom="true" Dot="true">
-            <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()">@(string.IsNullOrEmpty(ImageDataUrl) ? Initials?.ToUpper() : "")</MudAvatar>
-        </MudBadge>
+        <MudTooltip Text="@ToolTipText()" Color="@(IsUserOnline.Value ? Color.Success : Color.Error)">
+            <MudBadge Class="my-2 user-online-badge" Color="@(IsUserOnline.Value ? Color.Success : Color.Error)" Style="width:100%" Origin="Origin.BottomRight" Overlap="true" >
+                <MudAvatar Image="@ImageDataUrl" Style="@StyleStr()">@(string.IsNullOrEmpty(ImageDataUrl) ? Initials?.ToUpper() : "")</MudAvatar>
+            </MudBadge>
+        </MudTooltip>
     }
     else
     {
@@ -44,7 +47,7 @@
 
     [Parameter] public bool? IsUserOnline { get; set; }
 
-
+    private bool _handleOnlineStatus;
     private string Initials { get; set; }
     private ClaimsPrincipal _currentUser;
 
@@ -62,9 +65,20 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        _handleOnlineStatus = !IsUserOnline.HasValue;
         await Load();
 
         HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+
+        HubConnection.On<UserOnlineStatusChanged>(a =>
+        {
+            var actualDisplayedUserId = UserId ?? UserData?.Id ?? User?.GetUserId();
+            if (a.User.Id == actualDisplayedUserId)
+            {
+                UpdateOnlineStatusIf(a.User.IsOnline);
+                StateHasChanged();
+            }
+        });
 
         HubConnection.On<UserProfileChanged>(a =>
         {
@@ -72,6 +86,7 @@
             if (a.User.Id == actualDisplayedUserId)
             {
                 ImageDataUrl = string.Empty;
+                UpdateOnlineStatusIf(a.User.IsOnline);
                 Task.Delay(50).ContinueWith(t =>
                 {
                     UserData = a.User;
@@ -128,16 +143,25 @@
             var result = await _api.User_GetByIdAsync(UserId);
             if (result.Succeeded)
                 UserData = result.Data;
+            
         }
         if (UserData != null)
         {
             Initials = new(new[] { UserData.FirstName.FirstOrDefault(), UserData.LastName.FirstOrDefault() });
+            UpdateOnlineStatusIf();
             var data = await _api.Account_GetProfilePictureAsync(UserData.Id);
             if (data.Succeeded)
             {
                 SetImageDataUrl(data.Data);
             }
         }
+    }
+
+    private void UpdateOnlineStatusIf() => UpdateOnlineStatusIf(UserData.IsOnline);
+    private void UpdateOnlineStatusIf(bool isOnline)
+    {
+        if (_handleOnlineStatus)
+            IsUserOnline = isOnline;
     }
 
     private string TargetProfileUrl()
@@ -172,6 +196,11 @@
         ImageDataUrl = _navigationManager.ToAbsoluteServerUri(uri);
         if (stateChange)
             StateHasChanged();
+    }
+
+    private string ToolTipText()
+    {
+        return $"{User?.GetFullName() ?? UserData.FullName} ({(IsUserOnline ?? false ? _localizer["Online"] : _localizer["Offline"])})";
     }
 
 }

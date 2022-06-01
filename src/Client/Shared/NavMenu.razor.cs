@@ -10,6 +10,7 @@ using CleanArchitectureBase.Client.Models;
 using CleanArchitectureBase.Client.Models.Navigation;
 using Microsoft.AspNetCore.Components;
 using Nextended.Core.Extensions;
+using Nextended.Core.Types;
 
 namespace CleanArchitectureBase.Client.Shared
 {

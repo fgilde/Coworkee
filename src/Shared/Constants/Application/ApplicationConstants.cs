@@ -12,6 +12,8 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string Version = "v2.2";
         public const string DefaultLanguageCode = "en-US";
+        public const string DefaultDocumentTypeName = "Unassigned";
+
         public static bool HostClientInServer { get; set; }
 
         public static class Defaults
@@ -21,7 +23,8 @@ namespace CleanArchitectureBase.Shared.Constants.Application
                 public static CreateUser System => new(nameof(System), nameof(System), ApplicationName, $"{nameof(System)}@{ApplicationName}", "SystemUserPassw0rd4SystemUserAccess73F1985F3C1A4158B4BA70F7B65778BF", true, RoleConstants.AdministratorRole);
                 public static CreateUser[] Administrators => new[]
                 {
-                    new CreateUser("fgilde", "Florian", "Gilde", "info@coworkee.de","123Pa$$word!", true, RoleConstants.AdministratorRole) 
+                    new CreateUser("admin", "Administrator", "", "info@coworkee.de","123Pa$$word!", true, RoleConstants.AdministratorRole),
+                    new CreateUser("fgilde", "Florian", "Gilde", "fgilde@gmail.com","123Pa$$word!", true, RoleConstants.AdministratorRole)
                 };
                 public static CreateUser[] Basic => new[]
                 {
@@ -38,7 +41,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
             public const string Dashboard = "/jobs";
             public const string ApiDocumentation = "/swagger/index.html";
 
-            public static string[] AuthRequired = {Dashboard, ApiDocumentation};
+            public static string[] AuthRequired = { Dashboard, ApiDocumentation };
             public static bool IsAuthRequired(string route) => AuthRequired.Contains(route, StringComparer.InvariantCultureIgnoreCase);
         }
 
@@ -47,7 +50,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
             public const string ReturnUrl = nameof(ReturnUrl);
             public const string AuthedUrlParameter = "auth_token";
         }
-        
+
         public static class HeaderNames
         {
             public const string RoleIdHeader = "x-role-id";
@@ -62,9 +65,11 @@ namespace CleanArchitectureBase.Shared.Constants.Application
 
         public static class Session
         {
+            public const int RefreshTokenExpiryInDays = 7;
+            public const int SecurityTokenExpiryInDays = 2;
             public const string SessionUserIdKey = nameof(Session) + "_" + nameof(SessionUserIdKey);
         }
-        
+
         public static class ServiceBusQueues
         {
             public const string TestQueue = nameof(TestQueue);
@@ -99,6 +104,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
 
         public static class MimeTypes
         {
+            //public static string[] ExcelTypes = {Csv, OpenXml, Xls};
             public const string Csv = "text/csv";
             public const string OpenXml = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             public const string Xls = "application/vnd.ms-excel";

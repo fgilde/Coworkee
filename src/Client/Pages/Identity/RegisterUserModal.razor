@@ -20,8 +20,8 @@
             <MudTextField For="@(() => _registerUserModel.PhoneNumber)" @bind-Value="_registerUserModel.PhoneNumber" Label="@_localizer["Phone Number"]" />
             <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="@_localizer["Password"]" />
             <MudTextField For="@(() => _registerUserModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_registerUserModel.ConfirmPassword" Label="@_localizer["Confirm Password"]" />
-            <MudCheckBox @bind-Checked="@_registerUserModel.ActivateUser" Label="@_localizer["Activate User?"]" Color="Color.Primary"></MudCheckBox>
-            <MudCheckBox @bind-Checked="@_registerUserModel.AutoConfirmEmail" Label="@_localizer["Auto Confirm Email?"]" Color="Color.Primary"></MudCheckBox>
+            <MudCheckBox @bind-Checked="@_registerUserModel.IsActive" Label="@_localizer["Activate User?"]" Color="Color.Primary"></MudCheckBox>
+            <MudCheckBox @bind-Checked="@_registerUserModel.EmailConfirmed" Label="@_localizer["Auto Confirm Email?"]" Color="Color.Primary"></MudCheckBox>
         </DialogContent>
         <DialogActions>
             <MudButton Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>

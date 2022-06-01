@@ -8,7 +8,10 @@
 
 @code
 {
-    protected override Func<string, int> FromStringToEntityIdTypeConverter => s => int.Parse(s);
+    protected override Task<int> GetEntityIdFromStringAsync(string id)
+    {
+        return _api.System_UnhashHashedIdAsync(id);
+    }
 
     protected override string ExtendedAttributesViewPolicyName => Permissions.DocumentExtendedAttributes.View;
     protected override string ExtendedAttributesEditPolicyName => Permissions.DocumentExtendedAttributes.Edit;

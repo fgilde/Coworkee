@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
+using CleanArchitectureBase.Infrastructure.Services.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
@@ -79,6 +80,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> Logout()
         {
             await _accountService.LogoutAsync();
+            await Get<IdentityService>().SetUserOnlineStatusAsync(_currentUser.UserId, false);
             return Ok();
         }
     }

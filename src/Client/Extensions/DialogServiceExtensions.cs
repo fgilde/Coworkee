@@ -24,7 +24,7 @@ public static class DialogServiceExtensions
             MaximizeButton = true,
             DragMode = MudDialogDragMode.Simple,
             Position = await PositionBasedOnMouse(),
-            Animation = AnimationType.SlideIn,
+            Animations = new[] { AnimationType.SlideIn },
             FullHeight = true,
             DisableSizeMarginY = true,
             DisablePositionMargin = true

@@ -74,6 +74,7 @@ namespace CleanArchitectureBase.Server
             services.AddExtendedAttributesValidators();
             services.AddExtendedAttributesHandlers();
             services.AddRazorPages();
+
             services.AddLazyCache();
         }
 

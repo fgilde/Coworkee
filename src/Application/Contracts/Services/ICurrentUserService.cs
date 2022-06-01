@@ -15,5 +15,6 @@ namespace CleanArchitectureBase.Application.Contracts.Services
         ClaimsPrincipal Principal { get; }
         UserResponse CurrentUser();
         Task<IDisposable> AsSystemUser();
+        Task<IDisposable> AsUser(string userId);
     }
 }

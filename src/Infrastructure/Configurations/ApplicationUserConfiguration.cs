@@ -10,5 +10,6 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
     {
         builder.ToTable(name: "Users", "Identity");
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.HasOne(u => u.UserInfo);
     }
 }

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.Managers.Preferences;
+using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Client
@@ -30,6 +31,10 @@ namespace CleanArchitectureBase.Client
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
             }
+            // Set inital server config 
+            var serverConfig = await host.Services.GetRequiredService<IApplicationClient>().System_GetConfigurationAsync();
+            host.Services.GetRequiredService<ClientApplicationConfiguration>().ServerConfiguration = serverConfig;
+
             await builder.Build().RunAsync();
         }
     }

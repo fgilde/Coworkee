@@ -83,6 +83,13 @@ namespace SDK
         System.Threading.Tasks.Task<string> System_AuthorizeServerUrlAsync(string url = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        int System_UnhashHashedId(string id = null);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> System_UnhashHashedIdAsync(string id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         VersionInfoModel System_Version();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -158,7 +165,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        PaginatedResult<DocumentDto> Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
+        PaginatedResult<DocumentDto> Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<DocumentDto> odataFilterQuery = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -166,7 +173,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<PaginatedResult<DocumentDto>> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResult<DocumentDto>> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<DocumentDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Add/Edit Document
@@ -188,7 +195,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_Delete(System.Collections.Generic.IList<int> ids);
+        FileResponse Documents_Delete(System.Collections.Generic.IList<string> ids);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -196,14 +203,14 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Document By Id
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        DocumentDto Documents_GetById(int id);
+        DocumentDto Documents_GetById(string id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -211,7 +218,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<DocumentDto> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DocumentDto> Documents_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get All Document Types
@@ -363,7 +370,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        PaginatedResult<TranslationDto> Translations_GetAllPaged(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
+        PaginatedResult<TranslationDto> Translations_GetAllPaged(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<TranslationDto> odataFilterQuery = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -371,14 +378,14 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<PaginatedResult<TranslationDto>> Translations_GetAllPagedAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResult<TranslationDto>> Translations_GetAllPagedAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<TranslationDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get All Translations
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? filterByCurrentCulture = null, string odataFilterQuery = null, bool? force = null);
+        System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? filterByCurrentCulture = null, TransferableExpression<TranslationDto> odataFilterQuery = null, bool? force = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -386,7 +393,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? filterByCurrentCulture = null, string odataFilterQuery = null, bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? filterByCurrentCulture = null, TransferableExpression<TranslationDto> odataFilterQuery = null, bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get a translation by id
@@ -483,7 +490,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        PaginatedResult<NotificationDto> Notifications_GetAll(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
+        PaginatedResult<NotificationDto> Notifications_GetAll(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<NotificationDto> odataFilterQuery = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -491,7 +498,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<PaginatedResult<NotificationDto>> Notifications_GetAllAsync(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResult<NotificationDto>> Notifications_GetAllAsync(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<NotificationDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Deletes given notifications if they are for current user
@@ -661,7 +668,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<List<RoleClaimResponse>> RoleClaim_GetAll();
+        Result<List<RoleClaimResponse>> RoleClaim_GetAll(TransferableExpression<RoleClaimResponse> filter = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -669,7 +676,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllAsync(TransferableExpression<RoleClaimResponse> filter = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Add a Role Claim
@@ -721,7 +728,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<List<RoleResponse>> Role_GetAll();
+        Result<List<RoleResponse>> Role_GetAll(TransferableExpression<RoleResponse> filter = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -729,7 +736,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<List<RoleResponse>>> Role_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<RoleResponse>>> Role_GetAllAsync(TransferableExpression<RoleResponse> filter = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Add a Role
@@ -837,7 +844,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Result<List<UserResponse>> User_GetAll();
+        Result<List<UserResponse>> User_GetAll(TransferableExpression<UserResponse> filter = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -845,7 +852,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Result<List<UserResponse>>> User_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Result<List<UserResponse>>> User_GetAllAsync(TransferableExpression<UserResponse> filter = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Register a User
@@ -1120,7 +1127,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        PaginatedResult<ProductDto> Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null);
+        PaginatedResult<ProductDto> Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<ProductDto> odataFilterQuery = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1128,7 +1135,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<PaginatedResult<ProductDto>> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaginatedResult<ProductDto>> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<ProductDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Add/Edit a Product
@@ -1521,6 +1528,83 @@ namespace SDK
                         if (status_ == 200)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<string>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual int System_UnhashHashedId(string id = null)
+        {
+            return System.Threading.Tasks.Task.Run(async () => await System_UnhashHashedIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<int> System_UnhashHashedIdAsync(string id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/System/UnhashHashedId?");
+            if (id != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2111,9 +2195,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual PaginatedResult<DocumentDto> Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
+        public virtual PaginatedResult<DocumentDto> Documents_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<DocumentDto> odataFilterQuery = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Documents_GetAllAsync(pageNumber, pageSize, searchString, orderBy, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Documents_GetAllAsync(pageNumber, pageSize, searchString, orderBy, odataFilterQuery, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2122,7 +2206,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PaginatedResult<DocumentDto>> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PaginatedResult<DocumentDto>> Documents_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<DocumentDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Documents?");
@@ -2141,6 +2225,10 @@ namespace SDK
             if (orderBy != null)
             {
                 foreach (var item_ in orderBy) { urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            if (odataFilterQuery != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OdataFilterQuery") + "=").Append(System.Uri.EscapeDataString(ConvertToString(odataFilterQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -2292,7 +2380,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Documents_Delete(System.Collections.Generic.IList<int> ids)
+        public virtual FileResponse Documents_Delete(System.Collections.Generic.IList<string> ids)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_DeleteAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2303,7 +2391,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<int> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
@@ -2376,7 +2464,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual DocumentDto Documents_GetById(int id)
+        public virtual DocumentDto Documents_GetById(string id)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_GetByIdAsync(id, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -2387,11 +2475,8 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 Ok</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<DocumentDto> Documents_GetByIdAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<DocumentDto> Documents_GetByIdAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Documents/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -3511,9 +3596,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual PaginatedResult<TranslationDto> Translations_GetAllPaged(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
+        public virtual PaginatedResult<TranslationDto> Translations_GetAllPaged(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<TranslationDto> odataFilterQuery = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Translations_GetAllPagedAsync(pageNumber, pageSize, searchString, orderBy, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Translations_GetAllPagedAsync(pageNumber, pageSize, searchString, orderBy, odataFilterQuery, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3522,7 +3607,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PaginatedResult<TranslationDto>> Translations_GetAllPagedAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PaginatedResult<TranslationDto>> Translations_GetAllPagedAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<TranslationDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Translations/GetAllPaged?");
@@ -3541,6 +3626,10 @@ namespace SDK
             if (orderBy != null)
             {
                 foreach (var item_ in orderBy) { urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            if (odataFilterQuery != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OdataFilterQuery") + "=").Append(System.Uri.EscapeDataString(ConvertToString(odataFilterQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -3608,7 +3697,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? filterByCurrentCulture = null, string odataFilterQuery = null, bool? force = null)
+        public virtual System.Collections.Generic.IList<TranslationDto> Translations_GetAll(bool? filterByCurrentCulture = null, TransferableExpression<TranslationDto> odataFilterQuery = null, bool? force = null)
         {
             return System.Threading.Tasks.Task.Run(async () => await Translations_GetAllAsync(filterByCurrentCulture, odataFilterQuery, force, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3619,7 +3708,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? filterByCurrentCulture = null, string odataFilterQuery = null, bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.IList<TranslationDto>> Translations_GetAllAsync(bool? filterByCurrentCulture = null, TransferableExpression<TranslationDto> odataFilterQuery = null, bool? force = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Translations/GetAll?");
@@ -4212,9 +4301,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual PaginatedResult<NotificationDto> Notifications_GetAll(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
+        public virtual PaginatedResult<NotificationDto> Notifications_GetAll(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<NotificationDto> odataFilterQuery = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Notifications_GetAllAsync(unreadOnly, notificationTypeId, pageNumber, pageSize, searchString, orderBy, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Notifications_GetAllAsync(unreadOnly, notificationTypeId, pageNumber, pageSize, searchString, orderBy, odataFilterQuery, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4223,7 +4312,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PaginatedResult<NotificationDto>> Notifications_GetAllAsync(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PaginatedResult<NotificationDto>> Notifications_GetAllAsync(bool? unreadOnly = null, string notificationTypeId = null, int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<NotificationDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Notifications?");
@@ -4250,6 +4339,10 @@ namespace SDK
             if (orderBy != null)
             {
                 foreach (var item_ in orderBy) { urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            if (odataFilterQuery != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OdataFilterQuery") + "=").Append(System.Uri.EscapeDataString(ConvertToString(odataFilterQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -5231,9 +5324,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual Result<List<RoleClaimResponse>> RoleClaim_GetAll()
+        public virtual Result<List<RoleClaimResponse>> RoleClaim_GetAll(TransferableExpression<RoleClaimResponse> filter = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await RoleClaim_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await RoleClaim_GetAllAsync(filter, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5242,10 +5335,15 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Result<List<RoleClaimResponse>>> RoleClaim_GetAllAsync(TransferableExpression<RoleClaimResponse> filter = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/RoleClaim");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/RoleClaim?");
+            if (filter != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("$filter") + "=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -5562,9 +5660,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual Result<List<RoleResponse>> Role_GetAll()
+        public virtual Result<List<RoleResponse>> Role_GetAll(TransferableExpression<RoleResponse> filter = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Role_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Role_GetAllAsync(filter, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -5573,10 +5671,15 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Result<List<RoleResponse>>> Role_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Result<List<RoleResponse>>> Role_GetAllAsync(TransferableExpression<RoleResponse> filter = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/Role");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/Role?");
+            if (filter != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("$filter") + "=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -6229,9 +6332,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual Result<List<UserResponse>> User_GetAll()
+        public virtual Result<List<UserResponse>> User_GetAll(TransferableExpression<UserResponse> filter = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await User_GetAllAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await User_GetAllAsync(filter, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -6240,10 +6343,15 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Result<List<UserResponse>>> User_GetAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Result<List<UserResponse>>> User_GetAllAsync(TransferableExpression<UserResponse> filter = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/User");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity/User?");
+            if (filter != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("$filter") + "=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -7829,9 +7937,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual PaginatedResult<ProductDto> Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null)
+        public virtual PaginatedResult<ProductDto> Products_GetAll(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<ProductDto> odataFilterQuery = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Products_GetAllAsync(pageNumber, pageSize, searchString, orderBy, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Products_GetAllAsync(pageNumber, pageSize, searchString, orderBy, odataFilterQuery, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -7840,7 +7948,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<PaginatedResult<ProductDto>> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PaginatedResult<ProductDto>> Products_GetAllAsync(int? pageNumber = null, int? pageSize = null, string searchString = null, System.Collections.Generic.IList<string> orderBy = null, TransferableExpression<ProductDto> odataFilterQuery = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Products?");
@@ -7859,6 +7967,10 @@ namespace SDK
             if (orderBy != null)
             {
                 foreach (var item_ in orderBy) { urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            if (odataFilterQuery != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OdataFilterQuery") + "=").Append(System.Uri.EscapeDataString(ConvertToString(odataFilterQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 

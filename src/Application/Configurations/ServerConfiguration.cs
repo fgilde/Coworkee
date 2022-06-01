@@ -11,7 +11,6 @@ namespace CleanArchitectureBase.Application.Configurations
 
     // Content here is generated. To generate new open appsettings.json from WebServer project select all and copy content. After wards here in this class use VS->Edit->Paste Special -> Paste JSON as classes
 
-
     public class Rootobject
     {
         public string ClientUrl { get; set; }
@@ -35,13 +34,16 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Publicsettings
     {
-        public bool HostClientInServer { get; set; }
         public string ContactAddress { get; set; }
+        public bool HostClientInServer { get; set; }
         public Userregistration UserRegistration { get; set; }
     }
 
     public class Userregistration
     {
+        public bool RequireDocuments { get; set; }
+        public int RegistrationDocumentsMaxFileSize { get; set; }
+        public string[] RegistrationDocumentTypes { get; set; }
         public bool Enabled { get; set; }
         public bool RequiresAdministratorActivation { get; set; }
         public bool EmailConfirmationRequired { get; set; }

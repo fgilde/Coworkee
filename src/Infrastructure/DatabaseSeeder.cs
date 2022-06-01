@@ -27,7 +27,6 @@ namespace CleanArchitectureBase.Infrastructure
             AddUsers(usersToCreate);
         }
 
-
         private void AddUsers(CreateUser[] users)
         {
             _userService.GetOrAddUserAsync(users).GetAwaiter().GetResult();

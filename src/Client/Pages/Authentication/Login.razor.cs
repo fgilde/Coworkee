@@ -5,7 +5,6 @@ using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components;
-using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 
@@ -16,12 +15,10 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         [Parameter] public string Message { get; set; }
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private bool _processing;
         private TokenRequest _tokenModel = new();
-
+        private bool _processing;
         protected override async Task OnInitializedAsync()
         {
-            _configuration = await _api.System_GetConfigurationAsync();
             _tokenModel.Email = _navigationManager.ReadQueryParam("email");
             SetMessage();
             await base.OnInitializedAsync();
@@ -55,7 +52,6 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
         private bool _passwordVisibility;
         private InputType _passwordInput = InputType.Password;
         private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
-        private Publicsettings _configuration;
 
         void SetMessage()
         {
@@ -64,7 +60,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
             var confirmationResult = _navigationManager.ReadQueryParam("email-confirmation-result");
             if (confirmationResult != null)
             {
-                var email = _configuration.ContactAddress;
+                var email = _config.ServerConfiguration.ContactAddress;
                 var success = confirmationResult == "true";
                 var message = (success ? _localizer["Your e-mail address has been confirmed!"] : _localizer["Your email address could not be verified. If you have any problems, please contact {0}", email]).ToString();
                 var active = _navigationManager.ReadQueryParam("activated");

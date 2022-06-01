@@ -1,13 +1,26 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+﻿using System.Linq;
+using CleanArchitectureBase.Application.Requests.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using CleanArchitectureBase.Application.Configurations;
+using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Validators.Requests.Identity
 {
     public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {
-        public RegisterRequestValidator(IStringLocalizer<RegisterRequestValidator> localizer)
+        public RegisterRequestValidator(IStringLocalizer<RegisterRequestValidator> localizer, Publicsettings config, ICurrentUserService currentUserService)
+        // Notice: All injected services must provided by server and client
         {
+            if (config.UserRegistration.RequireDocuments)
+            {
+                // If you're are logged in and allowed to create user its not a registration process
+                var canCreateUser = currentUserService?.Principal?.HasClaim(c => c.Type == ApplicationClaimTypes.Permission && c.Value == Permissions.Users.Create) ?? false;
+                RuleFor(request => request.Documents)
+                    .Must(list => canCreateUser || list?.Any() == true).WithMessage(localizer["At least one document is required"]);
+            }
+
             RuleFor(request => request.FirstName)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["First Name is required"]);
             RuleFor(request => request.LastName)

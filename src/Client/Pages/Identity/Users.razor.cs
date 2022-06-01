@@ -1,6 +1,7 @@
 ﻿using MudBlazor;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -48,35 +49,19 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             var response = await _api.User_GetAllAsync();
             if (_errorService.IsSuccessFull(response))
-            {
                 _userList = response.Data.ToList();
-            }
+
         }
 
         private bool Search(UserResponse user)
         {
-            if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (user.FirstName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (user.LastName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (user.Email?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (user.PhoneNumber?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (user.UserName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            return false;
+            return string.IsNullOrWhiteSpace(_searchString)
+                   || user.FirstName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true
+                   || user.LastName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true
+                   || user.Email?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true
+                   || user.PhoneNumber?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true
+                   || user.UserName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true
+                   || user.CreatedOn.AsClientLocalTime().ToString("G", CultureInfo.CurrentCulture)?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true;
         }
 
         private async Task ExportToExcel()
@@ -97,11 +82,8 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             var parameters = new DialogParameters();
             var dialog = await _dialogService.ShowWithDefaultOptionsAsync<RegisterUserModal>(_localizer["Register New User"], parameters);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
+            if (!(await dialog.Result).Cancelled)
                 await GetUsersAsync();
-            }
         }
 
         private void ViewProfile(string userId)

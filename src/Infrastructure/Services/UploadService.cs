@@ -6,7 +6,7 @@ using Nextended.Core.Helper;
 
 namespace CleanArchitectureBase.Infrastructure.Services
 {
-    [RegisterAs(typeof(IUploadService),7)]
+    [RegisterAs(typeof(IUploadService), 7)]
     public class UploadService : IUploadService
     {
         public string UploadAsync(UploadRequest request)
@@ -35,10 +35,8 @@ namespace CleanArchitectureBase.Infrastructure.Services
                 }
                 return dbPath;
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
 
         private static string numberPattern = " ({0})";

@@ -1,14 +1,14 @@
 ﻿export class BrowserHelper {
 
-    public download (options) {
-        var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
+    public download(options) {
+        var fileUrl = options.url || "data:" + options.mimeType + ";base64," + options.base64String;
         fetch(fileUrl)
             .then(response => response.blob())
             .then(blob => {
                 var link = window.document.createElement("a");
                 //link.href = window.URL.createObjectURL(blob, { type: options.mimeType });
                 link.href = window.URL.createObjectURL(blob);
-                link.download = options.fileName;
+                link.download = options?.fileName;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -23,12 +23,12 @@
             document.title = appName ? appName + ' - ' + title : title;
         }
     }
-    
+
     public isDarkMode(): boolean {
         return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
     }
 
-    public scrollToBottom (elementName: string) {
+    public scrollToBottom(elementName: string) {
         var element = document.getElementById(elementName);
         element.scrollTop = element.scrollHeight - element.clientHeight;
     }
@@ -49,23 +49,23 @@
         return fetch(window.location.href, { method: 'GET', redirect: 'follow' })
             .then(response => response.text())
             .then(html => {
-                    // Convert the HTML string into a document object
-                    unloadScripts();
-                    var parser = new DOMParser();
-                    var doc = parser.parseFromString(html, 'text/html');
-                    document.replaceChild(
-                        document.importNode(doc.documentElement, true),
-                        document.documentElement
-                    );
-                    window['initialLoad']();
-                }
+                // Convert the HTML string into a document object
+                unloadScripts();
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(html, 'text/html');
+                document.replaceChild(
+                    document.importNode(doc.documentElement, true),
+                    document.documentElement
+                );
+                window['initialLoad']();
+            }
             ).catch(err => {
                 // There was an error
                 console.warn('Something went wrong.', err);
             });
     }
 
-    public changeFavIcon (url: string) {
+    public changeFavIcon(url: string) {
         var link: HTMLLinkElement = document.querySelector("link[rel~='icon']");
         if (!link) {
             link = document.createElement('link');
@@ -75,11 +75,11 @@
         link.href = url;
     }
 
-    public changeUrl (url: string): void {
+    public changeUrl(url: string): void {
         history.pushState(null, '', url);
     }
 
-    public removeUrlParams (url, parameters) : string {
+    public removeUrlParams(url, parameters): string {
         ((parameters ? (typeof parameters === 'string' ? [parameters] : parameters) : ['[^#]*'])).forEach(
             (parameter) => {
                 url = url
@@ -91,12 +91,12 @@
         return url;
     }
 
-    public urlParams (url?): unknown  {
+    public urlParams(url?): unknown {
         try {
             var search = url ? url.match(/(?:[^?]*)\??([^#]*)/)[1] : window.location.search.substring(1);
             return JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
                 (key, value) =>
-                key === '' ? value : decodeURIComponent(value)
+                    key === '' ? value : decodeURIComponent(value)
             );
         } catch (e) {
             return {};
@@ -122,6 +122,10 @@
                 }
             }, timeout || 50);
         });
+    }
+
+    public clickOnElement(selector: string) {
+        (document.querySelector(selector) as HTMLElement)?.click();
     }
 
 }

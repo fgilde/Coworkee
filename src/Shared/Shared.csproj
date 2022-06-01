@@ -14,9 +14,8 @@
     <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.3" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.3" />
-
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
-
+    <PackageReference Include="MimeTypesMap" Version="1.0.8" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,11 +26,13 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Misc\" />
   </ItemGroup>
 
   <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Exec IgnoreExitCode="true" Command="dotnet tool install --global ResourceTranslator.CLI" />
-    <Exec Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources\en-US.yml" />
+    <Exec IgnoreExitCode="true" Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources\en-US.yml" />
   </Target>
 
 </Project>

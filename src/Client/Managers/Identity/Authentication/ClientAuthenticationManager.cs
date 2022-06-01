@@ -71,7 +71,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
-            _authenticationStateProvider.MarkUserAsLoggedOut();
+
             try
             {
                 if (state?.User.Identity?.IsAuthenticated == true && !state.IsGuest())
@@ -80,6 +80,8 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             catch { /* ignored*/ }
 
             _httpClient.SetAuthorization(null);
+            _authenticationStateProvider.MarkUserAsLoggedOut();
+
             return await Result.SuccessAsync();
         }
 

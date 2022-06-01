@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
@@ -20,6 +21,10 @@ using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Hubs.Events;
+using CleanArchitectureBase.Domain.Entities.Identity;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -28,6 +33,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
     {
         private const string InvalidErrorMessage = "Invalid email or password.";
 
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ServerConfiguration _appConfig;
@@ -35,10 +41,12 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IStringLocalizer<IdentityService> _localizer;
 
         public IdentityService(
+            IServiceProvider serviceProvider,
             UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
             IOptions<ServerConfiguration> appConfig, SignInManager<ApplicationUser> signInManager,
             IStringLocalizer<IdentityService> localizer, IHttpContextAccessor contextAccessor)
         {
+            _serviceProvider = serviceProvider;
             _userManager = userManager;
             _roleManager = roleManager;
             _appConfig = appConfig.Value;
@@ -68,12 +76,18 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             }
 
             user.RefreshToken = GenerateRefreshToken();
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(ApplicationConstants.Session.RefreshTokenExpiryInDays);
+            user.UserInfo ??= new UserInformations();
+            user.UserInfo.LastLoginDate = DateTime.UtcNow;
+            user.UserInfo.IsOnline = true;
             await _userManager.UpdateAsync(user);
+            _ = _serviceProvider.GetService<IMediator>().PublishClientEvent(new UserOnlineStatusChanged(user.MapTo<UserResponse>()));
 
             var token = await GenerateJwtAsync(user);
             var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, UserImageURL = user.ProfilePictureDataUrl };
             _contextAccessor.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, user.Id);
+
+            //_= SetUserOnlineStatusAsync(user, true)
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
@@ -104,7 +118,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return token;
         }
 
-        private async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user)
+        public async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
@@ -124,7 +138,10 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.Name, user.FirstName),
                 new(ClaimTypes.Surname, user.LastName),
-                new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
+                new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty),
+                new(ClaimTypes.StreetAddress, user.UserInfo?.Addresses?.FirstOrDefault()?.Street ?? string.Empty),
+                new(ClaimTypes.PostalCode, user.UserInfo?.Addresses?.FirstOrDefault()?.PostalCode ?? string.Empty),
+                new(ClaimTypes.Country, user.UserInfo?.Addresses?.FirstOrDefault()?.Country ?? string.Empty)
             }
             .Union(userClaims)
             .Union(roleClaims)
@@ -145,7 +162,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         {
             var token = new JwtSecurityToken(
                claims: claims,
-               expires: DateTime.UtcNow.AddDays(2),
+               expires: DateTime.UtcNow.AddDays(ApplicationConstants.Session.SecurityTokenExpiryInDays),
                signingCredentials: signingCredentials);
             var tokenHandler = new JwtSecurityTokenHandler();
             var encryptedToken = tokenHandler.WriteToken(token);
@@ -178,6 +195,18 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         {
             var secret = Encoding.UTF8.GetBytes(_appConfig.AppConfiguration.Secret);
             return new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256);
+        }
+
+        public async Task SetUserOnlineStatusAsync(string userId, bool isOnline)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null && (user.UserInfo == null || user.UserInfo.IsOnline != isOnline))
+            {
+                user.UserInfo ??= new UserInformations();
+                user.UserInfo.IsOnline = isOnline;
+                await _userManager.UpdateAsync(user);
+                _ = _serviceProvider.GetService<IMediator>().PublishClientEvent(new UserOnlineStatusChanged(user.MapTo<UserResponse>()));
+            }
         }
     }
 }

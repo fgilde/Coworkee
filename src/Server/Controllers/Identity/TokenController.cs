@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 
@@ -15,7 +14,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
     {
         private readonly ITokenService _identityService;
 
-        public TokenController(ITokenService identityService, ICurrentUserService currentUserService)
+        public TokenController(ITokenService identityService)
         {
             _identityService = identityService;
         }

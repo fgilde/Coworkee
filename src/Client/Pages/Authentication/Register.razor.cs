@@ -2,12 +2,18 @@
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
+using CleanArchitectureBase.Application.Configurations;
+using CleanArchitectureBase.Client.JsInterop;
+using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Shared.Constants.Application;
 
 namespace CleanArchitectureBase.Client.Pages.Authentication
 {
     public partial class Register
     {
+        private UploadRequestEdit _uploadEdit;
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private RegisterRequest _registerUserModel = new();
@@ -15,8 +21,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
 
         protected override async Task OnInitializedAsync()
         {
-            var config = await _api.System_GetConfigurationAsync();
-            if (!config.UserRegistration.Enabled)
+            if (!_config.ServerConfiguration.UserRegistration.Enabled)
             {
                 _navigationManager.NavigateTo(ApplicationConstants.Routes.Login);
             }
@@ -42,6 +47,7 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
             finally
             {
                 _processing = false;
+                StateHasChanged();
             }
         }
 
@@ -63,6 +69,11 @@ namespace CleanArchitectureBase.Client.Pages.Authentication
                 _passwordInputIcon = Icons.Material.Filled.Visibility;
                 _passwordInput = InputType.Text;
             }
+        }
+
+        private Task Upload(MouseEventArgs arg)
+        {
+            return _uploadEdit.Upload(arg);
         }
     }
 }

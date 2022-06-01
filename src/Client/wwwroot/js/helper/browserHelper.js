@@ -1,13 +1,13 @@
 export class BrowserHelper {
     download(options) {
-        var fileUrl = "data:" + options.mimeType + ";base64," + options.base64String;
+        var fileUrl = options.url || "data:" + options.mimeType + ";base64," + options.base64String;
         fetch(fileUrl)
             .then(response => response.blob())
             .then(blob => {
             var link = window.document.createElement("a");
             //link.href = window.URL.createObjectURL(blob, { type: options.mimeType });
             link.href = window.URL.createObjectURL(blob);
-            link.download = options.fileName;
+            link.download = options?.fileName;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -103,6 +103,9 @@ export class BrowserHelper {
                 }
             }, timeout || 50);
         });
+    }
+    clickOnElement(selector) {
+        document.querySelector(selector)?.click();
     }
 }
 //# sourceMappingURL=browserHelper.js.map

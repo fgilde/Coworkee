@@ -10,7 +10,7 @@
 
 @if (!string.IsNullOrEmpty(_message))
 {
-    <MudAlert Class="top-alert" ContentAlignment="HorizontalAlignment.Center" Severity="@_messageSeverity">@((MarkupString)_message)</MudAlert>
+    <MudAlert Class="top-alert" ShowCloseIcon="true" CloseIconClicked="() => SetMessage(null, Severity.Info)" ContentAlignment="HorizontalAlignment.Center" Severity="@_messageSeverity">@((MarkupString)_message)</MudAlert>
 }
 
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
@@ -32,7 +32,7 @@
                 <MudText>@_localizer["LoginDescription"]</MudText>
             </div>
         </MudItem>
-        @if (_configuration?.UserRegistration?.Enabled == true)
+        @if (_config?.ServerConfiguration?.UserRegistration?.Enabled == true)
         {
             <MudItem xs="12">
                 <div class="d-flex justify-center">
@@ -47,6 +47,7 @@
         <MudItem xs="12">
             <MudTextField Label="@_localizer["Password"]" Variant="Variant.Outlined"
                           @bind-Value="_tokenModel.Password" For="@(() => _tokenModel.Password)"
+                          UserAttributes="@( new (){{"autocomplete", "current-password"}})"
                           InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-space-between align-center">

@@ -13,17 +13,17 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Products
     {
-        
+
         [Parameter]
         public string Action { get; set; }
 
         [Parameter]
         public string Id { get; set; }
 
-        
+
         private async Task<PaginatedResult<ProductDto>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings, CancellationToken cancellationToken)
         {
-            return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken);
+            return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken: cancellationToken);
         }
 
         private async Task<ProductDto> FindById(string id, IEnumerable<ProductDto> loaded)
@@ -54,7 +54,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task ExportSelected(ExportServiceType exportServiceType, string[] ids)
         {
-            await (await _api.Products_ExportAsync(exportServiceType:exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
+            await (await _api.Products_ExportAsync(exportServiceType: exportServiceType, ids: ids)).ForceDownloadAsync(_jsRuntime);
         }
 
 

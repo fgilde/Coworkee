@@ -1,0 +1,24 @@
+﻿.upload-request-edit {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 15px;
+}
+.upload-button {
+    margin-left: 15px;
+}
+
+.multi-upload-actions {
+    padding-left: 15px;
+}
+
+.action-margin {
+    margin: 0px 5px;
+}
+
+.error-message {
+    color: var(--mud-palette-error);
+    transition-property: all !important;
+    font-size: 9pt;
+    padding: 2px;
+    animation: fade-in-animation 900ms ease-in 1 alternate;
+}

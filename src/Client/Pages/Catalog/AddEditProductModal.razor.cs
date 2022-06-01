@@ -14,10 +14,11 @@ using Blazored.FluentValidation;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs;
+using CleanArchitectureBase.Shared.Misc;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
-    public partial class AddEditProductModal: IAsyncDisposable
+    public partial class AddEditProductModal : IAsyncDisposable
     {
         [Parameter] public ProductDto AddEditProductModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -35,7 +36,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
         private async Task SaveAsync()
         {
             await _api.Products_PostAsync(new AddEditProductsCommand(AddEditProductModel));
-            
+
             _snackBar.Add(_localizer["Product Updated"], Severity.Success);
             await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
             MudDialog.Close();
@@ -49,7 +50,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task LoadDataAsync()
         {
-            if(!AddEditProductModel.IsNew)
+            if (!AddEditProductModel.IsNew)
                 await LoadImageAsync();
             await LoadBrandsAsync();
         }
@@ -85,14 +86,14 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             _file = e.File;
             if (_file != null)
             {
-                
+
                 var extension = Path.GetExtension(_file.Name);
                 var format = "image/png";
                 var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
-                AddEditProductModel.ImageDataURL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name ,UploadType = UploadType.Product, Extension = extension };
+                AddEditProductModel.ImageDataURL = DataUrl.GetDataUrl(buffer, format);
+                AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name, ContentType = e.File.ContentType, UploadType = UploadType.Product, Extension = extension };
             }
         }
 

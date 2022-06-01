@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using CleanArchitectureBase.Application.Configurations;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Application.Hubs;
 using MediatR;
@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
+using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Configurations;
+using CleanArchitectureBase.Shared;
 
 namespace CleanArchitectureBase.Server.Controllers
 {
@@ -31,6 +34,11 @@ namespace CleanArchitectureBase.Server.Controllers
         protected int UnhashId(string hash) => hash.MapTo<int>();
         protected int[] UnhashIds(string hash) => hash.MapTo<int[]>();
         protected int[] UnhashIds(string[] hashes) => hashes.MapElementsTo<int>().ToArray();
+
+        protected List<TItem> Filter<TItem>(IList<TItem> l, TransferableExpression<TItem> expression) =>
+            l.Where(ODataQueryOptionsExtensions.ParseExpression<TItem>(expression).Compile()).ToList();
+        protected IQueryable<TItem> Filter<TItem>(IQueryable<TItem> l, TransferableExpression<TItem> expression) =>
+            l.Where(ODataQueryOptionsExtensions.ParseExpression<TItem>(expression));
     }
 
 }

@@ -1,12 +1,22 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditDocumentModal> _localizer
 
+<style>
+    form {
+        height: 100%;
+    }
+
+        form > .outline-none {
+            height: calc(100% - 60px);
+        }
+</style>
+
 <ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@AddEditDocumentModel" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudDialog>
+    <MudDialog Class="dialog-content-full-height overflow-hidden mud-ex-dialog-initial" ClassContent="full-height flex-column">
         <TitleContent>
             @{
-                if (AddEditDocumentModel.Id == 0)
+                if (AddEditDocumentModel.Id == default)
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
@@ -24,7 +34,7 @@
         </TitleContent>
         <DialogContent>
             <MudGrid>
-                @if (AddEditDocumentModel.Id != 0)
+                @if (AddEditDocumentModel.Id != default)
                 {
                     <MudItem xs="12" md="6">
                         <MudTextField Disabled For="@(() => AddEditDocumentModel.Id)" @bind-Value="AddEditDocumentModel.Id" Label="@_localizer["Id"]" />
@@ -48,13 +58,13 @@
                         {
                             <MudAlert>@_file.Name</MudAlert>
                         }
-                        @if (AddEditDocumentModel.Id != 0 && !string.IsNullOrEmpty(AddEditDocumentModel.URL))
+                        @if (AddEditDocumentModel.Id != default && !string.IsNullOrEmpty(AddEditDocumentModel.URL))
                         {
                             <MudAlert>@(AddEditDocumentModel.URL)</MudAlert>
                         }
                         <InputFile id="fileInput" hidden OnChange="UploadFiles" />
                         <div>
-                            @if (AddEditDocumentModel.Id == 0)
+                            @if (AddEditDocumentModel.Id == default)
                             {
                                 <MudButton HtmlTag="label"
                                            Variant="Variant.Text"
@@ -69,21 +79,29 @@
                             {
                                 <MudButton Variant="Variant.Text"
                                            Color="Color.Secondary"
-                                           StartIcon="@Icons.Filled.CloudDownload"
+                                           StartIcon="@Icons.Filled.OpenInNew"
                                            Size="Size.Small"
-                                           Link="@(AddEditDocumentModel.URL)" Target="_blank">
-                                    @_localizer["Download"]
+                                           Link="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" Target="_blank">
+                                    @_localizer["Open"]
                                 </MudButton>
-
                             }
                         </div>
                     </MudItem>
                 </MudItem>
             </MudGrid>
+            
+            @if (!string.IsNullOrEmpty(AddEditDocumentModel.URL))
+            {
+                <MudItem Style="flex: 1 1 auto;">
+                    <FileDisplay ContentStream="@_currentContentStream" Url="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" FileName="@AddEditDocumentModel.Title" ContentType="@AddEditDocumentModel.ContentType"></FileDisplay>
+                </MudItem>
+            }
+
+
         </DialogContent>
         <DialogActions>
             <MudButton Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
-            @if (AddEditDocumentModel.Id != 0)
+            @if (AddEditDocumentModel.Id != default)
             {
                 <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
             }

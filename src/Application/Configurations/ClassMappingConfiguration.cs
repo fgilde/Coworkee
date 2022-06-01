@@ -1,9 +1,11 @@
 ﻿using CleanArchitectureBase.Application.Common.Models;
+using CleanArchitectureBase.Application.Requests;
+using CleanArchitectureBase.Shared.Misc;
 using Nextended.Core.Helper;
 
 namespace CleanArchitectureBase.Application.Configurations;
 
-internal class ClassMappingConfiguration
+internal static class ClassMappingConfiguration
 {
     internal static void RegisterConverters(Idhashing hashSettings)
     {
@@ -15,5 +17,15 @@ internal class ClassMappingConfiguration
             ClassMappingSettings.AddGlobalConverter<int, string>(i => new HashedInt(i).Hash);
             ClassMappingSettings.AddGlobalConverter<int[], string>(i => new HashedInt(i).Hash);
         }
+
+        ClassMappingSettings.AddGlobalConverter<UploadRequest, DocumentDto>(r => new DocumentDto
+        {
+            Title = r.FileName,
+            Description = $"File '{r.FileName}'",
+            URL = DataUrl.GetDataUrl(r.Data),
+            IsPublic = false,
+            UploadRequest = r
+        });
+        ClassMappingSettings.AddGlobalConverter<DocumentDto, UploadRequest>(d => d.UploadRequest);
     }
 }

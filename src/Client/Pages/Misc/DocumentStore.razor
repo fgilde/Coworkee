@@ -1,8 +1,7 @@
 ﻿@page "/document-store"
 @attribute [Authorize(Policy = Permissions.Documents.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<DocumentStore> _localizer
-@using CleanArchitectureBase.Application.Common.Models
-@using CleanArchitectureBase.Shared.Constants.Role
+
 
 <style>
     .mud-table-container {
@@ -12,95 +11,4 @@
 
 <ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@_localizer["Document Store"]" Description="@_localizer["Browse Available Documents."]" />
-@if (!_loaded)
-{
-    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-}
-else
-{
-    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<DocumentDto>>>(ServerReload))" Hover="true" Dense="true" Bordered="false" Striped="true"  @ref="_table">
-        <ToolBarContent>
-            <div class="justify-center mud-text-align-center">
-                @if (_canCreateDocuments)
-                {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
-                }
-                else
-                {
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
-                }
-            </div>
-            <MudSpacer />
-            @if (_canSearchDocuments)
-            {
-                <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-            }
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentIdField">@_localizer["Id"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentTitleField">@_localizer["Title"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentDescriptionField">@_localizer["Description"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentDocumentTypeField">@_localizer["Document Type"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentIsPublicField">@_localizer["Is Public"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentDateCreatedField">@_localizer["Date Created"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel T="DocumentDto" SortLabel="documentOwnerField">@_localizer["Owner"]</MudTableSortLabel></MudTh>
-            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Id">@context.Id</MudTd>
-            <MudTd DataLabel="Title">
-                <MudHighlighter Text="@context.Title" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Description">
-                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="DocumentType">
-                <MudHighlighter Text="@context.DocumentTypeName" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="IsPublic"><MudCheckBox @bind-Checked="@context.IsPublic" ReadOnly="true" Color="Color.Secondary" /></MudTd>
-            <MudTd DataLabel="Date Created">@context.CreatedOn</MudTd>
-            <MudTd DataLabel="Owner">
-                <UserCard Class="no-padding" UserId="@context.CreatedBy" />
-            </MudTd>
-            <MudTd DataLabel="Actions" Style="text-align: right">
-                @if (_canEditDocuments || _canDeleteDocuments || _canViewDocumentExtendedAttributes)
-                    {
-                    <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                        @if (_canViewDocumentExtendedAttributes)
-                            {
-                            <MudMenuItem @onclick="@(() => ManageExtendedAttributes(@context.Id))">@_localizer["Manage Extended Attributes"]</MudMenuItem>
-                            }
-                        @if (context.CreatedBy == CurrentUserId || _currentUser.IsInRole(RoleConstants.AdministratorRole))
-                            {
-                            @if (_canEditDocuments)
-                                {
-                                <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
-                                }
-                            @if (_canDeleteDocuments)
-                                {
-                                <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
-                                }
-                            }
-                        <MudMenuItem Link="@_navigationManager.ToAbsoluteServerUri(context.URL)" Disabled="@(string.IsNullOrWhiteSpace(context.URL))" Target="_blank">@_localizer["Download"]</MudMenuItem>
-                    </MudMenu>
-                    }
-                    else
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
-                        @_localizer["No Allowed Actions"]
-                    </MudButton>
-                    }
-            </MudTd>
-        </RowTemplate>
-
-        <PagerContent>
-            <TablePager />
-        </PagerContent>
-    </MudTable>
-}
+<DocumentList></DocumentList>

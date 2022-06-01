@@ -14,7 +14,7 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
             public const string Create = "Permissions.Products.Create";
             [RequiresPermissions(Brands.View, View)] // You can't edit products without to see possible brands for assignment
             public const string Edit = "Permissions.Products.Edit";
-            [RequiresPermissions(View)] 
+            [RequiresPermissions(View)]
             public const string Delete = "Permissions.Products.Delete";
             [RequiresPermissions(View)]
             public const string Export = "Permissions.Products.Export";
@@ -40,9 +40,9 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
         public static class Documents
         {
             public const string View = "Permissions.Documents.View";
-            [RequiresPermissions(View)]
+            [RequiresPermissions(View, DocumentTypes.View)]
             public const string Create = "Permissions.Documents.Create";
-            [RequiresPermissions(View)]
+            [RequiresPermissions(View, DocumentTypes.View)]
             public const string Edit = "Permissions.Documents.Edit";
             [RequiresPermissions(View)]
             public const string Delete = "Permissions.Documents.Delete";
@@ -161,7 +161,7 @@ namespace CleanArchitectureBase.Shared.Constants.Permission
         {
             public const string View = "Permissions.Swagger.View";
         }
-        
+
         public static class AuditTrails
         {
             public const string View = "Permissions.AuditTrails.View";

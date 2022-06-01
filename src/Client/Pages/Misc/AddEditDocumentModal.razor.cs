@@ -13,18 +13,20 @@ using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR.Client;
+using CleanArchitectureBase.Shared.Misc;
 
 
 namespace CleanArchitectureBase.Client.Pages.Misc
 {
-    public partial class AddEditDocumentModal: IAsyncDisposable
+    public partial class AddEditDocumentModal : IAsyncDisposable
     {
 
         [Parameter] public DocumentDto AddEditDocumentModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
+
+        private Stream _currentContentStream;
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
@@ -68,10 +70,13 @@ namespace CleanArchitectureBase.Client.Pages.Misc
             {
                 var buffer = new byte[_file.Size];
                 var extension = Path.GetExtension(_file.Name);
-                var format = "application/octet-stream";
                 await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
-                AddEditDocumentModel.URL = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-                AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name, UploadType = UploadType.Document, Extension = extension };
+                AddEditDocumentModel.URL = DataUrl.GetDataUrl(buffer, e.File.ContentType);
+                AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, ContentType = e.File.ContentType, FileName = _file.Name, UploadType = UploadType.Document, Extension = extension };
+                AddEditDocumentModel.ContentType = e.File.ContentType;
+                AddEditDocumentModel.Title ??= _file.Name;
+                AddEditDocumentModel.Description ??= $"{extension?.Substring(1).ToUpper()} File '{_file.Name}' from {_file.LastModified.ToString("D")}";
+                _currentContentStream = new MemoryStream(buffer);
             }
         }
 

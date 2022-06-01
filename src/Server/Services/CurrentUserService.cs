@@ -10,7 +10,11 @@ using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Extensions;
 using Nextended.Core.Scopes;
+using CleanArchitectureBase.Application;
+using CleanArchitectureBase.Infrastructure.Models.Identity;
+using CleanArchitectureBase.Infrastructure.Services.Identity;
 
 namespace CleanArchitectureBase.Server.Services
 {
@@ -28,20 +32,24 @@ namespace CleanArchitectureBase.Server.Services
         {
             UserId = httpContextAccessor.HttpContext.GetUserId();
             Principal = httpContextAccessor.HttpContext?.User;
-            Claims = httpContextAccessor.HttpContext?.User?.Claims.AsEnumerable().Select(item => new KeyValuePair<string, string>(item.Type, item.Value)).ToList();
+            Claims = Principal?.Claims.AsEnumerable().Select(item => new KeyValuePair<string, string>(item.Type, item.Value)).ToList();
             RoleIds = httpContextAccessor.HttpContext?.Request.Headers[ApplicationConstants.HeaderNames.RoleIdHeader].SelectMany(s => s.Split(",")).ToArray();
+        }
+
+
+
+        public async Task<IDisposable> AsUser(string userId)
+        {
+            var user = await _serviceProvider.GetRequiredService<IUserService>().GetAsync(userId);
+            if (!user.Succeeded)
+                throw Errors.NotFound($"User with id {userId} not found");
+            return AsUser(user.Data);
         }
 
         public async Task<IDisposable> AsSystemUser()
         {
-            var systemUser = await _serviceProvider.GetService<IUserService>().SystemUserAsync();
-            return new ActionScope(() =>
-            {
-                UserId = systemUser.Id;
-            }, () =>
-            {
-                SetFromHttpContext(_serviceProvider.GetService<IHttpContextAccessor>());
-            });
+            var systemUser = await _serviceProvider.GetRequiredService<IUserService>().SystemUserAsync();
+            return AsUser(systemUser);
         }
 
         public string UserId { get; private set; }
@@ -49,6 +57,21 @@ namespace CleanArchitectureBase.Server.Services
         public List<KeyValuePair<string, string>> Claims { get; private set; }
         public ClaimsPrincipal Principal { get; private set; }
         public UserResponse CurrentUser() => _serviceProvider.GetService<IUserService>()?.Get(UserId);
+
+        private IDisposable AsUser(UserResponse user)
+        {
+            return new ActionScope(() =>
+            {
+                UserId = user.Id;
+                Principal = CreateClaimsPrincipalByUser(user).GetAwaiter().GetResult();
+            }, () =>
+            {
+                SetFromHttpContext(_serviceProvider.GetService<IHttpContextAccessor>());
+            });
+        }
+
+        private async Task<ClaimsPrincipal> CreateClaimsPrincipalByUser(UserResponse user) => new(
+            new ClaimsIdentity((await _serviceProvider.GetRequiredService<IdentityService>().GetClaimsAsync(user.MapTo<ApplicationUser>())).ToArray()));
     }
 
 }

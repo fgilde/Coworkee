@@ -13,6 +13,7 @@ using CleanArchitectureBase.Shared.Wrapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
+using CleanArchitectureBase.Shared;
 
 namespace CleanArchitectureBase.Application.Features.Base.Queries
 {
@@ -23,6 +24,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         public int PageSize { get; set; }
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; }
+        public TransferableExpression<TDto> OdataFilterQuery { get; set; } = null;
 
         public GetAllPagedQueryBase<TDto> SortBy(Expression<Func<TDto, object>> expression, string direction = "")
         {
@@ -63,7 +65,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         protected T Get<T>() => Provider.GetService<T>();
 
         public GetAllPagedQueryHandlerBase(
-            IUnitOfWork<TEntityId> unitOfWork, 
+            IUnitOfWork<TEntityId> unitOfWork,
             IMediator mediator,
             IServiceProvider provider)
         {
@@ -77,6 +79,14 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             return null;
         }
 
+        protected virtual IQueryable<TEntity> Query(TQuery query, IQueryable<TEntity> entities)
+        {
+            var expression = ODataQueryOptionsExtensions.ParseExpression<TEntity>(query.OdataFilterQuery);
+            return expression == null ? entities : entities.Where(expression);
+        }
+
+        protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
+
         public virtual async Task<PaginatedResult<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<TEntity, TDto>> expression = e => e.MapTo<TDto>();
@@ -85,8 +95,8 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             var orderBy = request.OrderBy?.Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
             if (orderBy?.Any() != true)
             {
-                var data = await UnitOfWork.Repository<TEntity>().Entities
-                   .Specify(filterSpec)
+                var data = await Query(request, Queryable
+                   .Specify(filterSpec))
                    .Select(expression)
                    .ToPaginatedListAsync(request.PageNumber, request.PageSize);
                 return data;
@@ -94,8 +104,8 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             else
             {
                 var ordering = string.Join(",", orderBy); // of the form fieldname [ascending|descending], ...
-                var data = await UnitOfWork.Repository<TEntity>().Entities
-                   .Specify(filterSpec)
+                var data = await Query(request, Queryable
+                   .Specify(filterSpec))
                    .OrderBy(ordering) // require system.linq.dynamic.core
                    .Select(expression)
                    .ToPaginatedListAsync(request.PageNumber, request.PageSize);

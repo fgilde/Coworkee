@@ -7,6 +7,8 @@ using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CleanArchitectureBase.Server.Middlewares;
+using CleanArchitectureBase.Shared;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
 {
@@ -29,9 +31,11 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         [Authorize(Policy = Permissions.Roles.View)]
         [HttpGet]
         [Produces(typeof(Result<List<RoleResponse>>))]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<RoleResponse> filter = null)
         {
             var roles = await _roleService.GetAllAsync();
+            if (filter != null)
+                roles.Data = Filter(roles.Data, filter);
             return Ok(roles);
         }
 

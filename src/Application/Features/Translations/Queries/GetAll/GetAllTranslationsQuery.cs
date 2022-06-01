@@ -21,13 +21,14 @@ namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
 
         private string currentCulture => Thread.CurrentThread.CurrentCulture.Name;
 
-        protected override string CacheKey (GetAllTranslationsQuery query)
+        protected override string CacheKey(GetAllTranslationsQuery query)
         {
             if (query.FilterByCurrentCulture)
                 return ApplicationConstants.Cache.CacheKeyFor(typeof(Translation), query.OdataFilterQuery, currentCulture);
             return ApplicationConstants.Cache.CacheKeyFor(typeof(Translation), query.OdataFilterQuery);
         }
 
-        protected override IQueryable<Translation> Query(GetAllTranslationsQuery query) => base.Query(query).Where(t => !query.FilterByCurrentCulture || t.CultureCode == currentCulture);
+        protected override IQueryable<Translation> Query(GetAllTranslationsQuery query, IQueryable<Translation> entities)
+            => base.Query(query, entities).Where(t => !query.FilterByCurrentCulture || t.CultureCode == currentCulture);
     }
 }

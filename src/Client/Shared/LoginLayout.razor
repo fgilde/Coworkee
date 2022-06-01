@@ -3,6 +3,7 @@
 
 <MudThemeProvider Theme="@(ClientTheme.LastUsedTheme ?? ClientTheme.DefaultTheme)" />
 <MudSnackbarProvider />
+<MudDialogProvider />
 <MudAppBar Elevation="4">
     <MudSpacer />
     <LanguageSelector />
@@ -10,7 +11,7 @@
 </MudAppBar>
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
-    <MudPaper Elevation="25" Class="pa-8" Style="width: 500px;">
+    <MudPaper Elevation="25" Class="pa-8">
         @Body
     </MudPaper>
 </MudContainer>

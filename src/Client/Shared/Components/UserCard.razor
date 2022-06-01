@@ -1,25 +1,41 @@
 ﻿@using CleanArchitectureBase.Client.Shared.Components
 
+
 <MudCard Class="@($"transparent {Class}")" Elevation="0" Square="true">
     <MudCardHeader Class="@($"transparent {Class}")" Style="@Style">
         <CardHeaderAvatar>
-            <UserAvatar IsUserOnline="@IsUserOnline" UserId="@UserId" User="@User" UserData="@UserData" />
+            @if (_isLoading)
+            {
+                <MudSkeleton SkeletonType="SkeletonType.Circle" Animation="Animation.Wave" Height="50px" Width="50px" />
+            }
+            else
+            {
+                <UserAvatar IsUserOnline="@IsUserOnline" UserId="@UserId" User="@User" UserData="@UserData" />
+            }
         </CardHeaderAvatar>
         <CardHeaderContent>
-            <MudText Typo="Typo.body2">@FirstName @SecondName</MudText>
-
-            @if (ShowLogout)
+            @if (_isLoading)
             {
-                <div style="position: absolute; right: 5px; top: 38px;">
-                    <MudIconButton Class="pa-0" OnClick="@(Logout)" Icon="@Icons.Material.Outlined.Login" />
-
-                    @*<MudButton OnClick="Logout" StartIcon="@Icons.Outlined.Login" Color="Color.Transparent"/>*@
-                </div>
+                <MudSkeleton Animation="Animation.Wave" Width="100px" />
+                <MudSkeleton Animation="Animation.Wave" Width="150px" />
             }
-
-            @if (ShowEmail)
+            else
             {
-            <MudText Typo="Typo.caption">@Email</MudText>
+                <MudText Typo="Typo.body2">@FirstName @SecondName</MudText>
+
+                @if (ShowLogout)
+                {
+                    <div style="position: absolute; right: 5px; top: 38px;">
+                        <MudIconButton Class="pa-0" OnClick="@(Logout)" Icon="@Icons.Material.Outlined.Login" />
+
+                        @*<MudButton OnClick="Logout" StartIcon="@Icons.Outlined.Login" Color="Color.Transparent"/>*@
+                    </div>
+                }
+
+                @if (ShowEmail)
+                {
+                    <MudText Typo="Typo.caption">@Email</MudText>
+                }
             }
         </CardHeaderContent>
     </MudCardHeader>

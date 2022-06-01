@@ -3,7 +3,7 @@ using CleanArchitectureBase.Application.Requests;
 
 namespace CleanArchitectureBase.Application.Common.Models
 {
-    public class DocumentDto: DtoBase<int>
+    public class DocumentDto: HashableDtoBase
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -13,6 +13,8 @@ namespace CleanArchitectureBase.Application.Common.Models
         public string URL { get; set; }
         public string DocumentTypeName { get; set; }
         public int DocumentTypeId { get; set; }
+        public bool IsBinary { get; set; }
+        public string ContentType { get; set; }
         public UploadRequest UploadRequest { get; set; }
     }
 }

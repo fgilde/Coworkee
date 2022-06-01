@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Shared.Models;
+﻿using System;
+using CleanArchitectureBase.Shared.Models;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Common.Models.Identity
@@ -15,6 +16,9 @@ namespace CleanArchitectureBase.Application.Common.Models.Identity
         public string PhoneNumber { get; set; }
         public string ProfilePictureDataUrl { get; set; }
         public string FullName => $"{FirstName} {LastName}";
+        public bool IsOnline { get; set; }
+        public UserInformationsDto UserInfo { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public bool IsSystemUser() => this.MapTo<CreateUser>().IsSystemUser();
     }

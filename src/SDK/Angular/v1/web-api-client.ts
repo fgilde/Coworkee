@@ -207,6 +207,7 @@ export class ResourceClient implements IResourceClient {
 
 export interface ISystemClient {
     authorizeServerUrl(url: string | null | undefined): Observable<string>;
+    unhashHashedId(id: string | null | undefined): Observable<number>;
     version(): Observable<VersionInfoModel>;
     availableApiVersions(): Observable<string[]>;
     getConfiguration(): Observable<Publicsettings>;
@@ -275,6 +276,57 @@ export class SystemClient implements ISystemClient {
             }));
         }
         return _observableOf<string>(null as any);
+    }
+
+    unhashHashedId(id: string | null | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/System/UnhashHashedId?";
+        if (id !== undefined && id !== null)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUnhashHashedId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUnhashHashedId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processUnhashHashedId(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<number>(null as any);
     }
 
     version(): Observable<VersionInfoModel> {
@@ -729,9 +781,10 @@ export interface IDocumentsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfDocumentDto>;
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfDocumentDto | null | undefined): Observable<PaginatedResultOfDocumentDto>;
     /**
      * Add/Edit Document
      * @return Status 200 OK
@@ -741,12 +794,12 @@ export interface IDocumentsClient {
      * Delete a Document
      * @return Status 200 OK
      */
-    delete(ids: number[]): Observable<FileResponse | null>;
+    delete(ids: string[]): Observable<FileResponse | null>;
     /**
      * Get Document By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<DocumentDto>;
+    getById(id: string | null): Observable<DocumentDto>;
 }
 
 @Injectable({
@@ -768,9 +821,10 @@ export class DocumentsClient implements IDocumentsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfDocumentDto> {
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfDocumentDto | null | undefined): Observable<PaginatedResultOfDocumentDto> {
         let url_ = this.baseUrl + "/Documents?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
@@ -784,6 +838,8 @@ export class DocumentsClient implements IDocumentsClient {
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
         if (orderBy !== undefined && orderBy !== null)
             orderBy && orderBy.forEach(item => { url_ += "OrderBy=" + encodeURIComponent("" + item) + "&"; });
+        if (odataFilterQuery !== undefined && odataFilterQuery !== null)
+            url_ += "OdataFilterQuery=" + encodeURIComponent("" + odataFilterQuery) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -888,7 +944,7 @@ export class DocumentsClient implements IDocumentsClient {
      * Delete a Document
      * @return Status 200 OK
      */
-    delete(ids: number[]): Observable<FileResponse | null> {
+    delete(ids: string[]): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Documents";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -942,7 +998,7 @@ export class DocumentsClient implements IDocumentsClient {
      * Get Document By Id
      * @return Status 200 Ok
      */
-    getById(id: number): Observable<DocumentDto> {
+    getById(id: string | null): Observable<DocumentDto> {
         let url_ = this.baseUrl + "/Documents/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1801,9 +1857,10 @@ export interface ITranslationsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto>;
+    getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfTranslationDto | null | undefined): Observable<PaginatedResultOfTranslationDto>;
     /**
      * Get All Translations
      * @param filterByCurrentCulture (optional) 
@@ -1811,7 +1868,7 @@ export interface ITranslationsClient {
      * @param force (optional) 
      * @return Status 200 OK
      */
-    getAll(filterByCurrentCulture: boolean | undefined, odataFilterQuery: string | null | undefined, force: boolean | undefined): Observable<TranslationDto[]>;
+    getAll(filterByCurrentCulture: boolean | undefined, odataFilterQuery: TransferableExpressionOfTranslationDto | null | undefined, force: boolean | undefined): Observable<TranslationDto[]>;
     /**
      * Get a translation by id
      * @return Status 200 Ok
@@ -1864,9 +1921,10 @@ export class TranslationsClient implements ITranslationsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfTranslationDto> {
+    getAllPaged(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfTranslationDto | null | undefined): Observable<PaginatedResultOfTranslationDto> {
         let url_ = this.baseUrl + "/Translations/GetAllPaged?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
@@ -1880,6 +1938,8 @@ export class TranslationsClient implements ITranslationsClient {
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
         if (orderBy !== undefined && orderBy !== null)
             orderBy && orderBy.forEach(item => { url_ += "OrderBy=" + encodeURIComponent("" + item) + "&"; });
+        if (odataFilterQuery !== undefined && odataFilterQuery !== null)
+            url_ += "OdataFilterQuery=" + encodeURIComponent("" + odataFilterQuery) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1933,7 +1993,7 @@ export class TranslationsClient implements ITranslationsClient {
      * @param force (optional) 
      * @return Status 200 OK
      */
-    getAll(filterByCurrentCulture: boolean | undefined, odataFilterQuery: string | null | undefined, force: boolean | undefined): Observable<TranslationDto[]> {
+    getAll(filterByCurrentCulture: boolean | undefined, odataFilterQuery: TransferableExpressionOfTranslationDto | null | undefined, force: boolean | undefined): Observable<TranslationDto[]> {
         let url_ = this.baseUrl + "/Translations/GetAll?";
         if (filterByCurrentCulture === null)
             throw new Error("The parameter 'filterByCurrentCulture' cannot be null.");
@@ -2335,9 +2395,10 @@ export interface INotificationsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAll(unreadOnly: boolean | undefined, notificationTypeId: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfNotificationDto>;
+    getAll(unreadOnly: boolean | undefined, notificationTypeId: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfNotificationDto | null | undefined): Observable<PaginatedResultOfNotificationDto>;
     /**
      * Deletes given notifications if they are for current user
      * @param ids Notifications to delete
@@ -2394,9 +2455,10 @@ export class NotificationsClient implements INotificationsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAll(unreadOnly: boolean | undefined, notificationTypeId: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfNotificationDto> {
+    getAll(unreadOnly: boolean | undefined, notificationTypeId: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfNotificationDto | null | undefined): Observable<PaginatedResultOfNotificationDto> {
         let url_ = this.baseUrl + "/Notifications?";
         if (unreadOnly === null)
             throw new Error("The parameter 'unreadOnly' cannot be null.");
@@ -2416,6 +2478,8 @@ export class NotificationsClient implements INotificationsClient {
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
         if (orderBy !== undefined && orderBy !== null)
             orderBy && orderBy.forEach(item => { url_ += "OrderBy=" + encodeURIComponent("" + item) + "&"; });
+        if (odataFilterQuery !== undefined && odataFilterQuery !== null)
+            url_ += "OdataFilterQuery=" + encodeURIComponent("" + odataFilterQuery) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -3105,9 +3169,10 @@ export class AccountClient implements IAccountClient {
 export interface IRoleClaimClient {
     /**
      * Get All Role Claims(e.g. Product Create Permission)
+     * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfRoleClaimResponse>;
+    getAll(filter: TransferableExpressionOfRoleClaimResponse | null | undefined): Observable<ResultOfListOfRoleClaimResponse>;
     /**
      * Add a Role Claim
      * @return Status 200 OK
@@ -3140,10 +3205,13 @@ export class RoleClaimClient implements IRoleClaimClient {
 
     /**
      * Get All Role Claims(e.g. Product Create Permission)
+     * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfRoleClaimResponse> {
-        let url_ = this.baseUrl + "/identity/RoleClaim";
+    getAll(filter: TransferableExpressionOfRoleClaimResponse | null | undefined): Observable<ResultOfListOfRoleClaimResponse> {
+        let url_ = this.baseUrl + "/identity/RoleClaim?";
+        if (filter !== undefined && filter !== null)
+            url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -3360,9 +3428,10 @@ export class RoleClaimClient implements IRoleClaimClient {
 export interface IRoleClient {
     /**
      * Get All Roles (basic, admin etc.)
+     * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfRoleResponse>;
+    getAll(filter: TransferableExpressionOfRoleResponse | null | undefined): Observable<ResultOfListOfRoleResponse>;
     /**
      * Add a Role
      * @return Status 200 OK
@@ -3399,10 +3468,13 @@ export class RoleClient implements IRoleClient {
 
     /**
      * Get All Roles (basic, admin etc.)
+     * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfRoleResponse> {
-        let url_ = this.baseUrl + "/identity/Role";
+    getAll(filter: TransferableExpressionOfRoleResponse | null | undefined): Observable<ResultOfListOfRoleResponse> {
+        let url_ = this.baseUrl + "/identity/Role?";
+        if (filter !== undefined && filter !== null)
+            url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -3818,9 +3890,10 @@ export interface IUserClient {
     delete(userId: string | null | undefined): Observable<Result>;
     /**
      * Get User Details
+     * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfUserResponse>;
+    getAll(filter: TransferableExpressionOfUserResponse | null | undefined): Observable<ResultOfListOfUserResponse>;
     /**
      * Register a User
      * @return Status 200 OK
@@ -3945,10 +4018,13 @@ export class UserClient implements IUserClient {
 
     /**
      * Get User Details
+     * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(): Observable<ResultOfListOfUserResponse> {
-        let url_ = this.baseUrl + "/identity/User";
+    getAll(filter: TransferableExpressionOfUserResponse | null | undefined): Observable<ResultOfListOfUserResponse> {
+        let url_ = this.baseUrl + "/identity/User?";
+        if (filter !== undefined && filter !== null)
+            url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -5087,9 +5163,10 @@ export interface IProductsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfProductDto>;
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfProductDto | null | undefined): Observable<PaginatedResultOfProductDto>;
     /**
      * Add/Edit a Product
      * @return Status 200 OK
@@ -5140,9 +5217,10 @@ export class ProductsClient implements IProductsClient {
      * @param pageSize (optional) 
      * @param searchString (optional) 
      * @param orderBy (optional) 
+     * @param odataFilterQuery (optional) 
      * @return Status 200 OK
      */
-    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined): Observable<PaginatedResultOfProductDto> {
+    getAll(pageNumber: number | undefined, pageSize: number | undefined, searchString: string | null | undefined, orderBy: string[] | null | undefined, odataFilterQuery: TransferableExpressionOfProductDto | null | undefined): Observable<PaginatedResultOfProductDto> {
         let url_ = this.baseUrl + "/Products?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
@@ -5156,6 +5234,8 @@ export class ProductsClient implements IProductsClient {
             url_ += "SearchString=" + encodeURIComponent("" + searchString) + "&";
         if (orderBy !== undefined && orderBy !== null)
             orderBy && orderBy.forEach(item => { url_ += "OrderBy=" + encodeURIComponent("" + item) + "&"; });
+        if (odataFilterQuery !== undefined && odataFilterQuery !== null)
+            url_ += "OdataFilterQuery=" + encodeURIComponent("" + odataFilterQuery) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -5753,8 +5833,8 @@ export interface IVersionInfoModel {
 }
 
 export class Publicsettings implements IPublicsettings {
-    hostClientInServer!: boolean;
     contactAddress?: string | undefined;
+    hostClientInServer!: boolean;
     userRegistration?: Userregistration | undefined;
 
     constructor(data?: IPublicsettings) {
@@ -5768,8 +5848,8 @@ export class Publicsettings implements IPublicsettings {
 
     init(_data?: any) {
         if (_data) {
-            this.hostClientInServer = _data["hostClientInServer"];
             this.contactAddress = _data["contactAddress"];
+            this.hostClientInServer = _data["hostClientInServer"];
             this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
         }
     }
@@ -5783,20 +5863,23 @@ export class Publicsettings implements IPublicsettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["hostClientInServer"] = this.hostClientInServer;
         data["contactAddress"] = this.contactAddress;
+        data["hostClientInServer"] = this.hostClientInServer;
         data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
         return data;
     }
 }
 
 export interface IPublicsettings {
-    hostClientInServer: boolean;
     contactAddress?: string | undefined;
+    hostClientInServer: boolean;
     userRegistration?: Userregistration | undefined;
 }
 
 export class Userregistration implements IUserregistration {
+    requireDocuments!: boolean;
+    registrationDocumentsMaxFileSize!: number;
+    registrationDocumentTypes?: string[] | undefined;
     enabled!: boolean;
     requiresAdministratorActivation!: boolean;
     emailConfirmationRequired!: boolean;
@@ -5812,6 +5895,13 @@ export class Userregistration implements IUserregistration {
 
     init(_data?: any) {
         if (_data) {
+            this.requireDocuments = _data["requireDocuments"];
+            this.registrationDocumentsMaxFileSize = _data["registrationDocumentsMaxFileSize"];
+            if (Array.isArray(_data["registrationDocumentTypes"])) {
+                this.registrationDocumentTypes = [] as any;
+                for (let item of _data["registrationDocumentTypes"])
+                    this.registrationDocumentTypes!.push(item);
+            }
             this.enabled = _data["enabled"];
             this.requiresAdministratorActivation = _data["requiresAdministratorActivation"];
             this.emailConfirmationRequired = _data["emailConfirmationRequired"];
@@ -5827,6 +5917,13 @@ export class Userregistration implements IUserregistration {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["requireDocuments"] = this.requireDocuments;
+        data["registrationDocumentsMaxFileSize"] = this.registrationDocumentsMaxFileSize;
+        if (Array.isArray(this.registrationDocumentTypes)) {
+            data["registrationDocumentTypes"] = [];
+            for (let item of this.registrationDocumentTypes)
+                data["registrationDocumentTypes"].push(item);
+        }
         data["enabled"] = this.enabled;
         data["requiresAdministratorActivation"] = this.requiresAdministratorActivation;
         data["emailConfirmationRequired"] = this.emailConfirmationRequired;
@@ -5835,6 +5932,9 @@ export class Userregistration implements IUserregistration {
 }
 
 export interface IUserregistration {
+    requireDocuments: boolean;
+    registrationDocumentsMaxFileSize: number;
+    registrationDocumentTypes?: string[] | undefined;
     enabled: boolean;
     requiresAdministratorActivation: boolean;
     emailConfirmationRequired: boolean;
@@ -5983,6 +6083,7 @@ export interface IBrandDto extends IHashableDtoBase {
 export class UploadRequest implements IUploadRequest {
     fileName?: string | undefined;
     extension?: string | undefined;
+    contentType?: string | undefined;
     uploadType!: UploadType;
     data?: string | undefined;
 
@@ -5999,6 +6100,7 @@ export class UploadRequest implements IUploadRequest {
         if (_data) {
             this.fileName = _data["fileName"];
             this.extension = _data["extension"];
+            this.contentType = _data["contentType"];
             this.uploadType = _data["uploadType"];
             this.data = _data["data"];
         }
@@ -6015,6 +6117,7 @@ export class UploadRequest implements IUploadRequest {
         data = typeof data === 'object' ? data : {};
         data["fileName"] = this.fileName;
         data["extension"] = this.extension;
+        data["contentType"] = this.contentType;
         data["uploadType"] = this.uploadType;
         data["data"] = this.data;
         return data;
@@ -6024,6 +6127,7 @@ export class UploadRequest implements IUploadRequest {
 export interface IUploadRequest {
     fileName?: string | undefined;
     extension?: string | undefined;
+    contentType?: string | undefined;
     uploadType: UploadType;
     data?: string | undefined;
 }
@@ -6173,45 +6277,7 @@ export interface IPaginatedResultOfDocumentDto extends IResult {
     hasNextPage: boolean;
 }
 
-export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
-    id!: number;
-    isNew!: boolean;
-
-    constructor(data?: IDtoBaseOfInteger) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.isNew = _data["isNew"];
-        }
-    }
-
-    static fromJS(data: any): DtoBaseOfInteger {
-        data = typeof data === 'object' ? data : {};
-        throw new Error("The abstract class 'DtoBaseOfInteger' cannot be instantiated.");
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["isNew"] = this.isNew;
-        return data;
-    }
-}
-
-export interface IDtoBaseOfInteger {
-    id: number;
-    isNew: boolean;
-}
-
-export class DocumentDto extends DtoBaseOfInteger implements IDocumentDto {
+export class DocumentDto extends HashableDtoBase implements IDocumentDto {
     title?: string | undefined;
     description?: string | undefined;
     isPublic!: boolean;
@@ -6220,6 +6286,8 @@ export class DocumentDto extends DtoBaseOfInteger implements IDocumentDto {
     url?: string | undefined;
     documentTypeName?: string | undefined;
     documentTypeId!: number;
+    isBinary!: boolean;
+    contentType?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
 
     constructor(data?: IDocumentDto) {
@@ -6237,6 +6305,8 @@ export class DocumentDto extends DtoBaseOfInteger implements IDocumentDto {
             this.url = _data["url"];
             this.documentTypeName = _data["documentTypeName"];
             this.documentTypeId = _data["documentTypeId"];
+            this.isBinary = _data["isBinary"];
+            this.contentType = _data["contentType"];
             this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
         }
     }
@@ -6258,13 +6328,15 @@ export class DocumentDto extends DtoBaseOfInteger implements IDocumentDto {
         data["url"] = this.url;
         data["documentTypeName"] = this.documentTypeName;
         data["documentTypeId"] = this.documentTypeId;
+        data["isBinary"] = this.isBinary;
+        data["contentType"] = this.contentType;
         data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
         super.toJSON(data);
         return data;
     }
 }
 
-export interface IDocumentDto extends IDtoBaseOfInteger {
+export interface IDocumentDto extends IHashableDtoBase {
     title?: string | undefined;
     description?: string | undefined;
     isPublic: boolean;
@@ -6273,7 +6345,39 @@ export interface IDocumentDto extends IDtoBaseOfInteger {
     url?: string | undefined;
     documentTypeName?: string | undefined;
     documentTypeId: number;
+    isBinary: boolean;
+    contentType?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
+}
+
+export class TransferableExpressionOfDocumentDto implements ITransferableExpressionOfDocumentDto {
+
+    constructor(data?: ITransferableExpressionOfDocumentDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfDocumentDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfDocumentDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfDocumentDto {
 }
 
 export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommandBaseOfDocumentDto {
@@ -6347,6 +6451,44 @@ export class AddEditDocumentsCommand extends AddEditCommandBaseOfDocumentDto imp
 }
 
 export interface IAddEditDocumentsCommand extends IAddEditCommandBaseOfDocumentDto {
+}
+
+export abstract class DtoBaseOfInteger implements IDtoBaseOfInteger {
+    id!: number;
+    isNew!: boolean;
+
+    constructor(data?: IDtoBaseOfInteger) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.isNew = _data["isNew"];
+        }
+    }
+
+    static fromJS(data: any): DtoBaseOfInteger {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'DtoBaseOfInteger' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["isNew"] = this.isNew;
+        return data;
+    }
+}
+
+export interface IDtoBaseOfInteger {
+    id: number;
+    isNew: boolean;
 }
 
 export class DocumentTypeDto extends DtoBaseOfInteger implements IDocumentTypeDto {
@@ -6914,6 +7056,36 @@ export interface ITranslationDto extends IDtoBaseOfInteger {
     cultureCode?: string | undefined;
 }
 
+export class TransferableExpressionOfTranslationDto implements ITransferableExpressionOfTranslationDto {
+
+    constructor(data?: ITransferableExpressionOfTranslationDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfTranslationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfTranslationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfTranslationDto {
+}
+
 export class ResultOfTranslationDto extends Result implements IResultOfTranslationDto {
     data?: TranslationDto | undefined;
 
@@ -7345,6 +7517,36 @@ export interface INotificationDto extends IHashableDtoBase {
     createdOn: Date;
 }
 
+export class TransferableExpressionOfNotificationDto implements ITransferableExpressionOfNotificationDto {
+
+    constructor(data?: ITransferableExpressionOfNotificationDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfNotificationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfNotificationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfNotificationDto {
+}
+
 export class UpdateProfileRequest implements IUpdateProfileRequest {
     firstName!: string;
     lastName!: string;
@@ -7679,6 +7881,36 @@ export interface IRoleClaimResponse {
     selected: boolean;
 }
 
+export class TransferableExpressionOfRoleClaimResponse implements ITransferableExpressionOfRoleClaimResponse {
+
+    constructor(data?: ITransferableExpressionOfRoleClaimResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfRoleClaimResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfRoleClaimResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfRoleClaimResponse {
+}
+
 export class RoleClaimRequest implements IRoleClaimRequest {
     id!: number;
     roleId?: string | undefined;
@@ -7822,6 +8054,36 @@ export interface IRoleResponse {
     id?: string | undefined;
     name: string;
     description?: string | undefined;
+}
+
+export class TransferableExpressionOfRoleResponse implements ITransferableExpressionOfRoleResponse {
+
+    constructor(data?: ITransferableExpressionOfRoleResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfRoleResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfRoleResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfRoleResponse {
 }
 
 export class RoleRequest implements IRoleRequest {
@@ -8133,6 +8395,9 @@ export class UserResponse implements IUserResponse {
     phoneNumber?: string | undefined;
     profilePictureDataUrl?: string | undefined;
     fullName?: string | undefined;
+    isOnline!: boolean;
+    userInfo?: UserInformationsDto | undefined;
+    createdOn!: Date;
 
     constructor(data?: IUserResponse) {
         if (data) {
@@ -8155,6 +8420,9 @@ export class UserResponse implements IUserResponse {
             this.phoneNumber = _data["phoneNumber"];
             this.profilePictureDataUrl = _data["profilePictureDataUrl"];
             this.fullName = _data["fullName"];
+            this.isOnline = _data["isOnline"];
+            this.userInfo = _data["userInfo"] ? UserInformationsDto.fromJS(_data["userInfo"]) : <any>undefined;
+            this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
         }
     }
 
@@ -8177,6 +8445,9 @@ export class UserResponse implements IUserResponse {
         data["phoneNumber"] = this.phoneNumber;
         data["profilePictureDataUrl"] = this.profilePictureDataUrl;
         data["fullName"] = this.fullName;
+        data["isOnline"] = this.isOnline;
+        data["userInfo"] = this.userInfo ? this.userInfo.toJSON() : <any>undefined;
+        data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -8192,6 +8463,141 @@ export interface IUserResponse {
     phoneNumber?: string | undefined;
     profilePictureDataUrl?: string | undefined;
     fullName?: string | undefined;
+    isOnline: boolean;
+    userInfo?: UserInformationsDto | undefined;
+    createdOn: Date;
+}
+
+export class UserInformationsDto extends DtoBaseOfInteger implements IUserInformationsDto {
+    addresses?: AddressDto[] | undefined;
+    lastLoginDate?: Date | undefined;
+    isOnline!: boolean;
+
+    constructor(data?: IUserInformationsDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["addresses"])) {
+                this.addresses = [] as any;
+                for (let item of _data["addresses"])
+                    this.addresses!.push(AddressDto.fromJS(item));
+            }
+            this.lastLoginDate = _data["lastLoginDate"] ? new Date(_data["lastLoginDate"].toString()) : <any>undefined;
+            this.isOnline = _data["isOnline"];
+        }
+    }
+
+    static fromJS(data: any): UserInformationsDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserInformationsDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.addresses)) {
+            data["addresses"] = [];
+            for (let item of this.addresses)
+                data["addresses"].push(item.toJSON());
+        }
+        data["lastLoginDate"] = this.lastLoginDate ? this.lastLoginDate.toISOString() : <any>undefined;
+        data["isOnline"] = this.isOnline;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUserInformationsDto extends IDtoBaseOfInteger {
+    addresses?: AddressDto[] | undefined;
+    lastLoginDate?: Date | undefined;
+    isOnline: boolean;
+}
+
+export class AddressDto extends DtoBaseOfInteger implements IAddressDto {
+    name?: string | undefined;
+    city?: string | undefined;
+    street?: string | undefined;
+    country?: string | undefined;
+    postalCode?: string | undefined;
+    houseNumber?: string | undefined;
+
+    constructor(data?: IAddressDto) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.city = _data["city"];
+            this.street = _data["street"];
+            this.country = _data["country"];
+            this.postalCode = _data["postalCode"];
+            this.houseNumber = _data["houseNumber"];
+        }
+    }
+
+    static fromJS(data: any): AddressDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddressDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["city"] = this.city;
+        data["street"] = this.street;
+        data["country"] = this.country;
+        data["postalCode"] = this.postalCode;
+        data["houseNumber"] = this.houseNumber;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IAddressDto extends IDtoBaseOfInteger {
+    name?: string | undefined;
+    city?: string | undefined;
+    street?: string | undefined;
+    country?: string | undefined;
+    postalCode?: string | undefined;
+    houseNumber?: string | undefined;
+}
+
+export class TransferableExpressionOfUserResponse implements ITransferableExpressionOfUserResponse {
+
+    constructor(data?: ITransferableExpressionOfUserResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfUserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfUserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfUserResponse {
 }
 
 export class ResultOfUserResponse extends Result implements IResultOfUserResponse {
@@ -8401,15 +8807,17 @@ export interface IUpdateUserRolesRequest {
 }
 
 export class RegisterRequest implements IRegisterRequest {
-    firstName!: string;
-    lastName!: string;
-    email!: string;
-    userName!: string;
-    password!: string;
-    confirmPassword!: string;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    email?: string | undefined;
+    userName?: string | undefined;
+    password?: string | undefined;
+    confirmPassword?: string | undefined;
     phoneNumber?: string | undefined;
-    activateUser!: boolean;
-    autoConfirmEmail!: boolean;
+    isActive!: boolean;
+    emailConfirmed!: boolean;
+    documents?: UploadRequest[] | undefined;
+    userInfo?: UserInformationsDto | undefined;
 
     constructor(data?: IRegisterRequest) {
         if (data) {
@@ -8429,8 +8837,14 @@ export class RegisterRequest implements IRegisterRequest {
             this.password = _data["password"];
             this.confirmPassword = _data["confirmPassword"];
             this.phoneNumber = _data["phoneNumber"];
-            this.activateUser = _data["activateUser"];
-            this.autoConfirmEmail = _data["autoConfirmEmail"];
+            this.isActive = _data["isActive"];
+            this.emailConfirmed = _data["emailConfirmed"];
+            if (Array.isArray(_data["documents"])) {
+                this.documents = [] as any;
+                for (let item of _data["documents"])
+                    this.documents!.push(UploadRequest.fromJS(item));
+            }
+            this.userInfo = _data["userInfo"] ? UserInformationsDto.fromJS(_data["userInfo"]) : <any>undefined;
         }
     }
 
@@ -8450,22 +8864,30 @@ export class RegisterRequest implements IRegisterRequest {
         data["password"] = this.password;
         data["confirmPassword"] = this.confirmPassword;
         data["phoneNumber"] = this.phoneNumber;
-        data["activateUser"] = this.activateUser;
-        data["autoConfirmEmail"] = this.autoConfirmEmail;
+        data["isActive"] = this.isActive;
+        data["emailConfirmed"] = this.emailConfirmed;
+        if (Array.isArray(this.documents)) {
+            data["documents"] = [];
+            for (let item of this.documents)
+                data["documents"].push(item.toJSON());
+        }
+        data["userInfo"] = this.userInfo ? this.userInfo.toJSON() : <any>undefined;
         return data;
     }
 }
 
 export interface IRegisterRequest {
-    firstName: string;
-    lastName: string;
-    email: string;
-    userName: string;
-    password: string;
-    confirmPassword: string;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    email?: string | undefined;
+    userName?: string | undefined;
+    password?: string | undefined;
+    confirmPassword?: string | undefined;
     phoneNumber?: string | undefined;
-    activateUser: boolean;
-    autoConfirmEmail: boolean;
+    isActive: boolean;
+    emailConfirmed: boolean;
+    documents?: UploadRequest[] | undefined;
+    userInfo?: UserInformationsDto | undefined;
 }
 
 export class ToggleUserStatusRequest implements IToggleUserStatusRequest {
@@ -9098,6 +9520,36 @@ export interface IPaginatedResultOfProductDto extends IResult {
     pageSize: number;
     hasPreviousPage: boolean;
     hasNextPage: boolean;
+}
+
+export class TransferableExpressionOfProductDto implements ITransferableExpressionOfProductDto {
+
+    constructor(data?: ITransferableExpressionOfProductDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfProductDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfProductDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfProductDto {
 }
 
 export abstract class AddEditCommandBaseOfProductDto implements IAddEditCommandBaseOfProductDto {

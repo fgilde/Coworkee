@@ -26,7 +26,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         // for localization
     }
 
-    public abstract partial class ExtendedAttributesBase<TId, TEntityId, TEntity, TExtendedAttribute>: IAsyncDisposable
+    public abstract partial class ExtendedAttributesBase<TId, TEntityId, TEntity, TExtendedAttribute> : IAsyncDisposable
         where TEntity : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
         where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
         where TId : IEquatable<TId>
@@ -39,7 +39,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public string Title { get; set; }
         [Parameter] public string Description { get; set; }
 
-        protected abstract Func<string, TEntityId> FromStringToEntityIdTypeConverter { get; }
         protected abstract string ExtendedAttributesViewPolicyName { get; }
         protected abstract string ExtendedAttributesEditPolicyName { get; }
         protected abstract string ExtendedAttributesCreatePolicyName { get; }
@@ -48,7 +47,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         protected abstract string ExtendedAttributesSearchPolicyName { get; }
         protected abstract RenderFragment Inherited();
 
-        private TEntityId EntityId => FromStringToEntityIdTypeConverter.Invoke(EntityIdString);
+        private TEntityId EntityId;
         private string CurrentUserId { get; set; }
         private List<GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId>> _model;
         private Dictionary<string, List<GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId>>> GroupedExtendedAttributes { get; } = new();
@@ -72,8 +71,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private bool _canSearchExtendedAttributes;
         private bool _loaded;
 
+        protected abstract Task<TEntityId> GetEntityIdFromStringAsync(string id);
+
         protected override async Task OnInitializedAsync()
         {
+            EntityId = await GetEntityIdFromStringAsync(EntityIdString);
             _currentUser = await _clientAuthenticationManager.CurrentUser();
             _canViewExtendedAttributes = (await _authorizationService.AuthorizeAsync(_currentUser, ExtendedAttributesViewPolicyName)).Succeeded;
             if (!_canViewExtendedAttributes)

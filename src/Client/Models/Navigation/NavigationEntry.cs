@@ -2,6 +2,7 @@
 using System.Linq;
 using CleanArchitectureBase.Application.Common.Security;
 using Nextended.Core.Extensions;
+using Nextended.Core.Types;
 
 namespace CleanArchitectureBase.Client.Models.Navigation
 {
@@ -23,7 +24,6 @@ namespace CleanArchitectureBase.Client.Models.Navigation
         public string[] Roles { get; set; }
         public RoleMatch RoleMatch { get; set; }
         public bool IsAuthenticationRequired { get; set; }
-        public bool IsExpanded { get; set; }
 
         public NavigationEntry WithAuthentication()
         {

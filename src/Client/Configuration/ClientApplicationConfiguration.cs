@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using CleanArchitectureBase.Application.Configurations;
 
 namespace CleanArchitectureBase.Client.Configuration
 {
@@ -8,6 +9,7 @@ namespace CleanArchitectureBase.Client.Configuration
         public string JsMainNamespace { get; set; }
         public bool AllowAnonymousPageAccess { get; set; }
         public Logging Logging { get; set; }
+        public Publicsettings ServerConfiguration { get; set; }
 
         public static ClientApplicationConfiguration Create(IConfiguration configuration)
         {

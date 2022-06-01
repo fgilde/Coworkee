@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Security.Claims;
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components;
@@ -28,9 +27,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private string FirstName { get; set; }
         private string SecondName { get; set; }
         private string Email { get; set; }
+        private bool _isLoading;
 
         protected override async Task OnInitializedAsync()
-        {            
+        {
             await Load();
 
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
@@ -58,10 +58,12 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task Load()
         {
+            _isLoading = true;
             if (string.IsNullOrWhiteSpace(UserId) && UserData == null)
                 await LoadCurrentUserData();
             else
                 await LoadOtherUserData();
+            _isLoading = false;
         }
 
         private async Task LoadCurrentUserData()

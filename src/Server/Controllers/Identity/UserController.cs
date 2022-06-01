@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Extensions;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application;
+using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Server.Extensions;
+using CleanArchitectureBase.Server.Middlewares;
+using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Role;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -51,9 +54,12 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         [Authorize(Policy = Permissions.Users.View)]
         [HttpGet]
         [Produces(typeof(Result<List<UserResponse>>))]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<UserResponse> filter = null)
         {
             var users = await _userService.GetAllAsync();
+            if (filter != null)
+                users.Data = Filter(users.Data, filter);
+
             return Ok(users);
         }
 
@@ -127,8 +133,8 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
                 {
                     throw Errors.Create("User registration is not allowed");
                 }
-                request.ActivateUser = !Configuration.PublicSettings.UserRegistration.RequiresAdministratorActivation;
-                request.AutoConfirmEmail = !Configuration.PublicSettings.UserRegistration.EmailConfirmationRequired;
+                request.IsActive = !Configuration.PublicSettings.UserRegistration.RequiresAdministratorActivation;
+                request.EmailConfirmed = !Configuration.PublicSettings.UserRegistration.EmailConfirmationRequired;
             }
             return Ok(await _userService.RegisterAsync(request, origin));
         }

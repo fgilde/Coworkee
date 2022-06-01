@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,17 +12,26 @@ using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Nextended.Core.Extensions;
 
+
 namespace CleanArchitectureBase.Server.Controllers
 {
     public class SystemController : BaseApiController<SystemController>
     {
         [Authorize]
         [HttpGet(nameof(AuthorizeServerUrl))]
-        //[Produces(typeof(string))]
         public ActionResult<string> AuthorizeServerUrl(string url)
         {
             var token = Request.Headers.Authorization.ToString().Split(" ")[1]; // remove Scheme
             return Ok(UriExtensions.AddParameterToUrl(url, ApplicationConstants.ParameterNames.AuthedUrlParameter, token));
+        }
+
+        [Authorize]
+        [HttpGet(nameof(UnhashHashedId))]
+        [Produces(typeof(int))]
+        // TODO: Remove after support of hashed ids is added to extended attributes
+        public ActionResult<string> UnhashHashedId(string id)
+        {
+            return Ok(UnhashId(id));
         }
 
         [AllowAnonymous]

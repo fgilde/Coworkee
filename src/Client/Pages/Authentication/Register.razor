@@ -23,7 +23,7 @@
             </div>
         </MudItem>
         <MudItem  xs="12">
-            <MudTextField For="@(() => _registerUserModel.UserName)" @bind-Value="_registerUserModel.UserName" Label="@_localizer["User Name"]" />
+            <MudTextField AutoFocus="true" For="@(() => _registerUserModel.UserName)" @bind-Value="_registerUserModel.UserName" Label="@_localizer["User Name"]" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
             <MudTextField For="@(() => _registerUserModel.FirstName)" @bind-Value="_registerUserModel.FirstName" Label="@_localizer["First Name"]" />
@@ -37,12 +37,33 @@
         <MudItem  xs="12" sm="6" md="6">
             <MudTextField T="string" Label="@_localizer["Phone Number"]" @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" />
         </MudItem>
+
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="@_localizer["Password"]" />
+            <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" UserAttributes="@( new (){{"autocomplete", "new-password"}})" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="@_localizer["Password"]" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
             <MudTextField For="@(() => _registerUserModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_registerUserModel.ConfirmPassword" Label="@_localizer["Confirm Password"]" />
         </MudItem>
+        
+        @if (_config?.ServerConfiguration?.UserRegistration?.RequireDocuments == true)
+        {
+            <MudItem xs="12">
+                <MudTextField DisableUnderLine="true" Class="disable-pointer-events-on-next-input" Adornment="Adornment.None" ReadOnly="true" For="@(() => _registerUserModel.Documents)" Label="@_localizer["Upload Qualifications and References"]" AdornmentIcon="@Icons.Filled.CloudUpload" OnAdornmentClick="Upload"/>
+                <MudText Typo="Typo.caption">@_localizer["Please upload your personal qualifications and references that confirm your person and qualification"]</MudText>
+                <MudDivider></MudDivider>
+                <UploadRequestEdit @ref="_uploadEdit"
+                                   MaxFileSize="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentsMaxFileSize"
+                                   MimeTypes="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentTypes"
+                                   MimeRestrictionType="MimeTypeRestrictionType.WhiteList"
+                                   ShowFileUploadButton="true"
+                                   UploadRequestRemoved="@(StateHasChanged)"
+                                   Style="margin-top: 5px;"
+                                   MaxHeight="150"
+                                   @bind-UploadRequests="_registerUserModel.Documents">
+                </UploadRequestEdit>
+            </MudItem>
+        }
+
         <MudItem  xs="12" Class="d-flex justify-center">
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated || _processing)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">
                 @if (_processing)

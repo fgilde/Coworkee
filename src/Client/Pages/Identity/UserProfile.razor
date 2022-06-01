@@ -11,7 +11,9 @@
 }
 else
 {
-    <MudGrid>
+    <MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
+        <MudTabPanel Text="@_localizer["Profile"]">
+            <MudGrid>
         <AuthorizeView Roles="@RoleConstants.AdministratorRole">
             <MudItem xs="12" sm="12" md="12">
                 <MudCard Elevation="25">
@@ -73,4 +75,10 @@ else
             </MudCard>
         </MudItem>
     </MudGrid>
+        </MudTabPanel>
+        <MudTabPanel Text="@_localizer["Documents"]">
+            <DocumentList CanCreate="false" UserId="@Id"></DocumentList>
+        </MudTabPanel>
+    </MudTabs>
+
 }

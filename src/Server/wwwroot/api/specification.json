@@ -157,6 +157,56 @@
         ]
       }
     },
+    "/System/UnhashHashedId": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_UnhashHashedId",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/System/Version": {
       "get": {
         "tags": [
@@ -537,6 +587,15 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "type": "object",
+            "name": "OdataFilterQuery",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfDocumentDto"
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -640,8 +699,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
               }
             },
             "x-nullable": false
@@ -691,12 +749,11 @@
         ],
         "parameters": [
           {
-            "type": "integer",
+            "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "format": "int32",
-            "x-nullable": false
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -1376,6 +1433,15 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "type": "object",
+            "name": "OdataFilterQuery",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfTranslationDto"
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -1423,9 +1489,12 @@
             "x-nullable": false
           },
           {
-            "type": "string",
+            "type": "object",
             "name": "OdataFilterQuery",
             "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfTranslationDto"
+            },
             "x-nullable": true
           },
           {
@@ -1802,6 +1871,15 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "type": "object",
+            "name": "OdataFilterQuery",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfNotificationDto"
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -2399,6 +2477,18 @@
           "text/json",
           "text/xml"
         ],
+        "parameters": [
+          {
+            "type": "object",
+            "name": "$filter",
+            "x-originalName": "filter",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfRoleClaimResponse"
+            },
+            "x-nullable": true
+          }
+        ],
         "responses": {
           "200": {
             "x-nullable": false,
@@ -2614,6 +2704,18 @@
           "application/octet-stream",
           "text/json",
           "text/xml"
+        ],
+        "parameters": [
+          {
+            "type": "object",
+            "name": "$filter",
+            "x-originalName": "filter",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfRoleResponse"
+            },
+            "x-nullable": true
+          }
         ],
         "responses": {
           "200": {
@@ -3086,6 +3188,18 @@
           "application/octet-stream",
           "text/json",
           "text/xml"
+        ],
+        "parameters": [
+          {
+            "type": "object",
+            "name": "$filter",
+            "x-originalName": "filter",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfUserResponse"
+            },
+            "x-nullable": true
+          }
         ],
         "responses": {
           "200": {
@@ -4194,6 +4308,15 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "type": "object",
+            "name": "OdataFilterQuery",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/TransferableExpressionOfProductDto"
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -4593,11 +4716,11 @@
         "hostClientInServer"
       ],
       "properties": {
-        "hostClientInServer": {
-          "type": "boolean"
-        },
         "contactAddress": {
           "type": "string"
+        },
+        "hostClientInServer": {
+          "type": "boolean"
         },
         "userRegistration": {
           "$ref": "#/definitions/Userregistration"
@@ -4607,11 +4730,26 @@
     "Userregistration": {
       "type": "object",
       "required": [
+        "requireDocuments",
+        "registrationDocumentsMaxFileSize",
         "enabled",
         "requiresAdministratorActivation",
         "emailConfirmationRequired"
       ],
       "properties": {
+        "requireDocuments": {
+          "type": "boolean"
+        },
+        "registrationDocumentsMaxFileSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "registrationDocumentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "enabled": {
           "type": "boolean"
         },
@@ -4713,6 +4851,9 @@
           "type": "string"
         },
         "extension": {
+          "type": "string"
+        },
+        "contentType": {
           "type": "string"
         },
         "uploadType": {
@@ -4841,14 +4982,15 @@
     "DocumentDto": {
       "allOf": [
         {
-          "$ref": "#/definitions/DtoBaseOfInteger"
+          "$ref": "#/definitions/HashableDtoBase"
         },
         {
           "type": "object",
           "required": [
             "isPublic",
             "createdOn",
-            "documentTypeId"
+            "documentTypeId",
+            "isBinary"
           ],
           "properties": {
             "title": {
@@ -4877,6 +5019,12 @@
               "type": "integer",
               "format": "int32"
             },
+            "isBinary": {
+              "type": "boolean"
+            },
+            "contentType": {
+              "type": "string"
+            },
             "uploadRequest": {
               "$ref": "#/definitions/UploadRequest"
             }
@@ -4884,22 +5032,8 @@
         }
       ]
     },
-    "DtoBaseOfInteger": {
-      "type": "object",
-      "x-abstract": true,
-      "required": [
-        "id",
-        "isNew"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "isNew": {
-          "type": "boolean"
-        }
-      }
+    "TransferableExpressionOfDocumentDto": {
+      "type": "object"
     },
     "AddEditDocumentsCommand": {
       "allOf": [
@@ -4946,6 +5080,23 @@
           }
         }
       ]
+    },
+    "DtoBaseOfInteger": {
+      "type": "object",
+      "x-abstract": true,
+      "required": [
+        "id",
+        "isNew"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isNew": {
+          "type": "boolean"
+        }
+      }
     },
     "AddEditDocumentTypesCommand": {
       "allOf": [
@@ -5216,6 +5367,9 @@
         }
       ]
     },
+    "TransferableExpressionOfTranslationDto": {
+      "type": "object"
+    },
     "ResultOfTranslationDto": {
       "allOf": [
         {
@@ -5436,6 +5590,9 @@
         }
       ]
     },
+    "TransferableExpressionOfNotificationDto": {
+      "type": "object"
+    },
     "UpdateProfileRequest": {
       "type": "object",
       "required": [
@@ -5591,6 +5748,9 @@
         }
       }
     },
+    "TransferableExpressionOfRoleClaimResponse": {
+      "type": "object"
+    },
     "RoleClaimRequest": {
       "type": "object",
       "required": [
@@ -5657,6 +5817,9 @@
           "type": "string"
         }
       }
+    },
+    "TransferableExpressionOfRoleResponse": {
+      "type": "object"
     },
     "RoleRequest": {
       "type": "object",
@@ -5772,7 +5935,9 @@
       "type": "object",
       "required": [
         "isActive",
-        "emailConfirmed"
+        "emailConfirmed",
+        "isOnline",
+        "createdOn"
       ],
       "properties": {
         "id": {
@@ -5804,8 +5969,79 @@
         },
         "fullName": {
           "type": "string"
+        },
+        "isOnline": {
+          "type": "boolean"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInformationsDto"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time"
         }
       }
+    },
+    "UserInformationsDto": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfInteger"
+        },
+        {
+          "type": "object",
+          "required": [
+            "isOnline"
+          ],
+          "properties": {
+            "addresses": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddressDto"
+              }
+            },
+            "lastLoginDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "isOnline": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "AddressDto": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfInteger"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "street": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            },
+            "houseNumber": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "TransferableExpressionOfUserResponse": {
+      "type": "object"
     },
     "ResultOfUserResponse": {
       "allOf": [
@@ -5885,49 +6121,45 @@
     "RegisterRequest": {
       "type": "object",
       "required": [
-        "firstName",
-        "lastName",
-        "email",
-        "userName",
-        "password",
-        "confirmPassword",
-        "activateUser",
-        "autoConfirmEmail"
+        "isActive",
+        "emailConfirmed"
       ],
       "properties": {
         "firstName": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         },
         "lastName": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         },
         "email": {
-          "type": "string",
-          "format": "email",
-          "minLength": 1
+          "type": "string"
         },
         "userName": {
-          "type": "string",
-          "minLength": 6
+          "type": "string"
         },
         "password": {
-          "type": "string",
-          "minLength": 6
+          "type": "string"
         },
         "confirmPassword": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         },
         "phoneNumber": {
           "type": "string"
         },
-        "activateUser": {
+        "isActive": {
           "type": "boolean"
         },
-        "autoConfirmEmail": {
+        "emailConfirmed": {
           "type": "boolean"
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UploadRequest"
+          }
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInformationsDto"
         }
       }
     },
@@ -6230,6 +6462,9 @@
           }
         }
       ]
+    },
+    "TransferableExpressionOfProductDto": {
+      "type": "object"
     },
     "AddEditProductsCommand": {
       "allOf": [

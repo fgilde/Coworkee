@@ -106,6 +106,7 @@ namespace CleanArchitectureBase.Server.Extensions
 
             ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>(); // One time to have static instance filled as early as possible
             services.AddTransient(_ => ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings static instance is updated as well on each read
+            services.AddTransient(s => s.GetRequiredService<ServerConfiguration>().PublicSettings);
             services.Configure<ServerConfiguration>(configuration);
             return configuration.Get<ServerConfiguration>();
         }
@@ -196,10 +197,11 @@ namespace CleanArchitectureBase.Server.Extensions
         internal static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                {
-                    //options.UseInMemoryDatabase("CleanArchitectureBaseDb");
-                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-                }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
+            {
+                options.UseLazyLoadingProxies();
+                //options.UseInMemoryDatabase("CleanArchitectureBaseDb");
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
             return services;
         }
 
@@ -256,7 +258,7 @@ namespace CleanArchitectureBase.Server.Extensions
                     {
                         if (c.Exception is SecurityTokenExpiredException)
                         {
-                            c.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
+                            c.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                             c.Response.ContentType = "application/json";
                             var result = JsonConvert.SerializeObject(Result.Fail(localizer["The Token is expired."]));
                             c.HttpContext?.RequestServices?.GetService<IAccountService>()?.LogoutAsync();
@@ -264,7 +266,7 @@ namespace CleanArchitectureBase.Server.Extensions
                         }
                         else
                         {
-                            c.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                            c.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                             c.Response.ContentType = "application/json";
                             var result = JsonConvert.SerializeObject(Result.Fail(localizer["An unhandled error has occurred."]));
                             return c.Response.WriteAsync(result);
@@ -275,7 +277,7 @@ namespace CleanArchitectureBase.Server.Extensions
                         context.HandleResponse();
                         if (!context.Response.HasStarted)
                         {
-                            context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                             context.Response.ContentType = "application/json";
                             var result = JsonConvert.SerializeObject(Result.Fail(localizer["You are not Authorized."]));
                             return context.Response.WriteAsync(result);
@@ -285,7 +287,7 @@ namespace CleanArchitectureBase.Server.Extensions
                     },
                     OnForbidden = context =>
                     {
-                        context.Response.StatusCode = (int) HttpStatusCode.Forbidden;
+                        context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                         context.Response.ContentType = "application/json";
                         var result = JsonConvert.SerializeObject(Result.Fail(localizer["You are not authorized to access this resource."]));
                         return context.Response.WriteAsync(result);

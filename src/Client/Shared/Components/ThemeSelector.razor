@@ -82,11 +82,11 @@
 
     private async Task Select(string themeName, ClientTheme theme)
     {
-        await OnThemeSelected.InvokeAsync(theme);
         ClientTheme.LastUsedTheme = theme;
         _charmOpen = false;
         await _clientPreferenceManager.SetCurrentThemeName(themeName);
         await UpdateCurrent();
+        await OnThemeSelected.InvokeAsync(theme);
     }
 
     private async void ButtonClicked()

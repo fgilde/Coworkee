@@ -85,7 +85,7 @@ public partial class FileDisplayZip
 
     protected override async Task OnInitializedAsync()
     {
-        Url = UriExtensions.AddParameterToUrl(Url, "cb", Guid.NewGuid().ToFormattedId());
+        //Url = UriExtensions.AddParameterToUrl(Url, "cb", Guid.NewGuid().ToFormattedId());
         _zipEntries = (await GetZipEntriesAsync(ContentStream ?? await new HttpClient().GetStreamAsync(Url))).ToList();
         _zipStructure = CreateStructure().ToHashSet();
         await base.OnInitializedAsync();

@@ -27,7 +27,7 @@ public partial class FileDisplay
     /// Set this to false to show everything in iframe/object tag otherwise zip, images audio and video will displayed in correct tags
     /// </summary>
     [Parameter] public bool ViewDependsOnContentType { get; set; } = true;
-    [Parameter] public bool ImageAsBackgroundImage { get; set; } = true;
+    [Parameter] public bool ImageAsBackgroundImage { get; set; } = false;
     [Parameter] public bool AllowDownload { get; set; } = true;
     [Parameter] public string FileName { get; set; }
     [Parameter] public Stream ContentStream { get; set; }
@@ -127,7 +127,7 @@ public partial class FileDisplay
         if (string.IsNullOrWhiteSpace(Url) && ContentStream != null)
         {
             ContentStream.Position = 0;
-            Url = DataUrl.GetDataUrl(ZipBrowserFile.GetBytes(ContentStream), ContentType);
+            Url = await DataUrl.GetDataUrlAsync(ZipBrowserFile.GetBytes(ContentStream), ContentType);
         }
         await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "download"), new
         {

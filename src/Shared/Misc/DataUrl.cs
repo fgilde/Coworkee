@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace CleanArchitectureBase.Shared.Misc;
 
@@ -17,6 +18,10 @@ public class DataUrl
 
     public override string ToString() => _url;
 
+    public static Task<string> GetDataUrlAsync(byte[] bytes, string mimeType = "application/octet-stream")
+    {
+        return Task.Run(() => GetDataUrl(bytes, mimeType));
+    }
     public static string GetDataUrl(byte[] bytes, string mimeType = "application/octet-stream")
     {
         return $"data:{mimeType};base64,{Convert.ToBase64String(bytes)}";

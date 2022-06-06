@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Cibuti)
+﻿A maximum of {0} files are allowed: En fazla {0} dosyaya izin verilir
+aa-DJ: Afar (Cibuti)
 aa-ER: Afar (Eritre)
 aa-ET: Afar (Etiyopya)
 about: Hakkında
@@ -13,6 +14,7 @@ Add Document Type: Belge Türü Ekle
 Add Extended Attribute: Genişletilmiş Öznitelik Ekle
 Add Product: Ürün Ekle
 Add Role: Rol Ekle
+Addresses: Adres
 Administrator: Yönetici
 Administrator Settings.: Yönetici Ayarları.
 Administrators Profile's Status cannot be toggled: Yönetici Profilinin Durumu değiştirilemez
@@ -20,6 +22,7 @@ af-NA: Afrikaanlar (Namibya)
 af-ZA: Afrikaans (Güney Afrika)
 agq-CM: Aghem (Kamerun)
 ak-GH: Will (Gana)
+All Documents without Type are stored here: Türü olmayan tüm Belgeler burada saklanır
 All Groups: Tüm Gruplar
 All Permissions: Tüm İzinler
 Already have an account?: Zaten bir hesabınız var mı?
@@ -68,6 +71,7 @@ as unread: okunmamış olarak
 as-IN: Assamca (Hindistan)
 asa-TZ: Asu (Tanzanya)
 ast-ES: Asturya (İspanya)
+At least one document is required: En az bir belge gereklidir
 Audit Trails: Denetim İzleri
 Audit Trails exported: Verilen Denetim İzleri
 Aug: Ağustos
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, Hindistan)
 Don't have an account?: Hesabınız yok mu?
 Done!: Yapılmış!
 Download: İndirmek
+Download {0} files separately: '{0} dosyalarını ayrı ayrı indirin'
+Download {0} with {1} files as zip: '{0} dosyaları içeren {1} zip olarak indirin'
+Download file {0}: Dosya {0} indir
+Download file {0} as zip: Dosya {0} zip olarak indirin
 dsb-DE: Aşağı Sorbian (Almanya)
 dua-CM: Duala (Kamerun)
 dv-MV: Divehi (Maldivler)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (Latince, Senegal)
 fi-FI: Fince (Finlandiya)
 fil-PH: Filipinli (Filipinler)
 File is required!: Dosya gereklidir!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Bu tür dosyalara ({0}) izin verilmez. Yalnızca aşağıdaki türlere "{1}" izin verilir. Bu uzantılardan birini deneyin ({2})
 Fill Administrator Credentials: Yönetici Kimlik Bilgilerini Doldur
 Fill Basic User Credentials: Temel Kullanıcı Kimlik Bilgilerini Doldur
 Filtered Audit Trails exported: Filtre Uygulanmış Denetim İzleri dışa aktarıldı
@@ -585,6 +594,7 @@ ln-CD: Lingala (Kongo [DRC])
 ln-CF: Lingala (Orta Afrika Cumhuriyeti)
 ln-CG: Lingala (Kongo)
 lo-LA: Lao (Laos)
+Loading: Yükleme
 Local: Yöresel
 Logged In.: Oturum açtı.
 Logged Out.: Oturumu kapattım.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Güney Sudan)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Occitan (Fransa)
 Oct: Ekim
+Offline: Çevrimdışı
 Ok: Tamam
 Old Values: Eski Değerler
 om-ET: Oromo (Etiyopya)
 om-KE: Oromo (Kenya)
+Online: Çevrimiçi
 Only Selected Group (Export): Yalnızca Seçili Grup (Dışarı Aktar)
+Open: Açık
 Open Url {0}: Açık URL {0}
 or-IN: Odia (Hindistan)
 os-GE: Ossetic (Gürcistan)
@@ -719,6 +732,9 @@ PhoneNumber: Telefon Numarası
 pl-PL: Lehçe (Polonya)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Lütfen hesabınızı <a href='{0}'>buraya tıklayarak onaylayın</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Lütfen şifrenizi <a href='{0}'>buraya tıklayarak sıfırlayın</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Lütfen kişisel niteliklerinizi ve şahsiyetinizi ve yeterliliğinizi doğrulayan referanslarınızı yükleyin
+Please Wait: Lütfen bekleyin
+Preview: Önizleme
 prg-001: Prusya (Dünya)
 Primary Key: Birincil anahtar
 Product Deleted: Ürün silindi!
@@ -766,6 +782,7 @@ Registered Users: Kayıtlı Kullanıcılar
 Reload: Yeni -den yükle
 Reload Data: Verileri Yeniden Yükle
 Remember me?: Beni hatırladın mı?
+Remove All: Tümünü Kaldır
 Reset password: Parolayı sıfırla
 Reset Password: Parolayı Sıfırla
 Resources: Kaynaklar
@@ -829,6 +846,8 @@ sg-CF: Sango (Orta Afrika Cumhuriyeti)
 shi-Latn-MA: Tachelhit (Latince, Fas)
 shi-Tfng-MA: Tachelhit (Tifinagh, Fas)
 Show: Göstermek
+Show as Tree: Ağaç Olarak Göster
+Show flat: Düz göster
 Show notification: Bildirimi göster
 si-LK: Sinhala (Sri Lanka)
 Sign In: Oturum Aç
@@ -892,8 +911,12 @@ Text: Metin
 Text value is required using {0} type!: Metin değeri {0} türü kullanılarak gereklidir!
 tg-Cyrl-TJ: Tacik (Kiril, Tacikistan)
 th-TH: Tay dili (Tayland)
+The content type {0} cannot be displayed without a suitable plugin: İçerik türü {0} uygun bir eklenti olmadan görüntülenemez
+The file ({0}) has already been added: Dosya ({0}) zaten eklenmiştir
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Dosya, {0} ile maksimum {1} boyutunu aştı. Dosya boyutu {2}
 The following {0} permissions are also required for permission {1}: İzin {1} için aşağıdaki {0} izinler de gereklidir
 The following permission is also required for permission {1}: İzin {1} için aşağıdaki izin de gereklidir
+The Plugin '{0}' may be able to help: Eklenti '{0}' yardımcı olabilir
 The User {0} has just edited, created or deleted entries here. You should reload the data: Kullanıcı {0} burada girişleri yeni düzenledi, oluşturdu veya sildi. Verileri yeniden yüklemelisiniz
 There are no new notifications: Yeni bildirim yok
 This is an Administrator Only View.: Bu yalnızca Yönetici Görünümüdür.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Central Atlas Tamazight (Latince, Fas)
 tzm-Tfng-MA: Merkezi Atlas Tamazight (Tifinagh, Fas)
 ug-CN: Uygur (Çin)
 uk-UA: Ukrayna (Ukrayna)
+Unassigned: Atanma -mış
 Update: Güncelleştirmek
 Update Brand: Markayı Güncelleştir
 Update Document: Belgeyi Güncelleştir
@@ -939,7 +963,11 @@ Update Role Permissions: Rol İzinlerini Güncelleştir
 Update User Roles: Kullanıcı Rollerini Güncelleştir
 Updated User Status.: Kullanıcı Durumu Güncelleştirildi.
 Upload: Karşıya yükleme
+Upload File: Dosya Yükle
+Upload Files: Dosya Yükleme
+Upload Folder: Karşıya Yükleme Klasörü
 Upload Image: Resmi Karşıya Yükle
+Upload Qualifications and References: Nitelikleri ve Referansları Yükleme
 ur-IN: Urduca (Hindistan)
 ur-PK: Urduca (Pakistan)
 User: Kullanıcı

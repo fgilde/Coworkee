@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Dżibuti)
+﻿A maximum of {0} files are allowed: Dozwolona jest maksymalnie {0} plików
+aa-DJ: Afar (Dżibuti)
 aa-ER: Afar (Erytrea)
 aa-ET: Afar (Etiopia)
 about: Około
@@ -13,6 +14,7 @@ Add Document Type: Dodaj typ dokumentu
 Add Extended Attribute: Dodaj atrybut rozszerzony
 Add Product: Dodaj produkt
 Add Role: Dodaj rolę
+Addresses: Adresy
 Administrator: Administrator
 Administrator Settings.: Ustawienia administratora.
 Administrators Profile's Status cannot be toggled: Nie można przełączać stanu profilu administratora
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (Republika Południowej Afryki)
 agq-CM: Aghem (Kamerun)
 ak-GH: Will (Ghana)
+All Documents without Type are stored here: Wszystkie dokumenty bez typu są przechowywane tutaj
 All Groups: Wszystkie grupy
 All Permissions: Wszystkie uprawnienia
 Already have an account?: Masz już konto?
@@ -68,6 +71,7 @@ as unread: jako nieprzeczytane
 as-IN: Asamski (Indie)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturia (Hiszpania)
+At least one document is required: Wymagany jest co najmniej jeden dokument
 Audit Trails: Ścieżki audytu
 Audit Trails exported: Wyeksportowane ścieżki inspekcji
 Aug: Sie
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Dewanagari, Indie)
 Don't have an account?: Nie masz konta?
 Done!: Gotowy!
 Download: Pobierać
+Download {0} files separately: Pobierz pliki {0} osobno
+Download {0} with {1} files as zip: Pobierz {0} z plikami {1} jako zip
+Download file {0}: Pobierz {0} plików
+Download file {0} as zip: Pobierz plik {0} jako zip
 dsb-DE: Dolnołużyckiego (Niemcy)
 dua-CM: Duala (Kamerun)
 dv-MV: Divehi (Malediwy)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (łacina, Senegal)
 fi-FI: Fiński (Finlandia)
 fil-PH: Filipiński (Filipiny)
 File is required!: Plik jest wymagany!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Pliki tego typu ({0}) są niedozwolone. Dozwolone są tylko następujące typy "{1}". Wypróbuj jedno z tych rozszerzeń ({2})
 Fill Administrator Credentials: Wypełnianie poświadczeń administratora
 Fill Basic User Credentials: Wypełnianie podstawowych poświadczeń użytkownika
 Filtered Audit Trails exported: Wyeksportowane filtrowane ścieżki inspekcji
@@ -585,6 +594,7 @@ ln-CD: Lingala (Kongo [DRK])
 ln-CF: Lingala (Republika Środkowoafrykańska)
 ln-CG: Lingala (Kongo)
 lo-LA: Laos (Laos)
+Loading: Ładowania
 Local: Lokalny
 Logged In.: Zalogowany.
 Logged Out.: Wylogowany.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Sudan Południowy)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Occitan (Francja)
 Oct: Paź
+Offline: Offline
 Ok: Ok
 Old Values: Stare wartości
 om-ET: Oromo (Etiopia)
 om-KE: Oromo (Kenia)
+Online: Online
 Only Selected Group (Export): Tylko wybrana grupa (eksport)
+Open: Otwierać
 Open Url {0}: Otwórz {0} URL
 or-IN: Odia (Indie)
 os-GE: Ossetic (Gruzja)
@@ -719,6 +732,9 @@ PhoneNumber: Numer telefonu
 pl-PL: Polski (Polska)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Potwierdź swoje konto, klikając <a href='{0}'></a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Zresetuj hasło, klikając <a href='{0}'>.</a>
+Please upload your personal qualifications and references that confirm your person and qualification: Prześlij swoje osobiste kwalifikacje i referencje, które potwierdzają Twoją osobę i kwalifikacje
+Please Wait: Czekaj
+Preview: Prapremiera
 prg-001: Pruski (Świat)
 Primary Key: Klucz podstawowy
 Product Deleted: Produkt usunięty!
@@ -766,6 +782,7 @@ Registered Users: Zarejestrowani użytkownicy
 Reload: Przeładować
 Reload Data: Odśwież dane
 Remember me?: Pamiętasz mnie?
+Remove All: Usuń wszystko
 Reset password: Resetowanie hasła
 Reset Password: Zresetuj hasło
 Resources: Zasoby
@@ -829,6 +846,8 @@ sg-CF: Sango (Republika Środkowoafrykańska)
 shi-Latn-MA: Tachelhit (łacina, Maroko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
 Show: Pokazać
+Show as Tree: Pokaż jako drzewo
+Show flat: Pokaż mieszkanie
 Show notification: Pokaż powiadomienie
 si-LK: Syngaleski (Sri Lanka)
 Sign In: Rejestrowanie
@@ -892,8 +911,12 @@ Text: Tekst
 Text value is required using {0} type!: Wartość tekstowa jest wymagana przy użyciu {0} typu!
 tg-Cyrl-TJ: Tadżycki (cyrylica, Tadżykistan)
 th-TH: Tajski (Tajlandia)
+The content type {0} cannot be displayed without a suitable plugin: Typ zawartości {0} nie może być wyświetlany bez odpowiedniej wtyczki
+The file ({0}) has already been added: Plik ({0}) został już dodany
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Plik przekroczył maksymalny rozmiar {0} z {1}. Rozmiar pliku to {2}
 The following {0} permissions are also required for permission {1}: Następujące uprawnienia {0} są również wymagane do {1} uprawnień
 The following permission is also required for permission {1}: Następujące uprawnienie jest również wymagane do uzyskania uprawnień {1}
+The Plugin '{0}' may be able to help: Wtyczka "{0}" może być w stanie pomóc
 The User {0} has just edited, created or deleted entries here. You should reload the data: Użytkownik {0} właśnie edytował, tworzył lub usuwał wpisy tutaj. Należy ponownie załadować dane
 There are no new notifications: Brak nowych powiadomień
 This is an Administrator Only View.: Jest to widok tylko dla administratorów.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Atlas Centralny Tamazight (łacina, Maroko)
 tzm-Tfng-MA: Atlas Centralny Tamazight (Tifinagh, Maroko)
 ug-CN: Ujgur (Chiny)
 uk-UA: Ukraiński (Ukraina)
+Unassigned: Nieprzypisane
 Update: Aktualizacja
 Update Brand: Zaktualizuj markę
 Update Document: Aktualizowanie dokumentu
@@ -939,7 +963,11 @@ Update Role Permissions: Aktualizowanie uprawnień roli
 Update User Roles: Aktualizowanie ról użytkowników
 Updated User Status.: Zaktualizowano status użytkownika.
 Upload: Przesyłać
+Upload File: Prześlij plik
+Upload Files: Przesyłanie plików
+Upload Folder: Folder przesyłania
 Upload Image: Prześlij obraz
+Upload Qualifications and References: Prześlij kwalifikacje i referencje
 ur-IN: urdu (Indie)
 ur-PK: urdu (Pakistan)
 User: Użytkownik

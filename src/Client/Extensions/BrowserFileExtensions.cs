@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Client.JsInterop;
+using CleanArchitectureBase.Client.Shared.Components;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
@@ -11,28 +13,41 @@ using MudBlazor;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Shared.Helper;
 using CleanArchitectureBase.Shared.Misc;
+using Microsoft.JSInterop;
 
 namespace CleanArchitectureBase.Client.Extensions;
 
 public static class BrowserFileExtensions
 {
+    public static async Task DownloadAsync(this IBrowserFile browserFile, IJSRuntime jsRuntime)
+    {
+        var url = await DataUrl.GetDataUrlAsync(await browserFile.GetBytesAsync(), browserFile.ContentType);
+        await jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "download"), new
+        {
+            Url = url,
+            FileName = $"{browserFile.Name}",
+            MimeType = browserFile.ContentType
+        });
+    }
+
     public static async Task<string> GetDataUrlAsync(this IBrowserFile file)
     {
-        var buffer = await file.GetBytesAsync();
-        return DataUrl.GetDataUrl(buffer, file.ContentType);
+        return await DataUrl.GetDataUrlAsync(await file.GetBytesAsync(), file.ContentType);
     }
 
     public static async Task<byte[]> GetBytesAsync(this IBrowserFile file, CancellationToken cancellationToken = default)
     {
+        if (file is ZipBrowserFile {FileBytes: { }} zipEntry)
+            return zipEntry.FileBytes;
         var buffer = new byte[file.Size];
-        await file.OpenReadStream().ReadAsync(buffer, cancellationToken);
+        await file.OpenReadStream(file.Size).ReadAsync(buffer, cancellationToken);
         return buffer;
     }
 
     public static byte[] GetBytes(this IBrowserFile file)
     {
         var buffer = new byte[file.Size];
-        file.OpenReadStream().Read(buffer);
+        file.OpenReadStream(file.Size).Read(buffer);
         return buffer;
     }
 

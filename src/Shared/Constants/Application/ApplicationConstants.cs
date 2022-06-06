@@ -13,6 +13,7 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public const string Version = "v2.2";
         public const string DefaultLanguageCode = "en-US";
         public const string DefaultDocumentTypeName = "Unassigned";
+        public const int MaxRequestSizeBytes = 30000000;
 
         public static bool HostClientInServer { get; set; }
 

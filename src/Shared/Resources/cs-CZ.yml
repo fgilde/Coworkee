@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Džibutsko)
+﻿A maximum of {0} files are allowed: Je povoleno maximálně {0} souborů
+aa-DJ: Afar (Džibutsko)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopie)
 about: Asi
@@ -13,6 +14,7 @@ Add Document Type: Přidat typ dokumentu
 Add Extended Attribute: Přidat rozšířený atribut
 Add Product: Přidat produkt
 Add Role: Přidat roli
+Addresses: Adresy
 Administrator: Správce
 Administrator Settings.: Nastavení správce.
 Administrators Profile's Status cannot be toggled: Stav profilu správce nelze přepínat
@@ -20,6 +22,7 @@ af-NA: Afrikánština (Namibie)
 af-ZA: Afrikánština (Jižní Afrika)
 agq-CM: Aghem (Kamerun)
 ak-GH: Will (Ghana)
+All Documents without Type are stored here: Zde jsou uloženy všechny dokumenty bez typu
 All Groups: Všechny skupiny
 All Permissions: Všechna oprávnění
 Already have an account?: Už máte účet?
@@ -68,6 +71,7 @@ as unread: jako nepřečtené
 as-IN: Ásámština (Indie)
 asa-TZ: Asu (Tanzanie)
 ast-ES: Asturština (Španělsko)
+At least one document is required: Je vyžadován alespoň jeden dokument
 Audit Trails: Auditní stopy
 Audit Trails exported: Exportované auditní záznamy
 Aug: Srpen
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, Indie)
 Don't have an account?: Nemáte účet?
 Done!: Hotový!
 Download: Stáhnout
+Download {0} files separately: Stažení souborů {0} samostatně
+Download {0} with {1} files as zip: Stáhněte si {0} se soubory {1} jako zip
+Download file {0}: Stáhnout soubor {0}
+Download file {0} as zip: Stáhnout soubor {0} jako zip
 dsb-DE: Dolnolužická srbština (Německo)
 dua-CM: Duala (Kamerun)
 dv-MV: Divehi (Maledivy)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (latinka, Senegal)
 fi-FI: Finština (Finsko)
 fil-PH: Filipínština (Filipíny)
 File is required!: Soubor je povinný!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Soubory tohoto typu ({0}) nejsou povoleny. Pouze následující typy jsou povoleny "{1}". Vyzkoušejte jedno z těchto rozšíření ({2})
 Fill Administrator Credentials: Vyplnění přihlašovacích údajů správce
 Fill Basic User Credentials: Vyplňte základní pověření uživatele
 Filtered Audit Trails exported: Exportované filtrované auditní záznamy
@@ -585,6 +594,7 @@ ln-CD: Lingala (Kongo [DRK])
 ln-CF: Lingala (Středoafrická republika)
 ln-CG: Lingala (Kongo)
 lo-LA: Lao (Laos)
+Loading: Nakládka
 Local: Místní
 Logged In.: Přihlášen.
 Logged Out.: Odhlášen.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Jižní Súdán)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Okcitánština (Francie)
 Oct: Osmičkový
+Offline: Offline
 Ok: Ok
 Old Values: Staré hodnoty
 om-ET: Oromo (Etiopie)
 om-KE: Oromo (Keňa)
+Online: Online
 Only Selected Group (Export): Pouze vybraná skupina (Export)
+Open: Otevřený
 Open Url {0}: Otevřít {0} adres URL
 or-IN: Odia (Indie)
 os-GE: Ossetic (Gruzie)
@@ -719,6 +732,9 @@ PhoneNumber: Telefonní číslo
 pl-PL: Polština (Polsko)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrďte prosím svůj účet <a href='{0}'> kliknutím sem</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Resetujte prosím své heslo <a href='{0}'>kliknutím sem</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Nahrajte prosím své osobní kvalifikace a reference, které potvrzují vaši osobu a kvalifikaci
+Please Wait: Počkejte prosím
+Preview: Náhled
 prg-001: Pruský (svět)
 Primary Key: Primární klíč
 Product Deleted: Produkt smazán!
@@ -766,6 +782,7 @@ Registered Users: Registrovaní uživatelé
 Reload: Dobít
 Reload Data: Opětovné načtení dat
 Remember me?: Pamatuješ si mě?
+Remove All: Odstranit vše
 Reset password: Resetovat heslo
 Reset Password: Obnovit heslo
 Resources: Prostředky
@@ -829,6 +846,8 @@ sg-CF: Sango (Středoafrická republika)
 shi-Latn-MA: Tachelhit (latinka, Maroko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
 Show: Ukázat
+Show as Tree: Zobrazit jako strom
+Show flat: Zobrazit byt
 Show notification: Zobrazit oznámení
 si-LK: Sinhálština (Srí Lanka)
 Sign In: Přihlásit se
@@ -892,8 +911,12 @@ Text: Text
 Text value is required using {0} type!: Textová hodnota je vyžadována pomocí {0} typu!
 tg-Cyrl-TJ: Tádžik (cyrilice, Tádžikistán)
 th-TH: Thajská (Thajsko)
+The content type {0} cannot be displayed without a suitable plugin: Typ obsahu {0} nelze zobrazit bez vhodného pluginu
+The file ({0}) has already been added: Soubor ({0}) již byl přidán
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Soubor překročil maximální velikost {0} s {1}. Velikost souboru je {2}
 The following {0} permissions are also required for permission {1}: Následující oprávnění {0} jsou také vyžadována pro {1} oprávnění
 The following permission is also required for permission {1}: Následující oprávnění je také vyžadováno pro oprávnění {1}
+The Plugin '{0}' may be able to help: Plugin '{0}' může být schopen pomoci
 The User {0} has just edited, created or deleted entries here. You should reload the data: Uživatel {0} zde právě upravil, vytvořil nebo smazal záznamy. Měli byste znovu načíst data
 There are no new notifications: Neexistují žádná nová oznámení
 This is an Administrator Only View.: Toto je zobrazení pouze pro správce.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Centrální Atlas Tamazight (latinka, Maroko)
 tzm-Tfng-MA: Centrální Atlas Tamazight (Tifinagh, Maroko)
 ug-CN: Ujgurština (Čína)
 uk-UA: Ukrajinština (Ukrajina)
+Unassigned: Nepřiřazeno
 Update: Aktualizace
 Update Brand: Aktualizovat značku
 Update Document: Aktualizovat dokument
@@ -939,7 +963,11 @@ Update Role Permissions: Aktualizace oprávnění role
 Update User Roles: Aktualizace rolí uživatelů
 Updated User Status.: Aktualizovaný stav uživatele.
 Upload: Upload
+Upload File: Nahrát soubor
+Upload Files: Vkládat
+Upload Folder: Nahrát složku
 Upload Image: Nahrát obrázek
+Upload Qualifications and References: Nahrát kvalifikace a reference
 ur-IN: Urdština (Indie)
 ur-PK: Urdština (Pákistán)
 User: Uživatel

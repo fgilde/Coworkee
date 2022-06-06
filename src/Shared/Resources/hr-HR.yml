@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Džibuti, BiH)
+﻿A maximum of {0} files are allowed: Dopušteno je najviše {0} datoteka
+aa-DJ: Afar (Džibuti, BiH)
 aa-ER: Afar (Eritreja, BiH)
 aa-ET: Afar (Etiopija)
 about: O
@@ -13,6 +14,7 @@ Add Document Type: Dodaj vrstu dokumenta
 Add Extended Attribute: Dodaj prošireni atribut
 Add Product: Dodaj proizvod
 Add Role: Dodaj ulogu
+Addresses: Adrese
 Administrator: Administrator
 Administrator Settings.: Administratorske postavke.
 Administrators Profile's Status cannot be toggled: Status profila administratora ne može se prebaciti
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibija)
 af-ZA: Afrikaans (Južna Afrika)
 agq-CM: Aghem (Kamerun, BiH)
 ak-GH: Will (Gana, BiH)
+All Documents without Type are stored here: Svi dokumenti bez vrste pohranjeni su ovdje
 All Groups: Sve grupe
 All Permissions: Sve dozvole
 Already have an account?: Već imate račun?
@@ -68,6 +71,7 @@ as unread: kao nepročitano
 as-IN: Asamski (Indija)
 asa-TZ: Asu (Tanzanija, BiH)
 ast-ES: Asturijanski (Španjolska)
+At least one document is required: Potreban je barem jedan dokument
 Audit Trails: Revizijski tragovi
 Audit Trails exported: Izvezeni tragovi nadzora
 Aug: Kolovoz
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, Indija)
 Don't have an account?: Nemate račun?
 Done!: Učinjeno!
 Download: Preuzimanje
+Download {0} files separately: Preuzimanje {0} datoteka zasebno
+Download {0} with {1} files as zip: Preuzimanje {0} s {1} datotekama kao zipom
+Download file {0}: Preuzimanje {0} datoteka
+Download file {0} as zip: Preuzimanje {0} datoteke kao zip
 dsb-DE: Donji Sorbian (Njemačka)
 dua-CM: Duala (Kamerun, BiH)
 dv-MV: Divehi (Maldivi)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (latinica, Senegal)
 fi-FI: Finski (Finska)
 fil-PH: Filipinski (Filipini)
 File is required!: Datoteka je obavezna!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Datoteke ove vrste ({0}) nisu dopuštene. Dopuštena je samo sljedeća vrsta "{1}". Isprobajte jedno od ovih proširenja ({2})
 Fill Administrator Credentials: Ispunjavanje administratorskih vjerodajnica
 Fill Basic User Credentials: Ispunjavanje osnovnih korisničkih vjerodajnica
 Filtered Audit Trails exported: Izvezeni filtrirani tragovi nadzora
@@ -585,6 +594,7 @@ ln-CD: Lingala (Kongo [DR Kongo])
 ln-CF: Lingala (Srednjoafrička Republika)
 ln-CG: Lingala (Kongo)
 lo-LA: Lao (Laos, BiH)
+Loading: Učitavanje
 Local: Lokalan
 Logged In.: Prijavljeni.
 Logged Out.: Odjavljeno.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Južni Sudan)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Okcitan (Francuska)
 Oct: Listopad
+Offline: Nezavisan
 Ok: Ok
 Old Values: Stare vrijednosti
 om-ET: Oromo (Etiopija)
 om-KE: Oromo (Kenija)
+Online: Povezan
 Only Selected Group (Export): Samo odabrana grupa (izvoz)
+Open: Otvoren
 Open Url {0}: Otvori {0} URL-a
 or-IN: Odia (Indija)
 os-GE: Ossetić (Gruzija)
@@ -719,6 +732,9 @@ PhoneNumber: Broj telefona
 pl-PL: Poljski (Poljska)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrdite svoj račun na <a href='{0}'>clicking ovdje</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Vratite lozinku na <a href='{0}'>clicking ovdje</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Prenesite svoje osobne kvalifikacije i reference koje potvrđuju vašu osobu i kvalifikaciju
+Please Wait: Molim te čekaj
+Preview: Pregled
 prg-001: Pruski (svijet)
 Primary Key: Primarni ključ
 Product Deleted: Proizvod izbrisan!
@@ -766,6 +782,7 @@ Registered Users: Registrirani korisnici
 Reload: Ponovno učitati
 Reload Data: Ponovno učitaj podatke
 Remember me?: Sjećaš li me se?
+Remove All: Ukloni sve
 Reset password: Ponovno postavljanje lozinke
 Reset Password: Vrati izvornu lozinku
 Resources: Resursi
@@ -829,6 +846,8 @@ sg-CF: Sango (Srednjoafrička Republika)
 shi-Latn-MA: Tachelhit (latinica, Maroko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Maroko)
 Show: Pokazati
+Show as Tree: Pokaži kao stablo
+Show flat: Pokaži ravno
 Show notification: Pokaži obavijest
 si-LK: Sinhala (Šri Lanka, BiH)
 Sign In: Prijavi se
@@ -892,8 +911,12 @@ Text: Tekstualna poruka
 Text value is required using {0} type!: Tekstna vrijednost potrebna je pomoću vrste {0}!
 tg-Cyrl-TJ: Tadžikistanac (ćirilica, Tadžikistan)
 th-TH: Tajlandski (Tajland)
+The content type {0} cannot be displayed without a suitable plugin: Vrsta sadržaja {0} ne može se prikazati bez odgovarajućeg dodatka
+The file ({0}) has already been added: Datoteka ({0}) je već dodana
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Datoteka je premašila maksimalnu veličinu {0} s {1}. Veličina datoteke je {2}
 The following {0} permissions are also required for permission {1}: Za {1} dozvole potrebne su i sljedeće dozvole za {0}
 The following permission is also required for permission {1}: Za {1} dozvole potrebna je i sljedeća dozvola
+The Plugin '{0}' may be able to help: Dodatak "{0}" možda će vam moći pomoći
 The User {0} has just edited, created or deleted entries here. You should reload the data: Korisnički {0} ovdje je upravo uređivao, kreirao ili brisao unose. Trebali biste ponovno učitati podatke
 There are no new notifications: Nema novih obavijesti
 This is an Administrator Only View.: Ovo je prikaz samo za administratore.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Središnji atlas Tamazight (latinica, Maroko)
 tzm-Tfng-MA: Središnji atlas Tamazight (Tifinagh, Maroko)
 ug-CN: Ujgur (Kina)
 uk-UA: Ukrajinski (Ukrajina)
+Unassigned: Nedodijeljeni
 Update: Ažurirati
 Update Brand: Ažuriraj robnu marku
 Update Document: Ažuriraj dokument
@@ -939,7 +963,11 @@ Update Role Permissions: Ažuriraj dozvole za ulogu
 Update User Roles: Ažuriraj korisničke uloge
 Updated User Status.: Ažurirani status korisnika.
 Upload: Otpremanje
+Upload File: Prenesi datoteku
+Upload Files: Prenesi datoteke
+Upload Folder: Prenesi mapu
 Upload Image: Prenesi sliku
+Upload Qualifications and References: Prenesi kvalifikacije i reference
 ur-IN: Urdu (Indija)
 ur-PK: Urdu (Pakistan)
 User: Korisnik

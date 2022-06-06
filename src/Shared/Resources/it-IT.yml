@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Gibuti)
+﻿A maximum of {0} files are allowed: È consentito un massimo di file {0}
+aa-DJ: Afar (Gibuti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopia)
 about: Circa
@@ -13,6 +14,7 @@ Add Document Type: Aggiungi tipo di documento
 Add Extended Attribute: Aggiungi attributo esteso
 Add Product: Aggiungi prodotto
 Add Role: Aggiungi ruolo
+Addresses: Indirizzi
 Administrator: Amministratore
 Administrator Settings.: Impostazioni dell'amministratore.
 Administrators Profile's Status cannot be toggled: Non è possibile attivare o disattivare lo stato del profilo degli amministratori
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (Sudafrica)
 agq-CM: Aghem (Camerun)
 ak-GH: Will (Ghana)
+All Documents without Type are stored here: Tutti i documenti senza tipo sono memorizzati qui
 All Groups: Tutti i gruppi
 All Permissions: Tutte le autorizzazioni
 Already have an account?: Hai già un account?
@@ -68,6 +71,7 @@ as unread: come non letto
 as-IN: Assamese (India)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spagna)
+At least one document is required: È richiesto almeno un documento
 Audit Trails: Audit Trail
 Audit Trails exported: Audit Trail esportati
 Aug: Ago
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, India)
 Don't have an account?: Non hai un account?
 Done!: Fatto!
 Download: Scaricare
+Download {0} files separately: Scarica i file {0} separatamente
+Download {0} with {1} files as zip: Scarica {0} con {1} file come zip
+Download file {0}: Scarica il file {0}
+Download file {0} as zip: Scarica il file {0} come zip
 dsb-DE: Basso Sorabo (Germania)
 dua-CM: Duala (Camerun)
 dv-MV: Divehi (Maldive)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (latino, Senegal)
 fi-FI: Finlandese (Finlandia)
 fil-PH: Filippino (Filippine)
 File is required!: Il file è obbligatorio!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): I file di questo tipo ({0}) non sono consentiti. Solo i seguenti tipi sono consentiti "{1}". Prova una di queste estensioni ({2})
 Fill Administrator Credentials: Compilare le credenziali di amministratore
 Fill Basic User Credentials: Compilare le credenziali utente di base
 Filtered Audit Trails exported: Audit trail filtrati esportati
@@ -585,6 +594,7 @@ ln-CD: Lingala (Congo [RDC])
 ln-CF: Lingala (Repubblica Centrafricana)
 ln-CG: Lingala (Congo)
 lo-LA: Laos (Laos)
+Loading: Caricamento
 Local: Locale
 Logged In.: Connesso.
 Logged Out.: Disconnesso.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Sudan del Sud)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Occitano (Francia)
 Oct: Ott
+Offline: Off-line
 Ok: Ok
 Old Values: Vecchi valori
 om-ET: Oromo (Etiopia)
 om-KE: Oromo (Kenya)
+Online: In linea
 Only Selected Group (Export): Solo gruppo selezionato (esportazione)
+Open: Aperto
 Open Url {0}: Apri url {0}
 or-IN: Odia (India)
 os-GE: Ossetico (Georgia)
@@ -719,6 +732,9 @@ PhoneNumber: Numero di telefono
 pl-PL: Polacco (Polonia)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Conferma il tuo account <a href='{0}'> cliccando qui</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Reimposta la password <a href='{0}'> cliccando qui</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Carica le tue qualifiche e referenze personali che confermano la tua persona e qualifica
+Please Wait: Attendere prego
+Preview: Anteprima
 prg-001: Prussiano (Mondo)
 Primary Key: Chiave primaria
 Product Deleted: Prodotto cancellato!
@@ -766,6 +782,7 @@ Registered Users: Utenti registrati
 Reload: Ricaricare
 Reload Data: Ricarica dati
 Remember me?: Ti ricordi di me?
+Remove All: Rimuovi tutto
 Reset password: Reimposta password
 Reset Password: Reimposta password
 Resources: Risorse
@@ -829,6 +846,8 @@ sg-CF: Sango (Repubblica Centrafricana)
 shi-Latn-MA: Tachelhit (latino, Marocco)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marocco)
 Show: Mostrare
+Show as Tree: Mostra come albero
+Show flat: Mostra appartamento
 Show notification: Mostra notifica
 si-LK: Singalese (Sri Lanka)
 Sign In: Accedi
@@ -892,8 +911,12 @@ Text: Testo
 Text value is required using {0} type!: Il valore di testo è obbligatorio utilizzando {0} tipo!
 tg-Cyrl-TJ: Tagiko (alfabeto cirillico, Tagikistan)
 th-TH: Thai (Thailandia)
+The content type {0} cannot be displayed without a suitable plugin: Il tipo di contenuto {0} non può essere visualizzato senza un plug-in adatto
+The file ({0}) has already been added: Il file ({0}) è già stato aggiunto
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Il file ha superato la dimensione massima di {0} con {1}. La dimensione del file è {2}
 The following {0} permissions are also required for permission {1}: Per le autorizzazioni di autorizzazione sono necessarie anche le seguenti autorizzazioni {1} {0}
 The following permission is also required for permission {1}: Per l'autorizzazione {1} è necessaria anche la seguente autorizzazione
+The Plugin '{0}' may be able to help: Il plugin '{0}' potrebbe essere in grado di aiutare
 The User {0} has just edited, created or deleted entries here. You should reload the data: L'utente {0} ha appena modificato, creato o eliminato le voci qui. È necessario ricaricare i dati
 There are no new notifications: Non ci sono nuove notifiche
 This is an Administrator Only View.: Si tratta di una visualizzazione solo amministratore.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Atlante centrale Tamazight (latino, Marocco)
 tzm-Tfng-MA: Atlante centrale Tamazight (Tifinagh, Marocco)
 ug-CN: Uiguro (Cina)
 uk-UA: Ucraino (Ucraina)
+Unassigned: Nessuno
 Update: Aggiornare
 Update Brand: Aggiorna marchio
 Update Document: Aggiorna documento
@@ -939,7 +963,11 @@ Update Role Permissions: Aggiornare le autorizzazioni del ruolo
 Update User Roles: Aggiornare i ruoli utente
 Updated User Status.: Stato utente aggiornato.
 Upload: Caricare
+Upload File: Carica file
+Upload Files: Carica file
+Upload Folder: Carica cartella
 Upload Image: Carica immagine
+Upload Qualifications and References: Carica qualifiche e riferimenti
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: Utente

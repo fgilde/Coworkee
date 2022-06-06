@@ -188,6 +188,9 @@ body * {
 .mud-alert-message-w-100 > .mud-alert-position > .mud-alert-message {
     width: 100%;
 }
+.mud-alert-message-mt-5 > .mud-alert-position > .mud-alert-message {
+    margin-top: -5px;
+}
 
 .dialog-content-full-height > .outline-none {
     height: 100%

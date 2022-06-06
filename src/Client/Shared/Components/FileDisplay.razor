@@ -7,12 +7,12 @@
 <div class="file-display-container">
     @if (_isZip)
     {
-        <FileDisplayZip RootFolderName="@FileName" ContentStream="@ContentStream" Url="@Url"></FileDisplayZip>
+        <FileDisplayZip AllowDownload="@AllowDownload" RootFolderName="@FileName" ContentStream="@ContentStream" Url="@Url"></FileDisplayZip>
     }
     else
     {
         <div class="file-display">
-            <MudElement UserAttributes="@renderInfos.attributes" HtmlTag="@renderInfos.tag" />
+            <MudElement UserAttributes="@renderInfos.attributes" HtmlTag="@renderInfos.tag"/>
         </div>
     }
     <div id="content-type-display-error">
@@ -24,13 +24,13 @@
             @if (PossiblePlugin != null)
             {
                 <MudButton HtmlTag="label"
-                       Class="w-100 my-4"
-                       Variant="Variant.Text"
-                       Color="Color.Primary"
-                       Size="Size.Small"
-                       Href="@PossiblePlugin.Url"
-                       Target="_blank"
-                       StartIcon="@(Icons.TwoTone.Shop)">
+                           Class="w-100 my-4"
+                           Variant="Variant.Text"
+                           Color="Color.Primary"
+                           Size="Size.Small"
+                           Href="@PossiblePlugin.Url"
+                           Target="_blank"
+                           StartIcon="@(Icons.TwoTone.Shop)">
                     @(_localizer["The Plugin '{0}' may be able to help", PossiblePlugin.Name])
                 </MudButton>
             }

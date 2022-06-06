@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Djibouti)
+﻿A maximum of {0} files are allowed: Un maximum de fichiers {0} sont autorisés
+aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Érythrée)
 aa-ET: Afar (Éthiopie)
 about: Environ
@@ -13,6 +14,7 @@ Add Document Type: Ajouter un type de document
 Add Extended Attribute: Ajouter un attribut étendu
 Add Product: Ajouter un produit
 Add Role: Ajouter un rôle
+Addresses: Adresses
 Administrator: Administrateur
 Administrator Settings.: Paramètres de l’administrateur.
 Administrators Profile's Status cannot be toggled: L’état du profil administrateurs ne peut pas être basculé
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibie)
 af-ZA: Afrikaans (Afrique du Sud)
 agq-CM: Aghem (Cameroun)
 ak-GH: Will (Ghana)
+All Documents without Type are stored here: Tous les documents sans type sont stockés ici
 All Groups: Tous les groupes
 All Permissions: Toutes les autorisations
 Already have an account?: Vous avez déjà un compte ?
@@ -68,6 +71,7 @@ as unread: comme non lu
 as-IN: Assamais (Inde)
 asa-TZ: Asu (Tanzanie)
 ast-ES: Asturien (Espagne)
+At least one document is required: Au moins un document est requis
 Audit Trails: Pistes d’audit
 Audit Trails exported: Pistes d’audit exportées
 Aug: Août
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, Inde)
 Don't have an account?: Vous n’avez pas de compte ?
 Done!: Fait!
 Download: Télécharger
+Download {0} files separately: Télécharger {0} fichiers séparément
+Download {0} with {1} files as zip: Télécharger {0} avec {1} fichiers au format zip
+Download file {0}: Télécharger le fichier {0}
+Download file {0} as zip: Télécharger le fichier {0} au format zip
 dsb-DE: Bas-sorabe (Allemagne)
 dua-CM: Duala (Cameroun)
 dv-MV: Divehi (Maldives)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (latin, Sénégal)
 fi-FI: Finnois (Finlande)
 fil-PH: Philippin (Philippines)
 File is required!: Le fichier est requis!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Les fichiers de ce type ({0}) ne sont pas autorisés. Seuls les types suivants sont autorisés '{1}'. Essayez l’une de ces extensions ({2})
 Fill Administrator Credentials: Remplir les informations d’identification de l’administrateur
 Fill Basic User Credentials: Remplir les informations d’identification de l’utilisateur de base
 Filtered Audit Trails exported: Pistes d’audit filtrées exportées
@@ -585,6 +594,7 @@ ln-CD: Lingala (Congo [RDC])
 ln-CF: Lingala (République centrafricaine)
 ln-CG: Lingala (Congo)
 lo-LA: Lao (Laos)
+Loading: Chargement
 Local: Local
 Logged In.: Connecté.
 Logged Out.: Déconnecté.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Soudan du Sud)
 nyn-UG: Nyankole (Ouganda)
 oc-FR: Occitan (France)
 Oct: Opo
+Offline: Hors-ligne
 Ok: D’accord
 Old Values: Anciennes valeurs
 om-ET: Oromo (Éthiopie)
 om-KE: Oromo (Kenya)
+Online: En ligne
 Only Selected Group (Export): Seul le groupe sélectionné (exporter)
+Open: Ouvrir
 Open Url {0}: Ouvrir l’URL {0}
 or-IN: Odia (Inde)
 os-GE: Ossetic (Géorgie)
@@ -719,6 +732,9 @@ PhoneNumber: Numéro de téléphone
 pl-PL: Polonais (Pologne)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Veuillez confirmer votre compte en cliquant <a href='{0}'>cliquez ici</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Veuillez réinitialiser votre mot de passe en <a href='{0}'>cliquer ici</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Veuillez télécharger vos qualifications personnelles et les références qui confirment votre personne et votre qualification
+Please Wait: Veuillez patienter
+Preview: Aperçu
 prg-001: Prussien (Monde)
 Primary Key: Clé primaire
 Product Deleted: Produit supprimé!
@@ -766,6 +782,7 @@ Registered Users: Utilisateurs enregistrés
 Reload: Recharger
 Reload Data: Recharger les données
 Remember me?: Souvenez-vous de moi?
+Remove All: Supprimer tout
 Reset password: Réinitialiser le mot de passe
 Reset Password: Réinitialiser le mot de passe
 Resources: Ressources
@@ -829,6 +846,8 @@ sg-CF: Sango (République centrafricaine)
 shi-Latn-MA: Tachelhit (Latin, Morocco)
 shi-Tfng-MA: Tachelhit (Tifinagh, Morocco)
 Show: Montrer
+Show as Tree: Afficher en tant qu’arbre
+Show flat: Afficher l’appartement
 Show notification: Afficher la notification
 si-LK: Cinghalais (Sri Lanka)
 Sign In: Connexion
@@ -892,8 +911,12 @@ Text: SMS
 Text value is required using {0} type!: La valeur de texte est requise à l’aide du type {0}!
 tg-Cyrl-TJ: Tadjik (cyrillique, Tadjikistan)
 th-TH: Thaï (Thaïlande)
+The content type {0} cannot be displayed without a suitable plugin: Le type de contenu {0} ne peut pas être affiché sans un plugin approprié
+The file ({0}) has already been added: Le fichier ({0}) a déjà été ajouté
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Le fichier a dépassé la taille maximale de {0} avec {1}. La taille du fichier est {2}
 The following {0} permissions are also required for permission {1}: Les autorisations de {0} suivantes sont également requises pour les autorisations {1}
 The following permission is also required for permission {1}: L’autorisation suivante est également requise pour l’autorisation {1}
+The Plugin '{0}' may be able to help: Le plugin '{0}' peut être en mesure d’aider
 The User {0} has just edited, created or deleted entries here. You should reload the data: L’Utilisateur {0} vient de modifier, créer ou supprimer des entrées ici. Vous devez recharger les données
 There are no new notifications: Il n’y a pas de nouvelles notifications
 This is an Administrator Only View.: Il s’agit d’une vue Administrateur uniquement.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Tamazight de l’Atlas central (latin, Maroc)
 tzm-Tfng-MA: Tamazight de l’Atlas central (Tifinagh, Maroc)
 ug-CN: Ouïghour (Chine)
 uk-UA: Ukrainien (Ukraine)
+Unassigned: Non attribué
 Update: Mettre à jour
 Update Brand: Mettre à jour la marque
 Update Document: Document de mise à jour
@@ -939,7 +963,11 @@ Update Role Permissions: Mettre à jour les autorisations de rôle
 Update User Roles: Mettre à jour les rôles d’utilisateur
 Updated User Status.: Statut de l’utilisateur mis à jour.
 Upload: Télécharger
+Upload File: Télécharger le fichier
+Upload Files: Télécharger des fichiers
+Upload Folder: Télécharger le dossier
 Upload Image: Télécharger l’image
+Upload Qualifications and References: Télécharger les qualifications et les références
 ur-IN: Ourdou (Inde)
 ur-PK: Ourdou (Pakistan)
 User: Utilisateur

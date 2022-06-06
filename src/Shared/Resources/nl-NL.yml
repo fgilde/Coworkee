@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Djibouti)
+﻿A maximum of {0} files are allowed: Maximaal {0} bestanden zijn toegestaan
+aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Ethiopië)
 about: Over
@@ -13,6 +14,7 @@ Add Document Type: Documenttype toevoegen
 Add Extended Attribute: Uitgebreid kenmerk toevoegen
 Add Product: Product toevoegen
 Add Role: Rol toevoegen
+Addresses: Adressen
 Administrator: Administrateur
 Administrator Settings.: Beheerdersinstellingen.
 Administrators Profile's Status cannot be toggled: Status beheerdersprofiel kan niet worden omgeschakeld
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibië)
 af-ZA: Afrikaans (Zuid-Afrika)
 agq-CM: Aghem (Kameroen)
 ak-GH: Will (Ghana)
+All Documents without Type are stored here: Alle documenten zonder type worden hier opgeslagen
 All Groups: Alle groepen
 All Permissions: Alle machtigingen
 Already have an account?: Heb je al een account?
@@ -68,6 +71,7 @@ as unread: als ongelezen
 as-IN: Assamees (India)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spanje)
+At least one document is required: Ten minste één document is vereist
 Audit Trails: Audittrails
 Audit Trails exported: Geëxporteerde audittrails
 Aug: Aug
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, India)
 Don't have an account?: Heb je nog geen account?
 Done!: Klaar!
 Download: Downloaden
+Download {0} files separately: Download {0} bestanden afzonderlijk
+Download {0} with {1} files as zip: Download {0} met {1} bestanden als zip
+Download file {0}: Download bestand {0}
+Download file {0} as zip: Download bestand {0} als zip
 dsb-DE: Nedersorbisch (Duitsland)
 dua-CM: Duala (Kameroen)
 dv-MV: Divehi (Malediven)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (Latijn, Senegal)
 fi-FI: Fins (Finland)
 fil-PH: Filipijns (Filipijnen)
 File is required!: Bestand is vereist!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Bestanden van dit type ({0}) zijn niet toegestaan. Alleen volgende typen zijn '{1}' toegestaan. Probeer een van deze extensies ({2})
 Fill Administrator Credentials: Beheerdersreferenties invullen
 Fill Basic User Credentials: Basisgebruikersreferenties invullen
 Filtered Audit Trails exported: Geëxporteerde gefilterde audittrails
@@ -585,6 +594,7 @@ ln-CD: Lingala (Congo [DRC])
 ln-CF: Lingala (Centraal-Afrikaanse Republiek)
 ln-CG: Lingala (Congo)
 lo-LA: Lao (Laos)
+Loading: Laden
 Local: Lokaal
 Logged In.: Ingelogd.
 Logged Out.: Uitgelogd.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Zuid-Soedan)
 nyn-UG: Nyankole (Oeganda)
 oc-FR: Occitaans (Frankrijk)
 Oct: Oct
+Offline: Offline
 Ok: OK
 Old Values: Oude waarden
 om-ET: Oromo (Ethiopië)
 om-KE: Oromo (Kenia)
+Online: Online
 Only Selected Group (Export): Alleen geselecteerde groep (exporteren)
+Open: Openen
 Open Url {0}: Url-{0} openen
 or-IN: Odia (Indië)
 os-GE: Ossetic (Georgië)
@@ -719,6 +732,9 @@ PhoneNumber: Telefoonnummer
 pl-PL: Pools (Polen)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Bevestig uw account door hier <a href='{0}'> te klikken</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Stel uw wachtwoord opnieuw in door <a href='{0}'>klik hier</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Upload uw persoonlijke kwalificaties en referenties die uw persoon en kwalificatie bevestigen
+Please Wait: Een ogenblik geduld
+Preview: Voorbeeld
 prg-001: Pruisisch (Wereld)
 Primary Key: Primaire sleutel
 Product Deleted: Product verwijderd!
@@ -766,6 +782,7 @@ Registered Users: Geregistreerde gebruikers
 Reload: Herladen
 Reload Data: Gegevens opnieuw laden
 Remember me?: Ken je me nog?
+Remove All: Alles verwijderen
 Reset password: Wachtwoord opnieuw instellen
 Reset Password: Wachtwoord opnieuw instellen
 Resources: Weg
@@ -829,6 +846,8 @@ sg-CF: Sango (Centraal-Afrikaanse Republiek)
 shi-Latn-MA: Tachelhit (Latijn, Marokko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marokko)
 Show: Tonen
+Show as Tree: Weergeven als boomstructuur
+Show flat: Toon flat
 Show notification: Toon melding
 si-LK: Singalees (Sri Lanka)
 Sign In: Aanmelden
@@ -892,8 +911,12 @@ Text: Sms
 Text value is required using {0} type!: Tekstwaarde is vereist met behulp van {0} type!
 tg-Cyrl-TJ: Tadzjieks (Cyrillisch, Tadzjikistan)
 th-TH: Thais (Thailand)
+The content type {0} cannot be displayed without a suitable plugin: Het inhoudstype {0} kan niet worden weergegeven zonder een geschikte plug-in
+The file ({0}) has already been added: Het bestand ({0}) is al toegevoegd
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Het bestand heeft de maximale grootte van {0} met {1} overschreden. Bestandsgrootte is {2}
 The following {0} permissions are also required for permission {1}: De volgende {0} machtigingen zijn ook vereist voor toestemming {1}
 The following permission is also required for permission {1}: De volgende toestemming is ook vereist voor toestemming {1}
+The Plugin '{0}' may be able to help: De plug-in '{0}' kan mogelijk helpen
 The User {0} has just edited, created or deleted entries here. You should reload the data: De Gebruiker {0} heeft hier zojuist items bewerkt, gemaakt of verwijderd. U moet de gegevens opnieuw laden
 There are no new notifications: Er zijn geen nieuwe meldingen
 This is an Administrator Only View.: Dit is een weergave alleen voor beheerders.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Central Atlas Tamazight (Latijn, Marokko)
 tzm-Tfng-MA: Central Atlas Tamazight (Tifinagh, Marokko)
 ug-CN: Oeigoers (China)
 uk-UA: Oekraïens (Oekraïne)
+Unassigned: Toegewezen
 Update: Update
 Update Brand: Merk bijwerken
 Update Document: Document bijwerken
@@ -939,7 +963,11 @@ Update Role Permissions: Rolmachtigingen bijwerken
 Update User Roles: Gebruikersrollen bijwerken
 Updated User Status.: Bijgewerkte gebruikersstatus.
 Upload: Uploaden
+Upload File: Bestand uploaden
+Upload Files: Bestanden uploaden
+Upload Folder: Map uploaden
 Upload Image: Afbeelding uploaden
+Upload Qualifications and References: Kwalificaties en referenties uploaden
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: Gebruiker

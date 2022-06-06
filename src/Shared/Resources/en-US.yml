@@ -1,4 +1,5 @@
-﻿aa-DJ: Afar (Djibouti)
+﻿A maximum of {0} files are allowed: A maximum of {0} files are allowed
+aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Ethiopia)
 about: About
@@ -13,6 +14,7 @@ Add Document Type: Add Document Type
 Add Extended Attribute: Add Extended Attribute
 Add Product: Add Product
 Add Role: Add Role
+Addresses: Addresses
 Administrator: Administrator
 Administrator Settings.: Administrator Settings.
 Administrators Profile's Status cannot be toggled: Administrators Profile's Status cannot be toggled
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (South Africa)
 agq-CM: Aghem (Cameroon)
 ak-GH: Akan (Ghana)
+All Documents without Type are stored here: All Documents without Type are stored here
 All Groups: All Groups
 All Permissions: All Permissions
 Already have an account?: Already have an account?
@@ -68,6 +71,7 @@ as unread: as unread
 as-IN: Assamese (India)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spain)
+At least one document is required: At least one document is required
 Audit Trails: Audit Trails
 Audit Trails exported: Audit Trails exported
 Aug: Aug
@@ -202,6 +206,10 @@ doi-Deva-IN: Dogri (Devanagari, India)
 Don't have an account?: Don't have an account?
 Done!: Done!
 Download: Download
+Download {0} files separately: Download {0} files separately
+Download {0} with {1} files as zip: Download {0} with {1} files as zip
+Download file {0}: Download file {0}
+Download file {0} as zip: Download file {0} as zip
 dsb-DE: Lower Sorbian (Germany)
 dua-CM: Duala (Cameroon)
 dv-MV: Divehi (Maldives)
@@ -417,6 +425,7 @@ ff-Latn-SN: Fulah (Latin, Senegal)
 fi-FI: Finnish (Finland)
 fil-PH: Filipino (Philippines)
 File is required!: File is required!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2})
 Fill Administrator Credentials: Fill Administrator Credentials
 Fill Basic User Credentials: Fill Basic User Credentials
 Filtered Audit Trails exported: Filtered Audit Trails exported
@@ -584,6 +593,7 @@ ln-CD: Lingala (Congo [DRC])
 ln-CF: Lingala (Central African Republic)
 ln-CG: Lingala (Congo)
 lo-LA: Lao (Laos)
+Loading: Loading
 Local: Local
 Logged In.: Logged In.
 Logged Out.: Logged Out.
@@ -684,11 +694,14 @@ nus-SS: Nuer (South Sudan)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Occitan (France)
 Oct: Oct
+Offline: Offline
 Ok: Ok
 Old Values: Old Values
 om-ET: Oromo (Ethiopia)
 om-KE: Oromo (Kenya)
+Online: Online
 Only Selected Group (Export): Only Selected Group (Export)
+Open: Open
 Open Url {0}: Open Url {0}
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
@@ -718,6 +731,9 @@ PhoneNumber: PhoneNumber
 pl-PL: Polish (Poland)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Please confirm your account by <a href='{0}'>clicking here</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Please reset your password by <a href='{0}'>clicking here</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Please upload your personal qualifications and references that confirm your person and qualification
+Please Wait: Please Wait
+Preview: Preview
 prg-001: Prussian (World)
 Primary Key: Primary Key
 Product Deleted: Product deleted!
@@ -765,6 +781,7 @@ Registered Users: Registered Users
 Reload: Reload
 Reload Data: Reload Data
 Remember me?: Remember me?
+Remove All: Remove All
 Reset password: Reset password
 Reset Password: Reset Password
 Resources: Resources
@@ -828,6 +845,8 @@ sg-CF: Sango (Central African Republic)
 shi-Latn-MA: Tachelhit (Latin, Morocco)
 shi-Tfng-MA: Tachelhit (Tifinagh, Morocco)
 Show: Show
+Show as Tree: Show as Tree
+Show flat: Show flat
 Show notification: Show notification
 si-LK: Sinhala (Sri Lanka)
 Sign In: Sign In
@@ -891,8 +910,12 @@ Text: Text
 Text value is required using {0} type!: Text value is required using {0} type!
 tg-Cyrl-TJ: Tajik (Cyrillic, Tajikistan)
 th-TH: Thai (Thailand)
+The content type {0} cannot be displayed without a suitable plugin: The content type {0} cannot be displayed without a suitable plugin
+The file ({0}) has already been added: The file ({0}) has already been added
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: The file has exceeded the maximum size of {0} with {1}. File size is {2}
 The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
 The following permission is also required for permission {1}: The following permission is also required for permission {1}
+The Plugin '{0}' may be able to help: The Plugin '{0}' may be able to help
 The User {0} has just edited, created or deleted entries here. You should reload the data: The User {0} has just edited, created or deleted entries here. You should reload the data
 There are no new notifications: There are no new notifications
 This is an Administrator Only View.: This is an Administrator Only View.
@@ -926,6 +949,7 @@ tzm-Latn-MA: Central Atlas Tamazight (Latin, Morocco)
 tzm-Tfng-MA: Central Atlas Tamazight (Tifinagh, Morocco)
 ug-CN: Uyghur (China)
 uk-UA: Ukrainian (Ukraine)
+Unassigned: Unassigned
 Update: Update
 Update Brand: Update Brand
 Update Document: Update Document
@@ -938,7 +962,11 @@ Update Role Permissions: Update Role Permissions
 Update User Roles: Update User Roles
 Updated User Status.: Updated User Status.
 Upload: Upload
+Upload File: Upload File
+Upload Files: Upload Files
+Upload Folder: Upload Folder
 Upload Image: Upload Image
+Upload Qualifications and References: Upload Qualifications and References
 ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: User
@@ -1002,26 +1030,3 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
-Please Wait: Please Wait
-Loading: Loading
-Please upload your personal qualifications and references that confirm your person and qualification: Please upload your personal qualifications and references that confirm your person and qualification
-Upload Qualifications and References: Upload Qualifications and References
-At least one document is required: At least one document is required
-Unassigned: Unassigned
-All Documents without Type are stored here: All Documents without Type are stored here
-Upload Files: Upload Files
-Upload File: Upload File
-Remove All: Remove All
-Show as Tree: Show as Tree
-Show flat: Show flat
-Addresses: Addresses
-Online: Online
-Offline: Offline
-Open: Open
-The content type {0} cannot be displayed without a suitable plugin: The content type {0} cannot be displayed without a suitable plugin
-The Plugin '{0}' may be able to help: The Plugin '{0}' may be able to help
-Upload Folder: Upload Folder
-The file ({0}) has already been added: The file ({0}) has already been added
-The file has exceeded the maximum size of {0} with {1}. File size is {2}: The file has exceeded the maximum size of {0} with {1}. File size is {2}
-A maximum of {0} files are allowed: A maximum of {0} files are allowed
-Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2})

@@ -25,18 +25,18 @@ public enum MimeTypeRestrictionType
 
 public record ZipBrowserFile: IBrowserFile
 {
-    private readonly ZipArchiveEntry _entry;
-    private Stream _stream;
-    private byte[] fileBytes;
-    public ZipBrowserFile(ZipArchiveEntry entry)
+    public ZipArchiveEntry Entry { get; }
+    public byte[] FileBytes { get; private set; }
+
+    public ZipBrowserFile(ZipArchiveEntry entry, bool load = true)
     {
-        using var fileStream = entry.Open();
-        fileBytes = GetBytes(fileStream);
-        
-        _entry = entry;
-        Name = _entry.Name;
-        Size = _entry.Length;
-        LastModified = _entry.LastWriteTime;
+        if (load)
+            FileBytes = GetBytes(entry.Open());
+
+        Entry = entry;
+        Name = Entry.Name;
+        Size = Entry.Length;
+        LastModified = Entry.LastWriteTime;
         FullName = entry.FullName;
         ContentType = MimeTypesMap.GetMimeType(entry.FullName);
 
@@ -48,7 +48,7 @@ public record ZipBrowserFile: IBrowserFile
 
     public Stream OpenReadStream(long maxAllowedSize = 512000, CancellationToken cancellationToken = default)
     {
-        return new MemoryStream(fileBytes);
+        return new MemoryStream(FileBytes ??= GetBytes(Entry.Open()));
     }
 
     public static byte[] GetBytes(Stream input)

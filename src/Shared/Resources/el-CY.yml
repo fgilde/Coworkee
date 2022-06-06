@@ -1,4 +1,5 @@
-﻿aa-DJ: Από μακριά (Τζιμπουτί)
+﻿A maximum of {0} files are allowed: Επιτρέπονται έως {0} αρχεία
+aa-DJ: Από μακριά (Τζιμπουτί)
 aa-ER: Από μακριά (Ερυθραία)
 aa-ET: Από μακριά (Αιθιοπία)
 about: Περίπου
@@ -13,6 +14,7 @@ Add Document Type: Προσθήκη τύπου εγγράφου
 Add Extended Attribute: Προσθήκη εκτεταμένου χαρακτηριστικού
 Add Product: Προσθήκη προϊόντος
 Add Role: Προσθήκη ρόλου
+Addresses: Διευθύνσεις
 Administrator: Διαχειριστής
 Administrator Settings.: Ρυθμίσεις διαχειριστή.
 Administrators Profile's Status cannot be toggled: Δεν είναι δυνατή η εναλλαγή της κατάστασης του προφίλ διαχειριστών
@@ -20,6 +22,7 @@ af-NA: Αφρικανοί (Ναμίμπια)
 af-ZA: Αφρικανοί (Νότια Αφρική)
 agq-CM: Αγκέμ (Καμερούν)
 ak-GH: Γουίλ (Γκάνα)
+All Documents without Type are stored here: Όλα τα έγγραφα χωρίς τύπο αποθηκεύονται εδώ
 All Groups: Όλες οι ομάδες
 All Permissions: Όλα τα δικαιώματα
 Already have an account?: Έχεις ήδη λογαριασμό;
@@ -68,6 +71,7 @@ as unread: τόσο αδιάβαστο
 as-IN: Ασαμέζικα (Ινδία)
 asa-TZ: Ασού (Τανζανία)
 ast-ES: Αστουριάν (Ισπανία)
+At least one document is required: Απαιτείται τουλάχιστον ένα έγγραφο
 Audit Trails: Διαδρομές ελέγχου
 Audit Trails exported: Διαδρομή ελέγχου που εξάγεται
 Aug: Αυγ
@@ -203,6 +207,10 @@ doi-Deva-IN: Ντογκρί (Ντεβαναγκάρι, Ινδία)
 Don't have an account?: Δεν έχεις λογαριασμό;
 Done!: Έγινε, έγινε!
 Download: Καταφόρτωση
+Download {0} files separately: Λήψη αρχείων {0} ξεχωριστά
+Download {0} with {1} files as zip: Κατεβάστε {0} με {1} αρχεία ως zip
+Download file {0}: Λήψη {0} αρχείου
+Download file {0} as zip: Λήψη {0} αρχείου ως zip
 dsb-DE: Κάτω Σορβικά (Γερμανία)
 dua-CM: Duala (Καμερούν)
 dv-MV: Δύκι (Μαλδίβες)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (Λατινικά, Σενεγάλη)
 fi-FI: Φινλανδικά (Φινλανδία)
 fil-PH: Φιλιππινέζικα (Φιλιππίνες)
 File is required!: Το αρχείο είναι απαραίτητο!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Δεν επιτρέπονται αρχεία αυτού του τύπου ({0}). Επιτρέπονται μόνο οι ακόλουθοι τύποι «{1}». Δοκιμάστε μία από αυτές τις επεκτάσεις ({2})
 Fill Administrator Credentials: Γέμισμα διαπιστευτηρίων διαχειριστή
 Fill Basic User Credentials: Γέμισμα βασικών διαπιστευτηρίων χρήστη
 Filtered Audit Trails exported: Φιλτραρισμένα μονοπάτια ελέγχου που εξάγονται
@@ -585,6 +594,7 @@ ln-CD: Λινγκάλα (Κονγκό [ΛΔΚ])
 ln-CF: Lingala (Κεντροαφρικανική Δημοκρατία)
 ln-CG: Λινγκάλα (Κονγκό)
 lo-LA: Λάο (Λάος)
+Loading: Φόρτωση
 Local: Τοπικός
 Logged In.: Συνδέθηκε.
 Logged Out.: Αποσυνδέθηκε.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Νότιο Σουδάν)
 nyn-UG: Νιάνκολ (Ουγκάντα)
 oc-FR: Οκιτάν (Γαλλία)
 Oct: Σεπ
+Offline: Εκτός σύνδεσης
 Ok: Ok
 Old Values: Παλαιές τιμές
 om-ET: Ορόμο (Αιθιοπία)
 om-KE: Ορόμο (Κένυα)
+Online: Σε απευθείας σύνδεση
 Only Selected Group (Export): Μόνο επιλεγμένη ομάδα (εξαγωγή)
+Open: Ανοίγω
 Open Url {0}: Άνοιγμα {0} url
 or-IN: Όντια (Ινδία)
 os-GE: Οσετί (Γεωργία)
@@ -719,6 +732,9 @@ PhoneNumber: Αριθμός τηλεφώνου
 pl-PL: Πολωνικά (Πολωνία)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Επιβεβαιώστε τον λογαριασμό σας με <a href={0}'> κλικ εδώ</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Παρακαλώ επαναφέρετε τον κωδικό πρόσβασής σας με <a href={0}'> κλικ εδώ</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Παρακαλούμε ανεβάστε τα προσωπικά σας προσόντα και αναφορές που επιβεβαιώνουν το πρόσωπο και τα προσόντα σας
+Please Wait: Παρακαλώ περίμενε
+Preview: Προεπισκόπηση
 prg-001: Πρωσικός (Κόσμος)
 Primary Key: Πρωτεύον κλειδί
 Product Deleted: Το προϊόν διαγράφηκε!
@@ -766,6 +782,7 @@ Registered Users: Εγγεγραμμένοι χρήστες
 Reload: Φορτώσετε εκ νέου
 Reload Data: Επαναφόρτωση δεδομένων
 Remember me?: Με θυμάστε;
+Remove All: Κατάργηση όλων
 Reset password: Επαναφορά κωδικού πρόσβασης
 Reset Password: Επαναφορά κωδικού πρόσβασης
 Resources: Πόροι
@@ -829,6 +846,8 @@ sg-CF: Sango (Κεντροαφρικανική Δημοκρατία)
 shi-Latn-MA: Ταχελχίτ (Λατινικά, Μαρόκο)
 shi-Tfng-MA: Ταχέλχιτ (Τίφιναγκ, Μαρόκο)
 Show: Δείχνω
+Show as Tree: Εμφάνιση ως δέντρου
+Show flat: Εμφάνιση επίπεδης επιφάνειας
 Show notification: Εμφάνιση ειδοποίησης
 si-LK: Σινχάλα (Σρι Λάνκα)
 Sign In: Είσοδος
@@ -892,8 +911,12 @@ Text: Κείμενο
 Text value is required using {0} type!: Η τιμή κειμένου απαιτείται με {0} τύπο!
 tg-Cyrl-TJ: Τατζίκ (Κυριλλικά, Τατζικιστάν)
 th-TH: Ταϊλανδικά (Ταϊλάνδη)
+The content type {0} cannot be displayed without a suitable plugin: Ο τύπος περιεχομένου {0} δεν μπορεί να εμφανιστεί χωρίς κατάλληλο πρόσθετο
+The file ({0}) has already been added: Το αρχείο ({0}) έχει ήδη προστεθεί
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Το αρχείο έχει υπερβεί το μέγιστο μέγεθος {0} με {1}. Το μέγεθος του αρχείου είναι {2}
 The following {0} permissions are also required for permission {1}: Τα ακόλουθα δικαιώματα {0} απαιτούνται επίσης για {1} δικαιωμάτων
 The following permission is also required for permission {1}: Απαιτείται επίσης το ακόλουθο δικαίωμα για την {1} δικαιωμάτων
+The Plugin '{0}' may be able to help: Το πρόσθετο «{0}» μπορεί να είναι σε θέση να βοηθήσει
 The User {0} has just edited, created or deleted entries here. You should reload the data: Η {0} χρήστη έχει μόλις επεξεργαστεί, δημιουργήσει ή διαγράψει καταχωρήσεις εδώ. Θα πρέπει να φορτώσετε ξανά τα δεδομένα
 There are no new notifications: Δεν υπάρχουν νέες ειδοποιήσεις
 This is an Administrator Only View.: Αυτή είναι μια προβολή μόνο διαχειριστή.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Κεντρικός Άτλας Tamazight (Λατινικά, Μαρό
 tzm-Tfng-MA: Κεντρικός Άτλας Ταμαζάιτ (Τίφιναγκ, Μαρόκο)
 ug-CN: Ουιγούρος (Κίνα)
 uk-UA: Ουκρανικά (Ουκρανία)
+Unassigned: Μη εκχωρημένο
 Update: Ενημερώνω
 Update Brand: Ενημέρωση επωνυμίας
 Update Document: Ενημέρωση εγγράφου
@@ -939,7 +963,11 @@ Update Role Permissions: Ενημέρωση δικαιωμάτων ρόλων
 Update User Roles: Ενημέρωση ρόλων χρηστών
 Updated User Status.: Ενημερωμένη κατάσταση χρήστη.
 Upload: Ανέβασμα
+Upload File: Αποστολή αρχείου
+Upload Files: Αποστολή αρχείων
+Upload Folder: Φάκελος αποστολής
 Upload Image: Αποστολή εικόνας
+Upload Qualifications and References: Αποστολή προσόντων και αναφορών
 ur-IN: Ουρντού (Ινδία)
 ur-PK: Ουρντού (Πακιστάν)
 User: Χρήστης

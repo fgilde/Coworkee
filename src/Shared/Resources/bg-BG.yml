@@ -1,4 +1,5 @@
-﻿aa-DJ: Афар (Джибути)
+﻿A maximum of {0} files are allowed: Допускат се максимум {0} файлове
+aa-DJ: Афар (Джибути)
 aa-ER: Афар (Еритрея)
 aa-ET: Афар (Етиопия)
 about: За
@@ -13,6 +14,7 @@ Add Document Type: Добавяне на тип документ
 Add Extended Attribute: Добавяне на разширен атрибут
 Add Product: Добавяне на продукт
 Add Role: Добавяне на роля
+Addresses: Адреси
 Administrator: Администратор
 Administrator Settings.: Настройки на администратора.
 Administrators Profile's Status cannot be toggled: Състоянието на профила на администраторите не може да бъде превключвано
@@ -20,6 +22,7 @@ af-NA: Африкаанс (Намибия)
 af-ZA: Африкаанс (Южна Африка)
 agq-CM: Ахем (Камерун)
 ak-GH: Уил (Гана)
+All Documents without Type are stored here: Всички Документи без Тип се съхраняват тук
 All Groups: Всички групи
 All Permissions: Всички разрешения
 Already have an account?: Вече имате сметка?
@@ -68,6 +71,7 @@ as unread: като непрочетени
 as-IN: Асамски (Индия)
 asa-TZ: Asu (Танзания)
 ast-ES: Астурски (Испания)
+At least one document is required: Изисква се поне един документ
 Audit Trails: Одитни пътеки
 Audit Trails exported: Изнесени одитни пътеки
 Aug: Август
@@ -203,6 +207,10 @@ doi-Deva-IN: Догри (Деванагари, Индия)
 Don't have an account?: Нямате сметка?
 Done!: Направи!
 Download: Свалям
+Download {0} files separately: Изтегляне {0} файлове отделно
+Download {0} with {1} files as zip: Изтеглете {0} с {1} файлове като zip
+Download file {0}: Изтегляне на файл {0}
+Download file {0} as zip: Изтегляне на файл {0} като цип
 dsb-DE: Долна Сорбиан (Германия)
 dua-CM: Дуала (Камерун)
 dv-MV: Дивехи (Малдиви)
@@ -418,6 +426,7 @@ ff-Latn-SN: Фула (латински, Сенегал)
 fi-FI: Финландски (Финландия)
 fil-PH: Филипински (Филипини)
 File is required!: Изисква се файл!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Файлове от този тип ({0}) не са разрешени. Допускат се само следните типове "{1}". Опитайте едно от тези разширения ({2})
 Fill Administrator Credentials: Запълване на идентификационни данни на администратор
 Fill Basic User Credentials: Попълнете основните потребителски идентификационни данни
 Filtered Audit Trails exported: Филтрирани одитни пътеки изнесени
@@ -585,6 +594,7 @@ ln-CD: Лингала (Конго [ДРК])
 ln-CF: Лингала (Централноафриканска република)
 ln-CG: Лингала (Конго)
 lo-LA: Лао (Лаос)
+Loading: Зареждане
 Local: Местен
 Logged In.: Влезли в системата.
 Logged Out.: Излезли.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Южен Судан)
 nyn-UG: Нянколе (Уганда)
 oc-FR: Окситан (Франция)
 Oct: Ост
+Offline: Офлайн
 Ok: OK
 Old Values: Стари ценности
 om-ET: Оромо (Етиопия)
 om-KE: Оромо (Кения)
+Online: Онлайн
 Only Selected Group (Export): Само избрана група (експортиране)
+Open: Отворя
 Open Url {0}: Отваряне на URL {0}
 or-IN: Одия (Индия)
 os-GE: Осетик (Грузия)
@@ -719,6 +732,9 @@ PhoneNumber: ТелефонНомер
 pl-PL: Полски (Полша)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Моля, потвърдете профила си, като <a href='{0}'>натиснете тук</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Моля, върнете паролата си, като <a href='{0}'>натиснете тук</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Моля, качете личните си квалификации и препратки, които потвърждават вашето лице и квалификация
+Please Wait: Моля, изчакайте
+Preview: Преглед
 prg-001: Пруски (Свят)
 Primary Key: Първичен ключ
 Product Deleted: Продукт изтрит!
@@ -766,6 +782,7 @@ Registered Users: Регистрирани потребители
 Reload: Презареди
 Reload Data: Презареждане на данни
 Remember me?: Помниш ли ме?
+Remove All: Премахни всички
 Reset password: Нулиране на паролата
 Reset Password: Нулиране на парола
 Resources: Ресурси
@@ -829,6 +846,8 @@ sg-CF: Sango (Централноафриканска република)
 shi-Latn-MA: Тачелит (латински, Мароко)
 shi-Tfng-MA: Тахелхит (Тифина, Мароко)
 Show: Показвам
+Show as Tree: Покажи като дърво
+Show flat: Покажи плосък
 Show notification: Показване на известие
 si-LK: Синхала (Шри Ланка)
 Sign In: Влизане
@@ -892,8 +911,12 @@ Text: Текст
 Text value is required using {0} type!: Изисква се текстова стойност с помощта на типа {0}!
 tg-Cyrl-TJ: Таджикски (кирилица, Таджикистан)
 th-TH: Тайландски (Тайланд)
+The content type {0} cannot be displayed without a suitable plugin: Типът съдържание {0} не може да се покаже без подходящ плъгин
+The file ({0}) has already been added: Файлът ({0}) вече е добавен
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Файлът е надхвърлил максималния размер на {0} с {1}. Размерът на файла е {2}
 The following {0} permissions are also required for permission {1}: Следните {0} разрешения също са необходими за разрешение {1}
 The following permission is also required for permission {1}: Следното разрешение се изисква и за разрешение {1}
+The Plugin '{0}' may be able to help: Плъгинът "{0}" може да е в състояние да помогне на
 The User {0} has just edited, created or deleted entries here. You should reload the data: Потребителският {0} току-що е редактирал, създал или изтрил записи тук. Трябва да презаредите данните
 There are no new notifications: Няма нови известия
 This is an Administrator Only View.: Това е само изглед на администратор.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Централен Атлас Тамазит (латински, М�
 tzm-Tfng-MA: Централен Атлас Тамазит (Тифина, Мароко)
 ug-CN: Уйгур (Китай)
 uk-UA: Украински (Украйна)
+Unassigned: Некласираните
 Update: Актуализирам
 Update Brand: Актуализиране на марката
 Update Document: Актуализиране на документ
@@ -939,7 +963,11 @@ Update Role Permissions: Разрешения за роля за актуали�
 Update User Roles: Актуализиране на потребителски роли
 Updated User Status.: Актуализирано състояние на потребителя.
 Upload: Качвам
+Upload File: Качване на файл
+Upload Files: Качване на файлове
+Upload Folder: Папка за качване
 Upload Image: Качване на изображение
+Upload Qualifications and References: Качване на квалификации и референции
 ur-IN: Урду (Индия)
 ur-PK: Урду (Пакистан)
 User: Потребител

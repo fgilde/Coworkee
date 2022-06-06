@@ -1,4 +1,5 @@
-﻿aa-DJ: Langvejs (Djibouti)
+﻿A maximum of {0} files are allowed: Maksimalt {0} filer er tilladt
+aa-DJ: Langvejs (Djibouti)
 aa-ER: Langvejs (Eritrea)
 aa-ET: Langvejs (Etiopien)
 about: Omtrent
@@ -13,6 +14,7 @@ Add Document Type: Tilføj dokumenttype
 Add Extended Attribute: Tilføj udvidet attribut
 Add Product: Tilføj produkt
 Add Role: Tilføj rolle
+Addresses: Adresser
 Administrator: Administrator
 Administrator Settings.: Administratorindstillinger.
 Administrators Profile's Status cannot be toggled: Administratorprofilens status kan ikke skiftes
@@ -20,6 +22,7 @@ af-NA: Afrikaans (Namibia)
 af-ZA: Afrikaans (Sydafrika)
 agq-CM: Aghem (Cameroun)
 ak-GH: Will (Ghana)
+All Documents without Type are stored here: Alle dokumenter uden type gemmes her
 All Groups: Alle grupper
 All Permissions: Alle tilladelser
 Already have an account?: Har du allerede en konto?
@@ -68,6 +71,7 @@ as unread: som ulæst
 as-IN: Assamesisk (Indien)
 asa-TZ: Asu (Tanzania)
 ast-ES: Asturian (Spanien)
+At least one document is required: Der kræves mindst ét dokument
 Audit Trails: Revisionsspor
 Audit Trails exported: Kontrolstier eksporteret
 Aug: Aug
@@ -203,6 +207,10 @@ doi-Deva-IN: Dogri (Devanagari, Indien)
 Don't have an account?: Har du ikke en konto?
 Done!: Gjort!
 Download: Downloade
+Download {0} files separately: Download {0} filer separat
+Download {0} with {1} files as zip: Download {0} med {1} filer som zip
+Download file {0}: Download fil {0}
+Download file {0} as zip: Download fil {0} som zip
 dsb-DE: Nedre Sorbian (Tyskland)
 dua-CM: Duala (Cameroun)
 dv-MV: Divehi (Maldiverne)
@@ -418,6 +426,7 @@ ff-Latn-SN: Fulah (Latin, Senegal)
 fi-FI: Finsk (Finland)
 fil-PH: Filippinsk (Filippinerne)
 File is required!: Filen er påkrævet!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Filer af denne type ({0}) er ikke tilladt. Kun følgende typer er tilladt '{1}'. Prøv en af disse udvidelser ({2})
 Fill Administrator Credentials: Udfyld administratorlegitimationsoplysninger
 Fill Basic User Credentials: Udfyld grundlæggende brugerlegitimationsoplysninger
 Filtered Audit Trails exported: Eksporterede filtrerede overvågningsstier
@@ -585,6 +594,7 @@ ln-CD: Lingala (Congo [DRC])
 ln-CF: Lingala (Den Centralafrikanske Republik)
 ln-CG: Lingala (Congo)
 lo-LA: Lao (Laos)
+Loading: Pålæsning
 Local: Lokal
 Logged In.: Logget på.
 Logged Out.: Logget af.
@@ -685,11 +695,14 @@ nus-SS: Nuer (Sydsudan)
 nyn-UG: Nyankole (Uganda)
 oc-FR: Occitan (Frankrig)
 Oct: Okt
+Offline: Offline
 Ok: Ok
 Old Values: Gamle værdier
 om-ET: Oromo (Etiopien)
 om-KE: Oromo (Kenya)
+Online: Online
 Only Selected Group (Export): Kun den valgte gruppe (eksport)
+Open: Åben
 Open Url {0}: Åbn url-{0}
 or-IN: Odia (Indien)
 os-GE: Ossetisk (Georgien)
@@ -719,6 +732,9 @@ PhoneNumber: Telefonnummer til telefon
 pl-PL: Polsk (Polen)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Bekræft venligst din konto ved at <a href='{0} >klik her</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Nulstil din adgangskode ved at <a href = '{0} > at klikke her</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: Upload venligst dine personlige kvalifikationer og referencer, der bekræfter din person og kvalifikation
+Please Wait: Vent venligst
+Preview: Preview
 prg-001: Preussisk (Verden)
 Primary Key: Primær nøgle
 Product Deleted: Produkt slettet!
@@ -766,6 +782,7 @@ Registered Users: Registrerede brugere
 Reload: Genindlæse
 Reload Data: Genindlæs data
 Remember me?: Kan du huske mig?
+Remove All: Fjern alle
 Reset password: Nulstil adgangskode
 Reset Password: Nulstil adgangskode
 Resources: Ressourcer
@@ -829,6 +846,8 @@ sg-CF: Sango (Den Centralafrikanske Republik)
 shi-Latn-MA: Tachelhit (latin, Marokko)
 shi-Tfng-MA: Tachelhit (Tifinagh, Marokko)
 Show: Vise
+Show as Tree: Vis som træ
+Show flat: Vis flad
 Show notification: Vis notifikation
 si-LK: Sinhala (Sri Lanka)
 Sign In: Log på
@@ -892,8 +911,12 @@ Text: Tekst
 Text value is required using {0} type!: Tekstværdi er påkrævet ved hjælp af {0} type!
 tg-Cyrl-TJ: Tadsjikisk (kyrillisk, Tadsjikistan)
 th-TH: Thai (Thailand)
+The content type {0} cannot be displayed without a suitable plugin: Indholdstypen {0} kan ikke vises uden et passende plugin
+The file ({0}) has already been added: Filen ({0}) er allerede tilføjet
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Filen har overskredet den maksimale størrelse af {0} med {1}. Filstørrelsen er {2}
 The following {0} permissions are also required for permission {1}: Følgende {0} tilladelser kræves også for at få tilladelse {1}
 The following permission is also required for permission {1}: Følgende tilladelse kræves også for at få tilladelse {1}
+The Plugin '{0}' may be able to help: Pluginet '{0}' kan muligvis hjælpe
 The User {0} has just edited, created or deleted entries here. You should reload the data: Brugeren {0} har netop redigeret, oprettet eller slettet poster her. Du bør genindlæse dataene
 There are no new notifications: Der er ingen nye meddelelser
 This is an Administrator Only View.: Dette er en administratorvisning.
@@ -927,6 +950,7 @@ tzm-Latn-MA: Central Atlas Tamazight (latin, Marokko)
 tzm-Tfng-MA: Central Atlas Tamazight (Tifinagh, Marokko)
 ug-CN: Uyghur (Kina)
 uk-UA: Ukrainsk (Ukraine)
+Unassigned: Ikke tildelt
 Update: Opdatering
 Update Brand: Opdater brand
 Update Document: Opdater dokument
@@ -939,7 +963,11 @@ Update Role Permissions: Opdater rolletilladelser
 Update User Roles: Opdater brugerroller
 Updated User Status.: Opdateret brugerstatus.
 Upload: Uploade
+Upload File: Upload fil
+Upload Files: Upload filer
+Upload Folder: Upload mappe
 Upload Image: Overfør billede
+Upload Qualifications and References: Upload kvalifikationer og referencer
 ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Bruger

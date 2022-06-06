@@ -1,12 +1,13 @@
 ﻿.child-count-label {
     font-size: 7pt;
     margin-left: 5px;
-    margin-top: -1px;
     width: 15px;
     border: 1px solid var(--mud-palette-text-primary);
     height: 15px;
     border-radius: 50px;
     text-align: center;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .file-display-zip {
@@ -25,4 +26,13 @@
     margin-top: -15px;
     margin-bottom: 15px;
     margin-right: -10px;
+}
+
+.size-display {
+    font-style: italic;
+    font-size: 8pt;
+}
+
+.tree-actions {
+    margin-left: 20px;
 }

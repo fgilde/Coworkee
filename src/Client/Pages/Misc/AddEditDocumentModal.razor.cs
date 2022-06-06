@@ -13,6 +13,7 @@ using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Shared.Helper;
 using Microsoft.AspNetCore.SignalR.Client;
 using CleanArchitectureBase.Shared.Misc;
 
@@ -71,7 +72,12 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 var buffer = new byte[_file.Size];
                 var extension = Path.GetExtension(_file.Name);
                 await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
-                AddEditDocumentModel.URL = DataUrl.GetDataUrl(buffer, e.File.ContentType);
+
+                if (MimeTypeHelper.Matches(e.File.ContentType, "image*"))
+                    AddEditDocumentModel.URL = await (await e.File.RequestImageFileAsync("image/png", 1000, 1000)).GetDataUrlAsync();
+                else
+                    AddEditDocumentModel.URL = await DataUrl.GetDataUrlAsync(buffer, e.File.ContentType);
+
                 AddEditDocumentModel.UploadRequest = new UploadRequest { Data = buffer, ContentType = e.File.ContentType, FileName = _file.Name, UploadType = UploadType.Document, Extension = extension };
                 AddEditDocumentModel.ContentType = e.File.ContentType;
                 AddEditDocumentModel.Title ??= _file.Name;

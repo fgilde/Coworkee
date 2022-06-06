@@ -1,4 +1,5 @@
-﻿aa-DJ: عفر (جيبوتي)
+﻿A maximum of {0} files are allowed: يسمح بحد أقصى {0} الملفات
+aa-DJ: عفر (جيبوتي)
 aa-ER: عفر (إريتريا)
 aa-ET: عفر (إثيوبيا)
 about: عن
@@ -13,6 +14,7 @@ Add Document Type: إضافة نوع المستند
 Add Extended Attribute: إضافة سمة موسعة
 Add Product: إضافة منتج
 Add Role: إضافة دور
+Addresses: عناوين
 Administrator: مدير
 Administrator Settings.: إعدادات المسؤول.
 Administrators Profile's Status cannot be toggled: لا يمكن تبديل حالة ملف تعريف المسؤولين
@@ -20,6 +22,7 @@ af-NA: الأفريكانية (ناميبيا)
 af-ZA: الأفريكانية (جنوب أفريقيا)
 agq-CM: آغام (الكاميرون)
 ak-GH: ويل (غانا)
+All Documents without Type are stored here: يتم تخزين جميع المستندات بدون نوع هنا
 All Groups: جميع المجموعات
 All Permissions: كافة الأذونات
 Already have an account?: هل لديك حساب بالفعل؟
@@ -68,6 +71,7 @@ as unread: غير مقروءة
 as-IN: أسامي (الهند)
 asa-TZ: أسو (تنزانيا)
 ast-ES: أستوريان (إسبانيا)
+At least one document is required: مطلوب مستند واحد على الأقل
 Audit Trails: مسارات التدقيق
 Audit Trails exported: مسارات التدقيق المصدرة
 Aug: اغسطس
@@ -203,6 +207,10 @@ doi-Deva-IN: دوغري (ديفاناغاري، الهند)
 Don't have an account?: ليس لديك حساب؟
 Done!: منجز!
 Download: تحميل
+Download {0} files separately: تنزيل ملفات {0} بشكل منفصل
+Download {0} with {1} files as zip: تنزيل {0} التي تحتوي على ملفات {1} بالرمز البريدي
+Download file {0}: تحميل ملف {0}
+Download file {0} as zip: تنزيل {0} الملفات بالرمز البريدي
 dsb-DE: سوربيان السفلى (ألمانيا)
 dua-CM: دوالا (الكاميرون)
 dv-MV: ديفيهي (جزر المالديف)
@@ -418,6 +426,7 @@ ff-Latn-SN: فلاح (لاتيني، السنغال)
 fi-FI: الفنلندية (فنلندا)
 fil-PH: الفلبينية (الفلبين)
 File is required!: الملف مطلوب!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): الملفات من هذا النوع ({0}) غير مسموح بها. يسمح فقط بالأنواع التالية "{1}". جرب أحد هذه الإضافات ({2})
 Fill Administrator Credentials: تعبئة بيانات اعتماد المسؤول
 Fill Basic User Credentials: تعبئة بيانات اعتماد المستخدم الأساسية
 Filtered Audit Trails exported: مسارات التدقيق المصفاة المصدرة
@@ -585,6 +594,7 @@ ln-CD: لينغالا (الكونغو [جمهورية الكونغو الديم�
 ln-CF: لينغالا (جمهورية أفريقيا الوسطى)
 ln-CG: لينغالا (الكونغو)
 lo-LA: لاو (لاوس)
+Loading: تحميل
 Local: محلي
 Logged In.: تسجيل الدخول.
 Logged Out.: تم تسجيل الخروج.
@@ -685,11 +695,14 @@ nus-SS: نوير (جنوب السودان)
 nyn-UG: نيانكولي (أوغندا)
 oc-FR: أوكسيتا (فرنسا)
 Oct: اكتوبر
+Offline: دون اتصال
 Ok: موافق
 Old Values: القيم القديمة
 om-ET: أورومو (إثيوبيا)
 om-KE: أورومو (كينيا)
+Online: عبر الإنترنت
 Only Selected Group (Export): المجموعة المحددة فقط (تصدير)
+Open: مفتوح
 Open Url {0}: فتح {0} URL
 or-IN: أوديا (الهند)
 os-GE: أوسيتيك (جورجيا)
@@ -719,6 +732,9 @@ PhoneNumber: رقم الهاتف
 pl-PL: البولندية (بولندا)
 Please confirm your account by <a href='{0}'>clicking here</a>.: يرجى تأكيد حسابك عن طريق <a href='{0}'> انقر هنا</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: يرجى إعادة تعيين كلمة المرور الخاصة بك عن طريق <a href='{0}'> انقر هنا</a>.
+Please upload your personal qualifications and references that confirm your person and qualification: يرجى تحميل مؤهلاتك الشخصية ومراجعك التي تؤكد شخصيتك ومؤهلاتك
+Please Wait: الرجاء الانتظار
+Preview: معاينه
 prg-001: البروسية (العالم)
 Primary Key: المفتاح الأساسي
 Product Deleted: تم حذف المنتج!
@@ -766,6 +782,7 @@ Registered Users: المستخدمون المسجلون
 Reload: تحديث
 Reload Data: إعادة تحميل البيانات
 Remember me?: أتذكرني؟
+Remove All: إزالة الكل
 Reset password: إعادة تعيين كلمة المرور
 Reset Password: إعادة تعيين كلمة المرور
 Resources: موارد
@@ -829,6 +846,8 @@ sg-CF: سانغو (جمهورية أفريقيا الوسطى)
 shi-Latn-MA: تاشلهيت (لاتيني، مغربي)
 shi-Tfng-MA: تشلهيت (تيفيناغ، المغرب)
 Show: عرض
+Show as Tree: إظهار كشجرة
+Show flat: عرض شقة
 Show notification: إظهار الإشعار
 si-LK: سينهالا (سريلانكا)
 Sign In: تسجيل الدخول
@@ -892,8 +911,12 @@ Text: نص
 Text value is required using {0} type!: قيمة النص مطلوبة باستخدام نوع {0}!
 tg-Cyrl-TJ: الطاجيكية (السيريلية، طاجيكستان)
 th-TH: تايلاند (تايلاند)
+The content type {0} cannot be displayed without a suitable plugin: لا يمكن عرض نوع المحتوى {0} بدون مكون إضافي مناسب
+The file ({0}) has already been added: تمت إضافة الملف ({0}) بالفعل
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: تجاوز الملف الحد الأقصى لحجم {0} مع {1}. حجم الملف {2}
 The following {0} permissions are also required for permission {1}: كما يلزم الحصول على إذن {0} الأذونات التالية {1}
 The following permission is also required for permission {1}: إذن التالية مطلوب أيضا للحصول على إذن {1}
+The Plugin '{0}' may be able to help: قد يكون المكون الإضافي "{0}" قادرا على المساعدة
 The User {0} has just edited, created or deleted entries here. You should reload the data: قام {0} المستخدم بتحرير الإدخالات أو إنشائها أو حذفها هنا. يجب إعادة تحميل البيانات
 There are no new notifications: لا توجد إشعارات جديدة
 This is an Administrator Only View.: هذا هو "طريقة عرض المسؤول فقط".
@@ -927,6 +950,7 @@ tzm-Latn-MA: أطلس الأمازيغية المركزي (لاتيني، الم
 tzm-Tfng-MA: أطلس الأمازيغية المركزي (تيفيناغ، المغرب)
 ug-CN: الأويغور (الصين)
 uk-UA: الأوكرانية (أوكرانيا)
+Unassigned: غير معين
 Update: تحديث
 Update Brand: تحديث العلامة التجارية
 Update Document: تحديث المستند
@@ -939,7 +963,11 @@ Update Role Permissions: تحديث أذونات الدور
 Update User Roles: تحديث أدوار المستخدم
 Updated User Status.: تحديث حالة المستخدم.
 Upload: رفع
+Upload File: تحميل الملف
+Upload Files: تحميل الملفات
+Upload Folder: تحميل مجلد
 Upload Image: تحميل صورة
+Upload Qualifications and References: تحميل المؤهلات والمراجع
 ur-IN: الأوردو (الهند)
 ur-PK: الأوردو (باكستان)
 User: مستخدم

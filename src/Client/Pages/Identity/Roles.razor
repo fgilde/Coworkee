@@ -1,7 +1,6 @@
 ﻿@page "/identity/roles"
 @attribute [Authorize(Policy = Permissions.Roles.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Roles> _localizer
-@using System.ComponentModel.Design
 @using CleanArchitectureBase.Application.Common.Models.Identity
 
 <style>
@@ -18,7 +17,7 @@
 }
 else
 {
-    <MudTable Hover="true" Elevation="25" Items="_roleList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<RoleResponse, bool>(Search)" @bind-role="_role">
+    <MudTable Hover="true" Elevation="25" Items="_roleList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<RoleDto, bool>(Search)" @bind-role="_role">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateRoles)
@@ -38,9 +37,9 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
-            <MudTh><MudTableSortLabel SortBy="new Func<RoleResponse, object>(x => x.Id)">@_localizer["Id"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<RoleResponse, object>(x => x.Name)">@_localizer["Role"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<RoleResponse, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Id)">@_localizer["Id"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Name)">@_localizer["Role"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>

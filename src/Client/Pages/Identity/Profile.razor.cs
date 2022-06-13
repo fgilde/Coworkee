@@ -3,12 +3,17 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Shared.Constants.Permission;
 using CleanArchitectureBase.Shared.Constants.Storage;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
@@ -16,13 +21,19 @@ namespace CleanArchitectureBase.Client.Pages.Identity
     public partial class Profile : IAsyncDisposable
     {
         [Parameter] public string ImageDataUrl { get; set; }
-
-        public string UserId { get; set; }
-
+        [Parameter] public string UserId { get; set; }
+        [Parameter] public Variant Variant { get; set; } = Variant.Text;
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private readonly UpdateProfileRequest _profileModel = new();
+
+        private UserResponse user;
+        private ClaimsPrincipal _currentUser;
+        //private readonly UpdateProfileRequest _profileModel = new(); // TODO: remove
+
+        private bool _canEditUser;
+        private bool _canEditUserAsAdmin;
+
         private ElementReference dropZoneElement;
         private InputFile inputFile;
         private IJSObjectReference _module;
@@ -30,9 +41,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task UpdateProfileAsync()
         {
-            var token = await _api.Account_UpdateProfileAsync(_profileModel);
-            await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
-            _snackBar.Add(_localizer["Your Profile has been updated."], Severity.Success);
+            var result = await _api.User_UpdateProfileAsync(user);
+            if (_errorService.IsSuccessFull(result))
+            {
+                _snackBar.Add(_localizer["Profile updated"], Severity.Success);
+                if (UserId == _currentUser.GetUserId() && !string.IsNullOrWhiteSpace(result.Data))
+                    await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, result.Data);
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -51,13 +66,12 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task LoadDataAsync()
         {
-            var state = await _stateProvider.GetAuthenticationStateAsync();
-            var user = state.User;
-            _profileModel.Email = user.GetEmail();
-            _profileModel.FirstName = user.GetFirstName();
-            _profileModel.LastName = user.GetLastName();
-            _profileModel.PhoneNumber = user.GetPhoneNumber();
-            UserId = user.GetUserId();
+            _currentUser = await _clientAuthenticationManager.CurrentUser();
+            UserId = string.IsNullOrEmpty(UserId) ? _currentUser.GetUserId() : UserId;
+            user = (await _api.User_GetByIdAsync(UserId)).Data;
+            _canEditUserAsAdmin = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.Edit)).Succeeded;
+            _canEditUser = UserId == _currentUser.GetUserId() || _canEditUserAsAdmin;
+
             var data = await _api.Account_GetProfilePictureAsync(UserId);
             if (data.Succeeded)
             {
@@ -79,8 +93,12 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             var result = await _api.Account_UpdateProfilePictureAsync(request, UserId);
             if (_errorService.IsSuccessFull(result))
             {
-                await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, result.Data.UserImageURL);
-                await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, result.Data.Token);
+                if (UserId == _currentUser.GetUserId())
+                {
+                    await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, result.Data.UserImageURL);
+                    await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, result.Data.Token);
+                }
+
                 ImageDataUrl = result.Data.UserImageURL;
                 StateHasChanged();
                 _snackBar.Add(_localizer["Profile picture added."], Severity.Success);
@@ -91,7 +109,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             var parameters = new DialogParameters
             {
-                {nameof(Shared.Dialogs.DeleteConfirmation.Message), $"{string.Format(_localizer["Do you want to delete the profile picture of {0}"], _profileModel.Email)}?"}
+                {nameof(Shared.Dialogs.DeleteConfirmation.Message), $"{string.Format(_localizer["Do you want to delete the profile picture of {0}"], user.Email)}?"}
             };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
@@ -102,8 +120,12 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 var data = await _api.Account_UpdateProfilePictureAsync(request, UserId);
                 if (_errorService.IsSuccessFull(data))
                 {
-                    await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
-                    await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, data.Data.Token);
+                    if (UserId == _currentUser.GetUserId())
+                    {
+                        await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
+                        await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, data.Data.Token);
+                    }
+
                     ImageDataUrl = string.Empty;
                     StateHasChanged();
                     _snackBar.Add(_localizer["Profile picture deleted."], Severity.Success);
@@ -122,6 +144,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (_module != null)
                 await _module.DisposeAsync();
 
+        }
+
+        private void OnAddressCreated(AddressDto obj)
+        {
+            user.UserInfo ??= new UserInformationsDto();
+            user.UserInfo.Addresses ??= new List<AddressDto>();
+            user.UserInfo.Addresses.Add(obj);
         }
     }
 }

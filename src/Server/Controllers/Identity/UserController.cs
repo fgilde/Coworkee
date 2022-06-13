@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
@@ -12,12 +11,12 @@ using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Server.Middlewares;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Role;
 using CleanArchitectureBase.Shared.Wrapper;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
@@ -33,6 +32,18 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public UserController(IUserService userService)
         {
             _userService = userService;
+        }
+
+        /// <summary>
+        /// Update profile
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost(nameof(UpdateProfile))]
+        [Produces(typeof(Result<string>))]
+        public async Task<IActionResult> UpdateProfile(UserResponse user)
+        {
+            return Ok(await _userService.UpdateUserAsync(user));
         }
 
         /// <summary>
@@ -57,8 +68,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<UserResponse> filter = null)
         {
             var users = await _userService.GetAllAsync();
-            if (filter != null)
-                users.Data = Filter(users.Data, filter);
+            users.Data = Filter(users.Data, filter).ToList();
 
             return Ok(users);
         }
@@ -127,7 +137,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> RegisterAsync(RegisterRequest request)
         {
             var origin = Request.Headers["origin"];
-            if (!HttpContext.User.IsInRole(RoleConstants.AdministratorRole))
+            if (!HttpContext.User.HasPolicies(PolicyMatch.All, Permissions.Users.Create, Permissions.Roles.View))
             {
                 if (!Configuration.PublicSettings.UserRegistration.Enabled)
                 {
@@ -135,6 +145,9 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
                 }
                 request.IsActive = !Configuration.PublicSettings.UserRegistration.RequiresAdministratorActivation;
                 request.EmailConfirmed = !Configuration.PublicSettings.UserRegistration.EmailConfirmationRequired;
+                request.InitialRoleNames = (await Get<IRoleService>().GetAllAsync()).Data
+                    .Where(r => r.IsSelectableByUser && request.InitialRoleNames.Contains(r.Name)).Select(r => r.Name)
+                    .ToList();
             }
             return Ok(await _userService.RegisterAsync(request, origin));
         }

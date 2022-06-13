@@ -4,7 +4,6 @@ using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application;
 using CleanArchitectureBase.Application.Common.Extensions;
@@ -73,41 +72,6 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 model.NewPassword);
             var errors = identityResult.Errors.Select(e => _localizer[e.Description].ToString()).ToList();
             return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
-        }
-
-        /// <summary>
-        /// Updates the profile and returns the new JWT token
-        /// </summary>
-        public async Task<string> UpdateProfileAsync(UpdateProfileRequest request, string userId)
-        {
-            if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
-            {
-                if (await _userManager.Users.AnyAsync(x => x.PhoneNumber == request.PhoneNumber))
-                    throw Errors.Create(_localizer["Phone number {0} is already used.", request.PhoneNumber], HttpStatusCode.Conflict);
-            }
-
-            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
-            if (userWithSameEmail == null || userWithSameEmail.Id == userId)
-            {
-                var user = await _userManager.FindByIdAsync(userId);
-                if (user == null)
-                {
-                    throw Errors.NotFound("User Not found");
-                }
-                user.FirstName = request.FirstName;
-                user.LastName = request.LastName;
-                user.PhoneNumber = request.PhoneNumber;
-                var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-                if (request.PhoneNumber != phoneNumber)
-                    await _userManager.SetPhoneNumberAsync(user, request.PhoneNumber).EnsureSuccess();
-
-                await _userManager.UpdateAsync(user).EnsureSuccess();
-                await _signInManager.RefreshSignInAsync(user);
-                await _mediator.PublishClientEvent(new UserProfileChanged(user.MapTo<UserResponse>()));
-                return await _identityService.GenerateJwtAsync(user);
-
-            }
-            throw Errors.Create(_localizer["Email {0} is already used.", request.Email], HttpStatusCode.Conflict);
         }
 
         public async Task<IResult<string>> GetProfilePictureAsync(string userId)

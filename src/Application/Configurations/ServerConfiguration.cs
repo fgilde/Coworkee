@@ -41,12 +41,30 @@ namespace CleanArchitectureBase.Application.Configurations
 
     public class Userregistration
     {
+        public bool Enabled { get; set; }
+        public bool RequireAddress { get; set; }
+        public Usernamerules UsernameRules { get; set; }
+        public Passwordrules PasswordRules { get; set; }
         public bool RequireDocuments { get; set; }
         public int RegistrationDocumentsMaxFileSize { get; set; }
         public string[] RegistrationDocumentTypes { get; set; }
-        public bool Enabled { get; set; }
         public bool RequiresAdministratorActivation { get; set; }
         public bool EmailConfirmationRequired { get; set; }
+    }
+
+    public class Usernamerules
+    {
+        public int MinLength { get; set; }
+        public bool UsernameCanChangedAfterRegistration { get; set; }
+        public bool EmailCanChangedAfterRegistration { get; set; }
+    }
+
+    public class Passwordrules
+    {
+        public int MinLength { get; set; }
+        public bool CapitalLetterRequired { get; set; }
+        public bool LowercaseLetterRequired { get; set; }
+        public bool NumberRequired { get; set; }
     }
 
     public class Logging
@@ -184,4 +202,5 @@ namespace CleanArchitectureBase.Application.Configurations
         public string UserName { get; set; }
         public string Password { get; set; }
     }
+
 }

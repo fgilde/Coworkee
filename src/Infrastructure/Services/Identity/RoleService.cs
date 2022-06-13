@@ -27,7 +27,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         private readonly IRoleClaimService _roleClaimService;
         private readonly IStringLocalizer<RoleService> _localizer;
         private readonly ICurrentUserService _currentUserService;
-        
+
         public RoleService(
             RoleManager<ApplicationRole> roleManager,
             UserManager<ApplicationUser> userManager,
@@ -72,11 +72,11 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             }
         }
 
-        public async Task<Result<List<RoleResponse>>> GetAllAsync()
+        public async Task<Result<List<RoleDto>>> GetAllAsync()
         {
-            var roles = await _roleManager.Roles.ToListAsync();
-            var rolesResponse = roles.MapTo<List<RoleResponse>>();
-            return await Result<List<RoleResponse>>.SuccessAsync(rolesResponse);
+            List<ApplicationRole> roles = await _roleManager.Roles.ToListAsync();
+            var rolesResponse = roles.MapTo<List<RoleDto>>();
+            return await Result<List<RoleDto>>.SuccessAsync(rolesResponse);
         }
 
         public async Task<Result<PermissionResponse>> GetAllPermissionsAsync(string roleId)
@@ -135,39 +135,34 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return allPermissions;
         }
 
-        public async Task<Result<RoleResponse>> GetByIdAsync(string id)
+        public async Task<Result<RoleDto>> GetByIdAsync(string id)
         {
             var roles = await _roleManager.Roles.SingleOrDefaultAsync(x => x.Id == id);
-            var rolesResponse = roles.MapTo<RoleResponse>();
-            return await Result<RoleResponse>.SuccessAsync(rolesResponse);
+            var rolesResponse = roles.MapTo<RoleDto>();
+            return await Result<RoleDto>.SuccessAsync(rolesResponse);
         }
 
-        public async Task<Result<string>> SaveAsync(RoleRequest request)
+        public async Task<Result<string>> SaveAsync(RoleDto request)
         {
             if (string.IsNullOrEmpty(request.Id))
             {
                 var existingRole = await _roleManager.FindByNameAsync(request.Name);
                 if (existingRole != null) return await Result<string>.FailAsync(_localizer["Similar Role already exists."]);
-                var response = await _roleManager.CreateAsync(new ApplicationRole(request.Name, request.Description));
+                var response = await _roleManager.CreateAsync(request.MapTo<ApplicationRole>());
                 if (response.Succeeded)
-                {
                     return await Result<string>.SuccessAsync(string.Format(_localizer["Role {0} Created."], request.Name));
-                }
-                else
-                {
-                    return await Result<string>.FailAsync(response.Errors.Select(e => _localizer[e.Description].ToString()).ToList());
-                }
+                return await Result<string>.FailAsync(response.Errors.Select(e => _localizer[e.Description].ToString()).ToList());
             }
             else
             {
                 var existingRole = await _roleManager.FindByIdAsync(request.Id);
                 if (existingRole.Name == RoleConstants.AdministratorRole || existingRole.Name == RoleConstants.BasicRole)
-                {
                     return await Result<string>.FailAsync(string.Format(_localizer["Not allowed to modify {0} Role."], existingRole.Name));
-                }
+
                 existingRole.Name = request.Name;
                 existingRole.NormalizedName = request.Name.ToUpper();
                 existingRole.Description = request.Description;
+                existingRole.IsSelectableByUser = request.IsSelectableByUser;
                 await _roleManager.UpdateAsync(existingRole);
                 return await Result<string>.SuccessAsync(string.Format(_localizer["Role {0} Updated."], existingRole.Name));
             }
@@ -191,9 +186,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 var selectedClaims = request.RoleClaims.Where(a => a.Selected).ToList();
                 if (role.Name == RoleConstants.AdministratorRole)
                 {
-                    if (!selectedClaims.Any(x => x.ClaimValue == Permissions.Roles.View)
-                       || !selectedClaims.Any(x => x.ClaimValue == Permissions.RoleClaims.View)
-                       || !selectedClaims.Any(x => x.ClaimValue == Permissions.RoleClaims.Edit))
+                    if (selectedClaims.All(x => x.ClaimValue != Permissions.Roles.View)
+                        || selectedClaims.All(x => x.ClaimValue != Permissions.RoleClaims.View)
+                        || selectedClaims.All(x => x.ClaimValue != Permissions.RoleClaims.Edit))
                     {
                         return await Result<string>.FailAsync(string.Format(
                             _localizer["Not allowed to deselect {0} or {1} or {2} for this Role."],

@@ -1,23 +1,32 @@
 @page "/account"
 @using CleanArchitectureBase.Shared.Constants.Application
+@using CleanArchitectureBase.Application.Common.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Account> localizer
 
 <ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@localizer["Account"]" Description="@localizer["Manage your account"]" />
 <MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
     <MudTabPanel Text="@localizer["Profile"]">
-        <Profile />
+        <Profile Variant="Variant.Outlined" />
     </MudTabPanel>
     <MudTabPanel Text="@localizer["Security"]">
         <Security />
     </MudTabPanel>
+    <AuthorizeView Policy="@Permissions.Documents.View">
+        <MudTabPanel Text="@localizer["Documents"]">
+            <DocumentList UserId="@userId"></DocumentList>
+        </MudTabPanel>
+    </AuthorizeView>
 </MudTabs>
 
 @code
 {
+    private string userId;
     protected override async Task OnInitializedAsync()
     {
-        if((await _stateProvider.GetAuthenticationStateAsync()).IsGuest())
+        var authenticationState = await _stateProvider.GetAuthenticationStateAsync();
+        userId = authenticationState.User.GetUserId();
+        if (authenticationState.IsGuest())
         {
             _navigationManager.NavigateTo($"{ApplicationConstants.Routes.Forbidden}/{Uri.EscapeDataString(_navigationManager.ToBaseRelativePath(_navigationManager.Uri))}");
         }

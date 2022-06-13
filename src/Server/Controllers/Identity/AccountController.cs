@@ -24,19 +24,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
             _accountService = accountService;
             _currentUser = currentUser;
         }
-
-        /// <summary>
-        /// Update Profile
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Status 200 OK</returns>
-        [HttpPut(nameof(UpdateProfile))]
-        [Produces(typeof(string))]
-        public async Task<ActionResult> UpdateProfile(UpdateProfileRequest model)
-        {
-            return Ok(await _accountService.UpdateProfileAsync(model, _currentUser.UserId));
-        }
-
+        
         /// <summary>
         /// Change Password
         /// </summary>
@@ -67,12 +55,13 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// Update Profile Picture
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="userId"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost("profile-picture/{userId}")]
         [Produces(typeof(Result<TokenResponse>))]
-        public async Task<IActionResult> UpdateProfilePictureAsync(UpdateProfilePictureRequest request)
+        public async Task<IActionResult> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId)
         {
-            return Ok(await _accountService.UpdateProfilePictureAsync(request, _currentUser.UserId));
+            return Ok(await _accountService.UpdateProfilePictureAsync(request, string.IsNullOrWhiteSpace(userId) ? _currentUser.UserId : userId));
         }
 
         [HttpPost("[action]")]

@@ -1,10 +1,10 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+﻿using CleanArchitectureBase.Application.Common.Models.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Application.Validators.Requests.Identity
 {
-    public class RoleRequestValidator : AbstractValidator<RoleRequest>
+    public class RoleRequestValidator : AbstractValidator<RoleDto>
     {
         public RoleRequestValidator(IStringLocalizer<RoleRequestValidator> localizer)
         {

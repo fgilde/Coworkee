@@ -13,14 +13,12 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         [Parameter] public string Description { get; set; }
 
         private UserResponse user;
-
-        private bool _loaded;
-
+        
         private async Task ToggleUserStatus()
         {
             var request = new ToggleUserStatusRequest { ActivateUser = user.IsActive, EmailConfirmed = user.EmailConfirmed, UserId = Id };
             var result = await _api.User_ToggleUserStatusAsync(request);
-            
+
             if (_errorService.IsSuccessFull(result))
             {
                 _snackBar.Add(_localizer["Updated User Status."], Severity.Success);
@@ -32,25 +30,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         protected override async Task OnInitializedAsync()
         {
-            var userId = Id;
-            var result = await _api.User_GetByIdAsync(userId);
-            if (result.Succeeded)
+            var result = await _api.User_GetByIdAsync(Id);
+            if (_errorService.IsSuccessFull(result))
             {
                 user = result.Data;
-                if (user != null)
-                {
-                    Title = $"{user.FirstName} {user.LastName}'s {_localizer["Profile"]}";
-                    Description = user.Email;
-                    var data = await _api.Account_GetProfilePictureAsync(userId);
-                    if (data.Succeeded)
-                    {
-                        ImageDataUrl = data.Data;
-                    }
-                }
-
+                Title = $"{user.FirstName} {user.LastName}'s {_localizer["Profile"]}";
+                Description = user.Email;
             }
-
-            _loaded = true;
         }
     }
 }

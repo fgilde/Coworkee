@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CleanArchitectureBase.Shared.Wrapper
@@ -16,6 +17,11 @@ namespace CleanArchitectureBase.Shared.Wrapper
         public static IResult Fail()
         {
             return new Result { Succeeded = false };
+        }
+
+        public static IResult<T> Fail<T>(params string[] messages)
+        {
+            return new Result<T> { Succeeded = false, Messages = messages.ToList() };
         }
 
         public static IResult Fail(string message)
@@ -36,6 +42,11 @@ namespace CleanArchitectureBase.Shared.Wrapper
         public static Task<IResult> FailAsync(string message)
         {
             return Task.FromResult(Fail(message));
+        }
+
+        public static Task<IResult<T>> FailAsync<T>(params string[] messages)
+        {
+            return Task.FromResult(Fail<T>(messages));
         }
 
         public static Task<IResult> FailAsync(List<string> messages)

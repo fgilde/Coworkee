@@ -1,20 +1,19 @@
 ﻿using System;
-using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
     public partial class RoleModal: IAsyncDisposable
     {
-        
-        [Parameter] public RoleRequest RoleModel { get; set; } = new();
+
+        [Parameter] public RoleDto RoleModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 

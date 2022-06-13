@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
@@ -28,14 +31,28 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         /// Get All Roles (basic, admin etc.)
         /// </summary>
         /// <returns>Status 200 OK</returns>
+        [AllowAnonymous]
+        [HttpGet(nameof(GetPublicRoles))]
+        [Produces(typeof(Result<List<RoleDto>>))]
+        public async Task<IActionResult> GetPublicRoles()
+        {
+            var filter = new TransferableExpression<RoleDto>(d => d.IsSelectableByUser);
+            var roles = await _roleService.GetAllAsync();
+            roles.Data = Filter(roles.Data, filter).ToList();
+            return Ok(roles);
+        }
+
+        /// <summary>
+        /// Get All Roles (basic, admin etc.)
+        /// </summary>
+        /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Roles.View)]
         [HttpGet]
-        [Produces(typeof(Result<List<RoleResponse>>))]
-        public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<RoleResponse> filter = null)
+        [Produces(typeof(Result<List<RoleDto>>))]
+        public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<RoleDto> filter = null)
         {
             var roles = await _roleService.GetAllAsync();
-            if (filter != null)
-                roles.Data = Filter(roles.Data, filter);
+            roles.Data = Filter(roles.Data, filter).ToList();
             return Ok(roles);
         }
 
@@ -47,7 +64,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         [Authorize(Policy = Permissions.Roles.Create)]
         [HttpPost]
         [Produces(typeof(Result<string>))]
-        public async Task<IActionResult> Post(RoleRequest request)
+        public async Task<IActionResult> Post(RoleDto request)
         {
             var response = await _roleService.SaveAsync(request);
             return Ok(response);

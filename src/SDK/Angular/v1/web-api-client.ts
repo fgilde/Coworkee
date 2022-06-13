@@ -2857,11 +2857,6 @@ export class NotificationsClient implements INotificationsClient {
 
 export interface IAccountClient {
     /**
-     * Update Profile
-     * @return Status 200 OK
-     */
-    updateProfile(model: UpdateProfileRequest): Observable<string>;
-    /**
      * Change Password
      * @return Status 200 OK
      */
@@ -2875,7 +2870,7 @@ export interface IAccountClient {
      * Update Profile Picture
      * @return Status 200 OK
      */
-    updateProfilePicture(request: UpdateProfilePictureRequest, userId: string): Observable<ResultOfTokenResponse>;
+    updateProfilePicture(request: UpdateProfilePictureRequest, userId: string | null): Observable<ResultOfTokenResponse>;
     logout(): Observable<FileResponse | null>;
 }
 
@@ -2890,63 +2885,6 @@ export class AccountClient implements IAccountClient {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
-    }
-
-    /**
-     * Update Profile
-     * @return Status 200 OK
-     */
-    updateProfile(model: UpdateProfileRequest): Observable<string> {
-        let url_ = this.baseUrl + "/identity/Account/UpdateProfile";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(model);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUpdateProfile(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processUpdateProfile(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<string>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<string>;
-        }));
-    }
-
-    protected processUpdateProfile(response: HttpResponseBase): Observable<string> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<string>(null as any);
     }
 
     /**
@@ -3064,7 +3002,7 @@ export class AccountClient implements IAccountClient {
      * Update Profile Picture
      * @return Status 200 OK
      */
-    updateProfilePicture(request: UpdateProfilePictureRequest, userId: string): Observable<ResultOfTokenResponse> {
+    updateProfilePicture(request: UpdateProfilePictureRequest, userId: string | null): Observable<ResultOfTokenResponse> {
         let url_ = this.baseUrl + "/identity/Account/profile-picture/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -3428,15 +3366,20 @@ export class RoleClaimClient implements IRoleClaimClient {
 export interface IRoleClient {
     /**
      * Get All Roles (basic, admin etc.)
+     * @return Status 200 OK
+     */
+    getPublicRoles(): Observable<ResultOfListOfRoleDto>;
+    /**
+     * Get All Roles (basic, admin etc.)
      * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(filter: TransferableExpressionOfRoleResponse | null | undefined): Observable<ResultOfListOfRoleResponse>;
+    getAll(filter: TransferableExpressionOfRoleDto | null | undefined): Observable<ResultOfListOfRoleDto>;
     /**
      * Add a Role
      * @return Status 200 OK
      */
-    post(request: RoleRequest): Observable<ResultOfString>;
+    post(request: RoleDto): Observable<ResultOfString>;
     /**
      * Delete a Role
      * @return Status 200 OK
@@ -3468,10 +3411,62 @@ export class RoleClient implements IRoleClient {
 
     /**
      * Get All Roles (basic, admin etc.)
+     * @return Status 200 OK
+     */
+    getPublicRoles(): Observable<ResultOfListOfRoleDto> {
+        let url_ = this.baseUrl + "/identity/Role/GetPublicRoles";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPublicRoles(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPublicRoles(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ResultOfListOfRoleDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ResultOfListOfRoleDto>;
+        }));
+    }
+
+    protected processGetPublicRoles(response: HttpResponseBase): Observable<ResultOfListOfRoleDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfListOfRoleDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfListOfRoleDto>(null as any);
+    }
+
+    /**
+     * Get All Roles (basic, admin etc.)
      * @param filter (optional) 
      * @return Status 200 OK
      */
-    getAll(filter: TransferableExpressionOfRoleResponse | null | undefined): Observable<ResultOfListOfRoleResponse> {
+    getAll(filter: TransferableExpressionOfRoleDto | null | undefined): Observable<ResultOfListOfRoleDto> {
         let url_ = this.baseUrl + "/identity/Role?";
         if (filter !== undefined && filter !== null)
             url_ += "$filter=" + encodeURIComponent("" + filter) + "&";
@@ -3492,14 +3487,14 @@ export class RoleClient implements IRoleClient {
                 try {
                     return this.processGetAll(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<ResultOfListOfRoleResponse>;
+                    return _observableThrow(e) as any as Observable<ResultOfListOfRoleDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<ResultOfListOfRoleResponse>;
+                return _observableThrow(response_) as any as Observable<ResultOfListOfRoleDto>;
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfRoleResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<ResultOfListOfRoleDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3510,7 +3505,7 @@ export class RoleClient implements IRoleClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultOfListOfRoleResponse.fromJS(resultData200);
+            result200 = ResultOfListOfRoleDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -3518,14 +3513,14 @@ export class RoleClient implements IRoleClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ResultOfListOfRoleResponse>(null as any);
+        return _observableOf<ResultOfListOfRoleDto>(null as any);
     }
 
     /**
      * Add a Role
      * @return Status 200 OK
      */
-    post(request: RoleRequest): Observable<ResultOfString> {
+    post(request: RoleDto): Observable<ResultOfString> {
         let url_ = this.baseUrl + "/identity/Role";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3884,6 +3879,11 @@ export class TokenClient implements ITokenClient {
 
 export interface IUserClient {
     /**
+     * Update profile
+     * @return Status 200 OK
+     */
+    updateProfile(user: UserResponse): Observable<ResultOfString>;
+    /**
      * Deletes a user by id
      * @param userId (optional) 
      */
@@ -3960,6 +3960,62 @@ export class UserClient implements IUserClient {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * Update profile
+     * @return Status 200 OK
+     */
+    updateProfile(user: UserResponse): Observable<ResultOfString> {
+        let url_ = this.baseUrl + "/identity/User/UpdateProfile";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(user);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateProfile(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateProfile(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ResultOfString>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ResultOfString>;
+        }));
+    }
+
+    protected processUpdateProfile(response: HttpResponseBase): Observable<ResultOfString> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfString.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfString>(null as any);
     }
 
     /**
@@ -5877,10 +5933,13 @@ export interface IPublicsettings {
 }
 
 export class Userregistration implements IUserregistration {
+    enabled!: boolean;
+    requireAddress!: boolean;
+    usernameRules?: Usernamerules | undefined;
+    passwordRules?: Passwordrules | undefined;
     requireDocuments!: boolean;
     registrationDocumentsMaxFileSize!: number;
     registrationDocumentTypes?: string[] | undefined;
-    enabled!: boolean;
     requiresAdministratorActivation!: boolean;
     emailConfirmationRequired!: boolean;
 
@@ -5895,6 +5954,10 @@ export class Userregistration implements IUserregistration {
 
     init(_data?: any) {
         if (_data) {
+            this.enabled = _data["enabled"];
+            this.requireAddress = _data["requireAddress"];
+            this.usernameRules = _data["usernameRules"] ? Usernamerules.fromJS(_data["usernameRules"]) : <any>undefined;
+            this.passwordRules = _data["passwordRules"] ? Passwordrules.fromJS(_data["passwordRules"]) : <any>undefined;
             this.requireDocuments = _data["requireDocuments"];
             this.registrationDocumentsMaxFileSize = _data["registrationDocumentsMaxFileSize"];
             if (Array.isArray(_data["registrationDocumentTypes"])) {
@@ -5902,7 +5965,6 @@ export class Userregistration implements IUserregistration {
                 for (let item of _data["registrationDocumentTypes"])
                     this.registrationDocumentTypes!.push(item);
             }
-            this.enabled = _data["enabled"];
             this.requiresAdministratorActivation = _data["requiresAdministratorActivation"];
             this.emailConfirmationRequired = _data["emailConfirmationRequired"];
         }
@@ -5917,6 +5979,10 @@ export class Userregistration implements IUserregistration {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["enabled"] = this.enabled;
+        data["requireAddress"] = this.requireAddress;
+        data["usernameRules"] = this.usernameRules ? this.usernameRules.toJSON() : <any>undefined;
+        data["passwordRules"] = this.passwordRules ? this.passwordRules.toJSON() : <any>undefined;
         data["requireDocuments"] = this.requireDocuments;
         data["registrationDocumentsMaxFileSize"] = this.registrationDocumentsMaxFileSize;
         if (Array.isArray(this.registrationDocumentTypes)) {
@@ -5924,7 +5990,6 @@ export class Userregistration implements IUserregistration {
             for (let item of this.registrationDocumentTypes)
                 data["registrationDocumentTypes"].push(item);
         }
-        data["enabled"] = this.enabled;
         data["requiresAdministratorActivation"] = this.requiresAdministratorActivation;
         data["emailConfirmationRequired"] = this.emailConfirmationRequired;
         return data;
@@ -5932,12 +5997,107 @@ export class Userregistration implements IUserregistration {
 }
 
 export interface IUserregistration {
+    enabled: boolean;
+    requireAddress: boolean;
+    usernameRules?: Usernamerules | undefined;
+    passwordRules?: Passwordrules | undefined;
     requireDocuments: boolean;
     registrationDocumentsMaxFileSize: number;
     registrationDocumentTypes?: string[] | undefined;
-    enabled: boolean;
     requiresAdministratorActivation: boolean;
     emailConfirmationRequired: boolean;
+}
+
+export class Usernamerules implements IUsernamerules {
+    minLength!: number;
+    usernameCanChangedAfterRegistration!: boolean;
+    emailCanChangedAfterRegistration!: boolean;
+
+    constructor(data?: IUsernamerules) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.minLength = _data["minLength"];
+            this.usernameCanChangedAfterRegistration = _data["usernameCanChangedAfterRegistration"];
+            this.emailCanChangedAfterRegistration = _data["emailCanChangedAfterRegistration"];
+        }
+    }
+
+    static fromJS(data: any): Usernamerules {
+        data = typeof data === 'object' ? data : {};
+        let result = new Usernamerules();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["minLength"] = this.minLength;
+        data["usernameCanChangedAfterRegistration"] = this.usernameCanChangedAfterRegistration;
+        data["emailCanChangedAfterRegistration"] = this.emailCanChangedAfterRegistration;
+        return data;
+    }
+}
+
+export interface IUsernamerules {
+    minLength: number;
+    usernameCanChangedAfterRegistration: boolean;
+    emailCanChangedAfterRegistration: boolean;
+}
+
+export class Passwordrules implements IPasswordrules {
+    minLength!: number;
+    capitalLetterRequired!: boolean;
+    lowercaseLetterRequired!: boolean;
+    numberRequired!: boolean;
+
+    constructor(data?: IPasswordrules) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.minLength = _data["minLength"];
+            this.capitalLetterRequired = _data["capitalLetterRequired"];
+            this.lowercaseLetterRequired = _data["lowercaseLetterRequired"];
+            this.numberRequired = _data["numberRequired"];
+        }
+    }
+
+    static fromJS(data: any): Passwordrules {
+        data = typeof data === 'object' ? data : {};
+        let result = new Passwordrules();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["minLength"] = this.minLength;
+        data["capitalLetterRequired"] = this.capitalLetterRequired;
+        data["lowercaseLetterRequired"] = this.lowercaseLetterRequired;
+        data["numberRequired"] = this.numberRequired;
+        return data;
+    }
+}
+
+export interface IPasswordrules {
+    minLength: number;
+    capitalLetterRequired: boolean;
+    lowercaseLetterRequired: boolean;
+    numberRequired: boolean;
 }
 
 export abstract class HashableDtoBase implements IHashableDtoBase {
@@ -7547,54 +7707,6 @@ export class TransferableExpressionOfNotificationDto implements ITransferableExp
 export interface ITransferableExpressionOfNotificationDto {
 }
 
-export class UpdateProfileRequest implements IUpdateProfileRequest {
-    firstName!: string;
-    lastName!: string;
-    phoneNumber?: string | undefined;
-    email?: string | undefined;
-
-    constructor(data?: IUpdateProfileRequest) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.firstName = _data["firstName"];
-            this.lastName = _data["lastName"];
-            this.phoneNumber = _data["phoneNumber"];
-            this.email = _data["email"];
-        }
-    }
-
-    static fromJS(data: any): UpdateProfileRequest {
-        data = typeof data === 'object' ? data : {};
-        let result = new UpdateProfileRequest();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["phoneNumber"] = this.phoneNumber;
-        data["email"] = this.email;
-        return data;
-    }
-}
-
-export interface IUpdateProfileRequest {
-    firstName: string;
-    lastName: string;
-    phoneNumber?: string | undefined;
-    email?: string | undefined;
-}
-
 export class ChangePasswordRequest implements IChangePasswordRequest {
     password!: string;
     newPassword!: string;
@@ -7971,10 +8083,10 @@ export interface IRoleClaimRequest {
     selected: boolean;
 }
 
-export class ResultOfListOfRoleResponse extends Result implements IResultOfListOfRoleResponse {
-    data?: RoleResponse[] | undefined;
+export class ResultOfListOfRoleDto extends Result implements IResultOfListOfRoleDto {
+    data?: RoleDto[] | undefined;
 
-    constructor(data?: IResultOfListOfRoleResponse) {
+    constructor(data?: IResultOfListOfRoleDto) {
         super(data);
     }
 
@@ -7984,14 +8096,14 @@ export class ResultOfListOfRoleResponse extends Result implements IResultOfListO
             if (Array.isArray(_data["data"])) {
                 this.data = [] as any;
                 for (let item of _data["data"])
-                    this.data!.push(RoleResponse.fromJS(item));
+                    this.data!.push(RoleDto.fromJS(item));
             }
         }
     }
 
-    static fromJS(data: any): ResultOfListOfRoleResponse {
+    static fromJS(data: any): ResultOfListOfRoleDto {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultOfListOfRoleResponse();
+        let result = new ResultOfListOfRoleDto();
         result.init(data);
         return result;
     }
@@ -8008,16 +8120,15 @@ export class ResultOfListOfRoleResponse extends Result implements IResultOfListO
     }
 }
 
-export interface IResultOfListOfRoleResponse extends IResult {
-    data?: RoleResponse[] | undefined;
+export interface IResultOfListOfRoleDto extends IResult {
+    data?: RoleDto[] | undefined;
 }
 
-export class RoleResponse implements IRoleResponse {
+export abstract class DtoBaseOfString implements IDtoBaseOfString {
     id?: string | undefined;
-    name!: string;
-    description?: string | undefined;
+    isNew!: boolean;
 
-    constructor(data?: IRoleResponse) {
+    constructor(data?: IDtoBaseOfString) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8029,105 +8140,97 @@ export class RoleResponse implements IRoleResponse {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
+            this.isNew = _data["isNew"];
         }
     }
 
-    static fromJS(data: any): RoleResponse {
+    static fromJS(data: any): DtoBaseOfString {
         data = typeof data === 'object' ? data : {};
-        let result = new RoleResponse();
-        result.init(data);
-        return result;
+        throw new Error("The abstract class 'DtoBaseOfString' cannot be instantiated.");
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
+        data["isNew"] = this.isNew;
         return data;
     }
 }
 
-export interface IRoleResponse {
+export interface IDtoBaseOfString {
     id?: string | undefined;
-    name: string;
-    description?: string | undefined;
+    isNew: boolean;
 }
 
-export class TransferableExpressionOfRoleResponse implements ITransferableExpressionOfRoleResponse {
+export class RoleDto extends DtoBaseOfString implements IRoleDto {
+    name?: string | undefined;
+    description?: string | undefined;
+    isSelectableByUser!: boolean;
 
-    constructor(data?: ITransferableExpressionOfRoleResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
+    constructor(data?: IRoleDto) {
+        super(data);
     }
 
     init(_data?: any) {
-    }
-
-    static fromJS(data: any): TransferableExpressionOfRoleResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new TransferableExpressionOfRoleResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        return data;
-    }
-}
-
-export interface ITransferableExpressionOfRoleResponse {
-}
-
-export class RoleRequest implements IRoleRequest {
-    id?: string | undefined;
-    name!: string;
-    description?: string | undefined;
-
-    constructor(data?: IRoleRequest) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.id = _data["id"];
             this.name = _data["name"];
             this.description = _data["description"];
+            this.isSelectableByUser = _data["isSelectableByUser"];
         }
     }
 
-    static fromJS(data: any): RoleRequest {
+    static fromJS(data: any): RoleDto {
         data = typeof data === 'object' ? data : {};
-        let result = new RoleRequest();
+        let result = new RoleDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
         data["name"] = this.name;
         data["description"] = this.description;
+        data["isSelectableByUser"] = this.isSelectableByUser;
+        super.toJSON(data);
         return data;
     }
 }
 
-export interface IRoleRequest {
-    id?: string | undefined;
-    name: string;
+export interface IRoleDto extends IDtoBaseOfString {
+    name?: string | undefined;
     description?: string | undefined;
+    isSelectableByUser: boolean;
+}
+
+export class TransferableExpressionOfRoleDto implements ITransferableExpressionOfRoleDto {
+
+    constructor(data?: ITransferableExpressionOfRoleDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): TransferableExpressionOfRoleDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransferableExpressionOfRoleDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+}
+
+export interface ITransferableExpressionOfRoleDto {
 }
 
 export class ResultOfPermissionResponse extends Result implements IResultOfPermissionResponse {
@@ -8343,47 +8446,6 @@ export interface IRefreshTokenRequest {
     refreshToken?: string | undefined;
 }
 
-export class ResultOfListOfUserResponse extends Result implements IResultOfListOfUserResponse {
-    data?: UserResponse[] | undefined;
-
-    constructor(data?: IResultOfListOfUserResponse) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            if (Array.isArray(_data["data"])) {
-                this.data = [] as any;
-                for (let item of _data["data"])
-                    this.data!.push(UserResponse.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): ResultOfListOfUserResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultOfListOfUserResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.data)) {
-            data["data"] = [];
-            for (let item of this.data)
-                data["data"].push(item.toJSON());
-        }
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface IResultOfListOfUserResponse extends IResult {
-    data?: UserResponse[] | undefined;
-}
-
 export class UserResponse implements IUserResponse {
     id?: string | undefined;
     userName?: string | undefined;
@@ -8568,6 +8630,47 @@ export interface IAddressDto extends IDtoBaseOfInteger {
     country?: string | undefined;
     postalCode?: string | undefined;
     houseNumber?: string | undefined;
+}
+
+export class ResultOfListOfUserResponse extends Result implements IResultOfListOfUserResponse {
+    data?: UserResponse[] | undefined;
+
+    constructor(data?: IResultOfListOfUserResponse) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(UserResponse.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultOfListOfUserResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfListOfUserResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IResultOfListOfUserResponse extends IResult {
+    data?: UserResponse[] | undefined;
 }
 
 export class TransferableExpressionOfUserResponse implements ITransferableExpressionOfUserResponse {
@@ -8818,6 +8921,7 @@ export class RegisterRequest implements IRegisterRequest {
     emailConfirmed!: boolean;
     documents?: UploadRequest[] | undefined;
     userInfo?: UserInformationsDto | undefined;
+    initialRoleNames?: string[] | undefined;
 
     constructor(data?: IRegisterRequest) {
         if (data) {
@@ -8845,6 +8949,11 @@ export class RegisterRequest implements IRegisterRequest {
                     this.documents!.push(UploadRequest.fromJS(item));
             }
             this.userInfo = _data["userInfo"] ? UserInformationsDto.fromJS(_data["userInfo"]) : <any>undefined;
+            if (Array.isArray(_data["initialRoleNames"])) {
+                this.initialRoleNames = [] as any;
+                for (let item of _data["initialRoleNames"])
+                    this.initialRoleNames!.push(item);
+            }
         }
     }
 
@@ -8872,6 +8981,11 @@ export class RegisterRequest implements IRegisterRequest {
                 data["documents"].push(item.toJSON());
         }
         data["userInfo"] = this.userInfo ? this.userInfo.toJSON() : <any>undefined;
+        if (Array.isArray(this.initialRoleNames)) {
+            data["initialRoleNames"] = [];
+            for (let item of this.initialRoleNames)
+                data["initialRoleNames"].push(item);
+        }
         return data;
     }
 }
@@ -8888,6 +9002,7 @@ export interface IRegisterRequest {
     emailConfirmed: boolean;
     documents?: UploadRequest[] | undefined;
     userInfo?: UserInformationsDto | undefined;
+    initialRoleNames?: string[] | undefined;
 }
 
 export class ToggleUserStatusRequest implements IToggleUserStatusRequest {

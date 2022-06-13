@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using CleanArchitectureBase.Application.Common.Security;
+using CleanArchitectureBase.Shared.Constants.Permission;
 
 namespace CleanArchitectureBase.Application.Common.Extensions
 {
@@ -30,8 +31,30 @@ namespace CleanArchitectureBase.Application.Common.Extensions
 
         public static bool IsGuest(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier) == Guid.Empty.ToString();
-        
-        public static bool HasRoles(this ClaimsPrincipal user, RoleMatch match, string[] roles)
+
+        public static bool HasPolicy(this ClaimsPrincipal user, string policy)
+            => user.HasPolicies(PolicyMatch.All, policy);
+        public static bool HasPolicies(this ClaimsPrincipal user, string[] policies, PolicyMatch match = PolicyMatch.All)
+            => user.HasPolicies(match, policies);
+        public static bool HasPolicies(this ClaimsPrincipal user, PolicyMatch match, params string[] policies)
+        {
+            var granted = true;
+            foreach (var permission in policies ?? Enumerable.Empty<string>().ToArray())
+            {
+                granted = user.HasClaim(c => c.Type == ApplicationClaimTypes.Permission && c.Value == permission);
+                if (!granted && match == PolicyMatch.All)
+                    return false;
+                if (granted && match == PolicyMatch.Any)
+                    return true;
+            }
+            return granted;
+        }
+
+        public static bool HasRole(this ClaimsPrincipal user, string role)
+            => user.IsInRole(role);
+        public static bool HasRoles(this ClaimsPrincipal user, string[] roles, RoleMatch match = RoleMatch.All)
+            => user.HasRoles(match, roles);
+        public static bool HasRoles(this ClaimsPrincipal user, RoleMatch match, params string[] roles)
         {
             var granted = true;
             foreach (var role in roles ?? Enumerable.Empty<string>().ToArray())

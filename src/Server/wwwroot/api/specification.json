@@ -2159,79 +2159,6 @@
         ]
       }
     },
-    "/identity/Account/UpdateProfile": {
-      "put": {
-        "tags": [
-          "Account"
-        ],
-        "summary": "Update Profile",
-        "operationId": "Account_UpdateProfile",
-        "consumes": [
-          "application/json;odata.metadata=minimal;odata.streaming=true",
-          "application/json;odata.metadata=minimal;odata.streaming=false",
-          "application/json;odata.metadata=minimal",
-          "application/json;odata.metadata=full;odata.streaming=true",
-          "application/json;odata.metadata=full;odata.streaming=false",
-          "application/json;odata.metadata=full",
-          "application/json;odata.metadata=none;odata.streaming=true",
-          "application/json;odata.metadata=none;odata.streaming=false",
-          "application/json;odata.metadata=none",
-          "application/json;odata.streaming=true",
-          "application/json;odata.streaming=false",
-          "application/json",
-          "application/xml",
-          "text/plain",
-          "text/json",
-          "application/*+json",
-          "text/xml",
-          "application/*+xml"
-        ],
-        "produces": [
-          "application/json;odata.metadata=minimal;odata.streaming=true",
-          "application/json;odata.metadata=minimal;odata.streaming=false",
-          "application/json;odata.metadata=minimal",
-          "application/json;odata.metadata=full;odata.streaming=true",
-          "application/json;odata.metadata=full;odata.streaming=false",
-          "application/json;odata.metadata=full",
-          "application/json;odata.metadata=none;odata.streaming=true",
-          "application/json;odata.metadata=none;odata.streaming=false",
-          "application/json;odata.metadata=none",
-          "application/json;odata.streaming=true",
-          "application/json;odata.streaming=false",
-          "application/json",
-          "application/xml",
-          "text/plain",
-          "application/octet-stream",
-          "text/json",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "model",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateProfileRequest"
-            },
-            "x-nullable": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "x-nullable": false,
-            "description": "Status 200 OK",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
     "/identity/Account/ChangePassword": {
       "put": {
         "tags": [
@@ -2415,7 +2342,7 @@
             "name": "userId",
             "in": "path",
             "required": true,
-            "x-nullable": false
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -2679,6 +2606,43 @@
         ]
       }
     },
+    "/identity/Role/GetPublicRoles": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Get All Roles (basic, admin etc.)",
+        "operationId": "Role_GetPublicRoles",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Status 200 OK",
+            "schema": {
+              "$ref": "#/definitions/ResultOfListOfRoleDto"
+            }
+          }
+        }
+      }
+    },
     "/identity/Role": {
       "get": {
         "tags": [
@@ -2712,7 +2676,7 @@
             "x-originalName": "filter",
             "in": "query",
             "x-schema": {
-              "$ref": "#/definitions/TransferableExpressionOfRoleResponse"
+              "$ref": "#/definitions/TransferableExpressionOfRoleDto"
             },
             "x-nullable": true
           }
@@ -2722,7 +2686,7 @@
             "x-nullable": false,
             "description": "Status 200 OK",
             "schema": {
-              "$ref": "#/definitions/ResultOfListOfRoleResponse"
+              "$ref": "#/definitions/ResultOfListOfRoleDto"
             }
           }
         },
@@ -2783,7 +2747,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleRequest"
+              "$ref": "#/definitions/RoleDto"
             },
             "x-nullable": false
           }
@@ -3113,6 +3077,79 @@
             }
           }
         }
+      }
+    },
+    "/identity/User/UpdateProfile": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update profile",
+        "operationId": "User_UpdateProfile",
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/json",
+          "application/*+json",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Status 200 OK",
+            "schema": {
+              "$ref": "#/definitions/ResultOfString"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/identity/User": {
@@ -4730,13 +4767,26 @@
     "Userregistration": {
       "type": "object",
       "required": [
+        "enabled",
+        "requireAddress",
         "requireDocuments",
         "registrationDocumentsMaxFileSize",
-        "enabled",
         "requiresAdministratorActivation",
         "emailConfirmationRequired"
       ],
       "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "requireAddress": {
+          "type": "boolean"
+        },
+        "usernameRules": {
+          "$ref": "#/definitions/Usernamerules"
+        },
+        "passwordRules": {
+          "$ref": "#/definitions/Passwordrules"
+        },
         "requireDocuments": {
           "type": "boolean"
         },
@@ -4750,13 +4800,54 @@
             "type": "string"
           }
         },
-        "enabled": {
-          "type": "boolean"
-        },
         "requiresAdministratorActivation": {
           "type": "boolean"
         },
         "emailConfirmationRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Usernamerules": {
+      "type": "object",
+      "required": [
+        "minLength",
+        "usernameCanChangedAfterRegistration",
+        "emailCanChangedAfterRegistration"
+      ],
+      "properties": {
+        "minLength": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "usernameCanChangedAfterRegistration": {
+          "type": "boolean"
+        },
+        "emailCanChangedAfterRegistration": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Passwordrules": {
+      "type": "object",
+      "required": [
+        "minLength",
+        "capitalLetterRequired",
+        "lowercaseLetterRequired",
+        "numberRequired"
+      ],
+      "properties": {
+        "minLength": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "capitalLetterRequired": {
+          "type": "boolean"
+        },
+        "lowercaseLetterRequired": {
+          "type": "boolean"
+        },
+        "numberRequired": {
           "type": "boolean"
         }
       }
@@ -5593,29 +5684,6 @@
     "TransferableExpressionOfNotificationDto": {
       "type": "object"
     },
-    "UpdateProfileRequest": {
-      "type": "object",
-      "required": [
-        "firstName",
-        "lastName"
-      ],
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "minLength": 1
-        },
-        "lastName": {
-          "type": "string",
-          "minLength": 1
-        },
-        "phoneNumber": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        }
-      }
-    },
     "ChangePasswordRequest": {
       "type": "object",
       "required": [
@@ -5782,7 +5850,7 @@
         }
       }
     },
-    "ResultOfListOfRoleResponse": {
+    "ResultOfListOfRoleDto": {
       "allOf": [
         {
           "$ref": "#/definitions/Result"
@@ -5793,51 +5861,54 @@
             "data": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RoleResponse"
+                "$ref": "#/definitions/RoleDto"
               }
             }
           }
         }
       ]
     },
-    "RoleResponse": {
+    "RoleDto": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfString"
+        },
+        {
+          "type": "object",
+          "required": [
+            "isSelectableByUser"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "isSelectableByUser": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "DtoBaseOfString": {
       "type": "object",
+      "x-abstract": true,
       "required": [
-        "name"
+        "isNew"
       ],
       "properties": {
         "id": {
           "type": "string"
         },
-        "name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "description": {
-          "type": "string"
+        "isNew": {
+          "type": "boolean"
         }
       }
     },
-    "TransferableExpressionOfRoleResponse": {
+    "TransferableExpressionOfRoleDto": {
       "type": "object"
-    },
-    "RoleRequest": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "description": {
-          "type": "string"
-        }
-      }
     },
     "ResultOfPermissionResponse": {
       "allOf": [
@@ -5912,24 +5983,6 @@
           "type": "string"
         }
       }
-    },
-    "ResultOfListOfUserResponse": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Result"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/UserResponse"
-              }
-            }
-          }
-        }
-      ]
     },
     "UserResponse": {
       "type": "object",
@@ -6035,6 +6088,24 @@
             },
             "houseNumber": {
               "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "ResultOfListOfUserResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Result"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserResponse"
+              }
             }
           }
         }
@@ -6160,6 +6231,12 @@
         },
         "userInfo": {
           "$ref": "#/definitions/UserInformationsDto"
+        },
+        "initialRoleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -10,18 +10,18 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
-    public partial class Roles: IAsyncDisposable
+    public partial class Roles : IAsyncDisposable
     {
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
-        private List<RoleResponse> _roleList = new();
-        private RoleResponse _role = new();
+        private List<RoleDto> _roleList = new();
+        private RoleDto _role = new();
         private string _searchString = "";
         private bool _dense = false;
         private bool _striped = true;
@@ -52,7 +52,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         private async Task GetRolesAsync()
         {
             var response = await _api.Role_GetAllAsync();
-            if(_errorService.IsSuccessFull(response))
+            if (_errorService.IsSuccessFull(response))
                 _roleList = response.Data.ToList();
         }
 
@@ -86,12 +86,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 _role = _roleList.FirstOrDefault(c => c.Id == id);
                 if (_role != null)
                 {
-                    parameters.Add(nameof(RoleModal.RoleModel), new RoleRequest
-                    {
-                        Id = _role.Id,
-                        Name = _role.Name,
-                        Description = _role.Description
-                    });
+                    parameters.Add(nameof(RoleModal.RoleModel), _role.MapTo<RoleDto>());
                 }
             }
             var dialog = await _dialogService.ShowWithDefaultOptionsAsync<RoleModal>(id == null ? _localizer["Create"] : _localizer["Edit"], parameters);
@@ -104,11 +99,11 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         private async Task Reset()
         {
-            _role = new RoleResponse();
+            _role = new RoleDto();
             await GetRolesAsync();
         }
 
-        private bool Search(RoleResponse role)
+        private bool Search(RoleDto role)
         {
             return string.IsNullOrWhiteSpace(_searchString) ||
                    (role.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true ||

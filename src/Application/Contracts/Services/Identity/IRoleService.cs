@@ -9,13 +9,13 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Identity
 {
     public interface IRoleService : IService
     {
-        Task<Result<List<RoleResponse>>> GetAllAsync();
+        Task<Result<List<RoleDto>>> GetAllAsync();
 
         Task<int> GetCountAsync();
 
-        Task<Result<RoleResponse>> GetByIdAsync(string id);
+        Task<Result<RoleDto>> GetByIdAsync(string id);
 
-        Task<Result<string>> SaveAsync(RoleRequest request);
+        Task<Result<string>> SaveAsync(RoleDto request);
 
         Task<Result<string>> DeleteAsync(string id);
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
@@ -39,7 +40,9 @@ using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
+using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests;
+using CleanArchitectureBase.Shared.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -158,9 +161,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<IResult> RegisterAsync(RegisterRequest request, string origin)
         {
-            var failed = await FailIf(u => u.UserName == request.UserName, string.Format(_localizer["Username {0} is already taken."], request.UserName))
-                         ?? await FailIf(u => u.PhoneNumber == request.PhoneNumber, string.Format(_localizer["Phone number {0} is already registered."], request.PhoneNumber), !string.IsNullOrWhiteSpace(request.PhoneNumber))
-                         ?? await FailIf(u => u.Email == request.Email, string.Format(_localizer["Email {0} is already registered."], request.Email));
+            var failed = await FailIf(u => u.UserName == request.UserName, _localizer["Username {0} is already taken.", request.UserName])
+                         ?? await FailIf(u => u.PhoneNumber == request.PhoneNumber, _localizer["Phone number {0} is already registered.", request.PhoneNumber], !string.IsNullOrWhiteSpace(request.PhoneNumber))
+                         ?? await FailIf(u => u.Email == request.Email, _localizer["Email {0} is already registered.", request.Email]);
 
             if (failed != null)
                 return failed;
@@ -175,7 +178,10 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 if (user.EmailConfirmed && user.IsActive)
                     SendUserActivatedMailAsync(user);
 
-                var message = string.Format(request.EmailConfirmed ? _localizer["User {0} Registered."] : _localizer["User {0} Registered. Please check your Mailbox to verify!"], user.UserName);
+                var message = request.EmailConfirmed ? _localizer["User {0} Registered.", user.UserName] : _localizer["User {0} Registered. Please check your Mailbox to verify!", user.UserName];
+
+                foreach (var role in (request.InitialRoleNames ?? Enumerable.Empty<string>()))
+                    await _userManager.AddToRoleAsync(user, role);
 
                 if (request.Documents?.Any() == true)
                 {
@@ -282,6 +288,59 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result.SuccessAsync(_localizer["Roles Updated"]);
         }
 
+        /// <summary>
+        /// Updates the profile and if user is current user it returns the new JWT token
+        /// </summary>
+        public async Task<IResult<string>> UpdateUserAsync(UserResponse user)
+        {
+            var settings = _serviceProvider.GetRequiredService<ServerConfiguration>().PublicSettings;
+            var signInManager = _serviceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
+            var identityService = _serviceProvider.GetRequiredService<IdentityService>();
+            var isOwnProfile = user.Id == _currentUserService.UserId;
+            var canEditAsAdmin = await _permissionService.HasPoliciesAsync(new[] { Permissions.Users.Edit }, PolicyMatch.All);
+            if (!isOwnProfile && !canEditAsAdmin)
+                throw Errors.Create("Not Allowed", HttpStatusCode.Unauthorized);
+
+            var applicationUser = user.MapTo<ApplicationUser>();
+            var trackedUser = await _userManager.FindByIdAsync(user.Id);
+            if (trackedUser != null)
+            {
+                bool phoneChanged = !string.IsNullOrWhiteSpace(user.PhoneNumber) && user.PhoneNumber != trackedUser.PhoneNumber;
+
+                var failed = FailIf(trackedUser.UserName != user.UserName && !settings.UserRegistration.UsernameRules.UsernameCanChangedAfterRegistration && !canEditAsAdmin, _localizer["Username cannot changed"])
+                             ?? FailIf(trackedUser.Email != user.Email && !settings.UserRegistration.UsernameRules.EmailCanChangedAfterRegistration && !canEditAsAdmin, _localizer["Email cannot changed"])
+                             ?? await FailIf(u => u.UserName == user.UserName, _localizer["Username {0} is already taken.", user.UserName], user.UserName != trackedUser.UserName)
+                             ?? await FailIf(u => u.PhoneNumber == user.PhoneNumber, _localizer["Phone number {0} is already registered.", user.PhoneNumber ?? ""], user.PhoneNumber != trackedUser.PhoneNumber && !string.IsNullOrWhiteSpace(user.PhoneNumber))
+                             ?? await FailIf(u => u.Email == user.Email, _localizer["Email {0} is already registered.", user.Email != trackedUser.Email]);
+
+                if (failed != null)
+                    return new Result<string> { Succeeded = failed.Succeeded, Messages = failed.Messages };
+
+                trackedUser.Email = applicationUser.Email;
+                trackedUser.UserInfo = applicationUser.UserInfo;
+                trackedUser.FirstName = applicationUser.FirstName;
+                trackedUser.LastName = applicationUser.LastName;
+                trackedUser.PhoneNumber = applicationUser.PhoneNumber;
+                trackedUser.UserName = applicationUser.UserName;
+                if (phoneChanged)
+                    await _userManager.SetPhoneNumberAsync(trackedUser, user.PhoneNumber).EnsureSuccess();
+
+                var res = await _userManager.UpdateAsync(trackedUser);
+                string token = string.Empty;
+
+                await _serviceProvider.GetRequiredService<IMediator>().PublishClientEvent(new UserProfileChanged(user));
+                if (isOwnProfile)
+                {
+                    await signInManager.RefreshSignInAsync(trackedUser);
+                    token = await identityService.GenerateJwtAsync(trackedUser);
+                }
+
+                return res.ToApplicationResult(token);
+            }
+
+            return await Result.FailAsync<string>("User not found");
+        }
+
         public async Task<IResult<string>> ConfirmEmailAsync(string userId, string code)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -293,10 +352,10 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                     await SendAdminActivationNotification(user);
                 if (user.EmailConfirmed && user.IsActive)
                     SendUserActivatedMailAsync(user);
-                return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["Account Confirmed for {0}. You can now use the /api/identity/token endpoint to generate JWT."], user.Email));
+                return await Result<string>.SuccessAsync(user.Id, _localizer["Account Confirmed for {0}. You can now use the /api/identity/token endpoint to generate JWT.", user.Email]);
             }
 
-            throw new ApiException(string.Format(_localizer["An error occurred while confirming {0}"], user.Email));
+            throw new ApiException(_localizer["An error occurred while confirming {0}", user.Email]);
         }
 
         public async Task<IResult> ForgotPasswordAsync(ForgotPasswordRequest request, string origin)
@@ -312,7 +371,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             {
                 await SendVerificationMailAsync(origin, user);
 
-                return await Result.SuccessAsync(string.Format(_localizer["User {0} Registered. Please check your Mailbox to verify!"], user.UserName));
+                return await Result.SuccessAsync(_localizer["User {0} Registered. Please check your Mailbox to verify!", user.UserName]);
             }
             // For more information on how to enable account confirmation and password reset please
             // visit https://go.microsoft.com/fwlink/?LinkID=532713
@@ -383,6 +442,10 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return result.ToApplicationResult();
         }
 
+        private IResult FailIf(bool when, string message)
+        {
+            return !when ? null : Result.Fail(message);
+        }
         private async Task<IResult> FailIf(Expression<Func<ApplicationUser, bool>> expression, string message, bool? condition = null)
         {
             if (!(condition ?? false))

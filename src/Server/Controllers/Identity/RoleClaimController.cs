@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
@@ -34,8 +35,7 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> GetAll([FromOdataFilter] TransferableExpression<RoleClaimResponse> filter = null)
         {
             var roleClaims = await _roleClaimService.GetAllAsync();
-            if (filter != null)
-                roleClaims.Data = Filter(roleClaims.Data, filter);
+            roleClaims.Data = Filter(roleClaims.Data, filter).ToList();
             return Ok(roleClaims);
         }
 

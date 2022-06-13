@@ -13,6 +13,7 @@ namespace CleanArchitectureBase.Infrastructure.Models.Identity
         public string LastModifiedBy { get; set; }
         public DateTime? LastModifiedOn { get; set; }
         public virtual ICollection<ApplicationRoleClaim> RoleClaims { get; set; }
+        public bool IsSelectableByUser { get; set; }
 
         public ApplicationRole() : base()
         {

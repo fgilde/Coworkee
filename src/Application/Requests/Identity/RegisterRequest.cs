@@ -16,5 +16,6 @@ namespace CleanArchitectureBase.Application.Requests.Identity
         public bool EmailConfirmed { get; set; } = false;
         public IList<UploadRequest> Documents { get; set; }
         public UserInformationsDto UserInfo { get; set; } = new();
+        public List<string> InitialRoleNames { get; set; } = new();
     }
 }

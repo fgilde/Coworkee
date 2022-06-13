@@ -8,8 +8,6 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Account
 {
     public interface IAccountService : IService
     {
-        Task<string> UpdateProfileAsync(UpdateProfileRequest model, string userId);
-
         Task<IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId);
 
         Task<IResult<string>> GetProfilePictureAsync(string userId);

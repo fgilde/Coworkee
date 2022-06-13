@@ -31,10 +31,6 @@ body * {
     background-color: transparent
 }
 
-.cursor-pointer {
-    cursor: pointer;
-}
-
 .uppercase {
     text-transform: uppercase;
 }
@@ -220,4 +216,21 @@ body * {
 
 .w-100 {
     width: 100%;
+}
+
+.page-selection-menu > .mud-button {
+    font-size: 17pt;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+.hover-scale {
+    transition: transform 0.1s, border-color 0.4s, border-width 0.1s,;
+    transform: scale(1);
+
+    &:hover {
+        transform: scale(1.03);
+        border-color: var(--mud-palette-primary);
+        border-width: 3px;
+    }
 }

@@ -125,13 +125,6 @@
             </summary>
             <returns>Status 200 OK </returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.UpdateProfile(CleanArchitectureBase.Application.Requests.Identity.UpdateProfileRequest)">
-            <summary>
-            Update Profile
-            </summary>
-            <param name="model"></param>
-            <returns>Status 200 OK</returns>
-        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.ChangePassword(CleanArchitectureBase.Application.Requests.Identity.ChangePasswordRequest)">
             <summary>
             Change Password
@@ -146,11 +139,12 @@
             <param name="userId"></param>
             <returns>Status 200 OK </returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.UpdateProfilePictureAsync(CleanArchitectureBase.Application.Requests.Identity.UpdateProfilePictureRequest)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.UpdateProfilePictureAsync(CleanArchitectureBase.Application.Requests.Identity.UpdateProfilePictureRequest,System.String)">
             <summary>
             Update Profile Picture
             </summary>
             <param name="request"></param>
+            <param name="userId"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.RoleClaimResponse})">
@@ -180,13 +174,19 @@
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.RoleResponse})">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetPublicRoles">
             <summary>
             Get All Roles (basic, admin etc.)
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Post(CleanArchitectureBase.Application.Requests.Identity.RoleRequest)">
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.RoleDto})">
+            <summary>
+            Get All Roles (basic, admin etc.)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Post(CleanArchitectureBase.Application.Common.Models.Identity.RoleDto)">
             <summary>
             Add a Role
             </summary>
@@ -226,6 +226,13 @@
             Refresh Token
             </summary>
             <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.UpdateProfile(CleanArchitectureBase.Application.Common.Models.Identity.UserResponse)">
+            <summary>
+            Update profile
+            </summary>
+            <param name="user"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.Delete(System.String,System.Threading.CancellationToken)">

@@ -81,8 +81,6 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
 
             _httpClient.SetAuthorization(token);
             _authenticationStateProvider.MarkUserAsAuthenticated();
-            var x = _authenticationStateProvider.AuthenticationStateUser.Identity.IsAuthenticated;
-            var c = x;
         }
 
         public async Task<IResult> Logout()

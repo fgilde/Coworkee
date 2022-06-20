@@ -3,11 +3,18 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Hubs;
+using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.Shared.Dialogs;
+using Microsoft.AspNetCore.SignalR.Client;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
     public partial class UserProfile
     {
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public string Id { get; set; }
         [Parameter] public string Title { get; set; }
         [Parameter] public string Description { get; set; }
@@ -22,6 +29,8 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (_errorService.IsSuccessFull(result))
             {
                 _snackBar.Add(_localizer["Updated User Status."], Severity.Success);
+                if (!user.IsActive || !user.EmailConfirmed)
+                    await ExecuteUserLogout();
                 _navigationManager.NavigateTo("/identity/users");
             }
         }
@@ -36,7 +45,48 @@ namespace CleanArchitectureBase.Client.Pages.Identity
                 user = result.Data;
                 Title = $"{user.FirstName} {user.LastName}'s {_localizer["Profile"]}";
                 Description = user.Email;
+                HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
             }
+        }
+
+        private async Task LogoutUser()
+        {
+            var actions = new[]
+            {
+                new MessageDialog.DialogResultAction
+                {
+                    Label = "Cancel",
+                    Variant = Variant.Text,
+                    Result = DialogResult.Cancel()
+                },
+                new MessageDialog.DialogResultAction
+                {
+                    Label = "Confirm",
+                    Color = Color.Error,
+                    Variant = Variant.Filled,
+                    Result = DialogResult.Ok(true)
+                },
+            };
+            var parameters = new DialogParameters
+            {
+                {nameof(MessageDialog.Message), $"{_localizer["Are you sure you want to force logout for user {0}", user.FullName]}"},
+                {nameof(MessageDialog.Icon), Icons.Filled.Logout},
+                {nameof(MessageDialog.Class), "mud-ex-dialog-initial"},
+                {nameof(MessageDialog.Buttons), actions}
+            };
+            var options = new DialogOptionsEx { CloseButton = true, DisableBackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight};
+            var dialog = await _dialogService.ShowEx<MessageDialog>(_localizer["Logout user"], parameters, options);
+
+            if (!(await dialog.Result).Cancelled)
+            {
+                await ExecuteUserLogout();
+                _snackBar.Add(_localizer["The user {0} has been logged off", user.FullName], Severity.Success);
+            }
+        }
+
+        private async Task ExecuteUserLogout()
+        {
+            await HubConnection.SendAsync(nameof(ClientEventHub.LogoutUserById), Id);
         }
     }
 }

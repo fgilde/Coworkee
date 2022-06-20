@@ -4,12 +4,10 @@ using System.Linq;
 using System.Security.Claims;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Shared.Dialogs;
@@ -94,7 +92,6 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);
                 await HubConnection.SendAsync(nameof(ClientEventHub.RegenerateTokensAsync));
-                await HubConnection.SendAsync(nameof(ClientEventHub.OnChangeRolePermissions), _currentUser.GetUserId(), request.RoleId);
                 _navigationManager.NavigateTo("/identity/roles");
             }
             else

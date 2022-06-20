@@ -1051,3 +1051,9 @@ Basic role with default permissions: Basis-Rolle mit Standardrechten
 Basic: Basis
 All roles: Alle Rollen
 All roles unfiltered: Alle rollen ungefiltert
+You are logged out by an Administrator or profile change.: Sie wurden durch einen Adminstrator oder einer Profiländerung abgemeldet.
+Logout user: Diesen Benutzer abmelden
+The user {0} has been logged off: Der Benutzer {0} wurde abgemeldet.
+Yes: Ja
+No: Nein
+Are you sure you want to force logout for user {0}: Möchten Sie die Abmeldung für den Benutzer {0} wirklich erzwingen

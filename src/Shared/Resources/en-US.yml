@@ -1050,3 +1050,9 @@ Basic role with default permissions: Basic role with default permissions
 Basic: Basic
 All roles: All roles
 All roles unfiltered: All roles unfiltered
+You are logged out by an Administrator or profile change.: You are logged out by an Administrator or profile change.
+Logout user: Logout user
+The user {0} has been logged off: The user {0} has been logged off
+Yes: Yes
+No: No
+Are you sure you want to force logout for user {0}: Are you sure you want to force logout for user {0}

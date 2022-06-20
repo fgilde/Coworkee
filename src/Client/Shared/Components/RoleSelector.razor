@@ -1,8 +1,10 @@
 ﻿@using Nextended.Core.Extensions
 @using CleanArchitectureBase.Application.Common.Models.Identity
 @using CleanArchitectureBase.Application.Common.Extensions
+@using CleanArchitectureBase.Application.Contracts.Hubs
 @using CleanArchitectureBase.Client.JsInterop
 @using CleanArchitectureBase.Client.Utils
+@using Microsoft.AspNetCore.SignalR.Client
 @using MudBlazor.Extensions.Helper
 @using MudBlazor.Extensions.Options
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RoleSelector> localizer
@@ -65,6 +67,7 @@
 
 @code
 {
+    [CascadingParameter] private HubConnection HubConnection { get; set; }
     [Parameter] public bool IsOpen { get => _isOpen; set => SetOpen(value);}
     [Parameter] public string MainClass { get; set; } = "role-selector";
     [Parameter] public bool AnimateOpen { get; set; } = true;
@@ -99,7 +102,21 @@
         
         var currentUser = await _clientAuthenticationManager.CurrentUser();
         if (currentUser?.Identity?.IsAuthenticated == true && !currentUser.IsGuest())
+        {
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+            HubConnection.On<string>(nameof(IClientEventHub.UserRolesChanged), async (userId) =>
+            {
+                if (currentUser.GetUserId() == userId)
+                {
+                    actualRoles?.Clear();
+                    _httpClient.SetActiveRoleIds(null);
+                    await UpdateDataAsync();
+                    await ApplyChanges();
+                    StateHasChanged();
+                }
+            });
             await UpdateDataAsync();
+        }
     }
 
     private string DisplayName(bool ellipse = true, bool forceAll = false)

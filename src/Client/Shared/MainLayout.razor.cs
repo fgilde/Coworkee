@@ -16,6 +16,7 @@ using CleanArchitectureBase.Application.Contracts.Chat;
 using CleanArchitectureBase.Application.Contracts.Hubs;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Hubs.Events;
+using CleanArchitectureBase.Client.Authentication;
 using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
@@ -121,43 +122,24 @@ namespace CleanArchitectureBase.Client.Shared
 
             hubConnection.On(nameof(IClientEventHub.RegenerateTokens), async () =>
             {
-                try
-                {
-                    var token = await _clientAuthenticationManager.TryForceRefreshToken();
-                    if (!string.IsNullOrEmpty(token))
-                    {
-                        _snackBar.Add(localizer["Refreshed Token."], Severity.Success);
-                        _httpClient.SetAuthorization(token);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    _snackBar.Add(localizer["You are Logged Out."], Severity.Error);
-                    await _clientAuthenticationManager.Logout();
-                    _navigationManager.NavigateToHomeWithReturnTo();
-                }
+                await _clientAuthenticationManager.RegenerateAndUpdateTokenAsync();
             });
-            hubConnection.On<string, string>(nameof(IClientEventHub.LogoutUsersByRole), async (userId, roleId) =>
+            hubConnection.On<string>(nameof(IClientEventHub.UserRolesChanged), async (userId) =>
             {
-                if (CurrentUserId != userId)
+                if (CurrentUserId == userId)
+                    await _clientAuthenticationManager.RegenerateAndUpdateTokenAsync();
+            });
+            hubConnection.On<string>(nameof(IClientEventHub.LogoutUserById), async (userId) =>
+            {
+                if (CurrentUserId == userId)
                 {
-                    var rolesResponse = await _api.Role_GetAllAsync();
-                    if (rolesResponse.Succeeded)
-                    {
-                        var role = rolesResponse.Data.FirstOrDefault(x => x.Id == roleId);
-                        if (role != null)
-                        {
-                            var currentUserRolesResponse = await _api.User_GetRolesAsync(CurrentUserId);
-                            if (currentUserRolesResponse.Succeeded && currentUserRolesResponse.Data.UserRoles.Any(x => x.RoleName == role.Name))
-                            {
-                                _snackBar.Add(localizer["You are logged out because the Permissions of one of your Roles have been updated."], Severity.Error);
-                                await hubConnection.SendAsync(nameof(ClientEventHub.OnDisconnectAsync), CurrentUserId);
-                                await _clientAuthenticationManager.Logout();
-                                _navigationManager.NavigateToHomeWithReturnTo();
-                            }
-                        }
-                    }
+                    await hubConnection.SendAsync(nameof(ClientEventHub.OnDisconnectAsync), CurrentUserId);
+                    await _clientAuthenticationManager.Logout();
+                    if ((await _stateProvider.GetAuthenticationStateAsync()).IsGuest())
+                        _navigationManager.NavigateToHomeWithReturnTo();
+                    else
+                        _navigationManager.NavigateToWithReturnTo(ApplicationConstants.Routes.Login);
+                    _snackBar.Add(localizer["You are logged out by an Administrator or profile change."], Severity.Error);
                 }
             });
         }

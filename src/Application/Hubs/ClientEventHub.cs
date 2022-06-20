@@ -23,11 +23,16 @@ namespace CleanArchitectureBase.Application.Hubs
             await Clients.All.DisconnectUser(userId);
         }
 
-        public async Task OnChangeRolePermissions(string userId, string roleId)
+        public async Task UserRolesChanged(string userId)
         {
-            await Clients.All.LogoutUsersByRole(userId, roleId);
+            await Clients.All.UserRolesChanged(userId);
         }
-        
+
+        public async Task LogoutUserById(string userId)
+        {
+            await Clients.All.LogoutUserById(userId);
+        }
+
         public async Task UpdateDashboardAsync()
         {
             await Clients.All.UpdateDashboard();

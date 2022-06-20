@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Application.Hubs;
+using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
     public partial class UserRoles
     {
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public string Id { get; set; }
         [Parameter] public string Title { get; set; }
         [Parameter] public string Description { get; set; }
@@ -31,6 +35,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
 
         protected override async Task OnInitializedAsync()
         {
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
             _currentUser = await _clientAuthenticationManager.CurrentUser();
             _canEditUsers = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Users.Edit)).Succeeded;
             _canSearchRoles = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Roles.Search)).Succeeded;
@@ -63,6 +68,7 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             if (result.Succeeded)
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);
+                await HubConnection.SendAsync(nameof(ClientEventHub.UserRolesChanged), request.UserId);
                 _navigationManager.NavigateTo("/identity/users");
             }
             else

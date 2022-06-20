@@ -7,7 +7,7 @@
                 <Found Context="routeData">
                     <AuthorizeRouteView RouteData="@routeData" DefaultLayout="typeof(MainLayout)">
                         <NotAuthorized>
-                            @if (authenticationState?.User?.Identity?.IsAuthenticated ?? false)
+                            @if (IsLoggedIn())
                             {
                                 <Forbidden ReturnUrl="@_navigationManager.ToBaseRelativePath(_navigationManager.Uri)"/>
                             }

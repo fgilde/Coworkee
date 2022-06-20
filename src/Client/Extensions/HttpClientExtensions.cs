@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -25,27 +27,28 @@ namespace CleanArchitectureBase.Client.Extensions
             return headers;
         }
 
-        public static HttpRequestHeaders SetActiveRoleId(this HttpRequestHeaders headers, params string[] roleIds)
-        {
-            if (headers.Contains(ApplicationConstants.HeaderNames.RoleIdHeader))
-                headers.Remove(ApplicationConstants.HeaderNames.RoleIdHeader);
-            foreach (var roleId in roleIds.EmptyIfNull())
-                headers.Add(ApplicationConstants.HeaderNames.RoleIdHeader, RoleIdHeaderValue(roleId));
-            return headers;
-        }
-
+        public static string[] GetActiveRoleIds(this HttpHeaders headers) => headers.AllHeaderValuesFor(ApplicationConstants.HeaderNames.RoleIdHeader);
+        public static string[] GetActiveRoleIds(this HttpClient client) => client.DefaultRequestHeaders.GetActiveRoleIds();
+        public static HttpHeaders SetActiveRoleIds(this HttpHeaders headers, params string[] roleIds) => headers.SetHeaderValues(ApplicationConstants.HeaderNames.RoleIdHeader, roleIds);
         public static void UpdateAcceptLanguage(this HttpClient client, CultureInfo cultureInfo = null) => client.DefaultRequestHeaders.UpdateAcceptLanguage(cultureInfo);
-        public static void SetActiveRoleId(this HttpClient client, params string[] roleIds) => client.DefaultRequestHeaders.SetActiveRoleId(roleIds);
-        public static void SetActiveRoleId(this HttpRequestMessage request, string roleId) => request.Headers.SetActiveRoleId(roleId);
+        public static void SetActiveRoleIds(this HttpClient client, params string[] roleIds) => client.DefaultRequestHeaders.SetActiveRoleIds(roleIds);
+        public static void SetActiveRoleIds(this HttpRequestMessage request, string roleIds) => request.Headers.SetActiveRoleIds(roleIds);
         public static void SetAuthorization(this HttpClient httpClient, string token) => httpClient.DefaultRequestHeaders.SetAuthorization(token);
         public static string GetAuthorization(this HttpClient httpClient) => httpClient.DefaultRequestHeaders.Authorization?.Parameter;
         public static void SetAuthorization(this HttpRequestMessage request, string token) => request.Headers.SetAuthorization(token);
 
-        private static string RoleIdHeaderValue(string roleId)
-        {
-            return roleId;
-        }
+        internal static string[] AllHeaderValuesFor(this HttpHeaders headers, string headerName)
+            => headers.Contains(headerName) ? headers.GetValues(headerName).ToArray() : Array.Empty<string>();
 
+        internal static HttpHeaders SetHeaderValues(this HttpHeaders headers, string headerName, string[] values)
+        {
+            if (headers.Contains(headerName))
+                headers.Remove(headerName);
+            foreach (var value in values.EmptyIfNull())
+                headers.Add(headerName, value);
+            return headers;
+        }
+        
         private static AuthenticationHeaderValue GetAuth(string token)
         {
             return token.IsNullOrWhiteSpace() ? null : new AuthenticationHeaderValue("Bearer", token);

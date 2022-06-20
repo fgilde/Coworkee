@@ -19,12 +19,18 @@ public partial class App : IDisposable
         _interceptor.RegisterEvent();
         hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);
     }
-
+    
     public void Dispose()
     {
         _snackBar?.Dispose();
         _httpClient?.Dispose();
         _interceptor.DisposeEvent();
         _ = hubConnection.DisposeAsync();
+    }
+
+    private bool IsLoggedIn()
+    {
+        var result = authenticationState?.User.Identity?.IsAuthenticated == true;
+        return result || _stateProvider.IsAuthenticatedBeforeEvent;
     }
 }

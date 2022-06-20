@@ -1,9 +1,22 @@
 export class EventHelper {
-    addCustomEventListener(name, dotNetObjectRef) {
-        document.addEventListener(name, (event) => {
-            var args = this.cloneEvent(event, true);
-            dotNetObjectRef.invokeMethodAsync('OnCustomEvent', args);
-        });
+    addCustomEventListener(name, dotNetObjectRef, elementSelector) {
+        let target = elementSelector ? document.querySelector(elementSelector) : document;
+        if (target) {
+            target.addEventListener(name, (event) => {
+                var args = this.cloneEvent(event, true);
+                dotNetObjectRef.invokeMethodAsync('OnCustomEvent', args);
+            });
+        }
+        else {
+            let observer = new MutationObserver((e) => {
+                var res = e.filter(x => x.addedNodes && x.addedNodes[0] === document.querySelector(elementSelector));
+                if (res.length) {
+                    observer.disconnect();
+                    this.addCustomEventListener(name, dotNetObjectRef, elementSelector);
+                }
+            });
+            observer.observe(document, { characterData: true, childList: true, subtree: true });
+        }
     }
     addCustomEventListenerWhenNotIn(selector, name, dotNetObjectRef) {
         document.addEventListener(name || 'click', (event) => {

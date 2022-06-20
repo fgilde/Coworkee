@@ -198,7 +198,7 @@ namespace CleanArchitectureBase.Server.Extensions
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseLazyLoadingProxies();
+                //options.UseLazyLoadingProxies(); // Problems with chat service at this moment
                 //options.UseInMemoryDatabase("CleanArchitectureBaseDb");
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();

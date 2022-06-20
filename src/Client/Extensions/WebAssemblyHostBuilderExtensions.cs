@@ -67,6 +67,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 })
                 .AddMudMarkdownServices()
                 .AddScoped<ClientPreferenceManager>()
+                .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()
                 .AddScoped<ApplicationStateProvider>()
                 .AddScoped<AuthenticationStateProvider, ApplicationStateProvider>()
                 .AddScoped<ICurrentUserService, ApplicationStateProvider>(p => p.GetService<ApplicationStateProvider>())

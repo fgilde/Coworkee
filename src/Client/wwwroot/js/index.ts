@@ -2,7 +2,7 @@
 // TODO: Rebuild whole file, its Horrable
 
 let jsAppData = {
-    mouseArgs: {} as Event,
+    mouseArgs: {} as any,
     browserDimensions: {}
 }
 
@@ -24,8 +24,8 @@ function getJsAppData () {
         width: window.innerWidth,
         height: window.innerHeight
     };
-    //res.mouseArgs = (({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }:any) => ({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }))(jsAppData.mouseArgs);
-    res.mouseArgs = new helper.EventHelper().cloneEvent(jsAppData.mouseArgs, true);
+    res.mouseArgs = (({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }:any) => ({ pageX, pageY, clientX, clientY, screenX, screenY, movementX, movementY, shiftKey, altKey, metaKey, ctrlKey, button, buttons }))(jsAppData.mouseArgs);
+    //res.mouseArgs = new helper.EventHelper().cloneEvent(jsAppData.mouseArgs, true);
     return res;
 };
 

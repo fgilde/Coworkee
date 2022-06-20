@@ -12,6 +12,8 @@ using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
@@ -97,8 +99,8 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.Message), $"{string.Format(_localizer["Do you want to delete the User {0}"], user.FullName)}?"}
             };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
+            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var dialog = await _dialogService.ShowEx<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled && _errorService.IsSuccessFull(await _api.User_DeleteAsync(user.Id)))
             {

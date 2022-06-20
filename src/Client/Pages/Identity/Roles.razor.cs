@@ -12,6 +12,8 @@ using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Options;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
@@ -63,8 +65,8 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
             };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
+            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var dialog = await _dialogService.ShowEx<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

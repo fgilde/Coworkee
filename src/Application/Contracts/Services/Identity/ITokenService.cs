@@ -9,7 +9,7 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Identity
     public interface ITokenService : IService
     {
         Task<Result<TokenResponse>> LoginAsync(TokenRequest model);
-
+        Task<Result<TokenResponse>> RegenerateTokenAsync(string[] specificRoles);
         Task<Result<TokenResponse>> GetRefreshTokenAsync(RefreshTokenRequest model);
     }
 }

@@ -9,13 +9,15 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NotificationToggle> localizer
 
 @{
+    <ReactOnPreferenceChanged OnPreferenceChanged="PreferenceChanged"></ReactOnPreferenceChanged>
+
     <MudTooltip Text="@localizer["Notifications"]">
 
         <MudBadge Origin="Origin.CenterRight" BadgeClass="notification-badge" Content="@_unreadCount" Visible="@HasUnread()" Color="Color.Warning" Overlap="true">
             <MudToggleIconButton Class="@($"{MainClass}-toggle-button")" @bind-Toggled="@IsOpen" Icon="@Icons.Material.Outlined.Notifications" Color="@(HasUnread() ? Color.Warning : Color.Inherit)" ToggledIcon="@Icons.Filled.Notifications" ToggledColor="@Color.Secondary" />
         </MudBadge>
 
-        <MudPopover Class="@(_animate ? $"{MainClass}-popover slide-kf-from-right" : $"{MainClass}-popover")" Style="margin-right: 5px; margin-top: 10px;" Open="@IsOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="900">
+        <MudPopover Class="@(_animate ? $"{MainClass}-popover {animationCls}" : $"{MainClass}-popover")" Style="@($"{rtlBasedStyle} margin-top: 10px;")" Open="@IsOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="900">
 
             @if (_isLoading)
             {
@@ -130,6 +132,8 @@
     }
     #region Private fields
 
+    private string rtlBasedStyle = "margin-right: 5px;";
+    private string animationCls = "slide-kf-from-right";
     private bool _isOpen;
     private bool _isLoading;
     private bool _needsReload = true;
@@ -145,7 +149,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-
+        var preference = await _clientPreferenceManager.GetPreference() as ClientPreference;
+        UpdateRTLValues(preference);
         _unreadCount = await _api.Notifications_UnreadAsync();
         HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         _jsEvent = new CustomEventInterop<PointerEventArgs>(_jsRuntime);
@@ -179,6 +184,12 @@
 
             StateHasChanged();
         });
+    }
+
+    private void UpdateRTLValues(ClientPreference preference)
+    {
+        animationCls = preference?.IsRTL == true ? "slide-kf-from-left" : "slide-kf-from-right";
+        rtlBasedStyle = preference?.IsRTL == true ? "margin-left: 40px;" : "margin-right: 5px;";
     }
 
     private Task OnFocusLeft(PointerEventArgs arg)
@@ -251,5 +262,10 @@
         await _api.Notifications_DeleteAllAsync();
         await ReloadSilent();
         StateHasChanged();
+    }
+
+    private void PreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs args)
+    {
+        UpdateRTLValues(args.NewValue);
     }
 }

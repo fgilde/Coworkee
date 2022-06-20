@@ -29,11 +29,12 @@ public class CustomEventInterop<TEventArgs>: IDisposable
         return this;
     }
 
-    public async Task<CustomEventInterop<TEventArgs>> AddEventListener(string eventName, Func<TEventArgs, Task> callback)
+    public async Task<CustomEventInterop<TEventArgs>> AddEventListener(string eventName, Func<TEventArgs, Task> callback, string elementSelector = null)
     {
-        await _jsRuntime.InvokeVoidAsync(
-            JsNamespace.Get("EventHelper", "addCustomEventListener"), eventName,
-            _reference = DotNetObjectReference.Create(new CustomEventHelper<TEventArgs>(callback))
+        await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("EventHelper", "addCustomEventListener"), 
+            eventName,
+            _reference = DotNetObjectReference.Create(new CustomEventHelper<TEventArgs>(callback)), 
+            elementSelector
         );
         return this;
     }

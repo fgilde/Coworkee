@@ -1,87 +1,192 @@
 ﻿@using Nextended.Core.Extensions
 @using CleanArchitectureBase.Application.Common.Models.Identity
 @using CleanArchitectureBase.Application.Common.Extensions
+@using CleanArchitectureBase.Client.JsInterop
+@using CleanArchitectureBase.Client.Utils
+@using MudBlazor.Extensions.Helper
+@using MudBlazor.Extensions.Options
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RoleSelector> localizer
 
 @{
     @if (IsVisible)
     {
-        <MudTooltip Placement="Placement.Start" Text="@DisplayName(false)">
-            <MudMenu MaxHeight="350" Class="@(Small ? "" : "role-selector-menu")" Label="@(Small ? "" : DisplayName())" Icon="@(Small ? Icons.Material.Outlined.Group : null)" EndIcon="@(Small ? null : Icons.Material.Outlined.KeyboardArrowDown)" Color="Color.Inherit" FullWidth="false" Direction="Direction.Right" OffsetY="true" Dense="true">
-                <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Select active Roles"]</b></MudText>
-                <MudMenuItem Class="px-4 py-2" OnClick="() => AddUpdateRole(null)">
-                    @DisplayName(true, true)
-                </MudMenuItem>
-                <MudDivider Vertical="false" DividerType="DividerType.FullWidth" />
-                @foreach (var role in userRoles)
+        <ReactOnPreferenceChanged OnPreferenceChanged="PreferenceChanged"></ReactOnPreferenceChanged>
+        <MudTooltip Text="@DisplayName(false)">
+            <MudBadge Origin="Origin.TopRight" Content="@actualRoles?.Count" Visible="@HasActive" Color="Color.Warning" Overlap="true">
+                <MudButton Class="@($"{MainClass}-toggle-button")" Variant="@Variant" Color="@(IsOpen ? Color.Secondary : HasActive ? Color.Warning : Color.Inherit)" OnClick="@(() => IsOpen = !IsOpen)">
+                    <MudHidden Breakpoint="Breakpoint.MdAndDown">
+                        <MudText Typo="@(HasActive && string.IsNullOrEmpty(Label) ? Typo.caption : Typo.inherit)">@(string.IsNullOrEmpty(Label) ? DisplayName() : Label)</MudText>
+                    </MudHidden>
+                    <MudIcon Icon="@Icons.Material.Outlined.Group" Color="Color.Inherit"/>
+                </MudButton>
+            </MudBadge>
+            
+
+            <MudPopover Style="@(IsOpen && AnimateOpen ? $"animation: {aniStyle}" : "")" Class="@($"{MainClass}-popover {rtlCls} {popOverWhileAnimationClass}")" @bind-Open="@IsOpen" AnchorOrigin="@anchorOrigin" TransformOrigin="@transFormOrigin" MaxHeight="900">
+                <MudItem xs="12" Style="padding:5px;">
+                        <MudCard @onclick="@(() => { AddUpdateRole(null); IsOpen = false; })" Style="border-width: 3px;" Class="cursor-pointer hover-border" Outlined="true">
+                            <MudCardHeader>
+                                <CardHeaderAvatar>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Group" Color="Color.Inherit" />
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">@localizer["All roles"]</MudText>
+                                    <MudText Typo="Typo.body2">@localizer["All roles unfiltered"]</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                        </MudCard>
+                    </MudItem>
+                
+                @foreach (var role in availableRoles)
                 {
-                    <MudMenuItem OnClick ="() => ToggleRole(role)"> @*Direct click work s toggle otherwise in checkbox is multi select*@
-                        <MudCheckBox Label="@localizer[role.RoleName]" CheckedChanged="@(new Action<bool>(e => AddUpdateRole(role, e)))" Checked="@IsSelected(role.Id)"></MudCheckBox>
-                    </MudMenuItem>
+                    <MudItem xs="12" Style="padding:5px;">
+                        <MudCard @onclick="@(() => AddUpdateRole(role))" Style="@Style(role)" Class="cursor-pointer hover-border" Outlined="true">
+                            <MudCardHeader>
+                                <CardHeaderAvatar>
+                                    <MudAvatar Size="Size.Small" Style="@($"background-color:{ColorUtils.Random(role.Id)}")"></MudAvatar>
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">@localizer[role.RoleName]</MudText>
+                                    <MudText Typo="Typo.body2">@localizer[role.RoleDescription ?? ""]</MudText>
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudCheckBox CheckedChanged="@(new Action<bool>(e => AddUpdateRole(role)))" Checked="@IsSelected(role)"></MudCheckBox>
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                        </MudCard>
+                    </MudItem>
                 }
-            </MudMenu>
+            </MudPopover>
+
         </MudTooltip>
+
     }
 }
 
 @code
 {
-    [Parameter]
-    public bool Small { get; set; } = false;
-
+    [Parameter] public bool IsOpen { get => _isOpen; set => SetOpen(value);}
+    [Parameter] public string MainClass { get; set; } = "role-selector";
+    [Parameter] public bool AnimateOpen { get; set; } = true;
+    [Parameter] public Variant Variant { get; set; }
+    [Parameter] public string Label { get; set; }
+    
     public bool IsVisible { get; private set; }
-    List<UserRoleModel> actualRoles;
-    List<UserRoleModel> userRoles;
+    public bool HasChanges => !lastSelected.OrderBy(s => s).SequenceEqual(IdArray(actualRoles).OrderBy(s => s));
+
+    private bool _isOpen;
+    private string popOverWhileAnimationClass = "z-10i";
+    private TimeSpan animationDuration = TimeSpan.FromSeconds(1);
+    private string[] lastSelected;
+    private List<UserRoleModel> actualRoles;
+    private List<UserRoleModel> availableRoles;
+    private CustomEventInterop<PointerEventArgs> _jsEvent;
+    private string[] IdArray(IEnumerable<UserRoleModel> list) => list?.Select(r => r.Id).ToArray() ?? Array.Empty<string>();
+    private Origin anchorOrigin = Origin.BottomRight;
+    private Origin transFormOrigin = Origin.TopRight;
+    private string rtlCls = string.Empty;
+
+    bool HasActive => actualRoles?.Any() == true;
+    private string Style(UserRoleModel role) => IsSelected(role) ? "border: 3px solid var(--mud-palette-secondary)" : "border-width: 3px;";
+    private bool IsSelected(UserRoleModel role) => IsSelected(role.Id);
+    private bool IsSelected(string roleId)  => actualRoles != null && actualRoles.Any(m => m.Id == roleId); // || _httpClient.GetActiveRoleIds().Contains(roleId);
+
+    private string aniStyle => AnimateOpen ? new [] {AnimationType.FadeIn, AnimationType.SlideIn}.GetAnimationCssStyle(animationDuration) : string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _jsEvent = await new CustomEventInterop<PointerEventArgs>(_jsRuntime).OnBlur(OnFocusLeft, $".{MainClass}-toggle-button", $".{MainClass}-popover");
+        
+        var currentUser = await _clientAuthenticationManager.CurrentUser();
+        if (currentUser?.Identity?.IsAuthenticated == true && !currentUser.IsGuest())
+            await UpdateDataAsync();
+    }
 
     private string DisplayName(bool ellipse = true, bool forceAll = false)
     {
         var res = !forceAll && actualRoles != null && actualRoles.Any() ? string.Join(", ", actualRoles.Select(m => m.RoleName)) : $"< {localizer["All Roles"]} >";
-        return ellipse ? res.ToEllipsis(20): res;
+        return ellipse ? res.ToEllipsis(45) : res;
     }
-
-    private bool IsSelected(string roleId)
+    
+    private Task OnFocusLeft(PointerEventArgs arg)
     {
-        return actualRoles != null && actualRoles.Any(m => m.Id == roleId);
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var currentUser = await _clientAuthenticationManager.CurrentUser();
-        if (currentUser?.Identity?.IsAuthenticated == true && !currentUser.IsGuest())
-        {
-            await UpdateDataAsync();
-        }
-        else
-        {
-            IsVisible = false;
-        }
+        IsOpen = false;
+        StateHasChanged();
+        return Task.CompletedTask;
     }
 
     private async Task UpdateDataAsync()
     {
+        var preference = await _clientPreferenceManager.GetPreference() as ClientPreference;
+        UpdateRTLValues(preference);
+
         var roleResult = await _api.User_GetMyRolesAsync();
-        userRoles = roleResult.Data.UserRoles;
-        IsVisible = roleResult.Succeeded && userRoles.Count > 1; // At least one role
+        availableRoles = roleResult.Data.UserRoles;
+        foreach (var userRoleModel in availableRoles.Where(u => preference?.ActiveSelectedRoles?.Any(saved => saved.Id == u.Id) == true))
+            AddUpdateRole(userRoleModel);
+
+        IsVisible = roleResult.Succeeded && availableRoles.Count > 1; // At least one role
     }
 
-    private void ToggleRole(UserRoleModel role)
+    private void UpdateRTLValues(ClientPreference preference)
     {
-        var add = actualRoles?.Contains(role) ?? false;
-        actualRoles = null;
-        AddUpdateRole(role, add);
+        anchorOrigin = preference?.IsRTL == true ? Origin.BottomLeft : Origin.BottomRight;
+        transFormOrigin = preference?.IsRTL == true ? Origin.TopLeft : Origin.TopRight;
+        rtlCls = preference?.IsRTL == true ? "rtl" : "";
     }
 
-    private void AddUpdateRole(UserRoleModel role, bool add = true)
+    private void AddUpdateRole(UserRoleModel role)
     {
         actualRoles = role == null ? null : actualRoles ?? new List<UserRoleModel>();
-        if (add && role != null)
-            actualRoles?.Add(role);
-        else if (role != null && actualRoles?.Contains(role) == true)
-            actualRoles.Remove(role);
+        if (role != null)
+        {
+            bool add = !IsSelected(role);
+            if (add)
+                actualRoles.Add(role);
+            else if (actualRoles.Contains(role))
+                actualRoles.Remove(role);
 
-        if (add && role != null && userRoles != null && userRoles.All(m => actualRoles?.Contains(m) == true)) // Every role is selected then all roles should be used
-            actualRoles = null;
+            if (add && availableRoles != null && availableRoles.All(m => actualRoles?.Contains(m) == true)) // Every role is selected then all roles should be used
+                actualRoles = null;
+        }
 
-        _httpClient.SetActiveRoleId(actualRoles?.Select(m => m.Id)?.ToArray());
+        StateHasChanged();
+    }
+
+    private async Task ApplyChanges()
+    {
+        await _clientPreferenceManager.SetActiveSelectedRolesAsync(actualRoles?.ToArray() ?? Array.Empty<UserRoleModel>());
+        await _clientAuthenticationManager.RegenerateAndUpdateTokenAsync();
+    }
+
+    private void SetOpen(bool value)
+    {
+        if (value != _isOpen)
+        {
+            _isOpen = value;
+            if (_isOpen)
+            {
+                lastSelected = IdArray(actualRoles);
+                Task.Delay(AnimateOpen ? animationDuration : TimeSpan.FromMilliseconds(1)).ContinueWith(_ =>
+                {
+                    popOverWhileAnimationClass = "";
+                    StateHasChanged();
+                });
+            }
+            else
+                popOverWhileAnimationClass = "z-10i";
+            
+            if (!_isOpen && HasChanges)
+                _ = ApplyChanges();
+        }
+    }
+
+    private void PreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs args)
+    {
+        UpdateRTLValues(args.NewValue);
+        if (args.NewValue.ActiveSelectedRoles == null || args.NewValue.ActiveSelectedRoles.Length == 0)
+            AddUpdateRole(null);
+        else if (!IdArray(args.NewValue.ActiveSelectedRoles).SequenceEqual(IdArray(actualRoles)))
+            _= UpdateDataAsync();
     }
 }

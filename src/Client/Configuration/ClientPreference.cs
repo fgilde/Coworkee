@@ -1,4 +1,5 @@
-﻿using CleanArchitectureBase.Shared.Constants.Application;
+﻿using CleanArchitectureBase.Application.Common.Models.Identity;
+using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Settings;
 
 namespace CleanArchitectureBase.Client.Configuration
@@ -10,5 +11,6 @@ namespace CleanArchitectureBase.Client.Configuration
         public bool IsDrawerOpen { get; set; }
         public string PrimaryColor { get; set; }
         public string LanguageCode { get; set; } = ApplicationConstants.DefaultLanguageCode;
+        public UserRoleModel[] ActiveSelectedRoles { get; set; }
     }
 }

@@ -23,6 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Common.Extensions;
+using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Domain.Entities.Identity;
 
@@ -54,6 +55,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             _contextAccessor = contextAccessor;
         }
 
+        
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -91,6 +93,16 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
+        public async Task<Result<TokenResponse>> RegenerateTokenAsync(string[] specificRoles)
+        {
+            var user = await _userManager.FindByIdAsync(_serviceProvider.GetRequiredService<ICurrentUserService>().UserId);
+            if (user == null)
+                return await Result<TokenResponse>.FailAsync(_localizer["User Not Found."]);
+            var token = await GenerateJwtAsync(user, specificRoles);
+            var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, UserImageURL = user.ProfilePictureDataUrl };
+            return await Result<TokenResponse>.SuccessAsync(response);
+        }
+
         public async Task<Result<TokenResponse>> GetRefreshTokenAsync(RefreshTokenRequest model)
         {
             if (model is null)
@@ -112,13 +124,13 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
-        internal async Task<string> GenerateJwtAsync(ApplicationUser user)
+        internal async Task<string> GenerateJwtAsync(ApplicationUser user, string[] specificRoles = null)
         {
-            var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user));
+            var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user, specificRoles));
             return token;
         }
 
-        public async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user)
+        public async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user, string[] specificRoles = null)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
@@ -126,10 +138,13 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var permissionClaims = new List<Claim>();
             foreach (var role in roles)
             {
-                roleClaims.Add(new Claim(ClaimTypes.Role, role));
                 var thisRole = await _roleManager.FindByNameAsync(role);
-                var allPermissionsForThisRoles = await _roleManager.GetClaimsAsync(thisRole);
-                permissionClaims.AddRange(allPermissionsForThisRoles);
+                if (specificRoles == null || specificRoles.Length == 0 || specificRoles.Contains(thisRole.Id) || specificRoles.Contains(thisRole.Name))
+                {
+                    roleClaims.Add(new Claim(ClaimTypes.Role, role));
+                    var allPermissionsForThisRoles = await _roleManager.GetClaimsAsync(thisRole);
+                    permissionClaims.AddRange(allPermissionsForThisRoles);
+                }
             }
 
             var claims = new List<Claim>

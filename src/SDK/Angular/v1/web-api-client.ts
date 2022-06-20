@@ -3743,6 +3743,11 @@ export interface ITokenClient {
      * Get Token (Email, Password)
      * @return Status 200 OK
      */
+    regenerateNew(): Observable<ResultOfTokenResponse>;
+    /**
+     * Get Token (Email, Password)
+     * @return Status 200 OK
+     */
     get(model: TokenRequest): Observable<ResultOfTokenResponse>;
     /**
      * Refresh Token
@@ -3762,6 +3767,58 @@ export class TokenClient implements ITokenClient {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * Get Token (Email, Password)
+     * @return Status 200 OK
+     */
+    regenerateNew(): Observable<ResultOfTokenResponse> {
+        let url_ = this.baseUrl + "/identity/Token/RegenerateNew";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRegenerateNew(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRegenerateNew(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ResultOfTokenResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ResultOfTokenResponse>;
+        }));
+    }
+
+    protected processRegenerateNew(response: HttpResponseBase): Observable<ResultOfTokenResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfTokenResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfTokenResponse>(null as any);
     }
 
     /**

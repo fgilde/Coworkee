@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.3" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
     <PackageReference Include="MimeTypesMap" Version="1.0.8" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
   </ItemGroup>
 
   <ItemGroup>

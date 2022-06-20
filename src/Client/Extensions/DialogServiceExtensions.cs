@@ -12,6 +12,8 @@ namespace CleanArchitectureBase.Client.Extensions;
 
 public static class DialogServiceExtensions
 {
+    public static AnimationType[] DefaultAnimationNoFullHeight = { AnimationType.FadeIn, AnimationType.FlipX};
+
     public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters = null, Action<DialogOptionsEx> options = null) 
         where TDialog : ComponentBase
     {

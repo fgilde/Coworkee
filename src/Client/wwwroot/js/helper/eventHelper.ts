@@ -1,10 +1,23 @@
 ﻿export class EventHelper {
 
-    public addCustomEventListener(name: string, dotNetObjectRef): void {
-        document.addEventListener(name, (event) => {
-            var args = this.cloneEvent(event, true);
-            dotNetObjectRef.invokeMethodAsync('OnCustomEvent', args);
-        });
+    public addCustomEventListener(name: string, dotNetObjectRef, elementSelector?: string): void {
+        let target = elementSelector ? document.querySelector(elementSelector) : document;
+        if (target) {
+            target.addEventListener(name,
+                (event) => {
+                    var args = this.cloneEvent(event, true);
+                    dotNetObjectRef.invokeMethodAsync('OnCustomEvent', args);
+                });
+        } else {
+            let observer = new MutationObserver((e) => {
+                var res = e.filter(x => x.addedNodes && x.addedNodes[0] === document.querySelector(elementSelector));
+                if (res.length) {
+                    observer.disconnect();
+                    this.addCustomEventListener(name, dotNetObjectRef, elementSelector);
+                }
+            });
+            observer.observe(document, { characterData: true, childList: true, subtree: true });
+        }
     }
 
     public addCustomEventListenerWhenNotIn(selector: string[], name: string, dotNetObjectRef): void {

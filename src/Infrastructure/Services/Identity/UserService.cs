@@ -42,7 +42,6 @@ using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Shared.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -154,7 +153,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<Result<List<UserResponse>>> GetAllAsync()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).ToListAsync();
             var result = users.MapTo<List<UserResponse>>().Where(u => !u.IsSystemUser()).ToList();
             return await Result<List<UserResponse>>.SuccessAsync(result);
         }
@@ -197,13 +196,13 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public UserResponse Get(string userId)
         {
-            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            var user = _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).FirstOrDefault(u => u.Id == userId);
             return user?.MapTo<UserResponse>();
         }
 
         public async Task<IResult<UserResponse>> GetAsync(string userId)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
                 return await Result<UserResponse>.FailAsync($"User with id {userId} not found");
             return await Result<UserResponse>.SuccessAsync(user.MapTo<UserResponse>());
@@ -211,7 +210,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<IResult> ToggleUserStatusAsync(ToggleUserStatusRequest request)
         {
-            var user = await _userManager.Users.Where(u => u.Id == request.UserId).FirstOrDefaultAsync();
+            var user = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).Where(u => u.Id == request.UserId).FirstOrDefaultAsync();
             var isAdmin = await _userManager.IsInRoleAsync(user, RoleConstants.AdministratorRole);
             if (isAdmin)
             {
@@ -420,7 +419,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<string> ExportToExcelAsync(string searchString = "")
         {
             var userSpec = new UserFilterSpecification(searchString);
-            var users = await _userManager.Users
+            var users = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses)
                 .Specify(userSpec)
                 .OrderByDescending(a => a.CreatedOn)
                 .ToListAsync();

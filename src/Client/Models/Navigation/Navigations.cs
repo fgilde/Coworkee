@@ -35,7 +35,7 @@ namespace CleanArchitectureBase.Client.Models.Navigation
                 Children = new()
                 {
                     new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
-                    new NavigationEntry("Roles", Icons.Material.Outlined.Person, "/identity/roles").WithPolicies(Permissions.Roles.View),
+                    new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
                     new NavigationEntry("Localization")
                     {
                         Children = new()

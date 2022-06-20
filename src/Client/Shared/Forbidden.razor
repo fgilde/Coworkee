@@ -15,6 +15,7 @@
     <div class="pa-4 justify-center my-4 mud-text-align-center">
         <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="@ReturnUrl">@_localizer["Try again"]</MudButton>
         <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@LoginWithAnotherAccount" >@_localizer["Sign in with a different account"]</MudButton>
+        <RoleSelector Variant="Variant.Filled" Label="@_localizer["Try different role"]" AnimateOpen="false"></RoleSelector>
     </div>
 }
 

@@ -22,6 +22,9 @@ using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
 using Microsoft.AspNetCore.Components;
 using CleanArchitectureBase.Shared.Wrapper;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Helper;
+using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Shared
 {
@@ -81,6 +84,7 @@ namespace CleanArchitectureBase.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
+            _ = _jsRuntime.InitializeMudBlazorExtensionsAsync();
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
             _rightToLeft = await _clientPreferenceManager.IsRTL();
             hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);
@@ -99,19 +103,19 @@ namespace CleanArchitectureBase.Client.Shared
                 var chatUrlToUser = $"chat/{chatHistory.FromUserId}";
                 if (!_navigationManager.Uri.EndsWith(chatUrlToUser))
                 {
-                    _snackBar.Add(chatHistory.Message + " from "+ userName, Severity.Info, config =>
-                    {
-                        config.VisibleStateDuration = 10000;
-                        config.HideTransitionDuration = 500;
-                        config.ShowTransitionDuration = 500;
-                        config.Action = localizer["Chat?"];
-                        config.ActionColor = Color.Primary;
-                        config.Onclick = snackbar =>
-                        {
-                            _navigationManager.NavigateTo(chatUrlToUser);
-                            return Task.CompletedTask;
-                        };
-                    });
+                    _snackBar.Add(chatHistory.Message + " from " + userName, Severity.Info, config =>
+                     {
+                         config.VisibleStateDuration = 10000;
+                         config.HideTransitionDuration = 500;
+                         config.ShowTransitionDuration = 500;
+                         config.Action = localizer["Chat?"];
+                         config.ActionColor = Color.Primary;
+                         config.Onclick = snackbar =>
+                         {
+                             _navigationManager.NavigateTo(chatUrlToUser);
+                             return Task.CompletedTask;
+                         };
+                     });
                 }
             });
 
@@ -169,9 +173,9 @@ namespace CleanArchitectureBase.Client.Shared
                 {nameof(Dialogs.Logout.HubConnection), hubConnection}
             };
 
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
 
-             _dialogService.Show<Dialogs.Logout>(localizer["Logout"], parameters, options);
+            _dialogService.ShowEx<Dialogs.Logout>(localizer["Logout"], parameters, options);
         }
 
         private async void ShowAbout()
@@ -182,7 +186,8 @@ namespace CleanArchitectureBase.Client.Shared
                 {nameof(Dialogs.About.ServerInfo), await _api.System_VersionAsync()},
                 {nameof(Dialogs.About.ApiVersions),  await _api.System_AvailableApiVersionsAsync()},
             };
-            await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], parameters, o => {
+            await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], parameters, o =>
+            {
                 o.MaxWidth = MaxWidth.Small;
                 o.DisableBackdropClick = false;
                 o.MaximizeButton = false;

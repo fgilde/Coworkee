@@ -3,19 +3,23 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Client.Authentication;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.Managers.Preferences;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
 namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
 {
     public class ClientAuthenticationManager : IClientAuthenticationManager
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
         private readonly ApplicationStateProvider _authenticationStateProvider;
@@ -23,12 +27,14 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
         private readonly IApplicationClient _api;
 
         public ClientAuthenticationManager(
+            IServiceProvider serviceProvider,
             HttpClient httpClient,
             ILocalStorageService localStorage,
             AuthenticationStateProvider authenticationStateProvider,
             IStringLocalizer<ClientAuthenticationManager> localizer,
             IApplicationClient api)
         {
+            _serviceProvider = serviceProvider;
             _httpClient = httpClient;
             _localStorage = localStorage;
             _authenticationStateProvider = authenticationStateProvider as ApplicationStateProvider;
@@ -48,21 +54,35 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             var result = await _api.Token_GetAsync(model);
             if (result.Succeeded)
             {
-                var token = result.Data.Token;
-                var refreshToken = result.Data.RefreshToken;
-                var userImageUrl = result.Data.UserImageURL;
-                await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
-                await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, refreshToken);
-                if (!string.IsNullOrEmpty(userImageUrl))
-                {
-                    await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageUrl);
-                }
-                _authenticationStateProvider.MarkUserAsAuthenticated();
-                _httpClient.SetAuthorization(token);
+                await UpdateToken(result.Data);
                 return await Result.SuccessAsync();
             }
 
             return await Result.FailAsync(result.Messages);
+        }
+
+        public async Task<IResult> RegenerateAndUpdateTokenAsync()
+        {
+            var res = await _api.Token_RegenerateNewAsync();
+            if (res.Succeeded)
+                await UpdateToken(res.Data);
+            return res;
+        }
+
+        public async Task UpdateToken(TokenResponse response)
+        {
+            var token = response.Token;
+            var refreshToken = response.RefreshToken;
+            var userImageUrl = response.UserImageURL;
+            await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
+            await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, refreshToken);
+            if (!string.IsNullOrEmpty(userImageUrl))
+                await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, userImageUrl);
+
+            _httpClient.SetAuthorization(token);
+            _authenticationStateProvider.MarkUserAsAuthenticated();
+            var x = _authenticationStateProvider.AuthenticationStateUser.Identity.IsAuthenticated;
+            var c = x;
         }
 
         public async Task<IResult> Logout()
@@ -71,7 +91,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.RefreshToken, string.Empty);
             await _localStorage.SetItemAsync(StorageConstants.Local.UserImageURL, string.Empty);
-
+            await _serviceProvider.GetService<IClientPreferenceManager>()?.SetActiveSelectedRolesAsync(Array.Empty<UserRoleModel>())!;
             try
             {
                 if (state?.User.Identity?.IsAuthenticated == true && !state.IsGuest())
@@ -80,6 +100,7 @@ namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
             catch { /* ignored*/ }
 
             _httpClient.SetAuthorization(null);
+            _httpClient.SetActiveRoleIds(null);
             _authenticationStateProvider.MarkUserAsLoggedOut();
 
             return await Result.SuccessAsync();

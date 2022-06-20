@@ -19,9 +19,13 @@ namespace CleanArchitectureBase.Client.Authentication
 {
     public class ApplicationStateProvider : AuthenticationStateProvider, ICurrentUserService
     {
+        private static bool _generalAuthenticatedBeforeEvent; // Just a hack to have correct login state in app razor. before redirecting to login.
+
         private readonly HttpClient _httpClient;
         private readonly ClientApplicationConfiguration _config;
         private readonly ILocalStorageService _localStorage;
+
+        public bool IsAuthenticatedBeforeEvent => _generalAuthenticatedBeforeEvent; 
 
         public ApplicationStateProvider(
             HttpClient httpClient,
@@ -32,14 +36,16 @@ namespace CleanArchitectureBase.Client.Authentication
             _config = config;
             _localStorage = localStorage;
         }
-
+        
         public void MarkUserAsAuthenticated()
         {
+            _generalAuthenticatedBeforeEvent = true;
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
         public void MarkUserAsLoggedOut()
         {
+            _generalAuthenticatedBeforeEvent = false;
             NotifyAuthenticationStateChanged(Task.FromResult(GetAnonymousState()));
         }
 

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AKSoftware.Localization.MultiLanguages;
 using Blazored.LocalStorage;
+using CleanArchitectureBase.Application.Common.Models.Identity;
 using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Managers.Theme;
@@ -13,7 +15,6 @@ using CleanArchitectureBase.Shared.Constants.Storage;
 using CleanArchitectureBase.Shared.Settings;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
-using Microsoft.JSInterop;
 using Nextended.Core;
 
 namespace CleanArchitectureBase.Client.Managers.Preferences
@@ -100,6 +101,16 @@ namespace CleanArchitectureBase.Client.Managers.Preferences
         public async Task<IPreference> GetPreference()
         {
             return await _localStorageService.GetItemAsync<ClientPreference>(StorageConstants.Local.Preference) ?? new ClientPreference();
+        }
+
+        public async Task SetActiveSelectedRolesAsync(params UserRoleModel[] roles)
+        {
+            if (await GetPreference() is ClientPreference preference)
+            {
+                preference.ActiveSelectedRoles = roles ?? Array.Empty<UserRoleModel>();
+                _httpClient.SetActiveRoleIds(roles?.Select(m => m.Id).ToArray());
+                await SetPreference(preference);
+            }
         }
 
         public async Task SetPreference(IPreference preference)

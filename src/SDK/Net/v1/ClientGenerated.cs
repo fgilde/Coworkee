@@ -797,7 +797,7 @@ namespace SDK
         System.Threading.Tasks.Task<Result<string>> Role_UpdateAsync(PermissionRequest model, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get Token (Email, Password)
+        /// Regenerates a new token.
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -805,7 +805,7 @@ namespace SDK
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get Token (Email, Password)
+        /// Regenerates a new token.
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -6094,7 +6094,7 @@ namespace SDK
         }
 
         /// <summary>
-        /// Get Token (Email, Password)
+        /// Regenerates a new token.
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -6105,7 +6105,7 @@ namespace SDK
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Get Token (Email, Password)
+        /// Regenerates a new token.
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>

@@ -216,9 +216,8 @@
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.TokenController.RegenerateNew">
             <summary>
-            Get Token (Email, Password)
+            Regenerates a new token.
             </summary>
-            <param name="model"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.TokenController.Get(CleanArchitectureBase.Application.Requests.Identity.TokenRequest)">

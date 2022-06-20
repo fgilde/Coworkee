@@ -3740,7 +3740,7 @@ export class RoleClient implements IRoleClient {
 
 export interface ITokenClient {
     /**
-     * Get Token (Email, Password)
+     * Regenerates a new token.
      * @return Status 200 OK
      */
     regenerateNew(): Observable<ResultOfTokenResponse>;
@@ -3770,7 +3770,7 @@ export class TokenClient implements ITokenClient {
     }
 
     /**
-     * Get Token (Email, Password)
+     * Regenerates a new token.
      * @return Status 200 OK
      */
     regenerateNew(): Observable<ResultOfTokenResponse> {

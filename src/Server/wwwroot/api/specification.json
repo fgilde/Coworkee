@@ -2948,7 +2948,7 @@
         "tags": [
           "Token"
         ],
-        "summary": "Get Token (Email, Password)",
+        "summary": "Regenerates a new token.",
         "operationId": "Token_RegenerateNew",
         "produces": [
           "application/json;odata.metadata=minimal;odata.streaming=true",

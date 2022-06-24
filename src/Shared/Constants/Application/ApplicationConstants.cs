@@ -10,7 +10,6 @@ namespace CleanArchitectureBase.Shared.Constants.Application
         public const string ApplicationName = "CleanArchitectureBase";
         public static string ApplicationClientName = $"{ApplicationName}Client";
         public const string SessionIdKey = nameof(SessionIdKey);
-        public const string Version = "v2.2";
         public const string DefaultLanguageCode = "en-US";
         public const string DefaultDocumentTypeName = "Unassigned";
         public const int MaxRequestSizeBytes = 30000000;

@@ -136,6 +136,7 @@ namespace CleanArchitectureBase.Server.Extensions
                 async void Configure(AspNetCoreOpenApiDocumentGeneratorSettings options)
                 {
                     var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
+
                     options.Title = configSection.GetValue<string>(nameof(options.Title));
                     options.Description = configSection.GetValue<string>(nameof(options.Description));
                     options.DocumentName = ApiVersions.DocumentVersionPrefix + version.MajorVersion;
@@ -152,6 +153,32 @@ namespace CleanArchitectureBase.Server.Extensions
                         Description = localizer["Input your Bearer token in this format - Bearer {your token here} to access this API"],
                     })
                         .OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+
+
+                    //options.AddSecurity("bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                    //{
+                    //    Type = OpenApiSecuritySchemeType.OAuth2,
+                    //    Description = "My Authentication",
+                    //    Flow = OpenApiOAuth2Flow.Implicit,
+                    //    Flows = new OpenApiOAuthFlows()
+                    //    {
+                    //        Implicit = new OpenApiOAuthFlow()
+                    //        {
+                    //            Scopes = new Dictionary<string, string>
+                    //            {
+                    //                {"api1", "My API"}
+
+                    //            },
+                    //            TokenUrl = "http://localhost:5000/connect/token",
+                    //            AuthorizationUrl = "http://localhost:5000/Login",
+
+                    //        },
+                    //    }
+                    //});
+
+                    //options.OperationProcessors.Add(
+                    //    new AspNetCoreOperationSecurityScopeProcessor("bearer"));
+
                 }
 
                 services.AddSwaggerDocument(Configure).AddOpenApiDocument(document =>
@@ -166,6 +193,8 @@ namespace CleanArchitectureBase.Server.Extensions
 
         private static void ConfigureDocument(this IConfigurationSection configSection, OpenApiDocument document, ApiVersion version)
         {
+            //document.Info.TermsOfService = "/terms/ofuse/url";
+            
             configSection.GetSection("Contact").Bind(document.Info.Contact ?? (document.Info.Contact = new OpenApiContact()));
             configSection.GetSection("License").Bind(document.Info.License ?? (document.Info.License = new OpenApiLicense()));
             var prefix = "/api/" + ApiVersions.DocumentVersionPrefix + version.MajorVersion;

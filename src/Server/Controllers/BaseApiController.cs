@@ -35,10 +35,21 @@ namespace CleanArchitectureBase.Server.Controllers
         protected int[] UnhashIds(string hash) => hash.MapTo<int[]>();
         protected int[] UnhashIds(string[] hashes) => hashes.MapElementsTo<int>().ToArray();
 
-        protected IList<TItem> Filter<TItem>(IList<TItem> l, TransferableExpression<TItem> expression) =>
-            expression != null && !string.IsNullOrWhiteSpace(expression.ToString()) ? l.Where(ODataQueryOptionsExtensions.ParseExpression<TItem>(expression).Compile()).ToList() : l;
-        protected IQueryable<TItem> Filter<TItem>(IQueryable<TItem> l, TransferableExpression<TItem> expression) =>
-            expression != null && !string.IsNullOrWhiteSpace(expression.ToString()) ? l.Where(ODataQueryOptionsExtensions.ParseExpression<TItem>(expression)) : l;
+        protected IList<TItem> Filter<TItem>(IList<TItem> l, TransferableExpression<TItem> expression)
+        {
+            if (expression == null || string.IsNullOrWhiteSpace(expression) || expression == "{}")
+                return l;
+            var fn = ODataQueryOptionsExtensions.ParseExpression<TItem>(expression);
+            return fn == null ? l : l.Where(fn.Compile()).ToList();
+        }
+
+        protected IQueryable<TItem> Filter<TItem>(IQueryable<TItem> l, TransferableExpression<TItem> expression)
+        {
+            if (expression == null || string.IsNullOrWhiteSpace(expression) || expression == "{}")
+                return l;
+            var fn = ODataQueryOptionsExtensions.ParseExpression<TItem>(expression);
+            return fn == null ? l : l.Where(fn);
+        }
     }
 
 }

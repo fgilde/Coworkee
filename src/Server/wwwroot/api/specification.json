@@ -75,6 +75,56 @@
         }
       }
     },
+    "/Logo.svg": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "operationId": "Resource_LogoSvg",
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/Logo.png": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "operationId": "Resource_Logo",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "height",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "width",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/{objectName}/resources.js": {
       "get": {
         "tags": [
@@ -4773,9 +4823,6 @@
       "type": "object",
       "properties": {
         "applicationName": {
-          "type": "string"
-        },
-        "applicationVersion": {
           "type": "string"
         },
         "assemblyVersion": {

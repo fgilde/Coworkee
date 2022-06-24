@@ -1,0 +1,86 @@
+﻿/*@media (prefers-color-scheme: dark) {
+    body {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    html {
+        background-color: #111;
+    }
+
+    img, video, iframe {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    .icon {
+        filter: invert(15%) hue-rotate(180deg);
+    }
+
+    pre {
+        filter: invert(6%);
+    }
+
+    li::marker {
+        color: #666;
+    }
+
+    .swagger-ui .topbar {
+        background-color: transparent;
+    }
+
+    .swagger-ui .topbar .download-url-wrapper .select-label {
+        color: #111111;
+    }
+
+}*/
+
+tr[data-param-name="Authorization"] {
+    display: none;
+}
+
+.swagger-ui img {
+    content: url("/Logo.svg");
+}
+
+.package-action {
+    margin: 3px;
+    margin-bottom: -3px;
+    font-size: 14pt;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    background: white;
+    display: inline-block;
+    border: 1px solid #004880;
+    border-radius: 3px;
+}
+
+.package-action a {
+    text-decoration: none;
+    font-size: 10pt;
+    color: black;
+    font-family: sans-serif;
+}
+
+.nuget {
+    background-image: url(https://camo.githubusercontent.com/a539237d8dfd64cbe0d14069230c21c4f325af95551698ef7fd5741a83134dd8/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f6e706d2f73696d706c652d69636f6e734076332f69636f6e732f6e756765742e737667);
+    background-repeat: no-repeat;
+    background-position-y: -1px;
+}
+
+.custom-header hr {
+    margin-bottom: -1px;
+}
+
+.right-header-actions {
+    float: right;
+    margin-top: 10px;
+}
+
+#checkDarkTheme {
+    margin-top: 0px;
+}
+label[for=checkDarkTheme] {
+    font-size: 10pt;
+    margin-right: 10px;
+    font-family: sans-serif;
+}

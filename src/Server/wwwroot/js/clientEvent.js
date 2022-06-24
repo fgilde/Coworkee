@@ -66,3 +66,5 @@ document.getElementById("serviceBus").addEventListener("click", function (event)
     
     event.preventDefault();
 });
+
+window.SuperSwagger = true;

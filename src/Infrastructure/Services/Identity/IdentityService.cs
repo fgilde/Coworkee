@@ -124,6 +124,12 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
+        public async Task<string> GenerateTokenForUser(string userId)
+        {
+            var user = !string.IsNullOrWhiteSpace(userId) ? await _userManager.FindByIdAsync(userId) : null;
+            return user != null ? await GenerateJwtAsync(user) : null;
+        }
+
         internal async Task<string> GenerateJwtAsync(ApplicationUser user, string[] specificRoles = null)
         {
             var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user, specificRoles));

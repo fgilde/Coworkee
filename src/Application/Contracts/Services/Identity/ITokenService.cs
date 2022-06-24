@@ -11,5 +11,6 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Identity
         Task<Result<TokenResponse>> LoginAsync(TokenRequest model);
         Task<Result<TokenResponse>> RegenerateTokenAsync(string[] specificRoles);
         Task<Result<TokenResponse>> GetRefreshTokenAsync(RefreshTokenRequest model);
+        Task<string> GenerateTokenForUser(string userId);
     }
 }

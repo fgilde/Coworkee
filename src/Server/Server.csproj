@@ -48,6 +48,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Grpc.AspNetCore" Version="2.44.0" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="2.44.0" />
     <Protobuf Include=".\gRPC\Main.proto" GrpcServices="Server" /> 
@@ -73,6 +77,7 @@
     <Folder Include="Files\Images\ProfilePictures\" />
     <Folder Include="Logs\" />
     <Folder Include="wwwroot\api\" />
+    <Folder Include="wwwroot\sdk\" />
   </ItemGroup>
 
   <ItemGroup>

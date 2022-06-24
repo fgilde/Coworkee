@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Shared.Constants;
 using CleanArchitectureBase.Shared.Constants.Application;
@@ -30,6 +33,37 @@ namespace CleanArchitectureBase.Server.Controllers
                 var image = svgDoc.Draw();
                 return File(image.ToByteArray(), image.GetMimeType());
             });
+        }
+
+        [HttpGet("~/Logo.svg")]
+        public IActionResult LogoSvg()
+        {
+            return File(Encoding.UTF8.GetBytes(CustomIcons.ApplicationMainIcon), "image/svg+xml");
+        }
+
+        [HttpGet("~/Logo.png")]
+        public IActionResult Logo(int? height, int? width)
+        {
+            return Check.TryCatch<IActionResult, Exception>(() =>
+            {
+                var svgDoc = SvgDocument.FromSvg<SvgDocument>(CustomIcons.ApplicationMainIcon);
+                if (height.HasValue)
+                    svgDoc.Height = height.Value;
+                if (width.HasValue)
+                    svgDoc.Width = width.Value;
+                var image = svgDoc.Draw();
+                return File(image.ToByteArray(), image.GetMimeType());
+            });
+        }
+
+        [HttpGet("~/package/download/nuget")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<IActionResult> DownloadNugetPackage()
+        {
+            var file = Directory.EnumerateFiles("wwwroot/sdk", "*.nupkg").FirstOrDefault();
+            if (!string.IsNullOrEmpty(file) && System.IO.File.Exists(file))
+                return File(await System.IO.File.ReadAllBytesAsync(file), "application/zip", Path.GetFileName(file));
+            return NotFound();
         }
 
         [HttpGet("~/{objectName}/resources.js")]

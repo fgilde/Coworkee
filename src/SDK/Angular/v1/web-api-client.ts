@@ -91,6 +91,8 @@ export class DashboardClient implements IDashboardClient {
 
 export interface IResourceClient {
     favIcon(): Observable<FileResponse | null>;
+    logoSvg(): Observable<FileResponse | null>;
+    logo(height: number | null | undefined, width: number | null | undefined): Observable<FileResponse | null>;
     getResources(objectName: string | null, cacheBuster: string | null | undefined): Observable<FileResponse | null>;
 }
 
@@ -134,6 +136,102 @@ export class ResourceClient implements IResourceClient {
     }
 
     protected processFavIcon(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+
+    logoSvg(): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Logo.svg";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLogoSvg(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLogoSvg(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processLogoSvg(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+
+    logo(height: number | null | undefined, width: number | null | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Logo.png?";
+        if (height !== undefined && height !== null)
+            url_ += "height=" + encodeURIComponent("" + height) + "&";
+        if (width !== undefined && width !== null)
+            url_ += "width=" + encodeURIComponent("" + width) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLogo(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLogo(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processLogo(response: HttpResponseBase): Observable<FileResponse | null> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5895,7 +5993,6 @@ export interface IChartSeries {
 
 export class VersionInfoModel implements IVersionInfoModel {
     applicationName?: string | undefined;
-    applicationVersion?: string | undefined;
     assemblyVersion?: string | undefined;
     runtime?: string | undefined;
     system?: string | undefined;
@@ -5912,7 +6009,6 @@ export class VersionInfoModel implements IVersionInfoModel {
     init(_data?: any) {
         if (_data) {
             this.applicationName = _data["applicationName"];
-            this.applicationVersion = _data["applicationVersion"];
             this.assemblyVersion = _data["assemblyVersion"];
             this.runtime = _data["runtime"];
             this.system = _data["system"];
@@ -5929,7 +6025,6 @@ export class VersionInfoModel implements IVersionInfoModel {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["applicationName"] = this.applicationName;
-        data["applicationVersion"] = this.applicationVersion;
         data["assemblyVersion"] = this.assemblyVersion;
         data["runtime"] = this.runtime;
         data["system"] = this.system;
@@ -5939,7 +6034,6 @@ export class VersionInfoModel implements IVersionInfoModel {
 
 export interface IVersionInfoModel {
     applicationName?: string | undefined;
-    applicationVersion?: string | undefined;
     assemblyVersion?: string | undefined;
     runtime?: string | undefined;
     system?: string | undefined;

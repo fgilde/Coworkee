@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using CleanArchitectureBase.Application.Contracts;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Data;
 using CleanArchitectureBase.Server.Middlewares;
@@ -12,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
+using Nextended.Core.Extensions;
+using NSwag;
 
 namespace CleanArchitectureBase.Server.Extensions
 {
@@ -50,11 +55,21 @@ namespace CleanArchitectureBase.Server.Extensions
             app.UseSwaggerUi3(a => {
                 a.OperationsSorter = "alpha";
                 a.TagsSorter = "alpha";
+                a.CustomHeadContent = File.ReadAllText("wwwroot/swagger-ui/header.html");
+                a.CustomJavaScriptPath = "/swagger-ui/scripts.js";
+                a.CustomStylesheetPath = "/swagger-ui/styles.css";
             });
             app.UseOpenApi(options =>
             {
                 options.PostProcess = (document, request) =>
                 {
+                    ////var cfg = app.ApplicationServices.GetRequiredService<ServerConfiguration>();
+                    //var token = request.HttpContext.RequestServices.GetRequiredService<ITokenService>().GenerateTokenForUser(request.HttpContext.RequestServices.GetService<ISessionProvider>()?.UserIdFromSession).Result;
+                    //if (!string.IsNullOrEmpty(token))
+                    //{
+                    //    OpenApiHeader openApiHeader = new OpenApiHeader { Name = "Authorization", Id = "hidden-default-header", Kind = OpenApiParameterKind.Header, Default = $"Bearer {token}" };
+                    //    document.Operations.Apply(description => description.Operation.Parameters.Add(openApiHeader));
+                    //}
                     // Patch server URL for Swagger UI
                     var prefix = $"/api/v" + document.Info.Version.Split('.')[0];
                     document.Servers.First().Url += prefix;

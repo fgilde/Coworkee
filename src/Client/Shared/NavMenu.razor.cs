@@ -46,7 +46,7 @@ namespace CleanArchitectureBase.Client.Shared
             bool result = (!entry.IsAuthenticationRequired || (_user?.Identity?.IsAuthenticated == true && !_user.IsGuest()))
                           && _user?.HasRoles(entry.RoleMatch, entry.Roles) == true
                           && _authorizationService.HasPoliciesAsync(_user, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
-            _navigationManager.EnsureUrlIsAccessable(_user, entry.Href).ContinueWith(task =>
+            _navigationManager.EnsureUrlIsAccessible(_user, entry.Href).ContinueWith(task =>
             {
                 entry.Href = task.Result;
             });

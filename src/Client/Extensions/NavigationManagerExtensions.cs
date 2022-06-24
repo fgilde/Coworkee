@@ -41,7 +41,7 @@ namespace CleanArchitectureBase.Client.Extensions
             return url;
         }
 
-        public static Task<string> EnsureUrlIsAccessable(this NavigationManager navigationManager, ClaimsPrincipal user, string url)
+        public static Task<string> EnsureUrlIsAccessible(this NavigationManager navigationManager, ClaimsPrincipal user, string url)
         {
             if (!navigationManager.ShouldBeAuthorized(url) || navigationManager.UriContainsAuth(url))
                 return Task.FromResult(url);
@@ -138,7 +138,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 if (navigationManager.ShouldBeAuthorized(uri))
                 {
                     ServiceAccessor.Get<ApplicationStateProvider>().GetAuthenticationStateProviderUserAsync().ContinueWith(
-                        u => navigationManager.EnsureUrlIsAccessable(u.Result, uri).ContinueWith(
+                        u => navigationManager.EnsureUrlIsAccessible(u.Result, uri).ContinueWith(
                             t => navigationManager.NavigateTo(t.Result, NeedReload(t.Result))));
                 }
                 else

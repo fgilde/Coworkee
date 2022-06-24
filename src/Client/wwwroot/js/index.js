@@ -30,7 +30,7 @@ function onLoaded(appSettings) {
     nsObject['AppSettings'] = appSettings;
     nsObject['getJsAppData'] = getJsAppData;
     document.querySelector('#app-logo').insertAdjacentHTML('beforeend', nsObject.CustomIcons.ApplicationMainIcon);
-    document.querySelector('#sub-text').innerHTML = `${nsObject.ApplicationConstants.ApplicationName} ${nsObject.ApplicationConstants.Version}`;
+    document.querySelector('#sub-text').innerHTML = `${nsObject.ApplicationConstants.ApplicationName}`;
     document.title = nsObject.ApplicationConstants.ApplicationName + ' - Home';
     loadHelper(appSettings.JsMainNamespace);
     var app = document.getElementById('app');

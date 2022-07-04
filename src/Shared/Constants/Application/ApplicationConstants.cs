@@ -31,6 +31,27 @@ namespace CleanArchitectureBase.Shared.Constants.Application
                     new CreateUser("johndoe", "John", "Doe", "john@coworkee.de","123Pa$$word!", false, RoleConstants.BasicRole)
                 };
             }
+
+            public static (string Name, bool SelectableOnRegistration, string[] Permissions)[] Roles = null;
+            //{
+            //    ("Pathologist", true, new []
+            //    {
+            //        Permissions.Dashboards.View,
+            //        Permissions.Communication.Chat,
+            //        Permissions.Documents.View,
+            //        Permissions.Documents.Create,
+            //        Permissions.Documents.Edit,
+            //        Permissions.Documents.Delete,
+            //        Permissions.Specializations.View,
+            //    }),
+            //    ("Consultant Pathologist", true, new []
+            //    {
+            //        Permissions.Dashboards.View,
+            //        Permissions.Communication.Chat,
+            //        Permissions.Documents.View,
+            //        Permissions.Specializations.View,
+            //    })
+            //};
         }
 
         public static class Routes

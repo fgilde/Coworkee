@@ -210,11 +210,11 @@ body * {
 }
 
 .hover-scale {
-    transition: transform 0.1s;
+    transition: transform 0.4s;
     transform: scale(1);
 
     &:hover {
-        transform: scale(1.03);                
+        transform: scale(1.03);
     }
 }
 
@@ -224,6 +224,14 @@ body * {
     &:hover {
         border-color: var(--mud-palette-primary);
         border-width: 3px;
+    }
+}
+
+.hover-box-shadow {
+    transition: box-shadow 0.4s;
+
+    &:hover {
+        box-shadow: 0 0 0 3px var(--mud-palette-primary);
     }
 }
 

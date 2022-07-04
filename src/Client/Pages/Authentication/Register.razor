@@ -109,17 +109,17 @@
         {
             AddPage("Register as");
             <MudCarouselItem Style="padding: 10px" Transition="Transition.Slide">
-                <MudGrid Style="  max-height: 90%; overflow-y: auto; overflow-x: hidden;" Spacing="2">
+                <MudGrid Style="padding:5px; max-height: 90%; overflow-y: auto; overflow-x: hidden;" Spacing="2">
                     @foreach (var role in _selectableRoles)
                     {
                         <MudItem xs="12">
-                            <MudCard @onclick="@(() => ToggleRole(role))" Class="cursor-pointer hover-scale hover-border"  Outlined="true">
+                            <MudCard @onclick="@(() => ToggleRole(role))" Class="cursor-pointer animate-all-properties hover-scale hover-box-shadow"  Outlined="true">
                                 <MudCardContent>
                                     <MudText Typo="Typo.h6" Color="Color.Primary">@_localizer[role.Name]</MudText>
                                     <MudText Typo="Typo.body2">@_localizer[role.Description ?? ""]</MudText>
                                 </MudCardContent>
                                 <MudCardActions>
-                                    <MudCheckBox T="bool" CheckedChanged="@(() => ToggleRole(role))" Checked="@IsAddedAsInitialRole(role)" Label="@_localizer["Register as {0}", role.Name]" Color="Color.Primary"></MudCheckBox>
+                                    <MudCheckBox T="bool" CheckedChanged="@(() => ToggleRole(role))" Checked="@IsAddedAsInitialRole(role)" Label="@_localizer["Register as {0}", _localizer[role.Name]]" Color="Color.Primary"></MudCheckBox>
                                 </MudCardActions>
                             </MudCard>
                         </MudItem>

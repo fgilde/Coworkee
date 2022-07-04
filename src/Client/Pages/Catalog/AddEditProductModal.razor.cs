@@ -92,7 +92,7 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
                 var imageFile = await e.File.RequestImageFileAsync(format, 400, 400);
                 var buffer = new byte[imageFile.Size];
                 await imageFile.OpenReadStream().ReadAsync(buffer);
-                AddEditProductModel.ImageDataURL = DataUrl.GetDataUrl(buffer, format);
+                AddEditProductModel.ImageDataURL = await DataUrl.GetDataUrlAsync(buffer, format);
                 AddEditProductModel.UploadRequest = new UploadRequest { Data = buffer, FileName = _file.Name, ContentType = e.File.ContentType, UploadType = UploadType.Product, Extension = extension };
             }
         }

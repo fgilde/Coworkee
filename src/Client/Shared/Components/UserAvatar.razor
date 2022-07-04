@@ -138,7 +138,7 @@
 
     protected async Task LoadOtherUserData()
     {
-        if (UserData == null && !string.IsNullOrWhiteSpace(UserId))
+        if ((UserData == null || UserData.Id != UserId) && !string.IsNullOrWhiteSpace(UserId))
         {
             var result = await _api.User_GetByIdAsync(UserId);
             if (result.Succeeded)

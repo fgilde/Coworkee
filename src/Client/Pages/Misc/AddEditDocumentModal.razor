@@ -93,7 +93,7 @@
             @if (!string.IsNullOrEmpty(AddEditDocumentModel.URL))
             {
                 <MudItem Style="flex: 1 1 auto;">
-                    <FileDisplay ContentStream="@_currentContentStream" Url="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" FileName="@AddEditDocumentModel.Title" ContentType="@AddEditDocumentModel.ContentType"></FileDisplay>
+                    <MudExFileDisplay ContentStream="@_currentContentStream" Url="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" FileName="@AddEditDocumentModel.Title" ContentType="@AddEditDocumentModel.ContentType"></MudExFileDisplay>
                 </MudItem>
             }
 

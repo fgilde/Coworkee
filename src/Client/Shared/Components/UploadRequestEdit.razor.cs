@@ -13,12 +13,13 @@ using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Shared.Helper;
 using CleanArchitectureBase.Shared.Misc;
-using BrowserFileExtensions = CleanArchitectureBase.Client.Extensions.BrowserFileExtensions;
+using MudBlazor.Extensions.Components;
+using MudBlazor.Extensions.Extensions;
+using Nextended.Blazor.Extensions;
+using BrowserFileExtensions = Nextended.Blazor.Extensions.BrowserFileExtensions;
 
 namespace CleanArchitectureBase.Client.Shared.Components;
 
@@ -274,7 +275,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
 
     private string GetIcon(UploadRequest request)
     {
-        return BrowserFileExtensions.IconForFile(request.ContentType);
+        return BrowserFileExt.IconForFile(request.ContentType);
     }
 
     
@@ -284,12 +285,12 @@ public partial class UploadRequestEdit : IAsyncDisposable
         if (MimeTypeHelper.IsZip(request.ContentType))
         {
             var ms = new MemoryStream(request.Data);
-            await FileDisplayDialog.Show(_dialogService, ms, request.FileName, request.ContentType);
+            await MudExFileDisplayDialog.Show(_dialogService, ms, request.FileName, request.ContentType);
         }
         else
         {
-            var dataUrl = DataUrl.GetDataUrl(request.Data, request.ContentType);
-            await FileDisplayDialog.Show(_dialogService, dataUrl, request.FileName, request.ContentType);
+            var dataUrl = await DataUrl.GetDataUrlAsync(request.Data, request.ContentType);
+            await MudExFileDisplayDialog.Show(_dialogService, dataUrl, request.FileName, request.ContentType);
         }
     }
 

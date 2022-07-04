@@ -16,6 +16,7 @@ using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Helper;
 using Microsoft.AspNetCore.SignalR.Client;
 using CleanArchitectureBase.Shared.Misc;
+using Nextended.Blazor.Extensions;
 
 
 namespace CleanArchitectureBase.Client.Pages.Misc

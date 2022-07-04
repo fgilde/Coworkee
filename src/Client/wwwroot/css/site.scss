@@ -238,3 +238,11 @@ body * {
         margin-left: -100px;
     }
 }
+
+.primary-border {    
+    box-shadow: 0 0 0 2px var(--mud-palette-primary);
+}
+
+.primary-background {
+    background-color: var(--mud-palette-primary);
+}

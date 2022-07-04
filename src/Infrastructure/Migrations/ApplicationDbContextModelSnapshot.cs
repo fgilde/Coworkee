@@ -229,14 +229,14 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserInformationsId")
+                    b.Property<int>("UserInformationsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserInformationsId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", b =>
@@ -817,9 +817,12 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Identity.Address", b =>
                 {
-                    b.HasOne("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", null)
+                    b.HasOne("CleanArchitectureBase.Domain.Entities.Identity.UserInformations", "UserInformations")
                         .WithMany("Addresses")
-                        .HasForeignKey("UserInformationsId");
+                        .HasForeignKey("UserInformationsId")
+                        .IsRequired();
+
+                    b.Navigation("UserInformations");
                 });
 
             modelBuilder.Entity("CleanArchitectureBase.Domain.Entities.Misc.Document", b =>

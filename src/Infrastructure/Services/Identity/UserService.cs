@@ -42,6 +42,7 @@ using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests;
+using CleanArchitectureBase.Infrastructure.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -153,7 +154,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<Result<List<UserResponse>>> GetAllAsync()
         {
-            var users = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).ToListAsync();
+            var users = await _userManager.LoadedUsers().ToListAsync();
             var result = users.MapTo<List<UserResponse>>().Where(u => !u.IsSystemUser()).ToList();
             return await Result<List<UserResponse>>.SuccessAsync(result);
         }
@@ -196,13 +197,13 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public UserResponse Get(string userId)
         {
-            var user = _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).FirstOrDefault(u => u.Id == userId);
+            var user = _userManager.LoadedUsers().FirstOrDefault(u => u.Id == userId);
             return user?.MapTo<UserResponse>();
         }
 
         public async Task<IResult<UserResponse>> GetAsync(string userId)
         {
-            var user = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userManager.FindByIdFullyLoadedAsync(userId);
             if (user == null)
                 return await Result<UserResponse>.FailAsync($"User with id {userId} not found");
             return await Result<UserResponse>.SuccessAsync(user.MapTo<UserResponse>());
@@ -210,7 +211,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<IResult> ToggleUserStatusAsync(ToggleUserStatusRequest request)
         {
-            var user = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses).Where(u => u.Id == request.UserId).FirstOrDefaultAsync();
+            var user = await _userManager.FindByIdFullyLoadedAsync(request.UserId);
             var isAdmin = await _userManager.IsInRoleAsync(user, RoleConstants.AdministratorRole);
             if (isAdmin)
             {
@@ -233,7 +234,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             bool selectedOnly = userId == null;
             userId ??= _currentUserService.UserId;
             var viewModel = new List<UserRoleModel>();
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdFullyLoadedAsync(userId);
             var roles = await _roleManager.Roles.ToListAsync();
 
             foreach (var role in roles)
@@ -261,7 +262,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
-            var user = await _userManager.FindByIdAsync(request.UserId);
+            var user = await _userManager.FindByIdFullyLoadedAsync(request.UserId);
             if (user.Email == ApplicationConstants.Defaults.Users.System.Email || ApplicationConstants.Defaults.Users.Administrators.Any(u => u.Email == user.Email))
             {
                 return await Result.FailAsync(_localizer["Not Allowed."]);
@@ -270,7 +271,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             var roles = await _userManager.GetRolesAsync(user);
             var selectedRoles = request.UserRoles.Where(x => x.Selected).ToList();
 
-            var currentUser = await _userManager.FindByIdAsync(_currentUserService.UserId);
+            var currentUser = await _userManager.FindByIdFullyLoadedAsync(_currentUserService.UserId);
             if (!await _userManager.IsInRoleAsync(currentUser, RoleConstants.AdministratorRole))
             {
                 var tryToAddAdministratorRole = selectedRoles
@@ -314,6 +315,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
                 if (failed != null)
                     return new Result<string> { Succeeded = failed.Succeeded, Messages = failed.Messages };
+                if (trackedUser.UserInfo != null)
+                    applicationUser.UserInfo.Id = trackedUser.UserInfo.Id;
 
                 trackedUser.Email = applicationUser.Email;
                 trackedUser.UserInfo = applicationUser.UserInfo;
@@ -342,7 +345,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task<IResult<string>> ConfirmEmailAsync(string userId, string code)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdFullyLoadedAsync(userId);
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
@@ -419,7 +422,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         public async Task<string> ExportToExcelAsync(string searchString = "")
         {
             var userSpec = new UserFilterSpecification(searchString);
-            var users = await _userManager.Users.Include(u => u.UserInfo).Include(u => u.UserInfo.Addresses)
+            var users = await _userManager.LoadedUsers()
                 .Specify(userSpec)
                 .OrderByDescending(a => a.CreatedOn)
                 .ToListAsync();
@@ -432,7 +435,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
         {
             if (_currentUserService.UserId == userId)
                 throw Errors.Create("You cannot delete yourself");
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdFullyLoadedAsync(userId);
             if (user == null)
                 throw Errors.NotFound(_localizer["User Not Found!"]);
             if (user.IsSystemUser())
@@ -505,5 +508,6 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 Target = EventTarget.WithRole(RoleConstants.AdministratorRole)
             });
         }
+
     }
 }

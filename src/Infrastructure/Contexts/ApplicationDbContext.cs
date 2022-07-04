@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Chat;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
+using CleanArchitectureBase.Domain.Entities.Identity;
 using CleanArchitectureBase.Domain.Entities.Localization;
 using CleanArchitectureBase.Domain.Entities.Misc;
 using CleanArchitectureBase.Domain.Entities.Notifications;
@@ -28,6 +29,8 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
         }
 
         public DbSet<ChatHistory<ApplicationUser>> ChatHistories { get; set; }
+        public DbSet<UserInformations> UserInformations { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -65,8 +68,8 @@ namespace CleanArchitectureBase.Infrastructure.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             foreach (var property in builder.Model.GetEntityTypes()
-                         .SelectMany(t => t.GetProperties())
-                         .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+            .SelectMany(t => t.GetProperties())
+            .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
             {
                 property.SetColumnType("decimal(18,2)");
             }

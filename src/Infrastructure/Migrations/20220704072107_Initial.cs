@@ -256,7 +256,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -267,7 +267,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HouseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserInformationsId = table.Column<int>(type: "int", nullable: true),
+                    UserInformationsId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -275,9 +275,9 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_UserInformations_UserInformationsId",
+                        name: "FK_Addresses_UserInformations_UserInformationsId",
                         column: x => x.UserInformationsId,
                         principalTable: "UserInformations",
                         principalColumn: "Id");
@@ -483,8 +483,8 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_UserInformationsId",
-                table: "Address",
+                name: "IX_Addresses_UserInformationsId",
+                table: "Addresses",
                 column: "UserInformationsId");
 
             migrationBuilder.CreateIndex(
@@ -573,7 +573,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Address");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "AuditTrails");

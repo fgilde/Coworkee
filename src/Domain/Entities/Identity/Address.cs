@@ -10,4 +10,7 @@ public class Address : AuditableEntity<int>
     public string Country { get; set; }
     public string PostalCode { get; set; }
     public string HouseNumber { get; set; }
+
+    public int UserInformationsId { get; set; }
+    public virtual UserInformations UserInformations { get; set; }
 }

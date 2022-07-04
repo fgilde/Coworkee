@@ -19,6 +19,7 @@ using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services.Identity;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
@@ -26,6 +27,7 @@ using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Domain.Entities.Identity;
+using CleanArchitectureBase.Infrastructure.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -55,10 +57,11 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             _contextAccessor = contextAccessor;
         }
 
-        
+
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailFullyLoadedAsync(model.Email);
+
             if (user == null)
             {
                 return await Result<TokenResponse>.FailAsync(_localizer["User Not Found."]);
@@ -220,7 +223,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
 
         public async Task SetUserOnlineStatusAsync(string userId, bool isOnline)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdFullyLoadedAsync(userId);
             if (user != null && (user.UserInfo == null || user.UserInfo.IsOnline != isOnline))
             {
                 user.UserInfo ??= new UserInformations();

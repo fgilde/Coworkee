@@ -14,6 +14,7 @@ Add Document Type: 문서 유형 추가
 Add Extended Attribute: 확장 특성 추가
 Add Product: 제품 추가
 Add Role: 역할 추가
+Address: 주소
 Addresses: 주소
 Administrator: 관리자
 Administrator Settings.: 관리자 설정.
@@ -25,6 +26,8 @@ ak-GH: 윌 (가나)
 All Documents without Type are stored here: 유형이 없는 모든 문서는 여기에 저장됩니다.
 All Groups: 모든 그룹
 All Permissions: 모든 사용 권한
+All roles: 모든 역할
+All roles unfiltered: 필터링되지 않은 모든 역할
 Already have an account?: 이미 계정이 있습니까?
 am-ET: 암하라어 (에티오피아)
 An Error has occured!: 오류가 발생했습니다!
@@ -63,6 +66,7 @@ ar-SY: 아랍어(시리아)
 ar-TD: 아랍어 (차드)
 ar-TN: 아랍어(튀니지)
 ar-YE: 아랍어(예멘)
+Are you sure you want to force logout for user {0}: 사용자 이{0}에 대해 강제로 로그아웃하시겠습니까?
 arn-CL: 마푸체 (칠레)
 As Admin you can filter for users here: 관리자로 당신은 여기 사용자를 위해 필터링 할 수 있습니다
 as read: 읽음으로
@@ -83,6 +87,8 @@ Barcode: 바코드
 Barcode already exists.: 바코드가 이미 있습니다.
 Barcode is required!: 바코드가 필요합니다!
 bas-CM: 바사 (카메룬)
+Basic: 기초의
+Basic role with default permissions: 기본 권한이 있는 기본 역할
 be-BY: 벨라루스어 (벨라루스)
 bem-ZM: 벨바 (잠비아)
 bez-TZ: 다리(탄자니아)
@@ -126,6 +132,7 @@ chat: 잡담
 Chat: 잡담
 Chat?: 잡담?
 chr-Cher-US: 체로키 (체로키, 미국)
+City: 도시
 Clear: 맑다
 Client Language has been changed: 클라이언트 언어가 변경되었습니다.
 Close: 닫다
@@ -139,7 +146,10 @@ Confirm and Set Required: 필요한 확인 및 설정
 Confirm Password: 암호 확인
 Confirm Registration: 등록 확인
 contacts: 연락처
+Continue to {0}: 계속 {0}
+Country: 나라
 Create: 창조하다
+Create address: 주소 만들기
 cs-CZ: 체코어(체코)
 cu-RU: 교회 슬라브 (러시아)
 Current Password: 현재 암호
@@ -227,6 +237,7 @@ el-CY: 그리스어 (키프로스)
 el-GR: 그리스어 (그리스)
 Email: 이메일
 Email {0} is already registered.: 이메일 {0}가 이미 등록되어 있습니다.
+Email cannot changed: 이메일을 변경할 수 없습니다.
 Email Confirmation: 이메일 확인
 Email is not correct: 이메일이 올바르지 않습니다.
 Email is required: 이메일이 필요합니다.
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: 여기에
 hi-IN: 힌디어 (인도)
 Hide: 숨기다
 Home: 집
+HouseNumber: 수
 hr-BA: 크로아티아어 (보스니아 헤르체고비나)
 hr-HR: 크로아티아어 (크로아티아)
 hsb-DE: 어퍼 소르비안 (독일)
@@ -601,6 +613,7 @@ Logged Out.: 로그아웃.
 LoginDescription: 자격 증명으로 로그인합니다.
 Logout: 로그아웃
 Logout Confirmation: 당신은 정말 로그 아웃하시겠습니까?
+Logout user: 로그아웃 사용자
 lrc-IQ: 북부 루리 (이라크)
 lrc-IR: 북부 루리 (이란)
 lt-LT: 리투아니아어 (리투아니아)
@@ -680,6 +693,8 @@ nl-SX: 영어 (신트 마틴)
 nmg-CM: 와시오 (카메룬)
 nn-NO: 노르웨이 니노르스크 (노르웨이)
 nnh-CM: 응임분 (카메룬)
+No: 아니요
+No address: 주소 없음
 No Allowed Actions: 허용된 작업 없음
 No notifications: 알림 없음
 Not Allowed to add or delete Administrator Role if you have not this role.: 이 역할이 없는 경우 관리자 역할을 추가하거나 삭제할 수 없습니다.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>�
 Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'> 클릭하여 비밀번호를 재설정하십시오</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: 개인 자격 및 본인 및 자격을 확인하는 참고 자료를 업로드하십시오.
 Please Wait: 기다리세요
+PostalCode: 우편 번호
 Preview: 미리 보기
 prg-001: 프로이센 (세계)
 Primary Key: 기본 키
@@ -747,6 +763,7 @@ Profile: 윤곽
 Profile Details: 프로필 세부 정보
 Profile picture added.: 프로필 사진이 추가되었습니다.
 Profile picture deleted.: 프로필 사진이 삭제되었습니다.
+Profile updated: 프로필이 업데이트됨
 prs-AF: prs (아프가니스탄)
 ps-AF: 파슈토 (아프가니스탄)
 ps-PK: 파슈토 (파키스탄)
@@ -763,6 +780,7 @@ pt-PT: 포르투갈어(포르투갈)
 pt-ST: 영어 (상 토메 & 프린시페)
 pt-TL: 영어(동티모르)
 Public Profile: 공개 프로필
+Qualifications and References: 자격 및 참고 문헌
 quc-GT: 크르치체 (과테말라)
 Quick Insights.: 빠른 인사이트.
 Quick Start Guide: 빠른 시작 가이드
@@ -774,6 +792,7 @@ Rate must be greater than 0: 금리는 0보다 커야 합니다.
 Realtime Updates & Insights with SignalR.: 시그널R을 통해 실시간 업데이트 및 인사이트.
 Refreshed Token.: 새로 고침 된 토큰입니다.
 Register: 등록기
+Register as: 로 등록하기
 Register here: 여기에 등록하십시오.
 Register New User: 새 사용자 등록
 Register User: 사용자 등록
@@ -883,6 +902,7 @@ ssy-ER: 사호 (에리트레아)
 st-LS: 세소토 (레소토)
 st-ZA: 세소토 (남아프리카 공화국)
 Status: 상태
+Street: 거리
 Striped: 스트라이프
 su-Latn-ID: 순다네스 (라틴어, 인도네시아)
 Support: 지원
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: 파일
 The following {0} permissions are also required for permission {1}: 권한 {1} 다음 {0} 사용 권한도 필요합니다.
 The following permission is also required for permission {1}: 권한 {1} 위해 다음 권한도 필요합니다.
 The Plugin '{0}' may be able to help: 플러그인 '{0}'이 도움이 될 수 있습니다.
+The user {0} has been logged off: 사용자 {0}가 로그오프되었습니다.
 The User {0} has just edited, created or deleted entries here. You should reload the data: 사용자 {0} 여기에서 방금 편집, 생성 또는 삭제된 항목을 만들었습니다. 데이터를 다시 로드해야 합니다.
 There are no new notifications: 새 알림이 없습니다.
 This is an Administrator Only View.: 관리자 전용 보기입니다.
@@ -939,6 +960,7 @@ Trail Details: 트레일 세부 정보
 Translations: 번역
 Translations are being imported: 번역이 가져오고 있습니다.
 Translations updated: 번역 업데이트
+Try different role: 다른 역할 시도
 ts-ZA: 시송가 (남아프리카 공화국)
 tt-RU: 타타르 (러시아)
 twq-NE: 타사와크 (니제르)
@@ -972,6 +994,7 @@ ur-IN: 우르두어 (인도)
 ur-PK: 우르두어 (파키스탄)
 User: 사용자
 User {0} Registered. Please check your Mailbox to verify!: 사용자 {0}가 등록되었습니다. 사서함을 확인하여 이메일 주소를 확인하십시오!
+User Data: 사용자 데이터
 User Deleted: 사용자 삭제
 User Name: 사용자 이름
 User Not Active. Please contact the administrator.: 사용자가 활성 상태가 아닙니다. 활성화를 기다리거나 관리자에게 문의하십시오.
@@ -982,6 +1005,7 @@ User registration is not allowed: 사용자 등록이 허용되지 않습니다.
 Username: 사용자 이름
 UserName: 사용자 이름
 Username {0} is already taken.: 사용자 이름 {0}가 이미 사용 중입니다.
+Username cannot changed: 사용자 이름을 변경할 수 없습니다.
 UserName is required: 사용자 이름이 필요합니다.
 UserName must be at least of length 6: 사용자 이름은 길이 6 이상이어야 합니다.
 Users: 사용자
@@ -1009,12 +1033,14 @@ wo-SN: 울로피 (세네갈)
 xh-ZA: 이시호사 (남아프리카 공화국)
 xog-UG: 소가 (우간다)
 yav-CM: 양벤 (카메룬)
+Yes: 예
 yi-001: 이디시어 (세계)
 yo-BJ: 요루바 (베냉)
 yo-NG: 요루바 (나이지리아)
 you: 너
 You are logged out because the Permissions of one of your Roles have been updated.: 역할 중 하나의 사용 권한이 업데이트되었기 때문에 로그아웃됩니다.
 You are logged out because the user with your Token has been deleted or token is expired.: 토큰을 가진 사용자가 삭제되었거나 토큰이 만료되었기 때문에 로그아웃됩니다.
+You are logged out by an Administrator or profile change.: 관리자 또는 프로필 변경에 의해 로그아웃되었습니다.
 You are Logged Out.: 로그아웃됩니다.
 You can now Login with your credentials: 이제 자격 증명으로 로그인 할 수 있습니다.
 You cannot delete yourself: 직접 삭제할 수 없습니다.

@@ -14,6 +14,7 @@ Add Document Type: Добавяне на тип документ
 Add Extended Attribute: Добавяне на разширен атрибут
 Add Product: Добавяне на продукт
 Add Role: Добавяне на роля
+Address: Адрес
 Addresses: Адреси
 Administrator: Администратор
 Administrator Settings.: Настройки на администратора.
@@ -25,6 +26,8 @@ ak-GH: Уил (Гана)
 All Documents without Type are stored here: Всички Документи без Тип се съхраняват тук
 All Groups: Всички групи
 All Permissions: Всички разрешения
+All roles: Всички роли
+All roles unfiltered: Всички роли нефилтирани
 Already have an account?: Вече имате сметка?
 am-ET: Амхарик (Етиопия)
 An Error has occured!: Възникна грешка!
@@ -63,6 +66,7 @@ ar-SY: Арабски (Сирия)
 ar-TD: Арабски (Чад)
 ar-TN: Арабски (Тунис)
 ar-YE: Арабски (Йемен)
+Are you sure you want to force logout for user {0}: Наистина ли искате да принудите излизане за потребителски {0}
 arn-CL: Мапуш (Чили)
 As Admin you can filter for users here: Като Администратор можете да филтрирате за потребители тук
 as read: като прочетени
@@ -83,6 +87,8 @@ Barcode: Баркод
 Barcode already exists.: Баркодът вече съществува.
 Barcode is required!: Изисква се баркод!
 bas-CM: Басаа (Камерун)
+Basic: Основен
+Basic role with default permissions: Основна роля с разрешения по подразбиране
 be-BY: Беларус (Беларус)
 bem-ZM: Бемба (Замбия)
 bez-TZ: Крака (Танзания)
@@ -126,6 +132,7 @@ chat: Чат
 Chat: Чат
 Chat?: Чат?
 chr-Cher-US: Чероки (Чероки, САЩ)
+City: Град
 Clear: Ясен
 Client Language has been changed: Клиентски език е променен
 Close: Затварям
@@ -139,7 +146,10 @@ Confirm and Set Required: Потвърждаване и задаване на з
 Confirm Password: Потвърждаване на парола
 Confirm Registration: Потвърждаване на регистрацията
 contacts: Контакти
+Continue to {0}: Продължете да {0}
+Country: Страна
 Create: Създавам
+Create address: Създаване на адрес
 cs-CZ: Чешки (Чешки)
 cu-RU: Църковнославянски (Русия)
 Current Password: Текуща парола
@@ -227,6 +237,7 @@ el-CY: Гръцки (Кипър)
 el-GR: Гръцки (Гърция)
 Email: Имейл
 Email {0} is already registered.: Имейл {0} вече е регистриран.
+Email cannot changed: Имейлът не може да се промени
 Email Confirmation: Потвърждение по имейл
 Email is not correct: Имейлът не е правилен
 Email is required: Изисква се имейл
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Тук м
 hi-IN: Хинди (Индия)
 Hide: Крия
 Home: Дом
+HouseNumber: Номер
 hr-BA: Хърватски (Босна и Херцеговина)
 hr-HR: Хърватски (Хърватия)
 hsb-DE: Горна Сорбиан (Германия)
@@ -601,6 +613,7 @@ Logged Out.: Излезли.
 LoginDescription: Вход с вашите Идентификационни данни.
 Logout: Изход
 Logout Confirmation: Наистина ли искаш да Logout?
+Logout user: Потребител на излизане
 lrc-IQ: Северен Лури (Ирак)
 lrc-IR: Северен Лури (Иран)
 lt-LT: Литовски (Литва)
@@ -680,6 +693,8 @@ nl-SX: Английски (Синт Маартен)
 nmg-CM: Квазио (Камерун)
 nn-NO: Норвежки Нинорк (Норвегия)
 nnh-CM: Нгимбоун (Камерун)
+No: Не
+No address: Няма адрес
 No Allowed Actions: Без разрешени действия
 No notifications: Без известия
 Not Allowed to add or delete Administrator Role if you have not this role.: Не е разрешено да добавяте или изтривате роля на администратор, ако нямате тази роля.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Моля, по�
 Please reset your password by <a href='{0}'>clicking here</a>.: Моля, върнете паролата си, като <a href='{0}'>натиснете тук</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Моля, качете личните си квалификации и препратки, които потвърждават вашето лице и квалификация
 Please Wait: Моля, изчакайте
+PostalCode: Пощенски код
 Preview: Преглед
 prg-001: Пруски (Свят)
 Primary Key: Първичен ключ
@@ -747,6 +763,7 @@ Profile: Профил
 Profile Details: Подробни данни за профила
 Profile picture added.: Добавена е снимка на профила.
 Profile picture deleted.: Снимката на профила е изтрита.
+Profile updated: Профил актуализиран
 prs-AF: prs (Афганистан)
 ps-AF: Пащу (Афганистан)
 ps-PK: Пащу (Пакистан)
@@ -763,6 +780,7 @@ pt-PT: Португалски (Португалия)
 pt-ST: Английски (Сао Томе & Принсипи)
 pt-TL: Английски (Тимор-Лесте)
 Public Profile: Публичен профил
+Qualifications and References: Квалификации и референции
 quc-GT: Kʼicheʼ (Гватемала)
 Quick Insights.: Бързи прозрения.
 Quick Start Guide: Ръководство за бърз старт
@@ -774,6 +792,7 @@ Rate must be greater than 0: Ставката трябва да бъде по-г
 Realtime Updates & Insights with SignalR.: Актуализации в реално време & Прозрения с SignalR.
 Refreshed Token.: Освежен токен.
 Register: Регистрирайте се.
+Register as: Регистрирайте се като
 Register here: Регистрирайте се тук
 Register New User: Регистриране на нов потребител
 Register User: Регистриране на потребител
@@ -883,6 +902,7 @@ ssy-ER: Сахо (Еритрея)
 st-LS: Сезото (Лесото)
 st-ZA: Сезото (Южна Африка)
 Status: Статус
+Street: Улица
 Striped: Шарени
 su-Latn-ID: Сунданезе (латински, Индонезия)
 Support: Поддръжка
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Фай
 The following {0} permissions are also required for permission {1}: Следните {0} разрешения също са необходими за разрешение {1}
 The following permission is also required for permission {1}: Следното разрешение се изисква и за разрешение {1}
 The Plugin '{0}' may be able to help: Плъгинът "{0}" може да е в състояние да помогне на
+The user {0} has been logged off: Потребителският {0} е бил изключен
 The User {0} has just edited, created or deleted entries here. You should reload the data: Потребителският {0} току-що е редактирал, създал или изтрил записи тук. Трябва да презаредите данните
 There are no new notifications: Няма нови известия
 This is an Administrator Only View.: Това е само изглед на администратор.
@@ -939,6 +960,7 @@ Trail Details: Подробности за пътеката
 Translations: Преводи
 Translations are being imported: Внасят се преводи
 Translations updated: Актуализирани преводи
+Try different role: Опитайте различна роля
 ts-ZA: Кситсонга (Южна Африка)
 tt-RU: Татарски (Русия)
 twq-NE: Тасавак (Нигер)
@@ -972,6 +994,7 @@ ur-IN: Урду (Индия)
 ur-PK: Урду (Пакистан)
 User: Потребител
 User {0} Registered. Please check your Mailbox to verify!: Регистриран потребителски {0}. Моля, проверете пощенската си кутия, за да потвърдите имейл адреса си!
+User Data: Потребителски данни
 User Deleted: Изтрит потребител
 User Name: Потребителско име
 User Not Active. Please contact the administrator.: Потребител не активен. Моля, изчакайте activasion или се свържете с администратора.
@@ -982,6 +1005,7 @@ User registration is not allowed: Регистрацията на потреби
 Username: Потребителско име
 UserName: Потребителско име
 Username {0} is already taken.: Вече е взето потребителско име {0}.
+Username cannot changed: Потребителското име не може да се промени
 UserName is required: Потребителско име е необходимо
 UserName must be at least of length 6: Потребителско име трябва да бъде най-малко с дължина 6
 Users: Потребители
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Сенегал)
 xh-ZA: изиХоса (Южна Африка)
 xog-UG: Сога (Уганда)
 yav-CM: Янгбен (Камерун)
+Yes: Да
 yi-001: Идиш (Свят)
 yo-BJ: Йоруба (Бенин)
 yo-NG: Йоруба (Нигерия)
 you: ти
 You are logged out because the Permissions of one of your Roles have been updated.: Вие сте излезли, защото разрешенията на една от вашите Роли са актуализирани.
 You are logged out because the user with your Token has been deleted or token is expired.: Вие сте излезли, защото потребителят с вашия Маркер е изтрит или маркерът е изтекъл.
+You are logged out by an Administrator or profile change.: Вие сте излезли от Администратор или промяна на профил.
 You are Logged Out.: Вие сте излезли.
 You can now Login with your credentials: Вече можете да влезете с вашите идентификационни данни
 You cannot delete yourself: Не можете да изтриете себе си

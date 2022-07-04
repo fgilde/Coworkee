@@ -14,6 +14,7 @@ Add Document Type: Dodaj vrstu dokumenta
 Add Extended Attribute: Dodaj prošireni atribut
 Add Product: Dodaj proizvod
 Add Role: Dodaj ulogu
+Address: Adresa
 Addresses: Adrese
 Administrator: Administrator
 Administrator Settings.: Administratorske postavke.
@@ -25,6 +26,8 @@ ak-GH: Will (Gana, BiH)
 All Documents without Type are stored here: Svi dokumenti bez vrste pohranjeni su ovdje
 All Groups: Sve grupe
 All Permissions: Sve dozvole
+All roles: Sve uloge
+All roles unfiltered: Sve uloge nefiltrirane
 Already have an account?: Već imate račun?
 am-ET: Amharski (Etiopija)
 An Error has occured!: Došlo je do pogreške!
@@ -63,6 +66,7 @@ ar-SY: Arapski (Sirija)
 ar-TD: Arapski (Čad)
 ar-TN: Arapski (Tunis)
 ar-YE: Arapski (Jemen)
+Are you sure you want to force logout for user {0}: Jeste li sigurni da želite prisilno odjaviti se za korisničku {0}
 arn-CL: Mapuche (Čile)
 As Admin you can filter for users here: Kao administrator možete filtrirati za korisnike ovdje
 as read: kao pročitano
@@ -83,6 +87,8 @@ Barcode: Crtični kod
 Barcode already exists.: Crtični kod već postoji.
 Barcode is required!: Potreban je crtični kod!
 bas-CM: Basaa (Kamerun, BiH)
+Basic: Osnovni
+Basic role with default permissions: Osnovna uloga sa zadanim dozvolama
 be-BY: Bjeloruski (Bjelorusija)
 bem-ZM: Bemba (Zambija, BiH)
 bez-TZ: Noge (Tanzanija)
@@ -126,6 +132,7 @@ chat: Čavrljanje
 Chat: Čavrljanje
 Chat?: Čavrljanje?
 chr-Cher-US: Cherokee (Cherokee, Sjedinjene Američke Države)
+City: Grad
 Clear: Jasan
 Client Language has been changed: Jezik klijenta je promijenjen
 Close: Blizak
@@ -139,7 +146,10 @@ Confirm and Set Required: Potvrda i postavljanje obaveznog
 Confirm Password: Potvrda lozinke
 Confirm Registration: Potvrda registracije
 contacts: Kontakte
+Continue to {0}: Nastavi {0}
+Country: Zemlja
 Create: Stvoriti
+Create address: Stvori adresu
 cs-CZ: Češki (Češka)
 cu-RU: Crkveni slavenski (Rusija)
 Current Password: Trenutna lozinka
@@ -227,6 +237,7 @@ el-CY: Grčki (Cipar)
 el-GR: Grčki (Grčka)
 Email: E-pošta
 Email {0} is already registered.: '{0} e-pošte već je registrirana.'
+Email cannot changed: E-pošta se ne može promijeniti
 Email Confirmation: Potvrda e-pošte
 Email is not correct: E-pošta nije ispravna
 Email is required: Potrebna je e-pošta
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Ovdje mo�
 hi-IN: Hindski (Indija)
 Hide: Sakriti
 Home: Dom
+HouseNumber: Broj
 hr-BA: Hrvatski (Bosna i Hercegovina)
 hr-HR: Hrvatski (Hrvatska)
 hsb-DE: Gornji Sorbian (Njemačka)
@@ -601,6 +613,7 @@ Logged Out.: Odjavljeno.
 LoginDescription: Prijavite se sa svojim vjerodajnicama.
 Logout: Odjava
 Logout Confirmation: Želite li se zaista odjaviti?
+Logout user: Korisnik odjave
 lrc-IQ: Sjeverni Luri (Irak)
 lrc-IR: Sjeverni Luri (Iran)
 lt-LT: Litavski (Litva)
@@ -680,6 +693,8 @@ nl-SX: Engleski (Sint Maarten)
 nmg-CM: Kwasio (Kamerun, BiH)
 nn-NO: Norveški Nynorsk (Norveška)
 nnh-CM: Ngiemboon (Kamerun)
+No: Ne
+No address: Nema adrese
 No Allowed Actions: Nema dopuštenih akcija
 No notifications: Nema obavijesti
 Not Allowed to add or delete Administrator Role if you have not this role.: Nije dopušteno dodati ili izbrisati administratorsku ulogu ako nemate ovu ulogu.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrdite svoj 
 Please reset your password by <a href='{0}'>clicking here</a>.: Vratite lozinku na <a href='{0}'>clicking ovdje</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Prenesite svoje osobne kvalifikacije i reference koje potvrđuju vašu osobu i kvalifikaciju
 Please Wait: Molim te čekaj
+PostalCode: Poštanski broj
 Preview: Pregled
 prg-001: Pruski (svijet)
 Primary Key: Primarni ključ
@@ -747,6 +763,7 @@ Profile: Profil
 Profile Details: Detalji o profilu
 Profile picture added.: Dodana je slika profila.
 Profile picture deleted.: Slika profila je izbrisana.
+Profile updated: Profil ažuriran
 prs-AF: prs (Afganistan)
 ps-AF: Paštu (Afganistan)
 ps-PK: Paštu (Pakistan)
@@ -763,6 +780,7 @@ pt-PT: Portugalski (Portugal)
 pt-ST: Engleski (Sao Tome & Principe)
 pt-TL: Engleski (Timor-Leste)
 Public Profile: Javni profil
+Qualifications and References: Kvalifikacije i reference
 quc-GT: Kʼicheʼ (Gvatemala)
 Quick Insights.: Brzi uvidi.
 Quick Start Guide: Vodič za brzi početak rada
@@ -774,6 +792,7 @@ Rate must be greater than 0: Stopa mora biti veća od 0
 Realtime Updates & Insights with SignalR.: Ažuriranja u stvarnom vremenu i uvidi pomoću SignalR-a.
 Refreshed Token.: Osvježeni token.
 Register: Registar
+Register as: Registrirajte se kao
 Register here: Registrirajte se ovdje
 Register New User: Registriraj novog korisnika
 Register User: Registriraj korisnika
@@ -883,6 +902,7 @@ ssy-ER: Saho (Eritreja, BiH)
 st-LS: Sesotho (Lesoto, BiH)
 st-ZA: Sesotho (Južna Afrika)
 Status: Status
+Street: Ulica
 Striped: Prugasta
 su-Latn-ID: Sundanski (latinica, Indonezija)
 Support: Podrška
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Datote
 The following {0} permissions are also required for permission {1}: Za {1} dozvole potrebne su i sljedeće dozvole za {0}
 The following permission is also required for permission {1}: Za {1} dozvole potrebna je i sljedeća dozvola
 The Plugin '{0}' may be able to help: Dodatak "{0}" možda će vam moći pomoći
+The user {0} has been logged off: Korisnički {0} je odjavljen
 The User {0} has just edited, created or deleted entries here. You should reload the data: Korisnički {0} ovdje je upravo uređivao, kreirao ili brisao unose. Trebali biste ponovno učitati podatke
 There are no new notifications: Nema novih obavijesti
 This is an Administrator Only View.: Ovo je prikaz samo za administratore.
@@ -939,6 +960,7 @@ Trail Details: Detalji staze
 Translations: Prijevodi
 Translations are being imported: Prijevodi se uvoze
 Translations updated: Ažurirani prijevodi
+Try different role: Pokušaj s drugom ulogom
 ts-ZA: Xitsonga (Južna Afrika)
 tt-RU: Tatar (Rusija)
 twq-NE: Tasawaq (Niger)
@@ -972,6 +994,7 @@ ur-IN: Urdu (Indija)
 ur-PK: Urdu (Pakistan)
 User: Korisnik
 User {0} Registered. Please check your Mailbox to verify!: Korisnički {0} registrirani. Provjerite poštanski sandučić da biste potvrdili svoju adresu e-pošte!
+User Data: Korisnički podaci
 User Deleted: Korisnik je izbrisan
 User Name: Korisničko ime
 User Not Active. Please contact the administrator.: Korisnik nije aktivan. Pričekajte aktivaciju ili se obratite administratoru.
@@ -982,6 +1005,7 @@ User registration is not allowed: Registracija korisnika nije dopuštena
 Username: Korisničko ime
 UserName: Korisničko ime
 Username {0} is already taken.: Korisničko ime {0} već je preuzeto.
+Username cannot changed: Korisničko ime nije moguće promijeniti
 UserName is required: Korisničko ime je obavezno
 UserName must be at least of length 6: Korisničko ime mora biti najmanje duljine 6
 Users: Korisnici
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Senegal, BiH)
 xh-ZA: isiXhosa (Južna Afrika)
 xog-UG: Soga (Uganda, BiH)
 yav-CM: Yangben (Kamerun, BiH)
+Yes: Da
 yi-001: Jidiš (svijet)
 yo-BJ: Yoruba (Benin, BiH)
 yo-NG: Yoruba (Nigerija)
 you: ti
 You are logged out because the Permissions of one of your Roles have been updated.: Odjavljeni ste jer su ažurirane dozvole jedne od vaših uloga.
 You are logged out because the user with your Token has been deleted or token is expired.: Odjavljeni ste jer je korisnik s vašim tokenom izbrisan ili je token istekao.
+You are logged out by an Administrator or profile change.: Odjavljuje vas administrator ili promjena profila.
 You are Logged Out.: Odjavljeni ste.
 You can now Login with your credentials: Sada se možete prijaviti sa svojim vjerodajnicama
 You cannot delete yourself: Ne možete se izbrisati

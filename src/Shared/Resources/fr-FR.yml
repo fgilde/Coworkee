@@ -14,6 +14,7 @@ Add Document Type: Ajouter un type de document
 Add Extended Attribute: Ajouter un attribut étendu
 Add Product: Ajouter un produit
 Add Role: Ajouter un rôle
+Address: Adresse
 Addresses: Adresses
 Administrator: Administrateur
 Administrator Settings.: Paramètres de l’administrateur.
@@ -25,6 +26,8 @@ ak-GH: Will (Ghana)
 All Documents without Type are stored here: Tous les documents sans type sont stockés ici
 All Groups: Tous les groupes
 All Permissions: Toutes les autorisations
+All roles: Tous les rôles
+All roles unfiltered: Tous les rôles non filtrés
 Already have an account?: Vous avez déjà un compte ?
 am-ET: Amharique (Éthiopie)
 An Error has occured!: Une erreur s’est produite !
@@ -63,6 +66,7 @@ ar-SY: Arabe (Syrie)
 ar-TD: Arabe (Tchad)
 ar-TN: Arabe (Tunisie)
 ar-YE: Arabe (Yémen)
+Are you sure you want to force logout for user {0}: Voulez-vous vraiment forcer la déconnexion pour les {0}
 arn-CL: Mapuche (Chili)
 As Admin you can filter for users here: En tant qu'administrateur, vous pouvez filtrer par utilisateurs ici
 as read: à lire
@@ -83,6 +87,8 @@ Barcode: Code-barres
 Barcode already exists.: Le code-barres existe déjà.
 Barcode is required!: Le code-barres est requis!
 bas-CM: Basaa (Cameroun)
+Basic: Basique
+Basic role with default permissions: Rôle de base avec autorisations par défaut
 be-BY: Biélorusse (Biélorussie)
 bem-ZM: Bemba (Zambie)
 bez-TZ: Legs (Tanzanie)
@@ -126,6 +132,7 @@ chat: Bavarder
 Chat: Bavarder
 Chat?: Bavarder?
 chr-Cher-US: Cherokee (Cherokee, États-Unis)
+City: Ville
 Clear: Clair
 Client Language has been changed: La langue du client a été modifiée
 Close: Fermer
@@ -139,7 +146,10 @@ Confirm and Set Required: Confirmer et définir requis
 Confirm Password: Confirmer le mot de passe
 Confirm Registration: Confirmer l’inscription
 contacts: Contacts
+Continue to {0}: Continuer à {0}
+Country: Pays
 Create: Créer
+Create address: Créer une adresse
 cs-CZ: Tchèque (Tchéquie)
 cu-RU: Église slave (Russie)
 Current Password: Mot de passe actuel
@@ -227,6 +237,7 @@ el-CY: Grec (Chypre)
 el-GR: Grec (Grèce)
 Email: Messagerie électronique
 Email {0} is already registered.: Email {0} est déjà enregistré.
+Email cannot changed: L’e-mail ne peut pas être modifié
 Email Confirmation: Confirmation par e-mail
 Email is not correct: L’e-mail n’est pas correct
 Email is required: Un e-mail est requis
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Ici, vous
 hi-IN: Hindi (Inde)
 Hide: Cacher
 Home: Domicile
+HouseNumber: Nombre
 hr-BA: Croate (Bosnie-Herzégovine)
 hr-HR: Croate (Croatie)
 hsb-DE: Haut-sorabe (Allemagne)
@@ -601,6 +613,7 @@ Logged Out.: Déconnecté.
 LoginDescription: Connectez-vous avec vos informations d’identification.
 Logout: Déconnexion
 Logout Confirmation: Voulez-vous vraiment vous déconnecter?
+Logout user: Utilisateur de déconnexion
 lrc-IQ: Luri du Nord (Irak)
 lrc-IR: Northern Luri (Iran)
 lt-LT: Lituanien (Lituanie)
@@ -680,6 +693,8 @@ nl-SX: Anglais (Sint Maarten)
 nmg-CM: Kwasio (Cameroun)
 nn-NO: Nynorsk norvégien (Norvège)
 nnh-CM: Ngiemboon (Cameroun)
+No: Non
+No address: Pas d’adresse
 No Allowed Actions: Aucune action autorisée
 No notifications: Aucune notification
 Not Allowed to add or delete Administrator Role if you have not this role.: Impossible d’ajouter ou de supprimer un rôle d’administrateur si vous n’avez pas ce rôle.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Veuillez confir
 Please reset your password by <a href='{0}'>clicking here</a>.: Veuillez réinitialiser votre mot de passe en <a href='{0}'>cliquer ici</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Veuillez télécharger vos qualifications personnelles et les références qui confirment votre personne et votre qualification
 Please Wait: Veuillez patienter
+PostalCode: Code postal
 Preview: Aperçu
 prg-001: Prussien (Monde)
 Primary Key: Clé primaire
@@ -747,6 +763,7 @@ Profile: Profil
 Profile Details: Détails du profil
 Profile picture added.: Photo de profil ajoutée.
 Profile picture deleted.: Photo de profil supprimée.
+Profile updated: Profil mis à jour
 prs-AF: prs (Afghanistan)
 ps-AF: Pachto (Afghanistan)
 ps-PK: Pachto (Pakistan)
@@ -763,6 +780,7 @@ pt-PT: Portugais (Portugal)
 pt-ST: Anglais (Sao Tomé-et-Principe)
 pt-TL: Anglais (Timor-Leste)
 Public Profile: Profil public
+Qualifications and References: Qualifications et références
 quc-GT: Kʼicheʼ (Guatemala)
 Quick Insights.: Aperçus rapides.
 Quick Start Guide: Guide de démarrage rapide
@@ -774,6 +792,7 @@ Rate must be greater than 0: Le taux doit être supérieur à 0
 Realtime Updates & Insights with SignalR.: Mises à jour et informations en temps réel avec SignalR.
 Refreshed Token.: Jeton actualisé.
 Register: Registre
+Register as: Inscrivez-vous en tant que
 Register here: Inscrivez-vous ici
 Register New User: Enregistrer un nouvel utilisateur
 Register User: Enregistrer l’utilisateur
@@ -883,6 +902,7 @@ ssy-ER: Saho (Eritrea)
 st-LS: Sesotho (Lesotho)
 st-ZA: Sesotho (Afrique du Sud)
 Status: Statut
+Street: Rue
 Striped: Rayé
 su-Latn-ID: Sundanais (latin, Indonésie)
 Support: Soutien
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Le fic
 The following {0} permissions are also required for permission {1}: Les autorisations de {0} suivantes sont également requises pour les autorisations {1}
 The following permission is also required for permission {1}: L’autorisation suivante est également requise pour l’autorisation {1}
 The Plugin '{0}' may be able to help: Le plugin '{0}' peut être en mesure d’aider
+The user {0} has been logged off: L’utilisateur {0} a été déconnecté
 The User {0} has just edited, created or deleted entries here. You should reload the data: L’Utilisateur {0} vient de modifier, créer ou supprimer des entrées ici. Vous devez recharger les données
 There are no new notifications: Il n’y a pas de nouvelles notifications
 This is an Administrator Only View.: Il s’agit d’une vue Administrateur uniquement.
@@ -939,6 +960,7 @@ Trail Details: Détails du sentier
 Translations: Traductions
 Translations are being imported: Les traductions sont importées
 Translations updated: Traductions mises à jour
+Try different role: Essayez un rôle différent
 ts-ZA: Xitsonga (Afrique du Sud)
 tt-RU: Tatar (Russie)
 twq-NE: Tasawaq (Niger)
@@ -972,6 +994,7 @@ ur-IN: Ourdou (Inde)
 ur-PK: Ourdou (Pakistan)
 User: Utilisateur
 User {0} Registered. Please check your Mailbox to verify!: Utilisateur {0} enregistré. S’il vous plaît vérifier votre boîte aux lettres pour vérifier votre adresse e-mail!
+User Data: Données utilisateur
 User Deleted: Utilisateur supprimé
 User Name: Nom d’utilisateur
 User Not Active. Please contact the administrator.: Utilisateur non actif. Veuillez attendre l’action ou contacter l’administrateur.
@@ -982,6 +1005,7 @@ User registration is not allowed: L’inscription de l’utilisateur n’est pas
 Username: Nom d’utilisateur
 UserName: Nom d’utilisateur
 Username {0} is already taken.: Le nom d’utilisateur {0} est déjà pris.
+Username cannot changed: Le nom d’utilisateur ne peut pas être modifié
 UserName is required: Nom d’utilisateur requis
 UserName must be at least of length 6: Le nom d’utilisateur doit être d’au moins la longueur 6
 Users: Utilisateurs
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Sénégal)
 xh-ZA: isiXhosa (Afrique du Sud)
 xog-UG: Soga (Ouganda)
 yav-CM: Yangben (Cameroun)
+Yes: Oui
 yi-001: Yiddish (Monde)
 yo-BJ: Yoruba (Bénin)
 yo-NG: Yoruba (Nigéria)
 you: vous
 You are logged out because the Permissions of one of your Roles have been updated.: Vous êtes déconnecté car les autorisations de l’un de vos rôles ont été mises à jour.
 You are logged out because the user with your Token has been deleted or token is expired.: Vous êtes déconnecté car l'utilisateur avec votre token a été supprimé ou le token a expiré.
+You are logged out by an Administrator or profile change.: Vous êtes déconnecté par un administrateur ou un changement de profil.
 You are Logged Out.: Vous êtes déconnecté.
 You can now Login with your credentials: Vous pouvez maintenant vous connecter avec vos informations d’identification
 You cannot delete yourself: Vous ne pouvez pas vous supprimer vous-même

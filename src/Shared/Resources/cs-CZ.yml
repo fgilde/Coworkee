@@ -14,6 +14,7 @@ Add Document Type: Přidat typ dokumentu
 Add Extended Attribute: Přidat rozšířený atribut
 Add Product: Přidat produkt
 Add Role: Přidat roli
+Address: Adresa
 Addresses: Adresy
 Administrator: Správce
 Administrator Settings.: Nastavení správce.
@@ -25,6 +26,8 @@ ak-GH: Will (Ghana)
 All Documents without Type are stored here: Zde jsou uloženy všechny dokumenty bez typu
 All Groups: Všechny skupiny
 All Permissions: Všechna oprávnění
+All roles: Všechny role
+All roles unfiltered: Všechny role nefiltrované
 Already have an account?: Už máte účet?
 am-ET: Amharština (Etiopie)
 An Error has occured!: Došlo k chybě!
@@ -63,6 +66,7 @@ ar-SY: Arabština (Sýrie)
 ar-TD: Arabština (Čad)
 ar-TN: Arabština (Tunisko)
 ar-YE: Arabština (Jemen)
+Are you sure you want to force logout for user {0}: Opravdu chcete vynutit odhlášení pro uživatelské {0}
 arn-CL: Mapučche (Chile)
 As Admin you can filter for users here: Jako správce můžete filtrovat pro uživatele zde
 as read: jak číst
@@ -83,6 +87,8 @@ Barcode: Čárový kód
 Barcode already exists.: Čárový kód již existuje.
 Barcode is required!: Čárový kód je vyžadován!
 bas-CM: Basaa (Kamerun)
+Basic: Základní
+Basic role with default permissions: Základní role s výchozími oprávněními
 be-BY: Běloruština (Bělorusko)
 bem-ZM: Bemba (Zambie)
 bez-TZ: Nohy (Tanzanie)
@@ -126,6 +132,7 @@ chat: Povídat si
 Chat: Povídat si
 Chat?: Povídat si?
 chr-Cher-US: Cherokee (Cherokee, Spojené státy americké)
+City: Město
 Clear: Jasný
 Client Language has been changed: Jazyk klienta byl změněn
 Close: Zavřít
@@ -139,7 +146,10 @@ Confirm and Set Required: Potvrdit a nastavit povinné
 Confirm Password: Potvrdit heslo
 Confirm Registration: Potvrdit registraci
 contacts: Kontakty
+Continue to {0}: Pokračovat do {0}
+Country: Země
 Create: Vytvářet
+Create address: Vytvořit adresu
 cs-CZ: Čeština (Česko)
 cu-RU: Slovanská církev (Rusko)
 Current Password: Aktuální heslo
@@ -227,6 +237,7 @@ el-CY: Řečtina (Kypr)
 el-GR: Řečtina (Řecko)
 Email: E-mail
 Email {0} is already registered.: E-mailová {0} je již zaregistrována.
+Email cannot changed: E-mail nelze změnit
 Email Confirmation: Potvrzení e-mailem
 Email is not correct: E-mail není správný
 Email is required: E-mail je vyžadován
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Zde můž
 hi-IN: Hindština (Indie)
 Hide: Schovat
 Home: Domov
+HouseNumber: Číslo
 hr-BA: Chorvatština (Bosna a Hercegovina)
 hr-HR: Chorvatština (Chorvatsko)
 hsb-DE: Hornolužická srbština (Německo)
@@ -601,6 +613,7 @@ Logged Out.: Odhlášen.
 LoginDescription: Přihlaste se pomocí svých přihlašovacích údajů.
 Logout: Odhlášení od sítě
 Logout Confirmation: Opravdu se chcete od odsout?
+Logout user: Odhlášení uživatele
 lrc-IQ: Severní Luri (Irák)
 lrc-IR: Severní Luri (Írán)
 lt-LT: Litevština (Litva)
@@ -680,6 +693,8 @@ nl-SX: Angličtina (Sint Maarten)
 nmg-CM: Kwasio (Kamerun)
 nn-NO: Norština Nynorsk (Norsko)
 nnh-CM: Ngiemboon (Kamerun)
+No: Ne
+No address: Žádná adresa
 No Allowed Actions: Žádné povolené akce
 No notifications: Žádná oznámení
 Not Allowed to add or delete Administrator Role if you have not this role.: Není povoleno přidávat nebo odstraňovat roli správce, pokud tuto roli nemáte.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrďte pros�
 Please reset your password by <a href='{0}'>clicking here</a>.: Resetujte prosím své heslo <a href='{0}'>kliknutím sem</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Nahrajte prosím své osobní kvalifikace a reference, které potvrzují vaši osobu a kvalifikaci
 Please Wait: Počkejte prosím
+PostalCode: PSČ
 Preview: Náhled
 prg-001: Pruský (svět)
 Primary Key: Primární klíč
@@ -747,6 +763,7 @@ Profile: Profil
 Profile Details: Podrobnosti o profilu
 Profile picture added.: Přidán profilový obrázek.
 Profile picture deleted.: Profilový obrázek byl odstraněn.
+Profile updated: Profil aktualizován
 prs-AF: prs (Afghánistán)
 ps-AF: Paštové (Afghánistán)
 ps-PK: Paštská (Pákistán)
@@ -763,6 +780,7 @@ pt-PT: Portugalština (Portugalsko)
 pt-ST: Angličtina (Svatá Tomáše a Princův ostrov)
 pt-TL: Angličtina (Východní Timor)
 Public Profile: Moderátor
+Qualifications and References: Kvalifikace a reference
 quc-GT: Kʼicheʼ (Guatemala)
 Quick Insights.: Rychlé přehledy.
 Quick Start Guide: Stručná úvodní příručka
@@ -774,6 +792,7 @@ Rate must be greater than 0: Sazba musí být větší než 0
 Realtime Updates & Insights with SignalR.: Aktualizace a přehledy v reálném čase pomocí SignalR.
 Refreshed Token.: Obnovený token.
 Register: Registrace
+Register as: Zaregistrujte se jako
 Register here: Zaregistrujte se zde
 Register New User: Registrovat nového uživatele
 Register User: Registrovat uživatele
@@ -883,6 +902,7 @@ ssy-ER: Saho (Eritrea)
 st-LS: Sesotho (Lesotho)
 st-ZA: Sesotho (Jižní Afrika)
 Status: Stav
+Street: Ulice
 Striped: Proužkovaný
 su-Latn-ID: Sundanština (latinka, Indonésie)
 Support: Podpora
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Soubor
 The following {0} permissions are also required for permission {1}: Následující oprávnění {0} jsou také vyžadována pro {1} oprávnění
 The following permission is also required for permission {1}: Následující oprávnění je také vyžadováno pro oprávnění {1}
 The Plugin '{0}' may be able to help: Plugin '{0}' může být schopen pomoci
+The user {0} has been logged off: Uživatel{0} byl odhlášen
 The User {0} has just edited, created or deleted entries here. You should reload the data: Uživatel {0} zde právě upravil, vytvořil nebo smazal záznamy. Měli byste znovu načíst data
 There are no new notifications: Neexistují žádná nová oznámení
 This is an Administrator Only View.: Toto je zobrazení pouze pro správce.
@@ -939,6 +960,7 @@ Trail Details: Podrobnosti o stezce
 Translations: Překlady
 Translations are being imported: Překlady se importují
 Translations updated: Aktualizované překlady
+Try different role: Vyzkoušejte jinou roli
 ts-ZA: Xitsonga (Jižní Afrika)
 tt-RU: Tatarština (Rusko)
 twq-NE: Tasawaq (Niger)
@@ -972,6 +994,7 @@ ur-IN: Urdština (Indie)
 ur-PK: Urdština (Pákistán)
 User: Uživatel
 User {0} Registered. Please check your Mailbox to verify!: Uživatel {0} zaregistrován. Zkontrolujte prosím svou poštovní schránku a ověřte svou e-mailovou adresu!
+User Data: Uživatelská data
 User Deleted: Uživatel byl odstraněn
 User Name: Uživatelské jméno
 User Not Active. Please contact the administrator.: Uživatel není aktivní. Počkejte prosím na aktivaci nebo kontaktujte správce.
@@ -982,6 +1005,7 @@ User registration is not allowed: Registrace uživatele není povolena
 Username: Uživatelské jméno
 UserName: Uživatelské jméno
 Username {0} is already taken.: Uživatelské jméno {0} je již obsazeno.
+Username cannot changed: Uživatelské jméno nelze změnit
 UserName is required: Uživatelské jméno je povinné
 UserName must be at least of length 6: Uživatelské jméno musí mít alespoň délku 6
 Users: Uživatelé
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Senegal)
 xh-ZA: isiXhosa (Jižní Afrika)
 xog-UG: Soga (Uganda)
 yav-CM: Yangben (Kamerun)
+Yes: Ano
 yi-001: Toidiš (svět)
 yo-BJ: Joruba (Benin)
 yo-NG: Yoruba (Nigérie)
 you: ty
 You are logged out because the Permissions of one of your Roles have been updated.: Jste odhlášeni, protože byla aktualizována oprávnění jedné z vašich rolí.
 You are logged out because the user with your Token has been deleted or token is expired.: Jste odhlášeni, protože uživatel s vaším tokenem byl odstraněn nebo vypršela platnost tokenu.
+You are logged out by an Administrator or profile change.: Jste odhlášeni správcem nebo změnou profilu.
 You are Logged Out.: Jste odhlášeni.
 You can now Login with your credentials: Nyní se můžete přihlásit pomocí svých přihlašovacích údajů
 You cannot delete yourself: Nemůžete smazat sami sebe

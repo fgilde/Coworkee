@@ -14,6 +14,7 @@ Add Document Type: Προσθήκη τύπου εγγράφου
 Add Extended Attribute: Προσθήκη εκτεταμένου χαρακτηριστικού
 Add Product: Προσθήκη προϊόντος
 Add Role: Προσθήκη ρόλου
+Address: Διεύθυνση
 Addresses: Διευθύνσεις
 Administrator: Διαχειριστής
 Administrator Settings.: Ρυθμίσεις διαχειριστή.
@@ -25,6 +26,8 @@ ak-GH: Γουίλ (Γκάνα)
 All Documents without Type are stored here: Όλα τα έγγραφα χωρίς τύπο αποθηκεύονται εδώ
 All Groups: Όλες οι ομάδες
 All Permissions: Όλα τα δικαιώματα
+All roles: Όλοι οι ρόλοι
+All roles unfiltered: Όλοι οι ρόλοι αφιλτράριστοι
 Already have an account?: Έχεις ήδη λογαριασμό;
 am-ET: Αμχαρικός (Αιθιοπία)
 An Error has occured!: Παρουσιάστηκε σφάλμα!
@@ -63,6 +66,7 @@ ar-SY: Αραβικά (Συρία)
 ar-TD: Αραβικά (Τσαντ)
 ar-TN: Αραβικά (Τυνησία)
 ar-YE: Αραβικά (Υεμένη)
+Are you sure you want to force logout for user {0}: Είστε βέβαιοι ότι θέλετε να αναγκάσετε την αποσύνδεση για {0} χρήστη
 arn-CL: Μαπούτσε (Χιλή)
 As Admin you can filter for users here: Ως διαχειριστής μπορείτε να φιλτράρετε για χρήστες εδώ
 as read: όπως διαβάζεται
@@ -83,6 +87,8 @@ Barcode: Γραμμωτός κώδικας
 Barcode already exists.: Ο γραμμωτός κώδικας υπάρχει ήδη.
 Barcode is required!: Ο γραμμωτός κώδικας είναι απαραίτητος!
 bas-CM: Μπασάα (Καμερούν)
+Basic: Βασικός
+Basic role with default permissions: Βασικός ρόλος με προεπιλεγμένα δικαιώματα
 be-BY: Λευκορωσικά (Λευκορωσία)
 bem-ZM: Μπέμπα (Ζάμπια)
 bez-TZ: Πόδια (Τανζανία)
@@ -126,6 +132,7 @@ chat: Κουβέντα
 Chat: Κουβέντα
 Chat?: Κουβέντα?
 chr-Cher-US: Τσερόκι (Τσερόκι, Ηνωμένες Πολιτείες της Αμερικής)
+City: Πόλη
 Clear: Σαφής
 Client Language has been changed: Η γλώσσα προγράμματος-πελάτη έχει αλλάξει
 Close: Κλείνω
@@ -139,7 +146,10 @@ Confirm and Set Required: Επιβεβαίωση και ορισμός απαι�
 Confirm Password: Επιβεβαίωση κωδικού πρόσβασης
 Confirm Registration: Επιβεβαίωση εγγραφής
 contacts: Επαφές
+Continue to {0}: Συνεχίστε να {0}
+Country: Χώρα
 Create: Δημιουργώ
+Create address: Δημιουργία διεύθυνσης
 cs-CZ: Τσεχικά (Τσεχία)
 cu-RU: Εκκλησία Σλαβική (Ρωσία)
 Current Password: Τρέχων κωδικός πρόσβασης
@@ -227,6 +237,7 @@ el-CY: Ελληνικά (Κύπρος)
 el-GR: Ελληνικά (Ελλάδα)
 Email: Email
 Email {0} is already registered.: Το {0} ηλεκτρονικού ταχυδρομείου έχει ήδη καταχωρηθεί.
+Email cannot changed: Το ηλεκτρονικό ταχυδρομείο δεν μπορεί να αλλάξει
 Email Confirmation: Επιβεβαίωση ηλεκτρονικού ταχυδρομείου
 Email is not correct: Το ηλεκτρονικό ταχυδρομείο δεν είναι σωστό
 Email is required: Απαιτείται ηλεκτρονικό ταχυδρομείο
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Εδώ μ
 hi-IN: Χίντι (Ινδία)
 Hide: Κρύβω
 Home: Σπίτι
+HouseNumber: Αριθμός
 hr-BA: Κροατικά (Βοσνία - Ερζεγοβίνη)
 hr-HR: Κροατικά (Κροατία)
 hsb-DE: Άνω Σορβικά (Γερμανία)
@@ -601,6 +613,7 @@ Logged Out.: Αποσυνδέθηκε.
 LoginDescription: Συνδεθείτε με τα διαπιστευτήριά σας.
 Logout: Αποσύνδεση
 Logout Confirmation: Θέλεις πραγματικά να αποσυνδεθείς;
+Logout user: Χρήστης αποσύνδεσης
 lrc-IQ: Βόρειο Λούρι (Ιράκ)
 lrc-IR: Βόρειο Λούρι (Ιράν)
 lt-LT: Λιθουανά (Λιθουανία)
@@ -680,6 +693,8 @@ nl-SX: Αγγλικά (Σιντ Μόρτεν)
 nmg-CM: Κουάσιο (Καμερούν)
 nn-NO: Νορβηγικό Νυνόρσκ (Νορβηγία)
 nnh-CM: Νγκιμπούν (Καμερούν)
+No: Όχι
+No address: Δεν υπάρχει διεύθυνση
 No Allowed Actions: Δεν επιτρέπονται ενέργειες
 No notifications: Χωρίς ειδοποιήσεις
 Not Allowed to add or delete Administrator Role if you have not this role.: Δεν επιτρέπεται να προσθέσετε ή να διαγράψετε το ρόλο διαχειριστή εάν δεν έχετε αυτόν τον ρόλο.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Επιβεβα�
 Please reset your password by <a href='{0}'>clicking here</a>.: Παρακαλώ επαναφέρετε τον κωδικό πρόσβασής σας με <a href={0}'> κλικ εδώ</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Παρακαλούμε ανεβάστε τα προσωπικά σας προσόντα και αναφορές που επιβεβαιώνουν το πρόσωπο και τα προσόντα σας
 Please Wait: Παρακαλώ περίμενε
+PostalCode: Ταχυδρομικός κώδικας
 Preview: Προεπισκόπηση
 prg-001: Πρωσικός (Κόσμος)
 Primary Key: Πρωτεύον κλειδί
@@ -747,6 +763,7 @@ Profile: Προφίλ
 Profile Details: Λεπτομέρειες προφίλ
 Profile picture added.: Προσθήκη εικόνας προφίλ.
 Profile picture deleted.: Η εικόνα προφίλ διαγράφηκε.
+Profile updated: Το προφίλ ενημερώθηκε
 prs-AF: prs (Αφγανιστάν)
 ps-AF: Πάστο (Αφγανιστάν)
 ps-PK: Πάστο (Πακιστάν)
@@ -763,6 +780,7 @@ pt-PT: Πορτογαλικά (Πορτογαλία)
 pt-ST: Αγγλικά (Σάο Τομέ & Πρίνσιπε)
 pt-TL: Αγγλικά (Τιμόρ-Λέστε)
 Public Profile: Δημόσιο Προφίλ
+Qualifications and References: Προσόντα και Παραπομπές
 quc-GT: Kʼicheʼ (Γουατεμάλα)
 Quick Insights.: Γρήγορες πληροφορίες.
 Quick Start Guide: Οδηγός γρήγορης εκκίνησης
@@ -774,6 +792,7 @@ Rate must be greater than 0: Η τιμή πρέπει να είναι μεγαλ
 Realtime Updates & Insights with SignalR.: Ενημερώσεις σε πραγματικό χρόνο και στατιστικά στοιχεία με signalR.
 Refreshed Token.: Ανανεωμένο διακριτικό.
 Register: Εγγράψου.
+Register as: Εγγραφείτε ως
 Register here: Εγγραφείτε εδώ
 Register New User: Εγγραφή νέου χρήστη
 Register User: Εγγραφή χρήστη
@@ -883,6 +902,7 @@ ssy-ER: Σάχο (Ερυθραία)
 st-LS: Σεσόθο (Λεσόθο)
 st-ZA: Σεσόθο (Νότια Αφρική)
 Status: Κατάσταση
+Street: Οδός
 Striped: Ριγέ
 su-Latn-ID: Σουντάνες (Λατινικά, Ινδονησία)
 Support: Υποστηρίζω
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Το �
 The following {0} permissions are also required for permission {1}: Τα ακόλουθα δικαιώματα {0} απαιτούνται επίσης για {1} δικαιωμάτων
 The following permission is also required for permission {1}: Απαιτείται επίσης το ακόλουθο δικαίωμα για την {1} δικαιωμάτων
 The Plugin '{0}' may be able to help: Το πρόσθετο «{0}» μπορεί να είναι σε θέση να βοηθήσει
+The user {0} has been logged off: Το {0} χρήστη έχει αποσυνδεθεί
 The User {0} has just edited, created or deleted entries here. You should reload the data: Η {0} χρήστη έχει μόλις επεξεργαστεί, δημιουργήσει ή διαγράψει καταχωρήσεις εδώ. Θα πρέπει να φορτώσετε ξανά τα δεδομένα
 There are no new notifications: Δεν υπάρχουν νέες ειδοποιήσεις
 This is an Administrator Only View.: Αυτή είναι μια προβολή μόνο διαχειριστή.
@@ -939,6 +960,7 @@ Trail Details: Λεπτομέρειες Μονοπατιού
 Translations: Μεταφράσεις
 Translations are being imported: Οι μεταφράσεις εισάγονται
 Translations updated: Οι μεταφράσεις ενημερώνονται
+Try different role: Δοκιμάστε διαφορετικό ρόλο
 ts-ZA: Ζιτσόνγκα (Νότια Αφρική)
 tt-RU: Ταταρικά (Ρωσία)
 twq-NE: Τασαουάκ (Νίγηρας)
@@ -972,6 +994,7 @@ ur-IN: Ουρντού (Ινδία)
 ur-PK: Ουρντού (Πακιστάν)
 User: Χρήστης
 User {0} Registered. Please check your Mailbox to verify!: Ο χρήστης {0} καταχωρημένος. Ελέγξτε το γραμματοκιβώτιό σας για να επαληθεύσετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας!
+User Data: Δεδομένα χρήστη
 User Deleted: Ο χρήστης διαγράφηκε
 User Name: Όνομα χρήστη
 User Not Active. Please contact the administrator.: Ο χρήστης δεν είναι ενεργός. Περιμένετε για αδράνεια ή επικοινωνήστε με το διαχειριστή.
@@ -982,6 +1005,7 @@ User registration is not allowed: Δεν επιτρέπεται η εγγραφ�
 Username: Όνομα χρήστη
 UserName: Όνομα χρήστη
 Username {0} is already taken.: Το όνομα χρήστη {0} έχει ήδη ληφθεί.
+Username cannot changed: Το όνομα χρήστη δεν μπορεί να αλλάξει
 UserName is required: Απαιτείται όνομα χρήστη
 UserName must be at least of length 6: Το όνομα χρήστη πρέπει να έχει τουλάχιστον μήκος 6
 Users: Χρήστες
@@ -1009,12 +1033,14 @@ wo-SN: Γουόλοφ (Σενεγάλη)
 xh-ZA: isiXhosa (Νότια Αφρική)
 xog-UG: Σόγκα (Ουγκάντα)
 yav-CM: Γιανγκμπέν (Καμερούν)
+Yes: Ναι
 yi-001: Γίντις (Κόσμος)
 yo-BJ: Γιορούμπα (Μπενίν)
 yo-NG: Γιορούμπα (Νιγηρία)
 you: εσύ
 You are logged out because the Permissions of one of your Roles have been updated.: Είστε συνδεδεμένοι επειδή τα δικαιώματα ενός από τους ρόλους σας έχουν ενημερωθεί.
 You are logged out because the user with your Token has been deleted or token is expired.: Είστε συνδεδεμένοι επειδή ο χρήστης με το διακριτικό σας έχει διαγραφεί ή το διακριτικό έχει λήξει.
+You are logged out by an Administrator or profile change.: Είστε αποσυνδεδεμένοι από ένα διαχειριστή ή αλλαγή προφίλ.
 You are Logged Out.: Είστε συνδεδεμένοι.
 You can now Login with your credentials: Τώρα μπορείτε να συνδεθείτε με τα διαπιστευτήριά σας
 You cannot delete yourself: Δεν μπορείτε να διαγράψετε τον εαυτό σας

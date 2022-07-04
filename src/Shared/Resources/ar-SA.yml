@@ -14,6 +14,7 @@ Add Document Type: إضافة نوع المستند
 Add Extended Attribute: إضافة سمة موسعة
 Add Product: إضافة منتج
 Add Role: إضافة دور
+Address: عنوان
 Addresses: عناوين
 Administrator: مدير
 Administrator Settings.: إعدادات المسؤول.
@@ -25,6 +26,8 @@ ak-GH: ويل (غانا)
 All Documents without Type are stored here: يتم تخزين جميع المستندات بدون نوع هنا
 All Groups: جميع المجموعات
 All Permissions: كافة الأذونات
+All roles: جميع الأدوار
+All roles unfiltered: جميع الأدوار غير مصفاة
 Already have an account?: هل لديك حساب بالفعل؟
 am-ET: أمهرية (إثيوبيا)
 An Error has occured!: حدث خطأ!
@@ -63,6 +66,7 @@ ar-SY: العربية (سوريا)
 ar-TD: العربية (تشاد)
 ar-TN: العربية (تونس)
 ar-YE: العربية (اليمن)
+Are you sure you want to force logout for user {0}: هل أنت متأكد من أنك تريد فرض تسجيل الخروج {0} المستخدم
 arn-CL: مابوشي (تشيلي)
 As Admin you can filter for users here: كمسؤول يمكنك تصفية للمستخدمين هنا
 as read: كما قرأت
@@ -83,6 +87,8 @@ Barcode: الباركود
 Barcode already exists.: الباركود موجود بالفعل.
 Barcode is required!: الباركود مطلوب!
 bas-CM: باسا (الكاميرون)
+Basic: أساسي
+Basic role with default permissions: الدور الأساسي مع الأذونات الافتراضية
 be-BY: البيلاروسية (بيلاروسيا)
 bem-ZM: بيمبا (زامبيا)
 bez-TZ: الساقين (تنزانيا)
@@ -126,6 +132,7 @@ chat: ثَرْثَرَ
 Chat: ثَرْثَرَ
 Chat?: ثَرْثَرَ؟
 chr-Cher-US: شيروكي (شيروكي، الولايات المتحدة)
+City: مدينة
 Clear: واضح
 Client Language has been changed: تم تغيير لغة العميل
 Close: غلق
@@ -139,7 +146,10 @@ Confirm and Set Required: تأكيد وتعيين مطلوب
 Confirm Password: تأكيد كلمة المرور
 Confirm Registration: تأكيد التسجيل
 contacts: جهات الاتصال
+Continue to {0}: تابع {0}
+Country: بلد
 Create: خلق
+Create address: إنشاء عنوان
 cs-CZ: تشيكية (تشيكيا)
 cu-RU: الكنيسة السلافية (روسيا)
 Current Password: كلمة المرور الحالية
@@ -227,6 +237,7 @@ el-CY: اليونانية (قبرص)
 el-GR: اليونانية (اليونان)
 Email: البريد الإلكتروني
 Email {0} is already registered.: البريد الإلكتروني {0} مسجل بالفعل.
+Email cannot changed: لا يمكن تغيير البريد الإلكتروني
 Email Confirmation: تأكيد البريد الإلكتروني
 Email is not correct: البريد الإلكتروني غير صحيح
 Email is required: البريد الإلكتروني مطلوب
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: هنا ي
 hi-IN: الهندية (الهند)
 Hide: أخفى
 Home: وطن
+HouseNumber: رقم
 hr-BA: الكرواتية (البوسنة والهرسك)
 hr-HR: الكرواتية (كرواتيا)
 hsb-DE: سوربيان العليا (ألمانيا)
@@ -601,6 +613,7 @@ Logged Out.: تم تسجيل الخروج.
 LoginDescription: تسجيل الدخول مع بيانات الاعتماد الخاصة بك.
 Logout: الخروج
 Logout Confirmation: هل تريد حقا تسجيل الخروج؟
+Logout user: مستخدم تسجيل الخروج
 lrc-IQ: لوري الشمالية (العراق)
 lrc-IR: لوري الشمالية (إيران)
 lt-LT: ليتوانيا (ليتوانيا)
@@ -680,6 +693,8 @@ nl-SX: الإنجليزية (سانت مارتن)
 nmg-CM: كواسيو (الكاميرون)
 nn-NO: نينورسك النرويجية (النرويج)
 nnh-CM: نغيمبون (الكاميرون)
+No: لا
+No address: لا يوجد عنوان
 No Allowed Actions: لا يسمح الإجراءات
 No notifications: لا توجد إشعارات
 Not Allowed to add or delete Administrator Role if you have not this role.: غير مسموح بإضافة دور المسؤول أو حذفه إذا لم يكن لديك هذا الدور.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: يرجى تأك
 Please reset your password by <a href='{0}'>clicking here</a>.: يرجى إعادة تعيين كلمة المرور الخاصة بك عن طريق <a href='{0}'> انقر هنا</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: يرجى تحميل مؤهلاتك الشخصية ومراجعك التي تؤكد شخصيتك ومؤهلاتك
 Please Wait: الرجاء الانتظار
+PostalCode: الرمز البريدي
 Preview: معاينه
 prg-001: البروسية (العالم)
 Primary Key: المفتاح الأساسي
@@ -747,6 +763,7 @@ Profile: ملف تعريف
 Profile Details: تفاصيل الملف الشخصي
 Profile picture added.: تمت إضافة صورة الملف الشخصي.
 Profile picture deleted.: تم حذف صورة ملف التعريف.
+Profile updated: تم تحديث الملف الشخصي
 prs-AF: prs (أفغانستان)
 ps-AF: باشتو (أفغانستان)
 ps-PK: باشتو (باكستان)
@@ -763,6 +780,7 @@ pt-PT: البرتغالية (البرتغال)
 pt-ST: اللغة الإنجليزية (ساو تومي وبرينسيبي)
 pt-TL: الإنجليزية (تيمور - ليشتي)
 Public Profile: الملف الشخصي العام
+Qualifications and References: المؤهلات والمراجع
 quc-GT: كيشي (غواتيمالا)
 Quick Insights.: رؤى سريعة.
 Quick Start Guide: دليل البدء السريع
@@ -774,6 +792,7 @@ Rate must be greater than 0: يجب أن يكون المعدل أكبر من 0
 Realtime Updates & Insights with SignalR.: تحديثات الوقت الحقيقي والرؤى مع SignalR.
 Refreshed Token.: الرمز المميز التحديث.
 Register: سجل
+Register as: سجل باسم
 Register here: سجل هنا
 Register New User: تسجيل مستخدم جديد
 Register User: تسجيل المستخدم
@@ -883,6 +902,7 @@ ssy-ER: ساهو (إريتريا)
 st-LS: سيسوتو (ليسوتو)
 st-ZA: سيسوتو (جنوب أفريقيا)
 Status: حالة
+Street: شارع
 Striped: مخطط
 su-Latn-ID: السندانية (اللاتينية، إندونيسيا)
 Support: دعم
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: تجا
 The following {0} permissions are also required for permission {1}: كما يلزم الحصول على إذن {0} الأذونات التالية {1}
 The following permission is also required for permission {1}: إذن التالية مطلوب أيضا للحصول على إذن {1}
 The Plugin '{0}' may be able to help: قد يكون المكون الإضافي "{0}" قادرا على المساعدة
+The user {0} has been logged off: تم تسجيل خروج {0} المستخدم
 The User {0} has just edited, created or deleted entries here. You should reload the data: قام {0} المستخدم بتحرير الإدخالات أو إنشائها أو حذفها هنا. يجب إعادة تحميل البيانات
 There are no new notifications: لا توجد إشعارات جديدة
 This is an Administrator Only View.: هذا هو "طريقة عرض المسؤول فقط".
@@ -939,6 +960,7 @@ Trail Details: تفاصيل تريل
 Translations: تراجم
 Translations are being imported: يتم استيراد الترجمات
 Translations updated: الترجمات المحدثة
+Try different role: جرب دورا مختلفا
 ts-ZA: شيتسونغا (جنوب أفريقيا)
 tt-RU: تتار (روسيا)
 twq-NE: تاساواق (النيجر)
@@ -972,6 +994,7 @@ ur-IN: الأوردو (الهند)
 ur-PK: الأوردو (باكستان)
 User: مستخدم
 User {0} Registered. Please check your Mailbox to verify!: '{0} المستخدم المسجل. يرجى التحقق من صندوق البريد الخاص بك للتحقق من عنوان بريدك الإلكتروني!'
+User Data: بيانات المستخدم
 User Deleted: حذف المستخدم
 User Name: اسم المستخدم
 User Not Active. Please contact the administrator.: المستخدم غير نشط. يرجى الانتظار حتى يتم إجراء الأنشطة أو الاتصال بالمسؤول.
@@ -982,6 +1005,7 @@ User registration is not allowed: تسجيل المستخدم غير مسموح 
 Username: اسم المستخدم
 UserName: اسم المستخدم
 Username {0} is already taken.: تم بالفعل أخذ {0} اسم المستخدم.
+Username cannot changed: لا يمكن تغيير اسم المستخدم
 UserName is required: اسم المستخدم مطلوب
 UserName must be at least of length 6: يجب أن يكون اسم المستخدم على الأقل بطول 6
 Users: المستعملون
@@ -1009,12 +1033,14 @@ wo-SN: ولوف (السنغال)
 xh-ZA: ايسيكوسا (جنوب أفريقيا)
 xog-UG: سوغا (أوغندا)
 yav-CM: يانغبن (الكاميرون)
+Yes: نعم
 yi-001: اليديشية (العالم)
 yo-BJ: اليوروبا (بنن)
 yo-NG: اليوروبا (نيجيريا)
 you: أنت
 You are logged out because the Permissions of one of your Roles have been updated.: لقد قمت بتسجيل الخروج لأنه تم تحديث أذونات أحد الأدوار الخاصة بك.
 You are logged out because the user with your Token has been deleted or token is expired.: لقد قمت بتسجيل الخروج بسبب حذف المستخدم الذي يحمل الرمز المميز أو انتهاء صلاحية الرمز المميز.
+You are logged out by an Administrator or profile change.: يتم تسجيل خروجك بواسطة مسؤول أو تغيير ملف التعريف.
 You are Logged Out.: لقد قمت بتسجيل الخروج.
 You can now Login with your credentials: يمكنك الآن تسجيل الدخول باستخدام بيانات الاعتماد الخاصة بك
 You cannot delete yourself: لا يمكنك حذف نفسك

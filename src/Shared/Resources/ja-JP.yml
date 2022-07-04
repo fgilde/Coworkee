@@ -14,6 +14,7 @@ Add Document Type: ドキュメントタイプの追加
 Add Extended Attribute: 拡張属性の追加
 Add Product: 製品の追加
 Add Role: ロールの追加
+Address: 住所
 Addresses: アドレス
 Administrator: 管理者
 Administrator Settings.: 管理者設定。
@@ -25,6 +26,8 @@ ak-GH: ウィル (ガーナ)
 All Documents without Type are stored here: タイプのないすべてのドキュメントがここに保存されます
 All Groups: すべてのグループ
 All Permissions: すべてのアクセス許可
+All roles: すべての役割
+All roles unfiltered: フィルター処理されていないすべてのロール
 Already have an account?: すでにアカウントを持っていますか?
 am-ET: アムハラ語 (エチオピア)
 An Error has occured!: エラーが発生しました!
@@ -63,6 +66,7 @@ ar-SY: アラビア語 (シリア)
 ar-TD: アラビア語 (チャド)
 ar-TN: アラビア語 (チュニジア)
 ar-YE: アラビア語 (イエメン)
+Are you sure you want to force logout for user {0}: ユーザー{0}に対して強制的にログアウトしてもよろしいですか
 arn-CL: マプチェ (チリ)
 As Admin you can filter for users here: 管理者として、ここでユーザーをフィルター処理できます
 as read: 読むように
@@ -83,6 +87,8 @@ Barcode: バーコード
 Barcode already exists.: バーコードは既に存在します。
 Barcode is required!: バーコードが必要です!
 bas-CM: バサア (カメルーン)
+Basic: 基本的な
+Basic role with default permissions: 既定のアクセス許可を持つ基本ロール
 be-BY: ベラルーシ (ベラルーシ)
 bem-ZM: ベンバ (ザンビア)
 bez-TZ: 脚 (タンザニア)
@@ -126,6 +132,7 @@ chat: チャット
 Chat: チャット
 Chat?: チャット。
 chr-Cher-US: チェロキー(チェロキー、アメリカ)
+City: 都市
 Clear: クリア
 Client Language has been changed: クライアント言語が変更されました
 Close: 閉める
@@ -139,7 +146,10 @@ Confirm and Set Required: 確認し、必要な設定
 Confirm Password: パスワードの確認
 Confirm Registration: 登録の確認
 contacts: 連絡先
+Continue to {0}: '{0}に続く'
+Country: 国
 Create: 創造する
+Create address: 住所の作成
 cs-CZ: チェコ語 (チェコ)
 cu-RU: 教会スラブ (ロシア)
 Current Password: 現在のパスワード
@@ -227,6 +237,7 @@ el-CY: ギリシャ語 (キプロス)
 el-GR: ギリシャ語 (ギリシャ)
 Email: 電子メール
 Email {0} is already registered.: メール{0}は既に登録されています。
+Email cannot changed: メールは変更できません
 Email Confirmation: メールの確認
 Email is not correct: 電子メールが正しくない
 Email is required: 電子メールが必要です
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: ここで
 hi-IN: ヒンディー語 (インド)
 Hide: 隠れる
 Home: 家
+HouseNumber: 数
 hr-BA: クロアチア語 (ボスニア・ヘルツェゴビナ)
 hr-HR: クロアチア語 (クロアチア)
 hsb-DE: アッパーソルビアン (ドイツ)
@@ -601,6 +613,7 @@ Logged Out.: ログアウト。
 LoginDescription: 資格情報を使用してログインします。
 Logout: ログアウト
 Logout Confirmation: 本当にログアウトしますか?
+Logout user: ログアウトユーザー
 lrc-IQ: 北ルリ (イラク)
 lrc-IR: 北ルリ (イラン)
 lt-LT: リトアニア語 (リトアニア)
@@ -680,6 +693,8 @@ nl-SX: 英語 (シント・マールテン)
 nmg-CM: クワシオ (カメルーン)
 nn-NO: ノルウェージャン・ニーノスク (ノルウェー)
 nnh-CM: ンギエンブーン (カメルーン)
+No: いいえ
+No address: 住所なし
 No Allowed Actions: 許可されたアクションはありません
 No notifications: 通知なし
 Not Allowed to add or delete Administrator Role if you have not this role.: この役割を持っていない場合、管理者の役割を追加または削除することはできません。
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>�
 Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'ここをクリックしてパスワードをリセットしてくだ>い</a>。
 Please upload your personal qualifications and references that confirm your person and qualification: あなたの個人的な資格とあなたの個人と資格を確認する参考文献をアップロードしてください
 Please Wait: お待ちください
+PostalCode: 郵便番号
 Preview: プレビュー
 prg-001: プロイセン (世界)
 Primary Key: 主キー
@@ -747,6 +763,7 @@ Profile: プロフィール
 Profile Details: プロファイルの詳細
 Profile picture added.: プロフィール画像が追加されました。
 Profile picture deleted.: プロフィール画像が削除されました。
+Profile updated: プロファイルが更新されました
 prs-AF: prs (アフガニスタン)
 ps-AF: パシュトー (アフガニスタン)
 ps-PK: パシュトー (パキスタン)
@@ -763,6 +780,7 @@ pt-PT: ポルトガル語 (ポルトガル)
 pt-ST: 英語(サントメ・プリンシペ)
 pt-TL: 英語(東ティモール)
 Public Profile: パブリック プロファイル
+Qualifications and References: 資格と参考文献
 quc-GT: キチェ(グアテマラ)
 Quick Insights.: クイックインサイト。
 Quick Start Guide: クイック スタート ガイド
@@ -774,6 +792,7 @@ Rate must be greater than 0: レートは 0 より大きくする必要があり
 Realtime Updates & Insights with SignalR.: SignalR によるリアルタイム更新と洞察。
 Refreshed Token.: 更新されたトークン。
 Register: 登録する
+Register as: 登録する
 Register here: ここに登録
 Register New User: 新規ユーザーの登録
 Register User: ユーザーの登録
@@ -883,6 +902,7 @@ ssy-ER: サホ (エリトリア)
 st-LS: セソト (レソト)
 st-ZA: セソト (南アフリカ)
 Status: 地位
+Street: 通り
 Striped: ストライプ
 su-Latn-ID: スンダ語(ラテン語、インドネシア)
 Support: 支える
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: ファ
 The following {0} permissions are also required for permission {1}: アクセス許可の{1}には、次の{0}アクセス許可も必要です。
 The following permission is also required for permission {1}: アクセス許可の設定には、次のアクセス許可も必要{1}
 The Plugin '{0}' may be able to help: プラグイン「{0}」が助けることができるかもしれません
+The user {0} has been logged off: ユーザー {0} がログオフされました
 The User {0} has just edited, created or deleted entries here. You should reload the data: ユーザー {0}は、ここでエントリを編集、作成、または削除したところです。データを再ロードする必要があります。
 There are no new notifications: 新しい通知はありません
 This is an Administrator Only View.: これは管理者専用ビューです。
@@ -939,6 +960,7 @@ Trail Details: トレイルの詳細
 Translations: 翻訳
 Translations are being imported: 翻訳がインポートされています
 Translations updated: 翻訳の更新
+Try different role: 別の役割を試す
 ts-ZA: キシツォンガ (南アフリカ)
 tt-RU: タタール (ロシア)
 twq-NE: タサワク (ニジェール)
@@ -972,6 +994,7 @@ ur-IN: ウルドゥー語 (インド)
 ur-PK: ウルドゥー語 (パキスタン)
 User: 利用者
 User {0} Registered. Please check your Mailbox to verify!: ユーザー{0}登録済みです。メールボックスをチェックしてメールアドレスを確認してください!
+User Data: ユーザーデータ
 User Deleted: ユーザーが削除されました
 User Name: ユーザー名
 User Not Active. Please contact the administrator.: ユーザーがアクティブではありません。アクティベーションを待つか、管理者に問い合わせてください。
@@ -982,6 +1005,7 @@ User registration is not allowed: ユーザー登録はできません
 Username: ユーザー名
 UserName: ユーザー名
 Username {0} is already taken.: ユーザー名{0}は既に取得されています。
+Username cannot changed: ユーザー名は変更できません
 UserName is required: ユーザー名が必要です
 UserName must be at least of length 6: ユーザー名は少なくとも長さ 6 である必要があります。
 Users: ユーザー
@@ -1009,12 +1033,14 @@ wo-SN: ウォロフ (セネガル)
 xh-ZA: イシソサ (南アフリカ)
 xog-UG: ソガ (ウガンダ)
 yav-CM: ヤンベン (カメルーン)
+Yes: はい
 yi-001: イディッシュ語 (世界)
 yo-BJ: ヨルバ (ベナン)
 yo-NG: ヨルバ (ナイジェリア)
 you: あなたが
 You are logged out because the Permissions of one of your Roles have been updated.: ロールの 1 つのアクセス許可が更新されたため、ログアウトされます。
 You are logged out because the user with your Token has been deleted or token is expired.: トークンを持つユーザーが削除されているか、トークンの有効期限が切れているため、ログアウトされます。
+You are logged out by an Administrator or profile change.: 管理者またはプロファイルの変更によってログアウトされました。
 You are Logged Out.: ログアウトしています。
 You can now Login with your credentials: これで、資格情報でログインできます
 You cannot delete yourself: 自分で削除することはできません。

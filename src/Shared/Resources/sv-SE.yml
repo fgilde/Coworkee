@@ -14,6 +14,7 @@ Add Document Type: Lägga till dokumenttyp
 Add Extended Attribute: Lägg till utökat attribut
 Add Product: Lägg till produkt
 Add Role: Lägg till roll
+Address: Adress
 Addresses: Adresser
 Administrator: Administratör
 Administrator Settings.: Administratörsinställningar.
@@ -25,6 +26,8 @@ ak-GH: Will (Ghana)
 All Documents without Type are stored here: Alla dokument utan typ lagras här
 All Groups: Alla grupper
 All Permissions: Alla behörigheter
+All roles: Alla roller
+All roles unfiltered: Alla roller ofiltrerade
 Already have an account?: Har du redan ett konto?
 am-ET: Amhariska (Etiopien)
 An Error has occured!: Ett fel har inträffat!
@@ -63,6 +66,7 @@ ar-SY: Arabiska (Syrien)
 ar-TD: Arabiska (Tchad)
 ar-TN: Arabiska (Tunisien)
 ar-YE: Arabiska (Jemen)
+Are you sure you want to force logout for user {0}: Är du säker på att du vill tvinga fram utloggning för {0}
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Som administratör kan du filtrera efter användare här
 as read: som läst
@@ -83,6 +87,8 @@ Barcode: Streckkod
 Barcode already exists.: Streckkod finns redan.
 Barcode is required!: Streckkod krävs!
 bas-CM: Basaa (Kamerun)
+Basic: Grundläggande
+Basic role with default permissions: Grundläggande roll med standardbehörigheter
 be-BY: Vitryska (Vitryssland)
 bem-ZM: Bemba (Zambia)
 bez-TZ: Ben (Tanzania)
@@ -126,6 +132,7 @@ chat: Chatta
 Chat: Chatta
 Chat?: Chatta?
 chr-Cher-US: Cherokee (Cherokee, FÖRENTA STATERNA)
+City: Stad
 Clear: Klar
 Client Language has been changed: Klientspråk har ändrats
 Close: Stänga
@@ -139,7 +146,10 @@ Confirm and Set Required: Bekräfta och ange obligatoriskt
 Confirm Password: Bekräfta lösenord
 Confirm Registration: Bekräfta registrering
 contacts: Kontakter
+Continue to {0}: Fortsätt att {0}
+Country: Land
 Create: Skapa
+Create address: Skapa adress
 cs-CZ: Tjeckiska (Tjeckien)
 cu-RU: Kyrkan Slavisk (Ryssland)
 Current Password: Aktuellt lösenord
@@ -227,6 +237,7 @@ el-CY: Grekiska (Cypern)
 el-GR: Grekiska (Grekland)
 Email: E-post
 Email {0} is already registered.: E-{0} är redan registrerat.
+Email cannot changed: E-post kan inte ändras
 Email Confirmation: E-postbekräftelse
 Email is not correct: E-post är inte korrekt
 Email is required: E-post krävs
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Här kan 
 hi-IN: Hindi (Indien)
 Hide: Gömma
 Home: Hem
+HouseNumber: Nummer
 hr-BA: Kroatiska (Bosnien och Hercegovina)
 hr-HR: Kroatiska (Kroatien)
 hsb-DE: Övre Sorbian (Tyskland)
@@ -601,6 +613,7 @@ Logged Out.: Utloggad.
 LoginDescription: Logga in med dina referenser.
 Logout: Utloggning
 Logout Confirmation: Vill du verkligen logga ut?
+Logout user: Logga ut användare
 lrc-IQ: Norra Luri (Irak)
 lrc-IR: Norra Luri (Iran)
 lt-LT: Litauiska (Litauen)
@@ -680,6 +693,8 @@ nl-SX: Engelska (Sint Maarten)
 nmg-CM: Kwasio (Kamerun)
 nn-NO: Norska Nynorsk (Norge)
 nnh-CM: Ngiemboon (Kamerun)
+No: Nej
+No address: Ingen adress
 No Allowed Actions: Inga tillåtna åtgärder
 No notifications: Inga aviseringar
 Not Allowed to add or delete Administrator Role if you have not this role.: Det är inte tillåtet att lägga till eller ta bort administratörsrollen om du inte har den här rollen.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Bekräfta ditt 
 Please reset your password by <a href='{0}'>clicking here</a>.: Återställ ditt lösenord genom att <a href='{0} >klicka här</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Ladda upp dina personliga kvalifikationer och referenser som bekräftar din person och dina kvalifikationer
 Please Wait: Snälla vänta
+PostalCode: Postnummer
 Preview: Förhandsvisning
 prg-001: Preussiska (Värld)
 Primary Key: Primärnyckel
@@ -747,6 +763,7 @@ Profile: Profil
 Profile Details: Profilinformation
 Profile picture added.: Profilbild har lagts till.
 Profile picture deleted.: Profilbild borttagen.
+Profile updated: Profilen uppdaterad
 prs-AF: prs (Afghanistan)
 ps-AF: Pashto (Afghanistan)
 ps-PK: Pashto (Pakistan)
@@ -763,6 +780,7 @@ pt-PT: Portugisiska (Portugal)
 pt-ST: Engelska (Sao Tome & Principe)
 pt-TL: Engelska (Timor-Leste)
 Public Profile: Offentlig profil
+Qualifications and References: Kvalifikationer och referenser
 quc-GT: (Guatemala)
 Quick Insights.: Snabba insikter.
 Quick Start Guide: Snabbstartsguide
@@ -774,6 +792,7 @@ Rate must be greater than 0: Hastigheten måste vara större än 0
 Realtime Updates & Insights with SignalR.: Realtidsuppdateringar & insikter med SignalR.
 Refreshed Token.: Uppdaterad token.
 Register: Registrera dig
+Register as: Registrera dig som
 Register here: Registrera dig här
 Register New User: Registrera ny användare
 Register User: Registrera användare
@@ -883,6 +902,7 @@ ssy-ER: Saho (Eritrea)
 st-LS: Sesotho (Lesotho)
 st-ZA: Sesotho (Sydafrika)
 Status: Status
+Street: Gata
 Striped: Randig
 su-Latn-ID: Sundanese (latin, Indonesien)
 Support: Stöd
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Filen 
 The following {0} permissions are also required for permission {1}: Följande {0} behörigheter krävs också för behörighet {1}
 The following permission is also required for permission {1}: Följande behörighet krävs också för tillstånd {1}
 The Plugin '{0}' may be able to help: Plugin '{0}' kanske kan hjälpa till
+The user {0} has been logged off: Användarens {0} har loggats ut
 The User {0} has just edited, created or deleted entries here. You should reload the data: Den {0} har just redigerat, skapat eller tagit bort poster här. Du bör ladda om data
 There are no new notifications: Det finns inga nya aviseringar
 This is an Administrator Only View.: Det här är en administratörsvy.
@@ -939,6 +960,7 @@ Trail Details: Spårinformation
 Translations: Översättningar
 Translations are being imported: Översättningar importeras
 Translations updated: Översättningar uppdaterade
+Try different role: Prova olika roller
 ts-ZA: Xitsonga (Sydafrika)
 tt-RU: Tatariska (Ryssland)
 twq-NE: Tasawaq (Niger)
@@ -972,6 +994,7 @@ ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Användare
 User {0} Registered. Please check your Mailbox to verify!: Användaren {0} registrerad. Kontrollera din brevlåda för att verifiera din e-postadress!
+User Data: Användaruppgifter
 User Deleted: Användaren har tagits bort
 User Name: Användarnamn
 User Not Active. Please contact the administrator.: Användaren är inte aktiv. Vänta på aktivivasion eller kontakta administratören.
@@ -982,6 +1005,7 @@ User registration is not allowed: Användarregistrering är inte tillåten
 Username: Användarnamn
 UserName: Användarnamn
 Username {0} is already taken.: Användarnamn {0} är redan taget.
+Username cannot changed: Användarnamnet kan inte ändras
 UserName is required: Användarnamn krävs
 UserName must be at least of length 6: Användarnamn måste vara minst längd 6
 Users: Användare
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Senegal)
 xh-ZA: isiXhosa (Sydafrika)
 xog-UG: Soga (Uganda)
 yav-CM: Yangben (Kamerun)
+Yes: Ja
 yi-001: Jiddisch (Värld)
 yo-BJ: Yoruba (Benin)
 yo-NG: Yoruba (Nigeria)
 you: du
 You are logged out because the Permissions of one of your Roles have been updated.: Du är utloggad eftersom behörigheterna för en av dina roller har uppdaterats.
 You are logged out because the user with your Token has been deleted or token is expired.: Du är utloggad eftersom användaren med token har tagits bort eller token har upphört att gälla.
+You are logged out by an Administrator or profile change.: Du loggas ut av en administratörs- eller profiländring.
 You are Logged Out.: Du är utloggad.
 You can now Login with your credentials: Du kan nu logga in med dina uppgifter
 You cannot delete yourself: Du kan inte ta bort dig själv

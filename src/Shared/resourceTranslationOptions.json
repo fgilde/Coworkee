@@ -1,8 +1,6 @@
 {
   "TextTranslationEndpoint": "https://api.cognitive.microsofttranslator.com/",
-  "ApiKey1Paid": "d7de107f4b734c7a9f764e29c0d83a29",
-  "ApiKey": "901f0e1f3e3143b5b82fb984990bcad8",
-  "ApiKey2Paid": "f67cfa8cac4d400d899926083a575927",
+  "ApiKey": "b7e40e9841f34ad0aada06e0804a7e99",
   "FileOutputFormat": "{FileName}.{Culture}.{Extension}",
   "TargetCultures": "de-DE, fr-FR, bg-BG, it-IT, tr-TR, ar-SA, cs-CZ, da-DK, el-CY, es-ES, hr-HR, ja-JP, ko-KR, nl-NL, pl-PL, sv-SE",
   "Region": "germanywestcentral",

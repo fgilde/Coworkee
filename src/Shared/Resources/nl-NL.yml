@@ -14,6 +14,7 @@ Add Document Type: Documenttype toevoegen
 Add Extended Attribute: Uitgebreid kenmerk toevoegen
 Add Product: Product toevoegen
 Add Role: Rol toevoegen
+Address: Adres
 Addresses: Adressen
 Administrator: Administrateur
 Administrator Settings.: Beheerdersinstellingen.
@@ -25,6 +26,8 @@ ak-GH: Will (Ghana)
 All Documents without Type are stored here: Alle documenten zonder type worden hier opgeslagen
 All Groups: Alle groepen
 All Permissions: Alle machtigingen
+All roles: Alle rollen
+All roles unfiltered: Alle rollen ongefilterd
 Already have an account?: Heb je al een account?
 am-ET: Amhaars (Ethiopië)
 An Error has occured!: Er is een fout opgetreden!
@@ -63,6 +66,7 @@ ar-SY: Arabisch (Syrië)
 ar-TD: Arabisch (Tsjaad)
 ar-TN: Arabisch (Tunesië)
 ar-YE: Arabisch (Jemen)
+Are you sure you want to force logout for user {0}: Weet u zeker dat u het uitloggen voor {0}
 arn-CL: Mapuche (Chili)
 As Admin you can filter for users here: Als Admin kunt u hier filteren op gebruikers
 as read: zoals gelezen
@@ -83,6 +87,8 @@ Barcode: Barcode
 Barcode already exists.: Barcode bestaat al.
 Barcode is required!: Barcode is verplicht!
 bas-CM: Basaa (Kameroen)
+Basic: Basisch
+Basic role with default permissions: Basisrol met standaardmachtigingen
 be-BY: Wit-Russisch (Wit-Rusland)
 bem-ZM: Bemba (Zambia)
 bez-TZ: Benen (Tanzania)
@@ -126,6 +132,7 @@ chat: Babbelen
 Chat: Babbelen
 Chat?: Babbelen?
 chr-Cher-US: Cherokee (Cherokee, Verenigde Staten)
+City: Stad
 Clear: Duidelijk
 Client Language has been changed: Clienttaal is gewijzigd
 Close: Sluiten
@@ -139,7 +146,10 @@ Confirm and Set Required: Bevestigen en instellen Vereist
 Confirm Password: Bevestig wachtwoord
 Confirm Registration: Registratie bevestigen
 contacts: Contactpersonen
+Continue to {0}: Ga verder naar {0}
+Country: Land
 Create: Scheppen
+Create address: Adres aanmaken
 cs-CZ: Tsjechisch (Tsjechië)
 cu-RU: Kerk Slavisch (Rusland)
 Current Password: Huidig wachtwoord
@@ -227,6 +237,7 @@ el-CY: Grieks (Cyprus)
 el-GR: Grieks (Griekenland)
 Email: E-mail
 Email {0} is already registered.: E-{0} is al geregistreerd.
+Email cannot changed: E-mail kan niet worden gewijzigd
 Email Confirmation: E-mail bevestiging
 Email is not correct: E-mail is niet correct
 Email is required: E-mail is verplicht
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Hier kunt
 hi-IN: Hindi (Indië)
 Hide: Verbergen
 Home: Thuis
+HouseNumber: Getal
 hr-BA: Kroatisch (Bosnië & Herzegovina)
 hr-HR: Kroatisch (Kroatië)
 hsb-DE: Opper-Sorbisch (Duitsland)
@@ -601,6 +613,7 @@ Logged Out.: Uitgelogd.
 LoginDescription: Log in met uw inloggegevens.
 Logout: Logout
 Logout Confirmation: Wil je echt uitloggen?
+Logout user: Gebruiker uitloggen
 lrc-IQ: Noord-Luri (Irak)
 lrc-IR: Noord-Luri (Iran)
 lt-LT: Litouws (Litouwen)
@@ -680,6 +693,8 @@ nl-SX: Dutch (Sint Maarten)
 nmg-CM: Kwasio (Kameroen)
 nn-NO: Noors Nynorsk (Noorwegen)
 nnh-CM: Ngiemboon (Kameroen)
+No: Nee
+No address: Geen adres
 No Allowed Actions: Geen toegestane acties
 No notifications: Geen meldingen
 Not Allowed to add or delete Administrator Role if you have not this role.: Mag beheerdersrol niet worden toegevoegd of verwijderd als u deze rol niet hebt.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Bevestig uw acc
 Please reset your password by <a href='{0}'>clicking here</a>.: Stel uw wachtwoord opnieuw in door <a href='{0}'>klik hier</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Upload uw persoonlijke kwalificaties en referenties die uw persoon en kwalificatie bevestigen
 Please Wait: Een ogenblik geduld
+PostalCode: Postcode
 Preview: Voorbeeld
 prg-001: Pruisisch (Wereld)
 Primary Key: Primaire sleutel
@@ -747,6 +763,7 @@ Profile: Profiel
 Profile Details: Profiel details
 Profile picture added.: Profielfoto toegevoegd.
 Profile picture deleted.: Profielfoto verwijderd.
+Profile updated: Profiel bijgewerkt
 prs-AF: prs (Afghanistan)
 ps-AF: Pashto (Afghanistan)
 ps-PK: Pashto (Pakistan)
@@ -763,6 +780,7 @@ pt-PT: Portugees (Portugal)
 pt-ST: Engels (Sao Tomé & Principe)
 pt-TL: Engels (Oost-Timor)
 Public Profile: 'Profiel: Openbaar'
+Qualifications and References: Kwalificaties en referenties
 quc-GT: Kʼicheʼ (Guatemala)
 Quick Insights.: Snelle inzichten.
 Quick Start Guide: Snelstartgids
@@ -774,6 +792,7 @@ Rate must be greater than 0: Tarief moet groter zijn dan 0
 Realtime Updates & Insights with SignalR.: Realtime Updates & Insights met SignalR.
 Refreshed Token.: Vernieuwd token.
 Register: Registreren
+Register as: Registreer als
 Register here: Registreer hier
 Register New User: Registreer nieuwe gebruiker
 Register User: Gebruiker registreren
@@ -883,6 +902,7 @@ ssy-ER: Saho (Eritrea)
 st-LS: Sesotho (Lesotho)
 st-ZA: Sesotho (Zuid-Afrika)
 Status: Status
+Street: Straat
 Striped: Gestreept
 su-Latn-ID: Sundanese (Latijn, Indonesië)
 Support: Steunen
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Het be
 The following {0} permissions are also required for permission {1}: De volgende {0} machtigingen zijn ook vereist voor toestemming {1}
 The following permission is also required for permission {1}: De volgende toestemming is ook vereist voor toestemming {1}
 The Plugin '{0}' may be able to help: De plug-in '{0}' kan mogelijk helpen
+The user {0} has been logged off: De gebruiker {0} is afgemeld
 The User {0} has just edited, created or deleted entries here. You should reload the data: De Gebruiker {0} heeft hier zojuist items bewerkt, gemaakt of verwijderd. U moet de gegevens opnieuw laden
 There are no new notifications: Er zijn geen nieuwe meldingen
 This is an Administrator Only View.: Dit is een weergave alleen voor beheerders.
@@ -939,6 +960,7 @@ Trail Details: Trail Details
 Translations: Translations
 Translations are being imported: Vertalingen worden geïmporteerd
 Translations updated: Vertalingen bijgewerkt
+Try different role: Probeer een andere rol
 ts-ZA: Xitsonga (Zuid-Afrika)
 tt-RU: Tatar (Rusland)
 twq-NE: Tasawaq (Niger)
@@ -972,6 +994,7 @@ ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: Gebruiker
 User {0} Registered. Please check your Mailbox to verify!: Gebruiker {0} geregistreerd. Controleer uw mailbox om uw e-mailadres te verifiëren!
+User Data: Gebruikersgegevens
 User Deleted: Gebruiker verwijderd
 User Name: Gebruikersnaam
 User Not Active. Please contact the administrator.: Gebruiker niet actief. Wacht op activasion of neem contact op met de beheerder.
@@ -982,6 +1005,7 @@ User registration is not allowed: Gebruikersregistratie is niet toegestaan
 Username: Gebruikersnaam
 UserName: Gebruikersnaam
 Username {0} is already taken.: Gebruikersnaam {0} is al in gebruik.
+Username cannot changed: Gebruikersnaam kan niet worden gewijzigd
 UserName is required: Gebruikersnaam is vereist
 UserName must be at least of length 6: Gebruikersnaam moet ten minste lengte 6 hebben
 Users: Gebruikers
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Senegal)
 xh-ZA: isiXhosa (Zuid-Afrika)
 xog-UG: Soga (Oeganda)
 yav-CM: Yangben (Kameroen)
+Yes: Ja
 yi-001: Jiddisch (Wereld)
 yo-BJ: Yoruba (Benin)
 yo-NG: Yoruba (Nigeria)
 you: jij
 You are logged out because the Permissions of one of your Roles have been updated.: U bent uitgelogd omdat de machtigingen van een van uw rollen zijn bijgewerkt.
 You are logged out because the user with your Token has been deleted or token is expired.: U bent uitgelogd omdat de gebruiker met uw token is verwijderd of het token is verlopen.
+You are logged out by an Administrator or profile change.: U bent uitgelogd door een beheerder of profielwijziging.
 You are Logged Out.: U bent uitgelogd.
 You can now Login with your credentials: U kunt nu inloggen met uw inloggegevens
 You cannot delete yourself: U kunt uzelf niet verwijderen

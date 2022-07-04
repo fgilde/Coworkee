@@ -14,6 +14,7 @@ Add Document Type: Add Document Type
 Add Extended Attribute: Add Extended Attribute
 Add Product: Add Product
 Add Role: Add Role
+Address: Address
 Addresses: Addresses
 Administrator: Administrator
 Administrator Settings.: Administrator Settings.
@@ -25,6 +26,8 @@ ak-GH: Akan (Ghana)
 All Documents without Type are stored here: All Documents without Type are stored here
 All Groups: All Groups
 All Permissions: All Permissions
+All roles: All roles
+All roles unfiltered: All roles unfiltered
 Already have an account?: Already have an account?
 am-ET: Amharic (Ethiopia)
 An Error has occured!: An Error has occurred!
@@ -63,6 +66,7 @@ ar-SY: Arabic (Syria)
 ar-TD: Arabic (Chad)
 ar-TN: Arabic (Tunisia)
 ar-YE: Arabic (Yemen)
+Are you sure you want to force logout for user {0}: Are you sure you want to force logout for user {0}
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: As Admin you can filter for users here
 as read: as read
@@ -83,6 +87,8 @@ Barcode: Barcode
 Barcode already exists.: Barcode already exists.
 Barcode is required!: Barcode is required!
 bas-CM: Basaa (Cameroon)
+Basic: Basic
+Basic role with default permissions: Basic role with default permissions
 be-BY: Belarusian (Belarus)
 bem-ZM: Bemba (Zambia)
 bez-TZ: Bena (Tanzania)
@@ -126,6 +132,7 @@ chat: Chat
 Chat: Chat
 Chat?: Chat?
 chr-Cher-US: Cherokee (Cherokee, United States)
+City: City
 Clear: Clear
 Client Language has been changed: Client Language has been changed
 Close: Close
@@ -139,7 +146,10 @@ Confirm and Set Required: Confirm and Set Required
 Confirm Password: Confirm Password
 Confirm Registration: Confirm Registration
 contacts: Contacts
+Continue to {0}: Continue to {0}
+Country: Country
 Create: Create
+Create address: Create address
 cs-CZ: Czech (Czechia)
 cu-RU: Church Slavic (Russia)
 Current Password: Current Password
@@ -226,6 +236,7 @@ el-CY: Greek (Cyprus)
 el-GR: Greek (Greece)
 Email: Email
 Email {0} is already registered.: Email {0} is already registered.
+Email cannot changed: Email cannot changed
 Email Confirmation: Email Confirmation
 Email is not correct: Email is not correct
 Email is required: Email is required
@@ -513,6 +524,7 @@ Here you can leave a comment for this permission for the current role: Here you 
 hi-IN: Hindi (India)
 Hide: Hide
 Home: Home
+HouseNumber: Number
 hr-BA: Croatian (Bosnia & Herzegovina)
 hr-HR: Croatian (Croatia)
 hsb-DE: Upper Sorbian (Germany)
@@ -600,6 +612,7 @@ Logged Out.: Logged Out.
 LoginDescription: Login with your Credentials.
 Logout: Logout
 Logout Confirmation: Do you really want to Logout?
+Logout user: Logout user
 lrc-IQ: Northern Luri (Iraq)
 lrc-IR: Northern Luri (Iran)
 lt-LT: Lithuanian (Lithuania)
@@ -679,6 +692,8 @@ nl-SX: Dutch (Sint Maarten)
 nmg-CM: Kwasio (Cameroon)
 nn-NO: Norwegian Nynorsk (Norway)
 nnh-CM: Ngiemboon (Cameroon)
+No: No
+No address: No address
 No Allowed Actions: No Allowed Actions
 No notifications: No notifications
 Not Allowed to add or delete Administrator Role if you have not this role.: Not Allowed to add or delete Administrator Role if you have not this role.
@@ -733,6 +748,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Please confirm 
 Please reset your password by <a href='{0}'>clicking here</a>.: Please reset your password by <a href='{0}'>clicking here</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Please upload your personal qualifications and references that confirm your person and qualification
 Please Wait: Please Wait
+PostalCode: Postalcode
 Preview: Preview
 prg-001: Prussian (World)
 Primary Key: Primary Key
@@ -746,6 +762,7 @@ Profile: Profile
 Profile Details: Profile Details
 Profile picture added.: Profile picture added.
 Profile picture deleted.: Profile picture deleted.
+Profile updated: Profile updated
 prs-AF: prs (Afghanistan)
 ps-AF: Pashto (Afghanistan)
 ps-PK: Pashto (Pakistan)
@@ -762,6 +779,7 @@ pt-PT: Portuguese (Portugal)
 pt-ST: Portuguese (São Tomé & Príncipe)
 pt-TL: Portuguese (Timor-Leste)
 Public Profile: Public Profile
+Qualifications and References: Qualifications and References
 quc-GT: Kʼicheʼ (Guatemala)
 Quick Insights.: Quick Insights.
 Quick Start Guide: Quick Start Guide
@@ -773,6 +791,7 @@ Rate must be greater than 0: Rate must be greater than 0
 Realtime Updates & Insights with SignalR.: Realtime Updates & Insights with SignalR.
 Refreshed Token.: Refreshed Token.
 Register: Register
+Register as: Register as
 Register here: Register here
 Register New User: Register New User
 Register User: Register User
@@ -882,6 +901,7 @@ ssy-ER: Saho (Eritrea)
 st-LS: Sesotho (Lesotho)
 st-ZA: Sesotho (South Africa)
 Status: Status
+Street: Street
 Striped: Striped
 su-Latn-ID: Sundanese (Latin, Indonesia)
 Support: Support
@@ -916,6 +936,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: The fi
 The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
 The following permission is also required for permission {1}: The following permission is also required for permission {1}
 The Plugin '{0}' may be able to help: The Plugin '{0}' may be able to help
+The user {0} has been logged off: The user {0} has been logged off
 The User {0} has just edited, created or deleted entries here. You should reload the data: The User {0} has just edited, created or deleted entries here. You should reload the data
 There are no new notifications: There are no new notifications
 This is an Administrator Only View.: This is an Administrator Only View.
@@ -938,6 +959,7 @@ Trail Details: Trail Details
 Translations: Translations
 Translations are being imported: Translations are being imported
 Translations updated: Translations updated
+Try different role: Try different role
 ts-ZA: Xitsonga (South Africa)
 tt-RU: Tatar (Russia)
 twq-NE: Tasawaq (Niger)
@@ -971,6 +993,7 @@ ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: User
 User {0} Registered. Please check your Mailbox to verify!: User {0} Registered. Please check your Mailbox to verify your email address!
+User Data: User Data
 User Deleted: User Deleted
 User Name: User Name
 User Not Active. Please contact the administrator.: User Not Active. Please wait for activasion or contact the administrator.
@@ -981,6 +1004,7 @@ User registration is not allowed: User registration is not allowed
 Username: Username
 UserName: UserName
 Username {0} is already taken.: Username {0} is already taken.
+Username cannot changed: Username cannot changed
 UserName is required: UserName is required
 UserName must be at least of length 6: UserName must be at least of length 6
 Users: Users
@@ -1008,12 +1032,14 @@ wo-SN: Wolof (Senegal)
 xh-ZA: isiXhosa (South Africa)
 xog-UG: Soga (Uganda)
 yav-CM: Yangben (Cameroon)
+Yes: Yes
 yi-001: Yiddish (World)
 yo-BJ: Yoruba (Benin)
 yo-NG: Yoruba (Nigeria)
 you: you
 You are logged out because the Permissions of one of your Roles have been updated.: You are logged out because the Permissions of one of your Roles have been updated.
 You are logged out because the user with your Token has been deleted or token is expired.: You are logged out because the user with your Token has been deleted or token is expired.
+You are logged out by an Administrator or profile change.: You are logged out by an Administrator or profile change.
 You are Logged Out.: You are Logged Out.
 You can now Login with your credentials: You can now Login with your credentials
 You cannot delete yourself: You cannot delete yourself
@@ -1030,29 +1056,3 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
-Address: Address
-User Data: User Data
-Qualifications and References: Qualifications and References
-Continue to {0}: Continue to {0}
-Register as: Register as
-PostalCode: Postalcode
-HouseNumber: Number
-Street: Street
-City: City
-Country: Country
-Create address: Create address
-Profile updated: Profile updated
-No address: No address
-Username cannot changed: Username cannot changed
-Email cannot changed: Email cannot changed
-Try different role: Try different role
-Basic role with default permissions: Basic role with default permissions
-Basic: Basic
-All roles: All roles
-All roles unfiltered: All roles unfiltered
-You are logged out by an Administrator or profile change.: You are logged out by an Administrator or profile change.
-Logout user: Logout user
-The user {0} has been logged off: The user {0} has been logged off
-Yes: Yes
-No: No
-Are you sure you want to force logout for user {0}: Are you sure you want to force logout for user {0}

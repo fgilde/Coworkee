@@ -14,6 +14,7 @@ Add Document Type: Belge Türü Ekle
 Add Extended Attribute: Genişletilmiş Öznitelik Ekle
 Add Product: Ürün Ekle
 Add Role: Rol Ekle
+Address: Adres
 Addresses: Adres
 Administrator: Yönetici
 Administrator Settings.: Yönetici Ayarları.
@@ -25,6 +26,8 @@ ak-GH: Will (Gana)
 All Documents without Type are stored here: Türü olmayan tüm Belgeler burada saklanır
 All Groups: Tüm Gruplar
 All Permissions: Tüm İzinler
+All roles: Tüm roller
+All roles unfiltered: Filtrelenmemiş tüm roller
 Already have an account?: Zaten bir hesabınız var mı?
 am-ET: Amharik (Etiyopya)
 An Error has occured!: Bir Hata Oluştu!
@@ -63,6 +66,7 @@ ar-SY: Arapça (Suriye)
 ar-TD: Arapça (Çad)
 ar-TN: Arapça (Tunus)
 ar-YE: Arapça (Yemen)
+Are you sure you want to force logout for user {0}: Kullanıcı {0} için oturumu kapatmaya zorlamak istediğinizden emin misiniz?
 arn-CL: Mapuche (Şili)
 As Admin you can filter for users here: Yönetici olarak kullanıcılar için burada filtreleyebilirsiniz
 as read: okunduğu gibi
@@ -83,6 +87,8 @@ Barcode: Barkod
 Barcode already exists.: Barkod zaten var.
 Barcode is required!: Barkod gereklidir!
 bas-CM: Basaa (Kamerun)
+Basic: Temel
+Basic role with default permissions: Varsayılan izinlere sahip temel rol
 be-BY: Beyaz Rusya (Beyaz Rusya)
 bem-ZM: Bemba (Zambiya)
 bez-TZ: Bacaklar (Tanzanya)
@@ -126,6 +132,7 @@ chat: Sohbet
 Chat: Sohbet
 Chat?: Sohbet?
 chr-Cher-US: Cherokee (Cherokee, Amerika Birleşik Devletleri)
+City: Şehir
 Clear: Berrak
 Client Language has been changed: İstemci Dili değiştirildi
 Close: Kapatmak
@@ -139,7 +146,10 @@ Confirm and Set Required: Onayla ve Ayarla Gerekli
 Confirm Password: Parolayı Onayla
 Confirm Registration: Kaydı Onayla
 contacts: Kişiler
+Continue to {0}: '{0} devam et'
+Country: Ülke
 Create: Yaratmak
+Create address: Adres oluştur
 cs-CZ: Çekçe (Çekya)
 cu-RU: Kilise Slav (Rusya)
 Current Password: Geçerli Parola
@@ -227,6 +237,7 @@ el-CY: Yunanca (Kıbrıs)
 el-GR: Yunanca (Yunanistan)
 Email: E-posta
 Email {0} is already registered.: E-posta {0} zaten kayıtlı.
+Email cannot changed: E-posta değiştirilemez
 Email Confirmation: E-posta Onayı
 Email is not correct: E-posta doğru değil
 Email is required: E-posta gereklidir
@@ -514,6 +525,7 @@ Here you can leave a comment for this permission for the current role: Burada, g
 hi-IN: Hintçe (Hindistan)
 Hide: Gizlemek
 Home: Ev
+HouseNumber: Sayı
 hr-BA: Hırvatça (Bosna Hersek)
 hr-HR: Hırvatça (Hırvatistan)
 hsb-DE: Yukarı Sorbian (Almanya)
@@ -601,6 +613,7 @@ Logged Out.: Oturumu kapattım.
 LoginDescription: Kimlik Bilgilerinizle giriş yapın.
 Logout: Oturum kapatma
 Logout Confirmation: Gerçekten çıkış yapmak istiyor musunuz?
+Logout user: Oturumu kapatan kullanıcı
 lrc-IQ: Kuzey Luri (Irak)
 lrc-IR: Kuzey Luri (İran)
 lt-LT: Litvanca (Litvanya)
@@ -680,6 +693,8 @@ nl-SX: İngilizce (Sint Maarten)
 nmg-CM: Kwasio (Kamerun)
 nn-NO: Norveç Nynorsk (Norveç)
 nnh-CM: Ngiemboon (Kamerun)
+No: Hayır
+No address: Adres yok
 No Allowed Actions: İzin Verilen Eylem Yok
 No notifications: Bildirim yok
 Not Allowed to add or delete Administrator Role if you have not this role.: Bu role sahip değilseniz Yönetici Rolü eklemenize veya silmenize izin verilmez.
@@ -734,6 +749,7 @@ Please confirm your account by <a href='{0}'>clicking here</a>.: Lütfen hesabı
 Please reset your password by <a href='{0}'>clicking here</a>.: Lütfen şifrenizi <a href='{0}'>buraya tıklayarak sıfırlayın</a>.
 Please upload your personal qualifications and references that confirm your person and qualification: Lütfen kişisel niteliklerinizi ve şahsiyetinizi ve yeterliliğinizi doğrulayan referanslarınızı yükleyin
 Please Wait: Lütfen bekleyin
+PostalCode: Posta kodu
 Preview: Önizleme
 prg-001: Prusya (Dünya)
 Primary Key: Birincil anahtar
@@ -747,6 +763,7 @@ Profile: Profil
 Profile Details: Profil Ayrıntıları
 Profile picture added.: Profil resmi eklendi.
 Profile picture deleted.: Profil resmi silindi.
+Profile updated: Profil güncellendi
 prs-AF: prs (Afganistan)
 ps-AF: Peşto (Afganistan)
 ps-PK: Peşto (Pakistan)
@@ -763,6 +780,7 @@ pt-PT: Portekizce (Portekiz)
 pt-ST: İngilizce (Sao Tome & Principe)
 pt-TL: İngilizce (Timor-Leste)
 Public Profile: Ortak Profil
+Qualifications and References: Nitelikler ve Referanslar
 quc-GT: K¹iche¹ (Guatemala)
 Quick Insights.: Hızlı İçgörüler.
 Quick Start Guide: Hızlı Başlangıç Kılavuzu
@@ -774,6 +792,7 @@ Rate must be greater than 0: Oran 0'dan büyük olmalıdır
 Realtime Updates & Insights with SignalR.: SignalR ile Gerçek Zamanlı Güncellemeler ve İçgörüler.
 Refreshed Token.: Yenilenmiş Belirteç.
 Register: Kaydolmak
+Register as: Kayıt ol
 Register here: Buradan kaydolun
 Register New User: Yeni Kullanıcı Kaydet
 Register User: Kullanıcı Kaydet
@@ -883,6 +902,7 @@ ssy-ER: Saho (Eritre)
 st-LS: Sesotho (Lesotho)
 st-ZA: Sesotho (Güney Afrika)
 Status: Durum
+Street: Sokak
 Striped: Çizgili
 su-Latn-ID: Sundan dili (Latince, Endonezya)
 Support: Destek
@@ -917,6 +937,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Dosya,
 The following {0} permissions are also required for permission {1}: İzin {1} için aşağıdaki {0} izinler de gereklidir
 The following permission is also required for permission {1}: İzin {1} için aşağıdaki izin de gereklidir
 The Plugin '{0}' may be able to help: Eklenti '{0}' yardımcı olabilir
+The user {0} has been logged off: Kullanıcı {0} oturumu kapatıldı
 The User {0} has just edited, created or deleted entries here. You should reload the data: Kullanıcı {0} burada girişleri yeni düzenledi, oluşturdu veya sildi. Verileri yeniden yüklemelisiniz
 There are no new notifications: Yeni bildirim yok
 This is an Administrator Only View.: Bu yalnızca Yönetici Görünümüdür.
@@ -939,6 +960,7 @@ Trail Details: İz Ayrıntıları
 Translations: Çeviri -leri
 Translations are being imported: Çeviriler alınıyor
 Translations updated: Güncelleştirme çevirileri
+Try different role: Farklı bir rol deneyin
 ts-ZA: Xitsonga (Güney Afrika)
 tt-RU: Tatar (Rusya)
 twq-NE: Tasawaq (Nijer)
@@ -972,6 +994,7 @@ ur-IN: Urduca (Hindistan)
 ur-PK: Urduca (Pakistan)
 User: Kullanıcı
 User {0} Registered. Please check your Mailbox to verify!: Kullanıcı {0} Kayıtlı. Lütfen e-posta adresinizi doğrulamak için Posta Kutunuzu kontrol edin!
+User Data: Kullanıcı Verileri
 User Deleted: Kullanıcı Silindi
 User Name: Kullanıcı Adı
 User Not Active. Please contact the administrator.: Kullanıcı Aktif Değil. Lütfen etkinleştirme için bekleyin veya yöneticiye başvurun.
@@ -982,6 +1005,7 @@ User registration is not allowed: Kullanıcı kaydına izin verilmez
 Username: Kullanıcı adı
 UserName: Kullanıcı adı
 Username {0} is already taken.: Kullanıcı adı {0} zaten alınmış.
+Username cannot changed: Kullanıcı adı değiştirilemez
 UserName is required: KullanıcıAdı gerekli
 UserName must be at least of length 6: UserName en az 6 uzunluğunda olmalıdır
 Users: Kullanıcı
@@ -1009,12 +1033,14 @@ wo-SN: Wolof (Senegal)
 xh-ZA: isiXhosa (Güney Afrika)
 xog-UG: Soga (Uganda)
 yav-CM: Yangben (Kamerun)
+Yes: Evet
 yi-001: Yidiş (Dünya)
 yo-BJ: Yoruba (Benin)
 yo-NG: Yoruba (Nijerya)
 you: sen
 You are logged out because the Permissions of one of your Roles have been updated.: Rollerinizden birinin İzinleri güncelleştirildiği için oturumunuz kapatılıyor.
 You are logged out because the user with your Token has been deleted or token is expired.: Belirtecinizin olduğu kullanıcı silindiği veya belirtecinin süresi dolduğu için oturumunuz kapatılıyor.
+You are logged out by an Administrator or profile change.: Bir Yönetici veya profil değişikliği ile oturumunuz kapatılır.
 You are Logged Out.: Oturumunuz Tükendi.
 You can now Login with your credentials: Artık kimlik bilgilerinizle Giriş yapabilirsiniz
 You cannot delete yourself: Kendinizi silemezsiniz

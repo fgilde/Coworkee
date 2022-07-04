@@ -46,7 +46,7 @@
     <ItemGroup>
       <SdkPackageFiles Include="$(ProjectDir)bin/$(Configuration)/*.nupkg" />
     </ItemGroup>
-    <Copy SourceFiles="@(SdkPackageFiles)" DestinationFolder="$(SolutionDir)src/Server/wwwroot/sdk" />
+    <Copy SourceFiles="@(SdkPackageFiles)" DestinationFolder="$(ProjectDir)../Server/wwwroot/sdk" />
   </Target>
 
 </Project>

@@ -50,6 +50,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
         }
 
         protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
+        protected virtual TDto ToDto(TEntity res) => res?.MapTo<TDto>();
 
         public virtual async Task<IReadOnlyCollection<TDto>> Handle(TQuery request, CancellationToken cancellationToken)
         {
@@ -58,7 +59,7 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
                 Cache.Remove(cacheKey);
             Task<List<TEntity>> GetAll() => Query(request, Queryable).ToListAsync(cancellationToken);
             var resultList = await (cacheKey.IsNullOrWhiteSpace() ? GetAll() : Cache.GetOrAddAsync(cacheKey, GetAll));
-            return resultList.MapTo<List<TDto>>().AsReadOnly();
+            return resultList.Select(ToDto).ToList().AsReadOnly();
         }
     }
 }

@@ -33,7 +33,7 @@
 
   <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Exec IgnoreExitCode="true" Command="dotnet tool install --global ResourceTranslator.CLI" />
-    <Exec IgnoreExitCode="false" Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources/en-US.yml" />
+    <Exec IgnoreExitCode="true" Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources/en-US.yml" />
   </Target>
 
 </Project>

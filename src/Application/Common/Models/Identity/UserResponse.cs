@@ -4,9 +4,8 @@ using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Application.Common.Models.Identity
 {
-    public class UserResponse
+    public class UserResponse : DtoBase<string>
     {
-        public string Id { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

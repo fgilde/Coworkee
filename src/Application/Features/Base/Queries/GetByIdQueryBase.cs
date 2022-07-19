@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Repositories;
 using CleanArchitectureBase.Domain.Contracts;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
@@ -35,10 +38,19 @@ namespace CleanArchitectureBase.Application.Features.Base.Queries
             Provider = provider;
         }
 
+        protected virtual TDto ToDto(TEntity res) => res?.MapTo<TDto>();
+        protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
+        protected virtual Expression<Func<TEntity, object>>[] Includes => null;
+
         public virtual async Task<TDto> Handle(TQuery request, CancellationToken cancellationToken)
         {
-            var result = await UnitOfWork.Repository<TEntity>().GetByIdAsync(request.Id, cancellationToken);
-            return result?.MapTo<TDto>();
+            var query = Queryable;
+
+            TEntity res = Includes?.Any() == true
+                ? await Includes.Aggregate(query, (current, include) => current.Include(include)).FirstOrDefaultAsync(e => e.Id.Equals(request.Id), cancellationToken: cancellationToken)
+                : await UnitOfWork.Repository<TEntity>().GetByIdAsync(request.Id, cancellationToken);
+
+            return ToDto(res);
         }
     }
 }

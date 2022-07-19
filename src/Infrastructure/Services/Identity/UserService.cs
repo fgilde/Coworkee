@@ -42,6 +42,7 @@ using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
 using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests;
+using CleanArchitectureBase.Domain.Entities.Identity;
 using CleanArchitectureBase.Infrastructure.Extensions;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
@@ -319,7 +320,9 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                     applicationUser.UserInfo.Id = trackedUser.UserInfo.Id;
 
                 trackedUser.Email = applicationUser.Email;
-                trackedUser.UserInfo = applicationUser.UserInfo;
+                //trackedUser.UserInfo = applicationUser.UserInfo;
+                trackedUser.UserInfo = applicationUser.UserInfo?.Id != null && applicationUser.UserInfo.Id != default ? await _db.UserInformations.FindAsync(applicationUser.UserInfo.Id) ?? new UserInformations() : new UserInformations();
+                //trackedUser.UserInfo.Specializations = _db.Specializations.ToList().Where(sp => applicationUser.UserInfo?.Specializations.Any(s => s?.Id.Equals(sp?.Id ?? -1) == true) == true).ToList();
                 trackedUser.FirstName = applicationUser.FirstName;
                 trackedUser.LastName = applicationUser.LastName;
                 trackedUser.PhoneNumber = applicationUser.PhoneNumber;

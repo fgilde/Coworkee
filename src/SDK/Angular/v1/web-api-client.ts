@@ -8597,8 +8597,7 @@ export interface IRefreshTokenRequest {
     refreshToken?: string | undefined;
 }
 
-export class UserResponse implements IUserResponse {
-    id?: string | undefined;
+export class UserResponse extends DtoBaseOfString implements IUserResponse {
     userName?: string | undefined;
     firstName?: string | undefined;
     lastName?: string | undefined;
@@ -8613,17 +8612,12 @@ export class UserResponse implements IUserResponse {
     createdOn!: Date;
 
     constructor(data?: IUserResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
+        super(data);
     }
 
     init(_data?: any) {
+        super.init(_data);
         if (_data) {
-            this.id = _data["id"];
             this.userName = _data["userName"];
             this.firstName = _data["firstName"];
             this.lastName = _data["lastName"];
@@ -8648,7 +8642,6 @@ export class UserResponse implements IUserResponse {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
         data["userName"] = this.userName;
         data["firstName"] = this.firstName;
         data["lastName"] = this.lastName;
@@ -8661,12 +8654,12 @@ export class UserResponse implements IUserResponse {
         data["isOnline"] = this.isOnline;
         data["userInfo"] = this.userInfo ? this.userInfo.toJSON() : <any>undefined;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
+        super.toJSON(data);
         return data;
     }
 }
 
-export interface IUserResponse {
-    id?: string | undefined;
+export interface IUserResponse extends IDtoBaseOfString {
     userName?: string | undefined;
     firstName?: string | undefined;
     lastName?: string | undefined;

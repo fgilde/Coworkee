@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Extensions;
@@ -12,6 +13,7 @@ using CleanArchitectureBase.Domain.Contracts;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Extensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
@@ -43,6 +45,8 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
         protected virtual IEnumerable<string> CacheKeys(TCommand command) => new[] { ApplicationConstants.Cache.CacheKeyFor(typeof(TEntity)) };
         protected virtual string EditPermission => null;
         protected virtual string CreatePermission => null;
+        protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
+        protected virtual Expression<Func<TEntity, object>>[] Includes => null;
 
         public AddEditCommandHandlerBase(IUnitOfWork<TEntityId> unitOfWork,
             IMediator mediator,
@@ -105,14 +109,24 @@ namespace CleanArchitectureBase.Application.Features.Base.Commands
             return new AddUpdateResult<TDto>(created, updated, skipped);
         }
 
+        protected virtual TEntity ToEntity(TDto dto) => dto.MapTo<TEntity>();
+
         private (bool IsNew, bool Exists, TEntity Entity, TDto Dto) GetPreparedEntity(TDto dto, bool createNewIfToUpdateNotExists)
         {
-            var mappedEntity = dto.MapTo<TEntity>();
-            var entity = dto.IsNew ? mappedEntity : UnitOfWork.Repository<TEntity>().GetById(dto.Id);
+            var mappedEntity = ToEntity(dto);
+            var entity = dto.IsNew ? mappedEntity : GetById(dto.Id);
             var exists = !dto.IsNew && !Equals(entity, default(TEntity));
             var isNew = createNewIfToUpdateNotExists ? dto.IsNew || !exists : dto.IsNew;
             mappedEntity.SetProperties(e => e.Id = isNew ? default : e.Id);
             return (isNew, exists, isNew || !exists ? mappedEntity : mappedEntity.CopyChangedValuesTo(entity), dto);
+        }
+
+        protected virtual TEntity GetById(TEntityId id)
+        {
+            var query = Queryable;
+            return Includes?.Any() == true
+                ? Includes.Aggregate(query, (current, include) => current.Include(include)).FirstOrDefault(e => e.Id.Equals(id))
+                : UnitOfWork.Repository<TEntity>().GetById(id);
         }
     }
 

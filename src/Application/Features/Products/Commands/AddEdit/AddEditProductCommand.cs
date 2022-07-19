@@ -4,6 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
@@ -28,6 +29,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
         private readonly IStringLocalizer<AddEditProductsCommandHandler> _localizer;
         protected override string EditPermission => Permissions.Products.Edit;
         protected override string CreatePermission => Permissions.Products.Create;
+        //protected override Expression<Func<Product, object>>[] Includes => new Expression<Func<Product, object>>[] { c => c.Barcode };
 
         public AddEditProductsCommandHandler(
             IUnitOfWork<int> unitOfWork, 

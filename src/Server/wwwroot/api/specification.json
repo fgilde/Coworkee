@@ -6074,55 +6074,59 @@
       }
     },
     "UserResponse": {
-      "type": "object",
-      "required": [
-        "isActive",
-        "emailConfirmed",
-        "isOnline",
-        "createdOn"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/DtoBaseOfString"
         },
-        "userName": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "isActive": {
-          "type": "boolean"
-        },
-        "emailConfirmed": {
-          "type": "boolean"
-        },
-        "phoneNumber": {
-          "type": "string"
-        },
-        "profilePictureDataUrl": {
-          "type": "string"
-        },
-        "fullName": {
-          "type": "string"
-        },
-        "isOnline": {
-          "type": "boolean"
-        },
-        "userInfo": {
-          "$ref": "#/definitions/UserInformationsDto"
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time"
+        {
+          "type": "object",
+          "required": [
+            "isActive",
+            "emailConfirmed",
+            "isOnline",
+            "createdOn"
+          ],
+          "properties": {
+            "userName": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "isActive": {
+              "type": "boolean"
+            },
+            "emailConfirmed": {
+              "type": "boolean"
+            },
+            "phoneNumber": {
+              "type": "string"
+            },
+            "profilePictureDataUrl": {
+              "type": "string"
+            },
+            "fullName": {
+              "type": "string"
+            },
+            "isOnline": {
+              "type": "boolean"
+            },
+            "userInfo": {
+              "$ref": "#/definitions/UserInformationsDto"
+            },
+            "createdOn": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
         }
-      }
+      ]
     },
     "UserInformationsDto": {
       "allOf": [

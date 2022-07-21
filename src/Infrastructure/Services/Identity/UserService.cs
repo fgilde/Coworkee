@@ -303,7 +303,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 throw Errors.Create("Not Allowed", HttpStatusCode.Unauthorized);
 
             var applicationUser = user.MapTo<ApplicationUser>();
-            var trackedUser = await _userManager.FindByIdAsync(user.Id);
+            var trackedUser = await _userManager.FindByIdFullyLoadedAsync(user.Id);
             if (trackedUser != null)
             {
                 bool phoneChanged = !string.IsNullOrWhiteSpace(user.PhoneNumber) && user.PhoneNumber != trackedUser.PhoneNumber;

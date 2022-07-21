@@ -53,6 +53,7 @@
         }
         <div class="select-container">
             <MudSelect T="@T" MultiSelectionTextFunc="MultiSelectionTextFunc"
+                       Label="@(!Label.IsNullOrWhiteSpace() ? _localizer[Label] : "")" HelperText="@(!HelperText.IsNullOrWhiteSpace() ? _localizer[HelperText] : "")"
                        Clearable="true"
                        SelectAll="false"
                        Class="@_cssName"

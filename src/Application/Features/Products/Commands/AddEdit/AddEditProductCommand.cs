@@ -4,7 +4,6 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Common.Security;
@@ -49,7 +48,7 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
                 throw Errors.Create(_localizer["Barcode already exists."], HttpStatusCode.Conflict);
 
             var uploadTasks = command.Items.Where(dto => dto.UploadRequest != null).Select(dto =>
-                Task.Run(() => _uploadService.UploadAsync(dto.UploadRequest), cancellationToken)
+                    _uploadService.UploadAsync(dto.UploadRequest, cancellationToken)
                     .ContinueWith(task => dto.ImageDataURL = task.Result, cancellationToken));
             await Task.WhenAll(uploadTasks);
             return await base.Handle(command, cancellationToken);

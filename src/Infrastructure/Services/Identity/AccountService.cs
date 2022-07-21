@@ -89,7 +89,7 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             if (user == null) return await Result<TokenResponse>.FailAsync(message: _localizer["User Not Found"]);
             if (File.Exists(user.ProfilePictureDataUrl))
                 File.Delete(user.ProfilePictureDataUrl);
-            var filePath = _uploadService.UploadAsync(request);
+            var filePath = await _uploadService.UploadAsync(request);
             user.ProfilePictureDataUrl = filePath;
             var identityResult = await _userManager.UpdateAsync(user);
             var errors = identityResult.Errors.Select(e => _localizer[e.Description].ToString()).ToList();

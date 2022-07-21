@@ -1,5 +1,9 @@
-﻿using CleanArchitectureBase.Application.Requests;
+﻿using System.Collections.Generic;
+using CleanArchitectureBase.Application.Requests;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using Nextended.Core.Helper;
@@ -9,7 +13,22 @@ namespace CleanArchitectureBase.Infrastructure.Services
     [RegisterAs(typeof(IUploadService), 7)]
     public class UploadService : IUploadService
     {
-        public string UploadAsync(UploadRequest request)
+        public Task<string> UploadAsync(UploadRequest request, CancellationToken cancellationToken = default)
+        {
+            return Task.Run(() => Upload(request), cancellationToken);
+        }
+
+        public string[] Upload(IEnumerable<UploadRequest> requests)
+        {
+            return requests.Select(Upload).ToArray();
+        }
+
+        public Task<string[]> UploadAsync(IEnumerable<UploadRequest> requests, CancellationToken cancellationToken = default)
+        {
+            return Task.WhenAll(requests.Select(r => UploadAsync(r, cancellationToken)));
+        }
+
+        public string Upload(UploadRequest request)
         {
             if (request.Data == null) return string.Empty;
             var streamData = new MemoryStream(request.Data);

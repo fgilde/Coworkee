@@ -29,10 +29,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private string Email { get; set; }
         private bool _isLoading;
 
+        protected override async Task OnParametersSetAsync()
+        {
+            await base.OnParametersSetAsync();
+            await Load();
+        }
+
         protected override async Task OnInitializedAsync()
         {
-            await Load();
-
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
 
             HubConnection.On<UserProfileChanged>(async a =>

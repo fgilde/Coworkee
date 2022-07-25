@@ -39,7 +39,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
 
-            HubConnection.On<UserProfileChanged>(async a =>
+            HubConnection.On<UserProfileChanged>(a =>
             {
                 if (a.User.Id == UserId || a.User.Id == UserData?.Id || a.User.Id == User?.GetUserId())
                 {

@@ -2,6 +2,8 @@
 @page "/login/{Message}"
 @using CleanArchitectureBase.Shared.Constants.Application
 @using CleanArchitectureBase.Client.Utils
+@using MudBlazor.Extensions.Helper
+@using MudBlazor.Extensions.Options
 @layout LoginLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> _localizer
@@ -15,7 +17,7 @@
 
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudGrid>
+    <MudGrid Style="@($"animation: {new [] {AnimationType.Zoom}.GetAnimationCssStyle(TimeSpan.FromMilliseconds(250))}")">
         <MudItem xs="12">
             <div class="d-flex justify-center">
                 <ApplicationLogo />

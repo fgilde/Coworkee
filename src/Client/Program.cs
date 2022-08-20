@@ -1,3 +1,4 @@
+using System;
 using CleanArchitectureBase.Client.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,11 +32,22 @@ namespace CleanArchitectureBase.Client
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
             }
-            // Set inital server config 
-            var serverConfig = await host.Services.GetRequiredService<IApplicationClient>().System_GetConfigurationAsync();
-            host.Services.GetRequiredService<ClientApplicationConfiguration>().ServerConfiguration = serverConfig;
-
+            
+            await RegisterServerConfiguration(host);
             await builder.Build().RunAsync();
+        }
+
+        private static async Task RegisterServerConfiguration(WebAssemblyHost host)
+        {
+            try
+            {
+                var serverConfig = await host.Services.GetRequiredService<IApplicationClient>().System_GetConfigurationAsync();
+                host.Services.GetRequiredService<ClientApplicationConfiguration>().ServerConfiguration = serverConfig;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

@@ -1,6 +1,12 @@
 @using CleanArchitectureBase.Application.Requests
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UploadRequestEdit> _localizer
 
+
+@if (!string.IsNullOrWhiteSpace(Label))
+{
+    <label class="@($"{(UploadRequests?.Any() == true ? "upload-request-label-small" : "")} upload-request-label mud-input-label mud-input-label-animated mud-input-label-text")">@Label</label>
+}
+
 @if (!string.IsNullOrWhiteSpace(_errorMessage) && DisplayErrors)
 {
     <p class="error-message">@_errorMessage</p>

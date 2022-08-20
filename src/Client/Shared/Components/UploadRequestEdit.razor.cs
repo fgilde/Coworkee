@@ -25,6 +25,7 @@ namespace CleanArchitectureBase.Client.Shared.Components;
 
 public partial class UploadRequestEdit : IAsyncDisposable
 {
+    [Parameter] public string Label { get; set; }
     [Parameter] public string UploadFieldId { get; set; }
     [Parameter] public string[] MimeTypes { get; set; }
     [Parameter] public MimeTypeRestrictionType MimeRestrictionType { get; set; } = MimeTypeRestrictionType.WhiteList;

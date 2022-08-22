@@ -32,6 +32,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {
         [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
+        [Parameter] public bool UseMudExPropertyEditAsView { get; set; }
         [Parameter] public bool MultiSelect { get; set; } = true;
         [Parameter] public string InitialAction { get; set; }
         [Parameter] public string InitialIdString { get; set; }

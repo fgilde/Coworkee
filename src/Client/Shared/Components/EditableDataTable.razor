@@ -7,8 +7,11 @@
 @using Nextended.Core.Helper
 
 <style>
-    .mud-table {
+    .mud-editable-table {
         height: 90%
+    }
+    .mud-editable-table .mud-input-control>.mud-input-control-input-container>div.mud-input.mud-input-text {
+        margin-top: 0;
     }
 </style>
 
@@ -25,7 +28,7 @@ else
         <InputFile id="importInput" OnChange="ExecImport" hidden/>
     }
 
-    <MudTable FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
+    <MudTable Class="mud-editable-table" FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
           RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
           @bind-SelectedItems="@_selectedItems"
           Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)"
@@ -114,7 +117,14 @@ else
             {
             <MudTd DataLabel="@_localizer[prop]">
                 <p class="@(HasChanges(context) ? "changed" : "" )">
-                    <MudHighlighter Text="@PropertyValueFor(context, prop)" HighlightedText="@_searchString" />
+                    @if (UseMudExPropertyEditAsView)
+                    {
+                        @*<MudExPropertyEdit PropertyMeta="@(new ObjectEdit.Options.ObjectEditPropertyMeta(PropertyFor(context, prop), context).AsReadOnly().WithoutLabel().DisableUnderline())"/>*@
+                    }
+                    else
+                    {
+                        <MudHighlighter Text="@PropertyValueFor(context, prop)" HighlightedText="@_searchString"/>
+                    }
                 </p>
             </MudTd>
             }
@@ -162,14 +172,15 @@ else
                 }
         </MudTd>
     </RowTemplate>
-
+        
     <RowEditingTemplate>
         @{
                 foreach (var prop in TableProperties.Select(n => PropertyFor(context, n)))
                 {
-                <MudTd DataLabel="@_localizer[prop.Name]">
-                    <SimplePropertyEdit ReadOnly="@(!prop.CanWrite || prop.Name == "Id")" ValueBindInstance="context" Property="prop"></SimplePropertyEdit>
-                </MudTd>
+                    <MudTd DataLabel="@_localizer[prop.Name]">
+                        @*<MudExPropertyEdit PropertyMeta="@(new ObjectEdit.Options.ObjectEditPropertyMeta(prop, context).WithoutLabel().AsReadOnly(!prop.CanWrite || prop.Name == "Id"))"/>*@
+                        <SimplePropertyEdit ReadOnly="@(!prop.CanWrite || prop.Name == "Id")" ValueBindInstance="context" Property="prop"></SimplePropertyEdit>
+                    </MudTd>
                 }
         }
     </RowEditingTemplate>

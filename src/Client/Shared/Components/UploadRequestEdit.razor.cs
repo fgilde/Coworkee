@@ -229,6 +229,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
     {
         UploadRequests.Remove(request);
         UploadRequestRemoved.InvokeAsync(request);
+        RaiseChangedAsync();
         StateHasChanged();
     }
 
@@ -238,6 +239,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
         UploadRequests?.Clear();
         foreach (var item in array)
             UploadRequestRemoved.InvokeAsync(item);
+        RaiseChangedAsync();
         StateHasChanged();
     }
 

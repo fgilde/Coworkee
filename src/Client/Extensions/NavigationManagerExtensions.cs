@@ -6,7 +6,6 @@ using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Client.Authentication;
 using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.Models.Navigation;
 using CleanArchitectureBase.SDK;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
@@ -148,6 +147,25 @@ namespace CleanArchitectureBase.Client.Extensions
             }
             else if (!string.IsNullOrEmpty(fallback))
                 navigationManager.NavigateTo(fallback, NeedReload(fallback));
+        }
+
+        public static void GoBack(this NavigationManager navigationManager) => ServiceAccessor.Get<IJSRuntime>().InvokeVoidAsync("window.history.back");
+        public static void GoForward(this NavigationManager navigationManager) => ServiceAccessor.Get<IJSRuntime>().InvokeVoidAsync("window.history.forward");
+
+        public static Task<T> NavigateToNotFoundOnError<T>(this NavigationManager navigationManager, Func<Task<T>> action)
+            => navigationManager.NavigateToOnError("/notfound", action);
+
+        public static async Task<T> NavigateToOnError<T>(this NavigationManager navigationManager, string url, Func<Task<T>> action)
+        {
+            try
+            {
+                return await action();
+            }
+            catch (Exception)
+            {
+                navigationManager.NavigateTo(url);
+                return default;
+            }
         }
 
         private static bool IsForbidden(string url)

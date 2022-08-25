@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
@@ -31,14 +30,18 @@ namespace CleanArchitectureBase.Client.Shared.Components
 {
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {
+        [Parameter] public string EditIcon { get; set; } = Icons.Material.Filled.Edit;
+        [Parameter] public string DeleteIcon { get; set; } = Icons.Material.Filled.Delete;
         [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
         [Parameter] public bool UseMudExPropertyEditAsView { get; set; }
+        [Parameter] public bool ChangeUrl { get; set; } = true;
+        [Parameter] public bool FullRowClickForEdit { get; set; }
         [Parameter] public bool MultiSelect { get; set; } = true;
         [Parameter] public string InitialAction { get; set; }
         [Parameter] public string InitialIdString { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [Parameter] public Func<int, int, string, string[], CancellationToken, Task<PaginatedResult<TResult>>> ApiLoadPaged { get; set; }
-        [Parameter] public Func<CancellationToken ,Task<Result<List<TResult>>>> ApiLoad { get; set; }
+        [Parameter] public Func<CancellationToken, Task<Result<List<TResult>>>> ApiLoad { get; set; }
         [Parameter] public Func<TResult, Task<bool>> ApiCreateOrEdit { get; set; }
         [Parameter] public Func<TResult[], Task<bool>> ApiEditMany { get; set; }
         [Parameter] public Func<TIdType[], Task<Result>> ApiDelete { get; set; }
@@ -48,6 +51,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public Func<TIdType, IEnumerable<TResult>, Task<TResult>> GetById { get; set; }
         [Parameter] public Func<TResult, TIdType> GetId { get; set; }
         [Parameter] public Func<TResult, string> Display { get; set; }
+        [Parameter] public Func<TResult, bool> CanDeleteFn { get; set; }
+        [Parameter] public Func<TResult, bool> CanEditFn { get; set; }
+        [Parameter] public Func<string, string> CaptionFn { get; set; }
+        [Parameter] public string[] Prefixes { get; set; }
         [Parameter] public string[] TableProperties { get; set; }
         [Parameter] public string CreatePermission { get; set; }
         [Parameter] public string EditPermission { get; set; }
@@ -74,6 +81,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private bool _canSearch;
         private bool _loaded;
 
+        private bool CanEdit(TResult item) => _canEdit && (CanEditFn == null || CanEditFn(item));
+        private bool CanDelete(TResult item) => _canDelete && (CanDeleteFn == null || CanDeleteFn(item));
+
         protected override async Task OnParametersSetAsync()
         {
             ImmediateSearch ??= ApiLoadPaged == null;
@@ -92,7 +102,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             cancellationTokenSource = new CancellationTokenSource();
             _pageUrl = _navigationManager.Uri.Split(InitialAction)[0].EnsureEndsWith("/");
             _currentUser = await _clientAuthenticationManager.CurrentUser();
-            
+
             if (ApiLoadPaged == null)
                 await LoadAllData();
 
@@ -128,7 +138,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private bool inAction;
         private async Task ExecuteInitialPageActionAsync()
         {
-            if(inAction)
+            if (inAction)
                 return;
             try
             {
@@ -235,7 +245,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             {
                 var item = typeof(TResult).CreateInstance<TResult>();
                 if (ApiLoadPaged != null)
-                    _pagedData = _pagedData.Concat(new[] {item}).ToList();
+                    _pagedData = _pagedData.Concat(new[] { item }).ToList();
                 else
                     _flatList.Insert(0, item);
                 return;
@@ -250,6 +260,12 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task WithUrl(string url, Func<Task> action)
         {
+            if (!ChangeUrl)
+            {
+                await action();
+                return;
+            }
+
             var currentUrl = _navigationManager.Uri;
             if (currentUrl != url)
                 await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "changeUrl"), url);
@@ -308,6 +324,11 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private string PropertyValueFor(TResult context, string prop)
         {
+            var property = PropertyFor(context, prop);
+            if (property?.PropertyType != typeof(string) && property?.PropertyType.IsIEnumerable() == true)
+            {
+                return string.Join(", ", PropertyValueForAs<IEnumerable<string>>(context, prop));
+            }
             return PropertyValueForAs<string>(context, prop);
         }
 
@@ -393,7 +414,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private void InlineEditResetItemToOriginalValues(object element)
         {
-            if(element != null)
+            if (element != null)
                 currentBackup?.CopyChangedValuesTo(element);
         }
 
@@ -420,5 +441,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 cancellationTokenSource = new CancellationTokenSource();
             }
         }
+
+        private async Task OnRowClick(TResult item, string prop)
+        {
+            if (FullRowClickForEdit)
+                await InvokeModal(GetId(item));
+        }
+
+        private string CaptionForProperty(string prop)
+            => CaptionFn != null ? CaptionFn(prop) : _localizer[prop];
     }
 }

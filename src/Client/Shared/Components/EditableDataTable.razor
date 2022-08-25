@@ -1,6 +1,6 @@
 ﻿@typeparam TResult
 @typeparam TIdType
-@inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer
+@inject Microsoft.Extensions.Localization.IStringLocalizer<EditableDataTable<TResult, TIdType>> _localizer
 @using CleanArchitectureBase.Client.Pages.Catalog
 @using Nextended.Core.Extensions
 @using CleanArchitectureBase.Application.Contracts.Enums
@@ -10,9 +10,10 @@
     .mud-editable-table {
         height: 90%
     }
-    .mud-editable-table .mud-input-control>.mud-input-control-input-container>div.mud-input.mud-input-text {
-        margin-top: 0;
-    }
+
+        .mud-editable-table .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
+            margin-top: 0;
+        }
 </style>
 
 <ReactOnPreferenceChanged Component="this" OnPreferenceChanged="OnPreferenceChanged" />
@@ -25,7 +26,7 @@ else
 {
     @if (Import != null)
     {
-        <InputFile id="importInput" OnChange="ExecImport" hidden/>
+        <InputFile id="importInput" OnChange="ExecImport" hidden />
     }
 
     <MudTable Class="mud-editable-table" FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
@@ -42,20 +43,20 @@ else
             }
         <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]" />
         <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh" />
-            <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
-                @foreach (var e in Enum<ExportServiceType>.GetValues())
+        <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+            @foreach (var e in Enum<ExportServiceType>.GetValues())
                 {
-                    <MudMenuItem OnClick="@(() => ExecExport(e))">
-                        <MudText>
-                            @_localizer[e.ToString()]
-                        </MudText>
-                    </MudMenuItem>
+                <MudMenuItem OnClick="@(() => ExecExport(e))">
+                    <MudText>
+                        @_localizer[e.ToString()]
+                    </MudText>
+                </MudMenuItem>
                 }
-            </MudMenu>
+        </MudMenu>
         @if (Import != null)
-        {
-            <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit"/>
-        }
+            {
+            <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit" />
+            }
 
         @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
             {
@@ -80,14 +81,14 @@ else
                     }
                 @if (ExportSelected != null && _canExport)
                     {
-                        <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@_localizer["Export"]</b></MudText>
-                        @foreach (var e in Enum<ExportServiceType>.GetValues())
+                    <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@_localizer["Export"]</b></MudText>
+                    @foreach (var e in Enum<ExportServiceType>.GetValues())
                         {
-                            <MudMenuItem OnClick="@(() => ExecExportSelected(e))">
-                                <MudText>
-                                    @_localizer[e.ToString()]
-                                </MudText>
-                            </MudMenuItem>
+                        <MudMenuItem OnClick="@(() => ExecExportSelected(e))">
+                            <MudText>
+                                @_localizer[e.ToString()]
+                            </MudText>
+                        </MudMenuItem>
                         }
                     }
             </MudMenu>
@@ -103,28 +104,34 @@ else
             {
             @if (ApiLoadPaged != null)
                 {
-                <MudTh><MudTableSortLabel T="TResult" SortLabel="@prop">@_localizer[prop]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel T="TResult" SortLabel="@prop">@CaptionForProperty(prop)</MudTableSortLabel></MudTh>
                 }
                 else
                 {
-                <MudTh><MudTableSortLabel SortBy="new Func<TResult, object>(x => x.ExposeField<object>(prop))">@_localizer[prop]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TResult, object>(x => x.ExposeField<object>(prop))">@CaptionForProperty(prop)</MudTableSortLabel></MudTh>
                 }
             }
         <MudTh Style="text-align: right">@_localizer["Actions"]</MudTh>
     </HeaderContent>
     <RowTemplate>
-        @foreach (var prop in TableProperties)
+        @for (var index = 0; index < TableProperties.Length; index++)
             {
-            <MudTd DataLabel="@_localizer[prop]">
-                <p class="@(HasChanges(context) ? "changed" : "" )">
+                var prefix = Prefixes?.Length > index ?  Prefixes?[index] : null;
+                var prop = TableProperties[index];
+            <MudTd Class="@($"{(FullRowClickForEdit ? "cursor-pointer cursor-pointer-deep" : "")}")" @onclick="@(()=>OnRowClick(context, prop))" DataLabel="@_localizer[prop]">
+                <p class="@($"{(HasChanges(context) ? "changed" : "")}")">
+                    @if (!string.IsNullOrWhiteSpace(prefix))
+                        {
+                        <span class="@($"table-value-prefix {(UseMudExPropertyEditAsView ? "table-value-prefix-with-mudex-object-edit" : "")}")">@prefix</span>
+                        }
                     @if (UseMudExPropertyEditAsView)
-                    {
-                        @*<MudExPropertyEdit PropertyMeta="@(new ObjectEdit.Options.ObjectEditPropertyMeta(PropertyFor(context, prop), context).AsReadOnly().WithoutLabel().DisableUnderline())"/>*@
-                    }
-                    else
-                    {
-                        <MudHighlighter Text="@PropertyValueFor(context, prop)" HighlightedText="@_searchString"/>
-                    }
+                        {
+                        @*<MudExPropertyEdit PropertyMeta="@(new ObjectEdit.Options.ObjectEditPropertyMeta(PropertyFor(context, prop), context).AsReadOnly().WithoutLabel().DisableUnderline())" />*@
+                        }
+                        else
+                        {
+                        <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString" />
+                        }
                 </p>
             </MudTd>
             }
@@ -142,7 +149,7 @@ else
                 @if (_canEdit && EditMode == EditMode.SelfHandled)
                     {
                     <MudTooltip Text="@_localizer["Edit"]">
-                        <MudIconButton @onclick="@(() => InvokeModal(GetId(context)))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" aria-label="@_localizer["Edit"]"></MudIconButton>
+                        <MudIconButton Disabled="@(!CanEdit(context))" @onclick="@(() => InvokeModal(GetId(context)))" Color="Color.Primary" Icon="@EditIcon" aria-label="@_localizer["Edit"]"></MudIconButton>
                     </MudTooltip>
                     }
                 @if (_canDelete)
@@ -150,12 +157,12 @@ else
                     @if (!GetId(context).Equals(default(TIdType)))
                         {
                         <MudTooltip Text="@_localizer["Delete"]">
-                            <MudIconButton @onclick="@(() => Delete(GetId(context)))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIconButton>
+                            <MudIconButton Disabled="@(!CanDelete(context))" @onclick="@(() => Delete(GetId(context)))" Color="Color.Error" Icon="@DeleteIcon" aria-label="@_localizer["Delete"]"></MudIconButton>
                         </MudTooltip>
                         }
                         else
                         {
-                        <MudIcon Color="Color.Transparent" Icon="@Icons.Material.Filled.Delete" aria-label="@_localizer["Delete"]"></MudIcon>
+                        <MudIcon Color="Color.Transparent" Icon="@DeleteIcon" aria-label="@_localizer["Delete"]"></MudIcon>
                         }
                     }
                 }
@@ -172,15 +179,15 @@ else
                 }
         </MudTd>
     </RowTemplate>
-        
+
     <RowEditingTemplate>
         @{
                 foreach (var prop in TableProperties.Select(n => PropertyFor(context, n)))
                 {
-                    <MudTd DataLabel="@_localizer[prop.Name]">
-                        @*<MudExPropertyEdit PropertyMeta="@(new ObjectEdit.Options.ObjectEditPropertyMeta(prop, context).WithoutLabel().AsReadOnly(!prop.CanWrite || prop.Name == "Id"))"/>*@
-                        <SimplePropertyEdit ReadOnly="@(!prop.CanWrite || prop.Name == "Id")" ValueBindInstance="context" Property="prop"></SimplePropertyEdit>
-                    </MudTd>
+                <MudTd DataLabel="@_localizer[prop.Name]">
+                    @*<MudExPropertyEdit PropertyMeta="@(new ObjectEdit.Options.ObjectEditPropertyMeta(prop, context).WithoutLabel().AsReadOnly(!CanEdit(context) || !prop.CanWrite || prop.Name == "Id"))" />*@
+                   <SimplePropertyEdit ReadOnly="@(!prop.CanWrite || prop.Name == "Id")" ValueBindInstance="context" Property="prop"></SimplePropertyEdit>
+                </MudTd>
                 }
         }
     </RowEditingTemplate>
@@ -191,3 +198,4 @@ else
     </PagerContent>
 </MudTable>
 }
+

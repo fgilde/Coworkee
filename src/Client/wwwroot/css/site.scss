@@ -254,3 +254,7 @@ body * {
 .primary-background {
     background-color: var(--mud-palette-primary);
 }
+
+.cursor-pointer-deep * {
+    cursor: pointer !important;
+}

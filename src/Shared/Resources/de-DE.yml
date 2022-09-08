@@ -803,6 +803,9 @@ Reload: Neu laden
 Reload Data: Daten neu laden
 Remember me?: Erinnern Sie sich an mich?
 Remove All: Alle entfernen
+Reset: Zurücksetzen
+Reset all: Alle zurücksetzen
+Reset all properties?: Alle Eigenschaften zurücksetzen?
 Reset password: Passwort zurücksetzen
 Reset Password: Passwort zurücksetzen
 Resources: Betriebsmittel
@@ -1058,3 +1061,14 @@ zh-MO: Chinesisch (Macao SAR)
 zh-SG: Chinesisch (Singapur)
 zh-TW: Chinesisch (Taiwan)
 zu-ZA: isiZulu (Südafrika)
+Add external Url: Externe URL hinzufügen
+Add Url: URL hinzufügen
+CreatedOn: Erstellungsdatum
+Enter the URL to existing file: Geben Sie die URL zu einer vorhandenen Datei an
+General: Allgemein
+Other: Sonstige
+Overview: Übersicht
+Back: Zurück
+Female: Weiblich
+Male: Männlich
+Add: Hinzufügen

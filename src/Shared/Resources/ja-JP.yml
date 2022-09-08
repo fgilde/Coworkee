@@ -803,6 +803,9 @@ Reload: 積み直す
 Reload Data: データの再読み込み
 Remember me?: 私を覚えていますか?
 Remove All: すべて削除
+Reset: リセット
+Reset all: すべてリセット
+Reset all properties?: すべてのプロパティをリセットしますか?
 Reset password: パスワードのリセット
 Reset Password: パスワードのリセット
 Resources: リソース

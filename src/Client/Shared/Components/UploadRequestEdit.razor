@@ -4,51 +4,64 @@
 
 @if (!string.IsNullOrWhiteSpace(Label))
 {
-    <label class="@($"{(UploadRequests?.Any() == true ? "upload-request-label-small" : "")} upload-request-label mud-input-label mud-input-label-animated mud-input-label-text")">@Label</label>
+    <label class="@($"{(UploadRequests?.Any() == true ? "upload-request-label-small" : "")} upload-request-label mud-input-label-animated mud-input-label-text")">@Label</label>
 }
 
-@if (!string.IsNullOrWhiteSpace(_errorMessage) && DisplayErrors)
-{
-    <p class="error-message">@_errorMessage</p>
-}
+<div class="@(Variant == Variant.Outlined ? "upload-request-outlined-border" : "")">
+    @if (!string.IsNullOrWhiteSpace(_errorMessage) && DisplayErrors)
+    {
+        <p class="error-message">@_errorMessage</p>
+    }
 
-<div @ref="dropZoneElement" style="@StyleStr()" class="upload-request-edit @(AllowDrop ? "drop-zone" : "") @Class">
 
-    <MudGrid Spacing="1">
-        @if (AllowMultiple)
-        {
-            <InputFile @ref="inputFile" id="@(UploadFieldId)" hidden multiple OnChange="UploadFiles" accept="@($"{_accept},{_acceptExtensions}")" />
-        }
-        else
-        {
-            <InputFile @ref="inputFile" id="@(UploadFieldId)" hidden OnChange="UploadFiles" accept="@($"{_accept},{_acceptExtensions}")" />
-        }
+    <div @ref="dropZoneElement" style="@StyleStr()" class="upload-request-edit @(AllowDrop ? "drop-zone" : "") @Class">
 
-        @foreach (var request in UploadRequests ?? Enumerable.Empty<UploadRequest>())
-        {
-            <MudItem xs="12">
-                <MudItem>
-                    <MudAlert Icon="@GetIcon(request)"
-                          Class="mud-alert-message-w-100"
-                          Severity="@(IsSelected(request) ? Severity.Warning : (_withErrors.Contains(request) ? Severity.Error : Severity.Normal))"
-                          OnClick="(a) => Select(request, a)"
-                          ShowCloseIcon="@AllowRemovingItems"
-                          CloseIcon="@Icons.Filled.Delete"
-                          CloseIconClicked="(() => Remove(request))">
-                        @request.FileName
-                        @if (AllowPreview)
-                        {
-                            <MudIconButton OnClick="@(() => Preview(request))" Style="float: right;" Icon="@Icons.Material.Filled.ZoomIn" Color="Color.Inherit" Size="Size.Small" />
-                        }
-                    </MudAlert>
+        <MudGrid Spacing="1">
+            
+            @if (!ReadOnly)
+            {
+                @if (AllowMultiple)
+                {
+                    <InputFile @ref="inputFile" id="@(UploadFieldId)" hidden multiple OnChange="UploadFiles" accept="@($"{_accept},{_acceptExtensions}")"/>
+                }
+                else
+                {
+                    <InputFile @ref="inputFile" id="@(UploadFieldId)" hidden OnChange="UploadFiles" accept="@($"{_accept},{_acceptExtensions}")"/>
+                }
+            }
+
+            @foreach (var request in UploadRequests ?? Enumerable.Empty<UploadRequest>())
+            {
+                <MudItem xs="12">
+                    <MudItem>
+                        <MudAlert Icon="@GetIcon(request)"
+                                  Class="mud-alert-message-w-100"
+                                  Severity="@(IsSelected(request) ? Severity.Warning : (_withErrors.Contains(request) ? Severity.Error : Severity.Normal))"
+                                  OnClick="(a) => Select(request, a)"
+                                  ShowCloseIcon="@(AllowRemovingItems && !ReadOnly)"
+                                  CloseIcon="@Icons.Filled.Delete"
+                                  CloseIconClicked="(() => Remove(request))">
+                            @if (AllowRename && !ReadOnly)
+                            {
+                                <MudTextField DisableUnderLine="true" Error="@(string.IsNullOrWhiteSpace(request.FileName))" @bind-Value="@request.FileName"></MudTextField>
+                            }
+                            else
+                            {
+                                @request.FileName
+                            }
+                            @if (AllowPreview)
+                            {
+                                <MudIconButton OnClick="@(() => Preview(request))" Style="float: right;" Icon="@Icons.Material.Filled.ZoomIn" Color="Color.Inherit" Size="Size.Small"/>
+                            }
+                        </MudAlert>
+                    </MudItem>
                 </MudItem>
-            </MudItem>
-        }
-    </MudGrid>
-</div>
+            }
+        </MudGrid>
+    </div>
 
-<div class="multi-upload-actions">
-    @if (ShowFileUploadButton)
+    <div class="multi-upload-actions">
+        @if (ShowFileUploadButton && !ReadOnly)
         {
 
             <MudButton HtmlTag="label"
@@ -62,7 +75,7 @@
 
         }
 
-        @if (AllowFolderUpload && AllowMultiple && ShowFolderUploadButton)
+        @if (AllowFolderUpload && AllowMultiple && ShowFolderUploadButton && !ReadOnly)
         {
             <span class="action-margin"></span>
             <MudButton HtmlTag="label"
@@ -75,8 +88,27 @@
             </MudButton>
         }
         
-        @if (ShowClearButton && UploadRequests?.Any() == true)
+        @if (AllowExternalUrl && !ReadOnly)
+        {
+            <span class="action-margin"></span>
+            <MudButton HtmlTag="label"
+                       OnClick="@(AddUrl)"
+                       Variant="Variant.Text"
+                       Color="Color.Primary"
+                       Size="Size.Small"
+                       StartIcon="@Icons.Filled.MoreHoriz">
+                @_localizer["Add Url"]
+            </MudButton>
+        }
+
+        @if (ShowClearButton && UploadRequests?.Any() == true && !ReadOnly)
         {
             <MudIconButton Title="@_localizer["Remove All"]" OnClick="@RemoveAll" Style="float: right; margin-right: 15px;" Icon="@Icons.Material.Filled.DeleteForever" Color="Color.Primary" Size="Size.Small" />
         }
+    </div>
 </div>
+
+@if (!string.IsNullOrWhiteSpace(HelperText))
+{
+    <label style="margin-left: 8px;" class="mud-input-helper-text">@HelperText</label>
+}

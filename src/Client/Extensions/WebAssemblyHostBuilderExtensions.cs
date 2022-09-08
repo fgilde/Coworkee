@@ -65,7 +65,6 @@ namespace CleanArchitectureBase.Client.Extensions
                     configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
-                .AddMudMarkdownServices()
                 .AddScoped<ClientPreferenceManager>()
                 .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()
                 .AddScoped<ApplicationStateProvider>()

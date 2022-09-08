@@ -9,6 +9,7 @@
 
 .multi-upload-actions {
     padding-left: 15px;
+    margin-bottom: 10px;
 }
 
 .action-margin {
@@ -34,3 +35,14 @@
     transform: translate(0,1.5px) scale(.75);
     transform-origin: top left;
 }
+.upload-request-outlined-border {
+    border-radius: var(--mud-default-borderradius);
+    border-color: var(--mud-palette-lines-inputs);
+    border-width: 1px;
+    border-style: solid;
+}
+
+/*.upload-request-edit .mud-input-control.mud-input-input-control {
+    height: 20px;
+    margin-top: -20px;
+}*/

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Helper;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 
@@ -68,6 +69,20 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new DeleteDocumentsCommand { Ids = UnhashIds(ids) }, cancellationToken));
+        }
+
+        /// <summary>
+        /// Gets the Mimetype for given url
+        /// </summary>
+        /// <returns>Status 200 OK</returns>
+        [Authorize]
+        [HttpGet(nameof(GetMimeType))]
+        [Produces(typeof(string))]
+        public async Task<IActionResult> GetMimeType(string url,
+            CancellationToken cancellationToken = default)
+        {
+            var res = await MimeTypeHelper.ReadContentTypeAsync(url, cancellationToken);
+            return Ok(res);
         }
     }
 }

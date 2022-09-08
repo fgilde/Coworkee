@@ -9,5 +9,6 @@ namespace CleanArchitectureBase.Application.Requests
         public string ContentType { get; set; }
         public UploadType UploadType { get; set; }
         public byte[] Data { get; set; }
+        public string Url { get; set; }
     }
 }

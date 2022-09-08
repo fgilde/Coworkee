@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using HeyRed.Mime;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using MudBlazor;
+using MudBlazor.Extensions;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Requests;
@@ -18,7 +21,10 @@ using CleanArchitectureBase.Shared.Helper;
 using CleanArchitectureBase.Shared.Misc;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Extensions;
+using MudBlazor.Extensions.Options;
 using Nextended.Blazor.Extensions;
+using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.Shared.Dialogs;
 using BrowserFileExtensions = Nextended.Blazor.Extensions.BrowserFileExtensions;
 
 namespace CleanArchitectureBase.Client.Shared.Components;
@@ -26,6 +32,11 @@ namespace CleanArchitectureBase.Client.Shared.Components;
 public partial class UploadRequestEdit : IAsyncDisposable
 {
     [Parameter] public string Label { get; set; }
+    [Parameter] public bool ReadOnly { get; set; }
+    [Parameter] public string HelperText { get; set; }
+    [Parameter] public Variant Variant { get; set; }
+    [Parameter] public bool AllowRename { get; set; } = true;
+    [Parameter] public bool AllowExternalUrl { get; set; } = true;
     [Parameter] public string UploadFieldId { get; set; }
     [Parameter] public string[] MimeTypes { get; set; }
     [Parameter] public MimeTypeRestrictionType MimeRestrictionType { get; set; } = MimeTypeRestrictionType.WhiteList;
@@ -48,7 +59,8 @@ public partial class UploadRequestEdit : IAsyncDisposable
     [Parameter] public SelectItemsMode SelectItemsMode { get; set; } = SelectItemsMode.None;
     [Parameter] public bool AutoExtractZip { get; set; } = false;
 
-    [Parameter] public UploadRequest UploadRequest
+    [Parameter]
+    public UploadRequest UploadRequest
     {
         get => UploadRequests?.FirstOrDefault();
         set
@@ -82,7 +94,6 @@ public partial class UploadRequestEdit : IAsyncDisposable
     private List<UploadRequest> _withErrors = new();
     private string _accept;
     private string _acceptExtensions;
-
     protected override Task OnInitializedAsync()
     {
         UploadFieldId ??= $"{nameof(UploadRequestEdit)}-FileInput-{Guid.NewGuid()}";
@@ -96,10 +107,11 @@ public partial class UploadRequestEdit : IAsyncDisposable
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender && AllowDrop)
+        if ((firstRender || _module == null || _dropZoneInstance == null) && AllowDrop && !ReadOnly && inputFile != null)
         {
             _module = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/helper/dropZone.js");
-            _dropZoneInstance = await _module.InvokeAsync<IJSObjectReference>("initializeFileDropZone", dropZoneElement, inputFile.Element, AllowFolderUpload);
+            if (_module != null)
+                _dropZoneInstance = await _module.InvokeAsync<IJSObjectReference>("initializeFileDropZone", dropZoneElement, inputFile.Element, AllowFolderUpload);
         }
     }
 
@@ -140,17 +152,8 @@ public partial class UploadRequestEdit : IAsyncDisposable
             var buffer = new byte[file.Size];
             var extension = Path.GetExtension(file.Name);
             await file.OpenReadStream(file.Size).ReadAsync(buffer);
-            var existing = AllowDuplicates ? null : UploadRequests?.FirstOrDefault(r => r.Data.SequenceEqual(buffer));
-            if (existing != null)
-            {
-                _withErrors.Add(existing);
-                SetError(_localizer["The file ({0}) has already been added", file.Name]);
-            }
-            else
-            {
-                var request = new UploadRequest {Data = buffer, FileName = file.Name, UploadType = UploadType.Document, ContentType = file.ContentType, Extension = extension};
-                (UploadRequests ??= new List<UploadRequest>()).Add(request);
-            }
+            var request = new UploadRequest { Data = buffer, FileName = file.Name, UploadType = UploadType.Document, ContentType = file.ContentType, Extension = extension };
+            Add(request);
         }
     }
 
@@ -170,10 +173,10 @@ public partial class UploadRequestEdit : IAsyncDisposable
 
         if (!MimeTypeAllowed(file.ContentType))
             return !SetError(_localizer["Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2})", file.ContentType, _accept, _acceptExtensions]);
-        
+
         if (UploadRequests?.Count >= Math.Max(1, MaxMultipleFiles))
             return !SetError(_localizer["A maximum of {0} files are allowed", MaxMultipleFiles]);
-        
+
         return true;
     }
 
@@ -209,7 +212,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
         return AllowMultiple
             ? UploadRequestsChanged.InvokeAsync(UploadRequests)
             : UploadRequestChanged.InvokeAsync(UploadRequest);
-    } 
+    }
 
 
     public async ValueTask DisposeAsync()
@@ -222,7 +225,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
 
         if (_module != null)
             await _module.DisposeAsync();
-        
+
     }
 
     public void Remove(UploadRequest request)
@@ -281,21 +284,74 @@ public partial class UploadRequestEdit : IAsyncDisposable
         return BrowserFileExt.IconForFile(request.ContentType);
     }
 
-    
+
     private async Task Preview(UploadRequest request)
     {
         //TODO SHow with IBrowserfile
-        if (MimeTypeHelper.IsZip(request.ContentType))
+        if (MimeTypeHelper.IsZip(request.ContentType) && request.Data != null)
         {
             var ms = new MemoryStream(request.Data);
             await MudExFileDisplayDialog.Show(_dialogService, ms, request.FileName, request.ContentType);
         }
         else
         {
-            var dataUrl = await DataUrl.GetDataUrlAsync(request.Data, request.ContentType);
+            var dataUrl = _navigationManager.ToAbsoluteServerUri(request.Url ?? await DataUrl.GetDataUrlAsync(request.Data, request.ContentType));
             await MudExFileDisplayDialog.Show(_dialogService, dataUrl, request.FileName, request.ContentType);
         }
     }
 
+    private bool IsValidUrl(string s) => Uri.TryCreate(s, UriKind.Absolute, out var uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
+    private async Task AddUrl()
+    {
+        var parameters = new DialogParameters
+        {
+            {nameof(SimplePromptDialog.Message), _localizer["Enter the URL to existing file"].ToString()},
+            {nameof(SimplePromptDialog.Icon), Icons.Material.Filled.Web},
+            {nameof(SimplePromptDialog.OkText), _localizer["Add Url"].ToString()},
+            {nameof(SimplePromptDialog.CanConfirm), IsValidUrl},
+            {nameof(SimplePromptDialog.Value), string.Empty},
+        };
+
+        var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+
+        var res = await _dialogService.ShowEx<SimplePromptDialog>(_localizer["Add external Url"], parameters, options);
+        var dialogResult = (await res.Result);
+
+        if (!dialogResult.Cancelled && dialogResult.Data != null && IsValidUrl(dialogResult.Data.ToString()))
+            await Add(dialogResult.Data.ToString());
+
+    }
+
+    private async Task Add(string url)
+    {
+        var contentType = await _api.Documents_GetMimeTypeAsync(url);
+        var request = new UploadRequest
+        {
+            Extension = Path.GetExtension(url),
+            ContentType = contentType ?? "application/octet-stream",
+            FileName = Path.GetFileName(url),
+            Data = Array.Empty<byte>(),
+            Url = url
+        };
+        Add(request);
+        await RaiseChangedAsync();
+    }
+
+    private void Add(UploadRequest request)
+    {
+        if (!AllowMultiple)
+            (UploadRequests ??= new List<UploadRequest>()).Clear();
+
+        var existing = AllowDuplicates ? null : UploadRequests?.FirstOrDefault(r => (r.Data != null && request.Data != null && r.Data.SequenceEqual(request.Data)) || (!string.IsNullOrWhiteSpace(r.Url) && !string.IsNullOrWhiteSpace(request.Url) && r.Url == request.Url));
+        if (existing != null)
+        {
+            _withErrors.Add(existing);
+            SetError(_localizer["The file ({0}) has already been added", request.FileName]);
+            return;
+        }
+
+        (UploadRequests ??= new List<UploadRequest>()).Add(request);
+        StateHasChanged();
+    }
 }

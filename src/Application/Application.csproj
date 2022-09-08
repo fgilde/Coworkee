@@ -16,7 +16,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.19" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
-    <PackageReference Include="Nextended.Core" Version="6.0.11" />
+    <PackageReference Include="Nextended.Core" Version="6.0.14" />
     <PackageReference Include="StringToExpression" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Hashids.net" Version="1.6.1" />

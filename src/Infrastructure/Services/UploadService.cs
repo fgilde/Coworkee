@@ -30,6 +30,12 @@ namespace CleanArchitectureBase.Infrastructure.Services
 
         public string Upload(UploadRequest request)
         {
+            if (!string.IsNullOrEmpty(request.Url))
+            {
+                // TODO Download to...
+                return request.Url;
+            }
+            
             if (request.Data == null) return string.Empty;
             var streamData = new MemoryStream(request.Data);
             if (streamData.Length > 0)

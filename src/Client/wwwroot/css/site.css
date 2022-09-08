@@ -361,22 +361,27 @@ body * {
   border: 3px dotted var(--mud-palette-primary);
 }
 
+/*TODO::Remove because in MudEx*/
 .mud-alert-close-no-flex > .mud-alert-close {
   display: initial;
 }
 
+/*TODO::Remove because in MudEx*/
 .mud-alert-message-w-100 > .mud-alert-position > .mud-alert-message {
   width: 100%;
 }
 
+/*TODO::Remove because in MudEx*/
 .mud-alert-message-mt-5 > .mud-alert-position > .mud-alert-message {
   margin-top: -5px;
 }
 
+/*TODO::Remove because in MudEx*/
 .dialog-content-full-height > .outline-none {
   height: 100%;
 }
 
+/*TODO::Remove because in MudEx*/
 .full-height {
   height: 100%;
 }
@@ -453,4 +458,13 @@ body * {
 
 .cursor-pointer-deep * {
   cursor: pointer !important;
+}
+
+.upload-request-edit .mud-input-control.mud-input-input-control {
+  height: 20px;
+  margin-top: -20px;
+}
+
+.sf-rich-text-editor-disabled .e-toolbar-container {
+  display: none;
 }

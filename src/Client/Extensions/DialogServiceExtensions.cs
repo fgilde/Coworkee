@@ -14,8 +14,16 @@ public static class DialogServiceExtensions
 {
     public static AnimationType[] DefaultAnimationNoFullHeight = { AnimationType.FadeIn, AnimationType.FlipX};
 
-    public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters = null, Action<DialogOptionsEx> options = null) 
+    public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters = null, Action<DialogOptionsEx> options = null)
         where TDialog : ComponentBase
+    {
+        var optionsEx = await DefaultDialogOptionsEx();
+        options?.Invoke(optionsEx);
+
+        return await dialogService.ShowEx<TDialog>(title, parameters ?? new DialogParameters(), optionsEx);
+    }
+
+    internal static async Task<DialogOptionsEx> DefaultDialogOptionsEx()
     {
         var optionsEx = new DialogOptionsEx
         {
@@ -31,9 +39,7 @@ public static class DialogServiceExtensions
             DisableSizeMarginY = true,
             DisablePositionMargin = true
         };
-        options?.Invoke(optionsEx);
-
-        return await dialogService.ShowEx<TDialog>(title, parameters ?? new DialogParameters(), optionsEx);
+        return optionsEx;
     }
 
     internal static async Task<DialogPosition> PositionBasedOnMouse()

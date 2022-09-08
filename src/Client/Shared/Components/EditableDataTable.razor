@@ -130,7 +130,14 @@ else
                         }
                         else
                         {
-                        <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString" />
+                            @if (prop == "CreatedBy")
+                            {
+                                <UserCard Class="no-padding" UserId="@(PropertyValueFor(context, prop))" />
+                            }
+                            else
+                            {
+                                <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString"/>
+                            }
                         }
                 </p>
             </MudTd>

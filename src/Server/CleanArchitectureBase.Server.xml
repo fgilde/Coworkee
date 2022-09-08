@@ -541,6 +541,12 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetMimeType(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the Mimetype for given url
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll(System.Threading.CancellationToken)">
             <summary>
             Get All Document Types

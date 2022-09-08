@@ -325,6 +325,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private string PropertyValueFor(TResult context, string prop)
         {
             var property = PropertyFor(context, prop);
+            if (property?.PropertyType == typeof(DateTime))
+            {
+                return PropertyValueForAs<DateTime>(context, prop).AsClientLocalTime().ToString(); // Renderer Property
+            }
             if (property?.PropertyType != typeof(string) && property?.PropertyType.IsIEnumerable() == true)
             {
                 return string.Join(", ", PropertyValueForAs<IEnumerable<string>>(context, prop));

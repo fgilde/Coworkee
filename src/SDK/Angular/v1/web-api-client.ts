@@ -898,6 +898,12 @@ export interface IDocumentsClient {
      * @return Status 200 Ok
      */
     getById(id: string | null): Observable<DocumentDto>;
+    /**
+     * Gets the Mimetype for given url
+     * @param url (optional) 
+     * @return Status 200 OK
+     */
+    getMimeType(url: string | null | undefined): Observable<string>;
 }
 
 @Injectable({
@@ -1145,6 +1151,62 @@ export class DocumentsClient implements IDocumentsClient {
             }));
         }
         return _observableOf<DocumentDto>(null as any);
+    }
+
+    /**
+     * Gets the Mimetype for given url
+     * @param url (optional) 
+     * @return Status 200 OK
+     */
+    getMimeType(url: string | null | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/Documents/GetMimeType?";
+        if (url !== undefined && url !== null)
+            url_ += "url=" + encodeURIComponent("" + url) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetMimeType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetMimeType(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processGetMimeType(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<string>(null as any);
     }
 }
 
@@ -6397,6 +6459,7 @@ export class UploadRequest implements IUploadRequest {
     contentType?: string | undefined;
     uploadType!: UploadType;
     data?: string | undefined;
+    url?: string | undefined;
 
     constructor(data?: IUploadRequest) {
         if (data) {
@@ -6414,6 +6477,7 @@ export class UploadRequest implements IUploadRequest {
             this.contentType = _data["contentType"];
             this.uploadType = _data["uploadType"];
             this.data = _data["data"];
+            this.url = _data["url"];
         }
     }
 
@@ -6431,6 +6495,7 @@ export class UploadRequest implements IUploadRequest {
         data["contentType"] = this.contentType;
         data["uploadType"] = this.uploadType;
         data["data"] = this.data;
+        data["url"] = this.url;
         return data;
     }
 }
@@ -6441,6 +6506,7 @@ export interface IUploadRequest {
     contentType?: string | undefined;
     uploadType: UploadType;
     data?: string | undefined;
+    url?: string | undefined;
 }
 
 export enum UploadType {

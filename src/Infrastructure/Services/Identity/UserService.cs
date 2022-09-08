@@ -322,7 +322,33 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 trackedUser.Email = applicationUser.Email;
                 //trackedUser.UserInfo = applicationUser.UserInfo;
                 trackedUser.UserInfo = applicationUser.UserInfo?.Id != null && applicationUser.UserInfo.Id != default ? await _db.UserInformations.FindAsync(applicationUser.UserInfo.Id) ?? new UserInformations() : new UserInformations();
-                //trackedUser.UserInfo.Specializations = _db.Specializations.ToList().Where(sp => applicationUser.UserInfo?.Specializations.Any(s => s?.Id.Equals(sp?.Id ?? -1) == true) == true).ToList();
+                
+                if (trackedUser.UserInfo.Addresses == null || trackedUser.UserInfo.Addresses.Count == 0)
+                    trackedUser.UserInfo.Addresses = applicationUser.UserInfo?.Addresses;
+                else
+                {
+                    // Ugly address sync... TODO: Refactor whole fucking method
+                    var dbAddresses = trackedUser.UserInfo.Addresses;
+                    var addressesToSet = applicationUser.UserInfo?.Addresses ?? Enumerable.Empty<Address>();
+                    foreach (var address in addressesToSet)
+                    {
+                        var toUpdate = dbAddresses.FirstOrDefault(a => a.Id == address.Id);
+                        if (toUpdate != null)
+                        {
+                            toUpdate.Name = address.Name;
+                            toUpdate.City = address.City;
+                            toUpdate.Street = address.Street;
+                            toUpdate.PostalCode = address.PostalCode;
+                            toUpdate.HouseNumber = address.HouseNumber;
+                            toUpdate.Country = address.Country;
+                        }
+                        else
+                        {
+                            trackedUser.UserInfo.Addresses.Add(address);
+                        }
+                    }
+                }
+
                 trackedUser.FirstName = applicationUser.FirstName;
                 trackedUser.LastName = applicationUser.LastName;
                 trackedUser.PhoneNumber = applicationUser.PhoneNumber;

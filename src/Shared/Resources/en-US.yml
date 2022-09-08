@@ -802,6 +802,9 @@ Reload: Reload
 Reload Data: Reload Data
 Remember me?: Remember me?
 Remove All: Remove All
+Reset: Reset
+Reset all: Reset all
+Reset all properties?: Reset all properties?
 Reset password: Reset password
 Reset Password: Reset Password
 Resources: Resources
@@ -1057,3 +1060,17 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
+Add external Url: Add external Url
+Add Url: Add Url
+CreatedOn: Date created
+Enter the URL to existing file: Enter the URL to existing file
+General: General
+Label_Description: Description
+Label_UploadRequests: Files
+Other: Other
+Overview: Overview
+Back: Back
+Take case: Take case
+Female: Female
+Male: Male
+Add: Add

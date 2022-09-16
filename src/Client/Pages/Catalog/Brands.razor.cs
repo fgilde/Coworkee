@@ -12,6 +12,7 @@ using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Wrapper;
+using MudBlazor.Extensions;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
@@ -68,6 +69,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task<bool> CreateOrEditBrand(BrandDto brandOrNull)
         {
+           // var r = await _dialogService.EditObject(brandOrNull ?? new BrandDto(), brandOrNull == null ? _localizer["Add Brand"] : _localizer["Update Brand"], await DialogServiceExtensions.DefaultDialogOptionsEx());
+            
             var parameters = new DialogParameters();
             if (brandOrNull != null)
             {

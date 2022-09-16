@@ -6,6 +6,8 @@ namespace CleanArchitectureBase.Application.Common.Models
 {
     public abstract class HashableDtoBase : IDtoBase<int>, IEquatable<HashableDtoBase>
     {
+        #region Equality members
+
         public bool Equals(HashableDtoBase other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -17,24 +19,16 @@ namespace CleanArchitectureBase.Application.Common.Models
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((HashableDtoBase)obj);
+            return obj.GetType() == this.GetType() && Equals((HashableDtoBase)obj);
         }
 
-        public override int GetHashCode()
-        {
-            return (Id != null ? Id.GetHashCode() : 0);
-        }
+        public override int GetHashCode() => (Id != null ? Id.GetHashCode() : 0);
 
-        public static bool operator ==(HashableDtoBase left, HashableDtoBase right)
-        {
-            return Equals(left, right);
-        }
+        public static bool operator ==(HashableDtoBase left, HashableDtoBase right) => Equals(left, right);
 
-        public static bool operator !=(HashableDtoBase left, HashableDtoBase right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator !=(HashableDtoBase left, HashableDtoBase right) => !Equals(left, right);
+
+        #endregion
 
         public virtual bool IsNew => string.IsNullOrEmpty(Id);
 
@@ -51,35 +45,28 @@ namespace CleanArchitectureBase.Application.Common.Models
 
     public abstract class DtoBase<TId> : IDtoBase<TId>, IEquatable<DtoBase<TId>>
     {
+        #region Equality members
+
         public bool Equals(DtoBase<TId> other)
         {
             if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return EqualityComparer<TId>.Default.Equals(Id, other.Id);
+            return ReferenceEquals(this, other) || EqualityComparer<TId>.Default.Equals(Id, other.Id);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((DtoBase<TId>)obj);
+            return obj.GetType() == this.GetType() && Equals((DtoBase<TId>)obj);
         }
 
-        public override int GetHashCode()
-        {
-            return EqualityComparer<TId>.Default.GetHashCode(Id);
-        }
+        public override int GetHashCode() => EqualityComparer<TId>.Default.GetHashCode(Id);
 
-        public static bool operator ==(DtoBase<TId> left, DtoBase<TId> right)
-        {
-            return Equals(left, right);
-        }
+        public static bool operator ==(DtoBase<TId> left, DtoBase<TId> right) => Equals(left, right);
 
-        public static bool operator !=(DtoBase<TId> left, DtoBase<TId> right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator !=(DtoBase<TId> left, DtoBase<TId> right) => !Equals(left, right);
+
+        #endregion
 
         public TId Id { get; set; }
 

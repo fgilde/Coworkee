@@ -107,15 +107,6 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 await LoadAllData();
 
             _loaded = true;
-            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
-
-            HubConnection.On<EntitiesUpdated<TResult>>(async (a) =>
-            {
-                if (a.User.Id != _currentUser.GetUserId())
-                {
-                    await Reload();
-                }
-            });
         }
 
         private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -124,9 +115,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
         }
 
 
-        public async Task Reload()
+        public async Task<TResult[]> Reload()
         {
             await Reset(true);
+            return _table.Items?.ToArray() ?? Array.Empty<TResult>();
         }
 
         private async Task<bool> HasPermission(string permission)

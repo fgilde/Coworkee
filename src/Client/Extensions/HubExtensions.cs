@@ -8,22 +8,22 @@ namespace CleanArchitectureBase.Client.Extensions
 {
     public static class HubExtensions
     {
-        public static HubConnection On<TClientEvent>(this HubConnection hubConnection, Action<TClientEvent> handler)
+        public static string On<TClientEvent>(this HubConnection hubConnection, Action<TClientEvent> handler)
             where TClientEvent : ClientEventBase, new()
         {
             var e = new TClientEvent();
             hubConnection.On(e.EventName, handler);
-            return hubConnection;
+            return e.EventName;
         }
 
-        public static HubConnection On<TClientEvent>(this HubConnection hubConnection, Func<TClientEvent, Task> handler)
-            where TClientEvent: ClientEventBase, new()
+        public static string On<TClientEvent>(this HubConnection hubConnection, Func<TClientEvent, Task> handler)
+            where TClientEvent : ClientEventBase, new()
         {
             var e = new TClientEvent();
             hubConnection.On(e.EventName, handler);
-            return hubConnection;
+            return e.EventName;
         }
-        
+
         public static async Task<HubConnection> EnsureStartedAsync(this HubConnection hubConnection, string backendOrigin)
         {
             hubConnection = hubConnection.TryInitialize(backendOrigin);

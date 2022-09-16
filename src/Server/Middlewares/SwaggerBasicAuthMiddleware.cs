@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitectureBase.Server.Middlewares
 {
@@ -11,18 +13,19 @@ namespace CleanArchitectureBase.Server.Middlewares
     public class SwaggerAuthorizedMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ServerConfiguration _configuration;
+        private readonly IServiceProvider _serviceProvider;
 
-        public SwaggerAuthorizedMiddleware(RequestDelegate next, ServerConfiguration configuration)
+        public SwaggerAuthorizedMiddleware(RequestDelegate next, IServiceProvider serviceProvider)
         {
             _next = next;
-            _configuration = configuration;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task Invoke(HttpContext context)
         {
-            if (_configuration.ApiDocumentation.RequireLogin && context.Request.Path.StartsWithSegments("/swagger") && 
-                (context.RedirectToLoginIfUnauthorized() || (_configuration.ApiDocumentation.RequirePermission && await context.SetStatusIfPolicyMissingAsync(StatusCodes.Status403Forbidden, Permissions.Swagger.View))))
+            var configuration = _serviceProvider.GetRequiredService<ServerConfiguration>();
+            if (configuration.ApiDocumentation.RequireLogin && context.Request.Path.StartsWithSegments("/swagger") &&
+                (context.RedirectToLoginIfUnauthorized() || (configuration.ApiDocumentation.RequirePermission && await context.SetStatusIfPolicyMissingAsync(StatusCodes.Status403Forbidden, Permissions.Swagger.View))))
             {
                 return;
             }

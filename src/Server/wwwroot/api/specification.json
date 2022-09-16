@@ -423,6 +423,104 @@
         }
       }
     },
+    "/System/SystemConfiguration": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_SystemConfiguration",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "Administrator"
+            ]
+          }
+        ]
+      }
+    },
+    "/System/WriteSystemConfiguration": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "operationId": "System_WriteSystemConfiguration",
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/json",
+          "application/*+json",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "name": "config",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "Administrator"
+            ]
+          }
+        ]
+      }
+    },
     "/Audits": {
       "get": {
         "tags": [
@@ -4908,16 +5006,22 @@
       "required": [
         "enabled",
         "requireAddress",
-        "requireDocuments",
-        "registrationDocumentsMaxFileSize",
         "requiresAdministratorActivation",
-        "emailConfirmationRequired"
+        "emailConfirmationRequired",
+        "requireDocuments",
+        "registrationDocumentsMaxFileSize"
       ],
       "properties": {
         "enabled": {
           "type": "boolean"
         },
         "requireAddress": {
+          "type": "boolean"
+        },
+        "requiresAdministratorActivation": {
+          "type": "boolean"
+        },
+        "emailConfirmationRequired": {
           "type": "boolean"
         },
         "usernameRules": {
@@ -4938,12 +5042,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "requiresAdministratorActivation": {
-          "type": "boolean"
-        },
-        "emailConfirmationRequired": {
-          "type": "boolean"
         }
       }
     },
@@ -5111,6 +5209,368 @@
         1,
         2
       ]
+    },
+    "ServerConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rootobject"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "Rootobject": {
+      "type": "object",
+      "properties": {
+        "clientUrl": {
+          "type": "string"
+        },
+        "connectionStrings": {
+          "$ref": "#/definitions/Connectionstrings"
+        },
+        "publicSettings": {
+          "$ref": "#/definitions/Publicsettings"
+        },
+        "logging": {
+          "$ref": "#/definitions/Logging"
+        },
+        "allowedHosts": {
+          "type": "string"
+        },
+        "appConfiguration": {
+          "$ref": "#/definitions/Appconfiguration"
+        },
+        "cognitiveServices": {
+          "$ref": "#/definitions/Cognitiveservices"
+        },
+        "apiDocumentation": {
+          "$ref": "#/definitions/Apidocumentation"
+        },
+        "mailConfiguration": {
+          "$ref": "#/definitions/Mailconfiguration"
+        },
+        "serilog": {
+          "$ref": "#/definitions/Serilog"
+        },
+        "azure": {
+          "$ref": "#/definitions/Azure"
+        },
+        "rabbitMQ": {
+          "$ref": "#/definitions/Rabbitmq"
+        }
+      }
+    },
+    "Connectionstrings": {
+      "type": "object",
+      "properties": {
+        "defaultConnection": {
+          "type": "string"
+        }
+      }
+    },
+    "Logging": {
+      "type": "object",
+      "properties": {
+        "logLevel": {
+          "$ref": "#/definitions/Loglevel"
+        }
+      }
+    },
+    "Loglevel": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "microsoft": {
+          "type": "string"
+        },
+        "hangfire": {
+          "type": "string"
+        },
+        "microsoftHostingLifetime": {
+          "type": "string"
+        }
+      }
+    },
+    "Appconfiguration": {
+      "type": "object",
+      "properties": {
+        "idHashing": {
+          "$ref": "#/definitions/Idhashing"
+        },
+        "secret": {
+          "type": "string"
+        }
+      }
+    },
+    "Idhashing": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "minLength",
+        "allowAccessWithNotHashedId"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "minLength": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "allowAccessWithNotHashedId": {
+          "type": "boolean"
+        },
+        "salt": {
+          "type": "string"
+        }
+      }
+    },
+    "Cognitiveservices": {
+      "type": "object",
+      "properties": {
+        "translation": {
+          "$ref": "#/definitions/Translation"
+        }
+      }
+    },
+    "Translation": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "textTranslationEndpoint": {
+          "type": "string"
+        },
+        "documentTranslationEndpoint": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "Apidocumentation": {
+      "type": "object",
+      "required": [
+        "requireLogin",
+        "requirePermission"
+      ],
+      "properties": {
+        "requireLogin": {
+          "type": "boolean"
+        },
+        "requirePermission": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/Contact"
+        },
+        "license": {
+          "$ref": "#/definitions/License"
+        }
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "License": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "spdx_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Mailconfiguration": {
+      "type": "object",
+      "required": [
+        "port"
+      ],
+      "properties": {
+        "sendGridApiKey": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
+    "Serilog": {
+      "type": "object",
+      "properties": {
+        "minimumLevel": {
+          "$ref": "#/definitions/Minimumlevel"
+        },
+        "writeTo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Writeto"
+          }
+        },
+        "enrich": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        }
+      }
+    },
+    "Minimumlevel": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "override": {
+          "$ref": "#/definitions/Override"
+        }
+      }
+    },
+    "Override": {
+      "type": "object",
+      "properties": {
+        "microsoft": {
+          "type": "string"
+        },
+        "microsoftHostingLifetime": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "hangfire": {
+          "type": "string"
+        }
+      }
+    },
+    "Writeto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "args": {
+          "$ref": "#/definitions/Args"
+        }
+      }
+    },
+    "Args": {
+      "type": "object",
+      "properties": {
+        "outputTemplate": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "rollingInterval": {
+          "type": "string"
+        }
+      }
+    },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "type": "string"
+        }
+      }
+    },
+    "Azure": {
+      "type": "object",
+      "properties": {
+        "signalR": {
+          "$ref": "#/definitions/Signalr"
+        }
+      }
+    },
+    "Signalr": {
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "stickyServerMode": {
+          "type": "string"
+        },
+        "connectionString": {
+          "type": "string"
+        }
+      }
+    },
+    "Rabbitmq": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "port"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
     },
     "AuditDto": {
       "type": "object",

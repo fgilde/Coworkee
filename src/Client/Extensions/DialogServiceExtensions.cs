@@ -19,7 +19,6 @@ public static class DialogServiceExtensions
     {
         var optionsEx = await DefaultDialogOptionsEx();
         options?.Invoke(optionsEx);
-
         return await dialogService.ShowEx<TDialog>(title, parameters ?? new DialogParameters(), optionsEx);
     }
 

@@ -310,6 +310,8 @@ export interface ISystemClient {
     availableApiVersions(): Observable<string[]>;
     getConfiguration(): Observable<Publicsettings>;
     sendOnServiceBus(queue: string | null, entity: ProductDto): Observable<FileResponse | null>;
+    systemConfiguration(): Observable<ServerConfiguration>;
+    writeSystemConfiguration(config: ServerConfiguration): Observable<FileResponse | null>;
 }
 
 @Injectable({
@@ -612,6 +614,104 @@ export class SystemClient implements ISystemClient {
     }
 
     protected processSendOnServiceBus(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+
+    systemConfiguration(): Observable<ServerConfiguration> {
+        let url_ = this.baseUrl + "/System/SystemConfiguration";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSystemConfiguration(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSystemConfiguration(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ServerConfiguration>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ServerConfiguration>;
+        }));
+    }
+
+    protected processSystemConfiguration(response: HttpResponseBase): Observable<ServerConfiguration> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ServerConfiguration.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ServerConfiguration>(null as any);
+    }
+
+    writeSystemConfiguration(config: ServerConfiguration): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/System/WriteSystemConfiguration";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(config);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processWriteSystemConfiguration(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processWriteSystemConfiguration(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processWriteSystemConfiguration(response: HttpResponseBase): Observable<FileResponse | null> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6148,13 +6248,13 @@ export interface IPublicsettings {
 export class Userregistration implements IUserregistration {
     enabled!: boolean;
     requireAddress!: boolean;
+    requiresAdministratorActivation!: boolean;
+    emailConfirmationRequired!: boolean;
     usernameRules?: Usernamerules | undefined;
     passwordRules?: Passwordrules | undefined;
     requireDocuments!: boolean;
     registrationDocumentsMaxFileSize!: number;
     registrationDocumentTypes?: string[] | undefined;
-    requiresAdministratorActivation!: boolean;
-    emailConfirmationRequired!: boolean;
 
     constructor(data?: IUserregistration) {
         if (data) {
@@ -6169,6 +6269,8 @@ export class Userregistration implements IUserregistration {
         if (_data) {
             this.enabled = _data["enabled"];
             this.requireAddress = _data["requireAddress"];
+            this.requiresAdministratorActivation = _data["requiresAdministratorActivation"];
+            this.emailConfirmationRequired = _data["emailConfirmationRequired"];
             this.usernameRules = _data["usernameRules"] ? Usernamerules.fromJS(_data["usernameRules"]) : <any>undefined;
             this.passwordRules = _data["passwordRules"] ? Passwordrules.fromJS(_data["passwordRules"]) : <any>undefined;
             this.requireDocuments = _data["requireDocuments"];
@@ -6178,8 +6280,6 @@ export class Userregistration implements IUserregistration {
                 for (let item of _data["registrationDocumentTypes"])
                     this.registrationDocumentTypes!.push(item);
             }
-            this.requiresAdministratorActivation = _data["requiresAdministratorActivation"];
-            this.emailConfirmationRequired = _data["emailConfirmationRequired"];
         }
     }
 
@@ -6194,6 +6294,8 @@ export class Userregistration implements IUserregistration {
         data = typeof data === 'object' ? data : {};
         data["enabled"] = this.enabled;
         data["requireAddress"] = this.requireAddress;
+        data["requiresAdministratorActivation"] = this.requiresAdministratorActivation;
+        data["emailConfirmationRequired"] = this.emailConfirmationRequired;
         data["usernameRules"] = this.usernameRules ? this.usernameRules.toJSON() : <any>undefined;
         data["passwordRules"] = this.passwordRules ? this.passwordRules.toJSON() : <any>undefined;
         data["requireDocuments"] = this.requireDocuments;
@@ -6203,8 +6305,6 @@ export class Userregistration implements IUserregistration {
             for (let item of this.registrationDocumentTypes)
                 data["registrationDocumentTypes"].push(item);
         }
-        data["requiresAdministratorActivation"] = this.requiresAdministratorActivation;
-        data["emailConfirmationRequired"] = this.emailConfirmationRequired;
         return data;
     }
 }
@@ -6212,13 +6312,13 @@ export class Userregistration implements IUserregistration {
 export interface IUserregistration {
     enabled: boolean;
     requireAddress: boolean;
+    requiresAdministratorActivation: boolean;
+    emailConfirmationRequired: boolean;
     usernameRules?: Usernamerules | undefined;
     passwordRules?: Passwordrules | undefined;
     requireDocuments: boolean;
     registrationDocumentsMaxFileSize: number;
     registrationDocumentTypes?: string[] | undefined;
-    requiresAdministratorActivation: boolean;
-    emailConfirmationRequired: boolean;
 }
 
 export class Usernamerules implements IUsernamerules {
@@ -6513,6 +6613,1013 @@ export enum UploadType {
     Product = 0,
     ProfilePicture = 1,
     Document = 2,
+}
+
+export class Rootobject implements IRootobject {
+    clientUrl?: string | undefined;
+    connectionStrings?: Connectionstrings | undefined;
+    publicSettings?: Publicsettings | undefined;
+    logging?: Logging | undefined;
+    allowedHosts?: string | undefined;
+    appConfiguration?: Appconfiguration | undefined;
+    cognitiveServices?: Cognitiveservices | undefined;
+    apiDocumentation?: Apidocumentation | undefined;
+    mailConfiguration?: Mailconfiguration | undefined;
+    serilog?: Serilog | undefined;
+    azure?: Azure | undefined;
+    rabbitMQ?: Rabbitmq | undefined;
+
+    constructor(data?: IRootobject) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.clientUrl = _data["clientUrl"];
+            this.connectionStrings = _data["connectionStrings"] ? Connectionstrings.fromJS(_data["connectionStrings"]) : <any>undefined;
+            this.publicSettings = _data["publicSettings"] ? Publicsettings.fromJS(_data["publicSettings"]) : <any>undefined;
+            this.logging = _data["logging"] ? Logging.fromJS(_data["logging"]) : <any>undefined;
+            this.allowedHosts = _data["allowedHosts"];
+            this.appConfiguration = _data["appConfiguration"] ? Appconfiguration.fromJS(_data["appConfiguration"]) : <any>undefined;
+            this.cognitiveServices = _data["cognitiveServices"] ? Cognitiveservices.fromJS(_data["cognitiveServices"]) : <any>undefined;
+            this.apiDocumentation = _data["apiDocumentation"] ? Apidocumentation.fromJS(_data["apiDocumentation"]) : <any>undefined;
+            this.mailConfiguration = _data["mailConfiguration"] ? Mailconfiguration.fromJS(_data["mailConfiguration"]) : <any>undefined;
+            this.serilog = _data["serilog"] ? Serilog.fromJS(_data["serilog"]) : <any>undefined;
+            this.azure = _data["azure"] ? Azure.fromJS(_data["azure"]) : <any>undefined;
+            this.rabbitMQ = _data["rabbitMQ"] ? Rabbitmq.fromJS(_data["rabbitMQ"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Rootobject {
+        data = typeof data === 'object' ? data : {};
+        let result = new Rootobject();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["clientUrl"] = this.clientUrl;
+        data["connectionStrings"] = this.connectionStrings ? this.connectionStrings.toJSON() : <any>undefined;
+        data["publicSettings"] = this.publicSettings ? this.publicSettings.toJSON() : <any>undefined;
+        data["logging"] = this.logging ? this.logging.toJSON() : <any>undefined;
+        data["allowedHosts"] = this.allowedHosts;
+        data["appConfiguration"] = this.appConfiguration ? this.appConfiguration.toJSON() : <any>undefined;
+        data["cognitiveServices"] = this.cognitiveServices ? this.cognitiveServices.toJSON() : <any>undefined;
+        data["apiDocumentation"] = this.apiDocumentation ? this.apiDocumentation.toJSON() : <any>undefined;
+        data["mailConfiguration"] = this.mailConfiguration ? this.mailConfiguration.toJSON() : <any>undefined;
+        data["serilog"] = this.serilog ? this.serilog.toJSON() : <any>undefined;
+        data["azure"] = this.azure ? this.azure.toJSON() : <any>undefined;
+        data["rabbitMQ"] = this.rabbitMQ ? this.rabbitMQ.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IRootobject {
+    clientUrl?: string | undefined;
+    connectionStrings?: Connectionstrings | undefined;
+    publicSettings?: Publicsettings | undefined;
+    logging?: Logging | undefined;
+    allowedHosts?: string | undefined;
+    appConfiguration?: Appconfiguration | undefined;
+    cognitiveServices?: Cognitiveservices | undefined;
+    apiDocumentation?: Apidocumentation | undefined;
+    mailConfiguration?: Mailconfiguration | undefined;
+    serilog?: Serilog | undefined;
+    azure?: Azure | undefined;
+    rabbitMQ?: Rabbitmq | undefined;
+}
+
+export class ServerConfiguration extends Rootobject implements IServerConfiguration {
+
+    constructor(data?: IServerConfiguration) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): ServerConfiguration {
+        data = typeof data === 'object' ? data : {};
+        let result = new ServerConfiguration();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IServerConfiguration extends IRootobject {
+}
+
+export class Connectionstrings implements IConnectionstrings {
+    defaultConnection?: string | undefined;
+
+    constructor(data?: IConnectionstrings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.defaultConnection = _data["defaultConnection"];
+        }
+    }
+
+    static fromJS(data: any): Connectionstrings {
+        data = typeof data === 'object' ? data : {};
+        let result = new Connectionstrings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["defaultConnection"] = this.defaultConnection;
+        return data;
+    }
+}
+
+export interface IConnectionstrings {
+    defaultConnection?: string | undefined;
+}
+
+export class Logging implements ILogging {
+    logLevel?: Loglevel | undefined;
+
+    constructor(data?: ILogging) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.logLevel = _data["logLevel"] ? Loglevel.fromJS(_data["logLevel"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Logging {
+        data = typeof data === 'object' ? data : {};
+        let result = new Logging();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["logLevel"] = this.logLevel ? this.logLevel.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface ILogging {
+    logLevel?: Loglevel | undefined;
+}
+
+export class Loglevel implements ILoglevel {
+    default?: string | undefined;
+    microsoft?: string | undefined;
+    hangfire?: string | undefined;
+    microsoftHostingLifetime?: string | undefined;
+
+    constructor(data?: ILoglevel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.default = _data["default"];
+            this.microsoft = _data["microsoft"];
+            this.hangfire = _data["hangfire"];
+            this.microsoftHostingLifetime = _data["microsoftHostingLifetime"];
+        }
+    }
+
+    static fromJS(data: any): Loglevel {
+        data = typeof data === 'object' ? data : {};
+        let result = new Loglevel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["default"] = this.default;
+        data["microsoft"] = this.microsoft;
+        data["hangfire"] = this.hangfire;
+        data["microsoftHostingLifetime"] = this.microsoftHostingLifetime;
+        return data;
+    }
+}
+
+export interface ILoglevel {
+    default?: string | undefined;
+    microsoft?: string | undefined;
+    hangfire?: string | undefined;
+    microsoftHostingLifetime?: string | undefined;
+}
+
+export class Appconfiguration implements IAppconfiguration {
+    idHashing?: Idhashing | undefined;
+    secret?: string | undefined;
+
+    constructor(data?: IAppconfiguration) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.idHashing = _data["idHashing"] ? Idhashing.fromJS(_data["idHashing"]) : <any>undefined;
+            this.secret = _data["secret"];
+        }
+    }
+
+    static fromJS(data: any): Appconfiguration {
+        data = typeof data === 'object' ? data : {};
+        let result = new Appconfiguration();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["idHashing"] = this.idHashing ? this.idHashing.toJSON() : <any>undefined;
+        data["secret"] = this.secret;
+        return data;
+    }
+}
+
+export interface IAppconfiguration {
+    idHashing?: Idhashing | undefined;
+    secret?: string | undefined;
+}
+
+export class Idhashing implements IIdhashing {
+    enabled!: boolean;
+    minLength!: number;
+    allowAccessWithNotHashedId!: boolean;
+    salt?: string | undefined;
+
+    constructor(data?: IIdhashing) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.enabled = _data["enabled"];
+            this.minLength = _data["minLength"];
+            this.allowAccessWithNotHashedId = _data["allowAccessWithNotHashedId"];
+            this.salt = _data["salt"];
+        }
+    }
+
+    static fromJS(data: any): Idhashing {
+        data = typeof data === 'object' ? data : {};
+        let result = new Idhashing();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["enabled"] = this.enabled;
+        data["minLength"] = this.minLength;
+        data["allowAccessWithNotHashedId"] = this.allowAccessWithNotHashedId;
+        data["salt"] = this.salt;
+        return data;
+    }
+}
+
+export interface IIdhashing {
+    enabled: boolean;
+    minLength: number;
+    allowAccessWithNotHashedId: boolean;
+    salt?: string | undefined;
+}
+
+export class Cognitiveservices implements ICognitiveservices {
+    translation?: Translation | undefined;
+
+    constructor(data?: ICognitiveservices) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.translation = _data["translation"] ? Translation.fromJS(_data["translation"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Cognitiveservices {
+        data = typeof data === 'object' ? data : {};
+        let result = new Cognitiveservices();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["translation"] = this.translation ? this.translation.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface ICognitiveservices {
+    translation?: Translation | undefined;
+}
+
+export class Translation implements ITranslation {
+    key?: string | undefined;
+    textTranslationEndpoint?: string | undefined;
+    documentTranslationEndpoint?: string | undefined;
+    region?: string | undefined;
+
+    constructor(data?: ITranslation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.key = _data["key"];
+            this.textTranslationEndpoint = _data["textTranslationEndpoint"];
+            this.documentTranslationEndpoint = _data["documentTranslationEndpoint"];
+            this.region = _data["region"];
+        }
+    }
+
+    static fromJS(data: any): Translation {
+        data = typeof data === 'object' ? data : {};
+        let result = new Translation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["key"] = this.key;
+        data["textTranslationEndpoint"] = this.textTranslationEndpoint;
+        data["documentTranslationEndpoint"] = this.documentTranslationEndpoint;
+        data["region"] = this.region;
+        return data;
+    }
+}
+
+export interface ITranslation {
+    key?: string | undefined;
+    textTranslationEndpoint?: string | undefined;
+    documentTranslationEndpoint?: string | undefined;
+    region?: string | undefined;
+}
+
+export class Apidocumentation implements IApidocumentation {
+    requireLogin!: boolean;
+    requirePermission!: boolean;
+    title?: string | undefined;
+    description?: string | undefined;
+    contact?: Contact | undefined;
+    license?: License | undefined;
+
+    constructor(data?: IApidocumentation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.requireLogin = _data["requireLogin"];
+            this.requirePermission = _data["requirePermission"];
+            this.title = _data["title"];
+            this.description = _data["description"];
+            this.contact = _data["contact"] ? Contact.fromJS(_data["contact"]) : <any>undefined;
+            this.license = _data["license"] ? License.fromJS(_data["license"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Apidocumentation {
+        data = typeof data === 'object' ? data : {};
+        let result = new Apidocumentation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["requireLogin"] = this.requireLogin;
+        data["requirePermission"] = this.requirePermission;
+        data["title"] = this.title;
+        data["description"] = this.description;
+        data["contact"] = this.contact ? this.contact.toJSON() : <any>undefined;
+        data["license"] = this.license ? this.license.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IApidocumentation {
+    requireLogin: boolean;
+    requirePermission: boolean;
+    title?: string | undefined;
+    description?: string | undefined;
+    contact?: Contact | undefined;
+    license?: License | undefined;
+}
+
+export class Contact implements IContact {
+    name?: string | undefined;
+    email?: string | undefined;
+    url?: string | undefined;
+
+    constructor(data?: IContact) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.email = _data["email"];
+            this.url = _data["url"];
+        }
+    }
+
+    static fromJS(data: any): Contact {
+        data = typeof data === 'object' ? data : {};
+        let result = new Contact();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["email"] = this.email;
+        data["url"] = this.url;
+        return data;
+    }
+}
+
+export interface IContact {
+    name?: string | undefined;
+    email?: string | undefined;
+    url?: string | undefined;
+}
+
+export class License implements ILicense {
+    name?: string | undefined;
+    spdx_id?: string | undefined;
+    url?: string | undefined;
+
+    constructor(data?: ILicense) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.spdx_id = _data["spdx_id"];
+            this.url = _data["url"];
+        }
+    }
+
+    static fromJS(data: any): License {
+        data = typeof data === 'object' ? data : {};
+        let result = new License();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["spdx_id"] = this.spdx_id;
+        data["url"] = this.url;
+        return data;
+    }
+}
+
+export interface ILicense {
+    name?: string | undefined;
+    spdx_id?: string | undefined;
+    url?: string | undefined;
+}
+
+export class Mailconfiguration implements IMailconfiguration {
+    sendGridApiKey?: string | undefined;
+    from?: string | undefined;
+    host?: string | undefined;
+    port!: number;
+    userName?: string | undefined;
+    password?: string | undefined;
+    displayName?: string | undefined;
+
+    constructor(data?: IMailconfiguration) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.sendGridApiKey = _data["sendGridApiKey"];
+            this.from = _data["from"];
+            this.host = _data["host"];
+            this.port = _data["port"];
+            this.userName = _data["userName"];
+            this.password = _data["password"];
+            this.displayName = _data["displayName"];
+        }
+    }
+
+    static fromJS(data: any): Mailconfiguration {
+        data = typeof data === 'object' ? data : {};
+        let result = new Mailconfiguration();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["sendGridApiKey"] = this.sendGridApiKey;
+        data["from"] = this.from;
+        data["host"] = this.host;
+        data["port"] = this.port;
+        data["userName"] = this.userName;
+        data["password"] = this.password;
+        data["displayName"] = this.displayName;
+        return data;
+    }
+}
+
+export interface IMailconfiguration {
+    sendGridApiKey?: string | undefined;
+    from?: string | undefined;
+    host?: string | undefined;
+    port: number;
+    userName?: string | undefined;
+    password?: string | undefined;
+    displayName?: string | undefined;
+}
+
+export class Serilog implements ISerilog {
+    minimumLevel?: Minimumlevel | undefined;
+    writeTo?: Writeto[] | undefined;
+    enrich?: string[] | undefined;
+    properties?: Properties | undefined;
+
+    constructor(data?: ISerilog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.minimumLevel = _data["minimumLevel"] ? Minimumlevel.fromJS(_data["minimumLevel"]) : <any>undefined;
+            if (Array.isArray(_data["writeTo"])) {
+                this.writeTo = [] as any;
+                for (let item of _data["writeTo"])
+                    this.writeTo!.push(Writeto.fromJS(item));
+            }
+            if (Array.isArray(_data["enrich"])) {
+                this.enrich = [] as any;
+                for (let item of _data["enrich"])
+                    this.enrich!.push(item);
+            }
+            this.properties = _data["properties"] ? Properties.fromJS(_data["properties"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Serilog {
+        data = typeof data === 'object' ? data : {};
+        let result = new Serilog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["minimumLevel"] = this.minimumLevel ? this.minimumLevel.toJSON() : <any>undefined;
+        if (Array.isArray(this.writeTo)) {
+            data["writeTo"] = [];
+            for (let item of this.writeTo)
+                data["writeTo"].push(item.toJSON());
+        }
+        if (Array.isArray(this.enrich)) {
+            data["enrich"] = [];
+            for (let item of this.enrich)
+                data["enrich"].push(item);
+        }
+        data["properties"] = this.properties ? this.properties.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface ISerilog {
+    minimumLevel?: Minimumlevel | undefined;
+    writeTo?: Writeto[] | undefined;
+    enrich?: string[] | undefined;
+    properties?: Properties | undefined;
+}
+
+export class Minimumlevel implements IMinimumlevel {
+    default?: string | undefined;
+    override?: Override | undefined;
+
+    constructor(data?: IMinimumlevel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.default = _data["default"];
+            this.override = _data["override"] ? Override.fromJS(_data["override"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Minimumlevel {
+        data = typeof data === 'object' ? data : {};
+        let result = new Minimumlevel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["default"] = this.default;
+        data["override"] = this.override ? this.override.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IMinimumlevel {
+    default?: string | undefined;
+    override?: Override | undefined;
+}
+
+export class Override implements IOverride {
+    microsoft?: string | undefined;
+    microsoftHostingLifetime?: string | undefined;
+    system?: string | undefined;
+    hangfire?: string | undefined;
+
+    constructor(data?: IOverride) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.microsoft = _data["microsoft"];
+            this.microsoftHostingLifetime = _data["microsoftHostingLifetime"];
+            this.system = _data["system"];
+            this.hangfire = _data["hangfire"];
+        }
+    }
+
+    static fromJS(data: any): Override {
+        data = typeof data === 'object' ? data : {};
+        let result = new Override();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["microsoft"] = this.microsoft;
+        data["microsoftHostingLifetime"] = this.microsoftHostingLifetime;
+        data["system"] = this.system;
+        data["hangfire"] = this.hangfire;
+        return data;
+    }
+}
+
+export interface IOverride {
+    microsoft?: string | undefined;
+    microsoftHostingLifetime?: string | undefined;
+    system?: string | undefined;
+    hangfire?: string | undefined;
+}
+
+export class Writeto implements IWriteto {
+    name?: string | undefined;
+    args?: Args | undefined;
+
+    constructor(data?: IWriteto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.args = _data["args"] ? Args.fromJS(_data["args"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Writeto {
+        data = typeof data === 'object' ? data : {};
+        let result = new Writeto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["args"] = this.args ? this.args.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IWriteto {
+    name?: string | undefined;
+    args?: Args | undefined;
+}
+
+export class Args implements IArgs {
+    outputTemplate?: string | undefined;
+    path?: string | undefined;
+    rollingInterval?: string | undefined;
+
+    constructor(data?: IArgs) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.outputTemplate = _data["outputTemplate"];
+            this.path = _data["path"];
+            this.rollingInterval = _data["rollingInterval"];
+        }
+    }
+
+    static fromJS(data: any): Args {
+        data = typeof data === 'object' ? data : {};
+        let result = new Args();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["outputTemplate"] = this.outputTemplate;
+        data["path"] = this.path;
+        data["rollingInterval"] = this.rollingInterval;
+        return data;
+    }
+}
+
+export interface IArgs {
+    outputTemplate?: string | undefined;
+    path?: string | undefined;
+    rollingInterval?: string | undefined;
+}
+
+export class Properties implements IProperties {
+    application?: string | undefined;
+
+    constructor(data?: IProperties) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.application = _data["application"];
+        }
+    }
+
+    static fromJS(data: any): Properties {
+        data = typeof data === 'object' ? data : {};
+        let result = new Properties();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["application"] = this.application;
+        return data;
+    }
+}
+
+export interface IProperties {
+    application?: string | undefined;
+}
+
+export class Azure implements IAzure {
+    signalR?: Signalr | undefined;
+
+    constructor(data?: IAzure) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.signalR = _data["signalR"] ? Signalr.fromJS(_data["signalR"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): Azure {
+        data = typeof data === 'object' ? data : {};
+        let result = new Azure();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["signalR"] = this.signalR ? this.signalR.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IAzure {
+    signalR?: Signalr | undefined;
+}
+
+export class Signalr implements ISignalr {
+    enabled!: boolean;
+    stickyServerMode?: string | undefined;
+    connectionString?: string | undefined;
+
+    constructor(data?: ISignalr) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.enabled = _data["enabled"];
+            this.stickyServerMode = _data["stickyServerMode"];
+            this.connectionString = _data["connectionString"];
+        }
+    }
+
+    static fromJS(data: any): Signalr {
+        data = typeof data === 'object' ? data : {};
+        let result = new Signalr();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["enabled"] = this.enabled;
+        data["stickyServerMode"] = this.stickyServerMode;
+        data["connectionString"] = this.connectionString;
+        return data;
+    }
+}
+
+export interface ISignalr {
+    enabled: boolean;
+    stickyServerMode?: string | undefined;
+    connectionString?: string | undefined;
+}
+
+export class Rabbitmq implements IRabbitmq {
+    enabled!: boolean;
+    hostName?: string | undefined;
+    port!: number;
+    userName?: string | undefined;
+    password?: string | undefined;
+
+    constructor(data?: IRabbitmq) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.enabled = _data["enabled"];
+            this.hostName = _data["hostName"];
+            this.port = _data["port"];
+            this.userName = _data["userName"];
+            this.password = _data["password"];
+        }
+    }
+
+    static fromJS(data: any): Rabbitmq {
+        data = typeof data === 'object' ? data : {};
+        let result = new Rabbitmq();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["enabled"] = this.enabled;
+        data["hostName"] = this.hostName;
+        data["port"] = this.port;
+        data["userName"] = this.userName;
+        data["password"] = this.password;
+        return data;
+    }
+}
+
+export interface IRabbitmq {
+    enabled: boolean;
+    hostName?: string | undefined;
+    port: number;
+    userName?: string | undefined;
+    password?: string | undefined;
 }
 
 export class AuditDto implements IAuditDto {

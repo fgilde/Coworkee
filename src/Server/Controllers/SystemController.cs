@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
+using CleanArchitectureBase.Shared.Constants.Role;
+using Newtonsoft.Json;
 using Nextended.Core.Extensions;
 
 
@@ -68,5 +71,44 @@ namespace CleanArchitectureBase.Server.Controllers
                 Content = entity
             }));
         }
+
+
+        [Authorize(Roles = RoleConstants.AdministratorRole)]
+        [HttpGet(nameof(SystemConfiguration))]
+        [Produces(typeof(ServerConfiguration))]
+        public IActionResult SystemConfiguration()
+        {
+            return Ok(Configuration);
+        }
+
+        [Authorize(Roles = RoleConstants.AdministratorRole)]
+        [HttpPost(nameof(WriteSystemConfiguration))]
+        public IActionResult WriteSystemConfiguration(ServerConfiguration config)
+        {
+            // For temporary set
+            foreach (var item in config.ToFlatDictionary())
+                Get<IConfiguration>()[item.Key.Replace(".", ":")] = item.Value;
+            // For persistent
+            System.IO.File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "appSettings.json"), JsonConvert.SerializeObject(config, Formatting.Indented));
+            //Get<IHostApplicationLifetime>().StopApplication();
+            return Ok();
+        }
+
+
+        //[HttpPost(nameof(SendNotification))]
+        //public async Task<IActionResult> SendNotification()
+        //{
+        //    await Get<INotificationService>().SendAsync(new NotificationRequest()
+        //    {
+        //        Target = EventTarget.All,
+        //        Content = "Test",
+        //        Excerpt = "Tes",
+        //        PersistInDb = false,
+        //        SendAsMail = NotificationAsMail.Never,
+        //        Subject = "Moin moin"
+        //    });
+        //    return Ok();
+        //}
+
     }
 }

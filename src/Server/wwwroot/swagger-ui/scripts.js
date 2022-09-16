@@ -56,7 +56,26 @@ function isDarkModePreferred() {
     return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 }
 
+function _swaggerLoginWithToken(token) {
+    var state = {
+        JWT: {
+            name: 'JWT',
+            value: 'Bearer ' + token
+        }
+    }
+    localStorage.setItem('authorized', JSON.stringify(state));
+}
+
+function _swaggerLoginWithCurrentUser() {
+    if (localStorage.authToken) {
+        _swaggerLoginWithToken(JSON.parse(localStorage.authToken));
+        return true;
+    }
+    return false;
+}
+
 init = function () {
+    _swaggerLoginWithCurrentUser();
     var cb = document.getElementById('checkDarkTheme');
     if (cb && isDarkModePreferred()) {
         cb.checked = true;

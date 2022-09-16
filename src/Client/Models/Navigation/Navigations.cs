@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CleanArchitectureBase.Shared.Constants.Application;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Constants.Role;
 using MudBlazor;
 using Nextended.Core.Extensions;
 
@@ -34,6 +35,7 @@ namespace CleanArchitectureBase.Client.Models.Navigation
             {
                 Children = new()
                 {
+                    new NavigationEntry("Site Settings", Icons.Material.Outlined.AdminPanelSettings, "/admin/site-settings").WithRoles(RoleConstants.AdministratorRole),
                     new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
                     new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
                     new NavigationEntry("Localization")

@@ -1,0 +1,45 @@
+﻿@*@typeparam TDto where TDto : CleanArchitectureBase.Application.Common.Models.IDtoBase;*@
+@typeparam TDto;
+
+<style>
+    .change-notification-sticky {
+        position: sticky;
+        top: 10%;
+        z-index: 5;
+        width: 80%;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .change-notification-fixed-appbar {
+        position: fixed;
+        top: var(--mud-appbar-height);
+        width: 100%;
+        right: 0;
+        z-index: 1100;
+        border-radius: 0;
+    }
+
+    .reload-auto-switch p {
+        font-size: 8pt;
+    }
+</style>
+
+<div>
+    @if (_notificationOpen)
+    {
+        <MudAlert Class="@($"{NotificationStyle.ToDescriptionString()} mud-alert-message-w-100")"
+              CloseIconClicked="@CloseNotification"
+              Style="@(_notificationOpen ? $"animation: {aniStyle}" : "")"
+              Icon="@Icons.Material.Filled.Update" ShowCloseIcon="true" ContentAlignment="HorizontalAlignment.Center" Elevation="5" Severity="Severity.Info" Variant="Variant.Filled">
+            @_notificationMessage
+            <MudSpacer></MudSpacer>
+            <MudSwitch Class="reload-auto-switch" CheckedChanged="@(ReloadAutoCheckChange)" Color="Color.Warning" T="bool" Label="@_localizer["Update automatically next time"]"></MudSwitch>
+            <MudButton Style="float: right; margin-top: -4px;" Variant="Variant.Filled" Color="Color.Warning" EndIcon="@Icons.Material.Filled.Refresh" Size="Size.Small" OnClick="@OnUpdateClick">@_localizer["Update Now"]</MudButton>
+        </MudAlert>
+    }
+    @ChildContent
+</div>
+

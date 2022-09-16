@@ -43,13 +43,13 @@ namespace CleanArchitectureBase.Application.Configurations
     {
         public bool Enabled { get; set; }
         public bool RequireAddress { get; set; }
+        public bool RequiresAdministratorActivation { get; set; }
+        public bool EmailConfirmationRequired { get; set; }
         public Usernamerules UsernameRules { get; set; }
         public Passwordrules PasswordRules { get; set; }
         public bool RequireDocuments { get; set; }
         public int RegistrationDocumentsMaxFileSize { get; set; }
         public string[] RegistrationDocumentTypes { get; set; }
-        public bool RequiresAdministratorActivation { get; set; }
-        public bool EmailConfirmationRequired { get; set; }
     }
 
     public class Usernamerules

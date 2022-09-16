@@ -1,0 +1,58 @@
+﻿@page "/admin/site-settings"
+@using CleanArchitectureBase.Shared.Constants.Role
+@attribute [Authorize(Roles = RoleConstants.AdministratorRole)]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Settings> _localizer
+<ReactOnPreferenceChanged Component="this" />
+<PageHeaderTitle Title="@_localizer["System Settings"]" Description="@_localizer["Change the system settings carefully"]" />
+
+<style>
+    .mud-ex-keep-input-label-visible.chip-select-chipsonly .mud-input-label {
+        opacity: 0;
+    }
+</style>
+
+@if (ServerConfiguration != null)
+{
+    <MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
+        <MudTabPanel Text="@_localizer["Server Settings"]">
+            <MudExObjectEditForm
+                IsLoading="@_isLoading"
+                StickyToolbar="true"
+                StickyActionBar="true"
+                ActionBarClass="action-bar-border"
+                ActionBarColor="Color.Surface"
+                ToolbarColor="Color.Surface"
+                GroupingStyle="GroupingStyle.Flat"
+                DefaultGroupName="@_localizer["General"]"
+                OnCancel="@OnCancel"
+                OnValidSubmit="@OnSubmitServerConfiguration"
+                MetaConfiguration="@Configure()"
+                Value="@ServerConfiguration">
+            </MudExObjectEditForm>
+        </MudTabPanel>
+        <MudTabPanel Text="@_localizer["Client Settings"]">
+            <MudExObjectEditForm
+                IsLoading="@_isLoading"
+                StickyToolbar="true"
+                StickyActionBar="true"
+                ActionBarClass="action-bar-border"
+                ActionBarColor="Color.Surface"
+                ToolbarColor="Color.Surface"
+                GroupingStyle="GroupingStyle.Flat"
+                DefaultGroupName="@_localizer["General"]"
+                OnCancel="@OnCancel"
+                OnValidSubmit="@OnSubmitClientConfiguration"
+                MetaConfiguration="@ConfigureClientSettings()"
+                Value="@_config">
+            </MudExObjectEditForm>
+        </MudTabPanel>
+    </MudTabs>
+    
+
+}
+else
+{
+    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7"/>
+}
+

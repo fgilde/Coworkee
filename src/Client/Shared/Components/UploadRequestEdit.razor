@@ -43,7 +43,7 @@
                                   CloseIconClicked="(() => Remove(request))">
                             @if (AllowRename && !ReadOnly)
                             {
-                                <MudTextField DisableUnderLine="true" Error="@(string.IsNullOrWhiteSpace(request.FileName))" @bind-Value="@request.FileName"></MudTextField>
+                                <MudTextField Class="mud-ex-collection-inline-string-edit" DisableUnderLine="true" Error="@(string.IsNullOrWhiteSpace(request.FileName))" @bind-Value="@request.FileName"></MudTextField>
                             }
                             else
                             {

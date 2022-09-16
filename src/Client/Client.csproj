@@ -37,13 +37,9 @@
     </PackageReference>
     <PackageReference Include="PSC.Blazor.Components.BrowserDetect" Version="1.0.6" />
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-    <PackageReference Include="MudBlazor" Version="6.0.14" />
-    <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.6" />
-    <PackageReference Include="MudBlazor.Extensions " Version="1.5.1" />
-    <!--<Reference Include="MudBlazor.Extensions">
-      <HintPath>C:\dev\privat\github\MudBlazor.Extensions\MudBlazor.Extensions\bin\Debug\net6.0\MudBlazor.Extensions.dll</HintPath>
-    </Reference>-->
-
+    <PackageReference Include="MudBlazor" Version="6.0.15" />
+    <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.7" />
+    <PackageReference Include="MudBlazor.Extensions " Version="1.6.1" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.1.0" />
     <!--<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
@@ -83,9 +79,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="MudBlazor.Extensions" Version="1.3.0" />
-    <PackageReference Update="MudBlazor.ThemeManager" Version="1.0.7" />
+    <Folder Include="Configuration\MudExObjectEdit\MetaConfigurations\" />
   </ItemGroup>
-
-
+  
 </Project>

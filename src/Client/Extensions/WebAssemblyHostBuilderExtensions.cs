@@ -29,6 +29,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Contracts.Services;
+using CleanArchitectureBase.Client.Configuration.MudExObjectEdit;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace CleanArchitectureBase.Client.Extensions
@@ -65,6 +66,7 @@ namespace CleanArchitectureBase.Client.Extensions
                     configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
+                .AddMudExWithExtendedDefaults()
                 .AddScoped<ClientPreferenceManager>()
                 .AddScoped<IClientPreferenceManager, ClientPreferenceManager>()
                 .AddScoped<ApplicationStateProvider>()

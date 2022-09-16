@@ -58,6 +58,7 @@ namespace CleanArchitectureBase.Server.Extensions
                 a.CustomHeadContent = File.ReadAllText("wwwroot/swagger-ui/header.html");
                 a.CustomJavaScriptPath = "/swagger-ui/scripts.js";
                 a.CustomStylesheetPath = "/swagger-ui/styles.css";
+                a.PersistAuthorization = true;
             });
             app.UseOpenApi(options =>
             {

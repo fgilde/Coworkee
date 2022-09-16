@@ -60,6 +60,10 @@ namespace CleanArchitectureBase.Server.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> DownloadNugetPackage()
         {
+            //if (Configuration.ApiDocumentation.RequireLogin && User.Identity is not {IsAuthenticated: true})
+            //    return Unauthorized();
+            //if (Configuration.ApiDocumentation.RequirePermission && !(await Get<IPermissionService>().HasPolicyAsync(Permissions.Swagger.View)))
+            //    return Forbid();
             var file = Directory.EnumerateFiles("wwwroot/sdk", "*.nupkg").FirstOrDefault();
             if (!string.IsNullOrEmpty(file) && System.IO.File.Exists(file))
                 return File(await System.IO.File.ReadAllBytesAsync(file), "application/zip", Path.GetFileName(file));

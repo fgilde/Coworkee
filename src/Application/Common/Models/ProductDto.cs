@@ -9,7 +9,6 @@ namespace CleanArchitectureBase.Application.Common.Models
         public string Description { get; set; }
         public decimal Rate { get; set; }
         public BrandDto Brand { get; set; }
-        public string BrandId { get; set; }
         public string ImageDataURL { get; set; }
         public UploadRequest UploadRequest { get; set; }
     }

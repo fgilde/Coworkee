@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Wrapper;
@@ -69,18 +70,22 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task<bool> CreateOrEditBrand(BrandDto brandOrNull)
         {
-           // var r = await _dialogService.EditObject(brandOrNull ?? new BrandDto(), brandOrNull == null ? _localizer["Add Brand"] : _localizer["Update Brand"], await DialogServiceExtensions.DefaultDialogOptionsEx());
-            
-            var parameters = new DialogParameters();
-            if (brandOrNull != null)
+            return !(await _dialogService.EditOrCreate(brandOrNull, async (dto, _) =>
             {
-                parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<BrandDto>());
-            }
-            
-            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
-            var result = await dialog.Result;
+                await _api.Brands_PostAsync(new AddEditBrandsCommand(dto));
+                return null;
+            })).Cancelled;
 
-            return !result.Cancelled;
+            //var parameters = new DialogParameters();
+            //if (brandOrNull != null)
+            //{
+            //    parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<BrandDto>());
+            //}
+
+            //var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
+            //var result = await dialog.Result;
+
+            //return !result.Cancelled;
         }
     }
 }

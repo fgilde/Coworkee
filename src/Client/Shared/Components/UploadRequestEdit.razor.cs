@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using HeyRed.Mime;
@@ -17,7 +16,6 @@ using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Shared.Helper;
 using CleanArchitectureBase.Shared.Misc;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Extensions;
@@ -25,6 +23,7 @@ using MudBlazor.Extensions.Options;
 using Nextended.Blazor.Extensions;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.Shared.Dialogs;
+using Nextended.Core;
 using BrowserFileExtensions = Nextended.Blazor.Extensions.BrowserFileExtensions;
 
 namespace CleanArchitectureBase.Client.Shared.Components;
@@ -76,7 +75,8 @@ public partial class UploadRequestEdit : IAsyncDisposable
     [Parameter] public bool DisplayErrors { get; set; } = true;
     [Parameter] public IList<UploadRequest> SelectedRequests { get; set; }
     [Parameter] public TimeSpan RemoveErrorAfter { get; set; } = TimeSpan.FromSeconds(5);
-    [Parameter] public bool AutoRemoveError { get; set; } = true;
+    [Parameter] public bool AutoRemoveError { get; set; }
+    [Parameter] public bool RemoveErrorOnChange { get; set; } = true;
     [Parameter] public bool AllowDrop { get; set; } = true;
 
     [Parameter] public EventCallback<string> OnError { get; set; }
@@ -99,7 +99,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
         UploadFieldId ??= $"{nameof(UploadRequestEdit)}-FileInput-{Guid.NewGuid()}";
         _accept = string.Join(",", (MimeTypes ?? Array.Empty<string>()).Distinct());
         var extensions = (MimeTypes?.Select(MimeTypesMap.GetExtension) ?? Array.Empty<string>()).ToList();
-        if (MimeTypes?.Any(MimeTypeHelper.IsZip) == true)
+        if (MimeTypes?.Any(MimeType.IsZip) == true)
             extensions.Add(".zip");
         _acceptExtensions = string.Join(",", extensions.Distinct());
         return base.OnInitializedAsync();
@@ -170,9 +170,14 @@ public partial class UploadRequestEdit : IAsyncDisposable
     {
         if (MaxFileSize != null && MaxFileSize.Value != default && MaxFileSize.Value > 0 && file.Size > MaxFileSize)
             return !SetError(_localizer["The file has exceeded the maximum size of {0} with {1}. File size is {2}", BrowserFileExtensions.GetReadableFileSize(MaxFileSize.Value, _localizer), BrowserFileExtensions.GetReadableFileSize(file.Size - MaxFileSize.Value, _localizer), file.GetReadableFileSize(_localizer)]);
+        
+        return IsAllowed(file.ContentType);
+    }
 
-        if (!MimeTypeAllowed(file.ContentType))
-            return !SetError(_localizer["Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2})", file.ContentType, _accept, _acceptExtensions]);
+    private bool IsAllowed(string mimeType)
+    {
+        if (!MimeTypeAllowed(mimeType))
+            return !SetError(_localizer["Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2})", mimeType, _accept, _acceptExtensions]);
 
         if (UploadRequests?.Count >= Math.Max(1, MaxMultipleFiles))
             return !SetError(_localizer["A maximum of {0} files are allowed", MaxMultipleFiles]);
@@ -183,7 +188,7 @@ public partial class UploadRequestEdit : IAsyncDisposable
     private bool MimeTypeAllowed(string mimeType)
     {
         if (MimeTypes?.Any() != true) return true;
-        var hasMatched = MimeTypeHelper.Matches(mimeType, MimeTypes);
+        var hasMatched = MimeType.Matches(mimeType, MimeTypes);
         return (MimeRestrictionType != MimeTypeRestrictionType.WhiteList || hasMatched) && (MimeRestrictionType != MimeTypeRestrictionType.BlackList || !hasMatched);
     }
 
@@ -232,6 +237,8 @@ public partial class UploadRequestEdit : IAsyncDisposable
     {
         UploadRequests.Remove(request);
         UploadRequestRemoved.InvokeAsync(request);
+        if (RemoveErrorOnChange)
+            SetError();
         RaiseChangedAsync();
         StateHasChanged();
     }
@@ -242,6 +249,8 @@ public partial class UploadRequestEdit : IAsyncDisposable
         UploadRequests?.Clear();
         foreach (var item in array)
             UploadRequestRemoved.InvokeAsync(item);
+        if (RemoveErrorOnChange)
+            SetError();
         RaiseChangedAsync();
         StateHasChanged();
     }
@@ -267,6 +276,12 @@ public partial class UploadRequestEdit : IAsyncDisposable
         {
             SelectedRequests ??= new List<UploadRequest>();
 
+            if (SelectedRequests.Contains(request) && SelectItemsMode == SelectItemsMode.Single)
+            {
+                SelectedRequests.Remove(request);
+                return;
+            }
+
             if (SelectItemsMode == SelectItemsMode.Single || (SelectItemsMode == SelectItemsMode.MultiSelectWithCtrlKey && !args.CtrlKey))
                 SelectedRequests.Clear();
 
@@ -287,17 +302,27 @@ public partial class UploadRequestEdit : IAsyncDisposable
 
     private async Task Preview(UploadRequest request)
     {
-        //TODO SHow with IBrowserfile
-        if (MimeTypeHelper.IsZip(request.ContentType) && request.Data != null)
+        if (MimeType.IsZip(request.ContentType) && request.Data != null)
         {
             var ms = new MemoryStream(request.Data);
-            await MudExFileDisplayDialog.Show(_dialogService, ms, request.FileName, request.ContentType);
+            await _dialogService.ShowFileDisplayDialog(ms, request.FileName, request.ContentType);
         }
         else
         {
             var dataUrl = _navigationManager.ToAbsoluteServerUri(request.Url ?? await DataUrl.GetDataUrlAsync(request.Data, request.ContentType));
-            await MudExFileDisplayDialog.Show(_dialogService, dataUrl, request.FileName, request.ContentType);
+            await _dialogService.ShowFileDisplayDialog(dataUrl, request.FileName, request.ContentType);
+            // await _dialogService.ShowFileDisplayDialog(dataUrl, request.FileName, request.ContentType, HandleContentErrorFunc);
         }
+    }
+
+    private Task<ContentErrorResult> HandleContentErrorFunc(IFileDisplayInfos arg)
+    {
+        if (arg.ContentType == "text/html")
+        {
+            var contentErrorResult = ContentErrorResult.RedirectTo("https://www.golem.de").SetProperties(r => r.FallBackInIframe = true, r => r.SandBoxIframes = false);
+            return Task.FromResult(contentErrorResult);
+        }
+        return Task.FromResult(ContentErrorResult.Unhandled);
     }
 
     private bool IsValidUrl(string s) => Uri.TryCreate(s, UriKind.Absolute, out var uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
@@ -334,8 +359,11 @@ public partial class UploadRequestEdit : IAsyncDisposable
             Data = Array.Empty<byte>(),
             Url = url
         };
-        Add(request);
-        await RaiseChangedAsync();
+        if (IsAllowed(request.ContentType))
+        {
+            Add(request);
+            await RaiseChangedAsync();
+        }
     }
 
     private void Add(UploadRequest request)
@@ -351,6 +379,9 @@ public partial class UploadRequestEdit : IAsyncDisposable
             return;
         }
 
+        if (RemoveErrorOnChange)
+            SetError();
+        
         (UploadRequests ??= new List<UploadRequest>()).Add(request);
         StateHasChanged();
     }

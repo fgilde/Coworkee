@@ -42,6 +42,14 @@ namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
             _localizer = localizer;
         }
 
+        protected override Product ToEntity(ProductDto dto)
+        {
+            var res = base.ToEntity(dto);
+            res.Brand = UnitOfWork.Repository<Brand>().GetById(dto.Brand.GetId());
+            res.BrandId = res.Brand.Id;
+            return res;
+        }
+
         public override async Task<AddUpdateResult<ProductDto>> Handle(AddEditProductsCommand command, CancellationToken cancellationToken)
         {
             if (command.Items.Any(item => UnitOfWork.Repository<Product>().Entities.Any(p => p.Id != item.GetId() && p.Barcode == item.Barcode)))

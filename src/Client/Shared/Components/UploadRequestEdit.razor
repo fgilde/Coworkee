@@ -10,7 +10,10 @@
 <div class="@(Variant == Variant.Outlined ? "upload-request-outlined-border" : "")">
     @if (!string.IsNullOrWhiteSpace(_errorMessage) && DisplayErrors)
     {
-        <p class="error-message">@_errorMessage</p>
+        <MudAlert Severity="Severity.Error" Class="upload-request-alert" ShowCloseIcon="true" CloseIconClicked="@(() => SetError())">
+            <span class="upload-request-alert-text">@_errorMessage</span>
+        </MudAlert>
+        @*<p class="error-message">@_errorMessage</p>*@
     }
 
 
@@ -30,7 +33,7 @@
                 }
             }
 
-            @foreach (var request in UploadRequests ?? Enumerable.Empty<UploadRequest>())
+            @foreach (var request in (UploadRequests ?? Enumerable.Empty<UploadRequest>()).Where(r => r?.Data != null || !string.IsNullOrEmpty(r?.Url)))
             {
                 <MudItem xs="12">
                     <MudItem>

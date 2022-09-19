@@ -6457,7 +6457,6 @@ export class ProductDto extends HashableDtoBase implements IProductDto {
     description?: string | undefined;
     rate!: number;
     brand?: BrandDto | undefined;
-    brandId?: string | undefined;
     imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
 
@@ -6473,7 +6472,6 @@ export class ProductDto extends HashableDtoBase implements IProductDto {
             this.description = _data["description"];
             this.rate = _data["rate"];
             this.brand = _data["brand"] ? BrandDto.fromJS(_data["brand"]) : <any>undefined;
-            this.brandId = _data["brandId"];
             this.imageDataURL = _data["imageDataURL"];
             this.uploadRequest = _data["uploadRequest"] ? UploadRequest.fromJS(_data["uploadRequest"]) : <any>undefined;
         }
@@ -6493,7 +6491,6 @@ export class ProductDto extends HashableDtoBase implements IProductDto {
         data["description"] = this.description;
         data["rate"] = this.rate;
         data["brand"] = this.brand ? this.brand.toJSON() : <any>undefined;
-        data["brandId"] = this.brandId;
         data["imageDataURL"] = this.imageDataURL;
         data["uploadRequest"] = this.uploadRequest ? this.uploadRequest.toJSON() : <any>undefined;
         super.toJSON(data);
@@ -6507,7 +6504,6 @@ export interface IProductDto extends IHashableDtoBase {
     description?: string | undefined;
     rate: number;
     brand?: BrandDto | undefined;
-    brandId?: string | undefined;
     imageDataURL?: string | undefined;
     uploadRequest?: UploadRequest | undefined;
 }

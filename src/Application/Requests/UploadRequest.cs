@@ -1,4 +1,8 @@
-﻿using CleanArchitectureBase.Application.Contracts.Enums;
+﻿using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Contracts.Enums;
+using Nextended.Core;
 
 namespace CleanArchitectureBase.Application.Requests
 {
@@ -10,5 +14,12 @@ namespace CleanArchitectureBase.Application.Requests
         public UploadType UploadType { get; set; }
         public byte[] Data { get; set; }
         public string Url { get; set; }
+        public static async Task<UploadRequest> FromUrlAsync(string url, CancellationToken cancellationToken = default) => new UploadRequest
+        {
+            Extension = Path.GetExtension(url),
+            ContentType = await MimeType.ReadMimeTypeFromUrlAsync(url, cancellationToken),
+            FileName = Path.GetFileName(url),
+            Url = url
+        };
     }
 }

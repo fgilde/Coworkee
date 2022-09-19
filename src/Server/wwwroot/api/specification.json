@@ -5116,9 +5116,6 @@
             "brand": {
               "$ref": "#/definitions/BrandDto"
             },
-            "brandId": {
-              "type": "string"
-            },
             "imageDataURL": {
               "type": "string"
             },

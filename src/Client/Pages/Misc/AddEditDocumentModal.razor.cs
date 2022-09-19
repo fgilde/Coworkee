@@ -13,10 +13,10 @@ using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Helper;
 using Microsoft.AspNetCore.SignalR.Client;
 using CleanArchitectureBase.Shared.Misc;
 using Nextended.Blazor.Extensions;
+using Nextended.Core;
 
 
 namespace CleanArchitectureBase.Client.Pages.Misc
@@ -74,7 +74,7 @@ namespace CleanArchitectureBase.Client.Pages.Misc
                 var extension = Path.GetExtension(_file.Name);
                 await _file.OpenReadStream(_file.Size).ReadAsync(buffer);
 
-                if (MimeTypeHelper.Matches(e.File.ContentType, "image*"))
+                if (MimeType.Matches(e.File.ContentType, "image*"))
                     AddEditDocumentModel.URL = await (await e.File.RequestImageFileAsync("image/png", 1000, 1000)).GetDataUrlAsync();
                 else
                     AddEditDocumentModel.URL = await DataUrl.GetDataUrlAsync(buffer, e.File.ContentType);

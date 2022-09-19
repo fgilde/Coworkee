@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
 
@@ -60,15 +61,24 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
 
         private async Task<bool> CreateOrEditProduct(ProductDto productOrNull)
         {
-            var parameters = new DialogParameters();
-            if (productOrNull != null)
+            if (!string.IsNullOrWhiteSpace(productOrNull?.ImageDataURL) && productOrNull.UploadRequest == null)
+                productOrNull.UploadRequest = await UploadRequest.FromUrlAsync(_navigationManager.ToAbsoluteServerUri(productOrNull.ImageDataURL));
+            return !(await _dialogService.EditOrCreate(productOrNull, async (dto, _) =>
             {
-                parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull);
-            }
+                dto.ImageDataURL = string.Empty; // Is overridden by UploadRequest
+                await _api.Products_PostAsync(new(dto));
+                return null;
+            })).Cancelled;
 
-            var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
-            var result = await dialog.Result;
-            return !result.Cancelled;
+            //var parameters = new DialogParameters();
+            //if (productOrNull != null)
+            //{
+            //    parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull);
+            //}
+
+            //var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
+            //var result = await dialog.Result;
+            //return !result.Cancelled;
         }
     }
 }

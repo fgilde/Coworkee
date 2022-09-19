@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.JsInterop.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Extensions;
+using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Options;
 
 namespace CleanArchitectureBase.Client.Extensions;
@@ -14,6 +16,17 @@ public static class DialogServiceExtensions
 {
     public static AnimationType[] DefaultAnimationNoFullHeight = { AnimationType.FadeIn, AnimationType.FlipX};
 
+    public static async Task<(bool Cancelled, TModel Result)> EditOrCreate<TModel>(this IDialogService dialogService, TModel model, Func<TModel, MudExObjectEditDialog<TModel> , Task<string>> onSave, string titleAdd = "Add", string titleEdit = "Edit" ) where TModel : IDtoBase, new()
+    {
+        var isNew = model == null || model.IsNew;
+        DialogParameters parameters = new()
+        {
+            { nameof(MudExObjectEditDialog<TModel>.DialogIcon), isNew ? Icons.Material.Filled.Add : Icons.Material.Filled.Edit }
+        };
+        var title = isNew ? titleAdd : titleEdit;
+        return await dialogService.EditObject(model ?? new TModel(), title, onSave, await DefaultDialogOptionsEx(), null, parameters);
+    }
+    
     public static async Task<IDialogReference> ShowWithDefaultOptionsAsync<TDialog>(this IDialogService dialogService, string title, DialogParameters parameters = null, Action<DialogOptionsEx> options = null)
         where TDialog : ComponentBase
     {

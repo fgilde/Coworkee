@@ -39,7 +39,7 @@
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
     <PackageReference Include="MudBlazor" Version="6.0.15" />
     <PackageReference Include="MudBlazor.ThemeManager " Version="1.0.7" />
-    <PackageReference Include="MudBlazor.Extensions " Version="1.6.1" />
+    <PackageReference Include="MudBlazor.Extensions " Version="1.6.62" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.1.0" />
     <!--<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
@@ -76,10 +76,6 @@
     <Content Update="wwwroot\appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\MudExObjectEdit\MetaConfigurations\" />
   </ItemGroup>
   
 </Project>

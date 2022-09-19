@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
 using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Helper;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
+using Nextended.Core;
 
 namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
 {
@@ -81,7 +81,7 @@ namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
         public async Task<IActionResult> GetMimeType(string url,
             CancellationToken cancellationToken = default)
         {
-            var res = await MimeTypeHelper.ReadContentTypeAsync(url, cancellationToken);
+            var res = await MimeType.ReadMimeTypeFromUrlAsync(url, cancellationToken);
             return Ok(res);
         }
     }

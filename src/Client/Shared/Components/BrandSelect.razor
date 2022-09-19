@@ -1,0 +1,21 @@
+﻿@using System.Threading
+@using CleanArchitectureBase.Application.Common.Models
+@inherits MudExChipSelect<CleanArchitectureBase.Application.Common.Models.BrandDto>
+
+@Inherited()
+
+@code {
+    public override string HelperText { get; set; } = "Select Brand";
+    protected RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
+
+    protected override Task<IList<BrandDto>> GetAvailableItemsAsync(CancellationToken cancellation = default)
+        => _api.Brands_GetAllAsync(null, cancellation);
+
+    protected override void OnInitialized()
+    {
+        ViewMode = ViewMode.NoChips;
+        MultiSelect = false;
+        base.OnInitialized();
+    }
+
+}

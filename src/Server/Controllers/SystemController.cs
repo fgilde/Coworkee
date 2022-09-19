@@ -89,7 +89,7 @@ namespace CleanArchitectureBase.Server.Controllers
             foreach (var item in config.ToFlatDictionary())
                 Get<IConfiguration>()[item.Key.Replace(".", ":")] = item.Value;
             // For persistent
-            System.IO.File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "appSettings.json"), JsonConvert.SerializeObject(config, Formatting.Indented));
+            //System.IO.File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "appSettings.json"), JsonConvert.SerializeObject(config, Formatting.Indented));
             //Get<IHostApplicationLifetime>().StopApplication();
             return Ok();
         }

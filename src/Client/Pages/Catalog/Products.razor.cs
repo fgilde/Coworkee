@@ -1,41 +1,41 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Products
     {
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
+        [Parameter] public string Action { get; set; }
 
-        [Parameter]
-        public string Action { get; set; }
+        [Parameter] public string Id { get; set; }
 
-        [Parameter]
-        public string Id { get; set; }
-
-
+        protected override async Task OnInitializedAsync()
+        {
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+            await base.OnInitializedAsync();
+        }
+        
         private async Task<PaginatedResult<ProductDto>> Load(int pageNumber, int pageSize, string _searchString, string[] orderings, CancellationToken cancellationToken)
         {
             return await _api.Products_GetAllAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken: cancellationToken);
         }
 
-        private async Task<ProductDto> FindById(string id, IEnumerable<ProductDto> loaded)
-        {
-            return loaded.FirstOrDefault(p => p.Id == id) ?? await _api.Products_GetByIdAsync(id);
-        }
+        private async Task<ProductDto> FindById(string id, IEnumerable<ProductDto> loaded) 
+            => loaded.FirstOrDefault(p => p.Id == id) ?? await _api.Products_GetByIdAsync(id);
 
-        private string GetId(ProductDto product)
-        {
-            return product.Id;
-        }
+        private string GetId(ProductDto product) 
+            => product.Id;
 
         private async Task<Result> DeleteProducts(string[] ids)
         {
@@ -43,10 +43,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return await Result.SuccessAsync(_localizer["Product Deleted"]) as Result;
         }
 
-        private string GetName(ProductDto arg)
-        {
-            return arg.Name;
-        }
+        private string GetName(ProductDto arg) 
+            => arg.Name;
 
         private async Task Export(ExportServiceType exportServiceType, string search)
         {
@@ -67,18 +65,9 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             {
                 dto.ImageDataURL = string.Empty; // Is overridden by UploadRequest
                 await _api.Products_PostAsync(new(dto));
+                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
                 return null;
             })).Cancelled;
-
-            //var parameters = new DialogParameters();
-            //if (productOrNull != null)
-            //{
-            //    parameters.Add(nameof(AddEditProductModal.AddEditProductModel), productOrNull);
-            //}
-
-            //var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditProductModal>(productOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
-            //var result = await dialog.Result;
-            //return !result.Cancelled;
         }
     }
 }

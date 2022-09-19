@@ -1,33 +1,31 @@
-﻿using CleanArchitectureBase.Application.Features.Brands.Queries.GetAll;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
+﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
+using CleanArchitectureBase.Application.Hubs;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Wrapper;
-using MudBlazor.Extensions;
-using Nextended.Core.Extensions;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace CleanArchitectureBase.Client.Pages.Catalog
 {
     public partial class Brands
     {
+        [CascadingParameter] private HubConnection HubConnection { get; set; }
+        [Parameter] public string Action { get; set; }
 
-        [Parameter]
-        public string Action { get; set; }
+        [Parameter] public string Id { get; set; }
 
-        [Parameter]
-        public string Id { get; set; }
-
-
+        protected override async Task OnInitializedAsync()
+        {
+            HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+            await base.OnInitializedAsync();
+        }
+        
         private async Task<Result<List<BrandDto>>> Load(CancellationToken cancellationToken)
         {            
             return new Result<List<BrandDto>>()
@@ -42,10 +40,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return Task.FromResult(loaded.FirstOrDefault(p => p.Id == id));
         }
 
-        private string GetId(BrandDto brand)
-        {
-            return brand.Id;
-        }
+        private string GetId(BrandDto brand) 
+            => brand.Id;
 
         private async Task<Result> DeleteBrands(string[] ids)
         {
@@ -53,10 +49,8 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return new Result {Succeeded = true};
         }
 
-        private string GetName(BrandDto arg)
-        {
-            return arg.Name;
-        }
+        private string GetName(BrandDto arg) 
+            => arg.Name;
 
         private async Task Export(ExportServiceType serviceType, string search)
         {
@@ -73,19 +67,9 @@ namespace CleanArchitectureBase.Client.Pages.Catalog
             return !(await _dialogService.EditOrCreate(brandOrNull, async (dto, _) =>
             {
                 await _api.Brands_PostAsync(new AddEditBrandsCommand(dto));
+                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
                 return null;
             })).Cancelled;
-
-            //var parameters = new DialogParameters();
-            //if (brandOrNull != null)
-            //{
-            //    parameters.Add(nameof(AddEditBrandModal.AddEditBrandModel), brandOrNull.MapTo<BrandDto>());
-            //}
-
-            //var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditBrandModal>(brandOrNull == null ? _localizer["Create"] : _localizer["Edit"], parameters);
-            //var result = await dialog.Result;
-
-            //return !result.Cancelled;
         }
     }
 }

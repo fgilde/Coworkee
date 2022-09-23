@@ -4,6 +4,9 @@ namespace CleanArchitectureBase.Shared.Constants.Localization
 {
     public class LanguageCode
     {
+        public LanguageCode()
+        { }
+        
         public bool? IsRTL { get; set; }
         public string DisplayName { get; set; }
         public string CultureCode { get; set; }

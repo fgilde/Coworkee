@@ -1501,7 +1501,8 @@
           "application/xml",
           "text/plain",
           "application/octet-stream",
-          "text/json"
+          "text/json",
+          "text/xml"
         ],
         "parameters": [
           {
@@ -5247,9 +5248,6 @@
         "mailConfiguration": {
           "$ref": "#/definitions/Mailconfiguration"
         },
-        "serilog": {
-          "$ref": "#/definitions/Serilog"
-        },
         "azure": {
           "$ref": "#/definitions/Azure"
         },
@@ -5431,90 +5429,6 @@
           "type": "string"
         },
         "displayName": {
-          "type": "string"
-        }
-      }
-    },
-    "Serilog": {
-      "type": "object",
-      "properties": {
-        "minimumLevel": {
-          "$ref": "#/definitions/Minimumlevel"
-        },
-        "writeTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Writeto"
-          }
-        },
-        "enrich": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/Properties"
-        }
-      }
-    },
-    "Minimumlevel": {
-      "type": "object",
-      "properties": {
-        "default": {
-          "type": "string"
-        },
-        "override": {
-          "$ref": "#/definitions/Override"
-        }
-      }
-    },
-    "Override": {
-      "type": "object",
-      "properties": {
-        "microsoft": {
-          "type": "string"
-        },
-        "microsoftHostingLifetime": {
-          "type": "string"
-        },
-        "system": {
-          "type": "string"
-        },
-        "hangfire": {
-          "type": "string"
-        }
-      }
-    },
-    "Writeto": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "args": {
-          "$ref": "#/definitions/Args"
-        }
-      }
-    },
-    "Args": {
-      "type": "object",
-      "properties": {
-        "outputTemplate": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "rollingInterval": {
-          "type": "string"
-        }
-      }
-    },
-    "Properties": {
-      "type": "object",
-      "properties": {
-        "application": {
           "type": "string"
         }
       }

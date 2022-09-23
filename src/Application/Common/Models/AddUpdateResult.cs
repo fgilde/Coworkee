@@ -7,6 +7,9 @@ namespace CleanArchitectureBase.Application.Common.Models;
 public class AddUpdateResult<TDto> 
     where TDto : IDtoBase
 {
+    public AddUpdateResult()
+    { }
+    
     public AddUpdateResult(IEnumerable<TDto> added = null, IEnumerable<TDto> updated = null, IEnumerable<TDto> skipped = null)
     {
         Added = added?.ToArray() ?? Array.Empty<TDto>();

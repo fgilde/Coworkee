@@ -22,7 +22,6 @@ namespace CleanArchitectureBase.Application.Configurations
         public Cognitiveservices CognitiveServices { get; set; }
         public Apidocumentation ApiDocumentation { get; set; }
         public Mailconfiguration MailConfiguration { get; set; }
-        public Serilog Serilog { get; set; }
         public Azure Azure { get; set; }
         public Rabbitmq RabbitMQ { get; set; }
     }
@@ -141,47 +140,7 @@ namespace CleanArchitectureBase.Application.Configurations
         public string Password { get; set; }
         public string DisplayName { get; set; }
     }
-
-    public class Serilog
-    {
-        public Minimumlevel MinimumLevel { get; set; }
-        public Writeto[] WriteTo { get; set; }
-        public string[] Enrich { get; set; }
-        public Properties Properties { get; set; }
-    }
-
-    public class Minimumlevel
-    {
-        public string Default { get; set; }
-        public Override Override { get; set; }
-    }
-
-    public class Override
-    {
-        public string Microsoft { get; set; }
-        public string MicrosoftHostingLifetime { get; set; }
-        public string System { get; set; }
-        public string Hangfire { get; set; }
-    }
-
-    public class Properties
-    {
-        public string Application { get; set; }
-    }
-
-    public class Writeto
-    {
-        public string Name { get; set; }
-        public Args Args { get; set; }
-    }
-
-    public class Args
-    {
-        public string outputTemplate { get; set; }
-        public string path { get; set; }
-        public string rollingInterval { get; set; }
-    }
-
+    
     public class Azure
     {
         public Signalr SignalR { get; set; }

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Serilog;
 
 namespace CleanArchitectureBase.Server
 {
@@ -51,7 +50,6 @@ namespace CleanArchitectureBase.Server
                     });
                     webBuilder.UseStaticWebAssets();
                     webBuilder.UseStartup<Startup>();
-                })
-                .UseSerilog();
+                });
     }
 }

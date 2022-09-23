@@ -6621,7 +6621,6 @@ export class Rootobject implements IRootobject {
     cognitiveServices?: Cognitiveservices | undefined;
     apiDocumentation?: Apidocumentation | undefined;
     mailConfiguration?: Mailconfiguration | undefined;
-    serilog?: Serilog | undefined;
     azure?: Azure | undefined;
     rabbitMQ?: Rabbitmq | undefined;
 
@@ -6645,7 +6644,6 @@ export class Rootobject implements IRootobject {
             this.cognitiveServices = _data["cognitiveServices"] ? Cognitiveservices.fromJS(_data["cognitiveServices"]) : <any>undefined;
             this.apiDocumentation = _data["apiDocumentation"] ? Apidocumentation.fromJS(_data["apiDocumentation"]) : <any>undefined;
             this.mailConfiguration = _data["mailConfiguration"] ? Mailconfiguration.fromJS(_data["mailConfiguration"]) : <any>undefined;
-            this.serilog = _data["serilog"] ? Serilog.fromJS(_data["serilog"]) : <any>undefined;
             this.azure = _data["azure"] ? Azure.fromJS(_data["azure"]) : <any>undefined;
             this.rabbitMQ = _data["rabbitMQ"] ? Rabbitmq.fromJS(_data["rabbitMQ"]) : <any>undefined;
         }
@@ -6669,7 +6667,6 @@ export class Rootobject implements IRootobject {
         data["cognitiveServices"] = this.cognitiveServices ? this.cognitiveServices.toJSON() : <any>undefined;
         data["apiDocumentation"] = this.apiDocumentation ? this.apiDocumentation.toJSON() : <any>undefined;
         data["mailConfiguration"] = this.mailConfiguration ? this.mailConfiguration.toJSON() : <any>undefined;
-        data["serilog"] = this.serilog ? this.serilog.toJSON() : <any>undefined;
         data["azure"] = this.azure ? this.azure.toJSON() : <any>undefined;
         data["rabbitMQ"] = this.rabbitMQ ? this.rabbitMQ.toJSON() : <any>undefined;
         return data;
@@ -6686,7 +6683,6 @@ export interface IRootobject {
     cognitiveServices?: Cognitiveservices | undefined;
     apiDocumentation?: Apidocumentation | undefined;
     mailConfiguration?: Mailconfiguration | undefined;
-    serilog?: Serilog | undefined;
     azure?: Azure | undefined;
     rabbitMQ?: Rabbitmq | undefined;
 }
@@ -7212,278 +7208,6 @@ export interface IMailconfiguration {
     userName?: string | undefined;
     password?: string | undefined;
     displayName?: string | undefined;
-}
-
-export class Serilog implements ISerilog {
-    minimumLevel?: Minimumlevel | undefined;
-    writeTo?: Writeto[] | undefined;
-    enrich?: string[] | undefined;
-    properties?: Properties | undefined;
-
-    constructor(data?: ISerilog) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.minimumLevel = _data["minimumLevel"] ? Minimumlevel.fromJS(_data["minimumLevel"]) : <any>undefined;
-            if (Array.isArray(_data["writeTo"])) {
-                this.writeTo = [] as any;
-                for (let item of _data["writeTo"])
-                    this.writeTo!.push(Writeto.fromJS(item));
-            }
-            if (Array.isArray(_data["enrich"])) {
-                this.enrich = [] as any;
-                for (let item of _data["enrich"])
-                    this.enrich!.push(item);
-            }
-            this.properties = _data["properties"] ? Properties.fromJS(_data["properties"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): Serilog {
-        data = typeof data === 'object' ? data : {};
-        let result = new Serilog();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["minimumLevel"] = this.minimumLevel ? this.minimumLevel.toJSON() : <any>undefined;
-        if (Array.isArray(this.writeTo)) {
-            data["writeTo"] = [];
-            for (let item of this.writeTo)
-                data["writeTo"].push(item.toJSON());
-        }
-        if (Array.isArray(this.enrich)) {
-            data["enrich"] = [];
-            for (let item of this.enrich)
-                data["enrich"].push(item);
-        }
-        data["properties"] = this.properties ? this.properties.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-export interface ISerilog {
-    minimumLevel?: Minimumlevel | undefined;
-    writeTo?: Writeto[] | undefined;
-    enrich?: string[] | undefined;
-    properties?: Properties | undefined;
-}
-
-export class Minimumlevel implements IMinimumlevel {
-    default?: string | undefined;
-    override?: Override | undefined;
-
-    constructor(data?: IMinimumlevel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.default = _data["default"];
-            this.override = _data["override"] ? Override.fromJS(_data["override"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): Minimumlevel {
-        data = typeof data === 'object' ? data : {};
-        let result = new Minimumlevel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["default"] = this.default;
-        data["override"] = this.override ? this.override.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-export interface IMinimumlevel {
-    default?: string | undefined;
-    override?: Override | undefined;
-}
-
-export class Override implements IOverride {
-    microsoft?: string | undefined;
-    microsoftHostingLifetime?: string | undefined;
-    system?: string | undefined;
-    hangfire?: string | undefined;
-
-    constructor(data?: IOverride) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.microsoft = _data["microsoft"];
-            this.microsoftHostingLifetime = _data["microsoftHostingLifetime"];
-            this.system = _data["system"];
-            this.hangfire = _data["hangfire"];
-        }
-    }
-
-    static fromJS(data: any): Override {
-        data = typeof data === 'object' ? data : {};
-        let result = new Override();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["microsoft"] = this.microsoft;
-        data["microsoftHostingLifetime"] = this.microsoftHostingLifetime;
-        data["system"] = this.system;
-        data["hangfire"] = this.hangfire;
-        return data;
-    }
-}
-
-export interface IOverride {
-    microsoft?: string | undefined;
-    microsoftHostingLifetime?: string | undefined;
-    system?: string | undefined;
-    hangfire?: string | undefined;
-}
-
-export class Writeto implements IWriteto {
-    name?: string | undefined;
-    args?: Args | undefined;
-
-    constructor(data?: IWriteto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.name = _data["name"];
-            this.args = _data["args"] ? Args.fromJS(_data["args"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): Writeto {
-        data = typeof data === 'object' ? data : {};
-        let result = new Writeto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["args"] = this.args ? this.args.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-export interface IWriteto {
-    name?: string | undefined;
-    args?: Args | undefined;
-}
-
-export class Args implements IArgs {
-    outputTemplate?: string | undefined;
-    path?: string | undefined;
-    rollingInterval?: string | undefined;
-
-    constructor(data?: IArgs) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.outputTemplate = _data["outputTemplate"];
-            this.path = _data["path"];
-            this.rollingInterval = _data["rollingInterval"];
-        }
-    }
-
-    static fromJS(data: any): Args {
-        data = typeof data === 'object' ? data : {};
-        let result = new Args();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["outputTemplate"] = this.outputTemplate;
-        data["path"] = this.path;
-        data["rollingInterval"] = this.rollingInterval;
-        return data;
-    }
-}
-
-export interface IArgs {
-    outputTemplate?: string | undefined;
-    path?: string | undefined;
-    rollingInterval?: string | undefined;
-}
-
-export class Properties implements IProperties {
-    application?: string | undefined;
-
-    constructor(data?: IProperties) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.application = _data["application"];
-        }
-    }
-
-    static fromJS(data: any): Properties {
-        data = typeof data === 'object' ? data : {};
-        let result = new Properties();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["application"] = this.application;
-        return data;
-    }
-}
-
-export interface IProperties {
-    application?: string | undefined;
 }
 
 export class Azure implements IAzure {

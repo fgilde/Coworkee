@@ -44,7 +44,7 @@ namespace CleanArchitectureBase.Client.Extensions
         {
             if (!navigationManager.ShouldBeAuthorized(url) || navigationManager.UriContainsAuth(url))
                 return Task.FromResult(url);
-            if (user.Identity?.IsAuthenticated == true && !user.IsGuest())
+            if (user?.Identity?.IsAuthenticated == true && !user.IsGuest())
                 return ServiceAccessor.Get<IApplicationClient>().System_AuthorizeServerUrlAsync(url);
 
             return Task.FromResult(url);

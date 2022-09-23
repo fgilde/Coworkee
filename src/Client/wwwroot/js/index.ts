@@ -78,7 +78,7 @@ function initialLoad() {
 
 
     if (isDebug) {
-        fetch('appsettings.development.json', { method: 'GET', redirect: 'follow' })
+        fetch('appsettings.Development.json', { method: 'GET', redirect: 'follow' })
             .then(response => response.json())
             .then(json => {
                 appSettings = json;

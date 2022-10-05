@@ -6,6 +6,7 @@ using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Application.Contracts.Attributes;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
+using CleanArchitectureBase.Shared.Constants.Role;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -96,6 +97,8 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
                 throw CreateException(userId);
         }
 
+        public Task<bool> IsAdministratorAsync(string userId = null) => HasRoleAsync(RoleConstants.AdministratorRole, userId);
+        
         private Exception CreateException(string checkedUserId)
         {
             return checkedUserId == null

@@ -12,8 +12,23 @@ namespace CleanArchitectureBase.Shared.Localizers
         private readonly IServiceProvider _provider;
         private readonly ILogger<AggregatedLocalizer<T>> _logger;
 
-        private IEnumerable<IStringLocalizer<T>> _localizers => _provider.GetServices<IStringLocalizer<T>>().Where(l => l != null && l.GetType() != GetType())
-            .OrderBy(l => l.GetType().Name);
+        private IEnumerable<IStringLocalizer<T>> _localizers
+        {
+            get
+            {
+                if (_provider == null)
+                    return Enumerable.Empty<IStringLocalizer<T>>();
+                try
+                {
+                    return _provider.GetServices<IStringLocalizer<T>>().Where(l => l != null && l.GetType() != GetType())
+                        .OrderBy(l => l.GetType().Name);
+                }
+                catch (Exception)
+                {
+                    return Enumerable.Empty<IStringLocalizer<T>>();
+                }
+            }
+        }
 
         public AggregatedLocalizer(IServiceProvider provider, ILogger<AggregatedLocalizer<T>> logger)
         {

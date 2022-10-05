@@ -69,20 +69,10 @@ namespace CleanArchitectureBase.Application
             return Create(messageOrKey, null, statusCode, arguments);
         }
 
-
-        public static Exception NotFound(string message, params object[] arguments)
-        {
-            return new NotFoundException(message);
-        }
-
-        public static Exception IdentityFail(IdentityResult identityResult)
-        {
-            return ValidationFailed(identityResult.Errors.Select(e => (e.Code, e.Description)).ToArray());
-        }
-
-        private static string TryFormat(string s, object[] arguments)
-        {
-            return arguments?.Any() == true ? string.Format(s, arguments) : s;
-        }
+        public static Exception Forbidden() => new ForbiddenAccessException();
+        public static Exception Unauthorized(string message = null) => new UnauthorizedAccessException(message);
+        public static Exception NotFound(string message, params object[] arguments) => new NotFoundException(message);
+        public static Exception IdentityFail(IdentityResult identityResult) => ValidationFailed(identityResult.Errors.Select(e => (e.Code, e.Description)).ToArray());
+        private static string TryFormat(string s, object[] arguments) => arguments?.Any() == true ? string.Format(s, arguments) : s;
     }
 }

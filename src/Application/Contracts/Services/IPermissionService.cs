@@ -72,5 +72,12 @@ namespace CleanArchitectureBase.Application.Contracts.Services
         /// <param name="userId">User to ensure policy for or null for current</param>
         /// <returns></returns>
         Task<bool> HasRolesAsync(string[] roles, RoleMatch match, string userId = null);
+
+        /// <summary>
+        /// Returns true if given or current user is an Administrator
+        /// </summary>
+        /// <param name="userId">User to ensure policy for or null for current</param>
+        /// <returns></returns>
+        Task<bool> IsAdministratorAsync(string userId = null);
     }
 }

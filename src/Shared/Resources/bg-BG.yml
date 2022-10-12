@@ -8,12 +8,15 @@ Actions: Действия
 Activate User?: Активиране на потребител?
 Active: Активен
 Active?: Активен?
+Add: Добавям
 Add Brand: Добавяне на марка
 Add Document: Добавяне на документ
 Add Document Type: Добавяне на тип документ
 Add Extended Attribute: Добавяне на разширен атрибут
+Add external Url: Добавяне на външен URL адрес
 Add Product: Добавяне на продукт
 Add Role: Добавяне на роля
+Add Url: Добави URL адрес
 Address: Адрес
 Addresses: Адреси
 Administrator: Администратор
@@ -83,6 +86,7 @@ Auto Confirm Email?: Автоматично потвърждаване на им
 az-Cyrl-AZ: Азербайджански (кирилица, Азербайджан)
 az-Latn-AZ: Азербайджански (латински, Азербайджан)
 ba-RU: Башкир (Русия)
+Back: Гръб
 Barcode: Баркод
 Barcode already exists.: Баркодът вече съществува.
 Barcode is required!: Изисква се баркод!
@@ -150,6 +154,7 @@ Continue to {0}: Продължете да {0}
 Country: Страна
 Create: Създавам
 Create address: Създаване на адрес
+CreatedOn: Дата на създаване
 cs-CZ: Чешки (Чешки)
 cu-RU: Църковнославянски (Русия)
 Current Password: Текуща парола
@@ -158,6 +163,7 @@ cy-GB: Уелски (Обединеното кралство)
 da-DK: Датски (Дания)
 da-GL: Датски (Гренландия)
 Dashboard: Таблото
+Data has been updated: Данните са актуализирани
 Date: Дата
 Date Created: Дата на създаване
 Date Range For Searching: Период от време за търсене
@@ -352,6 +358,7 @@ en-ZW: Английски (Зимбабве)
 English: Английски
 Enter email for password reset: Въведете имейл адреса, свързан с профила ви, и ще получите имейл, съдържащ връзка, за да възстановите паролата си
 Enter the email address for the confirmation mail: Въведете имейл адреса за пощата за потвърждение
+Enter the URL to existing file: Въведете URL адреса в съществуващ файл
 Enter your message...: Въведете съобщението си...
 Entity Id: ИД на обект
 Entity is required!: Обектът е задължителен!
@@ -410,6 +417,7 @@ Failed to get client preferences: Неуспешно получаване на �
 FAQs: Често задавани въпроси
 Features: Функции
 Feb: Февруари
+Female: Жена
 ff-Adlm-BF: Фула (Адлам, Буркина Фасо)
 ff-Adlm-CM: Фула (Адлам, Камерун)
 ff-Adlm-GH: Фула (Адлам, Гана)
@@ -504,6 +512,7 @@ fy-NL: Западно фризийско (Нидерландия)
 ga-GB: Ирландски (Обединеното кралство)
 ga-IE: Ирландски (Ирландия)
 gd-GB: Шотландски галски (Обединеното кралство)
+General: Основни
 German: Немски
 gl-ES: Галисиан (Испания)
 gn-PY: Гуарани (Парагвай)
@@ -594,6 +603,8 @@ ku-Arab-IR: Кюрдски (арабски, Иран)
 kw-GB: Корниш (Обединеното кралство)
 ky-KG: Киргизстан (Киргизстан)
 la-VA: Латински (Ватикан)
+Label_Description: 'Описание: __________'
+Label_UploadRequests: Файлове
 lag-TZ: Ланги (Танзания)
 Languages: Езици
 Last Name: Презиме
@@ -623,6 +634,7 @@ luy-KE: Луя (Кения)
 lv-LV: Латвийски (Латвия)
 mai-IN: Майтили (Индия)
 Mail: Поща
+Male: Мъжки
 Manage {0} {1}'s Extended Attributes: Управление на разширените атрибути на {0} {1}
 Manage {0} {1}'s Permissions: Управление на разрешенията на {0} {1}
 Manage {0} {1}'s Roles: Управление на ролите на {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: Нгимбоун (Камерун)
 No: Не
 No address: Няма адрес
 No Allowed Actions: Без разрешени действия
+No longer update automatically: Вече не се актуализира автоматично
 No notifications: Без известия
 Not Allowed to add or delete Administrator Role if you have not this role.: Не е разрешено да добавяте или изтривате роля на администратор, ако нямате тази роля.
 Not allowed to Delete this user: Не е разрешено изтриването на този потребител
@@ -722,6 +735,8 @@ Open Url {0}: Отваряне на URL {0}
 or-IN: Одия (Индия)
 os-GE: Осетик (Грузия)
 os-RU: Осетик (Русия)
+Other: Друг
+Overview: Преглед
 Owner: Собственик
 pa-Arab-PK: Пенджаби (арабски, Пакистан)
 pa-IN: Пенджаби (Индия)
@@ -926,6 +941,7 @@ ta-LK: Тамил (Шри Ланка)
 ta-MY: Нито (Малайзия)
 ta-SG: Тамил (Сингапур)
 Table Name: Име на таблица
+Take case: Вземете случай
 Tax: Данък
 Tax must be greater than 0: Данъкът трябва да бъде по-голям от 0
 te-IN: Телугу (Индия)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Фай
 The following {0} permissions are also required for permission {1}: Следните {0} разрешения също са необходими за разрешение {1}
 The following permission is also required for permission {1}: Следното разрешение се изисква и за разрешение {1}
 The Plugin '{0}' may be able to help: Плъгинът "{0}" може да е в състояние да помогне на
+The user "{0}" just changed some of this data: Потребителят "{0}" току-що промени някои от тези данни
 The user {0} has been logged off: Потребителският {0} е бил изключен
 The User {0} has just edited, created or deleted entries here. You should reload the data: Потребителският {0} току-що е редактирал, създал или изтрил записи тук. Трябва да презаредите данните
 There are no new notifications: Няма нови известия
@@ -978,10 +995,12 @@ ug-CN: Уйгур (Китай)
 uk-UA: Украински (Украйна)
 Unassigned: Некласираните
 Update: Актуализирам
+Update automatically next time: Актуализиране автоматично следващия път
 Update Brand: Актуализиране на марката
 Update Document: Актуализиране на документ
 Update Document Type: Актуализиране на типа документ
 Update Extended Attribute: Актуализиране на разширен атрибут
+Update Now: Актуализирай сега
 Update Permissions: Разрешения за актуализиране
 Update Product: Актуализиране на продукта
 Update Role: Роля на актуализиране

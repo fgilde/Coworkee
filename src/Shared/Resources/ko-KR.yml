@@ -8,12 +8,15 @@ Actions: 작업
 Activate User?: 사용자를 활성화?
 Active: 활동적인
 Active?: 활동적인?
+Add: 더하다
 Add Brand: 브랜드 추가
 Add Document: 문서 추가
 Add Document Type: 문서 유형 추가
 Add Extended Attribute: 확장 특성 추가
+Add external Url: 외부 URL 추가
 Add Product: 제품 추가
 Add Role: 역할 추가
+Add Url: URL 추가
 Address: 주소
 Addresses: 주소
 Administrator: 관리자
@@ -83,6 +86,7 @@ Auto Confirm Email?: 자동 확인 이메일?
 az-Cyrl-AZ: 아제르바이잔 (키릴, 아제르바이잔)
 az-Latn-AZ: 아제르바이잔 (라틴어, 아제르바이잔)
 ba-RU: 바슈키르 (러시아)
+Back: 뒤로
 Barcode: 바코드
 Barcode already exists.: 바코드가 이미 있습니다.
 Barcode is required!: 바코드가 필요합니다!
@@ -150,6 +154,7 @@ Continue to {0}: 계속 {0}
 Country: 나라
 Create: 창조하다
 Create address: 주소 만들기
+CreatedOn: 만든 날짜
 cs-CZ: 체코어(체코)
 cu-RU: 교회 슬라브 (러시아)
 Current Password: 현재 암호
@@ -158,6 +163,7 @@ cy-GB: 웨일스어 (영국)
 da-DK: 덴마크어 (덴마크)
 da-GL: 덴마크어 (그린란드)
 Dashboard: 대시보드
+Data has been updated: 데이터가 업데이트되었습니다.
 Date: 날짜
 Date Created: 생성된 날짜
 Date Range For Searching: 검색날짜 범위
@@ -352,6 +358,7 @@ en-ZW: 영어 (짐바브웨)
 English: 영어
 Enter email for password reset: 계정에 연결된 이메일 주소를 입력하면 비밀번호를 재설정하는 링크가 포함된 이메일이 전송됩니다.
 Enter the email address for the confirmation mail: 확인 메일의 이메일 주소를 입력합니다.
+Enter the URL to existing file: 기존 파일의 URL을 입력합니다.
 Enter your message...: 메시지를 입력...
 Entity Id: 엔터티 ID
 Entity is required!: 엔티티가 필요합니다!
@@ -410,6 +417,7 @@ Failed to get client preferences: 클라이언트 기본 설정을 얻지 못했
 FAQs: FAQ
 Features: 기능
 Feb: 2월
+Female: 여성
 ff-Adlm-BF: 풀라 (아들람, 부르키나파소)
 ff-Adlm-CM: 풀라 (아들람, 카메룬)
 ff-Adlm-GH: 풀라 (아들람, 가나)
@@ -504,6 +512,7 @@ fy-NL: 서부 프리시안 (네덜란드)
 ga-GB: 아일랜드어 (영국)
 ga-IE: 아일랜드어 (아일랜드)
 gd-GB: 스코틀랜드 게일어 (영국)
+General: 일반
 German: 독일어
 gl-ES: 갈리시아어 (스페인)
 gn-PY: 과라니 (파라과이)
@@ -594,6 +603,8 @@ ku-Arab-IR: 쿠르드어 (아랍어, 이란)
 kw-GB: 코니쉬 (영국)
 ky-KG: 키르기스스탄 (키르기스스탄)
 la-VA: 라틴어 (바티칸 시국)
+Label_Description: '인상착의: __________'
+Label_UploadRequests: 파일
 lag-TZ: 랑기 (탄자니아)
 Languages: 언어들
 Last Name: 성
@@ -623,6 +634,7 @@ luy-KE: 루이아 (케냐)
 lv-LV: 라트비아어 (라트비아)
 mai-IN: 마이틸리 (인도)
 Mail: 우편
+Male: 남성
 Manage {0} {1}'s Extended Attributes: '{0} {1} 확장 특성 관리'
 Manage {0} {1}'s Permissions: '{0} {1} 사용 권한 관리'
 Manage {0} {1}'s Roles: '{0} {1} 역할 관리'
@@ -696,6 +708,7 @@ nnh-CM: 응임분 (카메룬)
 No: 아니요
 No address: 주소 없음
 No Allowed Actions: 허용된 작업 없음
+No longer update automatically: 더 이상 자동으로 업데이트되지 않음
 No notifications: 알림 없음
 Not Allowed to add or delete Administrator Role if you have not this role.: 이 역할이 없는 경우 관리자 역할을 추가하거나 삭제할 수 없습니다.
 Not allowed to Delete this user: 이 사용자를 삭제할 수 없음
@@ -722,6 +735,8 @@ Open Url {0}: URL {0} 열기
 or-IN: 오디아 (인도)
 os-GE: 오세틱 (조지아 주)
 os-RU: 오세틱 (러시아)
+Other: 기타__________
+Overview: 개요
 Owner: 소유자
 pa-Arab-PK: 펀자브 (아랍어, 파키스탄)
 pa-IN: 펀자브 (인도)
@@ -926,6 +941,7 @@ ta-LK: 타밀 (스리랑카)
 ta-MY: 노 (말레이시아)
 ta-SG: 타밀 (싱가포르)
 Table Name: 표 이름
+Take case: 케이스를 가져 가라.
 Tax: 세금
 Tax must be greater than 0: 세금은 0보다 커야 합니다.
 te-IN: 텔루구 (인도)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: 파일
 The following {0} permissions are also required for permission {1}: 권한 {1} 다음 {0} 사용 권한도 필요합니다.
 The following permission is also required for permission {1}: 권한 {1} 위해 다음 권한도 필요합니다.
 The Plugin '{0}' may be able to help: 플러그인 '{0}'이 도움이 될 수 있습니다.
+The user "{0}" just changed some of this data: 사용자 "{0}"이 방금 이 데이터 중 일부를 변경했습니다.
 The user {0} has been logged off: 사용자 {0}가 로그오프되었습니다.
 The User {0} has just edited, created or deleted entries here. You should reload the data: 사용자 {0} 여기에서 방금 편집, 생성 또는 삭제된 항목을 만들었습니다. 데이터를 다시 로드해야 합니다.
 There are no new notifications: 새 알림이 없습니다.
@@ -978,10 +995,12 @@ ug-CN: 위구르 (중국)
 uk-UA: 우크라이나어 (우크라이나)
 Unassigned: 할당
 Update: 업데이트
+Update automatically next time: 다음에 자동으로 업데이트
 Update Brand: 업데이트 브랜드
 Update Document: 문서 업데이트
 Update Document Type: 문서 유형 업데이트
 Update Extended Attribute: 확장 특성 업데이트
+Update Now: 지금 업데이트
 Update Permissions: 사용 권한 업데이트
 Update Product: 제품 업데이트
 Update Role: 역할 업데이트

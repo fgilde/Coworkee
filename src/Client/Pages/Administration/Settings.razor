@@ -11,10 +11,10 @@
         opacity: 0;
     }
 </style>
-
+<p class="stick-observe"></p>
 @if (ServerConfiguration != null)
 {
-    <MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
+    <MudTabs Elevation="0" Color="Color.Transparent" Rounded="true" Class="mud-tabs-stick-merge" PanelClass="mt-6">
         <MudTabPanel Text="@_localizer["Server Settings"]">
             <MudExObjectEditForm
                 IsLoading="@_isLoading"

@@ -8,12 +8,15 @@ Actions: Akce
 Activate User?: Aktivovat uživatele?
 Active: Aktivní
 Active?: Aktivní?
+Add: Přidat
 Add Brand: Přidat značku
 Add Document: Přidat dokument
 Add Document Type: Přidat typ dokumentu
 Add Extended Attribute: Přidat rozšířený atribut
+Add external Url: Přidat externí adresu URL
 Add Product: Přidat produkt
 Add Role: Přidat roli
+Add Url: Přidat adresu URL
 Address: Adresa
 Addresses: Adresy
 Administrator: Správce
@@ -83,6 +86,7 @@ Auto Confirm Email?: Automatické potvrzení e-mailu?
 az-Cyrl-AZ: Ázerbájdžánština (cyrilice, Ázerbájdžán)
 az-Latn-AZ: Ázerbájdžánština (latinka, Ázerbájdžán)
 ba-RU: Baškir (Rusko)
+Back: Hřbet
 Barcode: Čárový kód
 Barcode already exists.: Čárový kód již existuje.
 Barcode is required!: Čárový kód je vyžadován!
@@ -150,6 +154,7 @@ Continue to {0}: Pokračovat do {0}
 Country: Země
 Create: Vytvářet
 Create address: Vytvořit adresu
+CreatedOn: Datum vytvoření
 cs-CZ: Čeština (Česko)
 cu-RU: Slovanská církev (Rusko)
 Current Password: Aktuální heslo
@@ -158,6 +163,7 @@ cy-GB: Velština (Spojené království)
 da-DK: Dánština (Dánsko)
 da-GL: Dánština (Grónsko)
 Dashboard: Palubní deska
+Data has been updated: Data byla aktualizována
 Date: Rande
 Date Created: Datum vytvoření
 Date Range For Searching: Časové období pro vyhledávání
@@ -352,6 +358,7 @@ en-ZW: Angličtina (Zimbabwe)
 English: Angličtina
 Enter email for password reset: Zadejte e-mailovou adresu propojenou s vaším účtem a obdržíte e-mail s odkazem na obnovení hesla
 Enter the email address for the confirmation mail: Zadejte e-mailovou adresu potvrzovacího e-mailu
+Enter the URL to existing file: Zadejte adresu URL existujícího souboru
 Enter your message...: Zadejte zprávu...
 Entity Id: Entity Id
 Entity is required!: Entita je povinná!
@@ -410,6 +417,7 @@ Failed to get client preferences: Nepodařilo se získat předvolby klienta
 FAQs: Nejčastější dotazy
 Features: Rysy
 Feb: Únor
+Female: Ženský
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Kamerun)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -504,6 +512,7 @@ fy-NL: Západní Fríština (Nizozemsko)
 ga-GB: Irština (Spojené království)
 ga-IE: Irština (Irsko)
 gd-GB: Skotská gaelština (Spojené království)
+General: Obecné
 German: Němčina
 gl-ES: Galicijština (Španělsko)
 gn-PY: Guarani (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kurdština (arabština, Írán)
 kw-GB: Cornish (Velká Británie)
 ky-KG: Kyrgyz (Kyrgyzstán)
 la-VA: Latina (Vatikán)
+Label_Description: Popis
+Label_UploadRequests: Soubory
 lag-TZ: Langi (Tanzanie)
 Languages: Jazyky
 Last Name: Příjmení
@@ -623,6 +634,7 @@ luy-KE: Luyia (Keňa)
 lv-LV: Lotyština (Lotyšsko)
 mai-IN: Maithili (Indie)
 Mail: Pošta
+Male: Muž
 Manage {0} {1}'s Extended Attributes: Správa rozšířených atributů {0} {1}
 Manage {0} {1}'s Permissions: Správa oprávnění {0} {1}
 Manage {0} {1}'s Roles: Správa rolí {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Kamerun)
 No: Ne
 No address: Žádná adresa
 No Allowed Actions: Žádné povolené akce
+No longer update automatically: Již se neaktualizuje automaticky
 No notifications: Žádná oznámení
 Not Allowed to add or delete Administrator Role if you have not this role.: Není povoleno přidávat nebo odstraňovat roli správce, pokud tuto roli nemáte.
 Not allowed to Delete this user: Není povoleno odstranit tohoto uživatele
@@ -722,6 +735,8 @@ Open Url {0}: Otevřít {0} adres URL
 or-IN: Odia (Indie)
 os-GE: Ossetic (Gruzie)
 os-RU: Ossetic (Rusko)
+Other: Jiné __________
+Overview: Přehled
 Owner: Vlastník
 pa-Arab-PK: Paňdžábština (arabština, Pákistán)
 pa-IN: Paňdžábština (Indie)
@@ -926,6 +941,7 @@ ta-LK: Tamilština (Srí Lanka)
 ta-MY: Nor (Malajsie)
 ta-SG: Tamilština (Singapur)
 Table Name: Název tabulky
+Take case: Vezměte si případ
 Tax: Daň
 Tax must be greater than 0: Daň musí být vyšší než 0
 te-IN: Telugu (Indie)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Soubor
 The following {0} permissions are also required for permission {1}: Následující oprávnění {0} jsou také vyžadována pro {1} oprávnění
 The following permission is also required for permission {1}: Následující oprávnění je také vyžadováno pro oprávnění {1}
 The Plugin '{0}' may be able to help: Plugin '{0}' může být schopen pomoci
+The user "{0}" just changed some of this data: Uživatel "{0}" právě změnil některé z těchto dat
 The user {0} has been logged off: Uživatel{0} byl odhlášen
 The User {0} has just edited, created or deleted entries here. You should reload the data: Uživatel {0} zde právě upravil, vytvořil nebo smazal záznamy. Měli byste znovu načíst data
 There are no new notifications: Neexistují žádná nová oznámení
@@ -978,10 +995,12 @@ ug-CN: Ujgurština (Čína)
 uk-UA: Ukrajinština (Ukrajina)
 Unassigned: Nepřiřazeno
 Update: Aktualizace
+Update automatically next time: Příště automaticky aktualizovat
 Update Brand: Aktualizovat značku
 Update Document: Aktualizovat dokument
 Update Document Type: Aktualizovat typ dokumentu
 Update Extended Attribute: Rozšířený atribut aktualizace
+Update Now: Aktualizovat nyní
 Update Permissions: Aktualizovat oprávnění
 Update Product: Aktualizovat produkt
 Update Role: Aktualizační role

@@ -8,12 +8,15 @@ Actions: Acciones
 Activate User?: ¿Activar usuario?
 Active: Activo
 Active?: ¿Activo?
+Add: Agregar
 Add Brand: Añadir marca
 Add Document: Agregar documento
 Add Document Type: Agregar tipo de documento
 Add Extended Attribute: Agregar atributo extendido
+Add external Url: Agregar URL externa
 Add Product: Añadir producto
 Add Role: Agregar rol
+Add Url: Agregar URL
 Address: Dirección
 Addresses: Direcciones
 Administrator: Administrador
@@ -83,6 +86,7 @@ Auto Confirm Email?: ¿Confirmación automática de correo electrónico?
 az-Cyrl-AZ: Azerbaiyano (cirílico, Azerbaiyán)
 az-Latn-AZ: Azerbaiyano (latín, Azerbaiyán)
 ba-RU: Bashkir (Rusia)
+Back: Atrás
 Barcode: Código de barras
 Barcode already exists.: El código de barras ya existe.
 Barcode is required!: ¡Se requiere código de barras!
@@ -150,6 +154,7 @@ Continue to {0}: Continuar {0}
 Country: País
 Create: Crear
 Create address: Crear dirección
+CreatedOn: Fecha de creación
 cs-CZ: Checo (Chequia)
 cu-RU: Iglesia eslava (Rusia)
 Current Password: Contraseña actual
@@ -158,6 +163,7 @@ cy-GB: Galés (Reino Unido)
 da-DK: Danés (Dinamarca)
 da-GL: Danés (Groenlandia)
 Dashboard: Salpicadero
+Data has been updated: Los datos se han actualizado
 Date: Fecha
 Date Created: Fecha de creación
 Date Range For Searching: Intervalo de fechas para la búsqueda
@@ -352,6 +358,7 @@ en-ZW: Español (Zimbabue)
 English: Inglés
 Enter email for password reset: Ingrese la dirección de correo electrónico vinculada a su cuenta y recibirá un correo electrónico que contiene un enlace para restablecer su contraseña
 Enter the email address for the confirmation mail: Introduzca la dirección de correo electrónico del correo de confirmación
+Enter the URL to existing file: Introduzca la URL del archivo existente
 Enter your message...: Introduce tu mensaje...
 Entity Id: Identificador de entidad
 Entity is required!: ¡Se requiere entidad!
@@ -410,6 +417,7 @@ Failed to get client preferences: Error al obtener las preferencias del cliente
 FAQs: Preguntas Frecuentes
 Features: Funciones
 Feb: Feb
+Female: Hembra
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Camerún)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -504,6 +512,7 @@ fy-NL: Frisón occidental (Países Bajos)
 ga-GB: Irlandés (Reino Unido)
 ga-IE: Irlandés (Irlanda)
 gd-GB: Gaélico escocés (Reino Unido)
+General: General
 German: Alemán
 gl-ES: Gallego (España)
 gn-PY: Guaraní (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kurdo (árabe, Irán)
 kw-GB: Cornualles (Reino Unido)
 ky-KG: Kirguistán (Kirguistán)
 la-VA: Latín (Ciudad del Vaticano)
+Label_Description: 'Descripción: __________'
+Label_UploadRequests: Archivos
 lag-TZ: Langi (Tanzania)
 Languages: Idiomas
 Last Name: Apellido
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenia)
 lv-LV: Letón (Letonia)
 mai-IN: Maithili (India)
 Mail: Correo
+Male: Masculino
 Manage {0} {1}'s Extended Attributes: Administrar los atributos extendidos de {0} {1}
 Manage {0} {1}'s Permissions: Administrar los permisos de {0} {1}
 Manage {0} {1}'s Roles: Administrar los roles de {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Camerún)
 No: No
 No address: Sin dirección
 No Allowed Actions: Acciones no permitidas
+No longer update automatically: Ya no se actualiza automáticamente
 No notifications: Sin notificaciones
 Not Allowed to add or delete Administrator Role if you have not this role.: No se permite agregar o eliminar el rol de administrador si no tiene este rol.
 Not allowed to Delete this user: No se permite eliminar este usuario
@@ -722,6 +735,8 @@ Open Url {0}: Abrir url {0}
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Rusia)
+Other: Otro
+Overview: Visión general
 Owner: Dueño
 pa-Arab-PK: Punjabi (árabe, Pakistán)
 pa-IN: Punjabi (India)
@@ -926,6 +941,7 @@ ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Malasia)
 ta-SG: Tamil (Singapur)
 Table Name: Nombre de la tabla
+Take case: Tome caso
 Tax: Impuesto
 Tax must be greater than 0: El impuesto debe ser mayor que 0
 te-IN: Telugu (India)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: El arc
 The following {0} permissions are also required for permission {1}: Los siguientes permisos de {0} también son necesarios para la {1} de permisos
 The following permission is also required for permission {1}: También se requiere el siguiente permiso para el permiso {1}
 The Plugin '{0}' may be able to help: El Plugin '{0}' puede ser capaz de ayudar
+The user "{0}" just changed some of this data: El usuario "{0}" acaba de cambiar algunos de estos datos
 The user {0} has been logged off: El usuario {0} se ha desconectado
 The User {0} has just edited, created or deleted entries here. You should reload the data: El usuario {0} acaba de editar, crear o eliminar entradas aquí. Debe volver a cargar los datos
 There are no new notifications: No hay nuevas notificaciones
@@ -978,10 +995,12 @@ ug-CN: Uigur (China)
 uk-UA: Ucraniano (Ucrania)
 Unassigned: Sin asignar
 Update: Actualizar
+Update automatically next time: Actualizar automáticamente la próxima vez
 Update Brand: Actualizar marca
 Update Document: Actualizar documento
 Update Document Type: Actualizar tipo de documento
 Update Extended Attribute: Actualizar atributo extendido
+Update Now: Actualiza ahora
 Update Permissions: Permisos de actualización
 Update Product: Actualizar producto
 Update Role: Rol de actualización

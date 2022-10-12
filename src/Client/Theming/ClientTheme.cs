@@ -1,15 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using CleanArchitectureBase.Client.Enums;
-using Microsoft.JSInterop;
 using MudBlazor;
 using Nextended.Core.Extensions;
 
 namespace CleanArchitectureBase.Client.Theming
 {
 
-    public class ClientTheme : MudTheme
+    public class ClientTheme : MudTheme, ICloneable
     {
-        public new LayoutPropertiesEx LayoutProperties { get; set; }
+        public LayoutPropertiesEx LayoutPropertiesEx => LayoutProperties as LayoutPropertiesEx;
 
         #region Statics
 
@@ -117,7 +116,9 @@ namespace CleanArchitectureBase.Client.Theming
 
         private static LayoutPropertiesEx DefaultLayoutProperties => new()
         {
-            DefaultBorderRadius = "3px"
+            DefaultBorderRadius = "3px", // default 3
+            DrawerWidthLeft = "280px",
+            DrawerWidthRight = "280px"
         };
 
         #endregion
@@ -139,8 +140,8 @@ namespace CleanArchitectureBase.Client.Theming
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
-            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
+            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Always,
+            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Responsive);
 
         public static ClientTheme DarkTheme = new ClientTheme()
         {
@@ -166,8 +167,8 @@ namespace CleanArchitectureBase.Client.Theming
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
-            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Responsive);
+            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Always,
+            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Responsive);
 
         public static ClientTheme LuckyGreen = new ClientTheme()
         {
@@ -183,8 +184,8 @@ namespace CleanArchitectureBase.Client.Theming
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
-            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Mini);
+            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Always,
+            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Mini);
 
 
         public static ClientTheme CodeBlue = new ClientTheme()
@@ -204,15 +205,17 @@ namespace CleanArchitectureBase.Client.Theming
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
         }.SetProperties(
-            t => t.LayoutProperties.DrawerClipMode = DrawerClipMode.Never,
-            t => t.LayoutProperties.DrawerVariant = DrawerVariant.Temporary,
-            t => t.LayoutProperties.ShowUserCardInNavigation = false,
-            t => t.LayoutProperties.ShowLogoInAppBar = false,
-            t => t.LayoutProperties.ShowLogoInNavMenu = true,
-            t => t.LayoutProperties.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
-            t => t.LayoutProperties.MenuTogglePosition = MenuTogglePosition.Start,
-            t => t.LayoutProperties.NavMenuExpandMode = ExpandMode.SingleExpand);
+            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Never,
+            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Temporary,
+            t => t.LayoutPropertiesEx.ShowUserCardInNavigation = false,
+            t => t.LayoutPropertiesEx.ShowLogoInAppBar = false,
+            t => t.LayoutPropertiesEx.ShowLogoInNavMenu = true,
+            t => t.LayoutPropertiesEx.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
+            t => t.LayoutPropertiesEx.MenuTogglePosition = MenuTogglePosition.Start,
+            t => t.LayoutPropertiesEx.NavMenuExpandMode = ExpandMode.SingleExpand);
         
         #endregion
+
+        public object Clone() => MemberwiseClone();
     }
 }

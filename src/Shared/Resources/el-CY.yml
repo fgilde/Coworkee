@@ -8,12 +8,15 @@ Actions: Ενέργειες
 Activate User?: Ενεργοποίηση χρήστη;
 Active: Δραστήριος
 Active?: Δραστήριος?
+Add: Προσθέτω
 Add Brand: Προσθήκη επωνυμίας
 Add Document: Προσθήκη εγγράφου
 Add Document Type: Προσθήκη τύπου εγγράφου
 Add Extended Attribute: Προσθήκη εκτεταμένου χαρακτηριστικού
+Add external Url: Προσθήκη εξωτερικής διεύθυνσης URL
 Add Product: Προσθήκη προϊόντος
 Add Role: Προσθήκη ρόλου
+Add Url: Προσθήκη διεύθυνσης URL
 Address: Διεύθυνση
 Addresses: Διευθύνσεις
 Administrator: Διαχειριστής
@@ -83,6 +86,7 @@ Auto Confirm Email?: Αυτόματη επιβεβαίωση ηλεκτρονι�
 az-Cyrl-AZ: Αζέρικα (Κυριλλικά, Αζερμπαϊτζάν)
 az-Latn-AZ: Αζέρικα (Λατινικά, Αζερμπαϊτζάν)
 ba-RU: Μπασκιρ (Ρωσία)
+Back: Πλάτη
 Barcode: Γραμμωτός κώδικας
 Barcode already exists.: Ο γραμμωτός κώδικας υπάρχει ήδη.
 Barcode is required!: Ο γραμμωτός κώδικας είναι απαραίτητος!
@@ -150,6 +154,7 @@ Continue to {0}: Συνεχίστε να {0}
 Country: Χώρα
 Create: Δημιουργώ
 Create address: Δημιουργία διεύθυνσης
+CreatedOn: Ημερομηνία δημιουργίας
 cs-CZ: Τσεχικά (Τσεχία)
 cu-RU: Εκκλησία Σλαβική (Ρωσία)
 Current Password: Τρέχων κωδικός πρόσβασης
@@ -158,6 +163,7 @@ cy-GB: Ουαλικό (Ηνωμένο Βασίλειο)
 da-DK: Δανικά (Δανία)
 da-GL: Δανικά (Γροιλανδία)
 Dashboard: Ταμπλό
+Data has been updated: Τα δεδομένα έχουν ενημερωθεί
 Date: Ημερομηνία
 Date Created: Ημερομηνία δημιουργίας
 Date Range For Searching: Εύρος ημερομηνιών για αναζήτηση
@@ -352,6 +358,7 @@ en-ZW: Αγγλικά (Ζιμπάμπουε)
 English: Αγγλικά
 Enter email for password reset: Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου που είναι συνδεδεμένη με το λογαριασμό σας και θα λάβετε ένα μήνυμα ηλεκτρονικού ταχυδρομείου που περιέχει έναν σύνδεσμο για την επαναφορά του κωδικού πρόσβασής σας
 Enter the email address for the confirmation mail: Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου για την αλληλογραφία επιβεβαίωσης
+Enter the URL to existing file: Εισαγάγετε τη διεύθυνση URL για το υπάρχον αρχείο
 Enter your message...: Εισαγάγετε το μήνυμά σας...
 Entity Id: Αναγνωριστικό οντότητας
 Entity is required!: Η οντότητα είναι απαραίτητη!
@@ -410,6 +417,7 @@ Failed to get client preferences: Απέτυχε η λήψη προτιμήσε�
 FAQs: Συχνές ερωτήσεις
 Features: Χαρακτηριστικά
 Feb: Φεβ
+Female: Θηλυκός
 ff-Adlm-BF: Φούλα (Αντλάμ, Μπουρκίνα Φάσο)
 ff-Adlm-CM: Φούλλαχ (Άντλαμ, Καμερούν)
 ff-Adlm-GH: Φούλλαχ (Άντλαμ, Γκάνα)
@@ -504,6 +512,7 @@ fy-NL: Δυτική Φριζιανή (Ολλανδία)
 ga-GB: Ιρλανδικά (Ηνωμένο Βασίλειο)
 ga-IE: Ιρλανδικά (Ιρλανδία)
 gd-GB: Σκωτσέζικα γαελικά (Ηνωμένο Βασίλειο)
+General: Γενικά
 German: Γερμανικά
 gl-ES: Γαλικία (Ισπανία)
 gn-PY: Γκουαράνι (Παραγουάη)
@@ -594,6 +603,8 @@ ku-Arab-IR: Κουρδικά (Αραβικά, Ιράν)
 kw-GB: Κορνίς (Ηνωμένο Βασίλειο)
 ky-KG: Κιργιζία (Κιργιζία)
 la-VA: Λατινικά (Βατικανό)
+Label_Description: 'Περιγραφή: __________'
+Label_UploadRequests: Αρχεία
 lag-TZ: Λάνγκι (Τανζανία)
 Languages: Γλώσσες
 Last Name: Επώνυμο
@@ -623,6 +634,7 @@ luy-KE: Λουία (Κένυα)
 lv-LV: Λετονικά (Λετονία)
 mai-IN: Μαϊθίλι (Ινδία)
 Mail: Ταχυδρομείο
+Male: Αρσενικός
 Manage {0} {1}'s Extended Attributes: Διαχείριση των εκτεταμένων χαρακτηριστικών του {0} {1}
 Manage {0} {1}'s Permissions: Διαχείριση δικαιωμάτων {0} {1}
 Manage {0} {1}'s Roles: Διαχείριση ρόλων {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: Νγκιμπούν (Καμερούν)
 No: Όχι
 No address: Δεν υπάρχει διεύθυνση
 No Allowed Actions: Δεν επιτρέπονται ενέργειες
+No longer update automatically: Δεν ενημερώνεται πλέον αυτόματα
 No notifications: Χωρίς ειδοποιήσεις
 Not Allowed to add or delete Administrator Role if you have not this role.: Δεν επιτρέπεται να προσθέσετε ή να διαγράψετε το ρόλο διαχειριστή εάν δεν έχετε αυτόν τον ρόλο.
 Not allowed to Delete this user: Δεν επιτρέπεται η διαγραφή αυτού του χρήστη
@@ -722,6 +735,8 @@ Open Url {0}: Άνοιγμα {0} url
 or-IN: Όντια (Ινδία)
 os-GE: Οσετί (Γεωργία)
 os-RU: Οστετικός (Ρωσία)
+Other: Άλλο__________
+Overview: Επισκόπηση
 Owner: Ιδιοκτήτης
 pa-Arab-PK: Πουντζάμπι (Αραβικά, Πακιστάν)
 pa-IN: Πουντζάμπι (Ινδία)
@@ -926,6 +941,7 @@ ta-LK: Ταμίλ (Σρι Λάνκα)
 ta-MY: Ούτε (Μαλαισία)
 ta-SG: Ταμίλ (Σιγκαπούρη)
 Table Name: Όνομα πίνακα
+Take case: Πάρτε την υπόθεση
 Tax: Φόρος
 Tax must be greater than 0: Ο φόρος πρέπει να είναι μεγαλύτερος από 0
 te-IN: Τελούγκου (Ινδία)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Το �
 The following {0} permissions are also required for permission {1}: Τα ακόλουθα δικαιώματα {0} απαιτούνται επίσης για {1} δικαιωμάτων
 The following permission is also required for permission {1}: Απαιτείται επίσης το ακόλουθο δικαίωμα για την {1} δικαιωμάτων
 The Plugin '{0}' may be able to help: Το πρόσθετο «{0}» μπορεί να είναι σε θέση να βοηθήσει
+The user "{0}" just changed some of this data: Ο χρήστης "{0}" μόλις άλλαξε μερικά από αυτά τα δεδομένα
 The user {0} has been logged off: Το {0} χρήστη έχει αποσυνδεθεί
 The User {0} has just edited, created or deleted entries here. You should reload the data: Η {0} χρήστη έχει μόλις επεξεργαστεί, δημιουργήσει ή διαγράψει καταχωρήσεις εδώ. Θα πρέπει να φορτώσετε ξανά τα δεδομένα
 There are no new notifications: Δεν υπάρχουν νέες ειδοποιήσεις
@@ -978,10 +995,12 @@ ug-CN: Ουιγούρος (Κίνα)
 uk-UA: Ουκρανικά (Ουκρανία)
 Unassigned: Μη εκχωρημένο
 Update: Ενημερώνω
+Update automatically next time: Αυτόματη ενημέρωση την επόμενη φορά
 Update Brand: Ενημέρωση επωνυμίας
 Update Document: Ενημέρωση εγγράφου
 Update Document Type: Ενημέρωση τύπου εγγράφου
 Update Extended Attribute: Ενημέρωση εκτεταμένου χαρακτηριστικού
+Update Now: Ενημέρωση τώρα
 Update Permissions: Δικαιώματα ενημέρωσης
 Update Product: Ενημέρωση προϊόντος
 Update Role: Ενημέρωση ρόλου

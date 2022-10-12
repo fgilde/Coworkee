@@ -12,12 +12,14 @@
         <MudNavMenu>
             @foreach (var theme in _themes)
             {
-            <MudContainer>
-                <MudNavLink Icon="@Icons.Filled.FormatColorFill" OnClick="@((e) => Select(theme.Key, theme.Value))">@ThemeDisplayName(theme.Key)</MudNavLink>
-                <div style="width: 70%; height: 2px; background: linear-gradient(90deg,@theme.Value.Palette.AppbarBackground 0%, @theme.Value.Palette.Primary 35%, @theme.Value.Palette.Background 100%);; margin-left: 27%; margin-top: -5px; margin-bottom: 6px;"></div>
-            </MudContainer>
+                <MudContainer>
+                    <MudNavLink Icon="@Icons.Filled.FormatColorFill" OnClick="@((e) => Select(theme.Key, theme.Value))">@ThemeDisplayName(theme.Key)</MudNavLink>
+                    <div style="width: 70%; height: 2px; background: linear-gradient(90deg,@theme.Value.Palette.AppbarBackground 0%, @theme.Value.Palette.Primary 35%, @theme.Value.Palette.Background 100%);; margin-left: 27%; margin-top: -5px; margin-bottom: 6px;"></div>
+                </MudContainer>
             }
         </MudNavMenu>
+        <MudButton StartIcon="@Icons.Material.Filled.Edit" OnClick="@EditTheme">Edit Current</MudButton>
+
     </MudDrawer>
 }
 @if (_themes is { Count: > 1 })
@@ -115,6 +117,19 @@
     private string ThemeDisplayName(string themeKey)
     {
         return string.Join(" ", themeKey.SplitByUpperCase());
+    }
+
+    private async void EditTheme()
+    {
+        var defaultDialogOptionsEx = await DialogServiceExtensions.DefaultDialogOptionsEx();
+        var p = new DialogParameters
+        {
+            {nameof(MudExObjectEditDialog<ClientTheme>.ShowCancelButton), false},
+            {nameof(MudExObjectEditDialog<ClientTheme>.SaveButtonText), "Close"}
+        };
+         await _dialogService.EditObject(ClientTheme.LastUsedTheme, "Edit Theme", defaultDialogOptionsEx, null, p);
+        _charmOpen = false;
+        StateHasChanged();
     }
 
 }

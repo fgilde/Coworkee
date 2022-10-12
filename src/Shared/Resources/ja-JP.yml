@@ -8,12 +8,15 @@ Actions: アクション
 Activate User?: ユーザーをアクティブにしますか?
 Active: 能動
 Active?: 能動。
+Add: 足す
 Add Brand: ブランドの追加
 Add Document: ドキュメントの追加
 Add Document Type: ドキュメントタイプの追加
 Add Extended Attribute: 拡張属性の追加
+Add external Url: 外部 URL の追加
 Add Product: 製品の追加
 Add Role: ロールの追加
+Add Url: URL の追加
 Address: 住所
 Addresses: アドレス
 Administrator: 管理者
@@ -83,6 +86,7 @@ Auto Confirm Email?: 電子メールの自動確認?
 az-Cyrl-AZ: アゼルバイジャン(キリル文字、アゼルバイジャン)
 az-Latn-AZ: アゼルバイジャン語 (ラテン語、 アゼルバイジャン)
 ba-RU: バシキール (ロシア)
+Back: 戻る
 Barcode: バーコード
 Barcode already exists.: バーコードは既に存在します。
 Barcode is required!: バーコードが必要です!
@@ -150,6 +154,7 @@ Continue to {0}: '{0}に続く'
 Country: 国
 Create: 創造する
 Create address: 住所の作成
+CreatedOn: 作成日
 cs-CZ: チェコ語 (チェコ)
 cu-RU: 教会スラブ (ロシア)
 Current Password: 現在のパスワード
@@ -158,6 +163,7 @@ cy-GB: ウェールズ語 (イギリス)
 da-DK: デンマーク語 (デンマーク)
 da-GL: デンマーク語 (グリーンランド)
 Dashboard: ダッシュボード
+Data has been updated: データが更新されました
 Date: 日付
 Date Created: 作成日
 Date Range For Searching: 検索する日付の範囲
@@ -352,6 +358,7 @@ en-ZW: 英語 (ジンバブエ)
 English: 英語
 Enter email for password reset: アカウントにリンクされているメールアドレスを入力すると、パスワードをリセットするためのリンクを含むメールが届きます
 Enter the email address for the confirmation mail: 確認メールのメールアドレスを入力します。
+Enter the URL to existing file: 既存のファイルの URL を入力します。
 Enter your message...: メッセージを入力します。
 Entity Id: エンティティ ID
 Entity is required!: エンティティが必要です!
@@ -410,6 +417,7 @@ Failed to get client preferences: クライアント設定を取得できませ�
 FAQs: よくある質問
 Features: 顔立ち
 Feb: 2月
+Female: 女性
 ff-Adlm-BF: フラ(アドラム、ブルキナファソ)
 ff-Adlm-CM: フラ (アドラム、 カメルーン)
 ff-Adlm-GH: フラ(ガーナ、アドラム)
@@ -504,6 +512,7 @@ fy-NL: 西フリジア(オランダ)
 ga-GB: アイルランド (イギリス)
 ga-IE: アイルランド (アイルランド)
 gd-GB: スコットランドゲール語 (イギリス)
+General: 全般
 German: ドイツ語
 gl-ES: ガリシア語 (スペイン)
 gn-PY: グアラニ (パラグアイ)
@@ -594,6 +603,8 @@ ku-Arab-IR: クルド人(アラビア語、イラン)
 kw-GB: コーニッシュ (イギリス)
 ky-KG: キルギス (キルギス)
 la-VA: ラテン語 (バチカン)
+Label_Description: '説明: __________'
+Label_UploadRequests: ファイル
 lag-TZ: ランギ (タンザニア)
 Languages: 言語
 Last Name: 名字
@@ -623,6 +634,7 @@ luy-KE: ルヤ(ケニア)
 lv-LV: ラトビア (ラトビア)
 mai-IN: マイティリ (インド)
 Mail: 郵便
+Male: 男性
 Manage {0} {1}'s Extended Attributes: '{0} {1}の拡張属性の管理'
 Manage {0} {1}'s Permissions: '{0} {1}の権限を管理する'
 Manage {0} {1}'s Roles: '{0} {1}の役割の管理'
@@ -696,6 +708,7 @@ nnh-CM: ンギエンブーン (カメルーン)
 No: いいえ
 No address: 住所なし
 No Allowed Actions: 許可されたアクションはありません
+No longer update automatically: 自動的に更新されなくなりました
 No notifications: 通知なし
 Not Allowed to add or delete Administrator Role if you have not this role.: この役割を持っていない場合、管理者の役割を追加または削除することはできません。
 Not allowed to Delete this user: このユーザーの削除は許可されていません
@@ -722,6 +735,8 @@ Open Url {0}: URL{0}を開く
 or-IN: オディア (インド)
 os-GE: オセティック (ジョージア州)
 os-RU: オセティック(ロシア)
+Other: その他 __________
+Overview: 概要
 Owner: 所有者
 pa-Arab-PK: パンジャブ語 (アラビア語、 パキスタン)
 pa-IN: パンジャブ語 (インド)
@@ -926,6 +941,7 @@ ta-LK: タミル語 (スリランカ)
 ta-MY: また(マレーシア)
 ta-SG: タミル語 (シンガポール)
 Table Name: テーブル名
+Take case: ケースを取る
 Tax: 税金
 Tax must be greater than 0: 税金は 0 より大きくする必要があります
 te-IN: テルグ語 (インド)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: ファ
 The following {0} permissions are also required for permission {1}: アクセス許可の{1}には、次の{0}アクセス許可も必要です。
 The following permission is also required for permission {1}: アクセス許可の設定には、次のアクセス許可も必要{1}
 The Plugin '{0}' may be able to help: プラグイン「{0}」が助けることができるかもしれません
+The user "{0}" just changed some of this data: ユーザー "{0}" は、このデータの一部を変更したばかりです。
 The user {0} has been logged off: ユーザー {0} がログオフされました
 The User {0} has just edited, created or deleted entries here. You should reload the data: ユーザー {0}は、ここでエントリを編集、作成、または削除したところです。データを再ロードする必要があります。
 There are no new notifications: 新しい通知はありません
@@ -978,10 +995,12 @@ ug-CN: ウイグル (中国)
 uk-UA: ウクライナ語 (ウクライナ)
 Unassigned: 未割り当て
 Update: 更新
+Update automatically next time: 次回自動的に更新する
 Update Brand: ブランドの更新
 Update Document: ドキュメントの更新
 Update Document Type: ドキュメント タイプの更新
 Update Extended Attribute: 拡張属性の更新
+Update Now: 今すぐ更新
 Update Permissions: 更新のアクセス許可
 Update Product: 製品の更新
 Update Role: ロールの更新

@@ -8,12 +8,15 @@ Actions: الاجراءات
 Activate User?: تنشيط المستخدم؟
 Active: نشط
 Active?: نشط؟
+Add: جمع
 Add Brand: إضافة علامة تجارية
 Add Document: إضافة مستند
 Add Document Type: إضافة نوع المستند
 Add Extended Attribute: إضافة سمة موسعة
+Add external Url: إضافة عنوان URL خارجي
 Add Product: إضافة منتج
 Add Role: إضافة دور
+Add Url: إضافة عنوان URL
 Address: عنوان
 Addresses: عناوين
 Administrator: مدير
@@ -83,6 +86,7 @@ Auto Confirm Email?: تأكيد تلقائي للبريد الإلكتروني؟
 az-Cyrl-AZ: أذربيجان (سيريلية، أذربيجان)
 az-Latn-AZ: أذربيجان (اللاتينية، أذربيجان)
 ba-RU: باشكير (روسيا)
+Back: ظهر
 Barcode: الباركود
 Barcode already exists.: الباركود موجود بالفعل.
 Barcode is required!: الباركود مطلوب!
@@ -150,6 +154,7 @@ Continue to {0}: تابع {0}
 Country: بلد
 Create: خلق
 Create address: إنشاء عنوان
+CreatedOn: تاريخ الإنشاء
 cs-CZ: تشيكية (تشيكيا)
 cu-RU: الكنيسة السلافية (روسيا)
 Current Password: كلمة المرور الحالية
@@ -158,6 +163,7 @@ cy-GB: ويلز (المملكة المتحدة)
 da-DK: الدنماركية (الدنمارك)
 da-GL: الدنماركية (غرينلاند)
 Dashboard: لوحه القياده
+Data has been updated: تم تحديث البيانات
 Date: تاريخ
 Date Created: تاريخ الإنشاء
 Date Range For Searching: نطاق التاريخ للبحث
@@ -352,6 +358,7 @@ en-ZW: الإنجليزية (زيمبابوي)
 English: الإنكليزية
 Enter email for password reset: أدخل عنوان البريد الإلكتروني المرتبط بحسابك وستتلقى رسالة إلكترونية تحتوي على رابط لإعادة تعيين كلمة المرور الخاصة بك
 Enter the email address for the confirmation mail: أدخل عنوان البريد الإلكتروني لرسالة التأكيد
+Enter the URL to existing file: أدخل عنوان URL للملف الحالي
 Enter your message...: أدخل رسالتك...
 Entity Id: معرف الكيان
 Entity is required!: الكيان مطلوب!
@@ -410,6 +417,7 @@ Failed to get client preferences: فشل في الحصول على تفضيلات
 FAQs: الأسئلة الشائعة
 Features: ملامح
 Feb: فبراير
+Female: أنثى
 ff-Adlm-BF: فلاح (عدالم، بوركينا فاسو)
 ff-Adlm-CM: فلاح (عدالام، الكاميرون)
 ff-Adlm-GH: فلاح (عدالام، غانا)
@@ -504,6 +512,7 @@ fy-NL: الفريزية الغربية (هولندا)
 ga-GB: الأيرلندية (المملكة المتحدة)
 ga-IE: الأيرلندية (أيرلندا)
 gd-GB: اللغة الغيلية الاسكتلندية (المملكة المتحدة)
+General: عام
 German: الألمانية
 gl-ES: الجاليكية (إسبانيا)
 gn-PY: غواراني (باراغواي)
@@ -594,6 +603,8 @@ ku-Arab-IR: الكردية (العربية، إيران)
 kw-GB: كورنيش (المملكة المتحدة)
 ky-KG: قيرغيزستان (قيرغيزستان)
 la-VA: اللاتينية (الفاتيكان)
+Label_Description: الوصف:__________
+Label_UploadRequests: الملفات
 lag-TZ: لانجي (تنزانيا)
 Languages: اللغات
 Last Name: اسم العائلة
@@ -623,6 +634,7 @@ luy-KE: لويا (كينيا)
 lv-LV: لاتفيا (لاتفيا)
 mai-IN: مايثيلي (الهند)
 Mail: بريد
+Male: ذكر
 Manage {0} {1}'s Extended Attributes: إدارة سمات {0} {1} الموسعة
 Manage {0} {1}'s Permissions: إدارة أذونات {0} {1}
 Manage {0} {1}'s Roles: إدارة أدوار {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: نغيمبون (الكاميرون)
 No: لا
 No address: لا يوجد عنوان
 No Allowed Actions: لا يسمح الإجراءات
+No longer update automatically: لم يعد يتم التحديث تلقائيا
 No notifications: لا توجد إشعارات
 Not Allowed to add or delete Administrator Role if you have not this role.: غير مسموح بإضافة دور المسؤول أو حذفه إذا لم يكن لديك هذا الدور.
 Not allowed to Delete this user: غير مسموح بحذف هذا المستخدم
@@ -722,6 +735,8 @@ Open Url {0}: فتح {0} URL
 or-IN: أوديا (الهند)
 os-GE: أوسيتيك (جورجيا)
 os-RU: أوسيتيك (روسيا)
+Other: غير ذلك __________
+Overview: نظره عامه
 Owner: مالك
 pa-Arab-PK: البنجابية (العربية، باكستان)
 pa-IN: البنجابية (الهند)
@@ -926,6 +941,7 @@ ta-LK: التاميل (سريلانكا)
 ta-MY: ولا (ماليزيا)
 ta-SG: التاميل (سنغافورة)
 Table Name: اسم الجدول
+Take case: خذ القضية
 Tax: ضريبة
 Tax must be greater than 0: يجب أن تكون الضريبة أكبر من 0
 te-IN: التيلجو (الهند)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: تجا
 The following {0} permissions are also required for permission {1}: كما يلزم الحصول على إذن {0} الأذونات التالية {1}
 The following permission is also required for permission {1}: إذن التالية مطلوب أيضا للحصول على إذن {1}
 The Plugin '{0}' may be able to help: قد يكون المكون الإضافي "{0}" قادرا على المساعدة
+The user "{0}" just changed some of this data: قام المستخدم "{0}" بتغيير بعض هذه البيانات للتو
 The user {0} has been logged off: تم تسجيل خروج {0} المستخدم
 The User {0} has just edited, created or deleted entries here. You should reload the data: قام {0} المستخدم بتحرير الإدخالات أو إنشائها أو حذفها هنا. يجب إعادة تحميل البيانات
 There are no new notifications: لا توجد إشعارات جديدة
@@ -978,10 +995,12 @@ ug-CN: الأويغور (الصين)
 uk-UA: الأوكرانية (أوكرانيا)
 Unassigned: غير معين
 Update: تحديث
+Update automatically next time: التحديث تلقائيا في المرة القادمة
 Update Brand: تحديث العلامة التجارية
 Update Document: تحديث المستند
 Update Document Type: تحديث نوع المستند
 Update Extended Attribute: تحديث سمة موسعة
+Update Now: التحديث الآن
 Update Permissions: أذونات التحديث
 Update Product: تحديث المنتج
 Update Role: دور التحديث

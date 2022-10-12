@@ -8,12 +8,15 @@ Actions: Actions
 Activate User?: Activate User?
 Active: Active
 Active?: Active?
+Add: Add
 Add Brand: Add Brand
 Add Document: Add Document
 Add Document Type: Add Document Type
 Add Extended Attribute: Add Extended Attribute
+Add external Url: Add external Url
 Add Product: Add Product
 Add Role: Add Role
+Add Url: Add Url
 Address: Address
 Addresses: Addresses
 Administrator: Administrator
@@ -83,6 +86,7 @@ Auto Confirm Email?: Auto Confirm Email?
 az-Cyrl-AZ: Azerbaijani (Cyrillic, Azerbaijan)
 az-Latn-AZ: Azerbaijani (Latin, Azerbaijan)
 ba-RU: Bashkir (Russia)
+Back: Back
 Barcode: Barcode
 Barcode already exists.: Barcode already exists.
 Barcode is required!: Barcode is required!
@@ -150,6 +154,7 @@ Continue to {0}: Continue to {0}
 Country: Country
 Create: Create
 Create address: Create address
+CreatedOn: Date created
 cs-CZ: Czech (Czechia)
 cu-RU: Church Slavic (Russia)
 Current Password: Current Password
@@ -158,6 +163,7 @@ cy-GB: Welsh (United Kingdom)
 da-DK: Danish (Denmark)
 da-GL: Danish (Greenland)
 Dashboard: Dashboard
+Data has been updated: Data has been updated
 Date: Date
 Date Created: Date Created
 Date Range For Searching: Date Range For Searching
@@ -351,6 +357,7 @@ en-ZW: English (Zimbabwe)
 English: English
 Enter email for password reset: Enter the email address linked to your account and you will recieve an email containing a link to reset your password
 Enter the email address for the confirmation mail: Enter the email address for the confirmation mail
+Enter the URL to existing file: Enter the URL to existing file
 Enter your message...: Enter your message...
 Entity Id: Entity Id
 Entity is required!: Entity is required!
@@ -409,6 +416,7 @@ Failed to get client preferences: Failed to get client preferences
 FAQs: FAQs
 Features: Features
 Feb: Feb
+Female: Female
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Cameroon)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -503,6 +511,7 @@ fy-NL: Western Frisian (Netherlands)
 ga-GB: Irish (United Kingdom)
 ga-IE: Irish (Ireland)
 gd-GB: Scottish Gaelic (United Kingdom)
+General: General
 German: German
 gl-ES: Galician (Spain)
 gn-PY: Guarani (Paraguay)
@@ -593,6 +602,8 @@ ku-Arab-IR: Kurdish (Arabic, Iran)
 kw-GB: Cornish (United Kingdom)
 ky-KG: Kyrgyz (Kyrgyzstan)
 la-VA: Latin (Vatican City)
+Label_Description: Description
+Label_UploadRequests: Files
 lag-TZ: Langi (Tanzania)
 Languages: Languages
 Last Name: Last Name
@@ -622,6 +633,7 @@ luy-KE: Luyia (Kenya)
 lv-LV: Latvian (Latvia)
 mai-IN: Maithili (India)
 Mail: Mail
+Male: Male
 Manage {0} {1}'s Extended Attributes: Manage {0} {1}'s Extended Attributes
 Manage {0} {1}'s Permissions: Manage {0} {1}'s Permissions
 Manage {0} {1}'s Roles: Manage {0} {1}'s Roles
@@ -695,6 +707,7 @@ nnh-CM: Ngiemboon (Cameroon)
 No: No
 No address: No address
 No Allowed Actions: No Allowed Actions
+No longer update automatically: No longer update automatically
 No notifications: No notifications
 Not Allowed to add or delete Administrator Role if you have not this role.: Not Allowed to add or delete Administrator Role if you have not this role.
 Not allowed to Delete this user: Not allowed to Delete this user
@@ -721,6 +734,8 @@ Open Url {0}: Open Url {0}
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Russia)
+Other: Other
+Overview: Overview
 Owner: Owner
 pa-Arab-PK: Punjabi (Arabic, Pakistan)
 pa-IN: Punjabi (India)
@@ -925,6 +940,7 @@ ta-LK: Tamil (Sri Lanka)
 ta-MY: Tamil (Malaysia)
 ta-SG: Tamil (Singapore)
 Table Name: Table Name
+Take case: Take case
 Tax: Tax
 Tax must be greater than 0: Tax must be greater than 0
 te-IN: Telugu (India)
@@ -940,6 +956,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: The fi
 The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
 The following permission is also required for permission {1}: The following permission is also required for permission {1}
 The Plugin '{0}' may be able to help: The Plugin '{0}' may be able to help
+The user "{0}" just changed some of this data: The user "{0}" just changed some of this data
 The user {0} has been logged off: The user {0} has been logged off
 The User {0} has just edited, created or deleted entries here. You should reload the data: The User {0} has just edited, created or deleted entries here. You should reload the data
 There are no new notifications: There are no new notifications
@@ -977,10 +994,12 @@ ug-CN: Uyghur (China)
 uk-UA: Ukrainian (Ukraine)
 Unassigned: Unassigned
 Update: Update
+Update automatically next time: Update automatically next time
 Update Brand: Update Brand
 Update Document: Update Document
 Update Document Type: Update Document Type
 Update Extended Attribute: Update Extended Attribute
+Update Now: Update now
 Update Permissions: Update Permissions
 Update Product: Update Product
 Update Role: Update Role
@@ -1060,22 +1079,3 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
-Add external Url: Add external Url
-Add Url: Add Url
-CreatedOn: Date created
-Enter the URL to existing file: Enter the URL to existing file
-General: General
-Label_Description: Description
-Label_UploadRequests: Files
-Other: Other
-Overview: Overview
-Back: Back
-Take case: Take case
-Female: Female
-Male: Male
-Add: Add
-The user "{0}" just changed some of this data: The user "{0}" just changed some of this data
-Update Now: Update now
-Data has been updated: Data has been updated
-Update automatically next time: Update automatically next time
-No longer update automatically: No longer update automatically

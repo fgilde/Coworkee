@@ -1,9 +1,10 @@
 ﻿using CleanArchitectureBase.Client.Enums;
 using MudBlazor;
+using System;
 
 namespace CleanArchitectureBase.Client.Theming
 {
-    public class LayoutPropertiesEx : MudBlazor.LayoutProperties
+    public class LayoutPropertiesEx : MudBlazor.LayoutProperties, ICloneable
     {
         public DrawerClipMode DrawerClipMode { get; set; } = DrawerClipMode.Always;
         public DrawerVariant DrawerVariant { get; set; } = DrawerVariant.Responsive;
@@ -13,5 +14,6 @@ namespace CleanArchitectureBase.Client.Theming
         public bool ShowUserCardInNavigation { get; set; } = true;
         public bool ShowLogoInAppBar { get; set; } = true;
         public bool ShowLogoInNavMenu { get; set; }
+        public object Clone() => MemberwiseClone();
     }
 }

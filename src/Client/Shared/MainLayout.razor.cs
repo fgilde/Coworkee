@@ -183,10 +183,10 @@ namespace CleanArchitectureBase.Client.Shared
 
         private void ThemeChanged(ClientTheme theme)
         {
-            var updateDrawer = theme.LayoutProperties.DrawerVariant == DrawerVariant.Temporary || _currentTheme.LayoutProperties.DrawerVariant == DrawerVariant.Temporary;
+            var updateDrawer = theme.LayoutPropertiesEx.DrawerVariant == DrawerVariant.Temporary || _currentTheme.LayoutPropertiesEx.DrawerVariant == DrawerVariant.Temporary;
             _currentTheme = theme;
             if (updateDrawer)
-                _drawerOpen = theme.LayoutProperties.DrawerVariant != DrawerVariant.Temporary;
+                _drawerOpen = theme.LayoutPropertiesEx.DrawerVariant != DrawerVariant.Temporary;
         }
 
         public ValueTask DisposeAsync()

@@ -8,12 +8,15 @@ Actions: Eylemler
 Activate User?: Kullanıcı Etkinleştirilensin mi?
 Active: Etkin
 Active?: Etkin?
+Add: Eklemek
 Add Brand: Marka Ekle
 Add Document: Belge Ekle
 Add Document Type: Belge Türü Ekle
 Add Extended Attribute: Genişletilmiş Öznitelik Ekle
+Add external Url: Harici URL ekleme
 Add Product: Ürün Ekle
 Add Role: Rol Ekle
+Add Url: URL Ekle
 Address: Adres
 Addresses: Adres
 Administrator: Yönetici
@@ -83,6 +86,7 @@ Auto Confirm Email?: E-postayı Otomatik Onayla?
 az-Cyrl-AZ: Azerice (Kiril, Azerbaycan)
 az-Latn-AZ: Azerice (Latince, Azerbaycan)
 ba-RU: Başçeri (Rusya)
+Back: Geri
 Barcode: Barkod
 Barcode already exists.: Barkod zaten var.
 Barcode is required!: Barkod gereklidir!
@@ -150,6 +154,7 @@ Continue to {0}: '{0} devam et'
 Country: Ülke
 Create: Yaratmak
 Create address: Adres oluştur
+CreatedOn: Oluşturulma tarihi
 cs-CZ: Çekçe (Çekya)
 cu-RU: Kilise Slav (Rusya)
 Current Password: Geçerli Parola
@@ -158,6 +163,7 @@ cy-GB: Galce (Birleşik Krallık)
 da-DK: Danca (Danimarka)
 da-GL: Danca (Grönland)
 Dashboard: Tablo
+Data has been updated: Veriler güncellendi
 Date: Tarih
 Date Created: Oluşturulma Tarihi
 Date Range For Searching: Arama için Tarih Aralığı
@@ -352,6 +358,7 @@ en-ZW: İngilizce (Zimbabve)
 English: İngilizce
 Enter email for password reset: Hesabınıza bağlı e-posta adresini girin ve şifrenizi sıfırlamak için bir bağlantı içeren bir e-posta alacaksınız
 Enter the email address for the confirmation mail: Onay postası için e-posta adresini girin
+Enter the URL to existing file: Mevcut dosyanın URL'sini girin
 Enter your message...: mesajınızı girin...
 Entity Id: Varlık Kimliği
 Entity is required!: Varlık gereklidir!
@@ -410,6 +417,7 @@ Failed to get client preferences: İstemci tercihleri alınamadı
 FAQs: SSS
 Features: Özellik
 Feb: Şubat
+Female: Dişi
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Kamerun)
 ff-Adlm-GH: Fulah (Adlam, Gana)
@@ -504,6 +512,7 @@ fy-NL: Batı Frizya (Hollanda)
 ga-GB: İrlanda (Birleşik Krallık)
 ga-IE: İrlanda (İrlanda)
 gd-GB: İskoç Galcesi (Birleşik Krallık)
+General: Genel
 German: Almanca
 gl-ES: Galiçyaca (İspanya)
 gn-PY: Guarani (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kürtçe (Arapça, İran)
 kw-GB: Cornish (Birleşik Krallık)
 ky-KG: Kırgız (Kırgızistan)
 la-VA: Latince (Vatikan)
+Label_Description: 'Açıklama: __________'
+Label_UploadRequests: Dosyaları
 lag-TZ: Langi (Tanzanya)
 Languages: Diller
 Last Name: Soyadı
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenya)
 lv-LV: Letonca (Letonya)
 mai-IN: Maithili (Hindistan)
 Mail: Posta
+Male: Erkek
 Manage {0} {1}'s Extended Attributes: '{0} {1} Genişletilmiş Özniteliklerini Yönetme'
 Manage {0} {1}'s Permissions: '{0} {1} İzinlerini Yönetme'
 Manage {0} {1}'s Roles: '{0} {1} Rollerini Yönetme'
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Kamerun)
 No: Hayır
 No address: Adres yok
 No Allowed Actions: İzin Verilen Eylem Yok
+No longer update automatically: Artık otomatik olarak güncellenmiyor
 No notifications: Bildirim yok
 Not Allowed to add or delete Administrator Role if you have not this role.: Bu role sahip değilseniz Yönetici Rolü eklemenize veya silmenize izin verilmez.
 Not allowed to Delete this user: Bu kullanıcının silinmesine izin verilmiyor
@@ -722,6 +735,8 @@ Open Url {0}: Açık URL {0}
 or-IN: Odia (Hindistan)
 os-GE: Ossetic (Gürcistan)
 os-RU: Ossetic (Rusya)
+Other: Başka
+Overview: Genel bakış
 Owner: Sahip
 pa-Arab-PK: Pencap dili (Arapça, Pakistan)
 pa-IN: Pencap (Hindistan)
@@ -926,6 +941,7 @@ ta-LK: Tamilce (Sri Lanka)
 ta-MY: Ne de (Malezya)
 ta-SG: Tamil (Singapur)
 Table Name: Tablo Adı
+Take case: Kılıfı al
 Tax: Vergi
 Tax must be greater than 0: Vergi 0'dan büyük olmalıdır
 te-IN: Telugu (Hindistan)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Dosya,
 The following {0} permissions are also required for permission {1}: İzin {1} için aşağıdaki {0} izinler de gereklidir
 The following permission is also required for permission {1}: İzin {1} için aşağıdaki izin de gereklidir
 The Plugin '{0}' may be able to help: Eklenti '{0}' yardımcı olabilir
+The user "{0}" just changed some of this data: '"{0}" kullanıcısı bu verilerin bir kısmını değiştirdi'
 The user {0} has been logged off: Kullanıcı {0} oturumu kapatıldı
 The User {0} has just edited, created or deleted entries here. You should reload the data: Kullanıcı {0} burada girişleri yeni düzenledi, oluşturdu veya sildi. Verileri yeniden yüklemelisiniz
 There are no new notifications: Yeni bildirim yok
@@ -978,10 +995,12 @@ ug-CN: Uygur (Çin)
 uk-UA: Ukrayna (Ukrayna)
 Unassigned: Atanma -mış
 Update: Güncelleştirmek
+Update automatically next time: Bir dahaki sefere otomatik olarak güncelle
 Update Brand: Markayı Güncelleştir
 Update Document: Belgeyi Güncelleştir
 Update Document Type: Belge Türünü Güncelleştir
 Update Extended Attribute: Genişletilmiş Özniteliği Güncelleştir
+Update Now: Şimdi Güncelleştir
 Update Permissions: İzinleri Güncelleştir
 Update Product: Ürünü Güncelleştir
 Update Role: Rolü Güncelleştir

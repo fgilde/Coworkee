@@ -8,12 +8,15 @@ Actions: Handlinger
 Activate User?: Skal brugeren aktiveres?
 Active: Aktiv
 Active?: Aktiv?
+Add: Tilføje
 Add Brand: Tilføj brand
 Add Document: Tilføj dokument
 Add Document Type: Tilføj dokumenttype
 Add Extended Attribute: Tilføj udvidet attribut
+Add external Url: Tilføj ekstern url
 Add Product: Tilføj produkt
 Add Role: Tilføj rolle
+Add Url: Tilføj url
 Address: Adresse
 Addresses: Adresser
 Administrator: Administrator
@@ -83,6 +86,7 @@ Auto Confirm Email?: Automatisk bekræft e-mail?
 az-Cyrl-AZ: Aserbajdsjansk (kyrillisk, Aserbajdsjan)
 az-Latn-AZ: Aserbajdsjansk (latin, Aserbajdsjan)
 ba-RU: Bashkir (Rusland)
+Back: Ryg
 Barcode: Stregkode
 Barcode already exists.: Stregkoden findes allerede.
 Barcode is required!: Stregkode er påkrævet!
@@ -150,6 +154,7 @@ Continue to {0}: Fortsæt med at {0}
 Country: Land
 Create: Skabe
 Create address: Opret adresse
+CreatedOn: Oprettelsesdato
 cs-CZ: Tjekkisk (Tjekkiet)
 cu-RU: Kirkeslavisk (Rusland)
 Current Password: Aktuel adgangskode
@@ -158,6 +163,7 @@ cy-GB: Walisisk (Storbritannien)
 da-DK: Dansk (Danmark)
 da-GL: Dansk (Grønland)
 Dashboard: Instrumentbræt
+Data has been updated: Data er blevet opdateret
 Date: Dato
 Date Created: Dato, der er oprettet
 Date Range For Searching: Datointerval til søgning
@@ -352,6 +358,7 @@ en-ZW: Engelsk (Zimbabwe)
 English: Engelsk
 Enter email for password reset: Indtast den e-mailadresse, der er knyttet til din konto, og du vil modtage en e-mail, der indeholder et link til at nulstille din adgangskode
 Enter the email address for the confirmation mail: Indtast e-mailadressen til bekræftelsesmailen
+Enter the URL to existing file: Indtast URL-adressen til eksisterende fil
 Enter your message...: Indtast din meddelelse...
 Entity Id: Enheds-id
 Entity is required!: Enheden er påkrævet!
@@ -410,6 +417,7 @@ Failed to get client preferences: Klientindstillingerne kunne ikke hentes
 FAQs: Ofte stillede spørgsmål
 Features: Funktioner
 Feb: Feb
+Female: Kvindelig
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Cameroun)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -504,6 +512,7 @@ fy-NL: Vestfrisisk (Holland)
 ga-GB: Irsk (Storbritannien)
 ga-IE: Irsk (Irland)
 gd-GB: Skotsk gælisk (Det Forenede Kongerige)
+General: Generel
 German: Tysk
 gl-ES: Galicisk (Spanien)
 gn-PY: Guarani (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kurdisk (arabisk, Iran)
 kw-GB: Cornish (Storbritannien)
 ky-KG: Kirgisisk (Kirgisistan)
 la-VA: Latin (Vatikanstaten)
+Label_Description: Beskrivelse
+Label_UploadRequests: ﬁler
 lag-TZ: Langi (Tanzania)
 Languages: Sprog
 Last Name: Efternavn
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenya)
 lv-LV: Lettisk (Letland)
 mai-IN: Maithili (Indien)
 Mail: Mail
+Male: Mandlig
 Manage {0} {1}'s Extended Attributes: Administrere {0} {1} udvidede attributter
 Manage {0} {1}'s Permissions: Administrere {0} {1}'s tilladelser
 Manage {0} {1}'s Roles: Administrere {0} {1} roller
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Cameroun)
 No: Nej
 No address: Ingen adresse
 No Allowed Actions: Ingen tilladte handlinger
+No longer update automatically: Opdater ikke længere automatisk
 No notifications: Ingen meddelelser
 Not Allowed to add or delete Administrator Role if you have not this role.: Må ikke tilføje eller slette administratorrolle, hvis du ikke har denne rolle.
 Not allowed to Delete this user: Ikke tilladt at slette denne bruger
@@ -722,6 +735,8 @@ Open Url {0}: Åbn url-{0}
 or-IN: Odia (Indien)
 os-GE: Ossetisk (Georgien)
 os-RU: Ossetisk (Rusland)
+Other: Andet__________
+Overview: Overblik
 Owner: Ejer
 pa-Arab-PK: Punjabi (arabisk, Pakistan)
 pa-IN: Punjabi (Indien)
@@ -926,6 +941,7 @@ ta-LK: Tamilsk (Sri Lanka)
 ta-MY: Heller ikke (Malaysia)
 ta-SG: Tamilsk (Singapore)
 Table Name: Tabelnavn
+Take case: Tag sagen
 Tax: Skat
 Tax must be greater than 0: Skat skal være større end 0
 te-IN: Telugu (Indien)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Filen 
 The following {0} permissions are also required for permission {1}: Følgende {0} tilladelser kræves også for at få tilladelse {1}
 The following permission is also required for permission {1}: Følgende tilladelse kræves også for at få tilladelse {1}
 The Plugin '{0}' may be able to help: Pluginet '{0}' kan muligvis hjælpe
+The user "{0}" just changed some of this data: Brugeren "{0}" har lige ændret nogle af disse data
 The user {0} has been logged off: Brugeren {0} er logget af
 The User {0} has just edited, created or deleted entries here. You should reload the data: Brugeren {0} har netop redigeret, oprettet eller slettet poster her. Du bør genindlæse dataene
 There are no new notifications: Der er ingen nye meddelelser
@@ -978,10 +995,12 @@ ug-CN: Uyghur (Kina)
 uk-UA: Ukrainsk (Ukraine)
 Unassigned: Ikke tildelt
 Update: Opdatering
+Update automatically next time: Opdater automatisk næste gang
 Update Brand: Opdater brand
 Update Document: Opdater dokument
 Update Document Type: Opdater dokumenttype
 Update Extended Attribute: Opdater udvidet attribut
+Update Now: Opdater nu
 Update Permissions: Opdater tilladelser
 Update Product: Opdater produkt
 Update Role: Opdater rolle

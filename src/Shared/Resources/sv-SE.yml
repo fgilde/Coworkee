@@ -8,12 +8,15 @@ Actions: Åtgärder
 Activate User?: Vill du aktivera användare?
 Active: Aktiv
 Active?: Aktiv?
+Add: Addera
 Add Brand: Lägg till varumärke
 Add Document: Lägga till dokument
 Add Document Type: Lägga till dokumenttyp
 Add Extended Attribute: Lägg till utökat attribut
+Add external Url: Lägg till extern URL
 Add Product: Lägg till produkt
 Add Role: Lägg till roll
+Add Url: Lägg till url
 Address: Adress
 Addresses: Adresser
 Administrator: Administratör
@@ -83,6 +86,7 @@ Auto Confirm Email?: Bekräfta e-post automatiskt?
 az-Cyrl-AZ: Azerbajdzjanska (kyrilliska, Azerbajdzjan)
 az-Latn-AZ: Azerbajdzjanska (latin, Azerbajdzjan)
 ba-RU: Bashkir (Ryssland)
+Back: Tillbaka
 Barcode: Streckkod
 Barcode already exists.: Streckkod finns redan.
 Barcode is required!: Streckkod krävs!
@@ -150,6 +154,7 @@ Continue to {0}: Fortsätt att {0}
 Country: Land
 Create: Skapa
 Create address: Skapa adress
+CreatedOn: Skapad
 cs-CZ: Tjeckiska (Tjeckien)
 cu-RU: Kyrkan Slavisk (Ryssland)
 Current Password: Aktuellt lösenord
@@ -158,6 +163,7 @@ cy-GB: Walesiska (Storbritannien)
 da-DK: Danska (Danmark)
 da-GL: Danska (Grönland)
 Dashboard: Instrumentbräda
+Data has been updated: Uppgifterna har uppdaterats
 Date: Datum
 Date Created: Datum skapat
 Date Range For Searching: Datumintervall för sökning
@@ -352,6 +358,7 @@ en-ZW: Engelska (Zimbabwe)
 English: Engelska
 Enter email for password reset: Ange e-postadressen som är länkad till ditt konto så får du ett e-postmeddelande som innehåller en länk för att återställa ditt lösenord
 Enter the email address for the confirmation mail: Ange e-postadressen för bekräftelsemeddelandet
+Enter the URL to existing file: Ange URL:en till befintlig fil
 Enter your message...: Skriv in ditt meddelande...
 Entity Id: Enhets-ID
 Entity is required!: Enhet krävs!
@@ -410,6 +417,7 @@ Failed to get client preferences: Det gick inte att hämta klientinställningar
 FAQs: Vanliga frågor och andra frågor
 Features: Funktioner
 Feb: Feb
+Female: Kvinnlig
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Kamerun)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -504,6 +512,7 @@ fy-NL: Västra Frisiska (Nederländerna)
 ga-GB: Iriska (Storbritannien)
 ga-IE: Iriska (Irland)
 gd-GB: Skotsk gaeliska (Storbritannien)
+General: Allmänt
 German: Tyska
 gl-ES: Galiciern (Spanien)
 gn-PY: Guarani (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kurdiska (arabiska, Iran)
 kw-GB: Cornish (Storbritannien)
 ky-KG: Kirgizistan (Kirgizistan)
 la-VA: Latin (Vatikanstaten)
+Label_Description: 'Beskrivning: __________'
+Label_UploadRequests: ﬁler
 lag-TZ: Langi (Tanzania)
 Languages: Språk
 Last Name: Efternamn
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenya)
 lv-LV: Lettiska (Lettland)
 mai-IN: Maithili (Indien)
 Mail: Post
+Male: Manlig
 Manage {0} {1}'s Extended Attributes: Hantera {0} {1} utökade attribut
 Manage {0} {1}'s Permissions: Hantera {0} {1} behörigheter
 Manage {0} {1}'s Roles: Hantera {0} {1} roller
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Kamerun)
 No: Nej
 No address: Ingen adress
 No Allowed Actions: Inga tillåtna åtgärder
+No longer update automatically: Uppdateras inte längre automatiskt
 No notifications: Inga aviseringar
 Not Allowed to add or delete Administrator Role if you have not this role.: Det är inte tillåtet att lägga till eller ta bort administratörsrollen om du inte har den här rollen.
 Not allowed to Delete this user: Får inte ta bort den här användaren
@@ -722,6 +735,8 @@ Open Url {0}: Öppna URL-{0}
 or-IN: Odia (Indien)
 os-GE: Ossetiska (Georgien)
 os-RU: Ossetic (Ryssland)
+Other: Annan
+Overview: Överblick
 Owner: Ägare
 pa-Arab-PK: Punjabi (arabiska, Pakistan)
 pa-IN: Punjabi (Indien)
@@ -926,6 +941,7 @@ ta-LK: Tamil (Sri Lanka)
 ta-MY: Inte heller (Malaysia)
 ta-SG: Tamil (Singapore)
 Table Name: Tabellnamn
+Take case: Ta fallet
 Tax: Skatt
 Tax must be greater than 0: Skatten måste vara större än 0
 te-IN: Telugu (Indien)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Filen 
 The following {0} permissions are also required for permission {1}: Följande {0} behörigheter krävs också för behörighet {1}
 The following permission is also required for permission {1}: Följande behörighet krävs också för tillstånd {1}
 The Plugin '{0}' may be able to help: Plugin '{0}' kanske kan hjälpa till
+The user "{0}" just changed some of this data: Användaren "{0}" ändrade bara en del av dessa data
 The user {0} has been logged off: Användarens {0} har loggats ut
 The User {0} has just edited, created or deleted entries here. You should reload the data: Den {0} har just redigerat, skapat eller tagit bort poster här. Du bör ladda om data
 There are no new notifications: Det finns inga nya aviseringar
@@ -978,10 +995,12 @@ ug-CN: Uigurer (Kina)
 uk-UA: Ukrainska (Ukraina)
 Unassigned: Otilldelade
 Update: Uppdatera
+Update automatically next time: Uppdatera automatiskt nästa gång
 Update Brand: Uppdatera varumärke
 Update Document: Uppdatera dokument
 Update Document Type: Uppdatera dokumenttyp
 Update Extended Attribute: Uppdatera utökat attribut
+Update Now: Uppdatera nu
 Update Permissions: Uppdatera behörigheter
 Update Product: Uppdatera produkt
 Update Role: Uppdatera roll

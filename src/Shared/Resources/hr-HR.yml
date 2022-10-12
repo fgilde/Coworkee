@@ -8,12 +8,15 @@ Actions: Akcije
 Activate User?: Želite li aktivirati korisnika?
 Active: Aktivan
 Active?: Aktivan?
+Add: Dodati
 Add Brand: Dodaj robnu marku
 Add Document: Dodaj dokument
 Add Document Type: Dodaj vrstu dokumenta
 Add Extended Attribute: Dodaj prošireni atribut
+Add external Url: Dodavanje vanjskog URL-a
 Add Product: Dodaj proizvod
 Add Role: Dodaj ulogu
+Add Url: Dodaj URL
 Address: Adresa
 Addresses: Adrese
 Administrator: Administrator
@@ -83,6 +86,7 @@ Auto Confirm Email?: Automatska potvrda e-pošte?
 az-Cyrl-AZ: Azerbajdžanski (ćirilica, Azerbajdžan)
 az-Latn-AZ: Azerbajdžanski (latinica, Azerbajdžan)
 ba-RU: Baškir (Rusija)
+Back: Leđa
 Barcode: Crtični kod
 Barcode already exists.: Crtični kod već postoji.
 Barcode is required!: Potreban je crtični kod!
@@ -150,6 +154,7 @@ Continue to {0}: Nastavi {0}
 Country: Zemlja
 Create: Stvoriti
 Create address: Stvori adresu
+CreatedOn: Datum stvaranja
 cs-CZ: Češki (Češka)
 cu-RU: Crkveni slavenski (Rusija)
 Current Password: Trenutna lozinka
@@ -158,6 +163,7 @@ cy-GB: Velški (Ujedinjeno Kraljevstvo)
 da-DK: Danski (Danska)
 da-GL: Danski (Grenland)
 Dashboard: Nadzorna ploča
+Data has been updated: Podaci su ažurirani
 Date: Datum
 Date Created: Datum stvaranja
 Date Range For Searching: Raspon datuma za pretraživanje
@@ -352,6 +358,7 @@ en-ZW: Engleski (Zimbabve)
 English: Engleski
 Enter email for password reset: Unesite adresu e-pošte povezanu s vašim računom i primit ćete poruku e-pošte koja sadrži vezu za ponovno postavljanje lozinke
 Enter the email address for the confirmation mail: Unesite adresu e-pošte za poruku s potvrdom
+Enter the URL to existing file: Unesite URL postojeće datoteke
 Enter your message...: Unesite poruku...
 Entity Id: ID entiteta
 Entity is required!: Entitet je obavezan!
@@ -410,6 +417,7 @@ Failed to get client preferences: Dohvaćanje preferenci klijenta nije uspjelo
 FAQs: Najčešća pitanja
 Features: Značajkama
 Feb: Veljača
+Female: Ženka
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Kamerun)
 ff-Adlm-GH: Fulah (Adlam, Gana)
@@ -504,6 +512,7 @@ fy-NL: Zapadni frizijski (Nizozemska)
 ga-GB: Irski (Ujedinjeno Kraljevstvo)
 ga-IE: Irski (Irska)
 gd-GB: Škotski galski (Ujedinjeno Kraljevstvo)
+General: Općenito
 German: Njemački
 gl-ES: Galicijski (Španjolska)
 gn-PY: Guarani (Paragvaj)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kurdski (arapski, Iran)
 kw-GB: Cornish (Ujedinjeno Kraljevstvo)
 ky-KG: Kirgistan (Kirgistan, BiH)
 la-VA: Latinski (Vatikan)
+Label_Description: Opis
+Label_UploadRequests: Datotekama
 lag-TZ: Langi (Tanzanija, BiH)
 Languages: Jezici
 Last Name: Prezime
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenija)
 lv-LV: Latvijski (Latvija)
 mai-IN: Maithili (Indija)
 Mail: Pošta
+Male: Muški
 Manage {0} {1}'s Extended Attributes: Upravljanje proširenim atributima {0} {1}
 Manage {0} {1}'s Permissions: Upravljanje dozvolama {0} {1}
 Manage {0} {1}'s Roles: Upravljanje ulogama {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Kamerun)
 No: Ne
 No address: Nema adrese
 No Allowed Actions: Nema dopuštenih akcija
+No longer update automatically: Više se ne ažurira automatski
 No notifications: Nema obavijesti
 Not Allowed to add or delete Administrator Role if you have not this role.: Nije dopušteno dodati ili izbrisati administratorsku ulogu ako nemate ovu ulogu.
 Not allowed to Delete this user: Brisanje ovog korisnika nije dopušteno
@@ -722,6 +735,8 @@ Open Url {0}: Otvori {0} URL-a
 or-IN: Odia (Indija)
 os-GE: Ossetić (Gruzija)
 os-RU: Ossetić (Rusija)
+Other: Drugi
+Overview: Pregled
 Owner: Vlasnik
 pa-Arab-PK: Pandžapski (arapski, Pakistan)
 pa-IN: Pandžapski (Indija)
@@ -926,6 +941,7 @@ ta-LK: Tamil (Šri Lanka, BiH)
 ta-MY: Nor (Malezija)
 ta-SG: Tamil (Singapur)
 Table Name: Naziv tablice
+Take case: Uzmi slučaj
 Tax: Porez
 Tax must be greater than 0: Porez mora biti veći od 0
 te-IN: Telugu (Indija)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Datote
 The following {0} permissions are also required for permission {1}: Za {1} dozvole potrebne su i sljedeće dozvole za {0}
 The following permission is also required for permission {1}: Za {1} dozvole potrebna je i sljedeća dozvola
 The Plugin '{0}' may be able to help: Dodatak "{0}" možda će vam moći pomoći
+The user "{0}" just changed some of this data: Korisnik "{0}" upravo je promijenio neke od ovih podataka
 The user {0} has been logged off: Korisnički {0} je odjavljen
 The User {0} has just edited, created or deleted entries here. You should reload the data: Korisnički {0} ovdje je upravo uređivao, kreirao ili brisao unose. Trebali biste ponovno učitati podatke
 There are no new notifications: Nema novih obavijesti
@@ -978,10 +995,12 @@ ug-CN: Ujgur (Kina)
 uk-UA: Ukrajinski (Ukrajina)
 Unassigned: Nedodijeljeni
 Update: Ažurirati
+Update automatically next time: Sljedeći put automatski ažuriraj
 Update Brand: Ažuriraj robnu marku
 Update Document: Ažuriraj dokument
 Update Document Type: Ažuriraj vrstu dokumenta
 Update Extended Attribute: Ažuriraj prošireni atribut
+Update Now: Ažuriraj
 Update Permissions: Ažuriraj dozvole
 Update Product: Ažuriraj proizvod
 Update Role: Ažuriraj ulogu

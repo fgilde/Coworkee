@@ -17,9 +17,9 @@
 
             <AppBarHeader Title="@GetTitle()"
                           @ref="appBarHeader"
-                          MenuTogglePosition="_currentTheme.LayoutProperties.MenuTogglePosition"
-                          TitleBehaviour="_currentTheme.LayoutProperties.AppBarTitleBehaviour"
-                          IsLogoVisible="_currentTheme.LayoutProperties.ShowLogoInAppBar"
+                          MenuTogglePosition="_currentTheme.LayoutPropertiesEx.MenuTogglePosition"
+                          TitleBehaviour="_currentTheme.LayoutPropertiesEx.AppBarTitleBehaviour"
+                          IsLogoVisible="_currentTheme.LayoutPropertiesEx.ShowLogoInAppBar"
                           OnMenuIconClick="(e) => DrawerToggle()" />
 
             <MudSpacer />
@@ -74,13 +74,13 @@
                 </MudMenu>
             </MudHidden>
         </MudAppBar>
-        <MudDrawer @ref="drawer" @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutProperties.DrawerVariant" ClipMode="_currentTheme.LayoutProperties.DrawerClipMode">
+        <MudDrawer @ref="drawer" @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutPropertiesEx.DrawerVariant" ClipMode="_currentTheme.LayoutPropertiesEx.DrawerClipMode">
             <NavMenu @ref="navMenu"
                      Logout="Logout"
                      isMini="(!drawer.Open && drawer.Variant == DrawerVariant.Mini)"
-                     ShowApplicationLogo="_currentTheme.LayoutProperties.ShowLogoInNavMenu"
-                     ShowUserCard="_currentTheme.LayoutProperties.ShowUserCardInNavigation"
-                     ExpandMode="_currentTheme.LayoutProperties.NavMenuExpandMode" />
+                     ShowApplicationLogo="_currentTheme.LayoutPropertiesEx.ShowLogoInNavMenu"
+                     ShowUserCard="_currentTheme.LayoutPropertiesEx.ShowUserCardInNavigation"
+                     ExpandMode="_currentTheme.LayoutPropertiesEx.NavMenuExpandMode" />
         </MudDrawer>
         <MudMainContent>
             <MudContainer MaxWidth="MaxWidth.False" Class="app-main-container mt-4">

@@ -8,12 +8,15 @@ Actions: Acties
 Activate User?: Gebruiker activeren?
 Active: Actief
 Active?: Actief?
+Add: Toevoegen
 Add Brand: Merk toevoegen
 Add Document: Document toevoegen
 Add Document Type: Documenttype toevoegen
 Add Extended Attribute: Uitgebreid kenmerk toevoegen
+Add external Url: Externe URL toevoegen
 Add Product: Product toevoegen
 Add Role: Rol toevoegen
+Add Url: Url toevoegen
 Address: Adres
 Addresses: Adressen
 Administrator: Administrateur
@@ -83,6 +86,7 @@ Auto Confirm Email?: E-mail automatisch bevestigen?
 az-Cyrl-AZ: Azerbeidzjaans (Cyrillisch, Azerbeidzjan)
 az-Latn-AZ: Azerbeidzjaans (Latijn, Azerbeidzjan)
 ba-RU: Basjkiers (Rusland)
+Back: Terug
 Barcode: Barcode
 Barcode already exists.: Barcode bestaat al.
 Barcode is required!: Barcode is verplicht!
@@ -150,6 +154,7 @@ Continue to {0}: Ga verder naar {0}
 Country: Land
 Create: Scheppen
 Create address: Adres aanmaken
+CreatedOn: Datum van creatie
 cs-CZ: Tsjechisch (Tsjechië)
 cu-RU: Kerk Slavisch (Rusland)
 Current Password: Huidig wachtwoord
@@ -158,6 +163,7 @@ cy-GB: Welsh (Verenigd Koninkrijk)
 da-DK: Deens (Denemarken)
 da-GL: Deens (Groenland)
 Dashboard: Dashboard
+Data has been updated: Gegevens zijn bijgewerkt
 Date: Datum
 Date Created: Datum van aansning
 Date Range For Searching: Datumbereik voor zoeken
@@ -352,6 +358,7 @@ en-ZW: Engels (Zimbabwe)
 English: Engels
 Enter email for password reset: Voer het e-mailadres in dat aan uw account is gekoppeld en u ontvangt een e-mail met een link om uw wachtwoord opnieuw in te stellen
 Enter the email address for the confirmation mail: Voer het e-mailadres in voor de bevestigingsmail
+Enter the URL to existing file: Voer de URL naar het bestaande bestand in
 Enter your message...: Voer uw bericht in...
 Entity Id: Entiteits-id
 Entity is required!: Entiteit is verplicht!
@@ -410,6 +417,7 @@ Failed to get client preferences: Kan de voorkeuren van de klant niet ophalen
 FAQs: Veelgestelde vragen
 Features: Functies
 Feb: feb
+Female: Vrouwelijk
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Kameroen)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -504,6 +512,7 @@ fy-NL: West-Fries (Nederland)
 ga-GB: Iers (Verenigd Koninkrijk)
 ga-IE: Iers (Ierland)
 gd-GB: Schots-Gaelisch (Verenigd Koninkrijk)
+General: Algemeen
 German: Duits
 gl-ES: Galicisch (Spanje)
 gn-PY: Guarani (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Koerdisch (Arabisch, Iran)
 kw-GB: Cornish (Verenigd Koninkrijk)
 ky-KG: Kirgizisch (Kirgizië)
 la-VA: Latijn (Vaticaanstad)
+Label_Description: 'Omschrijving: __________'
+Label_UploadRequests: Archief
 lag-TZ: Langi (Tanzania)
 Languages: Talen
 Last Name: Achternaam
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenia)
 lv-LV: Lets (Letland)
 mai-IN: Maithili (Indië)
 Mail: Post
+Male: Mannelijk
 Manage {0} {1}'s Extended Attributes: Uitgebreide kenmerken van {0} {1} beheren
 Manage {0} {1}'s Permissions: De machtigingen van {0} {1} beheren
 Manage {0} {1}'s Roles: De rollen van {0} {1} beheren
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Kameroen)
 No: Nee
 No address: Geen adres
 No Allowed Actions: Geen toegestane acties
+No longer update automatically: Niet langer automatisch updaten
 No notifications: Geen meldingen
 Not Allowed to add or delete Administrator Role if you have not this role.: Mag beheerdersrol niet worden toegevoegd of verwijderd als u deze rol niet hebt.
 Not allowed to Delete this user: Niet toegestaan om deze gebruiker te verwijderen
@@ -722,6 +735,8 @@ Open Url {0}: Url-{0} openen
 or-IN: Odia (Indië)
 os-GE: Ossetic (Georgië)
 os-RU: Ossetic (Rusland)
+Other: Ander
+Overview: Overzicht
 Owner: Eigenaar
 pa-Arab-PK: Punjabi (Arabisch, Pakistan)
 pa-IN: Punjabi (Indië)
@@ -926,6 +941,7 @@ ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Maleisië)
 ta-SG: Tamil (Singapore)
 Table Name: Tabelnaam
+Take case: Neem de zaak aan
 Tax: Belasting
 Tax must be greater than 0: Belasting moet hoger zijn dan 0
 te-IN: Telugu (Indië)
@@ -941,6 +957,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Het be
 The following {0} permissions are also required for permission {1}: De volgende {0} machtigingen zijn ook vereist voor toestemming {1}
 The following permission is also required for permission {1}: De volgende toestemming is ook vereist voor toestemming {1}
 The Plugin '{0}' may be able to help: De plug-in '{0}' kan mogelijk helpen
+The user "{0}" just changed some of this data: De gebruiker "{0}" heeft zojuist een deel van deze gegevens gewijzigd
 The user {0} has been logged off: De gebruiker {0} is afgemeld
 The User {0} has just edited, created or deleted entries here. You should reload the data: De Gebruiker {0} heeft hier zojuist items bewerkt, gemaakt of verwijderd. U moet de gegevens opnieuw laden
 There are no new notifications: Er zijn geen nieuwe meldingen
@@ -978,10 +995,12 @@ ug-CN: Oeigoers (China)
 uk-UA: Oekraïens (Oekraïne)
 Unassigned: Toegewezen
 Update: Update
+Update automatically next time: De volgende keer automatisch bijwerken
 Update Brand: Merk bijwerken
 Update Document: Document bijwerken
 Update Document Type: Documenttype bijwerken
 Update Extended Attribute: Uitgebreid kenmerk bijwerken
+Update Now: Nu bijwerken
 Update Permissions: Machtigingen voor bijwerken
 Update Product: Product bijwerken
 Update Role: Rol bijwerken

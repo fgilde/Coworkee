@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using Newtonsoft.Json;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Client.Configuration;
 using CleanArchitectureBase.Client.Extensions;
+using CleanArchitectureBase.Client.JsInterop;
 
 namespace CleanArchitectureBase.Client.Pages.Administration;
 
@@ -21,6 +18,14 @@ public partial class Settings
    // public ClientApplicationConfiguration ClientConfiguration { get; set; }
     private bool _isLoading = true;
 
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            _jsRuntime.ObserveMudTabsForStickMerge(".stick-observe");
+
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();

@@ -8,13 +8,6 @@ namespace CleanArchitectureBase.Application.Common.Extensions;
 
 public static class ODataQueryOptionsExtensions
 {
-    //public static Expression ToExpression<TElement>(this FilterQueryOption filter)
-    //{
-    //    IQueryable queryable = Enumerable.Empty<TElement>().AsQueryable();
-    //    queryable = filter.ApplyTo(queryable, new ODataQuerySettings());
-    //    return queryable.Expression;
-    //}
-
     public static Expression<Func<T, bool>> ToExpression<T>(this TransferableExpression<T> odataFilter)
     {
         return ParseExpression<T>(odataFilter);

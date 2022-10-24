@@ -93,9 +93,10 @@ namespace CleanArchitectureBase.Infrastructure.Repositories
             return _dbContext.Set<T>().Find(id);
         }
 
-        public async Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default)
+        public Task<IEnumerable<T>> GetByIdsAsync(IEnumerable<TId> ids, CancellationToken cancellation = default)
         {
-            return await Task.WhenAll(ids.Select(id => GetByIdAsync(id, cancellation)));
+            return Task.FromResult(_dbContext.Set<T>().Where(e => ids.Contains(e.Id)).AsEnumerable());
+            //return await Task.WhenAll(ids.Select(id => GetByIdAsync(id, cancellation)));
         }
 
         public async Task<List<T>> GetAllAsync(CancellationToken cancellation = default)

@@ -3131,6 +3131,11 @@ export interface IAccountClient {
      * @return Status 200 OK
      */
     updateProfilePicture(request: UpdateProfilePictureRequest, userId: string | null): Observable<ResultOfTokenResponse>;
+    /**
+     * SetPreferredLanguage
+     * @return Status 200 OK
+     */
+    setPreferredLanguage(language: LanguageDto): Observable<ResultOfResult>;
     logout(): Observable<FileResponse | null>;
 }
 
@@ -3315,6 +3320,62 @@ export class AccountClient implements IAccountClient {
             }));
         }
         return _observableOf<ResultOfTokenResponse>(null as any);
+    }
+
+    /**
+     * SetPreferredLanguage
+     * @return Status 200 OK
+     */
+    setPreferredLanguage(language: LanguageDto): Observable<ResultOfResult> {
+        let url_ = this.baseUrl + "/identity/Account/SetPreferredLanguage";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(language);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetPreferredLanguage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetPreferredLanguage(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ResultOfResult>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ResultOfResult>;
+        }));
+    }
+
+    protected processSetPreferredLanguage(response: HttpResponseBase): Observable<ResultOfResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfResult>(null as any);
     }
 
     logout(): Observable<FileResponse | null> {
@@ -8936,6 +8997,39 @@ export class UpdateProfilePictureRequest extends UploadRequest implements IUpdat
 export interface IUpdateProfilePictureRequest extends IUploadRequest {
 }
 
+export class ResultOfResult extends Result implements IResultOfResult {
+    data?: Result | undefined;
+
+    constructor(data?: IResultOfResult) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.data = _data["data"] ? Result.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ResultOfResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultOfResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IResultOfResult extends IResult {
+    data?: Result | undefined;
+}
+
 export class ResultOfListOfRoleClaimResponse extends Result implements IResultOfListOfRoleClaimResponse {
     data?: RoleClaimResponse[] | undefined;
 
@@ -9570,6 +9664,7 @@ export interface IUserResponse extends IDtoBaseOfString {
 export class UserInformationsDto extends DtoBaseOfInteger implements IUserInformationsDto {
     addresses?: AddressDto[] | undefined;
     lastLoginDate?: Date | undefined;
+    language?: string | undefined;
     isOnline!: boolean;
 
     constructor(data?: IUserInformationsDto) {
@@ -9585,6 +9680,7 @@ export class UserInformationsDto extends DtoBaseOfInteger implements IUserInform
                     this.addresses!.push(AddressDto.fromJS(item));
             }
             this.lastLoginDate = _data["lastLoginDate"] ? new Date(_data["lastLoginDate"].toString()) : <any>undefined;
+            this.language = _data["language"];
             this.isOnline = _data["isOnline"];
         }
     }
@@ -9604,6 +9700,7 @@ export class UserInformationsDto extends DtoBaseOfInteger implements IUserInform
                 data["addresses"].push(item.toJSON());
         }
         data["lastLoginDate"] = this.lastLoginDate ? this.lastLoginDate.toISOString() : <any>undefined;
+        data["language"] = this.language;
         data["isOnline"] = this.isOnline;
         super.toJSON(data);
         return data;
@@ -9613,6 +9710,7 @@ export class UserInformationsDto extends DtoBaseOfInteger implements IUserInform
 export interface IUserInformationsDto extends IDtoBaseOfInteger {
     addresses?: AddressDto[] | undefined;
     lastLoginDate?: Date | undefined;
+    language?: string | undefined;
     isOnline: boolean;
 }
 

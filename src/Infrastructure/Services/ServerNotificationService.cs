@@ -74,8 +74,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
 
         private bool IsOffline(UserResponse user)
         {
-            // TODO Implement me
-            return false;
+            return !user.IsOnline;
         }
     }
 }

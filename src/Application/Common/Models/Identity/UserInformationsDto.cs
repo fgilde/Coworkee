@@ -7,5 +7,6 @@ public class UserInformationsDto : DtoBase<int>
 {
     public ICollection<AddressDto> Addresses { get; set; }
     public DateTime? LastLoginDate { get; set; }
+    public string Language { get; set; }
     public bool IsOnline { get; set; }
 }

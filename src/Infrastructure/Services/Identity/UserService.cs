@@ -44,6 +44,7 @@ using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Application.Requests;
 using CleanArchitectureBase.Domain.Entities.Identity;
 using CleanArchitectureBase.Infrastructure.Extensions;
+using System.Globalization;
 
 namespace CleanArchitectureBase.Infrastructure.Services.Identity
 {
@@ -370,6 +371,17 @@ namespace CleanArchitectureBase.Infrastructure.Services.Identity
             }
 
             return await Result.FailAsync<string>("User not found");
+        }
+
+        public async Task<IdentityResult> SetUserCulture(string userId, CultureInfo culture)
+        {
+            var trackedUser = await _userManager.FindByIdFullyLoadedAsync(userId);
+            if (trackedUser != null && trackedUser.UserInfo?.Language != culture.Name)
+            {
+                (trackedUser.UserInfo ??= new UserInformations()).Language = culture.Name;
+                return await _userManager.UpdateAsync(trackedUser);
+            }
+            return IdentityResult.Failed(new IdentityError { Description = "User not found" });
         }
 
         public async Task<IResult<string>> ConfirmEmailAsync(string userId, string code)

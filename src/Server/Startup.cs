@@ -16,6 +16,7 @@ using CleanArchitectureBase.Shared.Constants.Application;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
+using CleanArchitectureBase.Shared;
 
 namespace CleanArchitectureBase.Server
 {
@@ -49,6 +50,7 @@ namespace CleanArchitectureBase.Server
             services.AddDatabase(_configuration);
             services.AddScoped<ServerPreferenceManager>();
             services.AddServerLocalization();
+            services.AddYamlLocalizationWithFallback();
             services.AddIdentity();
             services.AddJwtAuthentication(serverConfig);
             services.AddApplication(serverConfig);

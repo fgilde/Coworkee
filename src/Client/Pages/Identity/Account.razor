@@ -1,16 +1,21 @@
 @page "/account"
+@page "/account/{Action?}/{Id?}"
 @using CleanArchitectureBase.Shared.Constants.Application
 @using CleanArchitectureBase.Application.Common.Extensions
+@using CleanArchitectureBase.Client.JsInterop
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Account> localizer
 
 <ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@localizer["Account"]" Description="@localizer["Manage your account"]" />
-<MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
+<MudTabs ActivePanelIndexChanged="@PanelIndexChanged" ActivePanelIndex="@GetActivePanelIndex()" Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6 full-height" Style="height: 100%">
     <MudTabPanel Text="@localizer["Profile"]">
         <Profile Variant="Variant.Outlined" />
     </MudTabPanel>
     <MudTabPanel Text="@localizer["Security"]">
         <Security />
+    </MudTabPanel>
+    <MudTabPanel Text="@localizer["Notifications"]" Style="height:100%">
+        <NotificationsList Id="@Id"></NotificationsList>
     </MudTabPanel>
     <AuthorizeView Policy="@Permissions.Documents.View">
         <MudTabPanel Text="@localizer["Documents"]">
@@ -21,7 +26,21 @@
 
 @code
 {
+    [Parameter] public string Action { get; set; }
+    [Parameter] public string Id { get; set; }
     private string userId;
+    
+    private readonly Dictionary<int, string> _pages = new()
+    {
+        { 0, "" },
+        { 1, "security" },
+        { 2, "notifications" },
+        { 3, "documents" }
+    };
+    
+    private int GetActivePanelIndex() => _pages.ContainsValue(Action) ? _pages.FirstOrDefault(x => x.Value == Action).Key : 0;
+    private async void PanelIndexChanged(int index) => await _jsRuntime.InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "changeUrl"), $"/account/{Action = _pages[index]}/{Id}");
+
     protected override async Task OnInitializedAsync()
     {
         var authenticationState = await _stateProvider.GetAuthenticationStateAsync();
@@ -31,4 +50,5 @@
             _navigationManager.NavigateTo($"{ApplicationConstants.Routes.Forbidden}/{Uri.EscapeDataString(_navigationManager.ToBaseRelativePath(_navigationManager.Uri))}");
         }
     }
+
 }

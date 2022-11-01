@@ -1,7 +1,11 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using AKSoftware.Localization.MultiLanguages;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
+using Nextended.Core;
 
 namespace CleanArchitectureBase.Server.Middlewares
 {
@@ -16,10 +20,12 @@ namespace CleanArchitectureBase.Server.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
+            var languageContainerService = context.RequestServices.GetService<ILanguageContainerService>();
             var cultureQuery = context.Request.Query["culture"];
+            CultureInfo culture = null;
             if (!string.IsNullOrWhiteSpace(cultureQuery))
             {
-                var culture = new CultureInfo(cultureQuery);
+                culture = new CultureInfo(cultureQuery);
 
                 CultureInfo.CurrentCulture = culture;
                 CultureInfo.CurrentUICulture = culture;
@@ -29,12 +35,14 @@ namespace CleanArchitectureBase.Server.Middlewares
                 var cultureHeader = context.Request.Headers["Accept-Language"];
                 if (cultureHeader.Any())
                 {
-                    var culture = new CultureInfo(cultureHeader.First().Split(',').First().Trim());
+                    culture = new CultureInfo(cultureHeader.First().Split(',').First().Trim());
 
                     CultureInfo.CurrentCulture = culture;
                     CultureInfo.CurrentUICulture = culture;
                 }
             }
+            if (languageContainerService != null && culture != null)
+                Check.TryCatch<Exception>(() => languageContainerService.SetLanguage(culture));
 
             await _next(context);
         }

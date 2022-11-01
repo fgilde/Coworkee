@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models.Identity;
@@ -7,6 +8,7 @@ using CleanArchitectureBase.Application.Hubs.Events.Base;
 using CleanArchitectureBase.Application.Requests.Identity;
 using CleanArchitectureBase.Shared.Models;
 using CleanArchitectureBase.Shared.Wrapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace CleanArchitectureBase.Application.Contracts.Services.Identity
 {
@@ -29,5 +31,6 @@ namespace CleanArchitectureBase.Application.Contracts.Services.Identity
         Task<IResult> ResetPasswordAsync(ResetPasswordRequest request);
         Task<string> ExportToExcelAsync(string searchString = "");
         Task<IResult> DeleteAsync(string userId, CancellationToken cancellationToken = default);
+        Task<IdentityResult> SetUserCulture(string userId, CultureInfo culture);
     }
 }

@@ -147,6 +147,13 @@
             <param name="userId"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.SetPreferredLanguage(CleanArchitectureBase.Application.Common.Models.LanguageDto)">
+            <summary>
+            SetPreferredLanguage
+            </summary>
+            <param name="language"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.RoleClaimResponse})">
             <summary>
             Get All Role Claims(e.g. Product Create Permission)

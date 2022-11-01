@@ -58,13 +58,16 @@
                         @if (notifications.TotalCount > 1)
                         {
                             <MudPaper Class="d-flex justify-end flex-grow-1 gap-4" Elevation="0">
-                                <MudButtonGroup Size="Size.Small" Variant="Variant.Text" >
+                                <MudButtonGroup Size="Size.Small" Variant="Variant.Text">
                                     <MudTooltip Class="z-tt" Text="@localizer["Mark all as read"]">
-                                        <MudIconButton OnClick="@(() => MarkAll(true))" Icon="@Icons.Material.Rounded.Checklist" Color="Color.Transparent"></MudIconButton>
+                                        <MudIconButton OnClick="@(() => MarkAll(true))" Icon="@Icons.Material.Rounded.Checklist" Color="Color.Secondary"></MudIconButton>
                                     </MudTooltip>
-                                    <MudTooltip Class="z-tt" Text="@localizer["Mark all as unread"]">
-                                        <MudIconButton OnClick="@(() => MarkAll(false))" Icon="@Icons.Material.Rounded.Checklist" Color="Color.Primary"></MudIconButton>
-                                    </MudTooltip>
+                                    @if (!UnreadOnly)
+                                    {
+                                        <MudTooltip Class="z-tt" Text="@localizer["Mark all as unread"]">
+                                            <MudIconButton OnClick="@(() => MarkAll(false))" Icon="@Icons.Material.Rounded.Checklist" Color="Color.Primary"></MudIconButton>
+                                        </MudTooltip>
+                                    }
                                     <MudTooltip Class="z-tt" Text="@localizer["Delete all"]">
                                         <MudIconButton OnClick="@(DeleteAll)" Icon="@Icons.Material.Filled.DeleteForever" Color="Color.Error"></MudIconButton>
                                     </MudTooltip>
@@ -74,14 +77,14 @@
                         }
                         @foreach (var n in notifications?.Data)
                         {
-                            <NotificationView
-                                OnClose="@(n => IsOpen = false)"
-                                CanClose="@(notifications.TotalCount == 1 && n.Expanded)"
-                                OnNavigateToUrl="@(n => IsOpen = false)"
-                                OnBeforeDelete="@Deleting"
-                                OnRead="@(n => ReloadSilent())"
-                                OnDelete="@(n => ReloadSilent())"
-                                Notification="@n"/>
+                            <NotificationView AutoMarkAsRead="@AutoMarkAsRead"
+                              OnClose="@(n => IsOpen = false)"
+                              CanClose="@(notifications.TotalCount == 1 && n.Expanded)"
+                              OnNavigateToUrl="@(n => IsOpen = false)"
+                              OnBeforeDelete="@Deleting"
+                              OnRead="@(n => ReloadSilent())"
+                              OnDelete="@(n => ReloadSilent())"
+                              Notification="@n" />
                         }
                     </MudExpansionPanels>
 
@@ -106,11 +109,13 @@
 {
     private const string MainClass = "application-notification";
 
-    [CascadingParameter] 
+    [CascadingParameter]
     private HubConnection HubConnection { get; set; }
 
     [Parameter] public int PageSize { get; set; } = 10;
     [Parameter] public AnimationBehavior Animate { get; set; } = AnimationBehavior.Always;
+    [Parameter] public bool UnreadOnly { get; set; } = false;
+    [Parameter] public bool AutoMarkAsRead { get; set; } = true;
 
     private bool _animate;
 
@@ -163,7 +168,7 @@
             var notificationDto = arg.ToDto().SetProperties(n => n.Expanded = true);
             if (arg.PersistInDb)
             {
-                _api.Notifications_GetAllAsync(false, arg.NotificationTypeId, 0, 1).ContinueWith(task =>
+                _api.Notifications_GetAllAsync(UnreadOnly, arg.NotificationTypeId, 0, 1).ContinueWith(task =>
                 {
                     notificationDto.Id = task.Result.First()?.Id ?? default;
                     StateHasChanged();
@@ -228,7 +233,7 @@
     {
         if (updateLoadingState)
             _isLoading = true;
-        notifications = await _api.Notifications_GetAllAsync(false, null, _currentPage = page ?? 1, PageSize);
+        notifications = await _api.Notifications_GetAllAsync(UnreadOnly, null, _currentPage = page ?? 1, PageSize);
         notifications?.Data?.FirstOrDefault()?.SetProperties(n => n.Expanded = true);
         _unreadCount = await _api.Notifications_UnreadAsync();
         _needsReload = false;
@@ -244,10 +249,15 @@
 
     private async Task ReloadSilent()
     {
+        if (UnreadOnly && AutoMarkAsRead)
+        {
+            _unreadCount = await _api.Notifications_UnreadAsync();
+            return;
+        }
         await LoadData(_currentPage, false);
         if (notifications == null || notifications.Data.Count <= 0)
         {
-           Close(true);
+            Close(true);
         }
     }
 

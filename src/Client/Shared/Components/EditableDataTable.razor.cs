@@ -22,9 +22,11 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Extensions;
+using MudBlazor.Extensions.Extensions;
 using MudBlazor.Extensions.Options;
 using Nextended.Core;
 using Nextended.Core.Extensions;
+
 
 namespace CleanArchitectureBase.Client.Shared.Components
 {
@@ -54,6 +56,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public Func<TResult, bool> CanDeleteFn { get; set; }
         [Parameter] public Func<TResult, bool> CanEditFn { get; set; }
         [Parameter] public Func<string, string> CaptionFn { get; set; }
+        [Parameter] public Func<TResult, int, string> RowStyle { get; set; }
         [Parameter] public string[] Prefixes { get; set; }
         [Parameter] public string[] TableProperties { get; set; }
         [Parameter] public string CreatePermission { get; set; }
@@ -62,6 +65,9 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public string ExportPermission { get; set; }
         [Parameter] public string SearchPermission { get; set; }
         [Parameter] public bool? ImmediateSearch { get; set; }
+        [Parameter] public TResult SelectedItem { get; set; }
+        [Parameter] public EventCallback<TResult> SelectedItemChanged { get; set; }
+        [Parameter] public bool AllowRowSelection { get; set; }
 
         private string _pageUrl;
         private List<TResult> _flatList = new();
@@ -86,7 +92,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         protected override async Task OnParametersSetAsync()
         {
-            ImmediateSearch ??= ApiLoadPaged == null;
+            // ImmediateSearch ??= ApiLoadPaged == null; // Set ImmediateSearch if items are stored local
+            ImmediateSearch = false;
             _canCreate = ApiCreateOrEdit != null && await HasPermission(CreatePermission);
             _canEdit = ApiCreateOrEdit != null && GetId != null && await HasPermission(EditPermission);
             _canDelete = ApiDelete != null && GetId != null && await HasPermission(DeletePermission);
@@ -271,7 +278,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
             }
         }
 
-        private IEnumerable<TResult> GetLoadedData()
+        public IEnumerable<TResult> GetLoadedData()
         {
             return _pagedData?.Any() == true ? _pagedData : _flatList;
         }
@@ -295,6 +302,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 if (!result.Cancelled)
                 {
                     var response = await ApiDelete(ids);
+                    if (SelectedItem != null && ids.Contains(GetId(SelectedItem)))
+                        SetSelectedItem(default);
                     await Reset(true);
                     await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
                     if (_errorService.IsSuccessFull(response))
@@ -440,11 +449,28 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private async Task OnRowClick(TResult item, string prop)
         {
+            if (AllowRowSelection)
+                SetSelectedItem(item);
+
             if (FullRowClickForEdit)
                 await InvokeModal(GetId(item));
         }
 
         private string CaptionForProperty(string prop)
             => CaptionFn != null ? CaptionFn(prop) : _localizer[prop];
+
+        private string RowRenderStyle(TResult item, int index)
+        {
+            var style = RowStyle != null ? RowStyle(item, index) : string.Empty;
+            if (item?.Equals(SelectedItem) == true && !style.Contains("background-color:", StringComparison.InvariantCultureIgnoreCase) && !style.Contains("background:", StringComparison.InvariantCultureIgnoreCase))
+                return $"background-color: var(--mud-palette-action-default-hover); {style}";
+            return style;
+        }
+
+        private async void SetSelectedItem(TResult item)
+        {
+            SelectedItem = item;
+            await SelectedItemChanged.InvokeAsync(item);
+        }
     }
 }

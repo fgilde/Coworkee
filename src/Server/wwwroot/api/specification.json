@@ -2560,6 +2560,79 @@
         ]
       }
     },
+    "/identity/Account/SetPreferredLanguage": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "SetPreferredLanguage",
+        "operationId": "Account_SetPreferredLanguage",
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/json",
+          "application/*+json",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageDto"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Status 200 OK",
+            "schema": {
+              "$ref": "#/definitions/ResultOfResult"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/identity/Account/Logout": {
       "post": {
         "tags": [
@@ -6280,6 +6353,21 @@
         }
       ]
     },
+    "ResultOfResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Result"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      ]
+    },
     "ResultOfListOfRoleClaimResponse": {
       "allOf": [
         {
@@ -6572,6 +6660,9 @@
             "lastLoginDate": {
               "type": "string",
               "format": "date-time"
+            },
+            "language": {
+              "type": "string"
             },
             "isOnline": {
               "type": "boolean"
@@ -7092,7 +7183,6 @@
   "securityDefinitions": {
     "JWT": {
       "type": "apiKey",
-      "description": "Input your Bearer token in this format - Bearer {your token here} to access this API",
       "name": "Authorization",
       "in": "header"
     }

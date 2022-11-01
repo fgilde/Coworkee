@@ -93,7 +93,7 @@ namespace CleanArchitectureBase.Server.Extensions
 
         internal static IServiceCollection AddServerLocalization(this IServiceCollection services)
         {
-            services.TryAddTransient(typeof(IStringLocalizer<>), typeof(ServerLocalizer<>));
+            services.AddTransient(typeof(IStringLocalizer<>), typeof(ServerLocalizer<>));
             return services;
         }
 

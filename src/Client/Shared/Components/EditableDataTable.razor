@@ -25,37 +25,45 @@
 }
 else
 {
-    <UpdateOnChange UpdateForNotContainingModels="true" TDto="TResult" ChangeBehaviour="ModelChangeBehaviour.Reload" ModelsLoadFn="@Reload"/>
-    
+    <UpdateOnChange UpdateForNotContainingModels="true" TDto="TResult" ChangeBehaviour="ModelChangeBehaviour.Reload" ModelsLoadFn="@Reload" />
+
     @if (Import != null)
     {
         <InputFile id="importInput" OnChange="ExecImport" hidden />
     }
 
     <MudTable Class="mud-editable-table" FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
-              RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
-              @bind-SelectedItems="@_selectedItems"
-              Elevation="25" Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)"
-              ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
-              Hover="true" Dense="true" Bordered="false" Striped="true"
-              @ref="_table">
+          RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
+          @bind-SelectedItems="@_selectedItems"
+          RowStyleFunc="@RowRenderStyle"
+          Elevation="25"
+          Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)"
+          ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
+          Hover="true" Dense="true" Bordered="false" Striped="true"
+          @ref="_table">
         <ToolBarContent>
             @if (_canEdit && EditMode == EditMode.InlineBulk && ApiEditMany != null && toUpdate.Any())
             {
                 <MudButton Style="margin-right: 5px;" DisableElevation Variant="Variant.Filled" Color="Color.Success" @onclick="@(() => SaveBulk())" StartIcon="@Icons.Material.Filled.Save" IconColor="Color.Surface">@_localizer["Save {0} Changes", toUpdate.Count]</MudButton>
             }
-            <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]" />
+            @if (ApiCreateOrEdit != null)
+            {
+                <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]" />
+            }
             <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh" />
-            <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
-                @foreach (var e in Enum<ExportServiceType>.GetValues())
-                {
-                    <MudMenuItem OnClick="@(() => ExecExport(e))">
-                        <MudText>
-                            @_localizer[e.ToString()]
-                        </MudText>
-                    </MudMenuItem>
-                }
-            </MudMenu>
+            @if (Export != null)
+            {
+                <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                    @foreach (var e in Enum<ExportServiceType>.GetValues())
+                    {
+                        <MudMenuItem OnClick="@(() => ExecExport(e))">
+                            <MudText>
+                                @_localizer[e.ToString()]
+                            </MudText>
+                        </MudMenuItem>
+                    }
+                </MudMenu>
+            }
             @if (Import != null)
             {
                 <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit" />
@@ -119,7 +127,7 @@ else
         <RowTemplate>
             @for (var index = 0; index < TableProperties.Length; index++)
             {
-                var prefix = Prefixes?.Length > index ?  Prefixes?[index] : null;
+                var prefix = Prefixes?.Length > index ? Prefixes?[index] : null;
                 var prop = TableProperties[index];
                 <MudTd Class="@($"{(FullRowClickForEdit ? "cursor-pointer cursor-pointer-deep" : "")}")" @onclick="@(()=>OnRowClick(context, prop))" DataLabel="@_localizer[prop]">
                     <p class="@($"{(HasChanges(context) ? "changed" : "")}")">
@@ -139,7 +147,7 @@ else
                             }
                             else
                             {
-                                <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString"/>
+                                <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString" />
                             }
                         }
                     </p>
@@ -179,11 +187,11 @@ else
                 else
                 {
                     <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
                         @_localizer["No Allowed Actions"]
                     </MudButton>
                 }

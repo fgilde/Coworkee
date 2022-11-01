@@ -8,5 +8,6 @@ public class UserInformations : AuditableEntity<int>
 {
     public virtual ICollection<Address> Addresses { get; set; }
     public DateTime? LastLoginDate { get; set; }
+    public string Language { get; set; }
     public bool IsOnline { get; set; }
 }

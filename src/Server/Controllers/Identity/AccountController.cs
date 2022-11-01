@@ -7,6 +7,8 @@ using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Application.Contracts.Services.Account;
 using CleanArchitectureBase.Infrastructure.Services.Identity;
 using CleanArchitectureBase.Shared.Wrapper;
+using CleanArchitectureBase.Application.Contracts.Services.Identity;
+using CleanArchitectureBase.Application.Common.Models;
 
 namespace CleanArchitectureBase.Server.Controllers.Identity
 {
@@ -62,6 +64,22 @@ namespace CleanArchitectureBase.Server.Controllers.Identity
         public async Task<IActionResult> UpdateProfilePictureAsync(UpdateProfilePictureRequest request, string userId)
         {
             return Ok(await _accountService.UpdateProfilePictureAsync(request, string.IsNullOrWhiteSpace(userId) ? _currentUser.UserId : userId));
+        }
+
+        /// <summary>
+        /// SetPreferredLanguage
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost(nameof(SetPreferredLanguage))]
+        [Produces(typeof(Result<Result>))]
+        public async Task<IActionResult> SetPreferredLanguage(LanguageDto language)
+        {
+            if (!string.IsNullOrEmpty(_currentUser.UserId) && language != null)
+            {
+                return Ok(await Get<IUserService>().SetUserCulture(_currentUser.UserId, language.ToCulture()));
+            }
+            return Ok();
         }
 
         [HttpPost("[action]")]

@@ -160,6 +160,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastLoginDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsOnline = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),

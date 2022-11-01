@@ -17,7 +17,7 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -255,6 +255,9 @@ namespace CleanArchitectureBase.Infrastructure.Migrations
 
                     b.Property<bool>("IsOnline")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Language")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastLoginDate")
                         .HasColumnType("datetime2");

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
 using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.JsInterop.Models;
-using CleanArchitectureBase.Client.Shared.Dialogs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -34,47 +33,6 @@ public static class DialogServiceExtensions
         var optionsEx = await DefaultDialogOptionsEx();
         options?.Invoke(optionsEx);
         return await dialogService.ShowEx<TDialog>(title, parameters ?? new DialogParameters(), optionsEx);
-    }
-
-    public static async Task<bool> ShowConfirmationAsync(this IDialogService dialogService, string title, string message,
-        string confirmText = "Confirm",
-        string cancelText = "Cancel",
-        DialogOptionsEx options = null)
-    {
-        var actions = new[]
-        {
-            new MessageDialog.DialogResultAction
-            {
-                Label = cancelText,
-                Variant = Variant.Text,
-                Result = DialogResult.Cancel()
-            },
-            new MessageDialog.DialogResultAction
-            {
-                Label = confirmText,
-                Color = Color.Error,
-                Variant = Variant.Filled,
-                Result = DialogResult.Ok(true)
-            },
-        };
-        var parameters = new DialogParameters
-        {
-            {
-                nameof(MessageDialog.Message), message
-            },
-            {nameof(MessageDialog.Icon), Icons.Filled.Check},
-            {nameof(MessageDialog.Class), "mud-ex-dialog-initial"},
-            {nameof(MessageDialog.Buttons), actions}
-        };
-        options ??= new DialogOptionsEx
-        {
-            CloseButton = true,
-            DisableBackdropClick = false,
-            Animations = DefaultAnimationNoFullHeight
-        };
-        var dialog = await dialogService.ShowEx<MessageDialog>(title, parameters, options);
-
-        return !(await dialog.Result).Cancelled;
     }
 
     internal static async Task<DialogOptionsEx> DefaultDialogOptionsEx()

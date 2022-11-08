@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using MudBlazor;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Components;
+using MudBlazor.Extensions.Options;
 using Newtonsoft.Json;
 using Nextended.Core;
 
@@ -42,14 +45,14 @@ namespace CleanArchitectureBase.Client.ErrorHandling
             {
                 var actions = new[]
                 {
-                    new MessageDialog.DialogResultAction
+                    new MudExDialogResultAction
                     {
                         Label = "Ask Google",
                         Variant = Variant.Filled,
                         Color = Color.Secondary,
                         Result =  DialogResult.Ok(true)
                     },
-                    new MessageDialog.DialogResultAction
+                    new MudExDialogResultAction
                     {
                         Label = "Close",
                         Color = Color.Error,
@@ -74,12 +77,12 @@ namespace CleanArchitectureBase.Client.ErrorHandling
                     {
                         var parameters = new DialogParameters
                         {
-                            {nameof(Shared.Dialogs.MessageDialog.Message), $"{details.Detail}"},
-                            {nameof(Shared.Dialogs.MessageDialog.Icon), Icons.Filled.Error},
-                            {nameof(Shared.Dialogs.MessageDialog.Buttons), actions},
+                            {nameof(MudExMessageDialog.Message), $"{details.Detail}"},
+                            {nameof(MudExMessageDialog.Icon), Icons.Filled.Error},
+                            {nameof(MudExMessageDialog.Buttons), actions},
                         };
-                        var options = new DialogOptions { CloseButton = true, DisableBackdropClick = false };
-                        var dialog = _dialogService.Show<Shared.Dialogs.MessageDialog>(details.Title, parameters, options);
+                        var options = new DialogOptionsEx { CloseButton = true, Resizeable = true, DragMode = MudDialogDragMode.Simple, DisableBackdropClick = false };
+                        var dialog = await _dialogService.ShowEx<MudExMessageDialog>(details.Title, parameters, options);
                         if (!(await dialog.Result).Cancelled)
                         {
                             _navigationManager.NavigateToUnknown($"https://www.google.de/search?q={Uri.EscapeDataString(details.Detail)}");

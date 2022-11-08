@@ -32,6 +32,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
 {
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {
+        [Parameter] public bool HideActionColumn { get; set; }
+        [Parameter] public Color SelectedRowColor { get; set; } = Color.Transparent;
         [Parameter] public string EditIcon { get; set; } = Icons.Material.Filled.Edit;
         [Parameter] public string DeleteIcon { get; set; } = Icons.Material.Filled.Delete;
         [Parameter] public EditMode EditMode { get; set; } = EditMode.SelfHandled;
@@ -57,6 +59,7 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public Func<TResult, bool> CanEditFn { get; set; }
         [Parameter] public Func<string, string> CaptionFn { get; set; }
         [Parameter] public Func<TResult, int, string> RowStyle { get; set; }
+        [Parameter] public string AdditionalRowStyle { get; set; }
         [Parameter] public string[] Prefixes { get; set; }
         [Parameter] public string[] TableProperties { get; set; }
         [Parameter] public string CreatePermission { get; set; }
@@ -250,11 +253,14 @@ namespace CleanArchitectureBase.Client.Shared.Components
                 return;
             }
             bool isDefaultId = EqualityComparer<TIdType>.Default.Equals(id, default);
-            await WithUrl(ActionUrl(id), async () =>
+            if (ApiCreateOrEdit != null)
             {
-                if (await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData())))
-                    await Reset();
-            });
+                await WithUrl(ActionUrl(id), async () =>
+                {
+                    if (await ApiCreateOrEdit(isDefaultId ? default : await GetById(id, GetLoadedData())))
+                        await Reset();
+                });
+            }
         }
 
         private async Task WithUrl(string url, Func<Task> action)
@@ -461,9 +467,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
 
         private string RowRenderStyle(TResult item, int index)
         {
-            var style = RowStyle != null ? RowStyle(item, index) : string.Empty;
+            var style = $"{(!string.IsNullOrEmpty(AdditionalRowStyle) ? $"{AdditionalRowStyle};" : string.Empty)}{(RowStyle != null ? RowStyle(item, index) : string.Empty)}";
             if (item?.Equals(SelectedItem) == true && !style.Contains("background-color:", StringComparison.InvariantCultureIgnoreCase) && !style.Contains("background:", StringComparison.InvariantCultureIgnoreCase))
-                return $"background-color: var(--mud-palette-action-default-hover); {style}";
+                return $"background-color: {(SelectedRowColor == Color.Transparent ? "var(--mud-palette-action-default-hover)" : SelectedRowColor.CssVarDeclaration())}; {style}";
+
             return style;
         }
 

@@ -29,7 +29,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
             try
             {
                 var client = new SendGridClient(_config.SendGridApiKey);
-                var from = new EmailAddress(request.From ?? _config.From, _config.DisplayName);
+                var from = new EmailAddress(request.From ?? _config.From, request.SenderName ?? _config.DisplayName);
                 var subject = request.Subject;
                 var to = new EmailAddress(request.To, request.RecipientName);
                 var plainTextContent = request.Body; // TODO: Plain it or add field for plain content in MailRequest

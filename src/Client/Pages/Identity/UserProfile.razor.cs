@@ -9,6 +9,7 @@ using CleanArchitectureBase.Client.Shared.Dialogs;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
+using MudBlazor.Extensions.Components;
 
 namespace CleanArchitectureBase.Client.Pages.Identity
 {
@@ -53,13 +54,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
         {
             var actions = new[]
             {
-                new MessageDialog.DialogResultAction
+                new MudExDialogResultAction
                 {
                     Label = "Cancel",
                     Variant = Variant.Text,
                     Result = DialogResult.Cancel()
                 },
-                new MessageDialog.DialogResultAction
+                new MudExDialogResultAction
                 {
                     Label = "Confirm",
                     Color = Color.Error,
@@ -69,13 +70,13 @@ namespace CleanArchitectureBase.Client.Pages.Identity
             };
             var parameters = new DialogParameters
             {
-                {nameof(MessageDialog.Message), $"{_localizer["Are you sure you want to force logout for user {0}", user.FullName]}"},
-                {nameof(MessageDialog.Icon), Icons.Filled.Logout},
-                {nameof(MessageDialog.Class), "mud-ex-dialog-initial"},
-                {nameof(MessageDialog.Buttons), actions}
+                {nameof(MudExMessageDialog.Message), $"{_localizer["Are you sure you want to force logout for user {0}", user.FullName]}"},
+                {nameof(MudExMessageDialog.Icon), Icons.Filled.Logout},
+                {nameof(MudExMessageDialog.Class), "mud-ex-dialog-initial"},
+                {nameof(MudExMessageDialog.Buttons), actions}
             };
-            var options = new DialogOptionsEx { CloseButton = true, DisableBackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight};
-            var dialog = await _dialogService.ShowEx<MessageDialog>(_localizer["Logout user"], parameters, options);
+            var options = new DialogOptionsEx { CloseButton = true, DisableBackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var dialog = await _dialogService.ShowEx<MudExMessageDialog>(_localizer["Logout user"], parameters, options);
 
             if (!(await dialog.Result).Cancelled)
             {

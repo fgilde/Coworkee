@@ -22,6 +22,8 @@ public class NotificationRequest: ClientEventBase
     public string Excerpt { get; set; }
     public string Content { get; set; }
     public string Url { get; set; }
+    public string SenderEmailAddress { get; set; }
+    public string SenderName { get; set; }
 
     public NotificationDto ToDto()
     {
@@ -35,7 +37,9 @@ public class NotificationRequest: ClientEventBase
             RecipientName = $"{user.FirstName} {user.LastName}",
             To = user.Email,
             Body = Content,
-            Subject = Subject
+            Subject = Subject,
+            From = SenderEmailAddress,
+            SenderName = SenderName
         };
     }
 }

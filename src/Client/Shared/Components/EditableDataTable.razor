@@ -122,7 +122,10 @@ else
                     <MudTh><MudTableSortLabel SortBy="new Func<TResult, object>(x => x.ExposeField<object>(prop))">@CaptionForProperty(prop)</MudTableSortLabel></MudTh>
                 }
             }
-            <MudTh Style="text-align: right">@_localizer["Actions"]</MudTh>
+            @if (!HideActionColumn)
+            {
+                <MudTh Style="text-align: right">@_localizer["Actions"]</MudTh>
+            }
         </HeaderContent>
         <RowTemplate>
             @for (var index = 0; index < TableProperties.Length; index++)
@@ -153,7 +156,9 @@ else
                     </p>
                 </MudTd>
             }
-
+            
+        @if (!HideActionColumn)
+        {
             <MudTd DataLabel="@_localizer["Actions"]" Style="text-align: right">
                 @if (_canEdit || _canDelete)
                 {
@@ -187,15 +192,16 @@ else
                 else
                 {
                     <MudButton Variant="Variant.Filled"
-                       DisableElevation="true"
-                       StartIcon="@Icons.Material.Filled.DoNotTouch"
-                       IconColor="Color.Secondary"
-                       Size="Size.Small"
-                       Color="Color.Surface">
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
                         @_localizer["No Allowed Actions"]
                     </MudButton>
                 }
             </MudTd>
+        }
         </RowTemplate>
 
         <RowEditingTemplate>

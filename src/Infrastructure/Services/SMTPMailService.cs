@@ -30,7 +30,7 @@ namespace CleanArchitectureBase.Infrastructure.Services
                 var email = new MimeMessage
                 {
                     To = { new MailboxAddress(request.RecipientName, request.To) },
-                    Sender = new MailboxAddress(_config.MailConfiguration.DisplayName, request.From ?? _config.MailConfiguration.From),
+                    Sender = new MailboxAddress(request.SenderName ?? _config.MailConfiguration.DisplayName, request.From ?? _config.MailConfiguration.From),
                     Subject = request.Subject,
                     Body = new BodyBuilder
                     {

@@ -20,7 +20,11 @@
         => (await _api.User_GetAllAsync(cancellationToken: cancellation)).Data;
 
     public override string ItemNameRender(UserResponse item) => item?.FullName;
-
+    
     protected override RenderFragment RenderItem(RenderTreeBuilder __builder, UserResponse item)
-        => @<UserCard UserData="@item" ShowLogout="false"></UserCard>;
+    {
+        if (ViewMode == ViewMode.NoChips)
+            return base.RenderItem(__builder, item);
+        return @<UserCard UserData="@item" ShowLogout="false"></UserCard>;
+    }
 }

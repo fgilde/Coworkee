@@ -5,10 +5,8 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
 using CleanArchitectureBase.Application.Contracts.Enums;
 using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Application.Hubs.Events;
 using CleanArchitectureBase.Client.Extensions;
 using CleanArchitectureBase.Client.JsInterop;
 using CleanArchitectureBase.Client.Shared.Dialogs;
@@ -27,11 +25,15 @@ using MudBlazor.Extensions.Options;
 using Nextended.Core;
 using Nextended.Core.Extensions;
 
-
 namespace CleanArchitectureBase.Client.Shared.Components
 {
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {
+        [Parameter] public int Elevation { get; set; } = 25;
+        [Parameter] public RenderFragment ToolbarContentBeforeStart { get; set; }
+        [Parameter] public RenderFragment ToolbarContentAfterStart { get; set; }
+        [Parameter] public RenderFragment ToolbarContentBeforeEnd { get; set; }
+        [Parameter] public RenderFragment ToolbarContentAfterEnd { get; set; }
         [Parameter] public bool HideActionColumn { get; set; }
         [Parameter] public Color SelectedRowColor { get; set; } = Color.Transparent;
         [Parameter] public string EditIcon { get; set; } = Icons.Material.Filled.Edit;
@@ -332,6 +334,10 @@ namespace CleanArchitectureBase.Client.Shared.Components
         private string PropertyValueFor(TResult context, string prop)
         {
             var property = PropertyFor(context, prop);
+            if (property?.PropertyType.IsEnum == true)
+            {
+                return _localizer[PropertyValueForAs<string>(context, prop)];
+            }
             if (property?.PropertyType == typeof(DateTime))
             {
                 return PropertyValueForAs<DateTime>(context, prop).AsClientLocalTime().ToString(); // Renderer Property

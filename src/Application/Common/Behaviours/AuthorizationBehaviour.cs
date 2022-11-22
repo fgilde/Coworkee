@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours
 {
-    public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+    public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly ICustomAuthorizeAttributeHandler _authorizeAttributeHandler;
@@ -16,7 +16,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
             _authorizeAttributeHandler = authorizeAttributeHandler;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             await _authorizeAttributeHandler.EnsureIsAuthorizedForAllAsync(request.GetType().GetCustomAttributes<CustomAuthorizeAttribute>());
             return await next();

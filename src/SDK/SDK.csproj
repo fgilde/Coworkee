@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>CleanArchitectureBase.SDK</RootNamespace>
     <AssemblyName>CleanArchitectureBase.SDK</AssemblyName>
     <IsPackable>true</IsPackable>
@@ -29,11 +29,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <!--<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
-      <PrivateAssets>all</PrivateAssets>
+    <!--<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>-->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +46,7 @@
     <ItemGroup>
       <SdkPackageFiles Include="$(ProjectDir)bin/$(Configuration)/*.nupkg" />
     </ItemGroup>
-    <Copy SourceFiles="@(SdkPackageFiles)" DestinationFolder="$(ProjectDir)../Server/wwwroot/sdk" />
+    <Copy SourceFiles="@(SdkPackageFiles)" DestinationFolder="$(SolutionDir)src/Server/wwwroot/sdk" />
   </Target>
 
 </Project>

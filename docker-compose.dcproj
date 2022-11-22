@@ -12,5 +12,6 @@
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
     <None Include="src\Client\Pages\Utilities\UserFilter.razor" />
+    <None Include="tye.yml" />
   </ItemGroup>
 </Project>

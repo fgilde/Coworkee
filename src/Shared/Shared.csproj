@@ -1,39 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>CleanArchitectureBase.Shared</RootNamespace>
     <AssemblyName>CleanArchitectureBase.Shared</AssemblyName>
   </PropertyGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.yml" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.7" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.7" />
+    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
     <PackageReference Include="MimeTypesMap" Version="1.0.8" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="resourceTranslationOptions.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Helper\" />
     <Folder Include="Misc\" />
   </ItemGroup>
-
   <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Exec IgnoreExitCode="true" Command="dotnet tool install --global ResourceTranslator.CLI" />
     <Exec IgnoreExitCode="true" Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources/en-US.yml" />
   </Target>
-
 </Project>

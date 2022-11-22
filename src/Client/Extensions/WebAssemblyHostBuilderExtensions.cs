@@ -31,7 +31,6 @@ using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Client.Configuration.MudExObjectEdit;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
-
 namespace CleanArchitectureBase.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
@@ -39,16 +38,15 @@ namespace CleanArchitectureBase.Client.Extensions
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
             //builder.RootComponents.Add<App>("#app");
-            builder.RootComponents.RegisterAsCustomElement<App>("blazor-app");
+            builder.RootComponents.RegisterCustomElement<App>("blazor-app");
             return builder;
         }
-
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
             var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
             builder
-                .Services
-                .AddTransient(p => clientSettings)
+            .Services
+            .AddTransient(p => clientSettings)
                 .AddTransient(p => p.GetService<ClientApplicationConfiguration>()?.ServerConfiguration)
                 .AddLocalization(options =>
                 {
@@ -94,33 +92,35 @@ namespace CleanArchitectureBase.Client.Extensions
 
 
             // gRPC-Web client with auth
-            builder.Services.AddDataClient((services, options) =>
+            builder.Services.AddGrpcDataClient((services, options) =>
             {
-                // TODO: IDENTITY SERVER
-                //var authEnabledHandler = services.GetRequiredService<AuthorizationMessageHandler>();
-                //authEnabledHandler.ConfigureHandler(new[] { clientSettings.BackendOrigin });
-                //authEnabledHandler.InnerHandler = new HttpClientHandler();
                 var authEnabledHandler = services.GetRequiredService<AuthenticationHeaderHandler>();
+                //var client = services.GetRequiredService<HttpClient>();
                 authEnabledHandler.InnerHandler = new HttpClientHandler();
-
                 options.BaseUri = clientSettings.BackendOrigin;
                 options.MessageHandler = authEnabledHandler;
             });
 
             builder.Services.AddHttpClientInterceptor();
-
+           
             // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
+
             return builder;
         }
 
-        private static void AddDataClient(this IServiceCollection serviceCollection, Action<IServiceProvider, MainGrpcDataClientOptions> configure)
+        private static void AddGrpcDataClient(this IServiceCollection serviceCollection, Action<IServiceProvider, MainGrpcDataClientOptions> configure)
         {
             serviceCollection.AddScoped(services =>
             {
                 var options = new MainGrpcDataClientOptions();
                 configure(services, options);
                 var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, options.MessageHandler!));
-                var channel = GrpcChannel.ForAddress(options.BaseUri!, new GrpcChannelOptions { HttpClient = httpClient, MaxReceiveMessageSize = null });
+
+                return GrpcChannel.ForAddress(options.BaseUri!, new GrpcChannelOptions { HttpClient = httpClient, MaxReceiveMessageSize = null });
+            });
+            serviceCollection.AddScoped(services =>
+            {
+                var channel = services.GetRequiredService<GrpcChannel>();
                 return new CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataClient(channel);
             });
         }

@@ -1,14 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>CleanArchitectureBase.Domain</RootNamespace>
     <AssemblyName>CleanArchitectureBase.Domain</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="Entities\Identity\" />
     <Folder Include="Entities\Notifications\" />
   </ItemGroup>
-
 </Project>

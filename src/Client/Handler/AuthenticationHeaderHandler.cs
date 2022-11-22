@@ -20,7 +20,7 @@ namespace CleanArchitectureBase.Client.Handler
         {
             if (request.Headers.Authorization?.Scheme != "Bearer")
             {
-                var savedToken = await localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
+                var savedToken = await localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken, cancellationToken);
 
                 if (!string.IsNullOrWhiteSpace(savedToken))
                 {

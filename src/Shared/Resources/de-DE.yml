@@ -8,12 +8,15 @@ Actions: Aktionen
 Activate User?: Benutzer aktivieren?
 Active: Aktiv
 Active?: Aktiv?
+Add: Hinzufügen
 Add Brand: Marke hinzufügen
 Add Document: Dokument hinzufügen
 Add Document Type: Dokumenttyp hinzufügen
 Add Extended Attribute: Erweitertes Attribut hinzufügen
+Add external Url: Externe URL hinzufügen
 Add Product: Produkt hinzufügen
 Add Role: Rolle hinzufügen
+Add Url: URL hinzufügen
 Address: Adresse
 Addresses: Adressen
 Administrator: Administrator
@@ -83,6 +86,7 @@ Auto Confirm Email?: E-Mail automatisch bestätigen?
 az-Cyrl-AZ: Aserbaidschanisch (Kyrillisch, Aserbaidschan)
 az-Latn-AZ: Aserbaidschanisch (Latein, Aserbaidschan)
 ba-RU: Bashkir (Russland)
+Back: Zurück
 Barcode: Barcode
 Barcode already exists.: Barcode ist bereits vorhanden.
 Barcode is required!: Barcode ist erforderlich!
@@ -150,6 +154,7 @@ Continue to {0}: Weiter zu {0}
 Country: Land
 Create: Erstellen
 Create address: Neue Adresse anlegen
+CreatedOn: Erstellungsdatum
 cs-CZ: Tschechisch (Tschechien)
 cu-RU: Kirchenslawisch (Russland)
 Current Password: Aktuelles Passwort
@@ -158,6 +163,7 @@ cy-GB: Walisisch (Vereinigtes Königreich)
 da-DK: Dänisch (Dänemark)
 da-GL: Dänisch (Grönland)
 Dashboard: Dashboard
+Data has been updated: Daten wurden aktualisiert
 Date: Datum
 Date Created: Erstellungsdatum
 Date Range For Searching: Datumsbereich für die Suche
@@ -352,6 +358,7 @@ en-ZW: Englisch (Simbabwe)
 English: Englisch
 Enter email for password reset: Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und Sie erhalten eine E-Mail mit einem Link zum Zurücksetzen Ihres Passworts
 Enter the email address for the confirmation mail: Geben Sie die E-Mail-Adresse für die Bestätigungsmail ein
+Enter the URL to existing file: Geben Sie die URL zu einer vorhandenen Datei an
 Enter your message...: Geben Sie Ihre Nachricht ein...
 Entity Id: Entitäts-ID
 Entity is required!: Entität ist erforderlich!
@@ -410,6 +417,7 @@ Failed to get client preferences: Clienteinstellungen konnten nicht abbekommen w
 FAQs: Häufig gestellte Fragen
 Features: Funktionen
 Feb: Feb
+Female: Weiblich
 ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
 ff-Adlm-CM: Fulah (Adlam, Kamerun)
 ff-Adlm-GH: Fulah (Adlam, Ghana)
@@ -504,6 +512,7 @@ fy-NL: Westfriesisch (Niederlande)
 ga-GB: Irisch (Vereinigtes Königreich)
 ga-IE: Irisch (Irland)
 gd-GB: Schottisch-Gälisch (Vereinigtes Königreich)
+General: Allgemein
 German: Deutsch
 gl-ES: Galizisch (Spanien)
 gn-PY: Guarani (Paraguay)
@@ -594,6 +603,8 @@ ku-Arab-IR: Kurdisch (Arabisch, Iran)
 kw-GB: Cornish (Vereinigtes Königreich)
 ky-KG: Kirgisisch (Kirgisistan)
 la-VA: Latein (Vatikanstadt)
+Label_Description: Beschreibung
+Label_UploadRequests: Dateien
 lag-TZ: Langi (Tansania)
 Languages: Sprachen
 Last Name: Nachname
@@ -623,6 +634,7 @@ luy-KE: Luyia (Kenia)
 lv-LV: Lettisch (Lettland)
 mai-IN: Maithili (Indien)
 Mail: Mail
+Male: Männlich
 Manage {0} {1}'s Extended Attributes: Erweiterte Attribute von {0} {1} verwalten
 Manage {0} {1}'s Permissions: Berechtigungen von {0} {1} verwalten
 Manage {0} {1}'s Roles: Verwalten der Rollen von {0} {1}
@@ -696,6 +708,7 @@ nnh-CM: Ngiemboon (Kamerun)
 No: Nein
 No address: Keine Adresse vorhanden
 No Allowed Actions: Keine zulässigen Aktionen
+No longer update automatically: Nicht mehr automatisch aktualisieren
 No notifications: Keine Benachrichtigungen
 Not Allowed to add or delete Administrator Role if you have not this role.: Nicht zulässig, Administratorrolle hinzuzufügen oder zu löschen, wenn Sie nicht über diese Rolle verfügen.
 Not allowed to Delete this user: Diesen Benutzer darf nicht gelöscht werden
@@ -718,10 +731,13 @@ om-KE: Oromo (Kenia)
 Online: Online
 Only Selected Group (Export): Nur ausgewählte Gruppe (Exportieren)
 Open: Offen
+Open now: Öffnen
 Open Url {0}: Zur Url "{0}" navigieren
 or-IN: Odia (Indien)
 os-GE: Ossetic (Georgien)
 os-RU: Ossetic (Russland)
+Other: Sonstige
+Overview: Übersicht
 Owner: Eigentümer
 pa-Arab-PK: Punjabi (Arabisch, Pakistan)
 pa-IN: Punjabi (Indien)
@@ -909,6 +925,7 @@ Status: Status
 Street: Straße
 Striped: Gestreift
 su-Latn-ID: Sundanesisch (Latein, Indonesien)
+Subject: Betreff
 Support: Unterstützen
 sv-AX: Schwedisch (Ålandinseln)
 sv-FI: Schwedisch (Finnland)
@@ -926,6 +943,7 @@ ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Malaysia)
 ta-SG: Tamil (Singapur)
 Table Name: Tabellenname
+Take case: Fall übernehmen
 Tax: Steuer
 Tax must be greater than 0: Die Steuer muss größer als 0 sein
 te-IN: Telugu (Indien)
@@ -941,6 +959,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Die Da
 The following {0} permissions are also required for permission {1}: Für die Berechtigung "{1}" sind ebenfalls diese {0} Berechtigungen erforderlich
 The following permission is also required for permission {1}: Die folgende Berechtigung ist für die Berechtigung "{1}" ebenfalls erforderlich
 The Plugin '{0}' may be able to help: Das Plugin '{0}' kann eventuell helfen
+The user "{0}" just changed some of this data: Der Benutzer "{0}" hat gerade einige dieser Daten geändert
 The user {0} has been logged off: Der Benutzer {0} wurde abgemeldet.
 The User {0} has just edited, created or deleted entries here. You should reload the data: Der User {0} hat hier soeben Einträge bearbeitet, angelegt oder gelöscht. Sie sollten die Daten neu laden
 There are no new notifications: Keine neuen Benachrichtigungen vorhanden
@@ -978,10 +997,12 @@ ug-CN: Uigurisch (China)
 uk-UA: Ukrainisch (Ukraine)
 Unassigned: Unbestimmt
 Update: Aktualisieren
+Update automatically next time: Beim nächsten Mal automatisch aktualisieren
 Update Brand: Marke aktualisieren
 Update Document: Dokument aktualisieren
 Update Document Type: Dokumenttyp aktualisieren
 Update Extended Attribute: Erweitertes Attribut aktualisieren
+Update Now: Jetzt aktualisieren
 Update Permissions: Berechtigungen aktualisieren
 Update Product: Produkt aktualisieren
 Update Role: Rolle aktualisieren
@@ -1061,21 +1082,3 @@ zh-MO: Chinesisch (Macao SAR)
 zh-SG: Chinesisch (Singapur)
 zh-TW: Chinesisch (Taiwan)
 zu-ZA: isiZulu (Südafrika)
-Add external Url: Externe URL hinzufügen
-Add Url: URL hinzufügen
-CreatedOn: Erstellungsdatum
-Enter the URL to existing file: Geben Sie die URL zu einer vorhandenen Datei an
-General: Allgemein
-Other: Sonstige
-Overview: Übersicht
-Back: Zurück
-Female: Weiblich
-Male: Männlich
-Add: Hinzufügen
-The user "{0}" just changed some of this data: Der Benutzer "{0}" hat gerade einige dieser Daten geändert
-Update Now: Jetzt aktualisieren
-Data has been updated: Daten wurden aktualisiert
-Update automatically next time: Beim nächsten Mal automatisch aktualisieren
-No longer update automatically: Nicht mehr automatisch aktualisieren
-Open now: Öffnen
-Subject: Betreff

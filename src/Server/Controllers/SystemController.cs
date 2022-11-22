@@ -83,7 +83,7 @@ namespace CleanArchitectureBase.Server.Controllers
 
         [Authorize(Roles = RoleConstants.AdministratorRole)]
         [HttpPost(nameof(WriteSystemConfiguration))]
-        public IActionResult WriteSystemConfiguration(ServerConfiguration config)
+        public IActionResult WriteSystemConfiguration([FromBody] ServerConfiguration config)
         {
             // For temporary set
             foreach (var item in config.ToFlatDictionary())

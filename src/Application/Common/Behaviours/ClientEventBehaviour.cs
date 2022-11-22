@@ -16,7 +16,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
             this.mediator = mediator;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             await mediator.PublishClientEvent(new BeforeRequest<TRequest>(request), cancellationToken);
             var response = await next();

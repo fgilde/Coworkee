@@ -1,7 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CleanArchitectureBase.Shared.Constants.Application;
-using Microsoft.Extensions.PlatformAbstractions;
 
 namespace CleanArchitectureBase.Application.Common.Models
 {
@@ -10,12 +9,13 @@ namespace CleanArchitectureBase.Application.Common.Models
         //public string Application => this.GetType().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
         public VersionInfoModel()
         {
+            
             AssemblyVersion = GetType().Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
         }
 
         public string ApplicationName { get; set; } = ApplicationConstants.ApplicationName;
         public string AssemblyVersion { get; set; }
-        public string Runtime { get; set; } = PlatformServices.Default.Application.RuntimeFramework.FullName;
+        public string Runtime { get; set; } = $"{RuntimeInformation.FrameworkDescription} - {RuntimeInformation.ProcessArchitecture}";
         public string System { get; set; } = $"{RuntimeInformation.OSDescription} {RuntimeInformation.OSArchitecture}";
     }
 }

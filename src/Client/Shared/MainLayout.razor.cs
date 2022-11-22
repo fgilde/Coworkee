@@ -22,6 +22,7 @@ using CleanArchitectureBase.Client.Localization;
 using CleanArchitectureBase.Client.Shared.Components;
 using CleanArchitectureBase.Client.Theming;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using CleanArchitectureBase.Shared.Wrapper;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Helper;
@@ -85,6 +86,10 @@ namespace CleanArchitectureBase.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
+            //@inject IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>> Options
+            //var remoteAuthenticationOptions = Options.Get(Microsoft.Extensions.Options.Options.DefaultName);
+            //_navigationManager.NavigateToLogin(remoteAuthenticationOptions.AuthenticationPaths.LogInPath);
+            
             _ = _jsRuntime.InitializeMudBlazorExtensionsAsync();
             _currentTheme = await _clientPreferenceManager.GetCurrentThemeAsync();
             _rightToLeft = await _clientPreferenceManager.IsRTL();

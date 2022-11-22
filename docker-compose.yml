@@ -7,10 +7,11 @@ services:
       context: .
       dockerfile: src/Server/Dockerfile
     environment:
-      - "ConnectionStrings__DefaultConnection=Server=db;Database=CleanArchitectureBase;User=sa;Password=Your_password123;MultipleActiveResultSets=true"
+      - "ConnectionStrings__DefaultConnection=Server=db;Database=CleanArchitectureBase;User=sa;Password=Your_password123;MultipleActiveResultSets=true;TrustServerCertificate=true"
       - "ASPNETCORE_ENVIRONMENT=Development"
-      #- "ASPNETCORE_Kestrel__Certificates__Default__Password=securePassword123"
-      #- "ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx"
+      - "ASPNETCORE_URLS=http://+:80;https://+:443"
+      - "ASPNETCORE_Kestrel__Certificates__Default__Password=securePassword123"
+      - "ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx"
     volumes:
       - ~/.aspnet/https:/https:ro
       - ~/.aspnet/DataProtection-Keys:/root/.aspnet/DataProtection-Keys

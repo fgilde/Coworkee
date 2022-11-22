@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanArchitectureBase.Application.Common.Behaviours
 {
-    public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+    public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly Stopwatch _timer;
@@ -17,7 +17,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
         private readonly IAccountService _identityService;
 
         public PerformanceBehaviour(
-            ILogger<TRequest> logger, 
+            ILogger<TRequest> logger,
             ICurrentUserService currentUserService,
             IAccountService identityService)
         {
@@ -28,7 +28,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
             _identityService = identityService;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             _timer.Start();
 

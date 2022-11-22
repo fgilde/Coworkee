@@ -68,5 +68,11 @@ namespace CleanArchitectureBase.Client.Pages.Content
         {
             return HubConnection.TryDisposeAsync();
         }
+
+        private async Task Test()
+        {
+            var d = await _gRpc.GetDashboardDataAsync(new Data.DashboardRequest());
+            var c = d.ProductCount;
+        }
     }
 }

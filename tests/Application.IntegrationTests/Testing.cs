@@ -11,7 +11,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Infrastructure.Contexts;
 using CleanArchitectureBase.Infrastructure.Models.Identity;
@@ -24,11 +23,11 @@ public class Testing
 {
     private static IConfigurationRoot _configuration;
     private static IServiceScopeFactory _scopeFactory;
-    private static Checkpoint _checkpoint;
+    private static Respawner _checkpoint;
     private static string _currentUserId;
 
     [OneTimeSetUp]
-    public void RunBeforeAnyTests()
+    public async Task RunBeforeAnyTests()
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -62,21 +61,21 @@ public class Testing
 
         _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
 
-        _checkpoint = new Checkpoint
-        {
-            TablesToIgnore = new []{new Table("__EFMigrationsHistory") }
-        };
-
-        EnsureDatabase();
+        await EnsureDatabase();
     }
 
-    private static void EnsureDatabase()
+    private static async Task EnsureDatabase()
     {
         using var scope = _scopeFactory.CreateScope();
 
         var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-        context.Database.Migrate();
+        _checkpoint = await Respawner.CreateAsync(context.Database.GetConnectionString()!, new RespawnerOptions
+        {
+            TablesToIgnore = new[] { new Table("__EFMigrationsHistory") }
+        });
+
+        await context.Database.MigrateAsync();
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -134,7 +133,7 @@ public class Testing
 
     public static async Task ResetState()
     {
-        await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
+        await _checkpoint.ResetAsync(_configuration.GetConnectionString("DefaultConnection"));
         _currentUserId = null;
     }
 

@@ -347,6 +347,7 @@ body * {
   pointer-events: none;
 }
 
+/*REMOVE MUDEX*/
 .drop-zone {
   transition: all 0.4s;
   padding: 20px;

@@ -3,11 +3,15 @@ using System.Linq;
 using System.Security.Claims;
 using CleanArchitectureBase.Application.Common.Security;
 using CleanArchitectureBase.Shared.Constants.Permission;
+using CleanArchitectureBase.Shared.Constants.Role;
 
 namespace CleanArchitectureBase.Application.Common.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {
+        public static bool IsAdministrator(this ClaimsPrincipal claimsPrincipal)
+            => claimsPrincipal.IsInRole(RoleConstants.AdministratorRole);
+        
         public static string GetInitials(this ClaimsPrincipal claimsPrincipal)
             => new(new []{claimsPrincipal.GetFirstName().FirstOrDefault(), claimsPrincipal.GetLastName().FirstOrDefault()});
 

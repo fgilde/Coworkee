@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Shared.Constants.Permission
+namespace Coworkee.Shared.Constants.Permission
 {
     public static class ApplicationClaimTypes
     {

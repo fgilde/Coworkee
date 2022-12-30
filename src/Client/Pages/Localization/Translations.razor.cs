@@ -1,24 +1,24 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Translations.Export;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Localization;
-using CleanArchitectureBase.Shared.Extensions;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Features.Translations.Commands.AddEdit;
+using Coworkee.Application.Features.Translations.Export;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Localization;
+using Coworkee.Shared.Extensions;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using SDK;
 
 
-namespace CleanArchitectureBase.Client.Pages.Localization
+namespace Coworkee.Client.Pages.Localization
 {
     public partial class Translations : IAsyncDisposable
     {

@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.Contracts;
+using System.Diagnostics.Contracts;
 using Microsoft.AspNetCore.OData.Query;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace CleanArchitectureBase.Server.Extensions;
+namespace Coworkee.Server.Extensions;
 
 public static class ODataQueryOptionsExtensions
 {

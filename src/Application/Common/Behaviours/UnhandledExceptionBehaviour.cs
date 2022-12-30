@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitectureBase.Application.Common.Behaviours
+namespace Coworkee.Application.Common.Behaviours
 {
     public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
@@ -26,7 +26,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
             {
                 var requestName = typeof(TRequest).Name;
 
-                _logger.LogError(ex, "CleanArchitectureBase Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.LogError(ex, "Coworkee Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
                 throw;
             }

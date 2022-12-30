@@ -1,10 +1,10 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Exceptions;
+using System;
+using Coworkee.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Server.Extensions
+namespace Coworkee.Server.Extensions
 {
     public static class ExceptionConvertExtensions
     {

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
-using CleanArchitectureBase.Shared;
+using Coworkee.Shared;
 using StringToExpression.LanguageDefinitions;
 
-namespace CleanArchitectureBase.Application.Common.Extensions;
+namespace Coworkee.Application.Common.Extensions;
 
 public static class ODataQueryOptionsExtensions
 {

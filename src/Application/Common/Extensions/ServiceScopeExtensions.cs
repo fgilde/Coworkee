@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
+using System.Threading.Tasks;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitectureBase.Application.Common.Extensions;
+namespace Coworkee.Application.Common.Extensions;
 
 public static class ServiceScopeExtensions
 {

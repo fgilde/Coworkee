@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.Storage
+namespace Coworkee.Application.Contracts.Services.Storage
 {
     public interface IServerStorageService
     {

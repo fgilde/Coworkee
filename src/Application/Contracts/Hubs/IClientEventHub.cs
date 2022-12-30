@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Contracts.Chat;
+using System.Threading.Tasks;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Contracts.Chat;
 
-namespace CleanArchitectureBase.Application.Contracts.Hubs;
+namespace Coworkee.Application.Contracts.Hubs;
 
 public interface IClientEventHub
 {

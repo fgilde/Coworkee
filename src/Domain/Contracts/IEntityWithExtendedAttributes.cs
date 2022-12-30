@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace CleanArchitectureBase.Domain.Contracts
+namespace Coworkee.Domain.Contracts
 {
     public interface IEntityWithExtendedAttributes<TExtendedAttribute>
     {

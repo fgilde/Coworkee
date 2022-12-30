@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,15 +6,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Infrastructure.Contexts;
-using CleanArchitectureBase.Server.Services;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Products.Commands.AddEdit;
+using Coworkee.Application.Features.Products.Queries.GetAllPaged;
+using Coworkee.Domain.Entities.Catalog;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Server.Services;
 using CsvHelper;
 using Hangfire;
 using MediatR;
@@ -22,7 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Server.BackgroundServices;
+namespace Coworkee.Server.BackgroundServices;
 
 //[RegisterAs(typeof(IHostedService), ServiceLifetime = ServiceLifetime.Singleton)]
 public class ProductFeedSyncService : BackgroundService

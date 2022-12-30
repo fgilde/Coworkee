@@ -1,13 +1,13 @@
-﻿@page "/localization/languages"
+@page "/localization/languages"
 @attribute [Authorize(Policy = Permissions.Translations.Edit)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Languages> _localizer
-@using CleanArchitectureBase.Shared.Constants.Localization
+@using Coworkee.Shared.Constants.Localization
 @using Nextended.Core.Extensions
-@using CleanArchitectureBase.Application.Common.Models
-@using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
-@using CleanArchitectureBase.Application.Hubs.Events
+@using Coworkee.Application.Common.Models
+@using Coworkee.Application.Features.Translations.Commands.AddEdit
+@using Coworkee.Application.Hubs.Events
 @using Microsoft.AspNetCore.SignalR.Client
-@using CleanArchitectureBase.Application.Common.Extensions
+@using Coworkee.Application.Common.Extensions
 
 <style>
     .lang-active .mud-expand-panel-header {

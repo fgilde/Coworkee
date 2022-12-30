@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Client.Shared.Components;
+namespace Coworkee.Client.Shared.Components;
 
 public partial class AddressEdit
 {

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Infrastructure.Contexts;
-using CleanArchitectureBase.Server.Extensions;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 
-namespace CleanArchitectureBase.Server
+namespace Coworkee.Server
 {
     public class Program
     {

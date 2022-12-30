@@ -1,8 +1,8 @@
 @page "/audit-trails"
 @using System.Globalization
-@using CleanArchitectureBase.Shared.Constants.Role
+@using Coworkee.Shared.Constants.Role
 @using Microsoft.AspNetCore.Components
-@using CleanArchitectureBase.Client.Shared.Components
+@using Coworkee.Client.Shared.Components
 
 @attribute [Authorize(Policy = Permissions.AuditTrails.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AuditTrails> _localizer

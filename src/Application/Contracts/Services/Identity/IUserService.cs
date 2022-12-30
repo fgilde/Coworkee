@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Common;
-using CleanArchitectureBase.Application.Hubs.Events.Base;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Shared.Models;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Common;
+using Coworkee.Application.Hubs.Events.Base;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Models;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.Identity
+namespace Coworkee.Application.Contracts.Services.Identity
 {
     public interface IUserService : IService
     {

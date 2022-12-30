@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Client.Shared.Components.Notification;
+namespace Coworkee.Client.Shared.Components.Notification;
 
 public enum AnimationBehavior
 {

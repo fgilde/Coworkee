@@ -1,5 +1,5 @@
-﻿using Blazored.LocalStorage;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Blazored.LocalStorage;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -10,30 +10,30 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using CleanArchitectureBase.Client.Authentication;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.ErrorHandling;
-using CleanArchitectureBase.Client.Handler;
-using CleanArchitectureBase.Client.Localization;
-using CleanArchitectureBase.Client.Managers;
-using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
-using CleanArchitectureBase.Client.Managers.Preferences;
-using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Client.Authentication;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.ErrorHandling;
+using Coworkee.Client.Handler;
+using Coworkee.Client.Localization;
+using Coworkee.Client.Managers;
+using Coworkee.Client.Managers.ExtendedAttribute;
+using Coworkee.Client.Managers.Preferences;
+using Coworkee.Domain.Entities.ExtendedAttributes;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.SDK;
+using Coworkee.Shared;
+using Coworkee.Shared.Constants.Application;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Client.Configuration.MudExObjectEdit;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Client.Configuration.MudExObjectEdit;
 using Microsoft.AspNetCore.Components.Web;
 using Nextended.Core.Helper;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
-namespace CleanArchitectureBase.Client.Extensions
+namespace Coworkee.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
@@ -126,7 +126,7 @@ namespace CleanArchitectureBase.Client.Extensions
             serviceCollection.AddScoped(services =>
             {
                 var channel = services.GetRequiredService<GrpcChannel>();
-                return new CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataClient(channel);
+                return new Coworkee.Data.CoworkeeData.CoworkeeDataClient(channel);
             });
         }
 

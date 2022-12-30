@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Hubs.Events
+namespace Coworkee.Application.Hubs.Events
 {
     public class AfterRequest<TRequest, TResponse> : BeforeRequest<TRequest>
     {

@@ -1,22 +1,22 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
-using CleanArchitectureBase.Application.Specifications.ExtendedAttribute;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Enums;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services.ExportImport;
+using Coworkee.Application.Specifications.ExtendedAttribute;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Enums;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export
+namespace Coworkee.Application.Features.ExtendedAttributes.Queries.Export
 {
     internal class ExportExtendedAttributesQueryLocalization
     {

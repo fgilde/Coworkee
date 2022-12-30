@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Net;
 
-namespace CleanArchitectureBase.Application.Common.Exceptions
+namespace Coworkee.Application.Common.Exceptions
 {
     public class ApiException : Exception
     {

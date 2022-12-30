@@ -1,23 +1,23 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Products.Commands.Delete;
-using CleanArchitectureBase.Application.Features.Products.Queries.Export;
-using CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Features.Products.Queries.GetById;
-using CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage;
-using CleanArchitectureBase.Server.Filters;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Features.Products.Commands.AddEdit;
+using Coworkee.Application.Features.Products.Commands.Delete;
+using Coworkee.Application.Features.Products.Queries.Export;
+using Coworkee.Application.Features.Products.Queries.GetAllPaged;
+using Coworkee.Application.Features.Products.Queries.GetById;
+using Coworkee.Application.Features.Products.Queries.GetProductImage;
+using Coworkee.Server.Filters;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Wrapper;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitectureBase.Server.Controllers.Catalog
+namespace Coworkee.Server.Controllers.Catalog
 {
     public class ProductsController : BaseApiController<ProductsController>
     {

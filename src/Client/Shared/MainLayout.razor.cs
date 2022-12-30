@@ -1,5 +1,5 @@
-﻿using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -8,27 +8,27 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Application.Contracts.Hubs;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Client.Authentication;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.Localization;
-using CleanArchitectureBase.Client.Shared.Components;
-using CleanArchitectureBase.Client.Theming;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Chat;
+using Coworkee.Application.Contracts.Hubs;
+using Coworkee.Application.Hubs;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Client.Authentication;
+using Coworkee.Client.JsInterop;
+using Coworkee.Client.Localization;
+using Coworkee.Client.Shared.Components;
+using Coworkee.Client.Theming;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Shared.Wrapper;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Helper;
 using MudBlazor.Extensions.Options;
 
-namespace CleanArchitectureBase.Client.Shared
+namespace Coworkee.Client.Shared
 {
     public partial class MainLayout : IAsyncDisposable
     {

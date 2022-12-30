@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace CleanArchitectureBase.Domain.Contracts
+namespace Coworkee.Domain.Contracts
 {
     public abstract class AuditableEntityWithExtendedAttributes<TId, TEntityId, TEntity, TExtendedAttribute> 
         : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>

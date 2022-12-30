@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Enums;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Managers.ExtendedAttribute;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Enums;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 
-namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public class AddEditExtendedAttributeModalLocalization
     {

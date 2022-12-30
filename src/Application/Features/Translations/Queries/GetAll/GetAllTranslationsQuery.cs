@@ -1,13 +1,13 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Domain.Entities.Localization;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Domain.Entities.Localization;
+using Coworkee.Shared.Constants.Application;
 using LazyCache;
 
-namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
+namespace Coworkee.Application.Features.Translations.Queries.GetAll
 {
     public class GetAllTranslationsQuery : GetAllQueryBase<TranslationDto>
     {

@@ -1,8 +1,8 @@
-using CleanArchitectureBase.Domain.Enums;
+using Coworkee.Domain.Enums;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace CleanArchitectureBase.Domain.UnitTests.ValueObjects
+namespace Coworkee.Domain.UnitTests.ValueObjects
 {
     public class EntityExtendedAttributeTypeTests
     {

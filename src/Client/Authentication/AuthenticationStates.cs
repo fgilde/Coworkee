@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Security.Claims;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace CleanArchitectureBase.Client.Authentication;
+namespace Coworkee.Client.Authentication;
 
 public static class AuthenticationStates
 {

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
-namespace CleanArchitectureBase.Application.Contracts.Enums;
+namespace Coworkee.Application.Contracts.Enums;
 
 public enum ExportServiceType
 {

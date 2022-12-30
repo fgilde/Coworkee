@@ -1,7 +1,7 @@
-﻿using FluentValidation;
+using FluentValidation;
 using FluentValidation.Validators;
 
-namespace CleanArchitectureBase.Application.Validators.Extensions
+namespace Coworkee.Application.Validators.Extensions
 {
     public static class ValidatorExtensions
     {

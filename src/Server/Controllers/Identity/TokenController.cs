@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Linq;
-using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 
-namespace CleanArchitectureBase.Server.Controllers.Identity
+namespace Coworkee.Server.Controllers.Identity
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/identity/[controller]")]

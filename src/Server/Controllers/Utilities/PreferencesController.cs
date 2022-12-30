@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Server.Managers.Preferences;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using System.Threading.Tasks;
+using Coworkee.Server.Managers.Preferences;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Utilities
+namespace Coworkee.Server.Controllers.Utilities
 {
     [ApiController]
     public class PreferencesController : BaseApiController<PreferencesController>

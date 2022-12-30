@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Application.Contracts.Repositories
+namespace Coworkee.Application.Contracts.Repositories
 {
     public interface IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> : IDisposable where TEntity : AuditableEntity<TEntityId>
     {

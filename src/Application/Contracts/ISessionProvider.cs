@@ -1,7 +1,7 @@
 using System;
-using CleanArchitectureBase.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services;
 
-namespace CleanArchitectureBase.Application.Contracts
+namespace Coworkee.Application.Contracts
 {
     public interface ISessionProvider
     {

@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>CleanArchitectureBase.Domain.UnitTests</RootNamespace>
-    <AssemblyName>CleanArchitectureBase.Domain.UnitTests</AssemblyName>
+    <RootNamespace>Coworkee.Domain.UnitTests</RootNamespace>
+    <AssemblyName>Coworkee.Domain.UnitTests</AssemblyName>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>

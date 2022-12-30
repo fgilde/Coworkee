@@ -1,12 +1,12 @@
-﻿using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
+using Nextended.Core.Extensions;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
 using System.IO;
 using System.Linq;
 using Nextended.Core.Helper;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Application;
 
-namespace CleanArchitectureBase.Infrastructure.Services;
+namespace Coworkee.Infrastructure.Services;
 
 [RegisterAs(typeof(IFileAccess))]
 public class ServerFileAccess: IFileAccess

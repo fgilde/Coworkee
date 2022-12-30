@@ -1,4 +1,4 @@
-﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored
+A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored
 A maximum of {0} files are allowed: A maximum of {0} files are allowed
 aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
@@ -40,7 +40,7 @@ An error occurred while confirming {0}: An error occurred while confirming {0}
 Api: Api
 API-Versions: API-Versions
 ApplicationDescription: Sample Application with WebAssembly and Clean Architecture Pattern
-ApplicationSubDescription: Welcome to CleanArchitectureBase
+ApplicationSubDescription: Welcome to Coworkee
 Apply: Apply
 Apr: Apr
 ar-001: Arabic (World)

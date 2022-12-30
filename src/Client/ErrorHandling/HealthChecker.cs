@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,9 +6,9 @@ using MudBlazor;
 using MudBlazor.Extensions;
 using Nextended.Core;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Client.Configuration;
+using Coworkee.Client.Configuration;
 
-namespace CleanArchitectureBase.Client.ErrorHandling;
+namespace Coworkee.Client.ErrorHandling;
 
 public class HealthChecker : IHealthChecker
 {

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Security.Claims;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Application.Hubs.Events
+namespace Coworkee.Application.Hubs.Events
 {
     public class EntitiesChanged<TDto> : EntitiesUpdated<TDto>
     {

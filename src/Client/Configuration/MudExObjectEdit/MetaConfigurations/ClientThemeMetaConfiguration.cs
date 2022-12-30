@@ -1,10 +1,10 @@
-﻿using CleanArchitectureBase.Client.Theming;
+using Coworkee.Client.Theming;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
 using System.Threading.Tasks;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Configuration.MudExObjectEdit.MetaConfigurations;
+namespace Coworkee.Client.Configuration.MudExObjectEdit.MetaConfigurations;
 
 public class ClientThemeMetaConfiguration : IObjectMetaConfiguration<ClientTheme>
 {

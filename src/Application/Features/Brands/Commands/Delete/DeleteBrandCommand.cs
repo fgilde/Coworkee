@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Net;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using Coworkee.Domain.Entities.Catalog;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Brands.Commands.Delete
+namespace Coworkee.Application.Features.Brands.Commands.Delete
 {
     [CustomAuthorize(Policies = new[] { Permissions.Brands.Delete })]
     public class DeleteBrandCommand : DeleteCommandBase<int>

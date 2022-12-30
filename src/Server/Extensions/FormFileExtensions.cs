@@ -1,9 +1,9 @@
-﻿using System.IO;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace CleanArchitectureBase.Server.Extensions;
+namespace Coworkee.Server.Extensions;
 
 public static class FormFileExtensions
 {

@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Common;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Common;
 
-namespace CleanArchitectureBase.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services
 {
     public interface ICurrentUserService : IService
     {

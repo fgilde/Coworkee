@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Resources;
 using System.Text.RegularExpressions;
 
-namespace CleanArchitectureBase.Shared.Constants.Localization
+namespace Coworkee.Shared.Constants.Localization
 {
     public static class LocalizationConstants
     {

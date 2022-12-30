@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Application.IntegrationTests
+namespace Coworkee.Application.IntegrationTests
 {
     using static Testing;
 

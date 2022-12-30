@@ -1,4 +1,4 @@
-namespace CleanArchitectureBase.Client.Models
+namespace Coworkee.Client.Models
 {
     public class ChatMessage
     {

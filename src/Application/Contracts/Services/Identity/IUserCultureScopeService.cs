@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Common.Scopes;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Scopes;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.Identity;
+namespace Coworkee.Application.Contracts.Services.Identity;
 
 public interface IUserCultureScopeService
 {

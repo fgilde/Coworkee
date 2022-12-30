@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Common.Security
+namespace Coworkee.Application.Common.Security
 {
     public interface ICustomAuthorizeAttribute
     {

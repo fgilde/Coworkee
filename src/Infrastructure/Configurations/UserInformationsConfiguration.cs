@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CleanArchitectureBase.Domain.Entities.Identity;
+using Coworkee.Domain.Entities.Identity;
 
-namespace CleanArchitectureBase.Infrastructure.Configurations;
+namespace Coworkee.Infrastructure.Configurations;
 
 public class UserInformationsConfiguration : IEntityTypeConfiguration<UserInformations>
 {

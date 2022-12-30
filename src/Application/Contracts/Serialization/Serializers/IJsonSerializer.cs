@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Contracts.Serialization.Serializers
+namespace Coworkee.Application.Contracts.Serialization.Serializers
 {
     public interface IJsonSerializer
     {

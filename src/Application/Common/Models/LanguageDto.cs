@@ -1,7 +1,7 @@
-﻿using System.Globalization;
-using CleanArchitectureBase.Shared.Constants.Localization;
+using System.Globalization;
+using Coworkee.Shared.Constants.Localization;
 
-namespace CleanArchitectureBase.Application.Common.Models;
+namespace Coworkee.Application.Common.Models;
 
 public class LanguageDto: LanguageCode, IDtoBase<int>
 {

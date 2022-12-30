@@ -1,12 +1,12 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs.Events.Base;
-using CleanArchitectureBase.Application.Requests.Mail;
-using CleanArchitectureBase.Shared.Constants.Application;
+using System;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs.Events.Base;
+using Coworkee.Application.Requests.Mail;
+using Coworkee.Shared.Constants.Application;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Requests;
+namespace Coworkee.Application.Requests;
 
 public class NotificationRequest: ClientEventBase
 {

@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Extensions;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Extensions;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Extensions
+namespace Coworkee.Client.Extensions
 {
     public static class HttpClientExtensions
     {

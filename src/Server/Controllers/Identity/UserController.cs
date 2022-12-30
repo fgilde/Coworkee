@@ -1,25 +1,25 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Server.Middlewares;
-using CleanArchitectureBase.Shared;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Server.Extensions;
+using Coworkee.Server.Middlewares;
+using Coworkee.Shared;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Server.Controllers.Identity
+namespace Coworkee.Server.Controllers.Identity
 {
     [Authorize]
     [ApiController]

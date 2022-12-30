@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Domain.Entities.Notifications;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Domain.Entities.Notifications;
+using Coworkee.Shared.Constants.Role;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.Notifications.Queries.GetById
+namespace Coworkee.Application.Features.Notifications.Queries.GetById
 {
     [CustomAuthorize]
     public class GetNotificationByIdQuery : GetByIdQueryBase<int, NotificationDto>

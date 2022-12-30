@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts;
+using Coworkee.Application.Contracts;
 using FluentValidation;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Features.System
+namespace Coworkee.Application.Features.System
 {
     public class SendToServiceBus
     {

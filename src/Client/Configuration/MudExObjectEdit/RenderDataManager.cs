@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Client.Shared.Components;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Requests;
+using Coworkee.Client.Shared.Components;
 using MudBlazor.Extensions;
 
-namespace CleanArchitectureBase.Client.Configuration.MudExObjectEdit;
+namespace Coworkee.Client.Configuration.MudExObjectEdit;
 
 internal static class RenderDataManager
 {

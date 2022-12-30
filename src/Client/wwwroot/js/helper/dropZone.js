@@ -77,26 +77,22 @@ export function initializeFileDropZone(dropZoneElement, inputFile, allowFolderUp
         }
     }
     // Register all events
-    if (dropZoneElement) {
-        dropZoneElement.ondragenter = onDragHover;
-        dropZoneElement.ondragover = onDragHover;
-        dropZoneElement.ondragleave = onDragLeave;
-        dropZoneElement.ondrop = onDrop;
-        dropZoneElement.onpaste = onPaste;
-    }
+    dropZoneElement?.addEventListener("dragenter", onDragHover);
+    dropZoneElement?.addEventListener("dragover", onDragHover);
+    dropZoneElement?.addEventListener("dragleave", onDragLeave);
+    dropZoneElement?.addEventListener("drop", onDrop);
+    dropZoneElement?.addEventListener('paste', onPaste);
     // The returned object allows to unregister the events when the Blazor component is destroyed
     return {
         selectFolder: () => {
             openFolderPicker();
         },
         dispose: () => {
-            if (dropZoneElement) {
-                dropZoneElement.ondragenter = null;
-                dropZoneElement.ondragover = null;
-                dropZoneElement.ondragleave = null;
-                dropZoneElement.ondrop = null;
-                dropZoneElement.onpaste = null;
-            }
+            dropZoneElement?.removeEventListener('dragenter', onDragHover);
+            dropZoneElement?.removeEventListener('dragover', onDragHover);
+            dropZoneElement?.removeEventListener('dragleave', onDragLeave);
+            dropZoneElement?.removeEventListener("drop", onDrop);
+            dropZoneElement?.removeEventListener('paste', onPaste);
         }
     };
 }

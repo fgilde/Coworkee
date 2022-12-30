@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace CleanArchitectureBase.Client.JsInterop;
+namespace Coworkee.Client.JsInterop;
 
 public class CustomEventInterop<TEventArgs>: IDisposable
     //where TEventArgs : EventArgs 

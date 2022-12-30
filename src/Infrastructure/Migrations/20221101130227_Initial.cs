@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CleanArchitectureBase.Infrastructure.Migrations
+namespace Coworkee.Infrastructure.Migrations
 {
     public partial class Initial : Migration
     {

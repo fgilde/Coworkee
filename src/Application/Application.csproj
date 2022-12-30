@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>CleanArchitectureBase.Application</RootNamespace>
-    <AssemblyName>CleanArchitectureBase.Application</AssemblyName>
+    <RootNamespace>Coworkee.Application</RootNamespace>
+    <AssemblyName>Coworkee.Application</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.3.0" />

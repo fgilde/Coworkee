@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Wrapper;
 using LazyCache;
 using MediatR;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAll
+namespace Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll
 {
     public class GetAllExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute>
         : IRequest<Result<List<GetAllExtendedAttributesResponse<TId, TEntityId>>>>

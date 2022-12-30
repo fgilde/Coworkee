@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
+using Coworkee.Infrastructure.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanArchitectureBase.Infrastructure.Configurations;
+namespace Coworkee.Infrastructure.Configurations;
 
 public class ApplicationRoleClaimConfiguration : IEntityTypeConfiguration<ApplicationRoleClaim>
 {

@@ -1,18 +1,18 @@
-﻿using System;
-using CleanArchitectureBase.Application.Requests.Identity;
+using System;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class UserRoles
     {

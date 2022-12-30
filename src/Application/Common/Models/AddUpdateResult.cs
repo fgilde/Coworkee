@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CleanArchitectureBase.Application.Common.Models;
+namespace Coworkee.Application.Common.Models;
 
 public class AddUpdateResult<TDto> 
     where TDto : IDtoBase

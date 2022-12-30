@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Linq;
-using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
-using CleanArchitectureBase.Application.Contracts.Services.Storage;
-using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
-using CleanArchitectureBase.Application.Serialization.JsonConverters;
-using CleanArchitectureBase.Application.Serialization.Options;
-using CleanArchitectureBase.Application.Serialization.Serializers;
-using CleanArchitectureBase.Infrastructure.Repositories;
-using CleanArchitectureBase.Infrastructure.Services.Storage;
-using CleanArchitectureBase.Infrastructure.Services.Storage.Provider;
+using Coworkee.Application;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Contracts.Services.Storage;
+using Coworkee.Application.Contracts.Services.Storage.Provider;
+using Coworkee.Application.Serialization.JsonConverters;
+using Coworkee.Application.Serialization.Options;
+using Coworkee.Application.Serialization.Serializers;
+using Coworkee.Infrastructure.Repositories;
+using Coworkee.Infrastructure.Services.Storage;
+using Coworkee.Infrastructure.Services.Storage.Provider;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitectureBase.Infrastructure
+namespace Coworkee.Infrastructure
 {
     public static class DependencyInjection
     {

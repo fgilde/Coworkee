@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Chat;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Server.Controllers.Communication
+namespace Coworkee.Server.Controllers.Communication
 {
     [Authorize(Policy = Permissions.Communication.Chat)]
     [ApiController]

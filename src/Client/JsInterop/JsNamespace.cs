@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Extensions;
+using System.Linq;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.Extensions;
 
-namespace CleanArchitectureBase.Client.JsInterop;
+namespace Coworkee.Client.JsInterop;
 
 public class JsNamespace
 {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>CleanArchitectureBase.Domain</name>
+        <name>Coworkee.Client</name>
     </assembly>
     <members>
     </members>

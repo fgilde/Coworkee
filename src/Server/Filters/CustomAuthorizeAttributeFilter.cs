@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Server.Extensions;
+using Coworkee.Application.Common.Security;
+using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace CleanArchitectureBase.Server.Filters
+namespace Coworkee.Server.Filters
 {
     public class CustomAuthorizeAttributeFilter: IAsyncAuthorizationFilter
     {

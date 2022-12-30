@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Requests;
+using Coworkee.Application.Requests;
 
-namespace CleanArchitectureBase.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services
 {
     public interface IUploadService
     {

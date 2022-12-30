@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Client.ErrorHandling;
+namespace Coworkee.Client.ErrorHandling;
 
 public interface IHealthChecker
 {

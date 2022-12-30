@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Linq;
-using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Application;
 
-namespace CleanArchitectureBase.Client.Pages.Authentication
+namespace Coworkee.Client.Pages.Authentication
 {
     public partial class Login
     {

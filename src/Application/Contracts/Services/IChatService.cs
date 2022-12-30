@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Chat;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services
 {
     public interface IChatService
     {

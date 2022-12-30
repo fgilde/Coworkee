@@ -1,23 +1,23 @@
-﻿using Microsoft.JSInterop;
+using Microsoft.JSInterop;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace CleanArchitectureBase.Client.Pages.Utilities
+namespace Coworkee.Client.Pages.Utilities
 {
     public partial class AuditTrails : IAsyncDisposable
     {

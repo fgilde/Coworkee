@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Shared.Constants.Role
+namespace Coworkee.Shared.Constants.Role
 {
     public static class RoleConstants
     {

@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Server.Extensions;
+using Coworkee.Shared.Constants.Permission;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Http;
 
-namespace CleanArchitectureBase.Server.Filters
+namespace Coworkee.Server.Filters
 {
     public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
     {

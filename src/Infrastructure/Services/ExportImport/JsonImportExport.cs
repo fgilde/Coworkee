@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Services.ExportImport;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
-namespace CleanArchitectureBase.Infrastructure.Services.ExportImport;
+namespace Coworkee.Infrastructure.Services.ExportImport;
 
 [RegisterAs(typeof(IExportService), RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Scoped)]
 [RegisterAs(typeof(IImportService), RegisterAsImplementation = false, ServiceLifetime = ServiceLifetime.Scoped)]

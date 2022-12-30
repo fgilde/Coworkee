@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace CleanArchitectureBase.Client.Pages.Misc
+namespace Coworkee.Client.Pages.Misc
 {
     public partial class DocumentTypes
     {

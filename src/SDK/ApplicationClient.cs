@@ -1,7 +1,7 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using SDK;
 
-namespace CleanArchitectureBase.SDK
+namespace Coworkee.SDK
 {
     public class ApplicationClient: GeneratedClient, IApplicationClient
     {

@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Entities.Misc;
 
-namespace CleanArchitectureBase.Application.Specifications.Misc
+namespace Coworkee.Application.Specifications.Misc
 {
     public class DocumentTypeFilterSpecification : SpecificationBase<DocumentType>
     {

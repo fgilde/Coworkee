@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Configurations;
+using Coworkee.Server.Extensions;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitectureBase.Server.Middlewares
+namespace Coworkee.Server.Middlewares
 {
 
     public class SwaggerAuthorizedMiddleware

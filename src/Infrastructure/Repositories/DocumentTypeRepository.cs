@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Entities.Misc;
 
-namespace CleanArchitectureBase.Infrastructure.Repositories
+namespace Coworkee.Infrastructure.Repositories
 {
     public class DocumentTypeRepository : IDocumentTypeRepository
     {

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace CleanArchitectureBase.Shared.Constants.Permission
+namespace Coworkee.Shared.Constants.Permission
 {
     public static class Permissions
     {

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Application.Contracts.Chat
+namespace Coworkee.Application.Contracts.Chat
 {
     public interface IChatHistory<TUser> where TUser : IChatUser
     {

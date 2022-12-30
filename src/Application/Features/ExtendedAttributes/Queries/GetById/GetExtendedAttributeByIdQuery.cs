@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetById
+namespace Coworkee.Application.Features.ExtendedAttributes.Queries.GetById
 {
     public class GetExtendedAttributeByIdQuery<TId, TEntityId, TEntity, TExtendedAttribute>
         : IRequest<Result<GetExtendedAttributeByIdResponse<TId, TEntityId>>>

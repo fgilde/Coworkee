@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Shared.Managers;
+using Coworkee.Shared.Managers;
 
-namespace CleanArchitectureBase.Server.Managers.Preferences
+namespace Coworkee.Server.Managers.Preferences
 {
     public interface IServerPreferenceManager : IPreferenceManager
     {

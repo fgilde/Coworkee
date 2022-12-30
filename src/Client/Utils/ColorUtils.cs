@@ -1,7 +1,7 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Linq;
 
-namespace CleanArchitectureBase.Client.Utils
+namespace Coworkee.Client.Utils
 {
     public static class ColorUtils
     {

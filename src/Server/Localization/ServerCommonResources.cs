@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Server.Localization
+namespace Coworkee.Server.Localization
 {
     internal class ServerCommonResources
     {

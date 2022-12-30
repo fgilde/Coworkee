@@ -1,18 +1,18 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Shared.Constants.Role;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Shared.Constants.Role;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Server.Controllers;
+namespace Coworkee.Server.Controllers;
 
 public class DatabaseController : BaseApiController<DatabaseController>
 {

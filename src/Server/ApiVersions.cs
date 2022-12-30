@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server
+namespace Coworkee.Server
 {
     /// <summary>
     /// NOTICE*

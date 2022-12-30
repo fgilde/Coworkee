@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using MudBlazor;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class Reset
     {

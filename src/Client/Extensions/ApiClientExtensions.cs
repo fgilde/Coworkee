@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.ErrorHandling;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Client.ErrorHandling;
+using Coworkee.SDK;
+using Coworkee.Shared.Wrapper;
 using SDK;
 
-namespace CleanArchitectureBase.Client.Extensions
+namespace Coworkee.Client.Extensions
 {
     public static class ApiClientExtensions
     {

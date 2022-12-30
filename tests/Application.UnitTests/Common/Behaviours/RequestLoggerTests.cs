@@ -1,13 +1,13 @@
-//using CleanArchitectureBase.Application.Common.Behaviours;
-//using CleanArchitectureBase.Application.TodoItems.Commands.CreateTodoItem;
+//using Coworkee.Application.Common.Behaviours;
+//using Coworkee.Application.TodoItems.Commands.CreateTodoItem;
 //using Microsoft.Extensions.Logging;
 //using Moq;
 //using NUnit.Framework;
 //using System.Threading;
 //using System.Threading.Tasks;
-//using CleanArchitectureBase.Application.Contracts;
+//using Coworkee.Application.Contracts;
 
-//namespace CleanArchitectureBase.Application.UnitTests.Common.Behaviours
+//namespace Coworkee.Application.UnitTests.Common.Behaviours
 //{
 //    public class RequestLoggerTests
 //    {

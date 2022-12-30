@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Contracts.Serialization.Settings;
+using Coworkee.Application.Contracts.Serialization.Settings;
 using Newtonsoft.Json;
 
-namespace CleanArchitectureBase.Application.Serialization.Settings
+namespace Coworkee.Application.Serialization.Settings
 {
     public class NewtonsoftJsonSettings : IJsonSerializerSettings
     {

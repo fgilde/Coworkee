@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.DocumentTypes.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Validators.Features.DocumentTypes.Commands.AddEdit
+namespace Coworkee.Application.Validators.Features.DocumentTypes.Commands.AddEdit
 {
     public class AddEditDocumentTypesCommandValidator : AbstractValidator<AddEditDocumentTypesCommand>
     {

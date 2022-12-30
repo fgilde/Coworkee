@@ -1,10 +1,10 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Entities.Misc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitectureBase.Infrastructure.Repositories
+namespace Coworkee.Infrastructure.Repositories
 {
     public class DocumentRepository : IDocumentRepository
     {

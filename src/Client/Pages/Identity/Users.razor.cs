@@ -1,21 +1,21 @@
-﻿using MudBlazor;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.JsInterop;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class Users
     {

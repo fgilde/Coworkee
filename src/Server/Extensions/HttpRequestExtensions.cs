@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Server.Extensions;
+namespace Coworkee.Server.Extensions;
 
 public static class HttpRequestExtensions
 {

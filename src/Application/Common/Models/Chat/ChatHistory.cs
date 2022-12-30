@@ -1,7 +1,7 @@
-﻿using System;
-using CleanArchitectureBase.Application.Contracts.Chat;
+using System;
+using Coworkee.Application.Contracts.Chat;
 
-namespace CleanArchitectureBase.Application.Common.Models.Chat
+namespace Coworkee.Application.Common.Models.Chat
 {
     public partial class ChatHistory<TUser> : IChatHistory<TUser> where TUser : IChatUser
     {

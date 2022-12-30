@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Common;
+using Coworkee.Application.Contracts.Common;
 
-namespace CleanArchitectureBase.Application.Contracts.Services;
+namespace Coworkee.Application.Contracts.Services;
 
 public interface ITranslationService: IService
 {

@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using CleanArchitectureBase.Application.Requests.Identity;
+using System.Linq;
+using Coworkee.Application.Requests.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Validators.Requests.Identity
+namespace Coworkee.Application.Validators.Requests.Identity
 {
     public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {

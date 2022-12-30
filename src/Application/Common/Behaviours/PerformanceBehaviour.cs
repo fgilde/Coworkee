@@ -1,12 +1,12 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitectureBase.Application.Common.Behaviours
+namespace Coworkee.Application.Common.Behaviours
 {
     public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
@@ -49,7 +49,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
                     userName = await _identityService.GetUserNameAsync(userId);
                 }
 
-                _logger.LogWarning("CleanArchitectureBase Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+                _logger.LogWarning("Coworkee Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                     requestName, elapsedMilliseconds, userId, userName, request);
             }
 

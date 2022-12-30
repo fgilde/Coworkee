@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Client.Enums;
+using Coworkee.Client.Enums;
 using MudBlazor;
 using System;
 
-namespace CleanArchitectureBase.Client.Theming
+namespace Coworkee.Client.Theming
 {
     public class LayoutPropertiesEx : MudBlazor.LayoutProperties, ICloneable
     {

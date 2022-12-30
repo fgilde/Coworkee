@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Server.Filters;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Server.Filters;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Role;
 using HeyRed.Mime;
 
-namespace CleanArchitectureBase.Server.Controllers.Utilities
+namespace Coworkee.Server.Controllers.Utilities
 {
     [ApiController]
     [Authorize]

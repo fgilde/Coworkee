@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Application.Hubs.Events;
+namespace Coworkee.Application.Hubs.Events;
 
 public class UserOnlineStatusChanged : UserProfileChanged
 {

@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Hubs;
+using Coworkee.Application.Requests;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace CleanArchitectureBase.Client.Pages.Catalog
+namespace Coworkee.Client.Pages.Catalog
 {
     public partial class Products
     {

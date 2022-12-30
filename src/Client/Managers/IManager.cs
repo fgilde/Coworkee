@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Client.Managers
+namespace Coworkee.Client.Managers
 {
     public interface IManager
     {

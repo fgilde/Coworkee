@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using CleanArchitectureBase.Application.Common.Security;
+using Coworkee.Application.Common.Security;
 using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 
-namespace CleanArchitectureBase.Client.Models.Navigation
+namespace Coworkee.Client.Models.Navigation
 {
     public class NavigationEntry : Hierarchical<NavigationEntry>
     {

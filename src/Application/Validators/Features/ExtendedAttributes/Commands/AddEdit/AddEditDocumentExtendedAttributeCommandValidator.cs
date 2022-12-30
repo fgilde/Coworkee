@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Domain.Entities.ExtendedAttributes;
+using Coworkee.Domain.Entities.Misc;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit
+namespace Coworkee.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit
 {
     public class AddEditDocumentExtendedAttributeCommandValidator : AddEditExtendedAttributeCommandValidator<int, int, Document, DocumentExtendedAttribute>
     {

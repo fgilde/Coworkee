@@ -27,4 +27,4 @@ RUN dotnet publish "Server.csproj" -c Release -o /app/publish /p:UseAppHost=fals
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CleanArchitectureBase.Server.dll"]
+ENTRYPOINT ["dotnet", "Coworkee.Server.dll"]

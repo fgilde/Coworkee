@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Shared;
+using Coworkee.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-namespace CleanArchitectureBase.Server.Middlewares;
+namespace Coworkee.Server.Middlewares;
 
 public class TransferableExpressionModelBinder : IModelBinder
 {

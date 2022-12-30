@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+using System.Globalization;
 
-namespace CleanArchitectureBase.Shared.Extensions;
+namespace Coworkee.Shared.Extensions;
 
 public static class CultureExtensions
 {

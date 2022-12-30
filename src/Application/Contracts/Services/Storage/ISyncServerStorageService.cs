@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.Storage
+namespace Coworkee.Application.Contracts.Services.Storage
 {
     public interface ISyncServerStorageService
     {

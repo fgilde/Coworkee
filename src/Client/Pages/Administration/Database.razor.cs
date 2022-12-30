@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Shared.Wrapper;
 using MudBlazor.Extensions;
 using System.IO;
 using MudBlazor;
 using MudBlazor.Extensions.Options;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Shared.Components;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Shared.Components;
 
-namespace CleanArchitectureBase.Client.Pages.Administration
+namespace Coworkee.Client.Pages.Administration
 {
     public partial class Database
     {

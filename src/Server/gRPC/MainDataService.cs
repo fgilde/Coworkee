@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
-using CleanArchitectureBase.Infrastructure.Contexts;
+using Coworkee.Application.Features.Dashboards.Queries.GetData;
+using Coworkee.Infrastructure.Contexts;
 using Grpc.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
 
 // Dont change this namespace it will be partial on client generator
-namespace CleanArchitectureBase.Data;
+namespace Coworkee.Data;
 
 [Authorize]
-public class MainDataService : CleanArchitectureBaseData.CleanArchitectureBaseDataBase
+public class MainDataService : CoworkeeData.CoworkeeDataBase
 {
     private readonly ApplicationDbContext _db;
     private readonly IMediator _mediator;

@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using CleanArchitectureBase.Application.Configurations;
+using Microsoft.Extensions.Configuration;
+using Coworkee.Application.Configurations;
 
-namespace CleanArchitectureBase.Client.Configuration
+namespace Coworkee.Client.Configuration
 {
     public class ClientApplicationConfiguration
     {

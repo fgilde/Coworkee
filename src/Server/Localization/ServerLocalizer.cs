@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
-using CleanArchitectureBase.Infrastructure.Contexts;
+using Coworkee.Infrastructure.Contexts;
 
-namespace CleanArchitectureBase.Server.Localization
+namespace Coworkee.Server.Localization
 {
     internal class ServerLocalizer<T> : IStringLocalizer<T>
     {

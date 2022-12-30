@@ -1,9 +1,9 @@
 @page "/admin/database-backups"
-@using CleanArchitectureBase.Shared.Constants.Role
+@using Coworkee.Shared.Constants.Role
 @attribute [Authorize(Roles = RoleConstants.AdministratorRole)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Database> _localizer
-@using CleanArchitectureBase.Shared.Wrapper
-@using CleanArchitectureBase.Application.Common.Models
+@using Coworkee.Shared.Wrapper
+@using Coworkee.Application.Common.Models
 
 
 <ReactOnPreferenceChanged Component="this" />

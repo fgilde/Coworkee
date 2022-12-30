@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Domain.Entities.Notifications;
+namespace Coworkee.Domain.Entities.Notifications;
 
 public class Notification : AuditableEntity<int>
 {

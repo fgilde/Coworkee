@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit;
+using System.Linq;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitectureBase.Server.Extensions
+namespace Coworkee.Server.Extensions
 {
     internal static class MvcBuilderExtensions
     {

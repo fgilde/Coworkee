@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Shared.Settings
+namespace Coworkee.Shared.Settings
 {
     public interface IPreference
     {

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NJsonSchema;
 using NJsonSchema.Generation;
 
-namespace CleanArchitectureBase.Server
+namespace Coworkee.Server
 {
     public class CustomSchemaNameGenerator : ISchemaNameGenerator
     {

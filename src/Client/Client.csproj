@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-    <RootNamespace>CleanArchitectureBase.Client</RootNamespace>
-    <AssemblyName>CleanArchitectureBase.Client</AssemblyName>
+    <RootNamespace>Coworkee.Client</RootNamespace>
+    <AssemblyName>Coworkee.Client</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <RunAOTCompilation>False</RunAOTCompilation>

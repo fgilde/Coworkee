@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +6,13 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.Shared.Dialogs;
-using CleanArchitectureBase.Shared.Extensions;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.JsInterop;
+using Coworkee.Client.Shared.Dialogs;
+using Coworkee.Shared.Extensions;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -26,7 +26,7 @@ using MudBlazor.Extensions.Options;
 using Nextended.Core;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {

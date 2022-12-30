@@ -1,12 +1,12 @@
-﻿using System;
-using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using System;
+using Coworkee.Domain.Entities.Catalog;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Brands.Queries.GetById
+namespace Coworkee.Application.Features.Brands.Queries.GetById
 {
     [CustomAuthorize(Policies = new[] { Permissions.Brands.View })]
     public class GetBrandByIdQuery : GetByIdQueryBase<int, BrandDto>

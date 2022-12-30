@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Client.JsInterop;
+using System.Threading.Tasks;
+using Coworkee.Client.JsInterop;
 using Microsoft.JSInterop;
 using SDK;
 
-namespace CleanArchitectureBase.Client.Extensions;
+namespace Coworkee.Client.Extensions;
 
 public static class FileResponseExtensions
 {

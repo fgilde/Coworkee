@@ -1,10 +1,10 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
+namespace Coworkee.Client.Managers.Identity.Authentication
 {
     public interface IClientAuthenticationManager : IManager
     {

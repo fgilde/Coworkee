@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Client.Authentication;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Client.Authentication;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.JsInterop;
+using Coworkee.SDK;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Extensions
+namespace Coworkee.Client.Extensions
 {
     public static class NavigationManagerExtensions
     {

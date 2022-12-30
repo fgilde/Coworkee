@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanArchitectureBase.Infrastructure.Configurations;
+namespace Coworkee.Infrastructure.Configurations;
 
 public class IdentityUserTokenConfiguration : IEntityTypeConfiguration<IdentityUserToken<string>>
 {

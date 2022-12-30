@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Application.Common.Models
+namespace Coworkee.Application.Common.Models
 {
     public class TranslationDto: DtoBase<int>, IEquatable<TranslationDto>
     {

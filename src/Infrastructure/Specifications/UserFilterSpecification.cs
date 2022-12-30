@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Application.Specifications.Base;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Application.Specifications.Base;
 
-namespace CleanArchitectureBase.Infrastructure.Specifications
+namespace Coworkee.Infrastructure.Specifications
 {
     public class UserFilterSpecification : SpecificationBase<ApplicationUser>
     {

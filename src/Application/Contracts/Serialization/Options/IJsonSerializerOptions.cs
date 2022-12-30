@@ -1,6 +1,6 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
-namespace CleanArchitectureBase.Application.Contracts.Serialization.Options
+namespace Coworkee.Application.Contracts.Serialization.Options
 {
     public interface IJsonSerializerOptions
     {

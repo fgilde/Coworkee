@@ -1,10 +1,10 @@
-﻿using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Domain.Entities.Localization;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Domain.Entities.Localization;
 using LazyCache;
 
-namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAll
+namespace Coworkee.Application.Features.Translations.Queries.GetAll
 {
     public class GetAllLanguagesQuery : GetAllQueryBase<LanguageDto>
     {}

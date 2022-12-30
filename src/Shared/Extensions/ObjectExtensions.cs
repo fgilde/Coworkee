@@ -1,9 +1,9 @@
-﻿
+
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace CleanArchitectureBase.Shared.Extensions
+namespace Coworkee.Shared.Extensions
 {
     public static class ObjectExtensions
     {

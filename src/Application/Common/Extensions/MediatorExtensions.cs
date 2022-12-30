@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Application.Hubs.Events.Base;
+using Coworkee.Application.Hubs;
+using Coworkee.Application.Hubs.Events.Base;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Common.Extensions
+namespace Coworkee.Application.Common.Extensions
 {
     public static class MediatorExtensions
     {

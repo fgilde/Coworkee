@@ -1,22 +1,22 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
-using CleanArchitectureBase.Application.Features.Base.Contracts;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services.ExportImport;
+using Coworkee.Application.Features.Base.Contracts;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.Base.Export
+namespace Coworkee.Application.Features.Base.Export
 {
     public abstract class ExportQueryBase
     {

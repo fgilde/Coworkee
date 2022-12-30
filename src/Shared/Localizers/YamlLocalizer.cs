@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace CleanArchitectureBase.Shared.Localizers
+namespace Coworkee.Shared.Localizers
 {
 
     public class YamlLocalizer<T> : IStringLocalizer<T>

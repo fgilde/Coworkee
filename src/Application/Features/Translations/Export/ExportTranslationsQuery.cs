@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Export;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Application.Specifications.Translations;
-using CleanArchitectureBase.Domain.Entities.Localization;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Export;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Application.Specifications.Translations;
+using Coworkee.Domain.Entities.Localization;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.Translations.Export
+namespace Coworkee.Application.Features.Translations.Export
 {
     [CustomAuthorize(Policies = new[] {Permissions.Translations.Export})]
     public class ExportTranslationsQuery : ExportQueryBase<int>

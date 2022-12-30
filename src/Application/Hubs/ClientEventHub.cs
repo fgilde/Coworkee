@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Hubs;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Contracts.Hubs;
+using Coworkee.Application.Contracts.Services.Identity;
 
-namespace CleanArchitectureBase.Application.Hubs
+namespace Coworkee.Application.Hubs
 {
     public class ClientEventHub : HubBase<IClientEventHub>
     {

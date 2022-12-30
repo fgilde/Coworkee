@@ -1,16 +1,16 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
 
-namespace CleanArchitectureBase.Server.Extensions
+namespace Coworkee.Server.Extensions
 {
     public static class HttpContextExtensions
     {

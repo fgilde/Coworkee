@@ -1,4 +1,4 @@
-﻿@*Libraries*@
+@*Libraries*@
 @using System.Net.Http;
 @using System.Net.Http.Json;
 @using AKSoftware.Localization.MultiLanguages
@@ -24,27 +24,27 @@
 
 
 @*Shared Libraries*@
-@using CleanArchitectureBase.Shared.Constants.Permission;
-@using CleanArchitectureBase.Client.Shared.Components;
+@using Coworkee.Shared.Constants.Permission;
+@using Coworkee.Client.Shared.Components;
 
-@using CleanArchitectureBase.Client;
-@using CleanArchitectureBase.Client.Shared;
-@using CleanArchitectureBase.Client.Shared.Dialogs;
+@using Coworkee.Client;
+@using Coworkee.Client.Shared;
+@using Coworkee.Client.Shared.Dialogs;
 
-@using CleanArchitectureBase.Application.Requests.Identity;
-@using CleanArchitectureBase.Client.Authentication
-@using CleanArchitectureBase.Client.Configuration
-@using CleanArchitectureBase.Client.ErrorHandling
+@using Coworkee.Application.Requests.Identity;
+@using Coworkee.Client.Authentication
+@using Coworkee.Client.Configuration
+@using Coworkee.Client.ErrorHandling
 
-@using CleanArchitectureBase.Client.Shared.Components.Notification;
+@using Coworkee.Client.Shared.Components.Notification;
 
-@using CleanArchitectureBase.Client.Pages.Authentication;
-@using CleanArchitectureBase.Client.Extensions;
-@using CleanArchitectureBase.Client.Managers.Identity.Authentication
-@using CleanArchitectureBase.Client.Managers.Interceptors
-@using CleanArchitectureBase.Client.Managers.Preferences
-@using CleanArchitectureBase.Data
-@using CleanArchitectureBase.SDK;
+@using Coworkee.Client.Pages.Authentication;
+@using Coworkee.Client.Extensions;
+@using Coworkee.Client.Managers.Identity.Authentication
+@using Coworkee.Client.Managers.Interceptors
+@using Coworkee.Client.Managers.Preferences
+@using Coworkee.Data
+@using Coworkee.SDK;
 
 @attribute [Authorize]
 @inject IClientAuthenticationManager _clientAuthenticationManager
@@ -55,7 +55,7 @@
 @inject IDialogService _dialogService
 @inject HttpClient _httpClient
 @inject IApplicationClient _api
-@inject CleanArchitectureBaseData.CleanArchitectureBaseDataClient _gRpc
+@inject CoworkeeData.CoworkeeDataClient _gRpc
 @inject IHttpInterceptorManager _interceptor
 @inject ClientPreferenceManager _clientPreferenceManager
 @inject ILocalStorageService _localStorage;

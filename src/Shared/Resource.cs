@@ -1,11 +1,11 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Reflection;
 using AKSoftware.Localization.MultiLanguages;
-using CleanArchitectureBase.Shared.Localizers;
+using Coworkee.Shared.Localizers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Shared
+namespace Coworkee.Shared
 {
     public static class Resource
     {

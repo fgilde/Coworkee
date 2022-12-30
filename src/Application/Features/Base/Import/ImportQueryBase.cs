@@ -1,17 +1,17 @@
-﻿using MediatR;
+using MediatR;
 using System;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services.ExportImport;
-using CleanArchitectureBase.Application.Features.Base.Commands;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services.ExportImport;
+using Coworkee.Application.Features.Base.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.Base.Import
+namespace Coworkee.Application.Features.Base.Import
 {
     public class ImportQueryBase<TDto> : IRequest<AddUpdateResult<TDto>> 
         where TDto : IDtoBase

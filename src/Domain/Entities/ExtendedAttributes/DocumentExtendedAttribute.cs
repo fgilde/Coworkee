@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Entities.Misc;
 
-namespace CleanArchitectureBase.Domain.Entities.ExtendedAttributes
+namespace Coworkee.Domain.Entities.ExtendedAttributes
 {
     public class DocumentExtendedAttribute : AuditableEntityExtendedAttribute<int, int, Document>
     {

@@ -1,10 +1,10 @@
-﻿using System.IO;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Enums;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Application.Requests
+namespace Coworkee.Application.Requests
 {
     public class UploadRequest
     {

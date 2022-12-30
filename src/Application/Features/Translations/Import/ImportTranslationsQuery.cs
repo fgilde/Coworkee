@@ -1,13 +1,13 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Import;
-using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using System;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Import;
+using Coworkee.Application.Features.Translations.Commands.AddEdit;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.Translations.Import
+namespace Coworkee.Application.Features.Translations.Import
 {
     [CustomAuthorize(Policies = new[] {Permissions.Translations.Export})]
     public class ImportTranslationsQuery : ImportQueryBase<TranslationDto>

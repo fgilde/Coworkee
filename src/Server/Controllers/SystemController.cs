@@ -1,22 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.System;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Configurations;
+using Coworkee.Server.Extensions;
+using Coworkee.Shared.Constants.Application;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Shared.Constants.Role;
 using System.IO;
 using Microsoft.Extensions.Hosting;
 
-namespace CleanArchitectureBase.Server.Controllers
+namespace Coworkee.Server.Controllers
 {
     public class SystemController : BaseApiController<SystemController>
     {

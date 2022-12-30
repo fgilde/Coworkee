@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Shared;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Configurations;
+using Coworkee.Shared;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Primitives;
 
-namespace CleanArchitectureBase.Server.Middlewares
+namespace Coworkee.Server.Middlewares
 {
 
     public class AuthenticationFromQueryMiddleware

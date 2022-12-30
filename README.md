@@ -1,9 +1,9 @@
-[![Build and deploy ASP.Net Core app to Azure Web App - Coworkee](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml/badge.svg)](https://github.com/fgilde/CleanArchitectureBaseBlazor/actions/workflows/master_coworkee.yml)
+[![Build and deploy ASP.Net Core app to Azure Web App - Coworkee](https://github.com/fgilde/CoworkeeBlazor/actions/workflows/master_coworkee.yml/badge.svg)](https://github.com/fgilde/CoworkeeBlazor/actions/workflows/master_coworkee.yml)
 
 Single Page App (Blazor) and an ASP.NET Core Server following the principles of Clean Architecture. 
 <br/>
 
-This solution is new Next Version of [CleanArchitectureBase](https://github.com/fgilde/CleanArchitectureBase) 
+This solution is new Next Version of [Coworkee](https://github.com/fgilde/Coworkee) 
 Now with a Blazor Web Assembly Frontend.
 
 [A running demo is available here](https://coworkee.azurewebsites.net/)

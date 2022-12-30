@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Security.Claims;
@@ -10,12 +10,12 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using MudBlazor.Extensions.Helper;
 using MudBlazor.Extensions.Options;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Client.Extensions;
 
-namespace CleanArchitectureBase.Client.Shared.Components;
+namespace Coworkee.Client.Shared.Components;
 
 public partial class UpdateOnChange<TDto> : IAsyncDisposable
     //where TDto: IDtoBase

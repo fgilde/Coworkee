@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>CleanArchitectureBase.Shared</name>
+        <name>Coworkee.Shared</name>
     </assembly>
     <members>
-        <member name="M:CleanArchitectureBase.Shared.Constants.Permission.Permissions.GetRegisteredPermissions">
+        <member name="M:Coworkee.Shared.Constants.Permission.Permissions.GetRegisteredPermissions">
             <summary>
             Returns a list of Permissions.
             </summary>

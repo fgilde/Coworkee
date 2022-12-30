@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CleanArchitectureBase.Domain.Entities.Catalog
+namespace Coworkee.Domain.Entities.Catalog
 {
     public class Product : AuditableEntity<int>
     {

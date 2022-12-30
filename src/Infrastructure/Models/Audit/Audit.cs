@@ -1,7 +1,7 @@
-﻿using System;
-using CleanArchitectureBase.Domain.Contracts;
+using System;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Infrastructure.Models.Audit
+namespace Coworkee.Infrastructure.Models.Audit
 {
     public class Audit : IEntity<int>
     {

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Theming;
+using Coworkee.Client.Theming;
 
-namespace CleanArchitectureBase.Client.Managers.Theme
+namespace Coworkee.Client.Managers.Theme
 {
     public interface IThemeManager : IManager
     {

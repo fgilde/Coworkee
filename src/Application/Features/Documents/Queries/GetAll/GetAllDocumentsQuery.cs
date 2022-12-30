@@ -1,21 +1,21 @@
-﻿using CleanArchitectureBase.Application.Specifications.Misc;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Application.Specifications.Misc;
+using Coworkee.Domain.Entities.Misc;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using HeyRed.Mime;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Constants.Role;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Role;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Application.Features.Documents.Queries.GetAll
+namespace Coworkee.Application.Features.Documents.Queries.GetAll
 {
     [CustomAuthorize(Policies = new[] { Permissions.Documents.View })]
     public class GetAllDocumentsQuery : GetAllPagedQueryBase<DocumentDto>

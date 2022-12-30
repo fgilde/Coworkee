@@ -1,10 +1,10 @@
-﻿using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Server.Permission
+namespace Coworkee.Server.Permission
 {
     internal class PermissionPolicyProvider : IAuthorizationPolicyProvider
     {

@@ -1,24 +1,24 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Data;
-using CleanArchitectureBase.Server.Middlewares;
-using CleanArchitectureBase.Shared.Constants.Localization;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Application.Hubs;
+using Coworkee.Data;
+using Coworkee.Server.Middlewares;
+using Coworkee.Shared.Constants.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Nextended.Core.Extensions;
 using NSwag;
 
-namespace CleanArchitectureBase.Server.Extensions
+namespace Coworkee.Server.Extensions
 {
     internal static class ApplicationBuilderExtensions
     {

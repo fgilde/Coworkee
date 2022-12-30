@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitectureBase.Infrastructure.Models.Identity
+namespace Coworkee.Infrastructure.Models.Identity
 {
     public class ApplicationRole : IdentityRole, IAuditableEntity<string>
     {

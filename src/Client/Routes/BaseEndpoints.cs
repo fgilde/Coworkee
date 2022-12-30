@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Client.Routes
+namespace Coworkee.Client.Routes
 {
     public static class BaseEndpoints
     {

@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Domain.Entities.Notifications;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Domain.Entities.Notifications;
+using Coworkee.Shared.Constants.Role;
 
-namespace CleanArchitectureBase.Application.Features.Notifications.Commands.Delete
+namespace Coworkee.Application.Features.Notifications.Commands.Delete
 {
     [CustomAuthorize]
     public class DeleteNotificationsCommand : DeleteCommandBase<int>

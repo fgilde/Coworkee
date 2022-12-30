@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Contracts.Repositories
+namespace Coworkee.Application.Contracts.Repositories
 {
     public interface IDocumentTypeRepository
     {

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Configurations;
+using Coworkee.Application.Configurations;
 
-namespace CleanArchitectureBase.Application.Contracts.Attributes;
+namespace Coworkee.Application.Contracts.Attributes;
 
 public abstract class RegisterIfConfigAttribute : RegisterAsAttribute
 {

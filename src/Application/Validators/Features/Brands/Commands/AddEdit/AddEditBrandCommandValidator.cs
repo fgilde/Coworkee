@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.Brands.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Validators.Features.Brands.Commands.AddEdit
+namespace Coworkee.Application.Validators.Features.Brands.Commands.AddEdit
 {
     public class AddEditBrandsCommandValidator : AbstractValidator<AddEditBrandsCommand>
     {

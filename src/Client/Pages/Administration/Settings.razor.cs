@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -7,12 +7,12 @@ using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
 using MudBlazor.Extensions.Options;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.JsInterop;
+using Coworkee.Application.Configurations;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.JsInterop;
 
-namespace CleanArchitectureBase.Client.Pages.Administration;
+namespace Coworkee.Client.Pages.Administration;
 
 public partial class Settings
 {

@@ -1,17 +1,17 @@
-﻿using System.IO;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
+using System.IO;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
-using CleanArchitectureBase.Application.Hubs.Events;
+using Coworkee.Application;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
+using Coworkee.Application.Hubs.Events;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Identity
+namespace Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IAccountService), 3, ServiceLifetime = ServiceLifetime.Scoped)]
     public class AccountService : IAccountService

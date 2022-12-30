@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using System.Threading.Tasks;
+using Coworkee.Application.Features.Dashboards.Queries.GetData;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers
+namespace Coworkee.Server.Controllers
 {
     [ApiController]
     public class DashboardController : BaseApiController<DashboardController>

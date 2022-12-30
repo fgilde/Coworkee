@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Application.Contracts.Repositories
+namespace Coworkee.Application.Contracts.Repositories
 {
     public interface IProductRepository
     {

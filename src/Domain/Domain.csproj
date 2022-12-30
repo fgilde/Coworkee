@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>CleanArchitectureBase.Domain</RootNamespace>
-    <AssemblyName>CleanArchitectureBase.Domain</AssemblyName>
+    <RootNamespace>Coworkee.Domain</RootNamespace>
+    <AssemblyName>Coworkee.Domain</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Entities\Identity\" />

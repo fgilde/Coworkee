@@ -1,13 +1,13 @@
 using System;
 using FluentAssertions;
 using NUnit.Framework;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Configurations;
+using Coworkee.Domain.Contracts;
 using Nextended.Core.Extensions;
 using Nextended.Core.Helper;
 
-namespace CleanArchitectureBase.Application.UnitTests.Common.Models
+namespace Coworkee.Application.UnitTests.Common.Models
 {
     public class HashedIntTests
     {

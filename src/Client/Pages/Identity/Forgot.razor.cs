@@ -1,10 +1,10 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Client.Extensions;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class Forgot
     {

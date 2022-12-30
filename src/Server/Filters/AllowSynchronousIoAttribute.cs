@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace CleanArchitectureBase.Server.Filters;
+namespace Coworkee.Server.Filters;
 
 
 /// <summary>

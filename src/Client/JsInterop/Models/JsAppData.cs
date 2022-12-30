@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.Web;
 
-namespace CleanArchitectureBase.Client.JsInterop.Models;
+namespace Coworkee.Client.JsInterop.Models;
 
 public class JsAppData
 {

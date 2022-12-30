@@ -1,4 +1,4 @@
-namespace CleanArchitectureBase.SDK
+namespace Coworkee.SDK
 {
     public class ClientBase
     {

@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Client.JsInterop.Models;
+namespace Coworkee.Client.JsInterop.Models;
 
 public class BrowserDimension
 {

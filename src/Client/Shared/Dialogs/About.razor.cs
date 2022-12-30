@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace CleanArchitectureBase.Client.Shared.Dialogs
+namespace Coworkee.Client.Shared.Dialogs
 {
     public partial class About
     {

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Enums;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.ExportImport;
+namespace Coworkee.Application.Contracts.Services.ExportImport;
 
 public interface IExportService
 {

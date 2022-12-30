@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -13,20 +13,20 @@ using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Extensions;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Shared.Misc;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Requests;
+using Coworkee.Client.JsInterop;
+using Coworkee.Shared.Misc;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Extensions;
 using MudBlazor.Extensions.Options;
 using Nextended.Blazor.Extensions;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Shared.Dialogs;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Shared.Dialogs;
 using Nextended.Core;
 using BrowserFileExtensions = Nextended.Blazor.Extensions.BrowserFileExtensions;
 
-namespace CleanArchitectureBase.Client.Shared.Components;
+namespace Coworkee.Client.Shared.Components;
 
 public partial class UploadRequestEdit : IAsyncDisposable
 {

@@ -1,20 +1,20 @@
-﻿#nullable enable
+#nullable enable
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Enums;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Enums;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit
+namespace Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit
 {
     internal class AddEditExtendedAttributeCommandLocalization
     {

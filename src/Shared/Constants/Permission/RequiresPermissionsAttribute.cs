@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Shared.Constants.Permission
+namespace Coworkee.Shared.Constants.Permission
 {
     public class RequiresPermissionsAttribute: Attribute
     {

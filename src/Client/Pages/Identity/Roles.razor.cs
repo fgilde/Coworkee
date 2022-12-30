@@ -1,5 +1,5 @@
-﻿using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
@@ -8,15 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class Roles : IAsyncDisposable
     {

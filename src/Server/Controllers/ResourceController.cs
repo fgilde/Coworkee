@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Shared.Constants;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Shared.Constants;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Nextended.Core;
 using Nextended.Core.Helper;
 
 
-namespace CleanArchitectureBase.Server.Controllers
+namespace Coworkee.Server.Controllers
 {
     public class ResourceController : BaseApiController<ResourceController>
     {

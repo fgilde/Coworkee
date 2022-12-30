@@ -1,9 +1,9 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Microsoft.Extensions.Localization;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Configurations;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Configurations;
 
-namespace CleanArchitectureBase.Application.Validators.Requests.Identity
+namespace Coworkee.Application.Validators.Requests.Identity
 {
     public class UpdateProfileValidator : AbstractValidator<UserResponse>
     {

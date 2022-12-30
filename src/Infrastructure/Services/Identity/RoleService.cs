@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Infrastructure.Helpers;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Shared.Constants.Role;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Infrastructure.Helpers;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Shared.Constants.Role;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -10,14 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Shared.Constants.Permission;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Identity
+namespace Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IRoleService), 2)]
     public class RoleService : IRoleService

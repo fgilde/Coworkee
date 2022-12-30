@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using CleanArchitectureBase.Application.Common.Models;
+using Coworkee.Application.Common.Models;
 
-namespace CleanArchitectureBase.Client.Configuration.MudExObjectEdit.MetaConfigurations;
+namespace Coworkee.Client.Configuration.MudExObjectEdit.MetaConfigurations;
 
 public class BrandDtoMetaConfiguration : BaseDtoMetaConfiguration<BrandDto, int>
 {

@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Shared.Settings;
+using Coworkee.Shared.Settings;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Shared.Managers
+namespace Coworkee.Shared.Managers
 {
     public interface IPreferenceManager
     {

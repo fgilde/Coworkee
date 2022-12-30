@@ -1,9 +1,9 @@
-﻿using System.Text.Json;
-using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
-using CleanArchitectureBase.Application.Serialization.Options;
+using System.Text.Json;
+using Coworkee.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Serialization.Options;
 using Microsoft.Extensions.Options;
 
-namespace CleanArchitectureBase.Application.Serialization.Serializers
+namespace Coworkee.Application.Serialization.Serializers
 {
     public class SystemTextJsonSerializer : IJsonSerializer
     {

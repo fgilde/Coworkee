@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Infrastructure.Contexts;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Domain.Contracts;
+using Coworkee.Infrastructure.Contexts;
 using LazyCache;
 
-namespace CleanArchitectureBase.Infrastructure.Repositories
+namespace Coworkee.Infrastructure.Repositories
 {
     public class ExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> : IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> where TEntity : AuditableEntity<TEntityId>
     {

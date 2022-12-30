@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Domain.Enums
+namespace Coworkee.Domain.Enums
 {
     public enum EntityExtendedAttributeType : byte
     {

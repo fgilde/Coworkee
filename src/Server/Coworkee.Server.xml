@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>CleanArchitectureBase.Server</name>
+        <name>Coworkee.Server</name>
     </assembly>
     <members>
-        <member name="T:CleanArchitectureBase.Server.ApiVersions">
+        <member name="T:Coworkee.Server.ApiVersions">
             <summary>
             NOTICE*
             To create a new Version for example v3 you need to do 4 steps
@@ -14,18 +14,18 @@
              - In Angular Client app open app.module.ts and change API_BASE_URL to 'api/v3'
             </summary>
         </member>
-        <member name="T:CleanArchitectureBase.Server.Controllers.BaseApiController`1">
+        <member name="T:Coworkee.Server.Controllers.BaseApiController`1">
             <summary>
             Abstract BaseApi Controller Class
             </summary>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.BrandDto},System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.BrandsController.GetAll(Coworkee.Shared.TransferableExpression{Coworkee.Application.Common.Models.BrandDto},System.Threading.CancellationToken)">
             <summary>
             Get All Brands
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.GetById(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.BrandsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a Brand By Id
             </summary>
@@ -33,7 +33,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Post(CleanArchitectureBase.Application.Features.Brands.Commands.AddEdit.AddEditBrandsCommand,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.BrandsController.Post(Coworkee.Application.Features.Brands.Commands.AddEdit.AddEditBrandsCommand,System.Threading.CancellationToken)">
             <summary>
             Create/Update a Brand
             </summary>
@@ -41,7 +41,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Delete(System.String[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.BrandsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Delete a Brand
             </summary>
@@ -49,19 +49,19 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.BrandsController.Export(CleanArchitectureBase.Application.Features.Brands.Queries.Export.ExportBrandsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.BrandsController.Export(Coworkee.Application.Features.Brands.Queries.Export.ExportBrandsQuery,System.Threading.CancellationToken)">
             <summary>
             Exports brands
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetAll(CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.ProductsController.GetAll(Coworkee.Application.Features.Products.Queries.GetAllPaged.GetAllProductsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Products
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetProductImageAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.ProductsController.GetProductImageAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a Product Image by Id
             </summary>
@@ -69,7 +69,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.GetById(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.ProductsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a Product by Id
             </summary>
@@ -77,7 +77,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Post(CleanArchitectureBase.Application.Features.Products.Commands.AddEdit.AddEditProductsCommand,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.ProductsController.Post(Coworkee.Application.Features.Products.Commands.AddEdit.AddEditProductsCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit a Product
             </summary>
@@ -85,7 +85,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Delete(System.String[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.ProductsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Delete a Product
             </summary>
@@ -93,53 +93,53 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Catalog.ProductsController.Export(CleanArchitectureBase.Application.Features.Products.Queries.Export.ExportProductsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Catalog.ProductsController.Export(Coworkee.Application.Features.Products.Queries.Export.ExportProductsQuery,System.Threading.CancellationToken)">
             <summary>
             Exports products
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
             <summary>
             Get user wise chat history
             </summary>
             <param name="contactId"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.GetChatUsersAsync">
+        <member name="M:Coworkee.Server.Controllers.Communication.ChatsController.GetChatUsersAsync">
             <summary>
             get available users
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Communication.ChatsController.SaveMessageAsync(CleanArchitectureBase.Application.Common.Models.Chat.ChatHistory{CleanArchitectureBase.Application.Contracts.Chat.IChatUser})">
+        <member name="M:Coworkee.Server.Controllers.Communication.ChatsController.SaveMessageAsync(Coworkee.Application.Common.Models.Chat.ChatHistory{Coworkee.Application.Contracts.Chat.IChatUser})">
             <summary>
             Save Chat Message
             </summary>
             <param name="message"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.DashboardController.GetDataAsync">
+        <member name="M:Coworkee.Server.Controllers.DashboardController.GetDataAsync">
             <summary>
             Get the new ultimate Dashboard Data
             </summary>
             <returns>Status 200 OK </returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.ChangePassword(CleanArchitectureBase.Application.Requests.Identity.ChangePasswordRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.AccountController.ChangePassword(Coworkee.Application.Requests.Identity.ChangePasswordRequest)">
             <summary>
             Change Password
             </summary>
             <param name="model"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.GetProfilePictureAsync(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.AccountController.GetProfilePictureAsync(System.String)">
             <summary>
             Get Profile picture by Id
             </summary>
             <param name="userId"></param>
             <returns>Status 200 OK </returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.UpdateProfilePictureAsync(CleanArchitectureBase.Application.Requests.Identity.UpdateProfilePictureRequest,System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.AccountController.UpdateProfilePictureAsync(Coworkee.Application.Requests.Identity.UpdateProfilePictureRequest,System.String)">
             <summary>
             Update Profile Picture
             </summary>
@@ -147,154 +147,154 @@
             <param name="userId"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.AccountController.SetPreferredLanguage(CleanArchitectureBase.Application.Common.Models.LanguageDto)">
+        <member name="M:Coworkee.Server.Controllers.Identity.AccountController.SetPreferredLanguage(Coworkee.Application.Common.Models.LanguageDto)">
             <summary>
             SetPreferredLanguage
             </summary>
             <param name="language"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.RoleClaimResponse})">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleClaimController.GetAll(Coworkee.Shared.TransferableExpression{Coworkee.Application.Common.Models.Identity.RoleClaimResponse})">
             <summary>
             Get All Role Claims(e.g. Product Create Permission)
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.GetAllByRoleId(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleClaimController.GetAllByRoleId(System.String)">
             <summary>
             Get All Role Claims By Id
             </summary>
             <param name="roleId"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.Post(CleanArchitectureBase.Application.Requests.Identity.RoleClaimRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleClaimController.Post(Coworkee.Application.Requests.Identity.RoleClaimRequest)">
             <summary>
             Add a Role Claim
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK </returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleClaimController.Delete(System.Int32)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleClaimController.Delete(System.Int32)">
             <summary>
             Delete a Role Claim
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetPublicRoles">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleController.GetPublicRoles">
             <summary>
             Get All Roles (basic, admin etc.)
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.RoleDto})">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleController.GetAll(Coworkee.Shared.TransferableExpression{Coworkee.Application.Common.Models.Identity.RoleDto})">
             <summary>
             Get All Roles (basic, admin etc.)
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Post(CleanArchitectureBase.Application.Common.Models.Identity.RoleDto)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleController.Post(Coworkee.Application.Common.Models.Identity.RoleDto)">
             <summary>
             Add a Role
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Delete(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleController.Delete(System.String)">
             <summary>
             Delete a Role
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.GetPermissionsByRoleId(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleController.GetPermissionsByRoleId(System.String)">
             <summary>
             Get Permissions By Role Id
             </summary>
             <param name="roleId"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.RoleController.Update(CleanArchitectureBase.Application.Requests.Identity.PermissionRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.RoleController.Update(Coworkee.Application.Requests.Identity.PermissionRequest)">
             <summary>
             Edit a Role Claim
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.TokenController.RegenerateNew">
+        <member name="M:Coworkee.Server.Controllers.Identity.TokenController.RegenerateNew">
             <summary>
             Regenerates a new token.
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.TokenController.Get(CleanArchitectureBase.Application.Requests.Identity.TokenRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.TokenController.Get(Coworkee.Application.Requests.Identity.TokenRequest)">
             <summary>
             Get Token (Email, Password)
             </summary>
             <param name="model"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.TokenController.Refresh(CleanArchitectureBase.Application.Requests.Identity.RefreshTokenRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.TokenController.Refresh(Coworkee.Application.Requests.Identity.RefreshTokenRequest)">
             <summary>
             Refresh Token
             </summary>
             <param name="model"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.UpdateProfile(CleanArchitectureBase.Application.Common.Models.Identity.UserResponse)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.UpdateProfile(Coworkee.Application.Common.Models.Identity.UserResponse)">
             <summary>
             Update profile
             </summary>
             <param name="user"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.Delete(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.Delete(System.String,System.Threading.CancellationToken)">
             <summary>
             Deletes a user by id
             </summary>
             <param name="userId"></param>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.Identity.UserResponse})">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.GetAll(Coworkee.Shared.TransferableExpression{Coworkee.Application.Common.Models.Identity.UserResponse})">
             <summary>
             Get User Details
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.GetById(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.GetById(System.String)">
             <summary>
             Get User By Id
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.GetRolesAsync(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.GetRolesAsync(System.String)">
             <summary>
             Get User Roles By Id
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.GetMyRolesAsync">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.GetMyRolesAsync">
             <summary>
             Get Actual User Roles
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.UpdateRolesAsync(CleanArchitectureBase.Application.Requests.Identity.UpdateUserRolesRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.UpdateRolesAsync(Coworkee.Application.Requests.Identity.UpdateUserRolesRequest)">
             <summary>
             Update Roles for User
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.RegisterAsync(CleanArchitectureBase.Application.Requests.Identity.RegisterRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.RegisterAsync(Coworkee.Application.Requests.Identity.RegisterRequest)">
             <summary>
             Register a User
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.ConfirmEmailAsync(System.String,System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.ConfirmEmailAsync(System.String,System.String)">
             <summary>
             Confirm Email
             </summary>
@@ -302,47 +302,47 @@
             <param name="code"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.ToggleUserStatusAsync(CleanArchitectureBase.Application.Requests.Identity.ToggleUserStatusRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.ToggleUserStatusAsync(Coworkee.Application.Requests.Identity.ToggleUserStatusRequest)">
             <summary>
             Toggle User Status (Activate and Deactivate)
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.ForgotPasswordAsync(CleanArchitectureBase.Application.Requests.Identity.ForgotPasswordRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.ForgotPasswordAsync(Coworkee.Application.Requests.Identity.ForgotPasswordRequest)">
             <summary>
             Forgot Password
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.ResetPasswordAsync(CleanArchitectureBase.Application.Requests.Identity.ResetPasswordRequest)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.ResetPasswordAsync(Coworkee.Application.Requests.Identity.ResetPasswordRequest)">
             <summary>
             Reset Password
             </summary>
             <param name="request"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Identity.UserController.Export(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Identity.UserController.Export(System.String)">
             <summary>
             Export to Excel
             </summary>
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.GetAll(CleanArchitectureBase.Application.Features.Notifications.Queries.GetAllPaged.GetAllNotificationsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.GetAll(Coworkee.Application.Features.Notifications.Queries.GetAllPaged.GetAllNotificationsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Notifications
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.Unread(System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.Unread(System.Threading.CancellationToken)">
             <summary>
             Returns count of unread notifications
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.Delete(System.String[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Deletes given notifications if they are for current user
             </summary>
@@ -350,7 +350,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.DeleteAll(System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.DeleteAll(System.Threading.CancellationToken)">
             <summary>
             Deletes given notifications if they are for current user
             </summary>
@@ -358,7 +358,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.GetById(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets a Specific Notification by an Id
             </summary>
@@ -366,7 +366,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.MarkAllRead(System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.MarkAllRead(System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Marks all users notifications as read or unread
             </summary>
@@ -375,7 +375,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Notifications.NotificationsController.MarkRead(System.String,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Notifications.NotificationsController.MarkRead(System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Marks a notification as read or unread
             </summary>
@@ -384,7 +384,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.LanguageController.Post(CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit.AddEditLanguagesCommand,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.LanguageController.Post(Coworkee.Application.Features.Translations.Commands.AddEdit.AddEditLanguagesCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit languages
             </summary>
@@ -392,25 +392,25 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.LanguageController.GetAll(CleanArchitectureBase.Shared.TransferableExpression{CleanArchitectureBase.Application.Common.Models.LanguageDto},System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.LanguageController.GetAll(Coworkee.Shared.TransferableExpression{Coworkee.Application.Common.Models.LanguageDto},System.Threading.CancellationToken)">
             <summary>
             Get All Languages
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAllPaged(CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged.GetAllTranslationsPagedQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.GetAllPaged(Coworkee.Application.Features.Translations.Queries.GetAllPaged.GetAllTranslationsPagedQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Translations
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetAll(CleanArchitectureBase.Application.Features.Translations.Queries.GetAll.GetAllTranslationsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.GetAll(Coworkee.Application.Features.Translations.Queries.GetAll.GetAllTranslationsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Translations
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.GetById(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get a translation by id
             </summary>
@@ -418,7 +418,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Post(CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit.AddEditTranslationsCommand,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.Post(Coworkee.Application.Features.Translations.Commands.AddEdit.AddEditTranslationsCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit one or more Translations
             </summary>
@@ -426,7 +426,7 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Delete(System.Int32[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.Delete(System.Int32[],System.Threading.CancellationToken)">
             <summary>
             Delete a Translations with given ids
             </summary>
@@ -434,13 +434,13 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Export(CleanArchitectureBase.Application.Features.Translations.Export.ExportTranslationsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.Export(Coworkee.Application.Features.Translations.Export.ExportTranslationsQuery,System.Threading.CancellationToken)">
             <summary>
             Exports products
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.ImportFile(Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.ImportFile(Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
             <summary>
             Imports translations from file
             </summary>
@@ -448,7 +448,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Translations.TranslationsController.Import(CleanArchitectureBase.Application.Features.Translations.Import.ImportTranslationsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Translations.TranslationsController.Import(Coworkee.Application.Features.Translations.Import.ImportTranslationsQuery,System.Threading.CancellationToken)">
             <summary>
             Imports translations from byte array
             </summary>
@@ -456,58 +456,58 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.String[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync(System.String[],System.Threading.CancellationToken)">
             <summary>
             Get Current User Audit Trails
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.AuditsController.Export(CleanArchitectureBase.Application.Contracts.Enums.ExportServiceType,System.String[],System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.AuditsController.Export(Coworkee.Application.Contracts.Enums.ExportServiceType,System.String[],System.String,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Exports products
             </summary>
             <returns></returns>
         </member>
-        <member name="T:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4">
+        <member name="T:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4">
             <summary>
             Abstract Extended Attributes Controller Class
             </summary>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAll">
+        <member name="M:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAll">
             <summary>
             Get All Entity Extended Attributes
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAllByEntityId(`1)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAllByEntityId(`1)">
             <summary>
             Get All Entity Extended Attributes by entity id
             </summary>
             <param name="entityId"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetById(`0)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetById(`0)">
             <summary>
             Get Entity Extended Attribute By Id
             </summary>
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Post(CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit.AddEditExtendedAttributeCommand{`0,`1,`2,`3})">
+        <member name="M:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Post(Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit.AddEditExtendedAttributeCommand{`0,`1,`2,`3})">
             <summary>
             Create/Update a Entity Extended Attribute
             </summary>
             <param name="command"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Delete(`0)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Delete(`0)">
             <summary>
             Delete a Entity Extended Attribute
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Export(System.String,`1,System.Boolean,System.Boolean,System.String)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Export(System.String,`1,System.Boolean,System.Boolean,System.String)">
             <summary>
             Search Entity Extended Attribute and Export to Excel
             </summary>
@@ -518,13 +518,13 @@
             <param name="currentGroup"></param>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(CleanArchitectureBase.Application.Features.Documents.Queries.GetAll.GetAllDocumentsQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(Coworkee.Application.Features.Documents.Queries.GetAll.GetAllDocumentsQuery,System.Threading.CancellationToken)">
             <summary>
             Get All Documents
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.String,System.Threading.CancellationToken)">
             <summary>
             Get Document By Id
             </summary>
@@ -532,7 +532,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Post(CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit.AddEditDocumentsCommand,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.Post(Coworkee.Application.Features.Documents.Commands.AddEdit.AddEditDocumentsCommand,System.Threading.CancellationToken)">
             <summary>
             Add/Edit Document
             </summary>
@@ -540,7 +540,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.String[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.String[],System.Threading.CancellationToken)">
             <summary>
             Delete a Document
             </summary>
@@ -548,19 +548,19 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentsController.GetMimeType(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.GetMimeType(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the Mimetype for given url
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll(System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll(System.Threading.CancellationToken)">
             <summary>
             Get All Document Types
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.GetById(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentTypesController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get Document Type By Id
             </summary>
@@ -568,7 +568,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypesCommand,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(Coworkee.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypesCommand,System.Threading.CancellationToken)">
             <summary>
             Create/Update a Document Type
             </summary>
@@ -576,7 +576,7 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32[],System.Threading.CancellationToken)">
             <summary>
             Delete a Document Type
             </summary>
@@ -584,23 +584,23 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export.ExportDocumentTypesQuery,System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(Coworkee.Application.Features.DocumentTypes.Queries.Export.ExportDocumentTypesQuery,System.Threading.CancellationToken)">
             <summary>
             Exports Document Types
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Controllers.Utilities.PreferencesController.ChangeLanguageAsync(System.String)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.PreferencesController.ChangeLanguageAsync(System.String)">
             <summary>
             Change Language Preference
             </summary>
             <param name="languageCode"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:CleanArchitectureBase.Server.CustomTypeNameGenerator.Generate(NJsonSchema.JsonSchema,System.String,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Coworkee.Server.CustomTypeNameGenerator.Generate(NJsonSchema.JsonSchema,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <inheritdoc />
         </member>
-        <member name="T:CleanArchitectureBase.Server.Filters.AllowSynchronousIoAttribute">
+        <member name="T:Coworkee.Server.Filters.AllowSynchronousIoAttribute">
              <summary>
              Use this attribute to enable Synchronous IO on a per-request basis:
              
@@ -617,146 +617,146 @@
              basis using the IHttpBodyControlFeature.AllowSynchronousIO option
              </summary>
         </member>
-        <member name="M:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.#ctor">
+        <member name="M:Coworkee.Server.Filters.CustomAuthorizeAttribute.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute"/> class. 
+            Initializes a new instance of the <see cref="T:Coworkee.Server.Filters.CustomAuthorizeAttribute"/> class. 
             </summary>
         </member>
-        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.RoleMatch">
+        <member name="P:Coworkee.Server.Filters.CustomAuthorizeAttribute.RoleMatch">
             <summary>
             If more than one role is set you can specify if you need all ore one to get access
             </summary>
         </member>
-        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.PolicyMatch">
+        <member name="P:Coworkee.Server.Filters.CustomAuthorizeAttribute.PolicyMatch">
             <summary>
             If more than one policy is set you can specify if you need all ore one to get access
             </summary>
         </member>
-        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.Roles">
+        <member name="P:Coworkee.Server.Filters.CustomAuthorizeAttribute.Roles">
             <summary>
             Gets or sets a comma delimited list of roles that are allowed to access the resource.
             </summary>
         </member>
-        <member name="P:CleanArchitectureBase.Server.Filters.CustomAuthorizeAttribute.Policies">
+        <member name="P:Coworkee.Server.Filters.CustomAuthorizeAttribute.Policies">
             <summary>
             Gets or sets the policy name or a a comma delimited list of that determines access to the resource.
             </summary>
         </member>
-        <member name="T:CleanArchitectureBase.Data.MainReflection">
+        <member name="T:Coworkee.Data.MainReflection">
             <summary>Holder for reflection information generated from gRPC/Main.proto</summary>
         </member>
-        <member name="P:CleanArchitectureBase.Data.MainReflection.Descriptor">
+        <member name="P:Coworkee.Data.MainReflection.Descriptor">
             <summary>File descriptor for gRPC/Main.proto</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardChartSeries.NameFieldNumber">
+        <member name="F:Coworkee.Data.DashboardChartSeries.NameFieldNumber">
             <summary>Field number for the "name" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardChartSeries.DataFieldNumber">
+        <member name="F:Coworkee.Data.DashboardChartSeries.DataFieldNumber">
             <summary>Field number for the "data" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.ProductCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.ProductCountFieldNumber">
             <summary>Field number for the "productCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.BrandCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.BrandCountFieldNumber">
             <summary>Field number for the "brandCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.DocumentCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.DocumentCountFieldNumber">
             <summary>Field number for the "documentCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.DocumentTypeCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.DocumentTypeCountFieldNumber">
             <summary>Field number for the "DocumentTypeCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.DocumentExtendedAttributeCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.DocumentExtendedAttributeCountFieldNumber">
             <summary>Field number for the "documentExtendedAttributeCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.UserCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.UserCountFieldNumber">
             <summary>Field number for the "userCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.RoleCountFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.RoleCountFieldNumber">
             <summary>Field number for the "roleCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.DataEnterBarChartFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.DataEnterBarChartFieldNumber">
             <summary>Field number for the "dataEnterBarChart" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.DashboardReply.ProductByBrandTypePieChartFieldNumber">
+        <member name="F:Coworkee.Data.DashboardReply.ProductByBrandTypePieChartFieldNumber">
             <summary>Field number for the "productByBrandTypePieChart" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.ProductsRequest.ModifiedSinceFieldNumber">
+        <member name="F:Coworkee.Data.ProductsRequest.ModifiedSinceFieldNumber">
             <summary>Field number for the "modifiedSince" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.ProductsRequest.MaxCountFieldNumber">
+        <member name="F:Coworkee.Data.ProductsRequest.MaxCountFieldNumber">
             <summary>Field number for the "maxCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.ProductsReply.ProductsFieldNumber">
+        <member name="F:Coworkee.Data.ProductsReply.ProductsFieldNumber">
             <summary>Field number for the "products" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.ProductsReply.ModifiedCountFieldNumber">
+        <member name="F:Coworkee.Data.ProductsReply.ModifiedCountFieldNumber">
             <summary>Field number for the "modifiedCount" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.IdFieldNumber">
+        <member name="F:Coworkee.Data.Product.IdFieldNumber">
             <summary>Field number for the "id" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.ModifiedTicksFieldNumber">
+        <member name="F:Coworkee.Data.Product.ModifiedTicksFieldNumber">
             <summary>Field number for the "modifiedTicks" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.CategoryFieldNumber">
+        <member name="F:Coworkee.Data.Product.CategoryFieldNumber">
             <summary>Field number for the "category" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.SubcategoryFieldNumber">
+        <member name="F:Coworkee.Data.Product.SubcategoryFieldNumber">
             <summary>Field number for the "subcategory" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.NameFieldNumber">
+        <member name="F:Coworkee.Data.Product.NameFieldNumber">
             <summary>Field number for the "name" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.LocationFieldNumber">
+        <member name="F:Coworkee.Data.Product.LocationFieldNumber">
             <summary>Field number for the "location" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.ImageFieldNumber">
+        <member name="F:Coworkee.Data.Product.ImageFieldNumber">
             <summary>Field number for the "image" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.BrandFieldNumber">
+        <member name="F:Coworkee.Data.Product.BrandFieldNumber">
             <summary>Field number for the "brand" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.TargetUrlFieldNumber">
+        <member name="F:Coworkee.Data.Product.TargetUrlFieldNumber">
             <summary>Field number for the "targetUrl" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.ThumbnailFieldNumber">
+        <member name="F:Coworkee.Data.Product.ThumbnailFieldNumber">
             <summary>Field number for the "thumbnail" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.Product_FieldNumber">
+        <member name="F:Coworkee.Data.Product.Product_FieldNumber">
             <summary>Field number for the "product" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.SalePercentageFieldNumber">
+        <member name="F:Coworkee.Data.Product.SalePercentageFieldNumber">
             <summary>Field number for the "salePercentage" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.PriceFieldNumber">
+        <member name="F:Coworkee.Data.Product.PriceFieldNumber">
             <summary>Field number for the "price" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.SalePriceFieldNumber">
+        <member name="F:Coworkee.Data.Product.SalePriceFieldNumber">
             <summary>Field number for the "salePrice" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.ShopFieldNumber">
+        <member name="F:Coworkee.Data.Product.ShopFieldNumber">
             <summary>Field number for the "shop" field.</summary>
         </member>
-        <member name="F:CleanArchitectureBase.Data.Product.DateCreatedFieldNumber">
+        <member name="F:Coworkee.Data.Product.DateCreatedFieldNumber">
             <summary>Field number for the "dateCreated" field.</summary>
         </member>
-        <member name="P:CleanArchitectureBase.Data.Product.DateCreated">
+        <member name="P:Coworkee.Data.Product.DateCreated">
              <summary>
             int64 dateUpdated = 17;
              </summary>
         </member>
-        <member name="P:CleanArchitectureBase.Data.CleanArchitectureBaseData.Descriptor">
+        <member name="P:Coworkee.Data.CoworkeeData.Descriptor">
             <summary>Service descriptor</summary>
         </member>
-        <member name="T:CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataBase">
-            <summary>Base class for server-side implementations of CleanArchitectureBaseData</summary>
+        <member name="T:Coworkee.Data.CoworkeeData.CoworkeeDataBase">
+            <summary>Base class for server-side implementations of CoworkeeData</summary>
         </member>
-        <member name="M:CleanArchitectureBase.Data.CleanArchitectureBaseData.BindService(CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataBase)">
+        <member name="M:Coworkee.Data.CoworkeeData.BindService(Coworkee.Data.CoworkeeData.CoworkeeDataBase)">
             <summary>Creates service definition that can be registered with a server</summary>
             <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
-        <member name="M:CleanArchitectureBase.Data.CleanArchitectureBaseData.BindService(Grpc.Core.ServiceBinderBase,CleanArchitectureBase.Data.CleanArchitectureBaseData.CleanArchitectureBaseDataBase)">
+        <member name="M:Coworkee.Data.CoworkeeData.BindService(Grpc.Core.ServiceBinderBase,Coworkee.Data.CoworkeeData.CoworkeeDataBase)">
             <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
             Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
             <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>

@@ -1,19 +1,19 @@
-﻿using System;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using System;
+using Coworkee.Domain.Entities.Catalog;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.Products.Commands.AddEdit
+namespace Coworkee.Application.Features.Products.Commands.AddEdit
 {
     [CustomAuthorize(Policies = new[] { Permissions.Products.Create, Permissions.Products.Edit }, PolicyMatch = PolicyMatch.Any)]
     public class AddEditProductsCommand : AddEditCommandBase<ProductDto>

@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Client.Enums
+namespace Coworkee.Client.Enums
 {
     public enum MenuTogglePosition
     {

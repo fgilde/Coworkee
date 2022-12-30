@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using Microsoft.Rest.Azure.OData;
 
-namespace CleanArchitectureBase.Shared;
+namespace Coworkee.Shared;
 
 public class TransferableExpression<T>
 {

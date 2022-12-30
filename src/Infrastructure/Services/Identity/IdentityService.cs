@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Configurations;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,22 +14,22 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Domain.Entities.Identity;
-using CleanArchitectureBase.Infrastructure.Extensions;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Domain.Entities.Identity;
+using Coworkee.Infrastructure.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Identity
+namespace Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(ITokenService), 1, RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Transient)]
     public class IdentityService : ITokenService

@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Client.Enums;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Models;
-using CleanArchitectureBase.Client.Models.Navigation;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Client.Enums;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Models;
+using Coworkee.Client.Models.Navigation;
 using Microsoft.AspNetCore.Components;
 using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 
-namespace CleanArchitectureBase.Client.Shared
+namespace Coworkee.Client.Shared
 {
     public partial class NavMenu
     {

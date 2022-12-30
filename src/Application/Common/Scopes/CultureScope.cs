@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using AKSoftware.Localization.MultiLanguages;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Application.Common.Scopes;
+namespace Coworkee.Application.Common.Scopes;
 
 public class CultureScope : IDisposable
 {

@@ -1,10 +1,10 @@
-﻿using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Contracts.Serialization.Serializers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CleanArchitectureBase.Infrastructure.Extensions
+namespace Coworkee.Infrastructure.Extensions
 {
     public static class ValueConversionExtensions
     {

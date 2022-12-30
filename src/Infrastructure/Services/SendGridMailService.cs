@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Requests.Mail;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Requests.Mail;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAsIfConfigValueIsNotEmpty(typeof(IMailService), new[] { nameof(Mailconfiguration), nameof(Mailconfiguration.SendGridApiKey) })]
     public class SendGridMailService : IMailService

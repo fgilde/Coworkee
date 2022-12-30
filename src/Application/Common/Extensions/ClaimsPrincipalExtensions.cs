@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Security.Claims;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Security;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Role;
 
-namespace CleanArchitectureBase.Application.Common.Extensions
+namespace Coworkee.Application.Common.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {

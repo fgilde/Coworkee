@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using LazyCache;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Shared;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Shared;
 
-namespace CleanArchitectureBase.Application.Features.Base.Queries
+namespace Coworkee.Application.Features.Base.Queries
 {
     public class GetAllQueryBase<TDto> : IRequest<IReadOnlyCollection<TDto>>
         where TDto : IDtoBase

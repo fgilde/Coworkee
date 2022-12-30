@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.JsInterop.Models;
+using Coworkee.Application.Common.Models;
+using Coworkee.Client.JsInterop;
+using Coworkee.Client.JsInterop.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -10,7 +10,7 @@ using MudBlazor.Extensions;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Options;
 
-namespace CleanArchitectureBase.Client.Extensions;
+namespace Coworkee.Client.Extensions;
 
 public static class DialogServiceExtensions
 {

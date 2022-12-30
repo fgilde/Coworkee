@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Domain.Entities.Localization;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Domain.Entities.Localization;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Permission;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit
+namespace Coworkee.Application.Features.Translations.Commands.AddEdit
 {
     [CustomAuthorize(Policies = new[] { Permissions.Translations.Create, Permissions.Translations.Edit }, PolicyMatch = PolicyMatch.Any)]
     public class AddEditTranslationsCommand : AddEditCommandBase<TranslationDto>

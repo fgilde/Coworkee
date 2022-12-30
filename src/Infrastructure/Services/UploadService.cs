@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using CleanArchitectureBase.Application.Requests;
+using System.Collections.Generic;
+using Coworkee.Application.Requests;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
 using Nextended.Core.Helper;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IUploadService), 7)]
     public class UploadService : IUploadService

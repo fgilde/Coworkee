@@ -1,6 +1,6 @@
 using System;
 
-namespace CleanArchitectureBase.Application.Common.Exceptions
+namespace Coworkee.Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {

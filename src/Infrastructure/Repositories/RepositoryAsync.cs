@@ -1,14 +1,14 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Infrastructure.Contexts;
+using Coworkee.Domain.Contracts;
+using Coworkee.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Exceptions;
-using CleanArchitectureBase.Application.Contracts.Repositories;
+using Coworkee.Application.Common.Exceptions;
+using Coworkee.Application.Contracts.Repositories;
 
-namespace CleanArchitectureBase.Infrastructure.Repositories
+namespace Coworkee.Infrastructure.Repositories
 {
     public class RepositoryAsync<T, TId> : IRepositoryAsync<T, TId> where T : AuditableEntity<TId>
     {

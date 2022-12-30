@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.SDK;
+using Coworkee.Shared.Constants.Application;
 using Nextended.Core.Extensions;
 
 namespace SDK

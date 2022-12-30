@@ -1,6 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 
-namespace CleanArchitectureBase.Shared.Constants
+namespace Coworkee.Shared.Constants
 {
     [ExcludeFromCodeCoverage]
     public class CustomIcons

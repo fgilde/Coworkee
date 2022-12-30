@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Hubs.Events.Base;
+using Coworkee.Application.Hubs.Events.Base;
 using Microsoft.AspNetCore.SignalR.Client;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Application;
 
-namespace CleanArchitectureBase.Client.Extensions
+namespace Coworkee.Client.Extensions
 {
     public static class HubExtensions
     {

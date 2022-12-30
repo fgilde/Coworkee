@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Entities.Catalog;
 
-namespace CleanArchitectureBase.Infrastructure.Repositories
+namespace Coworkee.Infrastructure.Repositories
 {
     public class BrandRepository : IBrandRepository
     {

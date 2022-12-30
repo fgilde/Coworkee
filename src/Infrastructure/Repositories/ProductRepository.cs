@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Domain.Entities.Catalog;
+using Coworkee.Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Repositories;
 
-namespace CleanArchitectureBase.Infrastructure.Repositories
+namespace Coworkee.Infrastructure.Repositories
 {
     public class ProductRepository : IProductRepository
     {

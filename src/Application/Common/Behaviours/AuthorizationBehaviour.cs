@@ -1,10 +1,10 @@
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Security;
+using Coworkee.Application.Common.Security;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Common.Behaviours
+namespace Coworkee.Application.Common.Behaviours
 {
     public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

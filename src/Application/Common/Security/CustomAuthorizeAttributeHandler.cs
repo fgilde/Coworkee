@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services;
 
-namespace CleanArchitectureBase.Application.Common.Security
+namespace Coworkee.Application.Common.Security
 {
     public class CustomAuthorizeAttributeHandler: ICustomAuthorizeAttributeHandler
     {

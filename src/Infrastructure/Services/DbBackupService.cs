@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Infrastructure.Contexts;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Infrastructure.Contexts;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IDbBackupService))]
     public class DbBackupService : IDbBackupService

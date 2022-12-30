@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using CleanArchitectureBase.Application.Contracts.Serialization.Options;
+using System.Text.Json;
+using Coworkee.Application.Contracts.Serialization.Options;
 
-namespace CleanArchitectureBase.Application.Serialization.Options
+namespace Coworkee.Application.Serialization.Options
 {
     public class SystemTextJsonOptions : IJsonSerializerOptions
     {

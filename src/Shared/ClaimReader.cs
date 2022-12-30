@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace CleanArchitectureBase.Shared;
+namespace Coworkee.Shared;
 
 public static class ClaimReader
 {

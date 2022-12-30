@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Hubs.Events.Base
+namespace Coworkee.Application.Hubs.Events.Base
 {
     public abstract class ClientEventBase
     {

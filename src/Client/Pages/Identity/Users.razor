@@ -1,5 +1,5 @@
-﻿@page "/identity/users"
-@using CleanArchitectureBase.Application.Common.Models.Identity
+@page "/identity/users"
+@using Coworkee.Application.Common.Models.Identity
 @using System.Globalization
 @attribute [Authorize(Policy = Permissions.Users.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Users> _localizer

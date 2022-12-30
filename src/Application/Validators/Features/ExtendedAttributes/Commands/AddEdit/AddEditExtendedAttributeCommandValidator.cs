@@ -1,11 +1,11 @@
-﻿using System;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Enums;
+using System;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Enums;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit
+namespace Coworkee.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit
 {
     public class AddEditExtendedAttributeCommandValidatorLocalization
     {

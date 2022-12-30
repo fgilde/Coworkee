@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Client.ErrorHandling
+namespace Coworkee.Client.ErrorHandling
 {
     public interface IErrorHandler
     {

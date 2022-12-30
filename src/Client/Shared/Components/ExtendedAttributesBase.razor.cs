@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.Managers.ExtendedAttribute;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Enums;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.JsInterop;
+using Coworkee.Client.Managers.ExtendedAttribute;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Enums;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -21,7 +21,7 @@ using MudBlazor;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 
-namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public class ExtendedAttributesLocalization
     {

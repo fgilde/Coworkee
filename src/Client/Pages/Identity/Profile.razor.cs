@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Constants.Storage;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Storage;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class Profile : IAsyncDisposable
     {

@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Contracts.Services.Identity;
 using Microsoft.AspNetCore.SignalR;
 
-namespace CleanArchitectureBase.Application.Hubs
+namespace Coworkee.Application.Hubs
 {
     public abstract class HubBase<T> : Hub<T> 
         where T : class

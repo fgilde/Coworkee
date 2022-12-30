@@ -1,21 +1,21 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Shared;
+using Coworkee.Shared;
 
-namespace CleanArchitectureBase.Application.Features.Base.Queries
+namespace Coworkee.Application.Features.Base.Queries
 {
     public class GetAllPagedQueryBase<TDto> : IRequest<PaginatedResult<TDto>>
         where TDto : IDtoBase

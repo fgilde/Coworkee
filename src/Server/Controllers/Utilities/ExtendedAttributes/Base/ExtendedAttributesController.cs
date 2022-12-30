@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.Delete;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetById;
-using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.Delete;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetById;
+using Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base
+namespace Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base
 {
     /// <summary>
     /// Abstract Extended Attributes Controller Class

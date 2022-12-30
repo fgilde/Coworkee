@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Client.Managers.Theme;
-using CleanArchitectureBase.SDK;
+using Coworkee.Client.JsInterop;
+using Coworkee.Client.Managers.Theme;
+using Coworkee.SDK;
 using Microsoft.JSInterop;
 
-namespace CleanArchitectureBase.Client.Theming
+namespace Coworkee.Client.Theming
 {
     public class ThemeManager: IThemeManager
     {

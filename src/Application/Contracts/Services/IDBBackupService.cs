@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Application.Contracts.Services;
+namespace Coworkee.Application.Contracts.Services;
 
 public interface IDbBackupService
 {

@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.Delete;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetById;
-using CleanArchitectureBase.Server.Filters;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.DocumentTypes.Commands.AddEdit;
+using Coworkee.Application.Features.DocumentTypes.Commands.Delete;
+using Coworkee.Application.Features.DocumentTypes.Queries.Export;
+using Coworkee.Application.Features.DocumentTypes.Queries.GetAll;
+using Coworkee.Application.Features.DocumentTypes.Queries.GetById;
+using Coworkee.Server.Filters;
+using Coworkee.Shared.Constants.Permission;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
+namespace Coworkee.Server.Controllers.Utilities.Misc
 {
     [ApiController]
     public class DocumentTypesController : BaseApiController<DocumentTypesController>

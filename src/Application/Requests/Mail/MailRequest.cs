@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Requests.Mail
+namespace Coworkee.Application.Requests.Mail
 {
     public class MailRequest
     {

@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Exceptions;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Exceptions;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitectureBase.Application.Common.Extensions
+namespace Coworkee.Application.Common.Extensions
 {
     public static class QueryableExtensions
     {

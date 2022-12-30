@@ -1,7 +1,7 @@
-﻿using System;
-using CleanArchitectureBase.Application.Requests;
+using System;
+using Coworkee.Application.Requests;
 
-namespace CleanArchitectureBase.Application.Common.Models
+namespace Coworkee.Application.Common.Models
 {
     public class DocumentDto: HashableDtoBase
     {

@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using CleanArchitectureBase.Application.Contracts.Hubs;
-using CleanArchitectureBase.Application.Hubs;
+using Coworkee.Application.Contracts.Hubs;
+using Coworkee.Application.Hubs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Shared;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Configurations;
+using Coworkee.Shared;
 
-namespace CleanArchitectureBase.Server.Controllers
+namespace Coworkee.Server.Controllers
 {
     /// <summary>
     /// Abstract BaseApi Controller Class

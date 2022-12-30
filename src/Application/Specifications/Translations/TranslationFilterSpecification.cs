@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Entities.Localization;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Entities.Localization;
 
-namespace CleanArchitectureBase.Application.Specifications.Translations
+namespace Coworkee.Application.Specifications.Translations
 {
     public class TranslationFilterSpecification : SpecificationBase<Translation>
     {

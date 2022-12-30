@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
-using CleanArchitectureBase.Application.Serialization.Settings;
+using Coworkee.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Serialization.Settings;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace CleanArchitectureBase.Application.Serialization.Serializers
+namespace Coworkee.Application.Serialization.Serializers
 {
     public class NewtonSoftJsonSerializer : IJsonSerializer
     {

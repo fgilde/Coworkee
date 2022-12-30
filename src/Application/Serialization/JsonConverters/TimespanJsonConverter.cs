@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace CleanArchitectureBase.Application.Serialization.JsonConverters
+namespace Coworkee.Application.Serialization.JsonConverters
 {
     /// <summary>
     /// The new Json.NET doesn't support Timespan at this time

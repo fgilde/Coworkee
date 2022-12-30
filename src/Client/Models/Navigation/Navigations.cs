@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Constants.Role;
+using System.Collections.Generic;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Constants.Role;
 using MudBlazor;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Models.Navigation
+namespace Coworkee.Client.Models.Navigation
 {
     public static class Navigations
     {

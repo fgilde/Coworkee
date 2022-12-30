@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Shared.Constants.Permission;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Features.DocumentTypes.Commands.Delete
+namespace Coworkee.Application.Features.DocumentTypes.Commands.Delete
 {
     [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Delete })]
     public class DeleteDocumentTypesCommand : DeleteCommandBase<int>

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Shared.Misc;
+namespace Coworkee.Shared.Misc;
 
 public class DataUrl
 {

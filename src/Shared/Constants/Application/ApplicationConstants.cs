@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Linq;
-using CleanArchitectureBase.Shared.Constants.Role;
-using CleanArchitectureBase.Shared.Models;
+using Coworkee.Shared.Constants.Role;
+using Coworkee.Shared.Models;
 
-namespace CleanArchitectureBase.Shared.Constants.Application
+namespace Coworkee.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {
-        public const string ApplicationName = "CleanArchitectureBase";
+        public const string ApplicationName = "Coworkee";
         public static string ApplicationClientName = $"{ApplicationName}Client";
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string DefaultLanguageCode = "en-US";

@@ -1,14 +1,14 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using System;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Domain.Entities.Catalog;
 using MediatR;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Products.Commands.Delete
+namespace Coworkee.Application.Features.Products.Commands.Delete
 {
     [CustomAuthorize(Policies = new[] { Permissions.Products.Delete })]
     public class DeleteProductCommand : DeleteCommandBase<int>

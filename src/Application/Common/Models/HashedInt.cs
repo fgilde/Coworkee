@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Linq;
 using HashidsNet;
 using Nextended.Core.Helper;
 
-namespace CleanArchitectureBase.Application.Common.Models;
+namespace Coworkee.Application.Common.Models;
 
 public class HashedInt
 {
-    private static string _salt = "CleanArchitectureBase-Salt-E51FCEAC-B99F-462E-8D35-8F087033447C";
+    private static string _salt = "Coworkee-Salt-E51FCEAC-B99F-462E-8D35-8F087033447C";
     private static int _hashMinLength = 10;
     private static bool _allowWithExplicitId;
 

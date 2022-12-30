@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using System.Linq;
-using CleanArchitectureBase.Domain.Entities.Misc;
+using Coworkee.Domain.Entities.Misc;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Commands;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Commands;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Permission;
 using LazyCache;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitectureBase.Application.Features.Documents.Commands.Delete
+namespace Coworkee.Application.Features.Documents.Commands.Delete
 {
     [CustomAuthorize(Policies = new[] { Permissions.Documents.Delete })]
     public class DeleteDocumentsCommand : DeleteCommandBase<int>

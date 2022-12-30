@@ -1,8 +1,8 @@
-﻿@page "/identity/user-roles/{Id}"
+@page "/identity/user-roles/{Id}"
 @attribute [Authorize(Policy = Permissions.Roles.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserRoles> _localizer
 @using Microsoft.AspNetCore.Components
-@using CleanArchitectureBase.Application.Common.Models.Identity
+@using Coworkee.Application.Common.Models.Identity
 
 <ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@Title" Description="@Description" />

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.Storage.Provider
+namespace Coworkee.Application.Contracts.Services.Storage.Provider
 {
     public interface IStorageProvider
     {

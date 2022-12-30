@@ -1,9 +1,9 @@
-﻿using System;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Contracts;
+using System;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Application.Specifications.ExtendedAttribute
+namespace Coworkee.Application.Specifications.ExtendedAttribute
 {
     public class ExtendedAttributeFilterSpecification<TId, TEntityId, TEntity, TExtendedAttribute>
         : SpecificationBase<TExtendedAttribute>

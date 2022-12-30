@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Security.Claims;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Shared.Constants.Storage;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Shared.Constants.Storage;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public partial class UserCard : IAsyncDisposable
     {

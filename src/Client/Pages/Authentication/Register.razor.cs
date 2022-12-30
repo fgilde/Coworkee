@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components.Web;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Client.Shared.Components;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Client.Shared.Components;
+using Coworkee.Shared.Constants.Application;
 
-namespace CleanArchitectureBase.Client.Pages.Authentication
+namespace Coworkee.Client.Pages.Authentication
 {
     public partial class Register
     {

@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Common.Models
+namespace Coworkee.Application.Common.Models
 {
     public class DocumentTypeDto: DtoBase<int>
     {

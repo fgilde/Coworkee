@@ -11,11 +11,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Infrastructure.Contexts;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Infrastructure.Services.Identity;
-using CleanArchitectureBase.Server;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Infrastructure.Services.Identity;
+using Coworkee.Server;
 using Respawn.Graph;
 
 [SetUpFixture]
@@ -42,7 +42,7 @@ public class Testing
 
         services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
             w.EnvironmentName == "Development" &&
-            w.ApplicationName == "CleanArchitectureBase.WebAPI"));
+            w.ApplicationName == "Coworkee.WebAPI"));
 
         services.AddLogging();
 

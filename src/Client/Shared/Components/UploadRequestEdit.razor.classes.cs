@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -7,7 +7,7 @@ using HeyRed.Mime;
 using Microsoft.AspNetCore.Components.Forms;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Shared.Components;
+namespace Coworkee.Client.Shared.Components;
 
 public enum SelectItemsMode
 {

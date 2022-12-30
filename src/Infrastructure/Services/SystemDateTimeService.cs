@@ -1,8 +1,8 @@
-﻿using System;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
+using System;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IDateTimeService))]
     public class SystemDateTimeService : IDateTimeService

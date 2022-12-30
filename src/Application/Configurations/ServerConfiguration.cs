@@ -1,5 +1,5 @@
-﻿
-namespace CleanArchitectureBase.Application.Configurations
+
+namespace Coworkee.Application.Configurations
 {
     public class ServerConfiguration : Rootobject
     {

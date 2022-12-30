@@ -1,8 +1,8 @@
-﻿using System;
-using CleanArchitectureBase.Domain.Contracts;
+using System;
+using Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitectureBase.Infrastructure.Models.Identity
+namespace Coworkee.Infrastructure.Models.Identity
 {
     public class ApplicationRoleClaim : IdentityRoleClaim<string>, IAuditableEntity<int>
     {

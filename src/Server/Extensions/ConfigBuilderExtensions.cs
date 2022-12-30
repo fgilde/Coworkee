@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Configuration;
 
-namespace CleanArchitectureBase.Server.Extensions
+namespace Coworkee.Server.Extensions
 {
     public static class ConfigBuilderExtensions
     {

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Application.Common.Extensions;
+namespace Coworkee.Application.Common.Extensions;
 
 public static class UriExtensions
 {

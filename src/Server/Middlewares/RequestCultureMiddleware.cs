@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Server.Middlewares
+namespace Coworkee.Server.Middlewares
 {
     public class RequestCultureMiddleware
     {

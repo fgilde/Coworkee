@@ -1,14 +1,14 @@
-﻿using System;
-using CleanArchitectureBase.Client.Extensions;
+using System;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class RoleModal: IAsyncDisposable
     {

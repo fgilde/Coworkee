@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Application.Contracts.Attributes;
+namespace Coworkee.Application.Contracts.Attributes;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class RegisterAsIfConfigValueEqualsAttribute : RegisterIfConfigAttribute

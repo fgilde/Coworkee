@@ -1,11 +1,11 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Storage;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Storage;
 
-namespace CleanArchitectureBase.Client.Handler
+namespace Coworkee.Client.Handler
 {
     public class AuthenticationHeaderHandler : DelegatingHandler
     {

@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Contracts.Common
+namespace Coworkee.Application.Contracts.Common
 {
     public interface IScopedService
     {

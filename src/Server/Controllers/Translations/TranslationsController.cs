@@ -1,27 +1,27 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Translations.Commands.Delete;
-using CleanArchitectureBase.Application.Features.Translations.Export;
-using CleanArchitectureBase.Application.Features.Translations.Import;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetById;
-using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Server.Filters;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Features.Translations.Commands.AddEdit;
+using Coworkee.Application.Features.Translations.Commands.Delete;
+using Coworkee.Application.Features.Translations.Export;
+using Coworkee.Application.Features.Translations.Import;
+using Coworkee.Application.Features.Translations.Queries.GetAll;
+using Coworkee.Application.Features.Translations.Queries.GetAllPaged;
+using Coworkee.Application.Features.Translations.Queries.GetById;
+using Coworkee.Server.Extensions;
+using Coworkee.Server.Filters;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Wrapper;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Translations
+namespace Coworkee.Server.Controllers.Translations
 {
     public class TranslationsController : BaseApiController<TranslationsController>
     {

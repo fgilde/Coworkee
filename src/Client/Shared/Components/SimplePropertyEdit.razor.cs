@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public partial class SimplePropertyEdit
     {

@@ -1,10 +1,10 @@
-﻿using AKSoftware.Localization.MultiLanguages;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Common.Scopes;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
+using AKSoftware.Localization.MultiLanguages;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Scopes;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services.Identity;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Identity;
+namespace Coworkee.Infrastructure.Services.Identity;
 
 [RegisterAs(typeof(IUserCultureScopeService))]
 public class UserCultureScopeService : IUserCultureScopeService

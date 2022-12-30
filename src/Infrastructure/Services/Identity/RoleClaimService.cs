@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Infrastructure.Contexts;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Identity
+namespace Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IRoleClaimService), 0)]
     public class RoleClaimService : IRoleClaimService

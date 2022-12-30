@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Shared.Constants.Storage
+namespace Coworkee.Shared.Constants.Storage
 {
     public static class StorageConstants
     {

@@ -1,15 +1,15 @@
-﻿using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Infrastructure;
-using CleanArchitectureBase.Infrastructure.Contexts;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Server.Localization;
-using CleanArchitectureBase.Server.Managers.Preferences;
-using CleanArchitectureBase.Server.Permission;
-using CleanArchitectureBase.Server.Services;
-using CleanArchitectureBase.Server.Settings;
-using CleanArchitectureBase.Shared.Constants.Localization;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Configurations;
+using Coworkee.Infrastructure;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Server.Localization;
+using Coworkee.Server.Managers.Preferences;
+using Coworkee.Server.Permission;
+using Coworkee.Server.Services;
+using Coworkee.Server.Settings;
+using Coworkee.Shared.Constants.Localization;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,24 +29,24 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Serialization.Options;
-using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
-using CleanArchitectureBase.Application.Contracts.Serialization.Settings;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
-using CleanArchitectureBase.Application.Serialization.JsonConverters;
-using CleanArchitectureBase.Application.Serialization.Options;
-using CleanArchitectureBase.Application.Serialization.Serializers;
-using CleanArchitectureBase.Application.Serialization.Settings;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Contracts.Serialization.Options;
+using Coworkee.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Contracts.Serialization.Settings;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
+using Coworkee.Application.Serialization.JsonConverters;
+using Coworkee.Application.Serialization.Options;
+using Coworkee.Application.Serialization.Serializers;
+using Coworkee.Application.Serialization.Settings;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using NSwag;
 using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors.Security;
 
-namespace CleanArchitectureBase.Server.Extensions
+namespace Coworkee.Server.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
@@ -229,7 +229,7 @@ namespace CleanArchitectureBase.Server.Extensions
             {
                 options.EnableSensitiveDataLogging(false);
                 //options.UseLazyLoadingProxies();  // TODO: Problems with chat service at this moment
-                //options.UseInMemoryDatabase("CleanArchitectureBaseDb");
+                //options.UseInMemoryDatabase("CoworkeeDb");
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
             return services;

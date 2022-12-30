@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 
-namespace CleanArchitectureBase.Application.Contracts.Services;
+namespace Coworkee.Application.Contracts.Services;
 
 public interface IFileAccess
 {

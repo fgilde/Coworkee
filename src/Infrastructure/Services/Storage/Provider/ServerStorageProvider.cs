@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Storage.Provider;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Storage.Provider
+namespace Coworkee.Infrastructure.Services.Storage.Provider
 {
     internal class ServerStorageProvider : IStorageProvider
     {

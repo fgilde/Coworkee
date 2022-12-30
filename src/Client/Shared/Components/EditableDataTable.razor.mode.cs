@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public enum EditMode
     {

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Client.Extensions;
+namespace Coworkee.Client.Extensions;
 
 public static class DateTimeExtensions
 {

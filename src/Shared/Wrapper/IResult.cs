@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace CleanArchitectureBase.Shared.Wrapper
+namespace Coworkee.Shared.Wrapper
 {
     public interface IResult
     {

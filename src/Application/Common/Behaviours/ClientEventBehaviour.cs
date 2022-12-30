@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Hubs.Events;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Hubs.Events;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Common.Behaviours
+namespace Coworkee.Application.Common.Behaviours
 {
     internal class ClientEventBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

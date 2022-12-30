@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Application.Hubs.Events.Base
+namespace Coworkee.Application.Hubs.Events.Base
 {
     public class EventTarget : IEquatable<EventTarget>
     {

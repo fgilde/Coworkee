@@ -1,11 +1,11 @@
-﻿using CleanArchitectureBase.Client.Enums;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Client.Enums;
+using Coworkee.Client.JsInterop;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace CleanArchitectureBase.Client.Shared.Components
+namespace Coworkee.Client.Shared.Components
 {
     public partial class AppBarHeader
     {

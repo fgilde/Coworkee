@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Server;
+namespace Coworkee.Server;
 
 public class ServerUtils
 {

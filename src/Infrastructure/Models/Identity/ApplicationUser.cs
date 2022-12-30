@@ -1,16 +1,16 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Domain.Entities.Identity;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Models;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Contracts.Chat;
+using Coworkee.Domain.Entities.Identity;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Models;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure.Models.Identity
+namespace Coworkee.Infrastructure.Models.Identity
 {
     public class ApplicationUser : IdentityUser<string>, IChatUser, IAuditableEntity<string>
     {

@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CleanArchitectureBase.Application.Common.Exceptions;
-using CleanArchitectureBase.Server.Extensions;
+using Coworkee.Application.Common.Exceptions;
+using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitectureBase.Server.Filters
+namespace Coworkee.Server.Filters
 {
     public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     {

@@ -4,11 +4,11 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "cleanarchitecturebase",
+      "composeLaunchServiceName": "Coworkee",
       "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
       "serviceActions": {
         "db": "StartWithoutDebugging",
-        "cleanarchitecturebase": "StartDebugging"
+        "Coworkee": "StartDebugging"
       }
     }
   }

@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Domain.Entities.Localization
+namespace Coworkee.Domain.Entities.Localization
 {
     public class Translation: AuditableEntity<int>
     {

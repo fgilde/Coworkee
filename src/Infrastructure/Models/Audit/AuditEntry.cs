@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CleanArchitectureBase.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Enums;
 
-namespace CleanArchitectureBase.Infrastructure.Models.Audit
+namespace Coworkee.Infrastructure.Models.Audit
 {
     public class AuditEntry
     {

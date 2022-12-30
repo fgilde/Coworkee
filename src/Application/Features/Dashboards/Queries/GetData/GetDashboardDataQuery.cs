@@ -1,20 +1,20 @@
-﻿using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Domain.Entities.Catalog;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Domain.Entities.ExtendedAttributes;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData
+namespace Coworkee.Application.Features.Dashboards.Queries.GetData
 {
     [CustomAuthorize(Policies = new[] { Permissions.Dashboards.View })]
     public class GetDashboardDataQuery : IRequest<Result<DashboardDataResponse>>

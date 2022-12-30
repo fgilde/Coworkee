@@ -1,9 +1,9 @@
-﻿@page "/localization/translations/{Action?}/{Id?}"
+@page "/localization/translations/{Action?}/{Id?}"
 @attribute [Authorize(Policy = Permissions.Translations.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Translations> _localizer
-@using CleanArchitectureBase.Shared.Wrapper
-@using CleanArchitectureBase.Application.Common.Models
-@using CleanArchitectureBase.Application.Contracts.Enums
+@using Coworkee.Shared.Wrapper
+@using Coworkee.Application.Common.Models
+@using Coworkee.Application.Contracts.Enums
 @using System.Threading
 
 

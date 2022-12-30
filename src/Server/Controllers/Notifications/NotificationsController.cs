@@ -1,17 +1,17 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.Notifications.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Notifications.Commands.Delete;
-using CleanArchitectureBase.Application.Features.Notifications.Commands.MarkAll;
-using CleanArchitectureBase.Application.Features.Notifications.Queries;
-using CleanArchitectureBase.Application.Features.Notifications.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Features.Notifications.Queries.GetById;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.Notifications.Commands.AddEdit;
+using Coworkee.Application.Features.Notifications.Commands.Delete;
+using Coworkee.Application.Features.Notifications.Commands.MarkAll;
+using Coworkee.Application.Features.Notifications.Queries;
+using Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
+using Coworkee.Application.Features.Notifications.Queries.GetById;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Notifications
+namespace Coworkee.Server.Controllers.Notifications
 {
     public class NotificationsController : BaseApiController<NotificationsController>
     {

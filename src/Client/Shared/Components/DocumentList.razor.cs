@@ -1,25 +1,25 @@
-﻿using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Client.Extensions;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Hubs;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Client.Pages.Misc;
-using CleanArchitectureBase.Shared;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Client.Pages.Misc;
+using Coworkee.Shared;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 
-namespace CleanArchitectureBase.Client.Shared.Components;
+namespace Coworkee.Client.Shared.Components;
 
 public partial class DocumentList
 {

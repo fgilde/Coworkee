@@ -1,8 +1,8 @@
-﻿using System;
-using CleanArchitectureBase.Shared.Models;
+using System;
+using Coworkee.Shared.Models;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Common.Models.Identity
+namespace Coworkee.Application.Common.Models.Identity
 {
     public class UserResponse : DtoBase<string>
     {

@@ -1,10 +1,10 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Client.Extensions
+namespace Coworkee.Client.Extensions
 {
     public static class ResultExtensions
     {

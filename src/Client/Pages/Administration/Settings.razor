@@ -1,5 +1,5 @@
-﻿@page "/admin/site-settings"
-@using CleanArchitectureBase.Shared.Constants.Role
+@page "/admin/site-settings"
+@using Coworkee.Shared.Constants.Role
 @attribute [Authorize(Roles = RoleConstants.AdministratorRole)]
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Settings> _localizer

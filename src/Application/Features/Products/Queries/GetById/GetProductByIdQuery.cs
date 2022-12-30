@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Application.Requests;
+using Coworkee.Domain.Entities.Catalog;
+using Coworkee.Shared.Constants.Permission;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Application.Features.Products.Queries.GetById
+namespace Coworkee.Application.Features.Products.Queries.GetById
 {
     [CustomAuthorize(Policies = new[] { Permissions.Products.View })]
     public class GetProductByIdQuery : GetByIdQueryBase<int, ProductDto>

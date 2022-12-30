@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.Delete
+namespace Coworkee.Application.Features.ExtendedAttributes.Commands.Delete
 {
     internal class DeleteExtendedAttributeCommandLocalization
     {

@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Domain.Entities.Notifications;
+using Coworkee.Domain.Entities.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanArchitectureBase.Infrastructure.Configurations
+namespace Coworkee.Infrastructure.Configurations
 {
     public class EntityNotificationConfiguration : IEntityTypeConfiguration<Notification>
     {

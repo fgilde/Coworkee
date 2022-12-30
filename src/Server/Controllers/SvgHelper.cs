@@ -1,10 +1,10 @@
-﻿using System.IO;
+using System.IO;
 using Nextended.Core.Extensions;
 using SkiaSharp;
 using Svg;
 using Svg.Skia;
 
-namespace CleanArchitectureBase.Server.Controllers;
+namespace Coworkee.Server.Controllers;
 
 public class Svg
 {

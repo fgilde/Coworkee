@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Features.Translations.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Translations.Queries.GetAll;
-using CleanArchitectureBase.Server.Middlewares;
-using CleanArchitectureBase.Shared;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Features.Translations.Commands.AddEdit;
+using Coworkee.Application.Features.Translations.Queries.GetAll;
+using Coworkee.Server.Middlewares;
+using Coworkee.Shared;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Translations
+namespace Coworkee.Server.Controllers.Translations
 {
     public class LanguageController : BaseApiController<LanguageController>
     {

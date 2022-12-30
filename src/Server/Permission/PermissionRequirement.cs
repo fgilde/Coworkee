@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
-namespace CleanArchitectureBase.Server.Permission
+namespace Coworkee.Server.Permission
 {
     internal class PermissionRequirement : IAuthorizationRequirement
     {

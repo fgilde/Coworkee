@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitectureBase.Application.Common.Behaviours
+namespace Coworkee.Application.Common.Behaviours
 {
     // Will auto Injected
     public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
@@ -32,7 +32,7 @@ namespace CleanArchitectureBase.Application.Common.Behaviours
                 userName = await _identityService.GetUserNameAsync(userId);
             }
 
-            _logger.LogInformation("CleanArchitectureBase Request: {Name} {@UserId} {@UserName} {@Request}",
+            _logger.LogInformation("Coworkee Request: {Name} {@UserId} {@UserName} {@Request}",
                 requestName, userId, userName, request);
         }
     }

@@ -1,5 +1,5 @@
-﻿using CleanArchitectureBase.Infrastructure.Models.Audit;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
+using Coworkee.Infrastructure.Models.Audit;
+using Coworkee.Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Enums;
+using Coworkee.Application.Contracts.Enums;
 
-namespace CleanArchitectureBase.Infrastructure.Contexts
+namespace Coworkee.Infrastructure.Contexts
 {
     public abstract class AuditableContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, ApplicationRoleClaim, IdentityUserToken<string>>
     {

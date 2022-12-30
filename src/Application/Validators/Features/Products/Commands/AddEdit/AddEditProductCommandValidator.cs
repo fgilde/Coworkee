@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.Products.Commands.AddEdit;
+using System.Linq;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.Products.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Validators.Features.Products.Commands.AddEdit
+namespace Coworkee.Application.Validators.Features.Products.Commands.AddEdit
 {
 
     public class AddEditProductsCommandValidator : AbstractValidator<AddEditProductsCommand>

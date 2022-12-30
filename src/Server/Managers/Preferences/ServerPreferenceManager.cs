@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Services.Storage;
-using CleanArchitectureBase.Server.Settings;
-using CleanArchitectureBase.Shared.Constants.Storage;
-using CleanArchitectureBase.Shared.Settings;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Contracts.Services.Storage;
+using Coworkee.Server.Settings;
+using Coworkee.Shared.Constants.Storage;
+using Coworkee.Shared.Settings;
+using Coworkee.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Server.Managers.Preferences
+namespace Coworkee.Server.Managers.Preferences
 {
     public class ServerPreferenceManager : IServerPreferenceManager
     {

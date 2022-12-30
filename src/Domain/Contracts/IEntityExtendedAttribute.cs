@@ -1,8 +1,8 @@
-﻿#nullable enable
+#nullable enable
 using System;
-using CleanArchitectureBase.Domain.Enums;
+using Coworkee.Domain.Enums;
 
-namespace CleanArchitectureBase.Domain.Contracts
+namespace Coworkee.Domain.Contracts
 {
     public interface IEntityExtendedAttribute<TId, TEntityId, TEntity>
         : IEntityExtendedAttribute<TEntityId, TEntity>, IEntity<TId>

@@ -2,8 +2,8 @@
   "x-generator": "NSwag v13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))",
   "swagger": "2.0",
   "info": {
-    "title": "CleanArchitectureBase Web API",
-    "description": "API to use CleanArchitectureBase",
+    "title": "Coworkee Web API",
+    "description": "API to use Coworkee",
     "contact": {
       "name": "Florian Gilde",
       "url": "http://www.gilde.org",

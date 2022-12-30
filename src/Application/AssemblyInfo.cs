@@ -13,8 +13,8 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 
-[assembly: InternalsVisibleTo("CleanArchitectureBase.Application.UnitTests")]
-[assembly: InternalsVisibleTo("CleanArchitectureBase.Application.IntegrationTests")]
+[assembly: InternalsVisibleTo("Coworkee.Application.UnitTests")]
+[assembly: InternalsVisibleTo("Coworkee.Application.IntegrationTests")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM.
 

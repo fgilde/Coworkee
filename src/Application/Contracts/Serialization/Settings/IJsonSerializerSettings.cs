@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
-namespace CleanArchitectureBase.Application.Contracts.Serialization.Settings
+namespace Coworkee.Application.Contracts.Serialization.Settings
 {
     public interface IJsonSerializerSettings
     {

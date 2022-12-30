@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Client.Theming;
-using CleanArchitectureBase.Shared.Managers;
+using System.Threading.Tasks;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Client.Theming;
+using Coworkee.Shared.Managers;
 
-namespace CleanArchitectureBase.Client.Managers.Preferences
+namespace Coworkee.Client.Managers.Preferences
 {
     public interface IClientPreferenceManager : IPreferenceManager
     {

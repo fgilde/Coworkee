@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Entities.Catalog;
 
-namespace CleanArchitectureBase.Application.Specifications.Catalog
+namespace Coworkee.Application.Specifications.Catalog
 {
     public class ProductFilterSpecification : SpecificationBase<Product>
     {

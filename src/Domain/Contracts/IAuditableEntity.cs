@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Domain.Contracts
+namespace Coworkee.Domain.Contracts
 {
     public interface IAuditableEntity<TId> : IAuditableEntity, IEntity<TId>
     {

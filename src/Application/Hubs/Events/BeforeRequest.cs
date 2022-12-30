@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Application.Hubs.Events.Base;
+using Coworkee.Application.Hubs.Events.Base;
 
-namespace CleanArchitectureBase.Application.Hubs.Events
+namespace Coworkee.Application.Hubs.Events
 {
     public class BeforeRequest<TRequest> : ClientEventBase
     {

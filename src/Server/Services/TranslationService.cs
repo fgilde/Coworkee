@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 using TranslatorService;
 using TranslatorService.Models.Translation;
 
-namespace CleanArchitectureBase.Server.Services;
+namespace Coworkee.Server.Services;
 
 [RegisterAs(typeof(ITranslationService), ServiceLifetime = ServiceLifetime.Scoped)]
 public class TranslationService: ITranslationService

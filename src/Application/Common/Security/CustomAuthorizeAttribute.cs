@@ -1,6 +1,6 @@
 using System;
 
-namespace CleanArchitectureBase.Application.Common.Security
+namespace Coworkee.Application.Common.Security
 {
     /// <summary>
     /// Specifies the class this attribute is applied to requires authorization.

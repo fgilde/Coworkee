@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData
+namespace Coworkee.Application.Features.Dashboards.Queries.GetData
 {
     public class DashboardDataResponse
     {

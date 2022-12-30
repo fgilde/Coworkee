@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Exceptions;
+using Coworkee.Application.Common.Exceptions;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitectureBase.Application
+namespace Coworkee.Application
 {
     public static partial class Errors
     {

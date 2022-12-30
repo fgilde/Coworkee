@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Settings;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Settings;
 
-namespace CleanArchitectureBase.Client.Configuration
+namespace Coworkee.Client.Configuration
 {
     public record ClientPreference : IPreference
     {

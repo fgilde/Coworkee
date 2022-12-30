@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Application.Specifications.Notifications;
-using CleanArchitectureBase.Domain.Entities.Notifications;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Application.Specifications.Notifications;
+using Coworkee.Domain.Entities.Notifications;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Features.Notifications.Queries.GetAllPaged;
+namespace Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
 
 [CustomAuthorize]
 public class GetAllNotificationsQuery : GetAllPagedQueryBase<NotificationDto>

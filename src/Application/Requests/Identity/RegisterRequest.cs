@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using System.Collections.Generic;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Application.Requests.Identity
+namespace Coworkee.Application.Requests.Identity
 {
     public class RegisterRequest
     {

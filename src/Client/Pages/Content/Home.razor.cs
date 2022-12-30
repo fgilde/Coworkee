@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 
-namespace CleanArchitectureBase.Client.Pages.Content
+namespace Coworkee.Client.Pages.Content
 {
     public partial class Home
     {

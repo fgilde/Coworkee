@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Domain.Contracts
+namespace Coworkee.Domain.Contracts
 {
     public interface IEntity<TId> : IEntity
     {

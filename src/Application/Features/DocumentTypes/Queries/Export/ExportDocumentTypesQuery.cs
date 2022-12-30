@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Export;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Application.Specifications.Misc;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Export;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Application.Specifications.Misc;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.Export
+namespace Coworkee.Application.Features.DocumentTypes.Queries.Export
 {
     [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Export })]
     public class ExportDocumentTypesQuery : ExportQueryBase<int>

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CleanArchitectureBase.Application.Contracts.Chat
+namespace Coworkee.Application.Contracts.Chat
 {
     public interface IChatUser
     {

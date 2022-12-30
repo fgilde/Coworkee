@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Application.Common.Security
+namespace Coworkee.Application.Common.Security
 {
     public interface ICustomAuthorizeAttributeHandler
     {

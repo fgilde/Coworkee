@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Linq;
-using CleanArchitectureBase.Shared.Constants.Application;
-using DefaultUsers = CleanArchitectureBase.Shared.Constants.Application.ApplicationConstants.Defaults.Users;
+using Coworkee.Shared.Constants.Application;
+using DefaultUsers = Coworkee.Shared.Constants.Application.ApplicationConstants.Defaults.Users;
 
-namespace CleanArchitectureBase.Shared.Models;
+namespace Coworkee.Shared.Models;
 
 public class CreateUser
 {

@@ -1,22 +1,22 @@
-﻿using CleanArchitectureBase.Infrastructure.Contexts;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Exceptions;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Exceptions;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Chat;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Shared.Constants.Role;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IChatService), 6)]
     public class ChatService : IChatService

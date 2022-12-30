@@ -1,20 +1,20 @@
-﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
-using CleanArchitectureBase.Domain.Entities.Identity;
-using CleanArchitectureBase.Domain.Entities.Localization;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Domain.Entities.Notifications;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Domain.Entities.ExtendedAttributes;
+using Coworkee.Domain.Entities.Identity;
+using Coworkee.Domain.Entities.Localization;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Domain.Entities.Notifications;
 
-namespace CleanArchitectureBase.Infrastructure.Contexts
+namespace Coworkee.Infrastructure.Contexts
 {
     public class ApplicationDbContext : AuditableContext
     {

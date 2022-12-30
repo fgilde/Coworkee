@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Utils;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Utils;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -16,7 +16,7 @@ using MudBlazor.Extensions.Options;
 using Newtonsoft.Json;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Client.ErrorHandling
+namespace Coworkee.Client.ErrorHandling
 {
     public class ErrorHandler : IErrorHandler
     {

@@ -1,17 +1,17 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Shared.Dialogs;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Shared.Dialogs;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 using MudBlazor.Extensions.Components;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class UserProfile
     {

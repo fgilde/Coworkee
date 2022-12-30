@@ -1,14 +1,14 @@
-﻿using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Infrastructure.Helpers
+namespace Coworkee.Infrastructure.Helpers
 {
     public static class ClaimsHelper
     {

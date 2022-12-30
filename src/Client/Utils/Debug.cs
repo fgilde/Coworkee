@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
-namespace CleanArchitectureBase.Client.Utils;
+namespace Coworkee.Client.Utils;
 
 public static class Debug
 {

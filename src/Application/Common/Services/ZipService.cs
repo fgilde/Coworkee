@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
 
-namespace CleanArchitectureBase.Application.Common.Services;
+namespace Coworkee.Application.Common.Services;
 
 [RegisterAs(typeof(IZipService))]
 public class ZipService : IZipService

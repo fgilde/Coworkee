@@ -1,15 +1,15 @@
-﻿using CleanArchitectureBase.Application.Specifications.Catalog;
-using CleanArchitectureBase.Domain.Entities.Catalog;
+using Coworkee.Application.Specifications.Catalog;
+using Coworkee.Domain.Entities.Catalog;
 using MediatR;
 using System;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Products.Queries.GetAllPaged
+namespace Coworkee.Application.Features.Products.Queries.GetAllPaged
 {
     [CustomAuthorize(Policies = new[] { Permissions.Products.View })]
     public class GetAllProductsQuery : GetAllPagedQueryBase<ProductDto>

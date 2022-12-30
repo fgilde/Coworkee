@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Exceptions;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
-using CleanArchitectureBase.Shared.Constants.Role;
+using Coworkee.Application.Common.Exceptions;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
+using Coworkee.Shared.Constants.Role;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Identity
+namespace Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IPermissionService), 4)]
     public class PermissionService: IPermissionService

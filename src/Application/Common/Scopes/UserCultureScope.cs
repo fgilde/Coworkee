@@ -1,7 +1,7 @@
-﻿using AKSoftware.Localization.MultiLanguages;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using AKSoftware.Localization.MultiLanguages;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Application.Common.Scopes;
+namespace Coworkee.Application.Common.Scopes;
 
 public class UserCultureScope : CultureScope
 {

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Common.Models
+namespace Coworkee.Application.Common.Models
 {
     public abstract class HashableDtoBase : IDtoBase<int>, IEquatable<HashableDtoBase>
     {

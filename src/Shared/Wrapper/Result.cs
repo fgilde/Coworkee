@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureBase.Shared.Wrapper
+namespace Coworkee.Shared.Wrapper
 {
     public class Result : IResult
     {

@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Application.Requests;
+using Coworkee.Application.Requests;
 
-namespace CleanArchitectureBase.Application.Common.Models
+namespace Coworkee.Application.Common.Models
 {
     public class ProductDto : HashableDtoBase
     {

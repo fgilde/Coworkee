@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.SDK;
+using Coworkee.Application.Common.Models;
+using Coworkee.SDK;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Client.Localization
+namespace Coworkee.Client.Localization
 {
     internal static class ApiResources
     {

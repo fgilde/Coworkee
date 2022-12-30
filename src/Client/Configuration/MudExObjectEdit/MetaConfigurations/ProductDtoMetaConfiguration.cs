@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Client.Shared.Components;
+using Coworkee.Application.Common.Models;
+using Coworkee.Client.Shared.Components;
 using MudBlazor;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Client.Configuration.MudExObjectEdit.MetaConfigurations;
+namespace Coworkee.Client.Configuration.MudExObjectEdit.MetaConfigurations;
 
 public class ProductDtoMetaConfiguration : BaseDtoMetaConfiguration<ProductDto, int>
 {

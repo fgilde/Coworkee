@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using CleanArchitectureBase.Application.Common.Behaviours;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.Delete;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetById;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Behaviours;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.Delete;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetById;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Wrapper;
 using FluentValidation;
 using HashidsNet;
 using MediatR;
@@ -21,7 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application
+namespace Coworkee.Application
 {
     public static class DependencyInjection
     {
@@ -39,7 +39,7 @@ namespace CleanArchitectureBase.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
-            services.AddAllWithRegisterAttribute(typeof(CleanArchitectureBase.Application.DependencyInjection).Assembly);
+            services.AddAllWithRegisterAttribute(typeof(Coworkee.Application.DependencyInjection).Assembly);
             return services;
         }
 

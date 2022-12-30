@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Contracts.Chat;
+using System.Collections.Generic;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Contracts.Chat;
 
-namespace CleanArchitectureBase.Application.Common.Models.Identity
+namespace Coworkee.Application.Common.Models.Identity
 {
     public class ChatUserResponse
     {

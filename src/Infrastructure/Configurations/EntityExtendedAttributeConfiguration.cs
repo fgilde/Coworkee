@@ -1,12 +1,12 @@
-﻿using CleanArchitectureBase.Application.Serialization.Options;
-using CleanArchitectureBase.Application.Serialization.Serializers;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Infrastructure.Extensions;
+using Coworkee.Application.Serialization.Options;
+using Coworkee.Application.Serialization.Serializers;
+using Coworkee.Domain.Contracts;
+using Coworkee.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Options;
 
-namespace CleanArchitectureBase.Infrastructure.Configurations
+namespace Coworkee.Infrastructure.Configurations
 {
     //public class EntityExtendedAttributeConfiguration : IEntityTypeConfiguration<IEntityExtendedAttribute>
     //{

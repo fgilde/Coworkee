@@ -1,7 +1,7 @@
-﻿using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs.Events.Base;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs.Events.Base;
 
-namespace CleanArchitectureBase.Application.Hubs.Events;
+namespace Coworkee.Application.Hubs.Events;
 
 public class UserProfileChanged : ClientEventBase
 {

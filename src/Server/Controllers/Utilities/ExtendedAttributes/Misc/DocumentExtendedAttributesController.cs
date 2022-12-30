@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Domain.Entities.ExtendedAttributes;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Base;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using System.Threading.Tasks;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Domain.Entities.ExtendedAttributes;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Controllers.Utilities.ExtendedAttributes.Misc
+namespace Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Misc
 {
     public class DocumentExtendedAttributesController : ExtendedAttributesController<int, int, Document, DocumentExtendedAttribute>
     {

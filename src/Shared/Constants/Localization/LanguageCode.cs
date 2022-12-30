@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+using System.Globalization;
 
-namespace CleanArchitectureBase.Shared.Constants.Localization
+namespace Coworkee.Shared.Constants.Localization
 {
     public class LanguageCode
     {

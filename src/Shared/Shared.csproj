@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>CleanArchitectureBase.Shared</RootNamespace>
-    <AssemblyName>CleanArchitectureBase.Shared</AssemblyName>
+    <RootNamespace>Coworkee.Shared</RootNamespace>
+    <AssemblyName>Coworkee.Shared</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.yml" />

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Security;
+using System.Threading.Tasks;
+using Coworkee.Application.Common.Security;
 
-namespace CleanArchitectureBase.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services
 {
     public interface IPermissionService
     {

@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.Export;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAll;
-using CleanArchitectureBase.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
+using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using Coworkee.Client.Extensions;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Client.Managers.ExtendedAttribute
+namespace Coworkee.Client.Managers.ExtendedAttribute
 {
     public class ExtendedAttributeManager<TId, TEntityId, TEntity, TExtendedAttribute>
         : IExtendedAttributeManager<TId, TEntityId, TEntity, TExtendedAttribute>

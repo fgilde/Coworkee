@@ -1,9 +1,9 @@
-﻿using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Shared.Misc;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Requests;
+using Coworkee.Shared.Misc;
 using Nextended.Core.Helper;
 
-namespace CleanArchitectureBase.Application.Configurations;
+namespace Coworkee.Application.Configurations;
 
 internal static class ClassMappingConfiguration
 {

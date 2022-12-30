@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Application.Features.Notifications.Queries.GetAllPaged;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Domain.Entities.Notifications;
+using Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Domain.Entities.Notifications;
 
-namespace CleanArchitectureBase.Application.Specifications.Notifications
+namespace Coworkee.Application.Specifications.Notifications
 {
     public class NotificationFilterSpecification : SpecificationBase<Notification>
     {

@@ -1,15 +1,15 @@
-﻿using CleanArchitectureBase.Domain.Entities.Catalog;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Domain.Entities.Catalog;
+using Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Products.Queries.GetProductImage
+namespace Coworkee.Application.Features.Products.Queries.GetProductImage
 {
     [CustomAuthorize(Policies = new[] { Permissions.Products.View })]
     public class GetProductImageQuery : IRequest<Result<string>>

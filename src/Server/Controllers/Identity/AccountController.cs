@@ -1,16 +1,16 @@
-﻿using CleanArchitectureBase.Application.Requests.Identity;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Account;
-using CleanArchitectureBase.Infrastructure.Services.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Application.Common.Models;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Account;
+using Coworkee.Infrastructure.Services.Identity;
+using Coworkee.Shared.Wrapper;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Application.Common.Models;
 
-namespace CleanArchitectureBase.Server.Controllers.Identity
+namespace Coworkee.Server.Controllers.Identity
 {
     [Authorize]
     [ApiController]

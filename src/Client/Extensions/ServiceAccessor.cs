@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitectureBase.Client.Extensions;
+namespace Coworkee.Client.Extensions;
 
 public static class ServiceAccessor
 {

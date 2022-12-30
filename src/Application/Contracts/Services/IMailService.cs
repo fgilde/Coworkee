@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Requests.Mail;
+using System.Threading.Tasks;
+using Coworkee.Application.Requests.Mail;
 
-namespace CleanArchitectureBase.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services
 {
     public interface IMailService
     {

@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts.Attributes;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Requests.Mail;
+using System.Threading.Tasks;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts.Attributes;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Requests.Mail;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAsIfConfigValueIsEmpty(typeof(IMailService), new[] { nameof(Mailconfiguration), nameof(Mailconfiguration.SendGridApiKey) })]
     public class SMTPMailService : IMailService

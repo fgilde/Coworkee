@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Requests.Identity
+namespace Coworkee.Application.Requests.Identity
 {
     public class RoleClaimRequest
     {

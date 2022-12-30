@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -6,18 +6,18 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AKSoftware.Localization.MultiLanguages;
 using Blazored.LocalStorage;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Managers.Theme;
-using CleanArchitectureBase.Client.Theming;
-using CleanArchitectureBase.Shared.Constants.Storage;
-using CleanArchitectureBase.Shared.Settings;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Managers.Theme;
+using Coworkee.Client.Theming;
+using Coworkee.Shared.Constants.Storage;
+using Coworkee.Shared.Settings;
+using Coworkee.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Client.Managers.Preferences
+namespace Coworkee.Client.Managers.Preferences
 {
     public class ClientPreferenceManager : IClientPreferenceManager
     {

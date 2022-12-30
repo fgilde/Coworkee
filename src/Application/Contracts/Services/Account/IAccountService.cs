@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Common;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Shared.Wrapper;
+using System.Threading.Tasks;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Common;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Wrapper;
 
-namespace CleanArchitectureBase.Application.Contracts.Services.Account
+namespace Coworkee.Application.Contracts.Services.Account
 {
     public interface IAccountService : IService
     {

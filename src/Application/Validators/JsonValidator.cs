@@ -1,8 +1,8 @@
-﻿using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Contracts.Serialization.Serializers;
 using FluentValidation;
 using FluentValidation.Validators;
 
-namespace CleanArchitectureBase.Application.Validators
+namespace Coworkee.Application.Validators
 {
     public class JsonValidator<T> : PropertyValidator<T, string>
     {

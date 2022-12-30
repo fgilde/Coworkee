@@ -1,9 +1,9 @@
 using System;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Contracts;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 
-namespace CleanArchitectureBase.Server
+namespace Coworkee.Server
 {
     public class SessionProvider : ISessionProvider
     {

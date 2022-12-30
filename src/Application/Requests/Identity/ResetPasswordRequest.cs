@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace CleanArchitectureBase.Application.Requests.Identity
+namespace Coworkee.Application.Requests.Identity
 {
     public class ResetPasswordRequest
     {

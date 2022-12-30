@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Domain.Entities.Misc
+namespace Coworkee.Domain.Entities.Misc
 {
     public class DocumentType : AuditableEntity<int>
     {

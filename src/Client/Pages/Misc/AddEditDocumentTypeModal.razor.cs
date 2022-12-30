@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.DocumentTypes.Commands.AddEdit;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.DocumentTypes.Commands.AddEdit;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 
-namespace CleanArchitectureBase.Client.Pages.Misc
+namespace Coworkee.Client.Pages.Misc
 {
     public partial class AddEditDocumentTypeModal: IAsyncDisposable
     {

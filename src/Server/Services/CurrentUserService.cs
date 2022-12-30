@@ -1,22 +1,22 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Server.Extensions;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 using Nextended.Core.Scopes;
-using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Infrastructure.Services.Identity;
+using Coworkee.Application;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Infrastructure.Services.Identity;
 
-namespace CleanArchitectureBase.Server.Services
+namespace Coworkee.Server.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

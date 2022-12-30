@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
+using Coworkee.Infrastructure.Models.Identity;
 
-namespace CleanArchitectureBase.Infrastructure.Extensions;
+namespace Coworkee.Infrastructure.Extensions;
 
 public static class UserManagerExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureBase.Application.Contracts.Enums
+namespace Coworkee.Application.Contracts.Enums
 {
     public enum AuditType : byte
     {

@@ -1,6 +1,6 @@
-﻿using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Domain.Contracts;
 
-namespace CleanArchitectureBase.Domain.Entities.Identity;
+namespace Coworkee.Domain.Entities.Identity;
 
 public class Address : AuditableEntity<int>
 {

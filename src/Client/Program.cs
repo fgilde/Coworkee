@@ -1,15 +1,15 @@
 using System;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Managers.Preferences;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.Managers.Preferences;
+using Coworkee.SDK;
+using Coworkee.Shared.Constants.Application;
 
-namespace CleanArchitectureBase.Client
+namespace Coworkee.Client
 {
     public static class Program
     {

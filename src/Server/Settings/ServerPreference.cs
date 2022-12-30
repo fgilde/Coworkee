@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using CleanArchitectureBase.Shared.Constants.Localization;
-using CleanArchitectureBase.Shared.Settings;
+using System.Linq;
+using Coworkee.Shared.Constants.Localization;
+using Coworkee.Shared.Settings;
 
-namespace CleanArchitectureBase.Server.Settings
+namespace Coworkee.Server.Settings
 {
     public record ServerPreference : IPreference
     {

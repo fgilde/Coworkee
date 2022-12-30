@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
-using CleanArchitectureBase.Application.Requests;
+using Coworkee.Application.Features.Documents.Commands.AddEdit;
+using Coworkee.Application.Requests;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -9,17 +9,17 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.SignalR.Client;
-using CleanArchitectureBase.Shared.Misc;
+using Coworkee.Shared.Misc;
 using Nextended.Blazor.Extensions;
 using Nextended.Core;
 
 
-namespace CleanArchitectureBase.Client.Pages.Misc
+namespace Coworkee.Client.Pages.Misc
 {
     public partial class AddEditDocumentModal : IAsyncDisposable
     {

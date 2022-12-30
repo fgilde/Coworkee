@@ -1,21 +1,21 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Client.Authentication;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Managers.Preferences;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Storage;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Client.Authentication;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Managers.Preferences;
+using Coworkee.SDK;
+using Coworkee.Shared.Constants.Storage;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace CleanArchitectureBase.Client.Managers.Identity.Authentication
+namespace Coworkee.Client.Managers.Identity.Authentication
 {
     public class ClientAuthenticationManager : IClientAuthenticationManager
     {

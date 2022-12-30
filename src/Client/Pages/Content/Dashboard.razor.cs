@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Hubs;
-using CleanArchitectureBase.Application.Features.Dashboards.Queries.GetData;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.SDK;
+using Coworkee.Application.Contracts.Hubs;
+using Coworkee.Application.Features.Dashboards.Queries.GetData;
+using Coworkee.Client.Extensions;
+using Coworkee.SDK;
 using ChartSeries = MudBlazor.ChartSeries;
 
-namespace CleanArchitectureBase.Client.Pages.Content
+namespace Coworkee.Client.Pages.Content
 {
     public partial class Dashboard: IAsyncDisposable
     {

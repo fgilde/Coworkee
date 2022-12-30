@@ -1,4 +1,4 @@
-﻿using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -8,16 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Chat;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Chat;
-using CleanArchitectureBase.Application.Contracts.Hubs;
-using CleanArchitectureBase.Client.JsInterop;
-using CleanArchitectureBase.SDK;
-using CleanArchitectureBase.Shared.Constants.Storage;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Chat;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Chat;
+using Coworkee.Application.Contracts.Hubs;
+using Coworkee.Client.JsInterop;
+using Coworkee.SDK;
+using Coworkee.Shared.Constants.Storage;
 
-namespace CleanArchitectureBase.Client.Pages.Communication
+namespace Coworkee.Client.Pages.Communication
 {
     public partial class Chat: IAsyncDisposable
     {

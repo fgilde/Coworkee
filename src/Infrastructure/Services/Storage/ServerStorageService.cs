@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Serialization.Serializers;
-using CleanArchitectureBase.Application.Contracts.Services.Storage;
-using CleanArchitectureBase.Application.Contracts.Services.Storage.Provider;
+using Coworkee.Application.Contracts.Serialization.Serializers;
+using Coworkee.Application.Contracts.Services.Storage;
+using Coworkee.Application.Contracts.Services.Storage.Provider;
 
-namespace CleanArchitectureBase.Infrastructure.Services.Storage
+namespace Coworkee.Infrastructure.Services.Storage
 {
     public class ServerStorageService : IServerStorageService, ISyncServerStorageService
     {

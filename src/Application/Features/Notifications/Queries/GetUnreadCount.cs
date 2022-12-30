@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Domain.Entities.Notifications;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Domain.Entities.Notifications;
 using MediatR;
 
-namespace CleanArchitectureBase.Application.Features.Notifications.Queries
+namespace Coworkee.Application.Features.Notifications.Queries
 {
     public class GetUnreadCount
     {

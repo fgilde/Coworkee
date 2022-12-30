@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Requests;
-using CleanArchitectureBase.Domain.Entities.Notifications;
+using Coworkee.Application.Requests;
+using Coworkee.Domain.Entities.Notifications;
 
-namespace CleanArchitectureBase.Application.Contracts.Services;
+namespace Coworkee.Application.Contracts.Services;
 
 public interface INotificationService
 {

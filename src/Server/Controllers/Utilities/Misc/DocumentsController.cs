@@ -1,17 +1,17 @@
-﻿using System.Threading;
-using CleanArchitectureBase.Application.Features.Documents.Commands.AddEdit;
-using CleanArchitectureBase.Application.Features.Documents.Commands.Delete;
-using CleanArchitectureBase.Application.Features.Documents.Queries.GetAll;
+using System.Threading;
+using Coworkee.Application.Features.Documents.Commands.AddEdit;
+using Coworkee.Application.Features.Documents.Commands.Delete;
+using Coworkee.Application.Features.Documents.Queries.GetAll;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Features.Documents.Queries.GetById;
-using CleanArchitectureBase.Shared.Constants.Permission;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Features.Documents.Queries.GetById;
+using Coworkee.Shared.Constants.Permission;
+using Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Nextended.Core;
 
-namespace CleanArchitectureBase.Server.Controllers.Utilities.Misc
+namespace Coworkee.Server.Controllers.Utilities.Misc
 {
     [ApiController]
     public class DocumentsController : BaseApiController<DocumentsController>

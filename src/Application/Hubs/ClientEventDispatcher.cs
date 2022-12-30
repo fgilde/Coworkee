@@ -1,12 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Hubs.Events.Base;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Hubs.Events.Base;
+using Coworkee.Shared.Constants.Application;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 
-namespace CleanArchitectureBase.Application.Hubs
+namespace Coworkee.Application.Hubs
 {
     public class ClientEventDispatcher : INotificationHandler<ClientEventNotification>
     {

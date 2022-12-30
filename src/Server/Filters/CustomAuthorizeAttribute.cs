@@ -1,8 +1,8 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Security;
+using System;
+using Coworkee.Application.Common.Security;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitectureBase.Server.Filters
+namespace Coworkee.Server.Filters
 {
     public class CustomAuthorizeAttribute: TypeFilterAttribute, ICustomAuthorizeAttribute
     {

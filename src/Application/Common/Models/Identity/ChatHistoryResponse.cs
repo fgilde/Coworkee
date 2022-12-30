@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace CleanArchitectureBase.Application.Common.Models.Identity
+namespace Coworkee.Application.Common.Models.Identity
 {
     public partial class ChatHistoryResponse
     {

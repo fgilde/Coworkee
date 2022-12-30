@@ -1,15 +1,15 @@
-﻿using CleanArchitectureBase.Infrastructure.Contexts;
+using Coworkee.Infrastructure.Contexts;
 using System.Linq;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Contracts.Services.Identity;
-using CleanArchitectureBase.Infrastructure.Helpers;
-using CleanArchitectureBase.Infrastructure.Models.Identity;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Models;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Infrastructure.Helpers;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Infrastructure
+namespace Coworkee.Infrastructure
 {
     public class DatabaseSeeder : IDatabaseSeeder
     {

@@ -1,5 +1,5 @@
-using CleanArchitectureBase.Server.Extensions;
-using CleanArchitectureBase.Server.Middlewares;
+using Coworkee.Server.Extensions;
+using Coworkee.Server.Middlewares;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,17 +8,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using CleanArchitectureBase.Application;
-using CleanArchitectureBase.Infrastructure;
-using CleanArchitectureBase.Server.Filters;
-using CleanArchitectureBase.Server.Managers.Preferences;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application;
+using Coworkee.Infrastructure;
+using Coworkee.Server.Filters;
+using Coworkee.Server.Managers.Preferences;
+using Coworkee.Shared.Constants.Application;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
-using CleanArchitectureBase.Shared;
+using Coworkee.Shared;
 
-namespace CleanArchitectureBase.Server
+namespace Coworkee.Server
 {
 
     public class Startup

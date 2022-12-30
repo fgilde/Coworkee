@@ -1,9 +1,9 @@
-﻿using System;
-using CleanArchitectureBase.Client.Enums;
+using System;
+using Coworkee.Client.Enums;
 using MudBlazor;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Theming
+namespace Coworkee.Client.Theming
 {
 
     public class ClientTheme : MudTheme, ICloneable

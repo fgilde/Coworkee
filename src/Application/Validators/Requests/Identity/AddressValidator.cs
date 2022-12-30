@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Microsoft.Extensions.Localization;
-using CleanArchitectureBase.Application.Common.Models.Identity;
+using Coworkee.Application.Common.Models.Identity;
 
-namespace CleanArchitectureBase.Application.Validators.Requests.Identity
+namespace Coworkee.Application.Validators.Requests.Identity
 {
     public class AddressValidator : AbstractValidator<AddressDto>
     {

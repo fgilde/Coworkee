@@ -1,23 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Application.Hubs.Events;
-using CleanArchitectureBase.Domain.Contracts;
-using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Extensions;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Hubs.Events;
+using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.Base.Commands
+namespace Coworkee.Application.Features.Base.Commands
 {
     public abstract class AddEditCommandBase<TDto> : IRequest<AddUpdateResult<TDto>>
         where TDto : IDtoBase

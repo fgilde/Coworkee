@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Localization;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Localization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace CleanArchitectureBase.Client;
+namespace Coworkee.Client;
 
 public partial class App : IDisposable
 {

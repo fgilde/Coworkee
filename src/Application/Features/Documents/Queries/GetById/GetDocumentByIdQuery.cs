@@ -1,12 +1,12 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using System;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Documents.Queries.GetById
+namespace Coworkee.Application.Features.Documents.Queries.GetById
 {
     [CustomAuthorize(Policies = new[] { Permissions.Documents.View })]
     public class GetDocumentByIdQuery : GetByIdQueryBase<int, DocumentDto>

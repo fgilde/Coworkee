@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Enums;
-using CleanArchitectureBase.Shared.Wrapper;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Enums;
+using Coworkee.Shared.Wrapper;
 using SDK;
 
-namespace CleanArchitectureBase.Client.Contracts;
+namespace Coworkee.Client.Contracts;
 
 public interface IDataTableAdapter<in TId, TDto> where TDto : IDtoBase<TId>
 {

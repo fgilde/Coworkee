@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace CleanArchitectureBase.Client.JsInterop;
+namespace Coworkee.Client.JsInterop;
 
 public static class JsRuntimeExtensions
 {

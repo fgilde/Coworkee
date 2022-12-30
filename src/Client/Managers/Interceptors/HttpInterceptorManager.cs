@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.ErrorHandling;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Managers.Identity.Authentication;
+using Coworkee.Client.ErrorHandling;
+using Coworkee.Client.Extensions;
+using Coworkee.Client.Managers.Identity.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Toolbelt.Blazor;
 
-namespace CleanArchitectureBase.Client.Managers.Interceptors
+namespace Coworkee.Client.Managers.Interceptors
 {
     public class HttpInterceptorManager : IHttpInterceptorManager
     {

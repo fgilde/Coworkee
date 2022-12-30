@@ -1,15 +1,15 @@
-﻿using System;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
+using System;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
 using MediatR;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Application.Specifications.Base;
-using CleanArchitectureBase.Application.Specifications.Translations;
-using CleanArchitectureBase.Domain.Entities.Localization;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Application.Specifications.Base;
+using Coworkee.Application.Specifications.Translations;
+using Coworkee.Domain.Entities.Localization;
+using Coworkee.Shared.Constants.Permission;
 
-namespace CleanArchitectureBase.Application.Features.Translations.Queries.GetAllPaged
+namespace Coworkee.Application.Features.Translations.Queries.GetAllPaged
 {
     [CustomAuthorize(Policies = new[] { Permissions.Translations.View })]
     public class GetAllTranslationsPagedQuery : GetAllPagedQueryBase<TranslationDto>

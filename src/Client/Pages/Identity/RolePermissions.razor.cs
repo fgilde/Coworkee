@@ -1,21 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using CleanArchitectureBase.Application.Requests.Identity;
-using CleanArchitectureBase.Client.Extensions;
+using Coworkee.Application.Requests.Identity;
+using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Hubs;
-using CleanArchitectureBase.Client.Shared.Dialogs;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Hubs;
+using Coworkee.Client.Shared.Dialogs;
+using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Client.Pages.Identity
+namespace Coworkee.Client.Pages.Identity
 {
     public partial class RolePermissions: IAsyncDisposable
     {

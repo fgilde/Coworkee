@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  cleanarchitecturebase:
-    image: ${DOCKER_REGISTRY-}cleanarchitecturebase
+  Coworkee:
+    image: ${DOCKER_REGISTRY-}Coworkee
     build:
       context: .
       dockerfile: src/Server/Dockerfile
     environment:
-      - "ConnectionStrings__DefaultConnection=Server=db;Database=CleanArchitectureBase;User=sa;Password=Your_password123;MultipleActiveResultSets=true;TrustServerCertificate=true"
+      - "ConnectionStrings__DefaultConnection=Server=db;Database=Coworkee;User=sa;Password=Your_password123;MultipleActiveResultSets=true;TrustServerCertificate=true"
       - "ASPNETCORE_ENVIRONMENT=Development"
       - "ASPNETCORE_URLS=http://+:80;https://+:443"
       - "ASPNETCORE_Kestrel__Certificates__Default__Password=securePassword123"
@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     restart: on-failure
-    container_name: cleanarchitecturebase
+    container_name: Coworkee
 
   db:
     image: "mcr.microsoft.com/mssql/server"

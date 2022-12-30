@@ -1,10 +1,10 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Shared.Constants.Storage;
+using Coworkee.Client.Configuration;
+using Coworkee.Shared.Constants.Storage;
 
-namespace CleanArchitectureBase.Client.Handler
+namespace Coworkee.Client.Handler
 {
     public class RedirectToBackendHandler : DelegatingHandler
     {

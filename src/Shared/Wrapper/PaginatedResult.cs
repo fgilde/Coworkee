@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CleanArchitectureBase.Shared.Wrapper
+namespace Coworkee.Shared.Wrapper
 {
     public class PaginatedResult<T> : Result
     {

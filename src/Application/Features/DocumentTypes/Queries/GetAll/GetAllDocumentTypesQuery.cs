@@ -1,12 +1,12 @@
-﻿using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Common.Security;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Application.Features.Base.Queries;
-using CleanArchitectureBase.Domain.Entities.Misc;
-using CleanArchitectureBase.Shared.Constants.Permission;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Common.Security;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Application.Features.Base.Queries;
+using Coworkee.Domain.Entities.Misc;
+using Coworkee.Shared.Constants.Permission;
 using LazyCache;
 
-namespace CleanArchitectureBase.Application.Features.DocumentTypes.Queries.GetAll
+namespace Coworkee.Application.Features.DocumentTypes.Queries.GetAll
 {
     [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.View })]
     public class GetAllDocumentTypesQuery : GetAllQueryBase<DocumentTypeDto>

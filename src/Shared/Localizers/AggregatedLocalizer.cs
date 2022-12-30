@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitectureBase.Shared.Localizers
+namespace Coworkee.Shared.Localizers
 {
     public class AggregatedLocalizer<T> :IStringLocalizer<T>
     {

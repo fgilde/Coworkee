@@ -2,15 +2,15 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Configurations;
-using CleanArchitectureBase.Application.Contracts;
-using CleanArchitectureBase.Application.Contracts.Attributes;
+using Coworkee.Application.Configurations;
+using Coworkee.Application.Contracts;
+using Coworkee.Application.Contracts.Attributes;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using IModel = RabbitMQ.Client.IModel;
 
-namespace CleanArchitectureBase.Infrastructure.Services
+namespace Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IServiceBus))]
     public class RabbitMQServiceBus : IServiceBus

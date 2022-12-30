@@ -1,21 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using CleanArchitectureBase.Client.Configuration;
-using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Shared;
-using CleanArchitectureBase.Shared.Constants.Storage;
+using Coworkee.Client.Configuration;
+using Coworkee.Client.Extensions;
+using Coworkee.Shared;
+using Coworkee.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
-using CleanArchitectureBase.Application.Common.Extensions;
-using CleanArchitectureBase.Application.Common.Models.Identity;
-using CleanArchitectureBase.Application.Contracts.Services;
-using CleanArchitectureBase.Shared.Constants.Application;
+using Coworkee.Application.Common.Extensions;
+using Coworkee.Application.Common.Models.Identity;
+using Coworkee.Application.Contracts.Services;
+using Coworkee.Shared.Constants.Application;
 
-namespace CleanArchitectureBase.Client.Authentication
+namespace Coworkee.Client.Authentication
 {
     public class ApplicationStateProvider : AuthenticationStateProvider, ICurrentUserService
     {

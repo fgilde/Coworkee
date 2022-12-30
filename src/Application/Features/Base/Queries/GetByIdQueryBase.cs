@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitectureBase.Application.Common.Models;
-using CleanArchitectureBase.Application.Contracts.Repositories;
-using CleanArchitectureBase.Domain.Contracts;
+using Coworkee.Application.Common.Models;
+using Coworkee.Application.Contracts.Repositories;
+using Coworkee.Domain.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
-namespace CleanArchitectureBase.Application.Features.Base.Queries
+namespace Coworkee.Application.Features.Base.Queries
 {
     public class GetByIdQueryBase<TId, TDto> : IRequest<TDto>
     {

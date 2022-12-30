@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CleanArchitectureBase.Shared.Constants.Application;
+using Microsoft.Extensions.Configuration;
 
 namespace CleanArchitectureBase.Server.Extensions
 {
@@ -13,7 +14,8 @@ namespace CleanArchitectureBase.Server.Extensions
 
         public static IConfigurationBuilder AddConfigurations(this IConfigurationBuilder builder)
         {
-            // Here we can add custom config providers like db, or api call based or more json files (builder.AddJsonFile())
+            builder.AddEnvironmentVariables();
+            builder.AddJsonFile($"{ApplicationConstants.FileAccess.OverridingSettingsFile}", optional: true, reloadOnChange: true);
             return builder;
         }
     }

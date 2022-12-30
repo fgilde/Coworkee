@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: A maximum of {0} files are allowed
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored
+A maximum of {0} files are allowed: A maximum of {0} files are allowed
 aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Ethiopia)
@@ -1081,3 +1082,26 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.
+Create new backup: Create new backup
+Database Backups: Database Backups
+Do you really want to restart the server?: Do you really want to restart the server?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user
+Enter name of backup file: Enter name of backup file
+Enter new name of backup file: Enter new name of backup file
+Manage Database Backups.: Manage or restore database backups.
+Not connected: Not connected
+Rename backup: Rename backup
+Restart server: Restart server
+Restore: Restore
+Restore database: Restore database
+Restore default: Restore default
+Restore finished: Restore finished
+Restore in progress. Please wait until the restore is finished. This can take a while.: Restore in progress. Please wait until the restore is finished. This can take a while.
+The server is just restarting. Please wait until the connection has been restored: The server is just restarting. Please wait until the connection has been restored
+User and Roles: User and Roles
+Users and Roles: Users and Roles
+Server restarted successfully: Server restarted successfully
+Are you sure you want to restart Backend/Server?: Are you sure you want to restart Backend/Server?
+System Settings: System settings
+Change the system settings carefully: Change the system settings carefully

@@ -29,6 +29,7 @@ namespace CleanArchitectureBase.Server.Controllers
         protected ServerConfiguration Configuration => Get<ServerConfiguration>();
         protected ILogger<T> Logger => _loggerInstance ??= Get<ILogger<T>>();
         protected TService Get<TService>() => HttpContext.RequestServices.GetService<TService>();
+        protected IEnumerable<TService> GetAll<TService>() => HttpContext.RequestServices.GetServices<TService>();
         protected string ControllerName => ControllerContext.ActionDescriptor.ControllerName;
         protected IHubContext<ClientEventHub, IClientEventHub> ClientEventHub => Get<IHubContext<ClientEventHub, IClientEventHub>>();
         protected int UnhashId(string hash) => hash.MapTo<int>();

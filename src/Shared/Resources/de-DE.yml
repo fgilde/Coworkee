@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Es sind maximal {0} Dateien zulässig
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Es kann keine Verbindung zum Server hergestellt werden. Möglicherweise ist Ihre Netzwerkverbindung getrennt, oder der Server nicht erreichbar. Bitte warten Sie bis die Verbindung wiederhergestellt wurde
+A maximum of {0} files are allowed: Es sind maximal {0} Dateien zulässig
 aa-DJ: Afar (Dschibuti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Äthiopien)
@@ -1082,3 +1083,26 @@ zh-MO: Chinesisch (Macao SAR)
 zh-SG: Chinesisch (Singapur)
 zh-TW: Chinesisch (Taiwan)
 zu-ZA: isiZulu (Südafrika)
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Sind Sie sicher, dass Sie die Standardeinstellungen wiederherstellen möchten? Dies überschreibt alle Änderungen, die Sie hier jemals vorgenommen haben.
+Create new backup: Neues Backup erstellen
+Database Backups: Datenbank Sicherungen
+Do you really want to restart the server?: Möchten Sie den Server wirklich neu starten?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Möchten Sie die Datenbank wirklich aus dem Backup '{0}' wiederherstellen? Beachten Sie, dass alle Änderungen, die nach '{1}' vorgenommen wurden, weg sind. Dies bedeutet auch alle Änderungen, die von einem beliebigen Benutzer vorgenommen wurden
+Enter name of backup file: Geben Sie den Namen der Sicherungsdatei ein
+Enter new name of backup file: Neuen Namen der Sicherungsdatei eingeben
+Manage Database Backups.: Datenbank sichern und wiederherstellen.
+Not connected: Nicht verbunden
+Rename backup: Sicherung umbenennen
+Restart server: Server neustart
+Restore: Wiederherstellen
+Restore database: Datenbank wiederherstellen
+Restore default: Standard wiederherstellen
+Restore finished: Wiederherstellung abgeschlossen
+Restore in progress. Please wait until the restore is finished. This can take a while.: Wiederherstellung läuft. Bitte warten Sie, bis die Wiederherstellung abgeschlossen ist. Dies kann eine Weile dauern.
+The server is just restarting. Please wait until the connection has been restored: Der Server wird gerade neu gestartet. Bitte warten sie bis die Verbindung wieder hergestellt wurde
+User and Roles: Benutzer und Rollen
+Users and Roles: Benutzer und Rollen
+Server restarted successfully: Server wurde erfolgreich neu gestartet
+Are you sure you want to restart Backend/Server?: Sind Sie sicher, dass Sie den Server neu starten möchten?
+System Settings: Systemeinstellungen
+Change the system settings carefully: Ändern Sie die Systemeinstellungen vorsichtig

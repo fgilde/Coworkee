@@ -8,6 +8,7 @@ namespace CleanArchitectureBase.Client.Configuration
         public string BackendOrigin { get; set; }
         public string JsMainNamespace { get; set; }
         public bool AllowAnonymousPageAccess { get; set; }
+        public int BackendHealthCheckIntervalInSeconds { get; set; }
         public Logging Logging { get; set; }
         public Publicsettings ServerConfiguration { get; set; }
 

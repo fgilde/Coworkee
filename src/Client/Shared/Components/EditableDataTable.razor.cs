@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -73,6 +74,8 @@ namespace CleanArchitectureBase.Client.Shared.Components
         [Parameter] public TResult SelectedItem { get; set; }
         [Parameter] public EventCallback<TResult> SelectedItemChanged { get; set; }
         [Parameter] public bool AllowRowSelection { get; set; }
+
+        [Parameter] public EditableDataTable.CustomAction<TResult>[] CustomActions { get; set; }
 
         private string _pageUrl;
         private List<TResult> _flatList = new();
@@ -484,6 +487,17 @@ namespace CleanArchitectureBase.Client.Shared.Components
         {
             SelectedItem = item;
             await SelectedItemChanged.InvokeAsync(item);
+        }
+
+        private IEnumerable<EditableDataTable.CustomAction<TResult>> GetCustomActions(params EditableDataTable.CustomActionAvailability[] availabilities)
+        {
+            return CustomActions?.Where(action => availabilities.Contains(action.Availability)) ?? Enumerable.Empty<EditableDataTable.CustomAction<TResult>>();
+        }
+
+        private async Task ExecuteAction(EditableDataTable.CustomAction<TResult> action, TResult item = default)
+        {
+            var items = item != null ? new[] { item } : _selectedItems.ToArray();
+            await action.Action(items);
         }
     }
 }

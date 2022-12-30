@@ -29,7 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>-->
     <PackageReference Include="Nextended.Imaging" Version="6.0.1" />
-    <PackageReference Include="Hangfire" Version="1.7.31" />
+    <PackageReference Include="Hangfire" Version="1.7.32" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
@@ -72,6 +72,7 @@
   <ItemGroup>
     <Folder Include="BackgroundServices\" />
     <Folder Include="Files\" />
+    <Folder Include="Files\DBBackups\" />
     <Folder Include="Files\Documents\" />
     <Folder Include="Files\Images\ProfilePictures\" />
     <Folder Include="Logs\" />

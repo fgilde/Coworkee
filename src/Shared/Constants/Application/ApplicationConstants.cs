@@ -66,6 +66,12 @@ namespace CleanArchitectureBase.Shared.Constants.Application
             public static bool IsAuthRequired(string route) => AuthRequired.Contains(route, StringComparer.InvariantCultureIgnoreCase);
         }
 
+        public static class FileAccess
+        {
+            public const string StaticFileDirectoryName = "Files";
+            public const string OverridingSettingsFile = "appsettings.Override.json"; // In this file admin settings are stored. This file then overrides the appsettings.json file.
+        }
+
         public static class ParameterNames
         {
             public const string ReturnUrl = nameof(ReturnUrl);

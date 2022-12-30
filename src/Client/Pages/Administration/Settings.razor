@@ -16,43 +16,63 @@
 {
     <MudTabs Elevation="0" Color="Color.Transparent" Rounded="true" Class="mud-tabs-stick-merge" PanelClass="mt-6">
         <MudTabPanel Text="@_localizer["Server Settings"]">
-            <MudExObjectEditForm
-                IsLoading="@_isLoading"
-                StickyToolbar="true"
-                StickyActionBar="true"
-                ActionBarClass="action-bar-border"
-                ActionBarColor="Color.Surface"
-                ToolbarColor="Color.Surface"
-                GroupingStyle="GroupingStyle.Flat"
-                DefaultGroupName="@_localizer["General"]"
-                OnCancel="@OnCancel"
-                OnValidSubmit="@OnSubmitServerConfiguration"
-                MetaConfiguration="@Configure()"
-                Value="@ServerConfiguration">
+            <MudExObjectEditForm IsLoading="@_isLoading"
+                             ScrollToTopPosition="DialogPosition.BottomLeft"
+                             StickyToolbar="true"
+                             AllowExport="true"
+                             AllowImport="true"
+                             ImportNeedsConfirmation="true"
+                             StickyActionBar="true"
+                             ActionBarClass="action-bar-border"
+                             ActionBarColor="Color.Surface"
+                             ToolbarColor="Color.Surface"
+                             GroupingStyle="GroupingStyle.Flat"
+                             DefaultGroupName="@_localizer["General"]"
+                             GlobalResetSettings="@(new MudBlazor.Extensions.Components.ObjectEdit.Options.GlobalResetSettings {AllowReset = false})"
+                             OnCancel="@OnCancel"
+                             OnValidSubmit="@OnSubmitServerConfiguration"
+                             MetaConfiguration="@ConfigureServerSettings()"
+                             ToolBarActionAlignment="ActionAlignment.Left"
+                             Value="@ServerConfiguration">
+                <ToolBarContent>
+                    <MudSpacer />
+
+                    <MudTooltip Text="@_localizer["Restart server"]">
+                        <MudIconButton OnClick="@OnRestartClick" Icon="@Icons.Material.Filled.PowerSettingsNew"></MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="@_localizer["Restore"]">
+                        <MudIconButton OnClick="@OnRestoreClick" Icon="@Icons.Material.Filled.RestorePage"></MudIconButton>
+                    </MudTooltip>
+                    <MudDivider Style="height: 60%" Vertical="true" />
+                </ToolBarContent>
+
             </MudExObjectEditForm>
         </MudTabPanel>
         <MudTabPanel Text="@_localizer["Client Settings"]">
-            <MudExObjectEditForm
-                IsLoading="@_isLoading"
-                StickyToolbar="true"
-                StickyActionBar="true"
-                ActionBarClass="action-bar-border"
-                ActionBarColor="Color.Surface"
-                ToolbarColor="Color.Surface"
-                GroupingStyle="GroupingStyle.Flat"
-                DefaultGroupName="@_localizer["General"]"
-                OnCancel="@OnCancel"
-                OnValidSubmit="@OnSubmitClientConfiguration"
-                MetaConfiguration="@ConfigureClientSettings()"
-                Value="@_config">
+            <MudExObjectEditForm IsLoading="@_isLoading"
+                             ScrollToTopPosition="DialogPosition.BottomLeft"
+                             StickyToolbar="true"
+                             AllowExport="true"
+                             AllowImport="true"
+                             ImportNeedsConfirmation="true"
+                             StickyActionBar="true"
+                             ActionBarClass="action-bar-border"
+                             ActionBarColor="Color.Surface"
+                             ToolbarColor="Color.Surface"
+                             GroupingStyle="GroupingStyle.Flat"
+                             DefaultGroupName="@_localizer["General"]"
+                             OnCancel="@OnCancel"
+                             OnValidSubmit="@OnSubmitClientConfiguration"
+                             MetaConfiguration="@ConfigureClientSettings()"
+                             Value="@_config">
             </MudExObjectEditForm>
         </MudTabPanel>
     </MudTabs>
-    
+
 
 }
 else
 {
-    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7"/>
+    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
 }
 

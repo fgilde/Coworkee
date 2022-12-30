@@ -25,22 +25,22 @@
 }
 else
 {
-    <UpdateOnChange UpdateForNotContainingModels="true" TDto="TResult" ChangeBehaviour="ModelChangeBehaviour.Reload" ModelsLoadFn="@Reload"/>
-    
+    <UpdateOnChange UpdateForNotContainingModels="true" TDto="TResult" ChangeBehaviour="ModelChangeBehaviour.Reload" ModelsLoadFn="@Reload" />
+
     @if (Import != null)
     {
         <InputFile id="importInput" OnChange="ExecImport" hidden />
     }
 
     <MudTable Class="mud-editable-table" FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
-              RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
-              @bind-SelectedItems="@_selectedItems"
-              RowStyleFunc="@RowRenderStyle"
-              Elevation="@Elevation"
-              Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)"
-              ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
-              Hover="true" Dense="true" Bordered="false" Striped="true"
-              @ref="_table">
+          RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
+          @bind-SelectedItems="@_selectedItems"
+          RowStyleFunc="@RowRenderStyle"
+          Elevation="@Elevation"
+          Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)"
+          ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
+          Hover="true" Dense="true" Bordered="false" Striped="true"
+          @ref="_table">
         <ToolBarContent>
             @if (ToolbarContentBeforeStart != null)
             {
@@ -52,9 +52,9 @@ else
             }
             @if (ApiCreateOrEdit != null)
             {
-                <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]"/>
+                <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]" />
             }
-            <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh"/>
+            <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh" />
             @if (Export != null)
             {
                 <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
@@ -70,17 +70,31 @@ else
             }
             @if (Import != null)
             {
-                <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit"/>
+                <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit" />
             }
 
             @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
             {
                 <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" DisableElevation Label="@_localizer["With_Selected", _selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+
+                    @foreach (var action in GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.MultipleOnly))
+                    {
+                        <MudMenuItem OnClick="@(() => ExecuteAction(action))">
+                            <MudText>
+                                @if (!string.IsNullOrEmpty(action.Icon))
+                                {
+                                    <MudIcon Color="action.Color" Icon="@action.Icon" Class="mr-3 mb-n1" />
+                                }
+                                @_localizer[action.Text]
+                            </MudText>
+                        </MudMenuItem>
+                    }
+
                     @if (_canEdit && EditMode == EditMode.SelfHandled && ApiEditMany != null)
                     {
                         <MudMenuItem>
                             <MudText>
-                                <MudIcon Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1"/>
+                                <MudIcon Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
                                 @_localizer["Edit"]
                             </MudText>
                         </MudMenuItem>
@@ -89,7 +103,7 @@ else
                     {
                         <MudMenuItem @onclick="@(DeleteSelected)">
                             <MudText>
-                                <MudIcon Color="Color.Error" Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1"/>
+                                <MudIcon Color="Color.Error" Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
                                 @_localizer["Delete"]
                             </MudText>
                         </MudMenuItem>
@@ -112,7 +126,7 @@ else
             {
                 @ToolbarContentAfterStart
             }
-            <MudSpacer/>
+            <MudSpacer />
             @if (ToolbarContentBeforeEnd != null)
             {
                 @ToolbarContentBeforeEnd
@@ -138,15 +152,15 @@ else
                     <MudTh><MudTableSortLabel SortBy="new Func<TResult, object>(x => x.ExposeField<object>(prop))">@CaptionForProperty(prop)</MudTableSortLabel></MudTh>
                 }
             }
-        @if (!HideActionColumn)
-        {
-            <MudTh Style="text-align: right">@_localizer["Actions"]</MudTh>
-        }
+            @if (!HideActionColumn)
+            {
+                <MudTh Style="text-align: right">@_localizer["Actions"]</MudTh>
+            }
         </HeaderContent>
         <RowTemplate>
             @for (var index = 0; index < TableProperties.Length; index++)
             {
-                var prefix = Prefixes?.Length > index ?  Prefixes?[index] : null;
+                var prefix = Prefixes?.Length > index ? Prefixes?[index] : null;
                 var prop = TableProperties[index];
                 <MudTd Class="@($"{(FullRowClickForEdit ? "cursor-pointer cursor-pointer-deep" : "")}")" @onclick="@(()=>OnRowClick(context, prop))" DataLabel="@_localizer[prop]">
                     <p class="@($"{(HasChanges(context) ? "changed" : "")}")">
@@ -166,13 +180,13 @@ else
                             }
                             else
                             {
-                                <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString"/>
+                                <MudHighlighter Text="@(PropertyValueFor(context, prop))" HighlightedText="@_searchString" />
                             }
                         }
                     </p>
                 </MudTd>
             }
-            
+
             @if (!HideActionColumn)
             {
                 <MudTd DataLabel="@_localizer["Actions"]" Style="text-align: right">
@@ -205,17 +219,25 @@ else
                             }
                         }
                     }
-                    else
+                    else if (!GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.SingleOnly).Any())
                     {
                         <MudButton Variant="Variant.Filled"
-                                   DisableElevation="true"
-                                   StartIcon="@Icons.Material.Filled.DoNotTouch"
-                                   IconColor="Color.Secondary"
-                                   Size="Size.Small"
-                                   Color="Color.Surface">
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
                             @_localizer["No Allowed Actions"]
                         </MudButton>
                     }
+
+                    @foreach (var action in GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.SingleOnly))
+                    {
+                        <MudTooltip Text="@_localizer[action.Text]">
+                            <MudIconButton @onclick="@(() => ExecuteAction(action, context))" Color="action.Color" Icon="@action.Icon" aria-label="@_localizer[action.Text]"></MudIconButton>
+                        </MudTooltip>
+                    }
+
                 </MudTd>
             }
         </RowTemplate>

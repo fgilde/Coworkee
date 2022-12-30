@@ -315,14 +315,14 @@ public partial class UploadRequestEdit : IAsyncDisposable
         }
     }
 
-    private Task<ContentErrorResult> HandleContentErrorFunc(IFileDisplayInfos arg)
+    private Task<MudExFileDisplayContentErrorResult> HandleContentErrorFunc(IMudExFileDisplayInfos arg)
     {
         if (arg.ContentType == "text/html")
         {
-            var contentErrorResult = ContentErrorResult.RedirectTo("https://www.golem.de").SetProperties(r => r.FallBackInIframe = true, r => r.SandBoxIframes = false);
+            var contentErrorResult = MudExFileDisplayContentErrorResult.RedirectTo("https://www.golem.de").SetProperties(r => r.FallBackInIframe = true, r => r.SandBoxIframes = false);
             return Task.FromResult(contentErrorResult);
         }
-        return Task.FromResult(ContentErrorResult.Unhandled);
+        return Task.FromResult(MudExFileDisplayContentErrorResult.Unhandled);
     }
 
     private bool IsValidUrl(string s) => Uri.TryCreate(s, UriKind.Absolute, out var uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);

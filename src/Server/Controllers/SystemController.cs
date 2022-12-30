@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Application.Common.Models;
@@ -8,18 +7,20 @@ using CleanArchitectureBase.Application.Features.System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using CleanArchitectureBase.Application.Configurations;
 using CleanArchitectureBase.Server.Extensions;
 using CleanArchitectureBase.Shared.Constants.Application;
-using CleanArchitectureBase.Shared.Constants.Role;
-using Newtonsoft.Json;
 using Nextended.Core.Extensions;
-
+using CleanArchitectureBase.Shared.Constants.Role;
+using System.IO;
+using Microsoft.Extensions.Hosting;
 
 namespace CleanArchitectureBase.Server.Controllers
 {
     public class SystemController : BaseApiController<SystemController>
     {
+
         [Authorize]
         [HttpGet(nameof(AuthorizeServerUrl))]
         public ActionResult<string> AuthorizeServerUrl(string url)
@@ -31,7 +32,7 @@ namespace CleanArchitectureBase.Server.Controllers
         [Authorize]
         [HttpGet(nameof(UnhashHashedId))]
         [Produces(typeof(int))]
-        // TODO: Remove after support of hashed ids is added to extended attributes
+        // TODO: Remove after support of hashed ids has been added to extended attributes
         public ActionResult<string> UnhashHashedId(string id)
         {
             return Ok(UnhashId(id));
@@ -72,7 +73,6 @@ namespace CleanArchitectureBase.Server.Controllers
             }));
         }
 
-
         [Authorize(Roles = RoleConstants.AdministratorRole)]
         [HttpGet(nameof(SystemConfiguration))]
         [Produces(typeof(ServerConfiguration))]
@@ -86,13 +86,38 @@ namespace CleanArchitectureBase.Server.Controllers
         public IActionResult WriteSystemConfiguration([FromBody] ServerConfiguration config)
         {
             // For temporary set
+            var configuration = Get<IConfiguration>();
             foreach (var item in config.ToFlatDictionary())
-                Get<IConfiguration>()[item.Key.Replace(".", ":")] = item.Value;
+                configuration[item.Key.Replace(".", ":")] = item.Value;
             // For persistent
-            //System.IO.File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "appSettings.json"), JsonConvert.SerializeObject(config, Formatting.Indented));
-            //Get<IHostApplicationLifetime>().StopApplication();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), ApplicationConstants.FileAccess.OverridingSettingsFile);
+            System.IO.File.WriteAllText(path, JsonConvert.SerializeObject(config, Formatting.Indented));
             return Ok();
         }
+
+        [Authorize(Roles = RoleConstants.AdministratorRole)]
+        [HttpPost(nameof(RestoreSystemConfiguration))]
+        [Produces(typeof(ServerConfiguration))]
+        public IActionResult RestoreSystemConfiguration()
+        {
+            var configuration = Get<IConfiguration>();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), ApplicationConstants.FileAccess.OverridingSettingsFile);
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
+            var config = configuration as ConfigurationRoot;
+            config?.Reload();
+            return Ok(configuration.BindTo<ServerConfiguration>());
+        }
+
+
+        [Authorize(Roles = RoleConstants.AdministratorRole)]
+        [HttpPost(nameof(RestartServer))]
+        public IActionResult RestartServer()
+        {
+            Get<IHostApplicationLifetime>().StopApplication();
+            return Ok();
+        }
+
 
 
         //[HttpPost(nameof(SendNotification))]

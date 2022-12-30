@@ -36,6 +36,7 @@ namespace CleanArchitectureBase.Server
         public void ConfigureServices(IServiceCollection services)
         {
             var serverConfig = services.AddApplicationSettings(_configuration);
+
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalRServices(serverConfig);
@@ -61,10 +62,10 @@ namespace CleanArchitectureBase.Server
             services.AddHangfireServer();
             services.AddGrpc();
             services.AddControllersWithViews(options =>
-                {
-                    options.Filters.Add<ApiExceptionFilterAttribute>();
-                    options.ModelBinderProviders.Insert(0, new TransferableExpressionModelBinderProvider());
-                })
+            {
+                options.Filters.Add<ApiExceptionFilterAttribute>();
+                options.ModelBinderProviders.Insert(0, new TransferableExpressionModelBinderProvider());
+            })
                 .AddValidators()
                 .AddXmlDataContractSerializerFormatters()
                 .AddOData(options =>
@@ -80,7 +81,7 @@ namespace CleanArchitectureBase.Server
             services.AddLazyCache();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             IStringLocalizer<Startup> localizer,
             IDashboardAuthorizationFilter authorizationFilter)
         {
@@ -93,15 +94,15 @@ namespace CleanArchitectureBase.Server
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
-                RequestPath = new PathString("/Files")
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), ApplicationConstants.FileAccess.StaticFileDirectoryName)),
+                RequestPath = new PathString($"/{ApplicationConstants.FileAccess.StaticFileDirectoryName}")
             });
             app.UseRequestLocalizationByCulture();
             app.UseRouting();
 
 
             app.UseGrpcWeb();
-            if(!ServerUtils.ClientRunsOnServer)
+            if (!ServerUtils.ClientRunsOnServer)
                 app.UseAuthenticationFromQuery();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -115,10 +116,10 @@ namespace CleanArchitectureBase.Server
             app.UseSwaggerAuthorized();
             app.UseSwagger();
 
-    
+
 
             app.Initialize(_configuration);
         }
     }
-    
+
 }

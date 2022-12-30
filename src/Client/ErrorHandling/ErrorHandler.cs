@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CleanArchitectureBase.Client.Extensions;
-using CleanArchitectureBase.Client.Shared.Dialogs;
 using CleanArchitectureBase.Client.Utils;
 using CleanArchitectureBase.Shared.Wrapper;
 using Microsoft.AspNetCore.Components;

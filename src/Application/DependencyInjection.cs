@@ -39,6 +39,7 @@ namespace CleanArchitectureBase.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+            services.AddAllWithRegisterAttribute(typeof(CleanArchitectureBase.Application.DependencyInjection).Assembly);
             return services;
         }
 

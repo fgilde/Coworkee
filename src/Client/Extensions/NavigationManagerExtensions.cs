@@ -115,6 +115,11 @@ namespace CleanArchitectureBase.Client.Extensions
             return null;
         }
 
+        public static void NavigateToHome(this NavigationManager navigationManager)
+        {
+            navigationManager.NavigateTo("/");
+        }
+
         public static void NavigateToHomeWithReturnTo(this NavigationManager navigationManager, string returnUrl = null)
         {
             navigationManager.NavigateToWithReturnTo("/", returnUrl);

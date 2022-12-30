@@ -25,11 +25,13 @@ using CleanArchitectureBase.Shared;
 using CleanArchitectureBase.Shared.Constants.Application;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
 using CleanArchitectureBase.Application.Contracts.Services;
 using CleanArchitectureBase.Client.Configuration.MudExObjectEdit;
+using Microsoft.AspNetCore.Components.Web;
+using Nextended.Core.Helper;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 namespace CleanArchitectureBase.Client.Extensions
 {
@@ -37,13 +39,15 @@ namespace CleanArchitectureBase.Client.Extensions
     {
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
-            //builder.RootComponents.Add<App>("#app");
-            builder.RootComponents.RegisterCustomElement<App>("blazor-app");
+            builder.RootComponents.Add<App>("#app");
+           // builder.RootComponents.RegisterCustomElement<App>("blazor-app");
             return builder;
         }
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
             var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
+            var logLevel = clientSettings.Logging.LogLevel.Default.ToEnum<LogLevel>();
+            builder.Logging.SetMinimumLevel(logLevel);
             builder
             .Services
             .AddTransient(p => clientSettings)
@@ -71,6 +75,7 @@ namespace CleanArchitectureBase.Client.Extensions
                 .AddScoped<AuthenticationStateProvider, ApplicationStateProvider>()
                 .AddScoped<ICurrentUserService, ApplicationStateProvider>(p => p.GetService<ApplicationStateProvider>())
                 .AddTransient<IErrorHandler, ErrorHandler>()
+                .AddScoped<IHealthChecker, HealthChecker>()
                 .AddManagers()
                 .AddExtendedAttributeManagers()
                 .AddTransient<AuthenticationHeaderHandler>()
@@ -102,7 +107,7 @@ namespace CleanArchitectureBase.Client.Extensions
             });
 
             builder.Services.AddHttpClientInterceptor();
-           
+            
             // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
 
             return builder;

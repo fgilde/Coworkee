@@ -36,6 +36,7 @@ namespace CleanArchitectureBase.Client.Models.Navigation
                 Children = new()
                 {
                     new NavigationEntry("Site Settings", Icons.Material.Outlined.AdminPanelSettings, "/admin/site-settings").WithRoles(RoleConstants.AdministratorRole),
+                    new NavigationEntry("Database Backups", Icons.Material.Outlined.Save, "/admin/database-backups").WithPolicies(Permissions.Backups.View),
                     new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
                     new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
                     new NavigationEntry("Localization")

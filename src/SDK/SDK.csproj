@@ -38,10 +38,10 @@
       </CopyLocal>
     </ProjectReference>
   </ItemGroup>
-  <Target Name="CopyPackage" AfterTargets="Build">
+  <!--<Target Name="CopyPackage" AfterTargets="Build">
     <ItemGroup>
       <SdkPackageFiles Include="$(ProjectDir)bin/$(Configuration)/*.nupkg" />
     </ItemGroup>
     <Copy SourceFiles="@(SdkPackageFiles)" DestinationFolder="$(SolutionDir)src/Server/wwwroot/sdk" />
-  </Target>
+  </Target>-->
 </Project>

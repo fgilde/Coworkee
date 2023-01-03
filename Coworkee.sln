@@ -7,8 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0317DF35-F5C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{275B08FA-6837-4A32-B890-0ADE2DE4C3F7}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\delete_artifacts.yml = .github\workflows\delete_artifacts.yml
 		Features.md = Features.md
 		Links.txt = Links.txt
+		.github\workflows\master_coworkee.yml = .github\workflows\master_coworkee.yml
 		README.md = README.md
 		rename.ps1 = rename.ps1
 		version.json = version.json

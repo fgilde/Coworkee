@@ -73,6 +73,7 @@
     <Folder Include="Files\" />
     <Folder Include="Files\DBBackups\" />
     <Folder Include="Files\Documents\" />
+    <Folder Include="Files\Images\Products\" />
     <Folder Include="Files\Images\ProfilePictures\" />
     <Folder Include="Logs\" />
     <Folder Include="wwwroot\api\" />

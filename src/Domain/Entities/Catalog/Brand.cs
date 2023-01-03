@@ -2,6 +2,7 @@ using Coworkee.Domain.Contracts;
 
 namespace Coworkee.Domain.Entities.Catalog
 {
+    // Brand
     public class Brand : AuditableEntity<int>
     {
         public string Name { get; set; }

@@ -32,6 +32,7 @@ namespace Coworkee.Infrastructure.Services
 
             // Create a backup command using the connection string
             string backupCommand = $"BACKUP DATABASE {context.Database.GetDbConnection().Database} TO DISK='{backupPath}'";
+            //string backupCommand = $"BACKUP DATABASE {context.Database.GetDbConnection().Database} TO DISK = '{backupPath}' WITH FORMAT";
 
             // Open the connection to the database
             using var connection = context.Database.GetDbConnection();
@@ -100,5 +101,31 @@ namespace Coworkee.Infrastructure.Services
 
         }
 
+        //public async Task<string> BackupDatabaseToS3(DbContext context, string fileName = null, string bucketName = "your-bucket-name")
+        //{
+        //    // Generate a unique file name if not specified
+        //    fileName = fileName ?? $"DB_Backup_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.bak";
+        //    var backupPath = Path.Combine(BackupDirectory, fileName);
+
+        //    // Backup the database to the local file system
+        //    BackupDatabase(context, fileName);
+
+        //    // Upload the backup file to S3
+        //    using (var fileStream = new FileStream(backupPath, FileMode.Open))
+        //    {
+        //        var client = new AmazonS3Client();
+        //        var request = new PutObjectRequest
+        //        {
+        //            BucketName = bucketName,
+        //            Key = fileName,
+        //            InputStream = fileStream
+        //        };
+        //        await client.PutObjectAsync(request);
+        //    }
+
+        //    // Return the S3 file URL
+        //    return $"https://s3.amazonaws.com/{bucketName}/{fileName}";
+        //}
+        
     }
 }

@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   Coworkee:
-    image: ${DOCKER_REGISTRY-}Coworkee
+    image: ${DOCKER_REGISTRY-}coworkee
     build:
       context: .
       dockerfile: src/Server/Dockerfile
@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     restart: on-failure
-    container_name: Coworkee
+    container_name: coworkee
 
   db:
     image: "mcr.microsoft.com/mssql/server"

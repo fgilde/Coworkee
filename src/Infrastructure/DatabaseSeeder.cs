@@ -30,6 +30,7 @@ namespace Coworkee.Infrastructure
 
         public void Initialize()
         {
+            // TODO: Set Culture for this scope to.. whatever
             AddRoles();
             AddUsers(new[] { ApplicationConstants.Defaults.Users.System }
                 .Concat(ApplicationConstants.Defaults.Users.Administrators)

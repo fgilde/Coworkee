@@ -85,7 +85,7 @@
 
                 @if (_canEditUser)
                 {
-                    <MudGrid>
+                    <MudGrid Class="app-sticky-bottom-actionbar-body">
                         <MudButton Disabled="@(!Validated)" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mr-3 mt-5" ButtonType="ButtonType.Submit">@_localizer["Save Changes"]</MudButton>
                     </MudGrid>
                 }

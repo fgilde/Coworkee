@@ -24,9 +24,9 @@
         </TitleContent>
         <DialogContent>
             <MudTextField For="@(() => RoleModel.Id)" @bind-Value="RoleModel.Id" Label="@_localizer["Role ID"]" Disabled />
-            <MudTextField For="@(() => RoleModel.Name)" @bind-Value="RoleModel.Name" Label="@_localizer["Role Name"]" />
+            <MudTextField For="@(() => RoleModel.Name)" @bind-Value="RoleModel.Name" Label="@_localizer["Role Name"]" Disabled="@isSystemRequiredRole" />
             <MudTextField For="@(() => RoleModel.Description)" @bind-Value="RoleModel.Description" Label="@_localizer["Description"]" />
-            <MudCheckBox For="@(() => RoleModel.IsSelectableByUser)" @bind-Checked="@RoleModel.IsSelectableByUser" Label="@_localizer["Role is selectable by user and registration"]" Color="Color.Primary"></MudCheckBox>
+            <MudCheckBox Disabled="@isSystemRequiredRole" For="@(() => RoleModel.IsSelectableByUser)" @bind-Checked="@RoleModel.IsSelectableByUser" Label="@_localizer["Role is selectable by user and registration"]" Color="Color.Primary"></MudCheckBox>
         </DialogContent>
         <DialogActions>
             <MudButton Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>

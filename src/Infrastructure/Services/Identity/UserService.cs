@@ -115,7 +115,8 @@ namespace Coworkee.Infrastructure.Services.Identity
                 {
                     //Check if Role Exists
                     var targetRoleName = u.RoleToAdd;
-                    var applicationRole = new ApplicationRole(targetRoleName, _localizer[targetRoleName + " role " + (u.IsSuperUser ? "with full permissions" : "with default permissions")]);
+                    string withDefaultPermissions = targetRoleName + " role " + (u.IsSuperUser ? "with full permissions" : "with default permissions");
+                    var applicationRole = new ApplicationRole(targetRoleName, _localizer[withDefaultPermissions]);
                     var roleInDb = await _roleManager.FindByNameAsync(targetRoleName);
                     if (roleInDb == null)
                     {

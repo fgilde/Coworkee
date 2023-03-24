@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Coworkee.Application.Common.Models.Identity;
 using Coworkee.Application.Hubs;
+using Coworkee.Shared.Constants.Role;
 
 namespace Coworkee.Client.Pages.Identity
 {
     public partial class RoleModal: IAsyncDisposable
     {
+        private bool isSystemRequiredRole => RoleModel?.Name == RoleConstants.AdministratorRole || RoleModel?.Name == RoleConstants.BasicRole;
 
         [Parameter] public RoleDto RoleModel { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }

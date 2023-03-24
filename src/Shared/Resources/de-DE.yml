@@ -1106,3 +1106,4 @@ Server restarted successfully: Server wurde erfolgreich neu gestartet
 Are you sure you want to restart Backend/Server?: Sind Sie sicher, dass Sie den Server neu starten möchten?
 System Settings: Systemeinstellungen
 Change the system settings carefully: Ändern Sie die Systemeinstellungen vorsichtig
+Field is required!: Das Feld "{0}" ist erforderlich!

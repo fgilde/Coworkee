@@ -286,3 +286,17 @@ body * {
     z-index: 4;
     top: calc(var(--mud-appbar-height) + 10px);
 }
+
+.app-sticky-bottom-actionbar-surface {
+    position: sticky;
+    bottom: 0;
+    border-top: 2px dashed var(--mud-palette-secondary);
+    background-color: var(--mud-palette-surface);
+}
+
+.app-sticky-bottom-actionbar-body {
+    position: sticky;
+    bottom: 0;
+    border-top: 2px dashed var(--mud-palette-secondary);
+    background-color: var(--mud-palette-background);
+}

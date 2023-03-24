@@ -156,9 +156,9 @@ namespace Coworkee.Infrastructure.Services.Identity
             else
             {
                 var existingRole = await _roleManager.FindByIdAsync(request.Id);
-                if (existingRole.Name == RoleConstants.AdministratorRole || existingRole.Name == RoleConstants.BasicRole)
-                    return await Result<string>.FailAsync(string.Format(_localizer["Not allowed to modify {0} Role."], existingRole.Name));
-
+                if ((existingRole.Name == RoleConstants.AdministratorRole || existingRole.Name == RoleConstants.BasicRole) && (existingRole.Name != request.Name || request.IsSelectableByUser))
+                    return await Result<string>.FailAsync(string.Format(_localizer["Not allowed"], existingRole.Name));
+                
                 existingRole.Name = request.Name;
                 existingRole.NormalizedName = request.Name.ToUpper();
                 existingRole.Description = request.Description;

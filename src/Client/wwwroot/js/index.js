@@ -27,10 +27,16 @@ function getJsAppData() {
 ;
 function onLoaded(appSettings) {
     var nsObject = window[appSettings.JsMainNamespace];
+    var txtCmp = document.querySelector('#sub-text');
+    var logoCmp = document.querySelector('#app-logo');
     nsObject['AppSettings'] = appSettings;
     nsObject['getJsAppData'] = getJsAppData;
-    document.querySelector('#app-logo').insertAdjacentHTML('beforeend', nsObject.CustomIcons.ApplicationMainIcon);
-    document.querySelector('#sub-text').innerHTML = `${nsObject.ApplicationConstants.ApplicationName}`;
+    if (logoCmp) {
+        logoCmp.insertAdjacentHTML('beforeend', nsObject.CustomIcons.ApplicationMainLogo);
+    }
+    if (txtCmp) {
+        txtCmp.innerHTML = `${nsObject.ApplicationConstants.ApplicationName}`;
+    }
     document.title = nsObject.ApplicationConstants.ApplicationName + ' - Home';
     loadHelper(appSettings.JsMainNamespace);
     var app = document.getElementById('app');

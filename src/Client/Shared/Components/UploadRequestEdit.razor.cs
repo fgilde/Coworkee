@@ -18,7 +18,7 @@ using Coworkee.Application.Requests;
 using Coworkee.Client.JsInterop;
 using Coworkee.Shared.Misc;
 using MudBlazor.Extensions.Components;
-using MudBlazor.Extensions.Extensions;
+using MudBlazor.Extensions.Helper;
 using MudBlazor.Extensions.Options;
 using Nextended.Blazor.Extensions;
 using Coworkee.Client.Extensions;

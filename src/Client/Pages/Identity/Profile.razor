@@ -10,8 +10,8 @@
                 <div class="d-flex justify-center mb-4 drop-zone" @ref="dropZoneElement">
                     <UserAvatar UserData="@user" Height="250" Width="250" />
                 </div>
-                <MudText Typo="Typo.h6" Align="Align.Center">@user?.FirstName @user?.LastName</MudText>
-                <MudText Align="Align.Center">@user?.Email</MudText>
+                <MudText Style="word-wrap:break-word"Typo="Typo.h6" Align="Align.Center">@user?.FirstName @user?.LastName</MudText>
+                <MudText Style="word-wrap:break-word" Align="Align.Center">@user?.Email</MudText>
             </MudCardContent>
             @if (_canEditUser)
             {
@@ -22,7 +22,9 @@
                            Size="Size.Small"
                            StartIcon="@Icons.Filled.CloudUpload"
                            for="fileInput">
-                        @_localizer["Upload Image"]
+                        <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                            @_localizer["Upload Image"]
+                        </MudHidden>
                     </MudButton>
                     @if (!string.IsNullOrEmpty(@ImageDataUrl))
                     {
@@ -31,7 +33,9 @@
                            StartIcon="@Icons.Filled.Delete"
                            Size="Size.Small"
                            OnClick="DeleteAsync">
-                            @_localizer["Delete Image"]
+                            <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                                @_localizer["Delete Image"]
+                            </MudHidden>
                         </MudButton>
                     }
                 </MudCardActions>

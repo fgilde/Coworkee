@@ -10,17 +10,17 @@
                 <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" AutoFocus="true" For="@(() => Address.Name)" @bind-Value="Address.Name" Label="@_localizer["Name"]" />
             </MudItem>
         }
-        <MudItem xs="12" sm="3" md="3">
-            <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" AutoFocus="@(!ShowNameInput)" For="@(() => Address.PostalCode)" @bind-Value="Address.PostalCode" Label="@_localizer["PostalCode"]" />
-        </MudItem>
         <MudItem xs="12" sm="9" md="9">
-            <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" For="@(() => Address.City)" @bind-Value="Address.City" Label="@_localizer["City"]" />
-        </MudItem>
-        <MudItem xs="12" sm="9" md="9">
-            <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" OnKeyDown="@(StreetKeyDown)" For="@(() => Address.Street)" @bind-Value="Address.Street" Label="@_localizer["Street"]" />
+            <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" AutoFocus="@(!ShowNameInput)" OnKeyDown="@(StreetKeyDown)" For="@(() => Address.Street)" @bind-Value="Address.Street" Label="@_localizer["Street"]" />
         </MudItem>
         <MudItem xs="12" sm="3" md="3">
             <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" @ref="_houseNumberField" For="@(() => Address.HouseNumber)" @bind-Value="Address.HouseNumber" Label="@_localizer["HouseNumber"]" />
+        </MudItem>
+        <MudItem xs="12" sm="3" md="3">
+            <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" For="@(() => Address.PostalCode)" @bind-Value="Address.PostalCode" Label="@_localizer["PostalCode"]" />
+        </MudItem>
+        <MudItem xs="12" sm="9" md="9">
+            <MudTextField Variant="@Variant" ReadOnly="@ReadOnly" For="@(() => Address.City)" @bind-Value="Address.City" Label="@_localizer["City"]" />
         </MudItem>
     </MudGrid>
 }

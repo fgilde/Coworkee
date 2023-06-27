@@ -15,7 +15,6 @@
 @using MudBlazor.Extensions;
 @using MudBlazor.Extensions.Components;
 @using MudBlazor.Extensions.Components.ObjectEdit;
-@using MudBlazor.ThemeManager;
 @using Blazored.LocalStorage;
 @using Blazored.FluentValidation;
 @using PSC.Blazor.Components.BrowserDetect;
@@ -43,6 +42,7 @@
 @using Coworkee.Client.Managers.Identity.Authentication
 @using Coworkee.Client.Managers.Interceptors
 @using Coworkee.Client.Managers.Preferences
+@using Coworkee.Client.Managers.Theme
 @using Coworkee.Data
 @using Coworkee.SDK;
 
@@ -64,3 +64,4 @@
 @inject IErrorHandler _errorService
 @inject ClientApplicationConfiguration _config;
 @inject IHealthChecker _healthCheckService;
+@inject IThemeManager _themeManager;

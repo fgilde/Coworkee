@@ -2,8 +2,6 @@
 @page "/login/{Message}"
 @using Coworkee.Shared.Constants.Application
 @using Coworkee.Client.Utils
-@using MudBlazor.Extensions.Helper
-@using MudBlazor.Extensions.Options
 @layout LoginLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> _localizer
@@ -17,7 +15,8 @@
 
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudGrid Style="@($"animation: {new [] {AnimationType.Zoom}.GetAnimationCssStyle(TimeSpan.FromMilliseconds(250))}")">
+   @* <MudGrid Style="@($"animation: {new [] {AnimationType.Zoom}.GetAnimationCssStyle(TimeSpan.FromMilliseconds(250))}")">*@
+    <MudGrid>
         <MudItem xs="12">
             <div class="d-flex justify-center">
                 <ApplicationLogo />

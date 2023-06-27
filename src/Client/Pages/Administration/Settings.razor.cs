@@ -5,7 +5,6 @@ using MudBlazor;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using MudBlazor.Extensions.Options;
 using Nextended.Core.Extensions;
 using Coworkee.Application.Configurations;
 using Coworkee.Client.Configuration;
@@ -50,10 +49,10 @@ public partial class Settings
         return meta =>
         {
             meta.Properties(c => c.ClientUrl, c => c.PublicSettings.HostClientInServer).Ignore();
-            meta.Property(c => c.Logging.LogLevel.Default).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
-            meta.Property(c => c.Logging.LogLevel.Microsoft).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
-            meta.Property(c => c.Logging.LogLevel.MicrosoftHostingLifetime).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
-            meta.Property(c => c.Logging.LogLevel.Hangfire).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
+            //meta.Property(c => c.Logging.LogLevel.Default).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
+            //meta.Property(c => c.Logging.LogLevel.Microsoft).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
+            //meta.Property(c => c.Logging.LogLevel.MicrosoftHostingLifetime).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
+            //meta.Property(c => c.Logging.LogLevel.Hangfire).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
             meta.Property(c => c.ConnectionStrings.DefaultConnection).AsReadOnly().WrapInMudItem(i => i.xs = 12);
             meta.Property(c => c.PublicSettings.UserRegistration.RegistrationDocumentTypes).WrapInMudItem(i => i.xs = 12);
             meta.WrapEachInMudItem(i =>

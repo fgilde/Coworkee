@@ -22,9 +22,6 @@ namespace Coworkee.Client.Pages.Identity
         private List<UserResponse> _userList = new();
         private UserResponse _user = new();
         private string _searchString = "";
-        private bool _dense = false;
-        private bool _striped = true;
-        private bool _bordered = false;
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreateUsers;

@@ -21,10 +21,10 @@
 
     public override string ItemNameRender(UserResponse item) => item?.FullName;
     
-    protected override RenderFragment RenderItem(RenderTreeBuilder __builder, UserResponse item)
+    protected override RenderFragment RenderItem(UserResponse item)
     {
         if (ViewMode == ViewMode.NoChips)
-            return base.RenderItem(__builder, item);
+            return base.RenderItem(item);
         return @<UserCard UserData="@item" ShowLogout="false"></UserCard>;
     }
 }

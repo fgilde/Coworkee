@@ -16,6 +16,92 @@
     "version": "1.0"
   },
   "paths": {
+    "/Assistant/Ask": {
+      "post": {
+        "tags": [
+          "Assistant"
+        ],
+        "operationId": "Assistant_Ask",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "prompt",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/Assistant/AskWithHistory": {
+      "post": {
+        "tags": [
+          "Assistant"
+        ],
+        "operationId": "Assistant_AskWithHistory",
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/json",
+          "application/*+json",
+          "text/xml",
+          "application/*+xml"
+        ],
+        "parameters": [
+          {
+            "name": "commands",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AssistantCommandDto"
+              }
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/Dashboard": {
       "get": {
         "tags": [
@@ -5348,6 +5434,35 @@
     }
   },
   "definitions": {
+    "AssistantCommandDto": {
+      "type": "object",
+      "required": [
+        "owner"
+      ],
+      "properties": {
+        "owner": {
+          "$ref": "#/definitions/AssistantCommandOwner"
+        },
+        "message": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "AssistantCommandOwner": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Assistant",
+        "User"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
     "ResultOfDashboardDataResponse": {
       "allOf": [
         {
@@ -5548,9 +5663,13 @@
     "Publicsettings": {
       "type": "object",
       "required": [
+        "assistantAvailable",
         "hostClientInServer"
       ],
       "properties": {
+        "assistantAvailable": {
+          "type": "boolean"
+        },
         "contactAddress": {
           "type": "string"
         },
@@ -5790,9 +5909,6 @@
         "publicSettings": {
           "$ref": "#/definitions/Publicsettings"
         },
-        "logging": {
-          "$ref": "#/definitions/Logging"
-        },
         "allowedHosts": {
           "type": "string"
         },
@@ -5820,31 +5936,6 @@
       "type": "object",
       "properties": {
         "defaultConnection": {
-          "type": "string"
-        }
-      }
-    },
-    "Logging": {
-      "type": "object",
-      "properties": {
-        "logLevel": {
-          "$ref": "#/definitions/Loglevel"
-        }
-      }
-    },
-    "Loglevel": {
-      "type": "object",
-      "properties": {
-        "default": {
-          "type": "string"
-        },
-        "microsoft": {
-          "type": "string"
-        },
-        "hangfire": {
-          "type": "string"
-        },
-        "microsoftHostingLifetime": {
           "type": "string"
         }
       }
@@ -5886,8 +5977,22 @@
     "Cognitiveservices": {
       "type": "object",
       "properties": {
+        "openAi": {
+          "$ref": "#/definitions/Openai"
+        },
         "translation": {
           "$ref": "#/definitions/Translation"
+        }
+      }
+    },
+    "Openai": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
         }
       }
     },

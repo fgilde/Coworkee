@@ -1,91 +1,24 @@
-@using Coworkee.Shared.Constants.Application
-@using Coworkee.Application.Common.Extensions
 @inherits LayoutComponentBase
 @inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> localizer
 
-<audio id="notification" src="/media/notification.mp3" />
-<ReactOnPreferenceChanged Component="this" OnPreferenceChanged="@((arg) => {if (_rightToLeft != arg.NewValue.IsRTL) {_rightToLeft = arg.NewValue.IsRTL;}} )" />
-<MudRTLProvider RightToLeft="@_rightToLeft">
-    <MudThemeProvider Theme="_currentTheme" />
-    <MudDialogProvider />
-    <MudSnackbarProvider />
-    @{
-        LoadDataAsync();
-    }
-    <MudLayout>
-        <MudAppBar Elevation="25">
+<CascadingValue Value="this" IsFixed="true">
+    <CascadingValue Value="CurrentUser">
+        <audio id="notification" src="/media/notification.mp3" />
+        <ReactOnPreferenceChanged Component="this" OnPreferenceChanged="@OnPreferenceChanged" />
+        <MudRTLProvider RightToLeft="@RightToLeft">
+            <MudThemeProvider IsDarkMode="@IsDarkMode" Theme="CurrentTheme" />
+            <MudDialogProvider />
+            <MudSnackbarProvider />
 
-            <AppBarHeader Title="@GetTitle()"
-                          @ref="appBarHeader"
-                          MenuTogglePosition="_currentTheme.LayoutPropertiesEx.MenuTogglePosition"
-                          TitleBehaviour="_currentTheme.LayoutPropertiesEx.AppBarTitleBehaviour"
-                          IsLogoVisible="_currentTheme.LayoutPropertiesEx.ShowLogoInAppBar"
-                          OnMenuIconClick="(e) => DrawerToggle()" />
-
-            <MudSpacer />
-            <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
-                @if (!(currentUser?.Identity?.IsAuthenticated ?? false) || currentUser.IsGuest())
-                {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary" Link="@ApplicationConstants.Routes.Login" StartIcon="@Icons.Material.Filled.SwitchAccount">@localizer["Sign In"]</MudButton>
-                    <MudButton Style="margin-left: 5px;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NewLabel" Color="Color.Info" Link="@ApplicationConstants.Routes.Register">@localizer["Register"]</MudButton>
-                }
-                <RoleSelector />
-                <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
-                <LanguageSelector />
-                <MudTooltip Text="@localizer["Toggle right-to-left/left-to-right"]">
-                    <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())" />
-                </MudTooltip>
-                <ThemeSelector OnThemeSelected="@ThemeChanged" />
-                @if (currentUser?.Identity?.IsAuthenticated == true && !currentUser.IsGuest())
-                {
-
-                    <NotificationToggle />
-
-                    <MudMenu AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.BottomRight" Dense="true" Class="mt-1">
-                        <ActivatorContent>
-                            <UserAvatar LinkToProfile="false" />
-                        </ActivatorContent>
-                        <ChildContent>
-                            <UserCard Class="mt-n2" />
-                            <MudDivider Class="mb-2" />
-                            <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-                            <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
-                        </ChildContent>
-                    </MudMenu>
-                }
-                <MudTooltip Text="@localizer["about"]">
-                    <MudIconButton Icon="@Icons.Material.Outlined.Info" Size="Size.Small" Color="Color.Inherit" OnClick="ShowAbout" />
-                </MudTooltip>
-            </MudHidden>
-            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-                <RoleSelector />
-                <LanguageSelector Small="true" />
-                <MudMenu Icon="@Icons.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="_rightToLeft ? Direction.Left : Direction.Right" OffsetY="true">
-                    <div class="px-2">
-                        <ThemeSelector OnThemeSelected="@ThemeChanged" Mode="ThemeSelector.SelectionMode.ToggleCircle" />
-                        <NotificationToggle />
-                        <MudTooltip Text="@localizer["Toggle right-to-left/left-to-right"]">
-                            <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@((e) => RightToLeftToggle())" />
-                        </MudTooltip>
-                    </div>
-                    <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Account"]</b></MudText>
-                    <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-                    <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
-                </MudMenu>
-            </MudHidden>
-        </MudAppBar>
-        <MudDrawer @ref="drawer" @bind-Open="_drawerOpen" Elevation="25" @bind-Variant="_currentTheme.LayoutPropertiesEx.DrawerVariant" ClipMode="_currentTheme.LayoutPropertiesEx.DrawerClipMode">
-            <NavMenu @ref="navMenu"
-                     Logout="Logout"
-                     isMini="(!drawer.Open && drawer.Variant == DrawerVariant.Mini)"
-                     ShowApplicationLogo="_currentTheme.LayoutPropertiesEx.ShowLogoInNavMenu"
-                     ShowUserCard="_currentTheme.LayoutPropertiesEx.ShowUserCardInNavigation"
-                     ExpandMode="_currentTheme.LayoutPropertiesEx.NavMenuExpandMode" />
-        </MudDrawer>
-        <MudMainContent>
-            <MudContainer MaxWidth="MaxWidth.False" Class="app-main-container mt-4">
-                @Body
-            </MudContainer>
-        </MudMainContent>
-    </MudLayout>
-</MudRTLProvider>
+            <MudLayout>
+                <MainAppBar />
+                <MainNavMenuDrawer @ref="NavMenuDrawer" @bind-Open="IsDrawerOpen" Elevation="25" />
+                <MudMainContent>
+                    <MudContainer MaxWidth="MaxWidth.False" Class="app-main-container mt-4">
+                        @Body
+                    </MudContainer>
+                </MudMainContent>
+            </MudLayout>
+        </MudRTLProvider>
+    </CascadingValue>
+</CascadingValue>

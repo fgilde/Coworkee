@@ -17,7 +17,7 @@
 }
 else
 {
-    <MudTable Hover="true" Elevation="25" Items="_roleList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<RoleDto, bool>(Search)" @bind-role="_role">
+    <MudTable Hover="true" Elevation="25" Items="_roleList" Dense="@_themeManager.CurrentTheme.Dense" Bordered="@_themeManager.CurrentTheme.BorderedTables" Striped="@_themeManager.CurrentTheme.RowsStriped" Filter="new Func<RoleDto, bool>(Search)" @bind-role="_role">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateRoles)
@@ -82,9 +82,7 @@ else
             </MudTd>
         </RowTemplate>
         <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
+          
         </FooterContent>
         <PagerContent>
             <TablePager />

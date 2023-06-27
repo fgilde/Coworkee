@@ -8,6 +8,7 @@ using Coworkee.Application.Common.Models;
 using Coworkee.Application.Requests;
 using Coworkee.Client.Shared.Components;
 using MudBlazor.Extensions;
+using MudBlazor.Extensions.Components;
 
 namespace Coworkee.Client.Configuration.MudExObjectEdit;
 
@@ -25,9 +26,9 @@ internal static class RenderDataManager
         RenderDataDefaults.RegisterDefault<BrandDto, BrandSelect>(s => s.Value);
         //RenderDataDefaults.RegisterDefault<ICollection<SpecializationDto>, IEnumerable<SpecializationDto>, SpecializationsSelect>(s => s.Selected);
         //RenderDataDefaults.RegisterDefault<IEnumerable<SpecializationDto>, SpecializationsSelect>(s => s.Selected);
-        RenderDataDefaults.RegisterDefault<IEnumerable<UploadRequest>, UploadRequestEdit>(edit => edit.UploadRequests);
-        RenderDataDefaults.RegisterDefault<UploadRequest[], IList<UploadRequest>, UploadRequestEdit>(edit => edit.UploadRequests, requests => requests?.ToList() ?? new List<UploadRequest>(), requests => requests?.ToArray() ?? Array.Empty<UploadRequest>());
-        RenderDataDefaults.RegisterDefault<IList<UploadRequest>, UploadRequestEdit>(edit => edit.UploadRequests);
-        RenderDataDefaults.RegisterDefault<UploadRequest, UploadRequestEdit>(edit => edit.UploadRequest, edit => edit.AllowMultiple = false);
+        RenderDataDefaults.RegisterDefault<IEnumerable<UploadRequest>, MudExUploadEdit<UploadRequest>>(edit => edit.UploadRequests);
+        RenderDataDefaults.RegisterDefault<UploadRequest[], IList<UploadRequest>, MudExUploadEdit<UploadRequest>>(edit => edit.UploadRequests, requests => requests?.ToList() ?? new List<UploadRequest>(), requests => requests?.ToArray() ?? Array.Empty<UploadRequest>());
+        RenderDataDefaults.RegisterDefault<IList<UploadRequest>, MudExUploadEdit<UploadRequest>>(edit => edit.UploadRequests);
+        RenderDataDefaults.RegisterDefault<UploadRequest, MudExUploadEdit<UploadRequest>>(edit => edit.UploadRequest, edit => edit.AllowMultiple = false);
     }
 }

@@ -60,9 +60,6 @@ namespace Coworkee.Client.Shared.Components
         private bool _onlyCurrentGroup;
         private int _activeGroupIndex;
         private MudTabs _mudTabs;
-        private bool _dense = false;
-        private bool _striped = true;
-        private bool _bordered = false;
 
         private ClaimsPrincipal _currentUser;
         private bool _canViewExtendedAttributes;

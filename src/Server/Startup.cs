@@ -17,6 +17,10 @@ using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
 using Coworkee.Shared;
+using GptInvoke;
+using System;
+using Coworkee.Application.AssistantFeatures;
+using OpenAI.Models;
 
 namespace Coworkee.Server
 {
@@ -79,6 +83,7 @@ namespace Coworkee.Server
             services.AddRazorPages();
 
             services.AddLazyCache();
+            services.AddGptAssistant(_configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,

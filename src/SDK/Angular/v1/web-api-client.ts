@@ -15,6 +15,135 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
+export interface IAssistantClient {
+    ask(prompt: string | null | undefined): Observable<FileResponse | null>;
+    askWithHistory(commands: AssistantCommandDto[]): Observable<FileResponse | null>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class AssistantClient implements IAssistantClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    ask(prompt: string | null | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Assistant/Ask?";
+        if (prompt !== undefined && prompt !== null)
+            url_ += "prompt=" + encodeURIComponent("" + prompt) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAsk(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAsk(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processAsk(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+
+    askWithHistory(commands: AssistantCommandDto[]): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Assistant/AskWithHistory";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(commands);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAskWithHistory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAskWithHistory(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processAskWithHistory(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(null as any);
+    }
+}
+
 export interface IDashboardClient {
     /**
      * Get the new ultimate Dashboard Data
@@ -6668,6 +6797,55 @@ export class ProductsClient implements IProductsClient {
     }
 }
 
+export class AssistantCommandDto implements IAssistantCommandDto {
+    owner!: AssistantCommandOwner;
+    message?: string | undefined;
+    role?: string | undefined;
+
+    constructor(data?: IAssistantCommandDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.owner = _data["owner"];
+            this.message = _data["message"];
+            this.role = _data["role"];
+        }
+    }
+
+    static fromJS(data: any): AssistantCommandDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AssistantCommandDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["owner"] = this.owner;
+        data["message"] = this.message;
+        data["role"] = this.role;
+        return data;
+    }
+}
+
+export interface IAssistantCommandDto {
+    owner: AssistantCommandOwner;
+    message?: string | undefined;
+    role?: string | undefined;
+}
+
+export enum AssistantCommandOwner {
+    Assistant = 0,
+    User = 1,
+}
+
 export class Result implements IResult {
     messages?: string[] | undefined;
     succeeded!: boolean;
@@ -7081,6 +7259,7 @@ export interface IVersionInfoModel {
 }
 
 export class Publicsettings implements IPublicsettings {
+    assistantAvailable!: boolean;
     contactAddress?: string | undefined;
     hostClientInServer!: boolean;
     userRegistration?: Userregistration | undefined;
@@ -7096,6 +7275,7 @@ export class Publicsettings implements IPublicsettings {
 
     init(_data?: any) {
         if (_data) {
+            this.assistantAvailable = _data["assistantAvailable"];
             this.contactAddress = _data["contactAddress"];
             this.hostClientInServer = _data["hostClientInServer"];
             this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
@@ -7111,6 +7291,7 @@ export class Publicsettings implements IPublicsettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["assistantAvailable"] = this.assistantAvailable;
         data["contactAddress"] = this.contactAddress;
         data["hostClientInServer"] = this.hostClientInServer;
         data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
@@ -7119,6 +7300,7 @@ export class Publicsettings implements IPublicsettings {
 }
 
 export interface IPublicsettings {
+    assistantAvailable: boolean;
     contactAddress?: string | undefined;
     hostClientInServer: boolean;
     userRegistration?: Userregistration | undefined;
@@ -7494,7 +7676,6 @@ export class Rootobject implements IRootobject {
     clientUrl?: string | undefined;
     connectionStrings?: Connectionstrings | undefined;
     publicSettings?: Publicsettings | undefined;
-    logging?: Logging | undefined;
     allowedHosts?: string | undefined;
     appConfiguration?: Appconfiguration | undefined;
     cognitiveServices?: Cognitiveservices | undefined;
@@ -7517,7 +7698,6 @@ export class Rootobject implements IRootobject {
             this.clientUrl = _data["clientUrl"];
             this.connectionStrings = _data["connectionStrings"] ? Connectionstrings.fromJS(_data["connectionStrings"]) : <any>undefined;
             this.publicSettings = _data["publicSettings"] ? Publicsettings.fromJS(_data["publicSettings"]) : <any>undefined;
-            this.logging = _data["logging"] ? Logging.fromJS(_data["logging"]) : <any>undefined;
             this.allowedHosts = _data["allowedHosts"];
             this.appConfiguration = _data["appConfiguration"] ? Appconfiguration.fromJS(_data["appConfiguration"]) : <any>undefined;
             this.cognitiveServices = _data["cognitiveServices"] ? Cognitiveservices.fromJS(_data["cognitiveServices"]) : <any>undefined;
@@ -7540,7 +7720,6 @@ export class Rootobject implements IRootobject {
         data["clientUrl"] = this.clientUrl;
         data["connectionStrings"] = this.connectionStrings ? this.connectionStrings.toJSON() : <any>undefined;
         data["publicSettings"] = this.publicSettings ? this.publicSettings.toJSON() : <any>undefined;
-        data["logging"] = this.logging ? this.logging.toJSON() : <any>undefined;
         data["allowedHosts"] = this.allowedHosts;
         data["appConfiguration"] = this.appConfiguration ? this.appConfiguration.toJSON() : <any>undefined;
         data["cognitiveServices"] = this.cognitiveServices ? this.cognitiveServices.toJSON() : <any>undefined;
@@ -7556,7 +7735,6 @@ export interface IRootobject {
     clientUrl?: string | undefined;
     connectionStrings?: Connectionstrings | undefined;
     publicSettings?: Publicsettings | undefined;
-    logging?: Logging | undefined;
     allowedHosts?: string | undefined;
     appConfiguration?: Appconfiguration | undefined;
     cognitiveServices?: Cognitiveservices | undefined;
@@ -7627,90 +7805,6 @@ export class Connectionstrings implements IConnectionstrings {
 
 export interface IConnectionstrings {
     defaultConnection?: string | undefined;
-}
-
-export class Logging implements ILogging {
-    logLevel?: Loglevel | undefined;
-
-    constructor(data?: ILogging) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.logLevel = _data["logLevel"] ? Loglevel.fromJS(_data["logLevel"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): Logging {
-        data = typeof data === 'object' ? data : {};
-        let result = new Logging();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["logLevel"] = this.logLevel ? this.logLevel.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-export interface ILogging {
-    logLevel?: Loglevel | undefined;
-}
-
-export class Loglevel implements ILoglevel {
-    default?: string | undefined;
-    microsoft?: string | undefined;
-    hangfire?: string | undefined;
-    microsoftHostingLifetime?: string | undefined;
-
-    constructor(data?: ILoglevel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.default = _data["default"];
-            this.microsoft = _data["microsoft"];
-            this.hangfire = _data["hangfire"];
-            this.microsoftHostingLifetime = _data["microsoftHostingLifetime"];
-        }
-    }
-
-    static fromJS(data: any): Loglevel {
-        data = typeof data === 'object' ? data : {};
-        let result = new Loglevel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["default"] = this.default;
-        data["microsoft"] = this.microsoft;
-        data["hangfire"] = this.hangfire;
-        data["microsoftHostingLifetime"] = this.microsoftHostingLifetime;
-        return data;
-    }
-}
-
-export interface ILoglevel {
-    default?: string | undefined;
-    microsoft?: string | undefined;
-    hangfire?: string | undefined;
-    microsoftHostingLifetime?: string | undefined;
 }
 
 export class Appconfiguration implements IAppconfiguration {
@@ -7802,6 +7896,7 @@ export interface IIdhashing {
 }
 
 export class Cognitiveservices implements ICognitiveservices {
+    openAi?: Openai | undefined;
     translation?: Translation | undefined;
 
     constructor(data?: ICognitiveservices) {
@@ -7815,6 +7910,7 @@ export class Cognitiveservices implements ICognitiveservices {
 
     init(_data?: any) {
         if (_data) {
+            this.openAi = _data["openAi"] ? Openai.fromJS(_data["openAi"]) : <any>undefined;
             this.translation = _data["translation"] ? Translation.fromJS(_data["translation"]) : <any>undefined;
         }
     }
@@ -7828,13 +7924,55 @@ export class Cognitiveservices implements ICognitiveservices {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["openAi"] = this.openAi ? this.openAi.toJSON() : <any>undefined;
         data["translation"] = this.translation ? this.translation.toJSON() : <any>undefined;
         return data;
     }
 }
 
 export interface ICognitiveservices {
+    openAi?: Openai | undefined;
     translation?: Translation | undefined;
+}
+
+export class Openai implements IOpenai {
+    apiKey?: string | undefined;
+    model?: string | undefined;
+
+    constructor(data?: IOpenai) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.apiKey = _data["apiKey"];
+            this.model = _data["model"];
+        }
+    }
+
+    static fromJS(data: any): Openai {
+        data = typeof data === 'object' ? data : {};
+        let result = new Openai();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["apiKey"] = this.apiKey;
+        data["model"] = this.model;
+        return data;
+    }
+}
+
+export interface IOpenai {
+    apiKey?: string | undefined;
+    model?: string | undefined;
 }
 
 export class Translation implements ITranslation {

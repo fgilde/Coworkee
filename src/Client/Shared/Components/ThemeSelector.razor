@@ -1,135 +1,39 @@
 @using Nextended.Core.Extensions
 @using Coworkee.Client.Theming
 @using Coworkee.Client.Managers.Theme
+@using MudBlazor.Extensions.Core
 @inject Microsoft.Extensions.Localization.IStringLocalizer<ThemeSelector> localizer
 
-@if (Mode == SelectionMode.Charm)
-{
-    <MudDrawer @bind-Open="@_charmOpen" Anchor="@(rtl ? Anchor.Left: Anchor.Right)" Elevation="1" Variant="@DrawerVariant.Temporary">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">@localizer["Select Theme"]</MudText>
-        </MudDrawerHeader>
-        <MudNavMenu>
-            @foreach (var theme in _themes)
-            {
-                <MudContainer>
-                    <MudNavLink Icon="@Icons.Filled.FormatColorFill" OnClick="@((e) => Select(theme.Key, theme.Value))">@ThemeDisplayName(theme.Key)</MudNavLink>
-                    <div style="width: 70%; height: 2px; background: linear-gradient(90deg,@theme.Value.Palette.AppbarBackground 0%, @theme.Value.Palette.Primary 35%, @theme.Value.Palette.Background 100%);; margin-left: 27%; margin-top: -5px; margin-bottom: 6px;"></div>
-                </MudContainer>
-            }
-        </MudNavMenu>
-        <MudButton StartIcon="@Icons.Material.Filled.Edit" OnClick="@EditTheme">Edit Current</MudButton>
 
-    </MudDrawer>
-}
+<MudDrawer @bind-Open="@_charmOpen" Anchor="@(_rtl ? Anchor.Left: Anchor.Right)" Elevation="1" Variant="@DrawerVariant.Temporary">
+    <MudDrawerHeader>
+        <MudIcon Class="mt-1 mr-3" Icon="@Icons.Material.Filled.Colorize"></MudIcon>
+        <MudText Typo="Typo.h6">@localizer["Select Theme"]</MudText>
+    </MudDrawerHeader>
+    <MudNavMenu>
+        <MudButtonGroup Variant="Variant.Outlined" Style="width: 100%; justify-content: center;" Color="Color.Default">
+            <MudToggleIconButton Toggled="@IsDark" ToggledChanged="@(OnDarkChange)" Title="@localizer["Dark Mode"]" ToggledTitle="@localizer["Light Mode"]" Icon="@Icons.Material.Outlined.LightMode" ToggledIcon="@Icons.Material.Filled.DarkMode" Color="Color.Info" ToggledColor="Color.Warning">
+            </MudToggleIconButton>
+            <MudButton StartIcon="@Icons.Material.Filled.Edit" OnClick="@EditTheme">@localizer["Edit Current"]</MudButton>
+        </MudButtonGroup>
+        
+        <MudContainer Class="mt-10" Style="padding:0;">
+            
+            <MudExThemeSelect TTheme="ClientTheme"
+                              PreviewMode="@(IsDark ? ThemePreviewMode.DarkOnly : ThemePreviewMode.LightOnly)"
+                              Style="margin: 5px"
+                              SelectionMode="ThemeSelectionMode.ItemList"
+                              PreviewImageSize="@(new MudExDimension(110, 90))"
+                              Available="@_themes"
+                              @bind-Selected="@Selected">
+            </MudExThemeSelect>
+        </MudContainer>
+
+    </MudNavMenu>
+
+</MudDrawer>
+
 @if (_themes is { Count: > 1 })
 {
-    @if (Mode == SelectionMode.Menu)
-    {
-        <MudMenu Color="Color.Inherit" IconColor="Color.Inherit" Icon="@Icon" OffsetY="true" Dense="true">
-            @{
-                @foreach (var theme in _themes)
-                {
-                    <MudMenuItem OnClick="(() => Select(theme.Key, theme.Value))">
-                        <MudText Typo="Typo.body2">
-                            @ThemeDisplayName(theme.Key)
-                        </MudText>
-                    </MudMenuItem>
-                }
-            }
-        </MudMenu>
-    }
-    else
-    {
-        <MudIconButton Icon="@Icon" Color="Color.Inherit" OnClick="@ButtonClicked"/>
-    }
-}
-
-@code {
-    bool _charmOpen;
-
-    [Parameter]
-    public EventCallback<ClientTheme> OnThemeSelected { get; set; }
-
-    [Parameter]
-    public SelectionMode Mode { get; set; }
-
-    [Parameter]
-    public string Icon { get; set; } = Icons.Material.Filled.Brightness4;
-
-    [Inject]
-    private IThemeManager themeManager { get; set; }
-
-    private KeyValuePair<string, ClientTheme> _current;
-    private Dictionary<string, ClientTheme> _themes = new();
-    private bool rtl;
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await base.OnParametersSetAsync();
-        rtl = await _clientPreferenceManager.IsRTL();
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        _themes = await themeManager.ThemesAsync();
-    }
-
-    private async Task UpdateCurrent()
-    {
-        var preference = await _clientPreferenceManager.GetPreference() as ClientPreference;
-        var name = preference?.ThemeName ?? _themes.First().Key;
-        _current = new KeyValuePair<string, ClientTheme>(name, await themeManager.GetByNameAsync(name));
-    }
-
-    private async Task Select(string themeName, ClientTheme theme)
-    {
-        ClientTheme.LastUsedTheme = theme;
-        _charmOpen = false;
-        await _clientPreferenceManager.SetCurrentThemeName(themeName);
-        await UpdateCurrent();
-        await OnThemeSelected.InvokeAsync(theme);
-    }
-
-    private async void ButtonClicked()
-    {
-        if (Mode == SelectionMode.Charm)
-            _charmOpen = true;
-        if (Mode == SelectionMode.ToggleCircle)
-            await Toggle();
-    }
-
-    private async Task Toggle()
-    {
-        await UpdateCurrent();
-        var index = Array.IndexOf(_themes.Keys.ToArray(), _current.Key) + 1;
-        var toSelect = _themes.ElementAt(index > _themes.Count - 1 ? 0 : index);
-        await Select(toSelect.Key, toSelect.Value);
-    }
-
-    public enum SelectionMode
-    {
-        Charm,
-        Menu,
-        ToggleCircle
-    }
-
-    private string ThemeDisplayName(string themeKey)
-    {
-        return string.Join(" ", themeKey.SplitByUpperCase());
-    }
-
-    private async void EditTheme()
-    {
-        var defaultDialogOptionsEx = await DialogServiceExtensions.DefaultDialogOptionsEx();
-        var p = new DialogParameters
-        {
-            {nameof(MudExObjectEditDialog<ClientTheme>.ShowCancelButton), false},
-            {nameof(MudExObjectEditDialog<ClientTheme>.SaveButtonText), "Close"}
-        };
-         await _dialogService.EditObject(ClientTheme.LastUsedTheme, "Edit Theme", defaultDialogOptionsEx, null, p);
-        _charmOpen = false;
-        StateHasChanged();
-    }
-
+    <MudIconButton Icon="@Icon" Color="Color.Inherit" OnClick="@ButtonClicked"/>
 }

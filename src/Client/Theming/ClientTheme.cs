@@ -1,6 +1,7 @@
 using System;
 using Coworkee.Client.Enums;
 using MudBlazor;
+using MudBlazor.Extensions.Helper;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Client.Theming
@@ -8,7 +9,19 @@ namespace Coworkee.Client.Theming
 
     public class ClientTheme : MudTheme, ICloneable
     {
-        public LayoutPropertiesEx LayoutPropertiesEx => LayoutProperties as LayoutPropertiesEx;
+        public bool Dense { get; set; }
+        public bool RowsStriped { get; set; }
+        public bool BorderedTables { get; set; }
+        
+        public DrawerClipMode DrawerClipMode { get; set; } = DrawerClipMode.Always;
+        public DrawerVariant DrawerVariant { get; set; } = DrawerVariant.Responsive;
+
+        public ExpandMode NavMenuExpandMode { get; set; } = ExpandMode.Default;
+        public AppBarTitleBehaviour AppBarTitleBehaviour { get; set; } = AppBarTitleBehaviour.AppNameOnly;
+        public MenuTogglePosition MenuTogglePosition { get; set; } = MenuTogglePosition.End;
+        public bool ShowUserCardInNavigation { get; set; } = true;
+        public bool ShowLogoInAppBar { get; set; } = true;
+        public bool ShowLogoInNavMenu { get; set; }
 
         #region Statics
 
@@ -114,21 +127,20 @@ namespace Coworkee.Client.Theming
             }
         };
 
-        private static LayoutPropertiesEx DefaultLayoutProperties => new()
+        private static LayoutProperties GetDefaultLayoutProperties() => new()
         {
             DefaultBorderRadius = "3px", // default 3
-            DrawerWidthLeft = "280px",
-            DrawerWidthRight = "280px"
+            DrawerWidthLeft = "320px",
+            DrawerWidthRight = "320px"
         };
 
         #endregion
-
 
         public static ClientTheme LastUsedTheme { get; set; }
 
         public static ClientTheme DefaultTheme = new ClientTheme()
         {
-            Palette = new Palette()
+            Palette = new PaletteLight
             {
                 Primary = "#1E88E5",
                 AppbarBackground = "#1E88E5",
@@ -138,14 +150,13 @@ namespace Coworkee.Client.Theming
                 Success = "#007E33"
             },
             Typography = DefaultTypography,
-            LayoutProperties = DefaultLayoutProperties
+            LayoutProperties = GetDefaultLayoutProperties()
         }.SetProperties(
-            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Responsive);
+            t => t.PaletteDark = t.Palette.ToPaletteDark().SetProperties(p => p.AppbarBackground = "#373740"));
 
         public static ClientTheme DarkTheme = new ClientTheme()
         {
-            Palette = new Palette()
+            Palette = new PaletteLight()
             {
                 Primary = "#1E88E5",
                 Success = "#007E33",
@@ -165,14 +176,12 @@ namespace Coworkee.Client.Theming
                 DrawerIcon = "rgba(255,255,255, 0.50)"
             },
             Typography = DefaultTypography,
-            LayoutProperties = DefaultLayoutProperties
-        }.SetProperties(
-            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Responsive);
+            LayoutProperties = GetDefaultLayoutProperties()
+        };
 
         public static ClientTheme LuckyGreen = new ClientTheme()
         {
-            Palette = new Palette()
+            Palette = new PaletteLight()
             {
                 Primary = "#199b90",
                 AppbarBackground = "#199b90",
@@ -182,15 +191,14 @@ namespace Coworkee.Client.Theming
                 Success = "#19635d"
             },
             Typography = DefaultTypography,
-            LayoutProperties = DefaultLayoutProperties
+            LayoutProperties = GetDefaultLayoutProperties()
         }.SetProperties(
-            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Always,
-            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Mini);
+            t => t.PaletteDark = t.Palette.ToPaletteDark());
 
 
         public static ClientTheme CodeBlue = new ClientTheme()
         {
-            Palette = new Palette()
+            Palette = new PaletteLight()
             {
                 Primary = "#0082bb",
                 AppbarBackground = "#0082bb",
@@ -203,19 +211,27 @@ namespace Coworkee.Client.Theming
                 Error = "#df1642"
             },
             Typography = DefaultTypography,
-            LayoutProperties = DefaultLayoutProperties
+            LayoutProperties = GetDefaultLayoutProperties()
         }.SetProperties(
-            t => t.LayoutPropertiesEx.DrawerClipMode = DrawerClipMode.Never,
-            t => t.LayoutPropertiesEx.DrawerVariant = DrawerVariant.Temporary,
-            t => t.LayoutPropertiesEx.ShowUserCardInNavigation = false,
-            t => t.LayoutPropertiesEx.ShowLogoInAppBar = false,
-            t => t.LayoutPropertiesEx.ShowLogoInNavMenu = true,
-            t => t.LayoutPropertiesEx.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
-            t => t.LayoutPropertiesEx.MenuTogglePosition = MenuTogglePosition.Start,
-            t => t.LayoutPropertiesEx.NavMenuExpandMode = ExpandMode.SingleExpand);
-        
+            t => t.PaletteDark = t.Palette.ToPaletteDark(),
+            t => t.ShowUserCardInNavigation = false,
+            t => t.ShowLogoInAppBar = false,
+            t => t.ShowLogoInNavMenu = true,
+            t => t.AppBarTitleBehaviour = AppBarTitleBehaviour.TitleOnly,
+            t => t.MenuTogglePosition = MenuTogglePosition.Start,
+            t => t.DrawerClipMode = DrawerClipMode.Never,
+            t => t.DrawerVariant = DrawerVariant.Temporary,
+            t => t.NavMenuExpandMode = ExpandMode.SingleExpand);
+
         #endregion
 
-        public object Clone() => MemberwiseClone();
+        public ClientTheme Clone()
+        {
+            return this.CloneTheme();
+        }
+        object ICloneable.Clone()
+        {
+            return Clone();
+        }
     }
 }

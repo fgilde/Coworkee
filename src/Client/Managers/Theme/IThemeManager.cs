@@ -8,6 +8,8 @@ namespace Coworkee.Client.Managers.Theme
     {
         Task<Dictionary<string, ClientTheme>> ThemesAsync();
         Task<ClientTheme> GetByNameAsync(string name);
-        Task<ClientTheme> BestBrowserMatch();
+        Task<bool> BrowserPrefersDarkMode();
+        Task<ClientTheme> GetDefaultThemeAsync();
+        ClientTheme CurrentTheme { get;  }
     }
 }

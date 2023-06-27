@@ -16,7 +16,6 @@ namespace Coworkee.Application.Configurations
         public string ClientUrl { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
         public Publicsettings PublicSettings { get; set; }
-        public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
         public Appconfiguration AppConfiguration { get; set; }
         public Cognitiveservices CognitiveServices { get; set; }
@@ -33,6 +32,7 @@ namespace Coworkee.Application.Configurations
 
     public class Publicsettings
     {
+        public bool AssistantAvailable { get; set; }
         public string ContactAddress { get; set; }
         public bool HostClientInServer { get; set; }
         public Userregistration UserRegistration { get; set; }
@@ -66,19 +66,6 @@ namespace Coworkee.Application.Configurations
         public bool NumberRequired { get; set; }
     }
 
-    public class Logging
-    {
-        public Loglevel LogLevel { get; set; }
-    }
-
-    public class Loglevel
-    {
-        public string Default { get; set; }
-        public string Microsoft { get; set; }
-        public string Hangfire { get; set; }
-        public string MicrosoftHostingLifetime { get; set; }
-    }
-
     public class Appconfiguration
     {
         public Idhashing IdHashing { get; set; }
@@ -95,7 +82,14 @@ namespace Coworkee.Application.Configurations
 
     public class Cognitiveservices
     {
+        public Openai OpenAi { get; set; }
         public Translation Translation { get; set; }
+    }
+
+    public class Openai
+    {
+        public string ApiKey { get; set; }
+        public string Model { get; set; }
     }
 
     public class Translation
@@ -140,7 +134,7 @@ namespace Coworkee.Application.Configurations
         public string Password { get; set; }
         public string DisplayName { get; set; }
     }
-    
+
     public class Azure
     {
         public Signalr SignalR { get; set; }
@@ -161,5 +155,6 @@ namespace Coworkee.Application.Configurations
         public string UserName { get; set; }
         public string Password { get; set; }
     }
+
 
 }

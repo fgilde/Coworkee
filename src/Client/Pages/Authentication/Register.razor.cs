@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Components.Web;
 using Coworkee.Application.Common.Models.Identity;
 using Coworkee.Client.Shared.Components;
 using Coworkee.Shared.Constants.Application;
+using MudBlazor.Extensions.Components;
+using Coworkee.Application.Requests;
 
 namespace Coworkee.Client.Pages.Authentication
 {
@@ -26,7 +28,7 @@ namespace Coworkee.Client.Pages.Authentication
         public bool AllPagesVisited => Enumerable.Range(0, _pages.Count).All(_visitedPages.Contains);
 
 
-        private UploadRequestEdit _uploadEdit;
+        private MudExUploadEdit<UploadRequest> _uploadEdit;
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private RegisterRequest _registerUserModel = new() { UserInfo = new UserInformationsDto() };

@@ -8,7 +8,6 @@ namespace Coworkee.Client.Managers.Preferences
     public interface IClientPreferenceManager : IPreferenceManager
     {
         Task<ClientTheme> GetCurrentThemeAsync();
-        Task SetCurrentThemeName(string themeName);
         Task SetActiveSelectedRolesAsync(params UserRoleModel[] roles);
     }
 }

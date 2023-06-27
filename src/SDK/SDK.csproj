@@ -38,6 +38,9 @@
       </CopyLocal>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Net\Extensions\" />
+  </ItemGroup>
   <Target Name="CopyPackage" AfterTargets="Build">
     <ItemGroup>
       <SdkPackageFiles Include="$(ProjectDir)bin/$(Configuration)/*.nupkg" />

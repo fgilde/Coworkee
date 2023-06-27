@@ -16,6 +16,8 @@ namespace SDK
 
         public delegate void ProcessResponseDelegate(HttpClient client, HttpResponseMessage response);
 
+        public HttpClient GetHttpClient() => _httpClient;
+
         /// <summary>
         /// Delegate function to catch prepare request event
         /// </summary>

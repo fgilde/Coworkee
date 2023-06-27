@@ -12,7 +12,7 @@
 }
 else
 {
-    <MudTable Hover="true" Elevation="25" Items="UserRolesList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<UserRoleModel, bool>(Search)" @bind-userRole="_userRole">
+    <MudTable Hover="true" Elevation="25" Items="UserRolesList" Dense="@_themeManager.CurrentTheme.Dense" Bordered="@_themeManager.CurrentTheme.BorderedTables" Striped="@_themeManager.CurrentTheme.RowsStriped" Filter="new Func<UserRoleModel, bool>(Search)" @bind-userRole="_userRole">
         <ToolBarContent>
             <div class="justify-center mud-text-align-center">
                 @if (_canEditUsers)
@@ -41,9 +41,6 @@ else
             <MudTd DataLabel="Role"><MudCheckBox @bind-Checked="@context.Selected" Disabled="@(!_canEditUsers)" Color="Color.Secondary"></MudCheckBox></MudTd>
         </RowTemplate>
         <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
         </FooterContent>
         <PagerContent>
             <TablePager />

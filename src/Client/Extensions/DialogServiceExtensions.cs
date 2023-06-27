@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Coworkee.Application.Common.Models;
 using Coworkee.Client.JsInterop;
 using Coworkee.Client.JsInterop.Models;
+using Coworkee.Client.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -59,7 +60,7 @@ public static class DialogServiceExtensions
         try
         {
             var data = await ServiceAccessor.Get<IJSRuntime>().InvokeAsync<JsAppData>(JsNamespace.Get("getJsAppData"));
-            return data.MouseArgs.PageX < data.BrowserDimensions.Width / 2 ? DialogPosition.CenterLeft : DialogPosition.CenterRight;
+            return (data.MouseArgs.PageX < data.BrowserDimensions.Width / 2 && !MainLayout.Instance.RightToLeft ) ? DialogPosition.CenterLeft : DialogPosition.CenterRight;
         }
         catch { return DialogPosition.CenterRight; }
     }

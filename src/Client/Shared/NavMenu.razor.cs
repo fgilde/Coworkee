@@ -19,6 +19,8 @@ namespace Coworkee.Client.Shared
         private ClaimsPrincipal _user;
         private ExpandMode _expandMode;
 
+        [Parameter] public bool IsMini { get; set; }
+
         [Parameter] public bool ShowUserCard { get; set; } = true;     
         
         [Parameter] public bool ShowApplicationLogo { get; set; } = false;
@@ -99,7 +101,7 @@ namespace Coworkee.Client.Shared
             if (ExpandMode != ExpandMode.None)
             {
                 var state = !entry.IsExpanded;
-                if (ExpandMode == ExpandMode.SingleExpand && !isMini)
+                if (ExpandMode == ExpandMode.SingleExpand && !IsMini)
                     SetAllExpanded(false, e => e != entry && !e.ContainsChild(entry));
                 entry.IsExpanded = state;
             }

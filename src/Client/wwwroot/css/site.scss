@@ -1,5 +1,6 @@
 ﻿/*@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');*/
 @import '_animations.scss';
+@import '_app_load.scss';
 
 html, body, #app, .mud-main-content, .mud-rtl-provider {
     height: 100%;
@@ -141,7 +142,7 @@ body * {
     left: 0;
     width: 100%;
     /*animation-iteration-count: 1 !important;*/
-    animation: slideIn-t 1500ms ease-in-out 1 alternate;
+    animation: kf-mud-dialog-slide-top 1500ms ease-in-out 1 alternate;
 }
 
 .disable-pointer-events-on-next-input > div.mud-input-control-input-container > div.mud-input > input {

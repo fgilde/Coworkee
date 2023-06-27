@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
 using Coworkee.Application.Common.Models;
-using Coworkee.Client.Shared.Components;
+using Coworkee.Application.Requests;
 using MudBlazor;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using Nextended.Core;
+using MudBlazor.Extensions.Components;
 
 namespace Coworkee.Client.Configuration.MudExObjectEdit.MetaConfigurations;
 
@@ -22,7 +23,7 @@ public class ProductDtoMetaConfiguration : BaseDtoMetaConfiguration<ProductDto, 
             f.DisableUnderLine = true;
         }));
         meta.Property(p => p.UploadRequest)
-            .WithAdditionalAttributes<UploadRequestEdit>(a => a.MimeTypes = MimeType.ImageTypes)
+            .WithAdditionalAttributes<MudExUploadEdit<UploadRequest>>(a => a.MimeTypes = MimeType.ImageTypes)
             .WithoutLabel()
             .WrapInMudItem(i => i.md = 12)
             .WrapIn<MudCard>(c =>

@@ -19,15 +19,20 @@ namespace Coworkee.Client.Theming
             _jsRuntime = jsRuntime;
         }
 
-        public async Task<ClientTheme> BestBrowserMatch()
+        public async Task<bool> BrowserPrefersDarkMode() => await _jsRuntime.InvokeAsync<bool>(JsNamespace.Get("BrowserHelper", "isDarkMode"));
+
+        public Task<ClientTheme> GetDefaultThemeAsync()
         {
-            bool isDark = await _jsRuntime.InvokeAsync<bool>(JsNamespace.Get("BrowserHelper", "isDarkMode"));
-            var available = await ThemesAsync();
-            return isDark && available.ContainsValue(ClientTheme.DarkTheme) 
-                ? ClientTheme.DarkTheme 
-                : available.ContainsValue(ClientTheme.DefaultTheme) 
-                    ? ClientTheme.DefaultTheme : available.Count > 0 ? available.FirstOrDefault().Value : ClientTheme.DefaultTheme;
+            return Task.FromResult(ClientTheme.DefaultTheme);
+            //bool isDark = await BrowserPrefersDarkMode();
+            //var available = await ThemesAsync();
+            //return isDark && available.ContainsValue(ClientTheme.DarkTheme) 
+            //    ? ClientTheme.DarkTheme 
+            //    : available.ContainsValue(ClientTheme.DefaultTheme) 
+            //        ? ClientTheme.DefaultTheme : available.Count > 0 ? available.FirstOrDefault().Value : ClientTheme.DefaultTheme;
         }
+
+        public ClientTheme CurrentTheme => ClientTheme.LastUsedTheme;
 
         public Task<Dictionary<string, ClientTheme>> ThemesAsync()
         {
@@ -35,7 +40,6 @@ namespace Coworkee.Client.Theming
             return Task.FromResult(new Dictionary<string, ClientTheme>()
             {
                 {nameof(ClientTheme.DefaultTheme), ClientTheme.DefaultTheme},
-                {nameof(ClientTheme.DarkTheme), ClientTheme.DarkTheme},
                 {nameof(ClientTheme.LuckyGreen), ClientTheme.LuckyGreen},
                 {nameof(ClientTheme.CodeBlue), ClientTheme.CodeBlue}
             });

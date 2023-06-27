@@ -45,11 +45,30 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using NSwag;
 using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors.Security;
+using Coworkee.Application.AssistantFeatures;
+using GptInvoke;
+using OpenAI.Models;
 
 namespace Coworkee.Server.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
+        internal static IServiceCollection AddGptAssistant(this IServiceCollection services, IConfiguration configuration)
+        {
+            
+            var gptConfig = ServerConfiguration.Instance.CognitiveServices.OpenAi;
+            var assistantAvailable = ServerConfiguration.Instance.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
+            configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
+            if (assistantAvailable)
+            {
+                services.AddGptActionInvoker(settings =>
+                {
+                    settings.ApiKey = gptConfig.ApiKey;
+                    settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
+                }, typeof(AddProduct).Assembly);
+            }
+            return services;
+        }
         internal static IServiceCollection AddSignalRServices(this IServiceCollection services, ServerConfiguration configuration)
         {
             if (configuration.Azure.SignalR.Enabled && !string.IsNullOrEmpty(configuration.Azure.SignalR.ConnectionString))

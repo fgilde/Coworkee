@@ -12,7 +12,7 @@
 
     @if (ShowUserCard && _user?.Identity?.IsAuthenticated == true && !_user.IsGuest())
     {
-        @if (isMini)
+        @if (IsMini)
         {
             <div class="mini-avatar">
                 <UserAvatar />
@@ -20,7 +20,7 @@
         }
         else
         {
-            <UserCard Logout="Logout" ShowEmail="false" ShowLogout="true" />
+            <UserCard Logout="Logout" ShowEmail="false" ShowLogout="false" />
         }
         <MudDivider Class="mb-2" />
     }
@@ -30,7 +30,7 @@
             <ItemTemplate>
                 @if (IsAuthorized(context))
                 {
-                    if (isMini)
+                    if (IsMini)
                     {
                         context.IsExpanded = true;
                     }
@@ -38,7 +38,7 @@
                         <Content>
                             @if (HasAction(context))
                             {
-                            @if (isMini)
+                            @if (IsMini)
                                 {
                                 <MudTooltip Placement="Placement.End" Arrow="false" Inline="false" Text="@_localizer[context.Text]">
                                     <MudNavLink Class="mini-nav-link" Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
@@ -58,7 +58,7 @@
                                 {
                                 <MudIcon Icon="@context.Icon" Class="ml-0 mr-2" Color="@Color.Default" />
                                 }
-                            @if (!isMini)
+                            @if (!IsMini)
                                 {
                                 <MudListSubheader Class="@(CanExpand(context) ? "cursor-pointer" : "")" @onclick="() => OnExpandCollapseClick(context)">@_localizer[context.Text]</MudListSubheader>
 
@@ -79,19 +79,3 @@
     </MudNavMenu>
 
 </div>
-
-@code
-{
-
-    [Parameter] public bool isMini { get; set; }
-
-
-
-
-    private void Callback()
-    {
-
-    }
-}
-
-

@@ -1,0 +1,16 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<DeleteConfirmation> localizer
+
+<MudDialog Class="dialog-content-full-height overflow-hidden mud-ex-dialog-initial" ClassContent="full-height flex-column">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Assistant" Class="mr-3 mb-n1" />
+            @localizer[Title]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <Assistant></Assistant>
+    </DialogContent>
+    <DialogActions>
+
+    </DialogActions>
+</MudDialog>

@@ -30,7 +30,7 @@ namespace Coworkee.Application.Features.Documents.Commands.Delete
             _cache = cache;
         }
 
-        public override async Task<Unit> Handle(DeleteDocumentsCommand command, CancellationToken cancellationToken)
+        public override async Task Handle(DeleteDocumentsCommand command, CancellationToken cancellationToken)
         {
             var documentsWithExtendedAttributes = UnitOfWork.Repository<Document>().Entities.Include(x => x.ExtendedAttributes);
             
@@ -39,7 +39,7 @@ namespace Coworkee.Application.Features.Documents.Commands.Delete
                 .ToListAsync(cancellationToken);
             cacheKeys.Add(ApplicationConstants.Cache.GetAllEntityExtendedAttributesCacheKey(nameof(Document)));
             cacheKeys.ForEach(s => _cache.Remove(s));
-            return await base.Handle(command, cancellationToken);
+            await base.Handle(command, cancellationToken);
         }
     }
 }

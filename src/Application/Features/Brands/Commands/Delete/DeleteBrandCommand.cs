@@ -23,7 +23,7 @@ namespace Coworkee.Application.Features.Brands.Commands.Delete
             : base(unitOfWork, mediator, permissionService, provider)
         { }
 
-        public override async Task<Unit> Handle(DeleteBrandCommand command, CancellationToken cancellationToken)
+        public override async Task Handle(DeleteBrandCommand command, CancellationToken cancellationToken)
         {
             var productRepository = Get<IProductRepository>();
             foreach (var id in command.Ids)
@@ -31,7 +31,7 @@ namespace Coworkee.Application.Features.Brands.Commands.Delete
                 if (await productRepository.IsBrandUsed(id))
                     throw Errors.Create("Deletion Not Allowed", HttpStatusCode.Conflict);
             }
-            return await base.Handle(command, cancellationToken);
+            await base.Handle(command, cancellationToken);
         }
     }
 }

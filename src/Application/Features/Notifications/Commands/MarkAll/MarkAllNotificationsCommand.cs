@@ -28,7 +28,7 @@ public class MarkAllNotificationsCommand
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
+        public async Task Handle(Request request, CancellationToken cancellationToken)
         {
             var repo = _unitOfWork.Repository<Notification>();
             var notifications = repo.Entities.Where(n => n.UserId == _currentUserService.UserId);
@@ -37,7 +37,6 @@ public class MarkAllNotificationsCommand
             await _unitOfWork.Commit(cancellationToken);
 
            // await repo.UpdateManyAsync(toUpdate.Select(t => t.Entity), cancellationToken);
-            return Unit.Value;
         }
     }
 }

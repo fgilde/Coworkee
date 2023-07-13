@@ -23,7 +23,7 @@ namespace Coworkee.Application.Features.DocumentTypes.Commands.Delete
             : base(unitOfWork, mediator, permissionService, provider)
         { }
 
-        public override async Task<Unit> Handle(DeleteDocumentTypesCommand command, CancellationToken cancellationToken)
+        public override async Task Handle(DeleteDocumentTypesCommand command, CancellationToken cancellationToken)
         {
             var productRepository = Get<IDocumentRepository>();
             foreach (var id in command.Ids)
@@ -31,7 +31,7 @@ namespace Coworkee.Application.Features.DocumentTypes.Commands.Delete
                 if (await productRepository.IsDocumentTypeUsed(id))
                     throw Errors.Create("Deletion Not Allowed", HttpStatusCode.Conflict);
             }
-            return await base.Handle(command, cancellationToken);
+            await base.Handle(command, cancellationToken);
         }
     }
 }

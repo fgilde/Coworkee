@@ -47,7 +47,7 @@ namespace Coworkee.Application.Features.Base.Commands
             return (await UnitOfWork.Repository<TEntity>().GetByIdsAsync(command.Ids, cancellationToken));
         }
 
-        public virtual async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken)
+        public virtual async Task Handle(TCommand command, CancellationToken cancellationToken)
         {
             var user = Get<ICurrentUserService>().CurrentUser();
             var entities = (await FindEntitiesAsync(command, cancellationToken)).ToArray();
@@ -62,8 +62,6 @@ namespace Coworkee.Application.Features.Base.Commands
                 new EntitiesUpdated<TDto>(user, deletedItemsAsDto),
                 new EntitiesDeleted(user, ids),
                 new EntitiesUpdated(user, ids));
-
-            return Unit.Value;
         }
     }
 }

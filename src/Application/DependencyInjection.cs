@@ -33,7 +33,8 @@ namespace Coworkee.Application
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
             services.AddTransient<ICustomAuthorizeAttributeHandler, CustomAuthorizeAttributeHandler>();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ClientEventBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));

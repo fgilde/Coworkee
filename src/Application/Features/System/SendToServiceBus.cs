@@ -23,10 +23,9 @@ namespace Coworkee.Application.Features.System
                 this.bus = bus;
             }
 
-            public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
+            public async Task Handle(Request request, CancellationToken cancellationToken)
             {
                 await bus.SendMessageAsync(request.Queue, request.Content, cancellationToken);
-                return Unit.Value;
             }
         }
 

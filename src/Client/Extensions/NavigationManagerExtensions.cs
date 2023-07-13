@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Client.Authentication;
 using Coworkee.Client.Configuration;
@@ -9,7 +10,6 @@ using Coworkee.Client.JsInterop;
 using Coworkee.SDK;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.JSInterop;
 using Nextended.Core.Extensions;
 
@@ -80,13 +80,7 @@ namespace Coworkee.Client.Extensions
                 _= ServiceAccessor.Get<IJSRuntime>().InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "navigateToExternalUrl"), url);
             return navigationManager;
         }
-
-        public static string ReadQueryParam(this NavigationManager navigationManager, string paramName, string url = null)
-        {
-            var uri = string.IsNullOrEmpty(url) ? navigationManager.ToAbsoluteUri(navigationManager.Uri) : new Uri(url, UriKind.RelativeOrAbsolute);
-            return QueryHelpers.ParseQuery(uri.Query).TryGetValue(paramName, out var param) ? param.FirstOrDefault() : null;
-        }
-
+        
         public static bool IsExternalUrl(this NavigationManager navigationManager, string url)
         {
             var baseUrl = navigationManager.ToAbsoluteUri(navigationManager.Uri);
@@ -99,17 +93,22 @@ namespace Coworkee.Client.Extensions
             navigationManager.NavigateTo(navigationManager.Uri, forceLoad);
         }
 
+        public static string ReadQueryParam(this NavigationManager navigationManager, string paramName, string url = null)
+        {
+            var uri = string.IsNullOrEmpty(url) ? navigationManager.ToAbsoluteUri(navigationManager.Uri) : new Uri(url, UriKind.RelativeOrAbsolute);
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
+            return queryParams[paramName];
+        }
+
         public static string GetReturnUrlValue(this NavigationManager navigationManager)
         {
             var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
-            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue(ApplicationConstants.ParameterNames.ReturnUrl, out var param))
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
+            var url = queryParams[ApplicationConstants.ParameterNames.ReturnUrl];
+            if (!string.IsNullOrWhiteSpace(url))
             {
-                var url = param.First();
-                if (!string.IsNullOrWhiteSpace(url))
-                {
-                    string result = CleanReturnUrl(url);
-                    return !IsForbidden(result) ? result : null;
-                }
+                string result = CleanReturnUrl(url);
+                return !IsForbidden(result) ? result : null;
             }
 
             return null;

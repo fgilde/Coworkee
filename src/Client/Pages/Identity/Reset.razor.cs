@@ -1,10 +1,10 @@
 using Coworkee.Application.Requests.Identity;
-using Microsoft.AspNetCore.WebUtilities;
 using MudBlazor;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using Coworkee.Client.Extensions;
+using System;
 
 namespace Coworkee.Client.Pages.Identity
 {
@@ -16,13 +16,15 @@ namespace Coworkee.Client.Pages.Identity
 
         protected override void OnInitialized()
         {
-            var uri = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
-            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("Token", out var param))
+            var queryToken = _navigationManager.ReadQueryParam("Token");
+            if (!string.IsNullOrEmpty(queryToken))
             {
-                var queryToken = param.First();
-                _resetPasswordModel.Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(queryToken));
+                //_resetPasswordModel.Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(queryToken));
+                queryToken = queryToken.Replace('-', '+').Replace('_', '/');
+                _resetPasswordModel.Token = Encoding.UTF8.GetString(Convert.FromBase64String(queryToken));
             }
         }
+
 
         private async Task SubmitAsync()
         {

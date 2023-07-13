@@ -20,9 +20,9 @@
     <Content Include=".config\dotnet-tools.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="Microsoft.Azure.SignalR" Version="1.21.4" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Nextended.Imaging" Version="7.0.26" />
     <PackageReference Include="Hangfire" Version="1.8.3" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />

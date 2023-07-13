@@ -58,7 +58,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             _mediator = mediator;
         }
 
-        public async Task<IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId)
+        public async Task<Shared.Wrapper.IResult> ChangePasswordAsync(ChangePasswordRequest model, string userId)
         {
             var user = await this._userManager.FindByIdAsync(userId);
             if (user == null)
@@ -110,7 +110,7 @@ namespace Coworkee.Infrastructure.Services.Identity
 
             return user.UserName;
         }
-        public async Task<(IResult Result, string UserId)> CreateUserAsync(string userName, string password)
+        public async Task<(Shared.Wrapper.IResult Result, string UserId)> CreateUserAsync(string userName, string password)
         {
             var user = new ApplicationUser
             {
@@ -144,7 +144,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             return result.Succeeded;
         }
 
-        public async Task<IResult> DeleteUserAsync(string userId)
+        public async Task<Shared.Wrapper.IResult> DeleteUserAsync(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
 
@@ -176,7 +176,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             catch {/*ingnored*/}
         }
 
-        public async Task<IResult> DeleteUserAsync(ApplicationUser user)
+        public async Task<Shared.Wrapper.IResult> DeleteUserAsync(ApplicationUser user)
         {
             if (user.IsSystemUser())
                 throw Errors.Create("Not allowed to Delete this user");

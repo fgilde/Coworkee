@@ -19,7 +19,6 @@ using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;

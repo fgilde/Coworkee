@@ -5,13 +5,14 @@
     <AssemblyName>Coworkee.Infrastructure</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="CsvHelper" Version="27.2.1" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
     <PackageReference Include="CsvHelper.Excel.Core" Version="27.2.1" />
     <PackageReference Include="Hangfire.Core" Version="1.8.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" /> <!--TODO: Remove-->
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" /> <!--TODO: Remove-->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />

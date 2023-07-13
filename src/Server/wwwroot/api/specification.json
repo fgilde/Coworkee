@@ -1,5 +1,5 @@
 {
-  "x-generator": "NSwag v13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))",
   "swagger": "2.0",
   "info": {
     "title": "Coworkee Web API",
@@ -565,7 +565,7 @@
             "name": "objectName",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "type": "string",
@@ -828,7 +828,7 @@
             "name": "queue",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "name": "entity",
@@ -1396,7 +1396,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -2746,7 +2746,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -2795,7 +2795,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "type": "boolean",
@@ -2958,7 +2958,7 @@
             "name": "userId",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -3036,7 +3036,7 @@
             "name": "userId",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -3302,7 +3302,7 @@
             "name": "roleId",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -3567,7 +3567,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -3618,7 +3618,7 @@
             "name": "roleId",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -4161,7 +4161,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -4212,7 +4212,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -4694,7 +4694,7 @@
             "name": "contactId",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -5024,7 +5024,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -5312,7 +5312,7 @@
             "in": "path",
             "required": true,
             "description": "Product Id",
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -5363,7 +5363,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "x-nullable": true
+            "x-nullable": false
           }
         ],
         "responses": {

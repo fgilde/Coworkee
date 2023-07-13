@@ -50,7 +50,8 @@ namespace Coworkee.Server.Controllers.Notifications
         [HttpDelete]
         public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteNotificationsCommand { Ids = UnhashIds(ids) }, cancellationToken));
+            await Mediator.Send(new DeleteNotificationsCommand {Ids = UnhashIds(ids)}, cancellationToken);
+            return Ok();
         }
 
         /// <summary>
@@ -63,7 +64,8 @@ namespace Coworkee.Server.Controllers.Notifications
         [HttpDelete(nameof(DeleteAll))]
         public async Task<IActionResult> DeleteAll(CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteNotificationsCommand { All = true }, cancellationToken));
+            await Mediator.Send(new DeleteNotificationsCommand {All = true}, cancellationToken);
+            return Ok();
         }
 
         /// <summary>
@@ -92,8 +94,8 @@ namespace Coworkee.Server.Controllers.Notifications
         [HttpPost(nameof(MarkAllRead))]
         public async Task<IActionResult> MarkAllRead(bool isRead, CancellationToken cancellationToken = default)
         {
-            var result = await Mediator.Send(new MarkAllNotificationsCommand.Request {IsRead = isRead}, cancellationToken);
-            return Ok(result);
+            await Mediator.Send(new MarkAllNotificationsCommand.Request {IsRead = isRead}, cancellationToken);
+            return Ok();
         }
 
         /// <summary>

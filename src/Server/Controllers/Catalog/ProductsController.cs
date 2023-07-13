@@ -87,7 +87,8 @@ namespace Coworkee.Server.Controllers.Catalog
         [HttpDelete]
         public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteProductCommand { Ids = UnhashIds(ids) }, cancellationToken));
+            await Mediator.Send(new DeleteProductCommand {Ids = UnhashIds(ids)}, cancellationToken);
+            return Ok();
         }
         
         /// <summary>

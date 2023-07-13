@@ -68,7 +68,8 @@ namespace Coworkee.Server.Controllers.Utilities.Misc
         [HttpDelete]
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteDocumentTypesCommand { Ids = ids }, cancellationToken));
+            await Mediator.Send(new DeleteDocumentTypesCommand {Ids = ids}, cancellationToken);
+            return Ok();
         }
 
         /// <summary>

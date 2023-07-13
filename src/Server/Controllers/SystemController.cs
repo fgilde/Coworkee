@@ -66,11 +66,12 @@ namespace Coworkee.Server.Controllers
         [HttpPost("{queue}")]
         public async Task<ActionResult> SendOnServiceBus(string queue, [FromBody] ProductDto entity)
         {
-            return Ok(await Mediator.Send(new SendToServiceBus.Request
+            await Mediator.Send(new SendToServiceBus.Request
             {
                 Queue = queue,
                 Content = entity
-            }));
+            });
+            return Ok();
         }
 
         [Authorize(Roles = RoleConstants.AdministratorRole)]

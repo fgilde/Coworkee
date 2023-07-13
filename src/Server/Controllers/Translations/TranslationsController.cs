@@ -90,7 +90,8 @@ namespace Coworkee.Server.Controllers.Translations
         [HttpDelete]
         public async Task<IActionResult> Delete(int[] ids, CancellationToken cancellationToken = default)
         {
-            return Ok(await Mediator.Send(new DeleteTranslationsCommand { Ids = ids }, cancellationToken));
+            await Mediator.Send(new DeleteTranslationsCommand {Ids = ids}, cancellationToken);
+            return Ok();
         }
 
         /// <summary>

@@ -74,15 +74,26 @@ public partial class ThemeSelector
     {
         var defaultDialogOptionsEx = await DialogServiceExtensions.DefaultDialogOptionsEx();
 
-        var toEdit = ClientTheme.LastUsedTheme.Clone();
-        var res = await _dialogService.EditObject(toEdit, "Edit Theme", defaultDialogOptionsEx);
-        if (!res.Cancelled)
+        var res = await _dialogService.ShowComponentInDialogAsync<MudExThemeEdit<ClientTheme>>("Edit Theme", "", edit =>
         {
-            await _clientPreferenceManager.SaveCurrentThemeChangesAsync(toEdit);
-        }
+            edit.Theme = ClientTheme.LastUsedTheme.Clone();
+            edit.AllowPresetsEdit = false;
+        }, defaultDialogOptionsEx);
 
-        _charmOpen = false;
-        StateHasChanged();
+        if (!res.DialogResult.Canceled)
+        {
+            await _clientPreferenceManager.SaveCurrentThemeChangesAsync(res.Component.Theme);
+            StateHasChanged();
+        }
+        //var toEdit = ClientTheme.LastUsedTheme.Clone();
+        //var res = await _dialogService.EditObject(toEdit, "Edit Theme", defaultDialogOptionsEx);
+        //if (!res.Cancelled)
+        //{
+        //    await _clientPreferenceManager.SaveCurrentThemeChangesAsync(toEdit);
+        //}
+
+        //_charmOpen = false;
+        //StateHasChanged();
     }
 
     private async Task OnDarkChange(bool arg)

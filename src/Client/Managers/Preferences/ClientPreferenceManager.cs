@@ -123,6 +123,7 @@ namespace Coworkee.Client.Managers.Preferences
                     return MudExThemeHelper.FromJson<ClientTheme>(preference.ThemeJson);
                 }
                 catch {
+                    // ignored
                 }
             }
             return null;

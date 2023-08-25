@@ -2,29 +2,36 @@
 @using Coworkee.Application.Common.Models.Identity
 @using System.Threading
 @using Microsoft.AspNetCore.Components.Rendering
+@using MudBlazor.Extensions.Options
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserFilter> _localizer
 
-@inherits MudExChipSelect<UserResponse>
+@inherits MudExSelect<UserResponse>
 
 @Inherited()
 
-@code {
-    public override Color ChipColor { get; set; } = Color.Secondary;
+@code {    
     public override Variant ChipVariant { get; set; } = Variant.Outlined;
-    public override string Label { get; set; } = "User";
-    public override string HelperText { get; set; } = "Search by users";
-    public override bool UseCustomItemRenderInSelectionPopover { get; set; } = true;
+    public override Func<UserResponse, string> ToStringFunc { get; set; } = ItemNameRender;
     protected RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
-    
+
     protected override async Task<IList<UserResponse>> GetAvailableItemsAsync(CancellationToken cancellation = default)
         => (await _api.User_GetAllAsync(cancellationToken: cancellation)).Data;
 
-    public override string ItemNameRender(UserResponse item) => item?.FullName;
-    
-    protected override RenderFragment RenderItem(UserResponse item)
+    public static string ItemNameRender(UserResponse item) => item?.FullName;
+
+    protected override void OnInitialized()
     {
-        if (ViewMode == ViewMode.NoChips)
-            return base.RenderItem(item);
-        return @<UserCard UserData="@item" ShowLogout="false"></UserCard>;
+        Color = Color.Secondary;
+        Label = _localizer["User"];
+        HelperText = _localizer["Search by users"];
+        ItemTemplate = GetItemTemplate();
+        ValuePresenter = ValuePresenter.Chip;
+        MultiSelection = true;
+        ChipSize = Size.Large;
+        base.OnInitialized();        
     }
+    
+    private RenderFragment<UserResponse> GetItemTemplate() => context =>
+        @<UserCard UserData="@context" ShowLogout="false"></UserCard>;
+    
 }

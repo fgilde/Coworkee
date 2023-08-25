@@ -43,12 +43,7 @@ public partial class MainNavMenuDrawer
         set => UpdateSingleExpand(value);
     }
 
-    [Parameter]
-    public bool AllowSettingsChange { get; set; } = true;
-
-    public bool ShowUserCard => (Open || Pinned);
-
-    private bool DisplayUserCard => ShowUserCard && User?.Identity?.IsAuthenticated == true && !User.IsGuest();
+    public bool AllowSettingsChange => Layout?.CurrentTheme is not {CanPinDrawer: false, CanChangeDrawerExpandMode: false};
 
     protected override async Task OnInitializedAsync()
     {
@@ -66,7 +61,7 @@ public partial class MainNavMenuDrawer
 
     private void SetVariantAndClipMode()
     {
-        if (AllowSettingsChange)
+        if (Layout.CurrentTheme.CanPinDrawer)
         {
             Variant = Pinned ? DrawerVariant.Mini : DrawerVariant.Temporary;
             ClipMode = (Pinned ? DrawerClipMode.Always : DrawerClipMode.Never);
@@ -84,9 +79,10 @@ public partial class MainNavMenuDrawer
         ChildContent = DrawerContent();
     }
 
-    private bool ShowLogoInMenu() => (Open && (Layout?.CurrentTheme?.ShowLogoInNavMenu ?? !Pinned));//(!Pinned && Open)
+    private bool ShowLogoInMenu() => (Open && (Layout?.CurrentTheme?.ShowLogoInNavMenu ?? !Pinned));
+    private bool ShowUserInMenu() => (Open && (Layout?.CurrentTheme?.ShowUserCardInNavigation ?? !Pinned));
 
-    private ExpandMode GetExpandMode() => AllowSettingsChange ? (SingleExpand ? ExpandMode.SingleExpand : ExpandMode.Default) : (Layout?.CurrentTheme?.NavMenuExpandMode ?? ExpandMode.Default);
+    private ExpandMode GetExpandMode() => Layout?.CurrentTheme?.CanChangeDrawerExpandMode == true ? (SingleExpand ? ExpandMode.SingleExpand : ExpandMode.Default) : (Layout?.CurrentTheme?.NavMenuExpandMode ?? ExpandMode.Default);
 
     private string SettingsContainerStyle()
     {
@@ -128,10 +124,5 @@ public partial class MainNavMenuDrawer
             p.IsDrawerPinned = Pinned;
             p.DrawerSingleExpand = SingleExpand;
         });
-    }
-
-    private bool IsMini()
-    {
-        return (!Open && Variant == DrawerVariant.Mini);
     }
 }

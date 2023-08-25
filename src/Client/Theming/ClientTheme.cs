@@ -9,6 +9,9 @@ namespace Coworkee.Client.Theming
 
     public class ClientTheme : MudTheme, ICloneable
     {
+        public bool CanPinDrawer { get; set; } = true;
+        public bool CanChangeDrawerExpandMode { get; set; } = true;
+
         public bool Dense { get; set; }
         public bool RowsStriped { get; set; }
         public bool BorderedTables { get; set; }

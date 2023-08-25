@@ -169,8 +169,7 @@ namespace Coworkee.Client.Shared
         internal void DrawerToggle()
         {
             IsDrawerOpen = !IsDrawerOpen;
-            StateHasChanged();
-            _clientPreferenceManager.SetPreference(p => p.IsDrawerOpen = IsDrawerOpen);
+            _= _clientPreferenceManager.SetPreference(p => p.IsDrawerOpen = IsDrawerOpen);
         }
 
 

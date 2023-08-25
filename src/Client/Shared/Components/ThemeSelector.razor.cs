@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MudBlazor.Extensions;
+using MudBlazor.Extensions.Helper;
 
 namespace Coworkee.Client.Shared.Components;
 
@@ -74,26 +75,26 @@ public partial class ThemeSelector
     {
         var defaultDialogOptionsEx = await DialogServiceExtensions.DefaultDialogOptionsEx();
 
-        var res = await _dialogService.ShowComponentInDialogAsync<MudExThemeEdit<ClientTheme>>("Edit Theme", "", edit =>
-        {
-            edit.Theme = ClientTheme.LastUsedTheme.Clone();
-            edit.AllowPresetsEdit = false;
-        }, defaultDialogOptionsEx);
+        var res = await _dialogService.ShowComponentInDialogAsync<MudExThemeEdit<ClientTheme>>("Customize", "",
+            themeEdit =>
+            {
+                themeEdit.AllowPresetsEdit = false;
+                themeEdit.AllowModeToggle = false;
+                themeEdit.EditMode = ThemeEditMode.Simple;
+                themeEdit.Theme = ClientTheme.LastUsedTheme.CloneTheme();
+            },
+            dialog =>
+            {
+                dialog.ClassActions = MudExCss.Classes.Dialog.DialogActionsSticky;
+                dialog.Icon = Icons.Material.Filled.Palette;
+                dialog.Buttons = MudExDialogResultAction.OkCancel();
+            }, defaultDialogOptionsEx);
 
         if (!res.DialogResult.Canceled)
         {
             await _clientPreferenceManager.SaveCurrentThemeChangesAsync(res.Component.Theme);
             StateHasChanged();
         }
-        //var toEdit = ClientTheme.LastUsedTheme.Clone();
-        //var res = await _dialogService.EditObject(toEdit, "Edit Theme", defaultDialogOptionsEx);
-        //if (!res.Cancelled)
-        //{
-        //    await _clientPreferenceManager.SaveCurrentThemeChangesAsync(toEdit);
-        //}
-
-        //_charmOpen = false;
-        //StateHasChanged();
     }
 
     private async Task OnDarkChange(bool arg)

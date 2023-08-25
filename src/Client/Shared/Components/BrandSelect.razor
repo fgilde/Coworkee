@@ -1,20 +1,18 @@
 @using System.Threading
 @using Coworkee.Application.Common.Models
-@inherits MudExChipSelect<Coworkee.Application.Common.Models.BrandDto>
+@inherits MudExSelect<Coworkee.Application.Common.Models.BrandDto>
 
 @Inherited()
 
-@code {
-    public override string HelperText { get; set; } = "Select Brand";
+@code {    
     protected RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
 
     protected override Task<IList<BrandDto>> GetAvailableItemsAsync(CancellationToken cancellation = default)
         => _api.Brands_GetAllAsync(null, cancellation);
 
     protected override void OnInitialized()
-    {
-        ViewMode = ViewMode.NoChips;
-        MultiSelect = false;
+    {        
+        HelperText = "Select Brand";     
         base.OnInitialized();
     }
 

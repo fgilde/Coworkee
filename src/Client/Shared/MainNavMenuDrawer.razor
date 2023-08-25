@@ -12,6 +12,8 @@
 
     private RenderFragment HeaderContent()
     {
+        if (Layout?.CurrentTheme is {CanPinDrawer: false, CanChangeDrawerExpandMode: false})
+            return @<p></p>;
         return @<MudDrawerHeader Style="min-height: 0">
         <div style="@SettingsContainerStyle()">
             @if (!MiniAndClosed())
@@ -21,7 +23,6 @@
             else
             {
                 <div>
-                    @* This in general you only need to render is MiniAndClosed but because of a reference Bug in MudEx we just hide it visual *@
                     <MudIconButton Style="" Class="nav-settings-btn" OnClick="@ToggleOpen" Size="Size.Small" Icon="@Icons.Material.Filled.Settings" />
                     <MudExPopover Duration="400" Animation="AnimationType.Perspective3d" AnimationPosition="DialogPosition.CenterRight" OnBlur="@OnBlur" SelectorsForIgnoreBlur=".nav-settings-btn" Open="_popoverOpen"
                                   AnchorOrigin="Origin.CenterRight" TransformOrigin="Origin.CenterLeft">
@@ -36,9 +37,15 @@
     private RenderFragment SettingsButtons()
     {
         return @<div>
-        <MudToggleIconButton Size="Size.Small" ToggledSize="Size.Small" @bind-Toggled="@Pinned" Title="Pin" ToggledTitle="Unpin" Icon="@Icons.Material.Outlined.PushPin" ToggledIcon="@Icons.Material.Filled.PushPin" ToggledColor="@Color.Warning" />
-        <MudToggleIconButton Size="Size.Small" ToggledSize="Size.Small" @bind-Toggled="@SingleExpand" Title="Single expand" ToggledTitle="Multi expand" Icon="@Icons.Material.Outlined.Expand" ToggledIcon="@Icons.Material.Outlined.Expand" ToggledColor="@Color.Warning" />
-    </div>;
+            @if (Layout?.CurrentTheme?.CanPinDrawer == true)
+            {
+                <MudToggleIconButton Size="Size.Small" ToggledSize="Size.Small" @bind-Toggled="@Pinned" Title="Pin" ToggledTitle="Unpin" Icon="@Icons.Material.Outlined.PushPin" ToggledIcon="@Icons.Material.Filled.PushPin" ToggledColor="@Color.Warning"/>
+            }
+            @if (Layout?.CurrentTheme?.CanChangeDrawerExpandMode == true)
+            {
+                <MudToggleIconButton Size="Size.Small" ToggledSize="Size.Small" @bind-Toggled="@SingleExpand" Title="Single expand" ToggledTitle="Multi expand" Icon="@Icons.Material.Outlined.Expand" ToggledIcon="@Icons.Material.Outlined.Expand" ToggledColor="@Color.Warning"/>
+            }
+        </div>;
     }
 
     private RenderFragment MenuContent()
@@ -46,7 +53,7 @@
         return @<NavMenu @ref="Menu"
          IsMini="(!Open && Variant == DrawerVariant.Mini)"
          ShowApplicationLogo="@ShowLogoInMenu()"
-         ShowUserCard="@(Open || Pinned)"
+         ShowUserCard="@ShowUserInMenu()"
          ExpandMode="GetExpandMode()" />;
     }
 

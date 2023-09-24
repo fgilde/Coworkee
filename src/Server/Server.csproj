@@ -38,8 +38,8 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
-    <PackageReference Include="NSwag.AspNetCore" Version="13.19.0" />
-    <PackageReference Include="NSwag.MSBuild" Version="13.19.0">
+    <PackageReference Include="NSwag.AspNetCore" Version="13.20.0" />
+    <PackageReference Include="NSwag.MSBuild" Version="13.20.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

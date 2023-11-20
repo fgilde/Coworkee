@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components.Web;
 using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Client.Shared.Components;
 using Coworkee.Shared.Constants.Application;
-using MudBlazor.Extensions.Components;
-using Coworkee.Application.Requests;
 
 namespace Coworkee.Client.Pages.Authentication
 {
@@ -27,8 +24,6 @@ namespace Coworkee.Client.Pages.Authentication
         }
         public bool AllPagesVisited => Enumerable.Range(0, _pages.Count).All(_visitedPages.Contains);
 
-
-        private MudExUploadEdit<UploadRequest> _uploadEdit;
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private RegisterRequest _registerUserModel = new() { UserInfo = new UserInformationsDto() };
@@ -104,11 +99,6 @@ namespace Coworkee.Client.Pages.Authentication
                 _passwordInputIcon = Icons.Material.Filled.Visibility;
                 _passwordInput = InputType.Text;
             }
-        }
-
-        private Task Upload(MouseEventArgs arg)
-        {
-            return _uploadEdit.Upload(arg);
         }
 
         private bool IsAddedAsInitialRole(RoleDto role)

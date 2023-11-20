@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.9" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
     <PackageReference Include="MimeTypesMap" Version="1.0.8" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Update="resourceTranslationOptions.json">

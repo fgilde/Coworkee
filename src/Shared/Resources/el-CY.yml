@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Επιτρέπονται έως {0} αρχεία
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Δεν είναι δυνατή η δημιουργία σύνδεσης με το διακομιστή. Η σύνδεση δικτύου σας ενδέχεται να είναι εκτός λειτουργίας ή να μην είναι δυνατή η πρόσβαση στο διακομιστή. Περιμένετε μέχρι να αποκατασταθεί η σύνδεση
+A maximum of {0} files are allowed: Επιτρέπονται έως {0} αρχεία
 aa-DJ: Από μακριά (Τζιμπουτί)
 aa-ER: Από μακριά (Ερυθραία)
 aa-ET: Από μακριά (Αιθιοπία)
@@ -70,6 +71,8 @@ ar-TD: Αραβικά (Τσαντ)
 ar-TN: Αραβικά (Τυνησία)
 ar-YE: Αραβικά (Υεμένη)
 Are you sure you want to force logout for user {0}: Είστε βέβαιοι ότι θέλετε να αναγκάσετε την αποσύνδεση για {0} χρήστη
+Are you sure you want to restart Backend/Server?: Είστε βέβαιοι ότι θέλετε να επανεκκινήσετε το Backend/Server;
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Είστε βέβαιοι ότι θέλετε να επαναφέρετε τις προεπιλεγμένες ρυθμίσεις; Αυτό θα αντικαταστήσει τυχόν αλλαγές που έχετε κάνει ποτέ εδώ.
 arn-CL: Μαπούτσε (Χιλή)
 As Admin you can filter for users here: Ως διαχειριστής μπορείτε να φιλτράρετε για χρήστες εδώ
 as read: όπως διαβάζεται
@@ -131,6 +134,7 @@ ce-RU: Τσετσενία (Ρωσία)
 ceb-Latn-PH: Κεμπάνο (Λατινικά, Φιλιππίνες)
 cgg-UG: Τσίγκα (Ουγκάντα)
 Change Password: Αλλαγή κωδικού πρόσβασης
+Change the system settings carefully: Αλλάξτε προσεκτικά τις ρυθμίσεις συστήματος
 Charts comming soon ish...: Τα διαγράμματα έρχονται σύντομα...
 chat: Κουβέντα
 Chat: Κουβέντα
@@ -154,16 +158,19 @@ Continue to {0}: Συνεχίστε να {0}
 Country: Χώρα
 Create: Δημιουργώ
 Create address: Δημιουργία διεύθυνσης
+Create new backup: Δημιουργία νέου αντιγράφου ασφαλείας
 CreatedOn: Ημερομηνία δημιουργίας
 cs-CZ: Τσεχικά (Τσεχία)
 cu-RU: Εκκλησία Σλαβική (Ρωσία)
 Current Password: Τρέχων κωδικός πρόσβασης
 Current Password is required!: Απαιτείται τρέχων κωδικός πρόσβασης!
+Customize: Προσαρμογή
 cy-GB: Ουαλικό (Ηνωμένο Βασίλειο)
 da-DK: Δανικά (Δανία)
 da-GL: Δανικά (Γροιλανδία)
 Dashboard: Ταμπλό
 Data has been updated: Τα δεδομένα έχουν ενημερωθεί
+Database Backups: Αντίγραφα ασφαλείας βάσης δεδομένων
 Date: Ημερομηνία
 Date Created: Ημερομηνία δημιουργίας
 Date Range For Searching: Εύρος ημερομηνιών για αναζήτηση
@@ -200,6 +207,8 @@ Description is required!: Η περιγραφή είναι απαραίτητη!
 detailed guide for more.: αναλυτικός οδηγός για περισσότερα.
 Details for Trail ID: Λεπτομέρειες για το αναγνωριστικό διαδρομής
 dje-NE: Ζέρμα (Νίγηρας)
+Do you really want to restart the server?: Θέλετε πραγματικά να επανεκκινήσετε το διακομιστή;
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Θέλετε πραγματικά να επαναφέρετε τη βάση δεδομένων από το αντίγραφο ασφαλείας '{0}'; Σημειώστε ότι τυχόν αλλαγές που έγιναν μετά {1} έχουν φύγει. Αυτό σημαίνει επίσης τυχόν αλλαγές που έγιναν από οποιονδήποτε χρήστη
 Do you want to delete the profile picture of {0}: Θέλετε να διαγράψετε την εικόνα προφίλ του {0}
 Do you want to delete the User {0}: Θέλετε να διαγράψετε το {0} χρήστη
 Document Deleted: Το έγγραφο διαγράφηκε
@@ -357,6 +366,8 @@ en-ZM: Αγγλικά (Ζάμπια)
 en-ZW: Αγγλικά (Ζιμπάμπουε)
 English: Αγγλικά
 Enter email for password reset: Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου που είναι συνδεδεμένη με το λογαριασμό σας και θα λάβετε ένα μήνυμα ηλεκτρονικού ταχυδρομείου που περιέχει έναν σύνδεσμο για την επαναφορά του κωδικού πρόσβασής σας
+Enter name of backup file: Εισαγάγετε το όνομα του αρχείου αντιγράφου ασφαλείας
+Enter new name of backup file: Εισαγάγετε νέο όνομα αρχείου αντιγράφου ασφαλείας
 Enter the email address for the confirmation mail: Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου για την αλληλογραφία επιβεβαίωσης
 Enter the URL to existing file: Εισαγάγετε τη διεύθυνση URL για το υπάρχον αρχείο
 Enter your message...: Εισαγάγετε το μήνυμά σας...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Διαχείριση δικαιωμάτων {0} {1
 Manage {0} {1}'s Roles: Διαχείριση ρόλων {0} {1}
 Manage {0} Extended Attributes: Διαχείριση {0} εκτεταμένων χαρακτηριστικών
 Manage Brands.: Διαχείριση επωνυμίες.
+Manage Database Backups.: Διαχείριση ή επαναφορά αντιγράφων ασφαλείας βάσης δεδομένων.
 Manage Document Types.: Διαχείριση τύπων εγγράφων.
 Manage Extended Attributes: Διαχείριση εκτεταμένων χαρακτηριστικών
 Manage Languages: Διαχείριση γλωσσών
@@ -713,6 +725,7 @@ No notifications: Χωρίς ειδοποιήσεις
 Not Allowed to add or delete Administrator Role if you have not this role.: Δεν επιτρέπεται να προσθέσετε ή να διαγράψετε το ρόλο διαχειριστή εάν δεν έχετε αυτόν τον ρόλο.
 Not allowed to Delete this user: Δεν επιτρέπεται η διαγραφή αυτού του χρήστη
 Not Allowed.: Δεν επιτρέπεται.
+Not connected: Δεν είναι συνδεδεμένο
 NotFoundMessage: Η σελίδα που έψαχνες δεν υπάρχει.
 Notifications: Ειδοποιήσεις
 Nov: Νοε
@@ -819,12 +832,19 @@ Reload: Φορτώσετε εκ νέου
 Reload Data: Επαναφόρτωση δεδομένων
 Remember me?: Με θυμάστε;
 Remove All: Κατάργηση όλων
+Rename backup: Μετονομασία αντιγράφου ασφαλείας
 Reset: Επαναφορά
 Reset all: Επαναφορά όλων
 Reset all properties?: Επαναφορά όλων των ιδιοτήτων;
 Reset password: Επαναφορά κωδικού πρόσβασης
 Reset Password: Επαναφορά κωδικού πρόσβασης
 Resources: Πόροι
+Restart server: Επανεκκίνηση διακομιστή
+Restore: Αποκαθιστώ
+Restore database: Επαναφορά βάσης δεδομένων
+Restore default: Επαναφορά προεπιλογής
+Restore finished: Επαναφορά ολοκληρώθηκε
+Restore in progress. Please wait until the restore is finished. This can take a while.: Επαναφορά σε εξέλιξη. Περιμένετε μέχρι να ολοκληρωθεί η επαναφορά. Αυτό μπορεί να διαρκέσει λίγο.
 rm-CH: Ρόμανς (Ελβετία)
 rn-BI: Ρούντι (Μπουρούντι)
 ro-MD: Αγγλικά (Μολδαβία)
@@ -879,6 +899,7 @@ Select Language: Επιλογή γλώσσας
 Send: Αποστέλλω
 Send confirmation email: Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου επιβεβαίωσης
 Sep: Σεπ
+Server restarted successfully: Ο διακομιστής επανεκκινήθηκε με επιτυχία
 ses-ML: Κοϊραμπόρο Σέννι (Μάλι)
 Set new password: Ορισμός νέου κωδικού πρόσβασης
 sg-CF: Sango (Κεντροαφρικανική Δημοκρατία)
@@ -938,6 +959,7 @@ Swagger: Τεκμηρίωση API
 Swedish: Σουηδικά
 syr-SY: Συριακά (Συρία)
 System: Σύστημα
+System Settings: Ρυθμίσεις συστήματος
 ta-IN: Ταμίλ (Ινδία)
 ta-LK: Ταμίλ (Σρι Λάνκα)
 ta-MY: Ούτε (Μαλαισία)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Το �
 The following {0} permissions are also required for permission {1}: Τα ακόλουθα δικαιώματα {0} απαιτούνται επίσης για {1} δικαιωμάτων
 The following permission is also required for permission {1}: Απαιτείται επίσης το ακόλουθο δικαίωμα για την {1} δικαιωμάτων
 The Plugin '{0}' may be able to help: Το πρόσθετο «{0}» μπορεί να είναι σε θέση να βοηθήσει
+The server is just restarting. Please wait until the connection has been restored: Ο διακομιστής μόλις επανεκκινείται. Περιμένετε μέχρι να αποκατασταθεί η σύνδεση
 The user "{0}" just changed some of this data: Ο χρήστης "{0}" μόλις άλλαξε μερικά από αυτά τα δεδομένα
 The user {0} has been logged off: Το {0} χρήστη έχει αποσυνδεθεί
 The User {0} has just edited, created or deleted entries here. You should reload the data: Η {0} χρήστη έχει μόλις επεξεργαστεί, δημιουργήσει ή διαγράψει καταχωρήσεις εδώ. Θα πρέπει να φορτώσετε ξανά τα δεδομένα
@@ -1019,6 +1042,7 @@ ur-IN: Ουρντού (Ινδία)
 ur-PK: Ουρντού (Πακιστάν)
 User: Χρήστης
 User {0} Registered. Please check your Mailbox to verify!: Ο χρήστης {0} καταχωρημένος. Ελέγξτε το γραμματοκιβώτιό σας για να επαληθεύσετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας!
+User and Roles: Χρήστης και ρόλοι
 User Data: Δεδομένα χρήστη
 User Deleted: Ο χρήστης διαγράφηκε
 User Name: Όνομα χρήστη
@@ -1034,6 +1058,7 @@ Username cannot changed: Το όνομα χρήστη δεν μπορεί να �
 UserName is required: Απαιτείται όνομα χρήστη
 UserName must be at least of length 6: Το όνομα χρήστη πρέπει να έχει τουλάχιστον μήκος 6
 Users: Χρήστες
+Users and Roles: Χρήστες και ρόλοι
 Users exported: Χρήστες που εξάγονται
 UTC: UTC
 uz-Arab-AF: Ουζμπεκιστάν (Αραβικά, Αφγανιστάν)

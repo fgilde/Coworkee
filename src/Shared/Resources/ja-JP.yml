@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: 最大 {0} 個のファイルが許可されます。
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: サーバーへの接続を確立できません。ネットワーク接続がダウンしているか、サーバーに到達できない可能性があります。接続が復旧するまでお待ちください
+A maximum of {0} files are allowed: 最大 {0} 個のファイルが許可されます。
 aa-DJ: アファール (ジブチ)
 aa-ER: アファール (エリトリア)
 aa-ET: アファール (エチオピア)
@@ -70,6 +71,8 @@ ar-TD: アラビア語 (チャド)
 ar-TN: アラビア語 (チュニジア)
 ar-YE: アラビア語 (イエメン)
 Are you sure you want to force logout for user {0}: ユーザー{0}に対して強制的にログアウトしてもよろしいですか
+Are you sure you want to restart Backend/Server?: バックエンド/サーバーを再起動してもよろしいですか?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: デフォルト設定に戻してもよろしいですか?これにより、ここで行った変更が上書きされます。
 arn-CL: マプチェ (チリ)
 As Admin you can filter for users here: 管理者として、ここでユーザーをフィルター処理できます
 as read: 読むように
@@ -131,6 +134,7 @@ ce-RU: チェチェン (ロシア)
 ceb-Latn-PH: セブアノ(ラテン語、フィリピン)
 cgg-UG: チガ (ウガンダ)
 Change Password: パスワードの変更
+Change the system settings carefully: システム設定を慎重に変更してください
 Charts comming soon ish...: チャートはすぐにish..
 chat: チャット
 Chat: チャット
@@ -154,16 +158,19 @@ Continue to {0}: '{0}に続く'
 Country: 国
 Create: 創造する
 Create address: 住所の作成
+Create new backup: 新しいバックアップを作成
 CreatedOn: 作成日
 cs-CZ: チェコ語 (チェコ)
 cu-RU: 教会スラブ (ロシア)
 Current Password: 現在のパスワード
 Current Password is required!: 現在のパスワードが必要です!
+Customize: カスタマイズ
 cy-GB: ウェールズ語 (イギリス)
 da-DK: デンマーク語 (デンマーク)
 da-GL: デンマーク語 (グリーンランド)
 Dashboard: ダッシュボード
 Data has been updated: データが更新されました
+Database Backups: データベースのバックアップ
 Date: 日付
 Date Created: 作成日
 Date Range For Searching: 検索する日付の範囲
@@ -200,6 +207,8 @@ Description is required!: 説明が必要です!
 detailed guide for more.: 詳細なガイドを参照してください。
 Details for Trail ID: トレイル ID の詳細
 dje-NE: ザルマ (ニジェール)
+Do you really want to restart the server?: サーバーを再起動してもよろしいですか?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: バックアップ「{0}」からデータベースを復元してもよろしいですか?{1}後に行われた変更はすべて失われることに注意してください。これは、ユーザーによる変更も意味します
 Do you want to delete the profile picture of {0}: '{0}のプロフィール写真を削除しますか?'
 Do you want to delete the User {0}: ユーザー {0}を削除しますか?
 Document Deleted: ドキュメントの削除
@@ -357,6 +366,8 @@ en-ZM: 英語 (ザンビア)
 en-ZW: 英語 (ジンバブエ)
 English: 英語
 Enter email for password reset: アカウントにリンクされているメールアドレスを入力すると、パスワードをリセットするためのリンクを含むメールが届きます
+Enter name of backup file: バックアップファイルの名前を入力してください
+Enter new name of backup file: バックアップファイルの新しい名前を入力してください
 Enter the email address for the confirmation mail: 確認メールのメールアドレスを入力します。
 Enter the URL to existing file: 既存のファイルの URL を入力します。
 Enter your message...: メッセージを入力します。
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: '{0} {1}の権限を管理する'
 Manage {0} {1}'s Roles: '{0} {1}の役割の管理'
 Manage {0} Extended Attributes: 拡張属性{0}管理する
 Manage Brands.: ブランドを管理します。
+Manage Database Backups.: データベースのバックアップを管理または復元します。
 Manage Document Types.: ドキュメントタイプの管理
 Manage Extended Attributes: 拡張属性の管理
 Manage Languages: 言語の管理
@@ -713,6 +725,7 @@ No notifications: 通知なし
 Not Allowed to add or delete Administrator Role if you have not this role.: この役割を持っていない場合、管理者の役割を追加または削除することはできません。
 Not allowed to Delete this user: このユーザーの削除は許可されていません
 Not Allowed.: 禁じられた。
+Not connected: 接続されていません
 NotFoundMessage: 探していたページは存在しません。
 Notifications: 通知
 Nov: 11 月
@@ -819,12 +832,19 @@ Reload: 積み直す
 Reload Data: データの再読み込み
 Remember me?: 私を覚えていますか?
 Remove All: すべて削除
+Rename backup: バックアップの名前を変更する
 Reset: リセット
 Reset all: すべてリセット
 Reset all properties?: すべてのプロパティをリセットしますか?
 Reset password: パスワードのリセット
 Reset Password: パスワードのリセット
 Resources: リソース
+Restart server: サーバーの再起動
+Restore: 戻す
+Restore database: データベースの復元
+Restore default: デフォルトに戻す
+Restore finished: 復元が完了しました
+Restore in progress. Please wait until the restore is finished. This can take a while.: 復元が進行中です。復元が完了するまでお待ちください。これにはしばらく時間がかかる場合があります。
 rm-CH: ロマンシュ (スイス)
 rn-BI: ルンジ (ブルンジ)
 ro-MD: 英語 (モルドバ)
@@ -879,6 +899,7 @@ Select Language: 言語の選択
 Send: 送信
 Send confirmation email: 確認メールを送信する
 Sep: 9 月
+Server restarted successfully: サーバーが正常に再起動されました
 ses-ML: コイラボロ・セニ (マリ)
 Set new password: 新しいパスワードを設定する
 sg-CF: 三五 (中央アフリカ共和国)
@@ -938,6 +959,7 @@ Swagger: API ドキュメント
 Swedish: スウェーデン語
 syr-SY: シリア (シリア)
 System: 制
+System Settings: システム設定
 ta-IN: タミル語 (インド)
 ta-LK: タミル語 (スリランカ)
 ta-MY: また(マレーシア)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: ファ
 The following {0} permissions are also required for permission {1}: アクセス許可の{1}には、次の{0}アクセス許可も必要です。
 The following permission is also required for permission {1}: アクセス許可の設定には、次のアクセス許可も必要{1}
 The Plugin '{0}' may be able to help: プラグイン「{0}」が助けることができるかもしれません
+The server is just restarting. Please wait until the connection has been restored: サーバーが再起動中です。接続が復旧するまでお待ちください
 The user "{0}" just changed some of this data: ユーザー "{0}" は、このデータの一部を変更したばかりです。
 The user {0} has been logged off: ユーザー {0} がログオフされました
 The User {0} has just edited, created or deleted entries here. You should reload the data: ユーザー {0}は、ここでエントリを編集、作成、または削除したところです。データを再ロードする必要があります。
@@ -1019,6 +1042,7 @@ ur-IN: ウルドゥー語 (インド)
 ur-PK: ウルドゥー語 (パキスタン)
 User: 利用者
 User {0} Registered. Please check your Mailbox to verify!: ユーザー{0}登録済みです。メールボックスをチェックしてメールアドレスを確認してください!
+User and Roles: ユーザーとロール
 User Data: ユーザーデータ
 User Deleted: ユーザーが削除されました
 User Name: ユーザー名
@@ -1034,6 +1058,7 @@ Username cannot changed: ユーザー名は変更できません
 UserName is required: ユーザー名が必要です
 UserName must be at least of length 6: ユーザー名は少なくとも長さ 6 である必要があります。
 Users: ユーザー
+Users and Roles: ユーザーとロール
 Users exported: エクスポートされたユーザー
 UTC: UTC
 uz-Arab-AF: ウズベキスタン(アラビア語、アフガニスタン)

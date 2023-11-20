@@ -1,4 +1,4 @@
-A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored
 A maximum of {0} files are allowed: A maximum of {0} files are allowed
 aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
@@ -71,6 +71,8 @@ ar-TD: Arabic (Chad)
 ar-TN: Arabic (Tunisia)
 ar-YE: Arabic (Yemen)
 Are you sure you want to force logout for user {0}: Are you sure you want to force logout for user {0}
+Are you sure you want to restart Backend/Server?: Are you sure you want to restart Backend/Server?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: As Admin you can filter for users here
 as read: as read
@@ -132,6 +134,7 @@ ce-RU: Chechen (Russia)
 ceb-Latn-PH: Cebuano (Latin, Philippines)
 cgg-UG: Chiga (Uganda)
 Change Password: Change Password
+Change the system settings carefully: Change the system settings carefully
 Charts comming soon ish...: Charts comming soon ish...
 chat: Chat
 Chat: Chat
@@ -155,16 +158,19 @@ Continue to {0}: Continue to {0}
 Country: Country
 Create: Create
 Create address: Create address
+Create new backup: Create new backup
 CreatedOn: Date created
 cs-CZ: Czech (Czechia)
 cu-RU: Church Slavic (Russia)
 Current Password: Current Password
 Current Password is required!: Current Password is required!
+Customize: Customize
 cy-GB: Welsh (United Kingdom)
 da-DK: Danish (Denmark)
 da-GL: Danish (Greenland)
 Dashboard: Dashboard
 Data has been updated: Data has been updated
+Database Backups: Database Backups
 Date: Date
 Date Created: Date Created
 Date Range For Searching: Date Range For Searching
@@ -200,6 +206,8 @@ Description is required!: Description is required!
 detailed guide for more.: detailed guide for more.
 Details for Trail ID: Details for Trail ID
 dje-NE: Zarma (Niger)
+Do you really want to restart the server?: Do you really want to restart the server?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user
 Do you want to delete the profile picture of {0}: Do you want to delete the profile picture of {0}
 Do you want to delete the User {0}: Do you want to delete the User {0}
 Document Deleted: Document Deleted
@@ -357,6 +365,8 @@ en-ZM: English (Zambia)
 en-ZW: English (Zimbabwe)
 English: English
 Enter email for password reset: Enter the email address linked to your account and you will recieve an email containing a link to reset your password
+Enter name of backup file: Enter name of backup file
+Enter new name of backup file: Enter new name of backup file
 Enter the email address for the confirmation mail: Enter the email address for the confirmation mail
 Enter the URL to existing file: Enter the URL to existing file
 Enter your message...: Enter your message...
@@ -640,6 +650,7 @@ Manage {0} {1}'s Permissions: Manage {0} {1}'s Permissions
 Manage {0} {1}'s Roles: Manage {0} {1}'s Roles
 Manage {0} Extended Attributes: Manage {0} Extended Attributes
 Manage Brands.: Manage Brands.
+Manage Database Backups.: Manage or restore database backups.
 Manage Document Types.: Manage Document Types.
 Manage Extended Attributes: Manage Extended Attributes
 Manage Languages: Manage Languages
@@ -713,6 +724,7 @@ No notifications: No notifications
 Not Allowed to add or delete Administrator Role if you have not this role.: Not Allowed to add or delete Administrator Role if you have not this role.
 Not allowed to Delete this user: Not allowed to Delete this user
 Not Allowed.: Not Allowed.
+Not connected: Not connected
 NotFoundMessage: The page you were looking for doesn't exist.
 Notifications: Notifications
 Nov: Nov
@@ -819,12 +831,19 @@ Reload: Reload
 Reload Data: Reload Data
 Remember me?: Remember me?
 Remove All: Remove All
+Rename backup: Rename backup
 Reset: Reset
 Reset all: Reset all
 Reset all properties?: Reset all properties?
 Reset password: Reset password
 Reset Password: Reset Password
 Resources: Resources
+Restart server: Restart server
+Restore: Restore
+Restore database: Restore database
+Restore default: Restore default
+Restore finished: Restore finished
+Restore in progress. Please wait until the restore is finished. This can take a while.: Restore in progress. Please wait until the restore is finished. This can take a while.
 rm-CH: Romansh (Switzerland)
 rn-BI: Rundi (Burundi)
 ro-MD: Romanian (Moldova)
@@ -879,6 +898,7 @@ Select Language: Select Language
 Send: Send
 Send confirmation email: Send confirmation email
 Sep: Sep
+Server restarted successfully: Server restarted successfully
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Set new password
 sg-CF: Sango (Central African Republic)
@@ -938,6 +958,7 @@ Swagger: API Documentation
 Swedish: Swedish
 syr-SY: Syriac (Syria)
 System: System
+System Settings: System settings
 ta-IN: Tamil (India)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Tamil (Malaysia)
@@ -959,6 +980,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: The fi
 The following {0} permissions are also required for permission {1}: The following {0} permissions are also required for permission {1}
 The following permission is also required for permission {1}: The following permission is also required for permission {1}
 The Plugin '{0}' may be able to help: The Plugin '{0}' may be able to help
+The server is just restarting. Please wait until the connection has been restored: The server is just restarting. Please wait until the connection has been restored
 The user "{0}" just changed some of this data: The user "{0}" just changed some of this data
 The user {0} has been logged off: The user {0} has been logged off
 The User {0} has just edited, created or deleted entries here. You should reload the data: The User {0} has just edited, created or deleted entries here. You should reload the data
@@ -1019,6 +1041,7 @@ ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: User
 User {0} Registered. Please check your Mailbox to verify!: User {0} Registered. Please check your Mailbox to verify your email address!
+User and Roles: User and Roles
 User Data: User Data
 User Deleted: User Deleted
 User Name: User Name
@@ -1034,6 +1057,7 @@ Username cannot changed: Username cannot changed
 UserName is required: UserName is required
 UserName must be at least of length 6: UserName must be at least of length 6
 Users: Users
+Users and Roles: Users and Roles
 Users exported: Users exported
 UTC: UTC
 uz-Arab-AF: Uzbek (Arabic, Afghanistan)
@@ -1082,27 +1106,3 @@ zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
 zu-ZA: isiZulu (South Africa)
-Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.
-Create new backup: Create new backup
-Database Backups: Database Backups
-Do you really want to restart the server?: Do you really want to restart the server?
-Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user
-Enter name of backup file: Enter name of backup file
-Enter new name of backup file: Enter new name of backup file
-Manage Database Backups.: Manage or restore database backups.
-Not connected: Not connected
-Rename backup: Rename backup
-Restart server: Restart server
-Restore: Restore
-Restore database: Restore database
-Restore default: Restore default
-Restore finished: Restore finished
-Restore in progress. Please wait until the restore is finished. This can take a while.: Restore in progress. Please wait until the restore is finished. This can take a while.
-The server is just restarting. Please wait until the connection has been restored: The server is just restarting. Please wait until the connection has been restored
-User and Roles: User and Roles
-Users and Roles: Users and Roles
-Server restarted successfully: Server restarted successfully
-Are you sure you want to restart Backend/Server?: Are you sure you want to restart Backend/Server?
-System Settings: System settings
-Change the system settings carefully: Change the system settings carefully
-Customize: Customize

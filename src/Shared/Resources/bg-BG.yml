@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Допускат се максимум {0} файлове
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Не може да бъде установена връзка със сървъра. Мрежовата ви връзка може да е прекъсната или сървърът да е недостъпен. Моля, изчакайте, докато връзката бъде възстановена
+A maximum of {0} files are allowed: Допускат се максимум {0} файлове
 aa-DJ: Афар (Джибути)
 aa-ER: Афар (Еритрея)
 aa-ET: Афар (Етиопия)
@@ -70,6 +71,8 @@ ar-TD: Арабски (Чад)
 ar-TN: Арабски (Тунис)
 ar-YE: Арабски (Йемен)
 Are you sure you want to force logout for user {0}: Наистина ли искате да принудите излизане за потребителски {0}
+Are you sure you want to restart Backend/Server?: Наистина ли искате да рестартирате Backend/Server?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Наистина ли искате да възстановите настройките по подразбиране? Това ще замести всички промени, които някога сте направили тук.
 arn-CL: Мапуш (Чили)
 As Admin you can filter for users here: Като Администратор можете да филтрирате за потребители тук
 as read: като прочетени
@@ -131,6 +134,7 @@ ce-RU: Чеченски (Русия)
 ceb-Latn-PH: Cebuano (латински, Филипини)
 cgg-UG: Чига (Уганда)
 Change Password: Промяна на парола
+Change the system settings carefully: Променете внимателно системните настройки
 Charts comming soon ish...: Диаграми, идващи скоро иш...
 chat: Чат
 Chat: Чат
@@ -154,16 +158,19 @@ Continue to {0}: Продължете да {0}
 Country: Страна
 Create: Създавам
 Create address: Създаване на адрес
+Create new backup: Създаване на нов архив
 CreatedOn: Дата на създаване
 cs-CZ: Чешки (Чешки)
 cu-RU: Църковнославянски (Русия)
 Current Password: Текуща парола
 Current Password is required!: Изисква се текуща парола!
+Customize: Персонализирате
 cy-GB: Уелски (Обединеното кралство)
 da-DK: Датски (Дания)
 da-GL: Датски (Гренландия)
 Dashboard: Таблото
 Data has been updated: Данните са актуализирани
+Database Backups: Архивиране на бази данни
 Date: Дата
 Date Created: Дата на създаване
 Date Range For Searching: Период от време за търсене
@@ -200,6 +207,8 @@ Description is required!: Изисква се описание!
 detailed guide for more.: подробно ръководство за повече.
 Details for Trail ID: Подробности за Trail ID
 dje-NE: Зарма (Нигер)
+Do you really want to restart the server?: Наистина ли искате да рестартирате сървъра?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Наистина ли искате да възстановите базата данни от архив "{0}"? Имайте предвид, че всички промени, направени след {1}, са изчезнали. Това означава и всички промени, направени от който и да е потребител
 Do you want to delete the profile picture of {0}: Искате ли да изтриете снимката на профила на {0}
 Do you want to delete the User {0}: Искате ли да изтриете потребителския {0}
 Document Deleted: Документът е изтрит
@@ -357,6 +366,8 @@ en-ZM: Английски (Замбия)
 en-ZW: Английски (Зимбабве)
 English: Английски
 Enter email for password reset: Въведете имейл адреса, свързан с профила ви, и ще получите имейл, съдържащ връзка, за да възстановите паролата си
+Enter name of backup file: Въведете име на архивния файл
+Enter new name of backup file: Въведете ново име на архивния файл
 Enter the email address for the confirmation mail: Въведете имейл адреса за пощата за потвърждение
 Enter the URL to existing file: Въведете URL адреса в съществуващ файл
 Enter your message...: Въведете съобщението си...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Управление на разрешенията
 Manage {0} {1}'s Roles: Управление на ролите на {0} {1}
 Manage {0} Extended Attributes: Управление на {0} разширени атрибути
 Manage Brands.: Управление на марки.
+Manage Database Backups.: Управление или възстановяване на архиви на бази данни.
 Manage Document Types.: Управление на типове документи.
 Manage Extended Attributes: Управление на разширени атрибути
 Manage Languages: Управление на езици
@@ -713,6 +725,7 @@ No notifications: Без известия
 Not Allowed to add or delete Administrator Role if you have not this role.: Не е разрешено да добавяте или изтривате роля на администратор, ако нямате тази роля.
 Not allowed to Delete this user: Не е разрешено изтриването на този потребител
 Not Allowed.: Не е позволено.
+Not connected: Не е свързан
 NotFoundMessage: Страницата, която търсеше, не съществува.
 Notifications: Уведомления
 Nov: Ноември
@@ -819,12 +832,19 @@ Reload: Презареди
 Reload Data: Презареждане на данни
 Remember me?: Помниш ли ме?
 Remove All: Премахни всички
+Rename backup: Преименуване на архивиране
 Reset: Проучване
 Reset all: Нулиране на всички
 Reset all properties?: Нулиране на всички свойства?
 Reset password: Нулиране на паролата
 Reset Password: Нулиране на парола
 Resources: Ресурси
+Restart server: Рестартиране на сървъра
+Restore: Възстановявам
+Restore database: Възстановяване на база данни
+Restore default: Възстанови по подразбиране
+Restore finished: Възстановяването завърши
+Restore in progress. Please wait until the restore is finished. This can take a while.: Извършва се възстановяване. Моля, изчакайте, докато възстановяването завърши. Това може да отнеме известно време.
 rm-CH: Романски (Швейцария)
 rn-BI: Рунди (Бурунди)
 ro-MD: Английски (Молдова)
@@ -879,6 +899,7 @@ Select Language: Избор на език
 Send: Изпращам
 Send confirmation email: Изпращане на имейл за потвърждение
 Sep: Септември
+Server restarted successfully: Сървърът е рестартиран успешно
 ses-ML: Койраборо Сени (Мали)
 Set new password: Задаване на нова парола
 sg-CF: Sango (Централноафриканска република)
@@ -938,6 +959,7 @@ Swagger: Документация за API
 Swedish: Шведски
 syr-SY: Сирияк (Сирия)
 System: Система
+System Settings: Системни настройки
 ta-IN: Тамил (Индия)
 ta-LK: Тамил (Шри Ланка)
 ta-MY: Нито (Малайзия)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Фай
 The following {0} permissions are also required for permission {1}: Следните {0} разрешения също са необходими за разрешение {1}
 The following permission is also required for permission {1}: Следното разрешение се изисква и за разрешение {1}
 The Plugin '{0}' may be able to help: Плъгинът "{0}" може да е в състояние да помогне на
+The server is just restarting. Please wait until the connection has been restored: Сървърът тепърва се рестартира. Моля, изчакайте, докато връзката бъде възстановена
 The user "{0}" just changed some of this data: Потребителят "{0}" току-що промени някои от тези данни
 The user {0} has been logged off: Потребителският {0} е бил изключен
 The User {0} has just edited, created or deleted entries here. You should reload the data: Потребителският {0} току-що е редактирал, създал или изтрил записи тук. Трябва да презаредите данните
@@ -1019,6 +1042,7 @@ ur-IN: Урду (Индия)
 ur-PK: Урду (Пакистан)
 User: Потребител
 User {0} Registered. Please check your Mailbox to verify!: Регистриран потребителски {0}. Моля, проверете пощенската си кутия, за да потвърдите имейл адреса си!
+User and Roles: Потребител и роли
 User Data: Потребителски данни
 User Deleted: Изтрит потребител
 User Name: Потребителско име
@@ -1034,6 +1058,7 @@ Username cannot changed: Потребителското име не може д�
 UserName is required: Потребителско име е необходимо
 UserName must be at least of length 6: Потребителско име трябва да бъде най-малко с дължина 6
 Users: Потребители
+Users and Roles: Потребители и роли
 Users exported: Потребителите изнесени
 UTC: UTC
 uz-Arab-AF: Узбекски (арабски, Афганистан)

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Coworkee.Application.IntegrationTests</RootNamespace>
     <AssemblyName>Coworkee.Application.IntegrationTests</AssemblyName>
     <IsPackable>false</IsPackable>

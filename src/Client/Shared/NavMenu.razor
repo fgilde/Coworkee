@@ -1,6 +1,8 @@
 @using Nextended.Core.Extensions
 @using Coworkee.Application.Common.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
+
+<ReactOnPreferenceChanged Component="this" />
 <div>
     @if (ShowApplicationLogo)
     {
@@ -10,7 +12,7 @@
         <MudDivider Class="mb-2" />
     }
 
-    @if (ShowUserCard && _user?.Identity?.IsAuthenticated == true && !_user.IsGuest())
+    @if (ShowUserCard && User?.Identity?.IsAuthenticated == true && !User.IsGuest())
     {
         @if (IsMini)
         {

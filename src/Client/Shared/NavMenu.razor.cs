@@ -12,11 +12,14 @@ using Microsoft.AspNetCore.Components;
 using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 
+
 namespace Coworkee.Client.Shared
 {
     public partial class NavMenu
     {
-        private ClaimsPrincipal _user;
+        [CascadingParameter]
+        internal ClaimsPrincipal User { get; set; }
+
         private ExpandMode _expandMode;
 
         [Parameter] public bool IsMini { get; set; }
@@ -45,10 +48,10 @@ namespace Coworkee.Client.Shared
         
         private bool IsAuthorized(NavigationEntry entry)
         {
-            bool result = (!entry.IsAuthenticationRequired || (_user?.Identity?.IsAuthenticated == true && !_user.IsGuest()))
-                          && _user?.HasRoles(entry.RoleMatch, entry.Roles) == true
-                          && _authorizationService.HasPoliciesAsync(_user, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
-            _navigationManager.EnsureUrlIsAccessible(_user, entry.Href).ContinueWith(task =>
+            bool result = (!entry.IsAuthenticationRequired || (User?.Identity?.IsAuthenticated == true && !User.IsGuest()))
+                          && User?.HasRoles(entry.RoleMatch, entry.Roles) == true
+                          && _authorizationService.HasPoliciesAsync(User, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
+            _navigationManager.EnsureUrlIsAccessible(User, entry.Href).ContinueWith(task =>
             {
                 entry.Href = task.Result;
             });
@@ -64,11 +67,11 @@ namespace Coworkee.Client.Shared
             return base.OnAfterRenderAsync(firstRender);
         }
 
-        protected override async Task OnParametersSetAsync()
+        protected override void OnParametersSet()
         {
             Entries ??= Navigations.Default(_config.BackendOrigin);
-            _user = await _stateProvider.GetAuthenticationStateProviderUserAsync();
             ExpandToCurrentUrl();
+            base.OnParametersSet();
         }
 
         private void ExpandToCurrentUrl()
@@ -112,7 +115,6 @@ namespace Coworkee.Client.Shared
             predicate ??= n => ExpandMode == ExpandMode.SingleExpand || n.Parent == null;
             Entries.Recursive(n => n.Children.EmptyIfNull()).Where(predicate).Apply(e => e.IsExpanded = expand);
         }
-
 
         private bool HasAction(NavigationEntry entry)
         {

@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Dopušteno je najviše {0} datoteka
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Nije moguće uspostaviti vezu s poslužiteljem. Mrežna veza možda ne radi ili poslužitelj nije dostupan. Pričekajte dok se veza ne obnovi
+A maximum of {0} files are allowed: Dopušteno je najviše {0} datoteka
 aa-DJ: Afar (Džibuti, BiH)
 aa-ER: Afar (Eritreja, BiH)
 aa-ET: Afar (Etiopija)
@@ -70,6 +71,8 @@ ar-TD: Arapski (Čad)
 ar-TN: Arapski (Tunis)
 ar-YE: Arapski (Jemen)
 Are you sure you want to force logout for user {0}: Jeste li sigurni da želite prisilno odjaviti se za korisničku {0}
+Are you sure you want to restart Backend/Server?: Jeste li sigurni da želite ponovno pokrenuti pozadinski sustav/poslužitelj?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Jeste li sigurni da želite vratiti zadane postavke? Ovo će prebrisati sve promjene koje ste ikada napravili ovdje.
 arn-CL: Mapuche (Čile)
 As Admin you can filter for users here: Kao administrator možete filtrirati za korisnike ovdje
 as read: kao pročitano
@@ -131,6 +134,7 @@ ce-RU: Čečenski (Rusija)
 ceb-Latn-PH: Cebuano (latinica, Filipini)
 cgg-UG: Chiga (Uganda, BiH)
 Change Password: Promijeni lozinku
+Change the system settings carefully: Pažljivo promijenite postavke sustava
 Charts comming soon ish...: Karte uskoro stižu...
 chat: Čavrljanje
 Chat: Čavrljanje
@@ -154,16 +158,19 @@ Continue to {0}: Nastavi {0}
 Country: Zemlja
 Create: Stvoriti
 Create address: Stvori adresu
+Create new backup: Stvori novu sigurnosnu kopiju
 CreatedOn: Datum stvaranja
 cs-CZ: Češki (Češka)
 cu-RU: Crkveni slavenski (Rusija)
 Current Password: Trenutna lozinka
 Current Password is required!: Potrebna je trenutna lozinka!
+Customize: Prilagoditi
 cy-GB: Velški (Ujedinjeno Kraljevstvo)
 da-DK: Danski (Danska)
 da-GL: Danski (Grenland)
 Dashboard: Nadzorna ploča
 Data has been updated: Podaci su ažurirani
+Database Backups: Sigurnosne kopije baze podataka
 Date: Datum
 Date Created: Datum stvaranja
 Date Range For Searching: Raspon datuma za pretraživanje
@@ -200,6 +207,8 @@ Description is required!: Opis je obavezan!
 detailed guide for more.: detaljan vodič za više.
 Details for Trail ID: Detalji za ID staze
 dje-NE: Zarma (Niger, BiH)
+Do you really want to restart the server?: Želite li zaista ponovno pokrenuti poslužitelj?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Želite li zaista vratiti bazu podataka iz sigurnosne kopije '{0}'? Imajte na umu da su sve promjene napravljene nakon {1} nestale. To također znači sve promjene koje napravi bilo koji korisnik
 Do you want to delete the profile picture of {0}: Želite li izbrisati profilnu sliku {0}
 Do you want to delete the User {0}: Želite li izbrisati korisnički {0}
 Document Deleted: Dokument je izbrisan
@@ -357,6 +366,8 @@ en-ZM: Engleski (Zambia)
 en-ZW: Engleski (Zimbabve)
 English: Engleski
 Enter email for password reset: Unesite adresu e-pošte povezanu s vašim računom i primit ćete poruku e-pošte koja sadrži vezu za ponovno postavljanje lozinke
+Enter name of backup file: Unesite naziv datoteke sigurnosne kopije
+Enter new name of backup file: Unesite novi naziv datoteke sigurnosne kopije
 Enter the email address for the confirmation mail: Unesite adresu e-pošte za poruku s potvrdom
 Enter the URL to existing file: Unesite URL postojeće datoteke
 Enter your message...: Unesite poruku...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Upravljanje dozvolama {0} {1}
 Manage {0} {1}'s Roles: Upravljanje ulogama {0} {1}
 Manage {0} Extended Attributes: Upravljanje proširenim atributima {0}
 Manage Brands.: Upravljajte robnim markama.
+Manage Database Backups.: Upravljajte sigurnosnim kopijama baze podataka ili ih vraćajte.
 Manage Document Types.: Upravljanje vrstama dokumenata.
 Manage Extended Attributes: Upravljanje proširenim atributima
 Manage Languages: Upravljanje jezicima
@@ -713,6 +725,7 @@ No notifications: Nema obavijesti
 Not Allowed to add or delete Administrator Role if you have not this role.: Nije dopušteno dodati ili izbrisati administratorsku ulogu ako nemate ovu ulogu.
 Not allowed to Delete this user: Brisanje ovog korisnika nije dopušteno
 Not Allowed.: Nije dozvoljeno.
+Not connected: Nije povezano
 NotFoundMessage: Stranica koju ste tražili ne postoji.
 Notifications: Obavijesti
 Nov: Studeni
@@ -819,12 +832,19 @@ Reload: Ponovno učitati
 Reload Data: Ponovno učitaj podatke
 Remember me?: Sjećaš li me se?
 Remove All: Ukloni sve
+Rename backup: Preimenovanje sigurnosne kopije
 Reset: Brisanje
 Reset all: Vrati sve na izvorno
 Reset all properties?: Resetirati sva svojstva?
 Reset password: Ponovno postavljanje lozinke
 Reset Password: Vrati izvornu lozinku
 Resources: Resursi
+Restart server: Ponovno pokreni poslužitelj
+Restore: Vratiti
+Restore database: Vraćanje baze podataka
+Restore default: Vrati zadano
+Restore finished: Vraćanje je dovršeno
+Restore in progress. Please wait until the restore is finished. This can take a while.: Vraćanje je u tijeku. Pričekajte dok se vraćanje ne dovrši. To može potrajati.
 rm-CH: Romansh (Švicarska)
 rn-BI: Rundi (Burundi, BiH)
 ro-MD: Engleski (Moldavija)
@@ -879,6 +899,7 @@ Select Language: Odaberi jezik
 Send: Slati
 Send confirmation email: Pošalji e-poruku s potvrdom
 Sep: Rujan
+Server restarted successfully: Poslužitelj je uspješno ponovno pokrenut
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Postavljanje nove lozinke
 sg-CF: Sango (Srednjoafrička Republika)
@@ -938,6 +959,7 @@ Swagger: API dokumentacija
 Swedish: Švedski
 syr-SY: Sirijski (Sirija)
 System: Sustav
+System Settings: Postavke sustava
 ta-IN: Tamil (Indija)
 ta-LK: Tamil (Šri Lanka, BiH)
 ta-MY: Nor (Malezija)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Datote
 The following {0} permissions are also required for permission {1}: Za {1} dozvole potrebne su i sljedeće dozvole za {0}
 The following permission is also required for permission {1}: Za {1} dozvole potrebna je i sljedeća dozvola
 The Plugin '{0}' may be able to help: Dodatak "{0}" možda će vam moći pomoći
+The server is just restarting. Please wait until the connection has been restored: Poslužitelj se upravo ponovno pokreće. Pričekajte dok se veza ne obnovi
 The user "{0}" just changed some of this data: Korisnik "{0}" upravo je promijenio neke od ovih podataka
 The user {0} has been logged off: Korisnički {0} je odjavljen
 The User {0} has just edited, created or deleted entries here. You should reload the data: Korisnički {0} ovdje je upravo uređivao, kreirao ili brisao unose. Trebali biste ponovno učitati podatke
@@ -1019,6 +1042,7 @@ ur-IN: Urdu (Indija)
 ur-PK: Urdu (Pakistan)
 User: Korisnik
 User {0} Registered. Please check your Mailbox to verify!: Korisnički {0} registrirani. Provjerite poštanski sandučić da biste potvrdili svoju adresu e-pošte!
+User and Roles: Korisnik i uloge
 User Data: Korisnički podaci
 User Deleted: Korisnik je izbrisan
 User Name: Korisničko ime
@@ -1034,6 +1058,7 @@ Username cannot changed: Korisničko ime nije moguće promijeniti
 UserName is required: Korisničko ime je obavezno
 UserName must be at least of length 6: Korisničko ime mora biti najmanje duljine 6
 Users: Korisnici
+Users and Roles: Korisnici i uloge
 Users exported: Izvezeni korisnici
 UTC: UTC
 uz-Arab-AF: Uzbečki (arapski, Afganistan)

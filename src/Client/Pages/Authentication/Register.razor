@@ -1,7 +1,6 @@
 @page "/register"
 @using Coworkee.Shared.Constants.Application
 @using Coworkee.Application.Requests
-@using MimeTypeRestrictionType = MudBlazor.Extensions.Components.MimeTypeRestrictionType
 @layout LoginLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Register> _localizer
@@ -88,14 +87,14 @@
             AddPage("Qualifications and References");
             <MudCarouselItem Style="padding: 10px" Transition="Transition.Slide">
                 <MudGrid Spacing="2">
-                    <MudItem xs="12">
-                        <MudTextField DisableUnderLine="true" Class="disable-pointer-events-on-next-input" Adornment="Adornment.None" ReadOnly="true" For="@(() => _registerUserModel.Documents)" Label="@_localizer["Upload Qualifications and References"]" AdornmentIcon="@Icons.Filled.CloudUpload" OnAdornmentClick="Upload" />
+                    <MudItem xs="12">                        
                         <MudText Typo="Typo.caption">@_localizer["Please upload your personal qualifications and references that confirm your person and qualification"]</MudText>
                         <MudDivider></MudDivider>
                         <MudExUploadEdit T="UploadRequest"
                                            MaxFileSize="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentsMaxFileSize"
                                            MimeTypes="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentTypes"
-                                           MimeRestrictionType="MimeTypeRestrictionType.WhiteList"
+                                           MimeRestrictionType="RestrictionType.WhiteList"
+                                           For="@(() => _registerUserModel.Documents)"
                                            ShowFileUploadButton="true"
                                            UploadRequestRemoved="@(StateHasChanged)"
                                            Style="margin-top: 5px;"

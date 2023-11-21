@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Maximaal {0} bestanden zijn toegestaan
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Er kan geen verbinding met de server tot stand worden gebracht. Het kan zijn dat uw netwerkverbinding is verbroken of dat de server onbereikbaar is. Wacht tot de verbinding is hersteld
+A maximum of {0} files are allowed: Maximaal {0} bestanden zijn toegestaan
 aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Ethiopië)
@@ -70,6 +71,8 @@ ar-TD: Arabisch (Tsjaad)
 ar-TN: Arabisch (Tunesië)
 ar-YE: Arabisch (Jemen)
 Are you sure you want to force logout for user {0}: Weet u zeker dat u het uitloggen voor {0}
+Are you sure you want to restart Backend/Server?: Weet je zeker dat je Backend/Server opnieuw wilt opstarten?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Weet u zeker dat u de standaardinstellingen wilt herstellen? Hiermee worden alle wijzigingen die je hier ooit hebt aangebracht overschreven.
 arn-CL: Mapuche (Chili)
 As Admin you can filter for users here: Als Admin kunt u hier filteren op gebruikers
 as read: zoals gelezen
@@ -131,6 +134,7 @@ ce-RU: Tsjetsjeens (Rusland)
 ceb-Latn-PH: Cebuano (Latijn, Filipijnen)
 cgg-UG: Chiga (Oeganda)
 Change Password: Wachtwoord wijzigen
+Change the system settings carefully: Wijzig de systeeminstellingen zorgvuldig
 Charts comming soon ish...: Hitlijsten binnenkort ish...
 chat: Babbelen
 Chat: Babbelen
@@ -154,16 +158,19 @@ Continue to {0}: Ga verder naar {0}
 Country: Land
 Create: Scheppen
 Create address: Adres aanmaken
+Create new backup: Nieuwe back-up maken
 CreatedOn: Datum van creatie
 cs-CZ: Tsjechisch (Tsjechië)
 cu-RU: Kerk Slavisch (Rusland)
 Current Password: Huidig wachtwoord
 Current Password is required!: Huidig wachtwoord is vereist!
+Customize: Aanpassen
 cy-GB: Welsh (Verenigd Koninkrijk)
 da-DK: Deens (Denemarken)
 da-GL: Deens (Groenland)
 Dashboard: Dashboard
 Data has been updated: Gegevens zijn bijgewerkt
+Database Backups: Back-ups van databases
 Date: Datum
 Date Created: Datum van aansning
 Date Range For Searching: Datumbereik voor zoeken
@@ -200,6 +207,8 @@ Description is required!: Beschrijving is vereist!
 detailed guide for more.: gedetailleerde gids voor meer.
 Details for Trail ID: Details voor Trail ID
 dje-NE: Djerma (Niger)
+Do you really want to restart the server?: Wil je de server echt opnieuw opstarten?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Wil je echt de database herstellen vanaf back-up '{0}'? Houd er rekening mee dat alle wijzigingen die na {1} zijn aangebracht, zijn verdwenen. Dit betekent ook alle wijzigingen die door een gebruiker zijn aangebracht
 Do you want to delete the profile picture of {0}: Wil je de profielfoto van {0} verwijderen
 Do you want to delete the User {0}: Wilt u de User {0} verwijderen
 Document Deleted: Document verwijderd
@@ -357,6 +366,8 @@ en-ZM: Engels (Zambia)
 en-ZW: Engels (Zimbabwe)
 English: Engels
 Enter email for password reset: Voer het e-mailadres in dat aan uw account is gekoppeld en u ontvangt een e-mail met een link om uw wachtwoord opnieuw in te stellen
+Enter name of backup file: Voer de naam van het back-upbestand in
+Enter new name of backup file: Voer een nieuwe naam van het back-upbestand in
 Enter the email address for the confirmation mail: Voer het e-mailadres in voor de bevestigingsmail
 Enter the URL to existing file: Voer de URL naar het bestaande bestand in
 Enter your message...: Voer uw bericht in...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: De machtigingen van {0} {1} beheren
 Manage {0} {1}'s Roles: De rollen van {0} {1} beheren
 Manage {0} Extended Attributes: Uitgebreide kenmerken van {0} beheren
 Manage Brands.: Merken beheren.
+Manage Database Backups.: Databaseback-ups beheren of herstellen.
 Manage Document Types.: Documenttypen beheren.
 Manage Extended Attributes: Uitgebreide kenmerken beheren
 Manage Languages: Talen beheren
@@ -713,6 +725,7 @@ No notifications: Geen meldingen
 Not Allowed to add or delete Administrator Role if you have not this role.: Mag beheerdersrol niet worden toegevoegd of verwijderd als u deze rol niet hebt.
 Not allowed to Delete this user: Niet toegestaan om deze gebruiker te verwijderen
 Not Allowed.: Niet toegestaan.
+Not connected: Niet verbonden
 NotFoundMessage: De pagina die u zocht, bestaat niet.
 Notifications: Meldingen
 Nov: Nov
@@ -819,12 +832,19 @@ Reload: Herladen
 Reload Data: Gegevens opnieuw laden
 Remember me?: Ken je me nog?
 Remove All: Alles verwijderen
+Rename backup: Naam van back-up wijzigen
 Reset: Terugstellen
 Reset all: Alles opnieuw instellen
 Reset all properties?: Alle eigenschappen resetten?
 Reset password: Wachtwoord opnieuw instellen
 Reset Password: Wachtwoord opnieuw instellen
 Resources: Weg
+Restart server: Server opnieuw opstarten
+Restore: Herstellen
+Restore database: Database herstellen
+Restore default: Standaard herstellen
+Restore finished: Herstel voltooid
+Restore in progress. Please wait until the restore is finished. This can take a while.: Bezig met herstellen. Wacht tot het herstel is voltooid. Dit kan even duren.
 rm-CH: Reto-Romas (Zwitserland)
 rn-BI: Rundi (Burundi)
 ro-MD: Engels (Moldavië)
@@ -879,6 +899,7 @@ Select Language: Taal selecteren
 Send: Verzenden
 Send confirmation email: Stuur bevestigingsmail
 Sep: Sep
+Server restarted successfully: Server opnieuw opgestart
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Nieuw wachtwoord instellen
 sg-CF: Sango (Centraal-Afrikaanse Republiek)
@@ -938,6 +959,7 @@ Swagger: API-documentatie
 Swedish: Zweeds
 syr-SY: Syrisch (Syrië)
 System: Systeem
+System Settings: Systeeminstellingen
 ta-IN: Tamil (Indië)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Maleisië)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Het be
 The following {0} permissions are also required for permission {1}: De volgende {0} machtigingen zijn ook vereist voor toestemming {1}
 The following permission is also required for permission {1}: De volgende toestemming is ook vereist voor toestemming {1}
 The Plugin '{0}' may be able to help: De plug-in '{0}' kan mogelijk helpen
+The server is just restarting. Please wait until the connection has been restored: De server is net opnieuw opgestart. Wacht tot de verbinding is hersteld
 The user "{0}" just changed some of this data: De gebruiker "{0}" heeft zojuist een deel van deze gegevens gewijzigd
 The user {0} has been logged off: De gebruiker {0} is afgemeld
 The User {0} has just edited, created or deleted entries here. You should reload the data: De Gebruiker {0} heeft hier zojuist items bewerkt, gemaakt of verwijderd. U moet de gegevens opnieuw laden
@@ -1019,6 +1042,7 @@ ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistan)
 User: Gebruiker
 User {0} Registered. Please check your Mailbox to verify!: Gebruiker {0} geregistreerd. Controleer uw mailbox om uw e-mailadres te verifiëren!
+User and Roles: Gebruiker en rollen
 User Data: Gebruikersgegevens
 User Deleted: Gebruiker verwijderd
 User Name: Gebruikersnaam
@@ -1034,6 +1058,7 @@ Username cannot changed: Gebruikersnaam kan niet worden gewijzigd
 UserName is required: Gebruikersnaam is vereist
 UserName must be at least of length 6: Gebruikersnaam moet ten minste lengte 6 hebben
 Users: Gebruikers
+Users and Roles: Gebruikers en rollen
 Users exported: Gebruikers geëxporteerd
 UTC: UTC
 uz-Arab-AF: Oezbeeks (Arabisch, Afghanistan)

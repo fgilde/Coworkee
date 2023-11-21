@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Maksimalt {0} filer er tilladt
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Der kan ikke oprettes forbindelse til serveren. Din netværksforbindelse kan være nede, eller serveren kan ikke nås. Vent, indtil forbindelsen er blevet gendannet
+A maximum of {0} files are allowed: Maksimalt {0} filer er tilladt
 aa-DJ: Langvejs (Djibouti)
 aa-ER: Langvejs (Eritrea)
 aa-ET: Langvejs (Etiopien)
@@ -70,6 +71,8 @@ ar-TD: Arabisk (Tchad)
 ar-TN: Arabisk (Tunesien)
 ar-YE: Arabisk (Yemen)
 Are you sure you want to force logout for user {0}: Er du sikker på, at du vil tvinge logout til {0}
+Are you sure you want to restart Backend/Server?: Er du sikker på, at du vil genstarte Backend/Server?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Er du sikker på, at du vil gendanne standardindstillingerne? Dette vil overskrive eventuelle ændringer, du nogensinde har foretaget her.
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Som administrator kan du filtrere efter brugere her
 as read: som læst
@@ -131,6 +134,7 @@ ce-RU: Tjetjensk (Rusland)
 ceb-Latn-PH: Cebuano (Latin, Filippinerne)
 cgg-UG: Chiga (Uganda)
 Change Password: Skift adgangskode
+Change the system settings carefully: Skift systemindstillingerne omhyggeligt
 Charts comming soon ish...: Diagrammer kommer snart ish ...
 chat: Chatte
 Chat: Chatte
@@ -154,16 +158,19 @@ Continue to {0}: Fortsæt med at {0}
 Country: Land
 Create: Skabe
 Create address: Opret adresse
+Create new backup: Opret ny sikkerhedskopi
 CreatedOn: Oprettelsesdato
 cs-CZ: Tjekkisk (Tjekkiet)
 cu-RU: Kirkeslavisk (Rusland)
 Current Password: Aktuel adgangskode
 Current Password is required!: Nuværende adgangskode er påkrævet!
+Customize: Tilpasse
 cy-GB: Walisisk (Storbritannien)
 da-DK: Dansk (Danmark)
 da-GL: Dansk (Grønland)
 Dashboard: Instrumentbræt
 Data has been updated: Data er blevet opdateret
+Database Backups: Sikkerhedskopiering af databaser
 Date: Dato
 Date Created: Dato, der er oprettet
 Date Range For Searching: Datointerval til søgning
@@ -200,6 +207,8 @@ Description is required!: Beskrivelse er påkrævet!
 detailed guide for more.: detaljeret vejledning til mere.
 Details for Trail ID: Oplysninger om Trail ID
 dje-NE: Zarma (Niger)
+Do you really want to restart the server?: Vil du virkelig genstarte serveren?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Vil du virkelig gendanne databasen fra backup '{0}'? Bemærk, at alle ændringer, der foretages efter {1}, er væk. Dette betyder også eventuelle ændringer foretaget af enhver bruger
 Do you want to delete the profile picture of {0}: Vil du slette profilbilledet af {0}
 Do you want to delete the User {0}: Vil du slette {0}
 Document Deleted: Dokumentet er slettet
@@ -357,6 +366,8 @@ en-ZM: Engelsk (Zambia)
 en-ZW: Engelsk (Zimbabwe)
 English: Engelsk
 Enter email for password reset: Indtast den e-mailadresse, der er knyttet til din konto, og du vil modtage en e-mail, der indeholder et link til at nulstille din adgangskode
+Enter name of backup file: Indtast navnet på sikkerhedskopifilen
+Enter new name of backup file: Indtast nyt navn på sikkerhedskopifilen
 Enter the email address for the confirmation mail: Indtast e-mailadressen til bekræftelsesmailen
 Enter the URL to existing file: Indtast URL-adressen til eksisterende fil
 Enter your message...: Indtast din meddelelse...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Administrere {0} {1}'s tilladelser
 Manage {0} {1}'s Roles: Administrere {0} {1} roller
 Manage {0} Extended Attributes: Administrere {0} udvidede attributter
 Manage Brands.: Administrer brands.
+Manage Database Backups.: Administrer eller gendan sikkerhedskopier af databaser.
 Manage Document Types.: Administrer dokumenttyper.
 Manage Extended Attributes: Administrer udvidede attributter
 Manage Languages: Administrere sprog
@@ -713,6 +725,7 @@ No notifications: Ingen meddelelser
 Not Allowed to add or delete Administrator Role if you have not this role.: Må ikke tilføje eller slette administratorrolle, hvis du ikke har denne rolle.
 Not allowed to Delete this user: Ikke tilladt at slette denne bruger
 Not Allowed.: Ikke tilladt.
+Not connected: Ikke forbundet
 NotFoundMessage: Den side, du ledte efter, findes ikke.
 Notifications: Meddelelser
 Nov: Nov
@@ -819,12 +832,19 @@ Reload: Genindlæse
 Reload Data: Genindlæs data
 Remember me?: Kan du huske mig?
 Remove All: Fjern alle
+Rename backup: Omdøb backup
 Reset: Nulstille
 Reset all: Nulstil alle
 Reset all properties?: Nulstille alle egenskaber?
 Reset password: Nulstil adgangskode
 Reset Password: Nulstil adgangskode
 Resources: Ressourcer
+Restart server: Genstart serveren
+Restore: Genskabe
+Restore database: Gendan database
+Restore default: Gendan standard
+Restore finished: Gendan færdig
+Restore in progress. Please wait until the restore is finished. This can take a while.: Gendan i gang. Vent, indtil gendannelsen er færdig. Dette kan tage et stykke tid.
 rm-CH: Romansh (Schweiz)
 rn-BI: Rundi (Burundi)
 ro-MD: Engelsk (Moldova)
@@ -879,6 +899,7 @@ Select Language: Vælg sprog
 Send: Sende
 Send confirmation email: Send bekræftelses-e-mail
 Sep: Sep
+Server restarted successfully: Serveren blev genstartet
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Angiv ny adgangskode
 sg-CF: Sango (Den Centralafrikanske Republik)
@@ -938,6 +959,7 @@ Swagger: API-dokumentation
 Swedish: Svensk
 syr-SY: Syrisk (Syrien)
 System: System
+System Settings: Systemindstillinger
 ta-IN: Tamil (Indien)
 ta-LK: Tamilsk (Sri Lanka)
 ta-MY: Heller ikke (Malaysia)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Filen 
 The following {0} permissions are also required for permission {1}: Følgende {0} tilladelser kræves også for at få tilladelse {1}
 The following permission is also required for permission {1}: Følgende tilladelse kræves også for at få tilladelse {1}
 The Plugin '{0}' may be able to help: Pluginet '{0}' kan muligvis hjælpe
+The server is just restarting. Please wait until the connection has been restored: Serveren genstarter bare. Vent, indtil forbindelsen er blevet gendannet
 The user "{0}" just changed some of this data: Brugeren "{0}" har lige ændret nogle af disse data
 The user {0} has been logged off: Brugeren {0} er logget af
 The User {0} has just edited, created or deleted entries here. You should reload the data: Brugeren {0} har netop redigeret, oprettet eller slettet poster her. Du bør genindlæse dataene
@@ -1019,6 +1042,7 @@ ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Bruger
 User {0} Registered. Please check your Mailbox to verify!: Bruger {0} registreret. Tjek venligst din postkasse for at bekræfte din e-mailadresse!
+User and Roles: Bruger og roller
 User Data: Brugerdata
 User Deleted: Brugeren er slettet
 User Name: Brugernavn
@@ -1034,6 +1058,7 @@ Username cannot changed: Brugernavn kan ikke ændres
 UserName is required: Brugernavn er påkrævet
 UserName must be at least of length 6: Brugernavnet skal være mindst længden 6
 Users: Brugere
+Users and Roles: Brugere og roller
 Users exported: Brugere eksporteret
 UTC: UTC
 uz-Arab-AF: Usbekisk (arabisk, Afghanistan)

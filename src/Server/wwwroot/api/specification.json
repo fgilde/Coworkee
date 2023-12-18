@@ -5849,7 +5849,8 @@
     "UploadRequest": {
       "type": "object",
       "required": [
-        "uploadType"
+        "uploadType",
+        "size"
       ],
       "properties": {
         "fileName": {
@@ -5870,6 +5871,13 @@
         },
         "url": {
           "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

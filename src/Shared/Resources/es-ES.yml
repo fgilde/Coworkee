@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Se permite un máximo de archivos {0}
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: No se puede establecer una conexión con el servidor. Es posible que su conexión de red no funcione o que no se pueda acceder al servidor. Espere hasta que se haya restablecido la conexión
+A maximum of {0} files are allowed: Se permite un máximo de archivos {0}
 aa-DJ: Afar (Yibuti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopía)
@@ -70,6 +71,8 @@ ar-TD: Árabe (Chad)
 ar-TN: Árabe (Túnez)
 ar-YE: Árabe (Yemen)
 Are you sure you want to force logout for user {0}: ¿Está seguro de que desea forzar el cierre de sesión para el usuario {0}
+Are you sure you want to restart Backend/Server?: ¿Estás seguro de que quieres reiniciar Backend/Server?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: ¿Está seguro de que desea restaurar la configuración predeterminada? Esto sobrescribirá cualquier cambio que hayas realizado aquí.
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Como administrador, puede filtrar por usuarios aquí
 as read: como se lee
@@ -131,6 +134,7 @@ ce-RU: Checheno (Rusia)
 ceb-Latn-PH: Cebuano (Latín, Filipinas)
 cgg-UG: Chiga (Uganda)
 Change Password: Cambiar contraseña
+Change the system settings carefully: Cambie la configuración del sistema con cuidado
 Charts comming soon ish...: Las listas próximamente ...
 chat: Charlar
 Chat: Charlar
@@ -154,16 +158,19 @@ Continue to {0}: Continuar {0}
 Country: País
 Create: Crear
 Create address: Crear dirección
+Create new backup: Crear una nueva copia de seguridad
 CreatedOn: Fecha de creación
 cs-CZ: Checo (Chequia)
 cu-RU: Iglesia eslava (Rusia)
 Current Password: Contraseña actual
 Current Password is required!: ¡Se requiere contraseña actual!
+Customize: Personalizar
 cy-GB: Galés (Reino Unido)
 da-DK: Danés (Dinamarca)
 da-GL: Danés (Groenlandia)
 Dashboard: Salpicadero
 Data has been updated: Los datos se han actualizado
+Database Backups: Copias de seguridad de bases de datos
 Date: Fecha
 Date Created: Fecha de creación
 Date Range For Searching: Intervalo de fechas para la búsqueda
@@ -200,6 +207,8 @@ Description is required!: ¡Se requiere descripción!
 detailed guide for more.: guía detallada para más información.
 Details for Trail ID: Detalles de Trail ID
 dje-NE: Zarma (Níger)
+Do you really want to restart the server?: ¿Realmente quieres reiniciar el servidor?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: ¿Realmente desea restaurar la base de datos desde la copia de seguridad '{0}'? Tenga en cuenta que los cambios realizados después {1} desaparecen. Esto también significa cualquier cambio realizado por cualquier usuario
 Do you want to delete the profile picture of {0}: ¿Desea eliminar la foto de perfil de {0}
 Do you want to delete the User {0}: ¿Desea eliminar el {0} de usuario
 Document Deleted: Documento eliminado
@@ -357,6 +366,8 @@ en-ZM: Español (Zambia)
 en-ZW: Español (Zimbabue)
 English: Inglés
 Enter email for password reset: Ingrese la dirección de correo electrónico vinculada a su cuenta y recibirá un correo electrónico que contiene un enlace para restablecer su contraseña
+Enter name of backup file: Introduzca el nombre del archivo de copia de seguridad
+Enter new name of backup file: Introduzca el nuevo nombre del archivo de copia de seguridad
 Enter the email address for the confirmation mail: Introduzca la dirección de correo electrónico del correo de confirmación
 Enter the URL to existing file: Introduzca la URL del archivo existente
 Enter your message...: Introduce tu mensaje...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Administrar los permisos de {0} {1}
 Manage {0} {1}'s Roles: Administrar los roles de {0} {1}
 Manage {0} Extended Attributes: Administrar {0} atributos extendidos
 Manage Brands.: Gestionar marcas.
+Manage Database Backups.: Administre o restaure las copias de seguridad de la base de datos.
 Manage Document Types.: Administrar tipos de documentos.
 Manage Extended Attributes: Administrar atributos extendidos
 Manage Languages: Administrar idiomas
@@ -713,6 +725,7 @@ No notifications: Sin notificaciones
 Not Allowed to add or delete Administrator Role if you have not this role.: No se permite agregar o eliminar el rol de administrador si no tiene este rol.
 Not allowed to Delete this user: No se permite eliminar este usuario
 Not Allowed.: No permitido.
+Not connected: No conectado
 NotFoundMessage: La página que estabas buscando no existe.
 Notifications: Notificaciones
 Nov: Nov
@@ -819,12 +832,19 @@ Reload: Recargar
 Reload Data: Recargar datos
 Remember me?: ¿Recuérdame?
 Remove All: Eliminar todo
+Rename backup: Cambiar el nombre de la copia de seguridad
 Reset: Restablecimiento
 Reset all: Restablecer todo
 Reset all properties?: ¿Restablecer todas las propiedades?
 Reset password: Restablecer contraseña
 Reset Password: Restablecer contraseña
 Resources: Recursos
+Restart server: Reiniciar el servidor
+Restore: Restaurar
+Restore database: Restaurar base de datos
+Restore default: Restaurar el valor predeterminado
+Restore finished: Restauración finalizada
+Restore in progress. Please wait until the restore is finished. This can take a while.: Restauración en curso. Espere hasta que finalice la restauración. Esto puede llevar un tiempo.
 rm-CH: Romanche (Suiza)
 rn-BI: Rundi (Burundi)
 ro-MD: Español (Moldavia)
@@ -879,6 +899,7 @@ Select Language: Seleccionar idioma
 Send: Enviar
 Send confirmation email: Enviar correo electrónico de confirmación
 Sep: Sep
+Server restarted successfully: El servidor se reinició correctamente
 ses-ML: Koyraboro Senni (Malí)
 Set new password: Establecer nueva contraseña
 sg-CF: Sango (República Centroafricana)
@@ -938,6 +959,7 @@ Swagger: Documentación de la API
 Swedish: Sueco
 syr-SY: Siríaco (Siria)
 System: Sistema
+System Settings: Configuración del sistema
 ta-IN: Tamil (India)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Malasia)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: El arc
 The following {0} permissions are also required for permission {1}: Los siguientes permisos de {0} también son necesarios para la {1} de permisos
 The following permission is also required for permission {1}: También se requiere el siguiente permiso para el permiso {1}
 The Plugin '{0}' may be able to help: El Plugin '{0}' puede ser capaz de ayudar
+The server is just restarting. Please wait until the connection has been restored: El servidor se está reiniciando. Espere hasta que se haya restablecido la conexión
 The user "{0}" just changed some of this data: El usuario "{0}" acaba de cambiar algunos de estos datos
 The user {0} has been logged off: El usuario {0} se ha desconectado
 The User {0} has just edited, created or deleted entries here. You should reload the data: El usuario {0} acaba de editar, crear o eliminar entradas aquí. Debe volver a cargar los datos
@@ -1019,6 +1042,7 @@ ur-IN: Urdu (India)
 ur-PK: Urdu (Pakistán)
 User: Usuario
 User {0} Registered. Please check your Mailbox to verify!: Usuario {0} Registrado. ¡Revise su buzón para verificar su dirección de correo electrónico!
+User and Roles: Usuario y roles
 User Data: Datos del usuario
 User Deleted: Usuario eliminado
 User Name: Nombre de usuario
@@ -1034,6 +1058,7 @@ Username cannot changed: El nombre de usuario no se puede cambiar
 UserName is required: Se requiere UserName
 UserName must be at least of length 6: El nombre de usuario debe tener al menos una longitud 6
 Users: Usuarios
+Users and Roles: Usuarios y roles
 Users exported: Usuarios exportados
 UTC: UTC
 uz-Arab-AF: Uzbeko (árabe, Afganistán)

@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Högst {0} filer tillåts
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Det går inte att upprätta en anslutning till servern. Din nätverksanslutning kan vara nere eller så kan servern inte nås. Vänta tills anslutningen har återställts
+A maximum of {0} files are allowed: Högst {0} filer tillåts
 aa-DJ: Afar (Djibouti)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopien)
@@ -70,6 +71,8 @@ ar-TD: Arabiska (Tchad)
 ar-TN: Arabiska (Tunisien)
 ar-YE: Arabiska (Jemen)
 Are you sure you want to force logout for user {0}: Är du säker på att du vill tvinga fram utloggning för {0}
+Are you sure you want to restart Backend/Server?: Är du säker på att du vill starta om backend/server?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Är du säker på att du vill återställa standardinställningarna? Detta kommer att skriva över alla ändringar du någonsin har gjort här.
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Som administratör kan du filtrera efter användare här
 as read: som läst
@@ -131,6 +134,7 @@ ce-RU: Tjetjenska (Ryssland)
 ceb-Latn-PH: Cebuano (latin, Filippinerna)
 cgg-UG: Chiga (Uganda)
 Change Password: Ändra lösenord
+Change the system settings carefully: Ändra systeminställningarna noggrant
 Charts comming soon ish...: Diagram som kommer snart är...
 chat: Chatta
 Chat: Chatta
@@ -154,16 +158,19 @@ Continue to {0}: Fortsätt att {0}
 Country: Land
 Create: Skapa
 Create address: Skapa adress
+Create new backup: Skapa ny säkerhetskopia
 CreatedOn: Skapad
 cs-CZ: Tjeckiska (Tjeckien)
 cu-RU: Kyrkan Slavisk (Ryssland)
 Current Password: Aktuellt lösenord
 Current Password is required!: Aktuellt lösenord krävs!
+Customize: Anpassa
 cy-GB: Walesiska (Storbritannien)
 da-DK: Danska (Danmark)
 da-GL: Danska (Grönland)
 Dashboard: Instrumentbräda
 Data has been updated: Uppgifterna har uppdaterats
+Database Backups: Säkerhetskopior av databaser
 Date: Datum
 Date Created: Datum skapat
 Date Range For Searching: Datumintervall för sökning
@@ -200,6 +207,8 @@ Description is required!: Beskrivning krävs!
 detailed guide for more.: detaljerad guide för mer.
 Details for Trail ID: Information om Trail ID
 dje-NE: Zarma (Niger)
+Do you really want to restart the server?: Vill du verkligen starta om servern?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Vill du verkligen återställa databasen från säkerhetskopian "{0}"? Observera att alla ändringar som görs efter {1} är borta. Detta innebär också alla ändringar som görs av någon användare
 Do you want to delete the profile picture of {0}: Vill du ta bort profilbilden för {0}
 Do you want to delete the User {0}: Vill du ta bort {0}
 Document Deleted: Dokument borttaget
@@ -357,6 +366,8 @@ en-ZM: Engelska (Zambia)
 en-ZW: Engelska (Zimbabwe)
 English: Engelska
 Enter email for password reset: Ange e-postadressen som är länkad till ditt konto så får du ett e-postmeddelande som innehåller en länk för att återställa ditt lösenord
+Enter name of backup file: Ange namnet på säkerhetskopian
+Enter new name of backup file: Ange nytt namn på säkerhetskopian
 Enter the email address for the confirmation mail: Ange e-postadressen för bekräftelsemeddelandet
 Enter the URL to existing file: Ange URL:en till befintlig fil
 Enter your message...: Skriv in ditt meddelande...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Hantera {0} {1} behörigheter
 Manage {0} {1}'s Roles: Hantera {0} {1} roller
 Manage {0} Extended Attributes: Hantera {0} utökade attribut
 Manage Brands.: Hantera varumärken.
+Manage Database Backups.: Hantera eller återställ säkerhetskopior av databaser.
 Manage Document Types.: Hantera dokumenttyper.
 Manage Extended Attributes: Hantera utökade attribut
 Manage Languages: Hantera språk
@@ -713,6 +725,7 @@ No notifications: Inga aviseringar
 Not Allowed to add or delete Administrator Role if you have not this role.: Det är inte tillåtet att lägga till eller ta bort administratörsrollen om du inte har den här rollen.
 Not allowed to Delete this user: Får inte ta bort den här användaren
 Not Allowed.: Inte tillåtet.
+Not connected: Inte ansluten
 NotFoundMessage: Sidan du letade efter finns inte.
 Notifications: Meddelanden
 Nov: Nov
@@ -819,12 +832,19 @@ Reload: Reload
 Reload Data: Ladda om data
 Remember me?: Kommer du ihåg mig?
 Remove All: Ta bort alla
+Rename backup: Byt namn på säkerhetskopia
 Reset: Nollställa
 Reset all: Återställ alla
 Reset all properties?: Återställa alla egenskaper?
 Reset password: Återställ lösenord
 Reset Password: Återställ lösenord
 Resources: Resurser
+Restart server: Starta om servern
+Restore: Återställa
+Restore database: Återställa databas
+Restore default: Återställ standard
+Restore finished: Återställningen är klar
+Restore in progress. Please wait until the restore is finished. This can take a while.: Återställning pågår. Vänta tills återställningen är klar. Det kan ta ett tag.
 rm-CH: Romansh (Schweiz)
 rn-BI: Rundi (Burundi)
 ro-MD: Engelska (Moldavien)
@@ -879,6 +899,7 @@ Select Language: Välj språk
 Send: Sända
 Send confirmation email: Skicka bekräftelse via e-post
 Sep: Sep
+Server restarted successfully: Servern har startats om
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Ange nytt lösenord
 sg-CF: Sango (Centralafrikanska republiken)
@@ -938,6 +959,7 @@ Swagger: API-dokumentation
 Swedish: Svenska
 syr-SY: Syriska (Syrien)
 System: System
+System Settings: Systeminställningar
 ta-IN: Tamil (Indien)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Inte heller (Malaysia)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Filen 
 The following {0} permissions are also required for permission {1}: Följande {0} behörigheter krävs också för behörighet {1}
 The following permission is also required for permission {1}: Följande behörighet krävs också för tillstånd {1}
 The Plugin '{0}' may be able to help: Plugin '{0}' kanske kan hjälpa till
+The server is just restarting. Please wait until the connection has been restored: Servern startar bara om. Vänta tills anslutningen har återställts
 The user "{0}" just changed some of this data: Användaren "{0}" ändrade bara en del av dessa data
 The user {0} has been logged off: Användarens {0} har loggats ut
 The User {0} has just edited, created or deleted entries here. You should reload the data: Den {0} har just redigerat, skapat eller tagit bort poster här. Du bör ladda om data
@@ -1019,6 +1042,7 @@ ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Användare
 User {0} Registered. Please check your Mailbox to verify!: Användaren {0} registrerad. Kontrollera din brevlåda för att verifiera din e-postadress!
+User and Roles: Användare och roller
 User Data: Användaruppgifter
 User Deleted: Användaren har tagits bort
 User Name: Användarnamn
@@ -1034,6 +1058,7 @@ Username cannot changed: Användarnamnet kan inte ändras
 UserName is required: Användarnamn krävs
 UserName must be at least of length 6: Användarnamn måste vara minst längd 6
 Users: Användare
+Users and Roles: Användare och roller
 Users exported: Exporterade användare
 UTC: UTC
 uz-Arab-AF: Uzbekiska (arabiska, Afghanistan)

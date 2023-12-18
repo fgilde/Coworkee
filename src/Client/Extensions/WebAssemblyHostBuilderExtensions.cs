@@ -39,8 +39,8 @@ namespace Coworkee.Client.Extensions
     {
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
-           // builder.RootComponents.Add<App>("#app");
-            builder.RootComponents.RegisterCustomElement<App>("blazor-app");
+            builder.RootComponents.Add<App>("#app");
+            //builder.RootComponents.RegisterCustomElement<App>("blazor-app");
             return builder;
         }
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)

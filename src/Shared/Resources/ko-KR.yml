@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: 최대 {0}개의 파일이 허용됩니다.
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: 서버에 연결할 수 없습니다. 네트워크 연결이 끊어졌거나 서버에 연결할 수 없습니다. 연결이 복원될 때까지 기다려 주십시오
+A maximum of {0} files are allowed: 최대 {0}개의 파일이 허용됩니다.
 aa-DJ: 아파르 (지부티)
 aa-ER: 아파르 (에리트레아)
 aa-ET: 아파르 (에티오피아)
@@ -70,6 +71,8 @@ ar-TD: 아랍어 (차드)
 ar-TN: 아랍어(튀니지)
 ar-YE: 아랍어(예멘)
 Are you sure you want to force logout for user {0}: 사용자 이{0}에 대해 강제로 로그아웃하시겠습니까?
+Are you sure you want to restart Backend/Server?: 백엔드/서버를 다시 시작하시겠습니까?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: 기본 설정을 복원하시겠습니까? 이렇게 하면 여기에서 변경한 내용을 덮어씁니다.
 arn-CL: 마푸체 (칠레)
 As Admin you can filter for users here: 관리자로 당신은 여기 사용자를 위해 필터링 할 수 있습니다
 as read: 읽음으로
@@ -131,6 +134,7 @@ ce-RU: 체첸 (러시아)
 ceb-Latn-PH: 세부아노 (라틴어, 필리핀)
 cgg-UG: 치가 (우간다)
 Change Password: 암호 변경
+Change the system settings carefully: 시스템 설정을 신중하게 변경하십시오.
 Charts comming soon ish...: 차트는 곧 틱 오고 ...
 chat: 잡담
 Chat: 잡담
@@ -154,16 +158,19 @@ Continue to {0}: 계속 {0}
 Country: 나라
 Create: 창조하다
 Create address: 주소 만들기
+Create new backup: 새 백업 만들기
 CreatedOn: 만든 날짜
 cs-CZ: 체코어(체코)
 cu-RU: 교회 슬라브 (러시아)
 Current Password: 현재 암호
 Current Password is required!: 현재 암호가 필요합니다!
+Customize: 사용자 지정
 cy-GB: 웨일스어 (영국)
 da-DK: 덴마크어 (덴마크)
 da-GL: 덴마크어 (그린란드)
 Dashboard: 대시보드
 Data has been updated: 데이터가 업데이트되었습니다.
+Database Backups: 데이터베이스 백업
 Date: 날짜
 Date Created: 생성된 날짜
 Date Range For Searching: 검색날짜 범위
@@ -200,6 +207,8 @@ Description is required!: 설명이 필요합니다!
 detailed guide for more.: 자세한 내용은 자세한 설명서입니다.
 Details for Trail ID: 트레일 ID에 대한 세부 정보
 dje-NE: 자르마 (니제르)
+Do you really want to restart the server?: 정말로 서버를 다시 시작하시겠습니까?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: 백업 '{0}'에서 데이터베이스를 복원하시겠습니까? {1} 이후에 변경한 내용은 모두 사라집니다. 이는 또한 모든 사용자의 변경 사항을 의미합니다
 Do you want to delete the profile picture of {0}: '{0} 프로필 사진을 삭제하시겠습니까?'
 Do you want to delete the User {0}: 사용자 {0} 삭제하시겠습니까?
 Document Deleted: 삭제된 문서
@@ -357,6 +366,8 @@ en-ZM: 영어(잠비아)
 en-ZW: 영어 (짐바브웨)
 English: 영어
 Enter email for password reset: 계정에 연결된 이메일 주소를 입력하면 비밀번호를 재설정하는 링크가 포함된 이메일이 전송됩니다.
+Enter name of backup file: 백업 파일 이름 입력
+Enter new name of backup file: 백업 파일의 새 이름 입력
 Enter the email address for the confirmation mail: 확인 메일의 이메일 주소를 입력합니다.
 Enter the URL to existing file: 기존 파일의 URL을 입력합니다.
 Enter your message...: 메시지를 입력...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: '{0} {1} 사용 권한 관리'
 Manage {0} {1}'s Roles: '{0} {1} 역할 관리'
 Manage {0} Extended Attributes: 확장 특성에 {0} 관리
 Manage Brands.: 브랜드를 관리합니다.
+Manage Database Backups.: 데이터베이스 백업을 관리하거나 복원합니다.
 Manage Document Types.: 문서 유형을 관리합니다.
 Manage Extended Attributes: 확장 특성 관리
 Manage Languages: 언어 관리
@@ -713,6 +725,7 @@ No notifications: 알림 없음
 Not Allowed to add or delete Administrator Role if you have not this role.: 이 역할이 없는 경우 관리자 역할을 추가하거나 삭제할 수 없습니다.
 Not allowed to Delete this user: 이 사용자를 삭제할 수 없음
 Not Allowed.: 허용되지 않습니다.
+Not connected: 연결되지 않음
 NotFoundMessage: 찾고 있던 페이지가 존재하지 않습니다.
 Notifications: 알림을
 Nov: 11월
@@ -819,12 +832,19 @@ Reload: 새로고침
 Reload Data: 데이터 재로드
 Remember me?: 저를 기억해?
 Remove All: 모두 제거
+Rename backup: 백업 이름 바꾸기
 Reset: 재설정
 Reset all: 모두 재설정
 Reset all properties?: 모든 속성을 재설정하시겠습니까?
 Reset password: 암호 재설정
 Reset Password: 암호 재설정
 Resources: 리소스
+Restart server: 서버 다시 시작
+Restore: 복원
+Restore database: 데이터베이스 복원
+Restore default: 기본값 복원
+Restore finished: 복원 완료
+Restore in progress. Please wait until the restore is finished. This can take a while.: 복원이 진행 중입니다. 복원이 완료될 때까지 기다려 주십시오. 시간이 좀 걸릴 수 있습니다.
 rm-CH: 로만시 (스위스)
 rn-BI: 룬디 (부룬디)
 ro-MD: 영어(몰도바)
@@ -879,6 +899,7 @@ Select Language: 언어 선택
 Send: 보내기
 Send confirmation email: 확인 이메일 보내기
 Sep: 9월
+Server restarted successfully: 서버가 다시 시작되었습니다.
 ses-ML: 코이라보로 세니 (말리)
 Set new password: 새 암호 설정
 sg-CF: 산고 (중앙 아프리카 공화국)
@@ -938,6 +959,7 @@ Swagger: API 설명서
 Swedish: 스웨덴어
 syr-SY: 시리아 (시리아)
 System: 체계
+System Settings: 환경 설정
 ta-IN: 타밀 (인도)
 ta-LK: 타밀 (스리랑카)
 ta-MY: 노 (말레이시아)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: 파일
 The following {0} permissions are also required for permission {1}: 권한 {1} 다음 {0} 사용 권한도 필요합니다.
 The following permission is also required for permission {1}: 권한 {1} 위해 다음 권한도 필요합니다.
 The Plugin '{0}' may be able to help: 플러그인 '{0}'이 도움이 될 수 있습니다.
+The server is just restarting. Please wait until the connection has been restored: 서버가 방금 다시 시작됩니다. 연결이 복원될 때까지 기다려 주십시오
 The user "{0}" just changed some of this data: 사용자 "{0}"이 방금 이 데이터 중 일부를 변경했습니다.
 The user {0} has been logged off: 사용자 {0}가 로그오프되었습니다.
 The User {0} has just edited, created or deleted entries here. You should reload the data: 사용자 {0} 여기에서 방금 편집, 생성 또는 삭제된 항목을 만들었습니다. 데이터를 다시 로드해야 합니다.
@@ -1019,6 +1042,7 @@ ur-IN: 우르두어 (인도)
 ur-PK: 우르두어 (파키스탄)
 User: 사용자
 User {0} Registered. Please check your Mailbox to verify!: 사용자 {0}가 등록되었습니다. 사서함을 확인하여 이메일 주소를 확인하십시오!
+User and Roles: 사용자 및 역할
 User Data: 사용자 데이터
 User Deleted: 사용자 삭제
 User Name: 사용자 이름
@@ -1034,6 +1058,7 @@ Username cannot changed: 사용자 이름을 변경할 수 없습니다.
 UserName is required: 사용자 이름이 필요합니다.
 UserName must be at least of length 6: 사용자 이름은 길이 6 이상이어야 합니다.
 Users: 사용자
+Users and Roles: 사용자 및 역할
 Users exported: 내보낸 사용자
 UTC: UTC
 uz-Arab-AF: 우즈베키스탄 (아랍어, 아프가니스탄)

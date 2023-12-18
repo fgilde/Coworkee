@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: En fazla {0} dosyaya izin verilir
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Sunucuyla bağlantı kurulamıyor. Ağ bağlantınız kesik olabilir veya sunucuya ulaşılamıyor olabilir. Lütfen bağlantı yeniden kurulana kadar bekleyin
+A maximum of {0} files are allowed: En fazla {0} dosyaya izin verilir
 aa-DJ: Afar (Cibuti)
 aa-ER: Afar (Eritre)
 aa-ET: Afar (Etiyopya)
@@ -70,6 +71,8 @@ ar-TD: Arapça (Çad)
 ar-TN: Arapça (Tunus)
 ar-YE: Arapça (Yemen)
 Are you sure you want to force logout for user {0}: Kullanıcı {0} için oturumu kapatmaya zorlamak istediğinizden emin misiniz?
+Are you sure you want to restart Backend/Server?: Arka Ucu/Sunucuyu yeniden başlatmak istediğinizden emin misiniz?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Varsayılan ayarları geri yüklemek istediğinizden emin misiniz? Bu, burada yaptığınız tüm değişikliklerin üzerine yazacaktır.
 arn-CL: Mapuche (Şili)
 As Admin you can filter for users here: Yönetici olarak kullanıcılar için burada filtreleyebilirsiniz
 as read: okunduğu gibi
@@ -131,6 +134,7 @@ ce-RU: Çeçen (Rusya)
 ceb-Latn-PH: Cebuano (Latince, Filipinler)
 cgg-UG: Chiga (Uganda)
 Change Password: Parolayı Değiştir
+Change the system settings carefully: Sistem ayarlarını dikkatli bir şekilde değiştirin
 Charts comming soon ish...: Grafikler yakında geliyor...
 chat: Sohbet
 Chat: Sohbet
@@ -154,16 +158,19 @@ Continue to {0}: '{0} devam et'
 Country: Ülke
 Create: Yaratmak
 Create address: Adres oluştur
+Create new backup: Yeni yedek oluştur
 CreatedOn: Oluşturulma tarihi
 cs-CZ: Çekçe (Çekya)
 cu-RU: Kilise Slav (Rusya)
 Current Password: Geçerli Parola
 Current Password is required!: Geçerli Şifre gereklidir!
+Customize: Özelleştir
 cy-GB: Galce (Birleşik Krallık)
 da-DK: Danca (Danimarka)
 da-GL: Danca (Grönland)
 Dashboard: Tablo
 Data has been updated: Veriler güncellendi
+Database Backups: Veritabanı Yedeklemeleri
 Date: Tarih
 Date Created: Oluşturulma Tarihi
 Date Range For Searching: Arama için Tarih Aralığı
@@ -200,6 +207,8 @@ Description is required!: Açıklama gereklidir!
 detailed guide for more.: daha fazlası için ayrıntılı kılavuz.
 Details for Trail ID: İz Kimliği için ayrıntılar
 dje-NE: Zarma (Nijer)
+Do you really want to restart the server?: Sunucuyu gerçekten yeniden başlatmak istiyor musunuz?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Veritabanını gerçekten '{0}' yedeklemesinden geri yüklemek istiyor musunuz? {1} sonra yapılan değişikliklerin kaybolduğunu unutmayın. Bu aynı zamanda herhangi bir kullanıcı tarafından yapılan herhangi bir değişiklik anlamına gelir
 Do you want to delete the profile picture of {0}: '{0} profil resmini silmek istiyor musunuz?'
 Do you want to delete the User {0}: Kullanıcı {0} silmek istiyor musunuz?
 Document Deleted: Silinen Belge
@@ -357,6 +366,8 @@ en-ZM: İngilizce (Zambiya)
 en-ZW: İngilizce (Zimbabve)
 English: İngilizce
 Enter email for password reset: Hesabınıza bağlı e-posta adresini girin ve şifrenizi sıfırlamak için bir bağlantı içeren bir e-posta alacaksınız
+Enter name of backup file: Yedekleme dosyasının adını girin
+Enter new name of backup file: Yedekleme dosyasının yeni adını girin
 Enter the email address for the confirmation mail: Onay postası için e-posta adresini girin
 Enter the URL to existing file: Mevcut dosyanın URL'sini girin
 Enter your message...: mesajınızı girin...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: '{0} {1} İzinlerini Yönetme'
 Manage {0} {1}'s Roles: '{0} {1} Rollerini Yönetme'
 Manage {0} Extended Attributes: Genişletilmiş Öznitelikleri Yönetme {0}
 Manage Brands.: Markaları Yönetin.
+Manage Database Backups.: Veritabanı yedeklemelerini yönetin veya geri yükleyin.
 Manage Document Types.: Belge Türlerini Yönetin.
 Manage Extended Attributes: Genişletilmiş Öznitelikleri Yönetme
 Manage Languages: Dilleri Yönet
@@ -713,6 +725,7 @@ No notifications: Bildirim yok
 Not Allowed to add or delete Administrator Role if you have not this role.: Bu role sahip değilseniz Yönetici Rolü eklemenize veya silmenize izin verilmez.
 Not allowed to Delete this user: Bu kullanıcının silinmesine izin verilmiyor
 Not Allowed.: İzin verilmiyor.
+Not connected: Bağlı değil
 NotFoundMessage: Aradığınız sayfa yok.
 Notifications: Bildirim
 Nov: Kasım
@@ -819,12 +832,19 @@ Reload: Yeni -den yükle
 Reload Data: Verileri Yeniden Yükle
 Remember me?: Beni hatırladın mı?
 Remove All: Tümünü Kaldır
+Rename backup: Rename backup
 Reset: Sıfırlama
 Reset all: Tümünü sıfırla
 Reset all properties?: Tüm mülkleri sıfırladınız mı?
 Reset password: Parolayı sıfırla
 Reset Password: Parolayı Sıfırla
 Resources: Kaynaklar
+Restart server: Sunucuyu yeniden başlat
+Restore: Geri yüklemek
+Restore database: Veritabanını geri yükle
+Restore default: Varsayılanı geri yükle
+Restore finished: Geri yükleme tamamlandı
+Restore in progress. Please wait until the restore is finished. This can take a while.: Geri yükleme devam ediyor. Lütfen geri yükleme bitene kadar bekleyin. Bu biraz zaman alabilir.
 rm-CH: Romansh (İsviçre)
 rn-BI: Rundi (Burundi)
 ro-MD: İngilizce (Moldova)
@@ -879,6 +899,7 @@ Select Language: Dil seçin
 Send: Gönder
 Send confirmation email: Onay e-postası gönder
 Sep: Eylül
+Server restarted successfully: Sunucu başarıyla yeniden başlatıldı
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Yeni parola ayarlama
 sg-CF: Sango (Orta Afrika Cumhuriyeti)
@@ -938,6 +959,7 @@ Swagger: API Belgeleri
 Swedish: İsveç dili
 syr-SY: Süryani (Suriye)
 System: Sistem
+System Settings: Sistem ayarları
 ta-IN: Tamil (Hindistan)
 ta-LK: Tamilce (Sri Lanka)
 ta-MY: Ne de (Malezya)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Dosya,
 The following {0} permissions are also required for permission {1}: İzin {1} için aşağıdaki {0} izinler de gereklidir
 The following permission is also required for permission {1}: İzin {1} için aşağıdaki izin de gereklidir
 The Plugin '{0}' may be able to help: Eklenti '{0}' yardımcı olabilir
+The server is just restarting. Please wait until the connection has been restored: Sunucu yeniden başlatılıyor. Lütfen bağlantı yeniden kurulana kadar bekleyin
 The user "{0}" just changed some of this data: '"{0}" kullanıcısı bu verilerin bir kısmını değiştirdi'
 The user {0} has been logged off: Kullanıcı {0} oturumu kapatıldı
 The User {0} has just edited, created or deleted entries here. You should reload the data: Kullanıcı {0} burada girişleri yeni düzenledi, oluşturdu veya sildi. Verileri yeniden yüklemelisiniz
@@ -1019,6 +1042,7 @@ ur-IN: Urduca (Hindistan)
 ur-PK: Urduca (Pakistan)
 User: Kullanıcı
 User {0} Registered. Please check your Mailbox to verify!: Kullanıcı {0} Kayıtlı. Lütfen e-posta adresinizi doğrulamak için Posta Kutunuzu kontrol edin!
+User and Roles: Kullanıcı ve Roller
 User Data: Kullanıcı Verileri
 User Deleted: Kullanıcı Silindi
 User Name: Kullanıcı Adı
@@ -1034,6 +1058,7 @@ Username cannot changed: Kullanıcı adı değiştirilemez
 UserName is required: KullanıcıAdı gerekli
 UserName must be at least of length 6: UserName en az 6 uzunluğunda olmalıdır
 Users: Kullanıcı
+Users and Roles: Kullanıcılar ve Roller
 Users exported: Dışa aktarılan kullanıcılar
 UTC: UTC
 uz-Arab-AF: Özbekçe (Arapça, Afganistan)

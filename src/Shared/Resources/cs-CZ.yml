@@ -1,4 +1,5 @@
-﻿A maximum of {0} files are allowed: Je povoleno maximálně {0} souborů
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Nelze navázat spojení se serverem. Vaše síťové připojení může být mimo provoz nebo je server nedostupný. Počkejte prosím, dokud nebude připojení obnoveno
+A maximum of {0} files are allowed: Je povoleno maximálně {0} souborů
 aa-DJ: Afar (Džibutsko)
 aa-ER: Afar (Eritrea)
 aa-ET: Afar (Etiopie)
@@ -70,6 +71,8 @@ ar-TD: Arabština (Čad)
 ar-TN: Arabština (Tunisko)
 ar-YE: Arabština (Jemen)
 Are you sure you want to force logout for user {0}: Opravdu chcete vynutit odhlášení pro uživatelské {0}
+Are you sure you want to restart Backend/Server?: Opravdu chcete restartovat Backend/Server?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Opravdu chcete obnovit výchozí nastavení? Tím se přepíší všechny změny, které jste zde kdy provedli.
 arn-CL: Mapučche (Chile)
 As Admin you can filter for users here: Jako správce můžete filtrovat pro uživatele zde
 as read: jak číst
@@ -131,6 +134,7 @@ ce-RU: Čečensko (Rusko)
 ceb-Latn-PH: Cebuano (latinka, Filipíny)
 cgg-UG: Chiga (Uganda)
 Change Password: Změnit heslo
+Change the system settings carefully: Pečlivě změňte nastavení systému
 Charts comming soon ish...: Grafy již brzy ish...
 chat: Povídat si
 Chat: Povídat si
@@ -154,16 +158,19 @@ Continue to {0}: Pokračovat do {0}
 Country: Země
 Create: Vytvářet
 Create address: Vytvořit adresu
+Create new backup: Vytvořit novou zálohu
 CreatedOn: Datum vytvoření
 cs-CZ: Čeština (Česko)
 cu-RU: Slovanská církev (Rusko)
 Current Password: Aktuální heslo
 Current Password is required!: Aktuální heslo je vyžadováno!
+Customize: Přizpůsobit
 cy-GB: Velština (Spojené království)
 da-DK: Dánština (Dánsko)
 da-GL: Dánština (Grónsko)
 Dashboard: Palubní deska
 Data has been updated: Data byla aktualizována
+Database Backups: Zálohy databáze
 Date: Rande
 Date Created: Datum vytvoření
 Date Range For Searching: Časové období pro vyhledávání
@@ -200,6 +207,8 @@ Description is required!: Popis je nutný!
 detailed guide for more.: podrobný průvodce pro více informací.
 Details for Trail ID: Podrobnosti o ID stezky
 dje-NE: Zarma (Niger)
+Do you really want to restart the server?: Opravdu chcete restartovat server?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Opravdu chcete obnovit databázi ze zálohy '{0}'? Všimněte si, že všechny změny provedené po {1} jsou pryč. To také znamená jakékoli změny provedené libovolným uživatelem
 Do you want to delete the profile picture of {0}: Chcete odstranit profilový obrázek {0}
 Do you want to delete the User {0}: Chcete odstranit uživatelský {0}
 Document Deleted: Dokument odstraněn
@@ -357,6 +366,8 @@ en-ZM: Angličtina (Zambie)
 en-ZW: Angličtina (Zimbabwe)
 English: Angličtina
 Enter email for password reset: Zadejte e-mailovou adresu propojenou s vaším účtem a obdržíte e-mail s odkazem na obnovení hesla
+Enter name of backup file: Zadejte název záložního souboru
+Enter new name of backup file: Zadejte nový název záložního souboru
 Enter the email address for the confirmation mail: Zadejte e-mailovou adresu potvrzovacího e-mailu
 Enter the URL to existing file: Zadejte adresu URL existujícího souboru
 Enter your message...: Zadejte zprávu...
@@ -640,6 +651,7 @@ Manage {0} {1}'s Permissions: Správa oprávnění {0} {1}
 Manage {0} {1}'s Roles: Správa rolí {0} {1}
 Manage {0} Extended Attributes: Správa rozšířených atributů {0}
 Manage Brands.: Spravujte značky.
+Manage Database Backups.: Spravujte nebo obnovujte zálohy databáze.
 Manage Document Types.: Správa typů dokumentů.
 Manage Extended Attributes: Správa rozšířených atributů
 Manage Languages: Správa jazyků
@@ -713,6 +725,7 @@ No notifications: Žádná oznámení
 Not Allowed to add or delete Administrator Role if you have not this role.: Není povoleno přidávat nebo odstraňovat roli správce, pokud tuto roli nemáte.
 Not allowed to Delete this user: Není povoleno odstranit tohoto uživatele
 Not Allowed.: Není povoleno.
+Not connected: Není připojeno
 NotFoundMessage: Stránka, kterou jste hledali, neexistuje.
 Notifications: Upozornění
 Nov: Listopad
@@ -819,12 +832,19 @@ Reload: Dobít
 Reload Data: Opětovné načtení dat
 Remember me?: Pamatuješ si mě?
 Remove All: Odstranit vše
+Rename backup: Přejmenovat zálohu
 Reset: Resetovat
 Reset all: Obnovit vše
 Reset all properties?: Obnovit všechny vlastnosti?
 Reset password: Resetovat heslo
 Reset Password: Obnovit heslo
 Resources: Prostředky
+Restart server: Restartovat server
+Restore: Obnovit
+Restore database: Obnovení databáze
+Restore default: Obnovit výchozí
+Restore finished: Obnovení dokončeno
+Restore in progress. Please wait until the restore is finished. This can take a while.: Probíhá obnova. Počkejte prosím na dokončení obnovy. To může chvíli trvat.
 rm-CH: Romansh (Švýcarsko)
 rn-BI: Rundi (Burundi)
 ro-MD: Angličtina (Moldavsko)
@@ -879,6 +899,7 @@ Select Language: Vybrat jazyk
 Send: Poslat
 Send confirmation email: Odeslat potvrzovací e-mail
 Sep: Září
+Server restarted successfully: Server byl úspěšně restartován
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Nastavit nové heslo
 sg-CF: Sango (Středoafrická republika)
@@ -938,6 +959,7 @@ Swagger: Dokumentace API
 Swedish: Švédština
 syr-SY: Syrština (Sýrie)
 System: Systém
+System Settings: Nastavení systému
 ta-IN: Tamilština (Indie)
 ta-LK: Tamilština (Srí Lanka)
 ta-MY: Nor (Malajsie)
@@ -959,6 +981,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Soubor
 The following {0} permissions are also required for permission {1}: Následující oprávnění {0} jsou také vyžadována pro {1} oprávnění
 The following permission is also required for permission {1}: Následující oprávnění je také vyžadováno pro oprávnění {1}
 The Plugin '{0}' may be able to help: Plugin '{0}' může být schopen pomoci
+The server is just restarting. Please wait until the connection has been restored: Server se právě restartuje. Počkejte prosím, dokud nebude připojení obnoveno
 The user "{0}" just changed some of this data: Uživatel "{0}" právě změnil některé z těchto dat
 The user {0} has been logged off: Uživatel{0} byl odhlášen
 The User {0} has just edited, created or deleted entries here. You should reload the data: Uživatel {0} zde právě upravil, vytvořil nebo smazal záznamy. Měli byste znovu načíst data
@@ -1019,6 +1042,7 @@ ur-IN: Urdština (Indie)
 ur-PK: Urdština (Pákistán)
 User: Uživatel
 User {0} Registered. Please check your Mailbox to verify!: Uživatel {0} zaregistrován. Zkontrolujte prosím svou poštovní schránku a ověřte svou e-mailovou adresu!
+User and Roles: Uživatelé a role
 User Data: Uživatelská data
 User Deleted: Uživatel byl odstraněn
 User Name: Uživatelské jméno
@@ -1034,6 +1058,7 @@ Username cannot changed: Uživatelské jméno nelze změnit
 UserName is required: Uživatelské jméno je povinné
 UserName must be at least of length 6: Uživatelské jméno musí mít alespoň délku 6
 Users: Uživatelé
+Users and Roles: Uživatelé a role
 Users exported: Exportované uživatele
 UTC: UTC
 uz-Arab-AF: Uzbečti (arabština, Afghánistán)

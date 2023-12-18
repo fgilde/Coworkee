@@ -7617,6 +7617,8 @@ export class UploadRequest implements IUploadRequest {
     uploadType!: UploadType;
     data?: string | undefined;
     url?: string | undefined;
+    path?: string | undefined;
+    size!: number;
 
     constructor(data?: IUploadRequest) {
         if (data) {
@@ -7635,6 +7637,8 @@ export class UploadRequest implements IUploadRequest {
             this.uploadType = _data["uploadType"];
             this.data = _data["data"];
             this.url = _data["url"];
+            this.path = _data["path"];
+            this.size = _data["size"];
         }
     }
 
@@ -7653,6 +7657,8 @@ export class UploadRequest implements IUploadRequest {
         data["uploadType"] = this.uploadType;
         data["data"] = this.data;
         data["url"] = this.url;
+        data["path"] = this.path;
+        data["size"] = this.size;
         return data;
     }
 }
@@ -7664,6 +7670,8 @@ export interface IUploadRequest {
     uploadType: UploadType;
     data?: string | undefined;
     url?: string | undefined;
+    path?: string | undefined;
+    size: number;
 }
 
 export enum UploadType {

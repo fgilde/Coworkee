@@ -71,6 +71,8 @@ ar-TD: Arabisch (Tschad)
 ar-TN: Arabisch (Tunesien)
 ar-YE: Arabisch (Jemen)
 Are you sure you want to force logout for user {0}: Möchten Sie die Abmeldung für den Benutzer {0} wirklich erzwingen
+Are you sure you want to restart Backend/Server?: Sind Sie sicher, dass Sie den Server neu starten möchten?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Sind Sie sicher, dass Sie die Standardeinstellungen wiederherstellen möchten? Dies überschreibt alle Änderungen, die Sie hier jemals vorgenommen haben.
 arn-CL: Mapuche (Chile)
 As Admin you can filter for users here: Als Administrator können Sie hier nach Benutzern filtern
 as read: als gelesen
@@ -132,6 +134,7 @@ ce-RU: Tschetschenien (Russland)
 ceb-Latn-PH: Cebuano (Latein, Philippinen)
 cgg-UG: Chiga (Uganda)
 Change Password: Passwort ändern
+Change the system settings carefully: Ändern Sie die Systemeinstellungen vorsichtig
 Charts comming soon ish...: Charts kommen bald...
 chat: Chat
 Chat: Chat
@@ -155,16 +158,19 @@ Continue to {0}: Weiter zu {0}
 Country: Land
 Create: Erstellen
 Create address: Neue Adresse anlegen
+Create new backup: Neues Backup erstellen
 CreatedOn: Erstellungsdatum
 cs-CZ: Tschechisch (Tschechien)
 cu-RU: Kirchenslawisch (Russland)
 Current Password: Aktuelles Passwort
 Current Password is required!: Aktuelles Passwort ist erforderlich!
+Customize: Anpassen
 cy-GB: Walisisch (Vereinigtes Königreich)
 da-DK: Dänisch (Dänemark)
 da-GL: Dänisch (Grönland)
 Dashboard: Dashboard
 Data has been updated: Daten wurden aktualisiert
+Database Backups: Datenbank Sicherungen
 Date: Datum
 Date Created: Erstellungsdatum
 Date Range For Searching: Datumsbereich für die Suche
@@ -201,6 +207,8 @@ Description is required!: Beschreibung ist erforderlich!
 detailed guide for more.: detaillierte Anleitung für mehr.
 Details for Trail ID: Details zur Trail ID
 dje-NE: Zarma (Niger)
+Do you really want to restart the server?: Möchten Sie den Server wirklich neu starten?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Möchten Sie die Datenbank wirklich aus dem Backup '{0}' wiederherstellen? Beachten Sie, dass alle Änderungen, die nach '{1}' vorgenommen wurden, weg sind. Dies bedeutet auch alle Änderungen, die von einem beliebigen Benutzer vorgenommen wurden
 Do you want to delete the profile picture of {0}: Möchten Sie das Profilbild von {0}
 Do you want to delete the User {0}: Möchten Sie den Benutzer {0} löschen
 Document Deleted: Dokument gelöscht
@@ -358,6 +366,8 @@ en-ZM: Englisch (Sambia)
 en-ZW: Englisch (Simbabwe)
 English: Englisch
 Enter email for password reset: Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und Sie erhalten eine E-Mail mit einem Link zum Zurücksetzen Ihres Passworts
+Enter name of backup file: Geben Sie den Namen der Sicherungsdatei ein
+Enter new name of backup file: Neuen Namen der Sicherungsdatei eingeben
 Enter the email address for the confirmation mail: Geben Sie die E-Mail-Adresse für die Bestätigungsmail ein
 Enter the URL to existing file: Geben Sie die URL zu einer vorhandenen Datei an
 Enter your message...: Geben Sie Ihre Nachricht ein...
@@ -444,6 +454,7 @@ ff-Latn-NG: Fulah (Latein, Nigeria)
 ff-Latn-SL: Fulah (Latein, Sierra Leone)
 ff-Latn-SN: Fulah (lateinisch, Senegal)
 fi-FI: Finnisch (Finnland)
+Field is required!: Das Feld "{0}" ist erforderlich!
 fil-PH: Filipino (Philippinen)
 File is required!: Datei ist erforderlich!
 Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Dateien dieses Typs ({0}) sind nicht zulässig. Nur folgende Typen sind {1} erlaubt. Probieren Sie eine dieser Erweiterungen aus ({2})
@@ -641,6 +652,7 @@ Manage {0} {1}'s Permissions: Berechtigungen von {0} {1} verwalten
 Manage {0} {1}'s Roles: Verwalten der Rollen von {0} {1}
 Manage {0} Extended Attributes: Verwalten {0} erweiterter Attribute
 Manage Brands.: Marken verwalten.
+Manage Database Backups.: Datenbank sichern und wiederherstellen.
 Manage Document Types.: Verwalten von Dokumenttypen.
 Manage Extended Attributes: Erweiterte Attribute verwalten
 Manage Languages: Sprachen verwalten
@@ -714,6 +726,7 @@ No notifications: Keine Benachrichtigungen
 Not Allowed to add or delete Administrator Role if you have not this role.: Nicht zulässig, Administratorrolle hinzuzufügen oder zu löschen, wenn Sie nicht über diese Rolle verfügen.
 Not allowed to Delete this user: Diesen Benutzer darf nicht gelöscht werden
 Not Allowed.: Unstatthaft.
+Not connected: Nicht verbunden
 NotFoundMessage: Die Seite, nach der Sie gesucht haben, existiert nicht.
 Notifications: Benachrichtigungen
 Nov: Nov
@@ -820,12 +833,19 @@ Reload: Neu laden
 Reload Data: Daten neu laden
 Remember me?: Erinnern Sie sich an mich?
 Remove All: Alle entfernen
+Rename backup: Sicherung umbenennen
 Reset: Zurücksetzen
 Reset all: Alle zurücksetzen
 Reset all properties?: Alle Eigenschaften zurücksetzen?
 Reset password: Passwort zurücksetzen
 Reset Password: Passwort zurücksetzen
 Resources: Betriebsmittel
+Restart server: Server neustart
+Restore: Wiederherstellen
+Restore database: Datenbank wiederherstellen
+Restore default: Standard wiederherstellen
+Restore finished: Wiederherstellung abgeschlossen
+Restore in progress. Please wait until the restore is finished. This can take a while.: Wiederherstellung läuft. Bitte warten Sie, bis die Wiederherstellung abgeschlossen ist. Dies kann eine Weile dauern.
 rm-CH: Rätoromanisch (Schweiz)
 rn-BI: Rundi (Burundi)
 ro-MD: Rumänisch (Moldau)
@@ -880,6 +900,7 @@ Select Language: Sprache auswählen
 Send: Senden
 Send confirmation email: Bestätigungs-E-Mail senden
 Sep: Sep
+Server restarted successfully: Server wurde erfolgreich neu gestartet
 ses-ML: Koyraboro Senni (Mali)
 Set new password: Neues Passwort festlegen
 sg-CF: Sango (Zentralafrikanische Republik)
@@ -939,6 +960,7 @@ Swagger: API-Dokumentation
 Swedish: Schwedisch
 syr-SY: Syrisch (Syrien)
 System: System
+System Settings: Systemeinstellungen
 ta-IN: Tamil (Indien)
 ta-LK: Tamil (Sri Lanka)
 ta-MY: Nor (Malaysia)
@@ -960,6 +982,7 @@ The file has exceeded the maximum size of {0} with {1}. File size is {2}: Die Da
 The following {0} permissions are also required for permission {1}: Für die Berechtigung "{1}" sind ebenfalls diese {0} Berechtigungen erforderlich
 The following permission is also required for permission {1}: Die folgende Berechtigung ist für die Berechtigung "{1}" ebenfalls erforderlich
 The Plugin '{0}' may be able to help: Das Plugin '{0}' kann eventuell helfen
+The server is just restarting. Please wait until the connection has been restored: Der Server wird gerade neu gestartet. Bitte warten sie bis die Verbindung wieder hergestellt wurde
 The user "{0}" just changed some of this data: Der Benutzer "{0}" hat gerade einige dieser Daten geändert
 The user {0} has been logged off: Der Benutzer {0} wurde abgemeldet.
 The User {0} has just edited, created or deleted entries here. You should reload the data: Der User {0} hat hier soeben Einträge bearbeitet, angelegt oder gelöscht. Sie sollten die Daten neu laden
@@ -1020,6 +1043,7 @@ ur-IN: Urdu (Indien)
 ur-PK: Urdu (Pakistan)
 User: Benutzer
 User {0} Registered. Please check your Mailbox to verify!: Benutzer {0} registriert. Bitte überprüfen Sie Ihre Mailbox, um Ihre E-Mail-Adresse zu bestätigen!
+User and Roles: Benutzer und Rollen
 User Data: Benutzerdaten
 User Deleted: Benutzer gelöscht
 User Name: Benutzername
@@ -1035,6 +1059,7 @@ Username cannot changed: Benutzername kann nicht geändert werden
 UserName is required: Benutzername ist erforderlich
 UserName must be at least of length 6: UserName muss mindestens die Länge 6 haben
 Users: Benutzer
+Users and Roles: Benutzer und Rollen
 Users exported: Exportierte Benutzer
 UTC: UTC
 uz-Arab-AF: Usbekisch (Arabisch, Afghanistan)
@@ -1083,28 +1108,3 @@ zh-MO: Chinesisch (Macao SAR)
 zh-SG: Chinesisch (Singapur)
 zh-TW: Chinesisch (Taiwan)
 zu-ZA: isiZulu (Südafrika)
-Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Sind Sie sicher, dass Sie die Standardeinstellungen wiederherstellen möchten? Dies überschreibt alle Änderungen, die Sie hier jemals vorgenommen haben.
-Create new backup: Neues Backup erstellen
-Database Backups: Datenbank Sicherungen
-Do you really want to restart the server?: Möchten Sie den Server wirklich neu starten?
-Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Möchten Sie die Datenbank wirklich aus dem Backup '{0}' wiederherstellen? Beachten Sie, dass alle Änderungen, die nach '{1}' vorgenommen wurden, weg sind. Dies bedeutet auch alle Änderungen, die von einem beliebigen Benutzer vorgenommen wurden
-Enter name of backup file: Geben Sie den Namen der Sicherungsdatei ein
-Enter new name of backup file: Neuen Namen der Sicherungsdatei eingeben
-Manage Database Backups.: Datenbank sichern und wiederherstellen.
-Not connected: Nicht verbunden
-Rename backup: Sicherung umbenennen
-Restart server: Server neustart
-Restore: Wiederherstellen
-Restore database: Datenbank wiederherstellen
-Restore default: Standard wiederherstellen
-Restore finished: Wiederherstellung abgeschlossen
-Restore in progress. Please wait until the restore is finished. This can take a while.: Wiederherstellung läuft. Bitte warten Sie, bis die Wiederherstellung abgeschlossen ist. Dies kann eine Weile dauern.
-The server is just restarting. Please wait until the connection has been restored: Der Server wird gerade neu gestartet. Bitte warten sie bis die Verbindung wieder hergestellt wurde
-User and Roles: Benutzer und Rollen
-Users and Roles: Benutzer und Rollen
-Server restarted successfully: Server wurde erfolgreich neu gestartet
-Are you sure you want to restart Backend/Server?: Sind Sie sicher, dass Sie den Server neu starten möchten?
-System Settings: Systemeinstellungen
-Change the system settings carefully: Ändern Sie die Systemeinstellungen vorsichtig
-Field is required!: Das Feld "{0}" ist erforderlich!
-Customize: Anpassen

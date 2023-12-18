@@ -159,6 +159,12 @@ namespace Coworkee.Infrastructure.Services.Identity
         {
             var users = await _userManager.LoadedUsers().ToListAsync();
             var result = users.MapTo<List<UserResponse>>().Where(u => !u.IsSystemUser()).ToList();
+
+            foreach (var response in result)
+            {
+                response.Roles = (await GetRolesAsync(response.Id)).Data.UserRoles;
+            }
+
             return await Result<List<UserResponse>>.SuccessAsync(result);
         }
 
@@ -209,7 +215,9 @@ namespace Coworkee.Infrastructure.Services.Identity
             var user = await _userManager.FindByIdFullyLoadedAsync(userId);
             if (user == null)
                 return await Result<UserResponse>.FailAsync($"User with id {userId} not found");
-            return await Result<UserResponse>.SuccessAsync(user.MapTo<UserResponse>());
+            var userResponse = user.MapTo<UserResponse>();
+            userResponse.Roles = (await GetRolesAsync(user.Id)).Data.UserRoles;
+            return await Result<UserResponse>.SuccessAsync(userResponse);
         }
 
         public async Task<IResult> ToggleUserStatusAsync(ToggleUserStatusRequest request)

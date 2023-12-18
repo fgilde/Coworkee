@@ -1,7 +1,9 @@
 @using Nextended.Core.Extensions
 @using Coworkee.Application.Common.Models.Identity
 @using System.Threading
+@using Coworkee.Application.Common.Extensions
 @using Microsoft.AspNetCore.Components.Rendering
+@using MudBlazor.Extensions.Helper
 @using MudBlazor.Extensions.Options
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserFilter> _localizer
 
@@ -9,29 +11,92 @@
 
 @Inherited()
 
-@code {    
-    public override Variant ChipVariant { get; set; } = Variant.Outlined;
-    public override Func<UserResponse, string> ToStringFunc { get; set; } = ItemNameRender;
-    protected RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
+@code {
+
+    private bool _initialized;
+    private string[] _preInitParameters;
+
+    public override Variant ChipVariant { get; set; } = Variant.Text;
+    public override Func<UserResponse, string> ToStringFunc { get; set; } = item => item?.FullName;
+    private RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
+    private bool IsOverwritten(string paramName) => _preInitParameters?.Contains(paramName) == true;
+
+    /// <summary>
+    /// If set only users available in one of the specified roles will be shown
+    /// </summary>
+    [Parameter]
+    public string[] Roles { get; set; }
+
+    /// <summary>
+    /// If true the current user will not be shown in the list
+    /// </summary>
+    [Parameter]
+    public bool WithoutCurrentUser { get; set; }
 
     protected override async Task<IList<UserResponse>> GetAvailableItemsAsync(CancellationToken cancellation = default)
-        => (await _api.User_GetAllAsync(cancellationToken: cancellation)).Data;
+    {
+        var res = (await _api.User_GetAllAsync(cancellationToken: cancellation)).Data;
+        if (WithoutCurrentUser)
+        {
+            var currentUser = (await _stateProvider.GetAuthenticationStateAsync()).User;
+            res = res.Where(u => u.Id != currentUser.GetUserId()).ToList();
+        }
 
-    public static string ItemNameRender(UserResponse item) => item?.FullName;
+        if (Roles != null && Roles.Any())
+        {
+            return (from user in res
+                    let userRoles = user.Roles.Where(r => r.Selected).ToList()
+                    where userRoles.Any(role => Roles.Contains(role.RoleName) || Roles.Contains(role.Id.ToString()))
+                    select user).ToList();
+        }
+
+        return res;
+    }
+
+
+    /// <inheritdoc />
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        if (!_initialized)
+            _preInitParameters = parameters.ToDictionary().Select(x => x.Key).ToArray();
+        return base.SetParametersAsync(parameters);
+    }
 
     protected override void OnInitialized()
     {
-        Color = MudBlazor.Color.Secondary;
-        Label = _localizer["User"];
-        HelperText = _localizer["Search by users"];
-        ItemTemplate = GetItemTemplate();
-        ValuePresenter = ValuePresenter.Chip;
-        MultiSelection = true;
-        ChipSize = Size.Large;
-        base.OnInitialized();        
+        SearchFunc = (item, text) =>
+        item.FullName.Contains(text, StringComparison.OrdinalIgnoreCase)
+        || item.Email.Contains(text, StringComparison.OrdinalIgnoreCase);
+
+
+        Dense = true;
+        Clearable = true;
+
+        if (!IsOverwritten(nameof(Color)))
+            Color = MudBlazor.Color.Secondary;
+        if (!IsOverwritten(nameof(Label)))
+            Label = _localizer["User"];
+        if (!IsOverwritten(nameof(HelperText)))
+            HelperText = _localizer["Search by users"];
+        if (!IsOverwritten(nameof(ItemTemplate)))
+            ItemTemplate = GetItemTemplate();
+        if (!IsOverwritten(nameof(ValuePresenter)))
+            ValuePresenter = ValuePresenter.Chip;
+        if (!IsOverwritten(nameof(MultiSelection)))
+            MultiSelection = true;
+        if (!IsOverwritten(nameof(ChipSize)))
+            ChipSize = Size.Large;
+        base.OnInitialized();
     }
-    
+
+
+    private string StyleStr() => MudExStyleBuilder.Default
+        .With("padding", "0")
+        .With("transform", "scale(0.8)", ValuePresenter == ValuePresenter.Chip)
+        .With("margin-left", "-30px", ValuePresenter == ValuePresenter.Chip)
+        .Build();
+
     private RenderFragment<UserResponse> GetItemTemplate() => context =>
-        @<UserCard UserData="@context" ShowLogout="false"></UserCard>;
-    
+    @<UserCard Style="@StyleStr()" UserData="@context" ShowLogout="false"></UserCard>;
+
 }

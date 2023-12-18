@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Coworkee.Shared.Models;
 using Nextended.Core.Extensions;
 
@@ -18,7 +19,7 @@ namespace Coworkee.Application.Common.Models.Identity
         public bool IsOnline { get; set; }
         public UserInformationsDto UserInfo { get; set; }
         public DateTime CreatedOn { get; set; }
-
+        public List<UserRoleModel> Roles { get; set; } = new();
         public bool IsSystemUser() => this.MapTo<CreateUser>().IsSystemUser();
     }
 }

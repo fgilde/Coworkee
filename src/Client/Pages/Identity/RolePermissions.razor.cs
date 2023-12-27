@@ -13,6 +13,8 @@ using Coworkee.Application.Hubs;
 using Coworkee.Client.Shared.Dialogs;
 using Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
+using MudBlazor.Extensions;
+using MudBlazor.Extensions.Options;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Client.Pages.Identity
@@ -128,10 +130,10 @@ namespace Coworkee.Client.Pages.Identity
                         {nameof(PermissionsRequired.RequiredClaims), neededAdditionalPermissions},
                         {nameof(PermissionsRequired.Message), string.Format(message, neededAdditionalPermissions.Length, _localizer[context.ClaimValue])}
                     };
-                    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, FullScreen = false, DisableBackdropClick = true };
-                    var dialog = _dialogService.Show<PermissionsRequired>(_localizer["Dependent permissions required"], parameters, options);
+                    var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, FullScreen = false, DisableBackdropClick = true };
+                    var dialog = await _dialogService.ShowEx<PermissionsRequired>(_localizer["Dependent permissions required"], parameters, options);
                     var result = await dialog.Result;
-                    if (!result.Cancelled)
+                    if (!result.Canceled)
                     {
                         if (result.Data.MapTo<bool>())
                             neededAdditionalPermissions.Apply(r => r.Selected = true);

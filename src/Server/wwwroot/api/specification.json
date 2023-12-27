@@ -7235,6 +7235,12 @@
             "createdOn": {
               "type": "string",
               "format": "date-time"
+            },
+            "roles": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserRoleModel"
+              }
             }
           }
         }
@@ -7301,6 +7307,26 @@
         }
       ]
     },
+    "UserRoleModel": {
+      "type": "object",
+      "required": [
+        "selected"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        },
+        "roleDescription": {
+          "type": "string"
+        },
+        "selected": {
+          "type": "boolean"
+        }
+      }
+    },
     "ResultOfListOfUserResponse": {
       "allOf": [
         {
@@ -7360,26 +7386,6 @@
           "items": {
             "$ref": "#/definitions/UserRoleModel"
           }
-        }
-      }
-    },
-    "UserRoleModel": {
-      "type": "object",
-      "required": [
-        "selected"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "roleName": {
-          "type": "string"
-        },
-        "roleDescription": {
-          "type": "string"
-        },
-        "selected": {
-          "type": "boolean"
         }
       }
     },

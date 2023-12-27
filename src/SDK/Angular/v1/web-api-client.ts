@@ -10561,6 +10561,7 @@ export class UserResponse extends DtoBaseOfString implements IUserResponse {
     isOnline!: boolean;
     userInfo?: UserInformationsDto | undefined;
     createdOn!: Date;
+    roles?: UserRoleModel[] | undefined;
 
     constructor(data?: IUserResponse) {
         super(data);
@@ -10581,6 +10582,11 @@ export class UserResponse extends DtoBaseOfString implements IUserResponse {
             this.isOnline = _data["isOnline"];
             this.userInfo = _data["userInfo"] ? UserInformationsDto.fromJS(_data["userInfo"]) : <any>undefined;
             this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
+            if (Array.isArray(_data["roles"])) {
+                this.roles = [] as any;
+                for (let item of _data["roles"])
+                    this.roles!.push(UserRoleModel.fromJS(item));
+            }
         }
     }
 
@@ -10605,6 +10611,11 @@ export class UserResponse extends DtoBaseOfString implements IUserResponse {
         data["isOnline"] = this.isOnline;
         data["userInfo"] = this.userInfo ? this.userInfo.toJSON() : <any>undefined;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
+        if (Array.isArray(this.roles)) {
+            data["roles"] = [];
+            for (let item of this.roles)
+                data["roles"].push(item.toJSON());
+        }
         super.toJSON(data);
         return data;
     }
@@ -10623,6 +10634,7 @@ export interface IUserResponse extends IDtoBaseOfString {
     isOnline: boolean;
     userInfo?: UserInformationsDto | undefined;
     createdOn: Date;
+    roles?: UserRoleModel[] | undefined;
 }
 
 export class UserInformationsDto extends DtoBaseOfInteger implements IUserInformationsDto {
@@ -10729,6 +10741,54 @@ export interface IAddressDto extends IDtoBaseOfInteger {
     country?: string | undefined;
     postalCode?: string | undefined;
     houseNumber?: string | undefined;
+}
+
+export class UserRoleModel implements IUserRoleModel {
+    id?: string | undefined;
+    roleName?: string | undefined;
+    roleDescription?: string | undefined;
+    selected!: boolean;
+
+    constructor(data?: IUserRoleModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.roleName = _data["roleName"];
+            this.roleDescription = _data["roleDescription"];
+            this.selected = _data["selected"];
+        }
+    }
+
+    static fromJS(data: any): UserRoleModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserRoleModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["roleName"] = this.roleName;
+        data["roleDescription"] = this.roleDescription;
+        data["selected"] = this.selected;
+        return data;
+    }
+}
+
+export interface IUserRoleModel {
+    id?: string | undefined;
+    roleName?: string | undefined;
+    roleDescription?: string | undefined;
+    selected: boolean;
 }
 
 export class ResultOfListOfUserResponse extends Result implements IResultOfListOfUserResponse {
@@ -10910,54 +10970,6 @@ export class UserRolesResponse implements IUserRolesResponse {
 
 export interface IUserRolesResponse {
     userRoles?: UserRoleModel[] | undefined;
-}
-
-export class UserRoleModel implements IUserRoleModel {
-    id?: string | undefined;
-    roleName?: string | undefined;
-    roleDescription?: string | undefined;
-    selected!: boolean;
-
-    constructor(data?: IUserRoleModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.roleName = _data["roleName"];
-            this.roleDescription = _data["roleDescription"];
-            this.selected = _data["selected"];
-        }
-    }
-
-    static fromJS(data: any): UserRoleModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new UserRoleModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["roleName"] = this.roleName;
-        data["roleDescription"] = this.roleDescription;
-        data["selected"] = this.selected;
-        return data;
-    }
-}
-
-export interface IUserRoleModel {
-    id?: string | undefined;
-    roleName?: string | undefined;
-    roleDescription?: string | undefined;
-    selected: boolean;
 }
 
 export class UpdateUserRolesRequest implements IUpdateUserRolesRequest {

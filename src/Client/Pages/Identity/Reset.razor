@@ -1,5 +1,4 @@
 @page "/account/reset-password/"
-@using Coworkee.Shared.Constants
 @layout MainLayout
 @attribute [AllowAnonymous]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Reset> _localizer
@@ -20,7 +19,7 @@
         </MudItem>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudText Typo="Typo.subtitle2" Class="mb-n4">@_localizer["Enter email for password reset"]</MudText>
+                    <MudText Typo="Typo.subtitle2" Class="mb-n4">@_localizer["Enter email and your new password here"]</MudText>
             </div>
         </MudItem>
         <MudItem xs="12">

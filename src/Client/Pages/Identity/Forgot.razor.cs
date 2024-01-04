@@ -3,6 +3,7 @@ using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Coworkee.Client.Extensions;
+using Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Client.Pages.Identity
 {
@@ -26,7 +27,11 @@ namespace Coworkee.Client.Pages.Identity
             if (_errorService.IsSuccessFull(result))
             {
                 _snackBar.Add(_localizer["Done!"], Severity.Success);
-                _navigationManager.NavigateTo("/");
+                foreach (var message in result.Messages)
+                {
+                    _snackBar.Add(message, Severity.Success);
+                }
+                _navigationManager.NavigateTo($"{ApplicationConstants.Routes.Login}?email={_emailModel.Email}");
             }
         }
     }

@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "Layout";
+}
+
+<h1>Confirm Registration</h1>
+<br/>
+<p>
+Hello @Model.User.FirstName and welcome to Symvopath,
+Please confirm your account by <a href="@Model.VerificationUri">clicking here</a>.
+</p>
+
+<br/>
+<p>
+    Or open this link in your browser: 
+</p>
+<br/>
+@Model.VerificationUri

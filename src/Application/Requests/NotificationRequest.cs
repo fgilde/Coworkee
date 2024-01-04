@@ -3,7 +3,6 @@ using Coworkee.Application.Common.Models;
 using Coworkee.Application.Common.Models.Identity;
 using Coworkee.Application.Hubs.Events.Base;
 using Coworkee.Application.Requests.Mail;
-using Coworkee.Shared.Constants.Application;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Application.Requests;
@@ -21,6 +20,7 @@ public class NotificationRequest: ClientEventBase
     public string Subject { get; set; }
     public string Excerpt { get; set; }
     public string Content { get; set; }
+    public string HtmlContent { get; set; }
     public string Url { get; set; }
     public string SenderEmailAddress { get; set; }
     public string SenderName { get; set; }
@@ -36,7 +36,7 @@ public class NotificationRequest: ClientEventBase
         {
             RecipientName = $"{user.FirstName} {user.LastName}",
             To = user.Email,
-            Body = Content,
+            Body = HtmlContent ?? Content,
             Subject = Subject,
             From = SenderEmailAddress,
             SenderName = SenderName

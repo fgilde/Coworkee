@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Coworkee.Client.Extensions;
 using System;
+using System.Linq;
+using Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Client.Pages.Identity
 {
@@ -17,6 +19,11 @@ namespace Coworkee.Client.Pages.Identity
         protected override void OnInitialized()
         {
             var queryToken = _navigationManager.ReadQueryParam("Token");
+            var email = _navigationManager.ReadQueryParam("email");
+            if (!string.IsNullOrEmpty(email))
+            {
+                _resetPasswordModel.Email = email;
+            }
             if (!string.IsNullOrEmpty(queryToken))
             {
                 //_resetPasswordModel.Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(queryToken));
@@ -34,7 +41,7 @@ namespace Coworkee.Client.Pages.Identity
                 if (_errorService.IsSuccessFull(result))
                 {
                     _snackBar.Add(result.Messages[0], Severity.Success);
-                    _navigationManager.NavigateTo("/");
+                    _navigationManager.NavigateTo($"{ApplicationConstants.Routes.Login}?email={_resetPasswordModel.Email}");
                 }
             }
             else

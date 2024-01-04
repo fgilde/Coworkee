@@ -45,6 +45,7 @@ using Coworkee.Application.Requests;
 using Coworkee.Domain.Entities.Identity;
 using Coworkee.Infrastructure.Extensions;
 using System.Globalization;
+using Coworkee.Shared;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {
@@ -59,6 +60,7 @@ namespace Coworkee.Infrastructure.Services.Identity
         private readonly IExportService _excelService;
         private readonly ICurrentUserService _currentUserService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IEmailTemplateService _emailTemplateService;
         private readonly ApplicationDbContext _db;
 
         public UserService(
@@ -69,7 +71,8 @@ namespace Coworkee.Infrastructure.Services.Identity
             IStringLocalizer<UserService> localizer,
             ICurrentUserService currentUserService,
             ApplicationDbContext db,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IEmailTemplateService emailTemplateService)
         {
             _permissionService = permissionService;
             _userManager = userManager;
@@ -79,6 +82,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             _excelService = serviceProvider.GetServices<IExportService>().FirstOrDefault(s => s.ExportService == ExportServiceType.Excel);
             _currentUserService = currentUserService;
             _serviceProvider = serviceProvider;
+            _emailTemplateService = emailTemplateService;
             _db = db;
         }
 
@@ -431,11 +435,14 @@ namespace Coworkee.Infrastructure.Services.Identity
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var route = "account/reset-password";
             var endpointUri = new Uri(string.Concat($"{origin}/", route));
-            var passwordResetURL = QueryHelpers.AddQueryString(endpointUri.ToString(), "Token", code);
+            var passwordResetUrl = QueryHelpers.AddQueryString(endpointUri.ToString(), "Token", code);
+            passwordResetUrl = QueryHelpers.AddQueryString(passwordResetUrl, "email", request.Email);
+            var content = await _emailTemplateService.RunAsync(EmailTemplate.ForgotPassword(), new { User = user, PasswordResetUrl = HtmlEncoder.Default.Encode(passwordResetUrl) });
+
             var mailRequest = new MailRequest
             {
                 RecipientName = $"{user.FirstName} {user.LastName}",
-                Body = string.Format(_localizer["Please reset your password by <a href='{0}'>clicking here</a>."], HtmlEncoder.Default.Encode(passwordResetURL)),
+                Body = content,
                 Subject = _localizer["Reset Password"],
                 To = request.Email
             };
@@ -507,11 +514,7 @@ namespace Coworkee.Infrastructure.Services.Identity
 
         private void SendUserActivatedMailAsync(ApplicationUser user)
         {
-            var url = _serviceProvider.GetService<ServerConfiguration>()?.ClientUrl;
-            var body = string.Format(_localizer["Your Account is confirmed and active, you can now Login"], url);
-            if (!string.IsNullOrEmpty(url))
-                body += $"<a href='{url.EnsureEndsWith("/")}{ApplicationConstants.Routes.Login}?email={user.Email}'> Login to {ApplicationConstants.ApplicationName} </a>";
-
+            var body = _emailTemplateService.Run(EmailTemplate.Activated(), new { User = user });
             var mailRequest = new MailRequest
             {
                 RecipientName = $"{user.FirstName} {user.LastName}",
@@ -525,11 +528,12 @@ namespace Coworkee.Infrastructure.Services.Identity
         private async Task SendVerificationMailAsync(string origin, ApplicationUser user)
         {
             var verificationUri = await GetVerificationUriAsync(user, origin);
+            var content = await _emailTemplateService.RunAsync(EmailTemplate.Register(), new { User = user, VerificationUri = verificationUri });
             var mailRequest = new MailRequest
             {
                 RecipientName = $"{user.FirstName} {user.LastName}",
                 To = user.Email,
-                Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
+                Body = content,
                 Subject = _localizer["Confirm Registration"]
             };
             BackgroundJob.Enqueue(() => _mailService.SendAsync(mailRequest));

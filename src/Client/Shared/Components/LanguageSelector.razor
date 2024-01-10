@@ -4,6 +4,7 @@
 @using Coworkee.Application.Common.Models
 @using Coworkee.Application.Hubs.Events
 @using Microsoft.AspNetCore.SignalR.Client
+@using System.Security.Claims
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
 @implements IAsyncDisposable
 
@@ -36,7 +37,7 @@
 {
     [Parameter] public bool Small { get; set; } = false;
     [CascadingParameter] private HubConnection HubConnection { get; set; }
-
+    [CascadingParameter] internal ClaimsPrincipal User { get; set; }
     string displayName;
     IList<LanguageDto> languages;
     LanguageDto actuaLanguage;
@@ -98,7 +99,10 @@
             await LoadPreferenceAsync();
             StateHasChanged();
             _navigationManager.Reload();
-            await _api.Account_SetPreferredLanguageAsync(languageCode);
+            if (User?.Identity?.IsAuthenticated == true)
+            {
+                await _api.Account_SetPreferredLanguageAsync(languageCode);
+            }
         }
     }
 

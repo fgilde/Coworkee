@@ -40,6 +40,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Emails\de-DE\NewChatMessage.cshtml" />
+    <None Remove="Resources\Emails\en-US\NewChatMessage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="EmailTemplateNames.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

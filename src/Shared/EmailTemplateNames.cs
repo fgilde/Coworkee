@@ -9,6 +9,7 @@ public partial class EmailTemplate
         public const string Activated = "Activated.cshtml";      
         public const string Footer = "Footer.cshtml";      
         public const string ForgotPassword = "Forgot-Password.cshtml";      
+        public const string NewChatMessage = "NewChatMessage.cshtml";      
         public const string Register = "Register.cshtml";      
         public const string Layout = "Layout.cshtml";      
     }
@@ -19,6 +20,8 @@ public partial class EmailTemplate
     public static EmailTemplate Footer(string culture) => Get(Names.Footer, culture); 
     public static EmailTemplate ForgotPassword(CultureInfo culture = null) => Get(Names.ForgotPassword, culture); 
     public static EmailTemplate ForgotPassword(string culture) => Get(Names.ForgotPassword, culture); 
+    public static EmailTemplate NewChatMessage(CultureInfo culture = null) => Get(Names.NewChatMessage, culture); 
+    public static EmailTemplate NewChatMessage(string culture) => Get(Names.NewChatMessage, culture); 
     public static EmailTemplate Register(CultureInfo culture = null) => Get(Names.Register, culture); 
     public static EmailTemplate Register(string culture) => Get(Names.Register, culture); 
     public static EmailTemplate Layout(CultureInfo culture = null) => Get(Names.Layout, culture); 
@@ -30,6 +33,7 @@ public partial class EmailTemplate
             public static EmailTemplate Activated => Get(EmailTemplate.Names.Activated, "de-DE");
             public static EmailTemplate Footer => Get(EmailTemplate.Names.Footer, "de-DE");
             public static EmailTemplate ForgotPassword => Get(EmailTemplate.Names.ForgotPassword, "de-DE");
+            public static EmailTemplate NewChatMessage => Get(EmailTemplate.Names.NewChatMessage, "de-DE");
             public static EmailTemplate Register => Get(EmailTemplate.Names.Register, "de-DE");
         
     }
@@ -39,6 +43,7 @@ public partial class EmailTemplate
             public static EmailTemplate Activated => Get(EmailTemplate.Names.Activated, "en-US");
             public static EmailTemplate Footer => Get(EmailTemplate.Names.Footer, "en-US");
             public static EmailTemplate ForgotPassword => Get(EmailTemplate.Names.ForgotPassword, "en-US");
+            public static EmailTemplate NewChatMessage => Get(EmailTemplate.Names.NewChatMessage, "en-US");
             public static EmailTemplate Register => Get(EmailTemplate.Names.Register, "en-US");
         
     }

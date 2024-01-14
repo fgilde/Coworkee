@@ -127,6 +127,7 @@ ca-ES: Catalano (Spagna)
 ca-FR: Catalano (Francia)
 ca-IT: Catalano (Italia)
 Cancel: Annulla
+Cancel deletion: Annulla eliminazione
 Catalog Management: Gestione cataloghi
 ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
 ccp-Cakm-IN: Chakma (Chakma, India)
@@ -559,6 +560,7 @@ Id: Id
 id-ID: Indonesiano (Indonesiano)
 ig-NG: Igbo (Nigeria)
 ii-CN: Yi (Cina)
+Image format: Formato immagine
 Include Entity fields (Export): Includi campi Entità (Esporta)
 Incorrect Password.: Password errata.
 Indonesia: Indonesiano
@@ -673,6 +675,7 @@ mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: Maggio
 mer-KE: Meru (Kenya)
+Message will be deleted in {0} seconds: Il messaggio verrà eliminato in {0} secondi
 mfe-MU: Morisyen (Mauritius)
 mg-MG: Malgascio (Madagascar)
 mgh-MZ: Makhuwa-Meetto (Mozambico)
@@ -751,6 +754,7 @@ or-IN: Odia (India)
 os-GE: Ossetico (Georgia)
 os-RU: Ossetico (Russia)
 Other: Altro
+Otherwise the full image will be downloaded: In caso contrario, verrà scaricata l'immagine completa
 Overview: Panoramica
 Owner: Proprietario
 pa-Arab-PK: Punjabi (arabo, Pakistan)
@@ -783,6 +787,7 @@ PostalCode: Codice postale
 Preview: Anteprima
 prg-001: Prussiano (Mondo)
 Primary Key: Chiave primaria
+Print: Stampare
 Product Deleted: Prodotto cancellato!
 Product Not Found!: Prodotto non trovato!
 Product Saved: Prodotto salvato!
@@ -834,11 +839,17 @@ Reload Data: Ricarica dati
 Remember me?: Ti ricordi di me?
 Remove All: Rimuovi tutto
 Rename backup: Rinomina backup
+Render with {0}: Eseguire il rendering con {0}
+Render with MudExFileDisplayTiff: Rendering con il visualizzatore Tiff
+Render with MudExFileDisplayZip: Rendering con il visualizzatore Zip
+Render with MudExImageViewer: Eseguire il rendering con MudExImageViewer
+Render with native control: Rendering con controllo nativo
 Reset: Resettare
 Reset all: Ripristina tutto
 Reset all properties?: Ripristinare tutte le proprietà?
 Reset password: Reimposta password
 Reset Password: Reimposta password
+Reset view: Ripristina visualizzazione
 Resources: Risorse
 Restart server: Riavvia il server
 Restore: Restaurare
@@ -873,8 +884,11 @@ saq-KE: Samburu (Kenya)
 sat-Olck-IN: Santali (Ol Chiki, India)
 Save: Salvare
 Save {0} Changes: Salvare le modifiche {0}
+Save as: Salva con nome
 Save Changes: Salva modifiche
+Save image: Salva immagine
 Save Role: Salva ruolo
+Save visible area only: Salva solo l'area visibile
 saved: Salvato!
 sbp-TZ: Sangu (Tanzania)
 sd-Arab-PK: Sindhi (arabo, Pakistan)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Si è disconnessi da 
 You are Logged Out.: Sei disconnesso.
 You can now Login with your credentials: Ora puoi accedere con le tue credenziali
 You cannot delete yourself: Non puoi eliminare te stesso
+You received a new chat message from {0}: Hai ricevuto un nuovo messaggio di chat da {0}
 Your e-mail address has been confirmed!: Il tuo indirizzo e-mail è stato confermato!
 Your email address could not be verified. If you have any problems, please contact {0}: Impossibile verificare il tuo indirizzo email. In caso di problemi, si prega di contattare {0}
 Your Profile has been updated.: Il tuo profilo è stato aggiornato.
@@ -1107,4 +1122,6 @@ zh-HK: Cinese (Hong Kong SAR)
 zh-MO: Cinese (Macao SAR)
 zh-SG: Cinese (Singapore)
 zh-TW: Cinese (Taiwan)
+Zoom in: Ingrandisci
+Zoom out: Rimpicciolisci
 zu-ZA: isiZulu (Sudafrica)

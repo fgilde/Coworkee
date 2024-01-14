@@ -127,6 +127,7 @@ ca-ES: Catalaans (Spanje)
 ca-FR: Catalaans (Frankrijk)
 ca-IT: Catalaans (Italië)
 Cancel: Annuleren
+Cancel deletion: Verwijdering annuleren
 Catalog Management: Catalogusbeheer
 ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
 ccp-Cakm-IN: Chakma (Chakma, India)
@@ -559,6 +560,7 @@ Id: Legitimatiebewijs
 id-ID: Indonesisch (Indonesisch)
 ig-NG: Igbo (Nigeria)
 ii-CN: Yi (China)
+Image format: Beeldformaat
 Include Entity fields (Export): Entiteitsvelden opnemen (exporteren)
 Incorrect Password.: Onjuist wachtwoord.
 Indonesia: Indonesisch
@@ -673,6 +675,7 @@ mas-KE: Masai (Kenia)
 mas-TZ: Masai (Tanzania)
 May: Mei
 mer-KE: Meru (Kenia)
+Message will be deleted in {0} seconds: Bericht wordt binnen {0} seconden verwijderd
 mfe-MU: Morisyen (Mauritius)
 mg-MG: Malagasi (Madagaskar)
 mgh-MZ: Makhuwa-Meetto (Mozambique)
@@ -751,6 +754,7 @@ or-IN: Odia (Indië)
 os-GE: Ossetic (Georgië)
 os-RU: Ossetic (Rusland)
 Other: Ander
+Otherwise the full image will be downloaded: Anders wordt de volledige afbeelding gedownload
 Overview: Overzicht
 Owner: Eigenaar
 pa-Arab-PK: Punjabi (Arabisch, Pakistan)
@@ -783,6 +787,7 @@ PostalCode: Postcode
 Preview: Voorbeeld
 prg-001: Pruisisch (Wereld)
 Primary Key: Primaire sleutel
+Print: Afdrukken
 Product Deleted: Product verwijderd!
 Product Not Found!: Product niet gevonden!
 Product Saved: Product opgeslagen!
@@ -834,11 +839,17 @@ Reload Data: Gegevens opnieuw laden
 Remember me?: Ken je me nog?
 Remove All: Alles verwijderen
 Rename backup: Naam van back-up wijzigen
+Render with {0}: Renderen met {0}
+Render with MudExFileDisplayTiff: Renderen met Tiff viewer
+Render with MudExFileDisplayZip: Renderen met Zip-viewer
+Render with MudExImageViewer: Renderen met MudExImageViewer
+Render with native control: Renderen met native besturingselement
 Reset: Terugstellen
 Reset all: Alles opnieuw instellen
 Reset all properties?: Alle eigenschappen resetten?
 Reset password: Wachtwoord opnieuw instellen
 Reset Password: Wachtwoord opnieuw instellen
+Reset view: Weergave resetten
 Resources: Weg
 Restart server: Server opnieuw opstarten
 Restore: Herstellen
@@ -873,8 +884,11 @@ saq-KE: Samburu (Kenia)
 sat-Olck-IN: Santali (Ol Chiki, India)
 Save: Redden
 Save {0} Changes: '{0} wijzigingen opslaan'
+Save as: Opslaan als
 Save Changes: Wijzigingen opslaan
+Save image: Afbeelding opslaan
 Save Role: Rol opslaan
+Save visible area only: Alleen zichtbaar gebied opslaan
 saved: Opgeslagen!
 sbp-TZ: Sangu (Tanzania)
 sd-Arab-PK: Sindhi (Arabisch, Pakistan)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: U bent uitgelogd door
 You are Logged Out.: U bent uitgelogd.
 You can now Login with your credentials: U kunt nu inloggen met uw inloggegevens
 You cannot delete yourself: U kunt uzelf niet verwijderen
+You received a new chat message from {0}: Je hebt een nieuw chatbericht ontvangen van {0}
 Your e-mail address has been confirmed!: Uw e-mailadres is bevestigd!
 Your email address could not be verified. If you have any problems, please contact {0}: Uw e-mailadres kan niet worden geverifieerd. Als u problemen ondervindt, neem dan contact met {0}
 Your Profile has been updated.: Uw profiel is bijgewerkt.
@@ -1107,4 +1122,6 @@ zh-HK: Chinees (Hongkong SAR)
 zh-MO: Chinees (Macao SAR)
 zh-SG: Chinees (Singapore)
 zh-TW: Chinees (Taiwan)
+Zoom in: Inzoomen
+Zoom out: Uitzoomen
 zu-ZA: isiZulu (Zuid-Afrika)

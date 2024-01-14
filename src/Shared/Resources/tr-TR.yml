@@ -127,6 +127,7 @@ ca-ES: Katalanca (İspanya)
 ca-FR: Katalanca (Fransa)
 ca-IT: Katalanca (İtalya)
 Cancel: İptal
+Cancel deletion: Silme işlemini iptal et
 Catalog Management: Katalog Yönetimi
 ccp-Cakm-BD: Chakma (Chakma, Bangladeş)
 ccp-Cakm-IN: Chakma (Chakma, Hindistan)
@@ -559,6 +560,7 @@ Id: Kimliği
 id-ID: Endonezyaca (Endonezyaca)
 ig-NG: Igbo (Nijerya)
 ii-CN: Yi (Çin)
+Image format: Görüntü formatı
 Include Entity fields (Export): Varlık alanlarını dahil et (Dışarı Aktar)
 Incorrect Password.: Yanlış Parola.
 Indonesia: Endonezya dili
@@ -673,6 +675,7 @@ mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzanya)
 May: Mayıs
 mer-KE: Meru (Kenya)
+Message will be deleted in {0} seconds: Mesaj {0} saniye içinde silinecek
 mfe-MU: Morisyen (Mauritius)
 mg-MG: Malagasy (Madagaskar)
 mgh-MZ: Makhuwa-Meetto (Mozambik)
@@ -751,6 +754,7 @@ or-IN: Odia (Hindistan)
 os-GE: Ossetic (Gürcistan)
 os-RU: Ossetic (Rusya)
 Other: Başka
+Otherwise the full image will be downloaded: Aksi takdirde resmin tamamı indirilecektir
 Overview: Genel bakış
 Owner: Sahip
 pa-Arab-PK: Pencap dili (Arapça, Pakistan)
@@ -783,6 +787,7 @@ PostalCode: Posta kodu
 Preview: Önizleme
 prg-001: Prusya (Dünya)
 Primary Key: Birincil anahtar
+Print: Yazdırmak
 Product Deleted: Ürün silindi!
 Product Not Found!: Ürün Bulunamadı!
 Product Saved: Ürün Kaydedildi!
@@ -834,11 +839,17 @@ Reload Data: Verileri Yeniden Yükle
 Remember me?: Beni hatırladın mı?
 Remove All: Tümünü Kaldır
 Rename backup: Rename backup
+Render with {0}: '{0} ile işleyin'
+Render with MudExFileDisplayTiff: Tiff görüntüleyici ile oluşturma
+Render with MudExFileDisplayZip: Zip görüntüleyici ile oluşturma
+Render with MudExImageViewer: MudExImageViewer ile işleyin
+Render with native control: Yerel denetimle işleyin
 Reset: Sıfırlama
 Reset all: Tümünü sıfırla
 Reset all properties?: Tüm mülkleri sıfırladınız mı?
 Reset password: Parolayı sıfırla
 Reset Password: Parolayı Sıfırla
+Reset view: Görünümü sıfırla
 Resources: Kaynaklar
 Restart server: Sunucuyu yeniden başlat
 Restore: Geri yüklemek
@@ -873,8 +884,11 @@ saq-KE: Samburu (Kenya)
 sat-Olck-IN: Santali (Ol Chiki, Hindistan)
 Save: Kurtarmak
 Save {0} Changes: değişiklikleri kaydetme {0}
+Save as: Farklı kaydet
 Save Changes: Değişiklikleri Kaydet
+Save image: Resmi kaydet
 Save Role: Rolü Kaydet
+Save visible area only: Yalnızca görünür alanı kaydet
 saved: Kaydedilmiş!
 sbp-TZ: Sangu (Tanzanya)
 sd-Arab-PK: Sindhi (Arapça, Pakistan)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Bir Yönetici veya pr
 You are Logged Out.: Oturumunuz Tükendi.
 You can now Login with your credentials: Artık kimlik bilgilerinizle Giriş yapabilirsiniz
 You cannot delete yourself: Kendinizi silemezsiniz
+You received a new chat message from {0}: "{0}'den yeni bir sohbet mesajı aldınız"
 Your e-mail address has been confirmed!: E-posta adresiniz onaylandı!
 Your email address could not be verified. If you have any problems, please contact {0}: E-posta adresiniz doğrulanamadı. Herhangi bir sorun yaşarsanız, lütfen {0}
 Your Profile has been updated.: Profiliniz güncellendi.
@@ -1107,4 +1122,6 @@ zh-HK: Çince (Hong Kong Öİb)
 zh-MO: Çince (Makao SAR)
 zh-SG: Çince (Singapur)
 zh-TW: Çince (Tayvan)
+Zoom in: Yakınlaştır
+Zoom out: Uzaklaştırma
 zu-ZA: isiZulu (Güney Afrika)

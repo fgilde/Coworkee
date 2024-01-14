@@ -4662,6 +4662,58 @@
         ]
       }
     },
+    "/Chats/{messageId}": {
+      "delete": {
+        "tags": [
+          "Chats"
+        ],
+        "summary": "Deletes this message",
+        "operationId": "Chats_DeleteMessage",
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "application/octet-stream",
+          "text/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResultOfIEnumerableOfChatHistoryResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/Chats/{contactId}": {
       "get": {
         "tags": [

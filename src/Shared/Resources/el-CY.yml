@@ -127,6 +127,7 @@ ca-ES: Καταλανικά (Ισπανία)
 ca-FR: Καταλανικά (Γαλλία)
 ca-IT: Καταλανικά (Ιταλία)
 Cancel: Ακυρώνω
+Cancel deletion: Ακύρωση διαγραφής
 Catalog Management: Διαχείριση καταλόγων
 ccp-Cakm-BD: Τσάκμα (Τσάκμα, Μπαγκλαντές)
 ccp-Cakm-IN: Τσάκμα (Τσάκμα, Ινδία)
@@ -559,6 +560,7 @@ Id: Αναγνωριστικό
 id-ID: Ινδονησιακά (Ινδονησιακά)
 ig-NG: Ιγκμπάο (Νιγηρία)
 ii-CN: Yi (Κίνα)
+Image format: Μορφή εικόνας
 Include Entity fields (Export): Συμπερίληψη πεδίων οντότητας (Εξαγωγή)
 Incorrect Password.: Εσφαλμένος κωδικός πρόσβασης.
 Indonesia: Ινδονησιακά
@@ -673,6 +675,7 @@ mas-KE: Μασάι (Κένυα)
 mas-TZ: Μασάι (Τανζανία)
 May: Μάιος
 mer-KE: Μερού (Κένυα)
+Message will be deleted in {0} seconds: Το μήνυμα θα διαγραφεί σε {0} δευτερόλεπτα
 mfe-MU: Μορισιν (Μαυρίκιος)
 mg-MG: Μαδαγασκάρη (Μαδαγασκάρη)
 mgh-MZ: Μακούβα-Meetto (Μοζαμβίκη)
@@ -751,6 +754,7 @@ or-IN: Όντια (Ινδία)
 os-GE: Οσετί (Γεωργία)
 os-RU: Οστετικός (Ρωσία)
 Other: Άλλο__________
+Otherwise the full image will be downloaded: Διαφορετικά, θα γίνει λήψη της πλήρους εικόνας
 Overview: Επισκόπηση
 Owner: Ιδιοκτήτης
 pa-Arab-PK: Πουντζάμπι (Αραβικά, Πακιστάν)
@@ -783,6 +787,7 @@ PostalCode: Ταχυδρομικός κώδικας
 Preview: Προεπισκόπηση
 prg-001: Πρωσικός (Κόσμος)
 Primary Key: Πρωτεύον κλειδί
+Print: Τυπώνω
 Product Deleted: Το προϊόν διαγράφηκε!
 Product Not Found!: Το προϊόν δεν βρέθηκε!
 Product Saved: Προϊόν που σώθηκε!
@@ -834,11 +839,17 @@ Reload Data: Επαναφόρτωση δεδομένων
 Remember me?: Με θυμάστε;
 Remove All: Κατάργηση όλων
 Rename backup: Μετονομασία αντιγράφου ασφαλείας
+Render with {0}: Απόδοση με {0}
+Render with MudExFileDisplayTiff: Απόδοση με το πρόγραμμα προβολής Tiff
+Render with MudExFileDisplayZip: Απόδοση με προβολή Zip
+Render with MudExImageViewer: Απόδοση με το MudExImageViewer
+Render with native control: Απόδοση με εγγενή έλεγχο
 Reset: Επαναφορά
 Reset all: Επαναφορά όλων
 Reset all properties?: Επαναφορά όλων των ιδιοτήτων;
 Reset password: Επαναφορά κωδικού πρόσβασης
 Reset Password: Επαναφορά κωδικού πρόσβασης
+Reset view: Επαναφορά προβολής
 Resources: Πόροι
 Restart server: Επανεκκίνηση διακομιστή
 Restore: Αποκαθιστώ
@@ -873,8 +884,11 @@ saq-KE: Σαμπούρου (Κένυα)
 sat-Olck-IN: Σαντάλι (Ολ Τσίκι, Ινδία)
 Save: Σώζω
 Save {0} Changes: Αποθήκευση αλλαγών {0}
+Save as: Αποθήκευση ως
 Save Changes: Αποθήκευση αλλαγών
+Save image: Αποθήκευση εικόνας
 Save Role: Αποθήκευση ρόλου
+Save visible area only: Αποθήκευση μόνο ορατής περιοχής
 saved: Αποθηκεύτηκε!
 sbp-TZ: Σάνγκου (Τανζανία)
 sd-Arab-PK: Σίντι (Αραβικά, Πακιστάν)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Είστε αποσυ
 You are Logged Out.: Είστε συνδεδεμένοι.
 You can now Login with your credentials: Τώρα μπορείτε να συνδεθείτε με τα διαπιστευτήριά σας
 You cannot delete yourself: Δεν μπορείτε να διαγράψετε τον εαυτό σας
+You received a new chat message from {0}: Λάβατε ένα νέο μήνυμα συνομιλίας από {0}
 Your e-mail address has been confirmed!: Η διεύθυνση του e-mail σας επιβεβαιώθηκε!
 Your email address could not be verified. If you have any problems, please contact {0}: Δεν ήταν δυνατή η επαλήθευση της διεύθυνσης ηλεκτρονικού ταχυδρομείου σας. Εάν έχετε οποιοδήποτε πρόβλημα, παρακαλούμε επικοινωνήστε μαζί {0}
 Your Profile has been updated.: Το προφίλ σας έχει ενημερωθεί.
@@ -1107,4 +1122,6 @@ zh-HK: Κινεζικά (ΕΔΠ Χονγκ Κονγκ)
 zh-MO: Κινεζικά (SAR Μακάο)
 zh-SG: Κινεζικά (Σιγκαπούρη)
 zh-TW: Κινεζικά (Ταϊβάν)
+Zoom in: Μεγέθυνση
+Zoom out: Σμίκρυνση
 zu-ZA: isiZulu (Νότια Αφρική)

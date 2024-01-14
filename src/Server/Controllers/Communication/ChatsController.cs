@@ -10,6 +10,11 @@ using Coworkee.Application.Contracts.Chat;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Shared.Constants.Permission;
 using Coworkee.Shared.Wrapper;
+using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Application.Hubs.Events.Base;
+using Coworkee.Application.Requests;
+using Coworkee.Shared;
+using Microsoft.Extensions.Localization;
 
 namespace Coworkee.Server.Controllers.Communication
 {
@@ -24,6 +29,16 @@ namespace Coworkee.Server.Controllers.Communication
         {
             _currentUserService = currentUserService;
             _chatService = chatService;
+        }
+
+        /// <summary>
+        /// Deletes this message
+        /// </summary>
+        [HttpDelete("{messageId}")]
+        [Produces(typeof(Result<IEnumerable<ChatHistoryResponse>>))]
+        public async Task<IActionResult> DeleteMessageAsync(long messageId)
+        {
+            return Ok(await _chatService.DeleteMessageAsync(messageId, _currentUserService.UserId));
         }
 
         /// <summary>
@@ -63,9 +78,29 @@ namespace Coworkee.Server.Controllers.Communication
             message.FromUserId = _currentUserService.UserId;
             message.ToUserId = message.ToUserId;
             message.CreatedDate = DateTime.Now;
-            var name = _currentUserService.Principal.GetFullName();
-            await ClientEventHub.Clients.Group(message.ToUserId).ReceiveMessage(message, name);
+            await NotifyRecipientAsync(message);
             return Ok(await _chatService.SaveMessageAsync(message));
+        }
+
+        private async Task NotifyRecipientAsync(ChatHistory<IChatUser> message)
+        {
+            using var scope = Get<IUserCultureScopeService>().CreateUserCultureScope(message.ToUserId);
+
+            var localizer = Get<IStringLocalizer<ChatsController>>();
+            var sender = _currentUserService.Principal;
+            var name = sender.GetFullName();
+            var mailContent = await Get<IEmailTemplateService>().RunAsync(EmailTemplate.NewChatMessage(), new { Message = message.Message, SenderName = name, SenderId = sender.GetUserId() });
+            await ClientEventHub.Clients.Group(message.ToUserId).ReceiveMessage(message, name);
+            await Get<INotificationService>().SendAsync(new NotificationRequest()
+            {
+                PersistInDb = true,
+                SendAsMail = NotificationAsMail.WhenTargetOffline,
+                Url = $"/chat/{sender.GetUserId()}",
+                Subject = localizer["New Message From {0}", name],
+                Content = localizer["You received a new chat message from {0}", name],
+                HtmlContent = mailContent,
+                Target = EventTarget.User(message.ToUserId)
+            });
         }
     }
 }

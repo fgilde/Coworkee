@@ -127,6 +127,7 @@ ca-ES: Catalansk (Spanien)
 ca-FR: Catalansk (Frankrig)
 ca-IT: Catalansk (Italien)
 Cancel: Aflyse
+Cancel deletion: Annuller sletning
 Catalog Management: Katalogstyring
 ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
 ccp-Cakm-IN: Chakma (Chakma, Indien)
@@ -559,6 +560,7 @@ Id: Id
 id-ID: Indonesisk (indonesisk)
 ig-NG: Igbo (Nigeria)
 ii-CN: Yi (Kina)
+Image format: Billedformat
 Include Entity fields (Export): Medtag objektfelter (eksport)
 Incorrect Password.: Forkert adgangskode.
 Indonesia: Indonesisk
@@ -673,6 +675,7 @@ mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: Maj
 mer-KE: Meru (Kenya)
+Message will be deleted in {0} seconds: Meddelelsen slettes om {0} sekunder
 mfe-MU: Morisyen (Mauritius)
 mg-MG: Malagasy (Madagaskar)
 mgh-MZ: Makhuwa-Meetto (Mozambique)
@@ -751,6 +754,7 @@ or-IN: Odia (Indien)
 os-GE: Ossetisk (Georgien)
 os-RU: Ossetisk (Rusland)
 Other: Andet__________
+Otherwise the full image will be downloaded: Ellers downloades det fulde billede
 Overview: Overblik
 Owner: Ejer
 pa-Arab-PK: Punjabi (arabisk, Pakistan)
@@ -783,6 +787,7 @@ PostalCode: Postnummer
 Preview: Preview
 prg-001: Preussisk (Verden)
 Primary Key: Primær nøgle
+Print: Trykke
 Product Deleted: Produkt slettet!
 Product Not Found!: Produktet blev ikke fundet!
 Product Saved: Produkt gemt!
@@ -834,11 +839,17 @@ Reload Data: Genindlæs data
 Remember me?: Kan du huske mig?
 Remove All: Fjern alle
 Rename backup: Omdøb backup
+Render with {0}: Gengiv med {0}
+Render with MudExFileDisplayTiff: Gengiv med Tiff-fremviser
+Render with MudExFileDisplayZip: Gengiv med zip-fremviser
+Render with MudExImageViewer: Gengiv med MudExImageViewer
+Render with native control: Gengiv med oprindelig kontrol
 Reset: Nulstille
 Reset all: Nulstil alle
 Reset all properties?: Nulstille alle egenskaber?
 Reset password: Nulstil adgangskode
 Reset Password: Nulstil adgangskode
+Reset view: Nulstil visning
 Resources: Ressourcer
 Restart server: Genstart serveren
 Restore: Genskabe
@@ -873,8 +884,11 @@ saq-KE: Samburu (Kenya)
 sat-Olck-IN: Santali (Ol Chiki, Indien)
 Save: Spare
 Save {0} Changes: gemme {0} ændringer
+Save as: Gem som
 Save Changes: Gem ændringer
+Save image: Gem billede
 Save Role: Gem rolle
+Save visible area only: Gem kun synligt område
 saved: Gemt!
 sbp-TZ: Sangu (Tanzania)
 sd-Arab-PK: Sindhi (arabisk, Pakistan)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Du er logget ud af en
 You are Logged Out.: Du er logget ud.
 You can now Login with your credentials: Du kan nu logge ind med dine legitimationsoplysninger
 You cannot delete yourself: Du kan ikke slette dig selv
+You received a new chat message from {0}: Du har modtaget en ny chatbesked fra {0}
 Your e-mail address has been confirmed!: Din e-mail-adresse er blevet bekræftet!
 Your email address could not be verified. If you have any problems, please contact {0}: Din e-mailadresse kunne ikke bekræftes. Hvis du har problemer, bedes du kontakte {0}
 Your Profile has been updated.: Din profil er blevet opdateret.
@@ -1107,4 +1122,6 @@ zh-HK: Kinesisk (Hongkong SAR)
 zh-MO: Kinesisk (Macao SAR)
 zh-SG: Kinesisk (Singapore)
 zh-TW: Kinesisk (Taiwan)
+Zoom in: Zoom ind
+Zoom out: Zoom ud
 zu-ZA: isiZulu (Sydafrika)

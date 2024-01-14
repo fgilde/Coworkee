@@ -99,6 +99,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Coworkee.Server.Controllers.Communication.ChatsController.DeleteMessageAsync(System.Int64)">
+            <summary>
+            Deletes this message
+            </summary>
+        </member>
         <member name="M:Coworkee.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
             <summary>
             Get user wise chat history

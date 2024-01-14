@@ -66,6 +66,19 @@ namespace Coworkee.Infrastructure.Services
             }
         }
 
+        public Task<Result<IEnumerable<ChatHistoryResponse>>> DeleteMessageAsync(long messageId, string currentUserId)
+        {
+            var message = _context.ChatHistories.FirstOrDefault(x => x.Id == messageId);
+            if (message != null && message.FromUserId == currentUserId)
+            {
+                _context.ChatHistories.Remove(message);
+                _context.SaveChanges();
+                return GetChatHistoryAsync(currentUserId, message.ToUserId);
+            }
+
+            return Result<IEnumerable<ChatHistoryResponse>>.FailAsync(_localizer["Message not found or action not allowed"]);
+        }
+
         public async Task<Result<IEnumerable<ChatUserResponse>>> GetChatUsersAsync(string userId)
         {
             var userRoles = await _userService.GetRolesAsync(userId);

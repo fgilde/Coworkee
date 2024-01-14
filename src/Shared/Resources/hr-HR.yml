@@ -127,6 +127,7 @@ ca-ES: Katalonski (Španjolska)
 ca-FR: Katalonski (Francuska)
 ca-IT: Katalonski (Italija)
 Cancel: Otkazati
+Cancel deletion: Odustani od brisanja
 Catalog Management: Upravljanje katalogom
 ccp-Cakm-BD: Chakma (Chakma, Bangladeš)
 ccp-Cakm-IN: Chakma (Chakma, Indija)
@@ -559,6 +560,7 @@ Id: Id
 id-ID: Indonezijski (indonezijski)
 ig-NG: Igbo (Nigerija)
 ii-CN: Yi (Kina)
+Image format: Oblik slike
 Include Entity fields (Export): Uključi polja entiteta (izvoz)
 Incorrect Password.: Neispravna lozinka.
 Indonesia: Indonezijski
@@ -673,6 +675,7 @@ mas-KE: Masai (Kenija)
 mas-TZ: Masai (Tanzanija, BiH)
 May: Svibanj
 mer-KE: Meru (Kenija)
+Message will be deleted in {0} seconds: Poruka će se izbrisati za {0} sekundi
 mfe-MU: Morisyen (Mauricijus)
 mg-MG: Malagaški (Madagaskar)
 mgh-MZ: Makhuwa-Meetto (Mozambik)
@@ -751,6 +754,7 @@ or-IN: Odia (Indija)
 os-GE: Ossetić (Gruzija)
 os-RU: Ossetić (Rusija)
 Other: Drugi
+Otherwise the full image will be downloaded: U suprotnom će se preuzeti cijela slika
 Overview: Pregled
 Owner: Vlasnik
 pa-Arab-PK: Pandžapski (arapski, Pakistan)
@@ -783,6 +787,7 @@ PostalCode: Poštanski broj
 Preview: Pregled
 prg-001: Pruski (svijet)
 Primary Key: Primarni ključ
+Print: Otisak
 Product Deleted: Proizvod izbrisan!
 Product Not Found!: Proizvod nije pronađen!
 Product Saved: Proizvod spremljen!
@@ -834,11 +839,17 @@ Reload Data: Ponovno učitaj podatke
 Remember me?: Sjećaš li me se?
 Remove All: Ukloni sve
 Rename backup: Preimenovanje sigurnosne kopije
+Render with {0}: Renderiraj s {0}
+Render with MudExFileDisplayTiff: Renderiranje pomoću Tiff preglednika
+Render with MudExFileDisplayZip: Renderiranje pomoću zip preglednika
+Render with MudExImageViewer: Renderiranje uz MudExImageViewer
+Render with native control: Renderiranje s izvornom kontrolom
 Reset: Brisanje
 Reset all: Vrati sve na izvorno
 Reset all properties?: Resetirati sva svojstva?
 Reset password: Ponovno postavljanje lozinke
 Reset Password: Vrati izvornu lozinku
+Reset view: Vrati izvorni prikaz
 Resources: Resursi
 Restart server: Ponovno pokreni poslužitelj
 Restore: Vratiti
@@ -873,8 +884,11 @@ saq-KE: Samburu (Kenija)
 sat-Olck-IN: Santali (Ol Chiki, Indija)
 Save: Spasiti
 Save {0} Changes: spremi {0} promjene
+Save as: Spremi kao
 Save Changes: Spremi promjene
+Save image: Spremi sliku
 Save Role: Spremi ulogu
+Save visible area only: Spremi samo vidljivo područje
 saved: Spremljeni!
 sbp-TZ: Sangu (Tanzanija, BiH)
 sd-Arab-PK: Sindhi (arapski, Pakistan)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Odjavljuje vas admini
 You are Logged Out.: Odjavljeni ste.
 You can now Login with your credentials: Sada se možete prijaviti sa svojim vjerodajnicama
 You cannot delete yourself: Ne možete se izbrisati
+You received a new chat message from {0}: Primili ste novu poruku chata od {0}
 Your e-mail address has been confirmed!: Vaša e-mail adresa je potvrđena!
 Your email address could not be verified. If you have any problems, please contact {0}: Vašu adresu e-pošte nije moguće potvrditi. Ako imate bilo kakvih problema, obratite se {0}
 Your Profile has been updated.: Vaš profil je ažuriran.
@@ -1107,4 +1122,6 @@ zh-HK: Kineski (Hong Kong SAR)
 zh-MO: Kineski (Makao SAR)
 zh-SG: Kineski (Singapur)
 zh-TW: Kineski (Tajvan)
+Zoom in: Zumiranje
+Zoom out: Smanjivanje prikaza
 zu-ZA: isiZulu (Južna Afrika)

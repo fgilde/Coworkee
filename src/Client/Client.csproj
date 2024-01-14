@@ -33,7 +33,7 @@
     </PackageReference>    
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
     <PackageReference Include="MudBlazor" Version="6.12.0" />
-    <PackageReference Include="MudBlazor.Extensions " Version="1.7.81-prev-2401041559-main" />
+    <PackageReference Include="MudBlazor.Extensions " Version="1.7.83-prev-2401121446-main" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />
     <!-- gRPC -->

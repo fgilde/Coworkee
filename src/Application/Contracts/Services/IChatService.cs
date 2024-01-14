@@ -14,5 +14,6 @@ namespace Coworkee.Application.Contracts.Services
         Task<IResult> SaveMessageAsync(ChatHistory<IChatUser> message);
 
         Task<Result<IEnumerable<ChatHistoryResponse>>> GetChatHistoryAsync(string userId, string contactId);
+        Task<Result<IEnumerable<ChatHistoryResponse>>> DeleteMessageAsync(long messageId, string currentUserId);
     }
 }

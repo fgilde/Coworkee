@@ -127,6 +127,7 @@ ca-ES: كاتالونيا (إسبانيا)
 ca-FR: كاتالونية (فرنسا)
 ca-IT: كاتالونية (إيطاليا)
 Cancel: إلغاء الأمر
+Cancel deletion: إلغاء الحذف
 Catalog Management: إدارة الكتالوجات
 ccp-Cakm-BD: تشاكما (تشاكما، بنغلاديش)
 ccp-Cakm-IN: شاكما (تشاكما، الهند)
@@ -559,6 +560,7 @@ Id: معرف
 id-ID: الإندونيسية (الإندونيسية)
 ig-NG: إيغبو (نيجيريا)
 ii-CN: يي (الصين)
+Image format: تنسيق الصورة
 Include Entity fields (Export): تضمين حقول الكيان (تصدير)
 Incorrect Password.: كلمة مرور غير صحيحة.
 Indonesia: الإندونيسية
@@ -673,6 +675,7 @@ mas-KE: ماساي (كينيا)
 mas-TZ: ماساي (تنزانيا)
 May: مايو
 mer-KE: ميرو (كينيا)
+Message will be deleted in {0} seconds: سيتم حذف الرسالة في غضون {0} ثوان
 mfe-MU: موريسين (موريشيوس)
 mg-MG: مدغشقر (مدغشقر)
 mgh-MZ: ماخووا - يتو (موزامبيق)
@@ -751,6 +754,7 @@ or-IN: أوديا (الهند)
 os-GE: أوسيتيك (جورجيا)
 os-RU: أوسيتيك (روسيا)
 Other: غير ذلك __________
+Otherwise the full image will be downloaded: وإلا سيتم تنزيل الصورة كاملة
 Overview: نظره عامه
 Owner: مالك
 pa-Arab-PK: البنجابية (العربية، باكستان)
@@ -783,6 +787,7 @@ PostalCode: الرمز البريدي
 Preview: معاينه
 prg-001: البروسية (العالم)
 Primary Key: المفتاح الأساسي
+Print: طبع
 Product Deleted: تم حذف المنتج!
 Product Not Found!: لم يتم العثور على المنتج!
 Product Saved: المنتج المحفوظة!
@@ -834,11 +839,17 @@ Reload Data: إعادة تحميل البيانات
 Remember me?: أتذكرني؟
 Remove All: إزالة الكل
 Rename backup: إعادة تسمية النسخة الاحتياطية
+Render with {0}: عرض مع {0}
+Render with MudExFileDisplayTiff: عرض مع عارض Tiff
+Render with MudExFileDisplayZip: عرض باستخدام عارض Zip
+Render with MudExImageViewer: عرض مع موديكس عارض الصور
+Render with native control: عرض مع عنصر تحكم أصلي
 Reset: اعاده تعيين
 Reset all: إعادة تعيين الكل
 Reset all properties?: إعادة تعيين جميع الخصائص؟
 Reset password: إعادة تعيين كلمة المرور
 Reset Password: إعادة تعيين كلمة المرور
+Reset view: إعادة تعيين طريقة العرض
 Resources: موارد
 Restart server: إعادة تشغيل الخادم
 Restore: يستعيد
@@ -873,8 +884,11 @@ saq-KE: سامبورو (كينيا)
 sat-Olck-IN: سانتالي (أول شيكي، الهند)
 Save: أنقذ
 Save {0} Changes: حفظ تغييرات {0}
+Save as: حفظ باسم
 Save Changes: حفظ التغييرات
+Save image: حفظ الصورة
 Save Role: حفظ الدور
+Save visible area only: حفظ المنطقة المرئية فقط
 saved: حفظ!
 sbp-TZ: سانغو (تنزانيا)
 sd-Arab-PK: السندي (العربية، باكستان)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: يتم تسجيل خ�
 You are Logged Out.: لقد قمت بتسجيل الخروج.
 You can now Login with your credentials: يمكنك الآن تسجيل الدخول باستخدام بيانات الاعتماد الخاصة بك
 You cannot delete yourself: لا يمكنك حذف نفسك
+You received a new chat message from {0}: تلقيت رسالة محادثة جديدة من {0}
 Your e-mail address has been confirmed!: تم تأكيد عنوان بريدك الإلكتروني!
 Your email address could not be verified. If you have any problems, please contact {0}: تعذر التحقق من عنوان بريدك الإلكتروني. إذا كان لديك أي مشاكل، يرجى الاتصال {0}
 Your Profile has been updated.: تم تحديث ملف التعريف الخاص بك.
@@ -1107,4 +1122,6 @@ zh-HK: الصينية (هونج كونج SAR)
 zh-MO: الصينية (ماكاو SAR)
 zh-SG: الصينية (سنغافورة)
 zh-TW: الصينية (تايوان)
+Zoom in: التكبير
+Zoom out: التصغير
 zu-ZA: مدينة يزولو (جنوب أفريقيا)

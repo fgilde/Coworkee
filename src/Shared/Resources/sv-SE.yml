@@ -127,6 +127,7 @@ ca-ES: Katalanska (Spanien)
 ca-FR: Katalanska (Frankrike)
 ca-IT: Katalanska (Italien)
 Cancel: Annullera
+Cancel deletion: Avbryt radering
 Catalog Management: Kataloghantering
 ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
 ccp-Cakm-IN: Chakma (Chakma, Indien)
@@ -559,6 +560,7 @@ Id: Id
 id-ID: Indonesiska (indonesiska)
 ig-NG: Igbo (Nigeria)
 ii-CN: Yi (Kina)
+Image format: Bildformat
 Include Entity fields (Export): Inkludera entitetsfält (exportera)
 Incorrect Password.: Felaktigt lösenord.
 Indonesia: Indonesiska
@@ -673,6 +675,7 @@ mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: Maj
 mer-KE: Meru (Kenya)
+Message will be deleted in {0} seconds: Meddelandet raderas inom {0} sekunder
 mfe-MU: Morisyen (Mauritius)
 mg-MG: Madagaskar
 mgh-MZ: Makhuwa-Meetto (Moçambique)
@@ -751,6 +754,7 @@ or-IN: Odia (Indien)
 os-GE: Ossetiska (Georgien)
 os-RU: Ossetic (Ryssland)
 Other: Annan
+Otherwise the full image will be downloaded: Annars kommer hela bilden att laddas ner
 Overview: Överblick
 Owner: Ägare
 pa-Arab-PK: Punjabi (arabiska, Pakistan)
@@ -783,6 +787,7 @@ PostalCode: Postnummer
 Preview: Förhandsvisning
 prg-001: Preussiska (Värld)
 Primary Key: Primärnyckel
+Print: Trycka
 Product Deleted: Produkten har tagits bort!
 Product Not Found!: Produkten hittades inte!
 Product Saved: Sparad produkt!
@@ -834,11 +839,17 @@ Reload Data: Ladda om data
 Remember me?: Kommer du ihåg mig?
 Remove All: Ta bort alla
 Rename backup: Byt namn på säkerhetskopia
+Render with {0}: Rendera med {0}
+Render with MudExFileDisplayTiff: Rendera med Tiff-visningsprogram
+Render with MudExFileDisplayZip: Rendera med Zip-visningsprogram
+Render with MudExImageViewer: Rendera med MudExImageViewer
+Render with native control: Rendera med inbyggd kontroll
 Reset: Nollställa
 Reset all: Återställ alla
 Reset all properties?: Återställa alla egenskaper?
 Reset password: Återställ lösenord
 Reset Password: Återställ lösenord
+Reset view: Återställ vy
 Resources: Resurser
 Restart server: Starta om servern
 Restore: Återställa
@@ -873,8 +884,11 @@ saq-KE: Samburu (Kenya)
 sat-Olck-IN: Santali (Ol Chiki, Indien)
 Save: Spara
 Save {0} Changes: spara {0} ändringar
+Save as: Spara som
 Save Changes: Spara ändringar
+Save image: Spara bild
 Save Role: Spara roll
+Save visible area only: Spara endast synligt område
 saved: Räddad!
 sbp-TZ: Sangu (Tanzania)
 sd-Arab-PK: Sindhi (arabiska, Pakistan)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Du loggas ut av en ad
 You are Logged Out.: Du är utloggad.
 You can now Login with your credentials: Du kan nu logga in med dina uppgifter
 You cannot delete yourself: Du kan inte ta bort dig själv
+You received a new chat message from {0}: Du har fått ett nytt chattmeddelande från {0}
 Your e-mail address has been confirmed!: Din e-postadress har bekräftats!
 Your email address could not be verified. If you have any problems, please contact {0}: Din e-postadress kunde inte verifieras. Om du har några problem, vänligen kontakta {0}
 Your Profile has been updated.: Din profil har uppdaterats.
@@ -1107,4 +1122,6 @@ zh-HK: Kinesiska (Hongkong SAR)
 zh-MO: Kinesiska (Macao SAR)
 zh-SG: Kinesiska (Singapore)
 zh-TW: Kinesiska (Taiwan)
+Zoom in: Zooma in
+Zoom out: Zooma ut
 zu-ZA: isiZulu (Sydafrika)

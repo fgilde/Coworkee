@@ -127,6 +127,7 @@ ca-ES: Каталонски (Испания)
 ca-FR: Каталонски (Франция)
 ca-IT: Каталонски (Италия)
 Cancel: Задрасквам
+Cancel deletion: Отмяна на изтриването
 Catalog Management: Управление на каталога
 ccp-Cakm-BD: Чакма (Чакма, Бангладеш)
 ccp-Cakm-IN: Чакма (Чакма, Индия)
@@ -559,6 +560,7 @@ Id: ИД
 id-ID: Индонезийски (индонезийски)
 ig-NG: Игбо (Нигерия)
 ii-CN: Yi (Китай)
+Image format: Формат на изображението
 Include Entity fields (Export): Включване на полета на обект (Експортиране)
 Incorrect Password.: Неправилна парола.
 Indonesia: Индонезийски
@@ -673,6 +675,7 @@ mas-KE: Масаи (Кения)
 mas-TZ: Масаи (Танзания)
 May: Май
 mer-KE: Меру (Кения)
+Message will be deleted in {0} seconds: Съобщението ще бъде изтрито след {0} секунди
 mfe-MU: Морисиен (Мавриций)
 mg-MG: Малгашки (Мадагаскар)
 mgh-MZ: Макува-Меето (Мозамбик)
@@ -751,6 +754,7 @@ or-IN: Одия (Индия)
 os-GE: Осетик (Грузия)
 os-RU: Осетик (Русия)
 Other: Друг
+Otherwise the full image will be downloaded: В противен случай пълното изображение ще бъде изтеглено
 Overview: Преглед
 Owner: Собственик
 pa-Arab-PK: Пенджаби (арабски, Пакистан)
@@ -783,6 +787,7 @@ PostalCode: Пощенски код
 Preview: Преглед
 prg-001: Пруски (Свят)
 Primary Key: Първичен ключ
+Print: Печатам
 Product Deleted: Продукт изтрит!
 Product Not Found!: Продукт не е намерен!
 Product Saved: Продукт Записан!
@@ -834,11 +839,17 @@ Reload Data: Презареждане на данни
 Remember me?: Помниш ли ме?
 Remove All: Премахни всички
 Rename backup: Преименуване на архивиране
+Render with {0}: Рендериране с {0}
+Render with MudExFileDisplayTiff: Рендиране с Tiff viewer
+Render with MudExFileDisplayZip: Рендериране със Zip визуализатор
+Render with MudExImageViewer: Рендериране с MudExImageViewer
+Render with native control: Рендериране с естествена контрола
 Reset: Проучване
 Reset all: Нулиране на всички
 Reset all properties?: Нулиране на всички свойства?
 Reset password: Нулиране на паролата
 Reset Password: Нулиране на парола
+Reset view: Нулиране на изгледа
 Resources: Ресурси
 Restart server: Рестартиране на сървъра
 Restore: Възстановявам
@@ -873,8 +884,11 @@ saq-KE: Самбуру (Кения)
 sat-Olck-IN: Сантали (Ол Чики, Индия)
 Save: Спасявам
 Save {0} Changes: записване {0} промени
+Save as: Запиши като
 Save Changes: Записване на промените
+Save image: Запиши изображението
 Save Role: Записване на роля
+Save visible area only: Запиши само видимата област
 saved: Записани!
 sbp-TZ: Сангу (Танзания)
 sd-Arab-PK: Синдхи (арабски, Пакистан)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: Вие сте изл�
 You are Logged Out.: Вие сте излезли.
 You can now Login with your credentials: Вече можете да влезете с вашите идентификационни данни
 You cannot delete yourself: Не можете да изтриете себе си
+You received a new chat message from {0}: Получихте ново съобщение в чата от {0}
 Your e-mail address has been confirmed!: Вашият имейл адрес е потвърден!
 Your email address could not be verified. If you have any problems, please contact {0}: Имейл адресът ви не можа да бъде проверен. Ако имате някакви проблеми, моля свържете се с {0}
 Your Profile has been updated.: Вашият профил е актуализиран.
@@ -1107,4 +1122,6 @@ zh-HK: Китайски (САР Хонконг)
 zh-MO: Китайски (Macao SAR)
 zh-SG: Китайски (Сингапур)
 zh-TW: Китайски (Тайван)
+Zoom in: Увеличи
+Zoom out: Намаляване на мащаба
 zu-ZA: исиЗулу (Южна Африка)

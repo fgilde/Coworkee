@@ -127,6 +127,7 @@ ca-ES: Catalan (Spain)
 ca-FR: Catalan (France)
 ca-IT: Catalan (Italy)
 Cancel: Cancel
+Cancel deletion: Cancel deletion
 Catalog Management: Catalog Management
 ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
 ccp-Cakm-IN: Chakma (Chakma, India)
@@ -558,6 +559,7 @@ Id: Id
 id-ID: Indonesian (Indonesia)
 ig-NG: Igbo (Nigeria)
 ii-CN: Yi (China)
+Image format: Image format
 Include Entity fields (Export): Include Entity fields (Export)
 Incorrect Password.: Incorrect Password.
 Indonesia: Indonesia
@@ -672,6 +674,7 @@ mas-KE: Masai (Kenya)
 mas-TZ: Masai (Tanzania)
 May: May
 mer-KE: Meru (Kenya)
+Message will be deleted in {0} seconds: Message will be deleted in {0} seconds
 mfe-MU: Morisyen (Mauritius)
 mg-MG: Malagasy (Madagascar)
 mgh-MZ: Makhuwa-Meetto (Mozambique)
@@ -750,6 +753,7 @@ or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Russia)
 Other: Other
+Otherwise the full image will be downloaded: Otherwise the full image will be downloaded
 Overview: Overview
 Owner: Owner
 pa-Arab-PK: Punjabi (Arabic, Pakistan)
@@ -782,6 +786,7 @@ PostalCode: Postalcode
 Preview: Preview
 prg-001: Prussian (World)
 Primary Key: Primary Key
+Print: Print
 Product Deleted: Product deleted!
 Product Not Found!: Product Not Found!
 Product Saved: Product Saved!
@@ -833,11 +838,17 @@ Reload Data: Reload Data
 Remember me?: Remember me?
 Remove All: Remove All
 Rename backup: Rename backup
+Render with {0}: Render with {0}
+Render with MudExFileDisplayTiff: Render with Tiff viewer
+Render with MudExFileDisplayZip: Render with Zip viewer
+Render with MudExImageViewer: Render with MudExImageViewer
+Render with native control: Render with native control
 Reset: Reset
 Reset all: Reset all
 Reset all properties?: Reset all properties?
 Reset password: Reset password
 Reset Password: Reset Password
+Reset view: Reset view
 Resources: Resources
 Restart server: Restart server
 Restore: Restore
@@ -872,8 +883,11 @@ saq-KE: Samburu (Kenya)
 sat-Olck-IN: Santali (Ol Chiki, India)
 Save: Save
 Save {0} Changes: '{0} Änderungen speichern'
+Save as: Save as
 Save Changes: Save Changes
+Save image: Save image
 Save Role: Save Role
+Save visible area only: Save visible area only
 saved: Saved!
 sbp-TZ: Sangu (Tanzania)
 sd-Arab-PK: Sindhi (Arabic, Pakistan)
@@ -1094,6 +1108,7 @@ You are logged out by an Administrator or profile change.: You are logged out by
 You are Logged Out.: You are Logged Out.
 You can now Login with your credentials: You can now Login with your credentials
 You cannot delete yourself: You cannot delete yourself
+You received a new chat message from {0}: You received a new chat message from {0}
 Your e-mail address has been confirmed!: Your e-mail address has been confirmed!
 Your email address could not be verified. If you have any problems, please contact {0}: Your email address could not be verified. If you have any problems, please contact {0}
 Your Profile has been updated.: Your Profile has been updated.
@@ -1106,4 +1121,6 @@ zh-HK: Chinese (Hong Kong SAR)
 zh-MO: Chinese (Macao SAR)
 zh-SG: Chinese (Singapore)
 zh-TW: Chinese (Taiwan)
+Zoom in: Zoom in
+Zoom out: Zoom out
 zu-ZA: isiZulu (South Africa)

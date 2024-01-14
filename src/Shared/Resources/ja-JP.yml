@@ -127,6 +127,7 @@ ca-ES: カタロニア語 (スペイン)
 ca-FR: カタロニア語 (フランス)
 ca-IT: カタロニア語 (イタリア)
 Cancel: キャンセル
+Cancel deletion: 削除のキャンセル
 Catalog Management: カタログ管理
 ccp-Cakm-BD: チャクマ(バングラデシュ、チャクマ)
 ccp-Cakm-IN: チャクマ(インド、チャクマ)
@@ -559,6 +560,7 @@ Id: 身分証明書
 id-ID: インドネシア語 (インドネシア語)
 ig-NG: イボ (ナイジェリア)
 ii-CN: イ(中国)
+Image format: 画像フォーマット
 Include Entity fields (Export): エンティティ フィールドを含める (エクスポート)
 Incorrect Password.: パスワードが正しくありません。
 Indonesia: インドネシア語
@@ -673,6 +675,7 @@ mas-KE: マサイ (ケニア)
 mas-TZ: マサイ (タンザニア)
 May: 5 月
 mer-KE: メルー (ケニア)
+Message will be deleted in {0} seconds: メッセージは {0} 秒で削除されます
 mfe-MU: モリシエン (モーリシャス)
 mg-MG: マダガスカル (マダガスカル)
 mgh-MZ: マクワ・ミートー (モザンビーク)
@@ -751,6 +754,7 @@ or-IN: オディア (インド)
 os-GE: オセティック (ジョージア州)
 os-RU: オセティック(ロシア)
 Other: その他 __________
+Otherwise the full image will be downloaded: それ以外の場合は、完全なイメージがダウンロードされます
 Overview: 概要
 Owner: 所有者
 pa-Arab-PK: パンジャブ語 (アラビア語、 パキスタン)
@@ -783,6 +787,7 @@ PostalCode: 郵便番号
 Preview: プレビュー
 prg-001: プロイセン (世界)
 Primary Key: 主キー
+Print: プリント
 Product Deleted: 製品が削除されました!
 Product Not Found!: 製品が見つかりません!
 Product Saved: 製品が保存されました!
@@ -834,11 +839,17 @@ Reload Data: データの再読み込み
 Remember me?: 私を覚えていますか?
 Remove All: すべて削除
 Rename backup: バックアップの名前を変更する
+Render with {0}: '{0}でレンダリング'
+Render with MudExFileDisplayTiff: Tiffビューアでレンダリング
+Render with MudExFileDisplayZip: Zipビューアでレンダリングする
+Render with MudExImageViewer: MudExImageViewer でレンダリングする
+Render with native control: ネイティブコントロールによるレンダリング
 Reset: リセット
 Reset all: すべてリセット
 Reset all properties?: すべてのプロパティをリセットしますか?
 Reset password: パスワードのリセット
 Reset Password: パスワードのリセット
+Reset view: ビューのリセット
 Resources: リソース
 Restart server: サーバーの再起動
 Restore: 戻す
@@ -873,8 +884,11 @@ saq-KE: サンブル (ケニア)
 sat-Olck-IN: サンタリ(オルチキ、インド)
 Save: セーブ
 Save {0} Changes: '{0}の変更を保存する'
+Save as: 名前を付けて保存
 Save Changes: 変更を保存
+Save image: 画像を保存
 Save Role: ロールの保存
+Save visible area only: 表示領域のみを保存
 saved: 保存！
 sbp-TZ: サング (タンザニア)
 sd-Arab-PK: シンディ(アラビア語、パキスタン)
@@ -1095,6 +1109,7 @@ You are logged out by an Administrator or profile change.: 管理者またはプ
 You are Logged Out.: ログアウトしています。
 You can now Login with your credentials: これで、資格情報でログインできます
 You cannot delete yourself: 自分で削除することはできません。
+You received a new chat message from {0}: '{0}から新しいチャットメッセージを受信しました'
 Your e-mail address has been confirmed!: メールアドレスが確認できました!
 Your email address could not be verified. If you have any problems, please contact {0}: メールアドレスを確認できませんでした。何か問題がある場合は、お問い合わせくださ{0}
 Your Profile has been updated.: プロフィールが更新されました。
@@ -1107,4 +1122,6 @@ zh-HK: 中国語 (香港特別行政区)
 zh-MO: 中国語 (マカオ特別行政区)
 zh-SG: 中国語 (シンガポール)
 zh-TW: 中国語 (台湾)
+Zoom in: ズームインする
+Zoom out: ズームアウト
 zu-ZA: イズズール (南アフリカ)

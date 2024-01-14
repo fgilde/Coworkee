@@ -5831,6 +5831,10 @@ export class UserClient implements IUserClient {
 
 export interface IChatsClient {
     /**
+     * Deletes this message
+     */
+    deleteMessage(messageId: number): Observable<ResultOfIEnumerableOfChatHistoryResponse>;
+    /**
      * Get user wise chat history
      * @return Status 200 OK
      */
@@ -5858,6 +5862,60 @@ export class ChatsClient implements IChatsClient {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * Deletes this message
+     */
+    deleteMessage(messageId: number): Observable<ResultOfIEnumerableOfChatHistoryResponse> {
+        let url_ = this.baseUrl + "/Chats/{messageId}";
+        if (messageId === undefined || messageId === null)
+            throw new Error("The parameter 'messageId' must be defined.");
+        url_ = url_.replace("{messageId}", encodeURIComponent("" + messageId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteMessage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteMessage(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ResultOfIEnumerableOfChatHistoryResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ResultOfIEnumerableOfChatHistoryResponse>;
+        }));
+    }
+
+    protected processDeleteMessage(response: HttpResponseBase): Observable<ResultOfIEnumerableOfChatHistoryResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultOfIEnumerableOfChatHistoryResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ResultOfIEnumerableOfChatHistoryResponse>(null as any);
     }
 
     /**

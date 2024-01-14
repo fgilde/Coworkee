@@ -16,11 +16,19 @@ using Coworkee.Application.Contracts.Hubs;
 using Coworkee.Client.JsInterop;
 using Coworkee.SDK;
 using Coworkee.Shared.Constants.Storage;
+using System.Collections.Concurrent;
+using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Coworkee.Client.Pages.Communication
 {
     public partial class Chat: IAsyncDisposable
     {
+        private readonly TimeSpan _deletionDelay = TimeSpan.FromSeconds(5);
+        private ConcurrentDictionary<long, (string OriginalMessage, int SecondsRemaining, CancellationTokenSource TokenSource)> _deletionStatuses = new();
+        private bool _open;
+        private Anchor ChatDrawer { get; set; }
+
         [Inject] private IApplicationClient Api { get; set; }
 
         [CascadingParameter] private HubConnection HubConnection { get; set; }
@@ -80,6 +88,20 @@ namespace Coworkee.Client.Pages.Communication
             {
                 await LoadUserChat(CId);
             }
+        }
+
+        private MarkupString Linkify(string message)
+        {
+            var baseUri = new Uri(_navigationManager.BaseUri);
+            var regex = new Regex(@"\b(https?:\/\/|www\.)\S+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var linkedMessage = regex.Replace(message, match =>
+            {
+                var url = match.Value.StartsWith("http") ? match.Value : "http://" + match.Value;
+                var isFullUrl = Uri.TryCreate(url, UriKind.Absolute, out var tempUri) && (tempUri.Scheme == Uri.UriSchemeHttp || tempUri.Scheme == Uri.UriSchemeHttps);
+                var target = isFullUrl && new Uri(url).Host != baseUri.Host ? " target='_blank'" : "";
+                return $"<a class=\"mud-ex-alert-link\" href='{url}'{target}>{match.Value}</a>";
+            });
+            return new MarkupString(linkedMessage);
         }
 
         private async Task ScrollToBottomAsync()
@@ -167,8 +189,6 @@ namespace Coworkee.Client.Pages.Communication
             }
         }
 
-        private bool _open;
-        private Anchor ChatDrawer { get; set; }
 
         private void OpenDrawer(Anchor anchor)
         {
@@ -179,6 +199,61 @@ namespace Coworkee.Client.Pages.Communication
         public ValueTask DisposeAsync()
         {
             return HubConnection.TryDisposeAsync();
+        }
+
+
+        private string DeletionMessage(long messageId) => _deletionStatuses.TryGetValue(messageId, out var status) ? ($"<span class=\"deletion_status_message\">{_localizer["Message will be deleted in {0} seconds", status.SecondsRemaining]}</span>") : string.Empty;
+
+        private float DeletionProgress(long messageId) =>
+            _deletionStatuses.TryGetValue(messageId, out var status)
+                ? 1f - (status.SecondsRemaining / (float)_deletionDelay.TotalSeconds)
+                : 0f;
+
+        private bool IsDeleting(ChatHistoryResponse message) => _deletionStatuses.ContainsKey(message.Id);
+
+        private async Task DeleteMessage(ChatHistoryResponse message)
+        {
+            if (_deletionStatuses.TryGetValue(message.Id, out var status))
+            {
+                status.TokenSource.Cancel();
+                _deletionStatuses.TryRemove(message.Id, out _);
+                message.Message = status.OriginalMessage;
+            }
+            else
+            {
+                var tokenSource = new CancellationTokenSource();
+                _deletionStatuses.TryAdd(message.Id, (message.Message, (int)_deletionDelay.TotalSeconds, tokenSource));
+                StartDeletionCountdown(message, tokenSource.Token);
+
+                await Task.Delay(_deletionDelay, tokenSource.Token);
+                _deletionStatuses.TryRemove(message.Id, out _);
+
+                var result = await Api.Chats_DeleteMessageAsync(message.Id, tokenSource.Token);
+                if (_errorService.IsSuccessFull(result))
+                {
+                    _messages = result.Data.ToList();
+                    StateHasChanged();
+                }
+            }
+        }
+
+        private async void StartDeletionCountdown(ChatHistoryResponse message, CancellationToken token)
+        {
+            for (int i = (int)_deletionDelay.TotalSeconds; i > 0; i--)
+            {
+                if (token.IsCancellationRequested)
+                    break;
+
+
+                if (_deletionStatuses.TryGetValue(message.Id, out var status))
+                {
+                    _deletionStatuses[message.Id] = (status.OriginalMessage, i, status.TokenSource);
+                    message.Message = DeletionMessage(message.Id);
+                    StateHasChanged();
+                }
+
+                await Task.Delay(1000, token);
+            }
         }
     }
 }

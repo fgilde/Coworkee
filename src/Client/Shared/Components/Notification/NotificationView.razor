@@ -119,6 +119,7 @@
 
     private async void OpenLink(NotificationDto notification)
     {
+        await Delete(Notification);
         await OnNavigateToUrl.InvokeAsync(notification);
         _navigationManager.NavigateToUnknown(notification.Url);
         //StateHasChanged();

@@ -301,3 +301,8 @@ body * {
     border-top: 2px dashed var(--mud-palette-secondary);
     background-color: var(--mud-palette-background);
 }
+
+.deletion_status_message {
+    font-style: italic;
+    opacity: 0.7;
+}

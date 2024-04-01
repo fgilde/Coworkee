@@ -9,11 +9,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.3" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
     <PackageReference Include="MimeTypesMap" Version="1.0.8" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="EmailTemplateNames.tt">

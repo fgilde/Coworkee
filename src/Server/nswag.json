@@ -1,5 +1,5 @@
 {
-  "runtime": "Net50",
+  "runtime": "Net80",
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {

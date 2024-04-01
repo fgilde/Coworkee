@@ -2,10 +2,8 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
 using Coworkee.Client.Extensions;
 using Coworkee.Client.Shared.Components;
-using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
@@ -49,13 +47,7 @@ public partial class MainAppBar
 
     private async void ShowAbout()
     {
-        var parameters = new DialogParameters
-        {
-            {nameof(Dialogs.About.ClientInfo), new VersionInfoModel { ApplicationName = ApplicationConstants.ApplicationClientName }},
-            {nameof(Dialogs.About.ServerInfo), await _api.System_VersionAsync()},
-            {nameof(Dialogs.About.ApiVersions),  await _api.System_AvailableApiVersionsAsync()},
-        };
-        await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], parameters, o =>
+        await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], null, o =>
         {
             o.MaxWidth = MaxWidth.Small;
             o.DisableBackdropClick = false;

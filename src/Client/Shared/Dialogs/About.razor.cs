@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Models;
 using Coworkee.Shared.Constants.Application;
@@ -25,7 +26,7 @@ namespace Coworkee.Client.Shared.Dialogs
         {
             ClientInfo ??= new VersionInfoModel {ApplicationName = ApplicationConstants.ApplicationClientName};
             ServerInfo ??= await _api.System_VersionAsync();
-            ApiVersions ??= await _api.System_AvailableApiVersionsAsync();
+            ApiVersions ??= (await _api.System_AvailableApiVersionsAsync()).Select(v => v.ToString()).ToList();
         }
     }
 }

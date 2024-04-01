@@ -52,7 +52,7 @@ namespace Coworkee.Server.Extensions
 
         internal static IApplicationBuilder UseSwagger(this IApplicationBuilder app)
         {
-            app.UseSwaggerUi3(a => {
+            app.UseSwaggerUi(a => {
                 a.OperationsSorter = "alpha";
                 a.TagsSorter = "alpha";
                 a.CustomHeadContent = File.ReadAllText("wwwroot/swagger-ui/header.html");

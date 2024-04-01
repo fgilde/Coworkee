@@ -162,7 +162,7 @@ namespace Coworkee.Server.Extensions
                     options.ApiGroupNames = new[] { ApiVersions.DocumentVersionPrefix + version.MajorVersion };
                     options.Version = ApiVersions.VersionString(version);
                     // Patch document for Azure API Management
-                    options.AllowReferencesWithProperties = true;
+                    //options.AllowReferencesWithProperties = true;
                     options.PostProcess = document => configSection.ConfigureDocument(document, version);
                     options.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
                     {

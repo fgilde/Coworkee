@@ -194,6 +194,7 @@ Delete Confirmation: Slet bekræftelse
 Delete Content: Slet indhold
 Delete Content {0}: Slet indhold '{0}'
 Delete Extended Attribute?: Skal den udvidede attribut slettes?
+Delete file from server: Slet fil fra server
 Delete Image: Slet billede
 Delete Picture: Slet billede
 Delete Role Content: Vil du slette rollen med id-{0}?

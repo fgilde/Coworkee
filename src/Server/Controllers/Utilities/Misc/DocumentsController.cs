@@ -52,7 +52,7 @@ namespace Coworkee.Server.Controllers.Utilities.Misc
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Create)]
         [HttpPost]
-
+        [Produces(typeof(AddUpdateResult<DocumentDto>))]
         public async Task<IActionResult> Post(AddEditDocumentsCommand command, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
@@ -62,13 +62,14 @@ namespace Coworkee.Server.Controllers.Utilities.Misc
         /// Delete a Document
         /// </summary>
         /// <param name="ids"></param>
+        /// <param name="deleteFile"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Documents.Delete)]
         [HttpDelete]
-        public async Task<IActionResult> Delete(string[] ids, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Delete(string[] ids, bool deleteFile, CancellationToken cancellationToken = default)
         {
-            await Mediator.Send(new DeleteDocumentsCommand {Ids = UnhashIds(ids)}, cancellationToken);
+            await Mediator.Send(new DeleteDocumentsCommand {Ids = UnhashIds(ids), DeleteFiles = deleteFile }, cancellationToken);
             return Ok();
         }
 

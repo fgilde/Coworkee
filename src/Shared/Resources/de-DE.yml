@@ -194,6 +194,7 @@ Delete Confirmation: Bestätigung löschen
 Delete Content: Inhalt löschen
 Delete Content {0}: Inhalt löschen '{0}'
 Delete Extended Attribute?: Erweitertes Attribut löschen?
+Delete file from server: Datei vom Server löschen
 Delete Image: Bild löschen
 Delete Picture: Bild löschen
 Delete Role Content: Möchten Sie die Rolle mit ID {0} löschen?

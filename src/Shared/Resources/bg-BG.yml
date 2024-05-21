@@ -194,6 +194,7 @@ Delete Confirmation: Изтриване на потвърждение
 Delete Content: Изтриване на съдържание
 Delete Content {0}: Изтриване на съдържание "{0}"
 Delete Extended Attribute?: Изтриване на разширен атрибут?
+Delete file from server: Изтриване на файл от сървъра
 Delete Image: Изтриване на изображение
 Delete Picture: Изтриване на картина
 Delete Role Content: Искате ли да изтриете ролята с Id {0}?

@@ -193,6 +193,7 @@ Delete Confirmation: Delete Confirmation
 Delete Content: Delete Content
 Delete Content {0}: Delete Content '{0}'
 Delete Extended Attribute?: Delete Extended Attribute?
+Delete file from server: Delete file from server
 Delete Image: Delete Image
 Delete Picture: Delete Picture
 Delete Role Content: Do you want to delete the role with Id {0}?

@@ -1631,12 +1631,13 @@ export interface IDocumentsClient {
      * Add/Edit Document
      * @return Status 200 OK
      */
-    post(command: AddEditDocumentsCommand): Observable<FileResponse | null>;
+    post(command: AddEditDocumentsCommand): Observable<AddUpdateResultOfDocumentDto>;
     /**
      * Delete a Document
+     * @param deleteFile (optional) 
      * @return Status 200 OK
      */
-    delete(ids: string[]): Observable<FileResponse | null>;
+    delete(ids: string[], deleteFile: boolean | undefined): Observable<FileResponse | null>;
     /**
      * Get Document By Id
      * @return Status 200 Ok
@@ -1738,7 +1739,7 @@ export class DocumentsClient implements IDocumentsClient {
      * Add/Edit Document
      * @return Status 200 OK
      */
-    post(command: AddEditDocumentsCommand): Observable<FileResponse | null> {
+    post(command: AddEditDocumentsCommand): Observable<AddUpdateResultOfDocumentDto> {
         let url_ = this.baseUrl + "/Documents";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1750,7 +1751,7 @@ export class DocumentsClient implements IDocumentsClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1761,45 +1762,46 @@ export class DocumentsClient implements IDocumentsClient {
                 try {
                     return this.processPost(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                    return _observableThrow(e) as any as Observable<AddUpdateResultOfDocumentDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+                return _observableThrow(response_) as any as Observable<AddUpdateResultOfDocumentDto>;
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processPost(response: HttpResponseBase): Observable<AddUpdateResultOfDocumentDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (response as any).error instanceof Blob ? (response as any).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
-            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
-            if (fileName) {
-                fileName = decodeURIComponent(fileName);
-            } else {
-                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            }
-            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AddUpdateResultOfDocumentDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(null as any);
+        return _observableOf<AddUpdateResultOfDocumentDto>(null as any);
     }
 
     /**
      * Delete a Document
+     * @param deleteFile (optional) 
      * @return Status 200 OK
      */
-    delete(ids: string[]): Observable<FileResponse | null> {
-        let url_ = this.baseUrl + "/Documents";
+    delete(ids: string[], deleteFile: boolean | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Documents?";
+        if (deleteFile === null)
+            throw new Error("The parameter 'deleteFile' cannot be null.");
+        else if (deleteFile !== undefined)
+            url_ += "deleteFile=" + encodeURIComponent("" + deleteFile) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(ids);
@@ -8725,6 +8727,74 @@ export class TransferableExpressionOfDocumentDto implements ITransferableExpress
 }
 
 export interface ITransferableExpressionOfDocumentDto {
+}
+
+export class AddUpdateResultOfDocumentDto implements IAddUpdateResultOfDocumentDto {
+    added?: DocumentDto[] | undefined;
+    updated?: DocumentDto[] | undefined;
+    skipped?: DocumentDto[] | undefined;
+
+    constructor(data?: IAddUpdateResultOfDocumentDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["added"])) {
+                this.added = [] as any;
+                for (let item of _data["added"])
+                    this.added!.push(DocumentDto.fromJS(item));
+            }
+            if (Array.isArray(_data["updated"])) {
+                this.updated = [] as any;
+                for (let item of _data["updated"])
+                    this.updated!.push(DocumentDto.fromJS(item));
+            }
+            if (Array.isArray(_data["skipped"])) {
+                this.skipped = [] as any;
+                for (let item of _data["skipped"])
+                    this.skipped!.push(DocumentDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AddUpdateResultOfDocumentDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddUpdateResultOfDocumentDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.added)) {
+            data["added"] = [];
+            for (let item of this.added)
+                data["added"].push(item.toJSON());
+        }
+        if (Array.isArray(this.updated)) {
+            data["updated"] = [];
+            for (let item of this.updated)
+                data["updated"].push(item.toJSON());
+        }
+        if (Array.isArray(this.skipped)) {
+            data["skipped"] = [];
+            for (let item of this.skipped)
+                data["skipped"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IAddUpdateResultOfDocumentDto {
+    added?: DocumentDto[] | undefined;
+    updated?: DocumentDto[] | undefined;
+    skipped?: DocumentDto[] | undefined;
 }
 
 export abstract class AddEditCommandBaseOfDocumentDto implements IAddEditCommandBaseOfDocumentDto {

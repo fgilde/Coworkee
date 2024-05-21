@@ -194,6 +194,7 @@ Delete Confirmation: Potvrzení o odstranění
 Delete Content: Odstranit obsah
 Delete Content {0}: Smazat obsah "{0}"
 Delete Extended Attribute?: Odstranit rozšířený atribut?
+Delete file from server: Smazat soubor ze serveru
 Delete Image: Odstranit obrázek
 Delete Picture: Odstranit obrázek
 Delete Role Content: Chcete odstranit roli pomocí Id {0}?

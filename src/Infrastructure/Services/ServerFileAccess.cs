@@ -1,3 +1,4 @@
+using System;
 using Nextended.Core.Extensions;
 using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
@@ -5,6 +6,9 @@ using System.IO;
 using System.Linq;
 using Nextended.Core.Helper;
 using Coworkee.Shared.Constants.Application;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Nextended.Core;
 
 namespace Coworkee.Infrastructure.Services;
 
@@ -13,10 +17,26 @@ public class ServerFileAccess: IFileAccess
 {
     private const string ServerFileDirectory = ApplicationConstants.FileAccess.StaticFileDirectoryName;
     // AppContext.BaseDirectory
-    public string GetRelativeUrl(string fullPath)
+    public Task<bool> DeleteAsync(string path)
     {
-        return $"/{ServerFileDirectory}{fullPath.Substring(GetServerFileDirectory().Length).Replace("\\", "/").EnsureStartsWith("/")}";
+        return Task.Run(() =>
+        {
+            var filePath = GetPath(GetRelativeUrl(path));
+            if (File.Exists(filePath))
+            {
+                Check.TryCatch<Exception>(() => File.Delete(filePath));
+                return !File.Exists(filePath);
+            }
+            return false;
+        });
     }
+
+    public IEnumerable<Task<bool>> DeleteAsync(string[] paths) => paths.Select(DeleteAsync);
+
+    public bool Exists(params string[] segments) => File.Exists(GetPath(segments));
+
+    public string GetRelativeUrl(string fullPath) => fullPath.StartsWith("/") ? fullPath : $"/{ServerFileDirectory}{fullPath[GetServerFileDirectory().Length..].Replace("\\", "/").EnsureStartsWith("/")}";
+
 
     public string EnsureFileNotExists(params string[] segments)
     {
@@ -31,10 +51,15 @@ public class ServerFileAccess: IFileAccess
         var relative = segments
             .SelectMany(s => s.Split(Path.DirectorySeparatorChar))
             .SelectMany(s => s.Split('/'))
-            .Prepend(ServerFileDirectory).Aggregate(Path.Combine);
+            .Where(s => !string.IsNullOrEmpty(s))
+            .ToArray();
+        if (relative.FirstOrDefault() != ServerFileDirectory)
+            relative = relative.Prepend(ServerFileDirectory).ToArray();
 
-        var res = GetServerFileDirectory(relative);
-        
+        string path = relative.Aggregate(Path.Combine);
+
+        var res = GetServerFileDirectory(path);
+
         var file = Path.GetFileName(res);
         bool hasExtension = !string.IsNullOrEmpty(Path.GetExtension(file));
 

@@ -150,7 +150,7 @@ public partial class DocumentList
         }
         var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditDocumentModal>(id == default ? _localizer["Create"] : _localizer["Edit"], parameters);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             OnSearch("");
         }

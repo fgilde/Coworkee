@@ -7809,6 +7809,7 @@ export class Rootobject implements IRootobject {
     mailConfiguration?: Mailconfiguration | undefined;
     azure?: Azure | undefined;
     rabbitMQ?: Rabbitmq | undefined;
+    backupOptions?: BackupOptions | undefined;
 
     constructor(data?: IRootobject) {
         if (data) {
@@ -7831,6 +7832,7 @@ export class Rootobject implements IRootobject {
             this.mailConfiguration = _data["mailConfiguration"] ? Mailconfiguration.fromJS(_data["mailConfiguration"]) : <any>undefined;
             this.azure = _data["azure"] ? Azure.fromJS(_data["azure"]) : <any>undefined;
             this.rabbitMQ = _data["rabbitMQ"] ? Rabbitmq.fromJS(_data["rabbitMQ"]) : <any>undefined;
+            this.backupOptions = _data["backupOptions"] ? BackupOptions.fromJS(_data["backupOptions"]) : <any>undefined;
         }
     }
 
@@ -7853,6 +7855,7 @@ export class Rootobject implements IRootobject {
         data["mailConfiguration"] = this.mailConfiguration ? this.mailConfiguration.toJSON() : <any>undefined;
         data["azure"] = this.azure ? this.azure.toJSON() : <any>undefined;
         data["rabbitMQ"] = this.rabbitMQ ? this.rabbitMQ.toJSON() : <any>undefined;
+        data["backupOptions"] = this.backupOptions ? this.backupOptions.toJSON() : <any>undefined;
         return data;
     }
 }
@@ -7868,6 +7871,7 @@ export interface IRootobject {
     mailConfiguration?: Mailconfiguration | undefined;
     azure?: Azure | undefined;
     rabbitMQ?: Rabbitmq | undefined;
+    backupOptions?: BackupOptions | undefined;
 }
 
 export class ServerConfiguration extends Rootobject implements IServerConfiguration {
@@ -8483,6 +8487,42 @@ export interface IRabbitmq {
     port: number;
     userName?: string | undefined;
     password?: string | undefined;
+}
+
+export class BackupOptions implements IBackupOptions {
+    bucketName?: string | undefined;
+
+    constructor(data?: IBackupOptions) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.bucketName = _data["bucketName"];
+        }
+    }
+
+    static fromJS(data: any): BackupOptions {
+        data = typeof data === 'object' ? data : {};
+        let result = new BackupOptions();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["bucketName"] = this.bucketName;
+        return data;
+    }
+}
+
+export interface IBackupOptions {
+    bucketName?: string | undefined;
 }
 
 export class AuditDto implements IAuditDto {

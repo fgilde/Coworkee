@@ -38,7 +38,7 @@ namespace Coworkee.Client.Pages.Identity
             if (_errorService.IsSuccessFull(response))
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
-                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+                await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
                 MudDialog.Close();
             }
         }

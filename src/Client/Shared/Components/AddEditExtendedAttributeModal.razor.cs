@@ -78,7 +78,7 @@ namespace Coworkee.Client.Shared.Components
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 MudDialog.Close();
             }
-            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+            await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
         }
 
         protected override async Task OnInitializedAsync()

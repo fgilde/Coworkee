@@ -65,7 +65,7 @@ namespace Coworkee.Client.Pages.Catalog
             {
                 dto.ImageDataURL = string.Empty; // Is overridden by UploadRequest
                 await _api.Products_PostAsync(new(dto));
-                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+                await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
                 return null;
             })).Cancelled;
         }

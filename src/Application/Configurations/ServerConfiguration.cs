@@ -23,6 +23,7 @@ namespace Coworkee.Application.Configurations
         public Mailconfiguration MailConfiguration { get; set; }
         public Azure Azure { get; set; }
         public Rabbitmq RabbitMQ { get; set; }
+        public BackupOptions BackupOptions { get; set; }
     }
 
     public class Connectionstrings
@@ -156,5 +157,8 @@ namespace Coworkee.Application.Configurations
         public string Password { get; set; }
     }
 
-
+    public class BackupOptions
+    {
+        public string BucketName { get; set; }
+    }
 }

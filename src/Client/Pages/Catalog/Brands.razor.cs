@@ -67,7 +67,7 @@ namespace Coworkee.Client.Pages.Catalog
             return !(await _dialogService.EditOrCreate(brandOrNull, async (dto, _) =>
             {
                 await _api.Brands_PostAsync(new AddEditBrandsCommand(dto));
-                await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+                await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
                 return null;
             })).Cancelled;
         }

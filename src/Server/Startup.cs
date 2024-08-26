@@ -20,6 +20,7 @@ using Coworkee.Shared;
 using GptInvoke;
 using System;
 using Coworkee.Application.AssistantFeatures;
+using Coworkee.Application.Configurations;
 using OpenAI.Models;
 
 namespace Coworkee.Server
@@ -84,6 +85,10 @@ namespace Coworkee.Server
 
             services.AddLazyCache();
             services.AddGptAssistant(_configuration);
+            services.AddOptions<BackupOptions>()
+                .Bind(_configuration.GetSection(nameof(BackupOptions)))
+                .ValidateOnStart()
+                .ValidateDataAnnotations();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,

@@ -172,7 +172,7 @@ public partial class DocumentList
             await _api.Documents_DeleteAsync(toDelete);
             OnSearch("");
             _snackBar.Add(_localizer["Document Deleted"], Severity.Success);
-            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+            await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
         }
     }
 

@@ -71,7 +71,7 @@ namespace Coworkee.Client.Pages.Identity
                 if (_errorService.IsSuccessFull(response))
                 {
                     await Reset();
-                    await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+                    await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
                     _snackBar.Add(response.Messages[0], Severity.Success);
                 }
             }

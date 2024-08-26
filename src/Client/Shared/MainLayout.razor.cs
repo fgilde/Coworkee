@@ -122,7 +122,7 @@ namespace Coworkee.Client.Shared
             {
                 if (CurrentUserId == userId)
                 {
-                    await hubConnection.SendAsync(nameof(ClientEventHub.OnDisconnectAsync), CurrentUserId);
+                    await hubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.OnDisconnectAsync), CurrentUserId);
                     await _clientAuthenticationManager.Logout();
                     if ((await _stateProvider.GetAuthenticationStateAsync()).IsGuest())
                         _navigationManager.NavigateToHomeWithReturnTo();

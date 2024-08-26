@@ -31,7 +31,7 @@ namespace Coworkee.Client.Pages.Misc
             await _api.DocumentTypes_PostAsync(new AddEditDocumentTypesCommand(AddEditDocumentTypeModel));
             _snackBar.Add(_localizer["DocumentType Updated"], Severity.Success);
             MudDialog.Close();
-            await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
+            await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
         }
 
         protected override async Task OnInitializedAsync()

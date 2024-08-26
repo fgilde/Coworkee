@@ -90,7 +90,7 @@ namespace Coworkee.Client.Pages.Identity
             if (result.Succeeded)
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);
-                await HubConnection.SendAsync(nameof(ClientEventHub.RegenerateTokensAsync));
+                await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.RegenerateTokensAsync));
                 _navigationManager.NavigateTo("/identity/roles");
             }
             else

@@ -316,9 +316,9 @@ namespace Coworkee.Client.Shared.Components
                     if (SelectedItem != null && ids.Contains(GetId(SelectedItem)))
                         SetSelectedItem(default);
                     await Reset(true);
-                    await HubConnection.SendAsync(nameof(ClientEventHub.UpdateDashboardAsync));
-                    if (_errorService.IsSuccessFull(response))
-                        _snackBar.Add(response.Messages[0], Severity.Success);
+                    await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));
+                    if (_errorService.IsSuccessFull(response) && response.Messages?.Any() == true)
+                        _snackBar.Add(response.Messages.FirstOrDefault(), Severity.Success);
 
                     returnValue = response.Succeeded;
                 }

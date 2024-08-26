@@ -8429,6 +8429,9 @@
         },
         "rabbitMQ": {
           "$ref": "#/definitions/Rabbitmq"
+        },
+        "backupOptions": {
+          "$ref": "#/definitions/BackupOptions"
         }
       }
     },
@@ -8644,6 +8647,14 @@
           "type": "string"
         },
         "password": {
+          "type": "string"
+        }
+      }
+    },
+    "BackupOptions": {
+      "type": "object",
+      "properties": {
+        "bucketName": {
           "type": "string"
         }
       }

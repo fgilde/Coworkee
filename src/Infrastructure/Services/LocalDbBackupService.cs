@@ -1,24 +1,25 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Coworkee.Application.Configurations;
 using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Infrastructure.Contexts;
 
 namespace Coworkee.Infrastructure.Services
 {
-    [RegisterAs(typeof(IDbBackupService))]
-    public class DbBackupService : IDbBackupService
+    [RegisterAsIfConfigValueIsEmpty(typeof(IDbBackupService), new[] { nameof(BackupOptions), nameof(BackupOptions.BucketName) })]
+    public class LocalDbBackupService : IDbBackupService
     {
         public string BackupDirectory => "DBBackups";
         
         private IFileAccess _fileAccess;
         private readonly ApplicationDbContext _dbContext;
 
-        public DbBackupService(IFileAccess fileAccess, ApplicationDbContext dbContext)
+        public LocalDbBackupService(IFileAccess fileAccess, ApplicationDbContext dbContext)
         {
             _fileAccess = fileAccess;
             _dbContext = dbContext;
@@ -126,6 +127,6 @@ namespace Coworkee.Infrastructure.Services
         //    // Return the S3 file URL
         //    return $"https://s3.amazonaws.com/{bucketName}/{fileName}";
         //}
-        
+
     }
 }

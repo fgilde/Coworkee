@@ -65,7 +65,7 @@ namespace Coworkee.Client.Pages.Identity
             if (result.Succeeded)
             {
                 _snackBar.Add(result.Messages[0], Severity.Success);
-                await HubConnection.SendAsync(nameof(ClientEventHub.UserRolesChanged), request.UserId);
+                await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UserRolesChanged), request.UserId);
                 _navigationManager.NavigateTo("/identity/users");
             }
             else

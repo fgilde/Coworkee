@@ -87,7 +87,7 @@ namespace Coworkee.Client.Pages.Identity
 
         private async Task ExecuteUserLogout()
         {
-            await HubConnection.SendAsync(nameof(ClientEventHub.LogoutUserById), Id);
+            await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.LogoutUserById), Id);
         }
     }
 }

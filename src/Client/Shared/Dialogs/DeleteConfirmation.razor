@@ -1,6 +1,7 @@
+@using MudBlazor.Extensions.Helper
 @namespace Coworkee.Client.Shared.Dialogs
 @inject Microsoft.Extensions.Localization.IStringLocalizer<DeleteConfirmation> localizer
-<MudDialog Class="mud-ex-dialog-initial">
+<MudDialog Class="@MudExCss.Classes.Dialog._Initial">
     <TitleContent>
         <MudText Typo="Typo.h6">
             <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
@@ -12,16 +13,20 @@
         @if (Details != null)
         {
             <div class="scroll-container" style="max-height: 300px; overflow: auto;">
-            @foreach (var info in Details)
-            {
-                <MudAlert Severity="Severity.Warning">
-                    @info
-                </MudAlert>
-            }
+                @foreach (var info in Details)
+                {
+                    <MudAlert Severity="Severity.Warning">
+                        @info
+                    </MudAlert>
+                }
             </div>
         }
     </DialogContent>
     <DialogActions>
+        @if (!string.IsNullOrEmpty(CheckBoxLabel))
+        {
+            <MudCheckBox Style="position: absolute; left: 8px;" Label="@localizer.TryLocalize(CheckBoxLabel)" @bind-Value="IsChecked" />
+        }
         <MudButton OnClick="Cancel">@localizer["Cancel"]</MudButton>
         <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Submit">@localizer["Confirm"]</MudButton>
     </DialogActions>
@@ -30,11 +35,13 @@
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
     [Parameter] public string Message { get; set; }
+    [Parameter] public string CheckBoxLabel { get; set; }
     [Parameter] public IEnumerable<string> Details { get; set; }
+    [Parameter] public bool IsChecked { get; set; }
 
     void Submit()
     {
-        MudDialog.Close(DialogResult.Ok(true));
+        MudDialog.Close(string.IsNullOrEmpty(CheckBoxLabel) ? DialogResult.Ok(true) : DialogResult.Ok(IsChecked));
     }
     void Cancel() => MudDialog.Cancel();
 }

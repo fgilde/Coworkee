@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Coworkee.Application.Contracts.Services;
 
 public interface IFileAccess
 {
+    Task<bool> DeleteAsync(string path);
+    IEnumerable<Task<bool>> DeleteAsync(string[] paths);
+    bool Exists(params string[] segments);
     string GetRelativeUrl(string fullPath);
     string EnsureFileNotExists(params string[] segments);
     string EnsureFileNotExists(string path);

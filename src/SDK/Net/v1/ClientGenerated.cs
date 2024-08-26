@@ -282,7 +282,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_Post(AddEditDocumentsCommand command);
+        AddUpdateResult<DocumentDto> Documents_Post(AddEditDocumentsCommand command);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -290,14 +290,14 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_PostAsync(AddEditDocumentsCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AddUpdateResult<DocumentDto>> Documents_PostAsync(AddEditDocumentsCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete a Document
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        FileResponse Documents_Delete(System.Collections.Generic.IList<string> ids);
+        FileResponse Documents_Delete(System.Collections.Generic.IList<string> ids, bool? deleteFile = null);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -305,7 +305,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<string> ids, bool? deleteFile = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Document By Id
@@ -3684,7 +3684,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Documents_Post(AddEditDocumentsCommand command)
+        public virtual AddUpdateResult<DocumentDto> Documents_Post(AddEditDocumentsCommand command)
         {
             return System.Threading.Tasks.Task.Run(async () => await Documents_PostAsync(command, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
@@ -3695,7 +3695,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Documents_PostAsync(AddEditDocumentsCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<AddUpdateResult<DocumentDto>> Documents_PostAsync(AddEditDocumentsCommand command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (command == null)
                 throw new System.ArgumentNullException("command");
@@ -3711,7 +3711,7 @@ namespace SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
@@ -3741,12 +3741,14 @@ namespace SDK
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_);
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<AddUpdateResult<DocumentDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -3773,9 +3775,9 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual FileResponse Documents_Delete(System.Collections.Generic.IList<string> ids)
+        public virtual FileResponse Documents_Delete(System.Collections.Generic.IList<string> ids, bool? deleteFile = null)
         {
-            return System.Threading.Tasks.Task.Run(async () => await Documents_DeleteAsync(ids, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+            return System.Threading.Tasks.Task.Run(async () => await Documents_DeleteAsync(ids, deleteFile, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3784,7 +3786,7 @@ namespace SDK
         /// </summary>
         /// <returns>Status 200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<string> ids, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<FileResponse> Documents_DeleteAsync(System.Collections.Generic.IList<string> ids, bool? deleteFile = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (ids == null)
                 throw new System.ArgumentNullException("ids");
@@ -3806,6 +3808,12 @@ namespace SDK
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "Documents"
                     urlBuilder_.Append("Documents");
+                    urlBuilder_.Append('?');
+                    if (deleteFile != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("deleteFile")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(deleteFile, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 

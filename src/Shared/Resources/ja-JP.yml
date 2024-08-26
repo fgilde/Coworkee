@@ -194,6 +194,7 @@ Delete Confirmation: 削除確認
 Delete Content: コンテンツの削除
 Delete Content {0}: コンテンツ '{0}' を削除する
 Delete Extended Attribute?: 拡張属性を削除しますか?
+Delete file from server: サーバーからファイルを削除する
 Delete Image: イメージの削除
 Delete Picture: 画像の削除
 Delete Role Content: Id {0}を持つロールを削除しますか?

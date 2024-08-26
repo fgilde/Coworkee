@@ -545,11 +545,12 @@
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.String[],System.Threading.CancellationToken)">
+        <member name="M:Coworkee.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.String[],System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Delete a Document
             </summary>
             <param name="ids"></param>
+            <param name="deleteFile"></param>
             <param name="cancellationToken"></param>
             <returns>Status 200 OK</returns>
         </member>

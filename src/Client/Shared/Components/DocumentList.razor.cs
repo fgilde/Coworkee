@@ -150,7 +150,7 @@ public partial class DocumentList
         }
         var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditDocumentModal>(id == default ? _localizer["Create"] : _localizer["Edit"], parameters);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             OnSearch("");
         }
@@ -161,15 +161,17 @@ public partial class DocumentList
         var toDelete = new List<string> { id };
         string deleteContent = _localizer["Delete Content {0}"];
         var parameters = new DialogParameters
-            {
-                {nameof(Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
-            };
+        {
+            {nameof(Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)},
+            {nameof(Dialogs.DeleteConfirmation.CheckBoxLabel), "Delete file from server"},
+            {nameof(Dialogs.DeleteConfirmation.IsChecked), true},
+        };
         var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
         var dialog = await _dialogService.ShowEx<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
-            await _api.Documents_DeleteAsync(toDelete);
+            await _api.Documents_DeleteAsync(toDelete, result.Data as bool?);
             OnSearch("");
             _snackBar.Add(_localizer["Document Deleted"], Severity.Success);
             await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.UpdateDashboardAsync));

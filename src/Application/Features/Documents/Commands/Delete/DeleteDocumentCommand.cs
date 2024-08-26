@@ -18,7 +18,9 @@ namespace Coworkee.Application.Features.Documents.Commands.Delete
 {
     [CustomAuthorize(Policies = new[] { Permissions.Documents.Delete })]
     public class DeleteDocumentsCommand : DeleteCommandBase<int>
-    { }
+    {
+        public bool DeleteFiles { get; set; } = true;
+    }
 
     internal class DeleteDocumentsCommandHandler : DeleteCommandHandlerBase<DeleteDocumentsCommand, int, DocumentDto, Document>
     {
@@ -33,7 +35,14 @@ namespace Coworkee.Application.Features.Documents.Commands.Delete
         public override async Task Handle(DeleteDocumentsCommand command, CancellationToken cancellationToken)
         {
             var documentsWithExtendedAttributes = UnitOfWork.Repository<Document>().Entities.Include(x => x.ExtendedAttributes);
-            
+            if (command.DeleteFiles)
+            {
+                var fileAccess = Get<IFileAccess>();
+                var tasks = documentsWithExtendedAttributes
+                    .Where(x => command.Ids.Contains(x.Id) && !string.IsNullOrEmpty(x.URL))
+                    .Select(x => fileAccess.DeleteAsync(x.URL));
+                await Task.WhenAll(tasks);
+            }
             var cacheKeys = await documentsWithExtendedAttributes.SelectMany(x => x.ExtendedAttributes).Where(x => command.Ids.Contains(x.EntityId))
                 .Distinct().Select(x => ApplicationConstants.Cache.GetAllEntityExtendedAttributesByEntityIdCacheKey(nameof(Document), x.EntityId))
                 .ToListAsync(cancellationToken);

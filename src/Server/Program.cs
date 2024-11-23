@@ -2,12 +2,15 @@ using System;
 using System.Threading.Tasks;
 using Coworkee.Infrastructure.Contexts;
 using Coworkee.Server.Extensions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading;
+using Hangfire.Dashboard;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Localization;
 
 namespace Coworkee.Server
 {
@@ -22,47 +25,47 @@ namespace Coworkee.Server
 
         public static async Task Main(string[] args)
         {
-            await StartServer(args);
-            while (_cts.IsCancellationRequested)
+            do
             {
-                Console.WriteLine("Restarting App");
                 await StartServer(args);
-            }
+                Console.WriteLine("Restarting App");
+            } while (_cts.IsCancellationRequested);
         }
 
         public static async Task StartServer(string[] args)
         {
             _cts = new CancellationTokenSource();
-            var host = CreateHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
+            var builder = WebApplication.CreateBuilder(args);
+
+            builder.Configuration.AddConfigurations();
+
+            builder.WebHost.UseStaticWebAssets();
+
+            var startup = new Startup(builder.Configuration);
+
+            startup.ConfigureServices(builder.Services);
+
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 await TryMigrateDbAsync(services, scope);
                 services.GetService<IHostApplicationLifetime>()?.ApplicationStopping.Register(Restart);
             }
 
+            startup.Configure(app, app.Environment, app.Services.GetService<IStringLocalizer<Startup>>(), app.Services.GetService<IDashboardAuthorizationFilter>());
+
             try
             {
-                await host.RunAsync(_cts.Token);
+                await app.RunAsync(_cts.Token);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.ConfigureAppConfiguration((context, configBuiler) =>
-                    {
-                        configBuiler.AddConfigurations();
-                    });
-                    webBuilder.UseStaticWebAssets();
-                    webBuilder.UseStartup<Startup>();
-                });
 
         private static async Task TryMigrateDbAsync(IServiceProvider services, IServiceScope scope)
         {

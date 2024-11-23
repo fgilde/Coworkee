@@ -169,7 +169,7 @@ namespace Coworkee.Client.Shared.Components
             }
         }
 
-        private async Task<TableData<TResult>> ServerReload(TableState state)
+        private async Task<TableData<TResult>> ServerReload(TableState state, CancellationToken cancellation = default)
         {
             if (!string.IsNullOrWhiteSpace(_searchString))
             {
@@ -307,10 +307,10 @@ namespace Coworkee.Client.Shared.Components
                     {nameof(DeleteConfirmation.Details), names},
                     {nameof(DeleteConfirmation.Message), string.Format(value, ids.Length)}
                 };
-                var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+                var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, BackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
                 var dialog = await _dialogService.ShowEx<DeleteConfirmation>(_localizer["Delete"], parameters, options);
                 var result = await dialog.Result;
-                if (!result.Cancelled)
+                if (!result.Canceled)
                 {
                     var response = await ApiDelete(ids);
                     if (SelectedItem != null && ids.Contains(GetId(SelectedItem)))

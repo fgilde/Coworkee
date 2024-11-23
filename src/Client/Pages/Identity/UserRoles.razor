@@ -38,7 +38,7 @@ else
             <MudTd DataLabel="@_localizer["Description"]">
                 <MudHighlighter Text="@context.RoleDescription" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Role"><MudCheckBox @bind-Checked="@context.Selected" Disabled="@(!_canEditUsers)" Color="Color.Secondary"></MudCheckBox></MudTd>
+            <MudTd DataLabel="Role"><MudCheckBox @bind-Value="@context.Selected" Disabled="@(!_canEditUsers)" Color="Color.Secondary"></MudCheckBox></MudTd>
         </RowTemplate>
         <FooterContent>
         </FooterContent>

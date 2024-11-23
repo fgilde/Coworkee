@@ -98,7 +98,7 @@ namespace Coworkee.Client.Pages.Administration
             {
                 MaxWidth = MaxWidth.Medium,
                 FullWidth = true,
-                DisableBackdropClick = true,
+                BackdropClick = false,
                 CloseButton = true,
                 Animations = new[] { animationType }
             };

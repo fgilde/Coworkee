@@ -195,7 +195,7 @@ namespace Coworkee.Client.Shared.Components
             }
             var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditExtendedAttributeModal<TId, TEntityId, TEntity, TExtendedAttribute>>(id.Equals(default) ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
-            if (!result.Cancelled)
+            if (!result.Canceled)
             {
                 await Reset();
             }
@@ -208,10 +208,10 @@ namespace Coworkee.Client.Shared.Components
             {
                 {nameof(Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
             };
-            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, BackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
             var dialog = await _dialogService.ShowEx<Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled)
+            if (!result.Canceled)
             {
                 var response = await ExtendedAttributeManager.DeleteAsync(id);
                 await Reset();

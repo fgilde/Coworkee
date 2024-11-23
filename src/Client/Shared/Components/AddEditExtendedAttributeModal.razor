@@ -66,17 +66,17 @@
                     <MudItem xs="12" md="6">
                         <MudDatePicker @ref="_datePicker" PickerVariant="PickerVariant.Dialog" @bind-Date="_date" Label="@_localizer["Date"]">
                             <PickerActions Context="date">
-                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _datePicker.Clear())">@_localizer["Clear"]</MudButton>
-                                <MudButton OnClick="@(() => _datePicker.Close(false))">@_localizer["Cancel"]</MudButton>
-                                <MudButton Color="Color.Primary" OnClick="@(() => _datePicker.Close())">@_localizer["Ok"]</MudButton>
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _datePicker.ClearAsync())">@_localizer["Clear"]</MudButton>
+                                <MudButton OnClick="@(() => _datePicker.CloseAsync(false))">@_localizer["Cancel"]</MudButton>
+                                <MudButton Color="Color.Primary" OnClick="@(() => _datePicker.CloseAsync())">@_localizer["Ok"]</MudButton>
                             </PickerActions>
                         </MudDatePicker>
 
                         <MudTimePicker @ref="_timePicker" PickerVariant="PickerVariant.Dialog" Label="@_localizer["Time"]" @bind-Time="_time">
                             <PickerActions Context="time">
-                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _timePicker.Clear())">@_localizer["Clear"]</MudButton>
-                                <MudButton OnClick="@(() => _timePicker.Close(false))">@_localizer["Cancel"]</MudButton>
-                                <MudButton Color="Color.Primary" OnClick="@(() => _timePicker.Close())">@_localizer["Ok"]</MudButton>
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _timePicker.ClearAsync())">@_localizer["Clear"]</MudButton>
+                                <MudButton OnClick="@(() => _timePicker.CloseAsync(false))">@_localizer["Cancel"]</MudButton>
+                                <MudButton Color="Color.Primary" OnClick="@(() => _timePicker.CloseAsync())">@_localizer["Ok"]</MudButton>
                             </PickerActions>
                         </MudTimePicker>
                     </MudItem>
@@ -97,7 +97,7 @@
                     <MudTextField For="@(() => AddEditExtendedAttributeModel.Description)" @bind-Value="AddEditExtendedAttributeModel.Description" Label="@_localizer["Description"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudCheckBox For="@(() => AddEditExtendedAttributeModel.IsActive)" @bind-Checked="@AddEditExtendedAttributeModel.IsActive" Color="Color.Secondary" Label="@_localizer["Is Active"]" />
+                    <MudCheckBox For="@(() => AddEditExtendedAttributeModel.IsActive)" @bind-Value="@AddEditExtendedAttributeModel.IsActive" Color="Color.Secondary" Label="@_localizer["Is Active"]" />
                 </MudItem>
             </MudGrid>
         </DialogContent>

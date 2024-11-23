@@ -48,7 +48,7 @@
                     @foreach (var l in lang)
                     {
                         <MudItem xs="6" md="3">
-                            <MudSwitch CheckedChanged="@(new Action<bool>(e => Activate(l, e)))" Checked="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning"/>
+                            <MudSwitch ValueChanged="@(new Action<bool>(e => Activate(l, e)))" Value="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning" />
                             <span class="culture-code">@l.CultureCode</span>
                         </MudItem>
                     }

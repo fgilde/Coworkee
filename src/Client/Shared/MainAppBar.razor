@@ -44,8 +44,8 @@
                 <ChildContent>
                     <UserCard Class="mt-n2"/>
                     <MudDivider Class="mb-2"/>
-                    <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person"/>
-                    <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout"/>
+                    <MudListItem T="object" Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+                    <MudListItem T="object" Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
                 </ChildContent>
             </MudMenu>
         }
@@ -65,8 +65,8 @@
                 </MudTooltip>
             </div>
             <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@localizer["Account"]</b></MudText>
-            <MudListItem Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person"/>
-            <MudListItem Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout"/>
+            <MudListItem T="object" Text="@localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+            <MudListItem T="object" Text="@localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout"/>
         </MudMenu>
     </MudHidden>
 </MudAppBar>

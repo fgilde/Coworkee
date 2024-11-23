@@ -20,6 +20,9 @@ namespace Coworkee.Application.Common.Models.Identity
         public UserInformationsDto UserInfo { get; set; }
         public DateTime CreatedOn { get; set; }
         public List<UserRoleModel> Roles { get; set; } = new();
-        public bool IsSystemUser() => this.MapTo<CreateUser>().IsSystemUser();
+        public bool IsSystemUser()
+        {
+            return this.MapTo<CreateUser>().IsSystemUser();
+        }
     }
 }

@@ -121,7 +121,7 @@
                                     <MudText Typo="Typo.body2">@_localizer[role.Description ?? ""]</MudText>
                                 </MudCardContent>
                                 <MudCardActions>
-                                    <MudCheckBox T="bool" CheckedChanged="@(() => ToggleRole(role))" Checked="@IsAddedAsInitialRole(role)" Label="@_localizer["Register as {0}", _localizer[role.Name]]" Color="Color.Primary"></MudCheckBox>
+                                    <MudCheckBox T="bool" ValueChanged="@(() => ToggleRole(role))" Value="@IsAddedAsInitialRole(role)" Label="@_localizer["Register as {0}", _localizer[role.Name]]" Color="Color.Primary"></MudCheckBox>
                                 </MudCardActions>
                             </MudCard>
                         </MudItem>

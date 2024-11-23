@@ -62,10 +62,10 @@ namespace Coworkee.Client.Pages.Identity
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.Message), string.Format(deleteContent, id)}
             };
-            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, BackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
             var dialog = await _dialogService.ShowEx<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled)
+            if (!result.Canceled)
             {
                 var response = await _api.Role_DeleteAsync(id);
                 if (_errorService.IsSuccessFull(response))
@@ -90,7 +90,7 @@ namespace Coworkee.Client.Pages.Identity
             }
             var dialog = await _dialogService.ShowWithDefaultOptionsAsync<RoleModal>(id == null ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
-            if (!result.Cancelled)
+            if (!result.Canceled)
             {
                 await Reset();
             }

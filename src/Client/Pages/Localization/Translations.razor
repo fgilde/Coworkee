@@ -10,10 +10,10 @@
 <ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
 
-<MudSwitch Checked="@advancedMode" CheckedChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="@_localizer["Advanced Mode"]" Color="Color.Warning" />
+<MudSwitch Value="@advancedMode" ValueChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="@_localizer["Advanced Mode"]" Color="Color.Warning" />
 @if (!advancedMode)
 {
-    <MudSwitch Checked="@showCultureTranslations" CheckedChanged="@(new Action<bool>(e => CultureTranslationToggle(e)))" Label="@_localizer["Show Culture code Translations"]" Color="Color.Primary"/>
+    <MudSwitch Value="@showCultureTranslations" ValueChanged="@(new Action<bool>(e => CultureTranslationToggle(e)))" Label="@_localizer["Show Culture code Translations"]" Color="Color.Primary" />
 }
 
 <EditableDataTable @ref="dataTable"

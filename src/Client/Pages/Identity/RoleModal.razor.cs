@@ -16,7 +16,7 @@ namespace Coworkee.Client.Pages.Identity
         private bool isSystemRequiredRole => RoleModel?.Name == RoleConstants.AdministratorRole || RoleModel?.Name == RoleConstants.BasicRole;
 
         [Parameter] public RoleDto RoleModel { get; set; } = new();
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;

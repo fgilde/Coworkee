@@ -81,7 +81,7 @@ namespace Coworkee.Client.Pages.Identity
         {
             var parameters = new DialogParameters();
             var dialog = await _dialogService.ShowWithDefaultOptionsAsync<RegisterUserModal>(_localizer["Register New User"], parameters);
-            if (!(await dialog.Result).Cancelled)
+            if (!(await dialog.Result).Canceled)
                 await GetUsersAsync();
         }
 
@@ -96,10 +96,10 @@ namespace Coworkee.Client.Pages.Identity
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.Message), $"{string.Format(_localizer["Do you want to delete the User {0}"], user.FullName)}?"}
             };
-            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, BackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
             var dialog = await _dialogService.ShowEx<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
             var result = await dialog.Result;
-            if (!result.Cancelled && _errorService.IsSuccessFull(await _api.User_DeleteAsync(user.Id)))
+            if (!result.Canceled && _errorService.IsSuccessFull(await _api.User_DeleteAsync(user.Id)))
             {
                 _snackBar.Add(_localizer["User Deleted"], Severity.Success);
                 await GetUsersAsync();

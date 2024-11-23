@@ -50,7 +50,7 @@
                     <MudAutocomplete T="int" Label="@_localizer["Document Type"]" For="@(() => AddEditDocumentModel.DocumentTypeId)" @bind-Value="AddEditDocumentModel.DocumentTypeId" ResetValueOnEmptyText="true" SearchFunc="@SearchDocumentTypes" Variant="Variant.Filled" ToStringFunc="@(i => _documentTypes.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <MudCheckBox For="@(() => AddEditDocumentModel.IsPublic)" @bind-Checked="AddEditDocumentModel.IsPublic" Label="@_localizer["Is Public?"]" />
+                    <MudCheckBox For="@(() => AddEditDocumentModel.IsPublic)" @bind-Value="AddEditDocumentModel.IsPublic" Label="@_localizer["Is Public?"]" />
                 </MudItem>
                 <MudItem xs="12" md="6">
                     <MudItem>
@@ -70,7 +70,7 @@
                                            Variant="Variant.Text"
                                            Color="Color.Primary"
                                            Size="Size.Small"
-                                           StartIcon="@Icons.Filled.CloudUpload"
+                                           StartIcon="@Icons.Material.Filled.CloudUpload"
                                            for="fileInput">
                                     @_localizer["Upload"]
                                 </MudButton>
@@ -79,7 +79,7 @@
                             {
                                 <MudButton Variant="Variant.Text"
                                            Color="Color.Secondary"
-                                           StartIcon="@Icons.Filled.OpenInNew"
+                                           StartIcon="@Icons.Material.Filled.OpenInNew"
                                            Size="Size.Small"
                                            Link="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" Target="_blank">
                                     @_localizer["Open"]

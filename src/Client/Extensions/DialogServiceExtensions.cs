@@ -43,7 +43,7 @@ public static class DialogServiceExtensions
             CloseButton = true,
             MaxWidth = MaxWidth.Medium,
             FullWidth = true,
-            DisableBackdropClick = true,
+            BackdropClick = false,
             MaximizeButton = true,
             DragMode = MudDialogDragMode.Simple,
             Position = await PositionBasedOnMouse(),

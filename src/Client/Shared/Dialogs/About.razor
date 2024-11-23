@@ -1,4 +1,5 @@
 @using Nextended.Core.Encryption
+@using Nextended.Core.Extensions
 @inject Microsoft.Extensions.Localization.IStringLocalizer<About> localizer
 <MudDialog Class="mud-ex-dialog-initial" ClassContent="">
     <TitleContent>
@@ -14,15 +15,18 @@
         <MudCard Class="m-4">
             <MudCardContent>
                 <MudText GutterBottom="true" Typo="Typo.button"><b>Server</b></MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2">@ServerInfo.ApplicationName</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @ServerInfo.AssemblyVersion</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ServerInfo.Runtime</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ServerInfo.System</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@ServerInfo?.ApplicationName</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @ServerInfo?.AssemblyVersion</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ServerInfo?.Runtime</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ServerInfo?.System</MudText>
                 <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Api"]</b> <MudLink Typo="Typo.body2" Target="_blank" Href="@(_api.SwaggerUrl)">@_api.BaseUrl</MudLink></MudText>
                 <MudText Align="Align.Center" Typo="Typo.subtitle2">@localizer["API-Versions"]</MudText>
-                @foreach (var v in ApiVersions)
+                @if (ApiVersions != null && ApiVersions.Any())
                 {
-                    <MudText Align="Align.Center" Typo="Typo.body2">@v</MudText>
+                    @foreach (var v in ApiVersions)
+                    {
+                        <MudText Align="Align.Center" Typo="Typo.body2">@v</MudText>
+                    }
                 }
             </MudCardContent>
         </MudCard>
@@ -30,10 +34,10 @@
         <MudCard Class="m-4">
             <MudCardContent>
                 <MudText GutterBottom="true" Typo="Typo.button"><b>Client</b></MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2">@ClientInfo.ApplicationName</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @ClientInfo.AssemblyVersion</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ClientInfo.Runtime</MudText>
-                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ClientInfo.System</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2">@ClientInfo?.ApplicationName</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Version"]</b> @ClientInfo?.AssemblyVersion</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["Runtime"]</b> @ClientInfo?.Runtime</MudText>
+                <MudText Align="Align.Center" Typo="Typo.body2"><b>@localizer["System"]</b> @ClientInfo?.System</MudText>
             </MudCardContent>
         </MudCard>
 

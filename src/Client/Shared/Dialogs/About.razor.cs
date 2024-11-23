@@ -12,9 +12,9 @@ namespace Coworkee.Client.Shared.Dialogs
     {
         [Parameter] public VersionInfoModel ClientInfo { get; set; }
         [Parameter] public VersionInfoModel ServerInfo { get; set; }
-        [Parameter] public IList<string> ApiVersions { get; set; }
+        [Parameter] public IList<string>? ApiVersions { get; set; }
 
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
 
 
         public void Close()

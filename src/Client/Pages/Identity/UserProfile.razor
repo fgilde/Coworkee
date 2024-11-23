@@ -22,8 +22,8 @@
                             </MudCardHeader>
                             <MudCardContent Class="pa-46" Style="padding: 26px !important">
                                 <MudGrid>
-                                    <MudCheckBox @bind-Checked="@user.IsActive" Label="@_localizer["Active?"]" Color="Color.Primary"></MudCheckBox>
-                                    <MudCheckBox Class="ml-5" @bind-Checked="@user.EmailConfirmed" Label="@_localizer["Email Confirmation"]" Color="Color.Primary"></MudCheckBox>
+                                    <MudCheckBox @bind-Value="@user.IsActive" Label="@_localizer["Active?"]" Color="Color.Primary"></MudCheckBox>
+                                    <MudCheckBox Class="ml-5" @bind-Value="@user.EmailConfirmed" Label="@_localizer["Email Confirmation"]" Color="Color.Primary"></MudCheckBox>
                                     <MudButton Style="align-self: center" Variant="Variant.Outlined" Color="Color.Error" Class="ml-5" OnClick="LogoutUser" ButtonType="ButtonType.Submit">@_localizer["Logout user"]</MudButton>
                                     <MudButton Style="align-self: center" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="ToggleUserStatus" ButtonType="ButtonType.Submit">@_localizer["Save Changes"]</MudButton>
                                 </MudGrid>

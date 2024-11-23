@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Coworkee.Client.Enums;
 using System.Security.Claims;
 using Coworkee.Application.Common.Extensions;
+using MudBlazor.Extensions.Core.Enums;
 
 namespace Coworkee.Client.Shared;
 
@@ -82,7 +83,7 @@ public partial class MainNavMenuDrawer
     private bool ShowLogoInMenu() => (Open && (Layout?.CurrentTheme?.ShowLogoInNavMenu ?? !Pinned));
     private bool ShowUserInMenu() => (Open && (Layout?.CurrentTheme?.ShowUserCardInNavigation ?? !Pinned));
 
-    private ExpandMode GetExpandMode() => Layout?.CurrentTheme?.CanChangeDrawerExpandMode == true ? (SingleExpand ? ExpandMode.SingleExpand : ExpandMode.Default) : (Layout?.CurrentTheme?.NavMenuExpandMode ?? ExpandMode.Default);
+    private TreeViewExpandBehaviour GetExpandMode() => Layout?.CurrentTheme?.CanChangeDrawerExpandMode == true ? (SingleExpand ? TreeViewExpandBehaviour.SingleExpand : TreeViewExpandBehaviour.Default) : (Layout?.CurrentTheme?.NavMenuExpandMode ?? TreeViewExpandBehaviour.Default);
 
     private string SettingsContainerStyle()
     {

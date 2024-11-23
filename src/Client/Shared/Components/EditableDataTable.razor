@@ -1,6 +1,7 @@
 @typeparam TResult
 @typeparam TIdType
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditableDataTable<TResult, TIdType>> _localizer
+@using System.Threading
 @using Coworkee.Client.Pages.Catalog
 @using Nextended.Core.Extensions
 @using Coworkee.Application.Contracts.Enums
@@ -38,7 +39,7 @@ else
           RowStyleFunc="@RowRenderStyle"
           Elevation="@Elevation"
           Filter="@(ApiLoadPaged == null && ApiLoad != null ? new Func<TResult, bool>(LocalFilter) : null)"
-          ServerData="@(ApiLoadPaged != null ? (new Func<TableState, Task<TableData<TResult>>>(ServerReload)) : null)"
+          ServerData="@(ApiLoadPaged != null ? (new Func<TableState, CancellationToken, Task<TableData<TResult>>>(ServerReload)) : null)"
           Hover="true" Dense="true" Bordered="false" Striped="true"
           @ref="_table">
         <ToolBarContent>
@@ -75,7 +76,7 @@ else
 
             @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
             {
-                <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" DisableElevation Label="@_localizer["With_Selected", _selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" DisableElevation Label="@_localizer["With_Selected", _selectedItems.Count]" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Bottom" OffsetY="true" Dense="true">
 
                     @foreach (var action in GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.MultipleOnly))
                     {

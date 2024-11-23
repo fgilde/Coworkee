@@ -73,7 +73,7 @@ namespace Coworkee.Client.Pages.Misc
             var dialog = await _dialogService.ShowWithDefaultOptionsAsync<AddEditDocumentTypeModal>(arg == null ? _localizer["Create"] : _localizer["Edit"], parameters);
             var result = await dialog.Result;
 
-            return !result.Cancelled;
+            return !result.Canceled;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Coworkee.Client.Pages.Identity
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private readonly RegisterRequest _registerUserModel = new();
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
 
         private void Cancel()
         {

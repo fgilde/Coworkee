@@ -52,7 +52,7 @@
                                     <MudText Typo="Typo.body2">@localizer[role.RoleDescription ?? ""]</MudText>
                                 </CardHeaderContent>
                                 <CardHeaderActions>
-                                    <MudCheckBox CheckedChanged="@(new Action<bool>(e => AddUpdateRole(role)))" Checked="@IsSelected(role)"></MudCheckBox>
+                                    <MudCheckBox ValueChanged="@(new Action<bool>(e => AddUpdateRole(role)))" Value="@IsSelected(role)"></MudCheckBox>
                                 </CardHeaderActions>
                             </MudCardHeader>
                         </MudCard>

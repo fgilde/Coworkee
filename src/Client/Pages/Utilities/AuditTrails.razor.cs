@@ -148,7 +148,7 @@ namespace Coworkee.Client.Pages.Utilities
             await GetDataAsync();
             StateHasChanged();
         }
-
+        
         public class RelatedAuditTrail : AuditDto
         {
             public bool ShowDetails { get; set; } = false;
@@ -159,5 +159,6 @@ namespace Coworkee.Client.Pages.Utilities
         {
             return HubConnection.TryDisposeAsync();
         }
+
     }
 }

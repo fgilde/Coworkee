@@ -15,7 +15,7 @@ namespace Coworkee.Client.Pages.Misc
     public partial class AddEditDocumentTypeModal: IAsyncDisposable
     {
         [Parameter] public DocumentTypeDto AddEditDocumentTypeModel { get; set; } = new();
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;

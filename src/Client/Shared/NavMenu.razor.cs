@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Client.Enums;
 using Coworkee.Client.Extensions;
-using Coworkee.Client.Models;
+using Coworkee.Client.JsInterop;
 using Coworkee.Client.Models.Navigation;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using MudBlazor.Extensions.Components;
+using MudBlazor.Extensions.Core.Enums;
 using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 
@@ -20,32 +23,75 @@ namespace Coworkee.Client.Shared
         [CascadingParameter]
         internal ClaimsPrincipal User { get; set; }
 
-        private ExpandMode _expandMode;
-
+  
         [Parameter] public bool IsMini { get; set; }
 
-        [Parameter] public bool ShowUserCard { get; set; } = true;     
-        
+        [Parameter] public bool ShowUserCard { get; set; } = true;
+
         [Parameter] public bool ShowApplicationLogo { get; set; } = false;
 
-        [Parameter]
-        public ExpandMode ExpandMode
+        private NavigationEntry _selectedNavEntry;
+        private TreeViewExpandBehaviour _expandBehaviour;
+        private TreeViewMode _viewMode = TreeViewMode.Default;
+
+        public NavigationEntry SelectedNavEntry
         {
-            get => _expandMode;
+            get => _selectedNavEntry;
             set
             {
-                if (value != _expandMode)
+                if (_selectedNavEntry != value)
                 {
-                    _expandMode = value;
-                    SetAllExpanded(ExpandMode != ExpandMode.SingleExpand);
+                    _selectedNavEntry = value;
+                    if (HasAction(value))
+                    {
+                        try
+                        {
+                            if (!string.IsNullOrEmpty(value.Target))
+                                _ = ServiceAccessor.Get<IJSRuntime>().InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "navigateToExternalUrl"), value.Href, value.Target);
+                            else
+                                _navigationManager.NavigateTo(value.Href);
+                        }
+                        catch
+                        { }
+                    }
                 }
             }
         }
 
-        [Parameter] public HashSet<NavigationEntry> Entries { get; set; } 
-        
+        [Parameter]
+        public TreeViewMode ViewMode
+        {
+            get => IsMini ? TreeViewMode.FlatList : _viewMode;
+            set
+            {
+                if (IsMini || _viewMode == value)
+                    return;
+                _viewMode = value;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        [Parameter]
+        public TreeViewExpandBehaviour ExpandBehaviour
+        {
+            get => _expandBehaviour;
+            set
+            {
+                if (value != _expandBehaviour)
+                {
+                    _expandBehaviour = value;
+                    InvokeAsync(StateHasChanged);
+                }
+            }
+        }
+
+        [Parameter] public HashSet<NavigationEntry> Entries { get; set; }
+
         [Parameter] public EventCallback Logout { get; set; }
         
+        public HashSet<NavigationEntry> AuthorizedEntries => Entries.Where(IsAuthorized).ToHashSet();
+
+        private bool IsAuthorized(TreeViewItemContext<NavigationEntry> entry) => IsAuthorized(entry.Value);
         private bool IsAuthorized(NavigationEntry entry)
         {
             bool result = (!entry.IsAuthenticationRequired || (User?.Identity?.IsAuthenticated == true && !User.IsGuest()))
@@ -63,9 +109,13 @@ namespace Coworkee.Client.Shared
         protected override Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-                SetAllExpanded(ExpandMode != ExpandMode.SingleExpand);
+            {
+                _navigationManager.LocationChanged += (s, e) => ExpandToCurrentUrl();
+            }
+
             return base.OnAfterRenderAsync(firstRender);
         }
+
 
         protected override void OnParametersSet()
         {
@@ -76,21 +126,16 @@ namespace Coworkee.Client.Shared
 
         private void ExpandToCurrentUrl()
         {
+            var current = SelectedNavEntry;
             var url = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
-            if (ExpandMode != ExpandMode.None)
-            {
-                if (!string.IsNullOrWhiteSpace(url) && url != "/")
-                {
-                    FindEntriesForUrl(url)
-                        .SelectMany(e => e.Path)
-                        .Apply(e => e.IsExpanded = true);
-                }
-            }
+            SelectedNavEntry = FindEntriesForUrl(url)?.FirstOrDefault();
+            if (SelectedNavEntry != null && SelectedNavEntry != current)
+                InvokeAsync(StateHasChanged);
         }
 
         public string Locale(string s)
         {
-            return _localizer != null ? _localizer[s??""] : s??"";
+            return _localizer != null ? _localizer[s ?? ""] : s ?? "";
         }
 
         public IEnumerable<NavigationEntry> FindEntriesForUrl(string url = null)
@@ -99,32 +144,8 @@ namespace Coworkee.Client.Shared
             return Entries.Find(e => e.Href.EnsureStartsWith("/").ToLower() == url);
         }
 
-        private void OnExpandCollapseClick(NavigationEntry entry)
-        {
-            if (ExpandMode != ExpandMode.None)
-            {
-                var state = !entry.IsExpanded;
-                if (ExpandMode == ExpandMode.SingleExpand && !IsMini)
-                    SetAllExpanded(false, e => e != entry && !e.ContainsChild(entry));
-                entry.IsExpanded = state;
-            }
-        }
-
-        private void SetAllExpanded(bool expand, Func<NavigationEntry, bool> predicate = null)
-        {
-            predicate ??= n => ExpandMode == ExpandMode.SingleExpand || n.Parent == null;
-            Entries.Recursive(n => n.Children.EmptyIfNull()).Where(predicate).Apply(e => e.IsExpanded = expand);
-        }
-
-        private bool HasAction(NavigationEntry entry)
-        {
-            return !string.IsNullOrWhiteSpace(entry.Href);
-        }
-
-        private bool CanExpand(NavigationEntry context)
-        {
-            return context.HasChildren && ExpandMode != ExpandMode.None && (context.Parent == null || context.Parent.IsExpanded);
-        }
+        
+        private bool HasAction(NavigationEntry entry) => !string.IsNullOrWhiteSpace(entry?.Href);
     }
 
 }

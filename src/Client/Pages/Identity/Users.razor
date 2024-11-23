@@ -75,10 +75,10 @@ else
             <MudTd DataLabel="Date Created">
                 <MudHighlighter Text="@context.CreatedOn.AsClientLocalTime().ToString("G", CultureInfo.CurrentCulture)" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="EmailConfirmed"><MudCheckBox @bind-Checked="@context.EmailConfirmed" ReadOnly Color="Color.Secondary"></MudCheckBox></MudTd>
-            <MudTd DataLabel="Active"><MudCheckBox @bind-Checked="@context.IsActive" ReadOnly Color="Color.Secondary"></MudCheckBox></MudTd>
+            <MudTd DataLabel="EmailConfirmed"><MudCheckBox @bind-Value="@context.EmailConfirmed" ReadOnly Color="Color.Secondary"></MudCheckBox></MudTd>
+            <MudTd DataLabel="Active"><MudCheckBox @bind-Value="@context.IsActive" ReadOnly Color="Color.Secondary"></MudCheckBox></MudTd>
             <MudTd DataLabel="Actions" Style="text-align:right">
-                <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
                     <MudMenuItem OnClick="(()=>ViewProfile(context.Id))">@_localizer["View Profile"]</MudMenuItem>
                     @if (_canViewRoles)
                         {

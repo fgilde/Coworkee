@@ -14,7 +14,7 @@
     <MudTooltip Text="@localizer["Notifications"]">
 
         <MudBadge Origin="Origin.CenterRight" BadgeClass="notification-badge" Content="@_unreadCount" Visible="@HasUnread()" Color="Color.Warning" Overlap="true">
-            <MudToggleIconButton Class="@($"{MainClass}-toggle-button")" @bind-Toggled="@IsOpen" Icon="@Icons.Material.Outlined.Notifications" Color="@(HasUnread() ? Color.Warning : Color.Inherit)" ToggledIcon="@Icons.Filled.Notifications" ToggledColor="@Color.Secondary" />
+            <MudToggleIconButton Class="@($"{MainClass}-toggle-button")" @bind-Toggled="@IsOpen" Icon="@Icons.Material.Outlined.Notifications" Color="@(HasUnread() ? Color.Warning : Color.Inherit)" ToggledIcon="@Icons.Material.Filled.Notifications" ToggledColor="@Color.Secondary" />
         </MudBadge>
 
         <MudPopover Class="@(_animate ? $"{MainClass}-popover {animationCls}" : $"{MainClass}-popover")" Style="@($"{rtlBasedStyle} margin-top: 10px;")" Open="@IsOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="900">
@@ -91,7 +91,7 @@
                     @if (notifications.TotalPages > 1)
                     {
                         <MudDivider />
-                        <MudListItem>
+                        <MudListItem T="object">
                             <div class="d-flex flex-column align-center">
                                 <MudPagination Color="Color.Primary" Count="@notifications.TotalPages" Selected="@_currentPage" SelectedChanged="@(i => LoadData(i))" />
                             </div>

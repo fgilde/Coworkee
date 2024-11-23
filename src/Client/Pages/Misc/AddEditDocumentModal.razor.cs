@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Coworkee.Application.Common.Models;
@@ -25,7 +26,7 @@ namespace Coworkee.Client.Pages.Misc
     {
 
         [Parameter] public DocumentDto AddEditDocumentModel { get; set; } = new();
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private Stream _currentContentStream;
@@ -87,7 +88,7 @@ namespace Coworkee.Client.Pages.Misc
             }
         }
 
-        private async Task<IEnumerable<int>> SearchDocumentTypes(string value)
+        private async Task<IEnumerable<int>> SearchDocumentTypes(string value, CancellationToken cancellationToken = default)
         {
             // In real life use an asynchronous function for fetching data from an api.
             await Task.Delay(5);

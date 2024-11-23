@@ -50,7 +50,7 @@ public partial class MainAppBar
         await _dialogService.ShowWithDefaultOptionsAsync<Dialogs.About>(localizer["about"], null, o =>
         {
             o.MaxWidth = MaxWidth.Small;
-            o.DisableBackdropClick = false;
+            o.BackdropClick = true;
             o.MaximizeButton = false;
         });
     }
@@ -85,10 +85,10 @@ public partial class MainAppBar
             
         }, new DialogOptionsEx
         {
-            Buttons = new[] { new MudDialogButton(DotNetObjectReference.Create(this as object), nameof(PinAssistantClick)) { Icon = Icons.Filled.PushPin } },
+            Buttons = new[] { new MudDialogButton(DotNetObjectReference.Create(this as object), nameof(PinAssistantClick)) { Icon = Icons.Material.Filled.PushPin } },
             CloseButton = true,
             AnimationDurationInMs = 250,
-            DisableBackdropClick = true,
+            BackdropClick = false,
             DisablePositionMargin = true,
             Resizeable = true,
             DragMode = MudDialogDragMode.Simple,

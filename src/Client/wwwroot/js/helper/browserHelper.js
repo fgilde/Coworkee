@@ -85,9 +85,9 @@ export class BrowserHelper {
             return {};
         }
     }
-    navigateToExternalUrl(url) {
+    navigateToExternalUrl(url, target) {
         // noreferrer is important that's because otherwise the new window is opened in the same process with the opener window.
-        window.open(url, '_blank', 'noreferrer');
+        window.open(url, target || '_blank', 'noreferrer');
     }
     /**
     * Resolves a promise filled with the value from given expression after the expression function returns a value.

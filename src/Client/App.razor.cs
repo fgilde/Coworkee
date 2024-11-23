@@ -5,6 +5,8 @@ using Coworkee.Client.Extensions;
 using Coworkee.Client.Localization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
+using MudBlazor;
+using MudBlazor.Extensions.Components;
 
 namespace Coworkee.Client;
 

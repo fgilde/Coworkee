@@ -130,7 +130,7 @@ namespace Coworkee.Client.Pages.Identity
                         {nameof(PermissionsRequired.RequiredClaims), neededAdditionalPermissions},
                         {nameof(PermissionsRequired.Message), string.Format(message, neededAdditionalPermissions.Length, _localizer[context.ClaimValue])}
                     };
-                    var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, FullScreen = false, DisableBackdropClick = true };
+                    var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, FullScreen = false, BackdropClick = false };
                     var dialog = await _dialogService.ShowEx<PermissionsRequired>(_localizer["Dependent permissions required"], parameters, options);
                     var result = await dialog.Result;
                     if (!result.Canceled)

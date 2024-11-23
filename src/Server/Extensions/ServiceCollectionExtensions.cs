@@ -55,17 +55,23 @@ namespace Coworkee.Server.Extensions
     {
         internal static IServiceCollection AddGptAssistant(this IServiceCollection services, IConfiguration configuration)
         {
-            
-            var gptConfig = ServerConfiguration.Instance.CognitiveServices.OpenAi;
-            var assistantAvailable = ServerConfiguration.Instance.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
-            configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
-            if (assistantAvailable)
+            try
             {
-                services.AddGptActionInvoker(settings =>
+                var gptConfig = ServerConfiguration.Instance.CognitiveServices.OpenAi;
+                var assistantAvailable = ServerConfiguration.Instance.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
+                configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
+                if (assistantAvailable)
                 {
-                    settings.ApiKey = gptConfig.ApiKey;
-                    settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
-                }, typeof(AddProduct).Assembly);
+                    services.AddGptActionInvoker(settings =>
+                    {
+                        settings.ApiKey = gptConfig.ApiKey;
+                        settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
+                    }, typeof(AddProduct).Assembly);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
             return services;
         }

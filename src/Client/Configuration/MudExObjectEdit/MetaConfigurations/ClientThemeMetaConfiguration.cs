@@ -12,7 +12,7 @@ public class ClientThemeMetaConfiguration : IObjectMetaConfiguration<ClientTheme
     {
         meta.Property(c => c.LayoutProperties).Children.Recursive(om => om.Children).Ignore();
         //meta.Property(c => c.PaletteDark).Children.Recursive(om => om.Children).Ignore();
-        meta.Property(c => c.Palette).Children.Recursive(om => om.Children).WrapInMudItem(i => i.xs = 6);
+        meta.Property(c => c.PaletteLight).Children.Recursive(om => om.Children).WrapInMudItem(i => i.xs = 6);
         meta.Property(c => c.PaletteDark).Children.Recursive(om => om.Children).WrapInMudItem(i => i.xs = 6);
         return Task.CompletedTask;
     }

@@ -77,12 +77,12 @@ namespace Coworkee.Client.ErrorHandling
                         var parameters = new DialogParameters
                         {
                             {nameof(MudExMessageDialog.Message), $"{details.Detail}"},
-                            {nameof(MudExMessageDialog.Icon), Icons.Filled.Error},
+                            {nameof(MudExMessageDialog.Icon), Icons.Material.Filled.Error},
                             {nameof(MudExMessageDialog.Buttons), actions},
                         };
-                        var options = new DialogOptionsEx { CloseButton = true, Resizeable = true, DragMode = MudDialogDragMode.Simple, DisableBackdropClick = false };
+                        var options = new DialogOptionsEx { CloseButton = true, Resizeable = true, DragMode = MudDialogDragMode.Simple, BackdropClick = true };
                         var dialog = await _dialogService.ShowEx<MudExMessageDialog>(details.Title, parameters, options);
-                        if (!(await dialog.Result).Cancelled)
+                        if (!(await dialog.Result).Canceled)
                         {
                             _navigationManager.NavigateToUnknown($"https://www.google.de/search?q={Uri.EscapeDataString(details.Detail)}");
                         }

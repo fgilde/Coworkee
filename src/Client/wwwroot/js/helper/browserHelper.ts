@@ -103,9 +103,9 @@
         }
     }
 
-    public navigateToExternalUrl(url: string): void {
+    public navigateToExternalUrl(url: string, target: string): void {
         // noreferrer is important that's because otherwise the new window is opened in the same process with the opener window.
-        window.open(url, '_blank', 'noreferrer');
+        window.open(url, target || '_blank', 'noreferrer');
     }
 
     /**

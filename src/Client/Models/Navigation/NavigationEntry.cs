@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using Coworkee.Application.Common.Security;
-using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 
 namespace Coworkee.Client.Models.Navigation
@@ -15,6 +12,10 @@ namespace Coworkee.Client.Models.Navigation
             Href = href;
             Target = target;
         }
+
+        public NavigationEntry()
+        {}
+
         public string Text { get; set; }
         public string Icon { get; set; }
         public string Href { get; set; }
@@ -54,6 +55,9 @@ namespace Coworkee.Client.Models.Navigation
             Roles = roles;
             return this;
         }
-
+        public override string ToString()
+        {
+            return Text;
+        }
     }
 }

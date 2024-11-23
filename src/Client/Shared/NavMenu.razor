@@ -1,10 +1,13 @@
 @using Nextended.Core.Extensions
 @using Coworkee.Application.Common.Extensions
+@using Coworkee.Client.Models.Navigation
+@using MudBlazor.Extensions.Core
+@using MudBlazor.Extensions.Core.Enums
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> _localizer
 
 <ReactOnPreferenceChanged Component="this" />
 <div>
-    @if (ShowApplicationLogo)
+    @if (ShowApplicationLogo && !IsMini)
     {
         <div class="d-flex justify-center mt-4 mb-4">
             <ApplicationLogo />
@@ -27,57 +30,54 @@
         <MudDivider Class="mb-2" />
     }
 
-    <MudNavMenu>
-        <MudTreeView Items="@Entries">
-            <ItemTemplate>
-                @if (IsAuthorized(context))
-                {
-                    if (IsMini)
+    @if (Entries != null)
+    {
+        <MudExTreeView SelectedItemBackgroundColor="@(SelectedNavEntry?.HasChildren == true || ViewMode != TreeViewMode.Default ? MudExColor.Default : MudExColor.HoverBackground)"
+                       @bind-SelectedNode="SelectedNavEntry"
+                       AllowedToSelectFunc="@HasAction"
+                       ItemContentStyle="font-size:14px;"
+                       FilterChipsPlacedRight="true"
+                       ExpandOnFilter="true"
+                       Parameters="@(new Dictionary<string, object>() { { nameof(ExpandBehaviour), ExpandBehaviour }, { nameof(MudExTreeViewList<NavigationEntry>.RenderHomeLink), false }, { nameof(MudExTreeViewList<NavigationEntry>.BackLinkLabel), "Back" } })"
+                       FilterMode="@(_themeManager.CurrentTheme?.ShowFilterInDrawer == true && !IsMini && ViewMode != TreeViewMode.Breadcrumb ? PropertyFilterMode.AlwaysVisible : PropertyFilterMode.Disabled)"
+                       FilterBoxStyle="margin:10px;"
+                       Style="margin: 0 10px;"
+                       TextFunc="@(entry => Locale(entry.Text) )"
+                       ExpandButtonDirection="LeftOrRight.Right"
+                       @bind-ViewMode="@ViewMode"
+                       ItemTemplate="@(IsMini ? MiniItemTemplate : null)"
+                       TreeViewModeToggleComponent="@(_toggleableViewModes?.Contains(ViewMode) == true ? TreeViewModeToggleComponent.ToggleButton : TreeViewModeToggleComponent.None)"
+                       ToggleableViewModes="@_toggleableViewModes"
+                       Items="@AuthorizedEntries">
+            <ItemContentTemplate>
+                <div style="display: flex; align-items: center; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    @if (!context.Value.Icon.IsNullOrWhiteSpace())
                     {
-                        context.IsExpanded = true;
+                        <MudIcon Icon="@context.Value.Icon" Class="ml-0 mr-2" />
                     }
-                    <MudTreeViewItem @bind-Expanded="@context.IsExpanded" Items="@context.Children">
-                        <Content>
-                            @if (HasAction(context))
-                            {
-                            @if (IsMini)
-                                {
-                                <MudTooltip Placement="Placement.End" Arrow="false" Inline="false" Text="@_localizer[context.Text]">
-                                    <MudNavLink Class="mini-nav-link" Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
-                                    </MudNavLink>
-                                </MudTooltip>
-                                }
-                                else
-                                {
-                                <MudNavLink Href="@context.Href" Match="@(context.Href == "/" ? NavLinkMatch.All : NavLinkMatch.Prefix)" Target="@context.Target" Icon="@context.Icon">
-                                    @_localizer[context.Text]
-                                </MudNavLink>
-                                }
-                            }
-                            else
-                            {
-                            @if (!context.Icon.IsNullOrWhiteSpace())
-                                {
-                                <MudIcon Icon="@context.Icon" Class="ml-0 mr-2" Color="@Color.Default" />
-                                }
-                            @if (!IsMini)
-                                {
-                                <MudListSubheader Class="@(CanExpand(context) ? "cursor-pointer" : "")" @onclick="() => OnExpandCollapseClick(context)">@_localizer[context.Text]</MudListSubheader>
-
-                                <div class="apply-right">
-                                    <MudTreeViewItemToggleButton Visible="CanExpand(context)" Expanded="context.IsExpanded" ExpandedChanged="() => OnExpandCollapseClick(context)" />
-                                </div>
-                                }
-                                else
-                                {
-                                <MudDivider Class="mini-divider" />
-                                }
-                            }
-                    </Content>
-                </MudTreeViewItem>
-                }
-            </ItemTemplate>
-        </MudTreeView>
-    </MudNavMenu>
-
+                    @context.TreeView.RenderItemContent(context)
+                    @RenderChipIf(context.Value)
+                </div>
+            </ItemContentTemplate>
+        </MudExTreeView>
+    }
 </div>
+
+@code {
+
+    private RenderFragment MiniItemTemplate(TreeViewItemContext<NavigationEntry> context)
+    {
+        return @<RenderChild Condition="@HasAction(context.Value)">
+            <MudExIconButton Size="Size.Small" OnClick="@(() => context.TreeView.NodeClick(context.Value))" ToolTip="@context.TreeView.TextFunc(context.Value)" Icon="@context.Value.Icon" Class="ml-1 mt-1" />
+        </RenderChild>;
+    }
+    private TreeViewMode[] _toggleableViewModes => IsMini ? [] : new[] { TreeViewMode.Default, TreeViewMode.List, TreeViewMode.FlatList };
+    private RenderFragment RenderChipIf(NavigationEntry context)
+    {
+        // if (true)
+        // {
+        //     return @<MudChip T="NavigationEntry" Style="margin-left: 8px; margin-top: 0;" Size="Size.Small" Variant="Variant.Text" Color="Color.Warning">H</MudChip>;
+        // }
+        return @<p></p>;
+    }
+}

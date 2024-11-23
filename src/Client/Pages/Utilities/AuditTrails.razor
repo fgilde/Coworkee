@@ -26,7 +26,7 @@ else
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent Class="pa-46" Style="padding:26px!important">
-                    <UserFilter SelectedValues="@currentUserFilter" SelectedValuesChanged="@UserChanged"></UserFilter>
+                    @* <UserFilter SelectedValues="@currentUserFilter" SelectedValuesChanged="@(UserChanged)"></UserFilter> *@
                 </MudCardContent>
             </MudCard>
         </MudItem>
@@ -53,15 +53,15 @@ else
                     <MudTh colspan="2">
                         <MudDateRangePicker @ref="_dateRangePicker" PickerVariant="PickerVariant.Dialog" Label="@_localizer["Date Range For Searching"]" @bind-DateRange="_dateRange">
                             <PickerActions>
-                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.Clear())">@_localizer["Clear"]</MudButton>
-                                <MudButton OnClick="@(() => _dateRangePicker.Close(false))">@_localizer["Cancel"]</MudButton>
-                                <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.Close())">@_localizer["Ok"]</MudButton>
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.ClearAsync())">@_localizer["Clear"]</MudButton>
+                                <MudButton OnClick="@(() => _dateRangePicker.CloseAsync(false))">@_localizer["Cancel"]</MudButton>
+                                <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.CloseAsync())">@_localizer["Ok"]</MudButton>
                             </PickerActions>
                         </MudDateRangePicker>
                     </MudTh>
                     <MudTh colspan="3" Style="text-align: right">
-                        <MudSwitch @bind-Checked="@_searchInOldValues" Color="Color.Primary" Style="margin-left: 5px;">@_localizer["Search in Old Values"]</MudSwitch>
-                        <MudSwitch @bind-Checked="@_searchInNewValues" Color="Color.Primary" Style="margin-left: 5px;">@_localizer["Search in New Values"]</MudSwitch>
+                        <MudSwitch @bind-Value="@_searchInOldValues" Color="Color.Primary" Style="margin-left: 5px;">@_localizer["Search in Old Values"]</MudSwitch>
+                        <MudSwitch @bind-Value="@_searchInNewValues" Color="Color.Primary" Style="margin-left: 5px;">@_localizer["Search in New Values"]</MudSwitch>
                     </MudTh>
                 </MudTHeadRow>
                 }
@@ -81,10 +81,10 @@ else
             </MudTd>
             <MudTd DataLabel="Date">
                 <MudItem>
-                    <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Secondary" Label="true" Color="Color.Surface">@_localizer["Local"] : @context.LocalTime.ToString("G", CultureInfo.CurrentCulture)</MudChip>
+                    <MudChip T="object" Icon="@Icons.Material.Filled.Watch" IconColor="Color.Secondary" Label="true" Color="Color.Surface">@_localizer["Local"] : @context.LocalTime.ToString("G", CultureInfo.CurrentCulture)</MudChip>
                 </MudItem>
                 <MudItem>
-                    <MudChip Icon="@Icons.Material.Filled.Watch" IconColor="Color.Secondary" Label="true" Color="Color.Surface">@_localizer["UTC"] : @context.DateTime.ToString("G", CultureInfo.CurrentCulture)</MudChip>
+                    <MudChip T="object" Icon="@Icons.Material.Filled.Watch" IconColor="Color.Secondary" Label="true" Color="Color.Surface">@_localizer["UTC"] : @context.DateTime.ToString("G", CultureInfo.CurrentCulture)</MudChip>
                 </MudItem>
             </MudTd>
             <MudTd DataLabel="Type">@context.Type</MudTd>
@@ -92,7 +92,7 @@ else
                 <UserCard UserData="@(allUsers?.Any() == true ? allUsers.FirstOrDefault(r => r.Id == context.UserId) : currentUserFilter.FirstOrDefault(r => r.Id == context.UserId))" UserId="@context.UserId"></UserCard>
             </MudTd>
             <MudTd Style="text-align:right">
-                <MudButton Variant="Variant.Filled" DisableElevation="true" EndIcon="@(context.ShowDetails ? Icons.Filled.KeyboardArrowUp: Icons.Filled.KeyboardArrowDown)" IconColor="Color.Secondary" OnClick="@(() => ShowBtnPress(context))">@_localizer["Trail Details"]</MudButton>
+                <MudButton Variant="Variant.Filled" DisableElevation="true" EndIcon="@(context.ShowDetails ? Icons.Material.Filled.KeyboardArrowUp: Icons.Material.Filled.KeyboardArrowDown)" IconColor="Color.Secondary" OnClick="@(() => ShowBtnPress(context))">@_localizer["Trail Details"]</MudButton>
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
@@ -117,7 +117,7 @@ else
                                                     <MudItem>
                                                         @foreach (var column in context.AffectedColumns.Trim('[').Trim(']').Split(','))
                                                             {
-                                                            <MudChip Label="true" Color="Color.Surface">@column.Replace('"', ' ').Trim()</MudChip>
+                                                            <MudChip T="object" Label="true" Color="Color.Surface">@column.Replace('"', ' ').Trim()</MudChip>
                                                             }
                                                     </MudItem>
                                                 </td>
@@ -127,7 +127,7 @@ else
                                             <td>@_localizer["Primary Key"]</td>
                                             <td>
                                                 <MudItem>
-                                                    <MudChip Label="true" Color="Color.Surface">@context.PrimaryKey.Trim('{').Trim('}').Replace('"', ' ').Trim()</MudChip>
+                                                    <MudChip T="object" Label="true" Color="Color.Surface">@context.PrimaryKey.Trim('{').Trim('}').Replace('"', ' ').Trim()</MudChip>
                                                 </MudItem>
                                             </td>
                                         </tr>
@@ -143,13 +143,13 @@ else
                                                             {
                                                             @if (_searchInOldValues)
                                                                 {
-                                                                <MudChip Label="true" Color="Color.Warning">
+                                                                <MudChip T="object" Label="true" Color="Color.Warning">
                                                                     <MudHighlighter Text="@value.Replace('"', ' ').Trim()" HighlightedText="@_searchString" />
                                                                 </MudChip>
                                                                 }
                                                                 else
                                                                 {
-                                                                <MudChip Label="true" Color="Color.Warning">@value.Replace('"', ' ').Trim()</MudChip>
+                                                                <MudChip T="object" Label="true" Color="Color.Warning">@value.Replace('"', ' ').Trim()</MudChip>
                                                                 }
                                                             }
                                                     </MudItem>
@@ -167,13 +167,13 @@ else
                                                             {
                                                             @if (_searchInNewValues)
                                                                 {
-                                                                <MudChip Label="true" Color="Color.Success">
+                                                                <MudChip T="object" Label="true" Color="Color.Success">
                                                                     <MudHighlighter Text="@value.Replace('"', ' ').Trim()" HighlightedText="@_searchString" />
                                                                 </MudChip>
                                                                 }
                                                                 else
                                                                 {
-                                                                <MudChip Label="true" Color="Color.Success">@value.Replace('"', ' ').Trim()</MudChip>
+                                                                <MudChip T="object" Label="true" Color="Color.Success">@value.Replace('"', ' ').Trim()</MudChip>
                                                                 }
                                                             }
                                                     </MudItem>

@@ -71,14 +71,14 @@ namespace Coworkee.Client.Pages.Identity
             var parameters = new DialogParameters
             {
                 {nameof(MudExMessageDialog.Message), $"{_localizer["Are you sure you want to force logout for user {0}", user.FullName]}"},
-                {nameof(MudExMessageDialog.Icon), Icons.Filled.Logout},
+                {nameof(MudExMessageDialog.Icon), Icons.Material.Filled.Logout},
                 {nameof(MudExMessageDialog.Class), "mud-ex-dialog-initial"},
                 {nameof(MudExMessageDialog.Buttons), actions}
             };
-            var options = new DialogOptionsEx { CloseButton = true, DisableBackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+            var options = new DialogOptionsEx { CloseButton = true, BackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
             var dialog = await _dialogService.ShowEx<MudExMessageDialog>(_localizer["Logout user"], parameters, options);
 
-            if (!(await dialog.Result).Cancelled)
+            if (!(await dialog.Result).Canceled)
             {
                 await ExecuteUserLogout();
                 _snackBar.Add(_localizer["The user {0} has been logged off", user.FullName], Severity.Success);

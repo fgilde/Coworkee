@@ -17,7 +17,7 @@
     </DialogActions>
 </MudDialog>
 @code {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
 
     [Parameter] public string OkText { get; set; } = "Ok";
     [Parameter] public string CancelText { get; set; } = "Cancel";

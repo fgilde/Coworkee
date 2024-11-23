@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Common.Models;
@@ -71,7 +72,7 @@ public partial class DocumentList
         });
     }
 
-    private async Task<TableData<DocumentDto>> ServerReload(TableState state)
+    private async Task<TableData<DocumentDto>> ServerReload(TableState state, CancellationToken cancellationToken = default)
     {
         if (!string.IsNullOrWhiteSpace(_searchString))
         {
@@ -166,7 +167,7 @@ public partial class DocumentList
             {nameof(Dialogs.DeleteConfirmation.CheckBoxLabel), "Delete file from server"},
             {nameof(Dialogs.DeleteConfirmation.IsChecked), true},
         };
-        var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
+        var options = new DialogOptionsEx { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, BackdropClick = false, Animations = DialogServiceExtensions.DefaultAnimationNoFullHeight };
         var dialog = await _dialogService.ShowEx<Shared.Dialogs.DeleteConfirmation>(_localizer["Delete"], parameters, options);
         var result = await dialog.Result;
         if (!result.Canceled)

@@ -12,7 +12,13 @@ public static class ServiceAccessor
 
     public static WebAssemblyHost MakeStaticAccessible(this WebAssemblyHost host)
     {
-        ServiceProvider = host.Services;
+        MakeStaticAccessible(host.Services);
         return host;
+    }
+
+    public static IServiceProvider MakeStaticAccessible(this IServiceProvider serviceProvider)
+    {
+        ServiceProvider = serviceProvider;
+        return serviceProvider;
     }
 }

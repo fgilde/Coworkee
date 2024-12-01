@@ -1,3 +1,4 @@
+using System;
 using Coworkee.Infrastructure.Contexts;
 using System.Linq;
 using Coworkee.Application.Contracts.Services;
@@ -30,6 +31,7 @@ namespace Coworkee.Infrastructure
 
         public void Initialize()
         {
+            _db.Database.EnsureCreated();
             // TODO: Set Culture for this scope to.. whatever
             AddRoles();
             AddUsers(new[] { ApplicationConstants.Defaults.Users.System }

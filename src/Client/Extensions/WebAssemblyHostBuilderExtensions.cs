@@ -30,7 +30,7 @@ using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Client.Configuration.MudExObjectEdit;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.Configuration;
 using Nextended.Core.Helper;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 namespace Coworkee.Client.Extensions
@@ -46,10 +46,34 @@ namespace Coworkee.Client.Extensions
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
             var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
+            PrintConfiguration(builder.Configuration);
             var logLevel = clientSettings.Logging.LogLevel.Default.ToEnum<LogLevel>();
             builder.Logging.SetMinimumLevel(logLevel);
-            builder
-            .Services
+            
+            builder.Services.AddClientServices(clientSettings);
+            return builder;
+        }
+
+        static void PrintConfiguration(IConfiguration configuration, string parentPath = "")
+        {
+            foreach (var section in configuration.GetChildren())
+            {
+                string currentPath = string.IsNullOrEmpty(parentPath) ? section.Key : $"{parentPath}:{section.Key}";
+
+                if (!string.IsNullOrEmpty(section.Value))
+                {
+                    // Ausgabe für Schlüssel-Wert-Paare
+                    Console.WriteLine($"{currentPath}: {section.Value}");
+                }
+
+                // Rekursiver Aufruf für Unterabschnitte
+                PrintConfiguration(section, currentPath);
+            }
+        }
+
+        public static IServiceCollection AddClientServices(this IServiceCollection services, ClientApplicationConfiguration clientSettings)
+        {
+            services
             .AddTransient(p => clientSettings)
                 .AddTransient(p => p.GetService<ClientApplicationConfiguration>()?.ServerConfiguration)
                 .AddLocalization(options =>
@@ -82,7 +106,7 @@ namespace Coworkee.Client.Extensions
                 .AddScoped(sp => sp
                     .GetRequiredService<IHttpClientFactory>()
                     .CreateClient(ApplicationConstants.ApplicationClientName).EnableIntercept(sp))
-                .AddHttpClient(ApplicationConstants.ApplicationClientName, client =>
+                .AddHttpClient(ApplicationConstants.ApplicationClientName, (provider, client) =>
                 {
                     client.UpdateAcceptLanguage();
                     client.BaseAddress = new Uri(clientSettings.BackendOrigin);
@@ -97,20 +121,20 @@ namespace Coworkee.Client.Extensions
 
 
             // gRPC-Web client with auth
-            builder.Services.AddGrpcDataClient((services, options) =>
+            services.AddGrpcDataClient((services, options) =>
             {
                 var authEnabledHandler = services.GetRequiredService<AuthenticationHeaderHandler>();
-                //var client = services.GetRequiredService<HttpClient>();
+                var client = services.GetRequiredService<HttpClient>();
                 authEnabledHandler.InnerHandler = new HttpClientHandler();
-                options.BaseUri = clientSettings.BackendOrigin;
+                //options.BaseUri = clientSettings.BackendOrigin;
+                options.BaseUri = client.BaseAddress.AbsoluteUri;
                 options.MessageHandler = authEnabledHandler;
             });
 
-            builder.Services.AddHttpClientInterceptor();
-            
-            // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
+            services.AddHttpClientInterceptor();
 
-            return builder;
+            // builder.Services.AddSingleton<HubConnection>(sp => HubExtensions.BuildHubConnection(clientSettings.BackendOrigin));
+            return services;
         }
 
         private static void AddGrpcDataClient(this IServiceCollection serviceCollection, Action<IServiceProvider, MainGrpcDataClientOptions> configure)

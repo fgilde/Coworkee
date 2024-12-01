@@ -3,10 +3,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Coworkee.Server</RootNamespace>
     <AssemblyName>Coworkee.Server</AssemblyName>
-    <HostClientInServer>true</HostClientInServer>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(HostClientInServer)'=='true'">
-    <DefineConstants>HostClient</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Coworkee.Server.xml</DocumentationFile>
@@ -34,6 +30,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.11" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
     <PackageReference Include="Mime" Version="3.6.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
@@ -60,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Condition="'$(HostClientInServer)' == 'true'" Include="..\Client\Client.csproj" />
+    <ProjectReference Include="..\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
@@ -78,11 +75,6 @@
 
   <ItemGroup>
     <PackageReference Include="nksoft.MakeGenericAgain" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Condition="'$(HostClientInServer)' == 'true'" Remove="wwwroot\index.html" />
-    <Content Condition="'$(HostClientInServer)' == 'true'" Remove="wwwroot\index.html" />
   </ItemGroup>
 
   <ItemGroup>

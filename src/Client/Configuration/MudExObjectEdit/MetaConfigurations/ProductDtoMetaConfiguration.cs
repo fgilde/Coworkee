@@ -15,7 +15,11 @@ public class ProductDtoMetaConfiguration : BaseDtoMetaConfiguration<ProductDto, 
     {
         meta.Property(p => p.ImageDataURL).Ignore();               
         meta.Property(p => p.UploadRequest)            
-            .WithAdditionalAttributes<MudExUploadEdit<UploadRequest>>(a => a.MimeTypes = new[] { "image/*" })            
+            .WithAdditionalAttributes<MudExUploadEdit<UploadRequest>>(a =>
+            {
+                a.MimeTypes = new[] { "image/*" };
+                a.MimeRestrictionType = RestrictionType.WhiteList;
+            })            
             .WithoutLabel()
             .WrapInMudItem(i => i.md = 12)
             .WrapIn<MudCard>(c =>

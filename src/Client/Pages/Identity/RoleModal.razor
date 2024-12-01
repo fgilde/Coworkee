@@ -1,9 +1,10 @@
+@using MudBlazor.Extensions.Helper
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RoleModal> _localizer
 
 <ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@RoleModel" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudDialog>
+    <MudDialog Class="@MudExCss.Classes.Dialog._Initial">
         <TitleContent>
             @{
                 if (RoleModel.Id == null)

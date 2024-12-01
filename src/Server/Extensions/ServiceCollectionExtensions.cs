@@ -48,6 +48,7 @@ using NSwag.Generation.Processors.Security;
 using Coworkee.Application.AssistantFeatures;
 using GptInvoke;
 using OpenAI.Models;
+using System.Configuration;
 
 namespace Coworkee.Server.Extensions
 {
@@ -255,7 +256,15 @@ namespace Coworkee.Server.Extensions
                 options.EnableSensitiveDataLogging(false);
                 //options.UseLazyLoadingProxies();  // TODO: Problems with chat service at this moment
                 //options.UseInMemoryDatabase("CoworkeeDb");
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+
+                var connectionStr = configuration?.GetConnectionString("postgresdb");
+                if (!string.IsNullOrWhiteSpace(connectionStr))
+                {
+                    options.UseNpgsql(connectionStr);
+                    AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+                }
+                else
+                    options.UseSqlServer(configuration?.GetConnectionString("Database") ?? configuration.GetConnectionString("DefaultConnection"));
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
             return services;
         }

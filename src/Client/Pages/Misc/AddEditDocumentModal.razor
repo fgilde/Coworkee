@@ -13,7 +13,7 @@
 <ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@AddEditDocumentModel" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudDialog Class="dialog-content-full-height overflow-hidden mud-ex-dialog-initial" ClassContent="full-height flex-column">
+    <MudDialog Class="dialog-content-full-height overflow-hidden mud-ex-dialog-initial" ContentClass="full-height flex-column">
         <TitleContent>
             @{
                 if (AddEditDocumentModel.Id == default)
@@ -92,8 +92,8 @@
             
             @if (!string.IsNullOrEmpty(AddEditDocumentModel.URL))
             {
-                <MudItem Style="flex: 1 1 auto;">
-                    <MudExFileDisplay ContentStream="@_currentContentStream" Url="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" FileName="@AddEditDocumentModel.Title" ContentType="@AddEditDocumentModel.ContentType"></MudExFileDisplay>
+                <MudItem Style="flex: 1 1 auto; height: 70%">
+                    <MudExFileDisplay Style="height: 90%" ContentStream="@_currentContentStream" Url="@(_navigationManager.ToAbsoluteServerUri(AddEditDocumentModel.URL))" FileName="@AddEditDocumentModel.Title" ContentType="@AddEditDocumentModel.ContentType"></MudExFileDisplay>
                 </MudItem>
             }
 

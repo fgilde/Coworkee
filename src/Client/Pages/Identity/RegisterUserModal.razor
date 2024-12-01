@@ -1,9 +1,10 @@
+@using MudBlazor.Extensions.Helper
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RegisterUserModal> _localizer
 
 <ReactOnPreferenceChanged Component="this" />
 <EditForm Model="@_registerUserModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudDialog>
+    <MudDialog Class="@MudExCss.Classes.Dialog._Initial">
         <TitleContent>
             @{
                 <MudText Typo="Typo.h6">

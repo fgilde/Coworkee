@@ -12,13 +12,17 @@ using Coworkee.Shared.Constants.Application;
 namespace Coworkee.Client
 {
     public static class Program
-    {
+    {        
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder
-                          .CreateDefault(args)
-                          .AddRootComponents()
-                          .AddClientServices();
+                          .CreateDefault(args);
+
+            //builder.Services.AddServiceDefaults();
+
+            builder.AddRootComponents()
+                .AddClientServices();
+
             var host = builder.Build().MakeStaticAccessible();
 
             var storageService = host.Services.GetRequiredService<ClientPreferenceManager>();

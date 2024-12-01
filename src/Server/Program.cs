@@ -37,7 +37,7 @@ namespace Coworkee.Server
             _cts = new CancellationTokenSource();
 
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.AddServiceDefaults();
             builder.Configuration.AddConfigurations();
 
             builder.WebHost.UseStaticWebAssets();
@@ -56,7 +56,7 @@ namespace Coworkee.Server
             }
 
             startup.Configure(app, app.Environment, app.Services.GetService<IStringLocalizer<Startup>>(), app.Services.GetService<IDashboardAuthorizationFilter>());
-
+            app.MapDefaultEndpoints();
             try
             {
                 await app.RunAsync(_cts.Token);
@@ -73,7 +73,7 @@ namespace Coworkee.Server
             {
                 var context = services.GetRequiredService<ApplicationDbContext>();
 
-                if (context.Database.IsSqlServer())
+                if (context.Database.IsSqlServer() || context.Database.IsNpgsql())
                 {
                     await context.Database.MigrateAsync();
                 }

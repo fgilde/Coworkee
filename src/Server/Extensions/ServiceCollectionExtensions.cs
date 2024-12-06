@@ -264,7 +264,7 @@ namespace Coworkee.Server.Extensions
                     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
                 }
                 else
-                    options.UseSqlServer(configuration?.GetConnectionString("Database") ?? configuration.GetConnectionString("DefaultConnection"));
+                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
             return services;
         }

@@ -1,5 +1,5 @@
 {
-  "x-generator": "NSwag v14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))",
   "swagger": "2.0",
   "info": {
     "title": "Coworkee Web API",
@@ -8169,8 +8169,7 @@
         "build",
         "revision",
         "majorRevision",
-        "minorRevision",
-        "defaultFormatFieldCount"
+        "minorRevision"
       ],
       "properties": {
         "major": {
@@ -8194,10 +8193,6 @@
         },
         "minorRevision": {
           "type": "integer"
-        },
-        "defaultFormatFieldCount": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -8938,8 +8933,7 @@
       "x-abstract": true,
       "required": [
         "id",
-        "isNew",
-        "coworkee.Application.Common.Models.IDtoBase.IsNew"
+        "isNew"
       ],
       "properties": {
         "id": {
@@ -8947,9 +8941,6 @@
           "format": "int32"
         },
         "isNew": {
-          "type": "boolean"
-        },
-        "coworkee.Application.Common.Models.IDtoBase.IsNew": {
           "type": "boolean"
         }
       }
@@ -9676,17 +9667,13 @@
       "type": "object",
       "x-abstract": true,
       "required": [
-        "isNew",
-        "coworkee.Application.Common.Models.IDtoBase.IsNew"
+        "isNew"
       ],
       "properties": {
         "id": {
           "type": "string"
         },
         "isNew": {
-          "type": "boolean"
-        },
-        "coworkee.Application.Common.Models.IDtoBase.IsNew": {
           "type": "boolean"
         }
       }

@@ -1,8 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Coworkee.Server</RootNamespace>
     <AssemblyName>Coworkee.Server</AssemblyName>
+    <HostClientInServer>true</HostClientInServer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(HostClientInServer)'=='true'">
+    <DefineConstants>HostClient</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Coworkee.Server.xml</DocumentationFile>
@@ -17,46 +21,47 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
-    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.28.0" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.29.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="Nextended.Imaging" Version="7.0.33" />
-    <PackageReference Include="Hangfire" Version="1.8.11" />
+    <PackageReference Include="Nextended.Imaging" Version="8.0.0" />
+    <PackageReference Include="Hangfire" Version="1.8.17" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.0" />
     <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
     <PackageReference Include="Mime" Version="3.6.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.11" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-    <PackageReference Include="NSwag.AspNetCore" Version="14.0.7" />
-    <PackageReference Include="NSwag.MSBuild" Version="14.0.7">
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="14.2.0" />
+    <PackageReference Include="NSwag.MSBuild" Version="14.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
-    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.62.0" />
-    <PackageReference Include="SkiaSharp" Version="2.88.7" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.7" />
-    <PackageReference Include="Svg.Skia" Version="1.0.0.17" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.67.0" />
+    <PackageReference Include="SkiaSharp" Version="3.116.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.116.1" />
+    <PackageReference Include="Svg.Skia" Version="2.0.0.4" />
     <Protobuf Include=".\gRPC\Main.proto" GrpcServices="Server" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="9.1.1" />
     <PackageReference Include="TranslatorService" Version="3.0.11" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Condition="'$(HostClientInServer)' == 'true'" Include="..\Client\Client.csproj" />
     <ProjectReference Include="..\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
@@ -75,6 +80,11 @@
 
   <ItemGroup>
     <PackageReference Include="nksoft.MakeGenericAgain" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Condition="'$(HostClientInServer)' == 'true'" Remove="wwwroot\index.html" />
+    <Content Condition="'$(HostClientInServer)' == 'true'" Remove="wwwroot\index.html" />
   </ItemGroup>
 
   <ItemGroup>

@@ -46,35 +46,24 @@ namespace Coworkee.Client.Extensions
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
             var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
-            PrintConfiguration(builder.Configuration);
             var logLevel = clientSettings.Logging.LogLevel.Default.ToEnum<LogLevel>();
             builder.Logging.SetMinimumLevel(logLevel);
-            
+
+            if (string.IsNullOrEmpty(clientSettings.BackendOrigin))
+            {
+                builder.Configuration[nameof(clientSettings.BackendOrigin)] = clientSettings.BackendOrigin = builder.HostEnvironment.BaseAddress.EnsureEndsWith("/")[..^1];
+            }
+
+            Console.WriteLine($"Backend Origin: {clientSettings.BackendOrigin}");
             builder.Services.AddClientServices(clientSettings);
             return builder;
         }
 
-        static void PrintConfiguration(IConfiguration configuration, string parentPath = "")
-        {
-            foreach (var section in configuration.GetChildren())
-            {
-                string currentPath = string.IsNullOrEmpty(parentPath) ? section.Key : $"{parentPath}:{section.Key}";
-
-                if (!string.IsNullOrEmpty(section.Value))
-                {
-                    // Ausgabe für Schlüssel-Wert-Paare
-                    Console.WriteLine($"{currentPath}: {section.Value}");
-                }
-
-                // Rekursiver Aufruf für Unterabschnitte
-                PrintConfiguration(section, currentPath);
-            }
-        }
 
         public static IServiceCollection AddClientServices(this IServiceCollection services, ClientApplicationConfiguration clientSettings)
         {
             services
-            .AddTransient(p => clientSettings)
+                .AddTransient(p => clientSettings)
                 .AddTransient(p => p.GetService<ClientApplicationConfiguration>()?.ServerConfiguration)
                 .AddLocalization(options =>
                 {

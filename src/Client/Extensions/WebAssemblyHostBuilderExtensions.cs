@@ -45,6 +45,9 @@ namespace Coworkee.Client.Extensions
         }
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
+            //Console.WriteLine("AddClientServices!!!!!!!!!!!!!!!!!!!");
+            //Console.WriteLine(builder.Configuration["services__coworkee-application__https__0"]);
+
             var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
             var logLevel = clientSettings.Logging.LogLevel.Default.ToEnum<LogLevel>();
             builder.Logging.SetMinimumLevel(logLevel);

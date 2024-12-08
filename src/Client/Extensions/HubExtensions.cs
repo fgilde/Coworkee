@@ -35,14 +35,14 @@ namespace Coworkee.Client.Extensions
             return hubConnection;
         }
 
-        public static Task TrySendAsync(this HubConnection hubConnection, string methodName, params object[] args) 
-            => hubConnection.State == HubConnectionState.Connected ? hubConnection.SendAsync(methodName, args) : Task.CompletedTask;
+        public static Task TrySendAsync(this HubConnection hubConnection, string methodName, object arg) 
+            => hubConnection.State == HubConnectionState.Connected ? hubConnection.SendAsync(methodName, arg) : Task.CompletedTask;
 
         public static Task TrySendAsync(this HubConnection hubConnection, string methodName)
             => hubConnection.State == HubConnectionState.Connected ? hubConnection.SendAsync(methodName) : Task.CompletedTask;
 
-        public static async Task TrySendAsync(this HubConnection hubConnection, string backendOrigin, string methodName, params object[] args)
-            => await (await hubConnection.EnsureStartedAsync(backendOrigin)).TrySendAsync(methodName, args);
+        public static async Task TrySendAsync(this HubConnection hubConnection, string backendOrigin, string methodName, object arg)
+            => await (await hubConnection.EnsureStartedAsync(backendOrigin)).TrySendAsync(methodName, arg);
 
         public static async Task TrySendAsync(this HubConnection hubConnection, string backendOrigin, string methodName)
             => await (await hubConnection.EnsureStartedAsync(backendOrigin)).TrySendAsync(methodName);

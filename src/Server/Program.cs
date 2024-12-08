@@ -73,7 +73,7 @@ namespace Coworkee.Server
             {
                 var context = services.GetRequiredService<ApplicationDbContext>();
 
-                if (context.Database.IsSqlServer() || context.Database.IsNpgsql())
+                if (context.Database.IsSqlServer())
                 {
                     await context.Database.MigrateAsync();
                 }

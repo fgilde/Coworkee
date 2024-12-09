@@ -7,6 +7,7 @@ namespace Coworkee.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {
+        public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
         public static string ApplicationClientName = $"{ApplicationName}Client";
         public const string SessionIdKey = nameof(SessionIdKey);

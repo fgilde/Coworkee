@@ -1,3 +1,6 @@
+using Microsoft.Extensions.Azure;
+using Projects;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 //var db = builder.AddSqlServer("coworkee-sql-server")
@@ -10,9 +13,13 @@ var db = builder.AddPostgres("pg")
     .AddDatabase("postgresdb", "CoworkeeDb");
 
 
-//var keycloak = builder.AddKeycloak("keycloak", 8080,
-//    builder.AddParameter("AdminUserName", "admin"),
-//    builder.AddParameter("AdminUserPassword", "cargonerds123"));
+var keycloak = builder.AddKeycloak("keycloak", 8080,
+    builder.AddParameter("AdminUserName", "admin"),
+    builder.AddParameter("AdminUserPassword", "admin"))
+    .WithCommand("Seed Client", "Seed Client", context =>
+    {
+        return Task.FromResult(new ExecuteCommandResult() {Success = true});
+    });
 
 //var grafana = builder.AddContainer("grafana", "grafana/grafana")
 //    .WithBindMount("../grafana/config", "/etc/grafana", isReadOnly: true)
@@ -41,6 +48,8 @@ var ollama = builder.AddOllama("ollama")
 
 var api = builder.AddProject<Projects.Server>("coworkee-application")
     .WithReference(db)
+    .WithReference(keycloak)
+    .WaitFor(keycloak)
     .WaitFor(db);
 
 

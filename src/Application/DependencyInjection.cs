@@ -13,6 +13,7 @@ using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
 using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using Coworkee.Application.Features.ExtendedAttributes.Queries.GetById;
 using Coworkee.Domain.Contracts;
+using Coworkee.Shared.Constants.Application;
 using Coworkee.Shared.Wrapper;
 using FluentValidation;
 using HashidsNet;
@@ -25,6 +26,9 @@ namespace Coworkee.Application
 {
     public static class DependencyInjection
     {
+        public static IServiceCollection IfNotNSwag(this IServiceCollection services) => !ApplicationConstants.IsNswagGeneration ? services : new ServiceCollection();
+        public static IServiceCollection IfNSwag(this IServiceCollection services) => ApplicationConstants.IsNswagGeneration ? services : new ServiceCollection();
+
         public static IServiceCollection AddApplication(this IServiceCollection services, ServerConfiguration config)
         {
             //services.AddTransient(_ => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings

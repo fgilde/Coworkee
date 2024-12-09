@@ -49,6 +49,11 @@ using Coworkee.Application.AssistantFeatures;
 using GptInvoke;
 using OpenAI.Models;
 using System.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Coworkee.Application.Contracts.Services.Identity;
+using Microsoft.AspNetCore.Builder;
 
 namespace Coworkee.Server.Extensions
 {
@@ -288,7 +293,7 @@ namespace Coworkee.Server.Extensions
 
             return services;
         }
-
+        
         internal static IServiceCollection AddJwtAuthentication(
             this IServiceCollection services, ServerConfiguration config)
         {
@@ -366,6 +371,98 @@ namespace Coworkee.Server.Extensions
                     authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
                 .AddJwtBearer(ConfigureOptions);
+
+
+
+            #region Keycloak
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.Lax; // Für OAuth2 erforderlich
+                options.Secure = CookieSecurePolicy.Always;
+            });
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddKeycloakOpenIdConnect(
+                    "keycloak",
+                    realm: "master",
+                    options =>
+                    {
+                        options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
+                        options.ClientId = "WeatherWeb";
+                        options.ClientSecret = "dein-client-secret";
+                        options.ResponseType = OpenIdConnectResponseType.Code; 
+                        options.UsePkce = true;
+                        options.SaveTokens = true;
+                        //options.NonceCookie = new CookieBuilder
+                        //{
+                        //    Name = "KeycloakNonceCookie", // Ein eindeutiger Name für den Cookie
+                        //    SameSite = SameSiteMode.Lax, // Für OpenID Connect erforderlich
+                        //    SecurePolicy = CookieSecurePolicy.Always, // Immer HTTPS verwenden (in Produktion)
+                        //    HttpOnly = true // Zugriff nur über HTTP (nicht durch JS)
+                        //};
+                        //options.CorrelationCookie = new CookieBuilder
+                        //{
+                        //    Name = "KeycloakCorrelationCookie",
+                        //    //SameSite = SameSiteMode.Lax, // Erforderlich für OAuth2
+                        //    SameSite = SameSiteMode.None,
+                        //    SecurePolicy = CookieSecurePolicy.Always, // HTTPS verwenden
+                        //    HttpOnly = true // Zugriff nur über HTTP
+                        //};
+                        options.ProtocolValidator = new OpenIdConnectProtocolValidator
+                        {
+                            RequireState = false,
+                            RequireNonce = false // Nonce-Validierung deaktivieren
+                        };
+                        //options.ResponseMode = OpenIdConnectResponseMode.Query;
+                        options.Scope.Add("openid");
+                        options.Scope.Add("profile");
+                        options.Events = new OpenIdConnectEvents
+                        {
+                            OnTokenValidated = async context =>
+                            {
+                                // Hole Benutzerinformationen aus dem Token
+                                var claims = context.Principal?.Claims;
+                                var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                                var userName = claims?.FirstOrDefault(c => c.Type == "preferred_username")?.Value ?? claims?.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value;
+
+                                // Benutzer im lokalen System suchen
+                                var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<ApplicationUser>>();
+                                var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
+                                var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+                                var accountService = context.HttpContext.RequestServices.GetRequiredService<IAccountService>();
+                                var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();
+                                ApplicationUser user = null;
+                                if(!string.IsNullOrWhiteSpace(email))
+                                    user = await userManager.FindByEmailAsync(email);
+                                if (user == null)
+                                    user = await userManager.FindByNameAsync(userName);
+
+                                if (user == null)
+                                {
+                                    context.Fail("User not found in the local system.");
+                                    return;
+                                }
+
+                                //// Benutzer einloggen (lokales System)
+                                await signInManager.SignInAsync(user, true);
+                                context.Success();
+
+                                //// Optional: Claims erweitern
+                                //var identity = context.Principal?.Identity as ClaimsIdentity;
+                                //identity?.AddClaim(new Claim("CustomClaim", "CustomValue"));
+                            }
+                        };
+                    });
+
+            #endregion
+
+
             services.AddAuthorization(options =>
             {
                 // Here I stored necessary permissions/roles in a constant

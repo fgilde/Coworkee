@@ -67,6 +67,13 @@
                 }
             </MudButton>
         </MudItem>
+        @if (!_processing)
+        {
+            <MudItem xs="12" Class="d-flex justify-center">
+                <MudLink Href="@($"{_config.BackendOrigin}/api/v1/identity/account/login?returnUrl={_navigationManager.GetReturnUrlValue(true)}")">@_localizer["Login with Keycloak"]</MudLink>
+            </MudItem>
+        }
+
         @if(Debug.IsDebug()){
             @if (ApplicationConstants.Defaults.Users.Administrators.Any())
             {

@@ -11,6 +11,7 @@ using Coworkee.SDK;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Nextended.Blazor.Models;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Client.Extensions
@@ -100,7 +101,7 @@ namespace Coworkee.Client.Extensions
             return queryParams[paramName];
         }
 
-        public static string GetReturnUrlValue(this NavigationManager navigationManager)
+        public static string GetReturnUrlValue(this NavigationManager navigationManager, bool absolute = false)
         {
             var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
@@ -108,10 +109,22 @@ namespace Coworkee.Client.Extensions
             if (!string.IsNullOrWhiteSpace(url))
             {
                 string result = CleanReturnUrl(url);
-                return !IsForbidden(result) ? result : null;
+                return !IsForbidden(result) 
+                    ? (absolute ? navigationManager.EnsureAbsolute(result) : result)
+                    : null;
             }
 
             return null;
+        }
+
+
+        public static string EnsureAbsolute(this NavigationManager navigationManager, string url, bool absoluteToClient = true) 
+        {
+            if(url.StartsWith("http:") || url.StartsWith("https:") || DataUrl.IsDataUrl(url) || url.StartsWith("blob:"))
+                return url;
+            if (absoluteToClient)
+                return navigationManager.ToAbsoluteUri(url).AbsoluteUri;
+            return navigationManager.ToAbsoluteServerUri(url);
         }
 
         public static void NavigateToHome(this NavigationManager navigationManager)

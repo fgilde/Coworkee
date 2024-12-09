@@ -34,6 +34,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.0" />
+    <PackageReference Include="Aspire.Keycloak.Authentication" Version="9.0.0-preview.5.24551.3" />
     <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
     <PackageReference Include="Mime" Version="3.6.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.0" />
@@ -93,7 +94,7 @@
 
   <Target Name="NSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
-    <Exec Command="$(NSwagExe_Net80) run /v1/swagger.json /variables:Configuration=$(Configuration)" />
+    <Exec Command="$(NSwagExe_Net90) run /v1/swagger.json /variables:Configuration=$(Configuration)" />
     <RemoveDir Directories="$(OutDir)References" />
   </Target>
 

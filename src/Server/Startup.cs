@@ -21,7 +21,10 @@ using GptInvoke;
 using System;
 using Coworkee.Application.AssistantFeatures;
 using Coworkee.Application.Configurations;
+using DocumentFormat.OpenXml.Office2021.DocumentTasks;
 using OpenAI.Models;
+using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Coworkee.Server
 {
@@ -58,7 +61,7 @@ namespace Coworkee.Server
             services.AddServerLocalization();
             services.AddYamlLocalizationWithFallback();
             services.AddIdentity();
-            services.AddJwtAuthentication(serverConfig);
+            services.IfNotNSwag().AddJwtAuthentication(serverConfig);
             services.AddApplication(serverConfig);
             services.AddInfrastructure();
             services.AddApiVersions();
@@ -95,6 +98,27 @@ namespace Coworkee.Server
             IStringLocalizer<Startup> localizer,
             IDashboardAuthorizationFilter authorizationFilter)
         {
+            #region For Keycloak
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions()
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                //MinimumSameSitePolicy = SameSiteMode.Lax,
+                HttpOnly = HttpOnlyPolicy.Always,
+                MinimumSameSitePolicy = SameSiteMode.None,
+            });
+
+            var seeder = new KeycloakSeeder();
+            System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
+            {
+                _ = seeder.CreateClientAsync();
+            });
+            #endregion
+
             app.UseSessionId();
             app.UseCors();
             app.UseHealthChecks("/health");

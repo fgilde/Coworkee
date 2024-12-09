@@ -9,6 +9,9 @@ using Coworkee.Infrastructure.Services.Identity;
 using Coworkee.Shared.Wrapper;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Application.Common.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace Coworkee.Server.Controllers.Identity
 {
@@ -82,12 +85,30 @@ namespace Coworkee.Server.Controllers.Identity
             return Ok();
         }
 
+        [HttpGet("login")]
+        public async Task<IActionResult> Login(string returnUrl = "/")
+        {
+            await HttpContext.ChallengeAsync("keycloak", new OAuthChallengeProperties() { RedirectUri = returnUrl });
+            return Ok();
+        }
+
+        //[HttpGet("login")]
+        //public IActionResult Login(string returnUrl = "/")
+        //{
+        //    return Challenge(new AuthenticationProperties
+        //    {
+        //        RedirectUri = returnUrl
+        //    }, "keycloak");
+        //}
+
         [HttpPost("[action]")]
         [AllowAnonymous] // To ensure no error if call comes with expired session
         public async Task<IActionResult> Logout()
         {
             await _accountService.LogoutAsync();
             await Get<IdentityService>().SetUserOnlineStatusAsync(_currentUser.UserId, false);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return Ok();
         }
     }

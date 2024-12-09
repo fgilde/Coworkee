@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Coworkee.Infrastructure.Contexts;
 using Coworkee.Server.Extensions;
@@ -11,13 +12,15 @@ using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Localization;
+using System.Linq;
+using Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Server
 {
     public class Program
     {
         private static CancellationTokenSource _cts = new();
-
+        
         private static void Restart()
         {
             _cts.Cancel();
@@ -25,6 +28,7 @@ namespace Coworkee.Server
 
         public static async Task Main(string[] args)
         {
+            ApplicationConstants.IsNswagGeneration = args.Any(arg => arg.Contains("--applicationName", StringComparison.OrdinalIgnoreCase));
             do
             {
                 await StartServer(args);
@@ -73,16 +77,18 @@ namespace Coworkee.Server
             {
                 var context = services.GetRequiredService<ApplicationDbContext>();
 
-                if (context.Database.IsSqlServer())
+                if (context.Database.IsSqlServer() || context.Database.IsNpgsql())
                 {
-                    await context.Database.MigrateAsync();
+                    var needsMigration = (await context.Database.GetPendingMigrationsAsync()).Any() || context.Database.HasPendingModelChanges();
+                    if (needsMigration)
+                        await context.Database.MigrateAsync();
                 }
             }
             catch (Exception ex)
             {
                 scope.ServiceProvider.GetRequiredService<ILogger<Program>>()
                     .LogError(ex, "Error occurred while migrating/seeding database.");
-                throw;
+               // throw;
             }
         }
     }

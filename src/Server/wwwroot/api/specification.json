@@ -4353,6 +4353,37 @@
         ]
       }
     },
+    "/identity/Account/login": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Login",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "returnUrl",
+            "in": "query",
+            "default": "/",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/identity/Account/Logout": {
       "post": {
         "tags": [

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using Coworkee.Application.Requests.Identity;
@@ -14,18 +12,11 @@ using Coworkee.Infrastructure.Services.Identity;
 using Coworkee.Shared.Wrapper;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Application.Common.Models;
-using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
-using Coworkee.Application.Configurations;
-using Coworkee.Infrastructure.Models.Identity;
 using Coworkee.Shared;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Nextended.Core.Extensions;
-using System.Net.Http;
 
 namespace Coworkee.Server.Controllers.Identity
 {

@@ -751,6 +751,7 @@ Only Selected Group (Export): Kun den valgte gruppe (eksport)
 Open: Åben
 Open now: Åben
 Open Url {0}: Åbn url-{0}
+Open Url {0} in a new browser tab: Åbn URL-{0} i en ny browserfane
 or-IN: Odia (Indien)
 os-GE: Ossetisk (Georgien)
 os-RU: Ossetisk (Rusland)
@@ -826,6 +827,9 @@ quz-PE: quz (Peru)
 Rate: Tempo
 Rate must be greater than 0: Satsen skal være større end 0
 Realtime Updates & Insights with SignalR.: Realtime-opdateringer og indsigt med SignalR.
+Redirect: Omdirigere
+Redirecting to {0}: Omdirigering til {0}
+Redirecting...: Omdirigere...
 Refreshed Token.: Opdateret token.
 Register: Registrer
 Register as: Tilmeld dig som
@@ -1111,6 +1115,7 @@ You are Logged Out.: Du er logget ud.
 You can now Login with your credentials: Du kan nu logge ind med dine legitimationsoplysninger
 You cannot delete yourself: Du kan ikke slette dig selv
 You received a new chat message from {0}: Du har modtaget en ny chatbesked fra {0}
+You're leaving {0} and will redirected to {1}: Du forlader {0} og vil blive omdirigeret til {1}
 Your e-mail address has been confirmed!: Din e-mail-adresse er blevet bekræftet!
 Your email address could not be verified. If you have any problems, please contact {0}: Din e-mailadresse kunne ikke bekræftes. Hvis du har problemer, bedes du kontakte {0}
 Your Profile has been updated.: Din profil er blevet opdateret.

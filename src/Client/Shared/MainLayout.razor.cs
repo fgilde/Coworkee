@@ -151,7 +151,7 @@ namespace Coworkee.Client.Shared
                 {
                     _snackBar.Add(localizer["You are logged out because the user with your Token has been deleted or token is expired."], Severity.Error);
                     await _clientAuthenticationManager.Logout();
-                    _navigationManager.NavigateToWithReturnTo("login");
+                    _navigationManager.NavigateToWithReturnTo(ApplicationConstants.Routes.Login);
                     return false;
                 }
             }

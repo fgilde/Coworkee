@@ -45,7 +45,9 @@ using Coworkee.Application.Requests;
 using Coworkee.Domain.Entities.Identity;
 using Coworkee.Infrastructure.Extensions;
 using System.Globalization;
+using System.Security.Claims;
 using Coworkee.Shared;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {
@@ -101,6 +103,25 @@ namespace Coworkee.Infrastructure.Services.Identity
                 return all.Data.Where(r => _permissionService.HasPoliciesAsync(eventTarget.Groups, PolicyMatch.Any, r.Id).Result);
 
             return Enumerable.Empty<UserResponse>();
+        }
+
+        public Task<UserResponse[]> GetOrAddUserAsync(params ClaimsPrincipal[] principals)
+        {
+            return GetOrAddUserAsync(principals.Select(p =>
+            {
+                var email = p.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                var userName = p.Claims?.FirstOrDefault(c => c.Type == "preferred_username")?.Value ?? p.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value;
+                var password = Guid.NewGuid().ToString("N");
+                return new CreateUser()
+                {
+                    Email = email,
+                    FirstName = p.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value,
+                    LastName = p.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value,
+                    UserName = userName,
+                    Password = password,
+                    RoleToAdd = RoleConstants.BasicRole
+                };
+            }).ToArray());
         }
 
         public async Task<UserResponse> SystemUserAsync()

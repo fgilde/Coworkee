@@ -751,6 +751,7 @@ Only Selected Group (Export): Sólo grupo seleccionado (Exportar)
 Open: Abrir
 Open now: Abrir
 Open Url {0}: Abrir url {0}
+Open Url {0} in a new browser tab: Abrir URL {0} en una nueva pestaña del navegador
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Rusia)
@@ -826,6 +827,9 @@ quz-PE: quz (Perú)
 Rate: Tasa
 Rate must be greater than 0: La tasa debe ser mayor que 0
 Realtime Updates & Insights with SignalR.: Actualizaciones e información en tiempo real con SignalR.
+Redirect: Redirigir
+Redirecting to {0}: Redireccionamiento a {0}
+Redirecting...: Redirigiendo...
 Refreshed Token.: Token actualizado.
 Register: Registro
 Register as: Regístrese como
@@ -1111,6 +1115,7 @@ You are Logged Out.: Está desconectado.
 You can now Login with your credentials: Ahora puede iniciar sesión con sus credenciales
 You cannot delete yourself: No puede eliminarse a sí mismo
 You received a new chat message from {0}: Recibiste un nuevo mensaje de chat de {0}
+You're leaving {0} and will redirected to {1}: Vas a salir de {0} y se te redirigirá a {1}
 Your e-mail address has been confirmed!: ¡Su dirección de correo electrónico ha sido confirmada!
 Your email address could not be verified. If you have any problems, please contact {0}: No se pudo verificar su dirección de correo electrónico. Si tiene algún problema, póngase en contacto con {0}
 Your Profile has been updated.: Su perfil ha sido actualizado.

@@ -751,6 +751,7 @@ Only Selected Group (Export): Alleen geselecteerde groep (exporteren)
 Open: Openen
 Open now: Openen
 Open Url {0}: Url-{0} openen
+Open Url {0} in a new browser tab: Open Url {0} in een nieuw browsertabblad
 or-IN: Odia (Indië)
 os-GE: Ossetic (Georgië)
 os-RU: Ossetic (Rusland)
@@ -826,6 +827,9 @@ quz-PE: quz (Peru)
 Rate: Verhouding
 Rate must be greater than 0: Tarief moet groter zijn dan 0
 Realtime Updates & Insights with SignalR.: Realtime Updates & Insights met SignalR.
+Redirect: Doorsturen
+Redirecting to {0}: Doorverwijzen naar {0}
+Redirecting...: Omleiden...
 Refreshed Token.: Vernieuwd token.
 Register: Registreren
 Register as: Registreer als
@@ -1111,6 +1115,7 @@ You are Logged Out.: U bent uitgelogd.
 You can now Login with your credentials: U kunt nu inloggen met uw inloggegevens
 You cannot delete yourself: U kunt uzelf niet verwijderen
 You received a new chat message from {0}: Je hebt een nieuw chatbericht ontvangen van {0}
+You're leaving {0} and will redirected to {1}: U verlaat {0} en wordt doorgestuurd naar {1}
 Your e-mail address has been confirmed!: Uw e-mailadres is bevestigd!
 Your email address could not be verified. If you have any problems, please contact {0}: Uw e-mailadres kan niet worden geverifieerd. Als u problemen ondervindt, neem dan contact met {0}
 Your Profile has been updated.: Uw profiel is bijgewerkt.

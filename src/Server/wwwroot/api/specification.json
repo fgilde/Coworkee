@@ -4353,6 +4353,32 @@
         ]
       }
     },
+    "/identity/Account/login-callback": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_ExternalLoginCallback",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "returnUrl",
+            "in": "query",
+            "default": "/",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/identity/Account/login": {
       "get": {
         "tags": [
@@ -4376,12 +4402,7 @@
               "type": "file"
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/identity/Account/Logout": {

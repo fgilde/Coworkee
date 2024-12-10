@@ -751,6 +751,7 @@ Only Selected Group (Export): Само избрана група (експорт
 Open: Отворя
 Open now: Отворя
 Open Url {0}: Отваряне на URL {0}
+Open Url {0} in a new browser tab: Отворете URL {0} в нов раздел на браузъра
 or-IN: Одия (Индия)
 os-GE: Осетик (Грузия)
 os-RU: Осетик (Русия)
@@ -826,6 +827,9 @@ quz-PE: quz (Перу)
 Rate: Ставка
 Rate must be greater than 0: Ставката трябва да бъде по-голяма от 0
 Realtime Updates & Insights with SignalR.: Актуализации в реално време & Прозрения с SignalR.
+Redirect: Пренасочване
+Redirecting to {0}: Пренасочване към {0}
+Redirecting...: Пренасочване...
 Refreshed Token.: Освежен токен.
 Register: Регистрирайте се.
 Register as: Регистрирайте се като
@@ -1111,6 +1115,7 @@ You are Logged Out.: Вие сте излезли.
 You can now Login with your credentials: Вече можете да влезете с вашите идентификационни данни
 You cannot delete yourself: Не можете да изтриете себе си
 You received a new chat message from {0}: Получихте ново съобщение в чата от {0}
+You're leaving {0} and will redirected to {1}: Напускате {0} и ще се пренасочите към {1}
 Your e-mail address has been confirmed!: Вашият имейл адрес е потвърден!
 Your email address could not be verified. If you have any problems, please contact {0}: Имейл адресът ви не можа да бъде проверен. Ако имате някакви проблеми, моля свържете се с {0}
 Your Profile has been updated.: Вашият профил е актуализиран.

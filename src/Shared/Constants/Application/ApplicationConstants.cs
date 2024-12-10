@@ -58,6 +58,7 @@ namespace Coworkee.Shared.Constants.Application
         public static class Routes
         {
             public const string Login = nameof(Login);
+            public const string Redirect = nameof(Redirect);
             public const string Register = nameof(Register);
             public const string Forbidden = nameof(Forbidden);
             public const string Dashboard = "/jobs";

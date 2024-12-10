@@ -751,6 +751,7 @@ Only Selected Group (Export): 선택한 그룹만(내보내기)
 Open: 열다
 Open now: 열다
 Open Url {0}: URL {0} 열기
+Open Url {0} in a new browser tab: 새 브라우저 탭에서 URL {0} 열기
 or-IN: 오디아 (인도)
 os-GE: 오세틱 (조지아 주)
 os-RU: 오세틱 (러시아)
@@ -826,6 +827,9 @@ quz-PE: quz (페루)
 Rate: 율
 Rate must be greater than 0: 금리는 0보다 커야 합니다.
 Realtime Updates & Insights with SignalR.: 시그널R을 통해 실시간 업데이트 및 인사이트.
+Redirect: 리디렉션할
+Redirecting to {0}: '{0}로 리디렉션'
+Redirecting...: 리디렉션...
 Refreshed Token.: 새로 고침 된 토큰입니다.
 Register: 등록기
 Register as: 로 등록하기
@@ -1111,6 +1115,7 @@ You are Logged Out.: 로그아웃됩니다.
 You can now Login with your credentials: 이제 자격 증명으로 로그인 할 수 있습니다.
 You cannot delete yourself: 직접 삭제할 수 없습니다.
 You received a new chat message from {0}: '{0}에서 새 채팅 메시지를 받았습니다.'
+You're leaving {0} and will redirected to {1}: '{0} 떠나고 {1}로 리디렉션됩니다.'
 Your e-mail address has been confirmed!: 귀하의 이메일 주소가 확인되었습니다!
 Your email address could not be verified. If you have any problems, please contact {0}: 이메일 주소를 확인할 수 없습니다. 문제가 있으면 저희에게 연락하십시{0}.
 Your Profile has been updated.: 프로필이 업데이트되었습니다.

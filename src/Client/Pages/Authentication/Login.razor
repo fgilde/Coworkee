@@ -15,7 +15,7 @@
 
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
-   @* <MudGrid Style="@($"animation: {new [] {AnimationType.Zoom}.GetAnimationCssStyle(TimeSpan.FromMilliseconds(250))}")">*@
+    @* <MudGrid Style="@($"animation: {new [] {AnimationType.Zoom}.GetAnimationCssStyle(TimeSpan.FromMilliseconds(250))}")">*@
     <MudGrid>
         <MudItem xs="12">
             <div class="d-flex justify-center">
@@ -70,7 +70,7 @@
         @if (!_processing)
         {
             <MudItem xs="12" Class="d-flex justify-center">
-                <MudLink Href="@($"{_config.BackendOrigin}/api/v1/identity/account/login?returnUrl={_navigationManager.GetReturnUrlValue(true)}")">@_localizer["Login with Keycloak"]</MudLink>
+                <MudLink Href="@(KeyCloakHref())">@_localizer["Login with Keycloak"]</MudLink>
             </MudItem>
         }
 
@@ -90,3 +90,17 @@
         }
     </MudGrid>
 </EditForm>
+
+@code{
+
+    private string KeyCloakHref()
+    {
+        var redirectPageUri = _navigationManager.ToAbsoluteUri($"/{ApplicationConstants.Routes.Redirect}");
+        var currentReturnUrlValue = _navigationManager.GetReturnUrlValue(true);
+        var escapeDataString = !string.IsNullOrWhiteSpace(currentReturnUrlValue) ? Uri.EscapeDataString(currentReturnUrlValue) : currentReturnUrlValue;
+        if(string.IsNullOrWhiteSpace(escapeDataString))
+            escapeDataString = "/";
+        var returnUrl = $"{redirectPageUri}?{ApplicationConstants.ParameterNames.ReturnUrl}={escapeDataString}";
+        return $"{_config.BackendOrigin}/api/v1/identity/account/login?returnUrl={returnUrl}"; // Notice keyname returnUrl is a backend parameter so we dont use constants here
+    }
+}

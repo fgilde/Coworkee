@@ -751,6 +751,7 @@ Only Selected Group (Export): المجموعة المحددة فقط (تصدير
 Open: مفتوح
 Open now: مفتوح
 Open Url {0}: فتح {0} URL
+Open Url {0} in a new browser tab: افتح عنوان URL {0} في علامة تبويب مستعرض جديدة
 or-IN: أوديا (الهند)
 os-GE: أوسيتيك (جورجيا)
 os-RU: أوسيتيك (روسيا)
@@ -826,6 +827,9 @@ quz-PE: كوز (بيرو)
 Rate: معدل
 Rate must be greater than 0: يجب أن يكون المعدل أكبر من 0
 Realtime Updates & Insights with SignalR.: تحديثات الوقت الحقيقي والرؤى مع SignalR.
+Redirect: اعاده توجيه
+Redirecting to {0}: إعادة التوجيه إلى {0}
+Redirecting...: اعاده توجيه...
 Refreshed Token.: الرمز المميز التحديث.
 Register: سجل
 Register as: سجل باسم
@@ -1111,6 +1115,7 @@ You are Logged Out.: لقد قمت بتسجيل الخروج.
 You can now Login with your credentials: يمكنك الآن تسجيل الدخول باستخدام بيانات الاعتماد الخاصة بك
 You cannot delete yourself: لا يمكنك حذف نفسك
 You received a new chat message from {0}: تلقيت رسالة محادثة جديدة من {0}
+You're leaving {0} and will redirected to {1}: أنت تغادر {0} وستتم إعادة توجيهك إلى {1}
 Your e-mail address has been confirmed!: تم تأكيد عنوان بريدك الإلكتروني!
 Your email address could not be verified. If you have any problems, please contact {0}: تعذر التحقق من عنوان بريدك الإلكتروني. إذا كان لديك أي مشاكل، يرجى الاتصال {0}
 Your Profile has been updated.: تم تحديث ملف التعريف الخاص بك.

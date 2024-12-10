@@ -751,6 +751,7 @@ Only Selected Group (Export): Pouze vybraná skupina (Export)
 Open: Otevřený
 Open now: Otevřený
 Open Url {0}: Otevřít {0} adres URL
+Open Url {0} in a new browser tab: Otevření {0} adresy URL na nové kartě prohlížeče
 or-IN: Odia (Indie)
 os-GE: Ossetic (Gruzie)
 os-RU: Ossetic (Rusko)
@@ -826,6 +827,9 @@ quz-PE: quz (Peru)
 Rate: Sazba
 Rate must be greater than 0: Sazba musí být větší než 0
 Realtime Updates & Insights with SignalR.: Aktualizace a přehledy v reálném čase pomocí SignalR.
+Redirect: Přesměrovat
+Redirecting to {0}: Přesměrování na {0}
+Redirecting...: Přesměrování...
 Refreshed Token.: Obnovený token.
 Register: Registrace
 Register as: Zaregistrujte se jako
@@ -1111,6 +1115,7 @@ You are Logged Out.: Jste odhlášeni.
 You can now Login with your credentials: Nyní se můžete přihlásit pomocí svých přihlašovacích údajů
 You cannot delete yourself: Nemůžete smazat sami sebe
 You received a new chat message from {0}: Obdrželi jste novou chatovou zprávu od {0}
+You're leaving {0} and will redirected to {1}: Opouštíte {0} a budete přesměrováni na {1}
 Your e-mail address has been confirmed!: Vaše e-mailová adresa byla potvrzena!
 Your email address could not be verified. If you have any problems, please contact {0}: Vaši e-mailovou adresu nelze ověřit. Máte-li jakékoli problémy, obraťte se na {0}
 Your Profile has been updated.: Váš profil byl aktualizován.

@@ -750,6 +750,7 @@ Only Selected Group (Export): Only Selected Group (Export)
 Open: Open
 Open now: Open
 Open Url {0}: Open Url {0}
+Open Url {0} in a new browser tab: Open Url {0} in a new browser tab
 or-IN: Odia (India)
 os-GE: Ossetic (Georgia)
 os-RU: Ossetic (Russia)
@@ -825,6 +826,9 @@ quz-PE: quz (Peru)
 Rate: Rate
 Rate must be greater than 0: Rate must be greater than 0
 Realtime Updates & Insights with SignalR.: Realtime Updates & Insights with SignalR.
+Redirect: Redirect
+Redirecting to {0}: Redirecting to {0}
+Redirecting...: Redirecting...
 Refreshed Token.: Refreshed Token.
 Register: Register
 Register as: Register as
@@ -1110,6 +1114,7 @@ You are Logged Out.: You are Logged Out.
 You can now Login with your credentials: You can now Login with your credentials
 You cannot delete yourself: You cannot delete yourself
 You received a new chat message from {0}: You received a new chat message from {0}
+You're leaving {0} and will redirected to {1}: You're leaving {0} and will redirected to {1}
 Your e-mail address has been confirmed!: Your e-mail address has been confirmed!
 Your email address could not be verified. If you have any problems, please contact {0}: Your email address could not be verified. If you have any problems, please contact {0}
 Your Profile has been updated.: Your Profile has been updated.

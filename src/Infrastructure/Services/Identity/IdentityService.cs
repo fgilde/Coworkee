@@ -27,6 +27,11 @@ using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Hubs.Events;
 using Coworkee.Domain.Entities.Identity;
 using Coworkee.Infrastructure.Extensions;
+using Coworkee.Application.Contracts.Services.Account;
+using Coworkee.Shared.Constants.Role;
+using Coworkee.Shared.Models;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {
@@ -38,6 +43,7 @@ namespace Coworkee.Infrastructure.Services.Identity
         private readonly IServiceProvider _serviceProvider;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ServerConfiguration _appConfig;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IStringLocalizer<IdentityService> _localizer;
@@ -51,11 +57,59 @@ namespace Coworkee.Infrastructure.Services.Identity
             _serviceProvider = serviceProvider;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
             _appConfig = appConfig.Value;
             _localizer = localizer;
             _contextAccessor = contextAccessor;
         }
 
+
+        public async Task<Result<TokenResponse>> LoginAsync(ApplicationUser user)
+        {
+            user.RefreshToken = GenerateRefreshToken();
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(ApplicationConstants.Session.RefreshTokenExpiryInDays);
+            user.UserInfo ??= new UserInformations();
+            user.UserInfo.LastLoginDate = DateTime.UtcNow;
+            user.UserInfo.IsOnline = true;
+            await _userManager.UpdateAsync(user);
+            _ = _serviceProvider.GetService<IMediator>().PublishClientEvent(new UserOnlineStatusChanged(user.MapTo<UserResponse>()));
+
+            var token = await GenerateJwtAsync(user);
+            var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, UserImageURL = user.ProfilePictureDataUrl };
+            _contextAccessor.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, user.Id);
+
+            //_= SetUserOnlineStatusAsync(user, true)
+            return await Result<TokenResponse>.SuccessAsync(response);
+        }
+
+        public async Task<Result<TokenResponse>> LoginExternalAsync(ClaimsPrincipal externalClaim, bool registerIfNotExists)
+        {
+            var claims = externalClaim?.Claims;
+            if (claims == null || !claims.Any())
+                return Result<TokenResponse>.Fail(_localizer["Invalid external login."]);
+            
+            var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var userName = claims?.FirstOrDefault(c => c.Type == "preferred_username")?.Value ?? claims?.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value;
+
+            ApplicationUser user = null;
+            if (!string.IsNullOrWhiteSpace(email))
+                user = await _userManager.FindByEmailAsync(email);
+            if (user == null && !string.IsNullOrEmpty(userName))
+                user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null)
+            {
+                if(!registerIfNotExists)
+                    return Result<TokenResponse>.Fail(_localizer["User not found."]);
+                var userResponse = (await _serviceProvider.GetService<IUserService>().GetOrAddUserAsync(externalClaim))?.FirstOrDefault();
+                if (userResponse != null)
+                    user = await _userManager.FindByIdAsync(userResponse.Id);
+            }
+            if (user == null)
+                return Result<TokenResponse>.Fail(_localizer["User not found."]);
+
+            return await LoginAsync(user);
+        }
 
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
@@ -79,20 +133,7 @@ namespace Coworkee.Infrastructure.Services.Identity
                 return await Result<TokenResponse>.FailAsync(_localizer["Invalid Credentials."]);
             }
 
-            user.RefreshToken = GenerateRefreshToken();
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(ApplicationConstants.Session.RefreshTokenExpiryInDays);
-            user.UserInfo ??= new UserInformations();
-            user.UserInfo.LastLoginDate = DateTime.UtcNow;
-            user.UserInfo.IsOnline = true;
-            await _userManager.UpdateAsync(user);
-            _ = _serviceProvider.GetService<IMediator>().PublishClientEvent(new UserOnlineStatusChanged(user.MapTo<UserResponse>()));
-
-            var token = await GenerateJwtAsync(user);
-            var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, UserImageURL = user.ProfilePictureDataUrl };
-            _contextAccessor.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, user.Id);
-
-            //_= SetUserOnlineStatusAsync(user, true)
-            return await Result<TokenResponse>.SuccessAsync(response);
+            return await LoginAsync(user);
         }
 
         public async Task<Result<TokenResponse>> RegenerateTokenAsync(string[] specificRoles)

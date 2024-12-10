@@ -751,6 +751,7 @@ Only Selected Group (Export): Yalnızca Seçili Grup (Dışarı Aktar)
 Open: Açık
 Open now: Açık
 Open Url {0}: Açık URL {0}
+Open Url {0} in a new browser tab: Url {0}'yi yeni bir tarayıcı sekmesinde açın
 or-IN: Odia (Hindistan)
 os-GE: Ossetic (Gürcistan)
 os-RU: Ossetic (Rusya)
@@ -826,6 +827,9 @@ quz-PE: quz (Peru)
 Rate: Oran
 Rate must be greater than 0: Oran 0'dan büyük olmalıdır
 Realtime Updates & Insights with SignalR.: SignalR ile Gerçek Zamanlı Güncellemeler ve İçgörüler.
+Redirect: Yönlendirme
+Redirecting to {0}: '{0} sayfasına yönlendirme'
+Redirecting...: Yönlendirme...
 Refreshed Token.: Yenilenmiş Belirteç.
 Register: Kaydolmak
 Register as: Kayıt ol
@@ -1111,6 +1115,7 @@ You are Logged Out.: Oturumunuz Tükendi.
 You can now Login with your credentials: Artık kimlik bilgilerinizle Giriş yapabilirsiniz
 You cannot delete yourself: Kendinizi silemezsiniz
 You received a new chat message from {0}: "{0}'den yeni bir sohbet mesajı aldınız"
+You're leaving {0} and will redirected to {1}: '{0} ayrılıyorsunuz ve {1} yönlendirileceksiniz'
 Your e-mail address has been confirmed!: E-posta adresiniz onaylandı!
 Your email address could not be verified. If you have any problems, please contact {0}: E-posta adresiniz doğrulanamadı. Herhangi bir sorun yaşarsanız, lütfen {0}
 Your Profile has been updated.: Profiliniz güncellendi.

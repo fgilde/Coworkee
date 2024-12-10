@@ -751,6 +751,7 @@ Only Selected Group (Export): Endast markerad grupp (export)
 Open: Öppna
 Open now: Öppna
 Open Url {0}: Öppna URL-{0}
+Open Url {0} in a new browser tab: Öppna Url {0} i en ny flik i webbläsaren
 or-IN: Odia (Indien)
 os-GE: Ossetiska (Georgien)
 os-RU: Ossetic (Ryssland)
@@ -826,6 +827,9 @@ quz-PE: quz (Peru)
 Rate: Taxera
 Rate must be greater than 0: Hastigheten måste vara större än 0
 Realtime Updates & Insights with SignalR.: Realtidsuppdateringar & insikter med SignalR.
+Redirect: Omdirigera
+Redirecting to {0}: Omdirigera till {0}
+Redirecting...: Omdirigera...
 Refreshed Token.: Uppdaterad token.
 Register: Registrera dig
 Register as: Registrera dig som
@@ -1111,6 +1115,7 @@ You are Logged Out.: Du är utloggad.
 You can now Login with your credentials: Du kan nu logga in med dina uppgifter
 You cannot delete yourself: Du kan inte ta bort dig själv
 You received a new chat message from {0}: Du har fått ett nytt chattmeddelande från {0}
+You're leaving {0} and will redirected to {1}: Du lämnar {0} och kommer att omdirigeras till {1}
 Your e-mail address has been confirmed!: Din e-postadress har bekräftats!
 Your email address could not be verified. If you have any problems, please contact {0}: Din e-postadress kunde inte verifieras. Om du har några problem, vänligen kontakta {0}
 Your Profile has been updated.: Din profil har uppdaterats.

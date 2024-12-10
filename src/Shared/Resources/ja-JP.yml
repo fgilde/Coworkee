@@ -751,6 +751,7 @@ Only Selected Group (Export): 選択したグループのみ (エクスポート
 Open: 開ける
 Open now: 開ける
 Open Url {0}: URL{0}を開く
+Open Url {0} in a new browser tab: 新しいブラウザタブでURL{0}を開く
 or-IN: オディア (インド)
 os-GE: オセティック (ジョージア州)
 os-RU: オセティック(ロシア)
@@ -826,6 +827,9 @@ quz-PE: クズ (ペルー)
 Rate: 率
 Rate must be greater than 0: レートは 0 より大きくする必要があります
 Realtime Updates & Insights with SignalR.: SignalR によるリアルタイム更新と洞察。
+Redirect: リダイレクト
+Redirecting to {0}: '{0} へのリダイレクト'
+Redirecting...: リダイレクト。。。
 Refreshed Token.: 更新されたトークン。
 Register: 登録する
 Register as: 登録する
@@ -1111,6 +1115,7 @@ You are Logged Out.: ログアウトしています。
 You can now Login with your credentials: これで、資格情報でログインできます
 You cannot delete yourself: 自分で削除することはできません。
 You received a new chat message from {0}: '{0}から新しいチャットメッセージを受信しました'
+You're leaving {0} and will redirected to {1}: '{0}を離れると、{1}にリダイレクトされます'
 Your e-mail address has been confirmed!: メールアドレスが確認できました!
 Your email address could not be verified. If you have any problems, please contact {0}: メールアドレスを確認できませんでした。何か問題がある場合は、お問い合わせくださ{0}
 Your Profile has been updated.: プロフィールが更新されました。

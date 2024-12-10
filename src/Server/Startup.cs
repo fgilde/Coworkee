@@ -17,12 +17,7 @@ using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
 using Coworkee.Shared;
-using GptInvoke;
-using System;
-using Coworkee.Application.AssistantFeatures;
 using Coworkee.Application.Configurations;
-using DocumentFormat.OpenXml.Office2021.DocumentTasks;
-using OpenAI.Models;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.HttpOverrides;
 
@@ -99,29 +94,18 @@ namespace Coworkee.Server
             IDashboardAuthorizationFilter authorizationFilter)
         {
             #region For Keycloak
-
-            app.UseForwardedHeaders(new ForwardedHeadersOptions()
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-
-            app.UseCookiePolicy(new CookiePolicyOptions
-            {
-                //MinimumSameSitePolicy = SameSiteMode.Lax,
-                HttpOnly = HttpOnlyPolicy.Always,
-                MinimumSameSitePolicy = SameSiteMode.None,
-            });
-
+            
             var seeder = new KeycloakSeeder();
             System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
             {
                 _ = seeder.CreateClientAsync();
             });
+
             #endregion
 
             app.UseSessionId();
             app.UseCors();
-            app.UseHealthChecks("/health");
+            
             app.UseExceptionHandling(env);
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
@@ -133,7 +117,6 @@ namespace Coworkee.Server
             });
             app.UseRequestLocalizationByCulture();
             app.UseRouting();
-
 
             app.UseGrpcWeb();
             if (!ServerUtils.ClientRunsOnServer)

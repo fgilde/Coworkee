@@ -79,7 +79,11 @@ public static class Extensions
         }
 
         var telemetry = builder.Services.AddOpenTelemetry()
-            .WithMetrics(metrics => metrics.AddPrometheusExporter());
+            .WithMetrics(metrics =>
+            {
+                metrics.AddPrometheusExporter();
+                metrics.AddMeter("Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel");
+            });
 
         //Uncomment the following lines to enable the Azure Monitor exporter(requires the Azure.Monitor.OpenTelemetry.AspNetCore package)
         if (!string.IsNullOrEmpty(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))

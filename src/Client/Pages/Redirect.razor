@@ -1,0 +1,87 @@
+﻿@using Coworkee.Client.JsInterop
+@using Coworkee.Shared.Constants.Application
+@attribute [Route(ApplicationConstants.Routes.Redirect)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Redirect> _localizer
+
+<PageHeaderTitle Title="@_localizer["Redirect"]" Description="@GetDescription()" />
+
+@if (_rendered && NeedsConfirmation == true)
+{
+    <MudGrid Spacing="4" Justify="Justify.Center">
+        <MudItem>
+            <MudButton OnClick="@(() => ExecuteRedirect(true))" Variant="Variant.Filled" Color="Color.Primary">@(_localizer["Open Url {0}", ReadableUrl()])</MudButton>
+        </MudItem>
+        @if (!IsLocalUrl())
+        {
+            <MudItem>
+                <MudButton OnClick="@(() => ExecuteRedirect(true, "_blank"))" Variant="Variant.Filled" Color="Color.Primary">@(_localizer["Open Url {0} in a new browser tab", ReadableUrl()])</MudButton>
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+@code
+{
+    bool _rendered;
+    [Parameter]
+    public string ReturnUrl { get; set; }
+
+    [Parameter]
+    public bool? NeedsConfirmation { get; set; }
+
+    private string ReadableUrl()
+    {
+        if (string.IsNullOrWhiteSpace(ReturnUrl))
+            return "/";
+        if (Uri.TryCreate(ReturnUrl, UriKind.Absolute, out var uri))
+            return uri.Host;
+        return ReturnUrl;
+    }
+
+    private bool IsLocalUrl() => string.IsNullOrWhiteSpace(ReturnUrl) || !_navigationManager.IsExternalUrl(ReturnUrl);
+
+    private string GetDescription()
+    {
+        if(!_rendered)
+            return _localizer["Redirecting..."];
+        return IsLocalUrl() ? _localizer["Redirecting to {0}", ReadableUrl()] : _localizer["You're leaving {0} and will redirected to {1}", ApplicationConstants.ApplicationName, ReadableUrl()];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (!_rendered || firstRender)
+        {
+            ExecuteRedirect();
+            if (NeedsConfirmation == true)
+                await InvokeAsync(StateHasChanged);
+            _rendered = true;
+        }
+    }
+
+    private void ExecuteRedirect(bool force = false, string target = null)
+    {
+        ReturnUrl ??= _navigationManager.ReadQueryParam(ApplicationConstants.ParameterNames.ReturnUrl) ?? _navigationManager.ReadQueryParam(nameof(ReturnUrl));
+        if (!force && NeedsConfirmation == null)
+        {
+            var needsConfirmation = _navigationManager.ReadQueryParam(nameof(NeedsConfirmation));
+            if (!string.IsNullOrWhiteSpace(needsConfirmation) && bool.TryParse(needsConfirmation, out var res))
+                NeedsConfirmation = res;
+        }
+
+        if (NeedsConfirmation == true && !force)
+            return;
+        
+        Console.WriteLine("Redirecting to: " + ReturnUrl);
+        var redirectTo = !string.IsNullOrWhiteSpace(ReturnUrl) ? ReturnUrl : "/";
+
+        if (!string.IsNullOrWhiteSpace(target))
+        {
+            _ = ServiceAccessor.Get<IJSRuntime>().InvokeVoidAsync(JsNamespace.Get("BrowserHelper", "navigateToExternalUrl"), redirectTo, target);
+            //_navigationManager.NavigateTo("/");
+        }
+        else
+            _navigationManager.NavigateTo(redirectTo, true);
+    }
+
+}

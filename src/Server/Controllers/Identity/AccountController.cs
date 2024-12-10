@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Security.Claims;
 using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +14,18 @@ using Coworkee.Infrastructure.Services.Identity;
 using Coworkee.Shared.Wrapper;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Application.Common.Models;
+using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth;
+using Coworkee.Shared.Constants.Application;
+using Microsoft.AspNetCore.Http;
+using Coworkee.Application.Configurations;
+using Coworkee.Infrastructure.Models.Identity;
+using Coworkee.Shared;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Nextended.Core.Extensions;
+using System.Net.Http;
 
 namespace Coworkee.Server.Controllers.Identity
 {
@@ -85,21 +99,41 @@ namespace Coworkee.Server.Controllers.Identity
             return Ok();
         }
 
-        [HttpGet("login")]
-        public async Task<IActionResult> Login(string returnUrl = "/")
+        [HttpGet("login-callback")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = "/")
         {
-            await HttpContext.ChallengeAsync("keycloak", new OAuthChallengeProperties() { RedirectUri = returnUrl });
-            return Ok();
+            var token = HttpContext?.Session?.GetString(ApplicationConstants.ParameterNames.AuthedUrlParameter);
+            var claims = ClaimReader.ReadClaimsFromJwt(token);
+            var userId = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            await Get<IdentityService>().SetUserOnlineStatusAsync(userId, true);
+
+            // Ensure returnUrl is not null or empty
+            returnUrl ??= "/";
+
+            // Check if returnUrl already has query parameters
+            string separator = returnUrl.Contains("?") ? "&" : "?";
+
+            // Append the parameter safely
+            string redirectUrl = $"{returnUrl}{separator}{ApplicationConstants.ParameterNames.AuthedUrlParameter}={Uri.EscapeDataString(token)}";
+
+            return Redirect(redirectUrl);
         }
 
-        //[HttpGet("login")]
-        //public IActionResult Login(string returnUrl = "/")
-        //{
-        //    return Challenge(new AuthenticationProperties
-        //    {
-        //        RedirectUri = returnUrl
-        //    }, "keycloak");
-        //}
+
+
+        [HttpGet("login")]
+        [AllowAnonymous]
+        public IActionResult Login(string returnUrl = "/")
+        {
+            var callbackUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnUrl }, Request.Scheme);
+
+            return Challenge(new AuthenticationProperties
+            {
+                RedirectUri = callbackUrl
+            }, "keycloak");
+        }
 
         [HttpPost("[action]")]
         [AllowAnonymous] // To ensure no error if call comes with expired session
@@ -108,6 +142,10 @@ namespace Coworkee.Server.Controllers.Identity
             await _accountService.LogoutAsync();
             await Get<IdentityService>().SetUserOnlineStatusAsync(_currentUser.UserId, false);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, "");
+
+            // Keycloak logout
+            //var keycloakLogoutUrl = $"{Configuration.KeycloakConfiguration.Url}/realms/{Configuration.KeycloakConfiguration.Realm}/protocol/openid-connect/logout?redirect_uri={Configuration.ClientUrl.EnsureEndsWith("/")}";
 
             return Ok();
         }

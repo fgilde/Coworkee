@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Models.Identity;
@@ -16,6 +17,7 @@ namespace Coworkee.Application.Contracts.Services.Identity
     {
         Task<UserResponse> SystemUserAsync();
         Task<IEnumerable<UserResponse>> GetAllForTargetAsync(EventTarget eventTarget);
+        Task<UserResponse[]> GetOrAddUserAsync(params ClaimsPrincipal[] principals);
         Task<UserResponse[]> GetOrAddUserAsync(params CreateUser[] user);
         Task<Result<List<UserResponse>>> GetAllAsync();
         Task<int> GetCountAsync();

@@ -26,9 +26,9 @@ var keycloak = builder.AddKeycloak("keycloak", 8080,
 //    .WithBindMount("../grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
 //    .WithHttpEndpoint(targetPort: 3000, name: "http");
 
-//builder.AddContainer("prometheus", "prom/prometheus")
-//    .WithBindMount("../prometheus", "/etc/prometheus", isReadOnly: true)
-//    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090);
+builder.AddContainer("prometheus", "prom/prometheus")
+    .WithBindMount("../prometheus", "/etc/prometheus", isReadOnly: true)
+    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090);
 
 
 

@@ -14,6 +14,8 @@ using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Common.Models.Identity;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Shared.Constants.Application;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace Coworkee.Client.Authentication
 {
@@ -23,6 +25,8 @@ namespace Coworkee.Client.Authentication
 
         private readonly HttpClient _httpClient;
         private readonly ClientApplicationConfiguration _config;
+        private readonly IJSRuntime _jsRuntime;
+        private readonly NavigationManager _navigationManager;
         private readonly ILocalStorageService _localStorage;
 
         public bool IsAuthenticatedBeforeEvent => _generalAuthenticatedBeforeEvent; 
@@ -30,10 +34,14 @@ namespace Coworkee.Client.Authentication
         public ApplicationStateProvider(
             HttpClient httpClient,
             ClientApplicationConfiguration config,
+            IJSRuntime jsRuntime,
+            NavigationManager navigationManager,
             ILocalStorageService localStorage)
         {
             _httpClient = httpClient;
             _config = config;
+            _jsRuntime = jsRuntime;
+            _navigationManager = navigationManager;
             _localStorage = localStorage;
         }
         
@@ -60,6 +68,14 @@ namespace Coworkee.Client.Authentication
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            // Read from cookie?    
+            var token = _navigationManager.ReadQueryParam(ApplicationConstants.ParameterNames.AuthedUrlParameter);
+            if(token != null)
+            {
+                await _localStorage.SetItemAsync(StorageConstants.Local.AuthToken, token);
+                // TODO: remove from url
+            }
+
             var savedToken = await _localStorage.GetItemAsync<string>(StorageConstants.Local.AuthToken);
             if (string.IsNullOrWhiteSpace(savedToken))
                 return GetAnonymousState();

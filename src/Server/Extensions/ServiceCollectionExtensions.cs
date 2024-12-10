@@ -53,7 +53,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Coworkee.Application.Contracts.Services.Identity;
+using Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Builder;
+using Coworkee.Infrastructure.Services.Identity;
 
 namespace Coworkee.Server.Extensions
 {
@@ -161,6 +163,7 @@ namespace Coworkee.Server.Extensions
 
         public static IServiceCollection AddOpenApiDocumentation(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddEndpointsApiExplorer();
             var configSection = configuration.GetSection("ApiDocumentation");
             foreach (var version in ApiVersions.All.Reverse())
             {
@@ -391,6 +394,7 @@ namespace Coworkee.Server.Extensions
                 .AddKeycloakOpenIdConnect(
                     "keycloak",
                     realm: "master",
+                    authenticationScheme: "keycloak",
                     options =>
                     {
                         options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
@@ -399,26 +403,6 @@ namespace Coworkee.Server.Extensions
                         options.ResponseType = OpenIdConnectResponseType.Code; 
                         options.UsePkce = true;
                         options.SaveTokens = true;
-                        //options.NonceCookie = new CookieBuilder
-                        //{
-                        //    Name = "KeycloakNonceCookie", // Ein eindeutiger Name für den Cookie
-                        //    SameSite = SameSiteMode.Lax, // Für OpenID Connect erforderlich
-                        //    SecurePolicy = CookieSecurePolicy.Always, // Immer HTTPS verwenden (in Produktion)
-                        //    HttpOnly = true // Zugriff nur über HTTP (nicht durch JS)
-                        //};
-                        //options.CorrelationCookie = new CookieBuilder
-                        //{
-                        //    Name = "KeycloakCorrelationCookie",
-                        //    //SameSite = SameSiteMode.Lax, // Erforderlich für OAuth2
-                        //    SameSite = SameSiteMode.None,
-                        //    SecurePolicy = CookieSecurePolicy.Always, // HTTPS verwenden
-                        //    HttpOnly = true // Zugriff nur über HTTP
-                        //};
-                        options.ProtocolValidator = new OpenIdConnectProtocolValidator
-                        {
-                            RequireState = false,
-                            RequireNonce = false // Nonce-Validierung deaktivieren
-                        };
                         //options.ResponseMode = OpenIdConnectResponseMode.Query;
                         options.Scope.Add("openid");
                         options.Scope.Add("profile");
@@ -426,36 +410,15 @@ namespace Coworkee.Server.Extensions
                         {
                             OnTokenValidated = async context =>
                             {
-                                // Hole Benutzerinformationen aus dem Token
-                                var claims = context.Principal?.Claims;
-                                var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-                                var userName = claims?.FirstOrDefault(c => c.Type == "preferred_username")?.Value ?? claims?.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value;
-
-                                // Benutzer im lokalen System suchen
-                                var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<ApplicationUser>>();
-                                var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
-                                var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
-                                var accountService = context.HttpContext.RequestServices.GetRequiredService<IAccountService>();
                                 var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();
-                                ApplicationUser user = null;
-                                if(!string.IsNullOrWhiteSpace(email))
-                                    user = await userManager.FindByEmailAsync(email);
-                                if (user == null)
-                                    user = await userManager.FindByNameAsync(userName);
-
-                                if (user == null)
+                                var result = await identityService.LoginExternalAsync(context.Principal, true);
+                                if (!result.Succeeded)
                                 {
                                     context.Fail("User not found in the local system.");
                                     return;
                                 }
-
-                                //// Benutzer einloggen (lokales System)
-                                await signInManager.SignInAsync(user, true);
+                                context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);
                                 context.Success();
-
-                                //// Optional: Claims erweitern
-                                //var identity = context.Principal?.Identity as ClaimsIdentity;
-                                //identity?.AddClaim(new Claim("CustomClaim", "CustomValue"));
                             }
                         };
                     });

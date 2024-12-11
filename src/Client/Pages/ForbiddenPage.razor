@@ -1,4 +1,6 @@
-﻿@page "/forbidden/{ReturnUrl?}"
+﻿@using Coworkee.Shared.Constants.Application
+@attribute [Route($"{ApplicationConstants.Routes.Forbidden}/{{ReturnUrl?}}")]
+
 <Forbidden ReturnUrl="@ReturnUrl"/>
 
 @code

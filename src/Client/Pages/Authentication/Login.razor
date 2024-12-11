@@ -1,5 +1,6 @@
-@page "/login"
-@page "/login/{Message}"
+@attribute [Route(ApplicationConstants.Routes.Login)]
+@attribute [Route($"{ApplicationConstants.Routes.Login}/{{Message}}")]
+ 
 @using Coworkee.Shared.Constants.Application
 @using Coworkee.Client.Utils
 @layout LoginLayout

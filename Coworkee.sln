@@ -43,9 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.UnitTests", "tests\Domain.UnitTests\Domain.UnitTests.csproj", "{D0E33CCF-AC05-4668-9FEF-C41AF84AB321}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coworkee.AppHost", "src\Coworkee.AppHost\Coworkee.AppHost.csproj", "{50FC1E16-7F9D-4F04-B2ED-EE45A4F66133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coworkee.AppHost", "src\Aspire\Coworkee.AppHost\Coworkee.AppHost.csproj", "{50FC1E16-7F9D-4F04-B2ED-EE45A4F66133}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coworkee.ServiceDefaults", "src\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj", "{E2F5F140-0CF8-4406-9F5F-F57F9B63AC46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coworkee.ServiceDefaults", "src\Aspire\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj", "{E2F5F140-0CF8-4406-9F5F-F57F9B63AC46}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspire", "aspire", "{96AF5B00-47BD-490D-A369-655E5F64B3EB}"
 EndProject

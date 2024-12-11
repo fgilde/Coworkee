@@ -63,7 +63,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Condition="'$(HostClientInServer)' == 'true'" Include="..\Client\Client.csproj" />
-    <ProjectReference Include="..\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Aspire\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

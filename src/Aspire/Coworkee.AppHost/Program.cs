@@ -18,18 +18,8 @@ var keycloak = builder.AddKeycloak("keycloak", 8080,
     builder.AddParameter("AdminUserPassword", "admin"))
     .WithCommand("Seed Client", "Seed Client", context =>
     {
-        return Task.FromResult(new ExecuteCommandResult() {Success = true});
+        return Task.FromResult(new ExecuteCommandResult() { Success = true });
     });
-
-//var grafana = builder.AddContainer("grafana", "grafana/grafana")
-//    .WithBindMount("../grafana/config", "/etc/grafana", isReadOnly: true)
-//    .WithBindMount("../grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
-//    .WithHttpEndpoint(targetPort: 3000, name: "http");
-
-builder.AddContainer("prometheus", "prom/prometheus")
-    .WithBindMount("../prometheus", "/etc/prometheus", isReadOnly: true)
-    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090);
-
 
 
 var ollama = builder.AddOllama("ollama")
@@ -46,16 +36,28 @@ var ollama = builder.AddOllama("ollama")
     .PublishAsContainer()
     .AddModel("llama3.2");
 
+var grafana = builder.AddContainer("grafana", "grafana/grafana")
+    .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true)
+    .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
+    .WithHttpEndpoint(targetPort: 3000, name: "http");
+
 var api = builder.AddProject<Projects.Server>("coworkee-application")
+    .WithEnvironment("GRAFANA_URL", grafana.GetEndpoint("http"))
     .WithReference(db)
     .WithReference(keycloak)
     .WaitFor(keycloak)
     .WaitFor(db);
 
-
 //builder.AddProject<Projects.Client>("coworkee-client")
 //    .WaitFor(api)
 //    .WithReference(api);
 
+
+builder.AddContainer("prometheus", "prom/prometheus")
+    .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true)
+    .WithReference(api)
+    .WaitFor(api)
+    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
+    .WithContainerRuntimeArgs("--network=host");
 
 builder.Build().Run();

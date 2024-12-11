@@ -81,7 +81,8 @@ public static class Extensions
         var telemetry = builder.Services.AddOpenTelemetry()
             .WithMetrics(metrics =>
             {
-                metrics.AddPrometheusExporter();
+                // BUG: Part of the workaround for https://github.com/open-telemetry/opentelemetry-dotnet-contrib/issues/1617
+                metrics.AddPrometheusExporter(options => options.DisableTotalNameSuffixForCounters = true);
                 metrics.AddMeter("Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel");
             });
 

@@ -15,6 +15,8 @@ namespace Coworkee.Application.Configurations
     {
         public string ClientUrl { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
+        public Endpoints Endpoints { get; set; }
+
         public Publicsettings PublicSettings { get; set; }
         public string AllowedHosts { get; set; }
         public Appconfiguration AppConfiguration { get; set; }
@@ -25,10 +27,19 @@ namespace Coworkee.Application.Configurations
         public Rabbitmq RabbitMQ { get; set; }
         public BackupOptions BackupOptions { get; set; }
     }
-
+    
+    public class Endpoints
+    {
+        public string Ollama { get; set; }
+        public string OllamaUI { get; set; }
+        public string Grafana { get; set; }
+        public string Prometheus { get; set; }
+    }
+    
     public class Connectionstrings
     {
         public string DefaultConnection { get; set; }
+        public string Ollama { get; set; }
     }
 
     public class Publicsettings

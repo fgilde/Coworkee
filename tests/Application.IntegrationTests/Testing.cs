@@ -11,6 +11,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Coworkee.Application.Configurations;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Infrastructure.Contexts;
 using Coworkee.Infrastructure.Models.Identity;
@@ -133,7 +134,7 @@ public class Testing
 
     public static async Task ResetState()
     {
-        await _checkpoint.ResetAsync(_configuration.GetConnectionString("DefaultConnection"));
+        await _checkpoint.ResetAsync(_configuration.GetConnectionString(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection)));
         _currentUserId = null;
     }
 

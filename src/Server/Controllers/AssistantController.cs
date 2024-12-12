@@ -18,6 +18,14 @@ namespace Coworkee.Server.Controllers
 
     public class AssistantController : BaseApiController<AssistantController>
     {
+        [HttpPost(nameof(AskOllama))]
+        public async Task<ActionResult> AskOllama(string question)
+        {
+            var ollamaClient = Get<OllamaHttpClient>();
+            var result = await ollamaClient.Generate("llama3.2", question, false);
+            return Ok(result);
+        }
+
         [Authorize]
         [HttpPost(nameof(Ask))]
         public async Task<IActionResult> Ask(string prompt, CancellationToken cancellationToken = default)
@@ -31,7 +39,7 @@ namespace Coworkee.Server.Controllers
         {
             if (commands == null || !commands.Any())
                 return BadRequest("Command list is empty or null.");
-            
+
 
             var lastMessage = commands.Last().Message;
             commands.RemoveAt(commands.Count - 1);
@@ -42,11 +50,11 @@ namespace Coworkee.Server.Controllers
         {
             var responseBodyFeature = HttpContext.Features.Get<IHttpResponseBodyFeature>();
             var writer = responseBodyFeature.Writer;
-            var invoker = Get<IGptActionInvoker>();
+            var invoker = Get<IAIActionInvoker>();
 
             if (history?.Any() == true)
-                invoker.SetHistory(history.Select(dto => new ChatPrompt(dto.Role, dto.Message)));
-            
+                invoker.SetHistory(history.Select(dto => new AIMessage { Role = dto.Role, Content = dto.Message }));
+
             var result = await invoker.PromptAsync(prompt, async s =>
             {
                 if (s != null)

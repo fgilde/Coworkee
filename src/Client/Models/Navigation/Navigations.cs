@@ -12,7 +12,6 @@ namespace Coworkee.Client.Models.Navigation
         public static HashSet<NavigationEntry> Default(string backendOrigin) => new()
         {
             new NavigationEntry("Home", Icons.Material.Outlined.Home, "/"),
-            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
             new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, $"{backendOrigin}{ApplicationConstants.Routes.ApiDocumentation.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Swagger.View),
             new NavigationEntry("Personal")
             {
@@ -39,6 +38,14 @@ namespace Coworkee.Client.Models.Navigation
                     new NavigationEntry("Database Backups", Icons.Material.Outlined.Save, "/admin/database-backups").WithPolicies(Permissions.Backups.View),
                     new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
                     new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
+                    new NavigationEntry("Monitoring")
+                    {
+                        Children = new()
+                        {
+                            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
+                            //new NavigationEntry("Grafana", Icons.Material.Outlined.Dashboard, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
+                        }
+                    },
                     new NavigationEntry("Localization")
                     {
                         Children = new()

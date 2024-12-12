@@ -13,7 +13,7 @@ using Coworkee.Application.Features.Brands.Commands.AddEdit;
 
 namespace Coworkee.Application.AssistantFeatures;
 
-public class AddProduct: IGptInvokableService
+public class AddProduct: IAIInvokableService
 {
     private readonly IMediator _mediator;
     private readonly IUnitOfWork<int> _unitOfWork;
@@ -26,13 +26,13 @@ public class AddProduct: IGptInvokableService
     
     public string Name { get; set; } = "Add Product service";
     public string Description { get; set; } = "I can add products";
-    public GptInvokableServiceParameter[] Parameters => new[]
+    public AIInvokableServiceParameter[] Parameters => new[]
     {
-        new GptInvokableServiceParameter("Name", "Name of the product to add", typeof(string), true),
-        new GptInvokableServiceParameter("Barcode", "Barcode of product", typeof(string), true),
-        new GptInvokableServiceParameter("Description", "Description of product", typeof(string), false),
-        new GptInvokableServiceParameter("Brand", "Brand for this product", typeof(string), true),
-        new GptInvokableServiceParameter("Rate", "Description of product", typeof(decimal), true),
+        new AIInvokableServiceParameter("Name", "Name of the product to add", typeof(string), true),
+        new AIInvokableServiceParameter("Barcode", "Barcode of product", typeof(string), true),
+        new AIInvokableServiceParameter("Description", "Description of product", typeof(string), false),
+        new AIInvokableServiceParameter("Brand", "Brand for this product", typeof(string), true),
+        new AIInvokableServiceParameter("Rate", "Description of product", typeof(decimal), true),
     };
 
     public async Task<bool> ExecuteAsync(IDictionary<string, object> parameters)

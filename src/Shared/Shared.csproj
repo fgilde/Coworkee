@@ -26,7 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Helper\" />
     <Folder Include="Misc\" />
   </ItemGroup>
   <ItemGroup>

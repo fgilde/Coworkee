@@ -34,7 +34,7 @@
     </PackageReference>    
     <PackageReference Include="System.Net.Http.Json" Version="9.0.0" />
     <PackageReference Include="MudBlazor" Version="8.0.0-preview.4" />
-    <PackageReference Include="MudBlazor.Extensions" Version="8.0.0-prev-241208136-mudblazor-8" />
+    <PackageReference Include="MudBlazor.Extensions" Version="8.0.0-prev-2412121028-mudblazor-8" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.0" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />

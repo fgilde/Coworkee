@@ -8,6 +8,12 @@
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>54b92071-131f-43ec-97df-bad034da700f</UserSecretsId>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Application\Configurations\ServerConfiguration.cs" Link="Shared\ServerConfiguration.cs" />
+    <Compile Include="..\..\Shared\Constants\Application\ApplicationConstants.cs" Link="Shared\ApplicationConstants.cs" />
+    <Compile Include="..\..\Shared\Constants\Role\RoleConstants.cs" Link="Shared\RoleConstants.cs" />
+    <Compile Include="..\..\Shared\Models\CreateUser.cs" Link="Shared\CreateUser.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
@@ -23,6 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Client\Client.csproj" />
     <ProjectReference Include="..\..\Server\Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Shared\" />
   </ItemGroup>
 
 </Project>

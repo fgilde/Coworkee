@@ -16,6 +16,31 @@
     "version": "1.0"
   },
   "paths": {
+    "/Assistant/AskOllama": {
+      "post": {
+        "tags": [
+          "Assistant"
+        ],
+        "operationId": "Assistant_AskOllama",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "question",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/Assistant/Ask": {
       "post": {
         "tags": [
@@ -8502,6 +8527,9 @@
         "connectionStrings": {
           "$ref": "#/definitions/Connectionstrings"
         },
+        "endpoints": {
+          "$ref": "#/definitions/Endpoints"
+        },
         "publicSettings": {
           "$ref": "#/definitions/Publicsettings"
         },
@@ -8535,6 +8563,26 @@
       "type": "object",
       "properties": {
         "defaultConnection": {
+          "type": "string"
+        },
+        "ollama": {
+          "type": "string"
+        }
+      }
+    },
+    "Endpoints": {
+      "type": "object",
+      "properties": {
+        "ollama": {
+          "type": "string"
+        },
+        "ollamaUI": {
+          "type": "string"
+        },
+        "grafana": {
+          "type": "string"
+        },
+        "prometheus": {
           "type": "string"
         }
       }

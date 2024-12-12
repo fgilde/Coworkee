@@ -48,14 +48,12 @@ using NSwag.Generation.Processors.Security;
 using Coworkee.Application.AssistantFeatures;
 using GptInvoke;
 using OpenAI.Models;
-using System.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Application.Requests.Identity;
+using Coworkee.Shared.Helper;
 using Microsoft.AspNetCore.Builder;
-using Coworkee.Infrastructure.Services.Identity;
 
 namespace Coworkee.Server.Extensions
 {
@@ -70,7 +68,7 @@ namespace Coworkee.Server.Extensions
                 configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
                 if (assistantAvailable)
                 {
-                    services.AddGptActionInvoker(settings =>
+                    services.AddOpenAIActionInvoker(settings =>
                     {
                         settings.ApiKey = gptConfig.ApiKey;
                         settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
@@ -265,14 +263,19 @@ namespace Coworkee.Server.Extensions
                 //options.UseLazyLoadingProxies();  // TODO: Problems with chat service at this moment
                 //options.UseInMemoryDatabase("CoworkeeDb");
 
-                var connectionStr = configuration?.GetConnectionString("postgresdb");
-                if (!string.IsNullOrWhiteSpace(connectionStr))
+                var defaultConnection = configuration.GetConnectionString(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection)) ?? string.Empty;
+
+                if (DatabaseProviderDetector.DetectProvider(defaultConnection) == DatabaseProvider.Postgres)
                 {
-                    options.UseNpgsql(connectionStr);
+                    // Postgres connection
+                    options.UseNpgsql(defaultConnection);
                     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
                 }
                 else
-                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                {
+                    // Default SQL Server connection
+                    options.UseSqlServer(defaultConnection);
+                }
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
             return services;
         }

@@ -1,3 +1,4 @@
+using Coworkee.Application.Configurations;
 using Microsoft.Extensions.Azure;
 using Projects;
 
@@ -5,12 +6,12 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 //var db = builder.AddSqlServer("coworkee-sql-server")
 //    .WithLifetime(ContainerLifetime.Persistent)
-//    .AddDatabase("DefaultConnection");
+//    .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection));
 
 var db = builder.AddPostgres("pg")
     .WithPgAdmin()
     .WithLifetime(ContainerLifetime.Persistent)
-    .AddDatabase("postgresdb", "CoworkeeDb");
+    .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb");
 
 
 var keycloak = builder.AddKeycloak("keycloak", 8080,
@@ -22,30 +23,43 @@ var keycloak = builder.AddKeycloak("keycloak", 8080,
     });
 
 
+IResourceBuilder<OpenWebUIResource>? openWebUi = null;
 var ollama = builder.AddOllama("ollama")
     .WithContainerRuntimeArgs()
     .WithDataVolume()
     .WithOtlpExporter()
     .WithOpenWebUI(webui =>
     {
+        openWebUi = webui;
         webui.WithOtlpExporter()
             .WithExternalHttpEndpoints()
             .PublishAsContainer();
     })
     .WithExternalHttpEndpoints()
-    .PublishAsContainer()
-    .AddModel("llama3.2");
+    .PublishAsContainer();
+
+var ollamaModel = ollama.AddModel("llama3.2");
 
 var grafana = builder.AddContainer("grafana", "grafana/grafana")
     .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true)
     .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
     .WithHttpEndpoint(targetPort: 3000, name: "http");
 
+var prometheus = builder.AddContainer("prometheus", "prom/prometheus")
+    .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true)
+    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
+    .WithContainerRuntimeArgs("--network=host");
+
 var api = builder.AddProject<Projects.Server>("coworkee-application")
-    .WithEnvironment("GRAFANA_URL", grafana.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Grafana)}", grafana.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Ollama)}", ollama.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Prometheus)}", prometheus.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.OllamaUI)}", openWebUi?.GetEndpoint("http"))
     .WithReference(db)
     .WithReference(keycloak)
     .WaitFor(keycloak)
+    .WithReference(ollama)
+    .WithReference(ollamaModel)
     .WaitFor(db);
 
 //builder.AddProject<Projects.Client>("coworkee-client")
@@ -53,11 +67,8 @@ var api = builder.AddProject<Projects.Server>("coworkee-application")
 //    .WithReference(api);
 
 
-builder.AddContainer("prometheus", "prom/prometheus")
-    .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true)
+prometheus
     .WithReference(api)
-    .WaitFor(api)
-    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
-    .WithContainerRuntimeArgs("--network=host");
+    .WaitFor(api);
 
 builder.Build().Run();

@@ -38,7 +38,7 @@ var ollama = builder.AddOllama("ollama")
     .WithExternalHttpEndpoints()
     .PublishAsContainer();
 
-var ollamaModel = ollama.AddModel("llama3.2");
+var ollamaModel = ollama.AddModel("llama3.3");
 
 var grafana = builder.AddContainer("grafana", "grafana/grafana")
     .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true)
@@ -56,11 +56,11 @@ var api = builder.AddProject<Projects.Server>("coworkee-application")
     .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Prometheus)}", prometheus.GetEndpoint("http"))
     .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.OllamaUI)}", openWebUi?.GetEndpoint("http"))
     .WithReference(db)
+    .WaitFor(db)
     .WithReference(keycloak)
     .WaitFor(keycloak)
     .WithReference(ollama)
-    .WithReference(ollamaModel)
-    .WaitFor(db);
+    .WithReference(ollamaModel);
 
 //builder.AddProject<Projects.Client>("coworkee-client")
 //    .WaitFor(api)

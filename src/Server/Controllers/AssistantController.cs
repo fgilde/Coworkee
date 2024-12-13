@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Coworkee.Application.Common.Models;
 using System.Collections.Generic;
+using OllamaSharp;
 using OpenAI.Chat;
+using ChatRequest = OllamaSharp.Models.Chat.ChatRequest;
 
 namespace Coworkee.Server.Controllers
 {
@@ -21,9 +23,11 @@ namespace Coworkee.Server.Controllers
         [HttpPost(nameof(AskOllama))]
         public async Task<ActionResult> AskOllama(string question)
         {
-            var ollamaClient = Get<OllamaHttpClient>();
-            var result = await ollamaClient.Generate("llama3.2", question, false);
-            return Ok(result);
+            var res = new StringBuilder();
+            var ollama = Get<OllamaApiClient>();
+            await foreach (var stream in ollama.GenerateAsync(question))
+                res.Append(stream.Response);
+            return Ok(res.ToString());
         }
 
         [Authorize]

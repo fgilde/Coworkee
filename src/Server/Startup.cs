@@ -18,15 +18,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
 using Coworkee.Shared;
 using Coworkee.Application.Configurations;
-using Microsoft.AspNetCore.CookiePolicy;
-using Microsoft.AspNetCore.HttpOverrides;
-using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text;
-using System.Threading.Tasks;
 using Hangfire.PostgreSql;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 using Coworkee.Shared.Helper;
 
 namespace Coworkee.Server
@@ -47,13 +39,7 @@ namespace Coworkee.Server
         public void ConfigureServices(IServiceCollection services)
         {
             var serverConfig = services.AddApplicationSettings(_configuration);
-
-            services.AddHttpClient<OllamaHttpClient>(client =>
-            {
-                var uri = _configuration["ConnectionStrings:ollama"].Split("=")[1];
-                client.BaseAddress = new Uri(uri);
-            });
-
+            
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             services.AddSignalRServices(serverConfig);
@@ -65,7 +51,6 @@ namespace Coworkee.Server
             });
             services.AddHealthChecks();
             services.AddSerialization();
-            services.AddDatabase(_configuration);
             services.AddScoped<ServerPreferenceManager>();
             services.AddServerLocalization();
             services.AddYamlLocalizationWithFallback();
@@ -75,7 +60,8 @@ namespace Coworkee.Server
             services.AddInfrastructure();
             services.AddApiVersions();
             services.AddOpenApiDocumentation(_configuration);
-            services.AddHangfire(x =>
+            services.AddDatabase(_configuration);
+            services.AddHangfire((sp,x) =>
             {
                 var connectionStr = _configuration.GetConnectionString(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection));
                 if(DatabaseProviderDetector.DetectProvider(connectionStr) == DatabaseProvider.Postgres)
@@ -159,40 +145,5 @@ namespace Coworkee.Server
             app.Initialize(_configuration);
         }
     }
-    public class OllamaHttpClient
-    {
-        private readonly HttpClient _client;
-
-        public OllamaHttpClient(HttpClient client)
-        {
-            _client = client;
-            _client.Timeout = TimeSpan.FromMinutes(3);
-        }
-
-        public async Task<string> Generate(string model, string prompt, bool stream)
-        {
-            var data = new
-            {
-                model,
-                prompt,
-                stream
-            };
-
-            var jsonData = System.Text.Json.JsonSerializer.Serialize(data);
-
-            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-            var response = await _client.PostAsync("api/generate", content);
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                using var document = JsonDocument.Parse(json);
-                var root = document.RootElement;
-                var responseText = root.GetProperty("response").GetString();
-                return responseText;
-            }
-
-            return "Empty";
-        }
-    }
+   
 }

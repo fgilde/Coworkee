@@ -46,6 +46,7 @@ using NSwag;
 using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors.Security;
 using Coworkee.Application.AssistantFeatures;
+using Coworkee.Application.Common;
 using GptInvoke;
 using OpenAI.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -53,7 +54,9 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Shared.Helper;
+using GptInvoke.Contracts;
 using Microsoft.AspNetCore.Builder;
+using OllamaSharp;
 
 namespace Coworkee.Server.Extensions
 {
@@ -63,17 +66,22 @@ namespace Coworkee.Server.Extensions
         {
             try
             {
-                var gptConfig = ServerConfiguration.Instance.CognitiveServices.OpenAi;
-                var assistantAvailable = ServerConfiguration.Instance.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
-                configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
-                if (assistantAvailable)
-                {
-                    services.AddOpenAIActionInvoker(settings =>
-                    {
-                        settings.ApiKey = gptConfig.ApiKey;
-                        settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
-                    }, typeof(AddProduct).Assembly);
-                }
+                var config = ServerConfiguration.Instance;
+                services.AddScoped(p => new OllamaApiClient(config.Endpoints.Ollama, "llama3.2"));
+                services.AddAIActionInvoker<OllamaAIHandler>(new AIActionInvokeSettings());
+                configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
+
+                //var gptConfig = config.CognitiveServices.OpenAi;
+                //var assistantAvailable = config.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
+                //configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
+                //if (assistantAvailable)
+                //{
+                //    services.AddOpenAIActionInvoker(settings =>
+                //    {
+                //        settings.ApiKey = gptConfig.ApiKey;
+                //        settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
+                //    }, typeof(AddProduct).Assembly);
+                //}
             }
             catch (Exception e)
             {
@@ -277,6 +285,15 @@ namespace Coworkee.Server.Extensions
                     options.UseSqlServer(defaultConnection);
                 }
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
+
+            if (!ApplicationConstants.IsNswagGeneration) 
+            {
+                using var serviceProvider = services.BuildServiceProvider();
+                using var scope = serviceProvider.CreateScope();
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.EnsureCreated(); // required for hangfire
+            }
+
             return services;
         }
 

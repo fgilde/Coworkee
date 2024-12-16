@@ -1,4 +1,6 @@
 using Coworkee.Application.Configurations;
+using Coworkee.Infrastructure;
+using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Azure;
 using Projects;
 
@@ -15,11 +17,14 @@ var db = builder.AddPostgres("pg")
 
 
 var keycloak = builder.AddKeycloak("keycloak", 8080,
-    builder.AddParameter("AdminUserName", "admin"),
-    builder.AddParameter("AdminUserPassword", "admin"))
-    .WithCommand("Seed Client", "Seed Client", context =>
+    builder.AddParameter("AdminUserName", ApplicationConstants.Defaults.Users.Administrators[0].UserName),
+    builder.AddParameter("AdminUserPassword", ApplicationConstants.Defaults.Users.Administrators[0].Password))
+    .WithCommand("Seed Client", "Seed Client", async context =>
     {
-        return Task.FromResult(new ExecuteCommandResult() { Success = true });
+        var seeder = new KeycloakSeeder();
+        await seeder.CreateClientAsync(true);
+        await seeder.CreateUserAsync("hans", "hans", "hans@gmail.com");
+        return new ExecuteCommandResult { Success = true };
     });
 
 

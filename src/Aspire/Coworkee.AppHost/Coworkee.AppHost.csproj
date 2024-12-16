@@ -10,7 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\Application\Configurations\ServerConfiguration.cs" Link="Shared\ServerConfiguration.cs" />
+    <Compile Include="..\..\Infrastructure\KeycloakSeeder.cs" Link="Shared\KeycloakSeeder.cs" />
     <Compile Include="..\..\Shared\Constants\Application\ApplicationConstants.cs" Link="Shared\ApplicationConstants.cs" />
+    <Compile Include="..\..\Shared\Constants\Permission\Permissions.cs" Link="Shared\Permissions.cs" />
+    <Compile Include="..\..\Shared\Constants\Permission\RequiresPermissionsAttribute.cs" Link="Shared\RequiresPermissionsAttribute.cs" />
     <Compile Include="..\..\Shared\Constants\Role\RoleConstants.cs" Link="Shared\RoleConstants.cs" />
     <Compile Include="..\..\Shared\Models\CreateUser.cs" Link="Shared\CreateUser.cs" />
   </ItemGroup>

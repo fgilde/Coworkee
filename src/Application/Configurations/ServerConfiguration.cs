@@ -61,6 +61,7 @@ namespace Coworkee.Application.Configurations
         public bool RequireDocuments { get; set; }
         public int RegistrationDocumentsMaxFileSize { get; set; }
         public string[] RegistrationDocumentTypes { get; set; }
+        public string[] AllowedEmails { get; set; }
     }
 
     public class Usernamerules

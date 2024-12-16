@@ -418,8 +418,8 @@ namespace Coworkee.Server.Extensions
                     options =>
                     {
                         options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
-                        options.ClientId = "WeatherWeb";
-                        options.ClientSecret = "dein-client-secret";
+                        options.ClientId = ApplicationConstants.ApplicationClientName;
+                        options.ClientSecret = ApplicationConstants.ApplicationClientSecret;
                         options.ResponseType = OpenIdConnectResponseType.Code; 
                         options.UsePkce = true;
                         options.SaveTokens = true;

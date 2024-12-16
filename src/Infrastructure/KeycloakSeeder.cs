@@ -1,4 +1,6 @@
-﻿namespace Coworkee.Infrastructure;
+﻿using Coworkee.Shared.Constants.Application;
+
+namespace Coworkee.Infrastructure;
 
 using System;
 using System.Net.Http;
@@ -10,13 +12,14 @@ using Newtonsoft.Json;
 public class KeycloakSeeder
 {
     private readonly HttpClient _httpClient;
-    private readonly string _adminUsername = "admin";
-    private readonly string _adminPassword = "admin";
+    private readonly string _adminUsername = ApplicationConstants.Defaults.Users.Administrators[0].UserName;
+    private readonly string _adminPassword = ApplicationConstants.Defaults.Users.Administrators[0].Password;
+    private readonly string _clientSecret = ApplicationConstants.ApplicationClientSecret;
     private readonly string _realm = "master";
     private readonly string _keycloakUrl = "http://localhost:8080";
 
-    private const string ClientName = "WeatherWeb";
-    private const string ClientId = "WeatherWeb";
+    private const string ClientName = ApplicationConstants.ApplicationClientName;
+    private const string ClientId = ApplicationConstants.ApplicationClientName;
 
     public KeycloakSeeder()
     {
@@ -64,7 +67,7 @@ public class KeycloakSeeder
             },
             enabled = true,
             publicClient = false,
-            secret = "dein-client-secret",
+            secret = _clientSecret,
             directAccessGrantsEnabled = true,
             standardFlowEnabled = true,
             implicitFlowEnabled = false

@@ -7597,6 +7597,7 @@ export class Userregistration implements IUserregistration {
     requireDocuments!: boolean;
     registrationDocumentsMaxFileSize!: number;
     registrationDocumentTypes?: string[] | undefined;
+    allowedEmails?: string[] | undefined;
 
     constructor(data?: IUserregistration) {
         if (data) {
@@ -7621,6 +7622,11 @@ export class Userregistration implements IUserregistration {
                 this.registrationDocumentTypes = [] as any;
                 for (let item of _data["registrationDocumentTypes"])
                     this.registrationDocumentTypes!.push(item);
+            }
+            if (Array.isArray(_data["allowedEmails"])) {
+                this.allowedEmails = [] as any;
+                for (let item of _data["allowedEmails"])
+                    this.allowedEmails!.push(item);
             }
         }
     }
@@ -7647,6 +7653,11 @@ export class Userregistration implements IUserregistration {
             for (let item of this.registrationDocumentTypes)
                 data["registrationDocumentTypes"].push(item);
         }
+        if (Array.isArray(this.allowedEmails)) {
+            data["allowedEmails"] = [];
+            for (let item of this.allowedEmails)
+                data["allowedEmails"].push(item);
+        }
         return data;
     }
 }
@@ -7661,6 +7672,7 @@ export interface IUserregistration {
     requireDocuments: boolean;
     registrationDocumentsMaxFileSize: number;
     registrationDocumentTypes?: string[] | undefined;
+    allowedEmails?: string[] | undefined;
 }
 
 export class Usernamerules implements IUsernamerules {

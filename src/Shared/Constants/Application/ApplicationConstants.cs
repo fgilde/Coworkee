@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Coworkee.Shared.Constants.Permission;
 using Coworkee.Shared.Constants.Role;
 using Coworkee.Shared.Models;
 
@@ -9,7 +10,8 @@ namespace Coworkee.Shared.Constants.Application
     {
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
-        public static string ApplicationClientName = $"{ApplicationName}Client";
+        public const string ApplicationClientName = $"{ApplicationName}Client";
+        public const string ApplicationClientSecret = $"{ApplicationClientName}-34C2F2F8-CD3D-4976-AA08-36AE10FA4119";
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string DefaultLanguageCode = "en-US";
         public const string DefaultDocumentTypeName = "Unassigned";
@@ -33,26 +35,36 @@ namespace Coworkee.Shared.Constants.Application
                 };
             }
 
-            public static (string Name, bool SelectableOnRegistration, string[] Permissions)[] Roles = null;
-            //{
-            //    ("Pathologist", true, new []
-            //    {
-            //        Permissions.Dashboards.View,
-            //        Permissions.Communication.Chat,
-            //        Permissions.Documents.View,
-            //        Permissions.Documents.Create,
-            //        Permissions.Documents.Edit,
-            //        Permissions.Documents.Delete,
-            //        Permissions.Specializations.View,
-            //    }),
-            //    ("Consultant Pathologist", true, new []
-            //    {
-            //        Permissions.Dashboards.View,
-            //        Permissions.Communication.Chat,
-            //        Permissions.Documents.View,
-            //        Permissions.Specializations.View,
-            //    })
-            //};
+            public static (string Name, bool SelectableOnRegistration, string[] Permissions)[] Roles = 
+            {
+                ("Product Manager", true, new []
+                {
+                    Permissions.Dashboards.View,
+                    Permissions.Communication.Chat,
+                    Permissions.Documents.View,
+                    Permissions.Documents.Create,
+                    Permissions.Documents.Edit,
+                    Permissions.Documents.Delete,
+                    Permissions.Products.Create,
+                    Permissions.Products.Edit,
+                    Permissions.Products.Delete,
+                    Permissions.Products.View,
+                    Permissions.Brands.View               
+                }),
+                ("Brand Manager", true, new []
+                {
+                    Permissions.Dashboards.View,
+                    Permissions.Communication.Chat,
+                    Permissions.Documents.View,
+                    Permissions.Documents.Create,
+                    Permissions.Documents.Edit,
+                    Permissions.Documents.Delete,
+                    Permissions.Brands.Create,
+                    Permissions.Brands.Edit,
+                    Permissions.Brands.Delete,
+                    Permissions.Brands.View
+                })
+            };
         }
 
         public static class Routes

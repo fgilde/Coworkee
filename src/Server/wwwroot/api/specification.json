@@ -8335,6 +8335,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "allowedEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

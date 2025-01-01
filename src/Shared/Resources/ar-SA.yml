@@ -150,8 +150,10 @@ Columns Affected: الأعمدة المتأثرة
 Communication: انتقال
 Community: مجتمع
 Confirm: أكد
+CONFIRM: أكد
 Confirm and Ignore: تأكيد وتجاهل
 Confirm and Set Required: تأكيد وتعيين مطلوب
+Confirm edit: تأكيد التعديل
 Confirm Password: تأكيد كلمة المرور
 Confirm Registration: تأكيد التسجيل
 contacts: جهات الاتصال
@@ -248,6 +250,8 @@ E-Mail: البريد الإلكتروني
 E-Mail not confirmed.: البريد الإلكتروني غير مؤكد. يرجى التحقق من صندوق البريد الخاص بك وتأكيد عنوان بريدك الإلكتروني. <a href='{0}'>إعادة إرسال تأكيد البريد الإلكتروني</a>
 ebu-KE: إمبو (كينيا)
 Edit: حرر
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: يمكن أن يؤدي تحرير اتصال قاعدة البيانات إلى تعطيل التطبيق بأكمله. يرجى تعديل هذا فقط إذا كنت تعرف ما تفعله
+Editing of this endpoint can break AI integration: يمكن أن يؤدي تحرير نقطة النهاية هذه إلى كسر تكامل الذكاء الاصطناعي
 ee-GH: إيوي (غانا)
 ee-TG: إيوي (توغو)
 el-CY: اليونانية (قبرص)
@@ -636,6 +640,7 @@ Loading: تحميل
 Local: محلي
 Logged In.: تسجيل الدخول.
 Logged Out.: تم تسجيل الخروج.
+Login with Keycloak: تسجيل الدخول باستخدام Keycloak
 LoginDescription: تسجيل الدخول مع بيانات الاعتماد الخاصة بك.
 Logout: الخروج
 Logout Confirmation: هل تريد حقا تسجيل الخروج؟
@@ -783,6 +788,7 @@ PhoneNumber: رقم الهاتف
 pl-PL: البولندية (بولندا)
 Please confirm your account by <a href='{0}'>clicking here</a>.: يرجى تأكيد حسابك عن طريق <a href='{0}'> انقر هنا</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: يرجى إعادة تعيين كلمة المرور الخاصة بك عن طريق <a href='{0}'> انقر هنا</a>.
+Please type {0} to confirm edit: يرجى كتابة {0} لتأكيد التعديل
 Please upload your personal qualifications and references that confirm your person and qualification: يرجى تحميل مؤهلاتك الشخصية ومراجعك التي تؤكد شخصيتك ومؤهلاتك
 Please Wait: الرجاء الانتظار
 PostalCode: الرمز البريدي

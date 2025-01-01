@@ -150,8 +150,10 @@ Columns Affected: 影響を受ける列
 Communication: 通信
 Community: コミュニティ
 Confirm: 確認する
+CONFIRM: 確認する
 Confirm and Ignore: 確認と無視
 Confirm and Set Required: 確認し、必要な設定
+Confirm edit: 編集の確認
 Confirm Password: パスワードの確認
 Confirm Registration: 登録の確認
 contacts: 連絡先
@@ -248,6 +250,8 @@ E-Mail: 電子メール
 E-Mail not confirmed.: メールが未確認です。メールボックスを確認し、メールアドレスを確認してください。<a href='{0}'>確認メールの再送信</a>
 ebu-KE: エンブ (ケニア)
 Edit: 編集
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: DB Connectionを編集すると、アプリケーション全体が壊れる可能性があります。これは、自分が何をしているのかを知っている場合にのみ編集してください
+Editing of this endpoint can break AI integration: このエンドポイントを編集すると、AI統合が壊れる可能性があります
 ee-GH: エウェ (ガーナ)
 ee-TG: エウェ (トーゴ)
 el-CY: ギリシャ語 (キプロス)
@@ -636,6 +640,7 @@ Loading: 積載
 Local: 地元の
 Logged In.: ログイン中。
 Logged Out.: ログアウト。
+Login with Keycloak: Keycloakでログイン
 LoginDescription: 資格情報を使用してログインします。
 Logout: ログアウト
 Logout Confirmation: 本当にログアウトしますか?
@@ -783,6 +788,7 @@ PhoneNumber: 電話番号
 pl-PL: ポーランド (ポーランド)
 Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>ここをクリックしてアカウントを確認してください</a>。
 Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'ここをクリックしてパスワードをリセットしてくだ>い</a>。
+Please type {0} to confirm edit: 編集を確認するには、{0}を入力してください
 Please upload your personal qualifications and references that confirm your person and qualification: あなたの個人的な資格とあなたの個人と資格を確認する参考文献をアップロードしてください
 Please Wait: お待ちください
 PostalCode: 郵便番号

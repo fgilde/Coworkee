@@ -150,8 +150,10 @@ Columns Affected: Kolumny, których dotyczy problem
 Communication: Komunikacja
 Community: Społeczność
 Confirm: Potwierdzić
+CONFIRM: POTWIERDZIĆ
 Confirm and Ignore: Potwierdź i zignoruj
 Confirm and Set Required: Potwierdź i ustaw wymagane
+Confirm edit: Potwierdź edytuj
 Confirm Password: Potwierdź hasło
 Confirm Registration: Potwierdź rejestrację
 contacts: Kontakty
@@ -248,6 +250,8 @@ E-Mail: E-mail
 E-Mail not confirmed.: E-mail nie został potwierdzony. Sprawdź swoją skrzynkę pocztową i potwierdź swój adres e-mail. <a href='{0}'>Poślij potwierdzenie e-mailem</a>
 ebu-KE: Embu (Kenia)
 Edit: Redagować
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Edycja połączenia z bazą danych może spowodować uszkodzenie całej aplikacji. Edytuj to tylko wtedy, gdy wiesz, co robisz
+Editing of this endpoint can break AI integration: Edytowanie tego punktu końcowego może przerwać integrację sztucznej inteligencji
 ee-GH: Ewe (Ghana)
 ee-TG: Ewe (Togo)
 el-CY: Grecki (Cypr)
@@ -636,6 +640,7 @@ Loading: Ładowania
 Local: Lokalny
 Logged In.: Zalogowany.
 Logged Out.: Wylogowany.
+Login with Keycloak: Zaloguj się za pomocą Keycloak
 LoginDescription: Zaloguj się za pomocą swoich poświadczeń.
 Logout: Wyloguj
 Logout Confirmation: Czy naprawdę chcesz się wylogować?
@@ -783,6 +788,7 @@ PhoneNumber: Numer telefonu
 pl-PL: Polski (Polska)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Potwierdź swoje konto, klikając <a href='{0}'></a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Zresetuj hasło, klikając <a href='{0}'>.</a>
+Please type {0} to confirm edit: Wpisz {0}, aby potwierdzić edycję
 Please upload your personal qualifications and references that confirm your person and qualification: Prześlij swoje osobiste kwalifikacje i referencje, które potwierdzają Twoją osobę i kwalifikacje
 Please Wait: Czekaj
 PostalCode: Kod pocztowy

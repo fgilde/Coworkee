@@ -150,8 +150,10 @@ Columns Affected: Columns Affected
 Communication: Communication
 Community: Community
 Confirm: Confirm
+CONFIRM: CONFIRM
 Confirm and Ignore: Confirm and Ignore
 Confirm and Set Required: Confirm and Set Required
+Confirm edit: Confirm edit
 Confirm Password: Confirm Password
 Confirm Registration: Confirm Registration
 contacts: Contacts
@@ -247,6 +249,8 @@ E-Mail: E-Mail
 E-Mail not confirmed.: Email not confirmed. Please check your mailbox and confirm your email address. <a href='{0}'>Resend email confirmation</a>
 ebu-KE: Embu (Kenya)
 Edit: Edit
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing
+Editing of this endpoint can break AI integration: Editing of this endpoint can break AI integration
 ee-GH: Ewe (Ghana)
 ee-TG: Ewe (Togo)
 el-CY: Greek (Cyprus)
@@ -635,6 +639,7 @@ Loading: Loading
 Local: Local
 Logged In.: Logged In.
 Logged Out.: Logged Out.
+Login with Keycloak: Login with Keycloak
 LoginDescription: Login with your Credentials.
 Logout: Logout
 Logout Confirmation: Do you really want to Logout?
@@ -782,6 +787,7 @@ PhoneNumber: PhoneNumber
 pl-PL: Polish (Poland)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Please confirm your account by <a href='{0}'>clicking here</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Please reset your password by <a href='{0}'>clicking here</a>.
+Please type {0} to confirm edit: Please type {0} to confirm edit
 Please upload your personal qualifications and references that confirm your person and qualification: Please upload your personal qualifications and references that confirm your person and qualification
 Please Wait: Please Wait
 PostalCode: Postalcode

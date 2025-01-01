@@ -150,8 +150,10 @@ Columns Affected: Kolommen waarin dit van invloed is
 Communication: Communicatie
 Community: Gemeenschap
 Confirm: Bevestigen
+CONFIRM: BEVESTIGEN
 Confirm and Ignore: Bevestigen en negeren
 Confirm and Set Required: Bevestigen en instellen Vereist
+Confirm edit: Bevestig bewerken
 Confirm Password: Bevestig wachtwoord
 Confirm Registration: Registratie bevestigen
 contacts: Contactpersonen
@@ -248,6 +250,8 @@ E-Mail: E-mail
 E-Mail not confirmed.: E-mail niet bevestigd. Controleer uw mailbox en bevestig uw e-mailadres. <a href='{0}'>Ere-mailbevestiging opnieuw</a>
 ebu-KE: Embu (Kenia)
 Edit: Bewerken
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Het bewerken van de DB-verbinding kan de hele applicatie kapot maken. Bewerk dit alleen als u weet wat u doet
+Editing of this endpoint can break AI integration: Het bewerken van dit eindpunt kan de AI-integratie verbreken
 ee-GH: Ooi (Ghana)
 ee-TG: Ooi (Togo)
 el-CY: Grieks (Cyprus)
@@ -636,6 +640,7 @@ Loading: Laden
 Local: Lokaal
 Logged In.: Ingelogd.
 Logged Out.: Uitgelogd.
+Login with Keycloak: Inloggen met Keycloak
 LoginDescription: Log in met uw inloggegevens.
 Logout: Logout
 Logout Confirmation: Wil je echt uitloggen?
@@ -783,6 +788,7 @@ PhoneNumber: Telefoonnummer
 pl-PL: Pools (Polen)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Bevestig uw account door hier <a href='{0}'> te klikken</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Stel uw wachtwoord opnieuw in door <a href='{0}'>klik hier</a>.
+Please type {0} to confirm edit: Typ {0} om de bewerking te bevestigen
 Please upload your personal qualifications and references that confirm your person and qualification: Upload uw persoonlijke kwalificaties en referenties die uw persoon en kwalificatie bevestigen
 Please Wait: Een ogenblik geduld
 PostalCode: Postcode

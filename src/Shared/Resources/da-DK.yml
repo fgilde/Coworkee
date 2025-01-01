@@ -150,8 +150,10 @@ Columns Affected: Berørte kolonner
 Communication: Kommunikation
 Community: Samfund
 Confirm: Bekræfte
+CONFIRM: BEKRÆFTE
 Confirm and Ignore: Bekræft og ignorer
 Confirm and Set Required: Bekræft og angiv påkrævet
+Confirm edit: Bekræft redigering
 Confirm Password: Bekræft adgangskode
 Confirm Registration: Bekræft registrering
 contacts: Kontakter
@@ -248,6 +250,8 @@ E-Mail: E-mail
 E-Mail not confirmed.: E-mail ikke bekræftet. Tjek venligst din postkasse og bekræft din e-mailadresse. <a href='{0}'>Send e-mailbekræftelse</a>
 ebu-KE: Embu (Kenya)
 Edit: Redigere
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Redigering af DB-forbindelsen kan ødelægge hele applikationen. Rediger kun dette, hvis du ved, hvad du laver
+Editing of this endpoint can break AI integration: Redigering af dette slutpunkt kan bryde AI-integrationen
 ee-GH: Moderfår (Ghana)
 ee-TG: Moderfår (Togo)
 el-CY: Græsk (Cypern)
@@ -636,6 +640,7 @@ Loading: Pålæsning
 Local: Lokal
 Logged In.: Logget på.
 Logged Out.: Logget af.
+Login with Keycloak: Log ind med Keycloak
 LoginDescription: Log ind med dine legitimationsoplysninger.
 Logout: Logout
 Logout Confirmation: Vil du virkelig logge af?
@@ -783,6 +788,7 @@ PhoneNumber: Telefonnummer til telefon
 pl-PL: Polsk (Polen)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Bekræft venligst din konto ved at <a href='{0} >klik her</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Nulstil din adgangskode ved at <a href = '{0} > at klikke her</a>.
+Please type {0} to confirm edit: Indtast {0} for at bekræfte redigeringen
 Please upload your personal qualifications and references that confirm your person and qualification: Upload venligst dine personlige kvalifikationer og referencer, der bekræfter din person og kvalifikation
 Please Wait: Vent venligst
 PostalCode: Postnummer

@@ -150,8 +150,10 @@ Columns Affected: Etkilenen Sütunlar
 Communication: İletişim
 Community: Topluluk
 Confirm: Onaylamak
+CONFIRM: ONAYLAMAK
 Confirm and Ignore: Onayla ve Yoksay
 Confirm and Set Required: Onayla ve Ayarla Gerekli
+Confirm edit: Düzenlemeyi onayla
 Confirm Password: Parolayı Onayla
 Confirm Registration: Kaydı Onayla
 contacts: Kişiler
@@ -248,6 +250,8 @@ E-Mail: E-posta
 E-Mail not confirmed.: E-posta onaylanmadı. Lütfen posta kutunuzu kontrol edin ve e-posta adresinizi onaylayın. <a href='{0}'>E-posta onayını tekrar gönder</a>
 ebu-KE: Embu (Kenya)
 Edit: Düzenlemek
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: DB Bağlantısının düzenlenmesi tüm uygulamayı bozabilir. Lütfen bunu yalnızca ne yaptığınızı biliyorsanız düzenleyin
+Editing of this endpoint can break AI integration: Bu uç noktanın düzenlenmesi yapay zeka entegrasyonunu bozabilir
 ee-GH: Ewe (Gana)
 ee-TG: Ewe (Togo)
 el-CY: Yunanca (Kıbrıs)
@@ -636,6 +640,7 @@ Loading: Yükleme
 Local: Yöresel
 Logged In.: Oturum açtı.
 Logged Out.: Oturumu kapattım.
+Login with Keycloak: KeyCloak ile Giriş Yap
 LoginDescription: Kimlik Bilgilerinizle giriş yapın.
 Logout: Oturum kapatma
 Logout Confirmation: Gerçekten çıkış yapmak istiyor musunuz?
@@ -783,6 +788,7 @@ PhoneNumber: Telefon Numarası
 pl-PL: Lehçe (Polonya)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Lütfen hesabınızı <a href='{0}'>buraya tıklayarak onaylayın</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Lütfen şifrenizi <a href='{0}'>buraya tıklayarak sıfırlayın</a>.
+Please type {0} to confirm edit: Düzenlemeyi onaylamak için lütfen {0} yazın
 Please upload your personal qualifications and references that confirm your person and qualification: Lütfen kişisel niteliklerinizi ve şahsiyetinizi ve yeterliliğinizi doğrulayan referanslarınızı yükleyin
 Please Wait: Lütfen bekleyin
 PostalCode: Posta kodu

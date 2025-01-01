@@ -150,8 +150,10 @@ Columns Affected: Colonnes affectées
 Communication: Communication
 Community: Communauté
 Confirm: Confirmer
+CONFIRM: CONFIRMER
 Confirm and Ignore: Confirmer et ignorer
 Confirm and Set Required: Confirmer et définir requis
+Confirm edit: Confirmer la modification
 Confirm Password: Confirmer le mot de passe
 Confirm Registration: Confirmer l’inscription
 contacts: Contacts
@@ -248,6 +250,8 @@ E-Mail: Messagerie électronique
 E-Mail not confirmed.: E-mail non confirmé. Veuillez vérifier votre boîte aux lettres et confirmer votre adresse e-mail. <a href='{0}'>Envoyer un e-mail de confirmation</a>
 ebu-KE: Embu (Kenya)
 Edit: Éditer
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: La modification de la connexion DB peut interrompre l’ensemble de l’application. Veuillez modifier ceci uniquement si vous savez ce que vous faites
+Editing of this endpoint can break AI integration: La modification de ce point de terminaison peut interrompre l’intégration de l’IA
 ee-GH: Ewe (Ghana)
 ee-TG: Brebis (Togo)
 el-CY: Grec (Chypre)
@@ -636,6 +640,7 @@ Loading: Chargement
 Local: Local
 Logged In.: Connecté.
 Logged Out.: Déconnecté.
+Login with Keycloak: Se connecter avec Keycloak
 LoginDescription: Connectez-vous avec vos informations d’identification.
 Logout: Déconnexion
 Logout Confirmation: Voulez-vous vraiment vous déconnecter?
@@ -783,6 +788,7 @@ PhoneNumber: Numéro de téléphone
 pl-PL: Polonais (Pologne)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Veuillez confirmer votre compte en cliquant <a href='{0}'>cliquez ici</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Veuillez réinitialiser votre mot de passe en <a href='{0}'>cliquer ici</a>.
+Please type {0} to confirm edit: Veuillez taper {0} pour confirmer la modification
 Please upload your personal qualifications and references that confirm your person and qualification: Veuillez télécharger vos qualifications personnelles et les références qui confirment votre personne et votre qualification
 Please Wait: Veuillez patienter
 PostalCode: Code postal

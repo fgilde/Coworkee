@@ -150,8 +150,10 @@ Columns Affected: Colonne interessate
 Communication: Comunicazione
 Community: Comunità
 Confirm: Confermare
+CONFIRM: CONFERMARE
 Confirm and Ignore: Conferma e ignora
 Confirm and Set Required: Conferma e imposta richiesto
+Confirm edit: Conferma modifica
 Confirm Password: Conferma password
 Confirm Registration: Conferma registrazione
 contacts: Contatti
@@ -248,6 +250,8 @@ E-Mail: E-mail
 E-Mail not confirmed.: Email non confermata. Controlla la tua casella di posta e conferma il tuo indirizzo email. <a href='{0}'>Invia e-mail di conferma</a>
 ebu-KE: Embu (Kenya)
 Edit: Redigere
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: La modifica della connessione DB può interrompere l'intera applicazione. Si prega di modificare questo solo se si sa cosa si sta facendo
+Editing of this endpoint can break AI integration: La modifica di questo endpoint può interrompere l'integrazione dell'intelligenza artificiale
 ee-GH: Pecora (Ghana)
 ee-TG: Pecora (Togo)
 el-CY: Greco (Cipro)
@@ -636,6 +640,7 @@ Loading: Caricamento
 Local: Locale
 Logged In.: Connesso.
 Logged Out.: Disconnesso.
+Login with Keycloak: Accedi con Keycloak
 LoginDescription: Accedi con le tue credenziali.
 Logout: Logout
 Logout Confirmation: Vuoi davvero disconnetterti?
@@ -783,6 +788,7 @@ PhoneNumber: Numero di telefono
 pl-PL: Polacco (Polonia)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Conferma il tuo account <a href='{0}'> cliccando qui</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Reimposta la password <a href='{0}'> cliccando qui</a>.
+Please type {0} to confirm edit: Digita {0} per confermare la modifica
 Please upload your personal qualifications and references that confirm your person and qualification: Carica le tue qualifiche e referenze personali che confermano la tua persona e qualifica
 Please Wait: Attendere prego
 PostalCode: Codice postale

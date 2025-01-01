@@ -150,8 +150,10 @@ Columns Affected: Засегнати колони
 Communication: Общуване
 Community: Общност
 Confirm: Потвърждавам
+CONFIRM: ПОТВЪРЖДАВАМ
 Confirm and Ignore: Потвърдете и игнорирайте
 Confirm and Set Required: Потвърждаване и задаване на задължително
+Confirm edit: Потвърдете редакцията
 Confirm Password: Потвърждаване на парола
 Confirm Registration: Потвърждаване на регистрацията
 contacts: Контакти
@@ -248,6 +250,8 @@ E-Mail: Имейл
 E-Mail not confirmed.: Имейлът не е потвърден. Моля, проверете пощенската си кутия и потвърдете имейл адреса си. <a href='{0}'>Издаден имейл потвърждение</a>
 ebu-KE: Ембу (Кения)
 Edit: Редактирам
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Редактирането на DB връзката може да наруши цялото приложение. Моля, редактирайте това само ако знаете какво правите
+Editing of this endpoint can break AI integration: Редактирането на тази крайна точка може да наруши интеграцията на AI
 ee-GH: Еве (Гана)
 ee-TG: Ewe (Того)
 el-CY: Гръцки (Кипър)
@@ -636,6 +640,7 @@ Loading: Зареждане
 Local: Местен
 Logged In.: Влезли в системата.
 Logged Out.: Излезли.
+Login with Keycloak: Влезте с Keycloak
 LoginDescription: Вход с вашите Идентификационни данни.
 Logout: Изход
 Logout Confirmation: Наистина ли искаш да Logout?
@@ -783,6 +788,7 @@ PhoneNumber: ТелефонНомер
 pl-PL: Полски (Полша)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Моля, потвърдете профила си, като <a href='{0}'>натиснете тук</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Моля, върнете паролата си, като <a href='{0}'>натиснете тук</a>.
+Please type {0} to confirm edit: Моля, въведете {0}, за да потвърдите редакцията
 Please upload your personal qualifications and references that confirm your person and qualification: Моля, качете личните си квалификации и препратки, които потвърждават вашето лице и квалификация
 Please Wait: Моля, изчакайте
 PostalCode: Пощенски код

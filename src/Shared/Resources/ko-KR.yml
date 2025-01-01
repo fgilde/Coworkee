@@ -150,8 +150,10 @@ Columns Affected: 영향을 받는 열
 Communication: 통신
 Community: 커뮤니티
 Confirm: 확인하다
+CONFIRM: 확인하다
 Confirm and Ignore: 확인 및 무시
 Confirm and Set Required: 필요한 확인 및 설정
+Confirm edit: 편집 확인
 Confirm Password: 암호 확인
 Confirm Registration: 등록 확인
 contacts: 연락처
@@ -248,6 +250,8 @@ E-Mail: 이메일
 E-Mail not confirmed.: 이메일이 확인되지 않았습니다. 사서함을 확인하고 전자 메일 주소를 확인하십시오. <a href='{0}'>이메일 확인 재전송</a>
 ebu-KE: 엠부 (케냐)
 Edit: 편집하다
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: DB 연결을 편집하면 전체 응용 프로그램이 중단될 수 있습니다. 당신이 무엇을하고 있는지 알고있는 경우에만 이것을 편집하십시오
+Editing of this endpoint can break AI integration: 이 엔드포인트를 편집하면 AI 통합이 중단될 수 있습니다.
 ee-GH: 에베 (가나)
 ee-TG: 에베 (토고)
 el-CY: 그리스어 (키프로스)
@@ -636,6 +640,7 @@ Loading: 로드
 Local: 현지
 Logged In.: 로그인했습니다.
 Logged Out.: 로그아웃.
+Login with Keycloak: Keycloak으로 로그인
 LoginDescription: 자격 증명으로 로그인합니다.
 Logout: 로그아웃
 Logout Confirmation: 당신은 정말 로그 아웃하시겠습니까?
@@ -783,6 +788,7 @@ PhoneNumber: 전화 번호
 pl-PL: 폴란드어 (폴란드)
 Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>여기를 클릭하여 계정을 확인하십시오</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'> 클릭하여 비밀번호를 재설정하십시오</a>.
+Please type {0} to confirm edit: '{0} 입력하여 편집을 확인하십시오.'
 Please upload your personal qualifications and references that confirm your person and qualification: 개인 자격 및 본인 및 자격을 확인하는 참고 자료를 업로드하십시오.
 Please Wait: 기다리세요
 PostalCode: 우편 번호

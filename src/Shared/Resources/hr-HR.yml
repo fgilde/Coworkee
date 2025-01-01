@@ -150,8 +150,10 @@ Columns Affected: Zahvaćeni stupci
 Communication: Komunikacija
 Community: Zajednica
 Confirm: Potvrditi
+CONFIRM: POTVRDITI
 Confirm and Ignore: Potvrdi i zanemari
 Confirm and Set Required: Potvrda i postavljanje obaveznog
+Confirm edit: Potvrdi uređivanje
 Confirm Password: Potvrda lozinke
 Confirm Registration: Potvrda registracije
 contacts: Kontakte
@@ -248,6 +250,8 @@ E-Mail: E-pošta
 E-Mail not confirmed.: E-pošta nije potvrđena. Provjerite poštanski sandučić i potvrdite adresu e-pošte. <a href='{0}'>Prestani potvrdu e-pošte</a>
 ebu-KE: Embu (Kenija)
 Edit: Urediti
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Uređivanje DB veze može prekinuti cijelu aplikaciju. Molimo uredite ovo samo ako znate što radite
+Editing of this endpoint can break AI integration: Uređivanje ove krajnje točke može prekinuti integraciju umjetne inteligencije
 ee-GH: Ovce (Gana)
 ee-TG: Ovce (Togo)
 el-CY: Grčki (Cipar)
@@ -636,6 +640,7 @@ Loading: Učitavanje
 Local: Lokalan
 Logged In.: Prijavljeni.
 Logged Out.: Odjavljeno.
+Login with Keycloak: Prijavite se s Keycloakom
 LoginDescription: Prijavite se sa svojim vjerodajnicama.
 Logout: Odjava
 Logout Confirmation: Želite li se zaista odjaviti?
@@ -783,6 +788,7 @@ PhoneNumber: Broj telefona
 pl-PL: Poljski (Poljska)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrdite svoj račun na <a href='{0}'>clicking ovdje</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Vratite lozinku na <a href='{0}'>clicking ovdje</a>.
+Please type {0} to confirm edit: Upišite {0} za potvrdu uređivanja
 Please upload your personal qualifications and references that confirm your person and qualification: Prenesite svoje osobne kvalifikacije i reference koje potvrđuju vašu osobu i kvalifikaciju
 Please Wait: Molim te čekaj
 PostalCode: Poštanski broj

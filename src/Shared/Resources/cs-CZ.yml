@@ -150,8 +150,10 @@ Columns Affected: Ovlivněné sloupce
 Communication: Komunikace
 Community: Komunita
 Confirm: Potvrdit
+CONFIRM: POTVRDIT
 Confirm and Ignore: Potvrdit a ignorovat
 Confirm and Set Required: Potvrdit a nastavit povinné
+Confirm edit: Potvrdit úpravu
 Confirm Password: Potvrdit heslo
 Confirm Registration: Potvrdit registraci
 contacts: Kontakty
@@ -248,6 +250,8 @@ E-Mail: E-mail
 E-Mail not confirmed.: E-mail nebyl potvrzen. Zkontrolujte prosím svou poštovní schránku a potvrďte svou e-mailovou adresu. <a href='{0}'>Odobrazení potvrzení e-mailu</a>
 ebu-KE: Embu (Keňa)
 Edit: Upravit
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Editace DB Connection může narušit celou aplikaci. Upravujte to prosím pouze v případě, že víte, co děláte
+Editing of this endpoint can break AI integration: Úprava tohoto koncového bodu může narušit integraci AI
 ee-GH: Ovce (Ghana)
 ee-TG: Ovce (Togo)
 el-CY: Řečtina (Kypr)
@@ -636,6 +640,7 @@ Loading: Nakládka
 Local: Místní
 Logged In.: Přihlášen.
 Logged Out.: Odhlášen.
+Login with Keycloak: Přihlášení pomocí Keycloaku
 LoginDescription: Přihlaste se pomocí svých přihlašovacích údajů.
 Logout: Odhlášení od sítě
 Logout Confirmation: Opravdu se chcete od odsout?
@@ -783,6 +788,7 @@ PhoneNumber: Telefonní číslo
 pl-PL: Polština (Polsko)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Potvrďte prosím svůj účet <a href='{0}'> kliknutím sem</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Resetujte prosím své heslo <a href='{0}'>kliknutím sem</a>.
+Please type {0} to confirm edit: Pro potvrzení úpravy zadejte {0}
 Please upload your personal qualifications and references that confirm your person and qualification: Nahrajte prosím své osobní kvalifikace a reference, které potvrzují vaši osobu a kvalifikaci
 Please Wait: Počkejte prosím
 PostalCode: PSČ

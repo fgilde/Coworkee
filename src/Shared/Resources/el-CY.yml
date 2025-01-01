@@ -150,8 +150,10 @@ Columns Affected: Στήλες που επηρεάζονται
 Communication: Επικοινωνία
 Community: Κοινότητα
 Confirm: Επιβεβαιώνω
+CONFIRM: ΕΠΙΒΕΒΑΙΏΝΩ
 Confirm and Ignore: Επιβεβαίωση και παράβλεψη
 Confirm and Set Required: Επιβεβαίωση και ορισμός απαιτείται
+Confirm edit: Επιβεβαίωση επεξεργασίας
 Confirm Password: Επιβεβαίωση κωδικού πρόσβασης
 Confirm Registration: Επιβεβαίωση εγγραφής
 contacts: Επαφές
@@ -248,6 +250,8 @@ E-Mail: Email
 E-Mail not confirmed.: Το μήνυμα ηλεκτρονικού ταχυδρομείου δεν επιβεβαιώθηκε. Ελέγξτε το γραμματοκιβώτιό σας και επιβεβαιώστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας. επιβεβαίωση ηλεκτρονικού ταχυδρομείου <a href={0}>Αναφορά email</a>
 ebu-KE: Εμπού (Κένυα)
 Edit: Επεξεργασία
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Η επεξεργασία της σύνδεσης DB μπορεί να σπάσει ολόκληρη την εφαρμογή. Παρακαλώ επεξεργαστείτε αυτό μόνο αν ξέρετε τι κάνετε
+Editing of this endpoint can break AI integration: Η επεξεργασία αυτού του τελικού σημείου μπορεί να διακόψει την ενσωμάτωση AI
 ee-GH: Προβατόσου (Γκάνα)
 ee-TG: Προβατόσου (Τόγκο)
 el-CY: Ελληνικά (Κύπρος)
@@ -636,6 +640,7 @@ Loading: Φόρτωση
 Local: Τοπικός
 Logged In.: Συνδέθηκε.
 Logged Out.: Αποσυνδέθηκε.
+Login with Keycloak: Σύνδεση με Keycloak
 LoginDescription: Συνδεθείτε με τα διαπιστευτήριά σας.
 Logout: Αποσύνδεση
 Logout Confirmation: Θέλεις πραγματικά να αποσυνδεθείς;
@@ -783,6 +788,7 @@ PhoneNumber: Αριθμός τηλεφώνου
 pl-PL: Πολωνικά (Πολωνία)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Επιβεβαιώστε τον λογαριασμό σας με <a href={0}'> κλικ εδώ</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Παρακαλώ επαναφέρετε τον κωδικό πρόσβασής σας με <a href={0}'> κλικ εδώ</a>.
+Please type {0} to confirm edit: Πληκτρολογήστε {0} για να επιβεβαιώσετε την επεξεργασία
 Please upload your personal qualifications and references that confirm your person and qualification: Παρακαλούμε ανεβάστε τα προσωπικά σας προσόντα και αναφορές που επιβεβαιώνουν το πρόσωπο και τα προσόντα σας
 Please Wait: Παρακαλώ περίμενε
 PostalCode: Ταχυδρομικός κώδικας

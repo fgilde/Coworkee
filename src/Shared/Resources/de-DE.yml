@@ -150,8 +150,10 @@ Columns Affected: Betroffene Spalten
 Communication: Kommunikation
 Community: Gemeinschaft
 Confirm: Bestätigen
+CONFIRM: BESTÄTIGEN
 Confirm and Ignore: Übernehmen und fehlende ignorieren
 Confirm and Set Required: Übernehmen und fehlende setzen
+Confirm edit: Bearbeitung bestätigen
 Confirm Password: Passwort bestätigen
 Confirm Registration: Registrierung bestätigen
 contacts: Kontakte
@@ -248,6 +250,8 @@ E-Mail: E-Mail
 E-Mail not confirmed.: E-Mail nicht bestätigt. Bitte überprüfen Sie Ihre Mailbox und bestätigen Sie Ihre E-Mail-Adresse. <a href='{0}'>E-Mail-Bestätigung erneut senden</a>
 ebu-KE: Embu (Kenia)
 Edit: Bearbeiten
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: Das Bearbeiten der DB-Verbindung kann die gesamte Anwendung beschädigen. Bitte bearbeiten Sie dies nur, wenn Sie wissen, was Sie tun
+Editing of this endpoint can break AI integration: Die Bearbeitung dieses Endpunkts kann die KI-Integration beeinträchtigen
 ee-GH: Ewe (Ghana)
 ee-TG: Schaf (Togo)
 el-CY: Griechisch (Zypern)
@@ -637,6 +641,7 @@ Loading: Laden
 Local: Lokal
 Logged In.: Angemeldet.
 Logged Out.: Abgemeldet.
+Login with Keycloak: Mit Keycloak anmelden
 LoginDescription: Melden Sie sich mit Ihren Anmeldeinformationen an.
 Logout: Abmelden
 Logout Confirmation: Möchten Sie sich wirklich abmelden?
@@ -784,6 +789,7 @@ PhoneNumber: Telefonnummer
 pl-PL: Polnisch (Polen)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Bitte bestätigen Sie Ihr Konto, indem Sie <a href='{0}'>hier klicken</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Bitte setzen Sie Ihr Passwort zurück, indem Sie <a href='{0}'>hier klicken</a>.
+Please type {0} to confirm edit: Bitte geben Sie {0} ein, um die Bearbeitung zu bestätigen
 Please upload your personal qualifications and references that confirm your person and qualification: Laden Sie bitte Ihre Ihre persönlichen Qualifikationen und Referenzen hoch, die Ihre Person und qualifikation bestätigen
 Please Wait: Bitte warten
 PostalCode: PLZ

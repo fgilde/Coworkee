@@ -8,7 +8,7 @@ namespace Coworkee.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {
-        public const string LargeLanguageModel = "llama3.3";
+        public const string LargeLanguageModel = "llama3.2";
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
         public const string ApplicationClientName = $"{ApplicationName}Client";

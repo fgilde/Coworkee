@@ -150,8 +150,10 @@ Columns Affected: Columnas afectadas
 Communication: Comunicación
 Community: Comunidad
 Confirm: Confirmar
+CONFIRM: CONFIRMAR
 Confirm and Ignore: Confirmar e ignorar
 Confirm and Set Required: Confirmar y establecer requerido
+Confirm edit: Confirmar edición
 Confirm Password: Confirmar contraseña
 Confirm Registration: Confirmar registro
 contacts: Contactos
@@ -248,6 +250,8 @@ E-Mail: Correo electrónico
 E-Mail not confirmed.: Correo electrónico no confirmado. Por favor, compruebe su buzón y confirme su dirección de correo electrónico. <a href='{0}'>Enviar confirmación de correo electrónico</a>
 ebu-KE: Embu (Kenia)
 Edit: Editar
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: La edición de la conexión de base de datos puede interrumpir toda la aplicación. Por favor, edite esto solo si sabe lo que está haciendo
+Editing of this endpoint can break AI integration: La edición de este punto de conexión puede interrumpir la integración de la IA
 ee-GH: Oveja (Ghana)
 ee-TG: Oveja (Togo)
 el-CY: Griego (Chipre)
@@ -636,6 +640,7 @@ Loading: Carga
 Local: Local
 Logged In.: Ha iniciado sesión.
 Logged Out.: Desconectado.
+Login with Keycloak: Iniciar sesión con Keycloak
 LoginDescription: Inicie sesión con sus credenciales.
 Logout: Cerrar sesión
 Logout Confirmation: ¿Realmente quieres cerrar sesión?
@@ -783,6 +788,7 @@ PhoneNumber: Número de teléfono
 pl-PL: Polaco (Polonia)
 Please confirm your account by <a href='{0}'>clicking here</a>.: Confirme su cuenta <a href='{0}'>haga clic aquí</a>.
 Please reset your password by <a href='{0}'>clicking here</a>.: Restablezca su contraseña <a href='{0}'>haga clic aquí</a>.
+Please type {0} to confirm edit: Por favor, escriba {0} para confirmar la edición
 Please upload your personal qualifications and references that confirm your person and qualification: Por favor, cargue sus calificaciones personales y referencias que confirmen su persona y calificación
 Please Wait: Espera
 PostalCode: Código postal

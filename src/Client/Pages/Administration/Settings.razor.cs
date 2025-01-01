@@ -46,6 +46,7 @@ public partial class Settings
     }
     private Action<ObjectEditMeta<ServerConfiguration>> ConfigureServerSettings()
     {
+        var s = _localizer["Confirm edit"];
         return meta =>
         {
             meta.Properties(c => c.ClientUrl, c => c.PublicSettings.HostClientInServer).Ignore();
@@ -53,7 +54,10 @@ public partial class Settings
             //meta.Property(c => c.Logging.LogLevel.Microsoft).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
             //meta.Property(c => c.Logging.LogLevel.MicrosoftHostingLifetime).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
             //meta.Property(c => c.Logging.LogLevel.Hangfire).RenderWithMudAutocomplete<string>(typeof(Microsoft.Extensions.Logging.LogLevel), false);
-            meta.Property(c => c.ConnectionStrings.DefaultConnection).AsReadOnly().WrapInMudItem(i => i.xs = 12);
+            meta.Property(c => c.ConnectionStrings.DefaultConnection).WithEditConfirmation(ConfirmationProtection.PromptDialog(_dialogService, _localizer["Confirm edit"], _localizer["CONFIRM"], _localizer["Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing"], _localizer["Please type {0} to confirm edit"]))
+                .WrapInMudItem(i => i.xs = 12);
+            meta.Property(c => c.ConnectionStrings.Ollama).WithEditConfirmation(ConfirmationProtection.ToggleButton(_localizer["Editing of this endpoint can break AI integration"]))
+                .WrapInMudItem(i => i.xs = 12);
             meta.Property(c => c.PublicSettings.UserRegistration.RegistrationDocumentTypes).WrapInMudItem(i => i.xs = 12);
             meta.WrapEachInMudItem(i =>
             {

@@ -7,6 +7,6 @@ public static class JsRuntimeExtensions
 {
     public static ValueTask ObserveMudTabsForStickMerge(this IJSRuntime jsRuntime, string selectorObserveElement)
     {
-        return jsRuntime.InvokeVoidAsync("eval", "new IntersectionObserver(([e]) => { try { document.querySelector('.mud-tabs-stick-merge .mud-tabs-toolbar')?.toggleAttribute('stuck', e.intersectionRatio < 1); }catch(e){} }, {threshold: [1]}).observe(document.querySelector('" + selectorObserveElement + "'));");
+        return jsRuntime.InvokeVoidAsync("eval", "new IntersectionObserver(([e]) => { try { document.querySelector('.mud-tabs-stick-merge .mud-tabs-tabbar')?.toggleAttribute('stuck', e.intersectionRatio < 1); }catch(e){} }, {threshold: [1]}).observe(document.querySelector('" + selectorObserveElement + "'));");
     }
 }

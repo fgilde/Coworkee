@@ -4,6 +4,7 @@ using Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
+using Coworkee.Application.Configurations;
 using Microsoft.AspNetCore.Components;
 using Coworkee.Client.Extensions;
 using Coworkee.Shared.Constants.Application;
@@ -21,7 +22,24 @@ namespace Coworkee.Client.Pages.Authentication
         {
             _tokenModel.Email = _navigationManager.ReadQueryParam("email");
             SetMessage();
+
+            if(ShouldRedirectToKeycloak())            
+                RedirectToKeycloak();
+            
             await base.OnInitializedAsync();
+        }
+
+        private bool ShouldRedirectToKeycloak()
+        {
+            if(_navigationManager.Uri?.Contains("#!internal") == true)            
+                return false;
+            
+            return (_config?.ServerConfiguration?.LoginSettings?.LoginMode == LoginMode.External || _navigationManager.Uri?.Contains("#!external") == true) && _config?.ServerConfiguration?.KeycloakEnabled == true;
+        }
+
+        private void RedirectToKeycloak()
+        {
+            _navigationManager.NavigateTo(KeyCloakHref(), true);
         }
 
         private async Task SubmitAsync()
@@ -118,6 +136,13 @@ namespace Coworkee.Client.Pages.Authentication
         {
             _tokenModel.Email = ApplicationConstants.Defaults.Users.Basic.FirstOrDefault()?.Email;
             _tokenModel.Password = ApplicationConstants.Defaults.Users.Basic.FirstOrDefault()?.Password;
+        }
+
+        private string GetEmailLabel()
+        {
+            if(_config?.ServerConfiguration?.LoginSettings?.AllowLoginWithUsername == true)
+                return _localizer["Username or Email"];
+            return _localizer["E-mail"];
         }
     }
 }

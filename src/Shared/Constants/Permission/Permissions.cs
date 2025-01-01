@@ -172,6 +172,22 @@ namespace Coworkee.Shared.Constants.Permission
         {
             public const string View = "Permissions.Hangfire.View";
         }
+        public static class PgAdmin
+        {
+            public const string View = "Permissions.PgAdmin.View";
+        }
+        public static class Grafana
+        {
+            public const string View = "Permissions.Grafana.View";
+        }
+        public static class OllamaUI
+        {
+            public const string View = "Permissions.OllamaUI.View";
+        }
+        public static class Prometheus
+        {
+            public const string View = "Permissions.Prometheus.View";
+        }
         public static class Swagger
         {
             public const string View = "Permissions.Swagger.View";

@@ -96,6 +96,7 @@ namespace Coworkee.Client.Shared
         {
             bool result = (!entry.IsAuthenticationRequired || (User?.Identity?.IsAuthenticated == true && !User.IsGuest()))
                           && User?.HasRoles(entry.RoleMatch, entry.Roles) == true
+                          && entry?.MatchesConditions(User) == true
                           && _authorizationService.HasPoliciesAsync(User, entry.PolicyMatch, entry.Policies).GetAwaiter().GetResult();
             _navigationManager.EnsureUrlIsAccessible(User, entry.Href).ContinueWith(task =>
             {
@@ -119,7 +120,7 @@ namespace Coworkee.Client.Shared
 
         protected override void OnParametersSet()
         {
-            Entries ??= Navigations.Default(_config.BackendOrigin);
+            Entries ??= Navigations.Default(_config);
             ExpandToCurrentUrl();
             base.OnParametersSet();
         }
@@ -141,7 +142,7 @@ namespace Coworkee.Client.Shared
         public IEnumerable<NavigationEntry> FindEntriesForUrl(string url = null)
         {
             url = (url ?? _navigationManager.ToBaseRelativePath(_navigationManager.Uri)).EnsureStartsWith("/").ToLower();
-            return Entries.Find(e => e.Href.EnsureStartsWith("/").ToLower() == url);
+            return Entries.Find(e => e.Href?.EnsureStartsWith("/")?.ToLower() == url);
         }
 
         

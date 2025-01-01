@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Coworkee.Client.Configuration;
 using Coworkee.Shared.Constants.Application;
 using Coworkee.Shared.Constants.Permission;
 using Coworkee.Shared.Constants.Role;
@@ -9,68 +10,76 @@ namespace Coworkee.Client.Models.Navigation
 {
     public static class Navigations
     {
-        public static HashSet<NavigationEntry> Default(string backendOrigin) => new()
+        public static HashSet<NavigationEntry> Default(ClientApplicationConfiguration config)
         {
-            new NavigationEntry("Home", Icons.Material.Outlined.Home, "/"),
-            new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, $"{backendOrigin}{ApplicationConstants.Routes.ApiDocumentation.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Swagger.View),
-            new NavigationEntry("Personal")
+            var backendOrigin = config.BackendOrigin;
+            return new()
             {
-                Children = new()
+                new NavigationEntry("Home", Icons.Material.Outlined.Home, "/"),
+                new NavigationEntry("Swagger", Icons.Material.Outlined.LiveHelp, $"{backendOrigin}{ApplicationConstants.Routes.ApiDocumentation.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Swagger.View),
+                new NavigationEntry("Personal")
                 {
-                    new NavigationEntry("Dashboard", Icons.Material.Outlined.Dashboard, "/dashboard").WithPolicies(Permissions.Dashboards.View),
-                    new NavigationEntry("Account", Icons.Material.Outlined.SupervisorAccount, "/account").WithAuthentication(),
-                    new NavigationEntry("Audit Trails", Icons.Material.Outlined.Security, "/audit-trails").WithPolicies(Permissions.AuditTrails.View),
-                }
-            },
-            new NavigationEntry("Document Management")
-            {
-                Children = new()
-                {
-                    new NavigationEntry("Document Store", Icons.Material.Outlined.AttachFile, "/document-store").WithPolicies(Permissions.Documents.View),
-                    new NavigationEntry("Document Types", Icons.Material.Outlined.AttachFile, "/document-types").WithPolicies(Permissions.DocumentTypes.View)
-                }
-            },
-            new NavigationEntry("Administrator")
-            {
-                Children = new()
-                {
-                    new NavigationEntry("Site Settings", Icons.Material.Outlined.AdminPanelSettings, "/admin/site-settings").WithRoles(RoleConstants.AdministratorRole),
-                    new NavigationEntry("Database Backups", Icons.Material.Outlined.Save, "/admin/database-backups").WithPolicies(Permissions.Backups.View),
-                    new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
-                    new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
-                    new NavigationEntry("Monitoring")
+                    Children = new()
                     {
-                        Children = new()
-                        {
-                            new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
-                            //new NavigationEntry("Grafana", Icons.Material.Outlined.Dashboard, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
-                        }
-                    },
-                    new NavigationEntry("Localization")
+                        new NavigationEntry("Dashboard", Icons.Material.Outlined.Dashboard, "/dashboard").WithPolicies(Permissions.Dashboards.View),
+                        new NavigationEntry("Account", Icons.Material.Outlined.SupervisorAccount, "/account").WithAuthentication(),
+                        new NavigationEntry("Audit Trails", Icons.Material.Outlined.Security, "/audit-trails").WithPolicies(Permissions.AuditTrails.View),
+                    }
+                },
+                new NavigationEntry("Document Management")
+                {
+                    Children = new()
                     {
-                        Children = new()
+                        new NavigationEntry("Document Store", Icons.Material.Outlined.AttachFile, "/document-store").WithPolicies(Permissions.Documents.View),
+                        new NavigationEntry("Document Types", Icons.Material.Outlined.AttachFile, "/document-types").WithPolicies(Permissions.DocumentTypes.View)
+                    }
+                },
+                new NavigationEntry("Administrator")
+                {
+                    Children = new()
+                    {
+                        new NavigationEntry("Site Settings", Icons.Material.Outlined.AdminPanelSettings, "/admin/site-settings").WithRoles(RoleConstants.AdministratorRole),
+                        new NavigationEntry("Database Backups", Icons.Material.Outlined.Save, "/admin/database-backups").WithPolicies(Permissions.Backups.View),
+                        new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
+                        new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
+                        new NavigationEntry("Monitoring")
                         {
-                            new NavigationEntry("Languages", Icons.Material.Outlined.Language, "/localization/languages").WithPolicies(Permissions.Translations.Edit),
-                            new NavigationEntry("Translations", Icons.Material.Outlined.Translate, "/localization/translations").WithPolicies(Permissions.Translations.Edit)
+                            Children = new()
+                            {
+                                new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
+                                new NavigationEntry("Grafana", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Grafana, "_blank").WithPolicies(Permissions.Grafana.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Grafana)),
+                                new NavigationEntry("Prometheus", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Prometheus, "_blank").WithPolicies(Permissions.Prometheus.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Prometheus)),
+                                new NavigationEntry("OllamaUI", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.OllamaUI, "_blank").WithPolicies(Permissions.OllamaUI.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.OllamaUI)),
+                                new NavigationEntry("PG Admin", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.PGAdmin, "_blank").WithPolicies(Permissions.PgAdmin.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.PGAdmin)),
+                                new NavigationEntry("Keycloak Admin", Icons.Material.Outlined.Login, config.ServerConfiguration?.Endpoints?.Keycloak, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Keycloak)),
+                            }
+                        },
+                        new NavigationEntry("Localization")
+                        {
+                            Children = new()
+                            {
+                                new NavigationEntry("Languages", Icons.Material.Outlined.Language, "/localization/languages").WithPolicies(Permissions.Translations.Edit),
+                                new NavigationEntry("Translations", Icons.Material.Outlined.Translate, "/localization/translations").WithPolicies(Permissions.Translations.Edit)
+                            }
                         }
                     }
-                }
-            },
-            new NavigationEntry("Communication")
-            {
-                Children = new()
+                },
+                new NavigationEntry("Communication")
                 {
-                    new NavigationEntry("Chat", Icons.Material.Outlined.Chat, "/chat").WithPolicies(Permissions.Communication.Chat)
-                }
-            },
-            new NavigationEntry("Catalog Management")
-            {
-                Children = new()
+                    Children = new()
+                    {
+                        new NavigationEntry("Chat", Icons.Material.Outlined.Chat, "/chat").WithPolicies(Permissions.Communication.Chat)
+                    }
+                },
+                new NavigationEntry("Catalog Management")
                 {
-                    new NavigationEntry("Products", Icons.Material.Outlined.CallToAction, "/catalog/products").WithPolicies(Permissions.Products.View),
-                    new NavigationEntry("Brands", Icons.Material.Outlined.CallToAction, "/catalog/brands").WithPolicies(Permissions.Brands.View)
+                    Children = new()
+                    {
+                        new NavigationEntry("Products", Icons.Material.Outlined.CallToAction, "/catalog/products").WithPolicies(Permissions.Products.View),
+                        new NavigationEntry("Brands", Icons.Material.Outlined.CallToAction, "/catalog/brands").WithPolicies(Permissions.Brands.View)
+                    }
                 }
-            }
-        };
+            };
+        }
     }
 }

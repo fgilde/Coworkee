@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Il nome utente {0} è già stato preso.
 Username cannot changed: Il nome utente non può essere modificato
 UserName is required: UserName è obbligatorio
 UserName must be at least of length 6: UserName deve avere almeno una lunghezza 6
+Username or Email: Nome utente o e-mail
 Users: Gli utenti
 Users and Roles: Utenti e ruoli
 Users exported: Utenti esportati

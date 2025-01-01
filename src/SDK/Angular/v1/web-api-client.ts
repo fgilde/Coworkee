@@ -7540,10 +7540,13 @@ export interface IVersion {
 }
 
 export class Publicsettings implements IPublicsettings {
+    keycloakEnabled!: boolean;
     assistantAvailable!: boolean;
     contactAddress?: string | undefined;
     hostClientInServer!: boolean;
     userRegistration?: Userregistration | undefined;
+    loginSettings?: LoginSettings | undefined;
+    endpoints?: Endpoints | undefined;
 
     constructor(data?: IPublicsettings) {
         if (data) {
@@ -7556,10 +7559,13 @@ export class Publicsettings implements IPublicsettings {
 
     init(_data?: any) {
         if (_data) {
+            this.keycloakEnabled = _data["keycloakEnabled"];
             this.assistantAvailable = _data["assistantAvailable"];
             this.contactAddress = _data["contactAddress"];
             this.hostClientInServer = _data["hostClientInServer"];
             this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
+            this.loginSettings = _data["loginSettings"] ? LoginSettings.fromJS(_data["loginSettings"]) : <any>undefined;
+            this.endpoints = _data["endpoints"] ? Endpoints.fromJS(_data["endpoints"]) : <any>undefined;
         }
     }
 
@@ -7572,19 +7578,25 @@ export class Publicsettings implements IPublicsettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["keycloakEnabled"] = this.keycloakEnabled;
         data["assistantAvailable"] = this.assistantAvailable;
         data["contactAddress"] = this.contactAddress;
         data["hostClientInServer"] = this.hostClientInServer;
         data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
+        data["loginSettings"] = this.loginSettings ? this.loginSettings.toJSON() : <any>undefined;
+        data["endpoints"] = this.endpoints ? this.endpoints.toJSON() : <any>undefined;
         return data;
     }
 }
 
 export interface IPublicsettings {
+    keycloakEnabled: boolean;
     assistantAvailable: boolean;
     contactAddress?: string | undefined;
     hostClientInServer: boolean;
     userRegistration?: Userregistration | undefined;
+    loginSettings?: LoginSettings | undefined;
+    endpoints?: Endpoints | undefined;
 }
 
 export class Userregistration implements IUserregistration {
@@ -7765,6 +7777,108 @@ export interface IPasswordrules {
     capitalLetterRequired: boolean;
     lowercaseLetterRequired: boolean;
     numberRequired: boolean;
+}
+
+export class LoginSettings implements ILoginSettings {
+    loginMode!: LoginMode;
+    allowLoginWithUsername!: boolean;
+
+    constructor(data?: ILoginSettings) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.loginMode = _data["loginMode"];
+            this.allowLoginWithUsername = _data["allowLoginWithUsername"];
+        }
+    }
+
+    static fromJS(data: any): LoginSettings {
+        data = typeof data === 'object' ? data : {};
+        let result = new LoginSettings();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["loginMode"] = this.loginMode;
+        data["allowLoginWithUsername"] = this.allowLoginWithUsername;
+        return data;
+    }
+}
+
+export interface ILoginSettings {
+    loginMode: LoginMode;
+    allowLoginWithUsername: boolean;
+}
+
+export enum LoginMode {
+    Both = 0,
+    External = 1,
+    Internal = 2,
+}
+
+export class Endpoints implements IEndpoints {
+    ollama?: string | undefined;
+    ollamaUI?: string | undefined;
+    grafana?: string | undefined;
+    prometheus?: string | undefined;
+    keycloak?: string | undefined;
+    pgAdmin?: string | undefined;
+
+    constructor(data?: IEndpoints) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.ollama = _data["ollama"];
+            this.ollamaUI = _data["ollamaUI"];
+            this.grafana = _data["grafana"];
+            this.prometheus = _data["prometheus"];
+            this.keycloak = _data["keycloak"];
+            this.pgAdmin = _data["pgAdmin"];
+        }
+    }
+
+    static fromJS(data: any): Endpoints {
+        data = typeof data === 'object' ? data : {};
+        let result = new Endpoints();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["ollama"] = this.ollama;
+        data["ollamaUI"] = this.ollamaUI;
+        data["grafana"] = this.grafana;
+        data["prometheus"] = this.prometheus;
+        data["keycloak"] = this.keycloak;
+        data["pgAdmin"] = this.pgAdmin;
+        return data;
+    }
+}
+
+export interface IEndpoints {
+    ollama?: string | undefined;
+    ollamaUI?: string | undefined;
+    grafana?: string | undefined;
+    prometheus?: string | undefined;
+    keycloak?: string | undefined;
+    pgAdmin?: string | undefined;
 }
 
 export abstract class HashableDtoBase implements IHashableDtoBase {
@@ -7976,7 +8090,6 @@ export enum UploadType {
 export class Rootobject implements IRootobject {
     clientUrl?: string | undefined;
     connectionStrings?: Connectionstrings | undefined;
-    endpoints?: Endpoints | undefined;
     publicSettings?: Publicsettings | undefined;
     allowedHosts?: string | undefined;
     appConfiguration?: Appconfiguration | undefined;
@@ -8000,7 +8113,6 @@ export class Rootobject implements IRootobject {
         if (_data) {
             this.clientUrl = _data["clientUrl"];
             this.connectionStrings = _data["connectionStrings"] ? Connectionstrings.fromJS(_data["connectionStrings"]) : <any>undefined;
-            this.endpoints = _data["endpoints"] ? Endpoints.fromJS(_data["endpoints"]) : <any>undefined;
             this.publicSettings = _data["publicSettings"] ? Publicsettings.fromJS(_data["publicSettings"]) : <any>undefined;
             this.allowedHosts = _data["allowedHosts"];
             this.appConfiguration = _data["appConfiguration"] ? Appconfiguration.fromJS(_data["appConfiguration"]) : <any>undefined;
@@ -8024,7 +8136,6 @@ export class Rootobject implements IRootobject {
         data = typeof data === 'object' ? data : {};
         data["clientUrl"] = this.clientUrl;
         data["connectionStrings"] = this.connectionStrings ? this.connectionStrings.toJSON() : <any>undefined;
-        data["endpoints"] = this.endpoints ? this.endpoints.toJSON() : <any>undefined;
         data["publicSettings"] = this.publicSettings ? this.publicSettings.toJSON() : <any>undefined;
         data["allowedHosts"] = this.allowedHosts;
         data["appConfiguration"] = this.appConfiguration ? this.appConfiguration.toJSON() : <any>undefined;
@@ -8041,7 +8152,6 @@ export class Rootobject implements IRootobject {
 export interface IRootobject {
     clientUrl?: string | undefined;
     connectionStrings?: Connectionstrings | undefined;
-    endpoints?: Endpoints | undefined;
     publicSettings?: Publicsettings | undefined;
     allowedHosts?: string | undefined;
     appConfiguration?: Appconfiguration | undefined;
@@ -8118,54 +8228,6 @@ export class Connectionstrings implements IConnectionstrings {
 export interface IConnectionstrings {
     defaultConnection?: string | undefined;
     ollama?: string | undefined;
-}
-
-export class Endpoints implements IEndpoints {
-    ollama?: string | undefined;
-    ollamaUI?: string | undefined;
-    grafana?: string | undefined;
-    prometheus?: string | undefined;
-
-    constructor(data?: IEndpoints) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.ollama = _data["ollama"];
-            this.ollamaUI = _data["ollamaUI"];
-            this.grafana = _data["grafana"];
-            this.prometheus = _data["prometheus"];
-        }
-    }
-
-    static fromJS(data: any): Endpoints {
-        data = typeof data === 'object' ? data : {};
-        let result = new Endpoints();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["ollama"] = this.ollama;
-        data["ollamaUI"] = this.ollamaUI;
-        data["grafana"] = this.grafana;
-        data["prometheus"] = this.prometheus;
-        return data;
-    }
-}
-
-export interface IEndpoints {
-    ollama?: string | undefined;
-    ollamaUI?: string | undefined;
-    grafana?: string | undefined;
-    prometheus?: string | undefined;
 }
 
 export class Appconfiguration implements IAppconfiguration {

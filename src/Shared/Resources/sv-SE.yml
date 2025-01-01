@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Användarnamn {0} är redan taget.
 Username cannot changed: Användarnamnet kan inte ändras
 UserName is required: Användarnamn krävs
 UserName must be at least of length 6: Användarnamn måste vara minst längd 6
+Username or Email: Användarnamn eller e-post
 Users: Användare
 Users and Roles: Användare och roller
 Users exported: Exporterade användare

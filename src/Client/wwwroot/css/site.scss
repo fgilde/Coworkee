@@ -276,12 +276,12 @@ body * {
     border: 1px solid red;
 }
 
-.mud-tabs-stick-merge .mud-tabs-toolbar {
+.mud-tabs-stick-merge .mud-tabs-tabbar {
     position: sticky;
     top: -2px;
 }
 
-.mud-tabs-stick-merge .mud-tabs-toolbar[stuck] {
+.mud-tabs-stick-merge .mud-tabs-tabbar[stuck] {
     width: 450px;
     position: sticky;
     z-index: 4;

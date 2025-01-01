@@ -18,6 +18,8 @@ public static class UserManagerExtensions
         => userManager.FindByAsync(u => u.Id == id);
     public static Task<ApplicationUser> FindByEmailFullyLoadedAsync(this UserManager<ApplicationUser> userManager, string email)
         => userManager.FindByAsync(u => u.Email == email);
+    public static Task<ApplicationUser> FindByLoginNameFullyLoadedAsync(this UserManager<ApplicationUser> userManager, string loginName)
+        => userManager.FindByAsync(u => u.UserName == loginName);
     public static Task<ApplicationUser> FindByNameFullyLoadedAsync(this UserManager<ApplicationUser> userManager, string name)
         => userManager.FindByAsync(u => u.UserName == name);
 }

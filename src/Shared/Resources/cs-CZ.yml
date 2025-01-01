@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Uživatelské jméno {0} je již obsazeno.
 Username cannot changed: Uživatelské jméno nelze změnit
 UserName is required: Uživatelské jméno je povinné
 UserName must be at least of length 6: Uživatelské jméno musí mít alespoň délku 6
+Username or Email: Uživatelské jméno nebo e-mail
 Users: Uživatelé
 Users and Roles: Uživatelé a role
 Users exported: Exportované uživatele

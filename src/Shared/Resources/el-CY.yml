@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Το όνομα χρήστη {0} έχει ήδη
 Username cannot changed: Το όνομα χρήστη δεν μπορεί να αλλάξει
 UserName is required: Απαιτείται όνομα χρήστη
 UserName must be at least of length 6: Το όνομα χρήστη πρέπει να έχει τουλάχιστον μήκος 6
+Username or Email: Όνομα χρήστη ή email
 Users: Χρήστες
 Users and Roles: Χρήστες και ρόλοι
 Users exported: Χρήστες που εξάγονται

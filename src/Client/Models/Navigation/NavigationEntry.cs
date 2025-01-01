@@ -1,5 +1,7 @@
 using Coworkee.Application.Common.Security;
 using Nextended.Core.Types;
+using System;
+using System.Security.Claims;
 
 namespace Coworkee.Client.Models.Navigation
 {
@@ -14,7 +16,7 @@ namespace Coworkee.Client.Models.Navigation
         }
 
         public NavigationEntry()
-        {}
+        { }
 
         public string Text { get; set; }
         public string Icon { get; set; }
@@ -25,10 +27,21 @@ namespace Coworkee.Client.Models.Navigation
         public string[] Roles { get; set; }
         public RoleMatch RoleMatch { get; set; }
         public bool IsAuthenticationRequired { get; set; }
+        public Func<ClaimsPrincipal?, bool> Condition { get; set; }
+
+        public bool MatchesConditions(ClaimsPrincipal? claimsPrincipal) => Condition == null || Condition(claimsPrincipal);
 
         public NavigationEntry WithAuthentication()
         {
             IsAuthenticationRequired = true;
+            return this;
+        }
+
+        public NavigationEntry WithCondition(bool condition) => WithCondition((_) => condition);
+
+        public NavigationEntry WithCondition(Func<ClaimsPrincipal?, bool> condition)
+        {
+            Condition = Condition != null ? claimsPrincipal => Condition(claimsPrincipal) && condition(claimsPrincipal) : condition;
             return this;
         }
 

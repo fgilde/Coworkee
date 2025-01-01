@@ -114,6 +114,11 @@ namespace Coworkee.Infrastructure.Services.Identity
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
         {
             var user = await _userManager.FindByEmailFullyLoadedAsync(model.Email);
+            
+            if(user == null && _serviceProvider.GetService<ServerConfiguration>()?.PublicSettings?.LoginSettings?.AllowLoginWithUsername == true)
+            {
+                user = await _userManager.FindByLoginNameFullyLoadedAsync(model.Email);
+            }
 
             if (user == null)
             {

@@ -1,22 +1,32 @@
+using Aspire.Hosting.Postgres;
+using Coworkee.AppHost;
 using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
-using Microsoft.Extensions.Azure;
-using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
+IResourceBuilder<PgAdminContainerResource> pgAdmin = null;
+IResourceBuilder<KeycloakResource> keycloak = null;
+IResourceBuilder<OpenWebUIResource>? openWebUi = null;
+IResourceBuilder<OllamaResource> ollama = null;
+IResourceBuilder<OllamaModelResource> ollamaModel = null;
+IResourceBuilder<ContainerResource> grafana = null;
+IResourceBuilder<ContainerResource> prometheus = null;
 
 //var db = builder.AddSqlServer("coworkee-sql-server")
 //    .WithLifetime(ContainerLifetime.Persistent)
 //    .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection));
 
 var db = builder.AddPostgres("pg")
-    .WithPgAdmin()
+    .WithPgAdmin(admin =>
+    {
+        pgAdmin = admin;
+    })
     .WithLifetime(ContainerLifetime.Persistent)
     .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb");
 
 
-var keycloak = builder.AddKeycloak("keycloak", 8080,
+keycloak = builder.AddKeycloak("keycloak", 8080,
     builder.AddParameter("AdminUserName", ApplicationConstants.Defaults.Users.Administrators[0].UserName),
     builder.AddParameter("AdminUserPassword", ApplicationConstants.Defaults.Users.Administrators[0].Password))
     .WithCommand("Seed Client", "Seed Client", async context =>
@@ -28,8 +38,7 @@ var keycloak = builder.AddKeycloak("keycloak", 8080,
     });
 
 
-IResourceBuilder<OpenWebUIResource>? openWebUi = null;
-var ollama = builder.AddOllama("ollama")
+ollama = builder.AddOllama("ollama")
     .WithContainerRuntimeArgs()
     .WithDataVolume()
     .WithOtlpExporter()
@@ -43,37 +52,38 @@ var ollama = builder.AddOllama("ollama")
     .WithExternalHttpEndpoints()
     .PublishAsContainer();
 
-var ollamaModel = ollama.AddModel("llama3.3");
+ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel);
 
-var grafana = builder.AddContainer("grafana", "grafana/grafana")
+grafana = builder.AddContainer("grafana", "grafana/grafana")
     .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true)
     .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
     .WithHttpEndpoint(targetPort: 3000, name: "http");
 
-var prometheus = builder.AddContainer("prometheus", "prom/prometheus")
+prometheus = builder.AddContainer("prometheus", "prom/prometheus")
     .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true)
     .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
     .WithContainerRuntimeArgs("--network=host");
 
+
 var api = builder.AddProject<Projects.Server>("coworkee-application")
-    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Grafana)}", grafana.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Ollama)}", ollama.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.Prometheus)}", prometheus.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.Endpoints)}__{nameof(ServerConfiguration.Endpoints.OllamaUI)}", openWebUi?.GetEndpoint("http"))
-    .WithReference(db)
-    .WaitFor(db)
-    .WithReference(keycloak)
-    .WaitFor(keycloak)
-    .WithReference(ollama)
-    .WithReference(ollamaModel);
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Grafana)}", grafana?.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Ollama)}", ollama?.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Prometheus)}", prometheus?.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.OllamaUI)}", openWebUi?.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.PGAdmin)}", pgAdmin?.GetEndpoint("http"))
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Keycloak)}", keycloak?.GetEndpoint("http"))
+    .WithReferenceIf(db)
+    .WaitForIf(db)
+    .WithReferenceIf(keycloak)
+    .WaitForCompletionIf(keycloak)
+    .WithReferenceIf(ollama)
+    .WithReferenceIf(ollamaModel);
 
 //builder.AddProject<Projects.Client>("coworkee-client")
 //    .WaitFor(api)
 //    .WithReference(api);
 
 
-prometheus
-    .WithReference(api)
-    .WaitFor(api);
+prometheus?.WithReference(api)?.WaitFor(api);
 
 builder.Build().Run();

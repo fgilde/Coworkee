@@ -1077,6 +1077,7 @@ Username {0} is already taken.: ユーザー名{0}は既に取得されていま
 Username cannot changed: ユーザー名は変更できません
 UserName is required: ユーザー名が必要です
 UserName must be at least of length 6: ユーザー名は少なくとも長さ 6 である必要があります。
+Username or Email: ユーザー名またはメールアドレス
 Users: ユーザー
 Users and Roles: ユーザーとロール
 Users exported: エクスポートされたユーザー

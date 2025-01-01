@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Вече е взето потребителск�
 Username cannot changed: Потребителското име не може да се промени
 UserName is required: Потребителско име е необходимо
 UserName must be at least of length 6: Потребителско име трябва да бъде най-малко с дължина 6
+Username or Email: Потребителско име или имейл
 Users: Потребители
 Users and Roles: Потребители и роли
 Users exported: Потребителите изнесени

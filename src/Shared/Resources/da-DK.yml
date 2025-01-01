@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Brugernavn {0} er allerede taget.
 Username cannot changed: Brugernavn kan ikke ændres
 UserName is required: Brugernavn er påkrævet
 UserName must be at least of length 6: Brugernavnet skal være mindst længden 6
+Username or Email: Brugernavn eller e-mail
 Users: Brugere
 Users and Roles: Brugere og roller
 Users exported: Brugere eksporteret

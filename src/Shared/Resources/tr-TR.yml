@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Kullanıcı adı {0} zaten alınmış.
 Username cannot changed: Kullanıcı adı değiştirilemez
 UserName is required: KullanıcıAdı gerekli
 UserName must be at least of length 6: UserName en az 6 uzunluğunda olmalıdır
+Username or Email: Kullanıcı Adı veya E-posta
 Users: Kullanıcı
 Users and Roles: Kullanıcılar ve Roller
 Users exported: Dışa aktarılan kullanıcılar

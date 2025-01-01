@@ -8276,10 +8276,14 @@
     "Publicsettings": {
       "type": "object",
       "required": [
+        "keycloakEnabled",
         "assistantAvailable",
         "hostClientInServer"
       ],
       "properties": {
+        "keycloakEnabled": {
+          "type": "boolean"
+        },
         "assistantAvailable": {
           "type": "boolean"
         },
@@ -8291,6 +8295,12 @@
         },
         "userRegistration": {
           "$ref": "#/definitions/Userregistration"
+        },
+        "loginSettings": {
+          "$ref": "#/definitions/LoginSettings"
+        },
+        "endpoints": {
+          "$ref": "#/definitions/Endpoints"
         }
       }
     },
@@ -8385,6 +8395,58 @@
         },
         "numberRequired": {
           "type": "boolean"
+        }
+      }
+    },
+    "LoginSettings": {
+      "type": "object",
+      "required": [
+        "loginMode",
+        "allowLoginWithUsername"
+      ],
+      "properties": {
+        "loginMode": {
+          "$ref": "#/definitions/LoginMode"
+        },
+        "allowLoginWithUsername": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LoginMode": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Both",
+        "External",
+        "Internal"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "Endpoints": {
+      "type": "object",
+      "properties": {
+        "ollama": {
+          "type": "string"
+        },
+        "ollamaUI": {
+          "type": "string"
+        },
+        "grafana": {
+          "type": "string"
+        },
+        "prometheus": {
+          "type": "string"
+        },
+        "keycloak": {
+          "type": "string"
+        },
+        "pgAdmin": {
+          "type": "string"
         }
       }
     },
@@ -8533,9 +8595,6 @@
         "connectionStrings": {
           "$ref": "#/definitions/Connectionstrings"
         },
-        "endpoints": {
-          "$ref": "#/definitions/Endpoints"
-        },
         "publicSettings": {
           "$ref": "#/definitions/Publicsettings"
         },
@@ -8572,23 +8631,6 @@
           "type": "string"
         },
         "ollama": {
-          "type": "string"
-        }
-      }
-    },
-    "Endpoints": {
-      "type": "object",
-      "properties": {
-        "ollama": {
-          "type": "string"
-        },
-        "ollamaUI": {
-          "type": "string"
-        },
-        "grafana": {
-          "type": "string"
-        },
-        "prometheus": {
           "type": "string"
         }
       }

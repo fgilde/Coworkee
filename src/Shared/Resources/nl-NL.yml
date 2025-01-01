@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Gebruikersnaam {0} is al in gebruik.
 Username cannot changed: Gebruikersnaam kan niet worden gewijzigd
 UserName is required: Gebruikersnaam is vereist
 UserName must be at least of length 6: Gebruikersnaam moet ten minste lengte 6 hebben
+Username or Email: Gebruikersnaam of e-mailadres
 Users: Gebruikers
 Users and Roles: Gebruikers en rollen
 Users exported: Gebruikers geëxporteerd

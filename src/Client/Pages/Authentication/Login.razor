@@ -43,7 +43,7 @@
             </MudItem>
         }
         <MudItem xs="12">
-            <MudTextField T="string" Label="@_localizer["E-mail"]" Variant="Variant.Outlined"
+            <MudTextField T="string" Label="@GetEmailLabel()" Variant="Variant.Outlined"
                           @bind-Value="_tokenModel.Email" For="@(() => _tokenModel.Email)" />
         </MudItem>
         <MudItem xs="12">
@@ -68,7 +68,7 @@
                 }
             </MudButton>
         </MudItem>
-        @if (!_processing)
+        @if (!_processing && _config?.ServerConfiguration?.KeycloakEnabled == true)
         {
             <MudItem xs="12" Class="d-flex justify-center">
                 <MudLink Href="@(KeyCloakHref())">@_localizer["Login with Keycloak"]</MudLink>

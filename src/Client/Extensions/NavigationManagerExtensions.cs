@@ -61,6 +61,9 @@ namespace Coworkee.Client.Extensions
         /// </summary>
         public static bool ShouldBeAuthorized(this NavigationManager navigationManager, string url)
         {
+            if(string.IsNullOrEmpty(url))
+                return false;
+
             if (!url.ToLower().StartsWith("http") || !Uri.TryCreate(url, UriKind.Absolute, out var uri)) return false;
             var config = ServiceAccessor.Get<ClientApplicationConfiguration>();
             var clientOrigin = navigationManager.ToAbsoluteUri(navigationManager.BaseUri);

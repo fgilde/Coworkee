@@ -15,7 +15,6 @@ namespace Coworkee.Application.Configurations
     {
         public string ClientUrl { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
-        public Endpoints Endpoints { get; set; }
 
         public Publicsettings PublicSettings { get; set; }
         public string AllowedHosts { get; set; }
@@ -27,15 +26,17 @@ namespace Coworkee.Application.Configurations
         public Rabbitmq RabbitMQ { get; set; }
         public BackupOptions BackupOptions { get; set; }
     }
-    
+
     public class Endpoints
     {
         public string Ollama { get; set; }
         public string OllamaUI { get; set; }
         public string Grafana { get; set; }
         public string Prometheus { get; set; }
+        public string Keycloak { get; set; }
+        public string PGAdmin { get; set; }
     }
-    
+
     public class Connectionstrings
     {
         public string DefaultConnection { get; set; }
@@ -44,10 +45,20 @@ namespace Coworkee.Application.Configurations
 
     public class Publicsettings
     {
+        public bool KeycloakEnabled => !string.IsNullOrEmpty(Endpoints?.Keycloak) && LoginSettings?.LoginMode != LoginMode.Internal;
         public bool AssistantAvailable { get; set; }
         public string ContactAddress { get; set; }
         public bool HostClientInServer { get; set; }
         public Userregistration UserRegistration { get; set; }
+        public LoginSettings LoginSettings { get; set; }
+        public Endpoints Endpoints { get; set; }
+
+    }
+
+    public class LoginSettings
+    {
+        public LoginMode LoginMode { get; set; }
+        public bool AllowLoginWithUsername { get; set; }
     }
 
     public class Userregistration
@@ -173,4 +184,12 @@ namespace Coworkee.Application.Configurations
     {
         public string BucketName { get; set; }
     }
+
+    public enum LoginMode
+    {
+        Both,
+        External,
+        Internal
+    }
+
 }

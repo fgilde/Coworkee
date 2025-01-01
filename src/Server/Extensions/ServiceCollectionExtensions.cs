@@ -67,24 +67,33 @@ namespace Coworkee.Server.Extensions
             try
             {
                 var config = ServerConfiguration.Instance;
-                services.AddScoped(p => new OllamaApiClient(config.Endpoints.Ollama, "llama3.2"));
-                services.AddAIActionInvoker<OllamaAIHandler>(new AIActionInvokeSettings());
-                configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
+ 
+                var gptConfig = config.CognitiveServices.OpenAi;
+                var gptAssistantAvailable = config.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
+                if (gptAssistantAvailable)
+                {
+                    configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
+                    services.AddOpenAIActionInvoker(settings =>
+                    {
+                        settings.ApiKey = gptConfig.ApiKey;
+                        settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
+                    }, typeof(AddProduct).Assembly);
 
-                //var gptConfig = config.CognitiveServices.OpenAi;
-                //var assistantAvailable = config.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
-                //configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = assistantAvailable.ToString();
-                //if (assistantAvailable)
-                //{
-                //    services.AddOpenAIActionInvoker(settings =>
-                //    {
-                //        settings.ApiKey = gptConfig.ApiKey;
-                //        settings.Model = string.IsNullOrWhiteSpace(gptConfig.Model) ? Model.GPT4 : new Model(gptConfig.Model);
-                //    }, typeof(AddProduct).Assembly);
-                //}
+                }
+                else if(!string.IsNullOrEmpty(config.PublicSettings.Endpoints.Ollama))
+                {
+                    services.AddScoped(p => new OllamaApiClient(config.PublicSettings.Endpoints.Ollama, ApplicationConstants.LargeLanguageModel));
+                    services.AddAIActionInvoker<OllamaAIHandler>(new AIActionInvokeSettings());
+                    configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
+                }
+                else
+                {
+                    configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = false.ToString();
+                }
             }
             catch (Exception e)
             {
+                configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = false.ToString();
                 Console.WriteLine(e);
             }
             return services;
@@ -234,7 +243,7 @@ namespace Coworkee.Server.Extensions
         private static void ConfigureDocument(this IConfigurationSection configSection, OpenApiDocument document, ApiVersion version)
         {
             //document.Info.TermsOfService = "/terms/ofuse/url";
-            
+
             configSection.GetSection("Contact").Bind(document.Info.Contact ?? (document.Info.Contact = new OpenApiContact()));
             configSection.GetSection("License").Bind(document.Info.License ?? (document.Info.License = new OpenApiLicense()));
             var prefix = "/api/" + ApiVersions.DocumentVersionPrefix + version.MajorVersion;
@@ -286,7 +295,7 @@ namespace Coworkee.Server.Extensions
                 }
             }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
 
-            if (!ApplicationConstants.IsNswagGeneration) 
+            if (!ApplicationConstants.IsNswagGeneration)
             {
                 using var serviceProvider = services.BuildServiceProvider();
                 using var scope = serviceProvider.CreateScope();
@@ -316,7 +325,7 @@ namespace Coworkee.Server.Extensions
 
             return services;
         }
-        
+
         internal static IServiceCollection AddJwtAuthentication(
             this IServiceCollection services, ServerConfiguration config)
         {
@@ -398,51 +407,52 @@ namespace Coworkee.Server.Extensions
 
 
             #region Keycloak
-
-            services.Configure<CookiePolicyOptions>(options =>
+            if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
             {
-                options.MinimumSameSitePolicy = SameSiteMode.Lax; // Für OAuth2 erforderlich
-                options.Secure = CookieSecurePolicy.Always;
-            });
-
-            services.AddAuthentication(options =>
+                services.Configure<CookiePolicyOptions>(options =>
                 {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddKeycloakOpenIdConnect(
-                    "keycloak",
-                    realm: "master",
-                    authenticationScheme: "keycloak",
-                    options =>
-                    {
-                        options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
-                        options.ClientId = ApplicationConstants.ApplicationClientName;
-                        options.ClientSecret = ApplicationConstants.ApplicationClientSecret;
-                        options.ResponseType = OpenIdConnectResponseType.Code; 
-                        options.UsePkce = true;
-                        options.SaveTokens = true;
-                        //options.ResponseMode = OpenIdConnectResponseMode.Query;
-                        options.Scope.Add("openid");
-                        options.Scope.Add("profile");
-                        options.Events = new OpenIdConnectEvents
-                        {
-                            OnTokenValidated = async context =>
-                            {
-                                var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();
-                                var result = await identityService.LoginExternalAsync(context.Principal, true);
-                                if (!result.Succeeded)
-                                {
-                                    context.Fail("User not found in the local system.");
-                                    return;
-                                }
-                                context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);
-                                context.Success();
-                            }
-                        };
-                    });
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax; // Für OAuth2 erforderlich
+                    options.Secure = CookieSecurePolicy.Always;
+                });
 
+                services.AddAuthentication(options =>
+                    {
+                        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    })
+                    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddKeycloakOpenIdConnect(
+                        "keycloak",
+                        realm: "master",
+                        authenticationScheme: "keycloak",
+                        options =>
+                        {
+                            options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
+                            options.ClientId = ApplicationConstants.ApplicationClientName;
+                            options.ClientSecret = ApplicationConstants.ApplicationClientSecret;
+                            options.ResponseType = OpenIdConnectResponseType.Code;
+                            options.UsePkce = true;
+                            options.SaveTokens = true;
+                            //options.ResponseMode = OpenIdConnectResponseMode.Query;
+                            options.Scope.Add("openid");
+                            options.Scope.Add("profile");
+                            options.Events = new OpenIdConnectEvents
+                            {
+                                OnTokenValidated = async context =>
+                                {
+                                    var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();
+                                    var result = await identityService.LoginExternalAsync(context.Principal, true);
+                                    if (!result.Succeeded)
+                                    {
+                                        context.Fail("User not found in the local system.");
+                                        return;
+                                    }
+                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);
+                                    context.Success();
+                                }
+                            };
+                        });
+            }
             #endregion
 
 

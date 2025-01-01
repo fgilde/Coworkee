@@ -1077,6 +1077,7 @@ Username {0} is already taken.: 사용자 이름 {0}가 이미 사용 중입니�
 Username cannot changed: 사용자 이름을 변경할 수 없습니다.
 UserName is required: 사용자 이름이 필요합니다.
 UserName must be at least of length 6: 사용자 이름은 길이 6 이상이어야 합니다.
+Username or Email: 사용자 이름 또는 이메일
 Users: 사용자
 Users and Roles: 사용자 및 역할
 Users exported: 내보낸 사용자

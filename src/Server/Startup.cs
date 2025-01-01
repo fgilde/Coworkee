@@ -20,6 +20,7 @@ using Coworkee.Shared;
 using Coworkee.Application.Configurations;
 using Hangfire.PostgreSql;
 using Coworkee.Shared.Helper;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Coworkee.Server
 {
@@ -100,14 +101,16 @@ namespace Coworkee.Server
             IStringLocalizer<Startup> localizer,
             IDashboardAuthorizationFilter authorizationFilter)
         {
+            var config = ServerConfiguration.Instance;
             #region For Keycloak
-            
-            var seeder = new KeycloakSeeder();
-            System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
+            if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
             {
-                _ = seeder.CreateClientAsync();
-            });
-
+                var seeder = new KeycloakSeeder();
+                System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
+                {
+                    _ = seeder.CreateClientAsync();
+                });
+            }
             #endregion
 
             app.UseSessionId();

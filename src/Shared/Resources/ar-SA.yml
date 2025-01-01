@@ -1077,6 +1077,7 @@ Username {0} is already taken.: تم بالفعل أخذ {0} اسم المستخ
 Username cannot changed: لا يمكن تغيير اسم المستخدم
 UserName is required: اسم المستخدم مطلوب
 UserName must be at least of length 6: يجب أن يكون اسم المستخدم على الأقل بطول 6
+Username or Email: اسم المستخدم أو البريد الإلكتروني
 Users: المستعملون
 Users and Roles: المستخدمون والأدوار
 Users exported: المستخدمون المصدرون

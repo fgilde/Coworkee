@@ -1076,6 +1076,7 @@ Username {0} is already taken.: Username {0} is already taken.
 Username cannot changed: Username cannot changed
 UserName is required: UserName is required
 UserName must be at least of length 6: UserName must be at least of length 6
+Username or Email: Username or Email
 Users: Users
 Users and Roles: Users and Roles
 Users exported: Users exported

@@ -1077,6 +1077,7 @@ Username {0} is already taken.: Korisničko ime {0} već je preuzeto.
 Username cannot changed: Korisničko ime nije moguće promijeniti
 UserName is required: Korisničko ime je obavezno
 UserName must be at least of length 6: Korisničko ime mora biti najmanje duljine 6
+Username or Email: Korisničko ime ili e-mail
 Users: Korisnici
 Users and Roles: Korisnici i uloge
 Users exported: Izvezeni korisnici

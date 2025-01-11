@@ -72,7 +72,7 @@ namespace Coworkee.Client.ErrorHandling
                     config.ShowCloseIcon = true;
                     config.CloseAfterNavigation = true;
                     config.ActionColor = Color.Error;
-                    config.Onclick = async snackbar =>
+                    config.OnClick = async snackbar =>
                     {
                         var parameters = new DialogParameters
                         {

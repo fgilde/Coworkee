@@ -102,7 +102,7 @@ namespace Coworkee.Client.Shared
                             config.ShowTransitionDuration = 500;
                             config.Action = localizer["Chat?"];
                             config.ActionColor = Color.Primary;
-                            config.Onclick = snackbar =>
+                            config.OnClick = snackbar =>
                             {
                                 _navigationManager.NavigateTo(chatUrlToUser);
                                 return Task.CompletedTask;

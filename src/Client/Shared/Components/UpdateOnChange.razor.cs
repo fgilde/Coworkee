@@ -99,7 +99,7 @@ public partial class UpdateOnChange<TDto> : IAsyncDisposable
                 {
                     config.Action = _localizer["No longer update automatically"];
                     config.ActionColor = Color.Primary;
-                    config.Onclick = _ =>
+                    config.OnClick = _ =>
                     {
                         ConfirmUpdate = true;
                         StateHasChanged();

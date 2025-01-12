@@ -4,6 +4,13 @@ using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
 
+// #### CONSTANTS Settings #####################################################
+
+DatabaseToUse databaseToUse = DatabaseToUse.SqlServer;
+var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
+
+// ####### Start the Aspire application ########################################
+
 var builder = DistributedApplication.CreateBuilder(args);
 IResourceBuilder<PgAdminContainerResource> pgAdmin = null;
 IResourceBuilder<KeycloakResource> keycloak = null;
@@ -13,22 +20,30 @@ IResourceBuilder<OllamaModelResource> ollamaModel = null;
 IResourceBuilder<ContainerResource> grafana = null;
 IResourceBuilder<ContainerResource> prometheus = null;
 
-//var db = builder.AddSqlServer("coworkee-sql-server")
-//    .WithLifetime(ContainerLifetime.Persistent)
-//    .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection));
+//var username = builder.AddParameter("username","dbUser", secret: true);
+//var password = builder.AddParameter("password","dbPassword", secret: true);
 
-var db = builder.AddPostgres("pg")
-    .WithPgAdmin(admin =>
-    {
-        pgAdmin = admin;
-    })
-    .WithLifetime(ContainerLifetime.Persistent)
-    .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb");
+IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
+{
+    DatabaseToUse.Postgres => builder.AddPostgres("pg" //, username, password
+    )
+        .WithPgAdmin(admin => {
+            admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");
+            admin.WithEnvironment("PGADMIN_DEFAULT_EMAIL", administrator.Email);
+            admin.WithEnvironment("PGADMIN_DEFAULT_PASSWORD", administrator.Password);
+            pgAdmin = admin; 
+        })        
+        .WithLifetime(ContainerLifetime.Persistent)
+        .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb"),
+    DatabaseToUse.SqlServer => builder.AddSqlServer("coworkee-sql-server")
+        .WithLifetime(ContainerLifetime.Persistent)
+        .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
+};
 
 
 keycloak = builder.AddKeycloak("keycloak", 8080,
-    builder.AddParameter("AdminUserName", ApplicationConstants.Defaults.Users.Administrators[0].UserName),
-    builder.AddParameter("AdminUserPassword", ApplicationConstants.Defaults.Users.Administrators[0].Password))
+    builder.AddParameter("AdminUserName", administrator.UserName),
+    builder.AddParameter("AdminUserPassword", administrator.Password))
     .WithCommand("Seed Client", "Seed Client", async context =>
     {
         var seeder = new KeycloakSeeder();
@@ -55,6 +70,10 @@ ollama = builder.AddOllama("ollama")
 ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel);
 
 grafana = builder.AddContainer("grafana", "grafana/grafana")
+    .WithEnvironment("GF_SECURITY_ADMIN_USER", administrator.UserName)
+    .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
+    .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", administrator.Password)
+    .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false") 
     .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true)
     .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
     .WithHttpEndpoint(targetPort: 3000, name: "http");
@@ -86,4 +105,7 @@ var api = builder.AddProject<Projects.Server>("coworkee-application")
 
 prometheus?.WithReference(api)?.WaitFor(api);
 
-builder.Build().Run();
+builder
+    .Build()
+    .EnsureDockerRunningIfLocalDebug()
+    .Run();

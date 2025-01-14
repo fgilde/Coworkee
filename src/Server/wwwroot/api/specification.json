@@ -8410,6 +8410,12 @@
         },
         "allowLoginWithUsername": {
           "type": "boolean"
+        },
+        "allowedEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -406,7 +406,7 @@ namespace Coworkee.Server.Extensions
 
 
 
-            #region Keycloak
+            #region For Keycloak
             if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
             {
                 services.Configure<CookiePolicyOptions>(options =>
@@ -422,9 +422,9 @@ namespace Coworkee.Server.Extensions
                     })
                     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddKeycloakOpenIdConnect(
-                        "keycloak",
-                        realm: "master",
-                        authenticationScheme: "keycloak",
+                       ApplicationConstants.KeycloakSchemeName,
+                        realm: ApplicationConstants.KeycloakRealm,
+                        authenticationScheme: ApplicationConstants.KeycloakSchemeName,
                         options =>
                         {
                             options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
@@ -440,14 +440,16 @@ namespace Coworkee.Server.Extensions
                             {
                                 OnTokenValidated = async context =>
                                 {
-                                    var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();
+                                    var idToken = context.TokenEndpointResponse.IdToken;
+                                    var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();                                    
                                     var result = await identityService.LoginExternalAsync(context.Principal, true);
                                     if (!result.Succeeded)
                                     {
                                         context.Fail("User not found in the local system.");
                                         return;
                                     }
-                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);
+                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);                                    
+                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.Build(ApplicationConstants.ParameterNames.IdToken, context.Scheme.Name), idToken);
                                     context.Success();
                                 }
                             };

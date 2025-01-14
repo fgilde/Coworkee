@@ -102,16 +102,16 @@ namespace Coworkee.Server
             IDashboardAuthorizationFilter authorizationFilter)
         {
             var config = ServerConfiguration.Instance;
-            #region For Keycloak
-            if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
-            {
-                var seeder = new KeycloakSeeder();
-                System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
-                {
-                    _ = seeder.CreateClientAsync();
-                });
-            }
-            #endregion
+            //#region For Keycloak
+            //if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
+            //{
+            //    var seeder = new KeycloakSeeder();
+            //    System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
+            //    {
+            //        _ = seeder.CreateClientAsync();
+            //    });
+            //}
+            //#endregion
 
             app.UseSessionId();
             app.UseCors();

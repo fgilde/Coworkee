@@ -11,6 +11,8 @@ namespace Coworkee.Shared.Constants.Application
         public const string LargeLanguageModel = "llama3.2";
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
+        public const string KeycloakSchemeName = "keycloak";
+        public const string KeycloakRealm = "master";
         public const string ApplicationClientName = $"{ApplicationName}Client";
         public const string ApplicationClientSecret = $"{ApplicationClientName}-34C2F2F8-CD3D-4976-AA08-36AE10FA4119";
         public const string SessionIdKey = nameof(SessionIdKey);
@@ -91,6 +93,11 @@ namespace Coworkee.Shared.Constants.Application
         {
             public const string ReturnUrl = nameof(ReturnUrl);
             public const string AuthedUrlParameter = "auth_token";
+            public const string IdToken = "id_token";
+            public static string Build(string key, params string[] values)
+            {
+                return values.Where(s => !string.IsNullOrWhiteSpace(s)).Aggregate(key, (current, value) => current + ("_" + value));
+            }
         }
 
         public static class HeaderNames

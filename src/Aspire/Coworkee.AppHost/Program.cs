@@ -46,11 +46,30 @@ keycloak = builder.AddKeycloak("keycloak", 8080,
     builder.AddParameter("AdminUserPassword", administrator.Password))
     .WithCommand("Seed Client", "Seed Client", async context =>
     {
-        var seeder = new KeycloakSeeder();
-        await seeder.CreateClientAsync(true);
-        await seeder.CreateUserAsync("hans", "hans", "hans@gmail.com");
-        return new ExecuteCommandResult { Success = true };
-    });
+        bool result;
+        string message = "";
+        var seeder = new KeycloakSeeder(
+            ApplicationConstants.KeycloakRealm,
+            administrator.UserName,
+            administrator.Password,
+            keycloak.GetEndpoint("http").Url,
+            ApplicationConstants.ApplicationClientName,
+            ApplicationConstants.ApplicationClientSecret
+        );
+        try
+        {
+            await seeder.CreateClientAsync(true);
+            await seeder.CreateUserAsync(administrator.UserName, administrator.Password, administrator.Email);
+            await seeder.CreateUserAsync("hans", "hans", "hans@gmail.com");
+            result = true;
+        }
+        catch (Exception e)
+        {
+            result = false;
+            message = e.Message;
+        }
+        return new ExecuteCommandResult { Success = result, ErrorMessage = message };
+    }).WithHttpHealthCheck("/", 200);
 
 
 ollama = builder.AddOllama("ollama")

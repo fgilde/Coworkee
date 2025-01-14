@@ -7782,6 +7782,7 @@ export interface IPasswordrules {
 export class LoginSettings implements ILoginSettings {
     loginMode!: LoginMode;
     allowLoginWithUsername!: boolean;
+    allowedEmails?: string[] | undefined;
 
     constructor(data?: ILoginSettings) {
         if (data) {
@@ -7796,6 +7797,11 @@ export class LoginSettings implements ILoginSettings {
         if (_data) {
             this.loginMode = _data["loginMode"];
             this.allowLoginWithUsername = _data["allowLoginWithUsername"];
+            if (Array.isArray(_data["allowedEmails"])) {
+                this.allowedEmails = [] as any;
+                for (let item of _data["allowedEmails"])
+                    this.allowedEmails!.push(item);
+            }
         }
     }
 
@@ -7810,6 +7816,11 @@ export class LoginSettings implements ILoginSettings {
         data = typeof data === 'object' ? data : {};
         data["loginMode"] = this.loginMode;
         data["allowLoginWithUsername"] = this.allowLoginWithUsername;
+        if (Array.isArray(this.allowedEmails)) {
+            data["allowedEmails"] = [];
+            for (let item of this.allowedEmails)
+                data["allowedEmails"].push(item);
+        }
         return data;
     }
 }
@@ -7817,6 +7828,7 @@ export class LoginSettings implements ILoginSettings {
 export interface ILoginSettings {
     loginMode: LoginMode;
     allowLoginWithUsername: boolean;
+    allowedEmails?: string[] | undefined;
 }
 
 export enum LoginMode {

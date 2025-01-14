@@ -16,6 +16,11 @@ public static class HttpRequestExtensions
         return request.ThrowIfNull(nameof(request)).Headers[RequestedWithHeader] == XmlHttpRequest || request.HasReferer();
     }
 
+    public static string GetReferer(this HttpRequest request)
+    {
+        return request.GetRefererUris().FirstOrDefault()?.GetLeftPart(UriPartial.Scheme | UriPartial.Authority);
+    }
+
     public static IEnumerable<Uri> GetRefererUris(this HttpRequest request)
     {
         return request?.Headers.Referer.Where(s => !string.IsNullOrEmpty(s)).Select(s => new Uri(s, UriKind.RelativeOrAbsolute));

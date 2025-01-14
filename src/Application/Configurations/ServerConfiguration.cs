@@ -59,6 +59,8 @@ namespace Coworkee.Application.Configurations
     {
         public LoginMode LoginMode { get; set; }
         public bool AllowLoginWithUsername { get; set; }
+        public string[] AllowedEmails { get; set; }
+
     }
 
     public class Userregistration

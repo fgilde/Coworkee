@@ -1,9 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
-using Coworkee.Application.Contracts;
 using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Application.Hubs;
 using Coworkee.Data;
 using Coworkee.Server.Middlewares;
@@ -15,8 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
-using Nextended.Core.Extensions;
-using NSwag;
 
 namespace Coworkee.Server.Extensions
 {
@@ -52,10 +48,11 @@ namespace Coworkee.Server.Extensions
 
         internal static IApplicationBuilder UseSwagger(this IApplicationBuilder app)
         {
+            var wwwrootSwaggerUiHeaderHtml = "wwwroot/swagger-ui/header.html";
             app.UseSwaggerUi(a => {
                 a.OperationsSorter = "alpha";
-                a.TagsSorter = "alpha";
-                a.CustomHeadContent = File.ReadAllText("wwwroot/swagger-ui/header.html");
+                a.TagsSorter = "alpha";                
+                a.CustomHeadContent = File.Exists(wwwrootSwaggerUiHeaderHtml) ? File.ReadAllText(wwwrootSwaggerUiHeaderHtml) : string.Empty;
                 a.CustomJavaScriptPath = "/swagger-ui/scripts.js";
                 a.CustomStylesheetPath = "/swagger-ui/styles.css";
                 a.PersistAuthorization = true;

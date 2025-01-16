@@ -42,6 +42,9 @@ namespace Coworkee.Infrastructure.Services.Identity
 
         public async Task<bool> HasRolesAsync(string[] roles, RoleMatch match, string userId = null)
         {
+            userId = UserId(userId);
+            if (userId == null)
+                return false;
             var granted = true;
             foreach (var role in roles ?? Enumerable.Empty<string>().ToArray())
             {
@@ -56,6 +59,9 @@ namespace Coworkee.Infrastructure.Services.Identity
 
         public async Task<bool> HasPoliciesAsync(string[] policies, PolicyMatch match, string userId = null)
         {
+            userId = UserId(userId);
+            if (userId == null)
+                return false;
             var granted = true;
             foreach (var policy in policies ?? Enumerable.Empty<string>().ToArray())
             {

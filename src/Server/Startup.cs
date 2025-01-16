@@ -20,7 +20,6 @@ using Coworkee.Shared;
 using Coworkee.Application.Configurations;
 using Hangfire.PostgreSql;
 using Coworkee.Shared.Helper;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Coworkee.Server
 {
@@ -56,7 +55,7 @@ namespace Coworkee.Server
             services.AddServerLocalization();
             services.AddYamlLocalizationWithFallback();
             services.AddIdentity();
-            services.IfNotNSwag().AddJwtAuthentication(serverConfig);
+            services.AddJwtAuthentication(serverConfig);
             services.AddApplication(serverConfig);
             services.AddInfrastructure();
             services.AddApiVersions();
@@ -120,9 +119,12 @@ namespace Coworkee.Server
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
+            var staticFilePath = Path.Combine(Directory.GetCurrentDirectory(), ApplicationConstants.FileAccess.StaticFileDirectoryName);
+            if (!Directory.Exists(staticFilePath))
+                Directory.CreateDirectory(staticFilePath);
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), ApplicationConstants.FileAccess.StaticFileDirectoryName)),
+                FileProvider = new PhysicalFileProvider(staticFilePath),
                 RequestPath = new PathString($"/{ApplicationConstants.FileAccess.StaticFileDirectoryName}")
             });
             app.UseRequestLocalizationByCulture();

@@ -41,7 +41,7 @@ namespace Coworkee.Application.Common.Security
         }
 
         public async Task EnsureIsAuthorizedForAsync(ICustomAuthorizeAttribute attribute)
-        {
+        {            
             await _permissionService.EnsureRolesAsync(attribute?.Roles, attribute?.RoleMatch ?? RoleMatch.Any);
             await _permissionService.EnsurePoliciesAsync(attribute?.Policies, attribute?.PolicyMatch ?? PolicyMatch.Any);
         }

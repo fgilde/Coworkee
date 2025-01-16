@@ -28,7 +28,7 @@ namespace Coworkee.Server
 
         public static async Task Main(string[] args)
         {
-            ApplicationConstants.IsNswagGeneration = args.Any(arg => arg.Contains("--applicationName", StringComparison.OrdinalIgnoreCase));
+            ApplicationConstants.IsNswagGeneration = args.Any(arg => arg.Contains("--applicationName", StringComparison.OrdinalIgnoreCase)) && !args.Any(a => a.Contains($"--environment={ApplicationConstants.Environment.Testing}"));
             do
             {
                 await StartServer(args);

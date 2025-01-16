@@ -331,7 +331,7 @@ namespace Coworkee.Server.Extensions
         {
             var key = Encoding.ASCII.GetBytes(config.AppConfiguration.Secret);
 
-            async void ConfigureOptions(JwtBearerOptions bearer)
+            void ConfigureOptions(JwtBearerOptions bearer)
             {
                 bearer.RequireHttpsMetadata = false;
                 bearer.SaveToken = true;
@@ -345,7 +345,7 @@ namespace Coworkee.Server.Extensions
                     ClockSkew = TimeSpan.Zero
                 };
 
-                var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
+                var localizer = GetRegisteredServerLocalizerAsync<ServerCommonResources>(services).Result;
 
                 bearer.Events = new JwtBearerEvents
                 {
@@ -399,8 +399,10 @@ namespace Coworkee.Server.Extensions
             services
                 .AddAuthentication(authentication =>
                 {
+                    authentication.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                     authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    authentication.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;                    
                 })
                 .AddJwtBearer(ConfigureOptions);
 
@@ -417,8 +419,9 @@ namespace Coworkee.Server.Extensions
 
                 services.AddAuthentication(options =>
                     {
-                        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                        // Default not required
+                        //options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        //options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
                     })
                     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddKeycloakOpenIdConnect(

@@ -30,13 +30,29 @@ using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Client.Configuration.MudExObjectEdit;
-using Microsoft.Extensions.Configuration;
 using Nextended.Core.Helper;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 namespace Coworkee.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
+        internal static WebAssemblyHostBuilder DiscoverBackendUrlIfNeeded(this WebAssemblyHostBuilder builder)
+        {
+            if (string.IsNullOrEmpty(builder.Configuration[nameof(ClientApplicationConfiguration.BackendOrigin)]))
+            {
+                if (ApplicationConstants.HostClientInServer) {
+                    builder.Configuration[nameof(ClientApplicationConfiguration.BackendOrigin)] = builder.HostEnvironment.BaseAddress.EnsureEndsWith("/")[..^1];
+                }
+                else
+                {
+                    var app = builder.Configuration.GetSection("Services")?.GetSection(ApplicationConstants.AspireServerAppName);
+                    var serviceUrl = (app?.GetSection("https") ?? app.GetSection("http"))?.GetSection("0")?.Value;
+                    builder.Configuration[nameof(ClientApplicationConfiguration.BackendOrigin)] = serviceUrl;
+                }
+            }
+            return builder;
+        }
+
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
             builder.RootComponents.Add<App>("#app");
@@ -44,19 +60,10 @@ namespace Coworkee.Client.Extensions
             return builder;
         }
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
-        {
-            //Console.WriteLine("AddClientServices!!!!!!!!!!!!!!!!!!!");
-            //Console.WriteLine(builder.Configuration["services__coworkee-application__https__0"]);
-
+        {   
             var clientSettings = ClientApplicationConfiguration.Create(builder.Configuration);
             var logLevel = clientSettings.Logging.LogLevel.Default.ToEnum<LogLevel>();
             builder.Logging.SetMinimumLevel(logLevel);
-
-            if (string.IsNullOrEmpty(clientSettings.BackendOrigin))
-            {
-                builder.Configuration[nameof(clientSettings.BackendOrigin)] = clientSettings.BackendOrigin = builder.HostEnvironment.BaseAddress.EnsureEndsWith("/")[..^1];
-            }
-
             Console.WriteLine($"Backend Origin: {clientSettings.BackendOrigin}");
             builder.Services.AddClientServices(clientSettings);
             return builder;

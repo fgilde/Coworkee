@@ -60,22 +60,20 @@ class MouseTracker {
 
 class ApplicationLoader {
     static onLoaded(appSettings: any): void {
-        const nsObject: any = window[appSettings.JsMainNamespace];
+        const nsObject: any = window[appSettings.jsMainNamespace];
         nsObject['AppSettings'] = appSettings;
         nsObject['getJsAppData'] = MouseTracker.getJsAppData;        
         document.title = `${nsObject.ApplicationConstants.ApplicationName} - Home`;
-        HelperLoader.loadHelper(appSettings.JsMainNamespace);
+        HelperLoader.loadHelper(appSettings.jsMainNamespace);
     }
 }
 
 class Initializer {
     static appFullyLoaded() {
         document.body.classList.remove('app-loading');
+        document.querySelector('#app').classList.remove('unloaded-app');
     }
-    static initialLoad(): void {
-        let appSettings: any = {};
-        const isDebug = window.location.hostname.includes("localhost");  // TODO Find better way
-
+    static initialLoad(appSettings): void {                        
         document.addEventListener('mousemove', MouseTracker.onMouseUpdate, false);
         document.addEventListener('mouseenter', MouseTracker.onMouseUpdate, false);
         const nav = new helper.BrowserHelper();
@@ -84,35 +82,9 @@ class Initializer {
             window.localStorage.clear();
             window.location.href = nav.removeUrlParams(window.location.href, 'safemode');
         }
+        ApplicationLoader.onLoaded(appSettings);
+        Initializer.appFullyLoaded();
 
-        const configFetch = (): Promise<void> => {
-            return fetch('appsettings.json', { method: 'GET', redirect: 'follow' })
-                .then(response => response.json())
-                .then(json => {
-                    appSettings = Object.assign({ ...json }, { ...appSettings });
-                    console.log(appSettings);
-                    window['___appJsNameSpace'] = appSettings.JsMainNamespace;
-                    nav.changeFavIcon(appSettings.BackendOrigin + '/favicon.ico');
-
-                    var script = document.createElement('script');
-                    script.onload = () => {
-                        ApplicationLoader.onLoaded(appSettings);
-                    };
-                    script.src = `${appSettings.BackendOrigin}/${appSettings.JsMainNamespace}/resources.js`;
-                    document.head.appendChild(script);
-                });
-        };
-
-        if (isDebug) {
-            fetch('appsettings.Development.json', { method: 'GET', redirect: 'follow' })
-                .then(response => response.json())
-                .then(json => {
-                    appSettings = json;
-                    configFetch();
-                });
-        } else {
-            configFetch();
-        }
     }
 }
 
@@ -127,5 +99,10 @@ window['___helper'] = (name) => {
 
 window['___appFullyLoaded'] = Initializer.appFullyLoaded;
 
-
-Initializer.initialLoad();
+window['___initialLoad'] = function (appConfig, data) {
+    window['___appJsNameSpace'] = appConfig.jsMainNamespace;
+    (window as any)[appConfig.jsMainNamespace] = (window as any)[appConfig.jsMainNamespace] || {};
+    eval(data);    
+    Initializer.initialLoad(appConfig);
+}
+//Initializer.initialLoad();

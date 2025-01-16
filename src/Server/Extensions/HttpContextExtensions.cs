@@ -31,8 +31,8 @@ namespace Coworkee.Server.Extensions
             var config = context.RequestServices.GetService<ServerConfiguration>();
 
             if (string.IsNullOrWhiteSpace(userId))
-            {
-                var baseUrl = !ServerUtils.ClientRunsOnServer ? config?.ClientUrl.EnsureEndsWith("/") : "/";
+            {                
+                var baseUrl = !ApplicationConstants.HostClientInServer ? config?.ClientUrl.EnsureEndsWith("/") : "/";
                 context.RedirectToClient($"{baseUrl}{ApplicationConstants.Routes.Login}?{ApplicationConstants.ParameterNames.ReturnUrl}=" + context.Request.GetEncodedUrl());
                 return true;
             }

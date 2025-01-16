@@ -22,6 +22,9 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Polly;
 using System.Net.Http;
 using Coworkee.Server.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.Design;
 
 namespace Coworkee.Server.Controllers.Identity
 {
@@ -135,8 +138,17 @@ namespace Coworkee.Server.Controllers.Identity
         [AllowAnonymous] // To ensure no error if call comes with expired session
         public async Task<IActionResult> Logout()
         {
-            var tokenParam = ApplicationConstants.ParameterNames.Build(ApplicationConstants.ParameterNames.IdToken, ApplicationConstants.KeycloakSchemeName);
-            var idToken = HttpContext?.Session?.GetString(tokenParam);
+            var userId = _currentUser?.UserId;
+            var externalIdKey = $"{ApplicationConstants.KeycloakSchemeName}_token_for_{userId}";
+            var externalToken = "";
+                        
+            var dictService = HttpContext.RequestServices.GetRequiredService<Application.Contracts.Services.Identity.IDictionaryService>();
+            if (await dictService.ExistsAsync(externalIdKey))
+            {
+                externalToken = await dictService.GetAsAsync<string>(externalIdKey);
+                await dictService.RemoveAsync(externalIdKey);
+            }
+                        
             await _accountService.LogoutAsync();
             await Get<IdentityService>().SetUserOnlineStatusAsync(_currentUser.UserId, false);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -144,10 +156,9 @@ namespace Coworkee.Server.Controllers.Identity
                     
             // Keycloak logout            
             var clientUrl = !string.IsNullOrEmpty(Configuration.ClientUrl) ? Configuration.ClientUrl : Request.GetReferer();
-            var keycloakLogoutUrl = $"{Configuration.PublicSettings.Endpoints.Keycloak}/realms/{ApplicationConstants.KeycloakRealm}/protocol/openid-connect/logout?id_token_hint={idToken}&redirect_uri={clientUrl.EnsureEndsWith("/")}";
-            if(!string.IsNullOrWhiteSpace(idToken) && !string.IsNullOrWhiteSpace(Configuration.PublicSettings.Endpoints.Keycloak))
-            {
-                HttpContext.Session.SetString(tokenParam, "");
+            var keycloakLogoutUrl = $"{Configuration.PublicSettings.Endpoints.Keycloak}/realms/{ApplicationConstants.KeycloakRealm}/protocol/openid-connect/logout?id_token_hint={externalToken}&redirect_uri={clientUrl.EnsureEndsWith("/")}";
+            if(!string.IsNullOrWhiteSpace(externalToken) && !string.IsNullOrWhiteSpace(Configuration.PublicSettings.Endpoints.Keycloak))
+            {                
                 await new HttpClient().GetAsync(keycloakLogoutUrl);                
             }
             return Ok();

@@ -26,6 +26,7 @@ public class HealthChecker : IHealthChecker
     {
         _healthCheckUrl = $"{clientConfig.BackendOrigin.EnsureEndsWith("/")}health";
         _client = clientFactory.CreateClient("HealthCheck");
+        _client.Timeout = TimeSpan.FromSeconds(8); 
         _clientConfig = clientConfig;
         _dialogService = dialogService;
         IsEnabled = clientConfig.BackendHealthCheckIntervalInSeconds > 0;

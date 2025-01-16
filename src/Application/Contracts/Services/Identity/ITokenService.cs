@@ -12,7 +12,7 @@ namespace Coworkee.Application.Contracts.Services.Identity
         /// <summary>
         /// Login user with external provider the user will then searched by email or name and signed in if exists.
         /// </summary>
-        Task<Result<TokenResponse>> LoginExternalAsync(ClaimsPrincipal externalClaim, bool registerIfNotExists);
+        Task<Result<TokenResponse>> LoginExternalAsync(ClaimsPrincipal externalClaim, ExternalLoginOptions options);
         Task<Result<TokenResponse>> LoginAsync(TokenRequest model);
         Task<Result<TokenResponse>> RegenerateTokenAsync(string[] specificRoles);
         Task<Result<TokenResponse>> GetRefreshTokenAsync(RefreshTokenRequest model);

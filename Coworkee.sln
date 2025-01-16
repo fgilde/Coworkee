@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.github\workflows\master_coworkee.yml = .github\workflows\master_coworkee.yml
 		README.md = README.md
 		rename.ps1 = rename.ps1
+		src\Shared.props = src\Shared.props
 		version.json = version.json
 	EndProjectSection
 EndProject

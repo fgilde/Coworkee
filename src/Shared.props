@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <HostClientInServer>true</HostClientInServer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(HostClientInServer)' == 'true'">
+    <DefineConstants>HostClient</DefineConstants>
+  </PropertyGroup>
+</Project>

@@ -57,6 +57,7 @@ using Coworkee.Shared.Helper;
 using GptInvoke.Contracts;
 using Microsoft.AspNetCore.Builder;
 using OllamaSharp;
+using Coworkee.Application.Common.Models.Identity;
 
 namespace Coworkee.Server.Extensions
 {
@@ -149,8 +150,8 @@ namespace Coworkee.Server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            ApplicationConstants.HostClientInServer = ServerUtils.ClientRunsOnServer;
-            configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.HostClientInServer)}"] = ServerUtils.ClientRunsOnServer.ToString();
+            
+            configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.HostClientInServer)}"] = ApplicationConstants.HostClientInServer.ToString();
 
             ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>(); // One time to have static instance filled as early as possible
             services.AddTransient(_ => ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings static instance is updated as well on each read
@@ -430,9 +431,9 @@ namespace Coworkee.Server.Extensions
                         authenticationScheme: ApplicationConstants.KeycloakSchemeName,
                         options =>
                         {
-                            options.RequireHttpsMetadata = false; // Deaktiviere HTTPS nur für Tests
+                            options.RequireHttpsMetadata = false; // TODO: Deaktiviere HTTPS nur für Tests
                             options.ClientId = ApplicationConstants.ApplicationClientName;
-                            options.ClientSecret = ApplicationConstants.ApplicationClientSecret;
+                            options.ClientSecret = ApplicationConstants.Defaults.ApplicationClientSecret;
                             options.ResponseType = OpenIdConnectResponseType.Code;
                             options.UsePkce = true;
                             options.SaveTokens = true;
@@ -443,16 +444,16 @@ namespace Coworkee.Server.Extensions
                             {
                                 OnTokenValidated = async context =>
                                 {
-                                    var idToken = context.TokenEndpointResponse.IdToken;
-                                    var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();                                    
-                                    var result = await identityService.LoginExternalAsync(context.Principal, true);
+                                    var idToken = context.TokenEndpointResponse.IdToken;                                    
+                                    ExternalLoginOptions options = new ExternalLoginOptions(true, ApplicationConstants.KeycloakSchemeName, idToken);
+                                    var identityService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();                                                                        
+                                    var result = await identityService.LoginExternalAsync(context.Principal, options);
                                     if (!result.Succeeded)
                                     {
                                         context.Fail("User not found in the local system.");
                                         return;
                                     }
-                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);                                    
-                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.Build(ApplicationConstants.ParameterNames.IdToken, context.Scheme.Name), idToken);
+                                    context.HttpContext?.Session?.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, result.Data.Token);                                                                        
                                     context.Success();
                                 }
                             };

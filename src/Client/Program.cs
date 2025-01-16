@@ -8,6 +8,9 @@ using Coworkee.Client.Configuration;
 using Coworkee.Client.Managers.Preferences;
 using Coworkee.SDK;
 using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Constants;
+using Nextended.Core.Helper;
+using Microsoft.JSInterop;
 
 namespace Coworkee.Client
 {
@@ -16,7 +19,8 @@ namespace Coworkee.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder
-                          .CreateDefault(args);
+                          .CreateDefault(args)
+                          .DiscoverBackendUrlIfNeeded();
 
             //builder.Services.AddServiceDefaults();
 
@@ -47,6 +51,17 @@ namespace Coworkee.Client
             {
                 var serverConfig = await host.Services.GetRequiredService<IApplicationClient>().System_GetConfigurationAsync();
                 host.Services.GetRequiredService<ClientApplicationConfiguration>().ServerConfiguration = serverConfig;
+
+                var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();
+                var config = host.Services.GetRequiredService<ClientApplicationConfiguration>();
+                var ns = config.JsMainNamespace;
+                var res = await new JsStringBuilder(false, ns)
+                    .Append(typeof(ApplicationConstants))
+                    .Append(typeof(CustomIcons))
+                    .ToJsonAsync();
+
+                await jsRuntime.InvokeVoidAsync("___initialLoad", config, res);
+
             }
             catch (Exception e)
             {

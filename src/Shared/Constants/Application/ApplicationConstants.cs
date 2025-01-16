@@ -11,19 +11,26 @@ namespace Coworkee.Shared.Constants.Application
         public const string LargeLanguageModel = "llama3.2";
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
+        public const string AspireServerAppName = HostClientInServer ? $"{ApplicationName}-Application" : $"{ApplicationName}-Server-Api";
+        public const string AspireClientAppName = $"{ApplicationName}-Client-Application";
         public const string KeycloakSchemeName = "keycloak";
         public const string KeycloakRealm = "master";
         public const string ApplicationClientName = $"{ApplicationName}Client";
-        public const string ApplicationClientSecret = $"{ApplicationClientName}-34C2F2F8-CD3D-4976-AA08-36AE10FA4119";
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string DefaultLanguageCode = "en-US";
         public const string DefaultDocumentTypeName = "Unassigned";
-        public const int MaxRequestSizeBytes = 30000000;
+                
 
-        public static bool HostClientInServer { get; set; }
+#if HostClient
+        public const bool HostClientInServer = true;
+#else
+        public const bool HostClientInServer = false;
+#endif
 
         public static class Defaults
         {
+            public const string ApplicationClientSecret = $"{ApplicationClientName}-34C2F2F8-CD3D-4976-AA08-36AE10FA4119";
+
             public static class Users
             {
                 public static CreateUser System => new(nameof(System), nameof(System), ApplicationName, $"{nameof(System)}@{ApplicationName}", "SystemUserPassw0rd4SystemUserAccess73F1985F3C1A4158B4BA70F7B65778BF", true, RoleConstants.AdministratorRole);

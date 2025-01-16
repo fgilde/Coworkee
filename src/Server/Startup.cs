@@ -131,13 +131,13 @@ namespace Coworkee.Server
             app.UseRouting();
 
             app.UseGrpcWeb();
-            if (!ServerUtils.ClientRunsOnServer)
+            if (!ApplicationConstants.HostClientInServer)
                 app.UseAuthenticationFromQuery();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseHangfireDashboard(ApplicationConstants.Routes.Dashboard, new DashboardOptions
             {
-                AppPath = !ServerUtils.ClientRunsOnServer ? _configuration["ClientUrl"] : "/",
+                AppPath = !ApplicationConstants.HostClientInServer ? _configuration["ClientUrl"] : "/",
                 DashboardTitle = localizer["{0} Jobs", ApplicationConstants.ApplicationName],
                 Authorization = new[] { authorizationFilter }
             });

@@ -27,12 +27,8 @@ using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Hubs.Events;
 using Coworkee.Domain.Entities.Identity;
 using Coworkee.Infrastructure.Extensions;
-using Coworkee.Application.Contracts.Services.Account;
 using Coworkee.Application.Validators.Requests.Identity;
 using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Models;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {
@@ -65,7 +61,7 @@ namespace Coworkee.Infrastructure.Services.Identity
         }
 
 
-        public async Task<Result<TokenResponse>> LoginAsync(ApplicationUser user, Claim[] claimsToAdd = null)
+        public async Task<Result<TokenResponse>> LoginAsync(ApplicationUser user)
         {
             var allowedEmails = _appConfig.PublicSettings?.LoginSettings?.AllowedEmails;
             var allowedToLogin = allowedEmails == null || allowedEmails.Length == 0 || allowedEmails.Any(pattern => RegisterRequestValidator.MatchesPattern(user.Email, pattern));
@@ -81,7 +77,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             await _userManager.UpdateAsync(user);
             _ = _serviceProvider.GetService<IMediator>().PublishClientEvent(new UserOnlineStatusChanged(user.MapTo<UserResponse>()));
 
-            var token = await GenerateJwtAsync(user, null, claimsToAdd);
+            var token = await GenerateJwtAsync(user, null);
             var response = new TokenResponse { Token = token, RefreshToken = user.RefreshToken, UserImageURL = user.ProfilePictureDataUrl };
             _contextAccessor.HttpContext?.Session?.SetString(ApplicationConstants.Session.SessionUserIdKey, user.Id);
 
@@ -89,7 +85,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             return await Result<TokenResponse>.SuccessAsync(response);
         }
 
-        public async Task<Result<TokenResponse>> LoginExternalAsync(ClaimsPrincipal externalClaim, bool registerIfNotExists)
+        public async Task<Result<TokenResponse>> LoginExternalAsync(ClaimsPrincipal externalClaim, ExternalLoginOptions options)
         {
             var claims = externalClaim?.Claims?.ToArray();
             if (claims == null || !claims.Any())
@@ -106,7 +102,7 @@ namespace Coworkee.Infrastructure.Services.Identity
 
             if (user == null)
             {
-                if(!registerIfNotExists)
+                if(!options.RegisterIfNotExists)
                     return Result<TokenResponse>.Fail(_localizer["User not found."]);
                 var userResponse = (await _serviceProvider.GetService<IUserService>().GetOrAddUserAsync(externalClaim))?.FirstOrDefault();
                 if (userResponse != null)
@@ -115,7 +111,13 @@ namespace Coworkee.Infrastructure.Services.Identity
             if (user == null)
                 return Result<TokenResponse>.Fail(_localizer["User not found."]);
 
-            return await LoginAsync(user, claims);
+            if(!string.IsNullOrWhiteSpace(options.Token))
+            {
+                var dictionaryService = _serviceProvider.GetService<Application.Contracts.Services.Identity.IDictionaryService>();
+                await dictionaryService.SetAsync($"{options.Scheme}_token_for_{user.Id}", options.Token);
+            }
+
+            return await LoginAsync(user);
         }
 
         public async Task<Result<TokenResponse>> LoginAsync(TokenRequest model)
@@ -171,7 +173,7 @@ namespace Coworkee.Infrastructure.Services.Identity
                 return await Result<TokenResponse>.FailAsync(_localizer["User Not Found."]);
             if (user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 return await Result<TokenResponse>.FailAsync(_localizer["Invalid Client Token."]);
-            var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user, null, userPrincipal.Claims?.ToArray()));
+            var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user, null));
             user.RefreshToken = GenerateRefreshToken();
             await _userManager.UpdateAsync(user);
 
@@ -185,13 +187,13 @@ namespace Coworkee.Infrastructure.Services.Identity
             return user != null ? await GenerateJwtAsync(user) : null;
         }
 
-        internal async Task<string> GenerateJwtAsync(ApplicationUser user, string[] specificRoles = null, Claim[] claimsToMerge = null)
+        internal async Task<string> GenerateJwtAsync(ApplicationUser user, string[] specificRoles = null)
         {
-            var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user, specificRoles, claimsToMerge));
+            var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user, specificRoles));
             return token;
         }
 
-        public async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user, string[] specificRoles = null, Claim[] claimsToMerge = null)
+        public async Task<IEnumerable<Claim>> GetClaimsAsync(ApplicationUser user, string[] specificRoles = null)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
@@ -223,15 +225,6 @@ namespace Coworkee.Infrastructure.Services.Identity
             .Union(roleClaims)
             .Union(permissionClaims)
             .ToList();
-
-            if (claimsToMerge != null)
-            {
-                foreach (var item in claimsToMerge)
-                {
-                    if(claims.All(x => x.Type != item.Type))
-                        claims.Add(item);       
-                }
-            }
 
             return claims;
         }

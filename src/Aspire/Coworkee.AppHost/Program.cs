@@ -1,3 +1,4 @@
+using Aspire.Hosting;
 using Aspire.Hosting.Postgres;
 using Coworkee.AppHost;
 using Coworkee.Application.Configurations;
@@ -54,7 +55,7 @@ keycloak = builder.AddKeycloak("keycloak", 8080,
             administrator.Password,
             keycloak.GetEndpoint("http").Url,
             ApplicationConstants.ApplicationClientName,
-            ApplicationConstants.ApplicationClientSecret
+            ApplicationConstants.Defaults.ApplicationClientSecret
         );
         try
         {
@@ -103,7 +104,7 @@ prometheus = builder.AddContainer("prometheus", "prom/prometheus")
     .WithContainerRuntimeArgs("--network=host");
 
 
-var api = builder.AddProject<Projects.Server>("coworkee-application")
+var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
     .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Grafana)}", grafana?.GetEndpoint("http"))
     .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Ollama)}", ollama?.GetEndpoint("http"))
     .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Prometheus)}", prometheus?.GetEndpoint("http"))
@@ -117,9 +118,10 @@ var api = builder.AddProject<Projects.Server>("coworkee-application")
     .WithReferenceIf(ollama)
     .WithReferenceIf(ollamaModel);
 
-//builder.AddProject<Projects.Client>("coworkee-client")
-//    .WaitFor(api)
-//    .WithReference(api);
+if (!ApplicationConstants.HostClientInServer)
+{
+    api.AddWebAssemblyClient<Projects.Client>(ApplicationConstants.AspireClientAppName).WithReference(api);
+}
 
 
 prometheus?.WithReference(api)?.WaitFor(api);

@@ -5,8 +5,6 @@ using Coworkee.Client.Extensions;
 using Coworkee.Client.Localization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
-using MudBlazor;
-using MudBlazor.Extensions.Components;
 
 namespace Coworkee.Client;
 
@@ -19,7 +17,7 @@ public partial class App : IDisposable
         authenticationState = await _stateProvider.GetAuthenticationStateAsync();
         await ApiResources.UpdateEntries(_api, CultureInfo.DefaultThreadCurrentCulture, false);
         _interceptor.RegisterEvent();
-        hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);
+        hubConnection = await hubConnection.EnsureStartedAsync(_config.BackendOrigin);        
     }
     
     public void Dispose()

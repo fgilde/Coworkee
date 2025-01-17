@@ -43,11 +43,11 @@
             </MudItem>
         }
         <MudItem xs="12">
-            <MudTextField T="string" Label="@GetEmailLabel()" Variant="Variant.Outlined"
+            <MudTextField InputId="email" T="string" Label="@GetEmailLabel()" Variant="Variant.Outlined"
                           @bind-Value="_tokenModel.Email" For="@(() => _tokenModel.Email)" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField Label="@_localizer["Password"]" Variant="Variant.Outlined"
+            <MudTextField InputId="password" Label="@_localizer["Password"]" Variant="Variant.Outlined"
                           @bind-Value="_tokenModel.Password" For="@(() => _tokenModel.Password)"
                           UserAttributes="@( new (){{"autocomplete", "current-password"}})"
                           InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
@@ -56,7 +56,7 @@
             <MudCheckBox T="bool" Label="@_localizer["Remember me?"]" Color="Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="@($"/account/forgot-password?email={_tokenModel.Email}")">@_localizer["Forgot password?"]</MudLink>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated || _processing)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">
+            <MudButton Class="btn-login" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated || _processing)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">
                 @if (_processing)
                 {
                     <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>

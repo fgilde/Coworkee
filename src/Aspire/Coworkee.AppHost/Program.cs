@@ -1,4 +1,5 @@
 using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Postgres;
 using Coworkee.AppHost;
 using Coworkee.Application.Configurations;
@@ -41,7 +42,7 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
         .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
 };
 
-
+// TODO: azd up (Certificate)
 keycloak = builder.AddKeycloak("keycloak", 8080,
     builder.AddParameter("AdminUserName", administrator.UserName),
     builder.AddParameter("AdminUserPassword", administrator.Password))
@@ -94,8 +95,8 @@ grafana = builder.AddContainer("grafana", "grafana/grafana")
     .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
     .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", administrator.Password)
     .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false") 
-    .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true)
-    .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true)
+    .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true) // TODO: azd up
+    .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true) // TODO: azd up
     .WithHttpEndpoint(targetPort: 3000, name: "http");
 
 prometheus = builder.AddContainer("prometheus", "prom/prometheus")
@@ -105,12 +106,12 @@ prometheus = builder.AddContainer("prometheus", "prom/prometheus")
 
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
-    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Grafana)}", grafana?.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Ollama)}", ollama?.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Prometheus)}", prometheus?.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.OllamaUI)}", openWebUi?.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.PGAdmin)}", pgAdmin?.GetEndpoint("http"))
-    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ServerConfiguration.PublicSettings.Endpoints.Keycloak)}", keycloak?.GetEndpoint("http"))
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Grafana, grafana)
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Ollama, ollama)
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Prometheus, prometheus)
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.OllamaUI, openWebUi)
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.PGAdmin, pgAdmin)
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Keycloak, keycloak)        
     .WithReferenceIf(db)
     .WaitForIf(db)
     .WithReferenceIf(keycloak)

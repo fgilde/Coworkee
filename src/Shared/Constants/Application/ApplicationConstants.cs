@@ -11,8 +11,8 @@ namespace Coworkee.Shared.Constants.Application
         public const string LargeLanguageModel = "llama3.2";
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
-        public const string AspireServerAppName = HostClientInServer ? $"{ApplicationName}-Application" : $"{ApplicationName}-Server-Api";
-        public const string AspireClientAppName = $"{ApplicationName}-Client-Application";
+        public static string AspireServerAppName = (HostClientInServer ? $"{ApplicationName}-Application" : $"{ApplicationName}-Server-Api").ToLower();
+        public static string AspireClientAppName = ($"{ApplicationName}-Client-Application").ToLower();
         public const string KeycloakSchemeName = "keycloak";
         public const string KeycloakRealm = "master";
         public const string ApplicationClientName = $"{ApplicationName}Client";

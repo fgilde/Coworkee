@@ -11,6 +11,11 @@ using Coworkee.Shared.Constants.Application;
 DatabaseToUse databaseToUse = DatabaseToUse.SqlServer;
 var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
+bool ollamaEnabled = true;
+bool keycloakEnabled = true;
+bool grafanaEnabled = true;
+
+
 // ####### Start the Aspire application ########################################
 
 var builder = DistributedApplication.CreateBuilder(args);
@@ -42,68 +47,75 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
         .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
 };
 
-// TODO: azd up (Certificate)
-keycloak = builder.AddKeycloak("keycloak", 8080,
-    builder.AddParameter("AdminUserName", administrator.UserName),
-    builder.AddParameter("AdminUserPassword", administrator.Password))
-    .WithCommand("Seed Client", "Seed Client", async context =>
-    {
-        bool result;
-        string message = "";
-        var seeder = new KeycloakSeeder(
-            ApplicationConstants.KeycloakRealm,
-            administrator.UserName,
-            administrator.Password,
-            keycloak.GetEndpoint("http").Url,
-            ApplicationConstants.ApplicationClientName,
-            ApplicationConstants.Defaults.ApplicationClientSecret
-        );
-        try
+if (keycloakEnabled)
+{
+    // TODO: azd up (Certificate)
+    keycloak = builder.AddKeycloak("keycloak", 8080,
+        builder.AddParameter("AdminUserName", administrator.UserName),
+        builder.AddParameter("AdminUserPassword", administrator.Password))
+        .WithCommand("Seed Client", "Seed Client", async context =>
         {
-            await seeder.CreateClientAsync(true);
-            await seeder.CreateUserAsync(administrator.UserName, administrator.Password, administrator.Email);
-            await seeder.CreateUserAsync("hans", "hans", "hans@gmail.com");
-            result = true;
-        }
-        catch (Exception e)
+            bool result;
+            string message = "";
+            var seeder = new KeycloakSeeder(
+                ApplicationConstants.KeycloakRealm,
+                administrator.UserName,
+                administrator.Password,
+                keycloak.GetEndpoint("http").Url,
+                ApplicationConstants.ApplicationClientName,
+                ApplicationConstants.Defaults.ApplicationClientSecret
+            );
+            try
+            {
+                await seeder.CreateClientAsync(true);
+                await seeder.CreateUserAsync(administrator.UserName, administrator.Password, administrator.Email);
+                await seeder.CreateUserAsync("hans", "hans", "hans@gmail.com");
+                result = true;
+            }
+            catch (Exception e)
+            {
+                result = false;
+                message = e.Message;
+            }
+            return new ExecuteCommandResult { Success = result, ErrorMessage = message };
+        }).WithHttpHealthCheck("/", 200);
+}
+
+if (ollamaEnabled)
+{
+    ollama = builder.AddOllama("ollama")
+        .WithContainerRuntimeArgs()
+        .WithDataVolume()
+        .WithOtlpExporter()
+        .WithOpenWebUI(webui =>
         {
-            result = false;
-            message = e.Message;
-        }
-        return new ExecuteCommandResult { Success = result, ErrorMessage = message };
-    }).WithHttpHealthCheck("/", 200);
+            openWebUi = webui;
+            webui.WithOtlpExporter()
+                .WithExternalHttpEndpoints()
+                .PublishAsContainer();
+        })
+        .WithExternalHttpEndpoints()
+        .PublishAsContainer();
 
+    ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel); // TODO: azd up (UI is available and ollama as well but the model is not loaded or not available)
+}
 
-ollama = builder.AddOllama("ollama")
-    .WithContainerRuntimeArgs()
-    .WithDataVolume()
-    .WithOtlpExporter()
-    .WithOpenWebUI(webui =>
-    {
-        openWebUi = webui;
-        webui.WithOtlpExporter()
-            .WithExternalHttpEndpoints()
-            .PublishAsContainer();
-    })
-    .WithExternalHttpEndpoints()
-    .PublishAsContainer();
+if (grafanaEnabled)
+{
+    grafana = builder.AddContainer("grafana", "grafana/grafana")
+        .WithEnvironment("GF_SECURITY_ADMIN_USER", administrator.UserName)
+        .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
+        .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", administrator.Password)
+        .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false")
+        .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
+        .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
+        .WithHttpEndpoint(targetPort: 3000, name: "http");
 
-ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel);
-
-grafana = builder.AddContainer("grafana", "grafana/grafana")
-    .WithEnvironment("GF_SECURITY_ADMIN_USER", administrator.UserName)
-    .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
-    .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", administrator.Password)
-    .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false") 
-    .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true) // TODO: azd up
-    .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true) // TODO: azd up
-    .WithHttpEndpoint(targetPort: 3000, name: "http");
-
-prometheus = builder.AddContainer("prometheus", "prom/prometheus")
-    .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true)
-    .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
-    .WithContainerRuntimeArgs("--network=host");
-
+    prometheus = builder.AddContainer("prometheus", "prom/prometheus")
+        .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
+        .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
+        .WithContainerRuntimeArgs("--network=host");
+}
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
     .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Grafana, grafana)

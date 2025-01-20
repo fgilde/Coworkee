@@ -9,13 +9,21 @@ using Coworkee.Shared.Constants.Application;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nextended.Core;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Coworkee.Infrastructure.Services;
 
 [RegisterAs(typeof(IFileAccess))]
 public class ServerFileAccess: IFileAccess
 {
+    private readonly IWebHostEnvironment _webHostEnvironment;
     private const string ServerFileDirectory = ApplicationConstants.FileAccess.StaticFileDirectoryName;
+
+    public ServerFileAccess(IWebHostEnvironment webHostEnvironment)
+    {
+        _webHostEnvironment = webHostEnvironment;
+    }
+
     // AppContext.BaseDirectory
     public Task<bool> DeleteAsync(string path)
     {
@@ -73,8 +81,9 @@ public class ServerFileAccess: IFileAccess
     public string GetPath(string path) => GetPath(path.Split(Path.DirectorySeparatorChar));
     
 
-    internal static string GetServerFileDirectory(string relative = null)
+    internal string GetServerFileDirectory(string relative = null)
     {
-        return Path.Combine(Directory.GetCurrentDirectory(), relative ?? ServerFileDirectory);
+        return Path.Combine(_webHostEnvironment.WebRootPath, relative ?? ServerFileDirectory);
+        //return Path.Combine(Directory.GetCurrentDirectory(), relative ?? ServerFileDirectory);
     }
 }

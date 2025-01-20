@@ -118,15 +118,15 @@ namespace Coworkee.Server
             app.UseExceptionHandling(env);
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();            
-            var staticFilePath = Path.Combine(env.WebRootPath, "..", ApplicationConstants.FileAccess.StaticFileDirectoryName);
-            if (!Directory.Exists(staticFilePath))
-                Directory.CreateDirectory(staticFilePath);
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(staticFilePath),
-                RequestPath = new PathString($"/{ApplicationConstants.FileAccess.StaticFileDirectoryName}")
-            });
+            app.UseStaticFiles();
+            //var staticFilePath = Path.Combine(env.WebRootPath, "..", ApplicationConstants.FileAccess.StaticFileDirectoryName);
+            //if (!Directory.Exists(staticFilePath))
+            //    Directory.CreateDirectory(staticFilePath);
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(staticFilePath),
+            //    RequestPath = new PathString($"/{ApplicationConstants.FileAccess.StaticFileDirectoryName}")
+            //});
             app.UseRequestLocalizationByCulture();
             app.UseRouting();
 

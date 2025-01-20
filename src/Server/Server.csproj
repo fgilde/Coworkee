@@ -66,11 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BackgroundServices\" />
-    <Folder Include="Files\" />
-    <Folder Include="Files\DBBackups\" />
-    <Folder Include="Files\Documents\" />
-    <Folder Include="Files\Images\Products\" />
-    <Folder Include="Files\Images\ProfilePictures\" />
     <Folder Include="Logs\" />
     <Folder Include="wwwroot\api\" />
     <Folder Include="wwwroot\sdk\" />
@@ -99,7 +94,7 @@
   <Target Name="MakeGenericAgain" AfterTargets="NSwag" Condition="'$(Configuration)' == 'Debug'">
     <Exec IgnoreExitCode="true" Command="dotnet tool install --global makeGenericAgain" />
     <!--<Exec Command="makeGenericAgain -f $(SolutionDir)src/SDK/Net/v1/ClientGenerated.cs" />-->
-    <Exec Command='makeGenericAgain -f "$(MSBuildProjectDirectory)\..\SDK\Net\v1\ClientGenerated.cs"' />
+    <Exec Command="makeGenericAgain -f &quot;$(MSBuildProjectDirectory)\..\SDK\Net\v1\ClientGenerated.cs&quot;" />
   </Target>
 
 </Project>

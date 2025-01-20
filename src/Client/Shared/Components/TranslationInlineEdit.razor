@@ -22,7 +22,7 @@
         <MudIconButton OnClick="OnEditClick" Style="opacity: 0.5; position: absolute; margin-top: 2px; margin-left: 2px;" Size="Size.Small" Icon="@Icons.Material.Outlined.Edit"/>
     }
 </div>
-<MudPopover Style="padding: 10px;" RelativeWidth="true" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter" Open="@inEditMode" Fixed="true">
+<MudPopover Style="padding: 10px;" RelativeWidth="DropdownWidth.Relative" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter" Open="@inEditMode" Fixed="true">
     <MudTextField AutoFocus="true" @onkeyup="TextFieldKeyDown" @ref="textField" Value="@GetLocalizer()[Key].Value" />
     <MudIconButton OnClick="@ConfirmChange" Icon="@Icons.Material.Filled.Check" Color="Color.Success"/>
     <MudIconButton OnClick="@CancelChange" Icon="@Icons.Material.Filled.Cancel" Color="Color.Error"/>

@@ -26,7 +26,7 @@
     <PackageReference Include="Aspire.Hosting.Keycloak" Version="9.0.0-preview.5.24551.3" />
     <PackageReference Include="Aspire.Azure.Messaging.ServiceBus" Version="9.0.0" />
     <PackageReference Include="Aspire.Microsoft.Azure.Cosmos" Version="9.0.0" />
-    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Ollama" Version="9.0.0" />
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Ollama" Version="9.1.0" />
     <PackageReference Include="Aspire4Wasm" Version="3.0.0" />
   </ItemGroup>
 

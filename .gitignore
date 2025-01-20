@@ -237,3 +237,4 @@ _Pvt_Extensions
 /src/Server/Logs
 /src/Server/Files/
 /.patches
+/src/Server/wwwroot/Files/Documents

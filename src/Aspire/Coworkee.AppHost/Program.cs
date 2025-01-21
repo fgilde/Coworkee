@@ -9,7 +9,7 @@ using Coworkee.Shared.Constants.Application;
 
 // #### CONSTANTS Settings #####################################################
 
-DatabaseToUse databaseToUse = DatabaseToUse.SqlServer;
+DatabaseToUse databaseToUse = DatabaseToUse.SqlServer; // TODO: azd up (Postgres is not working on deployed azure container cluster)
 var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
 bool ollamaEnabled = true;

@@ -28,12 +28,12 @@ IResourceBuilder<OllamaModelResource> ollamaModel = null;
 IResourceBuilder<ContainerResource> grafana = null;
 IResourceBuilder<ContainerResource> prometheus = null;
 
-//var username = builder.AddParameter("username","dbUser", secret: true);
-//var password = builder.AddParameter("password","dbPassword", secret: true);
+//var dbUsername = builder.AddParameter("username","dbUser", secret: true);
+//var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
 
 IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
 {
-    DatabaseToUse.Postgres => builder.AddPostgres("pg" //, username, password
+    DatabaseToUse.Postgres => builder.AddPostgres("pg" //, dbUsername, dbPassword
     )
         .WithPgAdmin(admin => {
             admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");

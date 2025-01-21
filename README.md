@@ -1,5 +1,18 @@
 [![Build and deploy ASP.Net Core app to Azure Web App - Coworkee](https://github.com/fgilde/CoworkeeBlazor/actions/workflows/master_coworkee.yml/badge.svg)](https://github.com/fgilde/CoworkeeBlazor/actions/workflows/master_coworkee.yml)
 
+```
+cd MySolution    # oder wie dein Projektordner heiﬂt
+docker build -t coworkee-client -f src/Client/Dockerfile .
+docker run -d -p 8080:80 --name coworkee-client-container coworkee-client
+
+
+docker compose -f docker-compose.yml -f docker-compose.client.yml up --build
+
+```
+
+
+
+
 Single Page App (Blazor) and an ASP.NET Core Server following the principles of Clean Architecture. 
 <br/>
 

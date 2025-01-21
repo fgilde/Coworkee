@@ -36,8 +36,15 @@ namespace Coworkee.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
+
         internal static WebAssemblyHostBuilder DiscoverBackendUrlIfNeeded(this WebAssemblyHostBuilder builder)
         {
+            var dockerBackendOriginValue = Environment.GetEnvironmentVariable("BACKEND_ORIGIN") ?? builder.Configuration["DockerBackendOrigin"];
+            if (!string.IsNullOrEmpty(dockerBackendOriginValue) && dockerBackendOriginValue != "__BACKEND_ORIGIN__")
+            {
+                builder.Configuration[nameof(ClientApplicationConfiguration.BackendOrigin)] = dockerBackendOriginValue;
+                return builder;
+            }
             if (string.IsNullOrEmpty(builder.Configuration[nameof(ClientApplicationConfiguration.BackendOrigin)]))
             {
                 if (ApplicationConstants.HostClientInServer) {

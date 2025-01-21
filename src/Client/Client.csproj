@@ -70,4 +70,8 @@
     <Folder Include="Contracts\" />
   </ItemGroup>
 
+  <Target Name="InjectBackendOrigin" AfterTargets="Publish">
+    <Exec Command="sed -i 's|__BACKEND_ORIGIN__|$(BackendOrigin)|g' '$(PublishDir)/wwwroot/appsettings.json'" />
+  </Target>
+
 </Project>

@@ -2,6 +2,7 @@ using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Postgres;
 using Coworkee.AppHost;
+using Coworkee.AppHost.OpenTelemetryCollector;
 using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
@@ -53,6 +54,10 @@ if (keycloakEnabled)
     keycloak = builder.AddKeycloak("keycloak", 8080,
         builder.AddParameter("AdminUserName", administrator.UserName),
         builder.AddParameter("AdminUserPassword", administrator.Password))
+        .WithArgs("--features=preview")
+        .WithDataVolume()
+        //.RunWithHttpsDevCertificate()
+        //.RunKeycloakWithHttpsDevCertificate(port: 8081) // Own extension method only works locally and breaks currently all other resources
         .WithCommand("Seed Client", "Seed Client", async context =>
         {
             bool result;
@@ -97,11 +102,17 @@ if (ollamaEnabled)
         .WithExternalHttpEndpoints()
         .PublishAsContainer();
 
-    ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel); // TODO: azd up (UI is available and ollama as well but the model is not loaded or not available)
+    ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel); // TODO: azd up (UI is available and ollama as well but the model is not loaded or not available. In dahboard is also no ModelResource visible, but local it is)
 }
 
 if (grafanaEnabled)
 {
+
+    prometheus = builder.AddContainer("prometheus", "prom/prometheus")
+        .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
+        .WithArgs("--web.enable-otlp-receiver", "--config.file=/etc/prometheus/prometheus.yml")
+        .WithHttpEndpoint(targetPort: 9090, name: "http");
+
     grafana = builder.AddContainer("grafana", "grafana/grafana")
         .WithEnvironment("GF_SECURITY_ADMIN_USER", administrator.UserName)
         .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
@@ -109,12 +120,12 @@ if (grafanaEnabled)
         .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false")
         .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
         .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
+        .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
         .WithHttpEndpoint(targetPort: 3000, name: "http");
 
-    prometheus = builder.AddContainer("prometheus", "prom/prometheus")
-        .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
-        .WithHttpEndpoint(/* This port is fixed as it's referenced from the Grafana config */ port: 9090, targetPort: 9090)
-        .WithContainerRuntimeArgs("--network=host");
+    builder.AddOpenTelemetryCollector("otelcollector", "otelcollector/config.yaml")
+        .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp");
+
 }
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
@@ -132,8 +143,21 @@ var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerA
     .WithReferenceIf(ollamaModel);
 
 if (!ApplicationConstants.HostClientInServer)
-{
+{        
     api.AddWebAssemblyClient<Projects.Client>(ApplicationConstants.AspireClientAppName).WithReference(api);
+    if(!builder.ExecutionContext.IsRunMode)
+    {
+        // TODO: on azd up we can use the following but currently we need the build arg BACKEND_ORIGIN and we cant use api.GetEndpoint("http") here
+        //builder.AddDockerfile(ApplicationConstants.AspireClientAppName, "../../../", "./src/Client/Dockerfile")
+        //    .WaitFor(api)
+        //    .WithReference(api)
+        //    .WithHttpEndpoint(env: "PORT", name: "http", targetPort: 80)        
+        //    .WithBuildArg("BACKEND_ORIGIN", "https://localhost:5001")
+        //    .WithExternalHttpEndpoints()
+        //    .WithHttpHealthCheck("/", 200)
+        //    .WithOtlpExporter()
+        //    .PublishAsContainer();
+    }
 }
 
 

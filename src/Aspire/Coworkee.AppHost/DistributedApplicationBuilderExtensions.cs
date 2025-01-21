@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Coworkee.AppHost;
 
-public static class DistributedApplicationBuilderExtensions
+public static partial class DistributedApplicationBuilderExtensions
 {
     public static IResourceBuilder<T> WaitForIf<T>(this IResourceBuilder<T> builder, IResourceBuilder<IResource>? dependency) where T : IResourceWithWaitSupport
     {

@@ -1,0 +1,14 @@
+services:
+  coworkee-client:
+    container_name: coworkee-client
+    build:
+      context: .
+      dockerfile: src/Client/Dockerfile
+      args:
+        BACKEND_ORIGIN: "https://localhost:5001"
+    environment:
+      - "BackendOrigin=https://localhost:5001"
+    ports:
+      - "5002:80"
+    depends_on:
+      - Coworkee

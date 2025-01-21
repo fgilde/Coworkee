@@ -7,7 +7,7 @@ docker run -d -p 8080:80 --name coworkee-client-container coworkee-client
 
 
 docker compose -f docker-compose.yml -f docker-compose.client.yml up --build
-
+azd config set alpha.azd.operations on  
 ```
 
 

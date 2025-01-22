@@ -14,7 +14,7 @@ var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
 bool ollamaEnabled = true;
 bool keycloakEnabled = true;
-bool grafanaEnabled = true;
+bool grafanaEnabled = false;
 
 
 // ####### Start the Aspire application ########################################

@@ -8451,6 +8451,9 @@
         "keycloak": {
           "type": "string"
         },
+        "stirling": {
+          "type": "string"
+        },
         "pgAdmin": {
           "type": "string"
         }

@@ -14,8 +14,8 @@ var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
 bool ollamaEnabled = true;
 bool keycloakEnabled = true;
-bool grafanaEnabled = false;
-
+bool grafanaEnabled = true;
+bool stirlingEnabled = true;
 
 // ####### Start the Aspire application ########################################
 
@@ -27,6 +27,7 @@ IResourceBuilder<OllamaResource> ollama = null;
 IResourceBuilder<OllamaModelResource> ollamaModel = null;
 IResourceBuilder<ContainerResource> grafana = null;
 IResourceBuilder<ContainerResource> prometheus = null;
+IResourceBuilder<ContainerResource> stirling = null;
 
 //var dbUsername = builder.AddParameter("username","dbUser", secret: true);
 //var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
@@ -35,12 +36,13 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
 {
     DatabaseToUse.Postgres => builder.AddPostgres("pg" //, dbUsername, dbPassword
     )
-        .WithPgAdmin(admin => {
+        .WithPgAdmin(admin =>
+        {
             admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");
             admin.WithEnvironment("PGADMIN_DEFAULT_EMAIL", administrator.Email);
             admin.WithEnvironment("PGADMIN_DEFAULT_PASSWORD", administrator.Password);
-            pgAdmin = admin; 
-        })        
+            pgAdmin = admin;
+        })
         .WithLifetime(ContainerLifetime.Persistent)
         .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb"),
     DatabaseToUse.SqlServer => builder.AddSqlServer("coworkee-sql-server")
@@ -56,8 +58,6 @@ if (keycloakEnabled)
         builder.AddParameter("AdminUserPassword", administrator.Password))
         .WithArgs("--features=preview")
         .WithDataVolume()
-        //.RunWithHttpsDevCertificate()
-        //.RunKeycloakWithHttpsDevCertificate(port: 8081) // Own extension method only works locally and breaks currently all other resources
         .WithCommand("Seed Client", "Seed Client", async context =>
         {
             bool result;
@@ -83,7 +83,14 @@ if (keycloakEnabled)
                 message = e.Message;
             }
             return new ExecuteCommandResult { Success = result, ErrorMessage = message };
-        }).WithHttpHealthCheck("/", 200);
+        }).
+        WithHttpHealthCheck("/", 200);
+    //.RunWithHttpsDevCertificate("KC_HTTPS_CERTIFICATE_FILE", "KC_HTTPS_CERTIFICATE_KEY_FILE", (resourceBuilder, certFilePath, certKeyPath) =>
+    //{
+    //    resourceBuilder.WithEnvironment("KC_HOSTNAME", "localhost")
+    //        .WithHttpsEndpoint(port: 8081, targetPort: 8443)
+    //    .WithEnvironment("QUARKUS_HTTP_HTTP2", "false");
+    //});
 }
 
 if (ollamaEnabled)
@@ -128,24 +135,34 @@ if (grafanaEnabled)
 
 }
 
+if (stirlingEnabled)
+{
+    stirling = builder.AddContainer("stirling-pdf", "stirlingtools/stirling-pdf")
+        .WithHttpEndpoint(targetPort: 8080, name: "http")
+        .WithHttpHealthCheck("/", 200)
+        .WithExternalHttpEndpoints();
+}
+
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
     .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Grafana, grafana)
     .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Ollama, ollama)
     .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Prometheus, prometheus)
     .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.OllamaUI, openWebUi)
     .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.PGAdmin, pgAdmin)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Keycloak, keycloak)        
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Keycloak, keycloak)
+    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Stirling, stirling)
     .WithReferenceIf(db)
     .WaitForIf(db)
+    .WaitForCompletionIf(stirling)
     .WithReferenceIf(keycloak)
     .WaitForCompletionIf(keycloak)
     .WithReferenceIf(ollama)
     .WithReferenceIf(ollamaModel);
 
 if (!ApplicationConstants.HostClientInServer)
-{        
+{
     api.AddWebAssemblyClient<Projects.Client>(ApplicationConstants.AspireClientAppName).WithReference(api);
-    if(!builder.ExecutionContext.IsRunMode)
+    if (!builder.ExecutionContext.IsRunMode)
     {
         // TODO: on azd up we can use the following but currently we need the build arg BACKEND_ORIGIN and we cant use api.GetEndpoint("http") here
         //builder.AddDockerfile(ApplicationConstants.AspireClientAppName, "../../../", "./src/Client/Dockerfile")

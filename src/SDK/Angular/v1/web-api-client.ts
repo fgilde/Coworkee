@@ -7843,6 +7843,7 @@ export class Endpoints implements IEndpoints {
     grafana?: string | undefined;
     prometheus?: string | undefined;
     keycloak?: string | undefined;
+    stirling?: string | undefined;
     pgAdmin?: string | undefined;
 
     constructor(data?: IEndpoints) {
@@ -7861,6 +7862,7 @@ export class Endpoints implements IEndpoints {
             this.grafana = _data["grafana"];
             this.prometheus = _data["prometheus"];
             this.keycloak = _data["keycloak"];
+            this.stirling = _data["stirling"];
             this.pgAdmin = _data["pgAdmin"];
         }
     }
@@ -7879,6 +7881,7 @@ export class Endpoints implements IEndpoints {
         data["grafana"] = this.grafana;
         data["prometheus"] = this.prometheus;
         data["keycloak"] = this.keycloak;
+        data["stirling"] = this.stirling;
         data["pgAdmin"] = this.pgAdmin;
         return data;
     }
@@ -7890,6 +7893,7 @@ export interface IEndpoints {
     grafana?: string | undefined;
     prometheus?: string | undefined;
     keycloak?: string | undefined;
+    stirling?: string | undefined;
     pgAdmin?: string | undefined;
 }
 

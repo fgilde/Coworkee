@@ -34,6 +34,7 @@ namespace Coworkee.Application.Configurations
         public string Grafana { get; set; }
         public string Prometheus { get; set; }
         public string Keycloak { get; set; }
+        public string Stirling { get; set; }
         public string PGAdmin { get; set; }
     }
 

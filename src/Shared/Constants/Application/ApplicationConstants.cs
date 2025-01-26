@@ -8,7 +8,7 @@ namespace Coworkee.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {
-        public const string LargeLanguageModel = "llama3.2";
+        public const string LargeLanguageModel = "deepseek-r1:32b";
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
         public static string AspireServerAppName = (HostClientInServer ? $"{ApplicationName}-Application" : $"{ApplicationName}-Server-Api").ToLower();

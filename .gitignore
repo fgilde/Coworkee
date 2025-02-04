@@ -238,3 +238,4 @@ _Pvt_Extensions
 /src/Server/Files/
 /.patches
 /src/Server/wwwroot/Files/
+.azure

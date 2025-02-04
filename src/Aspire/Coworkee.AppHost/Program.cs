@@ -1,21 +1,24 @@
 using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
+using Aspire.Hosting.Azure;
 using Aspire.Hosting.Postgres;
 using Coworkee.AppHost;
 using Coworkee.AppHost.OpenTelemetryCollector;
 using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
+using Microsoft.Extensions.Hosting;
 
 // #### CONSTANTS Settings #####################################################
 
-DatabaseToUse databaseToUse = DatabaseToUse.SqlServer; // TODO: azd up (Postgres is not working on deployed azure container cluster)
+DatabaseToUse databaseToUse = DatabaseToUse.Postgres; // TODO: azd up (Postgres is not working on deployed azure container cluster)
 var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
 bool ollamaEnabled = true;
 bool keycloakEnabled = true;
 bool grafanaEnabled = true;
 bool stirlingEnabled = true;
+bool storageEnabled = true;
 
 // ####### Start the Aspire application ########################################
 
@@ -28,6 +31,8 @@ IResourceBuilder<OllamaModelResource> ollamaModel = null;
 IResourceBuilder<ContainerResource> grafana = null;
 IResourceBuilder<ContainerResource> prometheus = null;
 IResourceBuilder<ContainerResource> stirling = null;
+IResourceBuilder<AzureStorageResource> storage = null;
+IResourceBuilder<AzureBlobStorageResource> blobs = null;
 
 //var dbUsername = builder.AddParameter("username","dbUser", secret: true);
 //var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
@@ -35,12 +40,14 @@ IResourceBuilder<ContainerResource> stirling = null;
 IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
 {
     DatabaseToUse.Postgres => builder.AddPostgres("pg" //, dbUsername, dbPassword
-    )
+    ).PublishAsContainer()
         .WithPgAdmin(admin =>
         {
             admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");
             admin.WithEnvironment("PGADMIN_DEFAULT_EMAIL", administrator.Email);
             admin.WithEnvironment("PGADMIN_DEFAULT_PASSWORD", administrator.Password);
+            admin.WithExternalHttpEndpoints();
+            admin.PublishAsContainer();
             pgAdmin = admin;
         })
         .WithLifetime(ContainerLifetime.Persistent)
@@ -55,7 +62,7 @@ if (keycloakEnabled)
     // TODO: azd up (Certificate)
     keycloak = builder.AddKeycloak("keycloak", 8080,
         builder.AddParameter("AdminUserName", administrator.UserName),
-        builder.AddParameter("AdminUserPassword", administrator.Password))
+        builder.AddParameter("AdminUserPassword", administrator.Password))        
         .WithArgs("--features=preview")
         .WithDataVolume()
         .WithCommand("Seed Client", "Seed Client", async context =>
@@ -84,7 +91,9 @@ if (keycloakEnabled)
             }
             return new ExecuteCommandResult { Success = result, ErrorMessage = message };
         }).
-        WithHttpHealthCheck("/", 200);
+        WithHttpHealthCheck("/", 200)
+        .WithExternalHttpEndpoints()
+        .PublishAsContainer();
     //.RunWithHttpsDevCertificate("KC_HTTPS_CERTIFICATE_FILE", "KC_HTTPS_CERTIFICATE_KEY_FILE", (resourceBuilder, certFilePath, certKeyPath) =>
     //{
     //    resourceBuilder.WithEnvironment("KC_HOSTNAME", "localhost")
@@ -93,10 +102,47 @@ if (keycloakEnabled)
     //});
 }
 
+
+if (storageEnabled)
+{
+    storage = builder.AddAzureStorage("storage");
+    //.ConfigureInfrastructure(infra =>
+    //{
+    //    var storageAccount = infra.GetProvisionableResources()
+    //        .OfType<StorageAccount>()
+    //        .Single();
+
+    //    storageAccount.Kind = StorageKind.StorageV2;
+    //    storageAccount.AccessTier = StorageAccountAccessTier.Hot;
+    //    storageAccount.Sku = new StorageSku { Name = StorageSkuName.StandardLrs };
+    //    //storageAccount.Tags.Add("ExampleKey", "Example value");
+    //})
+    //;
+
+    if (builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode)
+    {
+        storage.RunAsEmulator(azurite =>
+        {
+            azurite.WithBlobPort(27000)
+                //.WithQueuePort(27001)
+                //.WithTablePort(27002)
+                //.WithDataVolume() // The data volume is used to persist the Azurite data outside the lifecycle of its container
+                //.WithDataBindMount("../Azurite/Data")
+                .WithLifetime(ContainerLifetime.Persistent);
+        });
+    }
+
+
+    blobs = storage.AddBlobs("blobs");
+}
+
+
 if (ollamaEnabled)
 {
     ollama = builder.AddOllama("ollama")
         .WithContainerRuntimeArgs()
+        .WithExternalHttpEndpoints()
+        .PublishAsContainer()
         .WithDataVolume()
         .WithOtlpExporter()
         .WithOpenWebUI(webui =>
@@ -116,11 +162,15 @@ if (grafanaEnabled)
 {
 
     prometheus = builder.AddContainer("prometheus", "prom/prometheus")
+        .WithExternalHttpEndpoints()
+        .PublishAsContainer()
         .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
         .WithArgs("--web.enable-otlp-receiver", "--config.file=/etc/prometheus/prometheus.yml")
         .WithHttpEndpoint(targetPort: 9090, name: "http");
 
     grafana = builder.AddContainer("grafana", "grafana/grafana")
+        .WithExternalHttpEndpoints()
+        .PublishAsContainer()
         .WithEnvironment("GF_SECURITY_ADMIN_USER", administrator.UserName)
         .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
         .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", administrator.Password)
@@ -140,7 +190,8 @@ if (stirlingEnabled)
     stirling = builder.AddContainer("stirling-pdf", "stirlingtools/stirling-pdf")
         .WithHttpEndpoint(targetPort: 8080, name: "http")
         .WithHttpHealthCheck("/", 200)
-        .WithExternalHttpEndpoints();
+        .WithExternalHttpEndpoints()
+        .PublishAsContainer();
 }
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
@@ -157,7 +208,9 @@ var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerA
     .WithReferenceIf(keycloak)
     .WaitForCompletionIf(keycloak)
     .WithReferenceIf(ollama)
-    .WithReferenceIf(ollamaModel);
+    .WithReferenceIf(ollamaModel)
+    .WithReferenceIf(blobs)
+    .WithExternalHttpEndpoints();
 
 if (!ApplicationConstants.HostClientInServer)
 {

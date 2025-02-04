@@ -85,7 +85,7 @@ Login to azd
 *Optional*
 Enable preview features
 
-`azd config set alpha.azd.operations on`
+`azd config set alpha.azd.operations on` 
 
 Deploy
 

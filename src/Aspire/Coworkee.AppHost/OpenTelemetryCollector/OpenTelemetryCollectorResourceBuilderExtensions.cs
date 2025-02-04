@@ -27,7 +27,7 @@ public static class OpenTelemetryCollectorResourceBuilderExtensions
             .WithEnvironment("ASPIRE_API_KEY", builder.Configuration[DashboardOtlpApiKeyVariableName])
             .WithEnvironment("ASPIRE_INSECURE", isHttpsEnabled ? "false" : "true");
 
-        if (isHttpsEnabled && builder.ExecutionContext.IsRunMode && builder.Environment.IsDevelopment())
+        if (isHttpsEnabled)
         {
             resourceBuilder.RunWithHttpsDevCertificate("HTTPS_CERT_FILE", "HTTPS_CERT_KEY_FILE", (_, certFilePath, certKeyPath) =>
             {

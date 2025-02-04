@@ -1,5 +1,3 @@
-using Aspire.Hosting;
-using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Azure;
 using Aspire.Hosting.Postgres;
 using Coworkee.AppHost;
@@ -9,9 +7,10 @@ using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Hosting;
 
+// TODO: LanguageModel Path-chat
 // #### CONSTANTS Settings #####################################################
 
-DatabaseToUse databaseToUse = DatabaseToUse.SqlServer;
+DatabaseToUse databaseToUse = DatabaseToUse.Postgres;
 var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
 bool ollamaEnabled = true;
@@ -37,6 +36,9 @@ IResourceBuilder<AzureBlobStorageResource> blobs = null;
 //var dbUsername = builder.AddParameter("username","dbUser", secret: true);
 //var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
 
+var userNameParam = builder.AddParameter("AdminUserName", administrator.UserName);
+var userPasswordParam = builder.AddParameter("AdminUserPassword", administrator.Password);
+
 IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
 {
     DatabaseToUse.Postgres => builder.AddPostgres("pg" //, dbUsername, dbPassword
@@ -46,8 +48,7 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
             admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");
             admin.WithEnvironment("PGADMIN_DEFAULT_EMAIL", administrator.Email);
             admin.WithEnvironment("PGADMIN_DEFAULT_PASSWORD", administrator.Password);
-            admin.WithExternalHttpEndpoints();
-            admin.PublishAsContainer();
+            admin.WithExternalHttpEndpoints().PublishAsContainer();
             pgAdmin = admin;
         })
         .WithLifetime(ContainerLifetime.Persistent)
@@ -57,13 +58,14 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
         .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
 };
 
+
 if (keycloakEnabled)
 {
     // TODO: azd up (Certificate)
-    keycloak = builder.AddKeycloak("keycloak", 8080,
-        builder.AddParameter("AdminUserName", administrator.UserName),
-        builder.AddParameter("AdminUserPassword", administrator.Password))        
+    keycloak = builder.AddKeycloak("keycloak", port: 8080, userNameParam, userPasswordParam)
         .WithArgs("--features=preview")
+        .WithArgs("--spi-connections-http-client-default-disable-trust-manager=true")
+        .WithEnvironment("KEYCLOAK_PROFILE", "dev")
         .WithDataVolume()
         .WithCommand("Seed Client", "Seed Client", async context =>
         {
@@ -89,11 +91,12 @@ if (keycloakEnabled)
                 result = false;
                 message = e.Message;
             }
+
             return new ExecuteCommandResult { Success = result, ErrorMessage = message };
-        }).
-        WithHttpHealthCheck("/", 200)
-        .WithExternalHttpEndpoints()
-        .PublishAsContainer();
+        })
+        .WithHttpHealthCheck("/", 200)
+        .WithExternalHttpEndpoints();
+    //.RunKeycloakWithHttpsDevCertificate(port: 8081);
     //.RunWithHttpsDevCertificate("KC_HTTPS_CERTIFICATE_FILE", "KC_HTTPS_CERTIFICATE_KEY_FILE", (resourceBuilder, certFilePath, certKeyPath) =>
     //{
     //    resourceBuilder.WithEnvironment("KC_HOSTNAME", "localhost")
@@ -141,8 +144,6 @@ if (ollamaEnabled)
 {
     ollama = builder.AddOllama("ollama")
         .WithContainerRuntimeArgs()
-        .WithExternalHttpEndpoints()
-        .PublishAsContainer()
         .WithDataVolume()
         .WithOtlpExporter()
         .WithOpenWebUI(webui =>
@@ -152,37 +153,35 @@ if (ollamaEnabled)
                 .WithExternalHttpEndpoints()
                 .PublishAsContainer();
         })
-        .WithExternalHttpEndpoints()
-        .PublishAsContainer();
+        .WithExternalHttpEndpoints();
 
     ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel); // TODO: azd up (UI is available and ollama as well but the model is not loaded or not available. In dahboard is also no ModelResource visible, but local it is)
+
+    ollama.PublishAsContainer();
 }
 
 if (grafanaEnabled)
 {
 
     prometheus = builder.AddContainer("prometheus", "prom/prometheus")
-        .WithExternalHttpEndpoints()
-        .PublishAsContainer()
-        .WithBindMount("prometheus", "/etc/prometheus", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
+        .WithDockerfile("prometheus", "Dockerfile")
         .WithArgs("--web.enable-otlp-receiver", "--config.file=/etc/prometheus/prometheus.yml")
-        .WithHttpEndpoint(targetPort: 9090, name: "http");
+        .WithHttpEndpoint(targetPort: 9090, name: "http")
+        .WithExternalHttpEndpoints();
 
     grafana = builder.AddContainer("grafana", "grafana/grafana")
-        .WithExternalHttpEndpoints()
-        .PublishAsContainer()
-        .WithEnvironment("GF_SECURITY_ADMIN_USER", administrator.UserName)
+        .WithDockerfile("grafana", "Dockerfile")
+        .WithEnvironment("GF_SECURITY_ADMIN_USER", userNameParam)
         .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
-        .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", administrator.Password)
+        .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", userPasswordParam)
         .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false")
-        .WithBindMount("grafana/config", "/etc/grafana", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
-        .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
         .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
-        .WithHttpEndpoint(targetPort: 3000, name: "http");
-
+        .WithHttpEndpoint(targetPort: 3000, name: "http")
+        .WithExternalHttpEndpoints();
 
     builder.AddOpenTelemetryCollector("otelcollector", "otelcollector/config.yaml")
-        .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp");
+        .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
+        .PublishAsContainer();
 
 }
 
@@ -191,8 +190,7 @@ if (stirlingEnabled)
     stirling = builder.AddContainer("stirling-pdf", "stirlingtools/stirling-pdf")
         .WithHttpEndpoint(targetPort: 8080, name: "http")
         .WithHttpHealthCheck("/", 200)
-        .WithExternalHttpEndpoints()
-        .PublishAsContainer();
+        .WithExternalHttpEndpoints();
 }
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)

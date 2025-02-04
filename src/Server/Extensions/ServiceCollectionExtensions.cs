@@ -99,10 +99,11 @@ namespace Coworkee.Server.Extensions
             }
             return services;
         }
-        internal static IServiceCollection AddSignalRServices(this IServiceCollection services, ServerConfiguration configuration)
+        internal static IServiceCollection AddSignalRServices(this IServiceCollection services, IConfiguration cfg)
         {
-            if (configuration.Azure.SignalR.Enabled && !string.IsNullOrEmpty(configuration.Azure.SignalR.ConnectionString))
-                services.AddSignalR().AddAzureSignalR();
+            var signalRConnection = cfg.GetConnectionString(ApplicationConstants.SignalR.Resource);
+            if (!ApplicationConstants.IsNswagGeneration && !string.IsNullOrEmpty(signalRConnection))
+                services.AddSignalR().AddNamedAzureSignalR(ApplicationConstants.SignalR.Resource);
             else
                 services.AddSignalR();
             return services;

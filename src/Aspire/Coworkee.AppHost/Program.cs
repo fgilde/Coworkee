@@ -22,6 +22,11 @@ bool storageEnabled = true;
 // ####### Start the Aspire application ########################################
 
 var builder = DistributedApplication.CreateBuilder(args);
+
+var signalr = builder.ExecutionContext.IsPublishMode
+    ? builder.AddAzureSignalR(ApplicationConstants.SignalR.Resource)
+    : null;
+
 IResourceBuilder<PgAdminContainerResource> pgAdmin = null;
 IResourceBuilder<KeycloakResource> keycloak = null;
 IResourceBuilder<OpenWebUIResource>? openWebUi = null;
@@ -209,6 +214,7 @@ var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerA
     .WithReferenceIf(ollama)
     .WithReferenceIf(ollamaModel)
     .WithReferenceIf(blobs)
+    .WithReferenceIf(signalr)
     .WithExternalHttpEndpoints();
 
 if (!ApplicationConstants.HostClientInServer)

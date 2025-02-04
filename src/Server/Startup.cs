@@ -42,7 +42,7 @@ namespace Coworkee.Server
             
             services.AddTransient<IDashboardAuthorizationFilter, HangfireAuthorizationFilter>();
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
-            services.AddSignalRServices(serverConfig);
+            services.AddSignalRServices(_configuration);
             services.AddCurrentUserServiceAndSession();
             services.AddAllWithRegisterAttribute(typeof(Startup).Assembly);
             services.AddLocalization(options =>

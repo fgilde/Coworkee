@@ -135,6 +135,7 @@ namespace Coworkee.Shared.Constants.Application
 
         public static class SignalR
         {
+            public const string Resource = "signalr";
             public const string EventHubUrl = "/eventHub";
             public const string ClientEventName = "EventRecieved";
         }

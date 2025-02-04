@@ -11,7 +11,7 @@ using Microsoft.Extensions.Hosting;
 
 // #### CONSTANTS Settings #####################################################
 
-DatabaseToUse databaseToUse = DatabaseToUse.Postgres; // TODO: azd up (Postgres is not working on deployed azure container cluster)
+DatabaseToUse databaseToUse = DatabaseToUse.SqlServer;
 var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
 bool ollamaEnabled = true;
@@ -179,6 +179,7 @@ if (grafanaEnabled)
         .WithBindMount("grafana/dashboards", "/var/lib/grafana/dashboards", isReadOnly: true) // TODO: azd up (Folder and file paths not working on deployed azure container cluster)
         .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
         .WithHttpEndpoint(targetPort: 3000, name: "http");
+
 
     builder.AddOpenTelemetryCollector("otelcollector", "otelcollector/config.yaml")
         .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp");

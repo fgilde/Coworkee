@@ -4,8 +4,73 @@ using System.Text;
 
 namespace Coworkee.AppHost.Helper;
 
+internal static class KeycloakContainerImageTags
+{
+    /// <remarks>quay.io</remarks>
+    public const string Registry = "quay.io";
+
+    /// <remarks>keycloak/keycloak</remarks>
+    public const string Image = "keycloak/keycloak";
+
+    /// <remarks>26.0</remarks>
+    public const string Tag = "26.0";
+}
+
 public static class HostingKeycloakExtensions
 {
+
+    private const int DefaultContainerPort = 8080;
+    private const string AdminEnvVarName = "KEYCLOAK_ADMIN";
+    private const string AdminPasswordEnvVarName = "KEYCLOAK_ADMIN_PASSWORD";
+
+
+    public static IResourceBuilder<KeycloakResource> AddKeycloakDev(
+        this IDistributedApplicationBuilder builder,
+        string name,
+        int? port = null,
+        IResourceBuilder<ParameterResource>? adminUsername = null,
+        IResourceBuilder<ParameterResource>? adminPassword = null,
+        bool? useDev = null)
+    {
+        useDev ??= builder.ExecutionContext.IsRunMode;
+        ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(name);
+
+        var passwordParameter = adminPassword?.Resource ?? ParameterResourceBuilderExtensions.CreateDefaultPasswordParameter(builder, $"{name}-password");
+
+        var resource = new KeycloakResource(name, adminUsername?.Resource, passwordParameter);
+
+        var keycloak = builder
+            .AddResource(resource)
+            .WithImage(KeycloakContainerImageTags.Image)
+            .WithImageRegistry(KeycloakContainerImageTags.Registry)
+            .WithImageTag(KeycloakContainerImageTags.Tag)
+            .WithHttpEndpoint(port: port, targetPort: DefaultContainerPort)
+            .WithEnvironment(context =>
+            {
+                context.EnvironmentVariables[AdminEnvVarName] = resource.AdminUserNameParameter is not null ?
+                    ReferenceExpression.Create($"{resource.AdminUserNameParameter}") :
+                    ReferenceExpression.Create($"admin");
+                context.EnvironmentVariables[AdminPasswordEnvVarName] = resource.AdminPasswordParameter;
+            });
+
+        if ((bool)useDev)
+        {
+            keycloak.WithArgs("start-dev");
+        }
+        else
+        {
+            keycloak.WithArgs("start");
+        }
+
+        keycloak.WithArgs("--import-realm");
+
+        return keycloak;
+    }
+
+
+
+
     /// <summary>
     /// Injects the ASP.NET Core HTTPS developer certificate into the resource via the specified environment variables when
     /// <paramref name="builder"/>.<see cref="IResourceBuilder{T}.ApplicationBuilder">ApplicationBuilder</see>.
@@ -61,7 +126,7 @@ public static class HostingKeycloakExtensions
             builder
                 .RunKeycloakWithHttpsDevCertificate("KC_HTTPS_CERTIFICATE_FILE", "KC_HTTPS_CERTIFICATE_KEY_FILE")
                 .WithHttpsEndpoint(port: port, targetPort: targetPort)
-                .WithEnvironment("KC_HOSTNAME", "localhost")
+                .WithEnvironment("KC_HOSTNAME", builder.GetEndpoint("http"))
                 // Without disabling HTTP/2 you can hit HTTP 431 Header too large errors in Keycloak.
                 // Related issues:
                 // https://github.com/keycloak/keycloak/discussions/10236

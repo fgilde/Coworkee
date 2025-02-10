@@ -50,7 +50,13 @@ namespace Coworkee.Server
 
             startup.ConfigureServices(builder.Services);
 
+            builder.Services.AddRequestTimeouts();
+            builder.Services.AddOutputCache();
+
             var app = builder.Build();
+
+            app.UseRequestTimeouts();
+            app.UseOutputCache();
 
             using (var scope = app.Services.CreateScope())
             {

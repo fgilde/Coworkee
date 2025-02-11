@@ -13,11 +13,11 @@ using Microsoft.Extensions.Hosting;
 DatabaseToUse databaseToUse = DatabaseToUse.Postgres;
 var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
 
-bool ollamaEnabled = true;
-bool keycloakEnabled = true;
-bool grafanaEnabled = true;
+bool ollamaEnabled = false;
+bool keycloakEnabled = false;
+bool grafanaEnabled = false;
 bool stirlingEnabled = true;
-bool storageEnabled = true;
+bool storageEnabled = false;
 
 // ####### Start the Aspire application ########################################
 

@@ -20,6 +20,7 @@ using Coworkee.Shared;
 using Coworkee.Application.Configurations;
 using Hangfire.PostgreSql;
 using Coworkee.Shared.Helper;
+using Hangfire.SqlServer;
 
 namespace Coworkee.Server
 {
@@ -67,7 +68,10 @@ namespace Coworkee.Server
                 if(DatabaseProviderDetector.DetectProvider(connectionStr) == DatabaseProvider.Postgres)
                     x.UsePostgreSqlStorage(connectionStr);
                 else
-                    x.UseSqlServerStorage(connectionStr);
+                    x.UseSqlServerStorage(connectionStr, new SqlServerStorageOptions
+                    {
+                        PrepareSchemaIfNecessary = true
+                    });
             });
             services.AddHangfireServer();
             services.AddGrpc();

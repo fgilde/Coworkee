@@ -24,7 +24,6 @@ namespace Coworkee.Server.Controllers.Identity
     [Authorize]
     [ApiController]
     [Route("api/v{version:apiVersion}/identity/[controller]")]
-
     public class UserController : BaseApiController<UserController>
     {
         private readonly IUserService _userService;

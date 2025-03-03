@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using Nextended.Aspire;
 
 namespace Coworkee.AppHost.OpenTelemetryCollector;
 

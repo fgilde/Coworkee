@@ -6,6 +6,7 @@ using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Hosting;
+using Nextended.Aspire;
 
 // TODO: LanguageModel Path-chat
 // #### CONSTANTS Settings #####################################################

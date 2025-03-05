@@ -10,7 +10,7 @@ using Coworkee.Application.Contracts.Repositories;
 
 namespace Coworkee.Infrastructure.Repositories
 {
-    public class RepositoryAsync<T, TId> : IRepositoryAsync<T, TId> where T : AuditableEntity<TId>
+    public class RepositoryAsync<T, TId> : IRepositoryAsync<T, TId> where T : class, IEntity<TId>
     {
         private readonly ApplicationDbContext _dbContext;
 

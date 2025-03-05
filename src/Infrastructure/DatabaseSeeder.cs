@@ -31,6 +31,8 @@ namespace Coworkee.Infrastructure
 
         public void Initialize()
         {
+            if (ApplicationConstants.IsNswagGeneration)
+                return;
             _db.Database.EnsureCreated();
             // TODO: Set Culture for this scope to.. whatever
             AddRoles();

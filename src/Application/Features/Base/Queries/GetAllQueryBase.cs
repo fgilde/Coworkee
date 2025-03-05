@@ -29,7 +29,7 @@ namespace Coworkee.Application.Features.Base.Queries
 
     internal class GetAllQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, IReadOnlyCollection<TDto>>
         where TQuery : GetAllQueryBase<TDto>
-        where TEntity : AuditableEntity<TEntityId>
+        where TEntity : class, IEntity<TEntityId>
         where TDto : class, IDtoBase
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;

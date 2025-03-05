@@ -49,6 +49,7 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
 {
     DatabaseToUse.Postgres => builder.AddPostgres("pg" //, dbUsername, dbPassword
     ).PublishAsContainer()
+        .WithDataVolume("postgresServer")
         .WithPgAdmin(admin =>
         {
             admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");
@@ -60,6 +61,7 @@ IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
         .WithLifetime(ContainerLifetime.Persistent)
         .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb"),
     DatabaseToUse.SqlServer => builder.AddSqlServer("coworkee-sql-server")
+        .WithDataVolume("sqlserver")
         .WithLifetime(ContainerLifetime.Persistent)
         .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
 };

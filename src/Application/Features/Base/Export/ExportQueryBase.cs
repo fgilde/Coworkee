@@ -37,7 +37,7 @@ namespace Coworkee.Application.Features.Base.Export
 
     internal abstract class ExportQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, byte[]>
         where TQuery : IExportQuery<TEntityId>
-        where TEntity : AuditableEntity<TEntityId>
+        where TEntity : class, IEntity<TEntityId>
         where TDto : class, IDtoBase
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;

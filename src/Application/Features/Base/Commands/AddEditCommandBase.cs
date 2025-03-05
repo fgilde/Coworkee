@@ -33,7 +33,7 @@ namespace Coworkee.Application.Features.Base.Commands
 
     internal class AddEditCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand, AddUpdateResult<TDto>>
         where TCommand : AddEditCommandBase<TDto>
-        where TEntity : AuditableEntity<TEntityId>
+        where TEntity : class, IEntity<TEntityId>
         where TDto : IDtoBase<TEntityId>
     {
 

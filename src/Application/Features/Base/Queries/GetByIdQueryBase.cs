@@ -25,7 +25,7 @@ namespace Coworkee.Application.Features.Base.Queries
 
     internal class GetByIdQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, TDto>
         where TQuery : GetByIdQueryBase<TEntityId, TDto>
-        where TEntity : AuditableEntity<TEntityId>
+        where TEntity : class, IEntity<TEntityId>
         where TDto : class, IDtoBase
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;

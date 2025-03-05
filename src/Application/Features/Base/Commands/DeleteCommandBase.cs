@@ -22,7 +22,7 @@ namespace Coworkee.Application.Features.Base.Commands
     }
 
     internal class DeleteCommandHandlerBase<TCommand, TEntityId, TDto, TEntity> : IRequestHandler<TCommand>
-        where TEntity : AuditableEntity<TEntityId>
+        where TEntity : class, IEntity<TEntityId>
         where TDto : IDtoBase
         where TCommand : DeleteCommandBase<TEntityId>
     {

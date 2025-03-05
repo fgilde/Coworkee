@@ -7,7 +7,7 @@ namespace Coworkee.Application.Contracts.Repositories
 {
     public interface IUnitOfWork<TId> : IDisposable
     {
-        IRepositoryAsync<T, TId> Repository<T>() where T : AuditableEntity<TId>;
+        IRepositoryAsync<T, TId> Repository<T>() where T : class, IEntity<TId>;
 
         Task<int> Commit(CancellationToken cancellationToken);
 

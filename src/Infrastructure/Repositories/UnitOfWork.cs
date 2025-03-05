@@ -26,7 +26,7 @@ namespace Coworkee.Infrastructure.Repositories
             _cache = cache;
         }
 
-        public IRepositoryAsync<TEntity, TId> Repository<TEntity>() where TEntity : AuditableEntity<TId>
+        public IRepositoryAsync<TEntity, TId> Repository<TEntity>() where TEntity : class, IEntity<TId>
         {
             _repositories ??= new Hashtable();
 

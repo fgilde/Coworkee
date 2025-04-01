@@ -21,7 +21,7 @@ namespace Coworkee.Client.Shared.Components
     }
 
     public partial class AddEditExtendedAttributeModal<TId, TEntityId, TEntity, TExtendedAttribute> : IAsyncDisposable
-        where TEntity : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
+        where TEntity : class, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
         where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
         where TId : IEquatable<TId>
     {

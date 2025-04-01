@@ -1,6 +1,6 @@
 @using Coworkee.Client.Theming
 @inherits LayoutComponentBase
 
-<MudThemeProvider Theme="@(ClientTheme.LastUsedTheme ?? ClientTheme.DefaultTheme)" />
+<MudThemeProvider Theme="@(ClientThemes.LastUsedTheme ?? ClientThemes.DefaultTheme)" />
 <MudSnackbarProvider />
 <NotFoundComponent/>

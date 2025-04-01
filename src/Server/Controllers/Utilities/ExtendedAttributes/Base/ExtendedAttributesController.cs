@@ -17,7 +17,7 @@ namespace Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base
     [ApiController]
     public abstract class ExtendedAttributesController<TId, TEntityId, TEntity, TExtendedAttribute>
         : BaseApiController<ExtendedAttributesController<TId, TEntityId, TEntity, TExtendedAttribute>>
-            where TEntity : AuditableEntity<TEntityId>, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
+            where TEntity : class, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>
             where TExtendedAttribute : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>, IEntity<TId>
             where TId : IEquatable<TId>
     {

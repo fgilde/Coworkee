@@ -54,6 +54,8 @@ public partial class ThemeSelector
     private async Task Select(ThemePreset<ClientTheme> preset)
     {
         _selected = preset;
+        if(preset?.Theme?.PreferDarkMode.HasValue == true)
+            await OnDarkChange(preset.Theme.PreferDarkMode.Value);
         await _clientPreferenceManager.SetCurrentThemeAsync(preset.Name, preset);
         await OnThemeSelected.InvokeAsync(preset);
     }
@@ -81,7 +83,7 @@ public partial class ThemeSelector
                 themeEdit.AllowPresetsEdit = false;
                 themeEdit.AllowModeToggle = false;
                 themeEdit.EditMode = ThemeEditMode.Simple;
-                themeEdit.Theme = ClientTheme.LastUsedTheme.CloneTheme();
+                themeEdit.Theme = ClientThemes.LastUsedTheme.CloneTheme();
             },
             dialog =>
             {

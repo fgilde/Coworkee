@@ -1,7 +1,7 @@
 @using Coworkee.Client.Theming
 @inherits LayoutComponentBase
 
-<MudThemeProvider Theme="@(ClientTheme.LastUsedTheme ?? ClientTheme.DefaultTheme)" />
+<MudThemeProvider IsDarkMode="@(_theme?.PreferDarkMode == true)" Theme="@_theme" />
 <MudSnackbarProvider />
 <MudDialogProvider />
 <MudPopoverProvider />
@@ -19,6 +19,7 @@
 
 @code
 {
+    ClientTheme _theme = ClientThemes.LastUsedTheme ?? ClientThemes.DefaultTheme;
     private void ThemeChanged(ClientTheme theme)
     {
         StateHasChanged();

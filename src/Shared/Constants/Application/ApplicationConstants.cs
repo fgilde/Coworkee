@@ -8,24 +8,43 @@ namespace Coworkee.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {
-        public const string LargeLanguageModel = "deepseek-r1:32b";
+       // public const string LargeLanguageModel = "deepseek-r1:32b";
+        public const string LargeLanguageModel = "deepseek-r1";
         public static bool IsNswagGeneration { get; set; }
         public const string ApplicationName = "Coworkee";
+        public const string? DatabaseName = "CoworkeeDb";
+
         public static string AspireServerAppName = (HostClientInServer ? $"{ApplicationName}-Application" : $"{ApplicationName}-Server-Api").ToLower();
         public static string AspireClientAppName = ($"{ApplicationName}-Client-Application").ToLower();
-        public const string KeycloakSchemeName = "keycloak";
         public const string KeycloakRealm = "master";
         public const string ApplicationClientName = $"{ApplicationName}Client";
         public const string SessionIdKey = nameof(SessionIdKey);
         public const string DefaultLanguageCode = "en-US";
         public const string DefaultDocumentTypeName = "Unassigned";
-                
+        public const string KeycloakSchemeName = "keycloak";
+
 
 #if HostClient
         public const bool HostClientInServer = true;
 #else
         public const bool HostClientInServer = false;
 #endif
+
+        public static class ServiceNames
+        {
+            public const string Ollama = nameof(Ollama);
+            public const string OllamaUI = nameof(OllamaUI);
+            public const string Keycloak = KeycloakSchemeName;
+            public const string Grafana = nameof(Grafana);
+            public const string Prometheus = nameof(Prometheus);
+            public const string PgAdmin = nameof(PgAdmin);
+            public const string Stirling = nameof(Stirling);
+            public const string KeycloakAdmin = nameof(KeycloakAdmin);
+            public const string Postgress = nameof(Postgress);
+            public const string SqlServer = nameof(SqlServer);
+            public const string Storage = "storage";
+            public const string Blobs = "blobs";
+        }
 
         public static class Defaults
         {
@@ -86,7 +105,7 @@ namespace Coworkee.Shared.Constants.Application
             public const string Dashboard = "/jobs";
             public const string ApiDocumentation = "/swagger/index.html";
 
-            public static string[] AuthRequired = { Dashboard, ApiDocumentation };
+            public static string[] AuthRequired = [Dashboard, ApiDocumentation];
             public static bool IsAuthRequired(string route) => AuthRequired.Contains(route, StringComparer.InvariantCultureIgnoreCase);
         }
 

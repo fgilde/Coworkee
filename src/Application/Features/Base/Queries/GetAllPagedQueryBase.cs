@@ -56,7 +56,7 @@ namespace Coworkee.Application.Features.Base.Queries
 
     internal class GetAllPagedQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, PaginatedResult<TDto>>
         where TQuery : GetAllPagedQueryBase<TDto>
-        where TEntity : AuditableEntity<TEntityId>
+        where TEntity : class, IEntity<TEntityId>
         where TDto : class, IDtoBase
     {
         protected readonly IUnitOfWork<TEntityId> UnitOfWork;

@@ -1,4 +1,7 @@
 
+using Coworkee.Shared.Constants.Application;
+using Microsoft.IdentityModel.Tokens;
+
 namespace Coworkee.Application.Configurations
 {
     public class ServerConfiguration : Rootobject
@@ -27,15 +30,10 @@ namespace Coworkee.Application.Configurations
         public BackupOptions BackupOptions { get; set; }
     }
 
-    public class Endpoints
+    public class Endpoint
     {
-        public string Ollama { get; set; }
-        public string OllamaUI { get; set; }
-        public string Grafana { get; set; }
-        public string Prometheus { get; set; }
-        public string Keycloak { get; set; }
-        public string Stirling { get; set; }
-        public string PGAdmin { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
     }
 
     public class Connectionstrings
@@ -46,13 +44,13 @@ namespace Coworkee.Application.Configurations
 
     public class Publicsettings
     {
-        public bool KeycloakEnabled => !string.IsNullOrEmpty(Endpoints?.Keycloak) && LoginSettings?.LoginMode != LoginMode.Internal;
+        public bool KeycloakEnabled => Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Keycloak, out string keycloakUrl) && !string.IsNullOrEmpty(keycloakUrl) && LoginSettings?.LoginMode != LoginMode.Internal;
         public bool AssistantAvailable { get; set; }
         public string ContactAddress { get; set; }
         public bool HostClientInServer { get; set; }
         public Userregistration UserRegistration { get; set; }
         public LoginSettings LoginSettings { get; set; }
-        public Endpoints Endpoints { get; set; }
+        public System.Collections.Generic.Dictionary<string, string> Endpoints { get; set; }
 
     }
 

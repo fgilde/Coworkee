@@ -5,7 +5,7 @@ using Coworkee.Domain.Contracts;
 
 namespace Coworkee.Application.Contracts.Repositories
 {
-    public interface IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> : IDisposable where TEntity : AuditableEntity<TEntityId>
+    public interface IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> : IDisposable where TEntity : class, IEntity<TEntityId>
     {
         IRepositoryAsync<T, TId> Repository<T>() where T : AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>;
 

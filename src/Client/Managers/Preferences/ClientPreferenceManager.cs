@@ -74,7 +74,7 @@ namespace Coworkee.Client.Managers.Preferences
         {
             if (await GetPreference() is { } preference)
             {
-                return ClientTheme.LastUsedTheme =
+                return ClientThemes.LastUsedTheme =
                     await LoadCustomThemeAsync(preference)
                     ?? await _themeManager.GetByNameAsync(preference.ThemeName) 
                     ?? await _themeManager.GetDefaultThemeAsync();
@@ -140,7 +140,7 @@ namespace Coworkee.Client.Managers.Preferences
 
         public Task SetCurrentThemeAsync(string themeName, ClientTheme theme)
         {
-            ClientTheme.LastUsedTheme = theme;
+            ClientThemes.LastUsedTheme = theme;
             return SetCurrentThemeNameAsync(themeName);
         }
 

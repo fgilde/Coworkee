@@ -13,7 +13,7 @@
     {
         <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
             <p class="cursor-pointer" @onclick="MainClick">
-                <ApplicationLogo Height="35" Width="35" />
+                <ApplicationLogo Icon="@(_themeManager?.CurrentTheme?.Icon ?? CustomIcons.ApplicationMainIcon)" Height="35" Width="35" />
             </p>
         </MudHidden>
     }

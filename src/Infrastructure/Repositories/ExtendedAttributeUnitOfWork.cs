@@ -11,7 +11,8 @@ using LazyCache;
 
 namespace Coworkee.Infrastructure.Repositories
 {
-    public class ExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> : IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> where TEntity : AuditableEntity<TEntityId>
+    public class ExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> : IExtendedAttributeUnitOfWork<TId, TEntityId, TEntity> 
+        where TEntity : class, IEntity<TEntityId>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ApplicationDbContext _dbContext;

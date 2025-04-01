@@ -1,6 +1,10 @@
 ﻿using System.Diagnostics;
 using System.IO.Hashing;
 using System.Text;
+using Aspire.Hosting;
+using Coworkee.Infrastructure;
+using Coworkee.Shared.Constants.Application;
+using Coworkee.Shared.Models;
 
 namespace Coworkee.AppHost.Helper;
 
@@ -22,6 +26,59 @@ public static class HostingKeycloakExtensions
     private const int DefaultContainerPort = 8080;
     private const string AdminEnvVarName = "KEYCLOAK_ADMIN";
     private const string AdminPasswordEnvVarName = "KEYCLOAK_ADMIN_PASSWORD";
+
+    public static IEnumerable<IResourceBuilder<IResource>> WithKeycloakIf(this IDistributedApplicationBuilder builder,
+        bool condition, string name, IResourceBuilder<ParameterResource>? userNameParam, IResourceBuilder<ParameterResource>? userPasswordParam)
+    {
+        if (!condition)
+            yield break;
+        yield return builder.WithKeycloak(name, userNameParam, userPasswordParam);
+    }
+
+    public static IResourceBuilder<KeycloakResource> WithKeycloak(this IDistributedApplicationBuilder builder,
+        string name,
+        IResourceBuilder<ParameterResource>? userNameParam,
+        IResourceBuilder<ParameterResource>? userPasswordParam)
+    {
+        var adminUsername = userNameParam.Resource.Value;
+        var adminPassword = userPasswordParam.Resource.Value;
+
+        IResourceBuilder<KeycloakResource> res = null;
+        res = builder.AddKeycloak(name, port: 8080, userNameParam, userPasswordParam)
+        .WithArgs("--features=preview")
+        .WithArgs("--spi-connections-http-client-default-disable-trust-manager=true")
+        .WithEnvironment("KEYCLOAK_PROFILE", "dev")
+        .WithDataVolume()
+        .WithCommand("Seed Client", "Seed Client", async context =>
+        {
+            bool result;
+            string message = "";
+            var seeder = new KeycloakSeeder(
+                ApplicationConstants.KeycloakRealm,
+                adminUsername,
+                adminPassword,
+                res?.GetEndpoint("http").Url,
+                ApplicationConstants.ApplicationClientName,
+                ApplicationConstants.Defaults.ApplicationClientSecret
+            );
+            try
+            {
+                await seeder.CreateClientAsync(true);
+                result = true;
+            }
+            catch (Exception e)
+            {
+                result = false;
+                message = e.Message;
+            }
+
+            return new ExecuteCommandResult { Success = result, ErrorMessage = message };
+        })
+        .WithHttpHealthCheck("/", 200)
+        .WithExternalHttpEndpoints();
+
+        return res;
+    }
 
 
     public static IResourceBuilder<KeycloakResource> AddKeycloakDev(

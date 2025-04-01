@@ -2,7 +2,7 @@
 @using Coworkee.Shared.Constants.Application
 @inject Microsoft.Extensions.Localization.IStringLocalizer<MainAppBar> localizer
 
-<MudAppBar Elevation="25">
+<MudAppBar Style="@Layout.CurrentTheme.StyleAppBar" Elevation="25">
 
     <AppBarHeader Title="@GetTitle()"
                   @ref="_appBarHeader"

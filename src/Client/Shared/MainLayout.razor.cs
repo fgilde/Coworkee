@@ -32,7 +32,7 @@ namespace Coworkee.Client.Shared
         internal string CurrentUserId { get; set; }
         internal MainNavMenuDrawer NavMenuDrawer;
         internal ClaimsPrincipal CurrentUser;
-        internal ClientTheme CurrentTheme = ClientTheme.DefaultTheme;
+        internal ClientTheme CurrentTheme = ClientThemes.DefaultTheme;
         
         internal bool IsDrawerOpen;
         internal bool IsDarkMode;
@@ -44,6 +44,8 @@ namespace Coworkee.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
+            if(CurrentTheme?.PreferDarkMode.HasValue == true)
+                IsDarkMode = CurrentTheme.PreferDarkMode.Value;
             //@inject IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>> Options
             //var remoteAuthenticationOptions = Options.Get(Microsoft.Extensions.Options.Options.DefaultName);
             //_navigationManager.NavigateToLogin(remoteAuthenticationOptions.AuthenticationPaths.LogInPath);

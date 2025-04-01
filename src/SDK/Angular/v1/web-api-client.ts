@@ -7546,7 +7546,7 @@ export class Publicsettings implements IPublicsettings {
     hostClientInServer!: boolean;
     userRegistration?: Userregistration | undefined;
     loginSettings?: LoginSettings | undefined;
-    endpoints?: Endpoints | undefined;
+    endpoints?: { [key: string]: string; } | undefined;
 
     constructor(data?: IPublicsettings) {
         if (data) {
@@ -7565,7 +7565,13 @@ export class Publicsettings implements IPublicsettings {
             this.hostClientInServer = _data["hostClientInServer"];
             this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
             this.loginSettings = _data["loginSettings"] ? LoginSettings.fromJS(_data["loginSettings"]) : <any>undefined;
-            this.endpoints = _data["endpoints"] ? Endpoints.fromJS(_data["endpoints"]) : <any>undefined;
+            if (_data["endpoints"]) {
+                this.endpoints = {} as any;
+                for (let key in _data["endpoints"]) {
+                    if (_data["endpoints"].hasOwnProperty(key))
+                        (<any>this.endpoints)![key] = _data["endpoints"][key];
+                }
+            }
         }
     }
 
@@ -7584,7 +7590,13 @@ export class Publicsettings implements IPublicsettings {
         data["hostClientInServer"] = this.hostClientInServer;
         data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
         data["loginSettings"] = this.loginSettings ? this.loginSettings.toJSON() : <any>undefined;
-        data["endpoints"] = this.endpoints ? this.endpoints.toJSON() : <any>undefined;
+        if (this.endpoints) {
+            data["endpoints"] = {};
+            for (let key in this.endpoints) {
+                if (this.endpoints.hasOwnProperty(key))
+                    (<any>data["endpoints"])[key] = (<any>this.endpoints)[key];
+            }
+        }
         return data;
     }
 }
@@ -7596,7 +7608,7 @@ export interface IPublicsettings {
     hostClientInServer: boolean;
     userRegistration?: Userregistration | undefined;
     loginSettings?: LoginSettings | undefined;
-    endpoints?: Endpoints | undefined;
+    endpoints?: { [key: string]: string; } | undefined;
 }
 
 export class Userregistration implements IUserregistration {
@@ -7835,66 +7847,6 @@ export enum LoginMode {
     Both = 0,
     External = 1,
     Internal = 2,
-}
-
-export class Endpoints implements IEndpoints {
-    ollama?: string | undefined;
-    ollamaUI?: string | undefined;
-    grafana?: string | undefined;
-    prometheus?: string | undefined;
-    keycloak?: string | undefined;
-    stirling?: string | undefined;
-    pgAdmin?: string | undefined;
-
-    constructor(data?: IEndpoints) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.ollama = _data["ollama"];
-            this.ollamaUI = _data["ollamaUI"];
-            this.grafana = _data["grafana"];
-            this.prometheus = _data["prometheus"];
-            this.keycloak = _data["keycloak"];
-            this.stirling = _data["stirling"];
-            this.pgAdmin = _data["pgAdmin"];
-        }
-    }
-
-    static fromJS(data: any): Endpoints {
-        data = typeof data === 'object' ? data : {};
-        let result = new Endpoints();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["ollama"] = this.ollama;
-        data["ollamaUI"] = this.ollamaUI;
-        data["grafana"] = this.grafana;
-        data["prometheus"] = this.prometheus;
-        data["keycloak"] = this.keycloak;
-        data["stirling"] = this.stirling;
-        data["pgAdmin"] = this.pgAdmin;
-        return data;
-    }
-}
-
-export interface IEndpoints {
-    ollama?: string | undefined;
-    ollamaUI?: string | undefined;
-    grafana?: string | undefined;
-    prometheus?: string | undefined;
-    keycloak?: string | undefined;
-    stirling?: string | undefined;
-    pgAdmin?: string | undefined;
 }
 
 export abstract class HashableDtoBase implements IHashableDtoBase {

@@ -23,26 +23,15 @@ namespace Coworkee.Client.Theming
 
         public Task<ClientTheme> GetDefaultThemeAsync()
         {
-            return Task.FromResult(ClientTheme.DefaultTheme);
-            //bool isDark = await BrowserPrefersDarkMode();
-            //var available = await ThemesAsync();
-            //return isDark && available.ContainsValue(ClientTheme.DarkTheme) 
-            //    ? ClientTheme.DarkTheme 
-            //    : available.ContainsValue(ClientTheme.DefaultTheme) 
-            //        ? ClientTheme.DefaultTheme : available.Count > 0 ? available.FirstOrDefault().Value : ClientTheme.DefaultTheme;
+            return Task.FromResult(ClientThemes.DefaultTheme);
         }
 
-        public ClientTheme CurrentTheme => ClientTheme.LastUsedTheme;
+        public ClientTheme CurrentTheme => ClientThemes.LastUsedTheme;
 
-        public Task<Dictionary<string, ClientTheme>> ThemesAsync()
+        public Task<IDictionary<string, ClientTheme>> ThemesAsync()
         {
             // TODO: Add from server
-            return Task.FromResult(new Dictionary<string, ClientTheme>()
-            {
-                {nameof(ClientTheme.DefaultTheme), ClientTheme.DefaultTheme},
-                {nameof(ClientTheme.LuckyGreen), ClientTheme.LuckyGreen},
-                {nameof(ClientTheme.CodeBlue), ClientTheme.CodeBlue}
-            });
+            return Task.FromResult(ClientThemes.All);
         }
 
         public async Task<ClientTheme> GetByNameAsync(string name)

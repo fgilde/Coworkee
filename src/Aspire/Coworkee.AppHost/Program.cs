@@ -1,35 +1,38 @@
 using Aspire.Hosting.Azure;
-using Aspire.Hosting.Postgres;
 using Coworkee.AppHost;
 using Coworkee.AppHost.OpenTelemetryCollector;
 using Coworkee.Application.Configurations;
-using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Hosting;
 using Nextended.Aspire;
+using System.Runtime.CompilerServices;
+using Coworkee.AppHost.Helper;
+using Coworkee.Infrastructure;
+using C = Coworkee.Shared.Constants.Application.ApplicationConstants;
 
 // TODO: LanguageModel Path-chat
 // #### CONSTANTS Settings #####################################################
 
 DatabaseToUse databaseToUse = DatabaseToUse.Postgres;
-var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
+var administrator = C.Defaults.Users.Administrators[0];
 
-bool ollamaEnabled = false;
-bool keycloakEnabled = false;
-bool grafanaEnabled = false;
+bool ollamaEnabled = true;
+bool keycloakEnabled = true;
+bool grafanaEnabled = true;
 bool stirlingEnabled = true;
-bool storageEnabled = false;
+bool storageEnabled = true;
 
 // ####### Start the Aspire application ########################################
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var signalr = builder.ExecutionContext.IsPublishMode
-    ? builder.AddAzureSignalR(ApplicationConstants.SignalR.Resource)
-    : null;
+var userNameParam = builder.AddParameter("AdminUserName", administrator.UserName);
+var userPasswordParam = builder.AddParameter("AdminUserPassword", administrator.Password);
+//var dbUsername = builder.AddParameter("username","dbUser", secret: true);
+//var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
 
-IResourceBuilder<PgAdminContainerResource> pgAdmin = null;
-IResourceBuilder<KeycloakResource> keycloak = null;
+//IResourceBuilder<PgAdminContainerResource> pgAdmin = null;
+IResourceBuilder<KeycloakResource>? keycloak = null;
 IResourceBuilder<OpenWebUIResource>? openWebUi = null;
 IResourceBuilder<OllamaResource> ollama = null;
 IResourceBuilder<OllamaModelResource> ollamaModel = null;
@@ -39,178 +42,55 @@ IResourceBuilder<ContainerResource> stirling = null;
 IResourceBuilder<AzureStorageResource> storage = null;
 IResourceBuilder<AzureBlobStorageResource> blobs = null;
 
-//var dbUsername = builder.AddParameter("username","dbUser", secret: true);
-//var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
+var signalr = builder.ExecutionContext.IsPublishMode
+    ? builder.AddAzureSignalR(C.SignalR.Resource)
+    : null;
 
-var userNameParam = builder.AddParameter("AdminUserName", administrator.UserName);
-var userPasswordParam = builder.AddParameter("AdminUserPassword", administrator.Password);
 
-IResourceBuilder<IResourceWithConnectionString> db = databaseToUse switch
-{
-    DatabaseToUse.Postgres => builder.AddPostgres("pg" //, dbUsername, dbPassword
-    ).PublishAsContainer()
-        .WithDataVolume("postgresServer")
-        .WithPgAdmin(admin =>
-        {
-            admin.WithEnvironment("PGADMIN_CONFIG_SERVER_MODE", "True");
-            admin.WithEnvironment("PGADMIN_DEFAULT_EMAIL", administrator.Email);
-            admin.WithEnvironment("PGADMIN_DEFAULT_PASSWORD", administrator.Password);
-            admin.WithExternalHttpEndpoints().PublishAsContainer();
-            pgAdmin = admin;
-        })
-        .WithLifetime(ContainerLifetime.Persistent)
-        .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), "CoworkeeDb"),
-    DatabaseToUse.SqlServer => builder.AddSqlServer("coworkee-sql-server")
-        .WithDataVolume("sqlserver")
-        .WithLifetime(ContainerLifetime.Persistent)
-        .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
-};
+
+var db = builder.WithDatabase(databaseToUse);
 
 
 if (keycloakEnabled)
 {
-    // TODO: azd up (Certificate)
-    keycloak = builder.AddKeycloak("keycloak", port: 8080, userNameParam, userPasswordParam)
-        .WithArgs("--features=preview")
-        .WithArgs("--spi-connections-http-client-default-disable-trust-manager=true")
-        .WithEnvironment("KEYCLOAK_PROFILE", "dev")
-        .WithDataVolume()
-        .WithCommand("Seed Client", "Seed Client", async context =>
-        {
-            bool result;
-            string message = "";
-            var seeder = new KeycloakSeeder(
-                ApplicationConstants.KeycloakRealm,
-                administrator.UserName,
-                administrator.Password,
-                keycloak.GetEndpoint("http").Url,
-                ApplicationConstants.ApplicationClientName,
-                ApplicationConstants.Defaults.ApplicationClientSecret
-            );
-            try
-            {
-                await seeder.CreateClientAsync(true);
-                await seeder.CreateUserAsync(administrator.UserName, administrator.Password, administrator.Email);
-                await seeder.CreateUserAsync("hans", "hans", "hans@gmail.com");
-                result = true;
-            }
-            catch (Exception e)
-            {
-                result = false;
-                message = e.Message;
-            }
-
-            return new ExecuteCommandResult { Success = result, ErrorMessage = message };
-        })
-        .WithHttpHealthCheck("/", 200)
-        .WithExternalHttpEndpoints();
-    //.RunKeycloakWithHttpsDevCertificate(port: 8081);
-    //.RunWithHttpsDevCertificate("KC_HTTPS_CERTIFICATE_FILE", "KC_HTTPS_CERTIFICATE_KEY_FILE", (resourceBuilder, certFilePath, certKeyPath) =>
-    //{
-    //    resourceBuilder.WithEnvironment("KC_HOSTNAME", "localhost")
-    //        .WithHttpsEndpoint(port: 8081, targetPort: 8443)
-    //    .WithEnvironment("QUARKUS_HTTP_HTTP2", "false");
-    //});
+    keycloak = builder.WithKeycloak(C.ServiceNames.Keycloak, userNameParam, userPasswordParam);
 }
 
 
 if (storageEnabled)
 {
-    storage = builder.AddAzureStorage("storage");
-    //.ConfigureInfrastructure(infra =>
-    //{
-    //    var storageAccount = infra.GetProvisionableResources()
-    //        .OfType<StorageAccount>()
-    //        .Single();
-
-    //    storageAccount.Kind = StorageKind.StorageV2;
-    //    storageAccount.AccessTier = StorageAccountAccessTier.Hot;
-    //    storageAccount.Sku = new StorageSku { Name = StorageSkuName.StandardLrs };
-    //    //storageAccount.Tags.Add("ExampleKey", "Example value");
-    //})
-    //;
-
-    if (builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode)
-    {
-        storage.RunAsEmulator(azurite =>
-        {
-            azurite.WithBlobPort(27000)
-                //.WithQueuePort(27001)
-                //.WithTablePort(27002)
-                //.WithDataVolume() // The data volume is used to persist the Azurite data outside the lifecycle of its container
-                //.WithDataBindMount("../Azurite/Data")
-                .WithLifetime(ContainerLifetime.Persistent);
-        });
-    }
-
-
-    blobs = storage.AddBlobs("blobs");
+    storage = builder.WithStorage(out blobs);
 }
 
 
 if (ollamaEnabled)
 {
-    ollama = builder.AddOllama("ollama")
-        .WithContainerRuntimeArgs()
-        .WithDataVolume()
-        .WithOtlpExporter()
-        .WithOpenWebUI(webui =>
-        {
-            openWebUi = webui;
-            webui.WithOtlpExporter()
-                .WithExternalHttpEndpoints()
-                .PublishAsContainer();
-        })
-        .WithExternalHttpEndpoints();
-
-    ollamaModel = ollama.AddModel(ApplicationConstants.LargeLanguageModel); // TODO: azd up (UI is available and ollama as well but the model is not loaded or not available. In dahboard is also no ModelResource visible, but local it is)
-
-    ollama.PublishAsContainer();
+    var res = builder.WithOllama();
+    ollama = res.OllamaResource;
+    openWebUi = res.OpenWebUIResource;
+    ollamaModel = res.OllamaModelResource;
 }
+
 
 if (grafanaEnabled)
 {
-
-    prometheus = builder.AddContainer("prometheus", "prom/prometheus")
-        .WithDockerfile("prometheus", "Dockerfile")
-        .WithArgs("--web.enable-otlp-receiver", "--config.file=/etc/prometheus/prometheus.yml")
-        .WithHttpEndpoint(targetPort: 9090, name: "http")
-        .WithExternalHttpEndpoints();
-
-    grafana = builder.AddContainer("grafana", "grafana/grafana")
-        .WithDockerfile("grafana", "Dockerfile")
-        .WithEnvironment("GF_SECURITY_ADMIN_USER", userNameParam)
-        .WithEnvironment("GF_SECURITY_ADMIN_EMAIL", administrator.Email)
-        .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", userPasswordParam)
-        .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "false")
-        .WithEnvironment("PROMETHEUS_ENDPOINT", prometheus.GetEndpoint("http"))
-        .WithHttpEndpoint(targetPort: 3000, name: "http")
-        .WithExternalHttpEndpoints();
-
-    builder.AddOpenTelemetryCollector("otelcollector", "otelcollector/config.yaml")
-        .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
-        .PublishAsContainer();
-
+    var res = builder.WithGrafana(userNameParam, userPasswordParam, administrator);
+    prometheus = res[0];
+    grafana = res[1];
 }
 
 if (stirlingEnabled)
 {
-    stirling = builder.AddContainer("stirling-pdf", "stirlingtools/stirling-pdf")
+    stirling = builder.AddContainer(C.ServiceNames.Stirling, "stirlingtools/stirling-pdf")
         .WithHttpEndpoint(targetPort: 8080, name: "http")
         .WithHttpHealthCheck("/", 200)
         .WithExternalHttpEndpoints();
 }
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Grafana, grafana)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Ollama, ollama)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Prometheus, prometheus)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.OllamaUI, openWebUi)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.PGAdmin, pgAdmin)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Keycloak, keycloak)
-    .WithEndpointAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints.Stirling, stirling)
-    .WithReferenceIf(db)
-    .WaitForIf(db)
+    .WithEndpointsAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints, [grafana, ollama, prometheus, openWebUi, db.AdminUIResource, keycloak, stirling])
+    .WithReferenceIf(db.DatabaseResource)
+    .WaitForIf(db.DatabaseResource)
     .WaitForCompletionIf(stirling)
     .WithReferenceIf(keycloak)
     .WaitForCompletionIf(keycloak)

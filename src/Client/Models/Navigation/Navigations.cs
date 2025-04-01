@@ -44,16 +44,16 @@ namespace Coworkee.Client.Models.Navigation
                         new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
                         new NavigationEntry("Monitoring")
                         {
-                            Children = new()
-                            {
-                                new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
-                                new NavigationEntry("Grafana", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Grafana, "_blank").WithPolicies(Permissions.Grafana.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Grafana)),
-                                new NavigationEntry("Prometheus", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Prometheus, "_blank").WithPolicies(Permissions.Prometheus.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Prometheus)),
-                                new NavigationEntry("OllamaUI", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.OllamaUI, "_blank").WithPolicies(Permissions.OllamaUI.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.OllamaUI)),
-                                new NavigationEntry("PG Admin", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.PGAdmin, "_blank").WithPolicies(Permissions.PgAdmin.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.PGAdmin)),
-                                new NavigationEntry("Stirling", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.Stirling, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.Stirling)),
-                                new NavigationEntry("Keycloak Admin", Icons.Material.Outlined.Login, config.ServerConfiguration?.Endpoints?.Keycloak, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Keycloak)),
-                            }
+                            //Children = new()
+                            //{
+                            //    new NavigationEntry("Hangfire", Icons.Material.Outlined.Work, $"{backendOrigin}{ApplicationConstants.Routes.Dashboard.EnsureStartsWith("/")}", "_blank").WithPolicies(Permissions.Hangfire.View),
+                            //    new NavigationEntry("Grafana", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Grafana, "_blank").WithPolicies(Permissions.Grafana.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Grafana)),
+                            //    new NavigationEntry("Prometheus", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Prometheus, "_blank").WithPolicies(Permissions.Prometheus.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Prometheus)),
+                            //    new NavigationEntry("OllamaUI", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.OllamaUI, "_blank").WithPolicies(Permissions.OllamaUI.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.OllamaUI)),
+                            //    new NavigationEntry("PG Admin", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.PGAdmin, "_blank").WithPolicies(Permissions.PgAdmin.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.PGAdmin)),
+                            //    new NavigationEntry("Stirling", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.Stirling, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.Stirling)),
+                            //    new NavigationEntry("Keycloak Admin", Icons.Material.Outlined.Login, config.ServerConfiguration?.Endpoints?.Keycloak, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Keycloak)),
+                            //}
                         },
                         new NavigationEntry("Localization")
                         {

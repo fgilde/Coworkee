@@ -81,9 +81,9 @@ namespace Coworkee.Server.Extensions
                     }, typeof(AddProduct).Assembly);
 
                 }
-                else if(!string.IsNullOrEmpty(config.PublicSettings.Endpoints.Ollama))
+                else if (config.PublicSettings.Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Ollama, out string ollamaUrl) && !string.IsNullOrEmpty(ollamaUrl))
                 {
-                    services.AddScoped(p => new OllamaApiClient(config.PublicSettings.Endpoints.Ollama, ApplicationConstants.LargeLanguageModel));
+                    services.AddScoped(p => new OllamaApiClient(ollamaUrl, ApplicationConstants.LargeLanguageModel));
                     services.AddAIActionInvoker<OllamaAIHandler>(new AIActionInvokeSettings());
                     configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
                 }
@@ -279,9 +279,6 @@ namespace Coworkee.Server.Extensions
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.EnableSensitiveDataLogging(false);
-                //options.UseLazyLoadingProxies();  // TODO: Problems with chat service at this moment
-                //options.UseInMemoryDatabase("CoworkeeDb");
-
                 var defaultConnection = configuration.GetConnectionString(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection)) ?? string.Empty;
 
                 if (DatabaseProviderDetector.DetectProvider(defaultConnection) == DatabaseProvider.Postgres)
@@ -411,7 +408,7 @@ namespace Coworkee.Server.Extensions
 
 
             #region For Keycloak
-            if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
+            if (config.PublicSettings.Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Keycloak, out string keycloakUrl) && !string.IsNullOrEmpty(keycloakUrl))
             {
                 services.Configure<CookiePolicyOptions>(options =>
                 {

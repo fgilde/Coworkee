@@ -1,5 +1,6 @@
 @page "/home"
 @page "/"
+@using Coworkee.Shared.Constants
 @using Coworkee.Shared.Constants.Application
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Home> _localizer
 
@@ -9,7 +10,8 @@
     <MudGrid>
         <MudItem xs="12" sm="12" md="12">
             <div class="d-flex justify-center mt-4">
-                <ApplicationLogo Height="250" Width="250" />
+                <ApplicationLogo Icon="@(_themeManager?.CurrentTheme?.Logo ?? CustomIcons.ApplicationMainIcon)" Height="250" Width="250" />
+
             </div>
         </MudItem>
         <MudItem xs="12" sm="12" md="12">

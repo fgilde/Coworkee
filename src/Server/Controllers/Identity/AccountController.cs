@@ -153,13 +153,13 @@ namespace Coworkee.Server.Controllers.Identity
             await Get<IdentityService>().SetUserOnlineStatusAsync(_currentUser.UserId, false);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.SetString(ApplicationConstants.ParameterNames.AuthedUrlParameter, "");
-                    
+
             // Keycloak logout            
-            var clientUrl = !string.IsNullOrEmpty(Configuration.ClientUrl) ? Configuration.ClientUrl : Request.GetReferer();
-            var keycloakLogoutUrl = $"{Configuration.PublicSettings.Endpoints.Keycloak}/realms/{ApplicationConstants.KeycloakRealm}/protocol/openid-connect/logout?id_token_hint={externalToken}&redirect_uri={clientUrl.EnsureEndsWith("/")}";
-            if(!string.IsNullOrWhiteSpace(externalToken) && !string.IsNullOrWhiteSpace(Configuration.PublicSettings.Endpoints.Keycloak))
-            {                
-                await new HttpClient().GetAsync(keycloakLogoutUrl);                
+            if (Configuration.PublicSettings.Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Keycloak, out string keycloakUrl) && !string.IsNullOrWhiteSpace(externalToken) && !string.IsNullOrWhiteSpace(keycloakUrl))
+            {
+                var clientUrl = !string.IsNullOrEmpty(Configuration.ClientUrl) ? Configuration.ClientUrl : Request.GetReferer();
+                var keycloakLogoutUrl = $"{keycloakUrl}/realms/{ApplicationConstants.KeycloakRealm}/protocol/openid-connect/logout?id_token_hint={externalToken}&redirect_uri={clientUrl.EnsureEndsWith("/")}";
+                await new HttpClient().GetAsync(keycloakLogoutUrl);
             }
             return Ok();
         }

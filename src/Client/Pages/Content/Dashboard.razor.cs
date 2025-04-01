@@ -8,6 +8,7 @@ using Coworkee.Application.Features.Dashboards.Queries.GetData;
 using Coworkee.Client.Extensions;
 using Coworkee.SDK;
 using ChartSeries = MudBlazor.ChartSeries;
+using System.Threading;
 
 namespace Coworkee.Client.Pages.Content
 {
@@ -23,6 +24,8 @@ namespace Coworkee.Client.Pages.Content
         [Parameter] public int DocumentExtendedAttributeCount { get; set; }
         [Parameter] public int UserCount { get; set; }
         [Parameter] public int RoleCount { get; set; }
+
+        private CancellationTokenSource _cts = new();
 
         private readonly string[] _dataEnterBarChartXAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
         private readonly List<ChartSeries> _dataEnterBarChartSeries = new();
@@ -42,7 +45,7 @@ namespace Coworkee.Client.Pages.Content
 
         private async Task LoadDataAsync()
         {
-            var response = await Api.Dashboard_GetDataAsync();
+            var response = await Api.Dashboard_GetDataAsync(_cts.Token);
             if (_errorService.IsSuccessFull(response))
                 UpdateDataFields(response.Data);
         }
@@ -66,6 +69,7 @@ namespace Coworkee.Client.Pages.Content
 
         public ValueTask DisposeAsync()
         {
+            _cts.Cancel();
             return HubConnection.TryDisposeAsync();
         }
 

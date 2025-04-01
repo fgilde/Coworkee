@@ -8300,7 +8300,10 @@
           "$ref": "#/definitions/LoginSettings"
         },
         "endpoints": {
-          "$ref": "#/definitions/Endpoints"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -8432,32 +8435,6 @@
         1,
         2
       ]
-    },
-    "Endpoints": {
-      "type": "object",
-      "properties": {
-        "ollama": {
-          "type": "string"
-        },
-        "ollamaUI": {
-          "type": "string"
-        },
-        "grafana": {
-          "type": "string"
-        },
-        "prometheus": {
-          "type": "string"
-        },
-        "keycloak": {
-          "type": "string"
-        },
-        "stirling": {
-          "type": "string"
-        },
-        "pgAdmin": {
-          "type": "string"
-        }
-      }
     },
     "ProductDto": {
       "allOf": [

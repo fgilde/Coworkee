@@ -2,20 +2,20 @@
 using Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Hosting;
 
-namespace Coworkee.AppHost.Helper;
+namespace Coworkee.AppHost.ApplicationServiceHelper;
 
 internal static class StorageHelper
 {
-    public static IEnumerable<IResourceBuilder<IResource>> WithStorageIf(this IDistributedApplicationBuilder builder, bool condition)
+    public static IEnumerable<IResourceBuilder<IResource>> AddAzureStorageIf(this IDistributedApplicationBuilder builder, bool condition)
     {
         if(!condition)
             yield break;
-        var res = WithStorage(builder, out var blobs);
+        var res = AddAzureStorage(builder, out var blobs);
         yield return res;
         yield return blobs;
     }
 
-    public static IResourceBuilder<AzureStorageResource> WithStorage(this IDistributedApplicationBuilder builder, out IResourceBuilder<AzureBlobStorageResource> blobs)
+    public static IResourceBuilder<AzureStorageResource> AddAzureStorage(this IDistributedApplicationBuilder builder, out IResourceBuilder<AzureBlobStorageResource> blobs)
     {
         var storage = builder.AddAzureStorage(ApplicationConstants.ServiceNames.Storage);
         //.ConfigureInfrastructure(infra =>

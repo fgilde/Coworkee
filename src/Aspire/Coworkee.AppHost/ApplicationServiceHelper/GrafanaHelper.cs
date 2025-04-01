@@ -2,23 +2,23 @@
 using Coworkee.Shared.Models;
 using C = Coworkee.Shared.Constants.Application.ApplicationConstants;
 
-namespace Coworkee.AppHost.Helper;
+namespace Coworkee.AppHost.ApplicationServiceHelper;
 
 internal static class GrafanaHelper
 {
-    public static IEnumerable<IResourceBuilder<IResource>> WithGrafanaIf(this IDistributedApplicationBuilder builder, bool condition, IResourceBuilder<ParameterResource> userNameParam,
+    public static IEnumerable<IResourceBuilder<IResource>> AddGrafanaIf(this IDistributedApplicationBuilder builder, bool condition, IResourceBuilder<ParameterResource> userNameParam,
         IResourceBuilder<ParameterResource> userPasswordParam, CreateUser administrator)
     {
         return !condition 
             ? [] 
-            : WithGrafana(builder, userNameParam, userPasswordParam, administrator);
+            : AddGrafana(builder, userNameParam, userPasswordParam, administrator);
     }
 
-    public static IResourceBuilder<ContainerResource>[] WithGrafana(this IDistributedApplicationBuilder builder, 
+    public static IResourceBuilder<ContainerResource>[] AddGrafana(this IDistributedApplicationBuilder builder, 
         IResourceBuilder<ParameterResource> userNameParam, 
         IResourceBuilder<ParameterResource> userPasswordParam, CreateUser administrator)
     {
-        var prometheus = WithPrometheus(builder);
+        var prometheus = AddPrometheus(builder);
 
         var grafana = builder.AddContainer(C.ServiceNames.Grafana, "grafana/grafana")
             .WithDockerfile("grafana", "Dockerfile")
@@ -30,18 +30,18 @@ internal static class GrafanaHelper
             .WithHttpEndpoint(targetPort: 3000, name: "http")
             .WithExternalHttpEndpoints();
 
-        var collector = WithOtelCollector(builder, prometheus);
+        var collector = AddOtelCollector(builder, prometheus);
         return [prometheus, grafana, collector];
     }
 
-    public static IResourceBuilder<OpenTelemetryCollectorResource> WithOtelCollector(IDistributedApplicationBuilder builder, IResourceBuilder<ContainerResource> prometheus)
+    public static IResourceBuilder<OpenTelemetryCollectorResource> AddOtelCollector(IDistributedApplicationBuilder builder, IResourceBuilder<ContainerResource> prometheus)
     {
         return builder.AddOpenTelemetryCollector("otelcollector", "otelcollector/config.yaml")
             .WithEnvironment("PROMETHEUS_ENDPOINT", $"{prometheus.GetEndpoint("http")}/api/v1/otlp")
             .PublishAsContainer();
     }
 
-    public static IResourceBuilder<ContainerResource> WithPrometheus(IDistributedApplicationBuilder builder)
+    public static IResourceBuilder<ContainerResource> AddPrometheus(IDistributedApplicationBuilder builder)
     {
         return builder.AddContainer(C.ServiceNames.Prometheus, "prom/prometheus")
             .WithDockerfile("prometheus", "Dockerfile")

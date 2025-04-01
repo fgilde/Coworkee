@@ -12,7 +12,6 @@ using Coworkee.Client.JsInterop;
 using Coworkee.Client.Managers.ExtendedAttribute;
 using Coworkee.Domain.Contracts;
 using Coworkee.Domain.Enums;
-using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -20,6 +19,7 @@ using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
+using Nextended.Core;
 
 namespace Coworkee.Client.Shared.Components
 {
@@ -152,7 +152,7 @@ namespace Coworkee.Client.Shared.Components
                 {
                     Base64String = response.Data,
                     FileName = $"{typeof(TExtendedAttribute).Name.ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
-                    MimeType = ApplicationConstants.MimeTypes.OpenXml
+                    MimeType = MimeType.OpenXml
                 });
                 _snackBar.Add(string.IsNullOrWhiteSpace(request.SearchString) && !request.IncludeEntity && !request.OnlyCurrentGroup
                     ? _localizer["Extended Attributes exported"]

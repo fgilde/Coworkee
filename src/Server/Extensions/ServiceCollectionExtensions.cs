@@ -63,7 +63,7 @@ namespace Coworkee.Server.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
-        internal static IServiceCollection AddGptAssistant(this IServiceCollection services, IConfiguration configuration)
+        internal static IServiceCollection AddAIAssistant(this IServiceCollection services, IConfiguration configuration)
         {
             try
             {

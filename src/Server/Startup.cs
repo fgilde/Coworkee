@@ -93,7 +93,7 @@ namespace Coworkee.Server
             services.AddRazorPages();
 
             services.AddLazyCache();
-            services.AddGptAssistant(_configuration);
+            services.AddAIAssistant(_configuration);
             services.AddOptions<BackupOptions>()
                 .Bind(_configuration.GetSection(nameof(BackupOptions)))
                 .ValidateOnStart()

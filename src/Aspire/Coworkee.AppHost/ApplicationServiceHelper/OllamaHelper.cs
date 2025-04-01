@@ -1,22 +1,22 @@
 ﻿using Coworkee.Shared.Constants.Application;
 
-namespace Coworkee.AppHost.Helper;
+namespace Coworkee.AppHost.ApplicationServiceHelper;
 
 internal static class OllamaHelper
 {
 
-    public static IEnumerable<IResourceBuilder<IResource>> WithOllamaIf(this IDistributedApplicationBuilder builder, bool condition)
+    public static IEnumerable<IResourceBuilder<IResource>> AddOllamaIf(this IDistributedApplicationBuilder builder, bool condition)
     {
         if (!condition)
             yield break;
-        var res = WithOllama(builder);
+        var res = AddOllama(builder);
         yield return res.OllamaResource;
         yield return res.OpenWebUIResource;
         yield return res.OllamaModelResource;
     }
 
     public static (IResourceBuilder<OllamaResource> OllamaResource, IResourceBuilder<OpenWebUIResource> OpenWebUIResource, IResourceBuilder<OllamaModelResource> OllamaModelResource) 
-        WithOllama(this IDistributedApplicationBuilder builder)
+        AddOllama(this IDistributedApplicationBuilder builder)
     {
         IResourceBuilder<OpenWebUIResource> openWebUi = null;
 

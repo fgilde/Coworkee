@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
+using Nextended.Core;
 
 namespace Coworkee.Client.Pages.Identity
 {
@@ -70,7 +71,7 @@ namespace Coworkee.Client.Pages.Identity
             {
                 Base64String = base64,
                 FileName = $"{nameof(Users).ToLower()}_{DateTime.Now:ddMMyyyyHHmmss}.xlsx",
-                MimeType = ApplicationConstants.MimeTypes.OpenXml
+                MimeType = MimeType.OpenXml
             });
             _snackBar.Add(string.IsNullOrWhiteSpace(_searchString)
                 ? _localizer["Users exported"]

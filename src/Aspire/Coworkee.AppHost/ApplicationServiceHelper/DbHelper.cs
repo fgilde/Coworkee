@@ -1,24 +1,25 @@
-﻿using Coworkee.Application.Configurations;
+﻿using Coworkee.AppHost.GeneralExtensions;
+using Coworkee.Application.Configurations;
 using Coworkee.Shared.Constants.Application;
 using Coworkee.Shared.Models;
 
-namespace Coworkee.AppHost.Helper;
+namespace Coworkee.AppHost.ApplicationServiceHelper;
 
 internal static class DbHelper
 {
-    public static IEnumerable<IResourceBuilder<IResource>> WithDatabaseIf(this IDistributedApplicationBuilder builder, bool condition, DatabaseToUse databaseToUse,
+    public static IEnumerable<IResourceBuilder<IResource>> AddDatabaseIf(this IDistributedApplicationBuilder builder, bool condition, DatabaseToUse databaseToUse,
             string? serviceName = null, CreateUser? administrator = null)
     {
         if(!condition)
             yield break;
-        var res = WithDatabase(builder, databaseToUse, serviceName, administrator);
+        var res = AddDatabase(builder, databaseToUse, serviceName, administrator);
         yield return res.DatabaseResource;
         if (res.AdminUIResource != null)
             yield return res.AdminUIResource;
     }
     
 
-    public static (IResourceBuilder<IResourceWithConnectionString> DatabaseResource, IResourceBuilder<ContainerResource>? AdminUIResource) WithDatabase(this IDistributedApplicationBuilder builder, DatabaseToUse databaseToUse, 
+    public static (IResourceBuilder<IResourceWithConnectionString> DatabaseResource, IResourceBuilder<ContainerResource>? AdminUIResource) AddDatabase(this IDistributedApplicationBuilder builder, DatabaseToUse databaseToUse, 
         string? serviceName = null, CreateUser? administrator = null )
     {
         bool addDataVolume = !builder.ExecutionContext.IsRunMode;

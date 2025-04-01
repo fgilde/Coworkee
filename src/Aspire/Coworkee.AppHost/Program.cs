@@ -1,104 +1,37 @@
-using Aspire.Hosting.Azure;
 using Coworkee.AppHost;
-using Coworkee.AppHost.OpenTelemetryCollector;
 using Coworkee.Application.Configurations;
 using Coworkee.Shared.Constants.Application;
-using Microsoft.Extensions.Hosting;
 using Nextended.Aspire;
-using System.Runtime.CompilerServices;
-using Coworkee.AppHost.Helper;
-using Coworkee.Infrastructure;
-using C = Coworkee.Shared.Constants.Application.ApplicationConstants;
+using Coworkee.AppHost.ApplicationServiceHelper;
+using Coworkee.AppHost.Types;
 
-// TODO: LanguageModel Path-chat
-// #### CONSTANTS Settings #####################################################
+// #### Settings #####################################################
 
-DatabaseToUse databaseToUse = DatabaseToUse.Postgres;
-var administrator = C.Defaults.Users.Administrators[0];
+var settings = new CoworkeeAppHostSettings()
+{
+    DatabaseToUse = DatabaseToUse.Postgres,
+    AddOllama = true,
+    AddKeycloak = true,
+    AddGrafana = true,
+    AddStirling = true,
+    AddAzureStorage = true,
+};
 
-bool ollamaEnabled = true;
-bool keycloakEnabled = true;
-bool grafanaEnabled = true;
-bool stirlingEnabled = true;
-bool storageEnabled = true;
 
-// ####### Start the Aspire application ########################################
+// ####### Start the Aspire application ##############################
 
 var builder = DistributedApplication.CreateBuilder(args);
+var services = builder.AddDependencyServices(settings);
 
-var userNameParam = builder.AddParameter("AdminUserName", administrator.UserName);
-var userPasswordParam = builder.AddParameter("AdminUserPassword", administrator.Password);
-//var dbUsername = builder.AddParameter("username","dbUser", secret: true);
-//var dbPassword = builder.AddParameter("password","dbPassword", secret: true);
-
-//IResourceBuilder<PgAdminContainerResource> pgAdmin = null;
-IResourceBuilder<KeycloakResource>? keycloak = null;
-IResourceBuilder<OpenWebUIResource>? openWebUi = null;
-IResourceBuilder<OllamaResource> ollama = null;
-IResourceBuilder<OllamaModelResource> ollamaModel = null;
-IResourceBuilder<ContainerResource> grafana = null;
-IResourceBuilder<ContainerResource> prometheus = null;
-IResourceBuilder<ContainerResource> stirling = null;
-IResourceBuilder<AzureStorageResource> storage = null;
-IResourceBuilder<AzureBlobStorageResource> blobs = null;
-
-var signalr = builder.ExecutionContext.IsPublishMode
-    ? builder.AddAzureSignalR(C.SignalR.Resource)
-    : null;
-
-
-
-var db = builder.WithDatabase(databaseToUse);
-
-
-if (keycloakEnabled)
-{
-    keycloak = builder.WithKeycloak(C.ServiceNames.Keycloak, userNameParam, userPasswordParam);
-}
-
-
-if (storageEnabled)
-{
-    storage = builder.WithStorage(out blobs);
-}
-
-
-if (ollamaEnabled)
-{
-    var res = builder.WithOllama();
-    ollama = res.OllamaResource;
-    openWebUi = res.OpenWebUIResource;
-    ollamaModel = res.OllamaModelResource;
-}
-
-
-if (grafanaEnabled)
-{
-    var res = builder.WithGrafana(userNameParam, userPasswordParam, administrator);
-    prometheus = res[0];
-    grafana = res[1];
-}
-
-if (stirlingEnabled)
-{
-    stirling = builder.AddContainer(C.ServiceNames.Stirling, "stirlingtools/stirling-pdf")
-        .WithHttpEndpoint(targetPort: 8080, name: "http")
-        .WithHttpHealthCheck("/", 200)
-        .WithExternalHttpEndpoints();
-}
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
-    .WithEndpointsAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints, [grafana, ollama, prometheus, openWebUi, db.AdminUIResource, keycloak, stirling])
-    .WithReferenceIf(db.DatabaseResource)
-    .WaitForIf(db.DatabaseResource)
-    .WaitForCompletionIf(stirling)
-    .WithReferenceIf(keycloak)
-    .WaitForCompletionIf(keycloak)
-    .WithReferenceIf(ollama)
-    .WithReferenceIf(ollamaModel)
-    .WithReferenceIf(blobs)
-    .WithReferenceIf(signalr)
+    .WithEndpointsAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints, services.OfType<IResourceBuilder<IResourceWithEndpoints>>().ToArray())
+    .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ApplicationConstants.Routes.Dashboard)}", ApplicationConstants.Routes.Dashboard)
+    .WaitForIf(services.ToArray())
+    .WithReferencesIf(services.OfType<IResourceBuilder<IResourceWithConnectionString>>().ToArray())
+    .WithReferencesIf(services.OfType<IResourceBuilder<IResourceWithServiceDiscovery>>().ToArray())
     .WithExternalHttpEndpoints();
+
 
 if (!ApplicationConstants.HostClientInServer)
 {
@@ -119,7 +52,7 @@ if (!ApplicationConstants.HostClientInServer)
 }
 
 
-prometheus?.WithReference(api)?.WaitFor(api);
+//prometheus?.WithReference(api)?.WaitFor(api);
 
 builder
     .Build()

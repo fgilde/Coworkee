@@ -18,13 +18,9 @@ using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Coworkee.Shared;
 using Nextended.Core.Extensions;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Polly;
 using System.Net.Http;
 using Coworkee.Server.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.Design;
 
 namespace Coworkee.Server.Controllers.Identity
 {

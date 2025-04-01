@@ -177,13 +177,5 @@ namespace Coworkee.Shared.Constants.Application
                 return $"all-{entityFullName}-extended-attributes-{entityId}";
             }
         }
-
-        public static class MimeTypes
-        {
-            //public static string[] ExcelTypes = {Csv, OpenXml, Xls};
-            public const string Csv = "text/csv";
-            public const string OpenXml = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            public const string Xls = "application/vnd.ms-excel";
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Coworkee.AppHost.Helper;
+﻿namespace Coworkee.AppHost.GeneralExtensions;
 
 internal static class ResourceBuilderExt
 {

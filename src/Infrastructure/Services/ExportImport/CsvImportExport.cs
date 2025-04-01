@@ -11,6 +11,7 @@ using Coworkee.Shared.Constants.Application;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core;
 
 
 namespace Coworkee.Infrastructure.Services.ExportImport
@@ -21,10 +22,7 @@ namespace Coworkee.Infrastructure.Services.ExportImport
     {
         public ExportServiceType ExportService => ExportServiceType.Csv;
 
-        public IEnumerable<string> SupportedContentTypes => new[]
-        {
-           ApplicationConstants.MimeTypes.Csv
-        };
+        public IEnumerable<string> SupportedContentTypes => [MimeType.Csv];
 
         public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data,
             CancellationToken cancellationToken = default)

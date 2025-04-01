@@ -12,6 +12,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.Excel;
 using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core;
 
 
 namespace Coworkee.Infrastructure.Services.ExportImport
@@ -22,11 +23,7 @@ namespace Coworkee.Infrastructure.Services.ExportImport
     {
         public ExportServiceType ExportService => ExportServiceType.Excel;
 
-        public IEnumerable<string> SupportedContentTypes => new[]
-        {
-           ApplicationConstants.MimeTypes.OpenXml,
-           ApplicationConstants.MimeTypes.Xls
-        };
+        public IEnumerable<string> SupportedContentTypes => [ MimeType.OpenXml, MimeType.Xls ];
 
         public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data,
             CancellationToken cancellationToken = default)

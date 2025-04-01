@@ -1,12 +1,10 @@
 ﻿using System.Diagnostics;
 using System.IO.Hashing;
 using System.Text;
-using Aspire.Hosting;
 using Coworkee.Infrastructure;
 using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Models;
 
-namespace Coworkee.AppHost.Helper;
+namespace Coworkee.AppHost.ApplicationServiceHelper;
 
 internal static class KeycloakContainerImageTags
 {
@@ -27,15 +25,15 @@ public static class HostingKeycloakExtensions
     private const string AdminEnvVarName = "KEYCLOAK_ADMIN";
     private const string AdminPasswordEnvVarName = "KEYCLOAK_ADMIN_PASSWORD";
 
-    public static IEnumerable<IResourceBuilder<IResource>> WithKeycloakIf(this IDistributedApplicationBuilder builder,
+    public static IEnumerable<IResourceBuilder<IResource>> AddKeycloakIf(this IDistributedApplicationBuilder builder,
         bool condition, string name, IResourceBuilder<ParameterResource>? userNameParam, IResourceBuilder<ParameterResource>? userPasswordParam)
     {
         if (!condition)
             yield break;
-        yield return builder.WithKeycloak(name, userNameParam, userPasswordParam);
+        yield return builder.AddKeycloak(name, userNameParam, userPasswordParam);
     }
 
-    public static IResourceBuilder<KeycloakResource> WithKeycloak(this IDistributedApplicationBuilder builder,
+    public static IResourceBuilder<KeycloakResource> AddKeycloak(this IDistributedApplicationBuilder builder,
         string name,
         IResourceBuilder<ParameterResource>? userNameParam,
         IResourceBuilder<ParameterResource>? userPasswordParam)

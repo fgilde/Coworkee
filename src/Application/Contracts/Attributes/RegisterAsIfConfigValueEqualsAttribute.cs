@@ -3,9 +3,9 @@ using System;
 namespace Coworkee.Application.Contracts.Attributes;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class RegisterAsIfConfigValueEqualsAttribute : RegisterIfConfigAttribute
+public class RegisterAsIfConfigValueEqualsAttribute(Type registerAsType, string requiredValue, string[] configPath)
+    : RegisterIfConfigAttribute(registerAsType, configPath)
 {
-    private readonly string _requiredValue;
     public StringComparison Comparison { get; set; }
 
     protected virtual bool Invert => false;
@@ -14,19 +14,13 @@ public class RegisterAsIfConfigValueEqualsAttribute : RegisterIfConfigAttribute
         : this(registerAsType, requiredValue, new[] { configPath })
     {}
 
-    public RegisterAsIfConfigValueEqualsAttribute(Type registerAsType, string requiredValue, string[] configPath)
-        : base(registerAsType, configPath)
-    {
-        _requiredValue = requiredValue;
-    }
-
     protected override bool IsEnabled()
     {
         var enabled = base.IsEnabled();
         if (!enabled)
             return false;
 
-        var equals = FindValue().Equals(_requiredValue, Comparison);
+        var equals = FindValue().Equals(requiredValue, Comparison);
         return Invert ? !equals : equals;
     }
 }

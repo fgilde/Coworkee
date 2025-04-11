@@ -1,7 +1,7 @@
 using Coworkee.Application.Common.Models;
 using Coworkee.Application.Requests;
-using Coworkee.Shared.Misc;
 using Nextended.Core.Helper;
+using Nextended.Core.Types;
 
 namespace Coworkee.Application.Configurations;
 

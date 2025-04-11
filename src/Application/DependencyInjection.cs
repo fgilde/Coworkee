@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Coworkee.Application.Common.Behaviours;
-using Coworkee.Application.Common.Security;
 using Coworkee.Application.Configurations;
 using Coworkee.Application.Contracts;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
 using Coworkee.Application.Features.ExtendedAttributes.Commands.Delete;
 using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
@@ -13,48 +10,40 @@ using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
 using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using Coworkee.Application.Features.ExtendedAttributes.Queries.GetById;
 using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Constants.Application;
 using Coworkee.Shared.Wrapper;
 using FluentValidation;
 using HashidsNet;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection IfNotNSwag(this IServiceCollection services) => !ApplicationConstants.IsNswagGeneration ? services : new ServiceCollection();
-        public static IServiceCollection IfNSwag(this IServiceCollection services) => ApplicationConstants.IsNswagGeneration ? services : new ServiceCollection();
-
         public static IServiceCollection AddApplication(this IServiceCollection services, ServerConfiguration config)
         {
             //services.AddTransient(_ => configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings
-            services.AddSingleton(_ => new Hashids(config.AppConfiguration.IdHashing.Salt, config.AppConfiguration.IdHashing.MinLength));
-            ClassMappingConfiguration.RegisterConverters(config.AppConfiguration.IdHashing);
+            services.AddIdHashing(config);
             services.TryAddScoped<ISessionProvider, SimpleSessionProvider>();
-            services.AddTransient<ICustomAuthorizeAttributeHandler, CustomAuthorizeAttributeHandler>();
+
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ClientEventBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             services.AddAllWithRegisterAttribute(typeof(Coworkee.Application.DependencyInjection).Assembly);
             return services;
         }
 
+        private static void AddIdHashing(this IServiceCollection services, ServerConfiguration config)
+        {
+            services.AddSingleton(_ => new Hashids(config.AppConfiguration.IdHashing.Salt, config.AppConfiguration.IdHashing.MinLength));
+            ClassMappingConfiguration.RegisterConverters(config.AppConfiguration.IdHashing);
+        }
+
         public static IServiceCollection AddAllWithRegisterAttribute(this IServiceCollection services, Assembly locatedInAssembly)
         {
-            var x = services.Count;
-            services.RegisterAllWithRegisterAsAttribute(locatedInAssembly);
-            var y = services.Count;
-            return services;
+            return services.RegisterAllWithRegisterAsAttribute(locatedInAssembly);
         }
 
         public static void AddExtendedAttributesHandlers(this IServiceCollection services)

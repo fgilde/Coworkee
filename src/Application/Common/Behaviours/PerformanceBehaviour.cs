@@ -1,32 +1,26 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.Account;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Application.Common.Behaviours
 {
-    public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    [ProtectUnused(typeof(PerformanceBehaviour<,>))]
+    [RegisterAs(typeof(IPipelineBehavior<,>), ServiceLifetime = ServiceLifetime.Transient)]
+    public class PerformanceBehaviour<TRequest, TResponse>(
+        ILogger<TRequest> logger,
+        ICurrentUserService currentUserService,
+        IAccountService identityService)
+        : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
-        private readonly Stopwatch _timer;
-        private readonly ILogger<TRequest> _logger;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly IAccountService _identityService;
-
-        public PerformanceBehaviour(
-            ILogger<TRequest> logger,
-            ICurrentUserService currentUserService,
-            IAccountService identityService)
-        {
-            _timer = new Stopwatch();
-
-            _logger = logger;
-            _currentUserService = currentUserService;
-            _identityService = identityService;
-        }
+        private readonly Stopwatch _timer = new();
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
@@ -41,15 +35,15 @@ namespace Coworkee.Application.Common.Behaviours
             if (elapsedMilliseconds > 500)
             {
                 var requestName = typeof(TRequest).Name;
-                var userId = _currentUserService.UserId ?? string.Empty;
+                var userId = currentUserService.UserId ?? string.Empty;
                 var userName = string.Empty;
 
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    userName = await _identityService.GetUserNameAsync(userId);
+                    userName = await identityService.GetUserNameAsync(userId);
                 }
 
-                _logger.LogWarning("Coworkee Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+                logger.LogWarning("Coworkee Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                     requestName, elapsedMilliseconds, userId, userName, request);
             }
 

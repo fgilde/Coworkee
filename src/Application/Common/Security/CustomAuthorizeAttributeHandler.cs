@@ -1,26 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Application.Common.Security
 {
-    public class CustomAuthorizeAttributeHandler: ICustomAuthorizeAttributeHandler
+    [ProtectUnused(typeof(CustomAuthorizeAttributeHandler))]
+    [RegisterAs(typeof(ICustomAuthorizeAttributeHandler), ServiceLifetime = ServiceLifetime.Transient)]
+    public class CustomAuthorizeAttributeHandler(IPermissionService permissionService)
+        : ICustomAuthorizeAttributeHandler
     {
-        private readonly IPermissionService _permissionService;
-        
-        public CustomAuthorizeAttributeHandler(
-            IPermissionService permissionService)
-        {
-            _permissionService = permissionService;
-        }
-
         public async Task<bool> IsAuthorizedForAsync(ICustomAuthorizeAttribute attribute)
         {
             if (attribute != null)
             {
-                return await _permissionService.HasPoliciesAsync(attribute.Policies, attribute.PolicyMatch)
-                    && await _permissionService.HasRolesAsync(attribute.Roles, attribute.RoleMatch);
+                return await permissionService.HasPoliciesAsync(attribute.Policies, attribute.PolicyMatch)
+                    && await permissionService.HasRolesAsync(attribute.Roles, attribute.RoleMatch);
             }
             return true;
         }
@@ -42,8 +40,8 @@ namespace Coworkee.Application.Common.Security
 
         public async Task EnsureIsAuthorizedForAsync(ICustomAuthorizeAttribute attribute)
         {            
-            await _permissionService.EnsureRolesAsync(attribute?.Roles, attribute?.RoleMatch ?? RoleMatch.Any);
-            await _permissionService.EnsurePoliciesAsync(attribute?.Policies, attribute?.PolicyMatch ?? PolicyMatch.Any);
+            await permissionService.EnsureRolesAsync(attribute?.Roles, attribute?.RoleMatch ?? RoleMatch.Any);
+            await permissionService.EnsurePoliciesAsync(attribute?.Policies, attribute?.PolicyMatch ?? PolicyMatch.Any);
         }
 
         public async Task EnsureIsAuthorizedForAllAsync(IEnumerable<ICustomAuthorizeAttribute> attributes)

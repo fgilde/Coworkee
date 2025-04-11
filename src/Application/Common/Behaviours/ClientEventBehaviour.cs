@@ -3,9 +3,12 @@ using System.Threading.Tasks;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Hubs.Events;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Application.Common.Behaviours
 {
+    [RegisterAs(typeof(IPipelineBehavior<,>), ServiceLifetime = ServiceLifetime.Transient)]
     internal class ClientEventBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {

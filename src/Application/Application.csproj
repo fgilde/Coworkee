@@ -14,14 +14,14 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.9" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" /> <!--TODO: Remove-->
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
     <PackageReference Include="Nextended.Core" Version="9.0.12" />
     <PackageReference Include="StringToExpression" Version="2.2.0" />
     <PackageReference Include="Hashids.net" Version="1.7.0" />
     <PackageReference Include="SendGrid" Version="9.29.3" />
     <PackageReference Include="GptInvoke" Version="1.2.24121212" />
-    <PackageReference Include="OllamaSharp" Version="4.0.11" />
+    <PackageReference Include="OllamaSharp" Version="5.1.13" />
 
   </ItemGroup>
   <ItemGroup>

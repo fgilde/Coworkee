@@ -7,21 +7,16 @@ using Nextended.Core.Attributes;
 
 namespace Coworkee.Application.Contracts.Attributes;
 
-public abstract class RegisterIfConfigAttribute : RegisterAsAttribute
+public abstract class RegisterIfConfigAttribute(Type registerAsType, string[] configPath)
+    : RegisterAsAttribute(registerAsType)
 {
-    private readonly string _configPath;
+    private readonly string _configPath = string.Join('.', configPath).Replace("::", ".");
     private static IDictionary<string, string> _config;
 
     public bool ThrowIfKeyInvalid { get; set; }
 
-    protected RegisterIfConfigAttribute(Type registerAsType, string[] configPath)
-        : base(registerAsType)
-    {
-        _configPath = string.Join('.', configPath).Replace("::", ".");
-    }
-
     protected RegisterIfConfigAttribute(Type registerAsType, string configPath)
-        : this(registerAsType, new[] { configPath })
+        : this(registerAsType, [configPath])
     { }
 
 

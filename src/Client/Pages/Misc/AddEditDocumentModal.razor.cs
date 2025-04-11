@@ -15,16 +15,15 @@ using Coworkee.Application.Contracts.Enums;
 using Coworkee.Application.Hubs;
 using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.SignalR.Client;
-using Coworkee.Shared.Misc;
 using Nextended.Blazor.Extensions;
 using Nextended.Core;
+using Nextended.Core.Types;
 
 
 namespace Coworkee.Client.Pages.Misc
 {
     public partial class AddEditDocumentModal : IAsyncDisposable
     {
-
         [Parameter] public DocumentDto AddEditDocumentModel { get; set; } = new();
         [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }

@@ -20,6 +20,7 @@ using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nextended.Core;
 
 namespace Coworkee.Server.Controllers.Translations
 {
@@ -106,7 +107,7 @@ namespace Coworkee.Server.Controllers.Translations
             var res = await Mediator.Send(query, cancellationToken);
             var mimeType = MimeGuesser.GuessMimeType(res);
             var culturePart = query.FilterByCurrentCulture ? $"{CultureInfo.CurrentUICulture}-" : "";
-            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{culturePart}{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{culturePart}{DateTime.Now:ddMMyyyyHHmmss}.{MimeType.GetExtension(mimeType)}";
             return File(res, mimeType, fileDownloadName);
         }
 

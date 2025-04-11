@@ -9,8 +9,8 @@ internal static class AspireMainAppHelper
     public static IList<IResourceBuilder<IResource>> AddDependencyServices(this IDistributedApplicationBuilder builder, IAppHostServiceSettings aspireServiceSettings )
     {
         var administrator = ApplicationConstants.Defaults.Users.Administrators[0];
-        var userNameParam = builder.AddParameter("AdminUserName", administrator.UserName);
-        var userPasswordParam = builder.AddParameter("AdminUserPassword", administrator.Password);
+        var userNameParam = builder.AddParameter("AdminUserName", administrator.UserName, true);
+        var userPasswordParam = builder.AddParameter("AdminUserPassword", administrator.Password, true);
 
         return [
             .. builder.AddSignalRIf(builder.ExecutionContext.IsPublishMode),

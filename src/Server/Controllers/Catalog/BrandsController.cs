@@ -15,6 +15,7 @@ using Coworkee.Shared.Constants.Permission;
 using HeyRed.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nextended.Core;
 
 
 namespace Coworkee.Server.Controllers.Catalog
@@ -89,7 +90,7 @@ namespace Coworkee.Server.Controllers.Catalog
         {
             var res = await Mediator.Send(query, cancellationToken);
             var mimeType = MimeGuesser.GuessMimeType(res);
-            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeType.GetExtension(mimeType)}";
             return File(res, mimeType, fileDownloadName);
         }
     }

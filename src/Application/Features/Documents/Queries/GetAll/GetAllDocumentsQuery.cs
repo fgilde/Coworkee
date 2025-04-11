@@ -4,7 +4,6 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using HeyRed.Mime;
 using Coworkee.Application.Common.Models;
 using Coworkee.Application.Common.Security;
 using Coworkee.Application.Contracts.Repositories;
@@ -14,6 +13,7 @@ using Coworkee.Application.Specifications.Base;
 using Coworkee.Shared.Constants.Permission;
 using Coworkee.Shared.Constants.Role;
 using Coworkee.Shared.Wrapper;
+using Nextended.Core;
 
 namespace Coworkee.Application.Features.Documents.Queries.GetAll
 {
@@ -42,7 +42,7 @@ namespace Coworkee.Application.Features.Documents.Queries.GetAll
             var res = await base.Handle(request, cancellationToken);
             res.Data.ForEach(dto => // TODO
             {
-                dto.ContentType = MimeTypesMap.GetMimeType(dto.URL);
+                dto.ContentType = MimeType.GetMimeType(dto.URL);
             });
 
             return res;

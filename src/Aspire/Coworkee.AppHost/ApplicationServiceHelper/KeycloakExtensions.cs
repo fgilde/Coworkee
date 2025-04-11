@@ -47,35 +47,43 @@ public static class HostingKeycloakExtensions
         .WithArgs("--spi-connections-http-client-default-disable-trust-manager=true")
         .WithEnvironment("KEYCLOAK_PROFILE", "dev")
         .WithDataVolume()
-        .WithCommand("Seed Client", "Seed Client", async context =>
+        .WithCommand("Seed Client", "Seed Client", async context => await ExecuteKeycloakSeedAsync(adminUsername, adminPassword, res?.GetEndpoint("http").Url), new CommandOptions()
         {
-            bool result;
-            string message = "";
-            var seeder = new KeycloakSeeder(
-                ApplicationConstants.KeycloakRealm,
-                adminUsername,
-                adminPassword,
-                res?.GetEndpoint("http").Url,
-                ApplicationConstants.ApplicationClientName,
-                ApplicationConstants.Defaults.ApplicationClientSecret
-            );
-            try
-            {
-                await seeder.CreateClientAsync(true);
-                result = true;
-            }
-            catch (Exception e)
-            {
-                result = false;
-                message = e.Message;
-            }
-
-            return new ExecuteCommandResult { Success = result, ErrorMessage = message };
+            Description = "Seed Keycloak Client",
+            ConfirmationMessage = "Are you sure you want to seed Keycloak client?",
+            IconName = "fa-solid fa-key",
+            IconVariant = IconVariant.Filled
         })
         .WithHttpHealthCheck("/", 200)
         .WithExternalHttpEndpoints();
 
         return res;
+    }
+
+    private static async Task<ExecuteCommandResult> ExecuteKeycloakSeedAsync(string adminUsername, string adminPassword, string url)
+    {
+        bool result;
+        string message = "";
+        var seeder = new KeycloakSeeder(
+            ApplicationConstants.KeycloakRealm,
+            adminUsername,
+            adminPassword,
+            url,
+            ApplicationConstants.ApplicationClientName,
+            ApplicationConstants.Defaults.ApplicationClientSecret
+        );
+        try
+        {
+            await seeder.CreateClientAsync(true);
+            result = true;
+        }
+        catch (Exception e)
+        {
+            result = false;
+            message = e.Message;
+        }
+
+        return new ExecuteCommandResult { Success = result, ErrorMessage = message };
     }
 
 

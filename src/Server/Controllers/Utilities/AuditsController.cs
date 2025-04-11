@@ -11,6 +11,7 @@ using Coworkee.Server.Filters;
 using Coworkee.Shared.Constants.Permission;
 using Coworkee.Shared.Constants.Role;
 using HeyRed.Mime;
+using Nextended.Core;
 
 namespace Coworkee.Server.Controllers.Utilities
 {
@@ -58,7 +59,7 @@ namespace Coworkee.Server.Controllers.Utilities
                 await Get<IPermissionService>().EnsureRoleAsync(RoleConstants.AdministratorRole);
             var data = await _auditService.ExportAsync(exportServiceType, userIds, searchString, searchInOldValues, searchInNewValues, cancellationToken);
             var mimeType = MimeGuesser.GuessMimeType(data);
-            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeTypesMap.GetExtension(mimeType)}";
+            var fileDownloadName = $"{ControllerContext.ActionDescriptor.ControllerName}-{DateTime.Now:ddMMyyyyHHmmss}.{MimeType.GetExtension(mimeType)}";
             return File(data, mimeType, fileDownloadName);
         }
     }

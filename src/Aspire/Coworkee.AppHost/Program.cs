@@ -13,8 +13,8 @@ var settings = new CoworkeeAppHostSettings()
     AddOllama = true,
     AddKeycloak = true,
     AddGrafana = true,
-    AddStirling = false,
-    AddAzureStorage = false,
+    AddStirling = true,
+    AddAzureStorage = true,
 };
 
 

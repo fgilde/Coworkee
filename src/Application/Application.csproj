@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Coworkee.Application</RootNamespace>
     <AssemblyName>Coworkee.Application</AssemblyName>
   </PropertyGroup>
@@ -27,13 +26,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\Services\ExportImport\" />
-    <Folder Include="Features\Base\Commands\" />
-    <Folder Include="Features\Base\Contracts\" />
-    <Folder Include="Features\Notifications\Commands\MarkAll\" />
-    <Folder Include="Features\Notifications\Queries\GetAllPaged\" />
-    <Folder Include="AssistantFeatures\" />
   </ItemGroup>
 </Project>

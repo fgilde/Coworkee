@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Coworkee.Server</RootNamespace>
     <AssemblyName>Coworkee.Server</AssemblyName>
   </PropertyGroup>
@@ -63,12 +62,6 @@
     <ProjectReference Include="..\Aspire\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BackgroundServices\" />
-    <Folder Include="Logs\" />
-    <Folder Include="wwwroot\api\" />
-    <Folder Include="wwwroot\sdk\" />
   </ItemGroup>
 
   <ItemGroup>

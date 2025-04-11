@@ -1,11 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Coworkee.Domain</RootNamespace>
     <AssemblyName>Coworkee.Domain</AssemblyName>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Identity\" />
-    <Folder Include="Entities\Notifications\" />
-  </ItemGroup>
 </Project>

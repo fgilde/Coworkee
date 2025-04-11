@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Coworkee.Domain.UnitTests</RootNamespace>
     <AssemblyName>Coworkee.Domain.UnitTests</AssemblyName>
     <IsPackable>false</IsPackable>

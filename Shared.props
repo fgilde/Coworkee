@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
     <HostClientInServer>true</HostClientInServer>
+    <TargetFramework>net9.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Nullable>disable</Nullable>
-    <!-- TODO: disable nullable for now because it breaks db operations but we want to enable it  -->
+    <Nullable>disable</Nullable> <!-- TODO: disable nullable for now because it breaks db operations but we want to enable it  -->
     <MicrosoftPackagesVersion>9.0.3</MicrosoftPackagesVersion>
   </PropertyGroup>
 

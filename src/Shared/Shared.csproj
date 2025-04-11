@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Coworkee.Shared</RootNamespace>
     <AssemblyName>Coworkee.Shared</AssemblyName>
   </PropertyGroup>
@@ -39,27 +38,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Emails\de-DE\NewChatMessage.cshtml" />
-    <None Remove="Resources\Emails\en-US\NewChatMessage.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="EmailTemplateNames.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>EmailTemplateNames.tt</DependentUpon>
     </Compile>
   </ItemGroup>
+
   <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Exec IgnoreExitCode="true" Command="dotnet tool install --global ResourceTranslator.CLI" />
     <Exec IgnoreExitCode="true" Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources/en-US.yml" />
   </Target>
 
-  <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v17.0\TextTemplating\Microsoft.TextTemplating.targets" />
-  <PropertyGroup>
-    <TransformOnBuild>true</TransformOnBuild>
-    <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
-    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
-  </PropertyGroup>-->
 
 </Project>

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     <BlazorWebAssemblyEnableDebugging>true</BlazorWebAssemblyEnableDebugging>
     <RootNamespace>Coworkee.Client</RootNamespace>

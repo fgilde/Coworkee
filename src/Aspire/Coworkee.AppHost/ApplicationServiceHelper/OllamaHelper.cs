@@ -4,7 +4,6 @@ namespace Coworkee.AppHost.ApplicationServiceHelper;
 
 internal static class OllamaHelper
 {
-
     public static IEnumerable<IResourceBuilder<IResource>> AddOllamaIf(this IDistributedApplicationBuilder builder, bool condition)
     {
         if (!condition)

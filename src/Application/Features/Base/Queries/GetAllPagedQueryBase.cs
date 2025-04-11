@@ -22,9 +22,9 @@ namespace Coworkee.Application.Features.Base.Queries
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public string SearchString { get; set; }
-        public string[] OrderBy { get; set; }
-        public TransferableExpression<TDto> OdataFilterQuery { get; set; } = null;
+        public string? SearchString { get; set; }
+        public string[]? OrderBy { get; set; }
+        public TransferableExpression<TDto>? OdataFilterQuery { get; set; } = null;
 
         public GetAllPagedQueryBase<TDto> SortBy(Expression<Func<TDto, object>> expression, string direction = "")
         {
@@ -33,7 +33,7 @@ namespace Coworkee.Application.Features.Base.Queries
 
         public GetAllPagedQueryBase<TDto> SortBy(string propertyName, string direction = "")
         {
-            var sorts = (OrderBy ?? Array.Empty<string>()).ToList();
+            var sorts = (OrderBy ?? []).ToList();
             sorts.Add($"{propertyName} {direction}");
             OrderBy = sorts.ToArray();
             return this;

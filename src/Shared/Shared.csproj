@@ -10,8 +10,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
     <PackageReference Include="MimeTypesMap" Version="1.0.8" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />

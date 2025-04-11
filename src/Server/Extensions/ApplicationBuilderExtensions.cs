@@ -105,8 +105,8 @@ namespace Coworkee.Server.Extensions
         internal static IApplicationBuilder Initialize(this IApplicationBuilder app, Microsoft.Extensions.Configuration.IConfiguration _configuration)
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
-
-            foreach (var initializer in serviceScope.ServiceProvider.GetServices<IDatabaseSeeder>())
+            var initializers = serviceScope.ServiceProvider.GetServices<IDatabaseSeeder>().ToArray();
+            foreach (var initializer in initializers)
                 initializer.Initialize();
             
             return app;

@@ -13,8 +13,8 @@ var settings = new CoworkeeAppHostSettings()
     AddOllama = true,
     AddKeycloak = true,
     AddGrafana = true,
-    AddStirling = true,
-    AddAzureStorage = true,
+    AddStirling = false,
+    AddAzureStorage = false,
 };
 
 
@@ -22,16 +22,18 @@ var settings = new CoworkeeAppHostSettings()
 
 var builder = DistributedApplication.CreateBuilder(args);
 var services = builder.AddDependencyServices(settings);
+var prometheus = services.OfType<IResourceBuilder<ContainerResource>>().FirstOrDefault(s => s.Resource.Name == ApplicationConstants.ServiceNames.Prometheus);
 
 
 var api = builder.AddProject<Projects.Server>(ApplicationConstants.AspireServerAppName)
     .WithEndpointsAsEnvironmentIf<ProjectResource, ServerConfiguration>(s => s.PublicSettings.Endpoints, services.OfType<IResourceBuilder<IResourceWithEndpoints>>().ToArray())
     .WithEnvironment($"{nameof(ServerConfiguration.PublicSettings)}__{nameof(ServerConfiguration.PublicSettings.Endpoints)}__{nameof(ApplicationConstants.Routes.Dashboard)}", ApplicationConstants.Routes.Dashboard)
-    .WaitForIf(services.ToArray())
+    .WaitForIf(services.Except([prometheus]).ToArray())
     .WithReferencesIf(services.OfType<IResourceBuilder<IResourceWithConnectionString>>().ToArray())
     .WithReferencesIf(services.OfType<IResourceBuilder<IResourceWithServiceDiscovery>>().ToArray())
     .WithExternalHttpEndpoints();
 
+prometheus?.WithReference(api)?.WaitFor(api);
 
 if (!ApplicationConstants.HostClientInServer)
 {

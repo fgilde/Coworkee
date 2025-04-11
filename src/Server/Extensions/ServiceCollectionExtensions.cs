@@ -292,7 +292,7 @@ namespace Coworkee.Server.Extensions
                     // Default SQL Server connection
                     options.UseSqlServer(defaultConnection);
                 }
-            }).AddTransient<IDatabaseSeeder, DatabaseSeeder>();
+            });
 
             if (!ApplicationConstants.IsNswagGeneration)
             {

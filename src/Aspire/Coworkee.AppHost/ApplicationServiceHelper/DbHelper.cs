@@ -23,6 +23,12 @@ internal static class DbHelper
         string? serviceName = null, CreateUser? administrator = null )
     {
         bool addDataVolume = !builder.ExecutionContext.IsRunMode;
+        var containerLifetime = ContainerLifetime.Persistent;
+
+        //bool addDataVolume = false;
+        //var containerLifetime = ContainerLifetime.Session;
+
+
         administrator ??= ApplicationConstants.Defaults.Users.Administrators.First();
         IResourceBuilder<ContainerResource> adminUiResource = null;
         IResourceBuilder<IResourceWithConnectionString> resourceResult = databaseToUse switch
@@ -38,11 +44,11 @@ internal static class DbHelper
                     admin.WithExternalHttpEndpoints().PublishAsContainer();
                     adminUiResource = admin;
                 }, containerName: ApplicationConstants.ServiceNames.PgAdmin)
-                .WithLifetime(ContainerLifetime.Persistent)
+                .WithLifetime(containerLifetime)
                 .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection), ApplicationConstants.DatabaseName),
             DatabaseToUse.SqlServer => builder.AddSqlServer(serviceName ?? ApplicationConstants.ServiceNames.SqlServer)
                 .WithDataVolumeIf(addDataVolume, $"{ApplicationConstants.ApplicationName}{ApplicationConstants.ServiceNames.SqlServer}Data")
-                .WithLifetime(ContainerLifetime.Persistent)
+                .WithLifetime(containerLifetime)
                 .AddDatabase(nameof(ServerConfiguration.ConnectionStrings.DefaultConnection))
         };
 

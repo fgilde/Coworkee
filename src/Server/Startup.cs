@@ -3,11 +3,8 @@ using Coworkee.Server.Middlewares;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
 using Coworkee.Application;
 using Coworkee.Infrastructure;
 using Coworkee.Server.Filters;
@@ -143,12 +140,11 @@ namespace Coworkee.Server
             {
                 AppPath = !ApplicationConstants.HostClientInServer ? _configuration["ClientUrl"] : "/",
                 DashboardTitle = localizer["{0} Jobs", ApplicationConstants.ApplicationName],
-                Authorization = new[] { authorizationFilter }
+                Authorization = [authorizationFilter]
             });
             app.UseApplicationEndpoints();
             app.UseSwaggerAuthorized();
             app.UseSwagger();
-
 
 
             app.Initialize(_configuration);

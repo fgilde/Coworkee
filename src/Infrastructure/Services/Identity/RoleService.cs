@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Shared.Constants.Permission;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Infrastructure.Services.Identity

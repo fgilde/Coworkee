@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
+using Nextended.Core.Attributes;
 using Nextended.Core.Helper;
 
 namespace Coworkee.Infrastructure.Services

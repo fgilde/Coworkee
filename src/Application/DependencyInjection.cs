@@ -20,6 +20,7 @@ using HashidsNet;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Application
@@ -50,11 +51,9 @@ namespace Coworkee.Application
 
         public static IServiceCollection AddAllWithRegisterAttribute(this IServiceCollection services, Assembly locatedInAssembly)
         {
-            locatedInAssembly.GetTypes()
-                .SelectMany(t => t.GetCustomAttributes<RegisterAsAttribute>().Select(a => a.SetImplementationType(t)))
-                .OrderBy(a => a.Order)
-                .SelectMany(a => a.GetServiceDescriptor())
-                .Apply(services.Add);
+            var x = services.Count;
+            services.RegisterAllWithRegisterAsAttribute(locatedInAssembly);
+            var y = services.Count;
             return services;
         }
 

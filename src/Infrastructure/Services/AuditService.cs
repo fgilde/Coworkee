@@ -7,13 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Enums;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.ExportImport;
 using Coworkee.Infrastructure.Specifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Infrastructure.Services

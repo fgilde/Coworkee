@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using RazorEngineCore;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Shared;
 using Coworkee.Infrastructure.Models;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Infrastructure.Services;
 

@@ -12,6 +12,7 @@ using Coworkee.Application.Requests;
 using Coworkee.Domain.Entities.Notifications;
 using Hangfire;
 using MediatR;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Infrastructure.Services

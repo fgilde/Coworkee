@@ -15,7 +15,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +28,7 @@ using Coworkee.Domain.Entities.Identity;
 using Coworkee.Infrastructure.Extensions;
 using Coworkee.Application.Validators.Requests.Identity;
 using Coworkee.Shared.Constants.Role;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {

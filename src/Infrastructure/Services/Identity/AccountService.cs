@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Coworkee.Application;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.Account;
 using Coworkee.Application.Hubs.Events;
@@ -18,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Infrastructure.Services.Identity

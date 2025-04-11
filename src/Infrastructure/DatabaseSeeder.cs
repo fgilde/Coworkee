@@ -1,7 +1,6 @@
 using System;
 using Coworkee.Infrastructure.Contexts;
 using System.Linq;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Infrastructure.Helpers;
@@ -10,6 +9,7 @@ using Coworkee.Shared.Constants.Application;
 using Coworkee.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Infrastructure

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using Coworkee.Application.Common.Exceptions;
 using Coworkee.Application.Common.Models.Chat;
 using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Chat;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Infrastructure.Models.Identity;
 using Coworkee.Shared.Constants.Role;
 using Microsoft.Extensions.Localization;
+using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Infrastructure.Services

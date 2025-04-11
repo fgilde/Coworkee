@@ -1,8 +1,10 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Application.Contracts;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Coworkee.Application.Features.System
 {
@@ -16,15 +18,16 @@ namespace Coworkee.Application.Features.System
 
         internal class Handler : IRequestHandler<Request>
         {
-            private readonly IServiceBus bus;
+            private readonly IServiceProvider _provider;
 
-            public Handler(IServiceBus bus)
+            public Handler(IServiceProvider provider)
             {
-                this.bus = bus;
+                _provider = provider;
             }
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
+                var bus = _provider.GetRequiredService<IServiceBus>();
                 await bus.SendMessageAsync(request.Queue, request.Content, cancellationToken);
             }
         }

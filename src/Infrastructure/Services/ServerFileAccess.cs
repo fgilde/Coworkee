@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nextended.Core;
 using Microsoft.AspNetCore.Hosting;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Infrastructure.Services;
 

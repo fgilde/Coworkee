@@ -8599,12 +8599,6 @@
         "mailConfiguration": {
           "$ref": "#/definitions/Mailconfiguration"
         },
-        "azure": {
-          "$ref": "#/definitions/Azure"
-        },
-        "rabbitMQ": {
-          "$ref": "#/definitions/Rabbitmq"
-        },
         "backupOptions": {
           "$ref": "#/definitions/BackupOptions"
         }
@@ -8775,56 +8769,6 @@
           "type": "string"
         },
         "displayName": {
-          "type": "string"
-        }
-      }
-    },
-    "Azure": {
-      "type": "object",
-      "properties": {
-        "signalR": {
-          "$ref": "#/definitions/Signalr"
-        }
-      }
-    },
-    "Signalr": {
-      "type": "object",
-      "required": [
-        "enabled"
-      ],
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "stickyServerMode": {
-          "type": "string"
-        },
-        "connectionString": {
-          "type": "string"
-        }
-      }
-    },
-    "Rabbitmq": {
-      "type": "object",
-      "required": [
-        "enabled",
-        "port"
-      ],
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "hostName": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "userName": {
-          "type": "string"
-        },
-        "password": {
           "type": "string"
         }
       }

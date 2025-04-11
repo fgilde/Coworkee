@@ -8064,8 +8064,6 @@ export class Rootobject implements IRootobject {
     cognitiveServices?: Cognitiveservices | undefined;
     apiDocumentation?: Apidocumentation | undefined;
     mailConfiguration?: Mailconfiguration | undefined;
-    azure?: Azure | undefined;
-    rabbitMQ?: Rabbitmq | undefined;
     backupOptions?: BackupOptions | undefined;
 
     constructor(data?: IRootobject) {
@@ -8087,8 +8085,6 @@ export class Rootobject implements IRootobject {
             this.cognitiveServices = _data["cognitiveServices"] ? Cognitiveservices.fromJS(_data["cognitiveServices"]) : <any>undefined;
             this.apiDocumentation = _data["apiDocumentation"] ? Apidocumentation.fromJS(_data["apiDocumentation"]) : <any>undefined;
             this.mailConfiguration = _data["mailConfiguration"] ? Mailconfiguration.fromJS(_data["mailConfiguration"]) : <any>undefined;
-            this.azure = _data["azure"] ? Azure.fromJS(_data["azure"]) : <any>undefined;
-            this.rabbitMQ = _data["rabbitMQ"] ? Rabbitmq.fromJS(_data["rabbitMQ"]) : <any>undefined;
             this.backupOptions = _data["backupOptions"] ? BackupOptions.fromJS(_data["backupOptions"]) : <any>undefined;
         }
     }
@@ -8110,8 +8106,6 @@ export class Rootobject implements IRootobject {
         data["cognitiveServices"] = this.cognitiveServices ? this.cognitiveServices.toJSON() : <any>undefined;
         data["apiDocumentation"] = this.apiDocumentation ? this.apiDocumentation.toJSON() : <any>undefined;
         data["mailConfiguration"] = this.mailConfiguration ? this.mailConfiguration.toJSON() : <any>undefined;
-        data["azure"] = this.azure ? this.azure.toJSON() : <any>undefined;
-        data["rabbitMQ"] = this.rabbitMQ ? this.rabbitMQ.toJSON() : <any>undefined;
         data["backupOptions"] = this.backupOptions ? this.backupOptions.toJSON() : <any>undefined;
         return data;
     }
@@ -8126,8 +8120,6 @@ export interface IRootobject {
     cognitiveServices?: Cognitiveservices | undefined;
     apiDocumentation?: Apidocumentation | undefined;
     mailConfiguration?: Mailconfiguration | undefined;
-    azure?: Azure | undefined;
-    rabbitMQ?: Rabbitmq | undefined;
     backupOptions?: BackupOptions | undefined;
 }
 
@@ -8616,138 +8608,6 @@ export interface IMailconfiguration {
     userName?: string | undefined;
     password?: string | undefined;
     displayName?: string | undefined;
-}
-
-export class Azure implements IAzure {
-    signalR?: Signalr | undefined;
-
-    constructor(data?: IAzure) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.signalR = _data["signalR"] ? Signalr.fromJS(_data["signalR"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): Azure {
-        data = typeof data === 'object' ? data : {};
-        let result = new Azure();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["signalR"] = this.signalR ? this.signalR.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-export interface IAzure {
-    signalR?: Signalr | undefined;
-}
-
-export class Signalr implements ISignalr {
-    enabled!: boolean;
-    stickyServerMode?: string | undefined;
-    connectionString?: string | undefined;
-
-    constructor(data?: ISignalr) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.enabled = _data["enabled"];
-            this.stickyServerMode = _data["stickyServerMode"];
-            this.connectionString = _data["connectionString"];
-        }
-    }
-
-    static fromJS(data: any): Signalr {
-        data = typeof data === 'object' ? data : {};
-        let result = new Signalr();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["enabled"] = this.enabled;
-        data["stickyServerMode"] = this.stickyServerMode;
-        data["connectionString"] = this.connectionString;
-        return data;
-    }
-}
-
-export interface ISignalr {
-    enabled: boolean;
-    stickyServerMode?: string | undefined;
-    connectionString?: string | undefined;
-}
-
-export class Rabbitmq implements IRabbitmq {
-    enabled!: boolean;
-    hostName?: string | undefined;
-    port!: number;
-    userName?: string | undefined;
-    password?: string | undefined;
-
-    constructor(data?: IRabbitmq) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.enabled = _data["enabled"];
-            this.hostName = _data["hostName"];
-            this.port = _data["port"];
-            this.userName = _data["userName"];
-            this.password = _data["password"];
-        }
-    }
-
-    static fromJS(data: any): Rabbitmq {
-        data = typeof data === 'object' ? data : {};
-        let result = new Rabbitmq();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["enabled"] = this.enabled;
-        data["hostName"] = this.hostName;
-        data["port"] = this.port;
-        data["userName"] = this.userName;
-        data["password"] = this.password;
-        return data;
-    }
-}
-
-export interface IRabbitmq {
-    enabled: boolean;
-    hostName?: string | undefined;
-    port: number;
-    userName?: string | undefined;
-    password?: string | undefined;
 }
 
 export class BackupOptions implements IBackupOptions {

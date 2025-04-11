@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Exceptions;
 using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.Account;
 using Coworkee.Shared.Constants.Role;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {

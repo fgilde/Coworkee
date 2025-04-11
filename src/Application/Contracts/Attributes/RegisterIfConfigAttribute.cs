@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Nextended.Core.Extensions;
 using Coworkee.Application.Configurations;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Application.Contracts.Attributes;
 

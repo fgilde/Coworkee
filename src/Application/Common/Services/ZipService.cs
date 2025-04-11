@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Application.Common.Services;
 

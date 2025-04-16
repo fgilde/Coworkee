@@ -28,6 +28,7 @@ internal static class OllamaHelper
                 openWebUi = webui;
                 webui.WithOtlpExporter()
                     .WithExternalHttpEndpoints()
+                    .WithDataVolume()
                     .PublishAsContainer();
             }, ApplicationConstants.ServiceNames.OllamaUI)
             .WithExternalHttpEndpoints();

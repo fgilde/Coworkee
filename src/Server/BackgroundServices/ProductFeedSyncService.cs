@@ -8,62 +8,68 @@ using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
+using Coworkee.Application.Features.Brands.Commands.AddEdit;
+using Coworkee.Application.Features.Brands.Queries.GetAll;
 using Coworkee.Application.Features.Products.Commands.AddEdit;
-using Coworkee.Application.Features.Products.Queries.GetAllPaged;
-using Coworkee.Domain.Entities.Catalog;
 using Coworkee.Infrastructure.Contexts;
-using Coworkee.Server.Services;
 using CsvHelper;
 using Hangfire;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nextended.Core.Extensions;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Server.BackgroundServices;
 
-//[RegisterAs(typeof(IHostedService), ServiceLifetime = ServiceLifetime.Singleton)]
-public class ProductFeedSyncService : BackgroundService
+[RegisterAs(typeof(IHostedService), ServiceLifetime = ServiceLifetime.Singleton, Enabled = false)]
+public class ProductFeedSyncService(IServiceScopeFactory scopeFactory) : BackgroundService
 {
-    public readonly IServiceScopeFactory ScopeFactory;
-    // private const string FeedUrl = "https://transport.productsup.io/9749eccfe150b21a58b0/channel/378317/pdsfeed.csv";
+    public readonly IServiceScopeFactory ScopeFactory = scopeFactory;
     private const string FeedUrl = "https://transport.productsup.io/9749eccfe150b21a58b0/channel/377786/pdsfeed.csv";
 
-
-    public ProductFeedSyncService(IServiceScopeFactory scopeFactory)
-    {
-        ScopeFactory = scopeFactory;
-    }
-
-    public async Task RunImport(CancellationToken stoppingToken)
+    public async Task RunImport(BrandDto targetBrand, CancellationToken stoppingToken)
     {
         using var scope = await ScopeFactory.CreateScope().AsSystemUserAsync();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-        await ReadRemoteFeedAsync(mediator, db, stoppingToken);
+        await ReadRemoteFeedAsync(mediator, targetBrand, db, stoppingToken);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        var brand = await EnsureBrand();
         while (!stoppingToken.IsCancellationRequested)
         {
-            BackgroundJob.Enqueue(() => RunImport(stoppingToken) );
+            BackgroundJob.Enqueue(() => RunImport(brand, stoppingToken));
             await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
         }
     }
 
-    private Task ReadRemoteFeedAsync(IMediator mediator, ApplicationDbContext db, CancellationToken stoppingToken)
+    private async Task<BrandDto> EnsureBrand()
+    {
+        using var scope = await ScopeFactory.CreateScope().AsSystemUserAsync();
+        var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+        var brands = await mediator.Send(new GetAllBrandsQuery() { Force = true });
+        if (brands.Count <= 0)
+        {
+            var cmd = new AddEditBrandsCommand(new BrandDto()
+            {
+                Name = "Default",
+                Description = "Default brand",
+            });
+            var res = await mediator.Send(cmd);
+            return res.Added.First();
+        }
+
+        return brands.First();
+    }
+
+    private Task ReadRemoteFeedAsync(IMediator mediator, BrandDto targetBrand, ApplicationDbContext db, CancellationToken stoppingToken)
     {
         return Task.Run(async () =>
         {
             try
             {
-                
-                var data = await mediator.Send(new GetAllProductsQuery(), stoppingToken);
-                
-                return;
                 int index = 0;
                 Uri uri = new Uri(FeedUrl);
 
@@ -74,14 +80,13 @@ public class ProductFeedSyncService : BackgroundService
 
                     StreamReader strReader = new StreamReader(await httpResponseMessage.Content.ReadAsStreamAsync(stoppingToken));
                     CsvReader csv = new CsvReader(strReader, CultureInfo.InvariantCulture);
-                    var products = new List<Product>();
+                    var products = new List<ProductDto>();
                     while (await csv.ReadAsync())
                     {
                         if (index > 0) // csv header we don't want
                         {
-                            var product = CreateProduct(csv);
+                            var product = CreateProduct(csv, targetBrand);
                             products.Add(product);
-                           // AddOrUpdateProduct(product, db);
                         }
 
                         index++;
@@ -90,9 +95,10 @@ public class ProductFeedSyncService : BackgroundService
 
                     try
                     {
-                        var cmd = new AddEditProductsCommand(products.MapElementsTo<ProductDto>().ToArray());
+                        var cmd = new AddEditProductsCommand(products.ToArray());
                         var result = await mediator.Send(cmd, stoppingToken);
                         var c = result.Added.Length;
+                        Console.WriteLine($"Added {c} products");
                     }
                     catch (Exception e)
                     {
@@ -103,54 +109,21 @@ public class ProductFeedSyncService : BackgroundService
                 }
             }
             catch (System.Net.WebException)
-            {}
+            { }
         }, stoppingToken);
     }
 
-    private void AddOrUpdateProduct(Product? product, ApplicationDbContext db)
-    {
-        return;
-        if (product == null)
-            return;
-        var productInDb = db.Products.FirstOrDefault(x => x.Id == product.Id);
-        if (productInDb != null)
-        {
-            if (productInDb.NeedsUpdate(product))
-            {
-                // Update
-                product.LastModifiedOn = DateTime.UtcNow;
-                db.Entry(productInDb).CurrentValues.SetValues(product);
-            }
-        }
-        else
-        {
-            db.Products.Add(product);
-        }
-    }
 
-
-    private Product? CreateProduct(CsvReader csv)
+    private ProductDto? CreateProduct(CsvReader csv, BrandDto targetBrand)
     {
-        return new Product()
+        return new ProductDto()
         {
             Name = csv.GetField<string>(0),
             Barcode = csv.GetField<string>(1),
             ImageDataURL = csv.GetField<string>(2),
-            BrandId = 1,
-            //TargetUrl = csv.GetField<string>(4),
-            //Thumbnail = csv.GetField<string>(5),
-            //Category = csv.GetField<string>(6),
+            Brand = targetBrand,
             Description = csv.GetField<string>(6),
             Rate = 3,
-            //SalePercentage = csv.GetField<string>(8),
-            //Price = decimal.ToDouble(csv.GetField<string>(9).ParsePrice()),
-            //SalePrice = decimal.ToDouble(csv.GetField<string>(10).ParsePrice()),
-            //Price = csv.GetField<string>(9),
-            //SalePrice = csv.GetField<string>(10),
-            //Shop = csv.GetField<string>(11),
-            //Subcategory = csv.GetField<string>(12),
-            //DateUpdated = DateTime.UtcNow.Ticks,
-            //DateCreated = DateTime.UtcNow.Ticks
         };
     }
 

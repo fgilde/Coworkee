@@ -30,6 +30,7 @@ namespace Coworkee.Client.Shared.Components
 {
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {
+        [Parameter] public string TextCreate { get; set; } = "Create";
         [Parameter] public int Elevation { get; set; } = 25;
         [Parameter] public RenderFragment ToolbarContentBeforeStart { get; set; }
         [Parameter] public RenderFragment ToolbarContentAfterStart { get; set; }
@@ -61,6 +62,7 @@ namespace Coworkee.Client.Shared.Components
         [Parameter] public Func<TResult, bool> CanDeleteFn { get; set; }
         [Parameter] public Func<TResult, bool> CanEditFn { get; set; }
         [Parameter] public Func<string, string> CaptionFn { get; set; }
+        [Parameter] public Func<TResult, string, string?> ValueFn { get; set; }
         [Parameter] public Func<TResult, int, string> RowStyle { get; set; }
         [Parameter] public string AdditionalRowStyle { get; set; }
         [Parameter] public string[] Prefixes { get; set; }
@@ -336,6 +338,9 @@ namespace Coworkee.Client.Shared.Components
 
         private string PropertyValueFor(TResult context, string prop)
         {
+            var result = ValueFn?.Invoke(context, prop);
+            if (result != null)
+                return result;
             var property = PropertyFor(context, prop);
             if (property?.PropertyType.IsEnum == true)
             {

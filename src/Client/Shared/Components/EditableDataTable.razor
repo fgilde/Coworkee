@@ -2,7 +2,6 @@
 @typeparam TIdType
 @inject Microsoft.Extensions.Localization.IStringLocalizer<EditableDataTable<TResult, TIdType>> _localizer
 @using System.Threading
-@using Coworkee.Client.Pages.Catalog
 @using Nextended.Core.Extensions
 @using Coworkee.Application.Contracts.Enums
 @using Nextended.Core.Helper
@@ -53,7 +52,7 @@ else
             }
             @if (ApiCreateOrEdit != null)
             {
-                <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer["Create"]" />
+                <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer[TextCreate]" />
             }
             <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh" />
             @if (Export != null)

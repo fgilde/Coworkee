@@ -15,8 +15,8 @@
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
         @if (!(CurrentUser?.Identity?.IsAuthenticated ?? false) || CurrentUser.IsGuest())
         {
-            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary" Link="@ApplicationConstants.Routes.Login" StartIcon="@Icons.Material.Filled.SwitchAccount">@localizer["Sign In"]</MudButton>
-            <MudButton Style="margin-left: 5px;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NewLabel" Color="Color.Info" Link="@ApplicationConstants.Routes.Register">@localizer["Register"]</MudButton>
+            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary" Href="@ApplicationConstants.Routes.Login" StartIcon="@Icons.Material.Filled.SwitchAccount">@localizer["Sign In"]</MudButton>
+            <MudButton Style="margin-left: 5px;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NewLabel" Color="Color.Info" Href="@ApplicationConstants.Routes.Register">@localizer["Register"]</MudButton>
         }
 
         @if (_config?.ServerConfiguration?.AssistantAvailable == true)

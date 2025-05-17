@@ -81,7 +81,7 @@ else
                                 <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
                                 }
                             }
-                        <MudMenuItem Link="@_navigationManager.ToAbsoluteServerUri(context.URL)" Disabled="@(string.IsNullOrWhiteSpace(context.URL))" Target="_blank">@_localizer["Download"]</MudMenuItem>
+                        <MudMenuItem Href="@_navigationManager.ToAbsoluteServerUri(context.URL)" Disabled="@(string.IsNullOrWhiteSpace(context.URL))" Target="_blank">@_localizer["Download"]</MudMenuItem>
                     </MudMenu>
                     }
                     else

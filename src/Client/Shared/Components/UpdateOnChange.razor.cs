@@ -11,7 +11,6 @@ using MudBlazor;
 using MudBlazor.Extensions.Helper;
 using MudBlazor.Extensions.Options;
 using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
 using Coworkee.Application.Hubs.Events;
 using Coworkee.Client.Extensions;
 

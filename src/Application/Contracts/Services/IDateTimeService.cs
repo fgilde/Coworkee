@@ -1,9 +1,8 @@
 using System;
 
-namespace Coworkee.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services;
+
+public interface IDateTimeService
 {
-    public interface IDateTimeService
-    {
-        DateTime NowUtc { get; }
-    }
+    DateTime NowUtc { get; }
 }

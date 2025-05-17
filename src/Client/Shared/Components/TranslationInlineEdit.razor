@@ -1,12 +1,11 @@
 @using Microsoft.Extensions.Localization
-@using Coworkee.Shared.Constants.Application
 @using Microsoft.AspNetCore.SignalR.Client
 @using Coworkee.Application.Features.Translations.Commands.AddEdit
 @using System.Globalization
 @using Coworkee.Application.Common.Models
 @using Coworkee.Application.Common.Security
 @using Coworkee.Shared.Extensions
-@inject Microsoft.Extensions.Localization.IStringLocalizer<TranslationInlineEdit> localizer
+@inject IStringLocalizer<TranslationInlineEdit> localizer
 
 <div @onclick="ElementClick" @onmouseover="ElementMouseOver" @onmouseout="ElementMouseLeave">
     @if (!inEditMode || usePopover)

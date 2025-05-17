@@ -1,5 +1,4 @@
 using Coworkee.Application.Requests.Identity;
-using Coworkee.Infrastructure.Helpers;
 using Coworkee.Infrastructure.Models.Identity;
 using Coworkee.Shared.Constants.Role;
 using Coworkee.Shared.Wrapper;
@@ -16,6 +15,7 @@ using Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Shared.Constants.Permission;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
+using Coworkee.Infrastructure.Extensions;
 
 namespace Coworkee.Infrastructure.Services.Identity
 {

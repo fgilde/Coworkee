@@ -1,12 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Coworkee.Application.Contracts.Services.Storage
+namespace Coworkee.Application.Contracts.Services.Storage;
+
+[ExcludeFromCodeCoverage]
+public class ChangedEventArgs
 {
-    [ExcludeFromCodeCoverage]
-    public class ChangedEventArgs
-    {
-        public string Key { get; set; }
-        public object OldValue { get; set; }
-        public object NewValue { get; set; }
-    }
+    public string Key { get; set; }
+    public object OldValue { get; set; }
+    public object NewValue { get; set; }
 }

@@ -1,7 +1,6 @@
-namespace Coworkee.Application.Contracts.Services
+namespace Coworkee.Application.Contracts.Services;
+
+public interface IDatabaseSeeder
 {
-    public interface IDatabaseSeeder
-    {
-        void Initialize();
-    }
+    void Initialize();
 }

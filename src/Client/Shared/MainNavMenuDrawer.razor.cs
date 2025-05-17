@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudBlazor.Extensions.Helper;
 using System.Threading.Tasks;
-using Coworkee.Client.Enums;
 using System.Security.Claims;
-using Coworkee.Application.Common.Extensions;
 using MudBlazor.Extensions.Core.Enums;
 
 namespace Coworkee.Client.Shared;

@@ -11,46 +11,45 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.Base.Queries
-{
-    public class GetByIdQueryBase<TId, TDto> : IRequest<TDto>
-    {
-        public TId Id { get; set; }
+namespace Coworkee.Application.Features.Base.Queries;
 
-        public GetByIdQueryBase(TId id)
-        {
-            Id = id;
-        }
+public class GetByIdQueryBase<TId, TDto> : IRequest<TDto>
+{
+    public TId Id { get; set; }
+
+    public GetByIdQueryBase(TId id)
+    {
+        Id = id;
+    }
+}
+
+internal class GetByIdQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, TDto>
+    where TQuery : GetByIdQueryBase<TEntityId, TDto>
+    where TEntity : class, IEntity<TEntityId>
+    where TDto : class, IDtoBase
+{
+    protected readonly IUnitOfWork<TEntityId> UnitOfWork;
+    protected readonly IServiceProvider Provider;
+    protected T Get<T>() => Provider.GetService<T>();
+
+    public GetByIdQueryHandlerBase(IUnitOfWork<TEntityId> unitOfWork, IServiceProvider provider)
+    {
+        UnitOfWork = unitOfWork;
+        Provider = provider;
     }
 
-    internal class GetByIdQueryHandlerBase<TQuery, TEntityId, TDto, TEntity> : IRequestHandler<TQuery, TDto>
-        where TQuery : GetByIdQueryBase<TEntityId, TDto>
-        where TEntity : class, IEntity<TEntityId>
-        where TDto : class, IDtoBase
+    protected virtual TDto ToDto(TEntity res) => res?.MapTo<TDto>();
+    protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
+    protected virtual Expression<Func<TEntity, object>>[] Includes => null;
+
+    public virtual async Task<TDto> Handle(TQuery request, CancellationToken cancellationToken)
     {
-        protected readonly IUnitOfWork<TEntityId> UnitOfWork;
-        protected readonly IServiceProvider Provider;
-        protected T Get<T>() => Provider.GetService<T>();
+        var query = Queryable;
 
-        public GetByIdQueryHandlerBase(IUnitOfWork<TEntityId> unitOfWork, IServiceProvider provider)
-        {
-            UnitOfWork = unitOfWork;
-            Provider = provider;
-        }
+        TEntity res = Includes?.Any() == true
+            ? await Includes.Aggregate(query, (current, include) => current.Include(include)).FirstOrDefaultAsync(e => e.Id.Equals(request.Id), cancellationToken: cancellationToken)
+            : await UnitOfWork.Repository<TEntity>().GetByIdAsync(request.Id, cancellationToken);
 
-        protected virtual TDto ToDto(TEntity res) => res?.MapTo<TDto>();
-        protected virtual IQueryable<TEntity> Queryable => UnitOfWork.Repository<TEntity>().Entities;
-        protected virtual Expression<Func<TEntity, object>>[] Includes => null;
-
-        public virtual async Task<TDto> Handle(TQuery request, CancellationToken cancellationToken)
-        {
-            var query = Queryable;
-
-            TEntity res = Includes?.Any() == true
-                ? await Includes.Aggregate(query, (current, include) => current.Include(include)).FirstOrDefaultAsync(e => e.Id.Equals(request.Id), cancellationToken: cancellationToken)
-                : await UnitOfWork.Repository<TEntity>().GetByIdAsync(request.Id, cancellationToken);
-
-            return ToDto(res);
-        }
+        return ToDto(res);
     }
 }

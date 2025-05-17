@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using Coworkee.Shared.Constants.Application;
 using DefaultUsers = Coworkee.Shared.Constants.Application.ApplicationConstants.Defaults.Users;
 
 namespace Coworkee.Shared.Models;

@@ -1,5 +1,5 @@
 @page "/document-types/{Action?}/{Id?}"
-@attribute [Authorize(Policy = Permissions.Brands.View)]
+@attribute [Authorize(Policy = Permissions.DocumentTypes.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<DocumentTypes> _localizer
 @using Coworkee.Shared.Wrapper
 @using Coworkee.Application.Common.Models

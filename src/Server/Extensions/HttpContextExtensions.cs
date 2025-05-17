@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
-
 namespace Coworkee.Server.Extensions
 {
     public static class HttpContextExtensions

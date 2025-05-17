@@ -3,6 +3,15 @@
   <PropertyGroup>
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     <BlazorWebAssemblyEnableDebugging>true</BlazorWebAssemblyEnableDebugging>
+    <!--Experimental-->
+    <CompressionEnabled>true</CompressionEnabled>
+    <!--<BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+      <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
+      <PublishTrimmed>true</PublishTrimmed>
+      <BlazorEnableCompression>true</BlazorEnableCompression>    
+      <TrimMode>link</TrimMode>-->
+
+    <!--End Experimental-->
     <RootNamespace>Coworkee.Client</RootNamespace>
     <AssemblyName>Coworkee.Client</AssemblyName>
   </PropertyGroup>

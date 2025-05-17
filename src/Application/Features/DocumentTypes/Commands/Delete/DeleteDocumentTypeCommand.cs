@@ -11,27 +11,26 @@ using Coworkee.Domain.Entities.Misc;
 using Coworkee.Shared.Constants.Permission;
 using MediatR;
 
-namespace Coworkee.Application.Features.DocumentTypes.Commands.Delete
+namespace Coworkee.Application.Features.DocumentTypes.Commands.Delete;
+
+[CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Delete })]
+public class DeleteDocumentTypesCommand : DeleteCommandBase<int>
+{ }
+
+internal class DeleteDocumentTypesCommandHandler : DeleteCommandHandlerBase<DeleteDocumentTypesCommand, int, DocumentTypeDto, DocumentType>
 {
-    [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Delete })]
-    public class DeleteDocumentTypesCommand : DeleteCommandBase<int>
+    public DeleteDocumentTypesCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider)
+        : base(unitOfWork, mediator, permissionService, provider)
     { }
 
-    internal class DeleteDocumentTypesCommandHandler : DeleteCommandHandlerBase<DeleteDocumentTypesCommand, int, DocumentTypeDto, DocumentType>
+    public override async Task Handle(DeleteDocumentTypesCommand command, CancellationToken cancellationToken)
     {
-        public DeleteDocumentTypesCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider)
-            : base(unitOfWork, mediator, permissionService, provider)
-        { }
-
-        public override async Task Handle(DeleteDocumentTypesCommand command, CancellationToken cancellationToken)
+        var productRepository = Get<IDocumentRepository>();
+        foreach (var id in command.Ids)
         {
-            var productRepository = Get<IDocumentRepository>();
-            foreach (var id in command.Ids)
-            {
-                if (await productRepository.IsDocumentTypeUsed(id))
-                    throw Errors.Create("Deletion Not Allowed", HttpStatusCode.Conflict);
-            }
-            await base.Handle(command, cancellationToken);
+            if (await productRepository.IsDocumentTypeUsed(id))
+                throw Errors.Create("Deletion Not Allowed", HttpStatusCode.Conflict);
         }
+        await base.Handle(command, cancellationToken);
     }
 }

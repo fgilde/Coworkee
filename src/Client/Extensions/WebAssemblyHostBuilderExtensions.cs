@@ -32,6 +32,7 @@ using Coworkee.Application.Contracts.Services;
 using Coworkee.Client.Configuration.MudExObjectEdit;
 using Nextended.Core.Helper;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
+
 namespace Coworkee.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions

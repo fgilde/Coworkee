@@ -6,38 +6,37 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Application.Features.System
+namespace Coworkee.Application.Features.System;
+
+public class SendToServiceBus
 {
-    public class SendToServiceBus
+    public class Request : IRequest
     {
-        public class Request : IRequest
+        public string Queue { get; set; }
+        public object Content { get; set; }
+    }
+
+    internal class Handler : IRequestHandler<Request>
+    {
+        private readonly IServiceProvider _provider;
+
+        public Handler(IServiceProvider provider)
         {
-            public string Queue { get; set; }
-            public object Content { get; set; }
+            _provider = provider;
         }
 
-        internal class Handler : IRequestHandler<Request>
+        public async Task Handle(Request request, CancellationToken cancellationToken)
         {
-            private readonly IServiceProvider _provider;
-
-            public Handler(IServiceProvider provider)
-            {
-                _provider = provider;
-            }
-
-            public async Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                var bus = _provider.GetRequiredService<IServiceBus>();
-                await bus.SendMessageAsync(request.Queue, request.Content, cancellationToken);
-            }
+            var bus = _provider.GetRequiredService<IServiceBus>();
+            await bus.SendMessageAsync(request.Queue, request.Content, cancellationToken);
         }
+    }
 
-        internal class Validator : AbstractValidator<Request>
+    internal class Validator : AbstractValidator<Request>
+    {
+        public Validator()
         {
-            public Validator()
-            {
-                RuleFor(x => x.Queue).NotEmpty();
-            }
+            RuleFor(x => x.Queue).NotEmpty();
         }
     }
 }

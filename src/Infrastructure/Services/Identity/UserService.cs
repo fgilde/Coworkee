@@ -12,7 +12,6 @@ using Coworkee.Application.Common.Exceptions;
 using Coworkee.Application.Common.Extensions;
 using Coworkee.Application.Common.Models.Identity;
 using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Enums;
 using Coworkee.Application.Contracts.Services;
 using Coworkee.Application.Contracts.Services.ExportImport;
@@ -21,7 +20,6 @@ using Coworkee.Application.Hubs.Events.Base;
 using Coworkee.Application.Requests.Identity;
 using Coworkee.Application.Requests.Mail;
 using Coworkee.Infrastructure.Contexts;
-using Coworkee.Infrastructure.Helpers;
 using Coworkee.Infrastructure.Models.Identity;
 using Coworkee.Infrastructure.Specifications;
 using Coworkee.Shared.Constants.Application;
@@ -47,7 +45,6 @@ using Coworkee.Infrastructure.Extensions;
 using System.Globalization;
 using System.Security.Claims;
 using Coworkee.Shared;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Nextended.Core.Attributes;
 
 namespace Coworkee.Infrastructure.Services.Identity

@@ -1,8 +1,6 @@
-@using Nextended.Core.Extensions
 @using Coworkee.Application.Common.Models.Identity
 @using System.Threading
 @using Coworkee.Application.Common.Extensions
-@using Microsoft.AspNetCore.Components.Rendering
 @using MudBlazor.Extensions.Helper
 @using MudBlazor.Extensions.Options
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserFilter> _localizer
@@ -15,17 +13,34 @@
 
     private bool _initialized;
     private string[] _preInitParameters;
+    private string _selectedUserId;
 
     public override Variant ChipVariant { get; set; } = Variant.Text;
     public override Func<UserResponse, string> ToStringFunc { get; set; } = item => item?.FullName;
     private RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
     private bool IsOverwritten(string paramName) => _preInitParameters?.Contains(paramName) == true;
 
+
     /// <summary>
     /// If set only users available in one of the specified roles will be shown
     /// </summary>
     [Parameter]
     public string[] Roles { get; set; }
+
+    [Parameter]
+    public string SelectedUserId
+    {
+        get => _selectedUserId;
+        set
+        {
+            if (_selectedUserId == value)
+                return;
+            _selectedUserId = value;
+            SelectedUserIdChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter] public EventCallback<string> SelectedUserIdChanged { get; set; }
 
     /// <summary>
     /// If true the current user will not be shown in the list
@@ -53,6 +68,11 @@
         return res;
     }
 
+    protected override async Task SetValueAsync(UserResponse value, bool updateText = true, bool force = false)
+    {
+        await base.SetValueAsync(value, updateText, force);
+        SelectedUserId = value?.Id;
+    }
 
     /// <inheritdoc />
     public override Task SetParametersAsync(ParameterView parameters)

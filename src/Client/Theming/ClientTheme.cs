@@ -4,7 +4,6 @@ using MudBlazor;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Core.Enums;
 using MudBlazor.Extensions.Helper;
-using Nextended.Core.Extensions;
 
 namespace Coworkee.Client.Theming
 {

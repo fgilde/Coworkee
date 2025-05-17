@@ -9,17 +9,16 @@ using Coworkee.Domain.Entities.Localization;
 using Coworkee.Shared.Constants.Permission;
 using MediatR;
 
-namespace Coworkee.Application.Features.Translations.Commands.Delete
-{
-    [CustomAuthorize(Policies = new[] { Permissions.Translations.Delete })]
-    public class DeleteTranslationsCommand : DeleteCommandBase<int>
-    {}
+namespace Coworkee.Application.Features.Translations.Commands.Delete;
 
-    internal class DeleteTranslationsCommandHandler : DeleteCommandHandlerBase<DeleteTranslationsCommand, int, TranslationDto, Translation>
-    {
-        protected override string CacheKey => $"{base.CacheKey}-{Thread.CurrentThread.CurrentCulture.Name}";
-        public DeleteTranslationsCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider) 
-            : base(unitOfWork, mediator, permissionService, provider)
-        {}
-    }
+[CustomAuthorize(Policies = [Permissions.Translations.Delete])]
+public class DeleteTranslationsCommand : DeleteCommandBase<int>
+{}
+
+internal class DeleteTranslationsCommandHandler : DeleteCommandHandlerBase<DeleteTranslationsCommand, int, TranslationDto, Translation>
+{
+    protected override string CacheKey => $"{base.CacheKey}-{Thread.CurrentThread.CurrentCulture.Name}";
+    public DeleteTranslationsCommandHandler(IUnitOfWork<int> unitOfWork, IMediator mediator, IPermissionService permissionService, IServiceProvider provider) 
+        : base(unitOfWork, mediator, permissionService, provider)
+    {}
 }

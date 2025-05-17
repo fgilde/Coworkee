@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Coworkee.Application.Common.Models.Identity;
 
-namespace Coworkee.Infrastructure.Helpers
+namespace Coworkee.Infrastructure.Extensions
 {
     public static class ClaimsHelper
     {

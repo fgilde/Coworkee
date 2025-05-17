@@ -1,5 +1,4 @@
 using System;
-using Coworkee.Application.Contracts.Attributes;
 using Coworkee.Application.Contracts.Services;
 using Nextended.Core.Attributes;
 

@@ -11,8 +11,7 @@ using Microsoft.Extensions.Logging;
 using Coworkee.Application.Common.Models;
 using System.Collections.Generic;
 using OllamaSharp;
-using OpenAI.Chat;
-using ChatRequest = OllamaSharp.Models.Chat.ChatRequest;
+
 
 namespace Coworkee.Server.Controllers
 {

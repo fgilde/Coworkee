@@ -7,7 +7,7 @@ namespace Coworkee.Application.Validators.Requests.Identity
 {
     public class TokenRequestValidator : AbstractValidator<TokenRequest>
     {
-        public TokenRequestValidator(IStringLocalizer<TokenRequestValidator> localizer, Publicsettings config)
+        public TokenRequestValidator(IStringLocalizer<TokenRequestValidator> localizer, PublicSettings config)
         {
             var emailRule = RuleFor(request => request.Email)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Email is required"]);

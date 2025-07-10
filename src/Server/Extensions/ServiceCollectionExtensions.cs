@@ -73,7 +73,7 @@ namespace Coworkee.Server.Extensions
                 var gptAssistantAvailable = config.PublicSettings.AssistantAvailable && !string.IsNullOrWhiteSpace(gptConfig.ApiKey);
                 if (gptAssistantAvailable)
                 {
-                    configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
+                    configuration[$"{nameof(PublicSettings)}:{nameof(PublicSettings.AssistantAvailable)}"] = true.ToString();
                     services.AddOpenAIActionInvoker(settings =>
                     {
                         settings.ApiKey = gptConfig.ApiKey;
@@ -85,16 +85,16 @@ namespace Coworkee.Server.Extensions
                 {
                     services.AddScoped(p => new OllamaApiClient(ollamaUrl, ApplicationConstants.LargeLanguageModel));
                     services.AddAIActionInvoker<OllamaAIHandler>(new AIActionInvokeSettings());
-                    configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = true.ToString();
+                    configuration[$"{nameof(PublicSettings)}:{nameof(PublicSettings.AssistantAvailable)}"] = true.ToString();
                 }
                 else
                 {
-                    configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = false.ToString();
+                    configuration[$"{nameof(PublicSettings)}:{nameof(PublicSettings.AssistantAvailable)}"] = false.ToString();
                 }
             }
             catch (Exception e)
             {
-                configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.AssistantAvailable)}"] = false.ToString();
+                configuration[$"{nameof(PublicSettings)}:{nameof(PublicSettings.AssistantAvailable)}"] = false.ToString();
                 Console.WriteLine(e);
             }
             return services;
@@ -152,7 +152,7 @@ namespace Coworkee.Server.Extensions
             IConfiguration configuration)
         {
             
-            configuration[$"{nameof(Publicsettings)}:{nameof(Publicsettings.HostClientInServer)}"] = ApplicationConstants.HostClientInServer.ToString();
+            configuration[$"{nameof(PublicSettings)}:{nameof(PublicSettings.HostClientInServer)}"] = ApplicationConstants.HostClientInServer.ToString();
 
             ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>(); // One time to have static instance filled as early as possible
             services.AddTransient(_ => ServerConfiguration.Instance = configuration.BindTo<ServerConfiguration>()); // Important as func to have always updated settings static instance is updated as well on each read

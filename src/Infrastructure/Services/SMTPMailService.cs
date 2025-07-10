@@ -11,7 +11,7 @@ using MimeKit;
 
 namespace Coworkee.Infrastructure.Services
 {
-    [RegisterAsIfConfigValueIsEmpty(typeof(IMailService), new[] { nameof(Mailconfiguration), nameof(Mailconfiguration.SendGridApiKey) })]
+    [RegisterAsIfConfigValueIsEmpty(typeof(IMailService), new[] { nameof(MailConfiguration), nameof(MailConfiguration.SendGridApiKey) })]
     public class SMTPMailService : IMailService
     {
         private readonly ServerConfiguration _config;

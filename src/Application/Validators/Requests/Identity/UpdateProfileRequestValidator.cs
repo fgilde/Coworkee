@@ -7,7 +7,7 @@ namespace Coworkee.Application.Validators.Requests.Identity
 {
     public class UpdateProfileValidator : AbstractValidator<UserResponse>
     {
-        public UpdateProfileValidator(IStringLocalizer<UpdateProfileValidator> localizer, Publicsettings config)
+        public UpdateProfileValidator(IStringLocalizer<UpdateProfileValidator> localizer, PublicSettings config)
         {
             RuleFor(request => request.FirstName)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["First Name is required"]);

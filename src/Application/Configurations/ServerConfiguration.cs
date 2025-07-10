@@ -4,165 +4,28 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Coworkee.Application.Configurations
 {
-    public class ServerConfiguration : Rootobject
+    public partial class ServerConfiguration
     {
         public static ServerConfiguration Instance { get; set; }
-
-        public ServerConfiguration()
-        { }
     }
+    
 
-    // Content here is generated. To generate new open appsettings.json from WebServer project select all and copy content. After wards here in this class use VS->Edit->Paste Special -> Paste JSON as classes
-
-    public class Rootobject
+    public partial class PublicSettings
     {
-        public string ClientUrl { get; set; }
-        public Connectionstrings ConnectionStrings { get; set; }
-
-        public Publicsettings PublicSettings { get; set; }
-        public string AllowedHosts { get; set; }
-        public Appconfiguration AppConfiguration { get; set; }
-        public Cognitiveservices CognitiveServices { get; set; }
-        public Apidocumentation ApiDocumentation { get; set; }
-        public Mailconfiguration MailConfiguration { get; set; }
-        public BackupOptions BackupOptions { get; set; }
-    }
-
-    public class Endpoint
-    {
-        public string Name { get; set; }
-        public string Address { get; set; }
-    }
-
-    public class Connectionstrings
-    {
-        public string DefaultConnection { get; set; }
-        public string Ollama { get; set; }
-    }
-
-    public class Publicsettings
-    {
-        public bool KeycloakEnabled => Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Keycloak, out string keycloakUrl) && !string.IsNullOrEmpty(keycloakUrl) && LoginSettings?.LoginMode != LoginMode.Internal;
-        public bool AssistantAvailable { get; set; }
-        public string ContactAddress { get; set; }
-        public bool HostClientInServer { get; set; }
-        public Userregistration UserRegistration { get; set; }
-        public LoginSettings LoginSettings { get; set; }
+        public bool KeycloakEnabled 
+            => Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Keycloak, out string keycloakUrl) 
+               && !string.IsNullOrEmpty(keycloakUrl) 
+               && this.LoginSettings?.LoginMode != LoginMode.Internal;
         public System.Collections.Generic.Dictionary<string, string> Endpoints { get; set; }
 
     }
 
-    public class LoginSettings
+    public partial class LoginSettings
     {
         public LoginMode LoginMode { get; set; }
-        public bool AllowLoginWithUsername { get; set; }
-        public string[] AllowedEmails { get; set; }
 
-    }
-
-    public class Userregistration
-    {
-        public bool Enabled { get; set; }
-        public bool RequireAddress { get; set; }
-        public bool RequiresAdministratorActivation { get; set; }
-        public bool EmailConfirmationRequired { get; set; }
-        public Usernamerules UsernameRules { get; set; }
-        public Passwordrules PasswordRules { get; set; }
-        public bool RequireDocuments { get; set; }
-        public int RegistrationDocumentsMaxFileSize { get; set; }
-        public string[] RegistrationDocumentTypes { get; set; }
-        public string[] AllowedEmails { get; set; }
-    }
-
-    public class Usernamerules
-    {
-        public int MinLength { get; set; }
-        public bool UsernameCanChangedAfterRegistration { get; set; }
-        public bool EmailCanChangedAfterRegistration { get; set; }
-    }
-
-    public class Passwordrules
-    {
-        public int MinLength { get; set; }
-        public bool CapitalLetterRequired { get; set; }
-        public bool LowercaseLetterRequired { get; set; }
-        public bool NumberRequired { get; set; }
-    }
-
-    public class Appconfiguration
-    {
-        public Idhashing IdHashing { get; set; }
-        public string Secret { get; set; }
-    }
-
-    public class Idhashing
-    {
-        public bool Enabled { get; set; }
-        public int MinLength { get; set; }
-        public bool AllowAccessWithNotHashedId { get; set; }
-        public string Salt { get; set; }
-    }
-
-    public class Cognitiveservices
-    {
-        public Openai OpenAi { get; set; }
-        public Translation Translation { get; set; }
-    }
-
-    public class Openai
-    {
-        public string ApiKey { get; set; }
-        public string Model { get; set; }
-    }
-
-    public class Translation
-    {
-        public string Key { get; set; }
-        public string TextTranslationEndpoint { get; set; }
-        public string DocumentTranslationEndpoint { get; set; }
-        public string Region { get; set; }
-    }
-
-    public class Apidocumentation
-    {
-        public bool RequireLogin { get; set; }
-        public bool RequirePermission { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public Contact Contact { get; set; }
-        public License License { get; set; }
-    }
-
-    public class Contact
-    {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Url { get; set; }
-    }
-
-    public class License
-    {
-        public string Name { get; set; }
-        public string spdx_id { get; set; }
-        public string Url { get; set; }
-    }
-
-    public class Mailconfiguration
-    {
-        public string SendGridApiKey { get; set; }
-        public string From { get; set; }
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string DisplayName { get; set; }
     }
     
-
-    public class BackupOptions
-    {
-        public string BucketName { get; set; }
-    }
 
     public enum LoginMode
     {
@@ -170,5 +33,4 @@ namespace Coworkee.Application.Configurations
         External,
         Internal
     }
-
 }

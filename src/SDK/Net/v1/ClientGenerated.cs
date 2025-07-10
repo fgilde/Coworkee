@@ -188,11 +188,11 @@ namespace SDK
         System.Threading.Tasks.Task<System.Collections.Generic.IList<Version>> System_AvailableApiVersionsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Publicsettings System_GetConfiguration();
+        PublicSettings System_GetConfiguration();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Publicsettings> System_GetConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PublicSettings> System_GetConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <exception cref="ApiException">A server side error occurred.</exception>
         FileResponse System_SendOnServiceBus(string queue, ProductDto entity);
@@ -2932,14 +2932,14 @@ namespace SDK
         }
 
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual Publicsettings System_GetConfiguration()
+        public virtual PublicSettings System_GetConfiguration()
         {
             return System.Threading.Tasks.Task.Run(async () => await System_GetConfigurationAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Publicsettings> System_GetConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PublicSettings> System_GetConfigurationAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2980,7 +2980,7 @@ namespace SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Publicsettings>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<PublicSettings>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

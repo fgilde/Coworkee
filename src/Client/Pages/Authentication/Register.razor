@@ -93,7 +93,7 @@
                         <MudDivider></MudDivider>
                         <MudExUploadEdit T="UploadRequest"
                                            MaxFileSize="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentsMaxFileSize"
-                                           MimeTypes="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentTypes"
+                                           MimeTypes="@_config?.ServerConfiguration?.UserRegistration?.RegistrationDocumentTypes?.ToArray()"
                                            MimeRestrictionType="RestrictionType.WhiteList"
                                            For="@(() => _registerUserModel.Documents)"
                                            ShowFileUploadButton="true"

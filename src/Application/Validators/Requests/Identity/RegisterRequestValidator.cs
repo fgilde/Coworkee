@@ -12,7 +12,7 @@ namespace Coworkee.Application.Validators.Requests.Identity
 {
     public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {
-        public RegisterRequestValidator(IStringLocalizer<RegisterRequestValidator> localizer, Publicsettings config, ICurrentUserService currentUserService)
+        public RegisterRequestValidator(IStringLocalizer<RegisterRequestValidator> localizer, PublicSettings config, ICurrentUserService currentUserService)
         // Notice: All injected services must provided by server and client
         {
             if (config.UserRegistration.RequireAddress)
@@ -36,12 +36,12 @@ namespace Coworkee.Application.Validators.Requests.Identity
             RuleFor(request => request.LastName)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Last Name is required"]);
 
-            string[] allowed = config?.UserRegistration?.AllowedEmails;
+            var allowed = config?.UserRegistration?.AllowedEmails;
 
             RuleFor(request => request.Email)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Email is required"])
                 .EmailAddress().WithMessage(x => localizer["Email is not correct"])
-                .Must(email => allowed == null || allowed.Length == 0 || allowed.Any(pattern => MatchesPattern(email, pattern)))
+                .Must(email => allowed == null || allowed.Count == 0 || allowed.Any(pattern => MatchesPattern(email, pattern)))
                 .WithMessage(x => localizer["Email is not allowed"]);
 
             RuleFor(request => request.UserName)
@@ -68,7 +68,7 @@ namespace Coworkee.Application.Validators.Requests.Identity
             if (string.IsNullOrWhiteSpace(email))
                 return false;
 
-            if (string.IsNullOrWhiteSpace(pattern))            
+            if (string.IsNullOrWhiteSpace(pattern) || pattern == "*")            
                 return true;
             
             string regexPattern = "^" + Regex.Escape(pattern).Replace("\\*", ".*") + "$";

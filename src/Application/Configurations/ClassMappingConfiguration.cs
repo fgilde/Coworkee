@@ -7,7 +7,7 @@ namespace Coworkee.Application.Configurations;
 
 internal static class ClassMappingConfiguration
 {
-    internal static void RegisterConverters(Idhashing hashSettings)
+    internal static void RegisterConverters(IdHashing hashSettings)
     {
         if (hashSettings.Enabled)
         {

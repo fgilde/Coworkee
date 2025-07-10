@@ -10,7 +10,7 @@ namespace Coworkee.Client.Configuration
         public bool AllowAnonymousPageAccess { get; set; }
         public int BackendHealthCheckIntervalInSeconds { get; set; }
         public Logging Logging { get; set; }
-        public Publicsettings ServerConfiguration { get; set; }
+        public PublicSettings ServerConfiguration { get; set; }
 
         public static ClientApplicationConfiguration Create(IConfiguration configuration)
         {

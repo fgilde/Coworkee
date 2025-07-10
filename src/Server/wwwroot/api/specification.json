@@ -1103,7 +1103,7 @@
             "x-nullable": false,
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Publicsettings"
+              "$ref": "#/definitions/PublicSettings"
             }
           }
         }
@@ -8273,17 +8273,14 @@
         }
       }
     },
-    "Publicsettings": {
+    "PublicSettings": {
       "type": "object",
       "required": [
-        "keycloakEnabled",
         "assistantAvailable",
-        "hostClientInServer"
+        "hostClientInServer",
+        "keycloakEnabled"
       ],
       "properties": {
-        "keycloakEnabled": {
-          "type": "boolean"
-        },
         "assistantAvailable": {
           "type": "boolean"
         },
@@ -8294,10 +8291,13 @@
           "type": "boolean"
         },
         "userRegistration": {
-          "$ref": "#/definitions/Userregistration"
+          "$ref": "#/definitions/UserRegistration"
         },
         "loginSettings": {
           "$ref": "#/definitions/LoginSettings"
+        },
+        "keycloakEnabled": {
+          "type": "boolean"
         },
         "endpoints": {
           "type": "object",
@@ -8307,7 +8307,7 @@
         }
       }
     },
-    "Userregistration": {
+    "UserRegistration": {
       "type": "object",
       "required": [
         "enabled",
@@ -8331,10 +8331,10 @@
           "type": "boolean"
         },
         "usernameRules": {
-          "$ref": "#/definitions/Usernamerules"
+          "$ref": "#/definitions/UsernameRules"
         },
         "passwordRules": {
-          "$ref": "#/definitions/Passwordrules"
+          "$ref": "#/definitions/PasswordRules"
         },
         "requireDocuments": {
           "type": "boolean"
@@ -8357,7 +8357,7 @@
         }
       }
     },
-    "Usernamerules": {
+    "UsernameRules": {
       "type": "object",
       "required": [
         "minLength",
@@ -8377,7 +8377,7 @@
         }
       }
     },
-    "Passwordrules": {
+    "PasswordRules": {
       "type": "object",
       "required": [
         "minLength",
@@ -8404,13 +8404,10 @@
     "LoginSettings": {
       "type": "object",
       "required": [
-        "loginMode",
-        "allowLoginWithUsername"
+        "allowLoginWithUsername",
+        "loginMode"
       ],
       "properties": {
-        "loginMode": {
-          "$ref": "#/definitions/LoginMode"
-        },
         "allowLoginWithUsername": {
           "type": "boolean"
         },
@@ -8419,6 +8416,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "loginMode": {
+          "$ref": "#/definitions/LoginMode"
         }
       }
     },
@@ -8563,48 +8563,38 @@
       ]
     },
     "ServerConfiguration": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Rootobject"
-        },
-        {
-          "type": "object"
-        }
-      ]
-    },
-    "Rootobject": {
       "type": "object",
       "properties": {
         "clientUrl": {
           "type": "string"
         },
         "connectionStrings": {
-          "$ref": "#/definitions/Connectionstrings"
+          "$ref": "#/definitions/ConnectionStrings"
         },
         "publicSettings": {
-          "$ref": "#/definitions/Publicsettings"
+          "$ref": "#/definitions/PublicSettings"
         },
         "allowedHosts": {
           "type": "string"
         },
         "appConfiguration": {
-          "$ref": "#/definitions/Appconfiguration"
+          "$ref": "#/definitions/AppConfiguration"
         },
         "cognitiveServices": {
-          "$ref": "#/definitions/Cognitiveservices"
+          "$ref": "#/definitions/CognitiveServices"
         },
         "apiDocumentation": {
-          "$ref": "#/definitions/Apidocumentation"
+          "$ref": "#/definitions/ApiDocumentation"
         },
         "mailConfiguration": {
-          "$ref": "#/definitions/Mailconfiguration"
+          "$ref": "#/definitions/MailConfiguration"
         },
         "backupOptions": {
           "$ref": "#/definitions/BackupOptions"
         }
       }
     },
-    "Connectionstrings": {
+    "ConnectionStrings": {
       "type": "object",
       "properties": {
         "defaultConnection": {
@@ -8615,18 +8605,18 @@
         }
       }
     },
-    "Appconfiguration": {
+    "AppConfiguration": {
       "type": "object",
       "properties": {
         "idHashing": {
-          "$ref": "#/definitions/Idhashing"
+          "$ref": "#/definitions/IdHashing"
         },
         "secret": {
           "type": "string"
         }
       }
     },
-    "Idhashing": {
+    "IdHashing": {
       "type": "object",
       "required": [
         "enabled",
@@ -8649,18 +8639,18 @@
         }
       }
     },
-    "Cognitiveservices": {
+    "CognitiveServices": {
       "type": "object",
       "properties": {
         "openAi": {
-          "$ref": "#/definitions/Openai"
+          "$ref": "#/definitions/OpenAi"
         },
         "translation": {
           "$ref": "#/definitions/Translation"
         }
       }
     },
-    "Openai": {
+    "OpenAi": {
       "type": "object",
       "properties": {
         "apiKey": {
@@ -8688,7 +8678,7 @@
         }
       }
     },
-    "Apidocumentation": {
+    "ApiDocumentation": {
       "type": "object",
       "required": [
         "requireLogin",
@@ -8735,7 +8725,7 @@
         "name": {
           "type": "string"
         },
-        "spdx_id": {
+        "spdxId": {
           "type": "string"
         },
         "url": {
@@ -8743,7 +8733,7 @@
         }
       }
     },
-    "Mailconfiguration": {
+    "MailConfiguration": {
       "type": "object",
       "required": [
         "port"

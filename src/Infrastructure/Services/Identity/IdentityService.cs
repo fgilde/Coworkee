@@ -64,7 +64,7 @@ namespace Coworkee.Infrastructure.Services.Identity
         public async Task<Result<TokenResponse>> LoginAsync(ApplicationUser user)
         {
             var allowedEmails = _appConfig.PublicSettings?.LoginSettings?.AllowedEmails;
-            var allowedToLogin = allowedEmails == null || allowedEmails.Length == 0 || allowedEmails.Any(pattern => RegisterRequestValidator.MatchesPattern(user.Email, pattern));
+            var allowedToLogin = allowedEmails == null || allowedEmails.Count == 0 || allowedEmails.Any(pattern => RegisterRequestValidator.MatchesPattern(user.Email, pattern));
             var roles = await _userManager.GetRolesAsync(user);
             if (!allowedToLogin && roles?.Contains(RoleConstants.AdministratorRole) != true)
                 return await Result<TokenResponse>.FailAsync(_localizer["Email is not allowed."]);

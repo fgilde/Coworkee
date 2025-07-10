@@ -11,10 +11,10 @@ using Coworkee.Application.Requests.Mail;
 
 namespace Coworkee.Infrastructure.Services
 {
-    [RegisterAsIfConfigValueIsNotEmpty(typeof(IMailService), new[] { nameof(Mailconfiguration), nameof(Mailconfiguration.SendGridApiKey) })]
+    [RegisterAsIfConfigValueIsNotEmpty(typeof(IMailService), new[] { nameof(MailConfiguration), nameof(MailConfiguration.SendGridApiKey) })]
     public class SendGridMailService : IMailService
     {
-        private readonly Mailconfiguration _config;
+        private readonly MailConfiguration _config;
         private readonly ILogger<SendGridMailService> _logger;
 
         public SendGridMailService(IOptions<ServerConfiguration> config, ILogger<SendGridMailService> logger)

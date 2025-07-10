@@ -881,7 +881,7 @@ export interface ISystemClient {
     unhashHashedId(id: string | null | undefined): Observable<number>;
     version(): Observable<VersionInfoModel>;
     availableApiVersions(): Observable<Version[]>;
-    getConfiguration(): Observable<Publicsettings>;
+    getConfiguration(): Observable<PublicSettings>;
     sendOnServiceBus(queue: string, entity: ProductDto): Observable<FileResponse | null>;
     systemConfiguration(): Observable<ServerConfiguration>;
     writeSystemConfiguration(config: ServerConfiguration): Observable<FileResponse | null>;
@@ -1107,7 +1107,7 @@ export class SystemClient implements ISystemClient {
         return _observableOf<Version[]>(null as any);
     }
 
-    getConfiguration(): Observable<Publicsettings> {
+    getConfiguration(): Observable<PublicSettings> {
         let url_ = this.baseUrl + "/System/Configuration";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1126,14 +1126,14 @@ export class SystemClient implements ISystemClient {
                 try {
                     return this.processGetConfiguration(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<Publicsettings>;
+                    return _observableThrow(e) as any as Observable<PublicSettings>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<Publicsettings>;
+                return _observableThrow(response_) as any as Observable<PublicSettings>;
         }));
     }
 
-    protected processGetConfiguration(response: HttpResponseBase): Observable<Publicsettings> {
+    protected processGetConfiguration(response: HttpResponseBase): Observable<PublicSettings> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1144,7 +1144,7 @@ export class SystemClient implements ISystemClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Publicsettings.fromJS(resultData200);
+            result200 = PublicSettings.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1152,7 +1152,7 @@ export class SystemClient implements ISystemClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Publicsettings>(null as any);
+        return _observableOf<PublicSettings>(null as any);
     }
 
     sendOnServiceBus(queue: string, entity: ProductDto): Observable<FileResponse | null> {
@@ -7539,16 +7539,16 @@ export interface IVersion {
     minorRevision: number;
 }
 
-export class Publicsettings implements IPublicsettings {
-    keycloakEnabled!: boolean;
+export class PublicSettings implements IPublicSettings {
     assistantAvailable!: boolean;
     contactAddress?: string | undefined;
     hostClientInServer!: boolean;
-    userRegistration?: Userregistration | undefined;
+    userRegistration?: UserRegistration | undefined;
     loginSettings?: LoginSettings | undefined;
+    keycloakEnabled!: boolean;
     endpoints?: { [key: string]: string; } | undefined;
 
-    constructor(data?: IPublicsettings) {
+    constructor(data?: IPublicSettings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7559,12 +7559,12 @@ export class Publicsettings implements IPublicsettings {
 
     init(_data?: any) {
         if (_data) {
-            this.keycloakEnabled = _data["keycloakEnabled"];
             this.assistantAvailable = _data["assistantAvailable"];
             this.contactAddress = _data["contactAddress"];
             this.hostClientInServer = _data["hostClientInServer"];
-            this.userRegistration = _data["userRegistration"] ? Userregistration.fromJS(_data["userRegistration"]) : <any>undefined;
+            this.userRegistration = _data["userRegistration"] ? UserRegistration.fromJS(_data["userRegistration"]) : <any>undefined;
             this.loginSettings = _data["loginSettings"] ? LoginSettings.fromJS(_data["loginSettings"]) : <any>undefined;
+            this.keycloakEnabled = _data["keycloakEnabled"];
             if (_data["endpoints"]) {
                 this.endpoints = {} as any;
                 for (let key in _data["endpoints"]) {
@@ -7575,21 +7575,21 @@ export class Publicsettings implements IPublicsettings {
         }
     }
 
-    static fromJS(data: any): Publicsettings {
+    static fromJS(data: any): PublicSettings {
         data = typeof data === 'object' ? data : {};
-        let result = new Publicsettings();
+        let result = new PublicSettings();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["keycloakEnabled"] = this.keycloakEnabled;
         data["assistantAvailable"] = this.assistantAvailable;
         data["contactAddress"] = this.contactAddress;
         data["hostClientInServer"] = this.hostClientInServer;
         data["userRegistration"] = this.userRegistration ? this.userRegistration.toJSON() : <any>undefined;
         data["loginSettings"] = this.loginSettings ? this.loginSettings.toJSON() : <any>undefined;
+        data["keycloakEnabled"] = this.keycloakEnabled;
         if (this.endpoints) {
             data["endpoints"] = {};
             for (let key in this.endpoints) {
@@ -7601,29 +7601,29 @@ export class Publicsettings implements IPublicsettings {
     }
 }
 
-export interface IPublicsettings {
-    keycloakEnabled: boolean;
+export interface IPublicSettings {
     assistantAvailable: boolean;
     contactAddress?: string | undefined;
     hostClientInServer: boolean;
-    userRegistration?: Userregistration | undefined;
+    userRegistration?: UserRegistration | undefined;
     loginSettings?: LoginSettings | undefined;
+    keycloakEnabled: boolean;
     endpoints?: { [key: string]: string; } | undefined;
 }
 
-export class Userregistration implements IUserregistration {
+export class UserRegistration implements IUserRegistration {
     enabled!: boolean;
     requireAddress!: boolean;
     requiresAdministratorActivation!: boolean;
     emailConfirmationRequired!: boolean;
-    usernameRules?: Usernamerules | undefined;
-    passwordRules?: Passwordrules | undefined;
+    usernameRules?: UsernameRules | undefined;
+    passwordRules?: PasswordRules | undefined;
     requireDocuments!: boolean;
     registrationDocumentsMaxFileSize!: number;
     registrationDocumentTypes?: string[] | undefined;
     allowedEmails?: string[] | undefined;
 
-    constructor(data?: IUserregistration) {
+    constructor(data?: IUserRegistration) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7638,8 +7638,8 @@ export class Userregistration implements IUserregistration {
             this.requireAddress = _data["requireAddress"];
             this.requiresAdministratorActivation = _data["requiresAdministratorActivation"];
             this.emailConfirmationRequired = _data["emailConfirmationRequired"];
-            this.usernameRules = _data["usernameRules"] ? Usernamerules.fromJS(_data["usernameRules"]) : <any>undefined;
-            this.passwordRules = _data["passwordRules"] ? Passwordrules.fromJS(_data["passwordRules"]) : <any>undefined;
+            this.usernameRules = _data["usernameRules"] ? UsernameRules.fromJS(_data["usernameRules"]) : <any>undefined;
+            this.passwordRules = _data["passwordRules"] ? PasswordRules.fromJS(_data["passwordRules"]) : <any>undefined;
             this.requireDocuments = _data["requireDocuments"];
             this.registrationDocumentsMaxFileSize = _data["registrationDocumentsMaxFileSize"];
             if (Array.isArray(_data["registrationDocumentTypes"])) {
@@ -7655,9 +7655,9 @@ export class Userregistration implements IUserregistration {
         }
     }
 
-    static fromJS(data: any): Userregistration {
+    static fromJS(data: any): UserRegistration {
         data = typeof data === 'object' ? data : {};
-        let result = new Userregistration();
+        let result = new UserRegistration();
         result.init(data);
         return result;
     }
@@ -7686,25 +7686,25 @@ export class Userregistration implements IUserregistration {
     }
 }
 
-export interface IUserregistration {
+export interface IUserRegistration {
     enabled: boolean;
     requireAddress: boolean;
     requiresAdministratorActivation: boolean;
     emailConfirmationRequired: boolean;
-    usernameRules?: Usernamerules | undefined;
-    passwordRules?: Passwordrules | undefined;
+    usernameRules?: UsernameRules | undefined;
+    passwordRules?: PasswordRules | undefined;
     requireDocuments: boolean;
     registrationDocumentsMaxFileSize: number;
     registrationDocumentTypes?: string[] | undefined;
     allowedEmails?: string[] | undefined;
 }
 
-export class Usernamerules implements IUsernamerules {
+export class UsernameRules implements IUsernameRules {
     minLength!: number;
     usernameCanChangedAfterRegistration!: boolean;
     emailCanChangedAfterRegistration!: boolean;
 
-    constructor(data?: IUsernamerules) {
+    constructor(data?: IUsernameRules) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7721,9 +7721,9 @@ export class Usernamerules implements IUsernamerules {
         }
     }
 
-    static fromJS(data: any): Usernamerules {
+    static fromJS(data: any): UsernameRules {
         data = typeof data === 'object' ? data : {};
-        let result = new Usernamerules();
+        let result = new UsernameRules();
         result.init(data);
         return result;
     }
@@ -7737,19 +7737,19 @@ export class Usernamerules implements IUsernamerules {
     }
 }
 
-export interface IUsernamerules {
+export interface IUsernameRules {
     minLength: number;
     usernameCanChangedAfterRegistration: boolean;
     emailCanChangedAfterRegistration: boolean;
 }
 
-export class Passwordrules implements IPasswordrules {
+export class PasswordRules implements IPasswordRules {
     minLength!: number;
     capitalLetterRequired!: boolean;
     lowercaseLetterRequired!: boolean;
     numberRequired!: boolean;
 
-    constructor(data?: IPasswordrules) {
+    constructor(data?: IPasswordRules) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -7767,9 +7767,9 @@ export class Passwordrules implements IPasswordrules {
         }
     }
 
-    static fromJS(data: any): Passwordrules {
+    static fromJS(data: any): PasswordRules {
         data = typeof data === 'object' ? data : {};
-        let result = new Passwordrules();
+        let result = new PasswordRules();
         result.init(data);
         return result;
     }
@@ -7784,7 +7784,7 @@ export class Passwordrules implements IPasswordrules {
     }
 }
 
-export interface IPasswordrules {
+export interface IPasswordRules {
     minLength: number;
     capitalLetterRequired: boolean;
     lowercaseLetterRequired: boolean;
@@ -7792,9 +7792,9 @@ export interface IPasswordrules {
 }
 
 export class LoginSettings implements ILoginSettings {
-    loginMode!: LoginMode;
     allowLoginWithUsername!: boolean;
     allowedEmails?: string[] | undefined;
+    loginMode!: LoginMode;
 
     constructor(data?: ILoginSettings) {
         if (data) {
@@ -7807,13 +7807,13 @@ export class LoginSettings implements ILoginSettings {
 
     init(_data?: any) {
         if (_data) {
-            this.loginMode = _data["loginMode"];
             this.allowLoginWithUsername = _data["allowLoginWithUsername"];
             if (Array.isArray(_data["allowedEmails"])) {
                 this.allowedEmails = [] as any;
                 for (let item of _data["allowedEmails"])
                     this.allowedEmails!.push(item);
             }
+            this.loginMode = _data["loginMode"];
         }
     }
 
@@ -7826,21 +7826,21 @@ export class LoginSettings implements ILoginSettings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["loginMode"] = this.loginMode;
         data["allowLoginWithUsername"] = this.allowLoginWithUsername;
         if (Array.isArray(this.allowedEmails)) {
             data["allowedEmails"] = [];
             for (let item of this.allowedEmails)
                 data["allowedEmails"].push(item);
         }
+        data["loginMode"] = this.loginMode;
         return data;
     }
 }
 
 export interface ILoginSettings {
-    loginMode: LoginMode;
     allowLoginWithUsername: boolean;
     allowedEmails?: string[] | undefined;
+    loginMode: LoginMode;
 }
 
 export enum LoginMode {
@@ -8055,18 +8055,18 @@ export enum UploadType {
     Document = 2,
 }
 
-export class Rootobject implements IRootobject {
+export class ServerConfiguration implements IServerConfiguration {
     clientUrl?: string | undefined;
-    connectionStrings?: Connectionstrings | undefined;
-    publicSettings?: Publicsettings | undefined;
+    connectionStrings?: ConnectionStrings | undefined;
+    publicSettings?: PublicSettings | undefined;
     allowedHosts?: string | undefined;
-    appConfiguration?: Appconfiguration | undefined;
-    cognitiveServices?: Cognitiveservices | undefined;
-    apiDocumentation?: Apidocumentation | undefined;
-    mailConfiguration?: Mailconfiguration | undefined;
+    appConfiguration?: AppConfiguration | undefined;
+    cognitiveServices?: CognitiveServices | undefined;
+    apiDocumentation?: ApiDocumentation | undefined;
+    mailConfiguration?: MailConfiguration | undefined;
     backupOptions?: BackupOptions | undefined;
 
-    constructor(data?: IRootobject) {
+    constructor(data?: IServerConfiguration) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8078,20 +8078,20 @@ export class Rootobject implements IRootobject {
     init(_data?: any) {
         if (_data) {
             this.clientUrl = _data["clientUrl"];
-            this.connectionStrings = _data["connectionStrings"] ? Connectionstrings.fromJS(_data["connectionStrings"]) : <any>undefined;
-            this.publicSettings = _data["publicSettings"] ? Publicsettings.fromJS(_data["publicSettings"]) : <any>undefined;
+            this.connectionStrings = _data["connectionStrings"] ? ConnectionStrings.fromJS(_data["connectionStrings"]) : <any>undefined;
+            this.publicSettings = _data["publicSettings"] ? PublicSettings.fromJS(_data["publicSettings"]) : <any>undefined;
             this.allowedHosts = _data["allowedHosts"];
-            this.appConfiguration = _data["appConfiguration"] ? Appconfiguration.fromJS(_data["appConfiguration"]) : <any>undefined;
-            this.cognitiveServices = _data["cognitiveServices"] ? Cognitiveservices.fromJS(_data["cognitiveServices"]) : <any>undefined;
-            this.apiDocumentation = _data["apiDocumentation"] ? Apidocumentation.fromJS(_data["apiDocumentation"]) : <any>undefined;
-            this.mailConfiguration = _data["mailConfiguration"] ? Mailconfiguration.fromJS(_data["mailConfiguration"]) : <any>undefined;
+            this.appConfiguration = _data["appConfiguration"] ? AppConfiguration.fromJS(_data["appConfiguration"]) : <any>undefined;
+            this.cognitiveServices = _data["cognitiveServices"] ? CognitiveServices.fromJS(_data["cognitiveServices"]) : <any>undefined;
+            this.apiDocumentation = _data["apiDocumentation"] ? ApiDocumentation.fromJS(_data["apiDocumentation"]) : <any>undefined;
+            this.mailConfiguration = _data["mailConfiguration"] ? MailConfiguration.fromJS(_data["mailConfiguration"]) : <any>undefined;
             this.backupOptions = _data["backupOptions"] ? BackupOptions.fromJS(_data["backupOptions"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): Rootobject {
+    static fromJS(data: any): ServerConfiguration {
         data = typeof data === 'object' ? data : {};
-        let result = new Rootobject();
+        let result = new ServerConfiguration();
         result.init(data);
         return result;
     }
@@ -8111,50 +8111,23 @@ export class Rootobject implements IRootobject {
     }
 }
 
-export interface IRootobject {
+export interface IServerConfiguration {
     clientUrl?: string | undefined;
-    connectionStrings?: Connectionstrings | undefined;
-    publicSettings?: Publicsettings | undefined;
+    connectionStrings?: ConnectionStrings | undefined;
+    publicSettings?: PublicSettings | undefined;
     allowedHosts?: string | undefined;
-    appConfiguration?: Appconfiguration | undefined;
-    cognitiveServices?: Cognitiveservices | undefined;
-    apiDocumentation?: Apidocumentation | undefined;
-    mailConfiguration?: Mailconfiguration | undefined;
+    appConfiguration?: AppConfiguration | undefined;
+    cognitiveServices?: CognitiveServices | undefined;
+    apiDocumentation?: ApiDocumentation | undefined;
+    mailConfiguration?: MailConfiguration | undefined;
     backupOptions?: BackupOptions | undefined;
 }
 
-export class ServerConfiguration extends Rootobject implements IServerConfiguration {
-
-    constructor(data?: IServerConfiguration) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-    }
-
-    static fromJS(data: any): ServerConfiguration {
-        data = typeof data === 'object' ? data : {};
-        let result = new ServerConfiguration();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface IServerConfiguration extends IRootobject {
-}
-
-export class Connectionstrings implements IConnectionstrings {
+export class ConnectionStrings implements IConnectionStrings {
     defaultConnection?: string | undefined;
     ollama?: string | undefined;
 
-    constructor(data?: IConnectionstrings) {
+    constructor(data?: IConnectionStrings) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8170,9 +8143,9 @@ export class Connectionstrings implements IConnectionstrings {
         }
     }
 
-    static fromJS(data: any): Connectionstrings {
+    static fromJS(data: any): ConnectionStrings {
         data = typeof data === 'object' ? data : {};
-        let result = new Connectionstrings();
+        let result = new ConnectionStrings();
         result.init(data);
         return result;
     }
@@ -8185,16 +8158,16 @@ export class Connectionstrings implements IConnectionstrings {
     }
 }
 
-export interface IConnectionstrings {
+export interface IConnectionStrings {
     defaultConnection?: string | undefined;
     ollama?: string | undefined;
 }
 
-export class Appconfiguration implements IAppconfiguration {
-    idHashing?: Idhashing | undefined;
+export class AppConfiguration implements IAppConfiguration {
+    idHashing?: IdHashing | undefined;
     secret?: string | undefined;
 
-    constructor(data?: IAppconfiguration) {
+    constructor(data?: IAppConfiguration) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8205,14 +8178,14 @@ export class Appconfiguration implements IAppconfiguration {
 
     init(_data?: any) {
         if (_data) {
-            this.idHashing = _data["idHashing"] ? Idhashing.fromJS(_data["idHashing"]) : <any>undefined;
+            this.idHashing = _data["idHashing"] ? IdHashing.fromJS(_data["idHashing"]) : <any>undefined;
             this.secret = _data["secret"];
         }
     }
 
-    static fromJS(data: any): Appconfiguration {
+    static fromJS(data: any): AppConfiguration {
         data = typeof data === 'object' ? data : {};
-        let result = new Appconfiguration();
+        let result = new AppConfiguration();
         result.init(data);
         return result;
     }
@@ -8225,18 +8198,18 @@ export class Appconfiguration implements IAppconfiguration {
     }
 }
 
-export interface IAppconfiguration {
-    idHashing?: Idhashing | undefined;
+export interface IAppConfiguration {
+    idHashing?: IdHashing | undefined;
     secret?: string | undefined;
 }
 
-export class Idhashing implements IIdhashing {
+export class IdHashing implements IIdHashing {
     enabled!: boolean;
     minLength!: number;
     allowAccessWithNotHashedId!: boolean;
     salt?: string | undefined;
 
-    constructor(data?: IIdhashing) {
+    constructor(data?: IIdHashing) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8254,9 +8227,9 @@ export class Idhashing implements IIdhashing {
         }
     }
 
-    static fromJS(data: any): Idhashing {
+    static fromJS(data: any): IdHashing {
         data = typeof data === 'object' ? data : {};
-        let result = new Idhashing();
+        let result = new IdHashing();
         result.init(data);
         return result;
     }
@@ -8271,18 +8244,18 @@ export class Idhashing implements IIdhashing {
     }
 }
 
-export interface IIdhashing {
+export interface IIdHashing {
     enabled: boolean;
     minLength: number;
     allowAccessWithNotHashedId: boolean;
     salt?: string | undefined;
 }
 
-export class Cognitiveservices implements ICognitiveservices {
-    openAi?: Openai | undefined;
+export class CognitiveServices implements ICognitiveServices {
+    openAi?: OpenAi | undefined;
     translation?: Translation | undefined;
 
-    constructor(data?: ICognitiveservices) {
+    constructor(data?: ICognitiveServices) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8293,14 +8266,14 @@ export class Cognitiveservices implements ICognitiveservices {
 
     init(_data?: any) {
         if (_data) {
-            this.openAi = _data["openAi"] ? Openai.fromJS(_data["openAi"]) : <any>undefined;
+            this.openAi = _data["openAi"] ? OpenAi.fromJS(_data["openAi"]) : <any>undefined;
             this.translation = _data["translation"] ? Translation.fromJS(_data["translation"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): Cognitiveservices {
+    static fromJS(data: any): CognitiveServices {
         data = typeof data === 'object' ? data : {};
-        let result = new Cognitiveservices();
+        let result = new CognitiveServices();
         result.init(data);
         return result;
     }
@@ -8313,16 +8286,16 @@ export class Cognitiveservices implements ICognitiveservices {
     }
 }
 
-export interface ICognitiveservices {
-    openAi?: Openai | undefined;
+export interface ICognitiveServices {
+    openAi?: OpenAi | undefined;
     translation?: Translation | undefined;
 }
 
-export class Openai implements IOpenai {
+export class OpenAi implements IOpenAi {
     apiKey?: string | undefined;
     model?: string | undefined;
 
-    constructor(data?: IOpenai) {
+    constructor(data?: IOpenAi) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8338,9 +8311,9 @@ export class Openai implements IOpenai {
         }
     }
 
-    static fromJS(data: any): Openai {
+    static fromJS(data: any): OpenAi {
         data = typeof data === 'object' ? data : {};
-        let result = new Openai();
+        let result = new OpenAi();
         result.init(data);
         return result;
     }
@@ -8353,7 +8326,7 @@ export class Openai implements IOpenai {
     }
 }
 
-export interface IOpenai {
+export interface IOpenAi {
     apiKey?: string | undefined;
     model?: string | undefined;
 }
@@ -8406,7 +8379,7 @@ export interface ITranslation {
     region?: string | undefined;
 }
 
-export class Apidocumentation implements IApidocumentation {
+export class ApiDocumentation implements IApiDocumentation {
     requireLogin!: boolean;
     requirePermission!: boolean;
     title?: string | undefined;
@@ -8414,7 +8387,7 @@ export class Apidocumentation implements IApidocumentation {
     contact?: Contact | undefined;
     license?: License | undefined;
 
-    constructor(data?: IApidocumentation) {
+    constructor(data?: IApiDocumentation) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8434,9 +8407,9 @@ export class Apidocumentation implements IApidocumentation {
         }
     }
 
-    static fromJS(data: any): Apidocumentation {
+    static fromJS(data: any): ApiDocumentation {
         data = typeof data === 'object' ? data : {};
-        let result = new Apidocumentation();
+        let result = new ApiDocumentation();
         result.init(data);
         return result;
     }
@@ -8453,7 +8426,7 @@ export class Apidocumentation implements IApidocumentation {
     }
 }
 
-export interface IApidocumentation {
+export interface IApiDocumentation {
     requireLogin: boolean;
     requirePermission: boolean;
     title?: string | undefined;
@@ -8508,7 +8481,7 @@ export interface IContact {
 
 export class License implements ILicense {
     name?: string | undefined;
-    spdx_id?: string | undefined;
+    spdxId?: string | undefined;
     url?: string | undefined;
 
     constructor(data?: ILicense) {
@@ -8523,7 +8496,7 @@ export class License implements ILicense {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
-            this.spdx_id = _data["spdx_id"];
+            this.spdxId = _data["spdxId"];
             this.url = _data["url"];
         }
     }
@@ -8538,7 +8511,7 @@ export class License implements ILicense {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        data["spdx_id"] = this.spdx_id;
+        data["spdxId"] = this.spdxId;
         data["url"] = this.url;
         return data;
     }
@@ -8546,11 +8519,11 @@ export class License implements ILicense {
 
 export interface ILicense {
     name?: string | undefined;
-    spdx_id?: string | undefined;
+    spdxId?: string | undefined;
     url?: string | undefined;
 }
 
-export class Mailconfiguration implements IMailconfiguration {
+export class MailConfiguration implements IMailConfiguration {
     sendGridApiKey?: string | undefined;
     from?: string | undefined;
     host?: string | undefined;
@@ -8559,7 +8532,7 @@ export class Mailconfiguration implements IMailconfiguration {
     password?: string | undefined;
     displayName?: string | undefined;
 
-    constructor(data?: IMailconfiguration) {
+    constructor(data?: IMailConfiguration) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -8580,9 +8553,9 @@ export class Mailconfiguration implements IMailconfiguration {
         }
     }
 
-    static fromJS(data: any): Mailconfiguration {
+    static fromJS(data: any): MailConfiguration {
         data = typeof data === 'object' ? data : {};
-        let result = new Mailconfiguration();
+        let result = new MailConfiguration();
         result.init(data);
         return result;
     }
@@ -8600,7 +8573,7 @@ export class Mailconfiguration implements IMailconfiguration {
     }
 }
 
-export interface IMailconfiguration {
+export interface IMailConfiguration {
     sendGridApiKey?: string | undefined;
     from?: string | undefined;
     host?: string | undefined;

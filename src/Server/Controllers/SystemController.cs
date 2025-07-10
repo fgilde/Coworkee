@@ -54,7 +54,7 @@ namespace Coworkee.Server.Controllers
 
         [AllowAnonymous]
         [HttpGet(nameof(Configuration))]
-        [Produces(typeof(Publicsettings))]
+        [Produces(typeof(PublicSettings))]
         public IActionResult GetConfiguration()
         {
             if (string.IsNullOrWhiteSpace(Configuration.ClientUrl))

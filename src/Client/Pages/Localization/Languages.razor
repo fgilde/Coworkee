@@ -13,6 +13,7 @@
     .lang-active .mud-expand-panel-header {
         color: var(--mud-palette-secondary);
     }
+
     .culture-code {
         font-size: x-small;
         font-weight: bold;
@@ -38,7 +39,7 @@
                     @if (isAnyUpdating)
                     {
                         <MudSpacer />
-                        <MudProgressCircular Color="Color.Primary" Class="mr-4 ml-4" Size="Size.Small" Indeterminate="true"/>
+                        <MudProgressCircular Color="Color.Primary" Class="mr-4 ml-4" Size="Size.Small" Indeterminate="true" />
                         <MudText Class="mr-5" Typo="Typo.subtitle2">@_localizer["Translations are being imported"]</MudText>
                     }
                 </div>
@@ -48,7 +49,7 @@
                     @foreach (var l in lang)
                     {
                         <MudItem xs="6" md="3">
-                            <MudSwitch ValueChanged="@(new Action<bool>(e => Activate(l, e)))" Value="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning" />
+                            <MudSwitch T="bool" ValueChanged="@(b => Activate(l,b))" Value="@l.IsActive" Label="@(l.CultureCode.Contains('-') ? _localizer[l.CultureCode] : neutralLangLabel)" Color="Color.Warning" />
                             <span class="culture-code">@l.CultureCode</span>
                         </MudItem>
                     }
@@ -85,7 +86,7 @@
         if (usedLanguages == null || !usedLanguages.Any())
         {
             usedLanguages = LocalizationConstants.DefaultUILanguages.MapElementsTo<LanguageDto>().ToList();
-            var res = await _api.Language_PostAsync(new AddEditLanguagesCommand(usedLanguages.Select(l => Prepare(l, true)).ToArray()) {AutoCreateTranslations = false});
+            var res = await _api.Language_PostAsync(new AddEditLanguagesCommand(usedLanguages.Select(l => Prepare(l, true)).ToArray()) { AutoCreateTranslations = false });
             usedLanguages = res.Added;
             server.AddRange(usedLanguages);
         }
@@ -102,19 +103,30 @@
         return language;
     }
 
-    private async void Activate(LanguageDto language, bool active)
+    private async Task Activate(LanguageDto language, bool active)
     {
         var autoCreateTranslations = active && LocalizationConstants.ExistingTranslations.All(l => l.CultureCode != language.CultureCode);
-        if (autoCreateTranslations) 
-            updating.Add(language);
 
-        await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) {AutoCreateTranslations = autoCreateTranslations});
-        language.IsActive = active;
-        usedLanguages = availableLanguages.Where(dto => dto.IsActive).ToList();
+        try
+        {
+            if (autoCreateTranslations)
+                updating.Add(language);
 
-        if (autoCreateTranslations) 
-            updating.Remove(language);
+            var result = await _api.Language_PostAsync(new AddEditLanguagesCommand(Prepare(language, active)) { AutoCreateTranslations = autoCreateTranslations });
+            language.IsActive = active;
+            usedLanguages = availableLanguages.Where(dto => dto.IsActive).ToList();
 
-        StateHasChanged();
+
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        finally
+        {
+            if (autoCreateTranslations)
+                updating.Remove(language);
+        }
     }
 }

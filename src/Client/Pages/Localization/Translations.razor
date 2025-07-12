@@ -7,7 +7,6 @@
 @using System.Threading
 
 
-<ReactOnPreferenceChanged Component="this" />
 <PageHeaderTitle Title="@_localizer["Translations"]" Description="@_localizer["Manage Translations"]" />
 
 <MudSwitch Value="@advancedMode" ValueChanged="@(new Action<bool>(e => AdvancedModeToggled(e)))" Label="@_localizer["Advanced Mode"]" Color="Color.Warning" />
@@ -39,26 +38,3 @@
                    ExportPermission="@Permissions.Translations.Export"
                    SearchPermission="@Permissions.Translations.Search">
 </EditableDataTable>
-
-@code{
-    private bool advancedMode;
-    private bool showCultureTranslations;
-    private EditableDataTable<TranslationDto, int> dataTable;
-
-    private async Task CultureTranslationToggle(bool isChecked)
-    {
-        showCultureTranslations = isChecked;
-        await dataTable.Reload();
-        StateHasChanged();
-    }
-
-    private async Task AdvancedModeToggled(bool isChecked)
-    {
-        advancedMode = isChecked;
-        await dataTable.Reload();
-        StateHasChanged();
-        await dataTable.Reload();
-        StateHasChanged();
-    }
-
-}

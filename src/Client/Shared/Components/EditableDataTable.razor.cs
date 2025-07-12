@@ -96,6 +96,7 @@ namespace Coworkee.Client.Shared.Components
         private bool _canExport;
         private bool _canSearch;
         private bool _loaded;
+        private bool _isReloading;
 
         private bool CanEdit(TResult item) => _canEdit && (CanEditFn == null || CanEditFn(item));
         private bool CanDelete(TResult item) => _canDelete && (CanDeleteFn == null || CanDeleteFn(item));
@@ -134,8 +135,24 @@ namespace Coworkee.Client.Shared.Components
 
         public async Task<TResult[]> Reload()
         {
-            await Reset(true);
-            return _table.Items?.ToArray() ?? Array.Empty<TResult>();
+            if (!_isReloading)
+            {
+                try
+                {
+                    _isReloading = true;
+                    await Reset(true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                finally
+                {
+                    _isReloading = false;
+                }
+            }
+
+            return _table.Items?.ToArray() ?? [];
         }
 
         private async Task<bool> HasPermission(string permission)
@@ -222,7 +239,7 @@ namespace Coworkee.Client.Shared.Components
             else
                 await LoadAllData();
             _selectedItems.Clear();
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
         private async Task ExecExportSelected(ExportServiceType serviceType)
@@ -392,7 +409,7 @@ namespace Coworkee.Client.Shared.Components
                 currentBackup = element.MapTo<TResult>();
         }
 
-        private async void InlineEditItemHasBeenCommitted(object element)
+        private async Task InlineEditItemHasBeenCommitted(object element)
         {
             if (element == null)
                 return;
@@ -418,7 +435,7 @@ namespace Coworkee.Client.Shared.Components
         }
 
 
-        private async void SaveBulk()
+        private async Task SaveBulk()
         {
             await ApiEditMany(toUpdate.Keys.ToArray());
             _snackBar.Add(_localizer["saved"], Severity.Success);
@@ -452,10 +469,15 @@ namespace Coworkee.Client.Shared.Components
             return HubConnection.TryDisposeAsync();
         }
 
-        private async void OnPreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs arg)
+        private async Task OnPreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs arg)
         {
             if (arg.NewValue.LanguageCode != arg.OldValue?.LanguageCode)
+            {
+                await Task.Delay(200);
                 await Reload();
+                await InvokeAsync(StateHasChanged);
+                await InvokeAsync(StateHasChanged);
+            }
         }
 
         private void Cancel()
@@ -488,7 +510,7 @@ namespace Coworkee.Client.Shared.Components
             return style;
         }
 
-        private async void SetSelectedItem(TResult item)
+        private async Task SetSelectedItem(TResult item)
         {
             SelectedItem = item;
             await SelectedItemChanged.InvokeAsync(item);

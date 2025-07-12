@@ -32,7 +32,7 @@ else
         <InputFile id="importInput" OnChange="ExecImport" hidden />
     }
 
-    <MudTable Class="mud-editable-table" FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="InlineEditItemHasBeenCommitted"
+    <MudTable Class="mud-editable-table" FixedHeader="true" Height="86%" Virtualize="true" ReadOnly="EditMode == EditMode.SelfHandled || !_canEdit" CanCancelEdit="true" RowEditPreview="InlineEditBackupItem" RowEditCancel="InlineEditResetItemToOriginalValues" RowEditCommit="@((a) => _= InlineEditItemHasBeenCommitted(a))"
           RowsPerPage="25" MultiSelection="MultiSelect" Items="@(ApiLoadPaged == null && ApiLoad != null ? _flatList : null)"
           @bind-SelectedItems="@_selectedItems"
           RowStyleFunc="@RowRenderStyle"

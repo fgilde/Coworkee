@@ -1,21 +1,22 @@
-using System;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Coworkee.Application.Common.Models;
 using Coworkee.Application.Contracts.Enums;
 using Coworkee.Application.Features.Translations.Commands.AddEdit;
 using Coworkee.Application.Features.Translations.Export;
 using Coworkee.Client.Extensions;
+using Coworkee.Client.Shared.Components;
 using Coworkee.Shared.Constants.Localization;
 using Coworkee.Shared.Extensions;
 using Coworkee.Shared.Wrapper;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using SDK;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace Coworkee.Client.Pages.Localization
@@ -23,7 +24,10 @@ namespace Coworkee.Client.Pages.Localization
     public partial class Translations : IAsyncDisposable
     {
         private Dictionary<string, List<TranslationDto>> clientLocalizationCache = new();
-
+        private bool advancedMode;
+        private bool showCultureTranslations;
+        private EditableDataTable<TranslationDto, int> dataTable;
+        
         [Parameter]
         public string Action { get; set; }
 
@@ -39,6 +43,25 @@ namespace Coworkee.Client.Pages.Localization
             HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
         }
 
+
+        private async Task CultureTranslationToggle(bool isChecked)
+        {
+            showCultureTranslations = isChecked;
+            await ReloadAsync();
+        }
+
+        private async Task AdvancedModeToggled(bool isChecked)
+        {
+            advancedMode = isChecked;
+            await ReloadAsync();
+            await ReloadAsync();
+        }
+
+        private async Task ReloadAsync()
+        {
+            await dataTable.Reload();
+            await InvokeAsync(StateHasChanged);
+        }
         private async Task<PaginatedResult<TranslationDto>> LoadPaged(int pageNumber, int pageSize, string _searchString, string[] orderings, CancellationToken cancellationToken)
         {
             return await _api.Translations_GetAllPagedAsync(pageNumber, pageSize, _searchString, orderings, cancellationToken: cancellationToken);

@@ -70,7 +70,7 @@ namespace Coworkee.Client.Pages.Identity
                 }
                 if (_model != null)
                 {
-                    Description = string.Format(_localizer["Manage {0} {1}'s Permissions"], _model.RoleId, _model.RoleName);
+                    Description = string.Format(_localizer["Manage {0}'s Permissions"], _model.RoleName);
                 }
             }
             else

@@ -37,13 +37,11 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
-            <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Id)">@_localizer["Id"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Name)">@_localizer["Role"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="Id">@context.Id</MudTd>
             <MudTd DataLabel="@_localizer["Role"]">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudTd>

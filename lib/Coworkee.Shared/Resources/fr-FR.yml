@@ -1,0 +1,1140 @@
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: Il n’est pas possible d’établir une connexion au serveur. Votre connexion réseau est peut-être en panne ou le serveur est inaccessible. Veuillez patienter jusqu’à ce que la connexion soit rétablie
+A maximum of {0} files are allowed: Un maximum de fichiers {0} sont autorisés
+aa-DJ: Afar (Djibouti)
+aa-ER: Afar (Érythrée)
+aa-ET: Afar (Éthiopie)
+about: Environ
+Account: Compte
+Actions: Actions
+Activate User?: Activer l’utilisateur ?
+Active: Actif
+Active?: Actif?
+Add: Ajouter
+Add Brand: Ajouter une marque
+Add Document: Ajouter un document
+Add Document Type: Ajouter un type de document
+Add Extended Attribute: Ajouter un attribut étendu
+Add external Url: Ajouter une URL externe
+Add Product: Ajouter un produit
+Add Role: Ajouter un rôle
+Add Url: Ajouter une URL
+Address: Adresse
+Addresses: Adresses
+Administrator: Administrateur
+Administrator Settings.: Paramètres de l’administrateur.
+Administrators Profile's Status cannot be toggled: L’état du profil administrateurs ne peut pas être basculé
+af-NA: Afrikaans (Namibie)
+af-ZA: Afrikaans (Afrique du Sud)
+agq-CM: Aghem (Cameroun)
+ak-GH: Will (Ghana)
+All Documents without Type are stored here: Tous les documents sans type sont stockés ici
+All Groups: Tous les groupes
+All Permissions: Toutes les autorisations
+All roles: Tous les rôles
+All roles unfiltered: Tous les rôles non filtrés
+Already have an account?: Vous avez déjà un compte ?
+am-ET: Amharique (Éthiopie)
+An Error has occured!: Une erreur s’est produite !
+An Error has occurred!: Une erreur s’est produite !
+An error occurred while confirming {0}: Une erreur s’est produite lors de la confirmation de {0}
+Api: API
+API-Versions: Versions de l’API
+ApplicationDescription: Exemple d’application avec WebAssembly et modèle d’architecture propre
+ApplicationSubDescription: Bienvenue sur cette page Blazor
+Apply: Appliquer
+Apr: Avr
+ar-001: Arabe (Monde)
+ar-AE: Arabe (Émirats arabes unis)
+ar-BH: Arabe (Bahreïn)
+ar-DJ: Arabe (Djibouti)
+ar-DZ: Arabe (Algérie)
+ar-EG: Arabe (Égypte)
+ar-ER: Arabe (Érythrée)
+ar-IL: Arabe (Israël)
+ar-IQ: Arabe (Irak)
+ar-JO: Arabe (Jordanie)
+ar-KM: Arabe (Comores)
+ar-KW: Arabe (Koweït)
+ar-LB: Arabe (Liban)
+ar-LY: Arabe (Libye)
+ar-MA: Arabe (Maroc)
+ar-MR: Arabe (Mauritanie)
+ar-OM: Arabe (Oman)
+ar-PS: Arabe (Autorité palestinienne)
+ar-QA: Arabe (Qatar)
+ar-SA: Arabe (Arabie saoudite)
+ar-SD: Arabe (Soudan)
+ar-SO: Arabe (Somalie)
+ar-SS: Arabe (Soudan du Sud)
+ar-SY: Arabe (Syrie)
+ar-TD: Arabe (Tchad)
+ar-TN: Arabe (Tunisie)
+ar-YE: Arabe (Yémen)
+Are you sure you want to force logout for user {0}: Voulez-vous vraiment forcer la déconnexion pour les {0}
+Are you sure you want to restart Backend/Server?: Êtes-vous sûr de vouloir redémarrer le backend/serveur ?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: Êtes-vous sûr de vouloir restaurer les paramètres par défaut ? Cela écrasera toutes les modifications que vous avez apportées ici.
+arn-CL: Mapuche (Chili)
+As Admin you can filter for users here: En tant qu'administrateur, vous pouvez filtrer par utilisateurs ici
+as read: à lire
+As soon as your account has been activated you can log in: Dès que votre compte a été activé, vous pouvez vous connecter
+as unread: comme non lu
+as-IN: Assamais (Inde)
+asa-TZ: Asu (Tanzanie)
+ast-ES: Asturien (Espagne)
+At least one document is required: Au moins un document est requis
+Audit Trails: Pistes d’audit
+Audit Trails exported: Pistes d’audit exportées
+Aug: Août
+Auto Confirm Email?: Confirmation automatique de l’e-mail?
+az-Cyrl-AZ: Azerbaïdjanais (cyrillique, Azerbaïdjan)
+az-Latn-AZ: Azerbaïdjanais (latin, Azerbaïdjan)
+ba-RU: Bashkir (Russie)
+Back: Précédent
+Barcode: Code-barres
+Barcode already exists.: Le code-barres existe déjà.
+Barcode is required!: Le code-barres est requis!
+bas-CM: Basaa (Cameroun)
+Basic: Basique
+Basic role with default permissions: Rôle de base avec autorisations par défaut
+be-BY: Biélorusse (Biélorussie)
+bem-ZM: Bemba (Zambie)
+bez-TZ: Legs (Tanzanie)
+bg-BG: Bulgare (Bulgarie)
+bin-NG: Edo (Nigéria)
+bm-Latn-ML: Bamanankan (Latin, Mali)
+bn-BD: Bangla (Bangladesh)
+bn-IN: Bangla (Inde)
+bo-CN: Tibétain (Chine)
+bo-IN: Tibétain (Inde)
+Bordered: Bordé
+br-FR: Breton (France)
+Brand: Marque
+Brand Deleted: Marque supprimée
+Brand is required!: La marque est requise!
+Brand Not Found!: Marque introuvable!
+Brand Saved: Marque sauvée!
+Brand Updated: Marque mise à jour!
+BrandName: Marque
+Brands: Marques
+Brands exported: Marques exportées
+Browse Available Documents.: Parcourez les documents disponibles.
+brx-IN: Bodo (Inde)
+bs-Cyrl-BA: Bosniaque (cyrillique, Bosnie-Herzégovine)
+bs-Latn-BA: Bosniaque (latin, Bosnie-Herzégovine)
+byn-ER: Blin (Érythrée)
+ca-AD: Catalan (Andorre)
+ca-ES: Catalan (Espagne)
+ca-FR: Catalan (France)
+ca-IT: Catalan (Italie)
+Cancel: Annuler
+Cancel deletion: Annuler la suppression
+Catalog Management: Gestion des catalogues
+ccp-Cakm-BD: Chakma (Chakma, Bangladesh)
+ccp-Cakm-IN: Chakma (Chakma, Inde)
+ce-RU: Tchétchène (Russie)
+ceb-Latn-PH: Cebuano (Latin, Philippines)
+cgg-UG: Chiga (Ouganda)
+Change Password: Changer le mot de passe
+Change the system settings carefully: Modifiez soigneusement les paramètres du système
+Charts comming soon ish...: Graphiques à venir bientôt ish...
+chat: Bavarder
+Chat: Bavarder
+Chat?: Bavarder?
+chr-Cher-US: Cherokee (Cherokee, États-Unis)
+City: Ville
+Clear: Clair
+Client Language has been changed: La langue du client a été modifiée
+Close: Fermer
+co-FR: Corse (France)
+Columns Affected: Colonnes affectées
+Communication: Communication
+Community: Communauté
+Confirm: Confirmer
+CONFIRM: CONFIRMER
+Confirm and Ignore: Confirmer et ignorer
+Confirm and Set Required: Confirmer et définir requis
+Confirm edit: Confirmer la modification
+Confirm Password: Confirmer le mot de passe
+Confirm Registration: Confirmer l’inscription
+contacts: Contacts
+Continue to {0}: Continuer à {0}
+Country: Pays
+Create: Créer
+Create address: Créer une adresse
+Create new backup: Créer une nouvelle sauvegarde
+CreatedOn: Date de création
+cs-CZ: Tchèque (Tchéquie)
+cu-RU: Église slave (Russie)
+Current Password: Mot de passe actuel
+Current Password is required!: Le mot de passe actuel est requis!
+Customize: Personnaliser
+cy-GB: Welsh (Royaume-Uni)
+da-DK: Danois (Danemark)
+da-GL: Danois (Groenland)
+Dashboard: Tableau de bord
+Data has been updated: Les données ont été mises à jour
+Database Backups: Sauvegardes de bases de données
+Date: Date
+Date Created: Date de création
+Date Range For Searching: Plage de dates pour la recherche
+DateTime value is required using {0} type!: La valeur DateTime est requise à l’aide du type {0}!
+dav-KE: Taita (Kenya)
+de-AT: Allemand (Autriche)
+de-BE: Allemand (Belgique)
+de-CH: Allemand (Suisse)
+de-DE: Allemand (Allemagne)
+de-IT: Allemand (Italie)
+de-LI: Allemand (Liechtenstein)
+de-LU: Allemand (Luxembourg)
+Dec: Dec
+Decimal: Décimal
+Decimal value is required using {0} type!: La valeur décimale est requise à l’aide du type {0}!
+Delete: Supprimer
+Delete all: Supprimer tout
+Delete all notifications: Supprimer toutes les notifications
+Delete Confirmation: Confirmation de suppression
+Delete Content: Supprimer du contenu
+Delete Content {0}: Supprimer du contenu '{0}'
+Delete Extended Attribute?: Supprimer l’attribut étendu ?
+Delete file from server: Supprimer le fichier du serveur
+Delete Image: Supprimer l’image
+Delete Picture: Supprimer l’image
+Delete Role Content: Voulez-vous supprimer le rôle avec Id {0} ?
+Delete these {0} elements: Supprimer ces éléments {0} ?
+Delete this element: Supprimer cet élément ?
+Delete User: Supprimer l’utilisateur
+Deletion Not Allowed: Suppression non autorisée
+Dense: Dense
+Dependent permissions required: Autorisations dépendantes requises
+Description: Description
+Description is required!: La description est requise!
+detailed guide for more.: guide détaillé pour en savoir plus.
+Details for Trail ID: Détails pour Trail ID
+dje-NE: Zarma (Niger)
+Do you really want to restart the server?: Voulez-vous vraiment redémarrer le serveur ?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: Voulez-vous vraiment restaurer la base de données à partir d’une sauvegarde « {0} » ? Notez que toutes les modifications apportées après {1} ont disparu. Cela signifie également toutes les modifications apportées par un utilisateur
+Do you want to delete the profile picture of {0}: Voulez-vous supprimer la photo de profil de {0}
+Do you want to delete the User {0}: Voulez-vous supprimer l’utilisateur {0}
+Document Deleted: Document supprimé
+Document Extended Attributes: Attributs étendus du document
+Document Management: Gestion des documents
+Document Not Found!: Document introuvable !
+Document Saved: Document enregistré
+Document Store: Magasin de documents
+Document Type: Document Type
+Document Type Deleted: Type de document supprimé
+Document Type is required!: Le type de document est requis!
+Document Type Not Found!: Type de document introuvable !
+Document Type Saved: Type de document enregistré
+Document Type Updated: Type de document mis à jour
+Document type with this name already exists.: Le type de document portant ce nom existe déjà.
+Document Types: Types de documents
+Document Types exported: Types de documents exportés
+Document Updated: Document mis à jour
+Documents: Documents
+doi-Deva-IN: Dogri (Devanagari, Inde)
+Don't have an account?: Vous n’avez pas de compte ?
+Done!: Fait!
+Download: Télécharger
+Download {0} files separately: Télécharger {0} fichiers séparément
+Download {0} with {1} files as zip: Télécharger {0} avec {1} fichiers au format zip
+Download file {0}: Télécharger le fichier {0}
+Download file {0} as zip: Télécharger le fichier {0} au format zip
+dsb-DE: Bas-sorabe (Allemagne)
+dua-CM: Duala (Cameroun)
+dv-MV: Divehi (Maldives)
+dyo-SN: Jola-Fonyi (Sénégal)
+dz-BT: Dzongkha (Bhoutan)
+E-mail: Messagerie électronique
+E-Mail: Messagerie électronique
+E-Mail not confirmed.: E-mail non confirmé. Veuillez vérifier votre boîte aux lettres et confirmer votre adresse e-mail. <a href='{0}'>Envoyer un e-mail de confirmation</a>
+ebu-KE: Embu (Kenya)
+Edit: Éditer
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: La modification de la connexion DB peut interrompre l’ensemble de l’application. Veuillez modifier ceci uniquement si vous savez ce que vous faites
+Editing of this endpoint can break AI integration: La modification de ce point de terminaison peut interrompre l’intégration de l’IA
+ee-GH: Ewe (Ghana)
+ee-TG: Brebis (Togo)
+el-CY: Grec (Chypre)
+el-GR: Grec (Grèce)
+Email: Messagerie électronique
+Email {0} is already registered.: Email {0} est déjà enregistré.
+Email cannot changed: L’e-mail ne peut pas être modifié
+Email Confirmation: Confirmation par e-mail
+Email is not correct: L’e-mail n’est pas correct
+Email is required: Un e-mail est requis
+Email is required!: L’e-mail est requis!
+en-001: Anglais (Monde)
+en-029: Anglais (Caraïbes)
+en-150: Anglais (Europe)
+en-AE: Anglais (Émirats arabes unis)
+en-AG: Anglais (Antigua-et-Barbuda)
+en-AI: Anglais (Anguilla)
+en-AS: Anglais (Samoa américaines)
+en-AT: Anglais (Autriche)
+en-AU: Anglais (Australie)
+en-BB: Anglais (Barbade)
+en-BE: Anglais (Belgique)
+en-BI: Anglais (Burundi)
+en-BM: Anglais (Bermudes)
+en-BS: Anglais (Bahamas)
+en-BW: Anglais (Botswana)
+en-BZ: Anglais (Belize)
+en-CA: Anglais (Canada)
+en-CC: Anglais (Îles Cocos [Keeling])
+en-CH: Anglais (Suisse)
+en-CK: Anglais (Îles Cook)
+en-CM: Anglais (Cameroun)
+en-CX: Anglais (Christmas Island)
+en-CY: Anglais (Chypre)
+en-DE: Anglais (Allemagne)
+en-DK: Anglais (Danemark)
+en-DM: Anglais (Dominique)
+en-ER: Anglais (Érythrée)
+en-FI: Anglais (Finlande)
+en-FJ: Anglais (Fidji)
+en-FK: Anglais (Îles Falkland)
+en-FM: Anglais (Micronésie)
+en-GB: Anglais (Royaume-Uni)
+en-GD: Anglais (Grenade)
+en-GG: Anglais (Guernesey)
+en-GH: Anglais (Ghana)
+en-GI: Anglais (Gibraltar)
+en-GM: Anglais (Gambie)
+en-GU: Anglais (Guam)
+en-GY: Anglais (Guyana)
+en-HK: Anglais (RAS de Hong Kong)
+en-ID: Anglais (Indonésie)
+en-IE: Anglais (Irlande)
+en-IL: Anglais (Israël)
+en-IM: Anglais (Île de Man)
+en-IN: Anglais (Inde)
+en-IO: Anglais (Territoire britannique de l’océan Indien)
+en-JE: Anglais (Jersey)
+en-JM: Anglais (Jamaïque)
+en-KE: Anglais (Kenya)
+en-KI: Anglais (Kiribati)
+en-KN: Anglais (Saint-Kitts-et-Nevis)
+en-KY: Anglais (Îles Caïmans)
+en-LC: Anglais (Sainte-Lucie)
+en-LR: Anglais (Liberia)
+en-LS: Anglais (Lesotho)
+en-MG: Anglais (Madagascar)
+en-MH: Anglais (Îles Marshall)
+en-MO: Anglais (RAS de Macao)
+en-MP: Anglais (Îles Mariannes du Nord)
+en-MS: Anglais (Montserrat)
+en-MT: Anglais (Malte)
+en-MU: Anglais (Maurice)
+en-MW: Anglais (Malawi)
+en-MY: Anglais (Malaisie)
+en-NA: Anglais (Namibie)
+en-NF: Anglais (Île Norfolk)
+en-NG: Anglais (Nigéria)
+en-NL: Anglais (Pays-Bas)
+en-NR: Anglais (Nauru)
+en-NU: Anglais (Niue)
+en-NZ: Anglais (Nouvelle-Zélande)
+en-PG: Anglais (Papouasie-Nouvelle-Guinée)
+en-PH: Anglais (Philippines)
+en-PK: Anglais (Pakistan)
+en-PN: Anglais (Îles Pitcairn)
+en-PR: Anglais (Porto Rico)
+en-PW: Anglais (Palau)
+en-RW: Anglais (Rwanda)
+en-SB: Anglais (Îles Salomon)
+en-SC: Anglais (Seychelles)
+en-SD: Anglais (Soudan)
+en-SE: Anglais (Suède)
+en-SG: Anglais (Singapour)
+en-SH: Anglais (Sainte-Hélène, Ascension, Tristan da Cunha)
+en-SI: Anglais (Slovénie)
+en-SL: Anglais (Sierra Leone)
+en-SS: Anglais (Soudan du Sud)
+en-SX: Pays-Bas (Sint Maarten)
+en-SZ: Anglais (Eswatini)
+en-TC: Anglais (Îles Turques et Caïques)
+en-TK: Anglais (Tokélaou)
+en-TO: Anglais (Tonga)
+en-TT: Anglais (Trinité-et-Tobago)
+en-TV: Anglais (Tuvalu)
+en-TZ: Anglais (Tanzanie)
+en-UG: Anglais (Ouganda)
+en-UM: Anglais (îles américaines)
+en-US: Anglais (États-Unis)
+en-US-posix: Anglais (États-Unis, Ordinateur)
+en-VC: Anglais (Saint-Vincent-et-les Grenadines)
+en-VG: Anglais (Îles Vierges britanniques)
+en-VI: Anglais (Îles Vierges américaines)
+en-VU: Anglais (Vanuatu)
+en-WS: Anglais (Samoa)
+en-ZA: Anglais (Afrique du Sud)
+en-ZM: Anglais (Zambie)
+en-ZW: Anglais (Zimbabwe)
+English: Anglais
+Enter email and your new password here: Entrez votre adresse e-mail et votre nouveau mot de passe ici
+Enter email for password reset: Entrez l’adresse e-mail liée à votre compte et vous recevrez un e-mail contenant un lien pour réinitialiser votre mot de passe
+Enter name of backup file: Entrez le nom du fichier de sauvegarde
+Enter new name of backup file: Entrez le nouveau nom du fichier de sauvegarde
+Enter the email address for the confirmation mail: Entrez l’adresse e-mail de l’e-mail de confirmation
+Enter the URL to existing file: Entrez l’URL du fichier existant
+Enter your message...: Entrez votre message...
+Entity Id: ID d’entité
+Entity is required!: L’entité est requise!
+EntityCreatedBy: EntitéCrééPar
+EntityCreatedOn (Local): EntityCreatedOn (local)
+EntityCreatedOn (UTC): EntityCreatedOn (UTC)
+EntityId: EntityId
+EntityLastModifiedBy: EntityLastModifiedBy
+EntityLastModifiedOn (Local): EntityLastModifiedOn (local)
+EntityLastModifiedOn (UTC): EntityLastModifiedOn (UTC)
+eo-001: Espéranto (Monde)
+es-419: Espagnol (Amérique latine)
+es-AR: Espagnol (Argentine)
+es-BO: Espagnol (Bolivie)
+es-BR: Espagnol (Brésil)
+es-BZ: Espagnol (Belize)
+es-CL: Espagnol (Chili)
+es-CO: Espagnol (Colombie)
+es-CR: Espagnol (Costa Rica)
+es-CU: Espagnol (Cuba)
+es-DO: Espagnol (République dominicaine)
+es-EC: Espagnol (Équateur)
+es-ES: Espagnol (Espagne)
+es-GQ: Espagnol (Guinée équatoriale)
+es-GT: Espagnol (Guatemala)
+es-HN: Espagnol (Honduras)
+es-MX: Espagnol (Mexique)
+es-NI: Espagnol (Nicaragua)
+es-PA: Espagnol (Panama)
+es-PE: Espagnol (Pérou)
+es-PH: Espagnol (Philippines)
+es-PR: Espagnol (Porto Rico)
+es-PY: Espagnol (Paraguay)
+es-SV: Espagnol (El Salvador)
+es-US: Espagnol (États-Unis)
+es-UY: Espagnol (Uruguay)
+es-VE: Espagnol (Venezuela)
+Español: Espagnol
+et-EE: Estonien (Estonie)
+eu-ES: Basque (Espagne)
+ewo-CM: Ewondo (Cameroun)
+Export: Exportation
+Export To Excel: Exporter vers Excel
+Export_SheetName: Les données
+Extended Attribute Deleted: Attribut étendu supprimé
+Extended Attribute Not Found!: Attribut étendu introuvable !
+Extended Attribute Saved: Attribut étendu enregistré
+Extended Attribute Updated: Attribut étendu mis à jour
+Extended Attribute with this Key already exists.: L’attribut étendu avec cette clé existe déjà.
+Extended Attributes: '\{0}\ Attributs étendus'
+Extended Attributes exported: Attributs étendus exportés
+External Id: ID externe
+ExternalId: ExternalId
+fa-IR: Persan (Iran)
+Failed to get client preferences: Impossible d’obtenir les préférences du client
+FAQs: Foire aux questions (FAQ)
+Features: Fonctionnalités
+Feb: Fév
+Female: Femelle
+ff-Adlm-BF: Fulah (Adlam, Burkina Faso)
+ff-Adlm-CM: Fulah (Adlam, Cameroun)
+ff-Adlm-GH: Fulah (Adlam, Ghana)
+ff-Adlm-GM: Fulah (Adlam, Gambie)
+ff-Adlm-GN: Fulah (Adlam, Guinée)
+ff-Adlm-GW: Fulah (Adlam, Guinée-Bissau)
+ff-Adlm-LR: Fulah (Adlam, Libéria)
+ff-Adlm-MR: Fulah (Adlam, Mauritanie)
+ff-Adlm-NE: Fulah (Adlam, Niger)
+ff-Adlm-NG: Fulah (Adlam, Nigéria)
+ff-Adlm-SL: Fulah (Adlam, Sierra Leone)
+ff-Adlm-SN: Fulah (Adlam, Sénégal)
+ff-Latn-BF: Fulah (Latin, Burkina Faso)
+ff-Latn-CM: Fulah (Latin, Cameroun)
+ff-Latn-GH: Fulah (Latin, Ghana)
+ff-Latn-GM: Fulah (latin, Gambie)
+ff-Latn-GN: Fulah (latin, Guinée)
+ff-Latn-GW: Fulah (latin, Guinée-Bissau)
+ff-Latn-LR: Fulah (latin, Libéria)
+ff-Latn-MR: Fulah (latin, Mauritanie)
+ff-Latn-NE: Fulah (Latin, Niger)
+ff-Latn-NG: Fulah (latin, Nigéria)
+ff-Latn-SL: Fulah (Latin, Sierra Leone)
+ff-Latn-SN: Fulah (latin, Sénégal)
+fi-FI: Finnois (Finlande)
+fil-PH: Philippin (Philippines)
+File is required!: Le fichier est requis!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): Les fichiers de ce type ({0}) ne sont pas autorisés. Seuls les types suivants sont autorisés '{1}'. Essayez l’une de ces extensions ({2})
+Fill Administrator Credentials: Remplir les informations d’identification de l’administrateur
+Fill Basic User Credentials: Remplir les informations d’identification de l’utilisateur de base
+Filtered Audit Trails exported: Pistes d’audit filtrées exportées
+Filtered Brands exported: Marques filtrées exportées
+Filtered Document Types exported: Types de documents filtrés exportés
+Filtered Extended Attributes exported: Attributs étendus filtrés exportés
+Filtered Products exported: Produits filtrés exportés
+Filtered Users exported: Utilisateurs filtrés exportés
+First Name: Prénom
+First Name is required: Prénom requis
+fo-DK: Féroïen (Danemark)
+fo-FO: Féroïen (Îles Féroé)
+Forgot password?: Mot de passe oublié?
+fr-029: Français (Caraïbes)
+fr-BE: Français (Belgique)
+fr-BF: Français (Burkina Faso)
+fr-BI: Français (Burundi)
+fr-BJ: Français (Bénin)
+fr-BL: Français (Saint-Barthélemy)
+fr-CA: Français (Canada)
+fr-CD: Français (Congo [RDC])
+fr-CF: Français (République centrafricaine)
+fr-CG: Français (Congo)
+fr-CH: Français (Suisse)
+fr-CI: French (Côte d’Ivoire)
+fr-CM: Français (Cameroun)
+fr-DJ: Français (Djibouti)
+fr-DZ: Français (Algérie)
+fr-FR: Français (France)
+fr-GA: Français (Gabon)
+fr-GF: Français (Français Guyane)
+fr-GN: Français (Guinée)
+fr-GP: Français (Guadeloupe)
+fr-GQ: Français (Guinée équatoriale)
+fr-HT: Français (Haïti)
+fr-KM: Français (Comores)
+fr-LU: Français (Luxembourg)
+fr-MA: Français (Maroc)
+fr-MC: Français (Monaco)
+fr-MF: Français (Saint-Martin)
+fr-MG: Français (Madagascar)
+fr-ML: Français (Mali)
+fr-MQ: Français (Martinique)
+fr-MR: Français (Mauritanie)
+fr-MU: Français (Maurice)
+fr-NC: Français (Nouvelle-Calédonie)
+fr-NE: Français (Niger)
+fr-PF: Français (Polynésie Français)
+fr-PM: Français (Saint-Pierre-et-Miquelon)
+fr-RE: French (Réunion)
+fr-RW: Français (Rwanda)
+fr-SC: Français (Seychelles)
+fr-SN: Français (Sénégal)
+fr-SY: Français (Syrie)
+fr-TD: Français (Tchad)
+fr-TG: Français (Togo)
+fr-TN: Français (Tunisie)
+fr-VU: Français (Vanuatu)
+fr-WF: Français (Wallis et Futuna)
+fr-YT: Français (Mayotte)
+French: Français
+fur-IT: Frioulan (Italie)
+fy-NL: Frison occidental (Pays-Bas)
+ga-GB: Irlandais (Royaume-Uni)
+ga-IE: Irlandais (Irlande)
+gd-GB: Gaélique écossais (Royaume-Uni)
+General: Généralités
+German: Allemand
+gl-ES: Galicien (Espagne)
+gn-PY: Guarani (Paraguay)
+GoHome: Rentre chez toi!
+Group: Groupe
+gsw-CH: Suisse allemand (Suisse)
+gsw-FR: Suisse allemand (France)
+gsw-LI: Suisse allemand (Liechtenstein)
+gu-IN: Gujarati (Inde)
+guz-KE: Gusii (Kenya)
+gv-IM: Manx (Île de Man)
+ha-Latn-GH: Haoussa (latin, Ghana)
+ha-Latn-NE: Haoussa (latin, Niger)
+ha-Latn-NG: Haoussa (latin, Nigéria)
+haw-US: Hawaïen (États-Unis)
+he-IL: Hébreu (Israël)
+Hello World: Salut tout le monde
+Here you can leave a comment for this permission for the current role: Ici, vous pouvez laisser un commentaire pour cette autorisation pour le rôle actuel
+hi-IN: Hindi (Inde)
+Hide: Cacher
+Home: Domicile
+HouseNumber: Nombre
+hr-BA: Croate (Bosnie-Herzégovine)
+hr-HR: Croate (Croatie)
+hsb-DE: Haut-sorabe (Allemagne)
+hu-HU: Hongrois (Hongrie)
+hy-AM: Arménien (Arménie)
+I agree to the terms and privacy: J’accepte les conditions et la confidentialité
+ia-001: Interlingua (Monde)
+ibb-NG: Ibibio (Nigéria)
+Id: Id
+id-ID: Indonésien (indonésien)
+ig-NG: Igbo (Nigéria)
+ii-CN: Yi (Chine)
+Image format: Format de l’image
+Include Entity fields (Export): Inclure les champs d’entité (Exporter)
+Incorrect Password.: Mot de passe incorrect.
+Indonesia: Indonésien
+Invalid Credentials.: Informations d’identification non valides.
+Is Active: Est actif
+Is Public: Est public
+Is Public?: Est-ce que public?
+is-IS: Islandais (Islande)
+IsActive: IsActive
+it-CH: Italien (Suisse)
+it-IT: Italien (Italie)
+it-SM: Italien (Saint-Marin)
+it-VA: Italien (Cité du Vatican)
+Italian: Italien
+iu-CA: Inuktitut (Canada)
+iu-Latn-CA: Inuktitut (Latin, Canada)
+ja-JP: Japonais (Japon)
+Jan: Vérone
+jgo-CM: Ngomba (Cameroun)
+jmc-TZ: Machame (Tanzanie)
+Json: Json
+Json value is required using {0} type!: La valeur Json est requise à l’aide du type {0} !
+Json value must be a valid json string using {0} type!: La valeur Json doit être une chaîne json valide utilisant {0} type !
+Jul: Juil
+Jun: Juin
+jv-Java-ID: Javanais (javanais, indonésien)
+jv-Latn-ID: Javanais (latin, indonésien)
+ka-GE: Géorgien (Géorgie)
+kab-DZ: Kabyle (Algérie)
+kam-KE: Kamba (Kenya)
+kde-TZ: Makonde (Tanzanie)
+kea-CV: Kabuverdianu (Cap-Vert)
+Key: Clé
+Key is required!: La clé est requise!
+khq-ML: Koyra Chiini (Mali)
+ki-KE: Kikuyu (Kenya)
+kk-KZ: Kazakh (Kazakhstan)
+kkj-CM: Kako (Cameroun)
+kl-GL: Kalaallisut (Groenland)
+kln-KE: Kalenjin (Kenya)
+km-KH: Khmer (Cambodge)
+kn-IN: Kannada (Inde)
+ko-KP: Coréen (Corée du Nord)
+ko-KR: Coréen (Corée)
+kok-IN: Konkani (Inde)
+kr-Latn-NG: Kanuri (latin, Nigéria)
+ks-Arab-IN: Cachemire (arabe, Inde)
+ks-Deva-IN: Cachemire (Devanagari, Inde)
+ksb-TZ: Shambala (Tanzanie)
+ksf-CM: Bafia (Cameroon)
+ksh-DE: Colognian (Allemagne)
+ku-Arab-IQ: Kurde (arabe, Irak)
+ku-Arab-IR: Kurde (arabe, Iran)
+kw-GB: Cornouailles (Royaume-Uni)
+ky-KG: Kirghizistan (Kirghizistan)
+la-VA: Latin (Cité du Vatican)
+Label_Description: 'Description : __________'
+Label_UploadRequests: Fichiers
+lag-TZ: Langi (Tanzanie)
+Languages: Traduction
+Last Name: Nom
+Last Name is required: Nom de famille requis
+lb-LU: Luxembourgeois (Luxembourg)
+lg-UG: Shell (Ouganda)
+lkt-US: Lakota (États-Unis)
+ln-AO: Lingala (Angola)
+ln-CD: Lingala (Congo [RDC])
+ln-CF: Lingala (République centrafricaine)
+ln-CG: Lingala (Congo)
+lo-LA: Lao (Laos)
+Loading: Chargement
+Local: Local
+Logged In.: Connecté.
+Logged Out.: Déconnecté.
+Login with Keycloak: Se connecter avec Keycloak
+LoginDescription: Connectez-vous avec vos informations d’identification.
+Logout: Déconnexion
+Logout Confirmation: Voulez-vous vraiment vous déconnecter?
+Logout user: Utilisateur de déconnexion
+lrc-IQ: Luri du Nord (Irak)
+lrc-IR: Northern Luri (Iran)
+lt-LT: Lituanien (Lituanie)
+lu-CD: Luba-Katanga (Congo [RDC])
+luo-KE: Luo (Kenya)
+luy-KE: Luyia (Kenya)
+lv-LV: Letton (Lettonie)
+mai-IN: Maithili (Inde)
+Mail: Courrier
+Male: Mâle
+Manage {0} {1}'s Extended Attributes: Gérer les attributs étendus de {0} {1}
+Manage {0} {1}'s Permissions: Gérer les autorisations de {0} {1}
+Manage {0} {1}'s Roles: Gérer les rôles des {0} {1}
+Manage {0} Extended Attributes: Gérer {0} attributs étendus
+Manage Brands.: Gérer les marques.
+Manage Database Backups.: Gérez ou restaurez les sauvegardes de bases de données.
+Manage Document Types.: Gérer les types de documents.
+Manage Extended Attributes: Gérer les attributs étendus
+Manage Languages: Gérer les langues
+Manage Permission: Gérer les autorisations
+Manage Products.: Gérer les produits.
+Manage Roles: Gérer les rôles
+Manage Roles.: Gérer les rôles.
+Manage Translations: Gérer les traductions
+Manage Users: Gérer les utilisateurs
+Manage your account: Gérer votre compte
+Mar: Mars
+Mark all: Marquer tout
+Mark all as read: Marquer tout comme lu
+Mark all as unread: Marquer tout comme non lu
+Mark as read: Marquer la lecture
+Mark as unread: Marquer comme non lu
+mas-KE: Masai (Kenya)
+mas-TZ: Masai (Tanzanie)
+May: Mai
+mer-KE: Meru (Kenya)
+Message will be deleted in {0} seconds: Le message sera supprimé dans {0} secondes
+mfe-MU: Morisyen (Maurice)
+mg-MG: Malgache (Madagascar)
+mgh-MZ: Makhuwa-Meetto (Mozambique)
+mgo-CM: Metaʼ (Cameroun)
+mi-NZ: Maori (Nouvelle-Zélande)
+mk-MK: Macédonien (Macédoine du Nord)
+ml-IN: Malayalam (Inde)
+mn-MN: Mongol (Mongolie)
+mn-Mong-CN: Mongol (Mongol, Chine)
+mn-Mong-MN: Mongol (mongol, Mongolie)
+mni-IN: Manipuri (Inde)
+moh-CA: Mohawk (Canada)
+mr-IN: Marathi (Inde)
+ms-BN: Malais (Brunei)
+ms-ID: Malais (Indonésie)
+ms-MY: Malais (Malaisie)
+ms-SG: Malay (Singapour)
+mt-MT: Maltais (Malte)
+mua-CM: Mundang (Cameroun)
+my-MM: Birman (Myanmar)
+mzn-IR: Mazanderani (Iran)
+Name: Nom
+Name is required: Le nom est requis
+Name is required!: Le nom est requis!
+naq-NA: Nom (Namibie)
+nb-NO: Anglais (Norvège)
+nb-SJ: Bokmål norvégien (Svalbard & Jan Mayen)
+nd-ZW: North Ndebele (Zimbabwe)
+nds-DE: Bas allemand (Allemagne)
+nds-NL: Bas allemand (Pays-Bas)
+ne-IN: Népalais (Inde)
+ne-NP: Népalais (Népal)
+New Message From {0}: Nouveau message de {0}
+New Password: Nouveau mot de passe
+New Values: Nouvelles valeurs
+nl-AW: Néerlandais (Aruba)
+nl-BE: Néerlandais (Belgique)
+nl-BQ: Néerlandais (Bonaire, Saint-Eustache et Saba)
+nl-CW: Dutch (Curaçao)
+nl-NL: Néerlandais (Pays-Bas)
+nl-SR: Néerlandais (Suriname)
+nl-SX: Anglais (Sint Maarten)
+nmg-CM: Kwasio (Cameroun)
+nn-NO: Nynorsk norvégien (Norvège)
+nnh-CM: Ngiemboon (Cameroun)
+No: Non
+No address: Pas d’adresse
+No Allowed Actions: Aucune action autorisée
+No longer update automatically: Ne plus mettre à jour automatiquement
+No notifications: Aucune notification
+Not Allowed to add or delete Administrator Role if you have not this role.: Impossible d’ajouter ou de supprimer un rôle d’administrateur si vous n’avez pas ce rôle.
+Not allowed to Delete this user: Non autorisé à supprimer cet utilisateur
+Not Allowed.: Non autorisé.
+Not connected: Non connecté
+NotFoundMessage: La page que vous recherchiez n’existe pas.
+Notifications: Notifications
+Nov: Novembre
+nqo-GN: N’Ko (Guinée)
+nr-ZA: South Ndebele (Afrique du Sud)
+nso-ZA: Sesotho sa Leboa (Afrique du Sud)
+nus-SS: Nuer (Soudan du Sud)
+nyn-UG: Nyankole (Ouganda)
+oc-FR: Occitan (France)
+Oct: Opo
+Offline: Hors-ligne
+Ok: D’accord
+Old Values: Anciennes valeurs
+om-ET: Oromo (Éthiopie)
+om-KE: Oromo (Kenya)
+Online: En ligne
+Only Selected Group (Export): Seul le groupe sélectionné (exporter)
+Open: Ouvrir
+Open now: Ouvrir
+Open Url {0}: Ouvrir l’URL {0}
+Open Url {0} in a new browser tab: Ouvrez l’URL {0} dans un nouvel onglet du navigateur
+or-IN: Odia (Inde)
+os-GE: Ossetic (Géorgie)
+os-RU: Ossetic (Russie)
+Other: Autre chose__________
+Otherwise the full image will be downloaded: Dans le cas contraire, l’image complète sera téléchargée
+Overview: Aperçu
+Owner: Propriétaire
+pa-Arab-PK: Pendjabi (arabe, Pakistan)
+pa-IN: Pendjabi (Inde)
+pap-029: Papiamento (Caraïbes)
+Password: Mot de passe
+Password Changed!: Mot de passe changé!
+Password Confirmation: Confirmation du mot de passe
+Password Confirmation is required!: La confirmation du mot de passe est requise!
+Password is required!: Le mot de passe est requis!
+Password must be at least of length 8: Le mot de passe doit être d’au moins la longueur 8
+Password must contain at least one capital letter: Le mot de passe doit contenir au moins une lettre majuscule
+Password must contain at least one digit: Le mot de passe doit contenir au moins un chiffre
+Password must contain at least one lowercase letter: Le mot de passe doit contenir au moins une lettre minuscule
+Password Reset Mail has been sent to your authorized Email.: L’e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail autorisée.
+Password Reset Successful!: Réinitialisation du mot de passe réussie!
+Passwords don't match: Les mots de passe ne correspondent pas
+pcm-Latn-NG: Pidgin nigérian (latin, Nigéria)
+Permission Name: Nom de l’autorisation
+Personal: Personnel
+Phone Number: Numéro de téléphone
+Phone number {0} is already registered.: Le numéro de téléphone {0} est déjà enregistré.
+PhoneNumber: Numéro de téléphone
+pl-PL: Polonais (Pologne)
+Please confirm your account by <a href='{0}'>clicking here</a>.: Veuillez confirmer votre compte en cliquant <a href='{0}'>cliquez ici</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: Veuillez réinitialiser votre mot de passe en <a href='{0}'>cliquer ici</a>.
+Please type {0} to confirm edit: Veuillez taper {0} pour confirmer la modification
+Please upload your personal qualifications and references that confirm your person and qualification: Veuillez télécharger vos qualifications personnelles et les références qui confirment votre personne et votre qualification
+Please Wait: Veuillez patienter
+PostalCode: Code postal
+Preview: Aperçu
+prg-001: Prussien (Monde)
+Primary Key: Clé primaire
+Print: Imprimer
+Product Deleted: Produit supprimé!
+Product Not Found!: Produit introuvable!
+Product Saved: Produit sauvé!
+Product Updated: Produit mis à jour!
+Products: Produits
+Products exported: Produits exportés
+Profile: Profil
+Profile Details: Détails du profil
+Profile picture added.: Photo de profil ajoutée.
+Profile picture deleted.: Photo de profil supprimée.
+Profile updated: Profil mis à jour
+prs-AF: prs (Afghanistan)
+ps-AF: Pachto (Afghanistan)
+ps-PK: Pachto (Pakistan)
+pt-AO: Portugais (Angola)
+pt-BR: Portugais (Brésil)
+pt-CH: Portugais (Suisse)
+pt-CV: Anglais (Cap-Vert)
+pt-GQ: Portugais (Guinée équatoriale)
+pt-GW: Portugais (Guinée-Bissau)
+pt-LU: Portugais (Luxembourg)
+pt-MO: Portugais (RAS de Macao)
+pt-MZ: Portugais (Mozambique)
+pt-PT: Portugais (Portugal)
+pt-ST: Anglais (Sao Tomé-et-Principe)
+pt-TL: Anglais (Timor-Leste)
+Public Profile: Profil public
+Qualifications and References: Qualifications et références
+quc-GT: Kʼicheʼ (Guatemala)
+Quick Insights.: Aperçus rapides.
+Quick Start Guide: Guide de démarrage rapide
+quz-BO: Quz (Bolivie)
+quz-EC: quz (Équateur)
+quz-PE: quz (Pérou)
+Rate: Taux
+Rate must be greater than 0: Le taux doit être supérieur à 0
+Realtime Updates & Insights with SignalR.: Mises à jour et informations en temps réel avec SignalR.
+Redirect: Rediriger
+Redirecting to {0}: Redirection vers {0}
+Redirecting...: Redirection...
+Refreshed Token.: Jeton actualisé.
+Register: Registre
+Register as: Inscrivez-vous en tant que
+Register as {0}: S’inscrire en tant que {0}
+Register here: Inscrivez-vous ici
+Register New User: Enregistrer un nouvel utilisateur
+Register User: Enregistrer l’utilisateur
+Registered Roles: Rôles enregistrés
+Registered Users: Utilisateurs enregistrés
+Reload: Recharger
+Reload Data: Recharger les données
+Remember me?: Souvenez-vous de moi?
+Remove All: Supprimer tout
+Rename backup: Renommer la sauvegarde
+Render with {0}: Rendu avec {0}
+Render with MudExFileDisplayTiff: Rendu avec la visionneuse Tiff
+Render with MudExFileDisplayZip: Rendu avec la visionneuse Zip
+Render with MudExImageViewer: Rendu avec MudExImageViewer
+Render with native control: Rendu avec contrôle natif
+Reset: Réinitialisation
+Reset all: Réinitialiser tout
+Reset all properties?: Réinitialiser toutes les propriétés ?
+Reset password: Réinitialiser le mot de passe
+Reset Password: Réinitialiser le mot de passe
+Reset view: Réinitialiser la vue
+Resources: Ressources
+Restart server: Redémarrer le serveur
+Restore: Restaurer
+Restore database: Restaurer la base de données
+Restore default: Restaurer les paramètres par défaut
+Restore finished: Restauration terminée
+Restore in progress. Please wait until the restore is finished. This can take a while.: Restauration en cours. Veuillez patienter jusqu’à ce que la restauration soit terminée. Cela peut prendre un certain temps.
+rm-CH: Romanche (Suisse)
+rn-BI: Rundi (Burundi)
+ro-MD: Roumain (Moldavie)
+ro-RO: Roumain (Roumanie)
+rof-TZ: Rombo (Tanzanie)
+Role: Rôle
+Role ID: ID de rôle
+Role Name: Nom du rôle
+Roles: Rôles
+Roles Updated: Rôles mis à jour!
+RowsPerPageString: Lignes par page
+ru-BY: Russe (Biélorussie)
+ru-KG: Russe (Kirghizistan)
+ru-KZ: Russe (Kazakhstan)
+ru-MD: Russe (Moldavie)
+ru-RU: Russe (Russie)
+ru-UA: Russe (Ukraine)
+Runtime: Duree
+Russian: Russe
+rw-RW: Kinyarwanda (Rwanda)
+rwk-TZ: Rwa (Tanzanie)
+sa-IN: Sanskrit (Inde)
+sah-RU: Sakha (Russie)
+saq-KE: Samburu (Kenya)
+sat-Olck-IN: Santali (Ol Chiki, Inde)
+Save: Sauvegarder
+Save {0} Changes: '{0} Änderungen speichern'
+Save as: Enregistrer sous
+Save Changes: Enregistrer les modifications
+Save image: Enregistrer l’image
+Save Role: Enregistrer le rôle
+Save visible area only: Enregistrer uniquement la zone visible
+saved: Sauvé!
+sbp-TZ: Sangu (Tanzanie)
+sd-Arab-PK: Sindhi (arabe, Pakistan)
+sd-Deva-IN: Sindhi (Devanagari, Inde)
+se-FI: Sami du Nord (Finlande)
+se-NO: Sami du Nord (Norvège)
+se-SE: Sami du Nord (Suède)
+Search: Rechercher
+Search by users: Recherche par utilisateurs
+Search For {0} Extended Attributes: Rechercher des attributs étendus {0}
+Search for Brands: Rechercher des marques
+Search for Document Types: Rechercher des types de documents
+Search For Permissions: Rechercher des autorisations
+Search for Roles...: Rechercher des rôles...
+Search for Trails: Rechercher des sentiers
+Search For User Roles: Rechercher des rôles d’utilisateur
+Search For Users: Rechercher des utilisateurs
+Search in New Values: Rechercher dans de nouvelles valeurs
+Search in Old Values: Rechercher dans les anciennes valeurs
+Security: Sécurité
+seh-MZ: Sena (Mozambique)
+Select Language: Sélectionner une langue
+Send: Envoyer
+Send confirmation email: Envoyer un e-mail de confirmation
+Sep: Sept.
+Server restarted successfully: Le serveur a redémarré avec succès
+ses-ML: Koyraboro Senni (Mali)
+Set new password: Définir un nouveau mot de passe
+sg-CF: Sango (République centrafricaine)
+shi-Latn-MA: Tachelhit (Latin, Morocco)
+shi-Tfng-MA: Tachelhit (Tifinagh, Morocco)
+Show: Montrer
+Show as Tree: Afficher en tant qu’arbre
+Show flat: Afficher l’appartement
+Show notification: Afficher la notification
+si-LK: Cinghalais (Sri Lanka)
+Sign In: Connexion
+Sign Up: S’enregistrer
+sk-SK: Slovaque (Slovaquie)
+sl-SI: Slovène (Slovénie)
+sma-NO: Sami du Sud (Norvège)
+sma-SE: Sami du Sud (Suède)
+smj-NO: Lule Sami (Norvège)
+smj-SE: Lule Sami (Suède)
+smn-FI: Inari Sami (Finlande)
+sms-FI: Skolt Sami (Finlande)
+sn-Latn-ZW: Shona (Latin, Zimbabwe)
+so-DJ: Somalien (Djibouti)
+so-ET: Somali (Éthiopie)
+so-KE: Somalien (Kenya)
+so-SO: Somali (Somalie)
+Something went wrong during the refresh token action: Quelque chose s’est mal passé pendant l’action du jeton d’actualisation
+sq-AL: Albanais (Albanie)
+sq-MK: Albanais (Macédoine du Nord)
+sq-XK: albanais (Kosovo)
+sr-Cyrl-BA: Serbe (cyrillique, Bosnie-Herzégovine)
+sr-Cyrl-ME: Serbe (cyrillique, Monténégro)
+sr-Cyrl-RS: Serbe (cyrillique, Serbie)
+sr-Cyrl-XK: Serbe (cyrillique, Kosovo)
+sr-Latn-BA: Serbe (latin, Bosnie-Herzégovine)
+sr-Latn-ME: Serbe (latin, Monténégro)
+sr-Latn-RS: Serbe (latin, Serbie)
+sr-Latn-XK: Serbe (latin, Kosovo)
+ss-SZ: siSwati (Eswatini)
+ss-ZA: siSwati (Afrique du Sud)
+ssy-ER: Saho (Eritrea)
+st-LS: Sesotho (Lesotho)
+st-ZA: Sesotho (Afrique du Sud)
+Status: Statut
+Street: Rue
+Striped: Rayé
+su-Latn-ID: Sundanais (latin, Indonésie)
+Subject: Objet
+Support: Soutien
+sv-AX: Suédois (îles Åland)
+sv-FI: Suédois (Finlande)
+sv-SE: Suédois (Suède)
+sw-CD: Kiswahili (Congo [RDC])
+sw-KE: Swahili (Kenya)
+sw-TZ: Swahili (Tanzanie)
+sw-UG: Swahili (Ouganda)
+Swagger: Documentation de l’API
+Swedish: Suédois
+syr-SY: Syriaque (Syrie)
+System: Système
+System Settings: Paramètres du système
+ta-IN: Tamoul (Inde)
+ta-LK: Tamoul (Sri Lanka)
+ta-MY: Ni (Malaisie)
+ta-SG: Tamoul (Singapour)
+Table Name: Nom de la table
+Take case: Prenez le cas
+Tax: Taxe
+Tax must be greater than 0: La taxe doit être supérieure à 0
+te-IN: Telugu (Inde)
+teo-KE: Teso (Kenya)
+teo-UG: Teso (Ouganda)
+Text: SMS
+Text value is required using {0} type!: La valeur de texte est requise à l’aide du type {0}!
+tg-Cyrl-TJ: Tadjik (cyrillique, Tadjikistan)
+th-TH: Thaï (Thaïlande)
+The content type {0} cannot be displayed without a suitable plugin: Le type de contenu {0} ne peut pas être affiché sans un plugin approprié
+The file ({0}) has already been added: Le fichier ({0}) a déjà été ajouté
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: Le fichier a dépassé la taille maximale de {0} avec {1}. La taille du fichier est {2}
+The following {0} permissions are also required for permission {1}: Les autorisations de {0} suivantes sont également requises pour les autorisations {1}
+The following permission is also required for permission {1}: L’autorisation suivante est également requise pour l’autorisation {1}
+The Plugin '{0}' may be able to help: Le plugin '{0}' peut être en mesure d’aider
+The server is just restarting. Please wait until the connection has been restored: Le serveur vient de redémarrer. Veuillez patienter jusqu’à ce que la connexion soit rétablie
+The user "{0}" just changed some of this data: L’utilisateur « {0} » vient de modifier certaines de ces données
+The user {0} has been logged off: L’utilisateur {0} a été déconnecté
+The User {0} has just edited, created or deleted entries here. You should reload the data: L’Utilisateur {0} vient de modifier, créer ou supprimer des entrées ici. Vous devez recharger les données
+There are no new notifications: Il n’y a pas de nouvelles notifications
+This is an Administrator Only View.: Il s’agit d’une vue Administrateur uniquement.
+ti-ER: Tigrinya (Érythrée)
+ti-ET: Tigrinya (Éthiopie)
+tig-ER: Tigre (Érythrée)
+Time: Heure
+Title: Titre
+Title is required!: Le titre est requis!
+tk-TM: Turkmènes (Turkménistan)
+tn-BW: Setswana (Botswana)
+tn-ZA: Setswana (Afrique du Sud)
+to-TO: Tongan (Tonga)
+Toggle right-to-left/left-to-right: Basculer de droite à gauche/de gauche à droite
+Token is required: Le jeton est requis
+Token Not Found!: Jeton introuvable!
+tr-CY: Turc (Chypre)
+tr-TR: Turc (Turquie)
+Trail Details: Détails du sentier
+Translations: Traductions
+Translations are being imported: Les traductions sont importées
+Translations updated: Traductions mises à jour
+Try different role: Essayez un rôle différent
+ts-ZA: Xitsonga (Afrique du Sud)
+tt-RU: Tatar (Russie)
+twq-NE: Tasawaq (Niger)
+Type: Type
+Type should be valid: Le type doit être valide
+tzm-Arab-MA: Tamazight de l’Atlas central (arabe, Maroc)
+tzm-Latn-DZ: Tamazight de l’Atlas central (latin, Algérie)
+tzm-Latn-MA: Tamazight de l’Atlas central (latin, Maroc)
+tzm-Tfng-MA: Tamazight de l’Atlas central (Tifinagh, Maroc)
+ug-CN: Ouïghour (Chine)
+uk-UA: Ukrainien (Ukraine)
+Unassigned: Non attribué
+Update: Mettre à jour
+Update automatically next time: Mise à jour automatique la prochaine fois
+Update Brand: Mettre à jour la marque
+Update Document: Document de mise à jour
+Update Document Type: Mettre à jour le type de document
+Update Extended Attribute: Mettre à jour l’attribut étendu
+Update Now: Mettre à jour
+Update Permissions: Autorisations de mise à jour
+Update Product: Mettre à jour le produit
+Update Role: Rôle de mise à jour
+Update Role Permissions: Mettre à jour les autorisations de rôle
+Update User Roles: Mettre à jour les rôles d’utilisateur
+Updated User Status.: Statut de l’utilisateur mis à jour.
+Upload: Télécharger
+Upload File: Télécharger le fichier
+Upload Files: Télécharger des fichiers
+Upload Folder: Télécharger le dossier
+Upload Image: Télécharger l’image
+Upload Qualifications and References: Télécharger les qualifications et les références
+ur-IN: Ourdou (Inde)
+ur-PK: Ourdou (Pakistan)
+User: Utilisateur
+User {0} Registered. Please check your Mailbox to verify!: Utilisateur {0} enregistré. S’il vous plaît vérifier votre boîte aux lettres pour vérifier votre adresse e-mail!
+User and Roles: Utilisateur et rôles
+User Data: Données utilisateur
+User Deleted: Utilisateur supprimé
+User Name: Nom d’utilisateur
+User Not Active. Please contact the administrator.: Utilisateur non actif. Veuillez attendre l’action ou contacter l’administrateur.
+User Not Found!: Utilisateur introuvable!
+User Registered: Utilisateur enregistré!
+User Registered Mailbox: Utilisateur enregistré. Le courrier de confirmation a été remis à la boîte aux lettres.
+User registration is not allowed: L’inscription de l’utilisateur n’est pas autorisée
+Username: Nom d’utilisateur
+UserName: Nom d’utilisateur
+Username {0} is already taken.: Le nom d’utilisateur {0} est déjà pris.
+Username cannot changed: Le nom d’utilisateur ne peut pas être modifié
+UserName is required: Nom d’utilisateur requis
+UserName must be at least of length 6: Le nom d’utilisateur doit être d’au moins la longueur 6
+Username or Email: Nom d’utilisateur ou e-mail
+Users: Utilisateurs
+Users and Roles: Utilisateurs et rôles
+Users exported: Utilisateurs exportés
+UTC: UTC
+uz-Arab-AF: Ouzbek (arabe, Afghanistan)
+uz-Cyrl-UZ: Ouzbek (cyrillique, Ouzbékistan)
+uz-Latn-UZ: Ouzbek (latin, Ouzbékistan)
+vai-Latn-LR: Vai (latin, Libéria)
+vai-Vaii-LR: Go (Vai, Libéria)
+Value: Valeur
+ve-ZA: Venda (Afrique du Sud)
+Version: Version
+vi-VN: Vietnamien (Vietnam)
+View: Vue
+View Profile: Voir le profil
+vo-001: Volapük (Monde)
+vun-TZ: Vunjo (Tanzanie)
+wae-CH: Walser (Suisse)
+wal-ET: Wolaytta (Éthiopie)
+Welcome {0}: '{0} de bienvenue'
+Will be saved only when selected Permission: Sera enregistré uniquement lorsque l’autorisation est sélectionnée
+With_Selected: '{0} Selected'
+wo-SN: Wolof (Sénégal)
+xh-ZA: isiXhosa (Afrique du Sud)
+xog-UG: Soga (Ouganda)
+yav-CM: Yangben (Cameroun)
+Yes: Oui
+yi-001: Yiddish (Monde)
+yo-BJ: Yoruba (Bénin)
+yo-NG: Yoruba (Nigéria)
+you: vous
+You are logged out because the Permissions of one of your Roles have been updated.: Vous êtes déconnecté car les autorisations de l’un de vos rôles ont été mises à jour.
+You are logged out because the user with your Token has been deleted or token is expired.: Vous êtes déconnecté car l'utilisateur avec votre token a été supprimé ou le token a expiré.
+You are logged out by an Administrator or profile change.: Vous êtes déconnecté par un administrateur ou un changement de profil.
+You are Logged Out.: Vous êtes déconnecté.
+You can now Login with your credentials: Vous pouvez maintenant vous connecter avec vos informations d’identification
+You cannot delete yourself: Vous ne pouvez pas vous supprimer vous-même
+You received a new chat message from {0}: Vous avez reçu un nouveau message de chat de {0}
+You're leaving {0} and will redirected to {1}: Vous quittez {0} et serez redirigé vers {1}
+Your e-mail address has been confirmed!: Votre adresse e-mail a été confirmée !
+Your email address could not be verified. If you have any problems, please contact {0}: Votre adresse e-mail n’a pas pu être vérifiée. Si vous rencontrez des problèmes, veuillez contacter {0}
+Your Profile has been updated.: Votre profil a été mis à jour.
+Your Recent Activities.: Vos activités récentes.
+zgh-Tfng-MA: Tamazight marocain standard (Tifinagh, Maroc)
+zh-CN: Chinois (Chine)
+zh-Hans-HK: Chinois (simplifié, RAS de Hong Kong)
+zh-Hans-MO: Chinois (simplifié, RAS de Macao)
+zh-HK: Chinois (RAS de Hong Kong)
+zh-MO: Chinois (RAS de Macao)
+zh-SG: Chinois (Singapour)
+zh-TW: Chinois (Taïwan)
+Zoom in: Zoom avant
+Zoom out: Zoom arrière
+zu-ZA: isiZulu (Afrique du Sud)

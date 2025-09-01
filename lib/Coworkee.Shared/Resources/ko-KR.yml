@@ -1,0 +1,1140 @@
+﻿A connection to the server cannot be established. Your network connection may be down or the server is unreachable. Please wait until the connection has been restored: 서버에 연결할 수 없습니다. 네트워크 연결이 끊어졌거나 서버에 연결할 수 없습니다. 연결이 복원될 때까지 기다려 주십시오
+A maximum of {0} files are allowed: 최대 {0}개의 파일이 허용됩니다.
+aa-DJ: 아파르 (지부티)
+aa-ER: 아파르 (에리트레아)
+aa-ET: 아파르 (에티오피아)
+about: 약
+Account: 계좌
+Actions: 작업
+Activate User?: 사용자를 활성화?
+Active: 활동적인
+Active?: 활동적인?
+Add: 더하다
+Add Brand: 브랜드 추가
+Add Document: 문서 추가
+Add Document Type: 문서 유형 추가
+Add Extended Attribute: 확장 특성 추가
+Add external Url: 외부 URL 추가
+Add Product: 제품 추가
+Add Role: 역할 추가
+Add Url: URL 추가
+Address: 주소
+Addresses: 주소
+Administrator: 관리자
+Administrator Settings.: 관리자 설정.
+Administrators Profile's Status cannot be toggled: 관리자 프로필의 상태를 전환할 수 없습니다.
+af-NA: 아프리칸스 (나미비아)
+af-ZA: 아프리칸스 (남아프리카 공화국)
+agq-CM: 아젬 (카메룬)
+ak-GH: 윌 (가나)
+All Documents without Type are stored here: 유형이 없는 모든 문서는 여기에 저장됩니다.
+All Groups: 모든 그룹
+All Permissions: 모든 사용 권한
+All roles: 모든 역할
+All roles unfiltered: 필터링되지 않은 모든 역할
+Already have an account?: 이미 계정이 있습니까?
+am-ET: 암하라어 (에티오피아)
+An Error has occured!: 오류가 발생했습니다!
+An Error has occurred!: 오류가 발생했습니다!
+An error occurred while confirming {0}: 확인하는 동안 오류가 발생했{0}
+Api: Api
+API-Versions: API 버전
+ApplicationDescription: 웹어셈블리 및 클린 아키텍처 패턴이 있는 샘플 응용 프로그램
+ApplicationSubDescription: 이 블레저 페이지에 오신 것을 환영합니다.
+Apply: 적용하다
+Apr: 4월
+ar-001: 아랍어(세계)
+ar-AE: 아랍어(아랍에미리트)
+ar-BH: 아랍어(바레인)
+ar-DJ: 아랍어(지부티)
+ar-DZ: 아랍어(알제리)
+ar-EG: 아랍어(이집트)
+ar-ER: 아랍어(에리트레아)
+ar-IL: 아랍어(이스라엘)
+ar-IQ: 아랍어(이라크)
+ar-JO: 아랍어(요르단)
+ar-KM: 아랍어(코모로)
+ar-KW: 아랍어(쿠웨이트)
+ar-LB: 아랍어(레바논)
+ar-LY: 아랍어(리비아)
+ar-MA: 아랍어(모로코)
+ar-MR: 아랍어(모리타니)
+ar-OM: 아랍어(오만)
+ar-PS: 아랍어(팔레스타인 자치정부)
+ar-QA: 아랍어(카타르)
+ar-SA: 아랍어(사우디아라비아)
+ar-SD: 아랍어(수단)
+ar-SO: 아랍어(소말리아)
+ar-SS: 아랍어(남수단)
+ar-SY: 아랍어(시리아)
+ar-TD: 아랍어 (차드)
+ar-TN: 아랍어(튀니지)
+ar-YE: 아랍어(예멘)
+Are you sure you want to force logout for user {0}: 사용자 이{0}에 대해 강제로 로그아웃하시겠습니까?
+Are you sure you want to restart Backend/Server?: 백엔드/서버를 다시 시작하시겠습니까?
+Are you sure you want to restore the default settings? This will overwrite any changes you've ever made here.: 기본 설정을 복원하시겠습니까? 이렇게 하면 여기에서 변경한 내용을 덮어씁니다.
+arn-CL: 마푸체 (칠레)
+As Admin you can filter for users here: 관리자로 당신은 여기 사용자를 위해 필터링 할 수 있습니다
+as read: 읽음으로
+As soon as your account has been activated you can log in: 계정이 활성화되면 즉시 로그인 할 수 있습니다.
+as unread: 읽지 않은 것으로
+as-IN: 아사메 (인도)
+asa-TZ: 아수 (탄자니아)
+ast-ES: 아스투리아 (스페인)
+At least one document is required: 하나 이상의 문서가 필요합니다.
+Audit Trails: 감사 트레일
+Audit Trails exported: 내보낸 감사 트레일
+Aug: 8월
+Auto Confirm Email?: 자동 확인 이메일?
+az-Cyrl-AZ: 아제르바이잔 (키릴, 아제르바이잔)
+az-Latn-AZ: 아제르바이잔 (라틴어, 아제르바이잔)
+ba-RU: 바슈키르 (러시아)
+Back: 뒤로
+Barcode: 바코드
+Barcode already exists.: 바코드가 이미 있습니다.
+Barcode is required!: 바코드가 필요합니다!
+bas-CM: 바사 (카메룬)
+Basic: 기초의
+Basic role with default permissions: 기본 권한이 있는 기본 역할
+be-BY: 벨라루스어 (벨라루스)
+bem-ZM: 벨바 (잠비아)
+bez-TZ: 다리(탄자니아)
+bg-BG: 불가리아어 (불가리아)
+bin-NG: 에도 (나이지리아)
+bm-Latn-ML: 바마난칸 (라틴어, 말리)
+bn-BD: 방글라 (방글라데시)
+bn-IN: 방글라 (인도)
+bo-CN: 티베트어 (중국)
+bo-IN: 티베트어 (인도)
+Bordered: 접경
+br-FR: 브레튼 (프랑스)
+Brand: 낙인
+Brand Deleted: 브랜드 삭제
+Brand is required!: 브랜드가 필요합니다!
+Brand Not Found!: 찾을 수 없는 브랜드!
+Brand Saved: 브랜드 저장!
+Brand Updated: 브랜드 업데이트!
+BrandName: 낙인
+Brands: 브랜드
+Brands exported: 수출된 브랜드
+Browse Available Documents.: 사용 가능한 문서를 찾아봅보십시오.
+brx-IN: 보도 (인도)
+bs-Cyrl-BA: 보스니아 (키릴, 보스니아 헤르체고비나)
+bs-Latn-BA: 보스니아 (라틴어, 보스니아 헤르체고비나)
+byn-ER: 블린 (에리트레아)
+ca-AD: 카탈로니아어 (안도라)
+ca-ES: 카탈로니아어 (스페인)
+ca-FR: 카탈로니아어 (프랑스)
+ca-IT: 카탈로니아어 (이탈리아)
+Cancel: 취소
+Cancel deletion: 삭제 취소
+Catalog Management: 카탈로그 관리
+ccp-Cakm-BD: 차크마 (차크마, 방글라데시)
+ccp-Cakm-IN: 차크마 (차크마, 인도)
+ce-RU: 체첸 (러시아)
+ceb-Latn-PH: 세부아노 (라틴어, 필리핀)
+cgg-UG: 치가 (우간다)
+Change Password: 암호 변경
+Change the system settings carefully: 시스템 설정을 신중하게 변경하십시오.
+Charts comming soon ish...: 차트는 곧 틱 오고 ...
+chat: 잡담
+Chat: 잡담
+Chat?: 잡담?
+chr-Cher-US: 체로키 (체로키, 미국)
+City: 도시
+Clear: 맑다
+Client Language has been changed: 클라이언트 언어가 변경되었습니다.
+Close: 닫다
+co-FR: 코르시칸 (프랑스)
+Columns Affected: 영향을 받는 열
+Communication: 통신
+Community: 커뮤니티
+Confirm: 확인하다
+CONFIRM: 확인하다
+Confirm and Ignore: 확인 및 무시
+Confirm and Set Required: 필요한 확인 및 설정
+Confirm edit: 편집 확인
+Confirm Password: 암호 확인
+Confirm Registration: 등록 확인
+contacts: 연락처
+Continue to {0}: 계속 {0}
+Country: 나라
+Create: 창조하다
+Create address: 주소 만들기
+Create new backup: 새 백업 만들기
+CreatedOn: 만든 날짜
+cs-CZ: 체코어(체코)
+cu-RU: 교회 슬라브 (러시아)
+Current Password: 현재 암호
+Current Password is required!: 현재 암호가 필요합니다!
+Customize: 사용자 지정
+cy-GB: 웨일스어 (영국)
+da-DK: 덴마크어 (덴마크)
+da-GL: 덴마크어 (그린란드)
+Dashboard: 대시보드
+Data has been updated: 데이터가 업데이트되었습니다.
+Database Backups: 데이터베이스 백업
+Date: 날짜
+Date Created: 생성된 날짜
+Date Range For Searching: 검색날짜 범위
+DateTime value is required using {0} type!: '{0} 타입을 사용 하 여 날짜 시간 값이 필요 합니다!'
+dav-KE: 타이타 (케냐)
+de-AT: 독일어(오스트리아)
+de-BE: 독일어(벨기에)
+de-CH: 독일어(스위스)
+de-DE: 독일어(독일)
+de-IT: 독일어(이탈리아)
+de-LI: 독일어 (리히텐슈타인)
+de-LU: 독일어(룩셈부르크)
+Dec: 12월
+Decimal: 십진법
+Decimal value is required using {0} type!: 소수점 값이 {0} 타입을 사용 하 여 필요!
+Delete: 삭제하다
+Delete all: 모두 삭제
+Delete all notifications: 모든 알림 삭제
+Delete Confirmation: 확인 삭제
+Delete Content: 콘텐츠 삭제
+Delete Content {0}: 콘텐츠 '{0}' 삭제
+Delete Extended Attribute?: 확장 특성을 삭제?
+Delete file from server: 서버에서 파일 삭제
+Delete Image: 이미지 삭제
+Delete Picture: 사진 삭제
+Delete Role Content: Id {0} 역할을 삭제하시겠습니까?
+Delete these {0} elements: 이러한 {0} 요소를 삭제?
+Delete this element: 이 요소를 삭제?
+Delete User: 사용자 삭제
+Deletion Not Allowed: 삭제 는 허용되지 않습니다.
+Dense: 빽빽한
+Dependent permissions required: 종속 사용 권한 필요
+Description: 묘사
+Description is required!: 설명이 필요합니다!
+detailed guide for more.: 자세한 내용은 자세한 설명서입니다.
+Details for Trail ID: 트레일 ID에 대한 세부 정보
+dje-NE: 자르마 (니제르)
+Do you really want to restart the server?: 정말로 서버를 다시 시작하시겠습니까?
+Do you really want to restore the database from backup '{0}'? Note that any changes made after {1} are gone. This also means any changes made by any user: 백업 '{0}'에서 데이터베이스를 복원하시겠습니까? {1} 이후에 변경한 내용은 모두 사라집니다. 이는 또한 모든 사용자의 변경 사항을 의미합니다
+Do you want to delete the profile picture of {0}: '{0} 프로필 사진을 삭제하시겠습니까?'
+Do you want to delete the User {0}: 사용자 {0} 삭제하시겠습니까?
+Document Deleted: 삭제된 문서
+Document Extended Attributes: 문서 확장 특성
+Document Management: 문서 관리
+Document Not Found!: 문서를 찾을 수 없습니다!
+Document Saved: 저장된 문서
+Document Store: 문서 저장소
+Document Type: 문서 유형
+Document Type Deleted: 문서 유형 삭제됨
+Document Type is required!: 문서 유형이 필요합니다!
+Document Type Not Found!: 문서 유형을 찾을 수 없습니다!
+Document Type Saved: 문서 유형 저장
+Document Type Updated: 문서 유형 업데이트
+Document type with this name already exists.: 이 이름의 문서 형식은 이미 있습니다.
+Document Types: 문서 유형
+Document Types exported: 내보낸 문서 유형
+Document Updated: 문서 업데이트
+Documents: 문서
+doi-Deva-IN: 도그리 (인도 데바나가리)
+Don't have an account?: 계정이 없는가요?
+Done!: 수행!
+Download: 다운로드
+Download {0} files separately: '{0} 파일을 별도로 다운로드'
+Download {0} with {1} files as zip: '{0} 파일이있는 {1}를 zip으로 다운로드하십시오.'
+Download file {0}: 파일 {0} 다운로드
+Download file {0} as zip: 파일 {0}를 zip으로 다운로드
+dsb-DE: 로워 소르비안 (독일)
+dua-CM: 듀얼라 (카메룬)
+dv-MV: 다비히 (몰디브)
+dyo-SN: 졸라 포니 (세네갈)
+dz-BT: 단카 (부탄)
+E-mail: 이메일
+E-Mail: 이메일
+E-Mail not confirmed.: 이메일이 확인되지 않았습니다. 사서함을 확인하고 전자 메일 주소를 확인하십시오. <a href='{0}'>이메일 확인 재전송</a>
+ebu-KE: 엠부 (케냐)
+Edit: 편집하다
+Editing of the DB Connection can break whole application. Please edit this only if you know what you are doing: DB 연결을 편집하면 전체 응용 프로그램이 중단될 수 있습니다. 당신이 무엇을하고 있는지 알고있는 경우에만 이것을 편집하십시오
+Editing of this endpoint can break AI integration: 이 엔드포인트를 편집하면 AI 통합이 중단될 수 있습니다.
+ee-GH: 에베 (가나)
+ee-TG: 에베 (토고)
+el-CY: 그리스어 (키프로스)
+el-GR: 그리스어 (그리스)
+Email: 이메일
+Email {0} is already registered.: 이메일 {0}가 이미 등록되어 있습니다.
+Email cannot changed: 이메일을 변경할 수 없습니다.
+Email Confirmation: 이메일 확인
+Email is not correct: 이메일이 올바르지 않습니다.
+Email is required: 이메일이 필요합니다.
+Email is required!: 이메일이 필요합니다!
+en-001: 영어(세계)
+en-029: 영어(카리브해)
+en-150: 영어(유럽)
+en-AE: 영어(아랍에미리트)
+en-AG: 영어 (앤티가 바부다)
+en-AI: 영어(앵귈라)
+en-AS: 영어(아메리칸 사모아)
+en-AT: 영어(오스트리아)
+en-AU: 영어(오스트레일리아)
+en-BB: 영어(바베이도스)
+en-BE: 영어(벨기에)
+en-BI: 영어(부룬디)
+en-BM: 영어 (버뮤다)
+en-BS: 영어(바하마)
+en-BW: 영어 (보츠와나)
+en-BZ: 영어(벨리즈)
+en-CA: 영어(캐나다)
+en-CC: 영어(코코스 [킬링] 제도)
+en-CH: 영어(스위스)
+en-CK: 영어(쿡 제도)
+en-CM: 영어(카메룬)
+en-CX: 영어(크리스마스 섬)
+en-CY: 영어(키프로스)
+en-DE: 영어(독일)
+en-DK: 영어(덴마크)
+en-DM: 영어(도미니카)
+en-ER: 영어(에리트레아)
+en-FI: 영어(핀란드)
+en-FJ: 영어 (피지)
+en-FK: 영어(포클랜드 제도)
+en-FM: 영어(미크로네시아)
+en-GB: 영어(영국)
+en-GD: 영어 (그레나다)
+en-GG: 영어 (건지)
+en-GH: 영어(가나)
+en-GI: 영어(지브롤터)
+en-GM: 영어(감비아)
+en-GU: 영어(괌)
+en-GY: 영어 (가이아나)
+en-HK: 영어(홍콩 SAR)
+en-ID: 영어(인도네시아)
+en-IE: 영어(아일랜드)
+en-IL: 영어 (이스라엘)
+en-IM: 영어 (맨 섬)
+en-IN: 영어(인도)
+en-IO: 영어(영국 령 인도양 영토)
+en-JE: 영어(저지)
+en-JM: 영어(자메이카)
+en-KE: 영어(케냐)
+en-KI: 영어(키리바시)
+en-KN: 영어 (세인트 키츠 네비스)
+en-KY: 영어(케이맨 제도)
+en-LC: 영어 (세인트 루시아)
+en-LR: 영어(라이베리아)
+en-LS: 영어(레소토)
+en-MG: 영어(마다가스카르)
+en-MH: 영어(마셜 제도)
+en-MO: 영어(마카오 SAR)
+en-MP: 영어(북마리아나 제도)
+en-MS: 영어 (몬세라트)
+en-MT: 영어(몰타)
+en-MU: 영어(모리셔스)
+en-MW: 영어(말라위)
+en-MY: 영어(말레이시아)
+en-NA: 영어(나미비아)
+en-NF: 영어 (노퍽 섬)
+en-NG: 영어(나이지리아)
+en-NL: 영어(네덜란드)
+en-NR: 영어(나우루)
+en-NU: 영어(니우에)
+en-NZ: 영어(뉴질랜드)
+en-PG: 영어(파푸아뉴기니)
+en-PH: 영어(필리핀)
+en-PK: 영어(파키스탄)
+en-PN: 영어(핏케언 제도)
+en-PR: 영어(푸에르토리코)
+en-PW: 영어(팔라우)
+en-RW: 영어(르완다)
+en-SB: 영어(솔로몬 제도)
+en-SC: 영어 (세이셸)
+en-SD: 영어(수단)
+en-SE: 영어 (스웨덴)
+en-SG: 영어(싱가포르)
+en-SH: 영어 (세인트 헬레나, 승천, 트리스탄 다 쿤하)
+en-SI: 영어(슬로베니아)
+en-SL: 영어(시에라리온)
+en-SS: 영어(남수단)
+en-SX: 네더랜드 (신트 마틴)
+en-SZ: 영어(에스와티니)
+en-TC: 영어 (터크스 케이커스 제도)
+en-TK: 영어(토켈라우)
+en-TO: 영어(통가)
+en-TT: 영어 (트리니다드 토바고)
+en-TV: 영어(투발루)
+en-TZ: 영어(탄자니아)
+en-UG: 영어(우간다)
+en-UM: 영어(미국 외딴 섬)
+en-US: 영어(미국)
+en-US-posix: 영어(미국, 컴퓨터)
+en-VC: 영어 (세인트 빈센트 & 그레나딘)
+en-VG: 영어(영국령 버진 아일랜드)
+en-VI: 영어(미국령 버진 아일랜드)
+en-VU: 영어(바누아투)
+en-WS: 영어(사모아)
+en-ZA: 영어(남아프리카 공화국)
+en-ZM: 영어(잠비아)
+en-ZW: 영어 (짐바브웨)
+English: 영어
+Enter email and your new password here: 여기에 이메일과 새 비밀번호를 입력하세요.
+Enter email for password reset: 계정에 연결된 이메일 주소를 입력하면 비밀번호를 재설정하는 링크가 포함된 이메일이 전송됩니다.
+Enter name of backup file: 백업 파일 이름 입력
+Enter new name of backup file: 백업 파일의 새 이름 입력
+Enter the email address for the confirmation mail: 확인 메일의 이메일 주소를 입력합니다.
+Enter the URL to existing file: 기존 파일의 URL을 입력합니다.
+Enter your message...: 메시지를 입력...
+Entity Id: 엔터티 ID
+Entity is required!: 엔티티가 필요합니다!
+EntityCreatedBy: 엔티티창조
+EntityCreatedOn (Local): 엔티티인드온 (로컬)
+EntityCreatedOn (UTC): 엔티티신온 (UTC)
+EntityId: 엔티티아이드
+EntityLastModifiedBy: 엔티티서서스트리수정
+EntityLastModifiedOn (Local): 엔티티서서스트리폰 (로컬)
+EntityLastModifiedOn (UTC): 엔티티서스트리폰 (UTC)
+eo-001: 에스페란토 (세계)
+es-419: 스페인어(라틴 아메리카)
+es-AR: 스페인어(아르헨티나)
+es-BO: 스페인어(볼리비아)
+es-BR: 스페인어(브라질)
+es-BZ: 스페인어(벨리즈)
+es-CL: 스페인어(칠레)
+es-CO: 스페인어(콜롬비아)
+es-CR: 스페인어(코스타리카)
+es-CU: 스페인어(쿠바)
+es-DO: 스페인어(도미니카 공화국)
+es-EC: 스페인어(에콰도르)
+es-ES: 스페인어(스페인)
+es-GQ: 스페인어(적도 기니)
+es-GT: 스페인어(과테말라)
+es-HN: 스페인어(온두라스)
+es-MX: 스페인어(멕시코)
+es-NI: 스페인어(니카라과)
+es-PA: 스페인어(파나마)
+es-PE: 스페인어(페루)
+es-PH: 스페인어(필리핀)
+es-PR: 스페인어(푸에르토리코)
+es-PY: 스페인어(파라과이)
+es-SV: 스페인어(엘살바도르)
+es-US: 스페인어(미국)
+es-UY: 스페인어(우루과이)
+es-VE: 스페인어(베네수엘라)
+Español: 스페인어
+et-EE: 에스토니아어 (에스토니아)
+eu-ES: 바스크어 (스페인)
+ewo-CM: 에원도 (카메룬)
+Export: 수출
+Export To Excel: 엑셀로 내보내기
+Export_SheetName: 데이터
+Extended Attribute Deleted: 확장 특성 삭제
+Extended Attribute Not Found!: 확장 특성을 찾을 수 없습니다!
+Extended Attribute Saved: 저장된 확장 특성
+Extended Attribute Updated: 확장 특성 업데이트
+Extended Attribute with this Key already exists.: 이 키가 있는 확장 특성은 이미 존재합니다.
+Extended Attributes: '\{0}\ 확장 특성'
+Extended Attributes exported: 내보낸 확장 특성
+External Id: 외부 ID
+ExternalId: 외부 Id
+fa-IR: 페르시아어 (이란)
+Failed to get client preferences: 클라이언트 기본 설정을 얻지 못했습니다.
+FAQs: FAQ
+Features: 기능
+Feb: 2월
+Female: 여성
+ff-Adlm-BF: 풀라 (아들람, 부르키나파소)
+ff-Adlm-CM: 풀라 (아들람, 카메룬)
+ff-Adlm-GH: 풀라 (아들람, 가나)
+ff-Adlm-GM: 풀라 (아들람, 감비아)
+ff-Adlm-GN: 풀라 (아들람, 기니)
+ff-Adlm-GW: 풀라 (아들람, 기니 비사우)
+ff-Adlm-LR: 풀라 (아들람, 라이베리아)
+ff-Adlm-MR: 풀라 (아들람, 모리타니)
+ff-Adlm-NE: 풀라 (아들람, 니제르)
+ff-Adlm-NG: 풀라 (아들람, 나이지리아)
+ff-Adlm-SL: 풀라 (아들람, 시에라리온)
+ff-Adlm-SN: 풀라 (아들람, 세네갈)
+ff-Latn-BF: 풀라 (라틴어, 부르키나파소)
+ff-Latn-CM: 풀라 (라틴어, 카메룬)
+ff-Latn-GH: 풀라 (라틴어, 가나)
+ff-Latn-GM: 풀라 (라틴어, 감비아)
+ff-Latn-GN: 풀라 (라틴어, 기니)
+ff-Latn-GW: 풀라 (라틴어, 기니 비사우)
+ff-Latn-LR: 풀라 (라틴어, 라이베리아)
+ff-Latn-MR: 풀라 (라틴어, 모리타니)
+ff-Latn-NE: 풀라 (라틴어, 니제르)
+ff-Latn-NG: 풀라 (라틴어, 나이지리아)
+ff-Latn-SL: 풀라 (라틴어, 시에라리온)
+ff-Latn-SN: 풀라 (라틴어, 세네갈)
+fi-FI: 핀란드어 (핀란드)
+fil-PH: 필리핀 (필리핀)
+File is required!: 파일이 필요합니다!
+Files of this type ({0}) are not allowed. Only following types are allowed '{1}'. Try one of these extensions ({2}): 이 유형의 파일({0})은 허용되지 않습니다. 다음 유형만 '{1}'로 허용됩니다. 다음 확장 프로그램 중 하나를 사용해보십시오 ({2}).
+Fill Administrator Credentials: 관리자 자격 증명 채우기
+Fill Basic User Credentials: 기본 사용자 자격 증명 채우기
+Filtered Audit Trails exported: 필터링된 감사 트레일 내보내기
+Filtered Brands exported: 필터링된 브랜드 내보내기
+Filtered Document Types exported: 내보낸 필터링된 문서 유형
+Filtered Extended Attributes exported: 내보낸 필터링된 확장 특성
+Filtered Products exported: 필터링된 제품 내보내기
+Filtered Users exported: 필터링된 사용자 내보내기
+First Name: 이름
+First Name is required: 이름 도 필수
+fo-DK: 페로세 (덴마크)
+fo-FO: 페로스 (페로 제도)
+Forgot password?: 암호를 잊어 버렸습니까?
+fr-029: 프랑스어(카리브해)
+fr-BE: 프랑스어(벨기에)
+fr-BF: 프랑스어(부르키나파소)
+fr-BI: 프랑스어(부룬디)
+fr-BJ: 프랑스어 (베냉)
+fr-BL: 프랑스어(세인트 바르텔레미)
+fr-CA: 프랑스어(캐나다)
+fr-CD: 프랑스어(콩고 [DRC])
+fr-CF: 프랑스어(중앙아프리카 공화국)
+fr-CG: 프랑스어(콩고)
+fr-CH: 프랑스어(스위스)
+fr-CI: 프랑스어 (코트디부아르)
+fr-CM: 프랑스어(카메룬)
+fr-DJ: 프랑스어(지부티)
+fr-DZ: 프랑스어(알제리)
+fr-FR: 프랑스어(프랑스)
+fr-GA: 프랑스어 (가봉)
+fr-GF: 프랑스어(프랑스령 기아나)
+fr-GN: 프랑스어(기니)
+fr-GP: 프랑스어(과들루프)
+fr-GQ: 프랑스어(적도 기니)
+fr-HT: 프랑스어(아이티)
+fr-KM: 프랑스어(코모로)
+fr-LU: 프랑스어(룩셈부르크)
+fr-MA: 프랑스어(모로코)
+fr-MC: 프랑스어 (모나코)
+fr-MF: 프랑스어 (세인트 마틴)
+fr-MG: 프랑스어(마다가스카르)
+fr-ML: 프랑스어 (말리)
+fr-MQ: 프랑스어 (마르티니크)
+fr-MR: 프랑스어(모리타니)
+fr-MU: 프랑스어(모리셔스)
+fr-NC: 프랑스어(뉴칼레도니아)
+fr-NE: 프랑스어(니제르)
+fr-PF: 프랑스어(프랑스령 폴리네시아)
+fr-PM: 프랑스어(생 피에르 & 미켈론)
+fr-RE: 영어 (레위니옹)
+fr-RW: 프랑스 (르완다)
+fr-SC: 프랑스어 (세이셸)
+fr-SN: 프랑스어 (세네갈)
+fr-SY: 프랑스어(시리아)
+fr-TD: 프랑스어 (차드)
+fr-TG: 프랑스어(토고)
+fr-TN: 프랑스어(튀니지)
+fr-VU: 프랑스어(바누아투)
+fr-WF: 프랑스어(월리스 와 푸투나)
+fr-YT: 프랑스어 (마요트)
+French: 프랑스어
+fur-IT: 프리울리안 (이탈리아)
+fy-NL: 서부 프리시안 (네덜란드)
+ga-GB: 아일랜드어 (영국)
+ga-IE: 아일랜드어 (아일랜드)
+gd-GB: 스코틀랜드 게일어 (영국)
+General: 일반
+German: 독일어
+gl-ES: 갈리시아어 (스페인)
+gn-PY: 과라니 (파라과이)
+GoHome: 집에 가세요!
+Group: 그룹
+gsw-CH: 스위스 독일어(스위스)
+gsw-FR: 스위스 독일 (프랑스)
+gsw-LI: 스위스 독일어 (리히텐슈타인)
+gu-IN: 구자라티 (인도)
+guz-KE: 구시 (케냐)
+gv-IM: 맨스 (맨 섬)
+ha-Latn-GH: 하우사 (라틴어, 가나)
+ha-Latn-NE: 하우사 (라틴어, 니제르)
+ha-Latn-NG: 하우사 (라틴어, 나이지리아)
+haw-US: 하와이안 (미국)
+he-IL: 히브리어 (이스라엘)
+Hello World: 전 세계 여러분 안녕하세요
+Here you can leave a comment for this permission for the current role: 여기에서 현재 역할에 대한 이 권한에 대한 주석을 남길 수 있습니다.
+hi-IN: 힌디어 (인도)
+Hide: 숨기다
+Home: 집
+HouseNumber: 수
+hr-BA: 크로아티아어 (보스니아 헤르체고비나)
+hr-HR: 크로아티아어 (크로아티아)
+hsb-DE: 어퍼 소르비안 (독일)
+hu-HU: 헝가리어(헝가리)
+hy-AM: 아르메니아어 (아르메니아)
+I agree to the terms and privacy: 이용 약관 및 개인 정보 보호에 동의합니다.
+ia-001: 인터링구아 (세계)
+ibb-NG: 이비오 (나이지리아)
+Id: 아이디
+id-ID: 인도네시아어(인도네시아어)
+ig-NG: 이그보 (나이지리아)
+ii-CN: 이순신 (중국)
+Image format: 이미지 형식
+Include Entity fields (Export): 엔터티 필드 포함(내보내기)
+Incorrect Password.: 잘못된 암호입니다.
+Indonesia: 인도네시아어
+Invalid Credentials.: 잘못된 자격 증명입니다.
+Is Active: 활성 상태
+Is Public: 공개입니다
+Is Public?: 공개인가요?
+is-IS: 아이슬란드 (아이슬란드)
+IsActive: 활성 상태
+it-CH: 이탈리아어(스위스)
+it-IT: 이탈리아어(이탈리아)
+it-SM: 이탈리아어(산마리노)
+it-VA: 이탈리아어(바티칸 시국)
+Italian: 이탈리아어
+iu-CA: 이누크티투트 (캐나다)
+iu-Latn-CA: 이누크티투트 (라틴어, 캐나다)
+ja-JP: 일본(일본)
+Jan: 1월
+jgo-CM: 응암바 (카메룬)
+jmc-TZ: 마차메 (탄자니아)
+Json: 제이슨 (주)
+Json value is required using {0} type!: '{0} 타입을 사용 하 여 Json 값이 필요!'
+Json value must be a valid json string using {0} type!: Json 값은 {0} 형식을 사용하여 유효한 json 문자열이어야 합니다!
+Jul: 7월
+Jun: 6월
+jv-Java-ID: 자바어 (자바어, 인도네시아어)
+jv-Latn-ID: 자바어 (라틴어, 인도네시아어)
+ka-GE: 그루지야어 (조지아 주)
+kab-DZ: 카발레 (알제리)
+kam-KE: 캄바 (케냐)
+kde-TZ: 마코데 (탄자니아)
+kea-CV: 카부베르디아누 (카보베르데)
+Key: 열쇠
+Key is required!: 열쇠가 필요합니다!
+khq-ML: 고이라 치니 (말리)
+ki-KE: 키쿠유 (케냐)
+kk-KZ: 카자흐어 (카자흐스탄)
+kkj-CM: 카코 (카메룬)
+kl-GL: 칼라알리수트 (그린란드)
+kln-KE: 칼렌진 (케냐)
+km-KH: 크메르 (캄보디아)
+kn-IN: 칸나다 (인도)
+ko-KP: 조선민주주의인민공화국
+ko-KR: 한국(한국)
+kok-IN: 곤카니 (인도)
+kr-Latn-NG: 카누리 (라틴어, 나이지리아)
+ks-Arab-IN: 카슈미르 (아랍어, 인도)
+ks-Deva-IN: 카슈미르 (인도 데바나가리)
+ksb-TZ: 샴발라 (탄자니아)
+ksf-CM: 바피아 (카메룬)
+ksh-DE: 콜로니아 (독일)
+ku-Arab-IQ: 쿠르드어 (아랍어, 이라크)
+ku-Arab-IR: 쿠르드어 (아랍어, 이란)
+kw-GB: 코니쉬 (영국)
+ky-KG: 키르기스스탄 (키르기스스탄)
+la-VA: 라틴어 (바티칸 시국)
+Label_Description: '인상착의: __________'
+Label_UploadRequests: 파일
+lag-TZ: 랑기 (탄자니아)
+Languages: 언어들
+Last Name: 성
+Last Name is required: 성이름이 필요합니다.
+lb-LU: 룩셈부르크 (룩셈부르크)
+lg-UG: 쉘 (우간다)
+lkt-US: 라코타 (미국)
+ln-AO: 링갈라 (앙골라)
+ln-CD: 링갈라 (콩고 [DRC])
+ln-CF: 링갈라 (중앙 아프리카 공화국)
+ln-CG: 링갈라 (콩고)
+lo-LA: 라오스 (라오스)
+Loading: 로드
+Local: 현지
+Logged In.: 로그인했습니다.
+Logged Out.: 로그아웃.
+Login with Keycloak: Keycloak으로 로그인
+LoginDescription: 자격 증명으로 로그인합니다.
+Logout: 로그아웃
+Logout Confirmation: 당신은 정말 로그 아웃하시겠습니까?
+Logout user: 로그아웃 사용자
+lrc-IQ: 북부 루리 (이라크)
+lrc-IR: 북부 루리 (이란)
+lt-LT: 리투아니아어 (리투아니아)
+lu-CD: 루바 카탕가 (콩고 [DRC])
+luo-KE: 루오 (케냐)
+luy-KE: 루이아 (케냐)
+lv-LV: 라트비아어 (라트비아)
+mai-IN: 마이틸리 (인도)
+Mail: 우편
+Male: 남성
+Manage {0} {1}'s Extended Attributes: '{0} {1} 확장 특성 관리'
+Manage {0} {1}'s Permissions: '{0} {1} 사용 권한 관리'
+Manage {0} {1}'s Roles: '{0} {1} 역할 관리'
+Manage {0} Extended Attributes: 확장 특성에 {0} 관리
+Manage Brands.: 브랜드를 관리합니다.
+Manage Database Backups.: 데이터베이스 백업을 관리하거나 복원합니다.
+Manage Document Types.: 문서 유형을 관리합니다.
+Manage Extended Attributes: 확장 특성 관리
+Manage Languages: 언어 관리
+Manage Permission: 권한 관리
+Manage Products.: 제품을 관리합니다.
+Manage Roles: 역할 관리
+Manage Roles.: 역할을 관리합니다.
+Manage Translations: 번역 관리
+Manage Users: 사용자 관리
+Manage your account: 계정 관리
+Mar: 3월
+Mark all: 모두 표시
+Mark all as read: 모두 읽은 것으로 표시
+Mark all as unread: 모두 읽지 않은 것으로 표시
+Mark as read: 읽기 표시
+Mark as unread: 읽지 않은 것으로 표시
+mas-KE: 마사이 (케냐)
+mas-TZ: 마사이 (탄자니아)
+May: 5월
+mer-KE: 메루 (케냐)
+Message will be deleted in {0} seconds: 메시지는 {0}초 후에 삭제됩니다.
+mfe-MU: 모리센 (모리셔스)
+mg-MG: 말라가시 (마다가스카르)
+mgh-MZ: 마후와-미트토 (모잠비크)
+mgo-CM: 메타 (카메룬)
+mi-NZ: 마오리 (뉴질랜드)
+mk-MK: 마케도니아어 (노스 마케도니아)
+ml-IN: 말라얄람 (인도)
+mn-MN: 몽골어(몽골)
+mn-Mong-CN: 몽골어(몽골, 중국)
+mn-Mong-MN: 몽골어(몽골, 몽골)
+mni-IN: 마니푸리 (인도)
+moh-CA: 모호크 (캐나다)
+mr-IN: 마라티 (인도)
+ms-BN: 말레이 (브루나이)
+ms-ID: 말레이시아 (인도네시아)
+ms-MY: 말레이시아 (말레이시아)
+ms-SG: 말레이시아 (싱가포르)
+mt-MT: 몰타어 (몰타)
+mua-CM: 문당 (카메룬)
+my-MM: 버마 (미얀마)
+mzn-IR: 마잔데라니 (이란)
+Name: 이름
+Name is required: 이름이 필요합니다.
+Name is required!: 이름이 필요합니다!
+naq-NA: 이름(나미비아)
+nb-NO: 영어(노르웨이)
+nb-SJ: 노르웨이 보크롤 (스발바르 와 얀 마옌)
+nd-ZW: 노스 은데벨레 (짐바브웨)
+nds-DE: 저독일어(독일)
+nds-NL: 저독일어(네덜란드)
+ne-IN: 네팔어 (인도)
+ne-NP: 네팔어 (네팔)
+New Message From {0}: '{0} 새 메시지'
+New Password: 새 암호
+New Values: 새 값
+nl-AW: 네덜란드어 (아루바)
+nl-BE: 네덜란드어 (벨기에)
+nl-BQ: 네덜란드어 (보네르, 신트 유스타티우스, 사바)
+nl-CW: 네덜란드어 (쿠라소)
+nl-NL: 네덜란드어(네덜란드)
+nl-SR: 네덜란드어 (수리남)
+nl-SX: 영어 (신트 마틴)
+nmg-CM: 와시오 (카메룬)
+nn-NO: 노르웨이 니노르스크 (노르웨이)
+nnh-CM: 응임분 (카메룬)
+No: 아니요
+No address: 주소 없음
+No Allowed Actions: 허용된 작업 없음
+No longer update automatically: 더 이상 자동으로 업데이트되지 않음
+No notifications: 알림 없음
+Not Allowed to add or delete Administrator Role if you have not this role.: 이 역할이 없는 경우 관리자 역할을 추가하거나 삭제할 수 없습니다.
+Not allowed to Delete this user: 이 사용자를 삭제할 수 없음
+Not Allowed.: 허용되지 않습니다.
+Not connected: 연결되지 않음
+NotFoundMessage: 찾고 있던 페이지가 존재하지 않습니다.
+Notifications: 알림을
+Nov: 11월
+nqo-GN: 은코 (기니)
+nr-ZA: 사우스 은데벨레 (남아프리카 공화국)
+nso-ZA: 세소토 사 레보아 (남아프리카 공화국)
+nus-SS: 누어 (남수단)
+nyn-UG: 냥콜레 (우간다)
+oc-FR: 옥시탄 (프랑스)
+Oct: 10월
+Offline: 오프 라인
+Ok: 그래
+Old Values: 이전 값
+om-ET: 오로모 (에티오피아)
+om-KE: 오로모 (케냐)
+Online: 온라인
+Only Selected Group (Export): 선택한 그룹만(내보내기)
+Open: 열다
+Open now: 열다
+Open Url {0}: URL {0} 열기
+Open Url {0} in a new browser tab: 새 브라우저 탭에서 URL {0} 열기
+or-IN: 오디아 (인도)
+os-GE: 오세틱 (조지아 주)
+os-RU: 오세틱 (러시아)
+Other: 기타__________
+Otherwise the full image will be downloaded: 그렇지 않으면 전체 이미지가 다운로드됩니다.
+Overview: 개요
+Owner: 소유자
+pa-Arab-PK: 펀자브 (아랍어, 파키스탄)
+pa-IN: 펀자브 (인도)
+pap-029: 파피아멘토 (카리브해)
+Password: 암호
+Password Changed!: 암호가 변경되었습니다!
+Password Confirmation: 암호 확인
+Password Confirmation is required!: 암호 확인이 필요합니다!
+Password is required!: 암호가 필요합니다!
+Password must be at least of length 8: 암호는 길이 8 이상이어야 합니다.
+Password must contain at least one capital letter: 암호에는 하나 이상의 대문자가 포함되어야 합니다.
+Password must contain at least one digit: 암호에는 한 자리 이상이 포함되어야 합니다.
+Password must contain at least one lowercase letter: 암호에는 하나 이상의 소문자가 포함되어야 합니다.
+Password Reset Mail has been sent to your authorized Email.: 암호 재설정 메일이 승인된 이메일로 전송되었습니다.
+Password Reset Successful!: 암호 재설정 성공!
+Passwords don't match: 암호가 일치하지 않습니다.
+pcm-Latn-NG: 나이지리아 피진 (라틴어, 나이지리아)
+Permission Name: 권한 이름
+Personal: 개인
+Phone Number: 전화번호
+Phone number {0} is already registered.: 전화 번호 {0} 이미 등록되어 있습니다.
+PhoneNumber: 전화 번호
+pl-PL: 폴란드어 (폴란드)
+Please confirm your account by <a href='{0}'>clicking here</a>.: <a href='{0}'>여기를 클릭하여 계정을 확인하십시오</a>.
+Please reset your password by <a href='{0}'>clicking here</a>.: <a href='{0}'> 클릭하여 비밀번호를 재설정하십시오</a>.
+Please type {0} to confirm edit: '{0} 입력하여 편집을 확인하십시오.'
+Please upload your personal qualifications and references that confirm your person and qualification: 개인 자격 및 본인 및 자격을 확인하는 참고 자료를 업로드하십시오.
+Please Wait: 기다리세요
+PostalCode: 우편 번호
+Preview: 미리 보기
+prg-001: 프로이센 (세계)
+Primary Key: 기본 키
+Print: 인쇄하다
+Product Deleted: 제품이 삭제되었습니다!
+Product Not Found!: 제품을 찾을 수 없습니다!
+Product Saved: 저장 된 제품!
+Product Updated: 제품 업데이트!
+Products: 제품
+Products exported: 수출된 제품
+Profile: 윤곽
+Profile Details: 프로필 세부 정보
+Profile picture added.: 프로필 사진이 추가되었습니다.
+Profile picture deleted.: 프로필 사진이 삭제되었습니다.
+Profile updated: 프로필이 업데이트됨
+prs-AF: prs (아프가니스탄)
+ps-AF: 파슈토 (아프가니스탄)
+ps-PK: 파슈토 (파키스탄)
+pt-AO: 포르투갈어 (앙골라)
+pt-BR: 포르투갈어 (브라질)
+pt-CH: 포르투갈어 (스위스)
+pt-CV: 영어 (카보베르데)
+pt-GQ: 포르투갈어 (적도 기니)
+pt-GW: 포르투갈어 (기니 비사우)
+pt-LU: 포르투갈어 (룩셈부르크)
+pt-MO: 포르투갈어 (마카오 SAR)
+pt-MZ: 포르투갈어 (모잠비크)
+pt-PT: 포르투갈어(포르투갈)
+pt-ST: 영어 (상 토메 & 프린시페)
+pt-TL: 영어(동티모르)
+Public Profile: 공개 프로필
+Qualifications and References: 자격 및 참고 문헌
+quc-GT: 크르치체 (과테말라)
+Quick Insights.: 빠른 인사이트.
+Quick Start Guide: 빠른 시작 가이드
+quz-BO: 쿠즈 (볼리비아)
+quz-EC: quz (에콰도르)
+quz-PE: quz (페루)
+Rate: 율
+Rate must be greater than 0: 금리는 0보다 커야 합니다.
+Realtime Updates & Insights with SignalR.: 시그널R을 통해 실시간 업데이트 및 인사이트.
+Redirect: 리디렉션할
+Redirecting to {0}: '{0}로 리디렉션'
+Redirecting...: 리디렉션...
+Refreshed Token.: 새로 고침 된 토큰입니다.
+Register: 등록기
+Register as: 로 등록하기
+Register as {0}: '{0}로 등록하기'
+Register here: 여기에 등록하십시오.
+Register New User: 새 사용자 등록
+Register User: 사용자 등록
+Registered Roles: 등록된 역할
+Registered Users: 등록된 사용자
+Reload: 새로고침
+Reload Data: 데이터 재로드
+Remember me?: 저를 기억해?
+Remove All: 모두 제거
+Rename backup: 백업 이름 바꾸기
+Render with {0}: '{0}로 렌더링'
+Render with MudExFileDisplayTiff: Tiff 뷰어로 렌더링
+Render with MudExFileDisplayZip: Zip 뷰어로 렌더링
+Render with MudExImageViewer: MudExImageViewer로 렌더링
+Render with native control: 기본 컨트롤로 렌더링
+Reset: 재설정
+Reset all: 모두 재설정
+Reset all properties?: 모든 속성을 재설정하시겠습니까?
+Reset password: 암호 재설정
+Reset Password: 암호 재설정
+Reset view: 보기 재설정
+Resources: 리소스
+Restart server: 서버 다시 시작
+Restore: 복원
+Restore database: 데이터베이스 복원
+Restore default: 기본값 복원
+Restore finished: 복원 완료
+Restore in progress. Please wait until the restore is finished. This can take a while.: 복원이 진행 중입니다. 복원이 완료될 때까지 기다려 주십시오. 시간이 좀 걸릴 수 있습니다.
+rm-CH: 로만시 (스위스)
+rn-BI: 룬디 (부룬디)
+ro-MD: 영어(몰도바)
+ro-RO: 영어 (루마니아)
+rof-TZ: 롬보 (탄자니아)
+Role: 역할
+Role ID: 역할 ID
+Role Name: 역할 이름
+Roles: 역할
+Roles Updated: 역할이 업데이트되었습니다!
+RowsPerPageString: 페이지당 행
+ru-BY: 러시아어 (벨라루스)
+ru-KG: 러시아어 (키르기스스탄)
+ru-KZ: 러시아어(카자흐스탄)
+ru-MD: 러시아어 (몰도바)
+ru-RU: 러시아어 (러시아)
+ru-UA: 러시아어 (우크라이나)
+Runtime: 런타임
+Russian: 러시아어
+rw-RW: 키냐르완다 (르완다)
+rwk-TZ: 와 (탄자니아)
+sa-IN: 산스크리트어 (인도)
+sah-RU: 사하 (러시아)
+saq-KE: 삼부루 (케냐)
+sat-Olck-IN: 산타리 (올 치키, 인도)
+Save: 구해내다
+Save {0} Changes: '{0} 변경 사항 저장'
+Save as: 다른 이름으로 저장
+Save Changes: 변경 사항 저장
+Save image: 이미지 저장
+Save Role: 역할 저장
+Save visible area only: 가시 영역만 저장
+saved: 저장!
+sbp-TZ: 상구 (탄자니아)
+sd-Arab-PK: 신디 (아랍어, 파키스탄)
+sd-Deva-IN: 신디 (인도 데바나가리)
+se-FI: 북부 사미 (핀란드)
+se-NO: 북부 사미 (노르웨이)
+se-SE: 북부 사미 (스웨덴)
+Search: 검색
+Search by users: 사용자별 검색
+Search For {0} Extended Attributes: '{0} 확장 특성 검색'
+Search for Brands: 브랜드 검색
+Search for Document Types: 문서 유형 검색
+Search For Permissions: 사용 권한 검색
+Search for Roles...: 역할 검색...
+Search for Trails: 트레일 검색
+Search For User Roles: 사용자 역할 검색
+Search For Users: 사용자 검색
+Search in New Values: 새 값 검색
+Search in Old Values: 이전 값검색
+Security: 안전
+seh-MZ: 세나 (모잠비크)
+Select Language: 언어 선택
+Send: 보내기
+Send confirmation email: 확인 이메일 보내기
+Sep: 9월
+Server restarted successfully: 서버가 다시 시작되었습니다.
+ses-ML: 코이라보로 세니 (말리)
+Set new password: 새 암호 설정
+sg-CF: 산고 (중앙 아프리카 공화국)
+shi-Latn-MA: 타첼히트 (라틴어, 모로코)
+shi-Tfng-MA: 타첼히트 (티피나, 모로코)
+Show: 보이다
+Show as Tree: 트리로 표시
+Show flat: 플랫 표시
+Show notification: 알림 표시
+si-LK: 신할라 (스리랑카)
+Sign In: 서명하세요
+Sign Up: 등록하세요
+sk-SK: 슬로바키아어 (슬로바키아)
+sl-SI: 슬로베니아어 (슬로베니아)
+sma-NO: 남부 사미 (노르웨이)
+sma-SE: 남부 사미 (스웨덴)
+smj-NO: 룰 사미 (노르웨이)
+smj-SE: 룰 사미 (스웨덴)
+smn-FI: 이나리 사미 (핀란드)
+sms-FI: 스콜트 사미 (핀란드)
+sn-Latn-ZW: 쇼나 (라틴어, 짐바브웨)
+so-DJ: 소말리 (지부티)
+so-ET: 소말리 (에티오피아)
+so-KE: 소말리 (케냐)
+so-SO: 소말리아 (소말리아)
+Something went wrong during the refresh token action: 새로 고침 토큰 작업 중에 문제가 발생했습니다.
+sq-AL: 알바니아어 (알바니아)
+sq-MK: 알바니아어 (노스 마케도니아)
+sq-XK: 알바니아어 (코소보)
+sr-Cyrl-BA: 세르비아어 (키릴, 보스니아 헤르체고비나)
+sr-Cyrl-ME: 세르비아어 (키릴릭, 몬테네그로)
+sr-Cyrl-RS: 세르비아어 (키릴, 세르비아)
+sr-Cyrl-XK: 세르비아어 (키릴, 코소보)
+sr-Latn-BA: 세르비아어 (라틴어, 보스니아 헤르체고비나)
+sr-Latn-ME: 세르비아어 (라틴어, 몬테네그로)
+sr-Latn-RS: 세르비아어 (라틴어, 세르비아)
+sr-Latn-XK: 세르비아어 (라틴어, 코소보)
+ss-SZ: 시스와티 (에스와티니)
+ss-ZA: 시스와티 (남아프리카 공화국)
+ssy-ER: 사호 (에리트레아)
+st-LS: 세소토 (레소토)
+st-ZA: 세소토 (남아프리카 공화국)
+Status: 상태
+Street: 거리
+Striped: 스트라이프
+su-Latn-ID: 순다네스 (라틴어, 인도네시아)
+Subject: 제목
+Support: 지원
+sv-AX: 스웨덴어 (올란드 제도)
+sv-FI: 스웨덴어 (핀란드)
+sv-SE: 스웨덴어 (스웨덴)
+sw-CD: 키스와힐리 (콩고 [DRC])
+sw-KE: 스와힐리어 (케냐)
+sw-TZ: 스와힐리어 (탄자니아)
+sw-UG: 스와힐리어 (우간다)
+Swagger: API 설명서
+Swedish: 스웨덴어
+syr-SY: 시리아 (시리아)
+System: 체계
+System Settings: 환경 설정
+ta-IN: 타밀 (인도)
+ta-LK: 타밀 (스리랑카)
+ta-MY: 노 (말레이시아)
+ta-SG: 타밀 (싱가포르)
+Table Name: 표 이름
+Take case: 케이스를 가져 가라.
+Tax: 세금
+Tax must be greater than 0: 세금은 0보다 커야 합니다.
+te-IN: 텔루구 (인도)
+teo-KE: 테소 (케냐)
+teo-UG: 테소 (우간다)
+Text: 문자 메시지
+Text value is required using {0} type!: 텍스트 값은 {0} 형식을 사용하여 필요합니다!
+tg-Cyrl-TJ: 타지크 (키릴문자, 타지키스탄)
+th-TH: 태국어 (태국)
+The content type {0} cannot be displayed without a suitable plugin: 콘텐츠 유형 {0}는 적절한 플러그인 없이는 표시 할 수 없습니다.
+The file ({0}) has already been added: 파일({0})이 이미 추가되었습니다.
+The file has exceeded the maximum size of {0} with {1}. File size is {2}: 파일이 {0}으로 {1}의 최대 크기를 초과했습니다. 파일 크기가 {2}습니다.
+The following {0} permissions are also required for permission {1}: 권한 {1} 다음 {0} 사용 권한도 필요합니다.
+The following permission is also required for permission {1}: 권한 {1} 위해 다음 권한도 필요합니다.
+The Plugin '{0}' may be able to help: 플러그인 '{0}'이 도움이 될 수 있습니다.
+The server is just restarting. Please wait until the connection has been restored: 서버가 방금 다시 시작됩니다. 연결이 복원될 때까지 기다려 주십시오
+The user "{0}" just changed some of this data: 사용자 "{0}"이 방금 이 데이터 중 일부를 변경했습니다.
+The user {0} has been logged off: 사용자 {0}가 로그오프되었습니다.
+The User {0} has just edited, created or deleted entries here. You should reload the data: 사용자 {0} 여기에서 방금 편집, 생성 또는 삭제된 항목을 만들었습니다. 데이터를 다시 로드해야 합니다.
+There are no new notifications: 새 알림이 없습니다.
+This is an Administrator Only View.: 관리자 전용 보기입니다.
+ti-ER: 티그리냐 (에리트레아)
+ti-ET: 티그리냐 (에티오피아)
+tig-ER: 티그레 (에리트레아)
+Time: 시간
+Title: 타이틀
+Title is required!: 제목이 필요합니다!
+tk-TM: 투르크멘 (투르크메니스탄)
+tn-BW: 세트와나 (보츠와나)
+tn-ZA: 세츠와나 (남아프리카 공화국)
+to-TO: 통가 (통가)
+Toggle right-to-left/left-to-right: 오른쪽에서 왼쪽에서 왼쪽에서 오른쪽으로 전환
+Token is required: 토큰이 필요합니다.
+Token Not Found!: 토큰을 찾을 수 없습니다!
+tr-CY: 터키어(키프로스)
+tr-TR: 터키어(터키)
+Trail Details: 트레일 세부 정보
+Translations: 번역
+Translations are being imported: 번역이 가져오고 있습니다.
+Translations updated: 번역 업데이트
+Try different role: 다른 역할 시도
+ts-ZA: 시송가 (남아프리카 공화국)
+tt-RU: 타타르 (러시아)
+twq-NE: 타사와크 (니제르)
+Type: 형
+Type should be valid: 형식이 유효해야 합니다.
+tzm-Arab-MA: 센트럴 아틀라스 타마지트 (아랍어, 모로코)
+tzm-Latn-DZ: 센트럴 아틀라스 타마지트 (라틴어, 알제리)
+tzm-Latn-MA: 센트럴 아틀라스 타마지트 (라틴어, 모로코)
+tzm-Tfng-MA: 센트럴 아틀라스 타마지트 (티피나, 모로코)
+ug-CN: 위구르 (중국)
+uk-UA: 우크라이나어 (우크라이나)
+Unassigned: 할당
+Update: 업데이트
+Update automatically next time: 다음에 자동으로 업데이트
+Update Brand: 업데이트 브랜드
+Update Document: 문서 업데이트
+Update Document Type: 문서 유형 업데이트
+Update Extended Attribute: 확장 특성 업데이트
+Update Now: 지금 업데이트
+Update Permissions: 사용 권한 업데이트
+Update Product: 제품 업데이트
+Update Role: 역할 업데이트
+Update Role Permissions: 역할 권한 업데이트
+Update User Roles: 사용자 역할 업데이트
+Updated User Status.: 업데이트된 사용자 상태입니다.
+Upload: 업로드
+Upload File: 파일 업로드
+Upload Files: 파일 업로드
+Upload Folder: 폴더 업로드
+Upload Image: 이미지 업로드
+Upload Qualifications and References: 자격 및 참조 업로드
+ur-IN: 우르두어 (인도)
+ur-PK: 우르두어 (파키스탄)
+User: 사용자
+User {0} Registered. Please check your Mailbox to verify!: 사용자 {0}가 등록되었습니다. 사서함을 확인하여 이메일 주소를 확인하십시오!
+User and Roles: 사용자 및 역할
+User Data: 사용자 데이터
+User Deleted: 사용자 삭제
+User Name: 사용자 이름
+User Not Active. Please contact the administrator.: 사용자가 활성 상태가 아닙니다. 활성화를 기다리거나 관리자에게 문의하십시오.
+User Not Found!: 사용자가 찾을 수 없습니다!
+User Registered: 사용자 등록!
+User Registered Mailbox: 사용자 등록. 확인 메일이 사서함으로 배달되었습니다.
+User registration is not allowed: 사용자 등록이 허용되지 않습니다.
+Username: 사용자 이름
+UserName: 사용자 이름
+Username {0} is already taken.: 사용자 이름 {0}가 이미 사용 중입니다.
+Username cannot changed: 사용자 이름을 변경할 수 없습니다.
+UserName is required: 사용자 이름이 필요합니다.
+UserName must be at least of length 6: 사용자 이름은 길이 6 이상이어야 합니다.
+Username or Email: 사용자 이름 또는 이메일
+Users: 사용자
+Users and Roles: 사용자 및 역할
+Users exported: 내보낸 사용자
+UTC: UTC
+uz-Arab-AF: 우즈베키스탄 (아랍어, 아프가니스탄)
+uz-Cyrl-UZ: 우즈베키스탄 (키릴릭, 우즈베키스탄)
+uz-Latn-UZ: 우즈베키스탄 (라틴어, 우즈베키스탄)
+vai-Latn-LR: 바이 (라틴어, 라이베리아)
+vai-Vaii-LR: 이동 (바이, 라이베리아)
+Value: 값
+ve-ZA: 벤다 (남아프리카 공화국)
+Version: 버전
+vi-VN: 베트남어(베트남)
+View: 보기
+View Profile: 프로필 보기
+vo-001: 볼라푸크 (세계)
+vun-TZ: 반조 (탄자니아)
+wae-CH: 월서 (스위스)
+wal-ET: 울라에타 (에티오피아)
+Welcome {0}: '{0} 환영합니다'
+Will be saved only when selected Permission: 선택한 권한에 따라 저장됩니다.
+With_Selected: '{0} 선택됨'
+wo-SN: 울로피 (세네갈)
+xh-ZA: 이시호사 (남아프리카 공화국)
+xog-UG: 소가 (우간다)
+yav-CM: 양벤 (카메룬)
+Yes: 예
+yi-001: 이디시어 (세계)
+yo-BJ: 요루바 (베냉)
+yo-NG: 요루바 (나이지리아)
+you: 너
+You are logged out because the Permissions of one of your Roles have been updated.: 역할 중 하나의 사용 권한이 업데이트되었기 때문에 로그아웃됩니다.
+You are logged out because the user with your Token has been deleted or token is expired.: 토큰을 가진 사용자가 삭제되었거나 토큰이 만료되었기 때문에 로그아웃됩니다.
+You are logged out by an Administrator or profile change.: 관리자 또는 프로필 변경에 의해 로그아웃되었습니다.
+You are Logged Out.: 로그아웃됩니다.
+You can now Login with your credentials: 이제 자격 증명으로 로그인 할 수 있습니다.
+You cannot delete yourself: 직접 삭제할 수 없습니다.
+You received a new chat message from {0}: '{0}에서 새 채팅 메시지를 받았습니다.'
+You're leaving {0} and will redirected to {1}: '{0} 떠나고 {1}로 리디렉션됩니다.'
+Your e-mail address has been confirmed!: 귀하의 이메일 주소가 확인되었습니다!
+Your email address could not be verified. If you have any problems, please contact {0}: 이메일 주소를 확인할 수 없습니다. 문제가 있으면 저희에게 연락하십시{0}.
+Your Profile has been updated.: 프로필이 업데이트되었습니다.
+Your Recent Activities.: 최근 활동.
+zgh-Tfng-MA: 스탠다드 모로코 타마지트 (티피나, 모로코)
+zh-CN: 중국어(중국)
+zh-Hans-HK: 중국어(간편한 홍콩 SAR)
+zh-Hans-MO: 중국어(간편한 마카오 SAR)
+zh-HK: 중국어(홍콩 SAR)
+zh-MO: 중국어(마카오 SAR)
+zh-SG: 중국어(싱가포르)
+zh-TW: 중국어(대만)
+Zoom in: 확대
+Zoom out: 축소
+zu-ZA: 이시줄루 (남아프리카 공화국)

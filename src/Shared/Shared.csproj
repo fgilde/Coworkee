@@ -5,49 +5,6 @@
     <AssemblyName>Coworkee.Shared</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\*.yml" />
+    <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="$(MicrosoftPackagesVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="$(MicrosoftPackagesVersion)" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="EmailTemplateNames.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EmailTemplateNames.cs</LastGenOutput>
-    </None>
-    <None Update="resourceTranslationOptions.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Emails\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="EmailTemplateNames.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>EmailTemplateNames.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
-    <Exec IgnoreExitCode="true" Command="dotnet tool install --global ResourceTranslator.CLI" />
-    <Exec IgnoreExitCode="true" Command="resourceTranslator --optionsfile $(ProjectDir)resourceTranslationOptions.json -f $(ProjectDir)Resources/en-US.yml" />
-  </Target>
-
-
 </Project>

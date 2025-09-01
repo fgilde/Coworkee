@@ -29,7 +29,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj">
+    <ProjectReference Include="..\..\lib\Coworkee.Application\Coworkee.Application.csproj">
       <CopyLocal>
       </CopyLocal>
     </ProjectReference>

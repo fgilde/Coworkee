@@ -58,11 +58,11 @@
     <PackageReference Include="TranslatorService" Version="3.0.11" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Application\Coworkee.Application.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Infrastructure\Coworkee.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />
     <ProjectReference Condition="'$(HostClientInServer)' == 'true'" Include="..\Client\Client.csproj" />
     <ProjectReference Include="..\Aspire\Coworkee.ServiceDefaults\Coworkee.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 

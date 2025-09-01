@@ -61,8 +61,8 @@
     <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />
     <ProjectReference Include="..\SDK\SDK.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Pages\Redirect.razor">

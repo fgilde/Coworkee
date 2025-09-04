@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable> <!-- TODO: disable nullable for now because it breaks db operations but we want to enable it  -->
-    <MicrosoftPackagesVersion>8.0.10</MicrosoftPackagesVersion>
+    <MicrosoftPackagesVersion>8.0.12</MicrosoftPackagesVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(HostClientInServer)' == 'true'">

@@ -1,6 +1,11 @@
+using System;
+using System.Reflection;
 using Coworkee.Application.Configurations;
 using Coworkee.Core.Modules;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Nextended.Core.Extensions;
 
 namespace Coworkee.Application.Modules
 {
@@ -35,8 +40,8 @@ namespace Coworkee.Application.Modules
         private IServiceCollection RegisterCoreApplicationServices(IServiceCollection services)
         {
             // Register core application services that don't require configuration
-            services.AddValidatorsFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddAllWithRegisterAttribute(typeof(DependencyInjection).Assembly);
             
             return services;

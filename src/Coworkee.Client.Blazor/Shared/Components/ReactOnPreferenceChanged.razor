@@ -1,0 +1,41 @@
+@using System.Reflection
+@using Coworkee.Shared.Constants.Storage
+
+@code {
+    [Parameter]
+    public ComponentBase Component { get; set; }
+
+    [Parameter]
+    public EventCallback<PreferenceChangedArgs> OnPreferenceChanged { get; set; }
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _localStorage.Changed += (sender, args) =>
+        {
+            if (args.Key == StorageConstants.Local.Preference)
+            {
+                var oldValue = args.OldValue as ClientPreference;
+                var newValue = args.NewValue as ClientPreference;
+                if (oldValue?.LanguageCode != newValue?.LanguageCode)
+                {
+                    var methodInfo = Component?.GetType()?.GetMethod(nameof(StateHasChanged), BindingFlags.Instance | BindingFlags.NonPublic);
+                    methodInfo?.Invoke(Component, Array.Empty<object>());
+                }
+                OnPreferenceChanged.InvokeAsync(new PreferenceChangedArgs(oldValue, newValue));
+            }
+        };
+    }
+
+    public class PreferenceChangedArgs
+    {
+        public PreferenceChangedArgs(ClientPreference oldValue, ClientPreference newValue)
+        {
+            OldValue = oldValue;
+            NewValue = newValue;
+        }
+
+        public ClientPreference OldValue { get; set; }
+        public ClientPreference NewValue { get; set; }
+    }
+}

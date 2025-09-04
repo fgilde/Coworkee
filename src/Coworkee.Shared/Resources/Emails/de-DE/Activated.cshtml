@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "Layout";
+}
+
+<h1>Konto Aktiviert</h1>
+<br/>
+<p>
+    Hallo @Model.User.FirstName, Ihr Konto ist bestätigt und aktiv, Sie können sich jetzt anmelden
+</p>
+
+<div class="container">
+    <a class="btn" href="@Url("Login")?email=@Model.User.Email">Jetzt Anmelden</a>
+</div>

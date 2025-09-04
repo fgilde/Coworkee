@@ -1,0 +1,19 @@
+@using System.Threading
+@using Coworkee.Application.Common.Models
+@inherits MudExSelect<Coworkee.Application.Common.Models.BrandDto>
+
+@Inherited()
+
+@code {    
+    protected RenderFragment Inherited() => builder => base.BuildRenderTree(builder);
+
+    protected override Task<IList<BrandDto>> GetAvailableItemsAsync(CancellationToken cancellation = default)
+        => _api.Brands_GetAllAsync(null, cancellation);
+
+    protected override void OnInitialized()
+    {        
+        HelperText = "Select Brand";     
+        base.OnInitialized();
+    }
+
+}

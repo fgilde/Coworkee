@@ -1,0 +1,47 @@
+@using Coworkee.Application.Common.Models.Identity
+@namespace Coworkee.Client.Shared.Dialogs
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PermissionsRequired> localizer
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
+            @localizer["Update Permissions"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@Message</MudText>
+        <hr/>
+        <br/>
+            <div class="scroll-container" style="max-height: 300px; overflow: auto;">
+                @foreach (var info in RequiredClaims)
+                {
+                    <MudAlert Severity="Severity.Warning">
+                        @localizer[info.ClaimValue]
+                    </MudAlert>
+                }
+            </div>
+        
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@localizer["Cancel"]</MudButton>
+        <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="SubmitIgnore">@localizer["Confirm and Ignore"]</MudButton>
+        <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick="Submit">@localizer["Confirm and Set Required"]</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string Message { get; set; }
+    [Parameter] public IEnumerable<RoleClaimResponse> RequiredClaims { get; set; }
+
+    void SubmitIgnore()
+    {
+        MudDialog.Close(DialogResult.Ok(false));
+    }
+
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+    void Cancel() => MudDialog.Cancel();
+}

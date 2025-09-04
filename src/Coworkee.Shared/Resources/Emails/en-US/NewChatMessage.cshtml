@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "Layout";
+}
+
+<h1>New Chat Message</h1>
+<br/>
+You have received a new chat message from @Model.SenderName,
+
+<br/>
+@Model.Message
+
+<div class="container">
+    <a class="btn" href="@Url($"/chat/" + Model.SenderId)">View Message</a>
+</div>

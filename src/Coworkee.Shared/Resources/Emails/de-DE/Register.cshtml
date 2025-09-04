@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "Layout";
+}
+
+<h1>Registrierung Bestätigen</h1>
+<br/>
+Hallo @Model.User.FirstName und willkommen bei Coworkee,
+Bitte bestätigen Sie Ihr Konto, indem Sie <a href="@Model.VerificationUri">hier klicken</a>.
+
+<br/>
+Oder öffnen Sie diesen Link in Ihrem Browser: @Model.VerificationUri

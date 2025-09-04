@@ -1,0 +1,281 @@
+@using Nextended.Core.Extensions
+@using Coworkee.Application.Common.Models
+@using Coworkee.Application.Requests
+@using Coworkee.Client.JsInterop
+@using Coworkee.Shared.Wrapper
+@using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.EntityFrameworkCore.Diagnostics
+@using System.Diagnostics
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NotificationToggle> localizer
+
+@{
+    <ReactOnPreferenceChanged OnPreferenceChanged="PreferenceChanged"></ReactOnPreferenceChanged>
+
+    <MudTooltip Text="@localizer["Notifications"]">
+
+        <MudBadge Origin="Origin.CenterRight" BadgeClass="notification-badge" Content="@_unreadCount" Visible="@HasUnread()" Color="Color.Warning" Overlap="true">
+            <MudToggleIconButton Class="@($"{MainClass}-toggle-button")" @bind-Toggled="@IsOpen" Icon="@Icons.Material.Outlined.Notifications" Color="@(HasUnread() ? Color.Warning : Color.Inherit)" ToggledIcon="@Icons.Material.Filled.Notifications" ToggledColor="@Color.Secondary" />
+        </MudBadge>
+
+        <MudPopover Class="@(_animate ? $"{MainClass}-popover {animationCls}" : $"{MainClass}-popover")" Style="@($"{rtlBasedStyle} margin-top: 10px;")" Open="@IsOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" MaxHeight="900">
+
+            @if (_isLoading)
+            {
+                <MudPaper Height="400px" Width="300px">
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        <MudCard>
+                            <MudCardHeader>
+                                <CardHeaderAvatar>
+                                    <MudSkeleton SkeletonType="SkeletonType.Circle" Animation="Animation.Wave" Height="40px" Width="40px" />
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudSkeleton Animation="Animation.Wave" Width="40%" />
+                                    <MudSkeleton Animation="Animation.Wave" Width="60%" />
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                        </MudCard>
+                    }
+                </MudPaper>
+            }
+            else
+            {
+                if (notifications is not { TotalCount: > 0 } || notifications.Data.Count <= 0)
+                {
+                    <MudCard>
+                        <MudCardContent>
+                            <MudText>@localizer["No notifications"]</MudText>
+                            <MudText Typo="Typo.body2">@localizer["There are no new notifications"]</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton OnClick="@(() => IsOpen = false)" Variant="Variant.Text" Color="Color.Primary">@localizer["Close"]</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                }
+                else
+                {
+                    <MudExpansionPanels Class="notifications-expansion-panel">
+                        @if (notifications.TotalCount > 1)
+                        {
+                            <MudPaper Class="d-flex justify-end flex-grow-1 gap-4" Elevation="0">
+                                <MudButtonGroup Size="Size.Small" Variant="Variant.Text">
+                                    <MudTooltip Class="z-tt" Text="@localizer["Mark all as read"]">
+                                        <MudIconButton OnClick="@(() => MarkAll(true))" Icon="@Icons.Material.Rounded.Checklist" Color="Color.Secondary"></MudIconButton>
+                                    </MudTooltip>
+                                    @if (!UnreadOnly)
+                                    {
+                                        <MudTooltip Class="z-tt" Text="@localizer["Mark all as unread"]">
+                                            <MudIconButton OnClick="@(() => MarkAll(false))" Icon="@Icons.Material.Rounded.Checklist" Color="Color.Primary"></MudIconButton>
+                                        </MudTooltip>
+                                    }
+                                    <MudTooltip Class="z-tt" Text="@localizer["Delete all"]">
+                                        <MudIconButton OnClick="@(DeleteAll)" Icon="@Icons.Material.Filled.DeleteForever" Color="Color.Error"></MudIconButton>
+                                    </MudTooltip>
+                                </MudButtonGroup>
+                            </MudPaper>
+                            <MudDivider />
+                        }
+                        @foreach (var n in notifications?.Data)
+                        {
+                            <NotificationView AutoMarkAsRead="@AutoMarkAsRead"
+                              OnClose="@(n => IsOpen = false)"
+                              CanClose="@(notifications.TotalCount == 1 && n.Expanded)"
+                              OnNavigateToUrl="@(n => IsOpen = false)"
+                              OnBeforeDelete="@Deleting"
+                              OnRead="@(n => ReloadSilent())"
+                              OnDelete="@(n => ReloadSilent())"
+                              Notification="@n" />
+                        }
+                    </MudExpansionPanels>
+
+                    @if (notifications.TotalPages > 1)
+                    {
+                        <MudDivider />
+                        <MudListItem T="object">
+                            <div class="d-flex flex-column align-center">
+                                <MudPagination Color="Color.Primary" Count="@notifications.TotalPages" Selected="@_currentPage" SelectedChanged="@(i => LoadData(i))" />
+                            </div>
+                        </MudListItem>
+                    }
+                }
+            }
+
+        </MudPopover>
+
+    </MudTooltip>
+}
+
+@code
+{
+    private const string MainClass = "application-notification";
+
+    [CascadingParameter]
+    private HubConnection HubConnection { get; set; }
+
+    [Parameter] public int PageSize { get; set; } = 10;
+    [Parameter] public AnimationBehavior Animate { get; set; } = AnimationBehavior.Always;
+    [Parameter] public bool UnreadOnly { get; set; } = false;
+    [Parameter] public bool AutoMarkAsRead { get; set; } = true;
+
+    private bool _animate;
+
+    [Parameter]
+    public bool IsOpen
+    {
+        get => _isOpen;
+        set
+        {
+            if (_isOpen != value)
+            {
+                _isOpen = value;
+                _animate = Animate == AnimationBehavior.Always ? _isOpen : _isOpen && _animate;
+                if (_isOpen && _needsReload)
+                    _ = LoadData(_currentPage);
+            }
+
+        }
+    }
+    #region Private fields
+
+    private string rtlBasedStyle = "margin-right: 5px;";
+    private string animationCls = "slide-kf-from-right";
+    private bool _isOpen;
+    private bool _isLoading;
+    private bool _needsReload = true;
+    private bool _isMouseIn;
+    int _currentPage = 1;
+    int _unreadCount = 0;
+    private bool HasUnread() => _unreadCount > 0;
+    PaginatedResult<NotificationDto> notifications;
+    private CustomEventInterop<PointerEventArgs> _jsEvent;
+
+    #endregion
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var preference = await _clientPreferenceManager.GetPreference() as ClientPreference;
+        UpdateRTLValues(preference);
+        _unreadCount = await _api.Notifications_UnreadAsync();
+        HubConnection = await HubConnection.EnsureStartedAsync(_config.BackendOrigin);
+        _jsEvent = new CustomEventInterop<PointerEventArgs>(_jsRuntime);
+        await _jsEvent.OnBlur(OnFocusLeft, $".{MainClass}-toggle-button", $".{MainClass}-popover");
+
+        HubConnection.On<NotificationRequest>(arg =>
+        {
+            _unreadCount++;
+            _needsReload = true;
+            var notificationDto = arg.ToDto().SetProperties(n => n.Expanded = true);
+            if (arg.PersistInDb)
+            {
+                _api.Notifications_GetAllAsync(UnreadOnly, arg.NotificationTypeId, 0, 1).ContinueWith(task =>
+                {
+                    notificationDto.Id = task.Result.First()?.Id ?? default;
+                    StateHasChanged();
+                });
+            }
+            if (IsOpen)
+            {
+                (notifications.Data ??= new List<NotificationDto>()).Insert(0, notificationDto);
+                notifications.Data = notifications.Data.Take(PageSize).ToList();
+                notifications.TotalCount++;
+            }
+            else
+            {
+                notifications = new PaginatedResult<NotificationDto>(new List<NotificationDto> { notificationDto });
+                notifications.TotalCount = 1;
+                AutoOpen(false);
+            }
+
+            StateHasChanged();
+        });
+    }
+
+    private void UpdateRTLValues(ClientPreference preference)
+    {
+        animationCls = preference?.IsRTL == true ? "slide-kf-from-left" : "slide-kf-from-right";
+        rtlBasedStyle = preference?.IsRTL == true ? "margin-left: 40px;" : "margin-right: 5px;";
+    }
+
+    private Task OnFocusLeft(PointerEventArgs arg)
+    {
+        IsOpen = false;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private void Close(bool reloadOnNextOpen)
+    {
+        IsOpen = false;
+        _needsReload = reloadOnNextOpen;
+    }
+
+    private void AutoOpen(bool reload)
+    {
+        _needsReload = reload;
+        if (Animate == AnimationBehavior.OnNewEntry)
+            SlideInOnNextOpen();
+        IsOpen = true;
+        _needsReload = !reload;
+    }
+
+    private void SlideInOnNextOpen()
+    {
+        _animate = true; // Animate on auto open
+        Task.Delay(3000).ContinueWith(t =>
+        {
+            _animate = false;
+            StateHasChanged();
+        });
+    }
+
+    private async Task LoadData(int? page = null, bool updateLoadingState = true)
+    {
+        if (updateLoadingState)
+            _isLoading = true;
+        notifications = await _api.Notifications_GetAllAsync(UnreadOnly, null, _currentPage = page ?? 1, PageSize);
+        notifications?.Data?.FirstOrDefault()?.SetProperties(n => n.Expanded = true);
+        _unreadCount = await _api.Notifications_UnreadAsync();
+        _needsReload = false;
+        _isLoading = false;
+        StateHasChanged();
+    }
+
+    private void Deleting(NotificationDto notification)
+    {
+        if (notifications?.Data?.Contains(notification) == true)
+            notifications.Data.Remove(notification);
+    }
+
+    private async Task ReloadSilent()
+    {
+        if (UnreadOnly && AutoMarkAsRead)
+        {
+            _unreadCount = await _api.Notifications_UnreadAsync();
+            return;
+        }
+        await LoadData(_currentPage, false);
+        if (notifications == null || notifications.Data.Count <= 0)
+        {
+            Close(true);
+        }
+    }
+
+    private async void MarkAll(bool read)
+    {
+        await _api.Notifications_MarkAllReadAsync(read);
+        await ReloadSilent();
+    }
+
+    private async void DeleteAll()
+    {
+        await _api.Notifications_DeleteAllAsync();
+        await ReloadSilent();
+        StateHasChanged();
+    }
+
+    private void PreferenceChanged(ReactOnPreferenceChanged.PreferenceChangedArgs args)
+    {
+        UpdateRTLValues(args.NewValue);
+    }
+}

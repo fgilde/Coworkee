@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <Import Project="..\..\Shared.props" />
+  <PropertyGroup>
+    <RootNamespace>Coworkee.Client.Blazor</RootNamespace>
+    <AssemblyName>Coworkee.Client.Blazor</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="MudBlazor" Version="8.9.0" />
+    <PackageReference Include="MudBlazor.Extensions" Version="8.9.0-prev-2507101529-main" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+    <PackageReference Include="System.Text.Json" Version="$(MicrosoftPackagesVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Coworkee.Core\Coworkee.Core.csproj" />
+    <ProjectReference Include="..\Coworkee.Shared\Coworkee.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

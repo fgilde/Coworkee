@@ -1,0 +1,45 @@
+@using Coworkee.Shared.Constants.Application
+@using Microsoft.AspNetCore.SignalR.Client
+@using Coworkee.Application.Hubs
+@namespace Coworkee.Client.Shared.Dialogs
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Logout> localizer
+<MudDialog Class="mud-ex-dialog-initial">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Logout" Class="mr-3 mb-n1" />
+            @localizer["Logout Confirmation"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@ContentText</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@localizer["Cancel"]</MudButton>
+        <MudButton Color="@Color" Variant="Variant.Filled" OnClick="Submit">@ButtonText</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public HubConnection HubConnection { get; set; }
+
+    [Parameter] public string ContentText { get; set; }
+
+    [Parameter] public string ButtonText { get; set; }
+
+    [Parameter] public Color Color { get; set; }
+
+    [Parameter] public string CurrentUserId { get; set; }
+
+    async Task Submit()
+    {
+        await HubConnection.TrySendAsync(_config.BackendOrigin, nameof(ClientEventHub.OnDisconnectAsync), CurrentUserId);
+        await _clientAuthenticationManager.Logout();
+        if ((await _stateProvider.GetAuthenticationStateAsync()).IsGuest())
+            _navigationManager.NavigateToHomeWithReturnTo();
+        else
+            _navigationManager.NavigateToWithReturnTo(ApplicationConstants.Routes.Login);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+    void Cancel() => MudDialog.Cancel();
+}

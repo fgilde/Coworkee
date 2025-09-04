@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\Shared.props" />
+  <PropertyGroup>
+    <RootNamespace>Coworkee.Application</RootNamespace>
+    <AssemblyName>Coworkee.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="LazyCache" Version="2.4.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
+    <PackageReference Include="Nextended.Core" Version="9.0.15" />
+    <PackageReference Include="StringToExpression" Version="2.2.0" />
+    <PackageReference Include="Hashids.net" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Coworkee.Core\Coworkee.Core.csproj" />
+    <ProjectReference Include="..\Coworkee.Domain\Coworkee.Domain.csproj" />
+    <ProjectReference Include="..\Coworkee.Shared\Coworkee.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

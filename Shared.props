@@ -1,10 +1,10 @@
 <Project>
   <PropertyGroup>
     <HostClientInServer>true</HostClientInServer>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable> <!-- TODO: disable nullable for now because it breaks db operations but we want to enable it  -->
-    <MicrosoftPackagesVersion>9.0.7</MicrosoftPackagesVersion>
+    <MicrosoftPackagesVersion>8.0.10</MicrosoftPackagesVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(HostClientInServer)' == 'true'">

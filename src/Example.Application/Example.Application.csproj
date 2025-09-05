@@ -13,10 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Coworkee.Core\Coworkee.Core.csproj" />
-    <ProjectReference Include="..\Coworkee.Shared\Coworkee.Shared.csproj" />
-    <ProjectReference Include="..\Coworkee.Domain\Coworkee.Domain.csproj" />
-    <ProjectReference Include="..\Coworkee.Application\Coworkee.Application.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Core\Coworkee.Core.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Domain\Coworkee.Domain.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Application\Coworkee.Application.csproj" />
   </ItemGroup>
 
 </Project>

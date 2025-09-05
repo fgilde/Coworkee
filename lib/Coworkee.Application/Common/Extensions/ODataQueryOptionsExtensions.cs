@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Coworkee.Shared;
+using lib.Coworkee.Shared;
 using StringToExpression.LanguageDefinitions;
 
-namespace Coworkee.Application.Common.Extensions;
+namespace lib.Coworkee.Application.Common.Extensions;
 
 public static class ODataQueryOptionsExtensions
 {

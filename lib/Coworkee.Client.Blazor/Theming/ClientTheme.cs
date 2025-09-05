@@ -1,11 +1,11 @@
 using System;
-using Coworkee.Client.Enums;
+using lib.Coworkee.Client.Enums;
 using MudBlazor;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Core.Enums;
 using MudBlazor.Extensions.Helper;
 
-namespace Coworkee.Client.Theming
+namespace lib.Coworkee.Client.Theming
 {
 
     public class ClientTheme : MudTheme, ICloneable

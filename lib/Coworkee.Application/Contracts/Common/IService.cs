@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Contracts.Common
+namespace lib.Coworkee.Application.Contracts.Common
 {
     public interface IService
     {

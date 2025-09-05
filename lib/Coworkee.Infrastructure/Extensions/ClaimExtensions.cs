@@ -1,14 +1,14 @@
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 
-namespace Coworkee.Infrastructure.Extensions
+namespace lib.Coworkee.Infrastructure.Extensions
 {
     public static class ClaimsHelper
     {

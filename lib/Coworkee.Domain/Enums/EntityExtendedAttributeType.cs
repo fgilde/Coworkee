@@ -1,4 +1,4 @@
-namespace Coworkee.Domain.Enums
+namespace lib.Coworkee.Domain.Enums
 {
     public enum EntityExtendedAttributeType : byte
     {

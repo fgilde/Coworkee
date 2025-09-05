@@ -1,23 +1,24 @@
-using Coworkee.Application.Specifications.Misc;
-using Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Application.Specifications.Misc;
+using lib.Coworkee.Domain.Entities.Misc;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Wrapper;
 using Nextended.Core;
 
-namespace Coworkee.Application.Features.Documents.Queries.GetAll
+namespace lib.Coworkee.Application.Features.Documents.Queries.GetAll
 {
-    [CustomAuthorize(Policies = new[] { Permissions.Documents.View })]
+    [CustomAuthorize(Policies = new[] { CorePermissionProvider.Core.Documents.View })]
     public class GetAllDocumentsQuery : GetAllPagedQueryBase<DocumentDto>
     { }
 
@@ -27,7 +28,7 @@ namespace Coworkee.Application.Features.Documents.Queries.GetAll
 
         protected override ISpecification<Document> GetFilterSpecification(GetAllDocumentsQuery query)
         {
-            var isAdmin = _currentUserService.Principal.IsInRole(RoleConstants.AdministratorRole);
+            var isAdmin = _currentUserService.Principal.IsInRole(CoreRoleConstants.AdministratorRole);
             return new DocumentFilterSpecification(query.SearchString, _currentUserService.UserId, isAdmin);
         }
 

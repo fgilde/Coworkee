@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Coworkee.Application.Common.Models.Identity
+namespace lib.Coworkee.Application.Common.Models.Identity
 {
     public class PermissionResponse
     {

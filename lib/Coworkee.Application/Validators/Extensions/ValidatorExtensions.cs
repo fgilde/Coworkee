@@ -2,7 +2,7 @@ using FluentValidation;
 using FluentValidation.Validators;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Validators.Extensions
+namespace lib.Coworkee.Application.Validators.Extensions
 {
     public static class ValidatorExtensions
     {

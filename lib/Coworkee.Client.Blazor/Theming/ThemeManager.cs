@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Client.JsInterop;
-using Coworkee.Client.Managers.Theme;
-using Coworkee.SDK;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.Client.Managers.Theme;
+using lib.Coworkee.SDK;
 using Microsoft.JSInterop;
 
-namespace Coworkee.Client.Theming
+namespace lib.Coworkee.Client.Theming
 {
     public class ThemeManager: IThemeManager
     {

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Coworkee.Client.ErrorHandling;
+namespace lib.Coworkee.Client.ErrorHandling;
 
 public interface IHealthChecker
 {

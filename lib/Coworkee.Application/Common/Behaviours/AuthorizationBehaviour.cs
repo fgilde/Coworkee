@@ -1,12 +1,12 @@
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Application.Common.Behaviours
+namespace lib.Coworkee.Application.Common.Behaviours
 {
     [RegisterAs(typeof(IPipelineBehavior<,>), ServiceLifetime = ServiceLifetime.Transient)]
     public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

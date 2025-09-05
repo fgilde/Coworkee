@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Coworkee.Client.JsInterop.Models;
+namespace lib.Coworkee.Client.JsInterop.Models;
 
 public class JsAppData
 {

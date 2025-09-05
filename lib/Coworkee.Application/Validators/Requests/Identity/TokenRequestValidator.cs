@@ -1,9 +1,9 @@
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Requests.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Validators.Requests.Identity
+namespace lib.Coworkee.Application.Validators.Requests.Identity
 {
     public class TokenRequestValidator : AbstractValidator<TokenRequest>
     {

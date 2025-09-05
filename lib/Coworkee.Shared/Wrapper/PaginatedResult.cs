@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Coworkee.Shared.Wrapper
+namespace lib.Coworkee.Shared.Wrapper
 {
     public class PaginatedResult<T> : Result
     {

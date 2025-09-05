@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Contracts.Services.Storage
+namespace lib.Coworkee.Application.Contracts.Services.Storage
 {
     public interface ISyncServerStorageService
     {

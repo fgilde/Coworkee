@@ -1,4 +1,4 @@
-namespace Coworkee.Client.Shared.Components.Notification;
+namespace lib.Coworkee.Client.Shared.Components.Notification;
 
 public enum AnimationBehavior
 {

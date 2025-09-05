@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.Utils;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Utils;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -16,7 +16,7 @@ using MudBlazor.Extensions.Options;
 using Newtonsoft.Json;
 using Nextended.Core;
 
-namespace Coworkee.Client.ErrorHandling
+namespace lib.Coworkee.Client.ErrorHandling
 {
     public class ErrorHandler : IErrorHandler
     {

@@ -3,11 +3,11 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Extensions;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Extensions;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Client.Extensions
+namespace lib.Coworkee.Client.Extensions
 {
     public static class HttpClientExtensions
     {

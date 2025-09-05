@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Configurations;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Application.Contracts.Attributes;
+namespace lib.Coworkee.Application.Contracts.Attributes;
 
 public abstract class RegisterIfConfigAttribute(Type registerAsType, string[] configPath)
     : RegisterAsAttribute(registerAsType)

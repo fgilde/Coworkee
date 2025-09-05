@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Coworkee.Shared.Extensions
+namespace lib.Coworkee.Shared.Extensions
 {
     public static class ObjectExtensions
     {

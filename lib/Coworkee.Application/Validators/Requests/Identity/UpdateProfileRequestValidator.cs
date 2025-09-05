@@ -1,9 +1,9 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Configurations;
 
-namespace Coworkee.Application.Validators.Requests.Identity
+namespace lib.Coworkee.Application.Validators.Requests.Identity
 {
     public class UpdateProfileValidator : AbstractValidator<UserResponse>
     {

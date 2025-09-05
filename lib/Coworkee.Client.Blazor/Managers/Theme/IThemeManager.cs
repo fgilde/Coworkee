@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Client.Theming;
+using lib.Coworkee.Client.Theming;
 
-namespace Coworkee.Client.Managers.Theme
+namespace lib.Coworkee.Client.Managers.Theme
 {
     public interface IThemeManager : IManager
     {

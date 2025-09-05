@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace Coworkee.Client.JsInterop;
+namespace lib.Coworkee.Client.JsInterop;
 
 public static class JsRuntimeExtensions
 {

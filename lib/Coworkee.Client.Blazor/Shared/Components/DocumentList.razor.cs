@@ -1,4 +1,4 @@
-using Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Extensions;
 using MudBlazor;
 using System;
 using System.Collections.Generic;
@@ -6,21 +6,21 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Hubs;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Hubs;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
-using Coworkee.Application.Hubs.Events;
-using Coworkee.Client.Pages.Misc;
-using Coworkee.Shared;
+using lib.Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Client.Pages.Misc;
+using lib.Coworkee.Shared;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 
-namespace Coworkee.Client.Shared.Components;
+namespace lib.Coworkee.Client.Shared.Components;
 
 public partial class DocumentList
 {
@@ -51,11 +51,11 @@ public partial class DocumentList
     protected override async Task OnInitializedAsync()
     {
         _currentUser = await _clientAuthenticationManager.CurrentUser();
-        _canCreateDocuments = CanCreate && (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Documents.Create)).Succeeded;
-        _canEditDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Documents.Edit)).Succeeded;
-        _canDeleteDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Documents.Delete)).Succeeded;
-        _canSearchDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Documents.Search)).Succeeded;
-        _canViewDocumentExtendedAttributes = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.DocumentExtendedAttributes.View)).Succeeded;
+        _canCreateDocuments = CanCreate && (await _authorizationService.AuthorizeAsync(_currentUser, CorePermissionProvider.Core.Documents.Create)).Succeeded;
+        _canEditDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, CorePermissionProvider.Core.Documents.Edit)).Succeeded;
+        _canDeleteDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, CorePermissionProvider.Core.Documents.Delete)).Succeeded;
+        _canSearchDocuments = (await _authorizationService.AuthorizeAsync(_currentUser, CorePermissionProvider.Core.Documents.Search)).Succeeded;
+        _canViewDocumentExtendedAttributes = (await _authorizationService.AuthorizeAsync(_currentUser, CorePermissionProvider.Core.DocumentExtendedAttributes.View)).Succeeded;
         _loaded = true;
 
         var state = await _stateProvider.GetAuthenticationStateAsync();

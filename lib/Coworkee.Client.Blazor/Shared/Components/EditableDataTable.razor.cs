@@ -6,13 +6,13 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Hubs;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.JsInterop;
-using Coworkee.Client.Shared.Dialogs;
-using Coworkee.Shared.Extensions;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Hubs;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.Client.Shared.Dialogs;
+using lib.Coworkee.Shared.Extensions;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -26,7 +26,7 @@ using MudBlazor.Extensions.Options;
 using Nextended.Core;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public partial class EditableDataTable<TResult, TIdType> : IAsyncDisposable
     {

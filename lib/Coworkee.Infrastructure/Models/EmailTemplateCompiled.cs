@@ -1,9 +1,9 @@
 ﻿using System;
 using RazorEngineCore;
-using Coworkee.Shared;
+using lib.Coworkee.Shared;
 using System.Collections.Generic;
 
-namespace Coworkee.Infrastructure.Models;
+namespace lib.Coworkee.Infrastructure.Models;
 
 public class EmailTemplateCompiled
 {

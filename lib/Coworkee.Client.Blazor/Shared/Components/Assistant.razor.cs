@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 using System;
-using Coworkee.Application.Common.Models;
-using Coworkee.Client.JsInterop;
-using Coworkee.Client.Models;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.Client.Models;
 using Microsoft.JSInterop;
 using System.Linq;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public partial class Assistant
     {

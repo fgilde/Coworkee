@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Requests.Mail
+namespace lib.Coworkee.Application.Requests.Mail
 {
     public class MailRequest
     {

@@ -1,22 +1,22 @@
-using Coworkee.Infrastructure.Contexts;
+using lib.Coworkee.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.ExportImport;
-using Coworkee.Infrastructure.Specifications;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.ExportImport;
+using lib.Coworkee.Infrastructure.Specifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Infrastructure.Services
+namespace lib.Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IAuditService), 8)]
     public class AuditService : IAuditService

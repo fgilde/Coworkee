@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Coworkee.Shared.Wrapper
+namespace lib.Coworkee.Shared.Wrapper
 {
     public class Result : IResult
     {

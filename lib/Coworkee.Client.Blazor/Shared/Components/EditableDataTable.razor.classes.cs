@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using MudBlazor;
 
-namespace Coworkee.Client.Shared.Components;
+namespace lib.Coworkee.Client.Shared.Components;
 
 public partial class EditableDataTable
 {

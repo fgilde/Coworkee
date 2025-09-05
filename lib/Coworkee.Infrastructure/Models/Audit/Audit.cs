@@ -1,7 +1,7 @@
 using System;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 
-namespace Coworkee.Infrastructure.Models.Audit
+namespace lib.Coworkee.Infrastructure.Models.Audit
 {
     public class Audit : IEntity<int>
     {

@@ -6,9 +6,9 @@ using MudBlazor;
 using MudBlazor.Extensions;
 using Nextended.Core;
 using Nextended.Core.Extensions;
-using Coworkee.Client.Configuration;
+using lib.Coworkee.Client.Configuration;
 
-namespace Coworkee.Client.ErrorHandling;
+namespace lib.Coworkee.Client.ErrorHandling;
 
 public class HealthChecker : IHealthChecker
 {

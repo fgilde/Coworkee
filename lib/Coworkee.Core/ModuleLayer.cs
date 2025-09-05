@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Core
+namespace lib.Coworkee.Core
 {
     /// <summary>
     /// Interface for module layer entrance points to provide a consistent way for modules to configure services and initialize.

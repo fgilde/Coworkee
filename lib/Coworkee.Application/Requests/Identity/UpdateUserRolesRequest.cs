@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 
-namespace Coworkee.Application.Requests.Identity
+namespace lib.Coworkee.Application.Requests.Identity
 {
     public class UpdateUserRolesRequest
     {

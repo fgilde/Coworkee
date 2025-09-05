@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.EntityFrameworkCore;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Shared;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Shared;
 
-namespace Coworkee.Application.Features.Base.Queries;
+namespace lib.Coworkee.Application.Features.Base.Queries;
 
 public class GetAllQueryBase<TDto> : IRequest<IReadOnlyCollection<TDto>>
     where TDto : IDtoBase

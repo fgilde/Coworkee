@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using Microsoft.Rest.Azure.OData;
 
-namespace Coworkee.Shared;
+namespace lib.Coworkee.Shared;
 
 public class TransferableExpression<T>
 {

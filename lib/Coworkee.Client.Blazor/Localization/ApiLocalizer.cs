@@ -5,11 +5,11 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.SDK;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.SDK;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Client.Localization
+namespace lib.Coworkee.Client.Localization
 {
     internal static class ApiResources
     {

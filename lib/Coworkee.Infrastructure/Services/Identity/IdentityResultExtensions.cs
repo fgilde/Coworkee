@@ -1,8 +1,8 @@
 using System.Linq;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 
-namespace Coworkee.Infrastructure.Services.Identity
+namespace lib.Coworkee.Infrastructure.Services.Identity
 {
     public static class IdentityResultExtensions
     {

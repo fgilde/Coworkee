@@ -1,16 +1,16 @@
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Application.Contracts.Chat;
-using Coworkee.Domain.Entities.Identity;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Domain.Entities.Identity;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Models;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Infrastructure.Models.Identity
+namespace lib.Coworkee.Infrastructure.Models.Identity
 {
     public class ApplicationUser : IdentityUser<string>, IChatUser, IAuditableEntity<string>
     {

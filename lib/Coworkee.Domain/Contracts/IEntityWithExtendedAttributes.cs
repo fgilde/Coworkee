@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Coworkee.Domain.Contracts
+namespace lib.Coworkee.Domain.Contracts
 {
     public interface IEntityWithExtendedAttributes<TExtendedAttribute>
     {

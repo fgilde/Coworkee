@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Coworkee.Application.Requests.Identity
+namespace lib.Coworkee.Application.Requests.Identity
 {
     public class TokenRequest
     {

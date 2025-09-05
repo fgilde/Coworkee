@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using MediatR;
 
-namespace Coworkee.Application.Features.System
+namespace lib.Coworkee.Application.Features.System
 {
     public class GetVersion
     {

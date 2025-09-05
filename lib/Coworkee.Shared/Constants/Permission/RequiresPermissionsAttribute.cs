@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Shared.Constants.Permission
+namespace lib.Coworkee.Shared.Constants.Permission
 {
     public class RequiresPermissionsAttribute: Attribute
     {

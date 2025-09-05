@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using Coworkee.Shared.Constants.Localization;
+using lib.Coworkee.Shared.Constants.Localization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Coworkee.Shared;
+namespace lib.Coworkee.Shared;
 
 public partial class EmailTemplate
 {

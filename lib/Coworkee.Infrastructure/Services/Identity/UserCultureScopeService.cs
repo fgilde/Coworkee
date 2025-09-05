@@ -1,10 +1,10 @@
 using AKSoftware.Localization.MultiLanguages;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Common.Scopes;
-using Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Scopes;
+using lib.Coworkee.Application.Contracts.Services.Identity;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services.Identity;
+namespace lib.Coworkee.Infrastructure.Services.Identity;
 
 [RegisterAs(typeof(IUserCultureScopeService))]
 public class UserCultureScopeService : IUserCultureScopeService

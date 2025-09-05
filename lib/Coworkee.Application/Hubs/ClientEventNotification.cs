@@ -1,9 +1,9 @@
 using System;
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Hubs.Events.Base;
 using MediatR;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Hubs
+namespace lib.Coworkee.Application.Hubs
 {
     public class ClientEventNotification: INotification, ICloneable
     {

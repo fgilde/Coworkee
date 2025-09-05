@@ -1,4 +1,4 @@
-namespace Coworkee.Domain.Contracts
+namespace lib.Coworkee.Domain.Contracts
 {
     public interface IEntity<TId> : IEntity
     {

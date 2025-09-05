@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Contracts.Enums
+namespace lib.Coworkee.Application.Contracts.Enums
 {
     public enum AuditType : byte
     {

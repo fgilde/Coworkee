@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Entities.Misc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Coworkee.Infrastructure.Repositories
+namespace lib.Coworkee.Infrastructure.Repositories
 {
     public class DocumentRepository : IDocumentRepository
     {

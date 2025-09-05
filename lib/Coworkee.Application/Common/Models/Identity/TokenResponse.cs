@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Common.Models.Identity
+namespace lib.Coworkee.Application.Common.Models.Identity
 {
     public class TokenResponse
     {

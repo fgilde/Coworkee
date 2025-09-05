@@ -4,13 +4,13 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Requests;
-using Coworkee.Client.Shared.Components;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Requests;
+using lib.Coworkee.Client.Shared.Components;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Components;
 
-namespace Coworkee.Client.Configuration.MudExObjectEdit;
+namespace lib.Coworkee.Client.Configuration.MudExObjectEdit;
 
 internal static class RenderDataManager
 {

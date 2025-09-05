@@ -1,6 +1,6 @@
-using DefaultUsers = Coworkee.Shared.Constants.Application.ApplicationConstants.Defaults.Users;
+using DefaultUsers = lib.Coworkee.Shared.Constants.Application.ApplicationConstants.Defaults.Users;
 
-namespace Coworkee.Shared.Models;
+namespace lib.Coworkee.Shared.Models;
 
 public class CreateUser
 {

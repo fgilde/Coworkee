@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Account;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Account;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Application.Common.Extensions;
+namespace lib.Coworkee.Application.Common.Extensions;
 
 public static class ServiceScopeExtensions
 {

@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Core.Providers;
+using lib.Coworkee.Core.Providers;
 
-namespace Coworkee.Core.Extensions
+namespace lib.Coworkee.Core.Extensions
 {
     /// <summary>
     /// Extension methods for configuring Coworkee modules.

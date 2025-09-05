@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Common;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Common;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Wrapper;
 
-namespace Coworkee.Application.Contracts.Services.Identity
+namespace lib.Coworkee.Application.Contracts.Services.Identity
 {
     public interface IRoleService : IService
     {

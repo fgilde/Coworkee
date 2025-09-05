@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Coworkee.Application.Contracts.Services.Identity;
+namespace lib.Coworkee.Application.Contracts.Services.Identity;
 
 public interface IDictionaryService
 {

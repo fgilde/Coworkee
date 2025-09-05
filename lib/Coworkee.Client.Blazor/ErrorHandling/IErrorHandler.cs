@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 
-namespace Coworkee.Client.ErrorHandling
+namespace lib.Coworkee.Client.ErrorHandling
 {
     public interface IErrorHandler
     {

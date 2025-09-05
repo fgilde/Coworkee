@@ -1,8 +1,8 @@
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Validators.Requests.Identity
+namespace lib.Coworkee.Application.Validators.Requests.Identity
 {
     public class RoleRequestValidator : AbstractValidator<RoleDto>
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Models;
 
-namespace Coworkee.Shared.Constants.Application
+namespace lib.Coworkee.Shared.Constants.Application
 {
     public static class ApplicationConstants
     {

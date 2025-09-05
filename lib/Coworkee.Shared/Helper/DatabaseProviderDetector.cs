@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Coworkee.Shared.Helper;
+namespace lib.Coworkee.Shared.Helper;
 
 public static class DatabaseProviderDetector
 {

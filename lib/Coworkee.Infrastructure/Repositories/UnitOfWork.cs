@@ -1,15 +1,15 @@
-using Coworkee.Domain.Contracts;
-using Coworkee.Infrastructure.Contexts;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Infrastructure.Contexts;
 using LazyCache;
 using System;
 using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
 
-namespace Coworkee.Infrastructure.Repositories;
+namespace lib.Coworkee.Infrastructure.Repositories;
 
 public class UnitOfWork<TId> : IUnitOfWork<TId>
 {

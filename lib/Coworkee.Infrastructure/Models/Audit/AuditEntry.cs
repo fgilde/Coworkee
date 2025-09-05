@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Enums;
 
-namespace Coworkee.Infrastructure.Models.Audit
+namespace lib.Coworkee.Infrastructure.Models.Audit
 {
     public class AuditEntry
     {

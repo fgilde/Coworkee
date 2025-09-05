@@ -1,8 +1,8 @@
 using System;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Components;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public abstract partial class ExtendedAttributes<TId, TEntityId, TEntity, TExtendedAttribute>
         : ExtendedAttributesBase<TId, TEntityId, TEntity, TExtendedAttribute>

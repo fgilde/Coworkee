@@ -1,10 +1,10 @@
-using Coworkee.Application.Contracts.Serialization.Serializers;
+using lib.Coworkee.Application.Contracts.Serialization.Serializers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Coworkee.Infrastructure.Extensions
+namespace lib.Coworkee.Infrastructure.Extensions
 {
     public static class ValueConversionExtensions
     {

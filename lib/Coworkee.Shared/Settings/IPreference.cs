@@ -1,4 +1,4 @@
-namespace Coworkee.Shared.Settings
+namespace lib.Coworkee.Shared.Settings
 {
     public interface IPreference
     {

@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Infrastructure.Contexts;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Infrastructure.Contexts;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Infrastructure.Services.Identity
+namespace lib.Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IRoleClaimService), 0)]
     public class RoleClaimService : IRoleClaimService

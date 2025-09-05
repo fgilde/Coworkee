@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 using RazorEngineCore;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Configurations;
 
-namespace Coworkee.Infrastructure.Models;
+namespace lib.Coworkee.Infrastructure.Models;
 
 public class RazorEngineEmailTemplate : RazorEngineTemplateBase
 {

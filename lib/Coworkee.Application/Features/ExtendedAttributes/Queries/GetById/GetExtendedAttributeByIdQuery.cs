@@ -1,13 +1,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.ExtendedAttributes.Queries.GetById
+namespace lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetById
 {
     public class GetExtendedAttributeByIdQuery<TId, TEntityId, TEntity, TExtendedAttribute>
         : IRequest<Result<GetExtendedAttributeByIdResponse<TId, TEntityId>>>

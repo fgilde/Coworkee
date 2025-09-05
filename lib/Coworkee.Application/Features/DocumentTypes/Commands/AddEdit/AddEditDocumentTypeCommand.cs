@@ -3,19 +3,19 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Features.Base.Commands;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Features.Base.Commands;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Shared.Constants.Permission;
 using MediatR;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Features.DocumentTypes.Commands.AddEdit;
+namespace lib.Coworkee.Application.Features.DocumentTypes.Commands.AddEdit;
 
-[CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.Create, Permissions.DocumentTypes.Edit }, PolicyMatch = PolicyMatch.Any)]
+[CustomAuthorize(Policies = new[] { CorePermissionProvider.Core.DocumentTypes.Create, CorePermissionProvider.Core.DocumentTypes.Edit }, PolicyMatch = PolicyMatch.Any)]
 public class AddEditDocumentTypesCommand : AddEditCommandBase<DocumentTypeDto>
 {
     public AddEditDocumentTypesCommand(params DocumentTypeDto[] items) : base(items)
@@ -25,8 +25,8 @@ public class AddEditDocumentTypesCommand : AddEditCommandBase<DocumentTypeDto>
 internal class AddEditDocumentTypesCommandHandler : AddEditCommandHandlerBase<AddEditDocumentTypesCommand, int, DocumentTypeDto, DocumentType>
 {
     private readonly IStringLocalizer<AddEditDocumentTypesCommandHandler> _localizer;
-    protected override string EditPermission => Permissions.DocumentTypes.Edit;
-    protected override string CreatePermission => Permissions.DocumentTypes.Create;
+    protected override string EditPermission => CorePermissionProvider.Core.DocumentTypes.Edit;
+    protected override string CreatePermission => CorePermissionProvider.Core.DocumentTypes.Create;
 
     public AddEditDocumentTypesCommandHandler(
         IUnitOfWork<int> unitOfWork,

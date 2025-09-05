@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Coworkee.Application.Common.Models;
+namespace lib.Coworkee.Application.Common.Models;
 
 public class AddUpdateResult<TDto> 
     where TDto : IDtoBase

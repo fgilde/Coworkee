@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Client.Extensions;
+namespace lib.Coworkee.Client.Extensions;
 
 public static class ServiceAccessor
 {

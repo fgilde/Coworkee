@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Coworkee.Application.Common.Security
+namespace lib.Coworkee.Application.Common.Security
 {
     public interface ICustomAuthorizeAttributeHandler
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Common.Exceptions
+namespace lib.Coworkee.Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {

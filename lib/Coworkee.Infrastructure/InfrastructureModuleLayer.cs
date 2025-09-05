@@ -1,8 +1,8 @@
-using Coworkee.Core;
+using lib.Coworkee.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Infrastructure
+namespace lib.Coworkee.Infrastructure
 {
     /// <summary>
     /// Module entrance for Coworkee Infrastructure library.

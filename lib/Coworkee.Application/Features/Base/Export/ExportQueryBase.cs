@@ -3,20 +3,20 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services.ExportImport;
-using Coworkee.Application.Features.Base.Contracts;
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services.ExportImport;
+using lib.Coworkee.Application.Features.Base.Contracts;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.Base.Export;
+namespace lib.Coworkee.Application.Features.Base.Export;
 
 public abstract class ExportQueryBase
 {

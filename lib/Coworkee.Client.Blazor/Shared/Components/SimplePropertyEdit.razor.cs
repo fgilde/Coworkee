@@ -3,7 +3,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public partial class SimplePropertyEdit
     {

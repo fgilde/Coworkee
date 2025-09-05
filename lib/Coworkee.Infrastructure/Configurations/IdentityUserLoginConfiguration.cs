@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Coworkee.Infrastructure.Configurations;
+namespace lib.Coworkee.Infrastructure.Configurations;
 
 public class IdentityUserLoginConfiguration : IEntityTypeConfiguration<IdentityUserLogin<string>>
 {

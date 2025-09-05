@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using MudBlazor;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
 
-namespace Coworkee.Client.Configuration.MudExObjectEdit.MetaConfigurations;
+namespace lib.Coworkee.Client.Configuration.MudExObjectEdit.MetaConfigurations;
 
 public abstract class BaseDtoMetaConfiguration<T, TId> : IObjectMetaConfiguration<T> where T : IDtoBase<TId>
 {

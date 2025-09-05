@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Coworkee.Shared.Extensions;
+namespace lib.Coworkee.Shared.Extensions;
 
 public static class CultureExtensions
 {

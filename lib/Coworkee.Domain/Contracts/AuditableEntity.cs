@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Domain.Contracts
+namespace lib.Coworkee.Domain.Contracts
 {
     public abstract class AuditableEntity<TId> : IAuditableEntity<TId>
     {

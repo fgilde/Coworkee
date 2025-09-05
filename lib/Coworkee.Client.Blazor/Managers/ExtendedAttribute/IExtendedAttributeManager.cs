@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Wrapper;
 
-namespace Coworkee.Client.Managers.ExtendedAttribute
+namespace lib.Coworkee.Client.Managers.ExtendedAttribute
 {
     public interface IExtendedAttributeManager<TId, TEntityId, TEntity, TExtendedAttribute>
         where TEntity : class, IEntityWithExtendedAttributes<TExtendedAttribute>, IEntity<TEntityId>

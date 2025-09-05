@@ -1,18 +1,18 @@
 using System;
-using Coworkee.Infrastructure.Contexts;
+using lib.Coworkee.Infrastructure.Contexts;
 using System.Linq;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
-using Coworkee.Infrastructure.Extensions;
+using lib.Coworkee.Infrastructure.Extensions;
 
-namespace Coworkee.Infrastructure
+namespace lib.Coworkee.Infrastructure
 {
     [RegisterAs(typeof(IDatabaseSeeder), 0, ServiceLifetime = ServiceLifetime.Transient)]
     public class DatabaseSeeder(ApplicationDbContext db, RoleManager<ApplicationRole> roleManager, IUserService userService) : IDatabaseSeeder

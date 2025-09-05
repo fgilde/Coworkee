@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Client.ErrorHandling;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.Managers.Identity.Authentication;
+using lib.Coworkee.Client.ErrorHandling;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Managers.Identity.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Toolbelt.Blazor;
 
-namespace Coworkee.Client.Managers.Interceptors
+namespace lib.Coworkee.Client.Managers.Interceptors
 {
     public class HttpInterceptorManager : IHttpInterceptorManager
     {

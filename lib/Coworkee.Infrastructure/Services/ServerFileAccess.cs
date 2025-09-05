@@ -1,18 +1,18 @@
 using System;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
 using System.IO;
 using System.Linq;
 using Nextended.Core.Helper;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nextended.Core;
 using Microsoft.AspNetCore.Hosting;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services;
+namespace lib.Coworkee.Infrastructure.Services;
 
 [RegisterAs(typeof(IFileAccess))]
 public class ServerFileAccess: IFileAccess

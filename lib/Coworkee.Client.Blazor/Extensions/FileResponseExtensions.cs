@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Coworkee.Client.JsInterop;
+using lib.Coworkee.Client.JsInterop;
 using Microsoft.JSInterop;
 using SDK;
 
-namespace Coworkee.Client.Extensions;
+namespace lib.Coworkee.Client.Extensions;
 
 public static class FileResponseExtensions
 {

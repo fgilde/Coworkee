@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 
-namespace Coworkee.Client.Shared.Components;
+namespace lib.Coworkee.Client.Shared.Components;
 
 public partial class AddressEdit
 {

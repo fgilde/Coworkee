@@ -3,20 +3,20 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services.ExportImport;
-using Coworkee.Application.Specifications.ExtendedAttribute;
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Enums;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services.ExportImport;
+using lib.Coworkee.Application.Specifications.ExtendedAttribute;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Enums;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Features.ExtendedAttributes.Queries.Export
+namespace lib.Coworkee.Application.Features.ExtendedAttributes.Queries.Export
 {
     internal class ExportExtendedAttributesQueryLocalization
     {

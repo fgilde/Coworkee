@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Contracts.Services.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services.Identity;
+namespace lib.Coworkee.Infrastructure.Services.Identity;
 
 [RegisterAs(typeof(IDictionaryService), 1, RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Singleton)]
 public class DictionaryService: IDictionaryService

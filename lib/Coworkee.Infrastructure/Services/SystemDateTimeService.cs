@@ -1,8 +1,8 @@
 using System;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services
+namespace lib.Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IDateTimeService))]
     public class SystemDateTimeService : IDateTimeService

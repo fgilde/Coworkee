@@ -1,6 +1,6 @@
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 
-namespace Coworkee.Domain.Entities.Misc
+namespace lib.Coworkee.Domain.Entities.Misc
 {
     public class DocumentType : AuditableEntity<int>
     {

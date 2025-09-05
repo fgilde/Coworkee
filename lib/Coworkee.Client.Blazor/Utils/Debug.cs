@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Coworkee.Client.Utils;
+namespace lib.Coworkee.Client.Utils;
 
 public static class Debug
 {

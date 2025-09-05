@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Client.JsInterop;
-using Coworkee.Client.JsInterop.Models;
-using Coworkee.Client.Shared;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.Client.JsInterop.Models;
+using lib.Coworkee.Client.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -11,7 +11,7 @@ using MudBlazor.Extensions;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Options;
 
-namespace Coworkee.Client.Extensions;
+namespace lib.Coworkee.Client.Extensions;
 
 public static class DialogServiceExtensions
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Contracts.Attributes;
+namespace lib.Coworkee.Application.Contracts.Attributes;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class RegisterAsIfConfigValueEqualsAttribute(Type registerAsType, string requiredValue, string[] configPath)

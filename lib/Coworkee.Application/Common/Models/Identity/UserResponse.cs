@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Models;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Common.Models.Identity
+namespace lib.Coworkee.Application.Common.Models.Identity
 {
     public class UserResponse : DtoBase<string>
     {

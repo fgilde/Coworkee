@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Storage.Provider;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Storage.Provider;
 
-namespace Coworkee.Infrastructure.Services.Storage.Provider
+namespace lib.Coworkee.Infrastructure.Services.Storage.Provider
 {
     internal class ServerStorageProvider : IStorageProvider
     {

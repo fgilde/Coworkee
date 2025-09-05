@@ -4,14 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services.ExportImport;
-using Coworkee.Application.Features.Base.Commands;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services.ExportImport;
+using lib.Coworkee.Application.Features.Base.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Features.Base.Import;
+namespace lib.Coworkee.Application.Features.Base.Import;
 
 public class ImportQueryBase<TDto> : IRequest<AddUpdateResult<TDto>> 
     where TDto : IDtoBase

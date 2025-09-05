@@ -1,8 +1,8 @@
 
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Coworkee.Application.Configurations
+namespace lib.Coworkee.Application.Configurations
 {
     public partial class ServerConfiguration
     {

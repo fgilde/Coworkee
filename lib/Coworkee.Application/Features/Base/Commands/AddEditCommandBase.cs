@@ -4,20 +4,20 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Hubs.Events;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Extensions;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.Base.Commands;
+namespace lib.Coworkee.Application.Features.Base.Commands;
 
 public abstract class AddEditCommandBase<TDto> : IRequest<AddUpdateResult<TDto>>
     where TDto : IDtoBase

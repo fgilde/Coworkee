@@ -1,9 +1,9 @@
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using Nextended.Core.Types;
 using System;
 using System.Security.Claims;
 
-namespace Coworkee.Client.Models.Navigation
+namespace lib.Coworkee.Client.Models.Navigation
 {
     public class NavigationEntry : Hierarchical<NavigationEntry>
     {

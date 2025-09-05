@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Coworkee.Core;
+using lib.Coworkee.Core;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Application
+namespace lib.Coworkee.Application
 {
     /// <summary>
     /// Module entrance for Coworkee Application library.

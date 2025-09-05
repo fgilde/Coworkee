@@ -1,7 +1,7 @@
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -9,15 +9,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Shared.Constants.Permission;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
-using Coworkee.Infrastructure.Extensions;
+using lib.Coworkee.Infrastructure.Extensions;
 
-namespace Coworkee.Infrastructure.Services.Identity
+namespace lib.Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IRoleService), 2)]
     public class RoleService : IRoleService
@@ -45,7 +45,7 @@ namespace Coworkee.Infrastructure.Services.Identity
         public async Task<Result<string>> DeleteAsync(string id)
         {
             var existingRole = await _roleManager.FindByIdAsync(id);
-            if (existingRole.Name != RoleConstants.AdministratorRole && existingRole.Name != RoleConstants.BasicRole)
+            if (existingRole.Name != CoreRoleConstants.AdministratorRole && existingRole.Name != CoreRoleConstants.BasicRole)
             {
                 bool roleIsNotUsed = true;
                 var allUsers = await _userManager.Users.ToListAsync();
@@ -156,7 +156,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             else
             {
                 var existingRole = await _roleManager.FindByIdAsync(request.Id);
-                if ((existingRole.Name == RoleConstants.AdministratorRole || existingRole.Name == RoleConstants.BasicRole) && (existingRole.Name != request.Name || request.IsSelectableByUser))
+                if ((existingRole.Name == CoreRoleConstants.AdministratorRole || existingRole.Name == CoreRoleConstants.BasicRole) && (existingRole.Name != request.Name || request.IsSelectableByUser))
                     return await Result<string>.FailAsync(string.Format(_localizer["Not allowed"], existingRole.Name));
                 
                 existingRole.Name = request.Name;
@@ -174,25 +174,25 @@ namespace Coworkee.Infrastructure.Services.Identity
             {
                 var errors = new List<string>();
                 var role = await _roleManager.FindByIdAsync(request.RoleId);
-                if (role.Name == RoleConstants.AdministratorRole)
+                if (role.Name == CoreRoleConstants.AdministratorRole)
                 {
                     var currentUser = await _userManager.Users.SingleAsync(x => x.Id == _currentUserService.UserId);
-                    if (await _userManager.IsInRoleAsync(currentUser, RoleConstants.AdministratorRole))
+                    if (await _userManager.IsInRoleAsync(currentUser, CoreRoleConstants.AdministratorRole))
                     {
                         return await Result<string>.FailAsync(_localizer["Not allowed to modify Permissions for this Role."]);
                     }
                 }
 
                 var selectedClaims = request.RoleClaims.Where(a => a.Selected).ToList();
-                if (role.Name == RoleConstants.AdministratorRole)
+                if (role.Name == CoreRoleConstants.AdministratorRole)
                 {
-                    if (selectedClaims.All(x => x.ClaimValue != Permissions.Roles.View)
-                        || selectedClaims.All(x => x.ClaimValue != Permissions.RoleClaims.View)
-                        || selectedClaims.All(x => x.ClaimValue != Permissions.RoleClaims.Edit))
+                    if (selectedClaims.All(x => x.ClaimValue != CorePermissionProvider.Core.Roles.View)
+                        || selectedClaims.All(x => x.ClaimValue != CorePermissionProvider.Core.RoleClaims.View)
+                        || selectedClaims.All(x => x.ClaimValue != CorePermissionProvider.Core.RoleClaims.Edit))
                     {
                         return await Result<string>.FailAsync(string.Format(
                             _localizer["Not allowed to deselect {0} or {1} or {2} for this Role."],
-                            Permissions.Roles.View, Permissions.RoleClaims.View, Permissions.RoleClaims.Edit));
+                            CorePermissionProvider.Core.Roles.View, CorePermissionProvider.Core.RoleClaims.View, CorePermissionProvider.Core.RoleClaims.Edit));
                     }
                 }
 

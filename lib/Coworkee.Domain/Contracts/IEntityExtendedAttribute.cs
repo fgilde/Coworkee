@@ -1,8 +1,8 @@
 #nullable enable
 using System;
-using Coworkee.Domain.Enums;
+using lib.Coworkee.Domain.Enums;
 
-namespace Coworkee.Domain.Contracts
+namespace lib.Coworkee.Domain.Contracts
 {
     public interface IEntityExtendedAttribute<TId, TEntityId, TEntity>
         : IEntityExtendedAttribute<TEntityId, TEntity>, IEntity<TId>

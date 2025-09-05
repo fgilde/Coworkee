@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Contracts.Services;
+namespace lib.Coworkee.Application.Contracts.Services;
 
 public interface IDateTimeService
 {

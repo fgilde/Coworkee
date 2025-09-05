@@ -1,6 +1,6 @@
 using MudBlazor;
 
-namespace Coworkee.Client.Models
+namespace lib.Coworkee.Client.Models
 {
     public class ChatUser
     {

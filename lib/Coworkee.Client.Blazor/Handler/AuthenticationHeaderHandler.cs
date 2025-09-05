@@ -2,10 +2,10 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using Coworkee.Client.Extensions;
-using Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Shared.Constants.Storage;
 
-namespace Coworkee.Client.Handler
+namespace lib.Coworkee.Client.Handler
 {
     public class AuthenticationHeaderHandler : DelegatingHandler
     {

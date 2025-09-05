@@ -1,7 +1,7 @@
 using AKSoftware.Localization.MultiLanguages;
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 
-namespace Coworkee.Application.Common.Scopes;
+namespace lib.Coworkee.Application.Common.Scopes;
 
 public class UserCultureScope : CultureScope
 {

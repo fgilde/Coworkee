@@ -1,22 +1,22 @@
-using Coworkee.Infrastructure.Contexts;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Infrastructure.Contexts;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Exceptions;
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Chat;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Shared.Constants.Role;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Infrastructure.Services
+namespace lib.Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(IChatService), 6)]
     public class ChatService : IChatService
@@ -82,7 +82,7 @@ namespace Coworkee.Infrastructure.Services
         public async Task<Result<IEnumerable<ChatUserResponse>>> GetChatUsersAsync(string userId)
         {
             var userRoles = await _userService.GetRolesAsync(userId);
-            var userIsAdmin = userRoles.Data?.UserRoles?.Any(x => x.Selected && x.RoleName == RoleConstants.AdministratorRole) == true;
+            var userIsAdmin = userRoles.Data?.UserRoles?.Any(x => x.Selected && x.RoleName == CoreRoleConstants.AdministratorRole) == true;
             var allUsers = await _context.Users.Where(user => user.Id != userId && (userIsAdmin || user.IsActive && user.EmailConfirmed)).ToListAsync();
             var chatUsers = allUsers.Where(user => !user.IsSystemUser()).MapTo<IEnumerable<ChatUserResponse>>();
             return await Result<IEnumerable<ChatUserResponse>>.SuccessAsync(chatUsers);

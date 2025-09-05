@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
-namespace Coworkee.Shared.Localizers
+namespace lib.Coworkee.Shared.Localizers
 {
     public class AggregatedLocalizer<T> :IStringLocalizer<T>
     {

@@ -4,18 +4,18 @@ using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
-using Coworkee.Shared;
+using lib.Coworkee.Shared;
 
-namespace Coworkee.Application.Features.Base.Queries;
+namespace lib.Coworkee.Application.Features.Base.Queries;
 
 public class GetAllPagedQueryBase<TDto> : IRequest<PaginatedResult<TDto>>
     where TDto : IDtoBase

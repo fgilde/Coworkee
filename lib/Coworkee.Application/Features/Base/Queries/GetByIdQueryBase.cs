@@ -3,15 +3,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.Base.Queries;
+namespace lib.Coworkee.Application.Features.Base.Queries;
 
 public class GetByIdQueryBase<TId, TDto> : IRequest<TDto>
 {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Security.Claims;
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 
-namespace Coworkee.Application.Hubs.Events
+namespace lib.Coworkee.Application.Hubs.Events
 {
     public class EntitiesChanged<TDto> : EntitiesUpdated<TDto>
     {

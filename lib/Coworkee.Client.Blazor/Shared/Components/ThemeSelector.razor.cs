@@ -1,6 +1,6 @@
 ﻿using System;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.Theming;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Theming;
 using Microsoft.AspNetCore.Components;
 using MudBlazor.Extensions.Components;
 using MudBlazor;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Helper;
 
-namespace Coworkee.Client.Shared.Components;
+namespace lib.Coworkee.Client.Shared.Components;
 
 public partial class ThemeSelector
 {

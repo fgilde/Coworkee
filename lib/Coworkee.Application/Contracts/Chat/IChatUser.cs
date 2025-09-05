@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Coworkee.Application.Contracts.Chat
+namespace lib.Coworkee.Application.Contracts.Chat
 {
     public interface IChatUser
     {

@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Infrastructure.Models.Identity;
 
-namespace Coworkee.Infrastructure.Extensions;
+namespace lib.Coworkee.Infrastructure.Extensions;
 
 public static class UserManagerExtensions
 {

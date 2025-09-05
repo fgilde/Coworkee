@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Client.Enums;
+using lib.Coworkee.Client.Enums;
 using MudBlazor;
 using MudBlazor.Extensions.Core.Enums;
 using MudBlazor.Extensions.Helper;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Client.Theming;
+namespace lib.Coworkee.Client.Theming;
 
 public static class ClientThemes
 {

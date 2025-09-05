@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Coworkee.Shared.Constants.Localization
+namespace lib.Coworkee.Shared.Constants.Localization
 {
     public class LanguageCode
     {

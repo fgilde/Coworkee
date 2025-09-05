@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Client.ErrorHandling;
-using Coworkee.SDK;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Client.ErrorHandling;
+using lib.Coworkee.SDK;
+using lib.Coworkee.Shared.Wrapper;
 using SDK;
 
-namespace Coworkee.Client.Extensions
+namespace lib.Coworkee.Client.Extensions
 {
     public static class ApiClientExtensions
     {

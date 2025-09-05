@@ -1,5 +1,5 @@
 using Blazored.LocalStorage;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -10,30 +10,30 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using Coworkee.Client.Authentication;
-using Coworkee.Client.Configuration;
-using Coworkee.Client.ErrorHandling;
-using Coworkee.Client.Handler;
-using Coworkee.Client.Localization;
-using Coworkee.Client.Managers;
-using Coworkee.Client.Managers.ExtendedAttribute;
-using Coworkee.Client.Managers.Preferences;
-using Coworkee.Domain.Entities.ExtendedAttributes;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.SDK;
-using Coworkee.Shared;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Client.Authentication;
+using lib.Coworkee.Client.Configuration;
+using lib.Coworkee.Client.ErrorHandling;
+using lib.Coworkee.Client.Handler;
+using lib.Coworkee.Client.Localization;
+using lib.Coworkee.Client.Managers;
+using lib.Coworkee.Client.Managers.ExtendedAttribute;
+using lib.Coworkee.Client.Managers.Preferences;
+using lib.Coworkee.Domain.Entities.ExtendedAttributes;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.SDK;
+using lib.Coworkee.Shared;
+using lib.Coworkee.Shared.Constants.Application;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Client.Configuration.MudExObjectEdit;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Client.Configuration.MudExObjectEdit;
 using Nextended.Core.Helper;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
-namespace Coworkee.Client.Extensions
+namespace lib.Coworkee.Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {

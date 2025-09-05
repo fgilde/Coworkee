@@ -1,9 +1,9 @@
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Infrastructure.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Coworkee.Infrastructure.Configurations;
+namespace lib.Coworkee.Infrastructure.Configurations;
 
 public class ChatHistoryConfiguration : IEntityTypeConfiguration<ChatHistory<ApplicationUser>>
 {

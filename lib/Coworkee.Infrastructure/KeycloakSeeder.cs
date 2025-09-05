@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Coworkee.Infrastructure;
+namespace lib.Coworkee.Infrastructure;
 
 public class KeycloakSeeder
 {

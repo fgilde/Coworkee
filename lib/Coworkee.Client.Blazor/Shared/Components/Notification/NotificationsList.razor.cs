@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
-using Coworkee.Application.Common.Models;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 
 
-namespace Coworkee.Client.Shared.Components.Notification;
+namespace lib.Coworkee.Client.Shared.Components.Notification;
 
 public partial class NotificationsList
 {

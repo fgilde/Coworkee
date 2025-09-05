@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace Coworkee.Client.JsInterop;
+namespace lib.Coworkee.Client.JsInterop;
 
 public class CustomEventInterop<TEventArgs>: IDisposable
     //where TEventArgs : EventArgs 

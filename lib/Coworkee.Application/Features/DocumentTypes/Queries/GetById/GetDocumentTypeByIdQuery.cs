@@ -1,14 +1,14 @@
 using System;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Shared.Constants.Permission;
 
-namespace Coworkee.Application.Features.DocumentTypes.Queries.GetById
+namespace lib.Coworkee.Application.Features.DocumentTypes.Queries.GetById
 {
-    [CustomAuthorize(Policies = new[] { Permissions.DocumentTypes.View })]
+    [CustomAuthorize(Policies = new[] { CorePermissionProvider.Core.DocumentTypes.View })]
     public class GetDocumentTypeByIdQuery : GetByIdQueryBase<int, DocumentTypeDto>
     {
         public GetDocumentTypeByIdQuery(int id) : base(id)

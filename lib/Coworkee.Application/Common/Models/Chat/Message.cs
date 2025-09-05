@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Common.Models.Chat
+namespace lib.Coworkee.Application.Common.Models.Chat
 {
     public class Message
     {

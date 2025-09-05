@@ -1,9 +1,9 @@
-using Coworkee.Application.Contracts.Serialization.Serializers;
-using Coworkee.Application.Serialization.Settings;
+using lib.Coworkee.Application.Contracts.Serialization.Serializers;
+using lib.Coworkee.Application.Serialization.Settings;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace Coworkee.Application.Serialization.Serializers
+namespace lib.Coworkee.Application.Serialization.Serializers
 {
     public class NewtonSoftJsonSerializer : IJsonSerializer
     {

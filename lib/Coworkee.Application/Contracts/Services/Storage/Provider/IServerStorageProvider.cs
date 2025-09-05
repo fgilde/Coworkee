@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Coworkee.Application.Contracts.Services.Storage.Provider;
+namespace lib.Coworkee.Application.Contracts.Services.Storage.Provider;
 
 public interface IStorageProvider
 {

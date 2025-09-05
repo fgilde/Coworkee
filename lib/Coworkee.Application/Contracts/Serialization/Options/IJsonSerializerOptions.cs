@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Coworkee.Application.Contracts.Serialization.Options
+namespace lib.Coworkee.Application.Contracts.Serialization.Options
 {
     public interface IJsonSerializerOptions
     {

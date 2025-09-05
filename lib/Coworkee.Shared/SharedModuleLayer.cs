@@ -1,12 +1,12 @@
 using System;
-using Coworkee.Core;
-using Coworkee.Core.Extensions;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Core;
+using lib.Coworkee.Core.Extensions;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Shared
+namespace lib.Coworkee.Shared
 {
     /// <summary>
     /// Module entrance for Coworkee Shared library.

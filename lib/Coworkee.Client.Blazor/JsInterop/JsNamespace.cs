@@ -1,8 +1,8 @@
 using System.Linq;
-using Coworkee.Client.Configuration;
-using Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Configuration;
+using lib.Coworkee.Client.Extensions;
 
-namespace Coworkee.Client.JsInterop;
+namespace lib.Coworkee.Client.JsInterop;
 
 public class JsNamespace
 {

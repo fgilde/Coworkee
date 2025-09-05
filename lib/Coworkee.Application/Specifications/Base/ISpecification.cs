@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 
-namespace Coworkee.Application.Specifications.Base
+namespace lib.Coworkee.Application.Specifications.Base
 {
     public interface ISpecification<T> where T : class, IEntity
     {

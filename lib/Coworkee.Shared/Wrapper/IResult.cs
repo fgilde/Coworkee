@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Coworkee.Shared.Wrapper
+namespace lib.Coworkee.Shared.Wrapper
 {
     public interface IResult
     {

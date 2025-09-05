@@ -1,6 +1,6 @@
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Hubs.Events.Base;
 
-namespace Coworkee.Application.Hubs.Events
+namespace lib.Coworkee.Application.Hubs.Events
 {
     public class BeforeRequest<TRequest> : ClientEventBase
     {

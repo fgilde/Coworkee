@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Contracts.Chat
+namespace lib.Coworkee.Application.Contracts.Chat
 {
     public interface IChatHistory<TUser> where TUser : IChatUser
     {

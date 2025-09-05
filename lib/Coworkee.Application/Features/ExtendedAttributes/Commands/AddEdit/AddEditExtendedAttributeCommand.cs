@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Enums;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Enums;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit
+namespace lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit
 {
     internal class AddEditExtendedAttributeCommandLocalization
     {

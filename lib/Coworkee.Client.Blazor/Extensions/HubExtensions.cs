@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Hubs.Events.Base;
 using Microsoft.AspNetCore.SignalR.Client;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 
-namespace Coworkee.Client.Extensions
+namespace lib.Coworkee.Client.Extensions
 {
     public static class HubExtensions
     {

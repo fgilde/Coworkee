@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 
-namespace Coworkee.Client.Shared.Dialogs
+namespace lib.Coworkee.Client.Shared.Dialogs
 {
     public partial class AssistantDialog
     {

@@ -1,7 +1,7 @@
-using Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Enums;
 using MediatR;
 
-namespace Coworkee.Application.Features.Base.Contracts;
+namespace lib.Coworkee.Application.Features.Base.Contracts;
 
 public interface IExportQuery<out TEntityId> : IRequest<byte[]>
 {

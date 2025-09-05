@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Toolbelt.Blazor;
 
-namespace Coworkee.Client.Managers.Interceptors
+namespace lib.Coworkee.Client.Managers.Interceptors
 {
     public interface IHttpInterceptorManager : IManager
     {

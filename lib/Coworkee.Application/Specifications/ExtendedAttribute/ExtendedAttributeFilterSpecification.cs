@@ -1,9 +1,9 @@
 using System;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Domain.Contracts;
 
-namespace Coworkee.Application.Specifications.ExtendedAttribute
+namespace lib.Coworkee.Application.Specifications.ExtendedAttribute
 {
     public class ExtendedAttributeFilterSpecification<TId, TEntityId, TEntity, TExtendedAttribute>
         : SpecificationBase<TExtendedAttribute>

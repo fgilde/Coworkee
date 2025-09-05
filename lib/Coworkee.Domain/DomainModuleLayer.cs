@@ -1,9 +1,9 @@
 using System;
-using Coworkee.Core;
+using lib.Coworkee.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Domain
+namespace lib.Coworkee.Domain
 {
     /// <summary>
     /// Module entrance for Coworkee Domain library.

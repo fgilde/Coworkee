@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Account;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Account;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace Coworkee.Application.Common.Behaviours
+namespace lib.Coworkee.Application.Common.Behaviours
 {
     // Will auto Injected
     public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>

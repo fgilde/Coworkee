@@ -3,18 +3,18 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Client.Authentication;
-using Coworkee.Client.Configuration;
-using Coworkee.Client.JsInterop;
-using Coworkee.SDK;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Client.Authentication;
+using lib.Coworkee.Client.Configuration;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.SDK;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Nextended.Blazor.Models;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Client.Extensions
+namespace lib.Coworkee.Client.Extensions
 {
     public static class NavigationManagerExtensions
     {

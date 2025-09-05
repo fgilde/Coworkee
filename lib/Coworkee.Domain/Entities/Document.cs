@@ -1,7 +1,7 @@
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Entities.ExtendedAttributes;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Entities.ExtendedAttributes;
 
-namespace Coworkee.Domain.Entities.Misc
+namespace lib.Coworkee.Domain.Entities.Misc
 {
     public class Document : AuditableEntityWithExtendedAttributes<int, int, Document, DocumentExtendedAttribute>
     {

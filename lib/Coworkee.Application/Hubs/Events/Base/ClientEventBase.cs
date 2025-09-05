@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Hubs.Events.Base
+namespace lib.Coworkee.Application.Hubs.Events.Base
 {
     public abstract class ClientEventBase
     {

@@ -1,7 +1,7 @@
 using Nextended.Core.Helper;
 using System;
 
-namespace Coworkee.Application.Common.Models;
+namespace lib.Coworkee.Application.Common.Models;
 
 public class DatabaseBackupDto : IDtoBase
 {

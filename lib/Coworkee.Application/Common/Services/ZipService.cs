@@ -4,11 +4,11 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Application.Common.Services;
+namespace lib.Coworkee.Application.Common.Services;
 
 [RegisterAs(typeof(IZipService))]
 public class ZipService : IZipService

@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace Coworkee.Application.Serialization.JsonConverters
+namespace lib.Coworkee.Application.Serialization.JsonConverters
 {
     /// <summary>
     /// The new Json.NET doesn't support Timespan at this time

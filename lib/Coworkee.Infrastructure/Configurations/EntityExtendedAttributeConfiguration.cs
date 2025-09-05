@@ -1,12 +1,12 @@
-using Coworkee.Application.Serialization.Options;
-using Coworkee.Application.Serialization.Serializers;
-using Coworkee.Domain.Contracts;
-using Coworkee.Infrastructure.Extensions;
+using lib.Coworkee.Application.Serialization.Options;
+using lib.Coworkee.Application.Serialization.Serializers;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Options;
 
-namespace Coworkee.Infrastructure.Configurations
+namespace lib.Coworkee.Infrastructure.Configurations
 {
     //public class EntityExtendedAttributeConfiguration : IEntityTypeConfiguration<IEntityExtendedAttribute>
     //{

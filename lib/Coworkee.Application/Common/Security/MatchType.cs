@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Common.Security
+namespace lib.Coworkee.Application.Common.Security
 {
     public enum RoleMatch
     {

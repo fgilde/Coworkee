@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.JsInterop;
-using Coworkee.Client.Managers.ExtendedAttribute;
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Enums;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.Client.Managers.ExtendedAttribute;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -21,7 +21,7 @@ using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 using Nextended.Core;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public class ExtendedAttributesLocalization
     {

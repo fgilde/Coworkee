@@ -3,19 +3,19 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Client.Authentication;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.Managers.Preferences;
-using Coworkee.SDK;
-using Coworkee.Shared.Constants.Storage;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Client.Authentication;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Managers.Preferences;
+using lib.Coworkee.SDK;
+using lib.Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Client.Managers.Identity.Authentication
+namespace lib.Coworkee.Client.Managers.Identity.Authentication
 {
     public class ClientAuthenticationManager : IClientAuthenticationManager
     {

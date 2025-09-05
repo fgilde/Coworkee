@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
 
-namespace Coworkee.Application.Common.Exceptions
+namespace lib.Coworkee.Application.Common.Exceptions
 {
     public class ValidationException : Exception
     {

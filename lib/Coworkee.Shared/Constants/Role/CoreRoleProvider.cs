@@ -1,7 +1,8 @@
+using lib.Coworkee.Shared.Constants.Role;
 using System.Collections.Generic;
-using Coworkee.Core.Providers;
+using lib.Coworkee.Core.Providers;
 
-namespace Coworkee.Shared.Constants.Role
+namespace lib.Coworkee.Shared.Constants.Role
 {
     /// <summary>
     /// Core role constants for base system roles.

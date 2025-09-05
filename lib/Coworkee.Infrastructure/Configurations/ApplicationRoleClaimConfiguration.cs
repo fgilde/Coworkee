@@ -1,8 +1,8 @@
-using Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Infrastructure.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Coworkee.Infrastructure.Configurations;
+namespace lib.Coworkee.Infrastructure.Configurations;
 
 public class ApplicationRoleClaimConfiguration : IEntityTypeConfiguration<ApplicationRoleClaim>
 {

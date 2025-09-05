@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json.Linq;
 
-namespace Coworkee.Client.ErrorHandling
+namespace lib.Coworkee.Client.ErrorHandling
 {
     public class ClientProblemDetails
     {

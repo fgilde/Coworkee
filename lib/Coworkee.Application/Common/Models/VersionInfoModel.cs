@@ -1,8 +1,8 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 
-namespace Coworkee.Application.Common.Models
+namespace lib.Coworkee.Application.Common.Models
 {
     public class VersionInfoModel
     {

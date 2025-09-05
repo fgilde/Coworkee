@@ -1,4 +1,4 @@
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public enum EditMode
     {

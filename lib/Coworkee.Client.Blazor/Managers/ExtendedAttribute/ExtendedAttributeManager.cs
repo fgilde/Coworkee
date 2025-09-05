@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using Coworkee.Client.Extensions;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Wrapper;
 
-namespace Coworkee.Client.Managers.ExtendedAttribute
+namespace lib.Coworkee.Client.Managers.ExtendedAttribute
 {
     public class ExtendedAttributeManager<TId, TEntityId, TEntity, TExtendedAttribute>
         : IExtendedAttributeManager<TId, TEntityId, TEntity, TExtendedAttribute>

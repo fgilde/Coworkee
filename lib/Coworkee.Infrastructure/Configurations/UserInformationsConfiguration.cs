@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Coworkee.Domain.Entities.Identity;
+using lib.Coworkee.Domain.Entities.Identity;
 
-namespace Coworkee.Infrastructure.Configurations;
+namespace lib.Coworkee.Infrastructure.Configurations;
 
 public class UserInformationsConfiguration : IEntityTypeConfiguration<UserInformations>
 {

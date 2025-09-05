@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
-using Coworkee.Shared;
+using lib.Coworkee.Shared;
 
-namespace Coworkee.Application.Contracts.Services;
+namespace lib.Coworkee.Application.Contracts.Services;
 
 public interface IEmailTemplateService
 {

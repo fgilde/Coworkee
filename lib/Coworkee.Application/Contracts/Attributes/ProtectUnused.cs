@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Coworkee.Application.Contracts.Attributes;
+namespace lib.Coworkee.Application.Contracts.Attributes;
 
 /// <summary>
 /// Just a small attribute to ensure classes are not detect as unused

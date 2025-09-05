@@ -1,7 +1,7 @@
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Common.Scopes;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Scopes;
 
-namespace Coworkee.Application.Contracts.Services.Identity;
+namespace lib.Coworkee.Application.Contracts.Services.Identity;
 
 public interface IUserCultureScopeService
 {

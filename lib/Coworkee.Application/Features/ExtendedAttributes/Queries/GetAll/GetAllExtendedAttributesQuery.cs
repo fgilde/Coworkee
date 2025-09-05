@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Wrapper;
 using LazyCache;
 using MediatR;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll
+namespace lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll
 {
     public class GetAllExtendedAttributesQuery<TId, TEntityId, TEntity, TExtendedAttribute>
         : IRequest<Result<List<GetAllExtendedAttributesResponse<TId, TEntityId>>>>

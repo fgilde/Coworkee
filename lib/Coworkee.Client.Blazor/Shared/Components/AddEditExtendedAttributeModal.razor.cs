@@ -2,18 +2,18 @@ using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Application.Hubs;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.Managers.ExtendedAttribute;
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Enums;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Hubs;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Managers.ExtendedAttribute;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Enums;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public class AddEditExtendedAttributeModalLocalization
     {

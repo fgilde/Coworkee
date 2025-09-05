@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Application.Common.Security
+namespace lib.Coworkee.Application.Common.Security
 {
     [ProtectUnused(typeof(CustomAuthorizeAttributeHandler))]
     [RegisterAs(typeof(ICustomAuthorizeAttributeHandler), ServiceLifetime = ServiceLifetime.Transient)]

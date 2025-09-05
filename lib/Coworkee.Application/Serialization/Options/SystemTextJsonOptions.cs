@@ -1,7 +1,7 @@
 using System.Text.Json;
-using Coworkee.Application.Contracts.Serialization.Options;
+using lib.Coworkee.Application.Contracts.Serialization.Options;
 
-namespace Coworkee.Application.Serialization.Options
+namespace lib.Coworkee.Application.Serialization.Options
 {
     public class SystemTextJsonOptions : IJsonSerializerOptions
     {

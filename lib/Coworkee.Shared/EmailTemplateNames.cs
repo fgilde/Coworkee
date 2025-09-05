@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Coworkee.Shared;
+namespace lib.Coworkee.Shared;
 
 public partial class EmailTemplate
 {    

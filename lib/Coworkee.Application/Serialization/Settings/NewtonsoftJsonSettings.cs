@@ -1,7 +1,7 @@
-using Coworkee.Application.Contracts.Serialization.Settings;
+using lib.Coworkee.Application.Contracts.Serialization.Settings;
 using Newtonsoft.Json;
 
-namespace Coworkee.Application.Serialization.Settings
+namespace lib.Coworkee.Application.Serialization.Settings
 {
     public class NewtonsoftJsonSettings : IJsonSerializerSettings
     {

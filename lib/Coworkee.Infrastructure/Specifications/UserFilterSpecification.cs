@@ -1,7 +1,7 @@
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Application.Specifications.Base;
 
-namespace Coworkee.Infrastructure.Specifications
+namespace lib.Coworkee.Infrastructure.Specifications
 {
     public class UserFilterSpecification : SpecificationBase<ApplicationUser>
     {

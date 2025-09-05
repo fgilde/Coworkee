@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace Coworkee.Application.Common.Exceptions
+namespace lib.Coworkee.Application.Common.Exceptions
 {
     public class ApiException : Exception
     {

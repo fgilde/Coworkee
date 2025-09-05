@@ -1,11 +1,11 @@
-using Coworkee.Client.Enums;
-using Coworkee.Client.JsInterop;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Client.Enums;
+using lib.Coworkee.Client.JsInterop;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace Coworkee.Client.Shared.Components
+namespace lib.Coworkee.Client.Shared.Components
 {
     public partial class AppBarHeader
     {

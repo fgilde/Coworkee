@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 
-namespace Coworkee.Domain.Entities.Identity;
+namespace lib.Coworkee.Domain.Entities.Identity;
 
 public class UserInformations : AuditableEntity<int>
 {

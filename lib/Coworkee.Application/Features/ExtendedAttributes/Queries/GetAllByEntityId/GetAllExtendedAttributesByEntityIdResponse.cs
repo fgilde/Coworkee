@@ -1,9 +1,9 @@
 #nullable enable
 using System;
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Enums;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Enums;
 
-namespace Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId
+namespace lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId
 {
     public class GetAllExtendedAttributesByEntityIdResponse<TId, TEntityId> : IEntityAuditableExtendedAttribute
     {

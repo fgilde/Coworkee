@@ -6,7 +6,7 @@ using System.Linq;
 using System.Resources;
 using System.Text.RegularExpressions;
 
-namespace Coworkee.Shared.Constants.Localization
+namespace lib.Coworkee.Shared.Constants.Localization
 {
     public static class LocalizationConstants
     {

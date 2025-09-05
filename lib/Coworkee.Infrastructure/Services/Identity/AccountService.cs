@@ -1,16 +1,16 @@
 using System.IO;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Account;
-using Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Application;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Account;
+using lib.Coworkee.Application.Hubs.Events;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +20,7 @@ using Microsoft.Extensions.Localization;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Infrastructure.Services.Identity
+namespace lib.Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IAccountService), 3, ServiceLifetime = ServiceLifetime.Scoped)]
     public class AccountService : IAccountService

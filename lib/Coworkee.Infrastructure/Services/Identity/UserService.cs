@@ -7,26 +7,26 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application;
-using Coworkee.Application.Common.Exceptions;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.ExportImport;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Application.Hubs.Events.Base;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Application.Requests.Mail;
-using Coworkee.Infrastructure.Contexts;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Infrastructure.Specifications;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Models;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application;
+using lib.Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.ExportImport;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Mail;
+using lib.Coworkee.Infrastructure.Contexts;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Infrastructure.Specifications;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Wrapper;
 using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -35,19 +35,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Features.Documents.Commands.AddEdit;
-using Coworkee.Application.Hubs.Events;
-using Coworkee.Application.Requests;
-using Coworkee.Domain.Entities.Identity;
-using Coworkee.Infrastructure.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Features.Documents.Commands.AddEdit;
+using lib.Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Application.Requests;
+using lib.Coworkee.Domain.Entities.Identity;
+using lib.Coworkee.Infrastructure.Extensions;
 using System.Globalization;
 using System.Security.Claims;
-using Coworkee.Shared;
+using lib.Coworkee.Shared;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services.Identity
+namespace lib.Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(IUserService), 5)]
     public class UserService : IUserService
@@ -117,7 +117,7 @@ namespace Coworkee.Infrastructure.Services.Identity
                     LastName = p.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value,
                     UserName = userName,
                     Password = password,
-                    RoleToAdd = RoleConstants.BasicRole
+                    RoleToAdd = CoreRoleConstants.BasicRole
                 };
             }).ToArray());
         }
@@ -204,7 +204,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, RoleConstants.BasicRole);
+                await _userManager.AddToRoleAsync(user, CoreRoleConstants.BasicRole);
                 if (!request.EmailConfirmed)
                     await SendVerificationMailAsync(origin, user);
                 if (user.EmailConfirmed && user.IsActive)
@@ -217,7 +217,7 @@ namespace Coworkee.Infrastructure.Services.Identity
 
                 if (request.Documents?.Any() == true)
                 {
-                    using var scope = await _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope().AsUserAsync(user.Id).WithPermissions(Permissions.Documents.Create);
+                    using var scope = await _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope().AsUserAsync(user.Id).WithPermissions(CorePermissionProvider.Core.Documents.Create);
                     await scope.ServiceProvider.GetRequiredService<IMediator>().Send(new AddEditDocumentsCommand(request.Documents.MapElementsTo<DocumentDto>().ToArray()));
                 }
 
@@ -246,7 +246,7 @@ namespace Coworkee.Infrastructure.Services.Identity
         public async Task<IResult> ToggleUserStatusAsync(ToggleUserStatusRequest request)
         {
             var user = await _userManager.FindByIdFullyLoadedAsync(request.UserId);
-            var isAdmin = await _userManager.IsInRoleAsync(user, RoleConstants.AdministratorRole);
+            var isAdmin = await _userManager.IsInRoleAsync(user, CoreRoleConstants.AdministratorRole);
             if (isAdmin)
             {
                 return await Result.FailAsync(_localizer["Administrators Profile's Status cannot be toggled"]);
@@ -306,11 +306,11 @@ namespace Coworkee.Infrastructure.Services.Identity
             var selectedRoles = request.UserRoles.Where(x => x.Selected).ToList();
 
             var currentUser = await _userManager.FindByIdFullyLoadedAsync(_currentUserService.UserId);
-            if (!await _userManager.IsInRoleAsync(currentUser, RoleConstants.AdministratorRole))
+            if (!await _userManager.IsInRoleAsync(currentUser, CoreRoleConstants.AdministratorRole))
             {
                 var tryToAddAdministratorRole = selectedRoles
-                    .Any(x => x.RoleName == RoleConstants.AdministratorRole);
-                var userHasAdministratorRole = roles.Any(x => x == RoleConstants.AdministratorRole);
+                    .Any(x => x.RoleName == CoreRoleConstants.AdministratorRole);
+                var userHasAdministratorRole = roles.Any(x => x == CoreRoleConstants.AdministratorRole);
                 if (tryToAddAdministratorRole && !userHasAdministratorRole || !tryToAddAdministratorRole && userHasAdministratorRole)
                 {
                     return await Result.FailAsync(_localizer["Not Allowed to add or delete Administrator Role if you have not this role."]);
@@ -331,7 +331,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             var signInManager = _serviceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
             var identityService = _serviceProvider.GetRequiredService<IdentityService>();
             var isOwnProfile = user.Id == _currentUserService.UserId;
-            var canEditAsAdmin = await _permissionService.HasPoliciesAsync(new[] { Permissions.Users.Edit }, PolicyMatch.All);
+            var canEditAsAdmin = await _permissionService.HasPoliciesAsync(new[] { CorePermissionProvider.Core.Users.Edit }, PolicyMatch.All);
             if (!isOwnProfile && !canEditAsAdmin)
                 throw Errors.Create("Not Allowed", HttpStatusCode.Unauthorized);
 
@@ -578,7 +578,7 @@ namespace Coworkee.Infrastructure.Services.Identity
                 Subject = $"{ApplicationConstants.ApplicationName} - New User with valid Email registered",
                 Content = $"The User '{user.FirstName} {user.LastName}' has recently confirmed his email address '{user.Email}' and is waiting for activation.",
                 Url = $"/user-profile/{user.Id}",
-                Target = EventTarget.WithRole(RoleConstants.AdministratorRole)
+                Target = EventTarget.WithRole(CoreRoleConstants.AdministratorRole)
             });
         }
 

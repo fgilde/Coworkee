@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Requests.Mail;
+using lib.Coworkee.Application.Requests.Mail;
 
-namespace Coworkee.Application.Contracts.Services;
+namespace lib.Coworkee.Application.Contracts.Services;
 
 public interface IMailService
 {

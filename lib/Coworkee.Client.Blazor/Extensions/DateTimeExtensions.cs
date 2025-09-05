@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Client.Extensions;
+namespace lib.Coworkee.Client.Extensions;
 
 public static class DateTimeExtensions
 {

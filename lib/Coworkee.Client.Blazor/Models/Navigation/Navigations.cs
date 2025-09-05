@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Coworkee.Client.Configuration;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Client.Configuration;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
 using MudBlazor;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Client.Models.Navigation
+namespace lib.Coworkee.Client.Models.Navigation
 {
     public static class Navigations
     {
@@ -23,25 +23,25 @@ namespace Coworkee.Client.Models.Navigation
                     {
                         new NavigationEntry("Dashboard", Icons.Material.Outlined.Dashboard, "/dashboard").WithPolicies(Permissions.Dashboards.View),
                         new NavigationEntry("Account", Icons.Material.Outlined.SupervisorAccount, "/account").WithAuthentication(),
-                        new NavigationEntry("Audit Trails", Icons.Material.Outlined.Security, "/audit-trails").WithPolicies(Permissions.AuditTrails.View),
+                        new NavigationEntry("Audit Trails", Icons.Material.Outlined.Security, "/audit-trails").WithPolicies(CorePermissionProvider.Core.AuditTrails.View),
                     }
                 },
                 new NavigationEntry("Document Management")
                 {
                     Children = new()
                     {
-                        new NavigationEntry("Document Store", Icons.Material.Outlined.AttachFile, "/document-store").WithPolicies(Permissions.Documents.View),
-                        new NavigationEntry("Document Types", Icons.Material.Outlined.AttachFile, "/document-types").WithPolicies(Permissions.DocumentTypes.View)
+                        new NavigationEntry("Document Store", Icons.Material.Outlined.AttachFile, "/document-store").WithPolicies(CorePermissionProvider.Core.Documents.View),
+                        new NavigationEntry("Document Types", Icons.Material.Outlined.AttachFile, "/document-types").WithPolicies(CorePermissionProvider.Core.DocumentTypes.View)
                     }
                 },
                 new NavigationEntry("Administrator")
                 {
                     Children = new()
                     {
-                        new NavigationEntry("Site Settings", Icons.Material.Outlined.AdminPanelSettings, "/admin/site-settings").WithRoles(RoleConstants.AdministratorRole),
-                        new NavigationEntry("Database Backups", Icons.Material.Outlined.Save, "/admin/database-backups").WithPolicies(Permissions.Backups.View),
-                        new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(Permissions.Users.View),
-                        new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(Permissions.Roles.View),
+                        new NavigationEntry("Site Settings", Icons.Material.Outlined.AdminPanelSettings, "/admin/site-settings").WithRoles(CoreRoleConstants.AdministratorRole),
+                        new NavigationEntry("Database Backups", Icons.Material.Outlined.Save, "/admin/database-backups").WithPolicies(CorePermissionProvider.Core.Backups.View),
+                        new NavigationEntry("Users", Icons.Material.Outlined.Person, "/identity/users").WithPolicies(CorePermissionProvider.Core.Users.View),
+                        new NavigationEntry("Roles", Icons.Material.Outlined.Group, "/identity/roles").WithPolicies(CorePermissionProvider.Core.Roles.View),
                         new NavigationEntry("Monitoring")
                         {
                             //Children = new()
@@ -51,8 +51,8 @@ namespace Coworkee.Client.Models.Navigation
                             //    new NavigationEntry("Prometheus", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.Prometheus, "_blank").WithPolicies(Permissions.Prometheus.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Prometheus)),
                             //    new NavigationEntry("OllamaUI", Icons.Material.Outlined.Dashboard, config.ServerConfiguration?.Endpoints?.OllamaUI, "_blank").WithPolicies(Permissions.OllamaUI.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.OllamaUI)),
                             //    new NavigationEntry("PG Admin", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.PGAdmin, "_blank").WithPolicies(Permissions.PgAdmin.View).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.PGAdmin)),
-                            //    new NavigationEntry("Stirling", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.Stirling, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.Stirling)),
-                            //    new NavigationEntry("Keycloak Admin", Icons.Material.Outlined.Login, config.ServerConfiguration?.Endpoints?.Keycloak, "_blank").WithRoles(RoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Keycloak)),
+                            //    new NavigationEntry("Stirling", Icons.Material.Outlined.Dataset, config.ServerConfiguration?.Endpoints?.Stirling, "_blank").WithRoles(CoreRoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration.Endpoints?.Stirling)),
+                            //    new NavigationEntry("Keycloak Admin", Icons.Material.Outlined.Login, config.ServerConfiguration?.Endpoints?.Keycloak, "_blank").WithRoles(CoreRoleConstants.AdministratorRole).WithCondition(!string.IsNullOrEmpty(config.ServerConfiguration?.Endpoints?.Keycloak)),
                             //}
                         },
                         new NavigationEntry("Localization")
@@ -69,7 +69,7 @@ namespace Coworkee.Client.Models.Navigation
                 {
                     Children = new()
                     {
-                        new NavigationEntry("Chat", Icons.Material.Outlined.Chat, "/chat").WithPolicies(Permissions.Communication.Chat)
+                        new NavigationEntry("Chat", Icons.Material.Outlined.Chat, "/chat").WithPolicies(CorePermissionProvider.Core.Communication.Chat)
                     }
                 },
                 new NavigationEntry("Catalog Management")

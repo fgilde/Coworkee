@@ -1,21 +1,21 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Application.Hubs.Events.Base;
-using Coworkee.Application.Requests;
-using Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Requests;
+using lib.Coworkee.Domain.Entities.Notifications;
 using Hangfire;
 using MediatR;
 using Nextended.Core.Attributes;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Infrastructure.Services
+namespace lib.Coworkee.Infrastructure.Services
 {
     [RegisterAs(typeof(INotificationService))]
     public class ServerNotificationService : INotificationService

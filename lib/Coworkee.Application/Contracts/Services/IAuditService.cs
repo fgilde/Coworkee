@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Enums;
 
-namespace Coworkee.Application.Contracts.Services
+namespace lib.Coworkee.Application.Contracts.Services
 {
     public interface IAuditService
     {

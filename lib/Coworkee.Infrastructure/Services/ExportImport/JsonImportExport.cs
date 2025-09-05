@@ -3,13 +3,13 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Contracts.Services.ExportImport;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Services.ExportImport;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services.ExportImport;
+namespace lib.Coworkee.Infrastructure.Services.ExportImport;
 
 [RegisterAs(typeof(IExportService), RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Scoped)]
 [RegisterAs(typeof(IImportService), RegisterAsImplementation = false, ServiceLifetime = ServiceLifetime.Scoped)]

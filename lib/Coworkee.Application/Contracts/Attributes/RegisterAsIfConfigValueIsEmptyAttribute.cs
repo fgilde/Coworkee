@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Contracts.Attributes;
+namespace lib.Coworkee.Application.Contracts.Attributes;
 
 public class RegisterAsIfConfigValueIsEmptyAttribute: RegisterAsIfConfigValueEqualsAttribute
 {

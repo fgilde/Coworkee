@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 
-namespace Coworkee.Application.Contracts.Repositories
+namespace lib.Coworkee.Application.Contracts.Repositories
 {
     public interface IRepositoryAsync<T, in TId> where T : class, IEntity<TId>
     {

@@ -1,7 +1,7 @@
 using System;
-using Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Application.Contracts.Chat;
 
-namespace Coworkee.Application.Common.Models.Chat
+namespace lib.Coworkee.Application.Common.Models.Chat
 {
     public partial class ChatHistory<TUser> : IChatHistory<TUser> where TUser : IChatUser
     {

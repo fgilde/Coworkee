@@ -1,4 +1,4 @@
-namespace Coworkee.Client.Routes
+namespace lib.Coworkee.Client.Routes
 {
     public static class BaseEndpoints
     {

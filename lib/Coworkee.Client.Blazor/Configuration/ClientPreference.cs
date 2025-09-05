@@ -1,8 +1,8 @@
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Settings;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Settings;
 
-namespace Coworkee.Client.Configuration
+namespace lib.Coworkee.Client.Configuration
 {
     public record ClientPreference : IPreference
     {

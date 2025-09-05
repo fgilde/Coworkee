@@ -1,4 +1,4 @@
-namespace Coworkee.Shared.Constants.Storage
+namespace lib.Coworkee.Shared.Constants.Storage
 {
     public static class StorageConstants
     {

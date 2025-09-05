@@ -1,4 +1,4 @@
-namespace Coworkee.Application.Contracts.Serialization.Serializers
+namespace lib.Coworkee.Application.Contracts.Serialization.Serializers
 {
     public interface IJsonSerializer
     {

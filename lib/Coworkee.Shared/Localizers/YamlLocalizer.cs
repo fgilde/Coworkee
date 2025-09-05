@@ -7,7 +7,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace Coworkee.Shared.Localizers
+namespace lib.Coworkee.Shared.Localizers
 {
 
     public class YamlLocalizer<T> : IStringLocalizer<T>

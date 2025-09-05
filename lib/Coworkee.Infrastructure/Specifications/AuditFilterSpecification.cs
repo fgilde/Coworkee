@@ -1,8 +1,8 @@
 using System.Linq;
-using Coworkee.Infrastructure.Models.Audit;
-using Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Infrastructure.Models.Audit;
+using lib.Coworkee.Application.Specifications.Base;
 
-namespace Coworkee.Infrastructure.Specifications
+namespace lib.Coworkee.Infrastructure.Specifications
 {
     public class AuditFilterSpecification : SpecificationBase<Audit>
     {

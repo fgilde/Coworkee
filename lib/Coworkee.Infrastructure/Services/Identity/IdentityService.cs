@@ -1,7 +1,7 @@
-using Coworkee.Application.Configurations;
-using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Infrastructure.Models.Identity;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,23 +14,23 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Hubs.Events;
-using Coworkee.Domain.Entities.Identity;
-using Coworkee.Infrastructure.Extensions;
-using Coworkee.Application.Validators.Requests.Identity;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Domain.Entities.Identity;
+using lib.Coworkee.Infrastructure.Extensions;
+using lib.Coworkee.Application.Validators.Requests.Identity;
+using lib.Coworkee.Shared.Constants.Role;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Infrastructure.Services.Identity
+namespace lib.Coworkee.Infrastructure.Services.Identity
 {
     [RegisterAs(typeof(ITokenService), 1, RegisterAsImplementation = true, ServiceLifetime = ServiceLifetime.Transient)]
     public class IdentityService : ITokenService
@@ -66,7 +66,7 @@ namespace Coworkee.Infrastructure.Services.Identity
             var allowedEmails = _appConfig.PublicSettings?.LoginSettings?.AllowedEmails;
             var allowedToLogin = allowedEmails == null || allowedEmails.Count == 0 || allowedEmails.Any(pattern => RegisterRequestValidator.MatchesPattern(user.Email, pattern));
             var roles = await _userManager.GetRolesAsync(user);
-            if (!allowedToLogin && roles?.Contains(RoleConstants.AdministratorRole) != true)
+            if (!allowedToLogin && roles?.Contains(CoreRoleConstants.AdministratorRole) != true)
                 return await Result<TokenResponse>.FailAsync(_localizer["Email is not allowed."]);
 
             user.RefreshToken = GenerateRefreshToken();

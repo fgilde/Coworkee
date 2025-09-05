@@ -10,11 +10,11 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using MudBlazor.Extensions.Helper;
 using MudBlazor.Extensions.Options;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Hubs.Events;
-using Coworkee.Client.Extensions;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Client.Extensions;
 
-namespace Coworkee.Client.Shared.Components;
+namespace lib.Coworkee.Client.Shared.Components;
 
 public partial class UpdateOnChange<TDto> : IAsyncDisposable
     //where TDto: IDtoBase

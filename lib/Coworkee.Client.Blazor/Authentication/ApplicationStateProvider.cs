@@ -5,19 +5,19 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using Coworkee.Client.Configuration;
-using Coworkee.Client.Extensions;
-using Coworkee.Shared;
-using Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Client.Configuration;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Shared;
+using lib.Coworkee.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Coworkee.Client.Authentication
+namespace lib.Coworkee.Client.Authentication
 {
     public class ApplicationStateProvider : AuthenticationStateProvider, ICurrentUserService
     {

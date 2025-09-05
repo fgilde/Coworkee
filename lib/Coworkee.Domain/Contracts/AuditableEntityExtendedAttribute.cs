@@ -1,8 +1,8 @@
 #nullable enable
 using System;
-using Coworkee.Domain.Enums;
+using lib.Coworkee.Domain.Enums;
 
-namespace Coworkee.Domain.Contracts
+namespace lib.Coworkee.Domain.Contracts
 {
     public abstract class AuditableEntityExtendedAttribute<TId, TEntityId, TEntity>
         : AuditableEntity<TId>, IEntityAuditableExtendedAttribute<TId, TEntityId, TEntity>

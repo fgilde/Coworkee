@@ -3,7 +3,7 @@
 /// --- ServerConfiguration ---
 /// </summary>
 
-namespace Coworkee.Application.Configurations
+namespace lib.Coworkee.Application.Configurations
 {
 	public partial class ServerConfiguration
 	{

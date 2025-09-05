@@ -1,8 +1,8 @@
-using Coworkee.Core;
+using lib.Coworkee.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Coworkee.Client.Blazor
+namespace lib.Coworkee.Client.Blazor
 {
     /// <summary>
     /// Module entrance for Coworkee Client Blazor library.

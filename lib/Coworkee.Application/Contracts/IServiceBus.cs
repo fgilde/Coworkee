@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Coworkee.Application.Contracts
+namespace lib.Coworkee.Application.Contracts
 {
     public interface IServiceBus
     {

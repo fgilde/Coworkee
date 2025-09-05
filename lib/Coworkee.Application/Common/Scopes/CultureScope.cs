@@ -5,7 +5,7 @@ using System.Threading;
 using AKSoftware.Localization.MultiLanguages;
 using Nextended.Core;
 
-namespace Coworkee.Application.Common.Scopes;
+namespace lib.Coworkee.Application.Common.Scopes;
 
 public class CultureScope : IDisposable
 {

@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Application.Common.Behaviours
+namespace lib.Coworkee.Application.Common.Behaviours
 {
     [RegisterAs(typeof(IPipelineBehavior<,>), ServiceLifetime = ServiceLifetime.Transient)]
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Nextended.Core.Extensions;
 
-namespace Coworkee.Application.Common.Models
+namespace lib.Coworkee.Application.Common.Models
 {
     public abstract class HashableDtoBase : IDtoBase<int>, IEquatable<HashableDtoBase>
     {

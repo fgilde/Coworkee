@@ -1,13 +1,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Attributes;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Nextended.Core.Attributes;
 
-namespace Coworkee.Application.Common.Behaviours
+namespace lib.Coworkee.Application.Common.Behaviours
 {
     [ProtectUnused(typeof(UnhandledExceptionBehaviour<,>))]
     [RegisterAs(typeof(IPipelineBehavior<,>), ServiceLifetime = ServiceLifetime.Transient)]

@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Coworkee.Application.Contracts.Enums;
+namespace lib.Coworkee.Application.Contracts.Enums;
 
 public enum ExportServiceType
 {

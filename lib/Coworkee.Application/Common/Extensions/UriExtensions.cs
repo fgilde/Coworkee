@@ -1,6 +1,6 @@
 using System;
 
-namespace Coworkee.Application.Common.Extensions;
+namespace lib.Coworkee.Application.Common.Extensions;
 
 public static class UriExtensions
 {

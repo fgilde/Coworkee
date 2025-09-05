@@ -3,19 +3,19 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Features.Base.Commands;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Features.Base.Commands;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Features.Documents.Commands.AddEdit;
+namespace lib.Coworkee.Application.Features.Documents.Commands.AddEdit;
 
-[CustomAuthorize(Policies = new[] { Permissions.Documents.Create, Permissions.Documents.Edit }, PolicyMatch = PolicyMatch.Any)]
+[CustomAuthorize(Policies = new[] { CorePermissionProvider.Core.Documents.Create, CorePermissionProvider.Core.Documents.Edit }, PolicyMatch = PolicyMatch.Any)]
 public class AddEditDocumentsCommand : AddEditCommandBase<DocumentDto>
 {
     public AddEditDocumentsCommand(params DocumentDto[] items) : base(items)
@@ -26,8 +26,8 @@ internal class AddEditDocumentsCommandHandler : AddEditCommandHandlerBase<AddEdi
 {
     private readonly IUploadService _uploadService;
     private readonly IStringLocalizer<AddEditDocumentsCommandHandler> _localizer;
-    protected override string EditPermission => Permissions.Documents.Edit;
-    protected override string CreatePermission => Permissions.Documents.Create;
+    protected override string EditPermission => CorePermissionProvider.Core.Documents.Edit;
+    protected override string CreatePermission => CorePermissionProvider.Core.Documents.Create;
 
     public AddEditDocumentsCommandHandler(
         IUnitOfWork<int> unitOfWork,

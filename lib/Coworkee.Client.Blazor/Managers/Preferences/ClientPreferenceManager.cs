@@ -6,20 +6,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AKSoftware.Localization.MultiLanguages;
 using Blazored.LocalStorage;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Client.Configuration;
-using Coworkee.Client.Extensions;
-using Coworkee.Client.Managers.Theme;
-using Coworkee.Client.Theming;
-using Coworkee.Shared.Constants.Storage;
-using Coworkee.Shared.Managers;
-using Coworkee.Shared.Settings;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Client.Configuration;
+using lib.Coworkee.Client.Extensions;
+using lib.Coworkee.Client.Managers.Theme;
+using lib.Coworkee.Client.Theming;
+using lib.Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Managers;
+using lib.Coworkee.Shared.Settings;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
 using MudBlazor.Extensions.Helper;
 using Nextended.Core;
 
-namespace Coworkee.Client.Managers.Preferences
+namespace lib.Coworkee.Client.Managers.Preferences
 {
     public class ClientPreferenceManager : IClientPreferenceManager
     {

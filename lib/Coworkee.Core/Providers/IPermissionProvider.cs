@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Coworkee.Core.Providers
+namespace lib.Coworkee.Core.Providers
 {
     /// <summary>
     /// Interface for providing permission constants in a modular way.

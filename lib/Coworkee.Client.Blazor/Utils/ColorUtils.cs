@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Linq;
 
-namespace Coworkee.Client.Utils
+namespace lib.Coworkee.Client.Utils
 {
     public static class ColorUtils
     {

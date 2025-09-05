@@ -2,15 +2,15 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Contracts;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
-namespace Coworkee.Application.Features.ExtendedAttributes.Commands.Delete
+namespace lib.Coworkee.Application.Features.ExtendedAttributes.Commands.Delete
 {
     internal class DeleteExtendedAttributeCommandLocalization
     {

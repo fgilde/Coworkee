@@ -26,6 +26,8 @@
     </PackageReference>
     <PackageReference Include="MailKit" Version="4.11.0" />
     <PackageReference Include="MimeKit" Version="4.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
   </ItemGroup>
   
   <ItemGroup>

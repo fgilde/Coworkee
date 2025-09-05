@@ -51,7 +51,7 @@ namespace lib.Coworkee.Shared.Constants.Localization
             return GetEmbeddedResourceNames().Any(n => n.Contains($".{code}."));
         }
 
-        internal static string[] GetEmbeddedResourceNames()
+        public static string[] GetEmbeddedResourceNames()
         {
             resourceNames ??= typeof(LocalizationConstants).Assembly.GetManifestResourceNames();
             return resourceNames;

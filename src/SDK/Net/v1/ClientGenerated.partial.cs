@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using Coworkee.SDK;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Nextended.Core.Extensions;
 
 namespace SDK

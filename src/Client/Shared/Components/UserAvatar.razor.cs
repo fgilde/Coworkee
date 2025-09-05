@@ -1,14 +1,14 @@
 ﻿using System.Linq;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Hubs.Events;
 using Coworkee.Client.Extensions;
 using Coworkee.Client.Utils;
-using Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Extensions;
 using MudBlazor.Extensions.Helper;
 using System;
 

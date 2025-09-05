@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Security.Claims;
-using Coworkee.Application.Common.Security;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
 
 namespace Coworkee.Application.Common.Extensions
 {

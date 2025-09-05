@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Coworkee.Server.Managers.Preferences;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

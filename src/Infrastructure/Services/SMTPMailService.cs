@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Requests.Mail;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Requests.Mail;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;

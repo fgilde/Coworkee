@@ -1,12 +1,12 @@
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 using Coworkee.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Exceptions;
-using Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Contracts.Repositories;
 
 namespace Coworkee.Infrastructure.Repositories;
 

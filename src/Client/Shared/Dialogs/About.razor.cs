@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 

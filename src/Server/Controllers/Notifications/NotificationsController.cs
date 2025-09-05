@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Features.Notifications.Commands.AddEdit;
-using Coworkee.Application.Features.Notifications.Commands.Delete;
-using Coworkee.Application.Features.Notifications.Commands.MarkAll;
-using Coworkee.Application.Features.Notifications.Queries;
-using Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
-using Coworkee.Application.Features.Notifications.Queries.GetById;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Features.Notifications.Commands.AddEdit;
+using lib.Coworkee.Application.Features.Notifications.Commands.Delete;
+using lib.Coworkee.Application.Features.Notifications.Commands.MarkAll;
+using lib.Coworkee.Application.Features.Notifications.Queries;
+using lib.Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
+using lib.Coworkee.Application.Features.Notifications.Queries.GetById;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

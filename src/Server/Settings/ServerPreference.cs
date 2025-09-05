@@ -1,6 +1,6 @@
 using System.Linq;
-using Coworkee.Shared.Constants.Localization;
-using Coworkee.Shared.Settings;
+using lib.Coworkee.Shared.Constants.Localization;
+using lib.Coworkee.Shared.Settings;
 
 namespace Coworkee.Server.Settings
 {

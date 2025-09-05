@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Application.Contracts.Hubs;
-using Coworkee.Application.Hubs;
+using lib.Coworkee.Application.Contracts.Hubs;
+using lib.Coworkee.Application.Hubs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Configurations;
 using Coworkee.Shared;
 
 namespace Coworkee.Server.Controllers

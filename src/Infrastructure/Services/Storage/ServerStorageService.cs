@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Serialization.Serializers;
-using Coworkee.Application.Contracts.Services.Storage;
-using Coworkee.Application.Contracts.Services.Storage.Provider;
+using lib.Coworkee.Application.Contracts.Serialization.Serializers;
+using lib.Coworkee.Application.Contracts.Services.Storage;
+using lib.Coworkee.Application.Contracts.Services.Storage.Provider;
 
 namespace Coworkee.Infrastructure.Services.Storage
 {

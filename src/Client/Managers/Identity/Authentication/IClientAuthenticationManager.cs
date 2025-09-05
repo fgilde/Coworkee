@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Client.Managers.Identity.Authentication
 {

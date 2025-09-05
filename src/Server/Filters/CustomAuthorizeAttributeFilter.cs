@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 

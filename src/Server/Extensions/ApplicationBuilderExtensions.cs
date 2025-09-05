@@ -1,17 +1,17 @@
 using System;
 using System.IO;
 using System.Linq;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Hubs;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Hubs;
 using Coworkee.Data;
 using Coworkee.Server.Middlewares;
-using Coworkee.Shared.Constants.Localization;
+using lib.Coworkee.Shared.Constants.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 
 namespace Coworkee.Server.Extensions

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 using Coworkee.Client.Theming;
-using Coworkee.Shared.Managers;
+using lib.Coworkee.Shared.Managers;
 
 namespace Coworkee.Client.Managers.Preferences
 {

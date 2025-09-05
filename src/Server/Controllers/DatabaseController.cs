@@ -5,12 +5,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Server.Controllers;
 

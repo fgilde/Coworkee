@@ -1,7 +1,7 @@
 ﻿using Coworkee.AppHost.GeneralExtensions;
-using Coworkee.Application.Configurations;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Models;
 
 namespace Coworkee.AppHost.ApplicationServiceHelper;
 

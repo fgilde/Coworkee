@@ -1,5 +1,5 @@
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Domain.Entities.Misc;
 
 namespace Coworkee.Application.Specifications.Misc
 {

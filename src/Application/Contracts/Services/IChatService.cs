@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Chat;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Application.Contracts.Services
 {

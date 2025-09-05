@@ -4,10 +4,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Requests.Mail;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Requests.Mail;
 
 namespace Coworkee.Infrastructure.Services
 {

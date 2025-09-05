@@ -1,9 +1,9 @@
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Coworkee.Client.Extensions;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Client.Pages.Identity
 {

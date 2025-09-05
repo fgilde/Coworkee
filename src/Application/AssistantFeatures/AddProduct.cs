@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using MediatR;
-using Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Repositories;
 using Coworkee.Domain.Entities.Catalog;
 using Coworkee.Application.Features.Products.Commands.AddEdit;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using Nextended.Core.Extensions;
 using Coworkee.Application.Features.Brands.Commands.AddEdit;
 

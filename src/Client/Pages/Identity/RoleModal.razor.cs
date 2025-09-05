@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Hubs;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Hubs;
+using lib.Coworkee.Shared.Constants.Role;
 
 namespace Coworkee.Client.Pages.Identity
 {

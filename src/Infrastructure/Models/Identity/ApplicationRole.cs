@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 
 namespace Coworkee.Infrastructure.Models.Identity

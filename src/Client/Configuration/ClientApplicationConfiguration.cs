@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Configuration;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Configurations;
 
 namespace Coworkee.Client.Configuration
 {

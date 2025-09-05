@@ -1,5 +1,5 @@
 using System.Globalization;
-using Coworkee.Shared.Constants.Localization;
+using lib.Coworkee.Shared.Constants.Localization;
 
 namespace Coworkee.Application.Common.Models;
 

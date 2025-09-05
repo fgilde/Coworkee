@@ -1,5 +1,5 @@
 using System;
-using Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nextended.Core.Extensions;

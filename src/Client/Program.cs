@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Coworkee.Client.Configuration;
 using Coworkee.Client.Managers.Preferences;
 using Coworkee.SDK;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Constants;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants;
 using Nextended.Core.Helper;
 using Microsoft.JSInterop;
 

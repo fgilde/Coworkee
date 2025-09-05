@@ -1,5 +1,5 @@
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Requests;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Requests;
 using Nextended.Core.Helper;
 using Nextended.Core.Types;
 

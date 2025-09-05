@@ -1,5 +1,5 @@
 using Coworkee.Server.Extensions;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Http;
 

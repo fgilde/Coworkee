@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Common;
+using lib.Coworkee.Application.Contracts.Common;
 
 namespace Coworkee.Application.Contracts.Services;
 

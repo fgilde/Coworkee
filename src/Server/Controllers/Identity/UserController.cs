@@ -2,22 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Nextended.Core.Extensions;
 using Coworkee.Application;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Server.Extensions;
 using Coworkee.Server.Middlewares;
 using Coworkee.Shared;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Server.Controllers.Identity
 {

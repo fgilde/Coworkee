@@ -1,7 +1,7 @@
-using Coworkee.Domain.Entities.Catalog;
+using lib.Coworkee.Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Repositories;
 
 namespace Coworkee.Infrastructure.Repositories
 {

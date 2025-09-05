@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Coworkee.Server.Middlewares;

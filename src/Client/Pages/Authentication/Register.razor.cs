@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components.Web;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Client.Pages.Authentication
 {

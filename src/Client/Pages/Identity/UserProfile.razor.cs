@@ -1,9 +1,9 @@
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Hubs;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Hubs;
 using Coworkee.Client.Extensions;
 using Coworkee.Client.Shared.Dialogs;
 using Microsoft.AspNetCore.SignalR.Client;

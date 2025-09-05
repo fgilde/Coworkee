@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Client.ErrorHandling
 {

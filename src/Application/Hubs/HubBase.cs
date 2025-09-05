@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts;
-using Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Contracts;
+using lib.Coworkee.Application.Contracts.Services.Identity;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Coworkee.Application.Hubs

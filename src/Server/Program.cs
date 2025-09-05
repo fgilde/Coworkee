@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Localization;
 using System.Linq;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Server
 {

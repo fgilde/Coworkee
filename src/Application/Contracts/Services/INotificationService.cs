@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Requests;
-using Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Application.Requests;
+using lib.Coworkee.Domain.Entities.Notifications;
 
 namespace Coworkee.Application.Contracts.Services;
 

@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Account;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Account;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

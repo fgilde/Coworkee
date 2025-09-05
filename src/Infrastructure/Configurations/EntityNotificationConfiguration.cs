@@ -1,4 +1,4 @@
-using Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Domain.Entities.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

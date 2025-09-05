@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Coworkee.Client.Configuration;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
 using MudBlazor;
 using Nextended.Core.Extensions;
 

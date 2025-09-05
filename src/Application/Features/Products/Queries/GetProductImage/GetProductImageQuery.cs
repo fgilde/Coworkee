@@ -1,13 +1,13 @@
 using Coworkee.Domain.Entities.Catalog;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Shared.Constants.Permission;
 
 namespace Coworkee.Application.Features.Products.Queries.GetProductImage
 {

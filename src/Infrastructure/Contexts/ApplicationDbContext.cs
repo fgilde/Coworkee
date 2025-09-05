@@ -1,18 +1,18 @@
 using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Domain.Contracts;
-using Coworkee.Domain.Entities.Catalog;
+using lib.Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Domain.Entities.ExtendedAttributes;
-using Coworkee.Domain.Entities.Identity;
-using Coworkee.Domain.Entities.Localization;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Domain.Entities.ExtendedAttributes;
+using lib.Coworkee.Domain.Entities.Identity;
+using lib.Coworkee.Domain.Entities.Localization;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Domain.Entities.Notifications;
 
 namespace Coworkee.Infrastructure.Contexts
 {

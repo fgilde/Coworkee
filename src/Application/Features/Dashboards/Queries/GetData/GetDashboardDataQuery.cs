@@ -1,17 +1,17 @@
 using Coworkee.Domain.Entities.Catalog;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services.Identity;
-using Coworkee.Domain.Entities.ExtendedAttributes;
-using Coworkee.Domain.Entities.Misc;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Domain.Entities.ExtendedAttributes;
+using lib.Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
 namespace Coworkee.Application.Features.Dashboards.Queries.GetData

@@ -1,5 +1,5 @@
 using System;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services;
 
 namespace Coworkee.Application.Contracts
 {

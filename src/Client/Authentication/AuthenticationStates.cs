@@ -1,6 +1,6 @@
 using System;
 using System.Security.Claims;
-using Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Extensions;
 using Coworkee.Client.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 

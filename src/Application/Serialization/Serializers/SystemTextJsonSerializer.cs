@@ -1,6 +1,6 @@
 using System.Text.Json;
-using Coworkee.Application.Contracts.Serialization.Serializers;
-using Coworkee.Application.Serialization.Options;
+using lib.Coworkee.Application.Contracts.Serialization.Serializers;
+using lib.Coworkee.Application.Serialization.Options;
 using Microsoft.Extensions.Options;
 
 namespace Coworkee.Application.Serialization.Serializers

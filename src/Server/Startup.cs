@@ -9,14 +9,14 @@ using Coworkee.Application;
 using Coworkee.Infrastructure;
 using Coworkee.Server.Filters;
 using Coworkee.Server.Managers.Preferences;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Localization;
 using Coworkee.Shared;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Configurations;
 using Hangfire.PostgreSql;
-using Coworkee.Shared.Helper;
+using lib.Coworkee.Shared.Helper;
 using Hangfire.SqlServer;
 
 namespace Coworkee.Server

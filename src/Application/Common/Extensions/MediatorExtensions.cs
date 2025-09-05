@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Hubs;
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Hubs;
+using lib.Coworkee.Application.Hubs.Events.Base;
 using MediatR;
 
 namespace Coworkee.Application.Common.Extensions

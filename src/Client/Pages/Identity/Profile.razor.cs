@@ -1,4 +1,4 @@
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.JSInterop;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Enums;
 using Coworkee.Client.Extensions;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Storage;
 using MudBlazor.Extensions;
 using MudBlazor.Extensions.Options;
 

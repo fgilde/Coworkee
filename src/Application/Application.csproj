@@ -24,6 +24,7 @@
 
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\lib\Coworkee.Application\Coworkee.Application.csproj" />
     <ProjectReference Include="..\..\lib\Coworkee.Domain\Coworkee.Domain.csproj" />
     <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />

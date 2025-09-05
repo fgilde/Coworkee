@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Configurations;
 using Coworkee.Server.Extensions;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;

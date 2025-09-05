@@ -4,12 +4,12 @@ using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Enums;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Services;
 using Coworkee.Server.Filters;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
 using HeyRed.Mime;
 using Nextended.Core;
 

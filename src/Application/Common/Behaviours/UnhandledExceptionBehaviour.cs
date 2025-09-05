@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Attributes;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

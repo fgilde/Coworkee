@@ -1,5 +1,5 @@
 using System;
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coworkee.Server.Filters

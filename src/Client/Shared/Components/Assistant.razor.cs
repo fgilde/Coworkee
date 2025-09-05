@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 using System;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using Coworkee.Client.JsInterop;
 using Coworkee.Client.Models;
 using Microsoft.JSInterop;

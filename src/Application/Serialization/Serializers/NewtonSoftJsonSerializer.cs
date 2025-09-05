@@ -1,5 +1,5 @@
-using Coworkee.Application.Contracts.Serialization.Serializers;
-using Coworkee.Application.Serialization.Settings;
+using lib.Coworkee.Application.Contracts.Serialization.Serializers;
+using lib.Coworkee.Application.Serialization.Settings;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 

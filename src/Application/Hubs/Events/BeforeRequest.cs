@@ -1,4 +1,4 @@
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Hubs.Events.Base;
 
 namespace Coworkee.Application.Hubs.Events
 {

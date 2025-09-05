@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.Delete;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
-using Coworkee.Application.Features.ExtendedAttributes.Queries.GetById;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.Delete;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.Export;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Queries.GetById;
+using lib.Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base

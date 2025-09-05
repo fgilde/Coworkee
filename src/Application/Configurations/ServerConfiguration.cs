@@ -1,5 +1,5 @@
 
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Coworkee.Application.Configurations

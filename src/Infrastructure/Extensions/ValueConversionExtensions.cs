@@ -1,4 +1,4 @@
-using Coworkee.Application.Contracts.Serialization.Serializers;
+using lib.Coworkee.Application.Contracts.Serialization.Serializers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

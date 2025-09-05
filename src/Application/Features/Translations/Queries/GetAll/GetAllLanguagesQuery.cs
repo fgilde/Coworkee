@@ -1,7 +1,7 @@
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Domain.Entities.Localization;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Domain.Entities.Localization;
 using LazyCache;
 
 namespace Coworkee.Application.Features.Translations.Queries.GetAll

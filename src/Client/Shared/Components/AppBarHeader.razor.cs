@@ -1,6 +1,6 @@
 using Coworkee.Client.Enums;
 using Coworkee.Client.JsInterop;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;

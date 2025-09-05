@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Exceptions;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Account;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Account;
+using lib.Coworkee.Shared.Constants.Role;
 using Nextended.Core.Attributes;
 
 namespace Coworkee.Infrastructure.Services.Identity

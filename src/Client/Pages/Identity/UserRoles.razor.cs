@@ -1,14 +1,14 @@
 using System;
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Hubs;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Hubs;
 using Coworkee.Client.Extensions;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
 

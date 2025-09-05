@@ -1,10 +1,10 @@
 using System;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Features.Base.Import;
-using Coworkee.Application.Features.Translations.Commands.AddEdit;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Features.Base.Import;
+using lib.Coworkee.Application.Features.Translations.Commands.AddEdit;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.Extensions.Localization;
 
 namespace Coworkee.Application.Features.Translations.Import

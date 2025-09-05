@@ -1,5 +1,5 @@
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Domain.Entities.Catalog;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Domain.Entities.Catalog;
 
 namespace Coworkee.Infrastructure.Repositories
 {

@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Client.Extensions
 {

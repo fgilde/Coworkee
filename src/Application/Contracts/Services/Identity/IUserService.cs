@@ -3,12 +3,12 @@ using System.Globalization;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Common;
-using Coworkee.Application.Hubs.Events.Base;
-using Coworkee.Application.Requests.Identity;
-using Coworkee.Shared.Models;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Common;
+using lib.Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 
 namespace Coworkee.Application.Contracts.Services.Identity;

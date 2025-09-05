@@ -1,13 +1,13 @@
 using System;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
 using MediatR;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Application.Specifications.Translations;
-using Coworkee.Domain.Entities.Localization;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Application.Specifications.Translations;
+using lib.Coworkee.Domain.Entities.Localization;
+using lib.Coworkee.Shared.Constants.Permission;
 
 namespace Coworkee.Application.Features.Translations.Queries.GetAllPaged
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Common.Exceptions;
 using Coworkee.Server.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;

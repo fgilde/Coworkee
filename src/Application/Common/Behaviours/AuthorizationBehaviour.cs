@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;

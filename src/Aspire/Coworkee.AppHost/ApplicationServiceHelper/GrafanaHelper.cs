@@ -1,5 +1,5 @@
 ﻿using Coworkee.AppHost.OpenTelemetryCollector;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Models;
 using C = Coworkee.Shared.Constants.Application.ApplicationConstants;
 
 namespace Coworkee.AppHost.ApplicationServiceHelper;

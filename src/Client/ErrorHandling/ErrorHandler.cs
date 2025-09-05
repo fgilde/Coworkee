@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Coworkee.Client.Extensions;
 using Coworkee.Client.Utils;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;

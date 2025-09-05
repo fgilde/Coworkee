@@ -1,5 +1,5 @@
 ﻿using Aspire.Hosting.Azure;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Hosting;
 
 namespace Coworkee.AppHost.ApplicationServiceHelper;

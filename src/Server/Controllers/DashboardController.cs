@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Features.Dashboards.Queries.GetData;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Features.Dashboards.Queries.GetData;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

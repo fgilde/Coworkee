@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Coworkee.Client.Configuration;
-using Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Constants.Storage;
 
 namespace Coworkee.Client.Handler
 {

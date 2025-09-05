@@ -1,8 +1,8 @@
 using System;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Hubs.Events.Base;
-using Coworkee.Application.Requests.Mail;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Requests.Mail;
 using Nextended.Core.Extensions;
 
 namespace Coworkee.Application.Requests;

@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using Coworkee.SDK;
 using Microsoft.Extensions.Localization;
 

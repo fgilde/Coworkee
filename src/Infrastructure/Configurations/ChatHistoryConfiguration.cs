@@ -1,4 +1,4 @@
-using Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Common.Models.Chat;
 using Coworkee.Infrastructure.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

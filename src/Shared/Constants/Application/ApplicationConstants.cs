@@ -1,11 +1,43 @@
 using System;
 using System.Linq;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Constants.Role;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Shared.Models;
 
 namespace Coworkee.Shared.Constants.Application
 {
+    /// <summary>
+    /// Business-specific permissions for the application.
+    /// Core permissions are provided by lib.Coworkee.Shared.Constants.Permission.CorePermissionProvider
+    /// </summary>
+    public static class BusinessPermissions
+    {
+        public static class Products
+        {
+            public const string View = "Permissions.Products.View";
+            public const string Create = "Permissions.Products.Create";
+            public const string Edit = "Permissions.Products.Edit";
+            public const string Delete = "Permissions.Products.Delete";
+            public const string Export = "Permissions.Products.Export";
+            public const string Search = "Permissions.Products.Search";
+        }
+
+        public static class Brands
+        {
+            public const string View = "Permissions.Brands.View";
+            public const string Create = "Permissions.Brands.Create";
+            public const string Edit = "Permissions.Brands.Edit";
+            public const string Delete = "Permissions.Brands.Delete";
+            public const string Export = "Permissions.Brands.Export";
+            public const string Search = "Permissions.Brands.Search";
+        }
+
+        public static class Dashboards
+        {
+            public const string View = "Permissions.Dashboards.View";
+        }
+    }
+
     public static class ApplicationConstants
     {
        // public const string LargeLanguageModel = "deepseek-r1:32b";
@@ -52,15 +84,15 @@ namespace Coworkee.Shared.Constants.Application
 
             public static class Users
             {
-                public static CreateUser System => new(nameof(System), nameof(System), ApplicationName, $"{nameof(System)}@{ApplicationName}", "SystemUserPassw0rd4SystemUserAccess73F1985F3C1A4158B4BA70F7B65778BF", true, RoleConstants.AdministratorRole);
+                public static CreateUser System => new(nameof(System), nameof(System), ApplicationName, $"{nameof(System)}@{ApplicationName}", "SystemUserPassw0rd4SystemUserAccess73F1985F3C1A4158B4BA70F7B65778BF", true, CoreRoleConstants.AdministratorRole);
                 public static CreateUser[] Administrators => new[]
                 {
-                    new CreateUser("admin", "Administrator", "", "info@coworkee.de","123Pa$$word!", true, RoleConstants.AdministratorRole),
-                    new CreateUser("fgilde", "Florian", "Gilde", "fgilde@gmail.com","123Pa$$word!", true, RoleConstants.AdministratorRole)
+                    new CreateUser("admin", "Administrator", "", "info@coworkee.de","123Pa$$word!", true, CoreRoleConstants.AdministratorRole),
+                    new CreateUser("fgilde", "Florian", "Gilde", "fgilde@gmail.com","123Pa$$word!", true, CoreRoleConstants.AdministratorRole)
                 };
                 public static CreateUser[] Basic => new[]
                 {
-                    new CreateUser("johndoe", "John", "Doe", "john@coworkee.de","123Pa$$word!", false, RoleConstants.BasicRole)
+                    new CreateUser("johndoe", "John", "Doe", "john@coworkee.de","123Pa$$word!", false, CoreRoleConstants.BasicRole)
                 };
             }
 
@@ -68,30 +100,30 @@ namespace Coworkee.Shared.Constants.Application
             {
                 ("Product Manager", true, new []
                 {
-                    Permissions.Dashboards.View,
-                    Permissions.Communication.Chat,
-                    Permissions.Documents.View,
-                    Permissions.Documents.Create,
-                    Permissions.Documents.Edit,
-                    Permissions.Documents.Delete,
-                    Permissions.Products.Create,
-                    Permissions.Products.Edit,
-                    Permissions.Products.Delete,
-                    Permissions.Products.View,
-                    Permissions.Brands.View               
+                    BusinessPermissions.Dashboards.View,
+                    CorePermissionProvider.Core.Communication.Chat,
+                    CorePermissionProvider.Core.Documents.View,
+                    CorePermissionProvider.Core.Documents.Create,
+                    CorePermissionProvider.Core.Documents.Edit,
+                    CorePermissionProvider.Core.Documents.Delete,
+                    BusinessPermissions.Products.Create,
+                    BusinessPermissions.Products.Edit,
+                    BusinessPermissions.Products.Delete,
+                    BusinessPermissions.Products.View,
+                    BusinessPermissions.Brands.View               
                 }),
                 ("Brand Manager", true, new []
                 {
-                    Permissions.Dashboards.View,
-                    Permissions.Communication.Chat,
-                    Permissions.Documents.View,
-                    Permissions.Documents.Create,
-                    Permissions.Documents.Edit,
-                    Permissions.Documents.Delete,
-                    Permissions.Brands.Create,
-                    Permissions.Brands.Edit,
-                    Permissions.Brands.Delete,
-                    Permissions.Brands.View
+                    BusinessPermissions.Dashboards.View,
+                    CorePermissionProvider.Core.Communication.Chat,
+                    CorePermissionProvider.Core.Documents.View,
+                    CorePermissionProvider.Core.Documents.Create,
+                    CorePermissionProvider.Core.Documents.Edit,
+                    CorePermissionProvider.Core.Documents.Delete,
+                    BusinessPermissions.Brands.Create,
+                    BusinessPermissions.Brands.Edit,
+                    BusinessPermissions.Brands.Delete,
+                    BusinessPermissions.Brands.View
                 })
             };
         }

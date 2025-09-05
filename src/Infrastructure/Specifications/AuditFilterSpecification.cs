@@ -1,6 +1,6 @@
 using System.Linq;
 using Coworkee.Infrastructure.Models.Audit;
-using Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Application.Specifications.Base;
 
 namespace Coworkee.Infrastructure.Specifications
 {

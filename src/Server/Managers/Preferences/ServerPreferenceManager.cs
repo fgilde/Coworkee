@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Services.Storage;
+using lib.Coworkee.Application.Contracts.Services.Storage;
 using Coworkee.Server.Settings;
-using Coworkee.Shared.Constants.Storage;
-using Coworkee.Shared.Settings;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Settings;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
 
 namespace Coworkee.Server.Managers.Preferences

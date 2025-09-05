@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Hubs.Events.Base;
 
 namespace Coworkee.Application.Hubs.Events
 {

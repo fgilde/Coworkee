@@ -1,4 +1,4 @@
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using Nextended.Core.Types;
 using System;
 using System.Security.Claims;

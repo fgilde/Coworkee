@@ -1,4 +1,4 @@
-using Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Common.Models.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 

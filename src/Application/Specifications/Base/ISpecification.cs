@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 
 namespace Coworkee.Application.Specifications.Base
 {

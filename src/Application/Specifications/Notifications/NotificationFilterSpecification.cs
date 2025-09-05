@@ -1,6 +1,6 @@
-using Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Application.Features.Notifications.Queries.GetAllPaged;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Domain.Entities.Notifications;
 
 namespace Coworkee.Application.Specifications.Notifications
 {

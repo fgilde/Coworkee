@@ -1,7 +1,7 @@
 using System.Linq;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Application.Validators.Features.ExtendedAttributes.Commands.AddEdit;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;

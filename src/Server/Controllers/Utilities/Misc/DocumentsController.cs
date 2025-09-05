@@ -1,13 +1,13 @@
 using System.Threading;
-using Coworkee.Application.Features.Documents.Commands.AddEdit;
-using Coworkee.Application.Features.Documents.Commands.Delete;
-using Coworkee.Application.Features.Documents.Queries.GetAll;
+using lib.Coworkee.Application.Features.Documents.Commands.AddEdit;
+using lib.Coworkee.Application.Features.Documents.Commands.Delete;
+using lib.Coworkee.Application.Features.Documents.Queries.GetAll;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Features.Documents.Queries.GetById;
-using Coworkee.Shared.Constants.Permission;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Features.Documents.Queries.GetById;
+using lib.Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Nextended.Core;
 

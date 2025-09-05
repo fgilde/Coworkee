@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts;
-using Coworkee.Application.Hubs.Events.Base;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Contracts;
+using lib.Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Shared.Constants.Application;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 

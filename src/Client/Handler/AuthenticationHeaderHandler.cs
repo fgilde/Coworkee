@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Coworkee.Client.Extensions;
-using Coworkee.Shared.Constants.Storage;
+using lib.Coworkee.Shared.Constants.Storage;
 
 namespace Coworkee.Client.Handler
 {

@@ -1,5 +1,5 @@
 using Coworkee.Client.Extensions;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -7,21 +7,21 @@ using System;
 using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Application.Common.Models.Identity;
-using Coworkee.Application.Contracts.Chat;
-using Coworkee.Application.Contracts.Hubs;
-using Coworkee.Application.Hubs;
-using Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Common.Models.Identity;
+using lib.Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Application.Contracts.Hubs;
+using lib.Coworkee.Application.Hubs;
+using lib.Coworkee.Application.Hubs.Events;
 using Coworkee.Client.Authentication;
 using Coworkee.Client.JsInterop;
 using Coworkee.Client.Localization;
 using Coworkee.Client.Shared.Components;
 using Coworkee.Client.Theming;
 using Microsoft.AspNetCore.Components;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using MudBlazor.Extensions.Helper;
 
 namespace Coworkee.Client.Shared

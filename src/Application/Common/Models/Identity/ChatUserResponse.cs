@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Coworkee.Application.Common.Models.Chat;
-using Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Application.Common.Models.Chat;
+using lib.Coworkee.Application.Contracts.Chat;
 
 namespace Coworkee.Application.Common.Models.Identity
 {

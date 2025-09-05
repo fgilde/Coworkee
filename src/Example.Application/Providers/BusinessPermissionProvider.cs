@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Coworkee.Core.Providers;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 
 namespace Example.Application.Providers
 {

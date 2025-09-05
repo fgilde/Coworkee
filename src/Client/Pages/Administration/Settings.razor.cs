@@ -6,7 +6,7 @@ using MudBlazor.Extensions;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
 using Nextended.Core.Extensions;
-using Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Configurations;
 using Coworkee.Client.Configuration;
 using Coworkee.Client.Extensions;
 using Coworkee.Client.JsInterop;

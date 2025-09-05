@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
 using Coworkee.Infrastructure.Contexts;
 
 namespace Coworkee.Infrastructure.Services;

@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Threading;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Domain.Entities.Localization;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Domain.Entities.Localization;
+using lib.Coworkee.Shared.Constants.Application;
 using LazyCache;
 
 namespace Coworkee.Application.Features.Translations.Queries.GetAll

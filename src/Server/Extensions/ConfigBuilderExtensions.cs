@@ -1,4 +1,4 @@
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.Extensions.Configuration;
 
 namespace Coworkee.Server.Extensions

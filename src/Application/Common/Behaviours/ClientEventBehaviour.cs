@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Hubs.Events;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;

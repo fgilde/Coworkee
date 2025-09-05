@@ -1,11 +1,11 @@
 using System.Linq;
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Shared.Constants.Permission;
 using System.Text.RegularExpressions;
 
 namespace Coworkee.Application.Validators.Requests.Identity

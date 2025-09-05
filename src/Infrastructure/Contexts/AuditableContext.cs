@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Enums;
+using lib.Coworkee.Application.Contracts.Enums;
 
 namespace Coworkee.Infrastructure.Contexts
 {

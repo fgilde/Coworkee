@@ -1,4 +1,4 @@
-using Coworkee.Application.Requests;
+using lib.Coworkee.Application.Requests;
 
 namespace Coworkee.Application.Common.Models
 {

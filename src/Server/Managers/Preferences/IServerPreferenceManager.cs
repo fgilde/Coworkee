@@ -1,4 +1,4 @@
-using Coworkee.Shared.Managers;
+using lib.Coworkee.Shared.Managers;
 
 namespace Coworkee.Server.Managers.Preferences
 {

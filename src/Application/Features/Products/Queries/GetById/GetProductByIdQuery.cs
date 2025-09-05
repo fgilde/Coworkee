@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Features.Base.Queries;
-using Coworkee.Application.Requests;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Features.Base.Queries;
+using lib.Coworkee.Application.Requests;
 using Coworkee.Domain.Entities.Catalog;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Nextended.Core;
 
 namespace Coworkee.Application.Features.Products.Queries.GetById

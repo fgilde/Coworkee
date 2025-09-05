@@ -8,7 +8,7 @@ using GptInvoke.Contracts;
 using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using System.Collections.Generic;
 using OllamaSharp;
 

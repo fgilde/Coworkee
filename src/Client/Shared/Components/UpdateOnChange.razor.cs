@@ -10,8 +10,8 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using MudBlazor.Extensions.Helper;
 using MudBlazor.Extensions.Options;
-using Coworkee.Application.Common.Extensions;
-using Coworkee.Application.Hubs.Events;
+using lib.Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Hubs.Events;
 using Coworkee.Client.Extensions;
 
 namespace Coworkee.Client.Shared.Components;

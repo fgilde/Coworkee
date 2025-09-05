@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Features.Dashboards.Queries.GetData;
+using lib.Coworkee.Application.Features.Dashboards.Queries.GetData;
 using Coworkee.Infrastructure.Contexts;
 using Grpc.Core;
 using MediatR;

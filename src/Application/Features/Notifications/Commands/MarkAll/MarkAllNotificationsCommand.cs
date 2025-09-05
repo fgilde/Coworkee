@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Domain.Entities.Notifications;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

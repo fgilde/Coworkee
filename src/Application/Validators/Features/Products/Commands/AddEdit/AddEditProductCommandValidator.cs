@@ -1,6 +1,6 @@
 using System.Linq;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Features.Products.Commands.AddEdit;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Features.Products.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 

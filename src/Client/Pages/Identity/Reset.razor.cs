@@ -1,4 +1,4 @@
-using Coworkee.Application.Requests.Identity;
+using lib.Coworkee.Application.Requests.Identity;
 using MudBlazor;
 using System.Text;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using Blazored.FluentValidation;
 using Coworkee.Client.Extensions;
 using System;
 using System.Linq;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.Client.Pages.Identity
 {

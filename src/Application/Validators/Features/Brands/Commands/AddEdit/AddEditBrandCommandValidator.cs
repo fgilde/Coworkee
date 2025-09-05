@@ -1,5 +1,5 @@
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Features.Brands.Commands.AddEdit;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Features.Brands.Commands.AddEdit;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 

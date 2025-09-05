@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Coworkee.Client.ErrorHandling;
 using Coworkee.SDK;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using SDK;
 
 namespace Coworkee.Client.Extensions

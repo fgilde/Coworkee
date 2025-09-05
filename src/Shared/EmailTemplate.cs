@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using Coworkee.Shared.Constants.Localization;
+using lib.Coworkee.Shared.Constants.Localization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -51,7 +51,7 @@ public partial class EmailTemplate
                 if (culture != null) usedCulture = new CultureInfo(culture.Replace("_", "-"));
                 return BuildResourceName(assemblyName, culture, templateName);
             })
-            .FirstOrDefault(name => LocalizationConstants.GetEmbeddedResourceNames().Contains(name));
+            .FirstOrDefault(name => lib.Coworkee.Shared.Constants.Localization.LocalizationConstants.GetEmbeddedResourceNames().Contains(name));
 
         if (resourceName != null)
             return new EmailTemplate(templateName, ReadResource(assembly, resourceName), usedCulture ?? CultureInfo.CurrentCulture);
@@ -64,7 +64,7 @@ public partial class EmailTemplate
     private static string BuildResourceName(string assemblyName, string cultureName, string templateName) =>
         cultureName switch
         {
-            null => LocalizationConstants.GetEmbeddedResourceNames().FirstOrDefault(r => r.EndsWith(templateName)),
+            null => lib.Coworkee.Shared.Constants.Localization.LocalizationConstants.GetEmbeddedResourceNames().FirstOrDefault(r => r.EndsWith(templateName)),
             _ => $"{assemblyName}.Resources.Emails.{cultureName}.{templateName}"
         };
 

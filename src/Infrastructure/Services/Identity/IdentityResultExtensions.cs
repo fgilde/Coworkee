@@ -1,5 +1,5 @@
 using System.Linq;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 using Microsoft.AspNetCore.Identity;
 
 namespace Coworkee.Infrastructure.Services.Identity

@@ -4,13 +4,13 @@ using System.Linq;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Features.Base.Commands;
-using Coworkee.Domain.Entities.Notifications;
-using Coworkee.Shared.Constants.Role;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Features.Base.Commands;
+using lib.Coworkee.Domain.Entities.Notifications;
+using lib.Coworkee.Shared.Constants.Role;
 
 namespace Coworkee.Application.Features.Notifications.Commands.Delete
 {

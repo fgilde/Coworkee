@@ -1,6 +1,6 @@
-using Coworkee.Shared.Settings;
+using lib.Coworkee.Shared.Settings;
 using System.Threading.Tasks;
-using Coworkee.Shared.Wrapper;
+using lib.Coworkee.Shared.Wrapper;
 
 namespace Coworkee.Shared.Managers
 {

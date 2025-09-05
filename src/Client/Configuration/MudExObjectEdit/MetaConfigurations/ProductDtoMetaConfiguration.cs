@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MudBlazor.Extensions.Components.ObjectEdit.Options;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Requests;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Requests;
 using MudBlazor;
 using MudBlazor.Extensions.Components.ObjectEdit;
 using MudBlazor.Extensions.Components;

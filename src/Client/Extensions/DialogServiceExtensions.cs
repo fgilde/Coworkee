@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Models;
 using Coworkee.Client.JsInterop;
 using Coworkee.Client.JsInterop.Models;
 using Coworkee.Client.Shared;

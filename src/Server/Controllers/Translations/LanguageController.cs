@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Features.Translations.Commands.AddEdit;
-using Coworkee.Application.Features.Translations.Queries.GetAll;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Features.Translations.Commands.AddEdit;
+using lib.Coworkee.Application.Features.Translations.Queries.GetAll;
 using Coworkee.Server.Middlewares;
 using Coworkee.Shared;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

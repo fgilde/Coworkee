@@ -1,9 +1,9 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Configurations;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;

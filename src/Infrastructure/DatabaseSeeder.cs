@@ -1,11 +1,11 @@
 using System;
 using Coworkee.Infrastructure.Contexts;
 using System.Linq;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Contracts.Services.Identity;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Services.Identity;
 using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Shared.Constants.Application;
-using Coworkee.Shared.Models;
+using lib.Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;

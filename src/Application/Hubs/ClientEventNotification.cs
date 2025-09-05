@@ -1,5 +1,5 @@
 using System;
-using Coworkee.Application.Hubs.Events.Base;
+using lib.Coworkee.Application.Hubs.Events.Base;
 using MediatR;
 using Nextended.Core.Extensions;
 

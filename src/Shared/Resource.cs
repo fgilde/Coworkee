@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using AKSoftware.Localization.MultiLanguages;
-using Coworkee.Shared.Localizers;
+using lib.Coworkee.Shared.Localizers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 

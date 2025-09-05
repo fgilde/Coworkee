@@ -2,7 +2,7 @@
 using System.IO.Hashing;
 using System.Text;
 using Coworkee.Infrastructure;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Shared.Constants.Application;
 
 namespace Coworkee.AppHost.ApplicationServiceHelper;
 

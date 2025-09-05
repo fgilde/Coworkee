@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Extensions;
+using lib.Coworkee.Application.Common.Extensions;
 using Coworkee.Client.Enums;
 using Coworkee.Client.Extensions;
 using Coworkee.Client.JsInterop;

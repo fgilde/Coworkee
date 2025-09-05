@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 
 namespace Coworkee.Application.Contracts.Services;
 

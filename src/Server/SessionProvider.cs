@@ -1,6 +1,6 @@
 using System;
-using Coworkee.Application.Contracts;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Contracts;
+using lib.Coworkee.Shared.Constants.Application;
 using Microsoft.AspNetCore.Http;
 
 namespace Coworkee.Server

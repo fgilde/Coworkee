@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Exceptions;
+using lib.Coworkee.Application.Common.Exceptions;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 

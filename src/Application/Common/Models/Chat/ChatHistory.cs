@@ -1,5 +1,5 @@
 using System;
-using Coworkee.Application.Contracts.Chat;
+using lib.Coworkee.Application.Contracts.Chat;
 
 namespace Coworkee.Application.Common.Models.Chat
 {

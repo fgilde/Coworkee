@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
-using Coworkee.Domain.Entities.ExtendedAttributes;
-using Coworkee.Domain.Entities.Misc;
+using lib.Coworkee.Application.Features.ExtendedAttributes.Commands.AddEdit;
+using lib.Coworkee.Domain.Entities.ExtendedAttributes;
+using lib.Coworkee.Domain.Entities.Misc;
 using Coworkee.Server.Controllers.Utilities.ExtendedAttributes.Base;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Shared.Constants.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

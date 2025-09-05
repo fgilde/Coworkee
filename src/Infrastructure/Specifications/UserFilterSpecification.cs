@@ -1,5 +1,5 @@
 using Coworkee.Infrastructure.Models.Identity;
-using Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Application.Specifications.Base;
 
 namespace Coworkee.Infrastructure.Specifications
 {

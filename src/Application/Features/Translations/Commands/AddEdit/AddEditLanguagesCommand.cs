@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Models;
-using Coworkee.Application.Common.Security;
-using Coworkee.Application.Contracts.Repositories;
-using Coworkee.Application.Contracts.Services;
-using Coworkee.Application.Features.Base.Commands;
-using Coworkee.Domain.Entities.Localization;
-using Coworkee.Shared.Constants.Localization;
-using Coworkee.Shared.Constants.Permission;
+using lib.Coworkee.Application.Common.Models;
+using lib.Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Contracts.Repositories;
+using lib.Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Features.Base.Commands;
+using lib.Coworkee.Domain.Entities.Localization;
+using lib.Coworkee.Shared.Constants.Localization;
+using lib.Coworkee.Shared.Constants.Permission;
 using MediatR;
 
 namespace Coworkee.Application.Features.Translations.Commands.AddEdit

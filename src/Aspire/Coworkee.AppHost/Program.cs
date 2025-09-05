@@ -1,6 +1,6 @@
 using Coworkee.AppHost;
-using Coworkee.Application.Configurations;
-using Coworkee.Shared.Constants.Application;
+using lib.Coworkee.Application.Configurations;
+using lib.Coworkee.Shared.Constants.Application;
 using Nextended.Aspire;
 using Coworkee.AppHost.ApplicationServiceHelper;
 using Coworkee.AppHost.Types;

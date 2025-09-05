@@ -1,4 +1,4 @@
-using Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Application.Specifications.Base;
 using Coworkee.Domain.Entities.Catalog;
 
 namespace Coworkee.Application.Specifications.Catalog

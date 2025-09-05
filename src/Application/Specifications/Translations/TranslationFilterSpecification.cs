@@ -1,5 +1,5 @@
-using Coworkee.Application.Specifications.Base;
-using Coworkee.Domain.Entities.Localization;
+using lib.Coworkee.Application.Specifications.Base;
+using lib.Coworkee.Domain.Entities.Localization;
 
 namespace Coworkee.Application.Specifications.Translations
 {

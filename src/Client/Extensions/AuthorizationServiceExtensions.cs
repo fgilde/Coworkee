@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Coworkee.Application.Common.Security;
+using lib.Coworkee.Application.Common.Security;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Coworkee.Client.Extensions

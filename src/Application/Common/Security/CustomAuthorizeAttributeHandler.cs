@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coworkee.Application.Contracts.Attributes;
-using Coworkee.Application.Contracts.Services;
+using lib.Coworkee.Application.Contracts.Attributes;
+using lib.Coworkee.Application.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Nextended.Core.Attributes;
 

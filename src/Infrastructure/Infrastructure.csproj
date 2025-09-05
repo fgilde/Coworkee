@@ -2,7 +2,7 @@
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
     <RootNamespace>Coworkee.Infrastructure</RootNamespace>
-    <AssemblyName>Coworkee.Infrastructure</AssemblyName>
+    <AssemblyName>Coworkee.Business.Infrastructure</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -27,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Infrastructure\Coworkee.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
     <RootNamespace>Coworkee.Shared</RootNamespace>
-    <AssemblyName>Coworkee.Shared</AssemblyName>
+    <AssemblyName>Coworkee.Business.Shared</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.yml" />
@@ -42,6 +42,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>EmailTemplateNames.tt</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\Coworkee.Shared\Coworkee.Shared.csproj" />
   </ItemGroup>
 
   <Target Name="Translate" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">

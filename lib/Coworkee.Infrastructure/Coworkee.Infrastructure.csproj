@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <RootNamespace>Coworkee.Infrastructure</RootNamespace>
+    <RootNamespace>lib.Coworkee.Infrastructure</RootNamespace>
     <AssemblyName>Coworkee.Infrastructure</AssemblyName>
   </PropertyGroup>
   

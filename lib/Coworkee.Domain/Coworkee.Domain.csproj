@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <RootNamespace>Coworkee.Domain</RootNamespace>
+    <RootNamespace>lib.Coworkee.Domain</RootNamespace>
     <AssemblyName>Coworkee.Domain</AssemblyName>
   </PropertyGroup>
 

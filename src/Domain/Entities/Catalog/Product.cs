@@ -1,4 +1,4 @@
-using Coworkee.Domain.Contracts;
+using lib.Coworkee.Domain.Contracts;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Coworkee.Domain.Entities.Catalog

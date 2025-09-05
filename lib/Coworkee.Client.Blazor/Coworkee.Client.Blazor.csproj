@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
-    <RootNamespace>Coworkee.Client.Blazor</RootNamespace>
+    <RootNamespace>lib.Coworkee.Client.Blazor</RootNamespace>
     <AssemblyName>Coworkee.Client.Blazor</AssemblyName>
   </PropertyGroup>
 

@@ -2,6 +2,9 @@
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
     <RootNamespace>Coworkee.Domain</RootNamespace>
-    <AssemblyName>Coworkee.Domain</AssemblyName>
+    <AssemblyName>Coworkee.Business.Domain</AssemblyName>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\Coworkee.Domain\Coworkee.Domain.csproj" />
+  </ItemGroup>
 </Project>

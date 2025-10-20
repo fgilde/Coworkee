@@ -145,7 +145,7 @@ namespace Coworkee.Server
             app.UseApplicationEndpoints();
             app.UseSwaggerAuthorized();
             app.UseSwagger();
-
+            
 
             app.Initialize(_configuration);
         }

@@ -11,8 +11,9 @@
     <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="$(MicrosoftPackagesVersion)" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
+    <PackageReference Include="Nextended.Core" Version="9.0.27-prev-3" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="EmailTemplateNames.tt">

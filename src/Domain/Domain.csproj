@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\Shared.props" />
   <PropertyGroup>
     <RootNamespace>Coworkee.Domain</RootNamespace>
     <AssemblyName>Coworkee.Domain</AssemblyName>
   </PropertyGroup>
+  <!--<ItemGroup>
+    <PackageReference Include="Nextended.Core" Version="9.0.27-prev-3" />
+  </ItemGroup>-->
 </Project>

@@ -1,6 +1,9 @@
-using System;
-using System.Linq.Expressions;
 using Microsoft.Rest.Azure.OData;
+using Nextended.Core.OData;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Coworkee.Shared;
 
@@ -17,7 +20,8 @@ public class TransferableExpression<T>
     }
 
     public TransferableExpression(Expression<Func<T, bool>> expression)
-    { 
+    {
+        //_odataFilter = expression.ToFilterString();
         _odataFilter = FilterString.Generate(expression, true);
     }
 

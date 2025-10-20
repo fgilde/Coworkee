@@ -5,6 +5,7 @@
 @using Coworkee.Application.Hubs.Events
 @using Microsoft.AspNetCore.SignalR.Client
 @using System.Security.Claims
+@using Coworkee.Shared
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LanguageSelector> localizer
 @implements IAsyncDisposable
 
@@ -65,7 +66,7 @@
     private async Task Load()
     {
         await LoadPreferenceAsync();
-        languages = await _api.Language_GetAllAsync(new(l => l.IsActive));
+        languages = await _api.Language_GetAllAsync(new TransferableExpression<LanguageDto>(l => l.IsActive));
         if (languages == null || !languages.Any())
             languages = LocalizationConstants.DefaultUILanguages.MapElementsTo<LanguageDto>().ToList();
         actuaLanguage = await GetEnsuredActualLanguage();

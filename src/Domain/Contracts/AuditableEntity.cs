@@ -2,6 +2,7 @@ using System;
 
 namespace Coworkee.Domain.Contracts
 {
+    //[ProvideAsEdm(ProvideInherits = true)]
     public abstract class AuditableEntity<TId> : IAuditableEntity<TId>
     {
         public TId Id { get; set; }

@@ -38,6 +38,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.3.0" />
     <PackageReference Include="Nextended.CodeGen" Version="9.0.17" />
+    
     <PackageReference Include="NSwag.MSBuild" Version="14.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -54,7 +55,7 @@
     <Protobuf Include=".\gRPC\Main.proto" GrpcServices="Server" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="9.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="9.4.0" />
     <PackageReference Include="TranslatorService" Version="3.0.11" />
   </ItemGroup>
   <ItemGroup>

@@ -7,16 +7,24 @@ using Coworkee.AppHost.Types;
 
 // #### Settings #####################################################
 
+//var settings = new CoworkeeAppHostSettings()
+//{
+//    DatabaseToUse = DatabaseToUse.Postgres,
+//    AddOllama = true,
+//    AddKeycloak = true,
+//    AddGrafana = true,
+//    AddStirling = true,
+//    AddAzureStorage = false,
+//};
 var settings = new CoworkeeAppHostSettings()
 {
     DatabaseToUse = DatabaseToUse.Postgres,
-    AddOllama = true,
-    AddKeycloak = true,
-    AddGrafana = true,
-    AddStirling = true,
+    AddOllama = false,
+    AddKeycloak = false,
+    AddGrafana = false,
+    AddStirling = false,
     AddAzureStorage = false,
 };
-
 
 // ####### Start the Aspire application ##############################
 

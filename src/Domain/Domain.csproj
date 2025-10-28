@@ -4,7 +4,8 @@
     <RootNamespace>Coworkee.Domain</RootNamespace>
     <AssemblyName>Coworkee.Domain</AssemblyName>
   </PropertyGroup>
-  <!--<ItemGroup>
-    <PackageReference Include="Nextended.Core" Version="9.0.27-prev-3" />
-  </ItemGroup>-->
+  <ItemGroup>
+    <PackageReference Include="Nextended.Core" Version="$(NextendedVersion)" />
+  </ItemGroup>
+ 
 </Project>

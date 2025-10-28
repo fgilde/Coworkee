@@ -21,7 +21,8 @@
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Microsoft.Azure.SignalR" Version="1.30.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="Nextended.Imaging" Version="9.0.0" />
+    <PackageReference Include=" " Version="$(NextendedVersion)" />
+    <PackageReference Include="Nextended.Web" Version="$(NextendedVersion)" />
     <PackageReference Include="Hangfire" Version="1.8.18" />
     <PackageReference Include="Hangfire.PostgreSql" Version="1.20.12" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
@@ -39,7 +40,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.3.0" />
-    <PackageReference Include="Nextended.CodeGen" Version="9.0.17" />
+    <PackageReference Include="Nextended.CodeGen" Version="$(NextendedVersion)" />
     
     <PackageReference Include="NSwag.MSBuild" Version="14.3.0">
       <PrivateAssets>all</PrivateAssets>

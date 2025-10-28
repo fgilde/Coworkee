@@ -1,9 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Nextended.Core.Attributes;
 
 namespace Coworkee.Domain.Contracts
 {
-    //[ProvideAsEdm(ProvideInherits = true)]
+    [ProvideAsEdm(ProvideInherits = true)]
     public abstract class AuditableEntity<TId> : IAuditableEntity<TId>
     {
         public TId Id { get; set; }

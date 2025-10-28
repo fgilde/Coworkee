@@ -1,4 +1,4 @@
-using System.IO;
+using System;
 using Coworkee.Application;
 using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
@@ -19,10 +19,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Formatter.Serialization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Localization;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
+using Nextended.Web.OData;
+using System.IO;
+using Coworkee.Domain.Contracts;
+using Coworkee.Domain.Entities.Catalog;
+using Coworkee.Server.OData;
 
 namespace Coworkee.Server
 {
@@ -86,8 +94,13 @@ namespace Coworkee.Server
                 .AddXmlDataContractSerializerFormatters()
                 .AddOData(options =>
                 {
-                    options.EnableQueryFeatures().SetMaxTop(1000);
-                    //options.AddRouteComponents("odata", modelBuilder.GetEdmModel());
+                    var model = EdmBuilder.GetEdmModel();
+                    options.EnableQueryFeatures().SetMaxTop(1000).AddRouteComponents("odata", model, services =>
+                    {
+                        services.AddSingleton(model);
+                        services.AddSingleton<IODataSerializerProvider, FacetSerializerProvider>();
+                        services.AddSingleton(sp => new Microsoft.OData.UriParser.ODataUriResolver { EnableCaseInsensitive = true });
+                    });
                 });
             //.AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); // TODO: Currently not working with extended attributes (EntityExtendedAttributeType) and all other enums inherit from byte
             services.AddExtendedAttributesValidators();
@@ -101,6 +114,7 @@ namespace Coworkee.Server
                 .ValidateOnStart()
                 .ValidateDataAnnotations();
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             IStringLocalizer<Startup> localizer,

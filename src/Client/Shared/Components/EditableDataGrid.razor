@@ -1,0 +1,265 @@
+@typeparam TResult
+@typeparam TIdType
+@inject Microsoft.Extensions.Localization.IStringLocalizer<EditableDataTable<TResult, TIdType>> _localizer
+@using System.Threading
+@using Nextended.Core.Extensions
+@using Coworkee.Application.Contracts.Enums
+@using Nextended.Core.Helper
+@using MudBlazor.Extensions.Components.ObjectEdit.Options
+
+<style>
+    .mud-editable-table {
+        height: 90%
+    }
+
+    .mud-editable-table .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
+        margin-top: 0;
+    }
+</style>
+
+<ReactOnPreferenceChanged Component="this" OnPreferenceChanged="OnPreferenceChanged" />
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <UpdateOnChange UpdateForNotContainingModels="true" TDto="TResult" ChangeBehaviour="ModelChangeBehaviour.Reload" ModelsLoadFn="@Reload" />
+
+    @if (Import != null)
+    {
+        <InputFile id="importInput" OnChange="ExecImport" hidden />
+    }
+
+    <MudDataGrid T="TResult"
+                 Class="mud-editable-table"
+                 FixedHeader="true"
+                 Dense="true"
+                 Hover="true"
+                 Bordered="false"
+                 Striped="true"
+                 EditMode="@(EditMode is EditMode.InlineLive or EditMode.InlineBulk ? DataGridEditMode.Cell : null)"
+                 ReadOnly="@(EditMode == EditMode.SelfHandled || !_canEdit)"
+                 CanCancelEdit="true"
+                 Style="height:86%"
+                 MultiSelection="MultiSelect"
+                 @bind-SelectedItems="_selectedItems"
+                 RowStyleFunc="RowRenderStyle"
+                 Filterable="true"
+                 Elevation="@Elevation"
+                 Items="@(ApiLoadPaged == null && ApiLoad != null ? LocalItems : null)"
+                 ServerData="@(ApiLoadPaged != null ? new Func<GridState<TResult>, Task<GridData<TResult>>>(ServerReload) : null)"
+                 CommittedItemChanges="OnCommittedItemChanges"
+                 CanceledEditingItem="OnCanceledEditingItem"
+                 @ref="_grid">
+
+        <ToolBarContent>
+            @if (ToolbarContentBeforeStart != null) { @ToolbarContentBeforeStart }
+
+            @if (_canEdit && EditMode == EditMode.InlineBulk && ApiEditMany != null && toUpdate.Any())
+            {
+                <MudButton Style="margin-right: 5px;" DisableElevation Variant="Variant.Filled" Color="Color.Success"
+                           @onclick="@(() => SaveBulk())" StartIcon="@Icons.Material.Filled.Save" IconColor="Color.Surface">
+                    @_localizer["Save {0} Changes", toUpdate.Count]
+                </MudButton>
+            }
+
+            @if (ApiCreateOrEdit != null)
+            {
+                <MudIconButton Disabled="@(_canCreate == false)" @onclick="@(() => InvokeModal())" Icon="@Icons.Material.Outlined.Add" Title="@_localizer[TextCreate]" />
+            }
+
+            <MudIconButton OnClick="@(Reload)" Title="@_localizer["Reload"]" Icon="@Icons.Material.Outlined.Refresh" />
+
+            @if (Export != null)
+            {
+                <MudMenu title="@_localizer["Export"]" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Icon="@Icons.Custom.FileFormats.FileDocument" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                    @foreach (var e in Enum<ExportServiceType>.GetValues())
+                    {
+                        <MudMenuItem OnClick="@(() => ExecExport(e))"><MudText>@_localizer[e.ToString()]</MudText></MudMenuItem>
+                    }
+                </MudMenu>
+            }
+
+            @if (Import != null)
+            {
+                <MudIconButton HtmlTag="label" for="importInput" Icon="@Icons.Material.Outlined.ImportExport" Title="@_localizer["Import"]" Color="Color.Inherit" />
+            }
+
+            @if (_selectedItems.Count > 0 && (_canDelete || _canEdit))
+            {
+                <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" DisableElevation
+                         Label="@_localizer["With_Selected", _selectedItems.Count]" Variant="Variant.Filled"
+                         EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary"
+                         Direction="Direction.Bottom" OffsetY="true" Dense="true">
+
+                    @foreach (var action in GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.MultipleOnly))
+                    {
+                        <MudMenuItem OnClick="@(() => ExecuteAction(action))">
+                            <MudText>
+                                @if (!string.IsNullOrEmpty(action.Icon))
+                                {
+                                    <MudIcon Color="action.Color" Icon="@action.Icon" Class="mr-3 mb-n1" />
+                                }
+                                @_localizer[action.Text]
+                            </MudText>
+                        </MudMenuItem>
+                    }
+
+                    @if (_canEdit && EditMode == EditMode.SelfHandled && ApiEditMany != null)
+                    {
+                        <MudMenuItem>
+                            <MudText>
+                                <MudIcon Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
+                                @_localizer["Edit"]
+                            </MudText>
+                        </MudMenuItem>
+                    }
+
+                    @if (_canDelete)
+                    {
+                        <MudMenuItem @onclick="@(DeleteSelected)">
+                            <MudText>
+                                <MudIcon Color="Color.Error" Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
+                                @_localizer["Delete"]
+                            </MudText>
+                        </MudMenuItem>
+                    }
+
+                    @if (ExportSelected != null && _canExport)
+                    {
+                        <MudText Typo="Typo.body2" Class="px-4 py-2"><b>@_localizer["Export"]</b></MudText>
+                        @foreach (var e in Enum<ExportServiceType>.GetValues())
+                        {
+                            <MudMenuItem OnClick="@(() => ExecExportSelected(e))"><MudText>@_localizer[e.ToString()]</MudText></MudMenuItem>
+                        }
+                    }
+                </MudMenu>
+            }
+
+            @if (ToolbarContentAfterStart != null) { @ToolbarContentAfterStart }
+            <MudSpacer />
+            @if (ToolbarContentBeforeEnd != null) { @ToolbarContentBeforeEnd }
+
+            @if (_canSearch)
+            {
+                <MudTextField Clearable="true" Immediate="@ImmediateSearch.Value" T="string" ValueChanged="@(OnSearch)"
+                              Placeholder="@(ImmediateSearch.Value ? _localizer["Filter"] : _localizer["Search"])"
+                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" />
+            }
+
+            @if (ToolbarContentAfterEnd != null) { @ToolbarContentAfterEnd }
+        </ToolBarContent>
+
+        <Columns>
+            @* Optional: Checkbox-Spalte für Selektion *@
+            @if (MultiSelect || _canDelete || _canEdit || GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.SingleOnly).Any())
+            {
+                <SelectColumn T="TResult" />
+            }
+
+            @for (var index = 0; index < TableProperties.Length; index++)
+            {
+                var prop = TableProperties[index];
+                var prefix = Prefixes?.Length > index ? Prefixes[index] : null;
+
+                <PropertyColumn T="TResult" TProperty="object"
+                                Property="@PropertyLambda(prop)"
+                                Title="@CaptionForProperty(prop)"
+                                Sortable="true">
+                    <CellTemplate>
+                        <div class="@($"{(FullRowClickForEdit ? "cursor-pointer cursor-pointer-deep" : "")}")"
+                             @onclick="@(()=> OnCellClick(context.Item, prop))">
+                            <p class="@($"{(HasChanges(context.Item) ? "changed" : "")}")">
+                                @if (!string.IsNullOrWhiteSpace(prefix))
+                                {
+                                    <span class="@($"table-value-prefix {(UseMudExPropertyEditAsView ? "table-value-prefix-with-mudex-object-edit" : "")}")">@prefix</span>
+                                }
+
+                                @if (UseMudExPropertyEditAsView)
+                                {
+                                    <MudExPropertyEdit PropertyMeta="@(new ObjectEditPropertyMeta(PropertyFor(context.Item, prop), context.Item).AsReadOnly().WithoutLabel().DisableUnderline())" />
+                                }
+                                else
+                                {
+                                    @if (prop == "CreatedBy")
+                                    {
+                                        <UserCard Class="no-padding" UserId="@(PropertyValueFor(context.Item, prop))" />
+                                    }
+                                    else
+                                    {
+                                        <MudHighlighter Text="@(PropertyValueFor(context.Item, prop))" HighlightedText="@_searchString" />
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </CellTemplate>
+                    <EditTemplate>
+                        @if (EditMode is EditMode.InlineLive or EditMode.InlineBulk)
+                        {
+                            <MudExPropertyEdit PropertyMeta="@(new ObjectEditPropertyMeta(PropertyFor(context.Item, prop), context.Item).WithoutLabel().AsReadOnly(!CanEdit(context.Item) || !PropertyFor(context.Item, prop).CanWrite || prop == "Id"))"/>                            
+                        }
+                    </EditTemplate>
+                </PropertyColumn>
+            }
+
+            @if (!HideActionColumn)
+            {
+                <TemplateColumn T="TResult" Title="@_localizer["Actions"]" CellClass="text-right">
+                    <CellTemplate>
+                        @if (_canEdit || _canDelete)
+                        {
+                            @if (EditMode == EditMode.InlineBulk && HasChanges(context.Item))
+                            {
+                                <MudTooltip Text="@_localizer["Undo"]">
+                                    <MudIconButton @onclick="@(() => UndoBulk(context.Item))" Color="Color.Primary" Icon="@Icons.Material.Filled.Undo" aria-label="@_localizer["Undo"]" />
+                                </MudTooltip>
+                            }
+
+                            @if (_canEdit && EditMode == EditMode.SelfHandled)
+                            {
+                                <MudTooltip Text="@_localizer["Edit"]">
+                                    <MudIconButton Disabled="@(!CanEdit(context.Item))" @onclick="@(() => InvokeModal(GetId(context.Item)))" Color="Color.Primary" Icon="@EditIcon" aria-label="@_localizer["Edit"]" />
+                                </MudTooltip>
+                            }
+
+                            @if (_canDelete)
+                            {
+                                @if (!GetId(context.Item).Equals(default(TIdType)))
+                                {
+                                    <MudTooltip Text="@_localizer["Delete"]">
+                                        <MudIconButton Disabled="@(!CanDelete(context.Item))" @onclick="@(() => Delete(GetId(context.Item)))" Color="Color.Error" Icon="@DeleteIcon" aria-label="@_localizer["Delete"]" />
+                                    </MudTooltip>
+                                }
+                                else
+                                {
+                                    <MudIcon Color="Color.Transparent" Icon="@DeleteIcon" aria-label="@_localizer["Delete"]" />
+                                }
+                            }
+                        }
+                        else if (!GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.SingleOnly).Any())
+                        {
+                            <MudButton Variant="Variant.Filled" DisableElevation="true"
+                                       StartIcon="@Icons.Material.Filled.DoNotTouch" IconColor="Color.Secondary"
+                                       Size="Size.Small" Color="Color.Surface">
+                                @_localizer["No Allowed Actions"]
+                            </MudButton>
+                        }
+
+                        @foreach (var action in GetCustomActions(EditableDataTable.CustomActionAvailability.Always, EditableDataTable.CustomActionAvailability.SingleOnly))
+                        {
+                            <MudTooltip Text="@_localizer[action.Text]">
+                                <MudIconButton @onclick="@(() => ExecuteAction(action, context.Item))" Color="action.Color" Icon="@action.Icon" aria-label="@_localizer[action.Text]" />
+                            </MudTooltip>
+                        }
+                    </CellTemplate>
+                </TemplateColumn>
+            }
+        </Columns>
+
+        <PagerContent>
+            <MudDataGridPager T="TResult" />
+        </PagerContent>
+    </MudDataGrid>
+}

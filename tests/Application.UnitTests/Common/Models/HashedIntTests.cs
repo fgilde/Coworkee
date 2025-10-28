@@ -14,7 +14,7 @@ namespace Coworkee.Application.UnitTests.Common.Models
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            ClassMappingConfiguration.RegisterConverters(new Idhashing() {Enabled = true, AllowAccessWithNotHashedId = false, MinLength = 5, Salt = Guid.NewGuid().ToString()});
+            ClassMappingConfiguration.RegisterConverters(new IdHashing() { Enabled = true, AllowAccessWithNotHashedId = false, MinLength = 5, Salt = Guid.NewGuid().ToString() });
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace Coworkee.Application.UnitTests.Common.Models
                 Description = "This is a Tens entity instance"
             };
             var dto = entity.MapTo<MyEntityDtoHashable>();
-            
+
             int realId = ((IDtoBase<int>)dto).Id;
             realId.Should().Be(testId);
             dto.Id.Should().Be(hash);
@@ -106,7 +106,7 @@ namespace Coworkee.Application.UnitTests.Common.Models
             };
 
             string strid = dto.Id;
-            int intid = ((IDtoBase<int>) dto).Id;
+            int intid = ((IDtoBase<int>)dto).Id;
             var entity = dto.MapTo<MyEntity>();
             entity.Id.Should().Be(testId);
             intid.Should().Be(testId);

@@ -1,6 +1,7 @@
-using System;
 using Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coworkee.Infrastructure.Models.Identity
 {
@@ -13,7 +14,7 @@ namespace Coworkee.Infrastructure.Models.Identity
         public string? LastModifiedBy { get; set; }
         public DateTime? LastModifiedOn { get; set; }
         public virtual ApplicationRole Role { get; set; }
-
+        [Timestamp] public byte[] RowVersion { get; set; }
         public ApplicationRoleClaim() : base()
         {}
 

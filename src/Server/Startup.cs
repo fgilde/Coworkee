@@ -1,23 +1,28 @@
-using Coworkee.Server.Extensions;
-using Coworkee.Server.Middlewares;
-using Hangfire;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 using Coworkee.Application;
+using Coworkee.Application.Configurations;
 using Coworkee.Infrastructure;
+using Coworkee.Infrastructure.Contexts;
+using Coworkee.Server.Extensions;
 using Coworkee.Server.Filters;
 using Coworkee.Server.Managers.Preferences;
-using Coworkee.Shared.Constants.Application;
-using Hangfire.Dashboard;
-using Microsoft.AspNetCore.OData;
-using Microsoft.Extensions.Localization;
+using Coworkee.Server.Middlewares;
 using Coworkee.Shared;
-using Coworkee.Application.Configurations;
-using Hangfire.PostgreSql;
+using Coworkee.Shared.Constants.Application;
 using Coworkee.Shared.Helper;
+using Delta;
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.PostgreSql;
 using Hangfire.SqlServer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.OData;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Localization;
 
 namespace Coworkee.Server
 {
@@ -101,16 +106,19 @@ namespace Coworkee.Server
             IStringLocalizer<Startup> localizer,
             IDashboardAuthorizationFilter authorizationFilter)
         {
-            var config = ServerConfiguration.Instance;
             //#region For Keycloak
-            //if (!string.IsNullOrEmpty(config.PublicSettings?.Endpoints?.Keycloak))
+
+            //var config = ServerConfiguration.Instance;
+            //if (config.PublicSettings.KeycloakEnabled)
             //{
-            //    var seeder = new KeycloakSeeder();
+            //    config.PublicSettings.Endpoints.TryGetValue(ApplicationConstants.ServiceNames.Keycloak, out string keycloakUrl);
+            //    var seeder = new KeycloakSeeder(keycloakUrl);
             //    System.Threading.Tasks.Task.Delay(15000).ContinueWith(task =>
             //    {
             //        _ = seeder.CreateClientAsync();
             //    });
             //}
+
             //#endregion
 
             app.UseSessionId();
@@ -120,14 +128,15 @@ namespace Coworkee.Server
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
-            //var staticFilePath = Path.Combine(env.WebRootPath, "..", ApplicationConstants.FileAccess.StaticFileDirectoryName);
-            //if (!Directory.Exists(staticFilePath))
-            //    Directory.CreateDirectory(staticFilePath);
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(staticFilePath),
-            //    RequestPath = new PathString($"/{ApplicationConstants.FileAccess.StaticFileDirectoryName}")
-            //});
+            var staticFilePath = Path.Combine(env.WebRootPath, "..", ApplicationConstants.FileAccess.StaticFileDirectoryName);
+            if (!Directory.Exists(staticFilePath))
+                Directory.CreateDirectory(staticFilePath);
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(staticFilePath),
+                RequestPath = new PathString($"/{ApplicationConstants.FileAccess.StaticFileDirectoryName}")
+            });
+
             app.UseRequestLocalizationByCulture();
             app.UseRouting();
 
@@ -136,6 +145,9 @@ namespace Coworkee.Server
                 app.UseAuthenticationFromQuery();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseDelta<ApplicationDbContext>();
+
+
             app.UseHangfireDashboard(ApplicationConstants.Routes.Dashboard, new DashboardOptions
             {
                 AppPath = !ApplicationConstants.HostClientInServer ? _configuration["ClientUrl"] : "/",
@@ -145,8 +157,8 @@ namespace Coworkee.Server
             app.UseApplicationEndpoints();
             app.UseSwaggerAuthorized();
             app.UseSwagger();
-            
 
+            
             app.Initialize(_configuration);
         }
     }

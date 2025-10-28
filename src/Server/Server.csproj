@@ -16,6 +16,8 @@
     <Content Include=".config\dotnet-tools.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Delta" Version="6.4.4" />
+    <PackageReference Include="Delta.EF" Version="6.4.4" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Microsoft.Azure.SignalR" Version="1.30.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />

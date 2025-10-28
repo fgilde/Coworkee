@@ -1,7 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Coworkee.Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coworkee.Infrastructure.Models.Identity
 {
@@ -14,6 +15,7 @@ namespace Coworkee.Infrastructure.Models.Identity
         public DateTime? LastModifiedOn { get; set; }
         public virtual ICollection<ApplicationRoleClaim> RoleClaims { get; set; }
         public bool IsSelectableByUser { get; set; }
+        [Timestamp] public byte[] RowVersion { get; set; }
 
         public ApplicationRole() : base()
         {

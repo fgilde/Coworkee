@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coworkee.Domain.Contracts
 {
@@ -15,5 +16,7 @@ namespace Coworkee.Domain.Contracts
         string LastModifiedBy { get; set; }
 
         DateTime? LastModifiedOn { get; set; }
+
+        byte[] RowVersion { get; }
     }
 }

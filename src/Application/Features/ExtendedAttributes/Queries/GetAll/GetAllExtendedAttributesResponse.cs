@@ -1,7 +1,8 @@
 #nullable enable
-using System;
 using Coworkee.Domain.Contracts;
 using Coworkee.Domain.Enums;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coworkee.Application.Features.ExtendedAttributes.Queries.GetAll;
 
@@ -23,4 +24,6 @@ public class GetAllExtendedAttributesResponse<TId, TEntityId> : IEntityAuditable
     public DateTime CreatedOn { get; set; }
     public string LastModifiedBy { get; set; }
     public DateTime? LastModifiedOn { get; set; }
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
 }

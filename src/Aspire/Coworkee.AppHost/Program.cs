@@ -18,7 +18,7 @@ using Coworkee.AppHost.Types;
 //};
 var settings = new CoworkeeAppHostSettings()
 {
-    DatabaseToUse = DatabaseToUse.Postgres,
+    DatabaseToUse = DatabaseToUse.SqlServer,
     AddOllama = false,
     AddKeycloak = false,
     AddGrafana = false,

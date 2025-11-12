@@ -75,6 +75,7 @@ namespace Coworkee.Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             foreach (var entityType in builder.Model.GetEntityTypes())
             {
                 builder.Entity(entityType.ClrType)
@@ -90,6 +91,7 @@ namespace Coworkee.Infrastructure.Contexts
             }
 
             base.OnModelCreating(builder);
+            
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

@@ -1,5 +1,5 @@
 /// <summary>
-/// --- AUTO GENERATED CODE (28.10.2025 18:19:21) ---
+/// --- AUTO GENERATED CODE (12.11.2025 23:10:57) ---
 /// --- ServerConfiguration ---
 /// </summary>
 

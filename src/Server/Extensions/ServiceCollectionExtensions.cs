@@ -299,7 +299,14 @@ namespace Coworkee.Server.Extensions
                 using var serviceProvider = services.BuildServiceProvider();
                 using var scope = serviceProvider.CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.EnsureCreated(); // required for hangfire
+                try
+                {
+                    dbContext.Database.EnsureCreated(); // required for hangfire
+                }
+                catch (Exception e)
+                {
+                    
+                }
             }
 
             return services;
@@ -312,6 +319,7 @@ namespace Coworkee.Server.Extensions
                 .AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>()
                 .AddIdentity<ApplicationUser, ApplicationRole>(options =>
                 {
+                    options.Stores.SchemaVersion = IdentitySchemaVersions.Version3;
                     options.Password.RequiredLength = 6;
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;

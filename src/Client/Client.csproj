@@ -29,28 +29,28 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftPackagesVersion)" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(MicrosoftPackagesVersion)" />
-    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.2.0" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="$(MicrosoftPackagesVersion)" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.8.1">
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.9.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>    
     <PackageReference Include="System.Net.Http.Json" Version="$(MicrosoftPackagesVersion)" />
-    <PackageReference Include="MudBlazor" Version="8.9.0" />
+    <PackageReference Include="MudBlazor" Version="8.14.0" />
     <PackageReference Include="BlazorJS" Version="2.2.0" />
-    <PackageReference Include="MudBlazor.Extensions" Version="8.9.0-prev-2507101529-main" />
-    <PackageReference Include="MudExRichTextEditor" Version="8.5.2" />
+    <PackageReference Include="MudBlazor.Extensions" Version="8.14.0" />
+    <PackageReference Include="MudExRichTextEditor" Version="8.14.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="System.Text.Json" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />
     <!-- gRPC -->
-    <PackageReference Include="Google.Protobuf" Version="3.30.2" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.70.0" />
-    <PackageReference Include="Grpc.Net.Client.Web" Version="2.70.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.71.0">
+    <PackageReference Include="Google.Protobuf" Version="3.33.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+    <PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.76.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

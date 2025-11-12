@@ -29,7 +29,7 @@ public class ServerApplicationFactory : WebApplicationFactory<Coworkee.Server.Pr
         .WithEnvironment("ACCEPT_EULA", "Y")
         .WithEnvironment("SA_PASSWORD", DbPassword)
         .WithPortBinding(Port, 1433)
-        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(1433))
+        .WithWaitStrategy(Wait.ForUnixContainer().UntilExternalTcpPortIsAvailable(1433))
         .Build();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)

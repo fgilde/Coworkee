@@ -8,7 +8,7 @@
     <EmbeddedResource Include="Resources\*.yml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="1.5.0" />
+    <PackageReference Include="AKSoftware.Localization.MultiLanguages.Blazor" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="$(MicrosoftPackagesVersion)" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />

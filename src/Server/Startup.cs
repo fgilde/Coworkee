@@ -95,11 +95,11 @@ namespace Coworkee.Server
                 .AddOData(options =>
                 {
                     var model = EdmBuilder.GetEdmModel();
-                    options.EnableQueryFeatures().SetMaxTop(1000).AddRouteComponents("odata", model, services =>
+                    options.EnableQueryFeatures().SetMaxTop(1000).AddRouteComponents("odata", model, svcs =>
                     {
-                        services.AddSingleton(model);
-                        services.AddSingleton<IODataSerializerProvider, FacetSerializerProvider>();
-                        services.AddSingleton(sp => new Microsoft.OData.UriParser.ODataUriResolver { EnableCaseInsensitive = true });
+                        svcs.AddSingleton(model);
+                        svcs.AddSingleton<IODataSerializerProvider, FacetSerializerProvider>();
+                        svcs.AddSingleton(sp => new Microsoft.OData.UriParser.ODataUriResolver { EnableCaseInsensitive = true });
                     });
                 });
             //.AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); // TODO: Currently not working with extended attributes (EntityExtendedAttributeType) and all other enums inherit from byte

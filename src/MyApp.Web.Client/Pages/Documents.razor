@@ -1,0 +1,177 @@
+@page "/documents"
+@attribute [Authorize]
+@using Coworkee.Client.Blazor.Api
+@using Coworkee.Contracts
+@using Microsoft.AspNetCore.Components.Forms
+@using MudBlazor.Extensions.Components
+@using MyApp.Contracts.Documents
+@inject IMyAppApi Api
+@inject ISnackbar Snackbar
+
+<PageTitle>Documents</PageTitle>
+<RealtimeSubscription Topic="type:Document" OnEvent="_ => LoadAsync()" />
+<MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+    <MudText Typo="Typo.h4">Documents</MudText>
+    <MudSpacer />
+    <MudTextField T="string" @bind-Value="_search" Label="Search" Immediate="true" DebounceInterval="300" OnDebounceIntervalElapsed="_ => LoadAsync()" Style="max-width:240px" />
+</MudStack>
+
+<MudGrid>
+    <MudItem xs="12" md="@(_selected is null ? 12 : 6)">
+        <MudSimpleTable Dense="true" Hover="true" data-testid="documents">
+            <thead><tr><th>Title</th><th>Type</th><th>File</th><th>Size</th><th></th><th></th></tr></thead>
+            <tbody>
+                @foreach (var document in _documents.Items)
+                {
+                    <tr data-document="@document.Title" style="cursor:pointer" @onclick="() => _selected = document">
+                        <td>@document.Title</td>
+                        <td>@document.DocumentTypeName</td>
+                        <td>@document.FileName</td>
+                        <td>@FormatSize(document.Size)</td>
+                        <td>@(document.IsPublic ? "public" : "private")</td>
+                        <td style="text-align:right">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Download" Size="Size.Small" Href="@DocumentUrls.Content(document.Id, download: true)" aria-label="Download" />
+                            @if (document.CanEdit)
+                            {
+                                <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="Size.Small" aria-label="Edit" OnClick="() => Edit(document)" />
+                                <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Small" aria-label="Delete" OnClick="() => RunAsync(() => Api.DeleteDocumentAsync(document.Id))" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </MudItem>
+    @if (_selected is { } selected)
+    {
+        <MudItem xs="12" md="6">
+            <MudPaper Outlined="true" Class="pa-2" Style="min-height:420px" data-testid="preview">
+                <MudStack Row="true" AlignItems="AlignItems.Center">
+                    <MudText Typo="Typo.h6">@selected.Title</MudText>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Outlined.Close" Size="Size.Small" aria-label="Close preview" OnClick="() => _selected = null" />
+                </MudStack>
+                @if (DocumentInlineTypes.All.Contains(selected.MimeType))
+                {
+                    <MudExFileDisplay @key="selected.Id" Url="@DocumentUrls.Content(selected.Id)" ContentType="@selected.MimeType" FileName="@selected.FileName" ShowFileName="false" />
+                }
+                else
+                {
+                    <MudText Typo="Typo.body2" Class="pa-4">No preview for this file type; download it instead.</MudText>
+                }
+            </MudPaper>
+        </MudItem>
+    }
+</MudGrid>
+
+<PermissionView Permission="@DocumentPermissions.Upload">
+    <MudPaper Outlined="true" Class="pa-4 mt-4">
+        <MudText Typo="Typo.h6">@(_editing is null ? "Upload a document" : "Edit document")</MudText>
+        <MudGrid>
+            <MudItem xs="12" sm="6"><MudTextField @bind-Value="_title" Label="Title" data-testid="document-title" /></MudItem>
+            <MudItem xs="12" sm="6">
+                <MudSelect T="Guid?" @bind-Value="_typeId" Label="Type" Clearable="true">
+                    @foreach (var type in _types)
+                    {
+                        <MudSelectItem T="Guid?" Value="@type.Id">@type.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12"><MudTextField @bind-Value="_description" Label="Description" Lines="2" /></MudItem>
+            <MudItem xs="12"><MudCheckBox @bind-Value="_isPublic" Label="Visible to everyone who may view documents" /></MudItem>
+        </MudGrid>
+        <MudStack Row="true" Class="mt-2" AlignItems="AlignItems.Center">
+            @if (_editing is null)
+            {
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadAsync" MaximumFileCount="1">
+                    <CustomContent>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Outlined.Upload" Disabled="string.IsNullOrWhiteSpace(_title)"
+                                   OnClick="context.OpenFilePickerAsync" data-testid="upload">Choose file and upload</MudButton>
+                    </CustomContent>
+                </MudFileUpload>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync" data-testid="save-document">Save</MudButton>
+                <MudButton OnClick="Reset">Cancel</MudButton>
+            }
+        </MudStack>
+    </MudPaper>
+</PermissionView>
+
+@code {
+    private PagedResult<DocumentDto> _documents = new([], 0, 1, 100);
+    private IReadOnlyList<DocumentTypeDto> _types = [];
+    private DocumentDto? _selected, _editing;
+    private string? _search, _title, _description;
+    private Guid? _typeId;
+    private bool _isPublic;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _types = await Api.GetDocumentTypesAsync();
+        }
+        catch (ApiException)
+        {
+            _types = [];
+        }
+
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            _documents = await Api.GetDocumentsAsync(new PageRequest(1, 100, _search));
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Warning);
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void Edit(DocumentDto document) =>
+        (_editing, _title, _description, _typeId, _isPublic) = (document, document.Title, document.Description, document.DocumentTypeId, document.IsPublic);
+
+    private void Reset() => (_editing, _title, _description, _typeId, _isPublic) = (null, null, null, null, false);
+
+    private DocumentRequest Request => new(_title ?? string.Empty, _description, _isPublic, _typeId);
+
+    private Task UploadAsync(IBrowserFile? file) => file is null ? Task.CompletedTask : RunAsync(async () =>
+    {
+        await using var content = file.OpenReadStream(100L * 1024 * 1024);
+        await Api.UploadDocumentAsync(Request, file.Name, content);
+        Reset();
+    });
+
+    private Task SaveAsync() => RunAsync(async () =>
+    {
+        await Api.UpdateDocumentAsync(_editing!.Id, Request);
+        Reset();
+    });
+
+    private async Task RunAsync(Func<Task> action)
+    {
+        try
+        {
+            await action();
+            await LoadAsync();
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Error);
+        }
+    }
+
+    internal static string FormatSize(long bytes) => bytes switch
+    {
+        < 1024 => $"{bytes} B",
+        < 1024 * 1024 => $"{bytes / 1024.0:0.#} KB",
+        _ => $"{bytes / (1024.0 * 1024):0.#} MB",
+    };
+}

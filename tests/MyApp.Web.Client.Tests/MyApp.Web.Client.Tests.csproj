@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MyApp.Web.Client\MyApp.Web.Client.csproj" />
+    <PackageReference Include="bunit" />
+    <PackageReference Include="NSubstitute" />
+  </ItemGroup>
+</Project>

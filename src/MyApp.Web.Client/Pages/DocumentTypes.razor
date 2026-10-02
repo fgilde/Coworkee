@@ -1,0 +1,61 @@
+@page "/documents/types"
+@attribute [Authorize]
+@using Coworkee.Client.Blazor.Api
+@using MyApp.Contracts.Documents
+@inject IMyAppApi Api
+@inject ISnackbar Snackbar
+
+<PageTitle>Document types</PageTitle>
+<MudText Typo="Typo.h4" Class="mb-4">Document types</MudText>
+
+<MudSimpleTable Dense="true" Hover="true" data-testid="document-types">
+    <thead><tr><th>Name</th><th>Description</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var type in _types)
+        {
+            <tr data-type="@type.Name">
+                <td>@type.Name</td>
+                <td>@type.Description</td>
+                <td style="text-align:right">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="Size.Small" aria-label="Edit" OnClick="() => (_id, _name, _description) = (type.Id, type.Name, type.Description)" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Small" aria-label="Delete" OnClick="() => RunAsync(() => Api.DeleteDocumentTypeAsync(type.Id))" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+<MudPaper Outlined="true" Class="pa-4 mt-4">
+    <MudStack Row="true" AlignItems="AlignItems.End">
+        <MudTextField @bind-Value="_name" Label="Name" data-testid="type-name" />
+        <MudTextField @bind-Value="_description" Label="Description" />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync" data-testid="save-type">Save</MudButton>
+    </MudStack>
+</MudPaper>
+
+@code {
+    private IReadOnlyList<DocumentTypeDto> _types = [];
+    private Guid? _id;
+    private string? _name, _description;
+
+    protected override Task OnInitializedAsync() => RunAsync(() => Task.CompletedTask);
+
+    private Task SaveAsync() => RunAsync(async () =>
+    {
+        await Api.SaveDocumentTypeAsync(_id, new DocumentTypeRequest(_name ?? string.Empty, _description));
+        (_id, _name, _description) = (null, null, null);
+    });
+
+    private async Task RunAsync(Func<Task> action)
+    {
+        try
+        {
+            await action();
+            _types = await Api.GetDocumentTypesAsync();
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Status == 403 ? "You may not manage document types." : exception.Message, Severity.Warning);
+        }
+    }
+}

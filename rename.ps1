@@ -11,14 +11,14 @@ param(
 #region Options
 $compile = $false;
 # Definiere die Dateimasken für textbasierte Dateien
-$mask = "*.csproj *.cs *.xaml *.xml *.yml *.yaml *.json *.asax *.cshtml *.config *.js *.razor *.proto *.css *.html *.md *.razor.cs *.DotSettings *.user Dockerfile *.g.cs *.editorconfig *.sln"
+$mask = "*.csproj *.cs *.xaml *.xml *.yml *.yaml *.json *.asax *.cshtml *.config *.js *.razor *.proto *.css *.html *.md *.razor.cs *.DotSettings *.user Dockerfile *.g.cs *.editorconfig *.sln *.slnx *.props *.targets"
 #endregion Options
 
 #region Param Handling
 if (-not $dir) {
     $dir = Get-Location
 }
-$solutionFileName = Get-ChildItem -Path $dir -Filter *.sln | ForEach-Object { $_.Name.Replace(".sln","") }
+$solutionFileName = Get-ChildItem -Path $dir -Filter *.slnx | ForEach-Object { $_.Name.Replace(".slnx","") }
 
 Write-Output "Working in Directory: $($dir)"
 
@@ -26,7 +26,7 @@ if (-not $old) {
     if ($solutionFileName) {
         $old = $solutionFileName
     } else {
-        $old = "CleanArchitectureBase"
+        $old = "MyApp"
     }
     if (-not $autoName) {
         ($old, (Read-Host "Enter your old name or press Enter to use '$old'")) -match '\S' | ForEach-Object { $old = $_ }
@@ -88,7 +88,8 @@ $extensions = $mask.Split(" ")
 foreach ($ext in $extensions) {
     Get-ChildItem -Path $dir -Filter $ext -Recurse | ForEach-Object {
         try {
-            (Get-Content $_.FullName -ErrorAction Stop) -replace [regex]::Escape($old), $new | Set-Content $_.FullName
+            # case-sensitive, so resource and connection names (lower case, e.g. "myapp-api") stay lower case
+            (Get-Content $_.FullName -ErrorAction Stop) -creplace [regex]::Escape($old), $new -creplace [regex]::Escape($old.ToLowerInvariant()), $new.ToLowerInvariant() | Set-Content $_.FullName
             Write-Host "Updated content in file: $($_.FullName)"
         }
         catch {

@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MyApp.Api/MyApp.Api.csproj" />
+    <Project Path="src/MyApp.AppHost/MyApp.AppHost.csproj" />
+    <Project Path="src/MyApp.Application/MyApp.Application.csproj" />
+    <Project Path="src/MyApp.Auth/MyApp.Auth.csproj" />
+    <Project Path="src/MyApp.Catalog/MyApp.Catalog.csproj" />
+    <Project Path="src/MyApp.Contracts/MyApp.Contracts.csproj" />
+    <Project Path="src/MyApp.Documents/MyApp.Documents.csproj" />
+    <Project Path="src/MyApp.Infrastructure/MyApp.Infrastructure.csproj" />
+    <Project Path="src/MyApp.Migrations/MyApp.Migrations.csproj" />
+    <Project Path="src/MyApp.ServiceDefaults/MyApp.ServiceDefaults.csproj" />
+    <Project Path="src/MyApp.Web.Client/MyApp.Web.Client.csproj" />
+    <Project Path="src/MyApp.Web/MyApp.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MyApp.Api.Tests/MyApp.Api.Tests.csproj" />
+    <Project Path="tests/MyApp.AppHost.Tests/MyApp.AppHost.Tests.csproj" />
+    <Project Path="tests/MyApp.Migrations.Tests/MyApp.Migrations.Tests.csproj" />
+    <Project Path="tests/MyApp.Web.Client.Tests/MyApp.Web.Client.Tests.csproj" />
+  </Folder>
+</Solution>

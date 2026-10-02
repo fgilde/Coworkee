@@ -1,0 +1,20 @@
+using Coworkee.Core.Modularity;
+using Microsoft.EntityFrameworkCore;
+using MyApp.Infrastructure;
+
+var builder = Host.CreateApplicationBuilder(args);
+builder.AddServiceDefaults();
+builder.Services.AddCoworkeeModules<MyAppDatabaseModule>(builder.Configuration);
+using var host = builder.Build();
+
+await using var scope = host.Services.CreateAsyncScope();
+try
+{
+    await scope.ServiceProvider.GetRequiredService<MyAppDbContext>().Database.MigrateAsync();
+    return 0;
+}
+catch (Exception exception)
+{
+    scope.ServiceProvider.GetRequiredService<ILogger<Program>>().LogCritical(exception, "Database migration failed");
+    return 1;
+}

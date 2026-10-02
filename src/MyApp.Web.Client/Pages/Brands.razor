@@ -1,0 +1,93 @@
+@page "/catalog/brands"
+@attribute [Authorize]
+@using Coworkee.Client.Blazor.Api
+@using MyApp.Contracts.Catalog
+@inject IMyAppApi Api
+@inject ISnackbar Snackbar
+
+<PageTitle>Brands</PageTitle>
+<RealtimeSubscription Topic="type:Brand" OnEvent="_ => LoadAsync()" />
+<MudText Typo="Typo.h4" Class="mb-4">Brands</MudText>
+
+<MudSimpleTable Dense="true" Hover="true" data-testid="brands">
+    <thead><tr><th>Name</th><th>Description</th><th>Tax</th><th>Products</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var brand in _brands)
+        {
+            <tr data-brand="@brand.Name">
+                <td>@brand.Name</td>
+                <td>@brand.Description</td>
+                <td>@brand.Tax %</td>
+                <td><MudLink Href="@($"/catalog/products?brand={brand.Id}")">@brand.ProductCount</MudLink></td>
+                <td style="text-align:right">
+                    <PermissionView Permission="@CatalogPermissions.Manage">
+                        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="Size.Small" aria-label="Edit" OnClick="() => Edit(brand)" />
+                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Small" aria-label="Delete" OnClick="() => RunAsync(() => Api.DeleteBrandAsync(brand.Id))" />
+                    </PermissionView>
+                </td>
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+<PermissionView Permission="@CatalogPermissions.Manage">
+    <MudPaper Outlined="true" Class="pa-4 mt-4">
+        <MudText Typo="Typo.h6">@(_id is null ? "New brand" : "Edit brand")</MudText>
+        <MudStack Row="true" AlignItems="AlignItems.End" Wrap="Wrap.Wrap">
+            <MudTextField @bind-Value="_name" Label="Name" data-testid="brand-name" />
+            <MudTextField @bind-Value="_description" Label="Description" />
+            <MudNumericField @bind-Value="_tax" Label="Tax %" Min="0" Max="100" Style="max-width:120px" />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync" data-testid="save-brand">Save</MudButton>
+            @if (_id is not null)
+            {
+                <MudButton OnClick="Reset">Cancel</MudButton>
+            }
+        </MudStack>
+    </MudPaper>
+</PermissionView>
+
+@code {
+    private IReadOnlyList<BrandDto> _brands = [];
+    private Guid? _id;
+    private string? _name, _description;
+    private decimal _tax;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            _brands = await Api.GetBrandsAsync();
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Warning);
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void Edit(BrandDto brand) => (_id, _name, _description, _tax) = (brand.Id, brand.Name, brand.Description, brand.Tax);
+
+    private void Reset() => (_id, _name, _description, _tax) = (null, null, null, 0);
+
+    private Task SaveAsync() => RunAsync(async () =>
+    {
+        await Api.SaveBrandAsync(_id, new BrandRequest(_name ?? string.Empty, _description, _tax));
+        Reset();
+    });
+
+    private async Task RunAsync(Func<Task> action)
+    {
+        try
+        {
+            await action();
+            await LoadAsync();
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Error);
+        }
+    }
+}

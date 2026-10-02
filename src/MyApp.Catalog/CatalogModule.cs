@@ -35,7 +35,7 @@ public sealed class MyAppCatalogModule : CoworkeeModule, IWebModule
 
         var products = app.MapGroup("/api/v1/products").WithTags("Catalog").RequireAuthorization();
         products.MapGet("/", (int? page, int? pageSize, string? search, Guid? brandId, IDispatcher d, CancellationToken ct) =>
-            d.SendAsync(new GetProducts(new PageRequest(page ?? 1, Math.Clamp(pageSize ?? 25, 1, 200), search), brandId), ct).ToHttpResult());
+            d.SendAsync(new GetProducts(new PageRequest(Math.Max(page ?? 1, 1), Math.Clamp(pageSize ?? 25, 1, 200), search), brandId), ct).ToHttpResult());
         products.MapPost("/", (ProductRequest body, IDispatcher d, CancellationToken ct) => d.SendAsync(new SaveProduct(null, body), ct).ToHttpResult());
         products.MapPut("/{id:guid}", (Guid id, ProductRequest body, IDispatcher d, CancellationToken ct) => d.SendAsync(new SaveProduct(id, body), ct).ToHttpResult());
         products.MapDelete("/{id:guid}", (Guid id, IDispatcher d, CancellationToken ct) => d.SendAsync(new DeleteProduct(id), ct).ToHttpResult());
@@ -160,6 +160,11 @@ internal sealed class CatalogHandlers(CoworkeeDbContext db, TimeProvider clock)
             return Error.Validation("Tax", "Tax from 0 to 100 percent.");
         }
 
+        if (request.Description is { Length: > 2000 })
+        {
+            return Error.Validation("Description", "Up to 2000 characters.");
+        }
+
         var name = request.Name.Trim();
         if (await db.Set<Brand>().AnyAsync(b => b.Name == name && b.Id != command.Id, cancellationToken))
         {
@@ -235,9 +240,14 @@ internal sealed class CatalogHandlers(CoworkeeDbContext db, TimeProvider clock)
             return Error.Validation("Name", "A name of up to 200 characters is required.");
         }
 
-        if (request.Rate < 0)
+        if (request.Rate is < 0 or >= 100_000_000_000_000m)
         {
-            return Error.Validation("Rate", "The rate cannot be negative.");
+            return Error.Validation("Rate", "The rate is from 0 to below 10^14.");
+        }
+
+        if (request.Barcode is { Length: > 100 } || request.Description is { Length: > 2000 })
+        {
+            return Error.Validation("Barcode", "Barcodes up to 100, descriptions up to 2000 characters.");
         }
 
         if (await db.Set<Brand>().AsNoTracking().SingleOrDefaultAsync(b => b.Id == request.BrandId, cancellationToken) is not { } brand)

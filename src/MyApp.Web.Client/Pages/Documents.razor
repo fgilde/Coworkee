@@ -9,7 +9,6 @@
 @inject ISnackbar Snackbar
 
 <PageTitle>Documents</PageTitle>
-<RealtimeSubscription Topic="type:Document" OnEvent="_ => LoadAsync()" />
 <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
     <MudText Typo="Typo.h4">Documents</MudText>
     <MudSpacer />
@@ -29,7 +28,7 @@
                         <td>@document.FileName</td>
                         <td>@FormatSize(document.Size)</td>
                         <td>@(document.IsPublic ? "public" : "private")</td>
-                        <td style="text-align:right">
+                        <td style="text-align:right" @onclick:stopPropagation="true">
                             <MudIconButton Icon="@Icons.Material.Outlined.Download" Size="Size.Small" Href="@DocumentUrls.Content(document.Id, download: true)" aria-label="Download" />
                             @if (document.CanEdit)
                             {
@@ -125,7 +124,9 @@
     {
         try
         {
+            // ponytail: the newest 100; a pager like the products page when lists get long
             _documents = await Api.GetDocumentsAsync(new PageRequest(1, 100, _search));
+            _selected = _selected is { } selected ? _documents.Items.FirstOrDefault(d => d.Id == selected.Id) : null;
         }
         catch (ApiException exception)
         {

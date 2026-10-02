@@ -95,6 +95,8 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
 
         (await Admin.GetFromJsonAsync<PagedResult<DocumentDto>>("/api/v1/documents", Ct))!.TotalCount.ShouldBe(2);
         (await uploader.DeleteAsync($"/api/v1/documents/{mine.Id}", Ct)).StatusCode.ShouldBe(HttpStatusCode.NoContent);
+        (await Admin.DeleteAsync($"/api/v1/documents/{html.Id}", Ct)).StatusCode.ShouldBe(HttpStatusCode.NoContent, "managers may delete documents of others");
+        (await Admin.GetAsync("/api/v1/documents?page=0", Ct)).StatusCode.ShouldBe(HttpStatusCode.OK);
         (await uploader.GetAsync($"/api/v1/documents/{mine.Id}", Ct)).StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
 

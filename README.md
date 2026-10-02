@@ -4,7 +4,7 @@ A Blazor (WASM + BFF) and ASP.NET Core app built on the **Coworkee** packages. I
 
 ## What Coworkee brings
 
-Sign-in through its own auth server (OpenIddict, passkeys, 2FA), setup wizard on an empty database, users, groups, roles, permission matrix and resource permissions, settings, mail templates, audit log, themes, realtime updates, notifications, background jobs (Hangfire), blob storage (file system, S3, Azure Blob) and the admin UI. Everything runs under .NET Aspire with PostgreSQL, Redis and Mailpit.
+Sign-in through its own auth server (OpenIddict, passkeys, 2FA), setup wizard on an empty database, users, groups, roles, permission matrix and resource permissions, settings, mail templates, audit log, themes, realtime updates, notifications, background jobs (Hangfire), blob storage (file system, S3, Azure Blob) and the admin UI. Everything runs under .NET Aspire with PostgreSQL, Redis, Mailpit and Elasticsearch (started by Coworkee.Aspire; unused until you add search).
 
 ## What the app adds (examples to copy or delete)
 
@@ -18,7 +18,7 @@ Pages: dashboard (`/`), brands, products, documents, document types. The admin a
 ## Getting started
 
 1. .NET 10 SDK, Docker.
-2. Coworkee packages: clone `CoworkeeLib` next to this repository and run `pwsh build/pack-local.ps1` there (fills `../coworkee/artifacts/nuget`, which `nuget.config` points at).
+2. Coworkee packages: `git clone https://github.com/fgilde/CoworkeeLib.git ../coworkee`, then run `pwsh build/pack-local.ps1` in `../coworkee` (fills `../coworkee/artifacts/nuget`, which `nuget.config` points at).
 3. `dotnet run --project src/MyApp.AppHost`, open the web app from the Aspire dashboard and complete the setup wizard (the setup token is in the api log, or set `MyApp:SetupToken` for the AppHost).
 
 ## Your own app

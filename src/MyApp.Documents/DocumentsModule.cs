@@ -41,7 +41,7 @@ public sealed class MyAppDocumentsModule : CoworkeeModule, IWebModule
 
         var documents = app.MapGroup("/api/v1/documents").WithTags("Documents").RequireAuthorization();
         documents.MapGet("/", (int? page, int? pageSize, string? search, IDispatcher d, CancellationToken ct) =>
-            d.SendAsync(new GetDocuments(new PageRequest(page ?? 1, Math.Clamp(pageSize ?? 25, 1, 200), search)), ct).ToHttpResult());
+            d.SendAsync(new GetDocuments(new PageRequest(Math.Max(page ?? 1, 1), Math.Clamp(pageSize ?? 25, 1, 200), search)), ct).ToHttpResult());
         documents.MapGet("/{id:guid}", (Guid id, IDispatcher d, CancellationToken ct) => d.SendAsync(new GetDocument(id), ct).ToHttpResult());
 
         // the api is called with a bearer token through the BFF (which checks its own CSRF header), so form antiforgery does not apply
@@ -82,7 +82,7 @@ public sealed class DocumentType : AuditedEntity, IMultiTenant
     public Guid TenantId { get; set; }
 }
 
-[Realtime(DocumentPermissions.View)]
+// no [Realtime]: change events would tell every viewer about private documents; the page reloads after its own changes
 public sealed class Document : AuditedEntity, IMultiTenant
 {
     public required string Title { get; set; }
@@ -183,7 +183,11 @@ internal sealed class DocumentHandlers(CoworkeeDbContext db, ICurrentUser curren
     private static readonly FileExtensionContentTypeProvider ContentTypes = new();
 
     // executables and scripts are refused whatever they claim to be
-    private static readonly HashSet<string> Forbidden = [".exe", ".dll", ".bat", ".cmd", ".com", ".msi", ".scr", ".ps1", ".vbs", ".js", ".jar", ".sh", ".hta", ".lnk"];
+    private static readonly HashSet<string> Forbidden =
+    [
+        ".exe", ".dll", ".bat", ".cmd", ".com", ".msi", ".msix", ".appx", ".scr", ".ps1", ".psm1", ".vbs", ".vbe", ".js", ".mjs", ".jse", ".wsf", ".wsh", ".jar", ".sh",
+        ".hta", ".lnk", ".url", ".reg", ".cpl", ".pif", ".application", ".iso", ".inf", ".msc",
+    ];
 
     public async Task<Result<IReadOnlyList<DocumentTypeDto>>> HandleAsync(GetDocumentTypes query, CancellationToken cancellationToken)
     {
@@ -196,6 +200,11 @@ internal sealed class DocumentHandlers(CoworkeeDbContext db, ICurrentUser curren
         if (string.IsNullOrWhiteSpace(command.Request.Name) || command.Request.Name.Length > 200)
         {
             return Error.Validation("Name", "A name of up to 200 characters is required.");
+        }
+
+        if (command.Request.Description is { Length: > 2000 })
+        {
+            return Error.Validation("Description", "Up to 2000 characters.");
         }
 
         var name = command.Request.Name.Trim();
@@ -296,7 +305,12 @@ internal sealed class DocumentHandlers(CoworkeeDbContext db, ICurrentUser curren
             return problem;
         }
 
-        var key = BlobKeys.New(currentUser.TenantId ?? Guid.Empty, clock);
+        if (currentUser.TenantId is not { } tenantId)
+        {
+            return Error.Forbidden("documents.no_tenant", "Documents belong to an organisation.");
+        }
+
+        var key = BlobKeys.New(tenantId, clock);
         var mimeType = ContentTypes.TryGetContentType(fileName, out var type) ? type : "application/octet-stream";
         await storage.PutAsync(key, command.Content, mimeType, cancellationToken);
         var document = new Document

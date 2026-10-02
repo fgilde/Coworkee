@@ -44,11 +44,20 @@ else
             _dashboard = await Api.GetDashboardAsync();
             _labels = _dashboard.ProductsPerMonth.Select(m => $"{m.Month:00}/{m.Year % 100:00}").ToArray();
             _series = [new ChartSeries<double> { Name = "Products", Data = _dashboard.ProductsPerMonth.Select(m => (double)m.Count).ToArray() }];
-            _documents = (await Api.GetDocumentsAsync(new PageRequest(1, 1))).TotalCount;
         }
         catch (ApiException exception)
         {
-            _error ??= exception.Status == 403 ? "You may not view the catalog." : exception.Message;
+            _error = exception.Status == 403 ? "You may not view the catalog." : exception.Message;
+        }
+
+        try
+        {
+            _documents = (await Api.GetDocumentsAsync(new PageRequest(1, 1))).TotalCount;
+        }
+        catch (ApiException)
+        {
+            // without the documents right the tile stays at zero
+            _documents = 0;
         }
 
         await InvokeAsync(StateHasChanged);

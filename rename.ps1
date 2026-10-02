@@ -1,124 +1,49 @@
-#region Params
+# Renames the app: "MyApp" -> "<New>" and "myapp" -> "<new>" in file contents, file names and folder names (one pass, case-sensitive).
+# Usage: pwsh ./rename.ps1 -new Contoso [-old MyApp] [-dir .]
 param(
-    [Parameter()]
     [String]$old,
     [String]$new,
-    [String]$dir,
-    [String]$autoName
+    [String]$dir
 )
-#endregion Params
 
-#region Options
-$compile = $false;
-# Definiere die Dateimasken für textbasierte Dateien
-$mask = "*.csproj *.cs *.xaml *.xml *.yml *.yaml *.json *.asax *.cshtml *.config *.js *.razor *.proto *.css *.html *.md *.razor.cs *.DotSettings *.user Dockerfile *.g.cs *.editorconfig *.sln *.slnx *.props *.targets"
-#endregion Options
-
-#region Param Handling
-if (-not $dir) {
-    $dir = Get-Location
-}
-$solutionFileName = Get-ChildItem -Path $dir -Filter *.slnx | ForEach-Object { $_.Name.Replace(".slnx","") }
-
-Write-Output "Working in Directory: $($dir)"
-
+if (-not $dir) { $dir = Get-Location }
 if (-not $old) {
-    if ($solutionFileName) {
-        $old = $solutionFileName
-    } else {
-        $old = "MyApp"
-    }
-    if (-not $autoName) {
-        ($old, (Read-Host "Enter your old name or press Enter to use '$old'")) -match '\S' | ForEach-Object { $old = $_ }
-    }
+    $old = Get-ChildItem -Path $dir -Filter *.slnx | Select-Object -First 1 | ForEach-Object { $_.BaseName }
+    if (-not $old) { $old = "MyApp" }
+}
+while (-not $new) { $new = Read-Host "Enter the new name" }
+if ($new -notmatch '^[A-Za-z][A-Za-z0-9]*$') { throw "Use letters and digits only, starting with a letter." }
+
+Write-Host "Rename '$old' to '$new' in $dir"
+$skip = '[\\/](\.git|bin|obj|node_modules|\.data)([\\/]|$)'
+$text = @('.cs', '.razor', '.csproj', '.props', '.targets', '.slnx', '.json', '.yml', '.yaml', '.md', '.ps1', '.css', '.js', '.html', '.xml', '.editorconfig', '.config', '.http')
+$lowerOld = $old.ToLowerInvariant()
+$lowerNew = $new.ToLowerInvariant()
+
+function Rename-Text([string]$value) {
+    # case-sensitive: "MyApp" -> "Contoso" for types and projects, "myapp" -> "contoso" for resource, scope and connection names
+    return $value -creplace [regex]::Escape($old), $new -creplace [regex]::Escape($lowerOld), $lowerNew
 }
 
-while (-not $new) {    
-    ($new, (Read-Host "Enter the new name:")) -match '\S' | ForEach-Object { $new = $_ }
-}
-
-if (-not $old) {
-    throw 'Invalid old name'
-    exit
-}
-
-Write-Host "Rename from '$old' to '$new'"
-#endregion Param Handling
-
-#region Executing
-if ($compile) {
-    Invoke-Expression "dotnet build .\$($solutionFileName).sln"
-}
-
-
-Invoke-Expression "dotnet tool install -g vsrenamer"
-$cmd = "vsrenamer.exe -a -c -f $($old) -t $($new) -w $($dir) --rename true --replacecontent true -m '$($mask)'"
-Invoke-Expression $cmd
-
-# Aktualisiere .csproj Dateien für Namespace- und AssemblyName-Änderungen
-$files = Get-ChildItem -Path $dir -Filter *.csproj -Recurse
-foreach ($f in $files) {
-    $ns = "$($new)." + $f.Name.Replace(".csproj","")
-    Write-Host "Updating file: $($f.FullName) with namespace: $ns"
-
-    $xml = New-Object XML
-    $xml.Load($f.FullName)
-    
-    # Aktualisiere RootNamespace
-    $rootNamespaceNode = $xml.SelectSingleNode("//RootNamespace")
-    if ($null -ne $rootNamespaceNode -and $rootNamespaceNode.PSObject.Properties.Match("InnerText")) {
-        $rootNamespaceNode.InnerText = $ns
-    } else {
-        Write-Warning "RootNamespace-Element nicht gefunden oder nicht änderbar in Datei $($f.FullName)"
-    }
-    
-    # Aktualisiere AssemblyName
-    $assemblyNameNode = $xml.SelectSingleNode("//AssemblyName")
-    if ($null -ne $assemblyNameNode -and $assemblyNameNode.PSObject.Properties.Match("InnerText")) {
-        $assemblyNameNode.InnerText = $ns
-    } else {
-        Write-Warning "AssemblyName-Element nicht gefunden oder nicht änderbar in Datei $($f.FullName)"
-    }
-    
-    $xml.Save($f.FullName)
-}
-
-# Ersetze in allen textbasierten Dateien den alten Namen durch den neuen
-$extensions = $mask.Split(" ")
-foreach ($ext in $extensions) {
-    Get-ChildItem -Path $dir -Filter $ext -Recurse | ForEach-Object {
-        try {
-            # case-sensitive, so resource and connection names (lower case, e.g. "myapp-api") stay lower case
-            (Get-Content $_.FullName -ErrorAction Stop) -creplace [regex]::Escape($old), $new -creplace [regex]::Escape($old.ToLowerInvariant()), $new.ToLowerInvariant() | Set-Content $_.FullName
-            Write-Host "Updated content in file: $($_.FullName)"
-        }
-        catch {
-            Write-Warning "Fehler beim Verarbeiten der Datei: $($_.FullName) - $_"
+$files = Get-ChildItem -Path $dir -Recurse -File -Force | Where-Object { $_.FullName -notmatch $skip }
+foreach ($file in $files | Where-Object { $text -contains $_.Extension -or $_.Name -eq 'Dockerfile' }) {
+    if ($file.FullName -eq $PSCommandPath) { continue }
+    $content = Get-Content -LiteralPath $file.FullName -Raw
+    if ($null -ne $content) {
+        $renamed = Rename-Text $content
+        if ($renamed -cne $content) {
+            Set-Content -LiteralPath $file.FullName -Value $renamed -NoNewline
+            Write-Host "content: $($file.FullName)"
         }
     }
 }
 
-# Benenne Dateien um, die den alten Namen beinhalten
-Get-ChildItem -Path $dir -Recurse -File | ForEach-Object {
-    if ($_.Name -like "*$old*") {
-        $newFileName = $_.Name -replace [regex]::Escape($old), $new
-        $newFilePath = Join-Path -Path $_.DirectoryName -ChildPath $newFileName
-        Rename-Item -Path $_.FullName -NewName $newFileName
-        Write-Host "Renamed file: $($_.FullName) to $newFilePath"
-    }
+foreach ($file in $files | Where-Object { $_.Name -cmatch [regex]::Escape($old) }) {
+    Rename-Item -LiteralPath $file.FullName -NewName (Rename-Text $file.Name)
 }
 
-# Benenne Ordner um, die den alten Namen beinhalten (von tiefster Ebene beginnend)
-Get-ChildItem -Path $dir -Recurse -Directory | Sort-Object FullName -Descending | ForEach-Object {
-    if ($_.Name -like "*$old*") {
-        $newDirName = $_.Name -replace [regex]::Escape($old), $new
-        $newDirPath = Join-Path -Path $_.Parent.FullName -ChildPath $newDirName
-        Rename-Item -Path $_.FullName -NewName $newDirName
-        Write-Host "Renamed directory: $($_.FullName) to $newDirPath"
-    }
-}
+# deepest folders first, so parents are renamed after their children
+Get-ChildItem -Path $dir -Recurse -Directory -Force | Where-Object { $_.FullName -notmatch $skip -and $_.Name -cmatch [regex]::Escape($old) } |
+    Sort-Object { $_.FullName.Length } -Descending | ForEach-Object { Rename-Item -LiteralPath $_.FullName -NewName (Rename-Text $_.Name) }
 
-if ($compile) {
-    Invoke-Expression "dotnet build .\$($new).sln"
-}
-#endregion Executing
+Write-Host "Done. Build with: dotnet build $new.slnx"

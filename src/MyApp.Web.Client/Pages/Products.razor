@@ -17,7 +17,7 @@
             <MudSelectItem T="Guid?" Value="@brand.Id">@brand.Name</MudSelectItem>
         }
     </MudSelect>
-    <MudTextField T="string" @bind-Value="_search" Label="Search" Immediate="true" DebounceInterval="300" OnDebounceIntervalElapsed="_ => LoadAsync()" Style="max-width:240px" data-testid="search" />
+    <MudTextField T="string" @bind-Value="_search" Label="Search" Immediate="true" DebounceInterval="300" OnDebounceIntervalElapsed="_ => PageAsync(1)" Style="max-width:240px" data-testid="search" />
 </MudStack>
 
 <MudSimpleTable Dense="true" Hover="true" data-testid="products">

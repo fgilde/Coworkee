@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\MyApp.Contracts\MyApp.Contracts.csproj" />
+    <CoworkeePackage Include="Coworkee.AspNetCore" />
+    <CoworkeePackage Include="Coworkee.Infrastructure" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+</Project>

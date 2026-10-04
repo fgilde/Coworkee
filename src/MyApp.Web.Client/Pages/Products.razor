@@ -1,0 +1,146 @@
+@page "/catalog/products"
+@attribute [Authorize]
+@using Coworkee.Client.Blazor.Api
+@using Coworkee.Contracts
+@using MyApp.Contracts.Catalog
+@inject IMyAppApi Api
+@inject ISnackbar Snackbar
+
+<PageTitle>Products</PageTitle>
+<RealtimeSubscription Topic="type:Product" OnEvent="_ => LoadAsync()" />
+<MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+    <MudText Typo="Typo.h4">Products</MudText>
+    <MudSpacer />
+    <MudSelect T="Guid?" Value="Brand" ValueChanged="FilterAsync" Label="Brand" Clearable="true" Style="max-width:240px" data-testid="brand-filter">
+        @foreach (var brand in _brands)
+        {
+            <MudSelectItem T="Guid?" Value="@brand.Id">@brand.Name</MudSelectItem>
+        }
+    </MudSelect>
+    <MudTextField T="string" @bind-Value="_search" Label="Search" Immediate="true" DebounceInterval="300" OnDebounceIntervalElapsed="_ => PageAsync(1)" Style="max-width:240px" data-testid="search" />
+</MudStack>
+
+<MudSimpleTable Dense="true" Hover="true" data-testid="products">
+    <thead><tr><th>Name</th><th>Brand</th><th>Barcode</th><th>Rate</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var product in _products.Items)
+        {
+            <tr data-product="@product.Name">
+                <td>@product.Name</td>
+                <td>@product.BrandName</td>
+                <td>@product.Barcode</td>
+                <td>@product.Rate.ToString("0.00")</td>
+                <td style="text-align:right">
+                    <PermissionView Permission="@CatalogPermissions.Manage">
+                        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="Size.Small" aria-label="Edit" OnClick="() => Edit(product)" />
+                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Small" aria-label="Delete" OnClick="() => RunAsync(() => Api.DeleteProductAsync(product.Id))" />
+                    </PermissionView>
+                </td>
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+@if (_products.TotalCount > PageSize)
+{
+    <MudPagination Count="@((_products.TotalCount + PageSize - 1) / PageSize)" Selected="_page" SelectedChanged="PageAsync" Class="mt-2" />
+}
+
+<PermissionView Permission="@CatalogPermissions.Manage">
+    <MudPaper Outlined="true" Class="pa-4 mt-4">
+        <MudText Typo="Typo.h6">@(_id is null ? "New product" : "Edit product")</MudText>
+        <MudStack Row="true" AlignItems="AlignItems.End" Wrap="Wrap.Wrap">
+            <MudTextField @bind-Value="_name" Label="Name" data-testid="product-name" />
+            <MudSelect T="Guid?" @bind-Value="_brandId" Label="Brand" Style="min-width:200px" data-testid="product-brand">
+                @foreach (var brand in _brands)
+                {
+                    <MudSelectItem T="Guid?" Value="@brand.Id">@brand.Name</MudSelectItem>
+                }
+            </MudSelect>
+            <MudTextField @bind-Value="_barcode" Label="Barcode" />
+            <MudNumericField @bind-Value="_rate" Label="Rate" Min="0" Style="max-width:140px" />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync" Disabled="_brandId is null" data-testid="save-product">Save</MudButton>
+            @if (_id is not null)
+            {
+                <MudButton OnClick="Reset">Cancel</MudButton>
+            }
+        </MudStack>
+    </MudPaper>
+</PermissionView>
+
+@code {
+    private const int PageSize = 25;
+
+    private IReadOnlyList<BrandDto> _brands = [];
+    private PagedResult<ProductDto> _products = new([], 0, 1, PageSize);
+    private int _page = 1;
+    private string? _search;
+    private Guid? _id, _brandId;
+    private string? _name, _barcode;
+    private decimal _rate;
+
+    [SupplyParameterFromQuery(Name = "brand")] public Guid? Brand { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _brands = await Api.GetBrandsAsync();
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Warning);
+        }
+
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            _products = await Api.GetProductsAsync(new PageRequest(_page, PageSize, _search), Brand);
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Warning);
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private Task FilterAsync(Guid? brand)
+    {
+        Brand = brand;
+        _page = 1;
+        return LoadAsync();
+    }
+
+    private Task PageAsync(int page)
+    {
+        _page = page;
+        return LoadAsync();
+    }
+
+    private void Edit(ProductDto product) => (_id, _name, _brandId, _barcode, _rate) = (product.Id, product.Name, product.BrandId, product.Barcode, product.Rate);
+
+    private void Reset() => (_id, _name, _brandId, _barcode, _rate) = (null, null, null, null, 0);
+
+    private Task SaveAsync() => RunAsync(async () =>
+    {
+        await Api.SaveProductAsync(_id, new ProductRequest(_name ?? string.Empty, _brandId!.Value, _barcode, null, _rate));
+        Reset();
+    });
+
+    private async Task RunAsync(Func<Task> action)
+    {
+        try
+        {
+            await action();
+            await LoadAsync();
+        }
+        catch (ApiException exception)
+        {
+            Snackbar.Add(exception.Message, Severity.Error);
+        }
+    }
+}

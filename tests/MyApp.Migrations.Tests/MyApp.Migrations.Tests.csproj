@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MyApp.Migrations\MyApp.Migrations.csproj" />
+  </ItemGroup>
+</Project>

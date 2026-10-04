@@ -1,0 +1,14 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.0">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>myapp-apphost</UserSecretsId>
+    <NoWarn>$(NoWarn);ASPIRE010</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <CoworkeePackage Include="Coworkee.Aspire" />
+    <ProjectReference Include="..\MyApp.Migrations\MyApp.Migrations.csproj" />
+    <ProjectReference Include="..\MyApp.Api\MyApp.Api.csproj" />
+    <ProjectReference Include="..\MyApp.Auth\MyApp.Auth.csproj" />
+    <ProjectReference Include="..\MyApp.Web\MyApp.Web.csproj" />
+  </ItemGroup>
+</Project>

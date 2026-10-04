@@ -239,3 +239,6 @@ _Pvt_Extensions
 /.patches
 /src/Server/wwwroot/Files/
 .azure
+
+# uploaded files of local runs
+.data/

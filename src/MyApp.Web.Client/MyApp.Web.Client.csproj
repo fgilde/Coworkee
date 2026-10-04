@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+    <CoworkeePackage Include="Coworkee.Client.Blazor" />
+    <InternalsVisibleTo Include="MyApp.Web.Client.Tests" />
+    <ProjectReference Include="..\MyApp.Contracts\MyApp.Contracts.csproj" />
+  </ItemGroup>
+</Project>

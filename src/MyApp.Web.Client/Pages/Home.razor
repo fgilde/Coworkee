@@ -1,0 +1,65 @@
+@page "/"
+@attribute [Authorize]
+@using Coworkee.Client.Blazor.Api
+@using Coworkee.Contracts
+@using MyApp.Contracts.Catalog
+@inject IMyAppApi Api
+
+<PageTitle>Dashboard</PageTitle>
+<RealtimeSubscription Topic="type:Product" OnEvent="_ => LoadAsync()" />
+<MudText Typo="Typo.h4" Class="mb-4">Dashboard</MudText>
+
+@if (_dashboard is null)
+{
+    <MudText Typo="Typo.body2" data-testid="dashboard-empty">@(_error ?? "Loading…")</MudText>
+}
+else
+{
+    <MudGrid>
+        <MudItem xs="12" sm="4"><MudPaper Class="pa-4" Outlined="true"><MudText Typo="Typo.caption">Brands</MudText><MudText Typo="Typo.h4" data-testid="brand-count">@_dashboard.Brands</MudText></MudPaper></MudItem>
+        <MudItem xs="12" sm="4"><MudPaper Class="pa-4" Outlined="true"><MudText Typo="Typo.caption">Products</MudText><MudText Typo="Typo.h4" data-testid="product-count">@_dashboard.Products</MudText></MudPaper></MudItem>
+        <MudItem xs="12" sm="4"><MudPaper Class="pa-4" Outlined="true"><MudText Typo="Typo.caption">Documents</MudText><MudText Typo="Typo.h4" data-testid="document-count">@_documents</MudText></MudPaper></MudItem>
+        <MudItem xs="12">
+            <MudPaper Class="pa-4" Outlined="true">
+                <MudText Typo="Typo.h6">New products per month</MudText>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="_series" ChartLabels="_labels" Height="300px" />
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+}
+
+@code {
+    private DashboardDto? _dashboard;
+    private int _documents;
+    private string? _error;
+    private List<ChartSeries<double>> _series = [];
+    private string[] _labels = [];
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            _dashboard = await Api.GetDashboardAsync();
+            _labels = _dashboard.ProductsPerMonth.Select(m => $"{m.Month:00}/{m.Year % 100:00}").ToArray();
+            _series = [new ChartSeries<double> { Name = "Products", Data = _dashboard.ProductsPerMonth.Select(m => (double)m.Count).ToArray() }];
+        }
+        catch (ApiException exception)
+        {
+            _error = exception.Status == 403 ? "You may not view the catalog." : exception.Message;
+        }
+
+        try
+        {
+            _documents = (await Api.GetDocumentsAsync(new PageRequest(1, 1))).TotalCount;
+        }
+        catch (ApiException)
+        {
+            // without the documents right the tile stays at zero
+            _documents = 0;
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+}

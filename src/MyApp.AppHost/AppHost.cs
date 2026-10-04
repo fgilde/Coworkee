@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 var builder = DistributedApplication.CreateBuilder(args);
 
 var infrastructure = builder.AddCoworkeeInfrastructure("myapp");
@@ -14,6 +15,12 @@ var auth = builder.AddProject<Projects.MyApp_Auth>("myapp-auth")
     .WaitForCompletion(migrations)
     .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints();
+
+if (builder.Environment.IsDevelopment())
+{
+    // per machine certificates are fine locally; production configures Coworkee__Auth__SigningCertificate and __EncryptionCertificate
+    auth.WithEnvironment("Coworkee__Auth__DevelopmentCertificates", "true");
+}
 
 var api = builder.AddProject<Projects.MyApp_Api>("myapp-api")
     .WithReference(infrastructure.Database)

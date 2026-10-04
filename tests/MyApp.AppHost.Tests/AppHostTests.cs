@@ -12,10 +12,11 @@ public sealed class AppHostTests
     {
         var ct = TestContext.Current.CancellationToken;
         var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.MyApp_AppHost>([$"--{CoworkeeInfrastructureExtensions.EphemeralSetting}=true"], ct);
-        await using var app = await appHost.BuildAsync(ct);
+        var app = await appHost.BuildAsync(ct);
+        await using var stop = AppHostDiagnostics.Guard(app);
         await app.StartAsync(ct);
 
-        await app.ResourceNotifications.WaitForResourceHealthyAsync("myapp-api", ct).WaitAsync(TimeSpan.FromMinutes(5), ct);
+        await AppHostDiagnostics.WaitHealthyAsync(app, ["myapp-api"], ct);
         using var client = app.CreateHttpClient("myapp-api");
         var info = await client.GetFromJsonAsync<JsonElement>("/api/v1/system/info", ct);
 
@@ -27,10 +28,10 @@ public sealed class AppHostTests
     {
         var ct = TestContext.Current.CancellationToken;
         var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.MyApp_AppHost>([$"--{CoworkeeInfrastructureExtensions.EphemeralSetting}=true"], ct);
-        await using var app = await appHost.BuildAsync(ct);
+        var app = await appHost.BuildAsync(ct);
+        await using var stop = AppHostDiagnostics.Guard(app);
         await app.StartAsync(ct);
-        await app.ResourceNotifications.WaitForResourceHealthyAsync("myapp-web", ct).WaitAsync(TimeSpan.FromMinutes(5), ct);
-        await app.ResourceNotifications.WaitForResourceHealthyAsync("myapp-auth", ct).WaitAsync(TimeSpan.FromMinutes(5), ct);
+        await AppHostDiagnostics.WaitHealthyAsync(app, ["myapp-web", "myapp-auth"], ct);
 
         using var web = app.CreateHttpClient("myapp-web");
         (await web.GetAsync("/", ct)).StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);

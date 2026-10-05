@@ -1,4 +1,5 @@
 using Coworkee.Client.Blazor;
+using Coworkee.Client.Blazor.Navigation;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyApp.Web.Client.Api;
 using MyApp.Web.Client.Navigation;
@@ -13,4 +14,5 @@ builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
     client.Timeout = Timeout.InfiniteTimeSpan;
 });
 builder.Services.AddSingleton<INavigationContributor, MyAppNavigation>();
+builder.Services.Configure<NavigationMenuOptions>(MyAppNavigation.Order);
 await builder.Build().RunAsync();

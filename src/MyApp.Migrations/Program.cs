@@ -8,6 +8,7 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddCoworkeeModules<MyAppDatabaseModule>(builder.Configuration);
 builder.Services.AddCoworkeeIdentitySeed(DemoSeed.Configure);
+builder.Services.AddScoped<Coworkee.Application.Setup.ISetupStep, DemoData>();
 using var host = builder.Build();
 
 await using var scope = host.Services.CreateAsyncScope();

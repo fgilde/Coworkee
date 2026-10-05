@@ -5,7 +5,7 @@ var infrastructure = builder.AddCoworkeeInfrastructure("myapp");
 
 var migrations = builder.AddProject<Projects.MyApp_Migrations>("myapp-migrations")
     .WithReference(infrastructure.Database)
-    .WaitFor(infrastructure.Database);
+    .WaitFor(infrastructure.Server);
 
 // uploaded documents
 var blobRoot = Path.GetFullPath(Path.Combine(builder.AppHostDirectory, "..", "..", ".data", "blobs"));

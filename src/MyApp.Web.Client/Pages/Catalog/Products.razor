@@ -1,0 +1,25 @@
+@page "/catalog/products"
+@attribute [Authorize(Policy = PermissionPolicy.Prefix + CatalogPermissions.Products.View)]
+
+<PageHeader Title="Products" Description="Manage products." />
+<RealtimeSubscription Topic="type:Product" OnEvent="_ => _table.ReloadAsync()" />
+<CoworkeeDataTable @ref="_table" T="ProductDto" EntitySet="Products" Expand="Brand" SearchFields="SearchFields" MultiSelection="true" ExportFileName="products"
+                   DescribeItem="p => p.Name" CreateText="New product"
+                   CreatePermission="@CatalogPermissions.Products.Create" EditPermission="@CatalogPermissions.Products.Edit" DeletePermission="@CatalogPermissions.Products.Delete"
+                   OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
+    <Columns>
+        <TemplateColumn T="ProductDto" Sortable="false" Title="">
+            <CellTemplate>
+                @if (context.Item.ImageDataUrl is { } image)
+                {
+                    <MudAvatar Size="Size.Small"><MudImage Src="@image" Alt="@context.Item.Name" /></MudAvatar>
+                }
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn Property="p => p.Name" />
+        <PropertyColumn Property="p => p.Brand!.Name" Title="Brand" />
+        <PropertyColumn Property="p => p.Description" />
+        <PropertyColumn Property="p => p.Barcode" />
+        <PropertyColumn Property="p => p.Rate" Format="0.00" />
+    </Columns>
+</CoworkeeDataTable>

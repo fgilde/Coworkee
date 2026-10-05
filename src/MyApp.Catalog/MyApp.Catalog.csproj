@@ -2,8 +2,12 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="..\MyApp.Contracts\MyApp.Contracts.csproj" />
+    <ProjectReference Include="..\MyApp.Application\MyApp.Application.csproj" />
     <CoworkeePackage Include="Coworkee.AspNetCore" />
     <CoworkeePackage Include="Coworkee.Infrastructure" />
+    <CoworkeePackage Include="Coworkee.OData" />
+    <CoworkeePackage Include="Coworkee.ResponseFilters" />
+    <CoworkeePackage Include="Coworkee.Identity" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 </Project>

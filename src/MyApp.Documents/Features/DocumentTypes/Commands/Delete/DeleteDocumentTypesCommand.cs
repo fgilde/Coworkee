@@ -1,0 +1,9 @@
+using Coworkee.Application.Authorization;
+using Coworkee.Application.Messaging;
+using Coworkee.Core.Results;
+using MyApp.Contracts.Documents;
+
+namespace MyApp.Documents.Features.DocumentTypes.Commands.Delete;
+
+[RequiresPermission(DocumentPermissions.Types.Delete)]
+public sealed record DeleteDocumentTypesCommand(IReadOnlyList<Guid> Ids) : ICommand<Result>;

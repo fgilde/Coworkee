@@ -1,0 +1,14 @@
+@page "/catalog/brands"
+@attribute [Authorize(Policy = PermissionPolicy.Prefix + CatalogPermissions.Brands.View)]
+
+<PageHeader Title="Brands" Description="Manage brands." />
+<RealtimeSubscription Topic="type:Brand" OnEvent="_ => _table.ReloadAsync()" />
+<CoworkeeDataTable @ref="_table" T="BrandDto" EntitySet="Brands" SearchFields="SearchFields" MultiSelection="true" ExportFileName="brands" DescribeItem="b => b.Name"
+                   CreateText="New brand" CreatePermission="@CatalogPermissions.Brands.Create" EditPermission="@CatalogPermissions.Brands.Edit" DeletePermission="@CatalogPermissions.Brands.Delete"
+                   OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
+    <Columns>
+        <PropertyColumn Property="b => b.Name" />
+        <PropertyColumn Property="b => b.Description" />
+        <PropertyColumn Property="b => b.Tax" Format="0.##" />
+    </Columns>
+</CoworkeeDataTable>

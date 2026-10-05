@@ -719,6 +719,27 @@ namespace MyApp.Infrastructure.Migrations
                     b.ToTable("NotificationDigests", "cw");
                 });
 
+            modelBuilder.Entity("Coworkee.Settings.ConfigurationEntry", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.Property<DateTimeOffset>("ModifiedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text")
+                        .HasAnnotation("Coworkee:Sensitive", true);
+
+                    b.HasKey("Key");
+
+                    b.ToTable("ConfigurationEntries", "cw");
+                });
+
             modelBuilder.Entity("Coworkee.Settings.SettingValue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -950,7 +971,7 @@ namespace MyApp.Infrastructure.Migrations
                     b.ToTable("UserTokens", "cw");
                 });
 
-            modelBuilder.Entity("MyApp.Catalog.Brand", b =>
+            modelBuilder.Entity("MyApp.Catalog.Domain.Brand", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -992,7 +1013,7 @@ namespace MyApp.Infrastructure.Migrations
                     b.ToTable("Brands", "app");
                 });
 
-            modelBuilder.Entity("MyApp.Catalog.Product", b =>
+            modelBuilder.Entity("MyApp.Catalog.Domain.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1014,6 +1035,9 @@ namespace MyApp.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)");
+
+                    b.Property<string>("ImageDataUrl")
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
@@ -1040,7 +1064,7 @@ namespace MyApp.Infrastructure.Migrations
                     b.ToTable("Products", "app");
                 });
 
-            modelBuilder.Entity("MyApp.Documents.Document", b =>
+            modelBuilder.Entity("MyApp.Documents.Domain.Document", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1106,7 +1130,7 @@ namespace MyApp.Infrastructure.Migrations
                     b.ToTable("Documents", "app");
                 });
 
-            modelBuilder.Entity("MyApp.Documents.DocumentType", b =>
+            modelBuilder.Entity("MyApp.Documents.Domain.DocumentType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1499,21 +1523,25 @@ namespace MyApp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyApp.Catalog.Product", b =>
+            modelBuilder.Entity("MyApp.Catalog.Domain.Product", b =>
                 {
-                    b.HasOne("MyApp.Catalog.Brand", null)
+                    b.HasOne("MyApp.Catalog.Domain.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("MyApp.Documents.Document", b =>
+            modelBuilder.Entity("MyApp.Documents.Domain.Document", b =>
                 {
-                    b.HasOne("MyApp.Documents.DocumentType", null)
+                    b.HasOne("MyApp.Documents.Domain.DocumentType", "DocumentType")
                         .WithMany()
                         .HasForeignKey("DocumentTypeId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("DocumentType");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization<System.Guid>", b =>

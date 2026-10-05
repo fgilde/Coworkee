@@ -3,8 +3,10 @@ using Coworkee.AspNetCore;
 using Coworkee.AspNetCore.Http;
 using Coworkee.Core.Modularity;
 using Coworkee.Infrastructure.Outbox;
+using Coworkee.ResponseFilters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MyApp.Application.System;
+using MyApp.Catalog;
 using MyApp.Infrastructure;
 
 namespace MyApp.Api;
@@ -17,6 +19,7 @@ public sealed class MyAppApiModule : CoworkeeModule, IWebModule
     public override void ConfigureServices(ModuleServiceContext context)
     {
         context.Services.AddCoworkeeOutboxProcessing<MyAppDbContext>();
+        context.Services.AddCoworkeeResponseFilters([typeof(MyAppCatalogModule).Assembly]);
         context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

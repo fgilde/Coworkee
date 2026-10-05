@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\src\MyApp.AppHost\MyApp.AppHost.csproj" />
+    <ProjectReference Include="..\..\src\MyApp.Migrations\MyApp.Migrations.csproj" />
     <PackageReference Include="Aspire.Hosting.Testing" />
     <CoworkeePackage Include="Coworkee.Contracts" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" />

@@ -1,65 +1,44 @@
 @page "/"
-@attribute [Authorize]
-@using Coworkee.Client.Blazor.Api
-@using Coworkee.Contracts
-@using MyApp.Contracts.Catalog
-@inject IMyAppApi Api
+@page "/home"
 
-<PageTitle>Dashboard</PageTitle>
-<RealtimeSubscription Topic="type:Product" OnEvent="_ => LoadAsync()" />
-<MudText Typo="Typo.h4" Class="mb-4">Dashboard</MudText>
-
-@if (_dashboard is null)
-{
-    <MudText Typo="Typo.body2" data-testid="dashboard-empty">@(_error ?? "Loading…")</MudText>
-}
-else
-{
+<PageTitle>@Options.AppTitle</PageTitle>
+<MudContainer MaxWidth="MaxWidth.Large">
     <MudGrid>
-        <MudItem xs="12" sm="4"><MudPaper Class="pa-4" Outlined="true"><MudText Typo="Typo.caption">Brands</MudText><MudText Typo="Typo.h4" data-testid="brand-count">@_dashboard.Brands</MudText></MudPaper></MudItem>
-        <MudItem xs="12" sm="4"><MudPaper Class="pa-4" Outlined="true"><MudText Typo="Typo.caption">Products</MudText><MudText Typo="Typo.h4" data-testid="product-count">@_dashboard.Products</MudText></MudPaper></MudItem>
-        <MudItem xs="12" sm="4"><MudPaper Class="pa-4" Outlined="true"><MudText Typo="Typo.caption">Documents</MudText><MudText Typo="Typo.h4" data-testid="document-count">@_documents</MudText></MudPaper></MudItem>
+        <MudItem xs="12" Class="d-flex justify-center mt-6">
+            <MudIcon Icon="@Icons.Material.Outlined.Hub" Color="Color.Primary" Style="width:200px;height:200px" />
+        </MudItem>
         <MudItem xs="12">
-            <MudPaper Class="pa-4" Outlined="true">
-                <MudText Typo="Typo.h6">New products per month</MudText>
-                <MudChart ChartType="ChartType.Bar" ChartSeries="_series" ChartLabels="_labels" Height="300px" />
-            </MudPaper>
+            <MudText Align="Align.Center" Typo="Typo.h2" Class="mud-ex-gradient-text">@Options.AppTitle</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h5">Clean Architecture starter for Blazor, built on Coworkee modules.</MudText>
+            <MudText Align="Align.Center" Class="mt-2">
+                Permissions, OData tables with facets, realtime and theming come with the packages;
+                the UI uses <MudLink Href="https://www.mudblazor.com" Target="_blank">MudBlazor</MudLink>
+                and <MudLink Href="https://github.com/fgilde/MudBlazor.Extensions" Target="_blank">MudBlazor.Extensions</MudLink>.
+            </MudText>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center gap-2 my-4 flex-wrap">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@ProjectUrl" Target="_blank">Project page</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Href="@DocumentationUrl" Target="_blank">Documentation</MudButton>
+            <AuthorizeView>
+                <Authorized>
+                    <MudButton Variant="Variant.Outlined" Href="/dashboard">Dashboard</MudButton>
+                </Authorized>
+            </AuthorizeView>
+        </MudItem>
+        <MudItem xs="12">
+            <MudExpansionPanels>
+                <MudExpansionPanel Text="Getting started">
+                    Sign in with one of the seeded accounts, then open the dashboard, the catalog or the document store.
+                    Every table loads through OData and offers facets, search, sorting, export and multi-select.
+                </MudExpansionPanel>
+                <MudExpansionPanel Text="Important links">
+                    <MudList T="string">
+                        <MudListItem T="string" Href="@ProjectUrl" Target="_blank" Text="Template repository" />
+                        <MudListItem T="string" Href="@DocumentationUrl" Target="_blank" Text="Coworkee developer documentation" />
+                        <MudListItem T="string" Href="https://github.com/fgilde/Nextended" Target="_blank" Text="Nextended" />
+                    </MudList>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
         </MudItem>
     </MudGrid>
-}
-
-@code {
-    private DashboardDto? _dashboard;
-    private int _documents;
-    private string? _error;
-    private List<ChartSeries<double>> _series = [];
-    private string[] _labels = [];
-
-    protected override Task OnInitializedAsync() => LoadAsync();
-
-    private async Task LoadAsync()
-    {
-        try
-        {
-            _dashboard = await Api.GetDashboardAsync();
-            _labels = _dashboard.ProductsPerMonth.Select(m => $"{m.Month:00}/{m.Year % 100:00}").ToArray();
-            _series = [new ChartSeries<double> { Name = "Products", Data = _dashboard.ProductsPerMonth.Select(m => (double)m.Count).ToArray() }];
-        }
-        catch (ApiException exception)
-        {
-            _error = exception.Status == 403 ? "You may not view the catalog." : exception.Message;
-        }
-
-        try
-        {
-            _documents = (await Api.GetDocumentsAsync(new PageRequest(1, 1))).TotalCount;
-        }
-        catch (ApiException)
-        {
-            // without the documents right the tile stays at zero
-            _documents = 0;
-        }
-
-        await InvokeAsync(StateHasChanged);
-    }
-}
+</MudContainer>

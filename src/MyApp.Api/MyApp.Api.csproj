@@ -3,6 +3,7 @@
     <ProjectReference Include="..\MyApp.Infrastructure\MyApp.Infrastructure.csproj" />
     <ProjectReference Include="..\MyApp.ServiceDefaults\MyApp.ServiceDefaults.csproj" />
     <CoworkeePackage Include="Coworkee.AspNetCore" />
+    <CoworkeePackage Include="Coworkee.ResponseFilters" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
   </ItemGroup>
 </Project>

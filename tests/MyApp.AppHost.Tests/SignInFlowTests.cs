@@ -32,29 +32,23 @@ public sealed partial class SignInFlowTests
             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
         }) { BaseAddress = webBase };
 
-        using (var setup = new HttpRequestMessage(HttpMethod.Post, "/api/v1/setup/complete")
-        {
-            Content = JsonContent.Create(new CompleteSetupRequest(SetupToken, "Acme", "admin@acme.test", "Admin#12345", "Ada", "Admin")),
-        })
-        {
-            setup.Headers.Add("X-CSRF", "1");
-            (await browser.SendAsync(setup, ct)).StatusCode.ShouldBe(HttpStatusCode.OK);
-        }
+        var admin = MyApp.Migrations.DemoSeed.Administrator;
+        (await browser.GetFromJsonAsync<SetupStatusDto>("/api/v1/setup/status", ct))!.IsInitialized.ShouldBeTrue("the migration service seeds the demo, no wizard");
 
         var loginPage = await browser.GetAsync("/bff/login?returnUrl=/bff/user", ct);
         var loginHtml = await loginPage.Content.ReadAsStringAsync(ct);
         loginHtml.ShouldContain("Sign in");
         var authorizeResponse = await browser.PostAsync(loginPage.RequestMessage!.RequestUri, new FormUrlEncodedContent(new Dictionary<string, string>
         {
-            ["Input.Email"] = "admin@acme.test",
-            ["Input.Password"] = "Admin#12345",
+            ["Input.Email"] = admin.Email,
+            ["Input.Password"] = admin.Password,
             ["__RequestVerificationToken"] = AntiforgeryToken().Match(loginHtml).Groups[1].Value,
         }), ct);
 
         // the code comes back as a redirect (response_mode=query), so the client lands on /bff/user right away
         var user = JsonDocument.Parse(await authorizeResponse.Content.ReadAsStringAsync(ct)).RootElement;
         user.GetProperty("isAuthenticated").GetBoolean().ShouldBeTrue();
-        user.GetProperty("email").GetString().ShouldBe("admin@acme.test");
+        user.GetProperty("email").GetString().ShouldBe(admin.Email);
 
         var permissions = await browser.GetFromJsonAsync<string[]>("/api/v1/identity/permissions/me", ct);
         permissions.ShouldContain(IdentityPermissions.Users.Manage);
@@ -67,7 +61,7 @@ public sealed partial class SignInFlowTests
 
         using var mailpit = new HttpClient { BaseAddress = app.GetEndpoint("mail", "http") };
         var deadline = DateTime.UtcNow.AddSeconds(90);
-        while (!(await mailpit.GetStringAsync("/api/v1/messages", ct)).Contains("admin@acme.test", StringComparison.OrdinalIgnoreCase))
+        while (!(await mailpit.GetStringAsync("/api/v1/messages", ct)).Contains(admin.Email, StringComparison.OrdinalIgnoreCase))
         {
             DateTime.UtcNow.ShouldBeLessThan(deadline, "welcome test mail did not arrive");
             await Task.Delay(500, ct);
@@ -121,7 +115,7 @@ public sealed partial class SignInFlowTests
         reLogin.RequestMessage!.RequestUri!.AbsolutePath.ShouldBe("/Account/Login");
 
         var authBase = app.GetEndpoint("myapp-auth", "https");
-        await PostAuthFormAsync(browser, new Uri(authBase, "/Account/ForgotPassword"), new() { ["Input.Email"] = "admin@acme.test" }, ct);
+        await PostAuthFormAsync(browser, new Uri(authBase, "/Account/ForgotPassword"), new() { ["Input.Email"] = admin.Email }, ct);
         string? resetLink = null;
         var resetDeadline = DateTime.UtcNow.AddSeconds(90);
         while (resetLink is null)
@@ -146,7 +140,7 @@ public sealed partial class SignInFlowTests
         var newLoginHtml = await newLogin.Content.ReadAsStringAsync(ct);
         var newAuthorize = await browser.PostAsync(newLogin.RequestMessage!.RequestUri, new FormUrlEncodedContent(new Dictionary<string, string>
         {
-            ["Input.Email"] = "admin@acme.test",
+            ["Input.Email"] = admin.Email,
             ["Input.Password"] = "Brand#New123",
             ["__RequestVerificationToken"] = AntiforgeryToken().Match(newLoginHtml).Groups[1].Value,
         }), ct);

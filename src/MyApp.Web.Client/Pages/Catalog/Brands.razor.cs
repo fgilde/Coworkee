@@ -28,9 +28,9 @@ public partial class Brands
 
     private async Task EditAsync(Guid? id, AddEditBrandRequest model)
     {
-        if (await Dialogs.ShowEditAsync(id is null ? "New brand" : "Edit brand", model) is { } saved)
+        if (await Dialogs.ShowEditAsync(L[id is null ? "New brand" : "Edit brand"], model, saved => Api.SaveBrandAsync(id, saved)))
         {
-            await Snackbar.RunAsync(() => Api.SaveBrandAsync(id, saved), L["Brand saved"]);
+            Snackbar.Add(L["Brand saved"], Severity.Success);
         }
     }
 

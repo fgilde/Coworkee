@@ -3,9 +3,10 @@ using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Components.Data;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using MudBlazor.Extensions.Components.ObjectEdit;
+using MudBlazor.Extensions.Components.ObjectEdit.Options;
 using MyApp.Contracts.Catalog;
 using MyApp.Web.Client.Api;
-using MyApp.Web.Client.Components;
 
 namespace MyApp.Web.Client.Pages.Catalog;
 
@@ -22,9 +23,38 @@ public partial class Products
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
-    private Task CreateAsync() => ProductDialog.ShowAsync(Dialogs, null);
+    private Task CreateAsync() => EditAsync(null, new AddEditProductRequest());
 
-    private Task EditAsync(ProductDto product) => ProductDialog.ShowAsync(Dialogs, product);
+    private Task EditAsync(ProductDto product) => EditAsync(product.Id, new AddEditProductRequest
+    {
+        Name = product.Name,
+        Barcode = product.Barcode,
+        Description = product.Description,
+        ImageDataUrl = product.ImageDataUrl,
+        Rate = product.Rate,
+        BrandId = product.BrandId,
+    });
+
+    private async Task EditAsync(Guid? id, AddEditProductRequest model)
+    {
+        if (await Dialogs.ShowEditAsync(L[id is null ? "New product" : "Edit product"], model, saved => Api.SaveProductAsync(id, saved), Configure))
+        {
+            Snackbar.Add(L["Product saved"], Severity.Success);
+        }
+    }
+
+    private void Configure(ObjectEditMeta<AddEditProductRequest> meta)
+    {
+        meta.Property(p => p.Name).WithLabel(L["Name"]).WithOrder(0);
+        meta.Property(p => p.BrandId).WithLabel(L["Brand"]).WithOrder(1)
+            .RenderWith<ODataPicker, Guid>(p => p.Value)
+            .WithAdditionalAttribute(nameof(ODataPicker.EntitySet), "Brands")
+            .WithAdditionalAttribute(nameof(ODataPicker.Required), true);
+        meta.Property(p => p.Barcode).WithLabel(L["Barcode"]).WithOrder(2);
+        meta.Property(p => p.Rate).WithLabel(L["Rate"]).WithOrder(3);
+        meta.Property(p => p.Description).WithLabel(L["Description"]).WithOrder(4).WithAdditionalAttribute("Lines", 3);
+        meta.Property(p => p.ImageDataUrl).WithLabel(L["Image"]).WithOrder(5).RenderWith<ImageDataUrlEdit, string?>(p => p.Value);
+    }
 
     private Task DeleteAsync(IReadOnlyCollection<ProductDto> products) => Snackbar.RunAsync(() => Api.DeleteProductsAsync([.. products.Select(p => p.Id)]));
 }

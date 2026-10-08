@@ -1,4 +1,6 @@
-<MudDialog>
+@using MudBlazor.Extensions.Components
+@using MyApp.Web.Client.Api
+<MudDialog ContentClass="d-flex flex-column">
     <TitleContent>
         <MudText Typo="Typo.h6">@L[Title]</MudText>
     </TitleContent>
@@ -24,6 +26,20 @@
                 </MudFileUpload>
             }
         </MudForm>
+        @if (Document is { } document)
+        {
+            <MudText Typo="Typo.subtitle2" Class="mt-4 mb-1">@L["Preview"]</MudText>
+            <div style="flex:1 1 auto;min-height:360px" data-testid="document-preview">
+                @if (DocumentInlineTypes.All.Contains(document.MimeType))
+                {
+                    <MudExFileDisplay Url="@DocumentUrls.Content(document.Id)" ContentType="@document.MimeType" FileName="@document.FileName" ShowFileName="false" Style="height:100%" />
+                }
+                else
+                {
+                    <MudAlert Severity="Severity.Info" Dense="true">@L["No preview for this file type; download it instead."]</MudAlert>
+                }
+            </div>
+        }
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">@L["Cancel"]</MudButton>

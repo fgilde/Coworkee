@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Components.Data;
 using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Data;
@@ -31,6 +32,8 @@ public partial class DocumentDialog
 
     [Parameter] public Guid? Id { get; set; }
 
+    [Parameter] public DocumentDto? Document { get; set; }
+
     [Parameter] public UpdateDocumentRequest Model { get; set; } = new();
 
     public static async Task<bool> ShowAsync(IDialogService dialogs, DocumentDto? document)
@@ -39,6 +42,7 @@ public partial class DocumentDialog
         {
             { d => d.Title, document is null ? "Upload a document" : "Edit document" },
             { d => d.Id, document?.Id },
+            { d => d.Document, document },
             {
                 d => d.Model, new UpdateDocumentRequest
                 {
@@ -49,7 +53,7 @@ public partial class DocumentDialog
                 }
             },
         };
-        var dialog = await dialogs.ShowAsync<DocumentDialog>(null, parameters, new DialogOptions { MaxWidth = MaxWidth.Small, FullWidth = true });
+        var dialog = await dialogs.ShowSideSheetAsync<DocumentDialog>(string.Empty, parameters);
         return await dialog.Result is { Canceled: false };
     }
 

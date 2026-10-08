@@ -27,9 +27,9 @@ public partial class DocumentTypes
 
     private async Task EditAsync(Guid? id, AddEditDocumentTypeRequest model)
     {
-        if (await Dialogs.ShowEditAsync(id is null ? "New document type" : "Edit document type", model) is { } saved)
+        if (await Dialogs.ShowEditAsync(L[id is null ? "New document type" : "Edit document type"], model, saved => Api.SaveDocumentTypeAsync(id, saved)))
         {
-            await Snackbar.RunAsync(() => Api.SaveDocumentTypeAsync(id, saved), L["Document type saved"]);
+            Snackbar.Add(L["Document type saved"], Severity.Success);
         }
     }
 

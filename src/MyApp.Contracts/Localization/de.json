@@ -62,5 +62,9 @@
   "Template repository": "Repository des Templates",
   "Coworkee developer documentation": "Coworkee-Entwicklerdokumentation",
   "public": "öffentlich",
-  "private": "privat"
+  "private": "privat",
+  "Communication": "Kommunikation",
+  "Site Settings": "Seiteneinstellungen",
+  "Database Backups": "Datenbanksicherungen",
+  "Audit Trails": "Änderungsprotokoll"
 }

@@ -21,4 +21,6 @@ builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
 });
 builder.Services.AddSingleton<INavigationContributor, MyAppNavigation>();
 builder.Services.Configure<NavigationMenuOptions>(MyAppNavigation.Order);
-await builder.Build().RunAsync();
+var host = builder.Build();
+await host.Services.InitializeCoworkeeClientAsync();
+await host.RunAsync();

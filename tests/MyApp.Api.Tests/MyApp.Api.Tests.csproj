@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\src\MyApp.Api\MyApp.Api.csproj" />
+    <ProjectReference Include="..\..\src\MyApp.Client\MyApp.Client.csproj" />
     <CoworkeePackage Include="Coworkee.Testing" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
   </ItemGroup>

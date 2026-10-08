@@ -5,6 +5,7 @@
     <Project Path="src/MyApp.Application/MyApp.Application.csproj" />
     <Project Path="src/MyApp.Auth/MyApp.Auth.csproj" />
     <Project Path="src/MyApp.Catalog/MyApp.Catalog.csproj" />
+    <Project Path="src/MyApp.Client/MyApp.Client.csproj" />
     <Project Path="src/MyApp.Contracts/MyApp.Contracts.csproj" />
     <Project Path="src/MyApp.Documents/MyApp.Documents.csproj" />
     <Project Path="src/MyApp.Infrastructure/MyApp.Infrastructure.csproj" />

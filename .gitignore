@@ -242,3 +242,6 @@ _Pvt_Extensions
 
 # uploaded files of local runs
 .data/
+
+sdk/typescript/node_modules/
+sdk/typescript/dist/

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <Description>Typed .NET client for the MyApp API: brands, products, document types and documents.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyApp.Contracts\MyApp.Contracts.csproj" />
+    <CoworkeePackage Include="Coworkee.Client" />
+  </ItemGroup>
+</Project>

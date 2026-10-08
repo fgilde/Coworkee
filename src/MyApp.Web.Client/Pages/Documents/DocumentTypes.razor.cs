@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Components.Data;
 using Microsoft.AspNetCore.Components;
@@ -9,6 +10,8 @@ namespace MyApp.Web.Client.Pages.Documents;
 
 public partial class DocumentTypes
 {
+    [Inject] private CoworkeeLocalizer L { get; set; } = null!;
+
     private static readonly string[] SearchFields = [nameof(DocumentTypeDto.Name), nameof(DocumentTypeDto.Description)];
     private CoworkeeDataTable<DocumentTypeDto> _table = null!;
 
@@ -26,7 +29,7 @@ public partial class DocumentTypes
     {
         if (await Dialogs.ShowEditAsync(id is null ? "New document type" : "Edit document type", model) is { } saved)
         {
-            await Snackbar.RunAsync(() => Api.SaveDocumentTypeAsync(id, saved), "Document type saved");
+            await Snackbar.RunAsync(() => Api.SaveDocumentTypeAsync(id, saved), L["Document type saved"]);
         }
     }
 

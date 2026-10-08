@@ -7,7 +7,7 @@
                    CreatePermission="@DocumentPermissions.Types.Create" EditPermission="@DocumentPermissions.Types.Edit" DeletePermission="@DocumentPermissions.Types.Delete"
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
     <Columns>
-        <PropertyColumn Property="t => t.Name" />
-        <PropertyColumn Property="t => t.Description" />
+        <PropertyColumn Property="t => t.Name" Title="@L["Name"]" />
+        <PropertyColumn Property="t => t.Description" Title="@L["Description"]" />
     </Columns>
 </CoworkeeDataTable>

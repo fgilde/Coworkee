@@ -9,32 +9,30 @@
         </MudItem>
         <MudItem xs="12">
             <MudText Align="Align.Center" Typo="Typo.h2" Class="mud-ex-gradient-text">@Options.AppTitle</MudText>
-            <MudText Align="Align.Center" Typo="Typo.h5">Clean Architecture starter for Blazor, built on Coworkee modules.</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h5">@L["Clean Architecture starter for Blazor, built on Coworkee modules."]</MudText>
             <MudText Align="Align.Center" Class="mt-2">
-                Permissions, OData tables with facets, realtime and theming come with the packages;
-                the UI uses <MudLink Href="https://www.mudblazor.com" Target="_blank">MudBlazor</MudLink>
-                and <MudLink Href="https://github.com/fgilde/MudBlazor.Extensions" Target="_blank">MudBlazor.Extensions</MudLink>.
+                @L["Permissions, OData tables with facets, realtime and theming come with the packages; the UI uses"] <MudLink Href="https://www.mudblazor.com" Target="_blank">MudBlazor</MudLink>
+                @L["and"] <MudLink Href="https://github.com/fgilde/MudBlazor.Extensions" Target="_blank">MudBlazor.Extensions</MudLink>.
             </MudText>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center gap-2 my-4 flex-wrap">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@ProjectUrl" Target="_blank">Project page</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Href="@DocumentationUrl" Target="_blank">Documentation</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@ProjectUrl" Target="_blank">@L["Project page"]</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Href="@DocumentationUrl" Target="_blank">@L["Documentation"]</MudButton>
             <AuthorizeView>
                 <Authorized>
-                    <MudButton Variant="Variant.Outlined" Href="/dashboard">Dashboard</MudButton>
+                    <MudButton Variant="Variant.Outlined" Href="/dashboard">@L["Dashboard"]</MudButton>
                 </Authorized>
             </AuthorizeView>
         </MudItem>
         <MudItem xs="12">
             <MudExpansionPanels>
-                <MudExpansionPanel Text="Getting started">
-                    Sign in with one of the seeded accounts, then open the dashboard, the catalog or the document store.
-                    Every table loads through OData and offers facets, search, sorting, export and multi-select.
+                <MudExpansionPanel Text="@L["Getting started"]">
+                    @L["Sign in with one of the seeded accounts, then open the dashboard, the catalog or the document store. Every table loads through OData and offers facets, search, sorting, export and multi-select."]
                 </MudExpansionPanel>
-                <MudExpansionPanel Text="Important links">
+                <MudExpansionPanel Text="@L["Important links"]">
                     <MudList T="string">
-                        <MudListItem T="string" Href="@ProjectUrl" Target="_blank" Text="Template repository" />
-                        <MudListItem T="string" Href="@DocumentationUrl" Target="_blank" Text="Coworkee developer documentation" />
+                        <MudListItem T="string" Href="@ProjectUrl" Target="_blank" Text="@L["Template repository"]" />
+                        <MudListItem T="string" Href="@DocumentationUrl" Target="_blank" Text="@L["Coworkee developer documentation"]" />
                         <MudListItem T="string" Href="https://github.com/fgilde/Nextended" Target="_blank" Text="Nextended" />
                     </MudList>
                 </MudExpansionPanel>

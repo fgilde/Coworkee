@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Data;
 using Microsoft.AspNetCore.Components;
@@ -10,6 +11,8 @@ namespace MyApp.Web.Client.Components;
 
 public partial class DocumentDialog
 {
+    [Inject] private CoworkeeLocalizer L { get; set; } = null!;
+
     private const long MaxFileBytes = 100L * 1024 * 1024;
     private MudForm _form = null!;
     private IReadOnlyList<DocumentTypeDto> _types = [];
@@ -63,12 +66,12 @@ public partial class DocumentDialog
 
         if (Id is null && _file is null)
         {
-            Snackbar.Add("Choose a file to upload.", Severity.Warning);
+            Snackbar.Add(L["Choose a file to upload."], Severity.Warning);
             return;
         }
 
         _saving = true;
-        if (await Snackbar.RunAsync(SendAsync, Id is null ? "Document uploaded" : "Document saved"))
+        if (await Snackbar.RunAsync(SendAsync, Id is null ? L["Document uploaded"] : L["Document saved"]))
         {
             Dialog.Close(DialogResult.Ok(true));
         }

@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Components.Data;
 using Microsoft.AspNetCore.Components;
@@ -10,6 +11,8 @@ namespace MyApp.Web.Client.Pages.Documents;
 
 public partial class DocumentStore
 {
+    [Inject] private CoworkeeLocalizer L { get; set; } = null!;
+
     private static readonly string[] SearchFields = [nameof(DocumentDto.Title), nameof(DocumentDto.Description), nameof(DocumentDto.FileName)];
     private CoworkeeDataTable<DocumentDto> _table = null!;
     private DocumentDto? _preview;

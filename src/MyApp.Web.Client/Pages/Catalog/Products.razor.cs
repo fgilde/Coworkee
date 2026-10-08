@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Components.Data;
 using Microsoft.AspNetCore.Components;
@@ -10,6 +11,8 @@ namespace MyApp.Web.Client.Pages.Catalog;
 
 public partial class Products
 {
+    [Inject] private CoworkeeLocalizer L { get; set; } = null!;
+
     private static readonly string[] SearchFields = [nameof(ProductDto.Name), nameof(ProductDto.Barcode), nameof(ProductDto.Description)];
     private CoworkeeDataTable<ProductDto> _table = null!;
 

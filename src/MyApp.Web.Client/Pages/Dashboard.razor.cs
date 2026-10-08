@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Localization;
 using System.Globalization;
 using Coworkee.Client.Blazor.Api;
 using Microsoft.AspNetCore.Components;
@@ -9,6 +10,8 @@ namespace MyApp.Web.Client.Pages;
 
 public partial class Dashboard
 {
+    [Inject] private CoworkeeLocalizer L { get; set; } = null!;
+
     private DashboardDto? _dashboard;
     private List<ChartSeries<double>> _series = [];
     private string[] _labels = [];

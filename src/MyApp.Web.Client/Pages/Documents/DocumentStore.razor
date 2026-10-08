@@ -11,18 +11,18 @@
                            CreatePermission="@DocumentPermissions.Documents.Create" EditPermission="@DocumentPermissions.Documents.Edit" DeletePermission="@DocumentPermissions.Documents.Delete"
                            OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
             <Columns>
-                <PropertyColumn Property="d => d.Title" />
-                <PropertyColumn Property="d => d.DocumentType!.Name" Title="Type" />
-                <PropertyColumn Property="d => d.FileName" Title="File" />
-                <PropertyColumn Property="d => d.Size">
+                <PropertyColumn Property="d => d.Title" Title="@L["Title"]" />
+                <PropertyColumn Property="d => d.DocumentType!.Name" Title="@L["Type"]" />
+                <PropertyColumn Property="d => d.FileName" Title="@L["File"]" />
+                <PropertyColumn Property="d => d.Size" Title="@L["Size"]">
                     <CellTemplate>@FormatSize(context.Item.Size)</CellTemplate>
                 </PropertyColumn>
-                <PropertyColumn Property="d => d.IsPublic" Title="Visibility">
+                <PropertyColumn Property="d => d.IsPublic" Title="@L["Visibility"]">
                     <CellTemplate>
-                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.IsPublic ? Color.Success : Color.Default)">@(context.Item.IsPublic ? "public" : "private")</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.IsPublic ? Color.Success : Color.Default)">@L[context.Item.IsPublic ? "public" : "private"]</MudChip>
                     </CellTemplate>
                 </PropertyColumn>
-                <PropertyColumn Property="d => d.CreatedAt" Title="Uploaded" Format="g" />
+                <PropertyColumn Property="d => d.CreatedAt" Title="@L["Uploaded"]" Format="g" />
                 <TemplateColumn T="DocumentDto" Sortable="false" CellStyle="white-space:nowrap">
                     <CellTemplate>
                         <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Size="Size.Small" aria-label="Preview" OnClick="() => _preview = context.Item" data-testid="preview-row" />
@@ -47,7 +47,7 @@
                 }
                 else
                 {
-                    <MudText Typo="Typo.body2" Class="pa-4">No preview for this file type; download it instead.</MudText>
+                    <MudText Typo="Typo.body2" Class="pa-4">@L["No preview for this file type; download it instead."]</MudText>
                 }
             </MudPaper>
         </MudItem>

@@ -7,8 +7,8 @@
                    CreateText="New brand" CreatePermission="@CatalogPermissions.Brands.Create" EditPermission="@CatalogPermissions.Brands.Edit" DeletePermission="@CatalogPermissions.Brands.Delete"
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
     <Columns>
-        <PropertyColumn Property="b => b.Name" />
-        <PropertyColumn Property="b => b.Description" />
-        <PropertyColumn Property="b => b.Tax" Format="0.##" />
+        <PropertyColumn Property="b => b.Name" Title="@L["Name"]" />
+        <PropertyColumn Property="b => b.Description" Title="@L["Description"]" />
+        <PropertyColumn Property="b => b.Tax" Title="@L["Tax"]" Format="0.##" />
     </Columns>
 </CoworkeeDataTable>

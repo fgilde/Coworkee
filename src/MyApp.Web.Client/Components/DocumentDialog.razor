@@ -1,24 +1,24 @@
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">@Title</MudText>
+        <MudText Typo="Typo.h6">@L[Title]</MudText>
     </TitleContent>
     <DialogContent>
         <MudForm @ref="_form">
-            <MudTextField @bind-Value="Model.Title" Label="Title" Required="true" MaxLength="200" data-testid="document-title" />
-            <MudSelect T="Guid?" @bind-Value="Model.DocumentTypeId" Label="Type" Clearable="true">
+            <MudTextField @bind-Value="Model.Title" Label="@L["Title"]" Required="true" MaxLength="200" data-testid="document-title" />
+            <MudSelect T="Guid?" @bind-Value="Model.DocumentTypeId" Label="@L["Type"]" Clearable="true">
                 @foreach (var type in _types)
                 {
                     <MudSelectItem T="Guid?" Value="type.Id">@type.Name</MudSelectItem>
                 }
             </MudSelect>
-            <MudTextField @bind-Value="Model.Description" Label="Description" Lines="3" />
-            <MudCheckBox @bind-Value="Model.IsPublic" Label="Visible to everyone who may view documents" />
+            <MudTextField @bind-Value="Model.Description" Label="@L["Description"]" Lines="3" />
+            <MudCheckBox @bind-Value="Model.IsPublic" Label="@L["Visible to everyone who may view documents"]" />
             @if (Id is null)
             {
                 <MudFileUpload T="IBrowserFile" @bind-Files="_file" Class="mt-2">
                     <CustomContent>
                         <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.AttachFile" OnClick="context.OpenFilePickerAsync" data-testid="choose-file">
-                            @(_file?.Name ?? "Choose file")
+                            @(_file?.Name ?? L["Choose file"])
                         </MudButton>
                     </CustomContent>
                 </MudFileUpload>
@@ -26,9 +26,9 @@
         </MudForm>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton OnClick="Cancel">@L["Cancel"]</MudButton>
         <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync" Disabled="_saving" data-testid="save-document">
-            @(Id is null ? "Upload" : "Save")
+            @L[Id is null ? "Upload" : "Save"]
         </MudButton>
     </DialogActions>
 </MudDialog>

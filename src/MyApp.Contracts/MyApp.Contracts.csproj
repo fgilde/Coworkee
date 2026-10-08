@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <CoworkeePackage Include="Coworkee.Contracts" />
+    <EmbeddedResource Include="Localization\*.json" />
   </ItemGroup>
 </Project>

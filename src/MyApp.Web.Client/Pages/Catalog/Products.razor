@@ -16,10 +16,10 @@
                 }
             </CellTemplate>
         </TemplateColumn>
-        <PropertyColumn Property="p => p.Name" />
-        <PropertyColumn Property="p => p.Brand!.Name" Title="Brand" />
-        <PropertyColumn Property="p => p.Description" />
-        <PropertyColumn Property="p => p.Barcode" />
-        <PropertyColumn Property="p => p.Rate" Format="0.00" />
+        <PropertyColumn Property="p => p.Name" Title="@L["Name"]" />
+        <PropertyColumn Property="p => p.Brand!.Name" Title="@L["Brand"]" />
+        <PropertyColumn Property="p => p.Description" Title="@L["Description"]" />
+        <PropertyColumn Property="p => p.Barcode" Title="@L["Barcode"]" />
+        <PropertyColumn Property="p => p.Rate" Title="@L["Rate"]" Format="0.00" />
     </Columns>
 </CoworkeeDataTable>

@@ -1,11 +1,20 @@
 using Coworkee.Auditing;
 using Coworkee.AuthServer;
 using Coworkee.Core.Modularity;
+using Coworkee.Localization;
+using Coworkee.Localization.Resources;
 using Coworkee.Mailing;
 using Coworkee.Notifications;
 using Coworkee.Theming;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MyApp.Infrastructure;
 
-[DependsOn(typeof(MyAppInfrastructureModule), typeof(CoworkeeAuthStoreModule), typeof(CoworkeeMailingModule), typeof(CoworkeeAuditingModule), typeof(CoworkeeThemingModule), typeof(CoworkeeNotificationsModule), typeof(Coworkee.Account.CoworkeeAccountModule), typeof(MyApp.Catalog.MyAppCatalogModule), typeof(MyApp.Documents.MyAppDocumentsModule))]
-public sealed class MyAppDatabaseModule : CoworkeeModule;
+[DependsOn(typeof(MyAppInfrastructureModule), typeof(CoworkeeAuthStoreModule), typeof(CoworkeeMailingModule), typeof(CoworkeeAuditingModule), typeof(CoworkeeThemingModule),
+    typeof(CoworkeeNotificationsModule), typeof(Coworkee.Account.CoworkeeAccountModule), typeof(CoworkeeLocalizationModule), typeof(MyApp.Catalog.MyAppCatalogModule),
+    typeof(MyApp.Documents.MyAppDocumentsModule))]
+public sealed class MyAppDatabaseModule : CoworkeeModule
+{
+    public override void ConfigureServices(ModuleServiceContext context) =>
+        context.Services.AddSingleton<ILocalizationResourceContributor, MyAppTexts>();
+}

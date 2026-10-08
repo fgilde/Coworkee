@@ -1,3 +1,4 @@
+using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Data;
 using Microsoft.AspNetCore.Components;
@@ -10,6 +11,8 @@ namespace MyApp.Web.Client.Components;
 
 public partial class ProductDialog
 {
+    [Inject] private CoworkeeLocalizer L { get; set; } = null!;
+
     private const long MaxImageBytes = 512 * 1024;
     private MudForm _form = null!;
     private IReadOnlyList<BrandDto> _brands = [];
@@ -62,7 +65,7 @@ public partial class ProductDialog
 
         if (file.Size > MaxImageBytes)
         {
-            Snackbar.Add("The image may have at most 512 KB.", Severity.Warning);
+            Snackbar.Add(L["The image may have at most 512 KB."], Severity.Warning);
             return;
         }
 
@@ -75,7 +78,7 @@ public partial class ProductDialog
     private async Task SaveAsync()
     {
         await _form.ValidateAsync();
-        if (_form.IsValid && await Snackbar.RunAsync(() => Api.SaveProductAsync(Id, Model), "Product saved"))
+        if (_form.IsValid && await Snackbar.RunAsync(() => Api.SaveProductAsync(Id, Model), L["Product saved"]))
         {
             Dialog.Close(DialogResult.Ok(true));
         }

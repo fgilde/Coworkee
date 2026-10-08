@@ -24,6 +24,7 @@
     <PackageVersion Include="Coworkee.Realtime" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.OData" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Localization" Version="$(CoworkeeVersion)" />
+    <PackageVersion Include="Coworkee.Backup" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.ResponseFilters" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Notifications" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Account" Version="$(CoworkeeVersion)" />

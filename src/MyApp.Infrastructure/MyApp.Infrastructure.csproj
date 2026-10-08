@@ -14,6 +14,7 @@
     <CoworkeePackage Include="Coworkee.Notifications" />
     <CoworkeePackage Include="Coworkee.Account" />
     <CoworkeePackage Include="Coworkee.Localization" />
+    <CoworkeePackage Include="Coworkee.Backup" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />

@@ -27,6 +27,24 @@ public partial class DocumentStore
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
+    [CascadingParameter] private Task<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> AuthenticationState { get; set; } = null!;
+
+    /// <summary>Only the documents the current user uploaded, as the account page shows them.</summary>
+    [Parameter] public bool Mine { get; set; }
+
+    private string? _filter;
+    private bool _ready;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Mine && (await AuthenticationState).User.FindFirst("sub")?.Value is { } me)
+        {
+            _filter = $"OwnerId eq {me}";
+        }
+
+        _ready = true;
+    }
+
     internal static string FormatSize(long bytes) => bytes switch
     {
         < 1024 => $"{bytes} B",

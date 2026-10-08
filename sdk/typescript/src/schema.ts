@@ -5256,6 +5256,12 @@ export interface components {
         };
         /** @enum {unknown} */
         PermissionProviderType: "Role" | "User" | "Group";
+        PostalAddress: {
+            street: null | string;
+            zipCode: null | string;
+            city: null | string;
+            country: null | string;
+        };
         /** @enum {unknown} */
         PrincipalType: "User" | "Group";
         ProductDto: {
@@ -5277,6 +5283,7 @@ export interface components {
             lastName: null | string;
             phoneNumber: null | string;
             avatarUrl?: null | string;
+            address?: null | components["schemas"]["PostalAddress"];
         };
         RenderedMailDto: {
             subject: string;
@@ -5431,6 +5438,7 @@ export interface components {
             firstName: null | string;
             lastName: null | string;
             phoneNumber: null | string;
+            address?: null | components["schemas"]["PostalAddress"];
         };
         UpdateUserRequest: {
             firstName: null | string;

@@ -16,7 +16,10 @@ internal sealed class MyAppNavigation : INavigationContributor
         .OrderGroup(Personal, 0)
         .OrderGroup(DocumentManagement, 1)
         .OrderGroup(NavigationGroups.Administration, 2)
-        .OrderGroup(CatalogManagement, 3);
+        .OrderGroup(CatalogManagement, 3)
+        .IconForGroup(Personal, MudBlazor.Icons.Material.Outlined.Person)
+        .IconForGroup(DocumentManagement, MudBlazor.Icons.Material.Outlined.Description)
+        .IconForGroup(CatalogManagement, MudBlazor.Icons.Material.Outlined.Inventory2);
 
     public IEnumerable<CoworkeeNavItem> Items =>
     [

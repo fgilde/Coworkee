@@ -43,6 +43,7 @@ public partial class Products
         }
     }
 
+#pragma warning disable BL0005 // MudEx configures the wrapping grid items through these instances
     private void Configure(ObjectEditMeta<AddEditProductRequest> meta)
     {
         meta.Property(p => p.Name).WithLabel(L["Name"]).WithOrder(0);
@@ -52,9 +53,10 @@ public partial class Products
             .WithAdditionalAttribute(nameof(ODataPicker.Required), true);
         meta.Property(p => p.Barcode).WithLabel(L["Barcode"]).WithOrder(2);
         meta.Property(p => p.Rate).WithLabel(L["Rate"]).WithOrder(3);
-        meta.Property(p => p.Description).WithLabel(L["Description"]).WithOrder(4).WithAdditionalAttribute("Lines", 3);
-        meta.Property(p => p.ImageDataUrl).WithLabel(L["Image"]).WithOrder(5).RenderWith<ImageDataUrlEdit, string?>(p => p.Value);
+        meta.Property(p => p.Description).WithLabel(L["Description"]).WithOrder(4).WithAdditionalAttribute("Lines", 3).WrapInMudItem(i => i.md = 12);
+        meta.Property(p => p.ImageDataUrl).WithLabel(L["Image"]).WithOrder(5).RenderWith<ImageDataUrlEdit, string?>(p => p.Value).WrapInMudItem(i => i.md = 12);
     }
+#pragma warning restore BL0005
 
     private Task DeleteAsync(IReadOnlyCollection<ProductDto> products) => Snackbar.RunAsync(() => Api.DeleteProductsAsync([.. products.Select(p => p.Id)]));
 }

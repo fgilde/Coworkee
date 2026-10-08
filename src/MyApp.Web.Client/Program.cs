@@ -9,9 +9,10 @@ var baseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 builder.Services.AddCoworkeeClient(baseAddress, options =>
 {
     options.AppTitle = "MyApp";
+    options.AssistantHint = "Ask for something, for example \"Which products of Acme cost more than 10?\" or \"Create a brand Northwind with 19% tax\".";
     options.AppDescription = "Clean Architecture starter for Blazor, built on Coworkee modules.";
-    options.AboutLinks.Add(new AboutLink("Project page", "https://github.com/fgilde/CleanArchitectureBaseBlazor"));
-    options.AboutLinks.Add(new AboutLink("Documentation", "https://fgilde.github.io/Coworkee/"));
+    options.AboutLinks.Add(new AboutLink("Project page", "https://github.com/fgilde/Coworkee"));
+    options.AboutLinks.Add(new AboutLink("Documentation", "https://fgilde.github.io/CoworkeeLib/"));
 });
 builder.Services.AddHttpClient<ICatalogApi, CatalogApi>(client => client.BaseAddress = baseAddress);
 builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>

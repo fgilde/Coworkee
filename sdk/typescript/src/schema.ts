@@ -3654,6 +3654,136 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/ai/tools": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/ai/chat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ChatRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ChatResponseDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/ai/tool-calls": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    Page?: number | string;
+                    PageSize?: number | string;
+                    Search?: string;
+                    channel?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PagedResultOfAiToolCallDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/brands/{id}": {
         parameters: {
             query?: never;
@@ -4529,6 +4659,22 @@ export interface components {
             /** Format: uuid */
             brandId?: string;
         };
+        AiToolCallDto: {
+            /** Format: uuid */
+            id: string;
+            tool: string;
+            channel: string;
+            input: string;
+            succeeded: boolean;
+            error: null | string;
+            /** Format: int32 */
+            durationMs: number | string;
+            /** Format: date-time */
+            at: string;
+            /** Format: uuid */
+            userId: null | string;
+            output?: null | string;
+        };
         AppConfigurationDto: {
             section: string;
             title: string;
@@ -4600,6 +4746,14 @@ export interface components {
             sentAt: string;
             /** Format: date-time */
             readAt: null | string;
+        };
+        ChatRequest: {
+            messages: components["schemas"]["ChatMessageDto"][];
+        };
+        ChatResponseDto: {
+            text: string;
+            stopReason: string;
+            toolCalls: components["schemas"]["AiToolCallDto"][];
         };
         CompleteSetupRequest: {
             setupToken: string;
@@ -4803,6 +4957,15 @@ export interface components {
         };
         /** @enum {unknown} */
         OutgoingMailStatus: "Queued" | "Sending" | "Sent" | "Failed" | "Skipped";
+        PagedResultOfAiToolCallDto: {
+            items: components["schemas"]["AiToolCallDto"][];
+            /** Format: int32 */
+            totalCount: number | string;
+            /** Format: int32 */
+            page: number | string;
+            /** Format: int32 */
+            pageSize: number | string;
+        };
         PagedResultOfAuditEntryDto: {
             items: components["schemas"]["AuditEntryDto"][];
             /** Format: int32 */

@@ -8,8 +8,8 @@ public partial class Home
 {
     [Inject] private CoworkeeLocalizer L { get; set; } = null!;
 
-    private const string ProjectUrl = "https://github.com/fgilde/CleanArchitectureBaseBlazor";
-    private const string DocumentationUrl = "https://fgilde.github.io/Coworkee/";
+    private const string ProjectUrl = "https://github.com/fgilde/Coworkee";
+    private const string DocumentationUrl = "https://fgilde.github.io/CoworkeeLib/";
 
     [Inject] private CoworkeeClientOptions Options { get; set; } = null!;
 }

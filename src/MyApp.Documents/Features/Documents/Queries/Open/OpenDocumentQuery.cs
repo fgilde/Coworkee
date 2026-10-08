@@ -5,6 +5,7 @@ using MyApp.Contracts.Documents;
 
 namespace MyApp.Documents.Features.Documents.Queries.Open;
 
+[AiTool(Exclude = true)]
 [RequiresPermission(DocumentPermissions.Documents.View)]
 public sealed record OpenDocumentQuery(Guid Id) : IQuery<Result<DocumentContent>>;
 

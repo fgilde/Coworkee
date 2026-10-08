@@ -7,6 +7,7 @@
     <CoworkeePackage Include="Coworkee.Infrastructure" />
     <CoworkeePackage Include="Coworkee.Storage" />
     <CoworkeePackage Include="Coworkee.OData" />
+    <CoworkeePackage Include="Coworkee.ExtendedAttributes" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 </Project>

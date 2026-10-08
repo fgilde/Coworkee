@@ -1,3 +1,5 @@
+using Coworkee.Client.Blazor.Components;
+using Coworkee.Client.Blazor.Security;
 using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Components.Data;
@@ -21,6 +23,8 @@ public partial class DocumentStore
 
     [Inject] private IDialogService Dialogs { get; set; } = null!;
 
+    [Inject] private PermissionStore Permissions { get; set; } = null!;
+
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
     internal static string FormatSize(long bytes) => bytes switch
@@ -33,6 +37,9 @@ public partial class DocumentStore
     private Task CreateAsync() => DocumentDialog.ShowAsync(Dialogs, null);
 
     private Task EditAsync(DocumentDto document) => DocumentDialog.ShowAsync(Dialogs, document);
+
+    private async Task AttributesAsync(DocumentDto document) =>
+        await ExtendedAttributesDialog.ShowAsync(Dialogs, L["Attributes"], "Documents", document.Id, readOnly: !await Permissions.HasAsync(DocumentPermissions.Documents.Edit));
 
     private async Task DeleteAsync(IReadOnlyCollection<DocumentDto> documents)
     {

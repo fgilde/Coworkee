@@ -27,6 +27,7 @@
                     <CellTemplate>
                         <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Size="Size.Small" aria-label="Preview" OnClick="() => _preview = context.Item" data-testid="preview-row" />
                         <MudIconButton Icon="@Icons.Material.Outlined.Download" Size="Size.Small" aria-label="Download" Href="@DocumentUrls.Content(context.Item.Id, download: true)" />
+                        <MudIconButton Icon="@Icons.Material.Outlined.DataObject" Size="Size.Small" aria-label="@L["Attributes"]" OnClick="() => AttributesAsync(context.Item)" data-testid="attributes-row" />
                     </CellTemplate>
                 </TemplateColumn>
             </Columns>

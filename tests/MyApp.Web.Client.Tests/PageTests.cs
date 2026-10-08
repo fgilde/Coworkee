@@ -36,6 +36,7 @@ public sealed class PageTests : BunitContext
         Services.AddScoped<RealtimeClient>();
         Services.AddScoped<FileDownloader>();
         Services.AddScoped<Coworkee.Client.Blazor.Security.PermissionStore>();
+        Services.AddScoped<Coworkee.Client.Blazor.People.UserCards>();
         var localization = Substitute.For<Coworkee.Client.Blazor.Localization.ILocalizationApi>();
         localization.GetTextsAsync(default!, default).ReturnsForAnyArgs(call => new Coworkee.Contracts.Localization.TextsDto(call.Arg<string>(), new Dictionary<string, string>()));
         Services.AddSingleton(localization);

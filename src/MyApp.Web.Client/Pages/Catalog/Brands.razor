@@ -3,7 +3,7 @@
 
 <PageHeader Title="Brands" Description="Manage brands." />
 <RealtimeSubscription Topic="type:Brand" OnEvent="_ => _table.ReloadAsync()" />
-<CoworkeeDataTable @ref="_table" T="BrandDto" EntitySet="Brands" SearchFields="SearchFields" MultiSelection="true" ExportFileName="brands" DescribeItem="b => b.Name"
+<CoworkeeDataTable @ref="_table" T="BrandDto" EntitySet="Brands" SearchFields="SearchFields" MultiSelection="true" Importable="true" ImportPermission="@CatalogPermissions.Brands.Create" ExportFileName="brands" DescribeItem="b => b.Name"
                    CreateText="New brand" CreatePermission="@CatalogPermissions.Brands.Create" EditPermission="@CatalogPermissions.Brands.Edit" DeletePermission="@CatalogPermissions.Brands.Delete"
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
     <Columns>

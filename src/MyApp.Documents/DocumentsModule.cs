@@ -12,6 +12,7 @@ using MyApp.Contracts.Documents;
 using MyApp.Documents.Domain;
 using MyApp.Documents.Endpoints;
 using MyApp.Documents.Features.Dashboard;
+using MyApp.Documents.Features.DocumentTypes.Commands.AddEdit;
 using MyApp.Documents.Permissions;
 using MyApp.Documents.Persistence;
 using MyApp.Documents.Visibility;
@@ -34,6 +35,7 @@ public sealed class MyAppDocumentsModule : CoworkeeModule, IWebModule
         services.AddScoped<IDashboardCounts, DocumentDashboardCounts>();
         services.AddODataEntity<Document>("Documents", DocumentPermissions.Documents.View, d => d.BlobKey);
         services.AddODataEntity<DocumentType>("DocumentTypes", DocumentPermissions.Types.View);
+        services.AddODataImport("DocumentTypes", (AddEditDocumentTypeRequest row) => new AddEditDocumentTypeCommand(null, row));
     }
 
     public void ConfigureApplication(WebApplication app)

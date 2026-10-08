@@ -2,7 +2,7 @@
 @attribute [Authorize(Policy = PermissionPolicy.Prefix + DocumentPermissions.Types.View)]
 
 <PageHeader Title="Document Types" Description="Manage document types." />
-<CoworkeeDataTable @ref="_table" T="DocumentTypeDto" EntitySet="DocumentTypes" SearchFields="SearchFields" MultiSelection="true" ExportFileName="document-types"
+<CoworkeeDataTable @ref="_table" T="DocumentTypeDto" EntitySet="DocumentTypes" SearchFields="SearchFields" MultiSelection="true" Importable="true" ImportPermission="@DocumentPermissions.Types.Create" ExportFileName="document-types"
                    DescribeItem="t => t.Name" CreateText="New type"
                    CreatePermission="@DocumentPermissions.Types.Create" EditPermission="@DocumentPermissions.Types.Edit" DeletePermission="@DocumentPermissions.Types.Delete"
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">

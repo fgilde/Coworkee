@@ -1,3 +1,4 @@
+using Coworkee.Contracts.Chat;
 using Coworkee.Identity.Setup;
 using MyApp.Contracts.Catalog;
 using MyApp.Contracts.Documents;
@@ -23,6 +24,7 @@ public static class DemoSeed
     private static string[] Shared =>
     [
         CatalogPermissions.Dashboards.View,
+        ChatPermissions.Use,
         DocumentPermissions.Documents.View, DocumentPermissions.Documents.Create, DocumentPermissions.Documents.Edit, DocumentPermissions.Documents.Delete,
     ];
 }

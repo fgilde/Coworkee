@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace MyApp.Infrastructure;
 
 [DependsOn(typeof(MyAppInfrastructureModule), typeof(CoworkeeAuthStoreModule), typeof(CoworkeeMailingModule), typeof(CoworkeeAuditingModule), typeof(CoworkeeThemingModule),
-    typeof(CoworkeeNotificationsModule), typeof(Coworkee.Account.CoworkeeAccountModule), typeof(CoworkeeLocalizationModule), typeof(Coworkee.Backup.CoworkeeBackupModule), typeof(MyApp.Catalog.MyAppCatalogModule),
+    typeof(CoworkeeNotificationsModule), typeof(Coworkee.Account.CoworkeeAccountModule), typeof(CoworkeeLocalizationModule), typeof(Coworkee.Backup.CoworkeeBackupModule), typeof(Coworkee.Chat.CoworkeeChatModule), typeof(MyApp.Catalog.MyAppCatalogModule),
     typeof(MyApp.Documents.MyAppDocumentsModule))]
 public sealed class MyAppDatabaseModule : CoworkeeModule
 {

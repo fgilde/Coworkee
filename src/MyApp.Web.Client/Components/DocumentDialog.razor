@@ -30,7 +30,7 @@
         {
             <MudText Typo="Typo.subtitle2" Class="mt-4 mb-1">@L["Preview"]</MudText>
             <div style="flex:1 1 auto;min-height:360px" data-testid="document-preview">
-                <MudExFileDisplay Url="@DocumentUrls.Content(document.Id)" ContentType="@document.MimeType" FileName="@document.FileName" ShowFileName="false" Style="height:100%" />
+                <MudExFileDisplay Url="@Nav.Absolute(document.Id)" ContentType="@document.MimeType" FileName="@document.FileName" ShowFileName="false" Style="height:100%" />
             </div>
         }
     </DialogContent>

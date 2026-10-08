@@ -47,7 +47,7 @@
                         <MudSpacer />
                         <MudIconButton Icon="@Icons.Material.Outlined.Close" Size="Size.Small" aria-label="Close preview" OnClick="() => _preview = null" />
                     </MudStack>
-                    <MudExFileDisplay @key="preview.Id" Url="@DocumentUrls.Content(preview.Id)" ContentType="@preview.MimeType" FileName="@preview.FileName" ShowFileName="false" />
+                    <MudExFileDisplay @key="preview.Id" Url="@Nav.Absolute(preview.Id)" ContentType="@preview.MimeType" FileName="@preview.FileName" ShowFileName="false" />
                 </MudPaper>
             </MudItem>
         }

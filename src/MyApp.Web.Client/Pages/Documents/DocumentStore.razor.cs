@@ -27,6 +27,8 @@ public partial class DocumentStore
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
+    [Inject] private NavigationManager Nav { get; set; } = null!;
+
     [CascadingParameter] private Task<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> AuthenticationState { get; set; } = null!;
 
     /// <summary>Only the documents the current user uploaded, as the account page shows them.</summary>

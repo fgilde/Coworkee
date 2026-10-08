@@ -28,6 +28,8 @@ public partial class DocumentDialog
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
+    [Inject] private NavigationManager Nav { get; set; } = null!;
+
     [Parameter] public string Title { get; set; } = string.Empty;
 
     [Parameter] public Guid? Id { get; set; }

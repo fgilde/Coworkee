@@ -45,7 +45,7 @@ internal static class DocumentEndpoints
         }
 
         var document = result.Value;
-        var inline = download != true && DocumentInlineTypes.All.Contains(document.MimeType);
+        var inline = download != true;
         response.Headers.XContentTypeOptions = "nosniff";
         response.Headers.CacheControl = "private, no-store";
         if (inline)

@@ -89,9 +89,13 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
             (await view.Content.ReadAsByteArrayAsync(Ct)).ShouldBe(pdf);
         }
 
-        // html is never shown inline in the app's origin
+        // html is shown inline only inside the sandbox, never with scripts in the app's origin
         var html = own.Items.Single(d => d.Title == "Public");
-        using (var download = await reader.GetAsync($"/api/v1/documents/{html.Id}/content", Ct))
+        using (var view = await reader.GetAsync($"/api/v1/documents/{html.Id}/content", Ct))
+        {
+            view.Headers.GetValues("Content-Security-Policy").Single().ShouldStartWith("sandbox;");
+        }
+        using (var download = await reader.GetAsync($"/api/v1/documents/{html.Id}/content?download=true", Ct))
         {
             download.Content.Headers.ContentDisposition!.DispositionType.ShouldBe("attachment");
         }

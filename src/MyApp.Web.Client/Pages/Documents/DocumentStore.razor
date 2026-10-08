@@ -42,14 +42,7 @@
                     <MudSpacer />
                     <MudIconButton Icon="@Icons.Material.Outlined.Close" Size="Size.Small" aria-label="Close preview" OnClick="() => _preview = null" />
                 </MudStack>
-                @if (DocumentInlineTypes.All.Contains(preview.MimeType))
-                {
-                    <MudExFileDisplay @key="preview.Id" Url="@DocumentUrls.Content(preview.Id)" ContentType="@preview.MimeType" FileName="@preview.FileName" ShowFileName="false" />
-                }
-                else
-                {
-                    <MudText Typo="Typo.body2" Class="pa-4">@L["No preview for this file type; download it instead."]</MudText>
-                }
+                <MudExFileDisplay @key="preview.Id" Url="@DocumentUrls.Content(preview.Id)" ContentType="@preview.MimeType" FileName="@preview.FileName" ShowFileName="false" />
             </MudPaper>
         </MudItem>
     }

@@ -1,10 +1,10 @@
 using Coworkee.Application.Messaging;
 using Coworkee.AspNetCore;
+using Coworkee.AspNetCore.Authentication;
 using Coworkee.AspNetCore.Http;
 using Coworkee.Core.Modularity;
 using Coworkee.Infrastructure.Outbox;
 using Coworkee.ResponseFilters;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MyApp.Application.System;
 using MyApp.Catalog;
 using MyApp.Infrastructure;
@@ -20,15 +20,7 @@ public sealed class MyAppApiModule : CoworkeeModule, IWebModule
     {
         context.Services.AddCoworkeeOutboxProcessing<MyAppDbContext>();
         context.Services.AddCoworkeeResponseFilters([typeof(MyAppCatalogModule).Assembly]);
-        context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                var authority = context.Configuration["Auth:Authority"];
-                options.Authority = authority;
-                options.Audience = Audience;
-                options.MapInboundClaims = false;
-                options.RequireHttpsMetadata = authority?.StartsWith("http://", StringComparison.OrdinalIgnoreCase) != true;
-            });
+        context.Services.AddCoworkeeApiAuthentication(context.Configuration, Audience);
     }
 
     public void ConfigureApplication(WebApplication app)

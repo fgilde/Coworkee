@@ -10,14 +10,12 @@ namespace MyApp.AppHost.Tests;
 
 public sealed partial class SignInFlowTests
 {
-    private const string SetupToken = "e2e-setup-token";
-
     [Fact]
     public async Task Admin_signs_in_through_the_bff_and_calls_the_api()
     {
         var ct = TestContext.Current.CancellationToken;
         var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.MyApp_AppHost>(
-            [$"--{CoworkeeInfrastructureExtensions.EphemeralSetting}=true", $"--MyApp:SetupToken={SetupToken}"], ct);
+            [$"--{CoworkeeAppExtensions.EphemeralSetting}=true"], ct);
         var app = await appHost.BuildAsync(ct);
         await using var stop = AppHostDiagnostics.Guard(app);
         await app.StartAsync(ct);
@@ -38,6 +36,7 @@ public sealed partial class SignInFlowTests
         var loginPage = await browser.GetAsync("/bff/login?returnUrl=/bff/user", ct);
         var loginHtml = await loginPage.Content.ReadAsStringAsync(ct);
         loginHtml.ShouldContain("Sign in");
+        loginHtml.ShouldContain("Sign in with Keycloak");
         var authorizeResponse = await browser.PostAsync(loginPage.RequestMessage!.RequestUri, new FormUrlEncodedContent(new Dictionary<string, string>
         {
             ["Input.Email"] = admin.Email,

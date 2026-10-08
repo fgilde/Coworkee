@@ -22,6 +22,6 @@ public sealed class MyAppInfrastructureModule : CoworkeeModule
             npgsql => npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "cw")));
         context.Services.AddHealthChecks().AddDbContextCheck<MyAppDbContext>("database");
         context.Services.Configure<SetupGateOptions>(options => options.AllowedPrefixes.Add("/api/v1/system"));
-        context.Services.PostConfigure<Coworkee.BackgroundJobs.BackgroundJobOptions>(options => options.ConnectionStringName = ConnectionStringName);
+        context.Services.PostConfigure<Coworkee.Contracts.Configuration.BackgroundJobOptions>(options => options.ConnectionStringName = ConnectionStringName);
     }
 }

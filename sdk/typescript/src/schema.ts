@@ -5403,6 +5403,10 @@ export interface components {
             customCss: null | string;
             /** Format: int32 */
             revision: number | string;
+            shadows?: unknown;
+            options?: unknown;
+            /** @default true */
+            isPublished: boolean;
         };
         ThemeRequest: {
             name: string;
@@ -5412,6 +5416,10 @@ export interface components {
             layoutProperties: null | components["schemas"]["JsonElement"];
             logoSvg: null | string;
             customCss: null | string;
+            shadows?: unknown;
+            options?: unknown;
+            /** @default false */
+            isPublished: boolean;
         };
         TranslateMissingDto: {
             /** Format: int32 */

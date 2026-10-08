@@ -6842,6 +6842,12 @@
               "string"
             ],
             "format": "int32"
+          },
+          "shadows": {},
+          "options": {},
+          "isPublished": {
+            "type": "boolean",
+            "default": true
           }
         }
       },
@@ -6897,6 +6903,12 @@
               "null",
               "string"
             ]
+          },
+          "shadows": {},
+          "options": {},
+          "isPublished": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -7192,8 +7204,20 @@
           }
         }
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
   },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
   "tags": [
     {
       "name": "Setup"

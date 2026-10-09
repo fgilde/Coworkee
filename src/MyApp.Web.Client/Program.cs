@@ -4,6 +4,8 @@ using Coworkee.Client.Blazor.Pages;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyApp.Web.Client.Api;
 using MyApp.Contracts.Documents;
+using MyApp.Contracts.Settings;
+using MudBlazor.Extensions.Components.ObjectEdit;
 using MyApp.Web.Client.Navigation;
 using MyApp.Web.Client.Pages.Documents;
 
@@ -26,6 +28,7 @@ builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
     client.Timeout = Timeout.InfiniteTimeSpan;
 });
 builder.Services.AddSingleton<INavigationContributor, MyAppNavigation>();
+builder.Services.AddCoworkeeSettings<MyAppSettings>(meta => meta.Property(s => s.Catalog.DefaultTaxRate).WithDescription("Tax rate in percent new brands start with"));
 builder.Services.AddSingleton(new ProfileTab("Documents", "documents", typeof(MyDocuments), DocumentPermissions.Documents.View, MudBlazor.Icons.Material.Outlined.Description));
 builder.Services.Configure<NavigationMenuOptions>(MyAppNavigation.Order);
 var host = builder.Build();

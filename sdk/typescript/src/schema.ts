@@ -2506,6 +2506,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ServiceDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/mail/templates": {
         parameters: {
             query?: never;
@@ -6910,6 +6954,8 @@ export interface components {
             values: components["schemas"]["JsonElement"];
             defaults: components["schemas"]["JsonElement"];
             changedKeys: string[];
+            locked?: null | string[];
+            hidden?: null | string[];
         };
         AuditChangeDto: {
             property: string;
@@ -7503,6 +7549,14 @@ export interface components {
         SendChatMessageRequest: {
             text: string;
         };
+        ServiceDto: {
+            name: string;
+            title: string;
+            url: string;
+            health: components["schemas"]["ServiceHealth"];
+        };
+        /** @enum {unknown} */
+        ServiceHealth: "Healthy" | "Unhealthy" | "Unreachable";
         SetAvatarRequest: {
             dataUrl: null | string;
         };

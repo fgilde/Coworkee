@@ -7657,6 +7657,15 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "arguments": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },

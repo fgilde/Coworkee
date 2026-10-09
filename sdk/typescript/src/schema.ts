@@ -6714,6 +6714,7 @@ export interface components {
             createdAt: string;
             /** Format: date-time */
             readAt: null | string;
+            arguments?: null | string[];
         };
         OutgoingMailDto: {
             /** Format: uuid */

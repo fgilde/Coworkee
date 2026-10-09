@@ -1,9 +1,11 @@
 using Coworkee.Domain;
 using Coworkee.Infrastructure.Persistence;
+using MyApp.Contracts.Documents;
 using Nextended.Core.Facets;
 
 namespace MyApp.Documents.Domain;
 
+[Realtime(DocumentPermissions.Documents.View)]
 public sealed class Document : AuditedEntity, IMultiTenant
 {
     public required string Title { get; set; }

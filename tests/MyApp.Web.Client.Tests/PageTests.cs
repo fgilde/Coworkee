@@ -76,16 +76,19 @@ public sealed class PageTests : BunitContext
     }
 
     [Fact]
-    public async Task A_pdf_is_previewed_with_mudex_file_display()
+    public async Task A_pdf_is_previewed_in_the_shared_preview_and_the_list_follows_realtime()
     {
         var pdf = new DocumentDto(Guid.CreateVersion7(), "Offer", null, true, null, null, "offer.pdf", "application/pdf", 2048, null, DateTimeOffset.UtcNow);
         _odata.With("Documents", pdf);
+        var dialogs = Render<MudDialogProvider>();
         Render<MudPopoverProvider>();
         var page = Render<DocumentStore>();
 
         await page.WaitForElement("[data-testid='preview-row']").ClickAsync(new());
 
-        page.WaitForAssertion(() => page.Find("[data-testid='preview']").InnerHtml.ShouldContain("mud-ex-file-display-pdf"));
+        dialogs.WaitForAssertion(() => dialogs.Find("[data-testid='file-preview']").InnerHtml.ShouldContain("mud-ex-file-display-pdf"));
+        dialogs.FindComponent<MudBlazor.Extensions.Components.MudExFileDisplay>().Instance.Url.ShouldBe($"http://localhost/api/v1/documents/{pdf.Id}/content");
+        page.FindComponent<Coworkee.Client.Blazor.Components.RealtimeSubscription>().Instance.Topic.ShouldBe("type:Document");
         page.FindAll("[data-testid='delete-row']").ShouldBeEmpty();
         DocumentStore.FormatSize(2048).ShouldBe("2 KB");
     }

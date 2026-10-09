@@ -32,6 +32,9 @@ internal sealed class DocumentsApi(HttpClient http) : ApiClientBase(http), IDocu
         using var response = await SendContentAsync(HttpMethod.Post, Documents, form, cancellationToken);
     }
 
+    public Task ImportDocumentAsync(ImportDocumentRequest request, CancellationToken cancellationToken = default) =>
+        SendAsync(HttpMethod.Post, $"{Documents}/import", request, cancellationToken);
+
     public Task UpdateDocumentAsync(Guid id, UpdateDocumentRequest request, CancellationToken cancellationToken = default) =>
         SendAsync(HttpMethod.Put, $"{Documents}/{id}", request, cancellationToken);
 

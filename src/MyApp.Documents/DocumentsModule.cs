@@ -20,7 +20,7 @@ using MyApp.Documents.Visibility;
 
 namespace MyApp.Documents;
 
-[DependsOn(typeof(CoworkeeStorageModule), typeof(CoworkeeODataModule), typeof(CoworkeeExtendedAttributesModule))]
+[DependsOn(typeof(CoworkeeStorageModule), typeof(CoworkeeODataModule), typeof(CoworkeeExtendedAttributesModule), typeof(Coworkee.Files.CoworkeeFilesModule))]
 public sealed class MyAppDocumentsModule : CoworkeeModule, IWebModule
 {
     public const long MaxSize = 100L * 1024 * 1024;
@@ -34,6 +34,7 @@ public sealed class MyAppDocumentsModule : CoworkeeModule, IWebModule
         services.AddScoped<DocumentVisibility>();
         services.AddScoped<IODataEntityFilter<Document>, DocumentODataFilter>();
         services.AddScoped<IDashboardCounts, DocumentDashboardCounts>();
+        services.AddScoped<Coworkee.Application.Privacy.IPersonalDataContributor, Privacy.DocumentPersonalData>();
         services.AddODataEntity<Document>("Documents", DocumentPermissions.Documents.View, d => d.BlobKey);
         services.AddODataEntity<DocumentType>("DocumentTypes", DocumentPermissions.Types.View);
         services.AddExtendedAttributes<Document>("Documents", DocumentPermissions.Documents.View, DocumentPermissions.Documents.Edit);

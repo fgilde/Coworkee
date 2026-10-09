@@ -1,55 +1,38 @@
 @page "/document-store"
 @attribute [Authorize(Policy = PermissionPolicy.Prefix + DocumentPermissions.Documents.View)]
-@using MudBlazor.Extensions.Components
 @using MyApp.Web.Client.Api
 
 @if (!Mine)
 {
-    <PageHeader Title="Document Store" Description="Upload, preview and share documents." />
+    <PageHeader Title="Document Store" Description="Typed documents with an owner, private or visible to everyone who may view documents. Upload, preview and share them." />
 }
 @if (_ready)
 {
-    <MudGrid>
-        <MudItem xs="12" md="@(_preview is null ? 12 : 7)">
-            <CoworkeeDataTable @ref="_table" T="DocumentDto" EntitySet="Documents" Expand="DocumentType" SearchFields="SearchFields" MultiSelection="true"
-                               ExportFileName="documents" Filter="@_filter" UrlState="!Mine" DescribeItem="d => d.Title" CreateText="Upload"
-                               CreatePermission="@DocumentPermissions.Documents.Create" EditPermission="@DocumentPermissions.Documents.Edit" DeletePermission="@DocumentPermissions.Documents.Delete"
-                               OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
-                <Columns>
-                    <PropertyColumn Property="d => d.Title" Title="@L["Title"]" />
-                    <PropertyColumn Property="d => d.DocumentType!.Name" Title="@L["Type"]" />
-                    <PropertyColumn Property="d => d.FileName" Title="@L["File"]" />
-                    <PropertyColumn Property="d => d.Size" Title="@L["Size"]">
-                        <CellTemplate>@FormatSize(context.Item.Size)</CellTemplate>
-                    </PropertyColumn>
-                    <PropertyColumn Property="d => d.IsPublic" Title="@L["Visibility"]">
-                        <CellTemplate>
-                            <MudChip T="string" Size="Size.Small" Color="@(context.Item.IsPublic ? Color.Success : Color.Default)">@L[context.Item.IsPublic ? "public" : "private"]</MudChip>
-                        </CellTemplate>
-                    </PropertyColumn>
-                    <PropertyColumn Property="d => d.CreatedAt" Title="@L["Uploaded"]" Format="g" />
-                    <TemplateColumn T="DocumentDto" Sortable="false" CellStyle="white-space:nowrap">
-                        <CellTemplate>
-                            <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Size="Size.Small" aria-label="Preview" OnClick="() => _preview = context.Item" data-testid="preview-row" />
-                            <MudIconButton Icon="@Icons.Material.Outlined.Download" Size="Size.Small" aria-label="Download" Href="@DocumentUrls.Content(context.Item.Id, download: true)" />
-                            <MudIconButton Icon="@Icons.Material.Outlined.DataObject" Size="Size.Small" aria-label="@L["Attributes"]" OnClick="() => AttributesAsync(context.Item)" data-testid="attributes-row" />
-                        </CellTemplate>
-                    </TemplateColumn>
-                </Columns>
-            </CoworkeeDataTable>
-        </MudItem>
-        @if (_preview is { } preview)
-        {
-            <MudItem xs="12" md="5">
-                <MudPaper Outlined="true" Class="pa-2" Style="min-height:420px" data-testid="preview">
-                    <MudStack Row="true" AlignItems="AlignItems.Center">
-                        <MudText Typo="Typo.h6">@preview.Title</MudText>
-                        <MudSpacer />
-                        <MudIconButton Icon="@Icons.Material.Outlined.Close" Size="Size.Small" aria-label="Close preview" OnClick="() => _preview = null" />
-                    </MudStack>
-                    <MudExFileDisplay @key="preview.Id" Url="@Nav.Absolute(preview.Id)" ContentType="@preview.MimeType" FileName="@preview.FileName" ShowFileName="false" />
-                </MudPaper>
-            </MudItem>
-        }
-    </MudGrid>
+    <RealtimeSubscription Topic="type:Document" OnEvent="_ => _table.ReloadAsync()" />
+    <CoworkeeDataTable @ref="_table" T="DocumentDto" EntitySet="Documents" Expand="DocumentType" SearchFields="SearchFields" MultiSelection="true"
+                       ExportFileName="documents" Filter="@_filter" UrlState="!Mine" DescribeItem="d => d.Title" CreateText="Upload"
+                       CreatePermission="@DocumentPermissions.Documents.Create" EditPermission="@DocumentPermissions.Documents.Edit" DeletePermission="@DocumentPermissions.Documents.Delete"
+                       OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
+        <Columns>
+            <PropertyColumn Property="d => d.Title" Title="@L["Title"]" />
+            <PropertyColumn Property="d => d.DocumentType!.Name" Title="@L["Type"]" />
+            <PropertyColumn Property="d => d.FileName" Title="@L["File"]" />
+            <PropertyColumn Property="d => d.Size" Title="@L["Size"]">
+                <CellTemplate>@FormatSize(context.Item.Size)</CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="d => d.IsPublic" Title="@L["Visibility"]">
+                <CellTemplate>
+                    <MudChip T="string" Size="Size.Small" Color="@(context.Item.IsPublic ? Color.Success : Color.Default)">@L[context.Item.IsPublic ? "public" : "private"]</MudChip>
+                </CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="d => d.CreatedAt" Title="@L["Uploaded"]" Format="g" />
+            <TemplateColumn T="DocumentDto" Sortable="false" CellStyle="white-space:nowrap">
+                <CellTemplate>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Size="Size.Small" aria-label="Preview" OnClick="() => PreviewAsync(context.Item)" data-testid="preview-row" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.Download" Size="Size.Small" aria-label="Download" Href="@DocumentUrls.Content(context.Item.Id, download: true)" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.DataObject" Size="Size.Small" aria-label="@L["Attributes"]" OnClick="() => AttributesAsync(context.Item)" data-testid="attributes-row" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </CoworkeeDataTable>
 }

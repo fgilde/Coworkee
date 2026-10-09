@@ -2,6 +2,8 @@ using Coworkee.Client.Blazor.Components.Data;
 using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Data;
+using Coworkee.Client.Blazor.Security;
+using Coworkee.Contracts.Files;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -18,6 +20,8 @@ public partial class DocumentDialog
     private MudForm _form = null!;
     private IReadOnlyList<DocumentTypeDto> _types = [];
     private IBrowserFile? _file;
+    private Guid? _fileId;
+    private bool _canImport;
     private bool _saving;
 
     [CascadingParameter] private IMudDialogInstance Dialog { get; set; } = null!;
@@ -29,6 +33,8 @@ public partial class DocumentDialog
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
     [Inject] private NavigationManager Nav { get; set; } = null!;
+
+    [Inject] private PermissionStore Permissions { get; set; } = null!;
 
     [Parameter] public string Title { get; set; } = string.Empty;
 
@@ -59,8 +65,11 @@ public partial class DocumentDialog
         return await dialog.Result is { Canceled: false };
     }
 
-    protected override async Task OnInitializedAsync() =>
+    protected override async Task OnInitializedAsync()
+    {
+        _canImport = Id is null && await Permissions.HasAsync(FilePermissions.View);
         _types = (await OData.QueryAsync<DocumentTypeDto>("DocumentTypes", new ODataQuery { OrderBy = "Name", Top = 1000, Count = false })).Items;
+    }
 
     private async Task SaveAsync()
     {
@@ -70,7 +79,7 @@ public partial class DocumentDialog
             return;
         }
 
-        if (Id is null && _file is null)
+        if (Id is null && _file is null && _fileId is null)
         {
             Snackbar.Add(L["Choose a file to upload."], Severity.Warning);
             return;
@@ -90,6 +99,12 @@ public partial class DocumentDialog
         if (Id is { } id)
         {
             await Api.UpdateDocumentAsync(id, Model);
+            return;
+        }
+
+        if (_fileId is { } fileId)
+        {
+            await Api.ImportDocumentAsync(new ImportDocumentRequest(fileId, Model));
             return;
         }
 

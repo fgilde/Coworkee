@@ -6800,6 +6800,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/documents/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ImportDocumentRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/documents/delete": {
         parameters: {
             query?: never;
@@ -7292,6 +7340,11 @@ export interface components {
         };
         /** Format: binary */
         IFormFile: string;
+        ImportDocumentRequest: {
+            /** Format: uuid */
+            fileId: string;
+            document: components["schemas"]["UpdateDocumentRequest"];
+        };
         JsonElement: unknown;
         LanguageDto: {
             /** Format: uuid */

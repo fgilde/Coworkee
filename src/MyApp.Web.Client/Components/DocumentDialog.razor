@@ -1,4 +1,5 @@
 @using MudBlazor.Extensions.Components
+@using Coworkee.Client.Blazor.Components.Files
 @using MyApp.Web.Client.Api
 <MudDialog Class="@MudBlazor.Extensions.Helper.MudExCss.Classes.Dialog.Initial" ContentClass="d-flex flex-column">
     <TitleContent>
@@ -17,13 +18,20 @@
             <MudCheckBox @bind-Value="Model.IsPublic" Label="@L["Visible to everyone who may view documents"]" />
             @if (Id is null)
             {
-                <MudFileUpload T="IBrowserFile" @bind-Files="_file" Class="mt-2">
-                    <CustomContent>
-                        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.AttachFile" OnClick="context.OpenFilePickerAsync" data-testid="choose-file">
-                            @(_file?.Name ?? L["Choose file"])
-                        </MudButton>
-                    </CustomContent>
-                </MudFileUpload>
+                @if (_fileId is null)
+                {
+                    <MudFileUpload T="IBrowserFile" @bind-Files="_file" Class="mt-2">
+                        <CustomContent>
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.AttachFile" OnClick="context.OpenFilePickerAsync" data-testid="choose-file">
+                                @(_file?.Name ?? L["Choose file"])
+                            </MudButton>
+                        </CustomContent>
+                    </MudFileUpload>
+                }
+                @if (_canImport && _file is null)
+                {
+                    <CoworkeeFilePicker @bind-Value="_fileId" Label="@L["Or copy a file from Files"]" />
+                }
             }
         </MudForm>
         @if (Document is { } document)

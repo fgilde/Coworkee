@@ -6419,6 +6419,45 @@
         }
       }
     },
+    "/api/v1/documents/import": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/documents/delete": {
       "post": {
         "tags": [
@@ -8126,6 +8165,22 @@
       "IFormFile": {
         "type": "string",
         "format": "binary"
+      },
+      "ImportDocumentRequest": {
+        "required": [
+          "fileId",
+          "document"
+        ],
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "document": {
+            "$ref": "#/components/schemas/UpdateDocumentRequest"
+          }
+        }
       },
       "JsonElement": {},
       "LanguageDto": {

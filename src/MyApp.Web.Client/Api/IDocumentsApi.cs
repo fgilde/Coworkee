@@ -10,6 +10,8 @@ public interface IDocumentsApi
 
     Task UploadDocumentAsync(UpdateDocumentRequest request, string fileName, Stream content, CancellationToken cancellationToken = default);
 
+    Task ImportDocumentAsync(ImportDocumentRequest request, CancellationToken cancellationToken = default);
+
     Task UpdateDocumentAsync(Guid id, UpdateDocumentRequest request, CancellationToken cancellationToken = default);
 
     Task DeleteDocumentsAsync(IReadOnlyList<Guid> ids, CancellationToken cancellationToken = default);

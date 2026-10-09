@@ -3,6 +3,7 @@ using Coworkee.Client.Blazor.Security;
 using Coworkee.Client.Blazor.Localization;
 using Coworkee.Client.Blazor.Api;
 using Coworkee.Client.Blazor.Components.Data;
+using Coworkee.Client.Blazor.Components.Files;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MyApp.Contracts.Documents;
@@ -17,7 +18,6 @@ public partial class DocumentStore
 
     private static readonly string[] SearchFields = [nameof(DocumentDto.Title), nameof(DocumentDto.Description), nameof(DocumentDto.FileName)];
     private CoworkeeDataTable<DocumentDto> _table = null!;
-    private DocumentDto? _preview;
 
     [Inject] private IDocumentsApi Api { get; set; } = null!;
 
@@ -26,8 +26,6 @@ public partial class DocumentStore
     [Inject] private PermissionStore Permissions { get; set; } = null!;
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
-
-    [Inject] private NavigationManager Nav { get; set; } = null!;
 
     [CascadingParameter] private Task<Microsoft.AspNetCore.Components.Authorization.AuthenticationState> AuthenticationState { get; set; } = null!;
 
@@ -61,11 +59,7 @@ public partial class DocumentStore
     private async Task AttributesAsync(DocumentDto document) =>
         await ExtendedAttributesDialog.ShowAsync(Dialogs, L["Attributes"], "Documents", document.Id, readOnly: !await Permissions.HasAsync(DocumentPermissions.Documents.Edit));
 
-    private async Task DeleteAsync(IReadOnlyCollection<DocumentDto> documents)
-    {
-        if (await Snackbar.RunAsync(() => Api.DeleteDocumentsAsync([.. documents.Select(d => d.Id)])) && documents.Any(d => d.Id == _preview?.Id))
-        {
-            _preview = null;
-        }
-    }
+    private Task PreviewAsync(DocumentDto document) => FilePreviewDialog.ShowAsync(Dialogs, DocumentUrls.Content(document.Id), document.MimeType, document.FileName);
+
+    private Task DeleteAsync(IReadOnlyCollection<DocumentDto> documents) => Snackbar.RunAsync(() => Api.DeleteDocumentsAsync([.. documents.Select(d => d.Id)]));
 }

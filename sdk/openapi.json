@@ -2325,6 +2325,38 @@
         }
       }
     },
+    "/api/v1/services": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/mail/templates": {
       "get": {
         "tags": [
@@ -6581,6 +6613,24 @@
             "items": {
               "type": "string"
             }
+          },
+          "locked": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "hidden": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -9085,6 +9135,36 @@
           }
         }
       },
+      "ServiceDto": {
+        "required": [
+          "name",
+          "title",
+          "url",
+          "health"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "health": {
+            "$ref": "#/components/schemas/ServiceHealth"
+          }
+        }
+      },
+      "ServiceHealth": {
+        "enum": [
+          "Healthy",
+          "Unhealthy",
+          "Unreachable"
+        ]
+      },
       "SetAvatarRequest": {
         "required": [
           "dataUrl"
@@ -9973,6 +10053,9 @@
     },
     {
       "name": "Configuration"
+    },
+    {
+      "name": "Services"
     },
     {
       "name": "Mail"

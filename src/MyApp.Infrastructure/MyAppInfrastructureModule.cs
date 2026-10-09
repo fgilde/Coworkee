@@ -3,6 +3,7 @@ using Coworkee.Identity;
 using Coworkee.Application.Setup;
 using Coworkee.Identity.Setup;
 using Coworkee.Infrastructure.Persistence;
+using Coworkee.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,5 +24,6 @@ public sealed class MyAppInfrastructureModule : CoworkeeModule
         context.Services.AddHealthChecks().AddDbContextCheck<MyAppDbContext>("database");
         context.Services.Configure<SetupGateOptions>(options => options.AllowedPrefixes.Add("/api/v1/system"));
         context.Services.PostConfigure<Coworkee.Contracts.Configuration.BackgroundJobOptions>(options => options.ConnectionStringName = ConnectionStringName);
+        context.Services.AddCoworkeeSettings<MyApp.Contracts.Settings.MyAppSettings>(context.Configuration, rules => rules.Lock(s => s.Catalog.Currency));
     }
 }

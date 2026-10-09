@@ -18,6 +18,8 @@ public static class DemoSeed
         seed.TenantName = "MyApp";
         seed.Roles.Add(new SeedRole("Product Manager", "Maintains products", [.. Shared, CatalogPermissions.Products.View, CatalogPermissions.Products.Create, CatalogPermissions.Products.Edit, CatalogPermissions.Products.Delete, CatalogPermissions.Brands.View]));
         seed.Roles.Add(new SeedRole("Brand Manager", "Maintains brands", [.. Shared, CatalogPermissions.Brands.View, CatalogPermissions.Brands.Create, CatalogPermissions.Brands.Edit, CatalogPermissions.Brands.Delete]));
+        seed.Roles.Add(new SeedRole("Customer", "Registers to see the dashboard and keep own documents",
+            [CatalogPermissions.Dashboards.View, DocumentPermissions.Documents.View, DocumentPermissions.Documents.Create], SelectableForRegistration: true));
         seed.Users.AddRange([Administrator, Florian, John]);
     }
 

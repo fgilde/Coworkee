@@ -6862,6 +6862,8 @@ export interface components {
             name: string;
             description: null | string;
             isSystem: boolean;
+            /** @default false */
+            selectableForRegistration: boolean;
         };
         RoleRefDto: {
             /** Format: uuid */
@@ -6871,6 +6873,8 @@ export interface components {
         RoleRequest: {
             name: string;
             description: null | string;
+            /** @default false */
+            selectableForRegistration: boolean;
         };
         SaveExtendedAttributesRequest: {
             attributes: components["schemas"]["ExtendedAttributeDto"][];

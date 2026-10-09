@@ -8305,6 +8305,10 @@
           },
           "isSystem": {
             "type": "boolean"
+          },
+          "selectableForRegistration": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -8339,6 +8343,10 @@
               "null",
               "string"
             ]
+          },
+          "selectableForRegistration": {
+            "type": "boolean",
+            "default": false
           }
         }
       },

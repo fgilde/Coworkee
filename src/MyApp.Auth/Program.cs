@@ -12,5 +12,7 @@ app.MapDefaultEndpoints();
 app.UseCoworkee();
 app.Run();
 
-[DependsOn(typeof(MyAppInfrastructureModule), typeof(CoworkeeAuthServerModule))]
+// registration documents go to the documents of the app; administrators get a notification about accounts to activate
+[DependsOn(typeof(MyAppInfrastructureModule), typeof(CoworkeeAuthServerModule), typeof(MyApp.Documents.Registration.MyAppRegistrationDocumentsModule),
+    typeof(Coworkee.Notifications.CoworkeeNotificationsModule))]
 internal sealed class MyAppAuthModule : CoworkeeModule;

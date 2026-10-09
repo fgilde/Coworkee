@@ -6878,6 +6878,8 @@ export interface components {
             grantTypes: string[];
             scopes: string[];
             managed: boolean;
+            roles: string[];
+            permissions: string[];
         };
         ClientRequest: {
             clientId: string;
@@ -6888,6 +6890,8 @@ export interface components {
             postLogoutRedirectUris: string[];
             grantTypes: string[];
             scopes: string[];
+            roles?: null | string[];
+            permissions?: null | string[];
         };
         ClientSecretDto: {
             /** Format: uuid */

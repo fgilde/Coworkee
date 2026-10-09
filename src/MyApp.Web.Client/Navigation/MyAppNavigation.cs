@@ -10,7 +10,7 @@ internal sealed class MyAppNavigation : INavigationContributor
 {
     private const string Personal = "Personal";
     private const string DocumentManagement = "Document Management";
-    private const string Communication = "Communication";
+    private const string Communication = "Collaboration";
     private const string CatalogManagement = "Catalog Management";
 
     public static void Order(NavigationMenuOptions menu) => menu

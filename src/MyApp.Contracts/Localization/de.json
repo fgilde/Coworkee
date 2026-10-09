@@ -67,5 +67,11 @@
   "Site Settings": "Seiteneinstellungen",
   "Database Backups": "Datenbanksicherungen",
   "Audit Trails": "Änderungsprotokoll",
-  "Rating, tags and comments": "Bewertung, Tags und Kommentare"
+  "Rating, tags and comments": "Bewertung, Tags und Kommentare",
+  "Catalog": "Katalog",
+  "Currency": "Währung",
+  "Default tax rate": "Standard-Steuersatz",
+  "Show prices with tax": "Preise mit Steuer anzeigen",
+  "Tax rate in percent new brands start with": "Steuersatz in Prozent, mit dem neue Marken starten",
+  "Collaboration": "Zusammenarbeit"
 }

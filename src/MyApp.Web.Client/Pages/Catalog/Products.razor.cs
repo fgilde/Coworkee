@@ -16,6 +16,7 @@ public partial class Products
 
     private static readonly string[] SearchFields = [nameof(ProductDto.Name), nameof(ProductDto.Barcode), nameof(ProductDto.Description)];
     private CoworkeeDataTable<ProductDto> _table = null!;
+    private string? _tagFilter;
 
     [Inject] private ICatalogApi Api { get; set; } = null!;
 
@@ -59,4 +60,7 @@ public partial class Products
 #pragma warning restore BL0005
 
     private Task DeleteAsync(IReadOnlyCollection<ProductDto> products) => Snackbar.RunAsync(() => Api.DeleteProductsAsync([.. products.Select(p => p.Id)]));
+
+    private Task DiscussAsync(ProductDto product) =>
+        Dialogs.ShowSideSheetAsync<ProductSocialDialog>(product.Name, new DialogParameters<ProductSocialDialog> { { d => d.ProductId, product.Id } });
 }

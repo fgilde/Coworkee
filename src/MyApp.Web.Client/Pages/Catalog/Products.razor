@@ -3,7 +3,8 @@
 
 <PageHeader Title="Products" Description="Manage products." />
 <RealtimeSubscription Topic="type:Product" OnEvent="_ => _table.ReloadAsync()" />
-<CoworkeeDataTable @ref="_table" T="ProductDto" EntitySet="Products" Expand="Brand" SearchFields="SearchFields" MultiSelection="true" Importable="true" ImportPermission="@CatalogPermissions.Products.Create" ExportFileName="products"
+<CoworkeeTagCloud EntityType="Products" @bind-Filter="_tagFilter" />
+<CoworkeeDataTable @ref="_table" T="ProductDto" EntitySet="Products" Expand="Brand" Filter="@_tagFilter" SearchFields="SearchFields" MultiSelection="true" Importable="true" ImportPermission="@CatalogPermissions.Products.Create" ExportFileName="products"
                    DescribeItem="p => p.Name" CreateText="New product"
                    CreatePermission="@CatalogPermissions.Products.Create" EditPermission="@CatalogPermissions.Products.Edit" DeletePermission="@CatalogPermissions.Products.Delete"
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
@@ -21,5 +22,12 @@
         <PropertyColumn Property="p => p.Description" Title="@L["Description"]" />
         <PropertyColumn Property="p => p.Barcode" Title="@L["Barcode"]" />
         <PropertyColumn Property="p => p.Rate" Title="@L["Rate"]" Format="0.00" />
+        <TemplateColumn T="ProductDto" Sortable="false" Title="">
+            <CellTemplate>
+                <MudTooltip Text="@L["Rating, tags and comments"]">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Forum" Size="Size.Small" OnClick="() => DiscussAsync(context.Item)" data-testid="discuss-row" />
+                </MudTooltip>
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
 </CoworkeeDataTable>

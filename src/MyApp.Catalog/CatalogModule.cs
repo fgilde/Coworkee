@@ -4,6 +4,7 @@ using Coworkee.AspNetCore;
 using Coworkee.Core.Modularity;
 using Coworkee.Infrastructure.Persistence;
 using Coworkee.OData;
+using Coworkee.Social;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.Catalog.Domain;
@@ -16,7 +17,7 @@ using MyApp.Contracts.Catalog;
 
 namespace MyApp.Catalog;
 
-[DependsOn(typeof(CoworkeeODataModule))]
+[DependsOn(typeof(CoworkeeODataModule), typeof(CoworkeeSocialModule))]
 public sealed class MyAppCatalogModule : CoworkeeModule, IWebModule
 {
     public override void ConfigureServices(ModuleServiceContext context)
@@ -28,6 +29,10 @@ public sealed class MyAppCatalogModule : CoworkeeModule, IWebModule
         context.Services.AddODataEntity<Product>("Products", CatalogPermissions.Products.View);
         context.Services.AddODataImport("Brands", (AddEditBrandRequest row) => new AddEditBrandCommand(null, row));
         context.Services.AddODataImport("Products", (AddEditProductRequest row) => new AddEditProductCommand(null, row));
+        context.Services.AddCoworkeeSocial(social => social
+            .Comments<Product>("Products", _ => "/catalog/products")
+            .Tags<Product>("Products")
+            .Ratings<Product>("Products"));
     }
 
     public void ConfigureApplication(WebApplication app)

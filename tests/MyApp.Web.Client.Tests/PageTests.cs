@@ -116,7 +116,7 @@ public sealed class PageTests : BunitContext
         await page.Find("[data-testid='compare-query']").ClickAsync(new());
 
         await Services.GetRequiredService<ISalesOrderAppService>().Received().CancelAsync(order.Id, Arg.Any<CancellationToken>());
-        page.WaitForAssertion(() => page.Find("[data-testid='query-comparison']").TextContent.ShouldContain("Total desc"));
+        page.WaitForAssertion(() => page.Find("[data-testid='query-comparison']").TextContent.ShouldContain("still loading"));
     }
 
     private sealed class NoServer : HttpMessageHandler

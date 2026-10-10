@@ -8,7 +8,7 @@
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
     <ToolBarContent>
         <ClientEntityIndicator EntitySet="@EntitySet" DataChanged="() => _table.ReloadAsync()" />
-        <MudTooltip Text="@L["Runs the current filter once on the server and once in the browser"]">
+        <MudTooltip Text="@L["Runs the current filter on the server and in the browser, five times each"]">
             <MudButton Variant="Variant.Text" Size="Size.Small" StartIcon="@Icons.Material.Outlined.Speed" OnClick="CompareAsync" Disabled="_comparing" data-testid="compare-query">@L["Compare"]</MudButton>
         </MudTooltip>
         @if (_comparison is { } comparison)

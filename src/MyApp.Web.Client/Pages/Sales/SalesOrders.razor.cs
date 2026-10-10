@@ -23,13 +23,12 @@ public partial class SalesOrders
     private const string Expand = "Customer";
 
     private static readonly string[] SearchFields = [nameof(SalesOrderDto.Number), "Customer/Name", nameof(SalesOrderDto.Region)];
-    private static readonly string[] ComparedOrders = ["Total desc", "OrderDate desc", "Customer/Name", "Number desc"];
+    private static readonly string[] ComparedOrders = ["Total desc", "OrderDate desc", "Customer/Name", "Number desc", "Items desc"];
     private static readonly AggregateDefinition<SalesOrderDto> TotalSum = new() { Type = AggregateType.Sum, DisplayFormat = "Σ {value}", NumberFormat = "N2" };
 
     private CoworkeeDataTable<SalesOrderDto> _table = null!;
     private string? _comparison;
     private bool _comparing;
-    private int _compared;
 
     [Inject] private CoworkeeLocalizer L { get; set; } = null!;
 
@@ -92,18 +91,26 @@ public partial class SalesOrders
 
     private Task DeleteAsync(IReadOnlyCollection<SalesOrderDto> orders) => Snackbar.RunAsync(() => Orders.DeleteAsync(new IdsRequest([.. orders.Select(o => o.Id)])));
 
-    // another sort order each time, so neither side answers from what it sorted just before
+    // the same queries on both sides: the current filter with facets, each sorted by another column, so neither answers from its last result
     private async Task CompareAsync()
     {
         _comparing = true;
         try
         {
-            var orderBy = ComparedOrders[_compared++ % ComparedOrders.Length];
-            var query = new ODataQuery { Filter = _table.CurrentFilter, OrderBy = orderBy, Expand = Expand, Top = 25, Facets = true };
-            var server = await TimeAsync(() => Server.QueryAsync<SalesOrderDto>(EntitySet, query));
-            _comparison = await Local.SetAsync<SalesOrderDto>(EntitySet, Expand) is { IsLocal: true } set
-                ? L["Sorted by {0}: server {1} ms, browser {2} ms", orderBy, server, await TimeAsync(() => set.QueryAsync(query))]
-                : L["Sorted by {0}: server {1} ms, the browser is still loading", orderBy, server];
+            if (await Local.SetAsync<SalesOrderDto>(EntitySet, Expand) is not { IsLocal: true } set)
+            {
+                _comparison = L["The browser is still loading the orders"];
+                return;
+            }
+
+            // plus a condition every row meets, new for each query, so neither side answers from a result it kept
+            var queries = ComparedOrders.Select(o => new ODataQuery
+            {
+                Filter = ODataFilter.And(_table.CurrentFilter, $"Number ne '{Guid.NewGuid():N}'"), OrderBy = o, Expand = Expand, Top = 25, Facets = true,
+            }).ToList();
+            var server = await MedianAsync(queries, q => Server.QueryAsync<SalesOrderDto>(EntitySet, q));
+            var browser = await MedianAsync(queries, q => set.QueryAsync(q));
+            _comparison = L["Median of {0} queries (current filter, facets, 25 rows, another sort each): server {1} ms, browser {2} ms", queries.Count, server, browser];
         }
         finally
         {
@@ -111,10 +118,17 @@ public partial class SalesOrders
         }
     }
 
-    private static async Task<long> TimeAsync(Func<Task> query)
+    private static async Task<long> MedianAsync(IEnumerable<ODataQuery> queries, Func<ODataQuery, Task> run)
     {
-        var watch = Stopwatch.StartNew();
-        await query();
-        return watch.ElapsedMilliseconds;
+        var times = new List<long>();
+        foreach (var query in queries)
+        {
+            var watch = Stopwatch.StartNew();
+            await run(query);
+            times.Add(watch.ElapsedMilliseconds);
+        }
+
+        times.Sort();
+        return times[times.Count / 2];
     }
 }

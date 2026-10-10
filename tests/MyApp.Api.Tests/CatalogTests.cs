@@ -33,7 +33,8 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
         (await Admin.PostAsJsonAsync("/api/v1/brands", new AddEditBrandRequest { Name = "Acme" }, Ct)).StatusCode.ShouldBe(HttpStatusCode.Conflict);
         (await Admin.PostAsJsonAsync("/api/v1/brands", new AddEditBrandRequest(), Ct)).StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         (await Admin.PostAsJsonAsync("/api/v1/products", new AddEditProductRequest { Name = "Hammer", BrandId = brand!.Id, Barcode = "4001" }, Ct)).EnsureSuccessStatusCode();
-        (await Admin.PostAsJsonAsync("/api/v1/products", new AddEditProductRequest { Name = "Saw", BrandId = brand.Id, Rate = 12.5m }, Ct)).EnsureSuccessStatusCode();
+        var saw = await (await Admin.PostAsJsonAsync("/api/v1/products", new AddEditProductRequest { Name = "Saw", BrandId = brand.Id, Rate = 12.499m }, Ct)).Content.ReadFromJsonAsync<ProductDto>(Ct);
+        saw!.Rate.ShouldBe(12.50m);
         (await Admin.PostAsJsonAsync("/api/v1/products", new AddEditProductRequest { Name = "Ghost", BrandId = Guid.NewGuid() }, Ct)).StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
         var found = await ODataAsync<ProductDto>(Admin, "/odata/Products?$filter=Barcode eq '4001'&$expand=Brand&$count=true");

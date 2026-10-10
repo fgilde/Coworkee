@@ -7295,17 +7295,10 @@
       },
       "BrandDto": {
         "required": [
-          "id",
-          "name",
-          "description",
-          "tax"
+          "name"
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "name": {
             "type": "string"
           },
@@ -7322,6 +7315,10 @@
               "string"
             ],
             "format": "double"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -9349,21 +9346,10 @@
       },
       "ProductDto": {
         "required": [
-          "id",
-          "name",
-          "barcode",
-          "description",
-          "imageDataUrl",
-          "rate",
-          "brandId",
-          "brand"
+          "name"
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "name": {
             "type": "string"
           },
@@ -9406,6 +9392,10 @@
                 "$ref": "#/components/schemas/BrandDto"
               }
             ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },

@@ -1,0 +1,12 @@
+{
+  "DtoGeneration": {
+    "Namespace": "MyApp.Catalog",
+    "OutputPath": "../MyApp.Contracts/Catalog/Generated/",
+    "MappingOutputPath": "./Generated/",
+    "DeepProperties": true,
+    "PropertiesToIgnore": [ "TenantId", "CreatedAt", "CreatedBy", "ModifiedAt", "ModifiedBy" ],
+    "CreateFileHeaders": false,
+    "CreateRegions": false,
+    "DefaultMappingSettings": { "ToSourceMethodName": "ToEntity" }
+  }
+}

@@ -35,6 +35,7 @@ public sealed class PageTests : BunitContext
         Services.AddSingleton(Substitute.For<IRealtimeConnection>());
         Services.AddScoped<RealtimeClient>();
         Services.AddScoped<FileDownloader>();
+        Services.AddScoped<ITableViewStore, TableViews>();
         Services.AddScoped<Coworkee.Client.Blazor.Security.PermissionStore>();
         Services.AddScoped<Coworkee.Client.Blazor.People.UserCards>();
         var localization = Substitute.For<Coworkee.Client.Blazor.Localization.ILocalizationApi>();

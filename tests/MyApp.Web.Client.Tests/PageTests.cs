@@ -48,7 +48,7 @@ public sealed class PageTests : BunitContext
     [Fact]
     public async Task Brands_come_from_odata_and_are_deleted_after_confirmation()
     {
-        var acme = new BrandDto(Guid.CreateVersion7(), "Acme", "Tools", 19);
+        var acme = new BrandDto { Id = Guid.CreateVersion7(), Name = "Acme", Description = "Tools", Tax = 19 };
         _odata.With("Brands", acme);
         var dialogs = Render<MudDialogProvider>();
         Render<MudPopoverProvider>();

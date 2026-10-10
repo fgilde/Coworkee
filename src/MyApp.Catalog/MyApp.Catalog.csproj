@@ -9,6 +9,8 @@
     <CoworkeePackage Include="Coworkee.ResponseFilters" />
     <CoworkeePackage Include="Coworkee.Identity" />
     <CoworkeePackage Include="Coworkee.Social" />
+    <CoworkeePackage Include="Coworkee.CodeGen" />
+    <PackageReference Include="Riok.Mapperly" PrivateAssets="all" ExcludeAssets="runtime" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 </Project>

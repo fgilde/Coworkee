@@ -7472,12 +7472,12 @@ export interface components {
             createdAt: string;
         };
         BrandDto: {
-            /** Format: uuid */
-            id: string;
             name: string;
-            description: null | string;
+            description?: null | string;
             /** Format: double */
-            tax: number | string;
+            tax?: number | string;
+            /** Format: uuid */
+            id?: string;
         };
         ChangeEmailRequest: {
             newEmail: string;
@@ -7956,17 +7956,17 @@ export interface components {
         /** @enum {unknown} */
         PrincipalType: "User" | "Group";
         ProductDto: {
-            /** Format: uuid */
-            id: string;
             name: string;
-            barcode: null | string;
-            description: null | string;
-            imageDataUrl: null | string;
+            barcode?: null | string;
+            description?: null | string;
+            imageDataUrl?: null | string;
             /** Format: double */
-            rate: number | string;
+            rate?: number | string;
             /** Format: uuid */
-            brandId: string;
-            brand: null | components["schemas"]["BrandDto"];
+            brandId?: string;
+            brand?: null | components["schemas"]["BrandDto"];
+            /** Format: uuid */
+            id?: string;
         };
         ProfileDto: {
             email: string;

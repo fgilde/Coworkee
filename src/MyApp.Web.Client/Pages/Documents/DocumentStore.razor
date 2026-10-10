@@ -8,7 +8,6 @@
 }
 @if (_ready)
 {
-    <RealtimeSubscription Topic="type:Document" OnEvent="_ => _table.ReloadAsync()" />
     <CoworkeeDataTable @ref="_table" T="DocumentDto" EntitySet="Documents" Expand="DocumentType" SearchFields="SearchFields" MultiSelection="true"
                        ExportFileName="documents" Filter="@_filter" UrlState="!Mine" DescribeItem="d => d.Title" CreateText="Upload"
                        CreatePermission="@DocumentPermissions.Documents.Create" EditPermission="@DocumentPermissions.Documents.Edit" DeletePermission="@DocumentPermissions.Documents.Delete"

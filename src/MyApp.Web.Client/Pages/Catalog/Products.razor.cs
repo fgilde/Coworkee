@@ -18,6 +18,9 @@ public partial class Products
     private CoworkeeDataTable<ProductDto> _table = null!;
     private string? _tagFilter;
 
+    // shown below the rows and below each group
+    private static readonly AggregateDefinition<ProductDto> AverageRate = new() { Type = AggregateType.Avg, DisplayFormat = "Ø {value:0.00}" };
+
     [Inject] private ICatalogApi Api { get; set; } = null!;
 
     [Inject] private IDialogService Dialogs { get; set; } = null!;

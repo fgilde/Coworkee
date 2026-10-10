@@ -1,4 +1,5 @@
 using Coworkee.Client.Blazor;
+using Coworkee.Client.Blazor.ClientEntities;
 using Coworkee.Client.Blazor.Navigation;
 using Coworkee.Client.Blazor.Pages;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -21,6 +22,7 @@ builder.Services.AddCoworkeeClient(baseAddress, options =>
     options.AboutLinks.Add(new AboutLink("Project page", "https://github.com/fgilde/Coworkee"));
     options.AboutLinks.Add(new AboutLink("Documentation", "https://fgilde.github.io/CoworkeeLib/"));
 });
+builder.Services.AddCoworkeeClientEntities();
 builder.Services.AddHttpClient<ICatalogApi, CatalogApi>(client => client.BaseAddress = baseAddress);
 builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
 {

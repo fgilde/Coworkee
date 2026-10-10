@@ -9,7 +9,7 @@ public sealed class SeedTests
     private static CancellationToken Ct => TestContext.Current.CancellationToken;
 
     [Fact]
-    public async Task Every_run_brings_back_the_seeded_roles_without_touching_users_or_the_demo_data()
+    public async Task Every_run_brings_back_the_seeded_roles_without_touching_users_or_the_demo_data_and_seeds_the_sales_orders_once()
     {
         await using var postgres = new PostgresFixture();
         await postgres.InitializeAsync();
@@ -32,6 +32,8 @@ public sealed class SeedTests
         (await ScalarAsync<string>(postgres.ConnectionString, "SELECT \"Description\" FROM cw.\"Roles\" WHERE \"Name\" = 'Brand Manager'")).ShouldBe("changed by an admin");
         (await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"PasswordHash\", ',' ORDER BY \"Email\") FROM cw.\"Users\"")).ShouldBe(hashes);
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"Products\"")).ShouldBe(products);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"SalesOrders\"")).ShouldBe(DemoSales.Orders);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(DISTINCT \"Status\") FROM app.\"SalesOrders\"")).ShouldBe(5);
     }
 
     private static async Task<int> RunAsync(string connectionString)

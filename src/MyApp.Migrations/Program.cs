@@ -17,6 +17,7 @@ try
     await scope.ServiceProvider.GetRequiredService<MyAppDbContext>().Database.MigrateAsync();
     await host.Services.SeedCoworkeeIdentityAsync();
     await DemoRoles.EnsureAsync(host.Services);
+    await DemoSales.EnsureAsync(host.Services);
     return 0;
 }
 catch (Exception exception)

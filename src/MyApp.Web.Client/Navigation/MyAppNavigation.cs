@@ -3,6 +3,7 @@ using Coworkee.Client.Blazor.Navigation;
 using MudBlazor;
 using MyApp.Contracts.Catalog;
 using MyApp.Contracts.Documents;
+using MyApp.Contracts.Sales;
 
 namespace MyApp.Web.Client.Navigation;
 
@@ -12,6 +13,7 @@ internal sealed class MyAppNavigation : INavigationContributor
     private const string DocumentManagement = "Document Management";
     private const string Communication = "Collaboration";
     private const string CatalogManagement = "Catalog Management";
+    private const string Sales = "Sales";
 
     public static void Order(NavigationMenuOptions menu) => menu
         .OrderGroup(Personal, 0)
@@ -19,6 +21,7 @@ internal sealed class MyAppNavigation : INavigationContributor
         .OrderGroup(NavigationGroups.Administration, 2)
         .OrderGroup(Communication, 3)
         .OrderGroup(CatalogManagement, 4)
+        .OrderGroup(Sales, 5)
         .Place("/admin/audit", Personal, "Audit Trails", 2)
         .Place("/admin/settings", NavigationGroups.System, "Site Settings", -1)
         .Place("/admin/backups", NavigationGroups.System, "Database Backups", 5)
@@ -27,7 +30,8 @@ internal sealed class MyAppNavigation : INavigationContributor
         .IconForGroup(Communication, MudBlazor.Icons.Material.Outlined.Forum)
         .IconForGroup(Personal, MudBlazor.Icons.Material.Outlined.Person)
         .IconForGroup(DocumentManagement, MudBlazor.Icons.Material.Outlined.Description)
-        .IconForGroup(CatalogManagement, MudBlazor.Icons.Material.Outlined.Inventory2);
+        .IconForGroup(CatalogManagement, MudBlazor.Icons.Material.Outlined.Inventory2)
+        .IconForGroup(Sales, MudBlazor.Icons.Material.Outlined.ShoppingCart);
 
     public IEnumerable<CoworkeeNavItem> Items =>
     [
@@ -37,5 +41,6 @@ internal sealed class MyAppNavigation : INavigationContributor
         new("Document Types", "/document-types", Icons.Material.Outlined.FileCopy, DocumentPermissions.Types.View, Group: DocumentManagement, Order: 1),
         new("Products", "/catalog/products", Icons.Material.Outlined.ViewCarousel, CatalogPermissions.Products.View, Group: CatalogManagement),
         new("Brands", "/catalog/brands", Icons.Material.Outlined.Sell, CatalogPermissions.Brands.View, Group: CatalogManagement, Order: 1),
+        new("Sales Orders", "/sales/orders", Icons.Material.Outlined.ReceiptLong, SalesPermissions.Orders.View, Group: Sales),
     ];
 }

@@ -6952,6 +6952,10 @@
   "components": {
     "schemas": {
       "AddEditBrandRequest": {
+        "required": [
+          "name",
+          "tax"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -6974,6 +6978,9 @@
         }
       },
       "AddEditDocumentTypeRequest": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -6988,6 +6995,12 @@
         }
       },
       "AddEditLanguageRequest": {
+        "required": [
+          "culture",
+          "name",
+          "isEnabled",
+          "isDefault"
+        ],
         "type": "object",
         "properties": {
           "culture": {
@@ -7005,6 +7018,11 @@
         }
       },
       "AddEditProductRequest": {
+        "required": [
+          "name",
+          "rate",
+          "brandId"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -7295,7 +7313,9 @@
       },
       "BrandDto": {
         "required": [
-          "name"
+          "name",
+          "tax",
+          "id"
         ],
         "type": "object",
         "properties": {
@@ -7468,7 +7488,8 @@
           "scopes",
           "managed",
           "roles",
-          "permissions"
+          "permissions",
+          "showInLauncher"
         ],
         "type": "object",
         "properties": {
@@ -7564,7 +7585,8 @@
           "redirectUris",
           "postLogoutRedirectUris",
           "grantTypes",
-          "scopes"
+          "scopes",
+          "showInLauncher"
         ],
         "type": "object",
         "properties": {
@@ -7865,7 +7887,9 @@
           "email",
           "password",
           "firstName",
-          "lastName"
+          "lastName",
+          "mustChangePassword",
+          "isActive"
         ],
         "type": "object",
         "properties": {
@@ -8240,6 +8264,11 @@
         }
       },
       "ExtendedAttributeDto": {
+        "required": [
+          "key",
+          "type",
+          "isActive"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -8560,6 +8589,9 @@
         }
       },
       "HttpValidationProblemDetails": {
+        "required": [
+          "errors"
+        ],
         "type": "object",
         "properties": {
           "type": {
@@ -9346,7 +9378,10 @@
       },
       "ProductDto": {
         "required": [
-          "name"
+          "name",
+          "rate",
+          "brandId",
+          "id"
         ],
         "type": "object",
         "properties": {
@@ -9404,7 +9439,8 @@
           "email",
           "firstName",
           "lastName",
-          "phoneNumber"
+          "phoneNumber",
+          "hasPassword"
         ],
         "type": "object",
         "properties": {
@@ -9563,7 +9599,8 @@
           "id",
           "name",
           "description",
-          "isSystem"
+          "isSystem",
+          "selectableForRegistration"
         ],
         "type": "object",
         "properties": {
@@ -9608,7 +9645,8 @@
       "RoleRequest": {
         "required": [
           "name",
-          "description"
+          "description",
+          "selectableForRegistration"
         ],
         "type": "object",
         "properties": {
@@ -9676,7 +9714,8 @@
           "name",
           "displayName",
           "description",
-          "resources"
+          "resources",
+          "builtIn"
         ],
         "type": "object",
         "properties": {
@@ -10242,7 +10281,8 @@
           "layoutProperties",
           "logoSvg",
           "customCss",
-          "revision"
+          "revision",
+          "isPublished"
         ],
         "type": "object",
         "properties": {
@@ -10321,7 +10361,8 @@
           "typography",
           "layoutProperties",
           "logoSvg",
-          "customCss"
+          "customCss",
+          "isPublished"
         ],
         "type": "object",
         "properties": {
@@ -10436,6 +10477,10 @@
         }
       },
       "UpdateDocumentRequest": {
+        "required": [
+          "title",
+          "isPublic"
+        ],
         "type": "object",
         "properties": {
           "title": {
@@ -10592,7 +10637,10 @@
           "lockedUntil",
           "lastLoginAt",
           "roles",
-          "groups"
+          "groups",
+          "mustChangePassword",
+          "hasPassword",
+          "hasAvatar"
         ],
         "type": "object",
         "properties": {

@@ -7387,30 +7387,30 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         AddEditBrandRequest: {
-            name?: string;
+            name: string;
             description?: null | string;
             /** Format: double */
-            tax?: number | string;
+            tax: number | string;
         };
         AddEditDocumentTypeRequest: {
-            name?: string;
+            name: string;
             description?: null | string;
         };
         AddEditLanguageRequest: {
-            culture?: string;
-            name?: string;
-            isEnabled?: boolean;
-            isDefault?: boolean;
+            culture: string;
+            name: string;
+            isEnabled: boolean;
+            isDefault: boolean;
         };
         AddEditProductRequest: {
-            name?: string;
+            name: string;
             barcode?: null | string;
             description?: null | string;
             imageDataUrl?: null | string;
             /** Format: double */
-            rate?: number | string;
+            rate: number | string;
             /** Format: uuid */
-            brandId?: string;
+            brandId: string;
         };
         AiToolCallDto: {
             /** Format: uuid */
@@ -7475,9 +7475,9 @@ export interface components {
             name: string;
             description?: null | string;
             /** Format: double */
-            tax?: number | string;
+            tax: number | string;
             /** Format: uuid */
-            id?: string;
+            id: string;
         };
         ChangeEmailRequest: {
             newEmail: string;
@@ -7699,8 +7699,8 @@ export interface components {
         ExtendedAttributeDto: {
             /** Format: uuid */
             id?: null | string;
-            key?: string;
-            type?: components["schemas"]["ExtendedAttributeType"];
+            key: string;
+            type: components["schemas"]["ExtendedAttributeType"];
             text?: null | string;
             /** Format: double */
             decimal?: null | number | string;
@@ -7710,7 +7710,7 @@ export interface components {
             group?: null | string;
             description?: null | string;
             externalId?: null | string;
-            isActive?: boolean;
+            isActive: boolean;
         };
         /** @enum {unknown} */
         ExtendedAttributeType: "Decimal" | "Text" | "DateTime" | "Json";
@@ -7780,7 +7780,7 @@ export interface components {
             status?: null | number | string;
             detail?: null | string;
             instance?: null | string;
-            errors?: {
+            errors: {
                 [key: string]: string[];
             };
         };
@@ -7961,12 +7961,12 @@ export interface components {
             description?: null | string;
             imageDataUrl?: null | string;
             /** Format: double */
-            rate?: number | string;
+            rate: number | string;
             /** Format: uuid */
-            brandId?: string;
+            brandId: string;
             brand?: null | components["schemas"]["BrandDto"];
             /** Format: uuid */
-            id?: string;
+            id: string;
         };
         ProfileDto: {
             email: string;
@@ -8227,9 +8227,9 @@ export interface components {
             count: number | string;
         };
         UpdateDocumentRequest: {
-            title?: string;
+            title: string;
             description?: null | string;
-            isPublic?: boolean;
+            isPublic: boolean;
             /** Format: uuid */
             documentTypeId?: null | string;
         };

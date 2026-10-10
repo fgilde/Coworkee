@@ -23,6 +23,8 @@ public sealed class PageTests : BunitContext
 {
     private readonly ICatalogApi _catalog = Substitute.For<ICatalogApi>();
     private readonly FakeODataClient _odata = new();
+    private readonly IDocumentsApi _documents = Substitute.For<IDocumentsApi>();
+    private readonly ICoworkeeApi _api = Substitute.For<ICoworkeeApi>();
 
     public PageTests()
     {
@@ -30,7 +32,7 @@ public sealed class PageTests : BunitContext
         Services.AddMudServices();
         MudBlazor.Extensions.ServiceCollectionExtensions.AddMudExtensions(Services);
         Services.AddSingleton(_catalog);
-        Services.AddSingleton(Substitute.For<IDocumentsApi>());
+        Services.AddSingleton(_documents);
         Services.AddSingleton(Substitute.For<IDocumentTypeAppService>());
         Services.AddSingleton(Substitute.For<ISalesOrderAppService>());
         Services.AddSingleton<IODataClient>(_odata);
@@ -38,7 +40,8 @@ public sealed class PageTests : BunitContext
         Coworkee.Client.Blazor.ClientEntities.ClientEntitiesServiceCollectionExtensions.AddCoworkeeClientEntities(Services);
         // no server: the client entity manifest fails at once and every query goes to the fake OData client
         Services.ConfigureHttpClientDefaults(client => client.ConfigurePrimaryHttpMessageHandler(() => new NoServer()));
-        Services.AddSingleton(Substitute.For<ICoworkeeApi>());
+        Services.AddSingleton(_api);
+        Services.AddSingleton(Substitute.For<Coworkee.Client.Blazor.Files.IFilesApi>());
         Services.AddSingleton(new CoworkeeClientOptions());
         Services.AddSingleton(Substitute.For<IRealtimeConnection>());
         Services.AddScoped<RealtimeClient>();
@@ -100,6 +103,36 @@ public sealed class PageTests : BunitContext
         page.FindComponent<Coworkee.Client.Blazor.Components.RealtimeSubscription>().Instance.Topic.ShouldBe("type:Document");
         page.FindAll("[data-testid='delete-row']").ShouldBeEmpty();
         DocumentStore.FormatSize(2048).ShouldBe("2 KB");
+    }
+
+    [Fact]
+    public async Task A_new_document_is_uploaded_through_the_upload_field_next_to_the_file_choice()
+    {
+        _api.GetMyPermissionsAsync(default).ReturnsForAnyArgs([Coworkee.Contracts.Files.FilePermissions.View]);
+        var dialogs = Render<MudDialogProvider>();
+        Render<MudPopoverProvider>();
+        _ = dialogs.InvokeAsync(() => Components.DocumentDialog.ShowAsync(Services.GetRequiredService<IDialogService>(), null));
+
+        dialogs.WaitForAssertion(() => dialogs.Find("[data-testid='document-source'] [data-testid='file-picker-open']"));
+        var source = dialogs.Find("[data-testid='document-source']");
+        source.QuerySelector("[data-testid='upload-file'] label.mud-button")!.TextContent.Trim().ShouldBe("Upload");
+        source.QuerySelector("[data-testid='file-picker-open']")!.TextContent.Trim().ShouldBe("Choose a file");
+
+        var upload = dialogs.FindComponent<MudBlazor.Extensions.Components.MudExUploadEdit<MudBlazor.Extensions.Components.UploadableFile>>();
+        await upload.InvokeAsync(() => upload.Instance.UploadRequestChanged.InvokeAsync(
+            new MudBlazor.Extensions.Components.UploadableFile { FileName = "offer.pdf", Data = [1, 2, 3] }));
+        dialogs.WaitForAssertion(() => dialogs.FindAll("[data-testid='file-picker-open']").ShouldBeEmpty());
+        long? sent = null;
+        _documents.UploadDocumentAsync(default!, default!, default!, default).ReturnsForAnyArgs(call =>
+        {
+            sent = call.Arg<Stream>().Length;
+            return Task.CompletedTask;
+        });
+        dialogs.Find("input[data-testid='document-title']").Change("Offer");
+        await dialogs.Find("[data-testid='save-document']").ClickAsync(new());
+
+        await _documents.Received(1).UploadDocumentAsync(Arg.Is<UpdateDocumentRequest>(r => r.Title == "Offer"), "offer.pdf", Arg.Any<Stream>(), Arg.Any<CancellationToken>());
+        sent.ShouldBe(3);
     }
 
     [Fact]

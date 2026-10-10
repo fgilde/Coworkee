@@ -18,20 +18,20 @@
             <MudCheckBox @bind-Value="Model.IsPublic" Label="@L["Visible to everyone who may view documents"]" />
             @if (Id is null)
             {
-                @if (_fileId is null)
-                {
-                    <MudFileUpload T="IBrowserFile" @bind-Files="_file" Class="mt-2">
-                        <CustomContent>
-                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.AttachFile" OnClick="context.OpenFilePickerAsync" data-testid="choose-file">
-                                @(_file?.Name ?? L["Choose file"])
-                            </MudButton>
-                        </CustomContent>
-                    </MudFileUpload>
-                }
-                @if (_canImport && _file is null)
-                {
-                    <CoworkeeFilePicker @bind-Value="_fileId" Label="@L["Or copy a file from Files"]" />
-                }
+                <MudStack Row="true" Wrap="Wrap.Wrap" AlignItems="AlignItems.End" Spacing="2" Class="mt-2" data-testid="document-source">
+                    @if (_fileId is null)
+                    {
+                        <div data-testid="upload-file">
+                            <MudExUploadEdit T="UploadableFile" @bind-UploadRequest="_file" AllowMultiple="false" AllowFolderUpload="false" AllowExternalUrl="false"
+                                             MaxFileSize="MaxFileBytes" TextUploadFile="@L["Upload"]" ButtonVariant="Variant.Outlined" ButtonColor="Color.Default" ButtonsJustify="Justify.FlexStart"
+                                             ExternalProviderRendering="ExternalProviderRendering.Images" ExternalPickerImageSize="@("30px")" />
+                        </div>
+                    }
+                    @if (_canImport && _file is null)
+                    {
+                        <CoworkeeFilePicker @bind-Value="_fileId" />
+                    }
+                </MudStack>
             }
         </MudForm>
         @if (Document is { } document)

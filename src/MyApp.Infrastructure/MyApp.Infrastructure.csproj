@@ -3,6 +3,7 @@
     <ProjectReference Include="..\MyApp.Application\MyApp.Application.csproj" />
     <ProjectReference Include="..\MyApp.Catalog\MyApp.Catalog.csproj" />
     <ProjectReference Include="..\MyApp.Documents\MyApp.Documents.csproj" />
+    <ProjectReference Include="..\MyApp.Sales\MyApp.Sales.csproj" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <CoworkeePackage Include="Coworkee.Infrastructure" />
     <CoworkeePackage Include="Coworkee.Identity" />

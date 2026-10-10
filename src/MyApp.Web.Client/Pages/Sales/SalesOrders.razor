@@ -1,0 +1,45 @@
+@page "/sales/orders"
+@attribute [Authorize(Policy = PermissionPolicy.Prefix + SalesPermissions.Orders.View)]
+
+<PageHeader Title="Sales Orders" Description="100,000 orders as a client entity: the browser keeps them and answers search, facets, sorting and grouping itself." />
+<CoworkeeDataTable @ref="_table" T="SalesOrderDto" EntitySet="@EntitySet" Expand="@Expand" SearchFields="SearchFields" MultiSelection="true" ExportFileName="sales-orders"
+                   DescribeItem="o => o.Number" CreateText="New order"
+                   CreatePermission="@SalesPermissions.Orders.Create" EditPermission="@SalesPermissions.Orders.Edit" DeletePermission="@SalesPermissions.Orders.Delete"
+                   OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
+    <ToolBarContent>
+        <ClientEntityIndicator EntitySet="@EntitySet" DataChanged="() => _table.ReloadAsync()" />
+        <MudTooltip Text="@L["Runs the current filter once on the server and once in the browser"]">
+            <MudButton Variant="Variant.Text" Size="Size.Small" StartIcon="@Icons.Material.Outlined.Speed" OnClick="CompareAsync" Disabled="_comparing" data-testid="compare-query">@L["Compare"]</MudButton>
+        </MudTooltip>
+        @if (_comparison is { } comparison)
+        {
+            <MudText Typo="Typo.caption" data-testid="query-comparison">@comparison</MudText>
+        }
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="o => o.Number" Title="@L["Number"]" />
+        <PropertyColumn Property="o => o.Customer!.Name" Title="@L["Customer"]" />
+        <PropertyColumn Property="o => o.Status" Title="@L["Status"]">
+            <CellTemplate>
+                <MudChip T="string" Size="Size.Small" Color="@StatusColor(context.Item.Status)">@L[context.Item.Status.ToString()]</MudChip>
+            </CellTemplate>
+        </PropertyColumn>
+        <PropertyColumn Property="o => o.Channel" Title="@L["Channel"]">
+            <CellTemplate>@L[context.Item.Channel.ToString()]</CellTemplate>
+        </PropertyColumn>
+        <PropertyColumn Property="o => o.Region" Title="@L["Region"]" />
+        <PropertyColumn Property="o => o.OrderDate" Title="@L["Order date"]" Format="d" />
+        <PropertyColumn Property="o => o.Items" Title="@L["Items"]" />
+        <PropertyColumn Property="o => o.Total" Title="@L["Total"]" Format="N2" AggregateDefinition="TotalSum" />
+        <TemplateColumn T="SalesOrderDto" Sortable="false" Title="">
+            <CellTemplate>
+                @if (context.Item.Status is not (SalesOrderStatus.Cancelled or SalesOrderStatus.Delivered))
+                {
+                    <MudTooltip Text="@L["Cancel order"]">
+                        <MudIconButton Icon="@Icons.Material.Outlined.Block" Size="Size.Small" OnClick="() => CancelAsync(context.Item)" data-testid="cancel-row" />
+                    </MudTooltip>
+                }
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</CoworkeeDataTable>

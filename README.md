@@ -12,6 +12,7 @@ Sign-in through its own auth server (OpenIddict, passkeys, 2FA), setup wizard on
 | --- | --- |
 | `MyApp.Catalog` | Brands and products: entities with `IModelContributor`, permissions (`Catalog.View`, `Catalog.Manage`), commands and queries on the Coworkee dispatcher, minimal API endpoints, paging and search, live updates via `[Realtime]`, a dashboard query |
 | `MyApp.Documents` | Files on Coworkee.Storage: typed documents, public or private, upload, download, preview in **MudExFileDisplay** for safe types (served with `nosniff` and a sandbox CSP) |
+| `MyApp.Sales` | 100,000 generated sales orders as a **client entity** (`[ClientEntity]`): the browser keeps them and the table searches, filters, groups and counts facets locally; writes through the application service `ISalesOrderAppService` with a generated Blazor client |
 
 Pages: dashboard (`/`), brands, products, documents, document types. The admin area (users, roles, settings, mail, themes, audit, jobs) comes from `Coworkee.Client.Blazor`.
 

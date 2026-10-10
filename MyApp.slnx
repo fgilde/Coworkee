@@ -10,6 +10,7 @@
     <Project Path="src/MyApp.Documents/MyApp.Documents.csproj" />
     <Project Path="src/MyApp.Infrastructure/MyApp.Infrastructure.csproj" />
     <Project Path="src/MyApp.Migrations/MyApp.Migrations.csproj" />
+    <Project Path="src/MyApp.Sales/MyApp.Sales.csproj" />
     <Project Path="src/MyApp.ServiceDefaults/MyApp.ServiceDefaults.csproj" />
     <Project Path="src/MyApp.Web.Client/MyApp.Web.Client.csproj" />
     <Project Path="src/MyApp.Web/MyApp.Web.csproj" />

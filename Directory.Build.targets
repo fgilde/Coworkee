@@ -6,6 +6,10 @@
   <ItemGroup Condition="'$(CoworkeeReferenceMode)' == 'Project'">
     <ProjectReference Include="@(CoworkeePackage->'$(CoworkeeRoot)src\%(Identity)\%(Identity).csproj')" IsAspireProjectResource="false" />
   </ItemGroup>
+  <!-- the packages bring the application service generator as analyzer; project references have to add it themselves -->
+  <ItemGroup Condition="'$(CoworkeeReferenceMode)' == 'Project' And ('@(CoworkeePackage->WithMetadataValue('Identity','Coworkee.AspNetCore'))' != '' Or '@(CoworkeePackage->WithMetadataValue('Identity','Coworkee.Client.Blazor'))' != '')">
+    <ProjectReference Include="$(CoworkeeRoot)src\Coworkee.SourceGenerators\Coworkee.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" IsAspireProjectResource="false" />
+  </ItemGroup>
   <ItemGroup Condition="'$(CoworkeeReferenceMode)' != 'Project'">
     <PackageReference Include="@(CoworkeePackage)" />
   </ItemGroup>

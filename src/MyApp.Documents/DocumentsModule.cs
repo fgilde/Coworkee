@@ -43,7 +43,6 @@ public sealed class MyAppDocumentsModule : CoworkeeModule, IWebModule
 
     public void ConfigureApplication(WebApplication app)
     {
-        app.MapDocumentTypeEndpoints();
         app.MapDocumentEndpoints();
     }
 }

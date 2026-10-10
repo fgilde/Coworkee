@@ -6,14 +6,7 @@ namespace MyApp.Web.Client.Api;
 
 internal sealed class DocumentsApi(HttpClient http) : ApiClientBase(http), IDocumentsApi
 {
-    private const string Types = "api/v1/document-types";
     private const string Documents = "api/v1/documents";
-
-    public Task SaveDocumentTypeAsync(Guid? id, AddEditDocumentTypeRequest request, CancellationToken cancellationToken = default) =>
-        id is { } existing ? SendAsync(HttpMethod.Put, $"{Types}/{existing}", request, cancellationToken) : SendAsync(HttpMethod.Post, Types, request, cancellationToken);
-
-    public Task DeleteDocumentTypesAsync(IReadOnlyList<Guid> ids, CancellationToken cancellationToken = default) =>
-        SendAsync(HttpMethod.Post, $"{Types}/delete", new IdsRequest(ids), cancellationToken);
 
     public async Task UploadDocumentAsync(UpdateDocumentRequest request, string fileName, Stream content, CancellationToken cancellationToken = default)
     {

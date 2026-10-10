@@ -29,6 +29,7 @@ public sealed class PageTests : BunitContext
         MudBlazor.Extensions.ServiceCollectionExtensions.AddMudExtensions(Services);
         Services.AddSingleton(_catalog);
         Services.AddSingleton(Substitute.For<IDocumentsApi>());
+        Services.AddSingleton(Substitute.For<IDocumentTypeAppService>());
         Services.AddSingleton<IODataClient>(_odata);
         Services.AddSingleton(Substitute.For<ICoworkeeApi>());
         Services.AddSingleton(new CoworkeeClientOptions());

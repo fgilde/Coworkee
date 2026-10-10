@@ -72,6 +72,9 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
         var type = await (await Admin.PostAsJsonAsync("/api/v1/document-types", new AddEditDocumentTypeRequest { Name = "Invoice" }, Ct)).Content.ReadFromJsonAsync<DocumentTypeDto>(Ct);
         var uploader = await UserWithPermissionsAsync("uploader@acme.test", DocumentPermissions.Documents.View, DocumentPermissions.Documents.Create, DocumentPermissions.Documents.Delete);
         var reader = await UserWithPermissionsAsync("reader@acme.test", DocumentPermissions.Documents.View, DocumentPermissions.Documents.Delete);
+        (await Admin.GetFromJsonAsync<DocumentTypeDto>($"/api/v1/document-types/{type!.Id}", Ct))!.Name.ShouldBe("Invoice");
+        (await Admin.GetAsync($"/api/v1/document-types/{Guid.NewGuid()}", Ct)).StatusCode.ShouldBe(HttpStatusCode.NotFound);
+        (await uploader.GetAsync($"/api/v1/document-types/{type.Id}", Ct)).StatusCode.ShouldBe(HttpStatusCode.Forbidden, "reading a type needs DocumentTypes.View");
 
         var pdf = "%PDF-1.4 test"u8.ToArray();
         (await UploadAsync(uploader, "private.pdf", pdf, "Mine", false, type!.Id)).StatusCode.ShouldBe(HttpStatusCode.OK);

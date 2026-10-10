@@ -13,6 +13,9 @@
                        ExportFileName="documents" Filter="@_filter" UrlState="!Mine" DescribeItem="d => d.Title" CreateText="Upload"
                        CreatePermission="@DocumentPermissions.Documents.Create" EditPermission="@DocumentPermissions.Documents.Edit" DeletePermission="@DocumentPermissions.Documents.Delete"
                        OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
+        <ToolBarContent>
+            <ClientEntityIndicator EntitySet="Documents" DataChanged="() => _table.ReloadAsync()" />
+        </ToolBarContent>
         <Columns>
             <PropertyColumn Property="d => d.Title" Title="@L["Title"]" />
             <PropertyColumn Property="d => d.DocumentType!.Name" Title="@L["Type"]" />

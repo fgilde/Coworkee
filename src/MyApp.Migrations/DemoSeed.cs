@@ -8,15 +8,12 @@ using MyApp.Contracts.Sales;
 
 namespace MyApp.Migrations;
 
+/// <summary>Development seed with the users of <see cref="DemoUsers"/>; change their passwords before you deploy anywhere.</summary>
 public static class DemoSeed
 {
     public const string SalesManager = "Sales Manager";
 
-    public static readonly SeedUser Administrator = new SeedUser("info@coworkee.de", "123Pa$$word!", "Administrator", null, IsAdmin: true);
-
-    public static readonly SeedUser Florian = new SeedUser("fgilde@gmail.com", "123Pa$$word!", "Florian", "Gilde", IsAdmin: true);
-
-    public static readonly SeedUser John = new SeedUser("john@coworkee.de", "123Pa$$word!", "John", "Doe");
+    public static readonly DemoUser Administrator = DemoUsers.Administrator;
 
     public static void Configure(IdentitySeedOptions seed)
     {
@@ -27,7 +24,7 @@ public static class DemoSeed
         seed.Roles.Add(new SeedRole("Brand Manager", "Maintains brands", [.. Shared, CatalogPermissions.Brands.View, CatalogPermissions.Brands.Create, CatalogPermissions.Brands.Edit, CatalogPermissions.Brands.Delete]));
         seed.Roles.Add(new SeedRole("Customer", "Registers to see the dashboard and keep own documents",
             [CatalogPermissions.Dashboards.View, DocumentPermissions.Documents.View, DocumentPermissions.Documents.Create], SelectableForRegistration: true));
-        seed.Users.AddRange([Administrator, Florian, John]);
+        seed.Users.AddRange(DemoUsers.All.Select(u => new SeedUser(u.Email, u.Password, u.FirstName, u.LastName, u.IsAdmin) { Roles = u.Roles ?? [] }));
     }
 
     private static string[] Shared =>

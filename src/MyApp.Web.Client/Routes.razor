@@ -3,7 +3,7 @@
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(CoworkeeLayout)">
             <NotAuthorized>
-                <MudAlert Severity="Severity.Warning">@L["You need to sign in, or you lack the permission for this page."]</MudAlert>
+                <NotAllowed PageType="routeData.PageType" />
             </NotAuthorized>
         </AuthorizeRouteView>
         <FocusOnNavigate RouteData="routeData" Selector="h1" />

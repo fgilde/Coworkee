@@ -9,7 +9,7 @@ public sealed class SeedTests
     private static CancellationToken Ct => TestContext.Current.CancellationToken;
 
     [Fact]
-    public async Task Every_run_brings_back_the_seeded_roles_without_touching_users_or_the_demo_data_and_seeds_the_sales_orders_once()
+    public async Task Every_run_brings_back_the_seeded_roles_without_touching_users_or_the_demo_data_and_seeds_the_sales_orders_and_reports_once()
     {
         await using var postgres = new PostgresFixture();
         await postgres.InitializeAsync();
@@ -34,6 +34,9 @@ public sealed class SeedTests
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"Products\"")).ShouldBe(products);
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"SalesOrders\"")).ShouldBe(DemoSales.Orders);
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(DISTINCT \"Status\") FROM app.\"SalesOrders\"")).ShouldBe(5);
+        (await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"Name\", ',' ORDER BY \"Name\") FROM cw.\"Reports\"")).ShouldBe("Catalog,Order desk,Sales overview");
+        (await ScalarAsync<long>(postgres.ConnectionString,
+            "SELECT count(*) FROM cw.\"Reports\" p JOIN cw.\"Roles\" r ON r.\"Id\" = ANY(p.\"RoleIds\") WHERE r.\"Name\" = 'Sales Manager'")).ShouldBe(2);
     }
 
     private static async Task<int> RunAsync(string connectionString)

@@ -44,7 +44,7 @@ public static class DemoSales
             FROM generate_series(0, {Customers - 1}) AS c
             """, cancellationToken);
         await db.Database.ExecuteSqlAsync($"""
-            INSERT INTO app."SalesOrders" ("Id", "Number", "CustomerId", "Status", "Channel", "Region", "OrderDate", "Items", "Total", "TenantId", "CreatedAt")
+            INSERT INTO app."SalesOrders" ("Id", "Number", "CustomerId", "Status", "Channel", "Region", "OrderDate", "Items", "Total", "Options", "Paid", "TenantId", "CreatedAt")
             SELECT md5({tenantId}::text || '/order/' || g)::uuid,
                    'SO-' || lpad(g::text, 7, '0'),
                    md5({tenantId}::text || '/customer/' || (g * 7919) % {Customers})::uuid,
@@ -54,6 +54,8 @@ public static class DemoSales
                    date,
                    1 + (g * 13) % 12,
                    round((1 + (g * 13) % 12) * (4.90 + ((g::bigint * 104729) % 25000) / 100.0), 2),
+                   (CASE WHEN g % 5 = 0 THEN 1 ELSE 0 END) | (CASE WHEN g % 7 = 0 THEN 2 ELSE 0 END) | (CASE WHEN g % 3 = 0 THEN 4 ELSE 0 END) | (CASE WHEN g % 11 = 0 THEN 8 ELSE 0 END),
+                   age >= 480 OR g % 2 = 0,
                    {tenantId},
                    date
             FROM generate_series(1, {Orders}) AS g,

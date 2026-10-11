@@ -26,8 +26,10 @@ public sealed class Document : AuditedEntity, IMultiTenant
     public required string FileName { get; set; }
 
     [ProvideFacet(Label = "File type")]
+    [Coworkee.Contracts.Data.FacetBehavior(View = Coworkee.Contracts.Data.FacetView.Tree, TreeSeparator = "/", Switchable = true)]
     public required string MimeType { get; set; }
 
+    [ProvideFacet(Label = "Size", Type = FacetType.Range)]
     public long Size { get; set; }
 
     public required string BlobKey { get; set; }

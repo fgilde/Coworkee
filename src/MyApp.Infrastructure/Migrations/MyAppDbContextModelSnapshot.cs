@@ -1947,8 +1947,14 @@ namespace MyApp.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<int>("Options")
+                        .HasColumnType("integer");
+
                     b.Property<DateTimeOffset>("OrderDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("Paid")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Region")
                         .IsRequired()

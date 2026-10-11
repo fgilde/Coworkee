@@ -7946,6 +7946,8 @@ export interface components {
             items: number | string;
             /** Format: double */
             total: number | string;
+            options: components["schemas"]["SalesOrderOptions"];
+            paid: boolean;
         };
         AiToolCallDto: {
             /** Format: uuid */
@@ -8599,7 +8601,12 @@ export interface components {
             items: number | string;
             /** Format: double */
             total: number | string;
+            options: components["schemas"]["SalesOrderOptions"];
+            /** @default false */
+            paid: boolean;
         };
+        /** @default None */
+        SalesOrderOptions: string;
         /** @enum {unknown} */
         SalesOrderStatus: "Open" | "Confirmed" | "Shipped" | "Delivered" | "Cancelled";
         SaveExtendedAttributesRequest: {

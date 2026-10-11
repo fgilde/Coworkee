@@ -13,4 +13,8 @@ public sealed class AddEditSalesOrderRequest
     public int Items { get; set; } = 1;
 
     public decimal Total { get; set; }
+
+    public SalesOrderOptions Options { get; set; }
+
+    public bool Paid { get; set; }
 }

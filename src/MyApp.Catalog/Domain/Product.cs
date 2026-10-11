@@ -19,6 +19,7 @@ public sealed class Product : AuditedEntity, IMultiTenant
 
     public string? ImageDataUrl { get; set; }
 
+    [ProvideFacet(Label = "Rate", Type = FacetType.Range, Order = 1)]
     public decimal Rate { get; set; }
 
     [ProvideFacet(Label = "Brand", ValuePath = "BrandId", LabelPath = "Brand.Name", ValueType = typeof(Guid))]

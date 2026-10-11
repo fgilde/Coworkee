@@ -11,7 +11,7 @@ public sealed class SeedTests
     [Fact]
     public async Task Every_run_brings_back_the_seeded_roles_without_touching_users_or_the_demo_data_and_seeds_the_sales_orders_and_reports_once()
     {
-        await using var postgres = new PostgresFixture();
+        await using var postgres = new DatabaseFixture();
         await postgres.InitializeAsync();
         (await RunAsync(postgres.ConnectionString)).ShouldBe(0);
         var hashes = await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"PasswordHash\", ',' ORDER BY \"Email\") FROM cw.\"Users\"");

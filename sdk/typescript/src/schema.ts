@@ -5313,6 +5313,457 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSummaryDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveReportRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSourceDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportRoleDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/query": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReportQueryRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportQueryResult"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/sheet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReportSheetRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveReportRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{id}/duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{id}/favorite": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["FavoriteReportRequest"];
+                };
+            };
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/ai/tools": {
         parameters: {
             query?: never;
@@ -7949,6 +8400,11 @@ export interface components {
             options: components["schemas"]["SalesOrderOptions"];
             paid: boolean;
         };
+        /**
+         * @default Count
+         * @enum {unknown}
+         */
+        AggregateFunction: "Count" | "Sum" | "Average" | "Min" | "Max" | "DistinctCount";
         AiToolCallDto: {
             /** Format: uuid */
             id: string;
@@ -8020,6 +8476,8 @@ export interface components {
             newEmail: string;
             currentPassword: null | string;
         };
+        /** @enum {unknown} */
+        ChartKind: "Bar" | "HorizontalBar" | "StackedBar" | "Line" | "Area" | "Pie" | "Donut" | "Scatter" | "Radar" | "Treemap" | "Heatmap";
         ChatContactDto: {
             /** Format: uuid */
             userId: string;
@@ -8174,6 +8632,13 @@ export interface components {
             roles: null | number | string;
             productsPerMonth: components["schemas"]["MonthCountDto"][];
         };
+        /**
+         * @default None
+         * @enum {unknown}
+         */
+        DateBucket: "None" | "Day" | "Week" | "Month" | "Quarter" | "Year";
+        /** @enum {unknown} */
+        DateRangePreset: "Today" | "Last7Days" | "Last30Days" | "Last90Days" | "ThisMonth" | "LastMonth" | "ThisQuarter" | "ThisYear" | "LastYear" | "Last12Months" | "Custom";
         DeleteAccountRequest: {
             email: string;
         };
@@ -8257,6 +8722,14 @@ export interface components {
         };
         /** @enum {unknown} */
         ExtendedAttributeType: "Decimal" | "Text" | "DateTime" | "Json";
+        /**
+         * @default Or
+         * @enum {unknown}
+         */
+        FacetOperator: "And" | "Or";
+        FavoriteReportRequest: {
+            favorite: boolean;
+        };
         FeatureDefinitionDto: {
             name: string;
             displayName: string;
@@ -8420,6 +8893,8 @@ export interface components {
             readAt: null | string;
             arguments?: null | string[];
         };
+        /** @enum {unknown} */
+        NumberFormat: "Number" | "Integer" | "Compact" | "Currency" | "Percent";
         OutgoingMailDto: {
             /** Format: uuid */
             id: string;
@@ -8554,6 +9029,143 @@ export interface components {
             subject: string;
             htmlBody: string;
         };
+        ReportAggregate: {
+            function: components["schemas"]["AggregateFunction"];
+            field?: null | string;
+            label?: null | string;
+        };
+        ReportDateRange: {
+            preset: components["schemas"]["DateRangePreset"];
+            /** Format: date */
+            from?: null | string;
+            /** Format: date */
+            to?: null | string;
+        };
+        ReportDefinition: {
+            widgets?: components["schemas"]["ReportWidget"][];
+            filters?: components["schemas"]["ReportFilterValue"][];
+            dateRange?: null | components["schemas"]["ReportDateRange"];
+            /** Format: int32 */
+            refreshSeconds?: number | string;
+        };
+        ReportDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            description: null | string;
+            icon: null | string;
+            visibility: components["schemas"]["ReportVisibility"];
+            roleIds: string[];
+            ownerName: null | string;
+            canEdit: boolean;
+            isFavorite: boolean;
+            definition: components["schemas"]["ReportDefinition"];
+            /** Format: date-time */
+            modifiedAt: null | string;
+        };
+        ReportFieldDto: {
+            path: string;
+            label: string;
+            kind: components["schemas"]["ReportFieldKind"];
+            members?: null | string[];
+            enumType?: null | string;
+            /** @default false */
+            dateOnly: boolean;
+            memberLabels?: null | string[];
+        };
+        /** @enum {unknown} */
+        ReportFieldKind: "Text" | "Integer" | "Number" | "Date" | "Boolean" | "Enum" | "Guid";
+        ReportFilterValue: {
+            entitySet: string;
+            groupKey: string;
+            groupLabel: string;
+            label: string;
+            oData: string;
+            operator: components["schemas"]["FacetOperator"];
+        };
+        ReportGroupBy: {
+            field: string;
+            bucket?: components["schemas"]["DateBucket"];
+        };
+        ReportKey: {
+            value: null | string;
+            label: string;
+            filter: string;
+        };
+        ReportQueryRequest: {
+            entitySet: string;
+            filter?: null | string;
+            groupBy?: null | components["schemas"]["ReportGroupBy"];
+            splitBy?: null | components["schemas"]["ReportGroupBy"];
+            aggregates?: null | components["schemas"]["ReportAggregate"][];
+            sortBy: components["schemas"]["ReportSortBy"];
+            /** @default false */
+            descending: boolean;
+            /** Format: int32 */
+            top?: null | number | string;
+        };
+        ReportQueryResult: {
+            rows: components["schemas"]["ReportQueryRow"][];
+            /** Format: int64 */
+            elapsedMilliseconds: number | string;
+        };
+        ReportQueryRow: {
+            key: null | components["schemas"]["ReportKey"];
+            series: null | components["schemas"]["ReportKey"];
+            values: (null | number | string)[];
+        };
+        ReportRoleDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+        };
+        ReportSheetRequest: {
+            name: string;
+            headers: string[];
+            rows: unknown[][];
+        };
+        /** @enum {unknown} */
+        ReportSortBy: "Key" | "Value";
+        ReportSourceDto: {
+            entitySet: string;
+            label: string;
+            fields: components["schemas"]["ReportFieldDto"][];
+            topic?: null | string;
+        };
+        ReportSummaryDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            description: null | string;
+            icon: null | string;
+            visibility: components["schemas"]["ReportVisibility"];
+            ownerName: null | string;
+            isOwner: boolean;
+            isFavorite: boolean;
+            /** Format: int32 */
+            widgets: number | string;
+            entitySets: string[];
+            /** Format: date-time */
+            modifiedAt: null | string;
+        };
+        /** @enum {unknown} */
+        ReportVisibility: "Private" | "Roles" | "Organisation";
+        ReportWidget: {
+            id: string;
+            type: components["schemas"]["WidgetType"];
+            title?: null | string;
+            subtitle?: null | string;
+            /** Format: int32 */
+            x: number | string;
+            /** Format: int32 */
+            y: number | string;
+            /** Format: int32 */
+            w: number | string;
+            /** Format: int32 */
+            h: number | string;
+            query?: null | components["schemas"]["WidgetQuery"];
+            options: components["schemas"]["WidgetOptions"];
+        };
         ResourcePermissionDto: {
             /** Format: uuid */
             id: string;
@@ -8615,6 +9227,14 @@ export interface components {
         SaveMailTemplateRequest: {
             subject: string;
             body: string;
+        };
+        SaveReportRequest: {
+            name: string;
+            description: null | string;
+            icon: null | string;
+            visibility: components["schemas"]["ReportVisibility"];
+            roleIds: string[];
+            definition: components["schemas"]["ReportDefinition"];
         };
         SaveTagsRequest: {
             tags: string[];
@@ -8731,6 +9351,8 @@ export interface components {
             product: string;
             version: string;
         };
+        /** @enum {unknown} */
+        TableView: "Table" | "Cards" | "List";
         TagDto: {
             name: string;
             /** Format: int32 */
@@ -8885,6 +9507,41 @@ export interface components {
             providerKey: string;
             displayName: null | string;
         };
+        WidgetOptions: {
+            chart?: components["schemas"]["ChartKind"];
+            format?: components["schemas"]["NumberFormat"];
+            currency?: string;
+            showLegend?: boolean;
+            showDataLabels?: boolean;
+            palette?: string[];
+            compareToPrevious?: boolean;
+            higherIsBetter?: boolean;
+            sparkline?: components["schemas"]["DateBucket"];
+            /** Format: double */
+            target?: null | number | string;
+            view?: components["schemas"]["TableView"];
+            crossFilter?: boolean;
+            text?: null | string;
+            url?: null | string;
+        };
+        WidgetQuery: {
+            entitySet?: string;
+            filter?: null | string;
+            rules?: null | string;
+            facets?: components["schemas"]["ReportFilterValue"][];
+            groupBy?: null | components["schemas"]["ReportGroupBy"];
+            splitBy?: null | components["schemas"]["ReportGroupBy"];
+            aggregates?: components["schemas"]["ReportAggregate"][];
+            dateField?: null | string;
+            sortBy?: components["schemas"]["ReportSortBy"];
+            descending?: boolean;
+            /** Format: int32 */
+            top?: null | number | string;
+            columns?: string[];
+            orderBy?: null | string;
+        };
+        /** @enum {unknown} */
+        WidgetType: "Kpi" | "Chart" | "Table" | "DataTable" | "Pivot" | "Markdown" | "Image" | "Embed";
     };
     responses: never;
     parameters: never;

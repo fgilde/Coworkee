@@ -102,5 +102,14 @@
   "View sales orders": "Aufträge ansehen",
   "Create sales orders": "Aufträge anlegen",
   "Edit and cancel sales orders": "Aufträge bearbeiten und stornieren",
-  "Delete sales orders": "Aufträge löschen"
+  "Delete sales orders": "Aufträge löschen",
+  "On the way": "Unterwegs",
+  "Web shop": "Webshop",
+  "By phone": "Telefonisch",
+  "Gift wrap": "Geschenkverpackung",
+  "Express": "Express",
+  "Insured": "Versichert",
+  "Fragile": "Zerbrechlich",
+  "Options": "Optionen",
+  "Paid": "Bezahlt"
 }

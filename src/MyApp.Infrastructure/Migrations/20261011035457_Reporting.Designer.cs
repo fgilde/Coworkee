@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyApp.Infrastructure.Migrations
 {
     [DbContext(typeof(MyAppDbContext))]
-    [Migration("20261011025417_Reporting")]
+    [Migration("20261011035457_Reporting")]
     partial class Reporting
     {
         /// <inheritdoc />
@@ -1950,8 +1950,14 @@ namespace MyApp.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<int>("Options")
+                        .HasColumnType("integer");
+
                     b.Property<DateTimeOffset>("OrderDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("Paid")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Region")
                         .IsRequired()

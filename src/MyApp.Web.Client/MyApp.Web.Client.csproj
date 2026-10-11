@@ -7,6 +7,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
     <CoworkeePackage Include="Coworkee.Client.Blazor" />
     <CoworkeePackage Include="Coworkee.Client.Blazor.ClientEntities" />
+    <CoworkeePackage Include="Coworkee.Client.Blazor.Reporting" />
     <InternalsVisibleTo Include="MyApp.Web.Client.Tests" />
     <ProjectReference Include="..\MyApp.Contracts\MyApp.Contracts.csproj" />
   </ItemGroup>

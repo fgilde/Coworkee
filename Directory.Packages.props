@@ -26,6 +26,8 @@
     <PackageVersion Include="Coworkee.Localization" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Backup" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Chat" Version="$(CoworkeeVersion)" />
+    <PackageVersion Include="Coworkee.Reporting" Version="$(CoworkeeVersion)" />
+    <PackageVersion Include="Coworkee.Client.Blazor.Reporting" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Ai" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Client" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.ExtendedAttributes" Version="$(CoworkeeVersion)" />

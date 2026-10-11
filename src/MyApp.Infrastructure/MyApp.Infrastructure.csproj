@@ -17,6 +17,7 @@
     <CoworkeePackage Include="Coworkee.Localization" />
     <CoworkeePackage Include="Coworkee.Backup" />
     <CoworkeePackage Include="Coworkee.Chat" />
+    <CoworkeePackage Include="Coworkee.Reporting" />
     <CoworkeePackage Include="Coworkee.Ai" />
     <CoworkeePackage Include="Coworkee.Features" />
     <CoworkeePackage Include="Coworkee.Files" />

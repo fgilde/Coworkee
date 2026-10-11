@@ -27,6 +27,7 @@ internal sealed class MyAppNavigation : INavigationContributor
         .Place("/admin/backups", NavigationGroups.System, "Database Backups", 5)
         .Place("/files", DocumentManagement, order: -1)
         .Place("/chat", Communication)
+        .Place("/reports", Personal, order: 0)
         .IconForGroup(Communication, MudBlazor.Icons.Material.Outlined.Forum)
         .IconForGroup(Personal, MudBlazor.Icons.Material.Outlined.Person)
         .IconForGroup(DocumentManagement, MudBlazor.Icons.Material.Outlined.Description)

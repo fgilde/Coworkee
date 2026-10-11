@@ -2,6 +2,7 @@ using Coworkee.Client.Blazor;
 using Coworkee.Client.Blazor.ClientEntities;
 using Coworkee.Client.Blazor.Navigation;
 using Coworkee.Client.Blazor.Pages;
+using Coworkee.Client.Blazor.Reporting;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyApp.Web.Client.Api;
 using MyApp.Contracts.Documents;
@@ -23,6 +24,7 @@ builder.Services.AddCoworkeeClient(baseAddress, options =>
     options.AboutLinks.Add(new AboutLink("Documentation", "https://fgilde.github.io/CoworkeeLib/"));
 });
 builder.Services.AddCoworkeeClientEntities();
+builder.Services.AddCoworkeeReporting(baseAddress, reports => reports.DrillDown("SalesOrders", "sales/orders").DrillDown("Products", "catalog/products").DrillDown("Brands", "catalog/brands"));
 builder.Services.AddHttpClient<ICatalogApi, CatalogApi>(client => client.BaseAddress = baseAddress);
 builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
 {

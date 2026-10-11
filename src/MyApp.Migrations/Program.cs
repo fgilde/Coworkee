@@ -18,6 +18,7 @@ try
     await host.Services.SeedCoworkeeIdentityAsync();
     await DemoRoles.EnsureAsync(host.Services);
     await DemoSales.EnsureAsync(host.Services);
+    await DemoReports.EnsureAsync(host.Services);
     return 0;
 }
 catch (Exception exception)

@@ -1,4 +1,4 @@
-<Project Sdk="Aspire.AppHost.Sdk/13.6.0">
+<Project Sdk="Aspire.AppHost.Sdk/13.6.1">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <UserSecretsId>myapp-apphost</UserSecretsId>
@@ -7,6 +7,8 @@
   <ItemGroup>
     <CoworkeePackage Include="Coworkee.Aspire" />
     <ProjectReference Include="..\MyApp.Migrations\MyApp.Migrations.csproj" />
+    <!-- the development users, so Keycloak and other resources get the same credentials as the seed -->
+    <Compile Include="..\MyApp.Migrations\DemoUsers.cs" Link="DemoUsers.cs" />
     <ProjectReference Include="..\MyApp.Api\MyApp.Api.csproj" />
     <ProjectReference Include="..\MyApp.Auth\MyApp.Auth.csproj" />
     <ProjectReference Include="..\MyApp.Web\MyApp.Web.csproj" />

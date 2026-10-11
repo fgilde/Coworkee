@@ -7483,7 +7483,9 @@
           "channel",
           "region",
           "items",
-          "total"
+          "total",
+          "options",
+          "paid"
         ],
         "type": "object",
         "properties": {
@@ -7515,6 +7517,12 @@
               "string"
             ],
             "format": "double"
+          },
+          "options": {
+            "$ref": "#/components/schemas/SalesOrderOptions"
+          },
+          "paid": {
+            "type": "boolean"
           }
         }
       },
@@ -10215,7 +10223,9 @@
           "region",
           "orderDate",
           "items",
-          "total"
+          "total",
+          "options",
+          "paid"
         ],
         "type": "object",
         "properties": {
@@ -10268,8 +10278,19 @@
               "string"
             ],
             "format": "double"
+          },
+          "options": {
+            "$ref": "#/components/schemas/SalesOrderOptions"
+          },
+          "paid": {
+            "type": "boolean",
+            "default": false
           }
         }
+      },
+      "SalesOrderOptions": {
+        "type": "string",
+        "default": "None"
       },
       "SalesOrderStatus": {
         "enum": [

@@ -4,6 +4,7 @@ using Coworkee.Client.Blazor.ClientEntities;
 using Coworkee.Client.Blazor.Components.Data;
 using Coworkee.Client.Blazor.Data;
 using Coworkee.Client.Blazor.Localization;
+using Coworkee.Contracts.Data;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudBlazor.Extensions.Components.ObjectEdit;
@@ -25,6 +26,12 @@ public partial class SalesOrders
     private static readonly string[] SearchFields = [nameof(SalesOrderDto.Number), "Customer/Name", nameof(SalesOrderDto.Region)];
     private static readonly string[] ComparedOrders = ["Total desc", "OrderDate desc", "Customer/Name", "Number desc", "Items desc"];
     private static readonly AggregateDefinition<SalesOrderDto> TotalSum = new() { Type = AggregateType.Sum, DisplayFormat = "Σ {value}", NumberFormat = "N2" };
+
+    // the page has the last word on a facet: regions as a dropdown with exclusion, whatever the server says
+    private static readonly Dictionary<string, FacetSettings> FacetSettings = new()
+    {
+        ["region"] = new() { View = FacetView.Select, AllowExclude = true },
+    };
 
     private CoworkeeDataTable<SalesOrderDto> _table = null!;
     private string? _comparison;
@@ -51,6 +58,9 @@ public partial class SalesOrders
         _ => Color.Default,
     };
 
+    private static IEnumerable<SalesOrderOptions> OptionsOf(SalesOrderOptions options) =>
+        Enum.GetValues<SalesOrderOptions>().Where(o => o != SalesOrderOptions.None && options.HasFlag(o));
+
     private Task CreateAsync() => EditAsync(null, new AddEditSalesOrderRequest());
 
     private Task EditAsync(SalesOrderDto order) => EditAsync(order.Id, new AddEditSalesOrderRequest
@@ -61,6 +71,8 @@ public partial class SalesOrders
         Region = order.Region,
         Items = order.Items,
         Total = order.Total,
+        Options = order.Options,
+        Paid = order.Paid,
     });
 
     private async Task EditAsync(Guid? id, AddEditSalesOrderRequest model)
@@ -84,6 +96,8 @@ public partial class SalesOrders
         meta.Property(o => o.Region).WithLabel(L["Region"]).WithOrder(3);
         meta.Property(o => o.Items).WithLabel(L["Items"]).WithOrder(4);
         meta.Property(o => o.Total).WithLabel(L["Total"]).WithOrder(5);
+        meta.Property(o => o.Options).WithLabel(L["Options"]).WithOrder(6);
+        meta.Property(o => o.Paid).WithLabel(L["Paid"]).WithOrder(7);
     }
 #pragma warning restore BL0005
 

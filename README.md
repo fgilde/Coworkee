@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="https://github.com/fgilde/CoworkeeLib"><img src="docs/coworkee-icon.svg" width="96" alt="Coworkee" /></a>
+</p>
+
+<p align="center">Built on <a href="https://github.com/fgilde/CoworkeeLib">Coworkee</a> · <a href="https://fgilde.github.io/CoworkeeLib/">Documentation</a></p>
+
+<p align="center"><a href="https://quickrun.org/run?repo=fgilde/Coworkee"><img src="https://quickrun.org/badge.svg" alt="QuickRun" /></a></p>
+
 # MyApp – Coworkee reference app
 
 A Blazor (WASM + BFF) and ASP.NET Core app built on the **Coworkee** packages. It is the starting point for new apps and shows how a module plugs into the platform.
@@ -21,6 +29,8 @@ Pages: dashboard (`/`), brands, products, documents, document types. The admin a
 1. .NET 10 SDK, Docker.
 2. Coworkee packages: `git clone https://github.com/fgilde/CoworkeeLib.git ../coworkee`, then run `pwsh build/pack-local.ps1` in `../coworkee` (fills `../coworkee/artifacts/nuget`, which `nuget.config` points at).
 3. `dotnet run --project src/MyApp.AppHost` and open the web app from the Aspire dashboard; the migration service seeds the demo users. How to sign in, also to Keycloak, Grafana and WebDataStudio: [LOGIN.md](LOGIN.md).
+
+Or with one click: the [QuickRun](https://quickrun.org) badge runs `quickrun.yml`, which clones and packs the library into `../coworkee`, trusts the development certificate, starts the app host and opens the web app once it answers.
 
 ## Your own app
 

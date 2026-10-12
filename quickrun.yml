@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://quickrun.org/quickrun.schema.json
+version: 1
+name: Coworkee demo app
+description: "The complete demo app on the Coworkee packages: clones and packs the library next to this folder (../coworkee), then runs the Aspire app host with the database, Redis, Mailpit, auth server, API and web app. How to sign in: LOGIN.md."
+icon: docs/coworkee-icon.svg
+docs: https://fgilde.github.io/CoworkeeLib/
+
+requires:
+  - tool: dotnet
+    version: ">=10.0"
+    install: https://dotnet.microsoft.com/download
+  - tool: pwsh
+    install: https://aka.ms/powershell
+  - tool: git
+    install: https://git-scm.com/downloads
+  - tool: docker
+    install: https://www.docker.com/products/docker-desktop
+
+setup:
+  # already there from an earlier run: the clone fails, the pack takes the current state
+  - run: git clone --depth 1 https://github.com/fgilde/CoworkeeLib.git ../coworkee
+    continueOnError: true
+  - run: pwsh -NoProfile -File ../coworkee/build/pack-local.ps1
+  - run: dotnet dev-certs https --trust
+    continueOnError: true
+
+tasks:
+  - name: apphost
+    run: dotnet run --project src/MyApp.AppHost
+    readyWhen:
+      http: http://localhost:5300
+    open: https://localhost:7300

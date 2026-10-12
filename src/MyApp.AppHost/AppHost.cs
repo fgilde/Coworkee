@@ -19,9 +19,22 @@ builder.AddCoworkeeApp("myapp", options =>
 
     // self registration like the standalone app: on, confirmed by email, activated by an administrator (admins change it under Settings)
     options.Configure("auth", Registration).Configure("api", Registration);
+
+    // free machine translation without an account: French, Spanish and Italian are translated at the first start
+    string[] languages = ["en", "de", "fr", "es", "it"];
+    options.UseLibreTranslate(languages);
+    options.Configure("auth", s => OfferLanguages(s, languages)).Configure("api", s => OfferLanguages(s, languages));
 }).AddProjects();
 
 builder.Build().Run();
+
+static void OfferLanguages(IResourceBuilder<ProjectResource> service, string[] languages)
+{
+    for (var i = 0; i < languages.Length; i++)
+    {
+        service.WithEnvironment($"Coworkee__Localization__Languages__{i}", languages[i]);
+    }
+}
 
 static void Registration(IResourceBuilder<ProjectResource> service) => service
     .WithSetting(s => s.Coworkee.Settings.Defaults["Account.AllowRegistration"], true)

@@ -10,6 +10,12 @@ builder.WebHost.ConfigureKestrel(kestrel => kestrel.Limits.MaxRequestBodySize = 
 builder.Services.AddRazorComponents().AddInteractiveWebAssemblyComponents();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    // the debug proxy of WebAssembly: Visual Studio and VS Code attach to the browser through /_framework/debug
+    app.UseWebAssemblyDebugging();
+}
+
 app.MapDefaultEndpoints();
 app.UseStaticFiles();
 app.UseAntiforgery();

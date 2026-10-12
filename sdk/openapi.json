@@ -8620,7 +8620,8 @@
       "AiPendingToolDto": {
         "required": [
           "tool",
-          "input"
+          "input",
+          "destructive"
         ],
         "type": "object",
         "properties": {
@@ -8629,6 +8630,10 @@
           },
           "input": {
             "type": "string"
+          },
+          "destructive": {
+            "type": "boolean",
+            "default": true
           }
         }
       },

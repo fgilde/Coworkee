@@ -9001,6 +9001,8 @@ export interface components {
         AiPendingToolDto: {
             tool: string;
             input: string;
+            /** @default true */
+            destructive: boolean;
         };
         AiSendRequest: {
             text: string;

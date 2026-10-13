@@ -3638,6 +3638,64 @@
         }
       }
     },
+    "/api/v1/themes/keycloak": {
+      "get": {
+        "tags": [
+          "Themes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeycloakThemeStatusDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/themes/keycloak/apply": {
+      "post": {
+        "tags": [
+          "Themes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeycloakThemeStatusDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/realtime/presence": {
       "get": {
         "tags": [
@@ -10600,6 +10658,39 @@
         }
       },
       "JsonElement": {},
+      "KeycloakThemeStatusDto": {
+        "required": [
+          "configured",
+          "themeName",
+          "writtenAt",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "configured": {
+            "type": "boolean"
+          },
+          "themeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "writtenAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "LanguageDto": {
         "required": [
           "id",
@@ -13214,7 +13305,7 @@
           "paletteDark",
           "typography",
           "layoutProperties",
-          "logoSvg",
+          "logo",
           "customCss",
           "revision",
           "isPublished"
@@ -13260,7 +13351,7 @@
               }
             ]
           },
-          "logoSvg": {
+          "logo": {
             "type": [
               "null",
               "string"
@@ -13295,7 +13386,7 @@
           "paletteDark",
           "typography",
           "layoutProperties",
-          "logoSvg",
+          "logo",
           "customCss",
           "isPublished"
         ],
@@ -13330,7 +13421,7 @@
               }
             ]
           },
-          "logoSvg": {
+          "logo": {
             "type": [
               "null",
               "string"

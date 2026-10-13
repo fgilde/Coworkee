@@ -3850,6 +3850,94 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/themes/keycloak": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["KeycloakThemeStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/themes/keycloak/apply": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["KeycloakThemeStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/realtime/presence": {
         parameters: {
             query?: never;
@@ -9516,6 +9604,13 @@ export interface components {
             document: components["schemas"]["UpdateDocumentRequest"];
         };
         JsonElement: unknown;
+        KeycloakThemeStatusDto: {
+            configured: boolean;
+            themeName: null | string;
+            /** Format: date-time */
+            writtenAt: null | string;
+            error: null | string;
+        };
         LanguageDto: {
             /** Format: uuid */
             id: null | string;
@@ -10134,7 +10229,7 @@ export interface components {
             paletteDark: components["schemas"]["JsonElement"];
             typography: null | components["schemas"]["JsonElement"];
             layoutProperties: null | components["schemas"]["JsonElement"];
-            logoSvg: null | string;
+            logo: null | string;
             customCss: null | string;
             /** Format: int32 */
             revision: number | string;
@@ -10149,7 +10244,7 @@ export interface components {
             paletteDark: components["schemas"]["JsonElement"];
             typography: null | components["schemas"]["JsonElement"];
             layoutProperties: null | components["schemas"]["JsonElement"];
-            logoSvg: null | string;
+            logo: null | string;
             customCss: null | string;
             shadows?: unknown;
             options?: unknown;

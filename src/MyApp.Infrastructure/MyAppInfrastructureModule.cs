@@ -24,6 +24,6 @@ public sealed class MyAppInfrastructureModule : CoworkeeModule
         context.Services.AddHealthChecks().AddDbContextCheck<MyAppDbContext>("database");
         context.Services.Configure<SetupGateOptions>(options => options.AllowedPrefixes.Add("/api/v1/system"));
         context.Services.PostConfigure<Coworkee.Contracts.Configuration.BackgroundJobOptions>(options => options.ConnectionStringName = ConnectionStringName);
-        context.Services.AddCoworkeeSettings<MyApp.Contracts.Settings.MyAppSettings>(context.Configuration, rules => rules.Lock(s => s.Catalog.Currency));
+        context.Services.AddCoworkeeSettings<MyApp.Contracts.Settings.MyAppSettings>(context.Configuration, rules => rules.Protect(s => s.Catalog.Currency));
     }
 }

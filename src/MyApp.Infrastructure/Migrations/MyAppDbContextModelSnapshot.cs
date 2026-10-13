@@ -1684,7 +1684,7 @@ namespace MyApp.Infrastructure.Migrations
                     b.Property<string>("LayoutProperties")
                         .HasColumnType("jsonb");
 
-                    b.Property<string>("LogoSvg")
+                    b.Property<string>("Logo")
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("ModifiedAt")

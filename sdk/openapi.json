@@ -2749,10 +2749,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceDto"
-                  }
+                  "$ref": "#/components/schemas/ServiceDirectoryResult"
                 }
               }
             }
@@ -3018,6 +3015,45 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mail/connection/test": {
+      "post": {
+        "tags": [
+          "Mail"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MailConnectionTestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MailConnectionTestDto"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -8957,6 +8993,15 @@
             "items": {
               "type": "string"
             }
+          },
+          "protected": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -10625,6 +10670,47 @@
           }
         }
       },
+      "MailConnectionTestDto": {
+        "required": [
+          "success",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MailConnectionTestRequest": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "cleared": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "MailTemplateDto": {
         "required": [
           "name",
@@ -11209,6 +11295,47 @@
               "string"
             ],
             "format": "int32"
+          }
+        }
+      },
+      "PasswordRules": {
+        "required": [
+          "requiredLength",
+          "requiredUniqueChars",
+          "requireDigit",
+          "requireLowercase",
+          "requireUppercase",
+          "requireNonAlphanumeric"
+        ],
+        "type": "object",
+        "properties": {
+          "requiredLength": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "requiredUniqueChars": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "requireDigit": {
+            "type": "boolean"
+          },
+          "requireLowercase": {
+            "type": "boolean"
+          },
+          "requireUppercase": {
+            "type": "boolean"
+          },
+          "requireNonAlphanumeric": {
+            "type": "boolean"
           }
         }
       },
@@ -12498,12 +12625,34 @@
           }
         }
       },
+      "ServiceDirectoryResult": {
+        "required": [
+          "services",
+          "unavailableSources"
+        ],
+        "type": "object",
+        "properties": {
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceDto"
+            }
+          },
+          "unavailableSources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "ServiceDto": {
         "required": [
           "name",
           "title",
           "url",
-          "health"
+          "health",
+          "source"
         ],
         "type": "object",
         "properties": {
@@ -12518,6 +12667,19 @@
           },
           "health": {
             "$ref": "#/components/schemas/ServiceHealth"
+          },
+          "source": {
+            "type": "string",
+            "default": "app"
+          },
+          "urls": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -12525,7 +12687,8 @@
         "enum": [
           "Healthy",
           "Unhealthy",
-          "Unreachable"
+          "Unreachable",
+          "Unknown"
         ]
       },
       "SetActiveRoleRequest": {
@@ -12597,6 +12760,24 @@
           }
         }
       },
+      "SettingCondition": {
+        "required": [
+          "setting",
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "setting": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "SettingDefinitionDto": {
         "required": [
           "name",
@@ -12644,6 +12825,16 @@
             "items": {
               "type": "string"
             }
+          },
+          "enabledWhen": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SettingCondition"
+              }
+            ]
           }
         }
       },
@@ -12666,6 +12857,12 @@
             "items": {
               "$ref": "#/components/schemas/SettingDefinitionDto"
             }
+          },
+          "page": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -12683,7 +12880,8 @@
           "Bool",
           "Int",
           "Secret",
-          "Choice"
+          "Choice",
+          "Language"
         ]
       },
       "SettingValueDto": {
@@ -12784,6 +12982,16 @@
         "properties": {
           "isInitialized": {
             "type": "boolean"
+          },
+          "passwordRules": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PasswordRules"
+              }
+            ]
           }
         }
       },

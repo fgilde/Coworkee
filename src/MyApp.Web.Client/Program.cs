@@ -43,7 +43,8 @@ builder.Services.AddCoworkeeSettings<MyAppSettings>(meta =>
     meta.Property(s => s.Catalog.Currency).RenderWith<MudExSelect<string>, string?>(s => s.Value, s =>
     {
         s.ItemCollection = [.. Currency.All.Select(c => c.IsoCode)];
-        s.ToStringFunc = iso => Currency.Find(iso) is { } c ? $"{c.IsoCode} – {c.Name}" : iso;
+        // WebAssembly runs with invariant globalization data, so Name is often just the ISO code
+        s.ToStringFunc = iso => Currency.Find(iso) is { } c ? c.Name != c.IsoCode ? $"{c.IsoCode} – {c.Name}" : $"{c.IsoCode} ({c.Symbol})" : iso;
     });
 });
 #pragma warning restore BL0005

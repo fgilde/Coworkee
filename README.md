@@ -28,7 +28,7 @@ Pages: dashboard (`/`), brands, products, documents, document types. The admin a
 
 1. .NET 10 SDK, Docker.
 2. Coworkee packages: `git clone https://github.com/fgilde/CoworkeeLib.git ../coworkee`, then run `pwsh build/pack-local.ps1` in `../coworkee` (fills `../coworkee/artifacts/nuget`, which `nuget.config` points at).
-3. `dotnet run --project src/MyApp.AppHost` and open the web app from the Aspire dashboard; the migration service seeds the demo users. How to sign in, also to Keycloak, Grafana and WebDataStudio: [LOGIN.md](LOGIN.md).
+3. `dotnet run --project src/MyApp.AppHost` and open the web app from the Aspire dashboard; the migration service seeds the demo users. How to sign in, also to Keycloak, Grafana, WebDataStudio and AspireUI: [LOGIN.md](LOGIN.md).
 
 Or with one click: the [QuickRun](https://quickrun.org) badge runs `quickrun.yml`, which clones and packs the library into `../coworkee`, trusts the development certificate, starts the app host and opens the web app once it answers.
 
@@ -44,7 +44,7 @@ dotnet ef migrations add <Name> --project src/MyApp.Infrastructure --startup-pro
 
 | Project | Role |
 | --- | --- |
-| `MyApp.AppHost` | Aspire topology (database, redis, mail, Keycloak, Grafana, WebDataStudio, auth, api, web, migrations) |
+| `MyApp.AppHost` | Aspire topology (database, redis, mail, Keycloak, Grafana, WebDataStudio, AspireUI, auth, api, web, migrations) |
 | `MyApp.Auth` | Auth server host (Coworkee.AuthServer) |
 | `MyApp.Api` | API host: Coworkee modules plus the app's modules |
 | `MyApp.Web` / `MyApp.Web.Client` | BFF host and Blazor WASM client |

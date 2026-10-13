@@ -1,15 +1,17 @@
 using Coworkee.Aspire.Settings;
 using MyApp.Migrations;
+using Nextended.Aspire.Hosting.AspireUI;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddCoworkeeApp("myapp", options =>
+var administrator = DemoUsers.All.First(u => u.IsAdmin);
+
+var app = builder.AddCoworkeeApp("myapp", options =>
 {
     options.DisplayName = "MyApp";
     options.LogoUrl = "/coworkee-icon.svg";
 
     // Grafana and WebDataStudio take the sign-in of the app's administrator (LOGIN.md)
-    var administrator = DemoUsers.All.First(u => u.IsAdmin);
     options.Administrator = new(administrator.Email, administrator.Password);
     options.UseGrafana();
     options.UseWebDataStudio();
@@ -25,6 +27,13 @@ builder.AddCoworkeeApp("myapp", options =>
     options.UseLibreTranslate(languages);
     options.Configure("auth", s => OfferLanguages(s, languages)).Configure("api", s => OfferLanguages(s, languages));
 }).AddProjects();
+
+// the apps and stacks hosted with AspireUI show up under Services; the administrator signs in locally or through Keycloak (LOGIN.md)
+builder.AddAspireUI()
+    .WithAdminUser(administrator.Email, administrator.Password)
+    .WithSeedFromDirectory(builder.AppHostDirectory)
+    .WithCoworkeeSignOn(app)
+    .WithRetrieveApi();
 
 builder.Build().Run();
 

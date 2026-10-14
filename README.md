@@ -21,12 +21,13 @@ Sign-in through its own auth server (OpenIddict, passkeys, 2FA), setup wizard on
 | `MyApp.Catalog` | Brands and products: entities with `IModelContributor`, permissions (`Catalog.View`, `Catalog.Manage`), commands and queries on the Coworkee dispatcher, minimal API endpoints, paging and search, live updates via `[Realtime]`, a dashboard query |
 | `MyApp.Documents` | Files on Coworkee.Storage: typed documents, public or private, upload, download, preview in **MudExFileDisplay** for safe types (served with `nosniff` and a sandbox CSP) |
 | `MyApp.Sales` | 100,000 generated sales orders as a **client entity** (`[ClientEntity]`): the browser keeps them and the table searches, filters, groups and counts facets locally; writes through the application service `ISalesOrderAppService` with a generated Blazor client |
+| `MyApp.AirWorks` | A second client: the [AirWorks](https://fgilde.github.io/AirWorks/) web desktop on the same sign-in and api, with the library's apps and hand-written ones in `ClientApp/src/apps` (catalog with product window, sales dashboard) |
 
 Pages: dashboard (`/`), brands, products, documents, document types. The admin area (users, roles, settings, mail, themes, audit, jobs) comes from `Coworkee.Client.Blazor`.
 
 ## Getting started
 
-1. .NET 10 SDK, Docker.
+1. .NET 10 SDK, Docker, Node.js 22.18 or newer (builds the AirWorks client; skip it with `-p:SkipClientBuild=true`).
 2. Coworkee packages: `git clone https://github.com/fgilde/CoworkeeLib.git ../coworkee`, then run `pwsh build/pack-local.ps1` in `../coworkee` (fills `../coworkee/artifacts/nuget`, which `nuget.config` points at).
 3. `dotnet run --project src/MyApp.AppHost` and open the web app from the Aspire dashboard; the migration service seeds the demo users. How to sign in, also to Keycloak, Grafana, WebDataStudio and AspireUI: [LOGIN.md](LOGIN.md).
 
@@ -48,6 +49,7 @@ dotnet ef migrations add <Name> --project src/MyApp.Infrastructure --startup-pro
 | `MyApp.Auth` | Auth server host (Coworkee.AuthServer) |
 | `MyApp.Api` | API host: Coworkee modules plus the app's modules |
 | `MyApp.Web` / `MyApp.Web.Client` | BFF host and Blazor WASM client |
+| `MyApp.AirWorks` | BFF host and AirWorks web desktop (TypeScript in `ClientApp`, `@coworkee/client` and `@coworkee/airworks` from npm) |
 | `MyApp.Infrastructure` | DbContext, migrations, module composition |
 | `MyApp.Migrations` | Applies migrations before the hosts start |
 | `MyApp.Contracts` | DTOs and permission names shared with the client |

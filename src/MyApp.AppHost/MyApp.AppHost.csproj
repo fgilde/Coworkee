@@ -12,5 +12,6 @@
     <ProjectReference Include="..\MyApp.Api\MyApp.Api.csproj" />
     <ProjectReference Include="..\MyApp.Auth\MyApp.Auth.csproj" />
     <ProjectReference Include="..\MyApp.Web\MyApp.Web.csproj" />
+    <ProjectReference Include="..\MyApp.AirWorks\MyApp.AirWorks.csproj" />
   </ItemGroup>
 </Project>

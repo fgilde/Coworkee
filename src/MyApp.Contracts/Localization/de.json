@@ -111,5 +111,14 @@
   "Insured": "Versichert",
   "Fragile": "Zerbrechlich",
   "Options": "Optionen",
-  "Paid": "Bezahlt"
+  "Paid": "Bezahlt",
+  "Product": "Produkt",
+  "No image": "Kein Bild",
+  "Change image": "Bild ändern",
+  "Image saved": "Bild gespeichert",
+  "The image must be smaller than {0}.": "Das Bild muss kleiner als {0} sein.",
+  "Sales dashboard": "Verkaufsübersicht",
+  "Orders": "Aufträge",
+  "Orders per status": "Aufträge pro Status",
+  "Orders per region": "Aufträge pro Region"
 }

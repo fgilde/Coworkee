@@ -1,0 +1,4 @@
+wwwroot/
+ClientApp/node_modules/
+# npm writes the AirWorks git dependency as git+ssh into the lock file, which CI cannot clone; like the template, no lock file
+ClientApp/package-lock.json

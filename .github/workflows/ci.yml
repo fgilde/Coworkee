@@ -40,6 +40,11 @@ jobs:
         with:
           global-json-file: myapp/global.json
 
+      # MyApp.AirWorks builds its client with npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Pack Coworkee into the local feed
         shell: pwsh
         run: ./coworkee/build/pack-local.ps1

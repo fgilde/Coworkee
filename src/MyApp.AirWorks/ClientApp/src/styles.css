@@ -1,0 +1,26 @@
+/* styles of your own apps; the theme's colors are --cw-primary, --cw-surface, --cw-text, ... */
+html, body { margin: 0; height: 100%; }
+
+.myapp-catalog { display: flex; flex-direction: column; gap: 12px; }
+.myapp-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; overflow: auto; }
+.myapp-card { display: flex; flex-direction: column; gap: 4px; padding: 10px; text-align: left; cursor: pointer; border: 1px solid color-mix(in srgb, var(--cw-text) 15%, transparent); border-radius: 10px; background: var(--cw-surface); color: var(--cw-text); }
+.myapp-card:hover, .myapp-card:focus-visible { border-color: var(--cw-primary); }
+.myapp-card img, .myapp-placeholder { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+.myapp-placeholder { display: grid; place-items: center; font-size: 2.5rem; color: #fff; background: var(--cw-primary); }
+.myapp-card small { opacity: .7; }
+
+.myapp-product { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); gap: 16px; height: 100%; box-sizing: border-box; }
+.myapp-image { min-height: 260px; display: grid; place-items: center; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--cw-text) 6%, transparent); }
+.myapp-image iframe { width: 100%; height: 100%; border: 0; }
+.myapp-details h2 { margin: 0 0 12px; font-family: inherit; font-size: 1.4rem; font-weight: 600; }
+.myapp-details dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0 0 16px; }
+.myapp-details dt { opacity: .7; }
+.myapp-details dd { margin: 0; }
+.myapp-upload span { display: inline-block; padding: 6px 14px; border-radius: 6px; cursor: pointer; color: #fff; background: var(--cw-primary); }
+
+.myapp-sales { display: flex; flex-direction: column; gap: 16px; overflow: auto; }
+.myapp-kpi b { font-size: 2rem; margin-right: 8px; color: var(--cw-primary); }
+.myapp-sales h3 { margin: 0 0 8px; font-family: inherit; }
+.myapp-bar { display: grid; grid-template-columns: 140px 1fr 80px; align-items: center; gap: 8px; margin-bottom: 6px; }
+.myapp-bar i { display: block; height: 14px; border-radius: 7px; background: var(--cw-primary); }
+.myapp-bar b { text-align: right; font-weight: 500; }

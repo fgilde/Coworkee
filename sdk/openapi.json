@@ -2797,6 +2797,68 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Mail"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMailTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mail/templates/{name}": {
+      "delete": {
+        "tags": [
+          "Mail"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/mail/templates/{name}/{culture}": {
@@ -9750,6 +9812,39 @@
           }
         }
       },
+      "CreateMailTemplateRequest": {
+        "required": [
+          "name",
+          "displayName",
+          "description",
+          "global"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "global": {
+            "type": "boolean",
+            "default": false
+          },
+          "copyFrom": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "CreateTenantRequest": {
         "required": [
           "name",
@@ -10810,7 +10905,8 @@
           "body",
           "defaultSubject",
           "defaultBody",
-          "isOverridden"
+          "isOverridden",
+          "variables"
         ],
         "type": "object",
         "properties": {
@@ -10834,6 +10930,12 @@
           },
           "isOverridden": {
             "type": "boolean"
+          },
+          "variables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MailVariableDto"
+            }
           }
         }
       },
@@ -10842,7 +10944,9 @@
           "name",
           "displayName",
           "cultures",
-          "overriddenCultures"
+          "overriddenCultures",
+          "isCustom",
+          "description"
         ],
         "type": "object",
         "properties": {
@@ -10863,6 +10967,41 @@
             "items": {
               "type": "string"
             }
+          },
+          "isCustom": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MailVariableDto": {
+        "required": [
+          "name",
+          "type",
+          "sample",
+          "isList"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "sample": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isList": {
+            "type": "boolean"
           }
         }
       },

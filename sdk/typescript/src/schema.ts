@@ -3062,8 +3062,82 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateMailTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/mail/templates/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    name: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -9382,6 +9456,14 @@ export interface components {
             parentId: null | string;
             name: string;
         };
+        CreateMailTemplateRequest: {
+            name: string;
+            displayName: string;
+            description: null | string;
+            /** @default false */
+            global: boolean;
+            copyFrom?: null | string;
+        };
         CreateTenantRequest: {
             name: string;
             identifier: string;
@@ -9647,12 +9729,21 @@ export interface components {
             defaultSubject: string;
             defaultBody: string;
             isOverridden: boolean;
+            variables: components["schemas"]["MailVariableDto"][];
         };
         MailTemplateSummaryDto: {
             name: string;
             displayName: string;
             cultures: string[];
             overriddenCultures: string[];
+            isCustom: boolean;
+            description: null | string;
+        };
+        MailVariableDto: {
+            name: string;
+            type: string;
+            sample: null | string;
+            isList: boolean;
         };
         MissingTextsRequest: {
             keys: string[];

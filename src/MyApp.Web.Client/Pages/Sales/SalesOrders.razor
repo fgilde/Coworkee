@@ -7,16 +7,6 @@
                    DescribeItem="o => o.Number" CreateText="New order"
                    CreatePermission="@SalesPermissions.Orders.Create" EditPermission="@SalesPermissions.Orders.Edit" DeletePermission="@SalesPermissions.Orders.Delete"
                    OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync" FacetLayout="FacetLayout.Panel" FacetSettings="FacetSettings">
-    <ToolBarContent>
-        <ClientEntityIndicator EntitySet="@EntitySet" DataChanged="() => _table.ReloadAsync()" />
-        <MudTooltip Text="@L["Runs the current filter on the server and in the browser, five times each"]">
-            <MudButton Variant="Variant.Text" Size="Size.Small" StartIcon="@Icons.Material.Outlined.Speed" OnClick="CompareAsync" Disabled="_comparing" data-testid="compare-query">@L["Compare"]</MudButton>
-        </MudTooltip>
-        @if (_comparison is { } comparison)
-        {
-            <MudText Typo="Typo.caption" data-testid="query-comparison">@comparison</MudText>
-        }
-    </ToolBarContent>
     <Columns>
         <PropertyColumn Property="o => o.Number" Title="@L["Number"]" />
         <PropertyColumn Property="o => o.Customer!.Name" Title="@L["Customer"]" />

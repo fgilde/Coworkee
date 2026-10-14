@@ -3979,6 +3979,45 @@
         }
       }
     },
+    "/api/v1/themes/loading-screen": {
+      "get": {
+        "tags": [
+          "Themes"
+        ],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadingScreenDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/themes/built-in": {
       "get": {
         "tags": [
@@ -7207,6 +7246,87 @@
             "in": "query",
             "schema": {
               "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/files/{id}/public": {
+      "put": {
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FilePublicRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoredFileDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/files/public/{id}/{name}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -10963,6 +11083,17 @@
           "String"
         ]
       },
+      "FilePublicRequest": {
+        "required": [
+          "isPublic"
+        ],
+        "type": "object",
+        "properties": {
+          "isPublic": {
+            "type": "boolean"
+          }
+        }
+      },
       "FileSelectionRequest": {
         "required": [
           "fileIds",
@@ -11332,6 +11463,42 @@
           },
           "translatorAvailable": {
             "type": "boolean"
+          }
+        }
+      },
+      "LoadingScreenBackground": {
+        "enum": [
+          "Animated",
+          "SignInMedia",
+          "Plain"
+        ]
+      },
+      "LoadingScreenDto": {
+        "required": [
+          "theme",
+          "background",
+          "mediaUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "theme": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ThemeDto"
+              }
+            ]
+          },
+          "background": {
+            "$ref": "#/components/schemas/LoadingScreenBackground"
+          },
+          "mediaUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -14076,7 +14243,8 @@
           "contentType",
           "size",
           "createdAt",
-          "createdBy"
+          "createdBy",
+          "isPublic"
         ],
         "type": "object",
         "properties": {
@@ -14115,6 +14283,10 @@
               "string"
             ],
             "format": "uuid"
+          },
+          "isPublic": {
+            "type": "boolean",
+            "default": false
           }
         }
       },

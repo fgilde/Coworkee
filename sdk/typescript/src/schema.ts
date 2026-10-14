@@ -4205,6 +4205,52 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/themes/loading-screen": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    themeId?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["LoadingScreenDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/themes/built-in": {
         parameters: {
             query?: never;
@@ -8016,6 +8062,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/files/{id}/public": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["FilePublicRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StoredFileDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/files/public/{id}/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                    name: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/comments/{entityType}/{entityId}": {
         parameters: {
             query?: never;
@@ -10139,6 +10271,9 @@ export interface components {
         };
         /** @enum {unknown} */
         FeatureType: "Bool" | "Int" | "String";
+        FilePublicRequest: {
+            isPublic: boolean;
+        };
         FileSelectionRequest: {
             fileIds: string[];
             folderIds: string[];
@@ -10229,6 +10364,13 @@ export interface components {
             /** Format: int32 */
             translated: number | string;
             translatorAvailable: boolean;
+        };
+        /** @enum {unknown} */
+        LoadingScreenBackground: "Animated" | "SignInMedia" | "Plain";
+        LoadingScreenDto: {
+            theme: null | components["schemas"]["ThemeDto"];
+            background: components["schemas"]["LoadingScreenBackground"];
+            mediaUrl: null | string;
         };
         LockUserRequest: {
             /** Format: date-time */
@@ -10869,6 +11011,8 @@ export interface components {
             createdAt: string;
             /** Format: uuid */
             createdBy: null | string;
+            /** @default false */
+            isPublic: boolean;
         };
         SystemInfo: {
             product: string;

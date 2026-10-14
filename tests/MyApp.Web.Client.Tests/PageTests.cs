@@ -136,7 +136,7 @@ public sealed class PageTests : BunitContext
     }
 
     [Fact]
-    public async Task Sales_orders_are_listed_cancelled_through_the_app_service_and_compared_with_the_server()
+    public async Task Sales_orders_are_listed_and_cancelled_through_the_app_service()
     {
         var order = new SalesOrderDto(Guid.CreateVersion7(), "SO-0000042", Guid.CreateVersion7(), new CustomerDto(Guid.CreateVersion7(), "Hanse Logistik KG", "Bremen"),
             SalesOrderStatus.Open, SalesChannel.Online, "Nord", DateTimeOffset.UtcNow, 2, 19.80m);
@@ -146,10 +146,8 @@ public sealed class PageTests : BunitContext
 
         page.WaitForAssertion(() => page.Markup.ShouldContain("Hanse Logistik KG"));
         await page.Find("[data-testid='cancel-row']").ClickAsync(new());
-        await page.Find("[data-testid='compare-query']").ClickAsync(new());
 
         await Services.GetRequiredService<ISalesOrderAppService>().Received().CancelAsync(order.Id, Arg.Any<CancellationToken>());
-        page.WaitForAssertion(() => page.Find("[data-testid='query-comparison']").TextContent.ShouldContain("still loading"));
     }
 
     private sealed class NoServer : HttpMessageHandler

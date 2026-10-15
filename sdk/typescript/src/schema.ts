@@ -10371,6 +10371,8 @@ export interface components {
             theme: null | components["schemas"]["ThemeDto"];
             background: components["schemas"]["LoadingScreenBackground"];
             mediaUrl: null | string;
+            /** @default false */
+            signedIn: boolean;
         };
         LockUserRequest: {
             /** Format: date-time */

@@ -4084,6 +4084,38 @@
         }
       }
     },
+    "/api/v1/history": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EntityHistorySetDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/history/{entitySet}/deleted": {
       "get": {
         "tags": [
@@ -13122,7 +13154,8 @@
         "required": [
           "property",
           "currentText",
-          "restoredText"
+          "restoredText",
+          "changedLater"
         ],
         "type": "object",
         "properties": {
@@ -13140,6 +13173,10 @@
               "null",
               "string"
             ]
+          },
+          "changedLater": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -13161,9 +13198,18 @@
           }
         }
       },
+      "EntityHistoryRestoreMode": {
+        "enum": [
+          "After",
+          "Before",
+          "Undo"
+        ],
+        "default": "After"
+      },
       "EntityHistoryRestoreRequest": {
         "required": [
-          "entryId"
+          "entryId",
+          "mode"
         ],
         "type": "object",
         "properties": {
@@ -13176,6 +13222,32 @@
               "null",
               "string"
             ]
+          },
+          "mode": {
+            "$ref": "#/components/schemas/EntityHistoryRestoreMode"
+          }
+        }
+      },
+      "EntityHistorySetDto": {
+        "required": [
+          "entityType",
+          "entitySet",
+          "canRestore",
+          "softDelete"
+        ],
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": "string"
+          },
+          "entitySet": {
+            "type": "string"
+          },
+          "canRestore": {
+            "type": "boolean"
+          },
+          "softDelete": {
+            "type": "boolean"
           }
         }
       },

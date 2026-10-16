@@ -15,6 +15,14 @@
                 <MudChip T="string" Size="Size.Small" Color="@StatusColor(context.Item.Status)">@L[EnumLabels.Of(context.Item.Status)]</MudChip>
             </CellTemplate>
         </PropertyColumn>
+        <TemplateColumn T="SalesOrderDto" Sortable="false" Title="@L["Approval"]">
+            <CellTemplate>
+                @if (context.Item.Status is SalesOrderStatus.Open or SalesOrderStatus.Confirmed or SalesOrderStatus.Cancelled)
+                {
+                    <CoworkeeWorkflowActions EntityType="SalesOrders" EntityId="context.Item.Id" />
+                }
+            </CellTemplate>
+        </TemplateColumn>
         <PropertyColumn Property="o => o.Channel" Title="@L["Channel"]">
             <CellTemplate>@L[EnumLabels.Of(context.Item.Channel)]</CellTemplate>
         </PropertyColumn>
@@ -36,14 +44,6 @@
                          Color="@(context.Item.Paid ? Color.Success : Color.Default)" />
             </CellTemplate>
         </PropertyColumn>
-        <TemplateColumn T="SalesOrderDto" Sortable="false" Title="@L["Approval"]">
-            <CellTemplate>
-                @if (context.Item.Status is SalesOrderStatus.Open or SalesOrderStatus.Confirmed or SalesOrderStatus.Cancelled)
-                {
-                    <CoworkeeWorkflowActions EntityType="SalesOrders" EntityId="context.Item.Id" />
-                }
-            </CellTemplate>
-        </TemplateColumn>
         <TemplateColumn T="SalesOrderDto" Sortable="false" Title="">
             <CellTemplate>
                 @if (context.Item.Status is not (SalesOrderStatus.Cancelled or SalesOrderStatus.Delivered))

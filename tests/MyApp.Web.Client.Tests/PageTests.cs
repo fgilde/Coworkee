@@ -50,6 +50,9 @@ public sealed class PageTests : BunitContext
         Services.AddScoped<ITableViewStore, TableViews>();
         Services.AddScoped<Coworkee.Client.Blazor.Security.PermissionStore>();
         Services.AddScoped<Coworkee.Client.Blazor.People.UserCards>();
+        Services.AddSingleton(Substitute.For<Coworkee.Client.Blazor.Workflows.IWorkflowApi>());
+        Services.AddScoped<Coworkee.Client.Blazor.Workflows.WorkflowStates>();
+        Services.AddScoped<Coworkee.Client.Blazor.Workflows.WorkflowCommands>();
         var localization = Substitute.For<Coworkee.Client.Blazor.Localization.ILocalizationApi>();
         localization.GetTextsAsync(default!, default).ReturnsForAnyArgs(call => new Coworkee.Contracts.Localization.TextsDto(call.Arg<string>(), new Dictionary<string, string>()));
         Services.AddSingleton(localization);

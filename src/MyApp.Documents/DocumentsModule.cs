@@ -5,6 +5,7 @@ using Coworkee.Core.Modularity;
 using Coworkee.Infrastructure.Persistence;
 using Coworkee.ExtendedAttributes;
 using Coworkee.OData;
+using Coworkee.OData.GlobalSearch;
 using Coworkee.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,7 @@ public sealed class MyAppDocumentsModule : CoworkeeModule, IWebModule
         services.AddScoped<Coworkee.Application.Privacy.IPersonalDataContributor, Privacy.DocumentPersonalData>();
         services.AddODataEntity<Document>("Documents", DocumentPermissions.Documents.View, d => d.BlobKey);
         services.AddODataEntity<DocumentType>("DocumentTypes", DocumentPermissions.Types.View);
+        services.AddGlobalSearch<Document>(s => s.Fields(d => d.Title, d => d.FileName, d => d.Description).Subtitle(d => d.FileName).Page("/document-store").Icon("Description"));
         services.AddExtendedAttributes<Document>("Documents", DocumentPermissions.Documents.View, DocumentPermissions.Documents.Edit);
         services.AddODataImport("DocumentTypes", (AddEditDocumentTypeRequest row) => new AddEditDocumentTypeCommand(null, row));
     }

@@ -3382,6 +3382,53 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/mail/templates/{name}/{culture}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    name: string;
+                    culture: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["MailTemplateVersionDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/mail/templates/{name}/{culture}/test": {
         parameters: {
             query?: never;
@@ -6025,6 +6072,119 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    q?: string;
+                    types?: string;
+                    limit?: number | string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GlobalSearchResult"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/search/providers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GlobalSearchProviderDto"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/search/stream": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    q?: string;
+                    types?: string;
+                    limit?: number | string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/x-ndjson": components["schemas"]["GlobalSearchEvent"];
+                    };
                 };
             };
         };
@@ -11758,6 +11918,43 @@ export interface components {
             /** Format: uuid */
             createdBy: null | string;
         };
+        GlobalSearchEvent: {
+            provider: string;
+            hit?: null | components["schemas"]["GlobalSearchHit"];
+            state?: null | components["schemas"]["GlobalSearchProviderState"];
+        };
+        GlobalSearchHit: {
+            provider: string;
+            group: string;
+            title: string;
+            subtitle?: null | string;
+            url?: null | string;
+            entitySet?: null | string;
+            id?: null | string;
+            /** Format: double */
+            score: number | string;
+            highlights: components["schemas"]["HighlightRange"][];
+            thumbnail?: null | string;
+            icon?: null | string;
+        };
+        GlobalSearchProviderDto: {
+            name: string;
+            group: string;
+            icon: null | string;
+        };
+        /** @enum {unknown} */
+        GlobalSearchProviderState: "Done" | "TimedOut" | "Failed";
+        GlobalSearchProviderStatus: {
+            name: string;
+            group: string;
+            state: components["schemas"]["GlobalSearchProviderState"];
+            /** Format: int32 */
+            count: number | string;
+        };
+        GlobalSearchResult: {
+            hits: components["schemas"]["GlobalSearchHit"][];
+            providers: components["schemas"]["GlobalSearchProviderStatus"][];
+        };
         GrantResourcePermissionRequest: {
             principalType: components["schemas"]["PrincipalType"];
             /** Format: uuid */
@@ -11781,6 +11978,12 @@ export interface components {
         GroupRequest: {
             name: string;
             description: null | string;
+        };
+        HighlightRange: {
+            /** Format: int32 */
+            start: number | string;
+            /** Format: int32 */
+            length: number | string;
         };
         HttpValidationProblemDetails: {
             type?: null | string;
@@ -11991,6 +12194,13 @@ export interface components {
             isCustom: boolean;
             description: null | string;
             defaultCultures?: null | string[];
+        };
+        MailTemplateVersionDto: {
+            /** Format: date-time */
+            savedAt: string;
+            author: null | string;
+            subject: string;
+            body: string;
         };
         MailVariableDto: {
             name: string;

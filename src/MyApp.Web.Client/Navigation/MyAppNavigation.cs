@@ -22,12 +22,12 @@ internal sealed class MyAppNavigation : INavigationContributor
         .OrderGroup(Communication, 3)
         .OrderGroup(CatalogManagement, 4)
         .OrderGroup(Sales, 5)
-        .Place("/admin/audit", Personal, "Audit Trails", 2)
+        .Place("/admin/audit", Personal, "Audit Trails", 3)
         .Place("/admin/settings", NavigationGroups.System, "Site Settings", -1)
         .Place("/admin/backups", NavigationGroups.System, "Database Backups", 5)
         .Place("/files", DocumentManagement, order: -1)
         .Place("/chat", Communication)
-        .Place("/reports", Personal, order: 0)
+        .Place("/reports", Personal, order: 1)
         .IconForGroup(Communication, MudBlazor.Icons.Material.Outlined.Forum)
         .IconForGroup(Personal, MudBlazor.Icons.Material.Outlined.Person)
         .IconForGroup(DocumentManagement, MudBlazor.Icons.Material.Outlined.Description)
@@ -37,7 +37,7 @@ internal sealed class MyAppNavigation : INavigationContributor
     public IEnumerable<CoworkeeNavItem> Items =>
     [
         new("Dashboard", "/dashboard", Icons.Material.Outlined.Dashboard, CatalogPermissions.Dashboards.View, Group: Personal),
-        new("Account", "/profile", Icons.Material.Outlined.ManageAccounts, Group: Personal, Order: 1),
+        new("Account", "/profile", Icons.Material.Outlined.ManageAccounts, Group: Personal, Order: 2),
         new("Document Store", "/document-store", Icons.Material.Outlined.AttachFile, DocumentPermissions.Documents.View, Group: DocumentManagement),
         new("Document Types", "/document-types", Icons.Material.Outlined.FileCopy, DocumentPermissions.Types.View, Group: DocumentManagement, Order: 1),
         new("Products", "/catalog/products", Icons.Material.Outlined.ViewCarousel, CatalogPermissions.Products.View, Group: CatalogManagement),

@@ -10,6 +10,8 @@ Start the app with `dotnet run --project src/MyApp.AppHost`, open *myapp-web* fr
 
 The AirWorks web desktop *myapp-airworks* signs in the same way (it is a second client of the same sign-in) and works on the same data.
 
+The workflow designer *myapp-elsastudio* (Elsa Studio, *Administration → Workflow designer* in the app) signs in the same way; it needs the permission `Workflows.Elsa.Manage`, which the administrators have. John is a product manager: he submits products, the administrators approve them in *Approvals*.
+
 The *Keycloak* button on the sign-in page takes the same users with the same passwords (realm `myapp`); the app host brings the realm up to date on every start.
 
 Visitors can also create an account on the sign-in page: they confirm their email and an administrator activates them (settings `Account.AllowRegistration`, `Account.RegistrationRequiresEmailConfirmation`, `Account.RegistrationRequiresActivation`).

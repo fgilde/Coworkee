@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="..\MyApp.ServiceDefaults\MyApp.ServiceDefaults.csproj" />
+    <CoworkeePackage Include="Coworkee.Workflows.Elsa.Studio" />
+  </ItemGroup>
+</Project>

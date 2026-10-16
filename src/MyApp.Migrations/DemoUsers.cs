@@ -10,7 +10,7 @@ public static class DemoUsers
 
     public static readonly DemoUser Florian = new("fgilde@gmail.com", "Florian", "Gilde", "123Pa$$word!", IsAdmin: true);
 
-    public static readonly DemoUser John = new("john@coworkee.de", "John", "Doe", "123Pa$$word!");
+    public static readonly DemoUser John = new("john@coworkee.de", "John", "Doe", "123Pa$$word!", Roles: ["Product Manager"]);
 
     public static readonly DemoUser[] All = [Administrator, Florian, John];
 }

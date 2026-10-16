@@ -120,5 +120,19 @@
   "Sales dashboard": "Verkaufsübersicht",
   "Orders": "Aufträge",
   "Orders per status": "Aufträge pro Status",
-  "Orders per region": "Aufträge pro Region"
+  "Orders per region": "Aufträge pro Region",
+  "Draft": "Entwurf",
+  "In review": "In Prüfung",
+  "Approved": "Freigegeben",
+  "Rejected": "Abgelehnt",
+  "Submit": "Einreichen",
+  "Withdraw": "Zurückziehen",
+  "Reopen": "Wieder öffnen",
+  "Approval": "Freigabe",
+  "Confirm": "Bestätigen",
+  "Request approval": "Freigabe anfordern",
+  "Awaiting approval": "Wartet auf Freigabe",
+  "Declined": "Abgelehnt",
+  "Details, approval, rating, tags and comments": "Details, Freigabe, Bewertung, Tags und Kommentare",
+  "A product was approved": "Ein Produkt wurde freigegeben"
 }

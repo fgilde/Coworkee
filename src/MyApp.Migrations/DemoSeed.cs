@@ -1,6 +1,7 @@
 using Coworkee.Contracts.Chat;
 using Coworkee.Contracts.Reporting;
 using Coworkee.Contracts.Social;
+using Coworkee.Contracts.Workflows;
 using Coworkee.Identity.Setup;
 using MyApp.Contracts.Catalog;
 using MyApp.Contracts.Documents;
@@ -39,6 +40,7 @@ public static class DemoSeed
         CatalogPermissions.Dashboards.View,
         ChatPermissions.Use,
         ReportPermissions.View,
+        WorkflowPermissions.View, WorkflowPermissions.Transition,
         DocumentPermissions.Documents.View, DocumentPermissions.Documents.Create, DocumentPermissions.Documents.Edit, DocumentPermissions.Documents.Delete,
     ];
 }

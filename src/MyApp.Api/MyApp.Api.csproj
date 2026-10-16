@@ -4,5 +4,6 @@
     <ProjectReference Include="..\MyApp.ServiceDefaults\MyApp.ServiceDefaults.csproj" />
     <CoworkeePackage Include="Coworkee.AspNetCore" />
     <CoworkeePackage Include="Coworkee.ResponseFilters" />
+    <CoworkeePackage Include="Coworkee.Workflows.Elsa" />
   </ItemGroup>
 </Project>

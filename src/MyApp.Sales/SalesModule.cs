@@ -7,6 +7,7 @@ using Coworkee.OData;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.Contracts.Sales;
 using MyApp.Sales.Domain;
+using MyApp.Sales.Features.Orders;
 using MyApp.Sales.Permissions;
 using MyApp.Sales.Persistence;
 
@@ -27,6 +28,7 @@ public sealed class MyAppSalesModule : CoworkeeModule
         services.AddSingleton<IPermissionDefinitionContributor, SalesPermissionDefinitions>();
         services.AddODataEntity<SalesOrder>("SalesOrders", SalesPermissions.Orders.View);
         services.AddODataEntity<Customer>("Customers", SalesPermissions.Orders.View);
+        services.AddOrderApproval();
 
         // [ClientEntity] on SalesOrder mirrors it with the defaults (up to 50,000 rows); its service raises the limit for the demo's 100,000
         services.Configure<ApplicationServiceOptions>(options => options.Configure<ISalesOrderAppService>(service =>

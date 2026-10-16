@@ -26,6 +26,7 @@ try
         await DemoSales.EnsureAsync(host.Services);
         await DemoReports.EnsureAsync(host.Services);
         await DemoWorkflows.EnsureAsync(host.Services);
+        await DemoWebhooks.EnsureAsync(host.Services);
     }
 
     // the Keycloak of a deployment gets the clients and the administrator of the app host

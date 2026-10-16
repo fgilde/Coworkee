@@ -6,6 +6,7 @@ using Coworkee.Infrastructure.Persistence;
 using Coworkee.OData;
 using Coworkee.OData.GlobalSearch;
 using Coworkee.Social;
+using Coworkee.Webhooks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.Catalog.Domain;
@@ -39,6 +40,7 @@ public sealed class MyAppCatalogModule : CoworkeeModule, IWebModule
             .Tags<Product>("Products")
             .Ratings<Product>("Products"));
         context.Services.AddProductApproval();
+        context.Services.AddCoworkeeWebhooks(webhooks => webhooks.Entity<Product>().Entity<Brand>());
     }
 
     public void ConfigureApplication(WebApplication app)

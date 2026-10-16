@@ -5,6 +5,7 @@ using Coworkee.Core.Modularity;
 using Coworkee.Infrastructure.Persistence;
 using Coworkee.OData;
 using Coworkee.OData.GlobalSearch;
+using Coworkee.Webhooks;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.Contracts.Sales;
 using MyApp.Sales.Domain;
@@ -31,6 +32,7 @@ public sealed class MyAppSalesModule : CoworkeeModule
         services.AddODataEntity<Customer>("Customers", SalesPermissions.Orders.View);
         services.AddGlobalSearch<SalesOrder>(s => s.Fields(o => o.Number, o => o.Region).Subtitle(o => o.Region).Page("/sales/orders").Icon("ShoppingCart"));
         services.AddOrderApproval();
+        services.AddCoworkeeWebhooks(webhooks => webhooks.Entity<SalesOrder>());
 
         // [ClientEntity] on SalesOrder mirrors it with the defaults (up to 50,000 rows); its service raises the limit for the demo's 100,000
         services.Configure<ApplicationServiceOptions>(options => options.Configure<ISalesOrderAppService>(service =>

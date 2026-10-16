@@ -14,7 +14,7 @@ internal sealed class CatalogModelContributor : IModelContributor
             brand.Property(b => b.Name).HasMaxLength(200);
             brand.Property(b => b.Description).HasMaxLength(2000);
             brand.Property(b => b.Tax).HasPrecision(9, 4);
-            brand.HasIndex(b => new { b.TenantId, b.Name }).IsUnique();
+            brand.HasIndex(b => new { b.TenantId, b.Name }).IsUnique().HasFilter("\"IsDeleted\" = false");
         });
 
         modelBuilder.Entity<Product>(product =>

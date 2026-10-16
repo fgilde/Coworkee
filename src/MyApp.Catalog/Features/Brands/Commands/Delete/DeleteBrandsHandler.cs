@@ -16,7 +16,7 @@ internal sealed class DeleteBrandsHandler(CoworkeeDbContext db) : IHandler<Delet
             return BrandErrors.NotFound;
         }
 
-        if (await db.Set<Product>().AnyAsync(p => command.Ids.Contains(p.BrandId), cancellationToken))
+        if (await db.Set<Product>().IgnoreQueryFilters([CoworkeeDbContext.SoftDeleteFilter]).AnyAsync(p => command.Ids.Contains(p.BrandId), cancellationToken))
         {
             return BrandErrors.HasProducts;
         }

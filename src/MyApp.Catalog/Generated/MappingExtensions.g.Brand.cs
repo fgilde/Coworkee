@@ -10,6 +10,9 @@ namespace MyApp.Catalog {
 			dest.Name = src.Name;
 			dest.Description = src.Description;
 			dest.Tax = src.Tax;
+			dest.IsDeleted = src.IsDeleted;
+			dest.DeletedAt = src.DeletedAt;
+			dest.DeletedBy = src.DeletedBy;
 			dest.Id = src.Id;
 		}
 		public static void AssignTo(this MyApp.Contracts.Catalog.BrandDto src, MyApp.Catalog.Domain.Brand dest) 
@@ -18,6 +21,9 @@ namespace MyApp.Catalog {
 			dest.Name = src.Name;
 			dest.Description = src.Description;
 			dest.Tax = src.Tax;
+			dest.IsDeleted = src.IsDeleted;
+			dest.DeletedAt = src.DeletedAt;
+			dest.DeletedBy = src.DeletedBy;
 			// skipped 'Id': destination not publicly writable
 		}
 		public static MyApp.Contracts.Catalog.BrandDto ToDto(this MyApp.Catalog.Domain.Brand src) 

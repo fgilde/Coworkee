@@ -8,6 +8,9 @@ namespace MyApp.Contracts.Catalog {
 		string Name { get; set; }
 		string? Description { get; set; }
 		decimal Tax { get; set; }
+		bool IsDeleted { get; set; }
+		System.DateTimeOffset? DeletedAt { get; set; }
+		System.Guid? DeletedBy { get; set; }
 		System.Guid Id { get; set; }
 	}
 
@@ -18,6 +21,9 @@ namespace MyApp.Contracts.Catalog {
 		public required string Name { get; set; }
 		public string? Description { get; set; }
 		public decimal Tax { get; set; }
+		public bool IsDeleted { get; set; }
+		public System.DateTimeOffset? DeletedAt { get; set; }
+		public System.Guid? DeletedBy { get; set; }
 		public System.Guid Id { get; set; }
 	}
 

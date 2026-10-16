@@ -12,6 +12,9 @@ namespace MyApp.Contracts.Catalog {
 		decimal Rate { get; set; }
 		System.Guid BrandId { get; set; }
 		MyApp.Contracts.Catalog.IBrandDto? Brand { get; set; }
+		bool IsDeleted { get; set; }
+		System.DateTimeOffset? DeletedAt { get; set; }
+		System.Guid? DeletedBy { get; set; }
 		System.Guid Id { get; set; }
 	}
 
@@ -26,6 +29,9 @@ namespace MyApp.Contracts.Catalog {
 		public decimal Rate { get; set; }
 		public System.Guid BrandId { get; set; }
 		public MyApp.Contracts.Catalog.BrandDto? Brand { get; set; }
+		public bool IsDeleted { get; set; }
+		public System.DateTimeOffset? DeletedAt { get; set; }
+		public System.Guid? DeletedBy { get; set; }
 		public System.Guid Id { get; set; }
 		MyApp.Contracts.Catalog.IBrandDto IProductDto.Brand { get => Brand; set => Brand = (MyApp.Contracts.Catalog.BrandDto)value; }
 	}

@@ -53,6 +53,33 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
     }
 
     [Fact]
+    public async Task Products_filter_by_their_approval_come_back_after_a_delete_and_send_webhooks()
+    {
+        var brand = await (await Admin.PostAsJsonAsync("/api/v1/brands", new AddEditBrandRequest { Name = "Bolt" }, Ct)).Content.ReadFromJsonAsync<BrandDto>(Ct);
+        var drill = await (await Admin.PostAsJsonAsync("/api/v1/products", new AddEditProductRequest { Name = "Drill", BrandId = brand!.Id, Rate = 3 }, Ct)).Content.ReadFromJsonAsync<ProductDto>(Ct);
+        var file = await (await Admin.PostAsJsonAsync("/api/v1/products", new AddEditProductRequest { Name = "File", BrandId = brand.Id, Rate = 1 }, Ct)).Content.ReadFromJsonAsync<ProductDto>(Ct);
+        (await Admin.PostAsync($"/api/v1/workflows/Products/{drill!.Id}/Submit", null, Ct)).EnsureSuccessStatusCode();
+
+        var inReview = await ODataAsync<ProductDto>(Admin, "/odata/Products?$filter=WorkflowState eq 'In review'&$orderby=WorkflowState");
+        inReview.Items.Select(p => p.Name).ShouldBe(["Drill"]);
+        inReview.Facets.ShouldContain("Awaiting my approval");
+        (await ODataAsync<ProductDto>(Admin, "/odata/Products?$filter=WorkflowState eq 'Draft'")).Items.Select(p => p.Name).ShouldBe(["File"]);
+
+        (await Admin.PostAsJsonAsync("/api/v1/products/delete", new IdsRequest([file!.Id]), Ct)).EnsureSuccessStatusCode();
+        (await Admin.GetStringAsync("/api/v1/history/Products/deleted", Ct)).ShouldContain(file.Id.ToString());
+        var history = (await Admin.GetFromJsonAsync<Coworkee.Contracts.Auditing.EntityHistoryDto>($"/api/v1/history/Products/{file.Id}", Ct))!;
+        history.IsDeleted.ShouldBeTrue();
+        (await Admin.PostAsJsonAsync($"/api/v1/history/Products/{file.Id}/restore",
+            new Coworkee.Contracts.Auditing.EntityHistoryRestoreRequest(history.Entries.Last().Id), Ct)).EnsureSuccessStatusCode();
+        (await ODataAsync<ProductDto>(Admin, "/odata/Products?$orderby=Name")).Items.Select(p => p.Name).ShouldBe(["Drill", "File"]);
+
+        var events = await Admin.GetStringAsync("/api/v1/webhooks/event-types", Ct);
+        events.ShouldContain("products.created");
+        events.ShouldContain("brands.deleted");
+        events.ShouldContain("sales_orders.updated");
+    }
+
+    [Fact]
     public async Task Catalog_needs_its_permissions()
     {
         var viewer = await UserWithPermissionsAsync("viewer@acme.test", CatalogPermissions.Brands.View);

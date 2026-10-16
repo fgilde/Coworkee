@@ -34,6 +34,8 @@ public sealed class SeedTests
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"Products\"")).ShouldBe(products);
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"SalesOrders\"")).ShouldBe(DemoSales.Orders);
         (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(DISTINCT \"Status\") FROM app.\"SalesOrders\"")).ShouldBe(5);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"SalesOrders\" WHERE \"ApprovalState\" = 'Awaiting approval'")).ShouldBe(3);
+        (await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"Url\" || ':' || \"IsActive\", ',') FROM cw.\"WebhookSubscriptions\"")).ShouldBe("https://example.org/hook:false");
         (await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"Name\", ',' ORDER BY \"Name\") FROM cw.\"Reports\"")).ShouldBe("Catalog,Order desk,Sales overview");
         (await ScalarAsync<long>(postgres.ConnectionString,
             "SELECT count(*) FROM cw.\"Reports\" p JOIN cw.\"Roles\" r ON r.\"Id\" = ANY(p.\"RoleIds\") WHERE r.\"Name\" = 'Sales Manager'")).ShouldBe(2);

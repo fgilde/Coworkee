@@ -10,7 +10,7 @@ Start the app with `dotnet run --project src/MyApp.AppHost`, open *myapp-web* fr
 
 The AirWorks web desktop *myapp-airworks* signs in the same way (it is a second client of the same sign-in) and works on the same data.
 
-The workflow designer *myapp-elsastudio* (Elsa Studio, *Administration → Workflow designer* in the app) signs in the same way; it needs the permission `Workflows.Elsa.Manage`, which the administrators have. John is a product manager: he submits products, the administrators approve them in *Approvals*.
+The workflow designer *myapp-elsastudio* (Elsa Studio, *Administration → Workflow designer* in the app) signs in the same way; it needs the permission `Workflows.Elsa.Manage`, which the administrators have. John is a product manager: he submits products, the administrators approve them in *Approvals*; the *Approval* column of *Products* and *Sales orders* filters by the state, *Awaiting my approval* included. Every row of brands, products and sales orders has a *History* button with restore, and deleted brands and products come back from *Deleted records* in the table toolbar. Administrators manage webhooks under *Administration → System → Webhooks* (`/cw/admin/webhooks`); the seeded example endpoint is switched off.
 
 The *Keycloak* button on the sign-in page takes the same users with the same passwords (realm `myapp`); the app host brings the realm up to date on every start.
 

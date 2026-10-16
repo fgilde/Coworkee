@@ -18,13 +18,13 @@ Sign-in through its own auth server (OpenIddict, passkeys, 2FA), setup wizard on
 
 | Module | Shows |
 | --- | --- |
-| `MyApp.Catalog` | Brands and products: entities with `IModelContributor`, permissions (`Catalog.View`, `Catalog.Manage`), commands and queries on the Coworkee dispatcher, minimal API endpoints, paging and search, live updates via `[Realtime]`, a dashboard query |
+| `MyApp.Catalog` | Brands and products: entities with `IModelContributor`, permissions (`Catalog.View`, `Catalog.Manage`), commands and queries on the Coworkee dispatcher, minimal API endpoints, paging and search, live updates via `[Realtime]`, a dashboard query, a product approval (`ProductApproval.cs`) whose *Approval* column filters, sorts and groups by the workflow state, the change history with restore and soft delete (*History* per row, *Deleted records* in the toolbar) and webhooks for product and brand changes |
 | `MyApp.Documents` | Files on Coworkee.Storage: typed documents, public or private, upload, download, preview in **MudExFileDisplay** for safe types (served with `nosniff` and a sandbox CSP) |
-| `MyApp.Sales` | 100,000 generated sales orders as a **client entity** (`[ClientEntity]`): the browser keeps them and the table searches, filters, groups and counts facets locally; writes through the application service `ISalesOrderAppService` with a generated Blazor client |
+| `MyApp.Sales` | 100,000 generated sales orders as a **client entity** (`[ClientEntity]`): the browser keeps them and the table searches, filters, groups and counts facets locally; writes through the application service `ISalesOrderAppService` with a generated Blazor client; large orders need an approval (`OrderApproval.cs`) whose state is mirrored into the order (`ApprovalState`) so the browser filters by it too; history and webhooks like the catalog |
 | `MyApp.AirWorks` | A second client: the [AirWorks](https://fgilde.github.io/AirWorks/) web desktop on the same sign-in and api, with the library's apps and hand-written ones in `ClientApp/src/apps` (catalog with product window, sales dashboard) |
 | `MyApp.ElsaStudio` | The workflow designer: Elsa Studio as an app of its own on the same sign-in, for the Elsa workflows of the api (sample *Product approved*) |
 
-Pages: dashboard (`/`), brands, products, documents, document types. The admin area (users, roles, settings, mail, themes, audit, jobs) comes from `Coworkee.Client.Blazor`.
+Pages: dashboard (`/`), brands, products, documents, document types, sales orders. The admin area (users, roles, settings, mail, themes, audit, jobs, webhooks under *Administration → System → Webhooks* with a switched off example endpoint) comes from `Coworkee.Client.Blazor`.
 
 ## Getting started
 

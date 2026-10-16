@@ -63,8 +63,13 @@ public static class Extensions
 
         if (builder.Configuration["GRAFANA_OTLP_ENDPOINT"] is { Length: > 0 } grafana)
         {
-            void Grafana(OtlpExporterOptions o) => (o.Endpoint, o.Protocol, o.Headers) = (new Uri(grafana), OtlpExportProtocol.Grpc, string.Empty);
-            telemetry.WithLogging(l => l.AddOtlpExporter("grafana", Grafana)).WithMetrics(m => m.AddOtlpExporter("grafana", Grafana)).WithTracing(t => t.AddOtlpExporter("grafana", Grafana));
+            // a deployed collector takes OTLP over HTTP, where each signal has its own path
+            var http = builder.Configuration["GRAFANA_OTLP_PROTOCOL"] == "http/protobuf";
+            Action<OtlpExporterOptions> Grafana(string signal) => o => (o.Endpoint, o.Protocol, o.Headers) = http
+                ? (new Uri($"{grafana.TrimEnd('/')}/v1/{signal}"), OtlpExportProtocol.HttpProtobuf, string.Empty)
+                : (new Uri(grafana), OtlpExportProtocol.Grpc, string.Empty);
+            telemetry.WithLogging(l => l.AddOtlpExporter("grafana-logs", Grafana("logs"))).WithMetrics(m => m.AddOtlpExporter("grafana-metrics", Grafana("metrics")))
+                .WithTracing(t => t.AddOtlpExporter("grafana-traces", Grafana("traces")));
         }
     }
 }

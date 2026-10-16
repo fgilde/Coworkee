@@ -11,7 +11,10 @@ var app = builder.AddCoworkeeApp("myapp", options =>
     options.DisplayName = "MyApp";
     options.LogoUrl = "/coworkee-icon.svg";
 
-    // Grafana and WebDataStudio take the sign-in of the app's administrator (LOGIN.md)
+    // Web Push for the notifications: the VAPID key pair is made at the first start and kept in the user secrets
+    options.UsePush();
+
+    // the tools take the sign-in of the app's administrator (LOGIN.md); a deployment takes the administrator of its parameters
     options.Administrator = new(administrator.Email, administrator.Password);
     options.UseGrafana();
     options.UseWebDataStudio();
@@ -29,11 +32,14 @@ var app = builder.AddCoworkeeApp("myapp", options =>
 }).AddProjects();
 
 // the apps and stacks hosted with AspireUI show up under Services; the administrator signs in locally or through Keycloak (LOGIN.md)
-builder.AddAspireUI()
-    .WithAdminUser(administrator.Email, administrator.Password)
-    .WithSeedFromDirectory(builder.AppHostDirectory)
-    .WithCoworkeeSignOn(app)
-    .WithRetrieveApi();
+if (app.Deploys(CoworkeeTools.AspireUI))
+{
+    var aspireUi = builder.AddAspireUI().WithCoworkee(app).WithRetrieveApi();
+    if (builder.ExecutionContext.IsRunMode)
+    {
+        aspireUi.WithSeedFromDirectory(builder.AppHostDirectory);
+    }
+}
 
 builder.Build().Run();
 

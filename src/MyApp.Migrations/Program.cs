@@ -7,7 +7,9 @@ using MyApp.Migrations;
 var builder = Host.CreateApplicationBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddCoworkeeModules<MyAppDatabaseModule>(builder.Configuration);
-builder.Services.AddCoworkeeIdentitySeed(DemoSeed.Configure);
+// the demo users, unless a deployment passes its first administrator (deploy parameters)
+var admin = InitialAdmin.From(builder.Configuration);
+builder.Services.AddCoworkeeIdentitySeed(admin is null ? DemoSeed.Configure : options => DemoSeed.ConfigureDeployment(options, admin));
 builder.Services.AddScoped<Coworkee.Application.Setup.ISetupStep, DemoData>();
 using var host = builder.Build();
 
@@ -16,9 +18,17 @@ try
 {
     await scope.ServiceProvider.GetRequiredService<MyAppDbContext>().Database.MigrateAsync();
     await host.Services.SeedCoworkeeIdentityAsync();
-    await DemoRoles.EnsureAsync(host.Services);
-    await DemoSales.EnsureAsync(host.Services);
-    await DemoReports.EnsureAsync(host.Services);
+    if (admin is null)
+    {
+        // a database set up earlier gets the users and roles added to DemoUsers.cs since, and their passwords again
+        await host.Services.SyncDevelopmentUsersAsync();
+        await DemoRoles.EnsureAsync(host.Services);
+        await DemoSales.EnsureAsync(host.Services);
+        await DemoReports.EnsureAsync(host.Services);
+    }
+
+    // the Keycloak of a deployment gets the clients and the administrator of the app host
+    await scope.ServiceProvider.ReconcileKeycloakRealmAsync();
     return 0;
 }
 catch (Exception exception)

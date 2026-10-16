@@ -3025,6 +3025,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/system/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SystemStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/mail/templates": {
         parameters: {
             query?: never;
@@ -3216,7 +3260,42 @@ export interface paths {
                 };
             };
         };
-        post?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    name: string;
+                    culture: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddMailTemplateLanguageRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["MailTemplateLanguageAddedDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
         delete: {
             parameters: {
                 query?: never;
@@ -4161,6 +4240,199 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/history/{entitySet}/deleted": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DeletedRecordDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/history/{entitySet}/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EntityHistoryDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/history/{entitySet}/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["EntityHistoryRestoreRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EntityHistoryPreviewDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/history/{entitySet}/{id}/restore": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["EntityHistoryRestoreRequest"];
+                };
+            };
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/themes/current": {
         parameters: {
             query?: never;
@@ -4910,6 +5182,126 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/notifications/push": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PushSettingsDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["PushSubscriptionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PushDeviceDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notifications/push/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/data/{entitySet}/export": {
         parameters: {
             query?: never;
@@ -4935,6 +5327,15 @@ export interface paths {
                     };
                     content?: never;
                 };
+                /** @description Accepted */
+                202: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DataTransferJobDto"];
+                    };
+                };
             };
         };
         put?: never;
@@ -4946,6 +5347,112 @@ export interface paths {
         trace?: never;
     };
     "/api/v1/data/{entitySet}/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ImportTargetDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "multipart/form-data": {
+                        file: components["schemas"]["IFormFile"];
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/imports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ImportTargetDto"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/{entitySet}/import/file": {
         parameters: {
             query?: never;
             header?: never;
@@ -4980,6 +5487,444 @@ export interface paths {
                 };
             };
         };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/imports/{id}/sheet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ImportParseOptions"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ImportSheetDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/imports/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ImportSettings"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ImportPreviewDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/imports/{id}/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ImportSettings"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DataTransferJobDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/imports/{id}/undo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DataTransferJobDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/{entitySet}/import/profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ImportProfileDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entitySet: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveImportProfileRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ImportProfileDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/import-profiles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/jobs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    entitySet?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DataTransferJobDto"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/jobs/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DataTransferJobDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/data/jobs/{id}/file": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -9813,6 +10758,11 @@ export interface components {
             options: components["schemas"]["SalesOrderOptions"];
             paid: boolean;
         };
+        AddMailTemplateLanguageRequest: {
+            from: string;
+            /** @default false */
+            translate: boolean;
+        };
         /**
          * @default Count
          * @enum {unknown}
@@ -10159,6 +11109,37 @@ export interface components {
             roles: null | number | string;
             productsPerMonth: components["schemas"]["MonthCountDto"][];
         };
+        DataTransferJobDto: {
+            /** Format: uuid */
+            id: string;
+            kind: components["schemas"]["DataTransferKind"];
+            entitySet: string;
+            status: components["schemas"]["DataTransferStatus"];
+            dryRun: boolean;
+            /** Format: int32 */
+            total: number | string;
+            /** Format: int32 */
+            processed: number | string;
+            /** Format: int32 */
+            created: number | string;
+            /** Format: int32 */
+            updated: number | string;
+            /** Format: int32 */
+            failed: number | string;
+            fileName: null | string;
+            resultFileName: null | string;
+            message: null | string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            finishedAt: null | string;
+            canUndo: boolean;
+            isFinished: boolean;
+        };
+        /** @enum {unknown} */
+        DataTransferKind: "Import" | "Export";
+        /** @enum {unknown} */
+        DataTransferStatus: "Draft" | "Queued" | "Running" | "Completed" | "Failed" | "Undone";
         /**
          * @default None
          * @enum {unknown}
@@ -10168,6 +11149,13 @@ export interface components {
         DateRangePreset: "Today" | "Last7Days" | "Last30Days" | "Last90Days" | "ThisMonth" | "LastMonth" | "ThisQuarter" | "ThisYear" | "LastYear" | "Last12Months" | "Custom";
         DeleteAccountRequest: {
             email: string;
+        };
+        DeletedRecordDto: {
+            entityId: string;
+            title: null | string;
+            /** Format: date-time */
+            deletedAt: string;
+            deletedByName: null | string;
         };
         DocumentDto: {
             /** Format: uuid */
@@ -10210,6 +11198,44 @@ export interface components {
             values: null | {
                 [key: string]: string;
             };
+        };
+        EntityHistoryChangeDto: {
+            property: string;
+            oldValue: null | string;
+            newValue: null | string;
+            oldText: null | string;
+            newText: null | string;
+            restorable: boolean;
+        };
+        EntityHistoryDto: {
+            canRestore: boolean;
+            isDeleted: boolean;
+            entries: components["schemas"]["EntityHistoryEntryDto"][];
+        };
+        EntityHistoryEntryDto: {
+            /** Format: uuid */
+            id: string;
+            action: string;
+            /** Format: uuid */
+            actorId: null | string;
+            actorName: null | string;
+            /** Format: date-time */
+            occurredAt: string;
+            changes: components["schemas"]["EntityHistoryChangeDto"][];
+        };
+        EntityHistoryFieldDto: {
+            property: string;
+            currentText: null | string;
+            restoredText: null | string;
+        };
+        EntityHistoryPreviewDto: {
+            undeletes: boolean;
+            fields: components["schemas"]["EntityHistoryFieldDto"][];
+        };
+        EntityHistoryRestoreRequest: {
+            /** Format: uuid */
+            entryId: string;
+            property?: null | string;
         };
         EntityTagsDto: {
             tags: string[];
@@ -10338,10 +11364,99 @@ export interface components {
         };
         /** Format: binary */
         IFormFile: string;
+        ImportColumnDto: {
+            /** Format: int32 */
+            index: number | string;
+            header: string;
+            samples: string[];
+            suggestedField: null | string;
+        };
         ImportDocumentRequest: {
             /** Format: uuid */
             fileId: string;
             document: components["schemas"]["UpdateDocumentRequest"];
+        };
+        ImportFieldDto: {
+            name: string;
+            label: string;
+            type: string;
+            required: boolean;
+            choices?: null | string[];
+            lookupSet?: null | string;
+            /** @default false */
+            keyOnly: boolean;
+        };
+        /**
+         * @default Create
+         * @enum {unknown}
+         */
+        ImportMode: "Create" | "Update" | "Upsert";
+        ImportParseOptions: {
+            delimiter?: null | string;
+            encoding?: null | string;
+            hasHeader?: null | boolean;
+        };
+        ImportPreviewDto: {
+            /** Format: int32 */
+            total: number | string;
+            /** Format: int32 */
+            checked: number | string;
+            /** Format: int32 */
+            valid: number | string;
+            /** Format: int32 */
+            creates: number | string;
+            /** Format: int32 */
+            updates: number | string;
+            rows: components["schemas"]["ImportPreviewRowDto"][];
+            invalid: components["schemas"]["ImportPreviewRowDto"][];
+        };
+        ImportPreviewRowDto: {
+            /** Format: int32 */
+            row: number | string;
+            action: string;
+            values: {
+                [key: string]: string;
+            };
+            errors: string[];
+        };
+        ImportProfileDto: {
+            /** Format: uuid */
+            id: string;
+            entitySet: string;
+            name: string;
+            columns: {
+                [key: string]: string;
+            };
+            mode: components["schemas"]["ImportMode"];
+            keyField: null | string;
+            culture: null | string;
+        };
+        ImportSettings: {
+            columns: string[];
+            mode: components["schemas"]["ImportMode"];
+            keyField?: null | string;
+            culture?: null | string;
+            parse?: null | components["schemas"]["ImportParseOptions"];
+            /** @default false */
+            dryRun: boolean;
+        };
+        ImportSheetDto: {
+            /** Format: uuid */
+            jobId: string;
+            fileName: string;
+            /** Format: int32 */
+            rowCount: number | string;
+            delimiter: null | string;
+            encoding: null | string;
+            hasHeader: boolean;
+            columns: components["schemas"]["ImportColumnDto"][];
+        };
+        ImportTargetDto: {
+            entitySet: string;
+            fields: components["schemas"]["ImportFieldDto"][];
+            canUpdate: boolean;
+            canUndo: boolean;
+            keyFields: string[];
         };
         JsonElement: unknown;
         KeycloakThemeStatusDto: {
@@ -10426,6 +11541,11 @@ export interface components {
             variables: components["schemas"]["MailVariableDto"][];
             isCustom: boolean;
         };
+        MailTemplateLanguageAddedDto: {
+            culture: string;
+            from: string;
+            translated: boolean;
+        };
         MailTemplateSummaryDto: {
             name: string;
             displayName: string;
@@ -10433,6 +11553,7 @@ export interface components {
             overriddenCultures: string[];
             isCustom: boolean;
             description: null | string;
+            defaultCultures?: null | string[];
         };
         MailVariableDto: {
             name: string;
@@ -10613,6 +11734,24 @@ export interface components {
             address?: null | components["schemas"]["PostalAddress"];
             /** @default true */
             hasPassword: boolean;
+        };
+        PushDeviceDto: {
+            /** Format: uuid */
+            id: string;
+            endpoint: string;
+            device: null | string;
+            /** Format: date-time */
+            createdAt: string;
+        };
+        PushSettingsDto: {
+            publicKey: null | string;
+            devices: components["schemas"]["PushDeviceDto"][];
+        };
+        PushSubscriptionRequest: {
+            endpoint: string;
+            p256dh: string;
+            auth: string;
+            device?: null | string;
         };
         RateRequest: {
             /** Format: int32 */
@@ -10864,6 +12003,15 @@ export interface components {
         SaveExtendedAttributesRequest: {
             attributes: components["schemas"]["ExtendedAttributeDto"][];
         };
+        SaveImportProfileRequest: {
+            name: string;
+            columns: {
+                [key: string]: string;
+            };
+            mode: components["schemas"]["ImportMode"];
+            keyField: null | string;
+            culture: null | string;
+        };
         SaveMailCampaignRequest: {
             name: string;
             templateName: string;
@@ -11019,6 +12167,43 @@ export interface components {
         SystemInfo: {
             product: string;
             version: string;
+        };
+        SystemStatusDto: {
+            /** Format: date-time */
+            at: string;
+            sections: components["schemas"]["SystemStatusSection"][];
+        };
+        SystemStatusEntry: {
+            label: string;
+            value: string;
+            level: components["schemas"]["SystemStatusLevel"];
+            arguments?: null | string[];
+            detail?: null | string;
+        };
+        /**
+         * @default Info
+         * @enum {unknown}
+         */
+        SystemStatusLevel: "Info" | "Ok" | "Warning" | "Error";
+        SystemStatusProblem: {
+            title: string;
+            message: string;
+            /** Format: date-time */
+            at?: null | string;
+        };
+        SystemStatusSection: {
+            key: string;
+            title: string;
+            entries: components["schemas"]["SystemStatusEntry"][];
+            problems?: null | components["schemas"]["SystemStatusProblem"][];
+            /**
+             * Format: int32
+             * @default 0
+             */
+            order: number | string;
+            link?: null | string;
+            /** @default false */
+            externalLink: boolean;
         };
         /** @enum {unknown} */
         TableView: "Table" | "Cards" | "List";

@@ -8903,6 +8903,260 @@
         }
       }
     },
+    "/api/v1/workflows/approvals": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApprovalDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/approvals/{id}": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowStatusDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/{entityType}/states": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowStatesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowStatusDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/{entityType}/{entityId}": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowStatusDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/{entityType}/{entityId}/{transition}": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "transition",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TransitionRequest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowStatusDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/brands/{id}": {
       "get": {
         "tags": [
@@ -9610,6 +9864,18 @@
               "type": "boolean"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/elsa/studio": {
+      "get": {
+        "tags": [
+          "Workflows"
         ],
         "responses": {
           "200": {
@@ -10743,6 +11009,121 @@
           }
         }
       },
+      "ApprovalDto": {
+        "required": [
+          "id",
+          "entityType",
+          "entityId",
+          "state",
+          "title",
+          "requiresAll",
+          "status",
+          "createdAt",
+          "dueAt",
+          "approvers",
+          "canDecide",
+          "link"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "entityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "requiresAll": {
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApprovalStatus"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dueAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "approvers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApproverDto"
+            }
+          },
+          "canDecide": {
+            "type": "boolean"
+          },
+          "link": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ApprovalStatus": {
+        "enum": [
+          "Pending",
+          "Approved",
+          "Rejected",
+          "Expired",
+          "Canceled"
+        ]
+      },
+      "ApproverDto": {
+        "required": [
+          "userId",
+          "approved",
+          "comment",
+          "decidedAt",
+          "escalation"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "approved": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "comment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "decidedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "escalation": {
+            "type": "boolean"
+          }
+        }
+      },
       "AuditChangeDto": {
         "required": [
           "property",
@@ -11829,6 +12210,23 @@
           "Last12Months",
           "Custom"
         ]
+      },
+      "DecisionRequest": {
+        "required": [
+          "approve"
+        ],
+        "type": "object",
+        "properties": {
+          "approve": {
+            "type": "boolean"
+          },
+          "comment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
       },
       "DeleteAccountRequest": {
         "required": [
@@ -16620,6 +17018,17 @@
           }
         }
       },
+      "TransitionRequest": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "TranslateMissingDto": {
         "required": [
           "translated",
@@ -17184,6 +17593,148 @@
           "Image",
           "Embed"
         ]
+      },
+      "WorkflowStatesRequest": {
+        "required": [
+          "ids"
+        ],
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "WorkflowStatusDto": {
+        "required": [
+          "entityType",
+          "entityId",
+          "state",
+          "transitions",
+          "approval",
+          "history"
+        ],
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": "string"
+          },
+          "entityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string"
+          },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkflowTransitionDto"
+            }
+          },
+          "approval": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ApprovalDto"
+              }
+            ]
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkflowStepDto"
+            }
+          }
+        }
+      },
+      "WorkflowStepDto": {
+        "required": [
+          "kind",
+          "from",
+          "to",
+          "transition",
+          "userId",
+          "comment",
+          "at"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/WorkflowStepKind"
+          },
+          "from": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "to": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transition": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "comment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "WorkflowStepKind": {
+        "enum": [
+          "Transition",
+          "Approved",
+          "Rejected",
+          "Reminded",
+          "Escalated",
+          "Expired"
+        ]
+      },
+      "WorkflowTransitionDto": {
+        "required": [
+          "name",
+          "to",
+          "commentRequired"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "commentRequired": {
+            "type": "boolean",
+            "default": false
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -17277,6 +17828,9 @@
     },
     {
       "name": "Ratings"
+    },
+    {
+      "name": "Workflows"
     },
     {
       "name": "Brands"

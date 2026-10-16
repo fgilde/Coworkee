@@ -6,6 +6,7 @@
     <CoworkeePackage Include="Coworkee.AspNetCore" />
     <CoworkeePackage Include="Coworkee.Infrastructure" />
     <CoworkeePackage Include="Coworkee.OData" />
+    <CoworkeePackage Include="Coworkee.Workflows" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 </Project>

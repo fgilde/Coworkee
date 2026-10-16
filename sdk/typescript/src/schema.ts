@@ -9694,6 +9694,249 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/workflows/approvals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ApprovalDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workflows/approvals/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["DecisionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["WorkflowStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workflows/{entityType}/states": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entityType: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["WorkflowStatesRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["WorkflowStatusDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workflows/{entityType}/{entityId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entityType: string;
+                    entityId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["WorkflowStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workflows/{entityType}/{entityId}/{transition}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entityType: string;
+                    entityId: string;
+                    transition: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": null | components["schemas"]["TransitionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["WorkflowStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/brands/{id}": {
         parameters: {
             query?: never;
@@ -10427,6 +10670,39 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/workflows/elsa/studio": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/system/info": {
         parameters: {
             query?: never;
@@ -11019,6 +11295,35 @@ export interface components {
             hidden?: null | string[];
             protected?: null | string[];
         };
+        ApprovalDto: {
+            /** Format: uuid */
+            id: string;
+            entityType: string;
+            /** Format: uuid */
+            entityId: string;
+            state: string;
+            title: string;
+            requiresAll: boolean;
+            status: components["schemas"]["ApprovalStatus"];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            dueAt: null | string;
+            approvers: components["schemas"]["ApproverDto"][];
+            canDecide: boolean;
+            link: null | string;
+        };
+        /** @enum {unknown} */
+        ApprovalStatus: "Pending" | "Approved" | "Rejected" | "Expired" | "Canceled";
+        ApproverDto: {
+            /** Format: uuid */
+            userId: string;
+            approved: null | boolean;
+            comment: null | string;
+            /** Format: date-time */
+            decidedAt: null | string;
+            escalation: boolean;
+        };
         AuditChangeDto: {
             property: string;
             oldValue: null | string;
@@ -11275,6 +11580,10 @@ export interface components {
         DateBucket: "None" | "Day" | "Week" | "Month" | "Quarter" | "Year";
         /** @enum {unknown} */
         DateRangePreset: "Today" | "Last7Days" | "Last30Days" | "Last90Days" | "ThisMonth" | "LastMonth" | "ThisQuarter" | "ThisYear" | "LastYear" | "Last12Months" | "Custom";
+        DecisionRequest: {
+            approve: boolean;
+            comment?: null | string;
+        };
         DeleteAccountRequest: {
             email: string;
         };
@@ -12406,6 +12715,9 @@ export interface components {
             /** @default false */
             isPublished: boolean;
         };
+        TransitionRequest: {
+            comment?: null | string;
+        };
         TranslateMissingDto: {
             /** Format: int32 */
             translated: number | string;
@@ -12528,6 +12840,37 @@ export interface components {
         };
         /** @enum {unknown} */
         WidgetType: "Kpi" | "Chart" | "Table" | "DataTable" | "Pivot" | "Markdown" | "Image" | "Embed";
+        WorkflowStatesRequest: {
+            ids: string[];
+        };
+        WorkflowStatusDto: {
+            entityType: string;
+            /** Format: uuid */
+            entityId: string;
+            state: string;
+            transitions: components["schemas"]["WorkflowTransitionDto"][];
+            approval: null | components["schemas"]["ApprovalDto"];
+            history: components["schemas"]["WorkflowStepDto"][];
+        };
+        WorkflowStepDto: {
+            kind: components["schemas"]["WorkflowStepKind"];
+            from: null | string;
+            to: null | string;
+            transition: null | string;
+            /** Format: uuid */
+            userId: null | string;
+            comment: null | string;
+            /** Format: date-time */
+            at: string;
+        };
+        /** @enum {unknown} */
+        WorkflowStepKind: "Transition" | "Approved" | "Rejected" | "Reminded" | "Escalated" | "Expired";
+        WorkflowTransitionDto: {
+            name: string;
+            to: string;
+            /** @default false */
+            commentRequired: boolean;
+        };
     };
     responses: never;
     parameters: never;

@@ -22,6 +22,7 @@ Sign-in through its own auth server (OpenIddict, passkeys, 2FA), setup wizard on
 | `MyApp.Documents` | Files on Coworkee.Storage: typed documents, public or private, upload, download, preview in **MudExFileDisplay** for safe types (served with `nosniff` and a sandbox CSP) |
 | `MyApp.Sales` | 100,000 generated sales orders as a **client entity** (`[ClientEntity]`): the browser keeps them and the table searches, filters, groups and counts facets locally; writes through the application service `ISalesOrderAppService` with a generated Blazor client |
 | `MyApp.AirWorks` | A second client: the [AirWorks](https://fgilde.github.io/AirWorks/) web desktop on the same sign-in and api, with the library's apps and hand-written ones in `ClientApp/src/apps` (catalog with product window, sales dashboard) |
+| `MyApp.ElsaStudio` | The workflow designer: Elsa Studio as an app of its own on the same sign-in, for the Elsa workflows of the api (sample *Product approved*) |
 
 Pages: dashboard (`/`), brands, products, documents, document types. The admin area (users, roles, settings, mail, themes, audit, jobs) comes from `Coworkee.Client.Blazor`.
 
@@ -50,6 +51,7 @@ dotnet ef migrations add <Name> --project src/MyApp.Infrastructure --startup-pro
 | `MyApp.Api` | API host: Coworkee modules plus the app's modules |
 | `MyApp.Web` / `MyApp.Web.Client` | BFF host and Blazor WASM client |
 | `MyApp.AirWorks` | BFF host and AirWorks web desktop (TypeScript in `ClientApp`, `@coworkee/client` and `@coworkee/airworks` from npm) |
+| `MyApp.ElsaStudio` | Elsa Studio host (`Coworkee.Workflows.Elsa.Studio`), linked as *Workflow designer* |
 | `MyApp.Infrastructure` | DbContext, migrations, module composition |
 | `MyApp.Migrations` | Applies migrations before the hosts start |
 | `MyApp.Contracts` | DTOs and permission names shared with the client |

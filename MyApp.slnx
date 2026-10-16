@@ -9,6 +9,7 @@
     <Project Path="src/MyApp.Client/MyApp.Client.csproj" />
     <Project Path="src/MyApp.Contracts/MyApp.Contracts.csproj" />
     <Project Path="src/MyApp.Documents/MyApp.Documents.csproj" />
+    <Project Path="src/MyApp.ElsaStudio/MyApp.ElsaStudio.csproj" />
     <Project Path="src/MyApp.Infrastructure/MyApp.Infrastructure.csproj" />
     <Project Path="src/MyApp.Migrations/MyApp.Migrations.csproj" />
     <Project Path="src/MyApp.Sales/MyApp.Sales.csproj" />

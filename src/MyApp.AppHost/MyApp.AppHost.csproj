@@ -13,5 +13,6 @@
     <ProjectReference Include="..\MyApp.Auth\MyApp.Auth.csproj" />
     <ProjectReference Include="..\MyApp.Web\MyApp.Web.csproj" />
     <ProjectReference Include="..\MyApp.AirWorks\MyApp.AirWorks.csproj" />
+    <ProjectReference Include="..\MyApp.ElsaStudio\MyApp.ElsaStudio.csproj" />
   </ItemGroup>
 </Project>

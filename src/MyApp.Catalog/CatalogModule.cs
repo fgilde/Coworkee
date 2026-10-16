@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using MyApp.Catalog.Domain;
 using MyApp.Catalog.Features.Brands.Commands.AddEdit;
+using MyApp.Catalog.Features.Products;
 using MyApp.Catalog.Features.Products.Commands.AddEdit;
 using MyApp.Catalog.Endpoints;
 using MyApp.Catalog.Permissions;
@@ -33,6 +34,7 @@ public sealed class MyAppCatalogModule : CoworkeeModule, IWebModule
             .Comments<Product>("Products", _ => "/catalog/products")
             .Tags<Product>("Products")
             .Ratings<Product>("Products"));
+        context.Services.AddProductApproval();
     }
 
     public void ConfigureApplication(WebApplication app)

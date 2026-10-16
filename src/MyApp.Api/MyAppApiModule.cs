@@ -5,13 +5,14 @@ using Coworkee.AspNetCore.Http;
 using Coworkee.Core.Modularity;
 using Coworkee.Infrastructure.Outbox;
 using Coworkee.ResponseFilters;
+using Elsa.Extensions;
 using MyApp.Application.System;
 using MyApp.Catalog;
 using MyApp.Infrastructure;
 
 namespace MyApp.Api;
 
-[DependsOn(typeof(MyAppDatabaseModule))]
+[DependsOn(typeof(MyAppDatabaseModule), typeof(Coworkee.Workflows.Elsa.CoworkeeWorkflowsElsaModule))]
 public sealed class MyAppApiModule : CoworkeeModule, IWebModule
 {
     public const string Audience = "myapp_api";
@@ -21,6 +22,7 @@ public sealed class MyAppApiModule : CoworkeeModule, IWebModule
         context.Services.AddCoworkeeOutboxProcessing<MyAppDbContext>();
         context.Services.AddCoworkeeResponseFilters([typeof(MyAppCatalogModule).Assembly]);
         context.Services.AddCoworkeeApiAuthentication(context.Configuration, Audience);
+        context.Services.AddWorkflow<Workflows.ProductApprovedWorkflow>();
     }
 
     public void ConfigureApplication(WebApplication app)

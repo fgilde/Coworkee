@@ -1,6 +1,7 @@
 using Coworkee.Contracts.Data;
 using Coworkee.Domain;
 using MyApp.Contracts.Sales;
+using MyApp.Sales.Features.Orders;
 using Nextended.Core.Facets;
 
 namespace MyApp.Sales.Domain;
@@ -47,6 +48,11 @@ public sealed class SalesOrder : AuditedEntity, IMultiTenant
 
     [ProvideFacet(Label = "Paid", Order = 8)]
     public bool Paid { get; set; }
+
+    /// <summary>The approval workflow writes its state here (MirrorTo), so the browser can filter, sort and group the orders by it.</summary>
+    [ProvideFacet(Label = "Approval", Order = 9)]
+    [FacetBehavior(View = FacetView.Chips, Switchable = true)]
+    public string ApprovalState { get; set; } = OrderApproval.Initial;
 
     public Guid TenantId { get; set; }
 }

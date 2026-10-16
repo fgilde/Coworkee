@@ -7,7 +7,7 @@ internal static class SalesOrderMapping
 {
     public static SalesOrderDto ToDto(this SalesOrder order) => new(
         order.Id, order.Number, order.CustomerId, order.Customer is { } c ? new CustomerDto(c.Id, c.Name, c.City) : null,
-        order.Status, order.Channel, order.Region, order.OrderDate, order.Items, order.Total, order.Options, order.Paid);
+        order.Status, order.Channel, order.Region, order.OrderDate, order.Items, order.Total, order.Options, order.Paid, order.ApprovalState);
 
     public static void Apply(this SalesOrder order, AddEditSalesOrderRequest input)
     {

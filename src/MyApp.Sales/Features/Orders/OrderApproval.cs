@@ -12,10 +12,13 @@ public static class OrderApproval
 
     public const decimal LargeTotal = 2000m;
 
+    public const string Initial = "Open";
+
     public static IServiceCollection AddOrderApproval(this IServiceCollection services) =>
         services.AddCoworkeeWorkflows(workflows => workflows.Entity<SalesOrder>(EntityType, order =>
         {
-            order.Initial("Open").Describe(o => o.Number).Link(_ => "/sales/orders");
+            // the browser keeps the orders (client entity) and filters them itself, so the state is mirrored into a column
+            order.Initial(Initial).Describe(o => o.Number).Link(_ => "/sales/orders").MirrorTo(o => o.ApprovalState);
             order.Transition("Confirm", "Open", "Confirmed").RequiresPermission(SalesPermissions.Orders.Edit)
                 .When(o => o.Status == SalesOrderStatus.Open && o.Total < LargeTotal);
             order.Transition("Request approval", "Open", "Awaiting approval").RequiresPermission(SalesPermissions.Orders.Edit)
@@ -24,7 +27,8 @@ public static class OrderApproval
                 .Role("Sales Manager", "admin")
                 .DueIn(TimeSpan.FromDays(2))
                 .RemindAfter(TimeSpan.FromDays(1)));
-            order.State("Confirmed").Set(o => o.Status = SalesOrderStatus.Confirmed);
-            order.State("Declined").Set(o => o.Status = SalesOrderStatus.Cancelled);
+            order.State("Awaiting approval").WithColor("var(--mud-palette-warning)");
+            order.State("Confirmed").WithColor("var(--mud-palette-success)").Set(o => o.Status = SalesOrderStatus.Confirmed);
+            order.State("Declined").WithColor("var(--mud-palette-error)").Set(o => o.Status = SalesOrderStatus.Cancelled);
         }));
 }

@@ -21,6 +21,8 @@ internal sealed class SalesModelContributor : IModelContributor
             order.Property(o => o.Number).HasMaxLength(20);
             order.Property(o => o.Region).HasMaxLength(50);
             order.Property(o => o.Total).HasPrecision(18, 2);
+            // the seed inserts orders with SQL; they start in the initial state of the approval
+            order.Property(o => o.ApprovalState).HasMaxLength(100).HasDefaultValue(Features.Orders.OrderApproval.Initial);
             order.HasOne(o => o.Customer).WithMany().HasForeignKey(o => o.CustomerId).OnDelete(DeleteBehavior.Restrict);
             order.HasIndex(o => new { o.TenantId, o.Number }).IsUnique();
             order.HasIndex(o => o.CustomerId);

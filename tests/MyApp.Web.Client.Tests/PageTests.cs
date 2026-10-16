@@ -41,6 +41,7 @@ public sealed class PageTests : BunitContext
         // no server: the client entity manifest fails at once and every query goes to the fake OData client
         Services.ConfigureHttpClientDefaults(client => client.ConfigurePrimaryHttpMessageHandler(() => new NoServer()));
         Services.AddSingleton(_api);
+        Services.AddSingleton(Substitute.For<Coworkee.Client.Blazor.Reporting.Api.IReportsApi>());
         Services.AddSingleton(Substitute.For<Coworkee.Client.Blazor.Files.IFilesApi>());
         Services.AddSingleton(new CoworkeeClientOptions());
         Services.AddSingleton(Substitute.For<IRealtimeConnection>());
@@ -76,6 +77,7 @@ public sealed class PageTests : BunitContext
         await _catalog.Received(1).DeleteBrandsAsync(Arg.Is<IReadOnlyList<Guid>>(ids => ids.Single() == acme.Id), Arg.Any<CancellationToken>());
     }
 
+    // without Reports.View there is no dashboard report: the catalog figures stay
     [Fact]
     public void The_dashboard_shows_the_counts()
     {

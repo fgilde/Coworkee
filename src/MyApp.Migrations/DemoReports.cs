@@ -8,7 +8,7 @@ using MyApp.Infrastructure;
 
 namespace MyApp.Migrations;
 
-/// <summary>Prebuilt reports of the administrator, once per database: sales over the 100,000 orders, an order desk and the catalog.</summary>
+/// <summary>Prebuilt reports of the administrator, once per database: sales over the 100,000 orders (the organisation's dashboard), an order desk and the catalog.</summary>
 public static class DemoReports
 {
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
@@ -24,20 +24,33 @@ public static class DemoReports
 
         using var actor = CurrentUserScope.Begin(new ImpersonatedUser(null, tenantId));
         var db = provider.GetRequiredService<MyAppDbContext>();
-        if (await db.Set<Report>().AnyAsync(cancellationToken)
-            || await db.Set<User>().FirstOrDefaultAsync(u => u.Email == DemoSeed.Administrator.Email, cancellationToken) is not { } owner)
+        if (!await db.Set<Report>().AnyAsync(cancellationToken)
+            && await db.Set<User>().FirstOrDefaultAsync(u => u.Email == DemoSeed.Administrator.Email, cancellationToken) is { } owner)
         {
-            return;
+            await AddReportsAsync(db, tenantId, owner.Id, cancellationToken);
         }
 
+        // ponytail: also databases seeded before; an organisation dashboard cleared by hand comes back with the next run of the migrations host
+        if (!await db.Set<DashboardReport>().AnyAsync(d => d.UserId == null, cancellationToken)
+            && await db.Set<Report>().FirstOrDefaultAsync(r => r.Name == SalesOverviewName, cancellationToken) is { } sales)
+        {
+            db.Add(new DashboardReport { TenantId = tenantId, ReportId = sales.Id });
+            await db.SaveChangesAsync(cancellationToken);
+        }
+    }
+
+    private const string SalesOverviewName = "Sales overview";
+
+    private static async Task AddReportsAsync(MyAppDbContext db, Guid tenantId, Guid ownerId, CancellationToken cancellationToken)
+    {
         var roles = await db.Set<Role>().Where(r => r.TenantId == tenantId).ToDictionaryAsync(r => r.Name!, r => r.Id, cancellationToken);
         List<Guid> Roles(params string[] names) => [.. names.Where(roles.ContainsKey).Select(n => roles[n])];
         db.AddRange(
-            Create(tenantId, owner.Id, "Sales overview", "Revenue, orders and customers of the last twelve months across regions and channels.",
+            Create(tenantId, ownerId, SalesOverviewName, "Revenue, orders and customers of the last twelve months across regions and channels.",
                 null, Roles(DemoSeed.SalesManager), SalesOverview()),
-            Create(tenantId, owner.Id, "Order desk", "Open orders to follow up, grouped and searchable.",
+            Create(tenantId, ownerId, "Order desk", "Open orders to follow up, grouped and searchable.",
                 null, Roles(DemoSeed.SalesManager), OrderDesk()),
-            Create(tenantId, owner.Id, "Catalog", "Products and brands at a glance.",
+            Create(tenantId, ownerId, "Catalog", "Products and brands at a glance.",
                 null, Roles("Product Manager", "Brand Manager"), Catalog()));
         await db.SaveChangesAsync(cancellationToken);
     }

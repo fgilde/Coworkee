@@ -1,6 +1,9 @@
 @page "/dashboard"
 @attribute [Authorize(Policy = PermissionPolicy.Prefix + CatalogPermissions.Dashboards.View)]
+@using Coworkee.Client.Blazor.Reporting.Components
 
+@* the report chosen as dashboard (Reports > Set as my dashboard), else the figures below *@
+<ReportDashboard>
 <PageHeader Title="Dashboard" Description="Realtime updates and insights." />
 <RealtimeSubscription Topic="type:Product" OnEvent="_ => LoadAsync()" />
 <RealtimeSubscription Topic="type:Brand" OnEvent="_ => LoadAsync()" />
@@ -31,3 +34,4 @@ else
         </MudItem>
     </MudGrid>
 }
+</ReportDashboard>

@@ -8,6 +8,7 @@ using Coworkee.Contracts.Identity;
 
 namespace MyApp.AppHost.Tests;
 
+[Collection("AppHost")]
 public sealed partial class SignInFlowTests
 {
     [Fact]

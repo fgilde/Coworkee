@@ -3,11 +3,13 @@ using System.Text.Json;
 using Aspire.Hosting;
 using Aspire.Hosting.Testing;
 
-// the app hosts share the Grafana configs they generate under src/MyApp.AppHost/observability, so they start one after the other
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
-
 namespace MyApp.AppHost.Tests;
 
+// every test starts the whole app with its databases and services (and the Grafana configs under the app host); one at a time
+[CollectionDefinition("AppHost", DisableParallelization = true)]
+public sealed class AppHostCollection;
+
+[Collection("AppHost")]
 public sealed class AppHostTests
 {
     [Fact]

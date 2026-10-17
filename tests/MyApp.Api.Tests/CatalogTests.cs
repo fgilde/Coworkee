@@ -69,8 +69,11 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
         (await Admin.GetStringAsync("/api/v1/history/Products/deleted", Ct)).ShouldContain(file.Id.ToString());
         var history = (await Admin.GetFromJsonAsync<Coworkee.Contracts.Auditing.EntityHistoryDto>($"/api/v1/history/Products/{file.Id}", Ct))!;
         history.IsDeleted.ShouldBeTrue();
-        (await Admin.PostAsJsonAsync($"/api/v1/history/Products/{file.Id}/restore",
-            new Coworkee.Contracts.Auditing.EntityHistoryRestoreRequest(history.Entries.Last().Id), Ct)).EnsureSuccessStatusCode();
+        var restore = new Coworkee.Contracts.Auditing.EntityHistoryRestoreRequest(history.Entries.Last().Id);
+        (await Admin.PostAsJsonAsync($"/api/v1/history/Products/{file.Id}/restore", restore, Ct)).StatusCode.ShouldBe(HttpStatusCode.Conflict);
+        var preview = await (await Admin.PostAsJsonAsync($"/api/v1/history/Products/{file.Id}/preview", restore, Ct))
+            .Content.ReadFromJsonAsync<Coworkee.Contracts.Auditing.EntityHistoryPreviewDto>(Ct);
+        (await Admin.PostAsJsonAsync($"/api/v1/history/Products/{file.Id}/restore", restore with { Version = preview!.Version }, Ct)).EnsureSuccessStatusCode();
         (await ODataAsync<ProductDto>(Admin, "/odata/Products?$orderby=Name")).Items.Select(p => p.Name).ShouldBe(["Drill", "File"]);
 
         var events = await Admin.GetStringAsync("/api/v1/webhooks/event-types", Ct);

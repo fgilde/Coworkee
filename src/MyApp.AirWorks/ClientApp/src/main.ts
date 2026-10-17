@@ -1,4 +1,4 @@
-import { adminApps, defaultApps, entityApp, useCoworkee } from '@coworkee/airworks';
+import { adminApps, defaultApps, embedApp, useCoworkee } from '@coworkee/airworks';
 import { AirWorks } from '@fgilde/airworks';
 import '@fgilde/airworks/style.css';
 import '@coworkee/airworks/style.css';
@@ -19,8 +19,8 @@ await coworkee.register(
   catalogApp,
   productApp,
   salesDashboardApp,
-  // the one-line way: an entity set as a searchable table
-  entityApp({ entitySet: 'Brands', liveType: 'Brand', icon: 'ratio-shoppingCart.png', requiredPermissions: ['Catalog.Brands.View'] }),
+  // a page of the web app in a window: the orders with facets, query builder and the browser copy, no rebuild in TypeScript
+  embedApp({ id: 'myapp.orders', title: 'Orders', path: '/sales/orders', icon: 'fn-planning.png', accent: '#2e7d32', requiredPermissions: ['SalesOrders.View'] }),
 );
 
 document.body.append(document.createElement('air-desktop'));

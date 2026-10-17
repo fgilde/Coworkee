@@ -8,7 +8,7 @@
   "dependencies": {
     "@coworkee/airworks": "0.0.1031",
     "@coworkee/client": "0.0.1031",
-    "@fgilde/airworks": "git+https://github.com/fgilde/AirWorks.git#d295c659dc4267a05f8d2a530fda5861fb5d8120"
+    "@fgilde/airworks": "git+https://github.com/fgilde/AirWorks.git#12e8507b22f11f99bba2c093fb81f617e751ff1f"
   },
   "devDependencies": {
     "mudex-webcomponents": "9.11.3",

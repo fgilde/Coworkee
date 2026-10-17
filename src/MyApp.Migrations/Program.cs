@@ -5,6 +5,8 @@ using MyApp.Infrastructure;
 using MyApp.Migrations;
 
 var builder = Host.CreateApplicationBuilder(args);
+// the app host runs the migrations as Development since lib 0.0.1.31; the OData controllers of the modules cannot be validated without a web host
+builder.ConfigureContainer(new DefaultServiceProviderFactory());
 builder.AddServiceDefaults();
 builder.Services.AddCoworkeeModules<MyAppDatabaseModule>(builder.Configuration);
 // the demo users, unless a deployment passes its first administrator (deploy parameters)

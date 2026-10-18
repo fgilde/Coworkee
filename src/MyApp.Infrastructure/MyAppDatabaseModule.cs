@@ -19,7 +19,7 @@ using MyApp.Sales.Features.Orders;
 namespace MyApp.Infrastructure;
 
 [DependsOn(typeof(MyAppInfrastructureModule), typeof(CoworkeeAuthStoreModule), typeof(CoworkeeMailingModule), typeof(CoworkeeAuditingModule), typeof(CoworkeeThemingModule),
-    typeof(CoworkeeNotificationsModule), typeof(Coworkee.Account.CoworkeeAccountModule), typeof(CoworkeeLocalizationModule), typeof(Coworkee.Backup.CoworkeeBackupModule), typeof(Coworkee.Chat.CoworkeeChatModule), typeof(Coworkee.Reporting.CoworkeeReportingModule), typeof(Coworkee.Ai.CoworkeeAiModule), typeof(Coworkee.Features.CoworkeeFeaturesModule), typeof(Coworkee.Files.CoworkeeFilesModule), typeof(Coworkee.Social.CoworkeeSocialModule), typeof(Coworkee.Workflows.CoworkeeWorkflowsModule), typeof(Coworkee.Webhooks.CoworkeeWebhooksModule), typeof(MyApp.Catalog.MyAppCatalogModule),
+    typeof(CoworkeeNotificationsModule), typeof(Coworkee.Account.CoworkeeAccountModule), typeof(CoworkeeLocalizationModule), typeof(Coworkee.Backup.CoworkeeBackupModule), typeof(Coworkee.Chat.CoworkeeChatModule), typeof(Coworkee.Reporting.CoworkeeReportingModule), typeof(Coworkee.Ai.CoworkeeAiModule), typeof(Coworkee.Features.CoworkeeFeaturesModule), typeof(Coworkee.Files.CoworkeeFilesModule), typeof(Coworkee.Social.CoworkeeSocialModule), typeof(Coworkee.Workflows.CoworkeeWorkflowsModule), typeof(Coworkee.Webhooks.CoworkeeWebhooksModule), typeof(Coworkee.Retention.CoworkeeRetentionModule), typeof(MyApp.Catalog.MyAppCatalogModule),
     typeof(MyApp.Documents.MyAppDocumentsModule), typeof(MyApp.Sales.MyAppSalesModule))]
 public sealed class MyAppDatabaseModule : CoworkeeModule
 {

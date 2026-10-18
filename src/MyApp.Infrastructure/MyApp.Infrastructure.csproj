@@ -24,6 +24,7 @@
     <CoworkeePackage Include="Coworkee.Social" />
     <CoworkeePackage Include="Coworkee.Workflows" />
     <CoworkeePackage Include="Coworkee.Webhooks" />
+    <CoworkeePackage Include="Coworkee.Retention" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />

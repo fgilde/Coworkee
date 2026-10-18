@@ -42,6 +42,7 @@
     <PackageVersion Include="Coworkee.Social" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Workflows" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Webhooks" Version="$(CoworkeeVersion)" />
+    <PackageVersion Include="Coworkee.Retention" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Workflows.Elsa" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Workflows.Elsa.Studio" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.CodeGen" Version="$(CoworkeeVersion)" />

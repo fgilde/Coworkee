@@ -1070,6 +1070,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/identity/users/{id}/passkeys/reset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/identity/users/{id}/logins": {
         parameters: {
             query?: never;
@@ -11319,6 +11363,171 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/retention": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    counts?: boolean;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["RetentionTargetDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        [key: string]: null | number | string;
+                    };
+                };
+            };
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/retention/{key}/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    days: number | string;
+                };
+                header?: never;
+                path: {
+                    key: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": number | string;
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/retention/{key}/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    key: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RunRetentionRequest"];
+                };
+            };
+            responses: {
+                /** @description Accepted */
+                202: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/brands/{id}": {
         parameters: {
             query?: never;
@@ -13701,6 +13910,11 @@ export interface components {
             address?: null | components["schemas"]["PostalAddress"];
             /** @default true */
             hasPassword: boolean;
+            /**
+             * Format: int32
+             * @default 0
+             */
+            passkeyCount: number | string;
         };
         PushDeviceDto: {
             /** Format: uuid */
@@ -13924,6 +14138,23 @@ export interface components {
             /** Format: uuid */
             roleId: string;
         };
+        RetentionTargetDto: {
+            key: string;
+            title: string;
+            description: null | string;
+            /** Format: int32 */
+            days: null | number | string;
+            /** Format: int32 */
+            defaultDays: null | number | string;
+            /** Format: int64 */
+            affected: null | number | string;
+            /** Format: date-time */
+            lastRunAt: null | string;
+            /** Format: int64 */
+            lastDeleted: null | number | string;
+            lastError: null | string;
+            running: boolean;
+        };
         RoleDto: {
             /** Format: uuid */
             id: string;
@@ -13943,6 +14174,10 @@ export interface components {
             description: null | string;
             /** @default false */
             selectableForRegistration: boolean;
+        };
+        RunRetentionRequest: {
+            /** Format: int32 */
+            days: number | string;
         };
         /** @enum {unknown} */
         SalesChannel: "Online" | "Store" | "Phone" | "Partner";
@@ -14321,6 +14556,11 @@ export interface components {
             /** @default false */
             hasAvatar: boolean;
             logins?: null | components["schemas"]["UserLoginDto"][];
+            /**
+             * Format: int32
+             * @default 0
+             */
+            passkeyCount: number | string;
         };
         UserDto: {
             /** Format: uuid */

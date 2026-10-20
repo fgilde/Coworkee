@@ -8412,6 +8412,98 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reports/ai": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportAiStatusDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["GenerateReportRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportDefinition"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/reports/rows": {
         parameters: {
             query?: never;
@@ -8813,6 +8905,250 @@ export interface paths {
             };
         };
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/subscriptions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSubscriptionDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveReportSubscriptionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSubscriptionDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/subscriptions/all": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSubscriptionDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/subscriptions/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SaveReportSubscriptionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSubscriptionDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/subscriptions/{id}/send": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportSubscriptionDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
         delete?: never;
         options?: never;
         head?: never;
@@ -13089,6 +13425,12 @@ export interface components {
             /** Format: uuid */
             id: string;
         };
+        BucketView: {
+            label: string;
+            field?: null | string;
+            bucket: components["schemas"]["DateBucket"];
+            dateField?: null | string;
+        };
         ChangeEmailRequest: {
             newEmail: string;
             currentPassword: null | string;
@@ -13371,6 +13713,8 @@ export interface components {
         DateBucket: "None" | "Day" | "Week" | "Month" | "Quarter" | "Year";
         /** @enum {unknown} */
         DateRangePreset: "Today" | "Last7Days" | "Last30Days" | "Last90Days" | "ThisMonth" | "LastMonth" | "ThisQuarter" | "ThisYear" | "LastYear" | "Last12Months" | "Custom";
+        /** @enum {unknown} */
+        DayOfWeek: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | null;
         DecisionRequest: {
             approve: boolean;
             comment?: null | string;
@@ -13568,6 +13912,10 @@ export interface components {
             createdAt: string;
             /** Format: uuid */
             createdBy: null | string;
+        };
+        GenerateReportRequest: {
+            prompt: string;
+            current?: null | components["schemas"]["ReportDefinition"];
         };
         GlobalSearchEvent: {
             provider: string;
@@ -13859,6 +14207,12 @@ export interface components {
             sample: null | string;
             isList: boolean;
         };
+        MetricView: {
+            label: string;
+            aggregates: components["schemas"]["ReportAggregate"][];
+            format?: null | components["schemas"]["NumberFormat"];
+            filter?: null | string;
+        };
         MissingTextsRequest: {
             keys: string[];
         };
@@ -14141,6 +14495,9 @@ export interface components {
             field?: null | string;
             label?: null | string;
         };
+        ReportAiStatusDto: {
+            available: boolean;
+        };
         ReportDateRange: {
             preset: components["schemas"]["DateRangePreset"];
             /** Format: date */
@@ -14249,6 +14606,15 @@ export interface components {
             /** Format: int64 */
             count: number | string;
         };
+        ReportSchedule: {
+            frequency: components["schemas"]["SubscriptionFrequency"];
+            /** Format: time */
+            time: string;
+            timeZone: string;
+            weekday?: null | components["schemas"]["DayOfWeek"];
+            /** Format: int32 */
+            dayOfMonth?: null | number | string;
+        };
         ReportSheetRequest: {
             name: string;
             headers: string[];
@@ -14263,6 +14629,25 @@ export interface components {
             topic?: null | string;
             /** @default false */
             computed: boolean;
+        };
+        ReportSubscriptionDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            reportId: string;
+            reportName: string;
+            /** Format: uuid */
+            userId: string;
+            userName: null | string;
+            schedule: components["schemas"]["ReportSchedule"];
+            dateRange: null | components["schemas"]["ReportDateRange"];
+            filters: null | components["schemas"]["ReportFilterValue"][];
+            attachment: boolean;
+            /** Format: date-time */
+            nextRunAt: string;
+            /** Format: date-time */
+            lastSentAt: null | string;
+            lastError: null | string;
         };
         ReportSummaryDto: {
             /** Format: uuid */
@@ -14409,6 +14794,15 @@ export interface components {
             roleIds: string[];
             definition: components["schemas"]["ReportDefinition"];
         };
+        SaveReportSubscriptionRequest: {
+            /** Format: uuid */
+            reportId: string;
+            schedule: components["schemas"]["ReportSchedule"];
+            dateRange?: null | components["schemas"]["ReportDateRange"];
+            filters?: null | components["schemas"]["ReportFilterValue"][];
+            /** @default true */
+            attachment: boolean;
+        };
         SaveTagsRequest: {
             tags: string[];
         };
@@ -14544,6 +14938,8 @@ export interface components {
             /** @default false */
             isPublic: boolean;
         };
+        /** @enum {unknown} */
+        SubscriptionFrequency: "Daily" | "Weekly" | "Monthly";
         SystemInfo: {
             product: string;
             version: string;
@@ -14653,6 +15049,12 @@ export interface components {
             options?: unknown;
             /** @default false */
             isPublished: boolean;
+        };
+        ThresholdStop: {
+            /** Format: double */
+            value: number | string;
+            color: string;
+            label?: null | string;
         };
         TransitionRequest: {
             comment?: null | string;
@@ -14825,6 +15227,11 @@ export interface components {
             crossFilter?: boolean;
             text?: null | string;
             url?: null | string;
+            metrics?: components["schemas"]["MetricView"][];
+            buckets?: components["schemas"]["BucketView"][];
+            thresholds?: components["schemas"]["ThresholdStop"][];
+            colorBarsByThreshold?: boolean;
+            thresholdColumn?: null | string;
         };
         WidgetQuery: {
             entitySet?: string;

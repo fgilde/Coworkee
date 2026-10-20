@@ -7683,6 +7683,45 @@
         }
       }
     },
+    "/api/v1/reports/rows": {
+      "post": {
+        "tags": [
+          "Reports"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRowsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportRowsResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/reports/sheet": {
       "post": {
         "tags": [
@@ -9833,6 +9872,110 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RatingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reactions/{entityType}/{entityId}": {
+      "get": {
+        "tags": [
+          "Reactions"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReactionsDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reactions"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReactionsDto"
                 }
               }
             }
@@ -13385,7 +13528,8 @@
           "authorId",
           "text",
           "createdAt",
-          "editedAt"
+          "editedAt",
+          "reactions"
         ],
         "type": "object",
         "properties": {
@@ -13417,6 +13561,12 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "reactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReactionDto"
+            }
           }
         }
       },
@@ -13442,7 +13592,9 @@
         "required": [
           "comments",
           "canComment",
-          "canModerate"
+          "canModerate",
+          "showReactions",
+          "canReact"
         ],
         "type": "object",
         "properties": {
@@ -13456,6 +13608,12 @@
             "type": "boolean"
           },
           "canModerate": {
+            "type": "boolean"
+          },
+          "showReactions": {
+            "type": "boolean"
+          },
+          "canReact": {
             "type": "boolean"
           }
         }
@@ -16995,6 +17153,54 @@
           }
         }
       },
+      "ReactionDto": {
+        "required": [
+          "emoji",
+          "userIds"
+        ],
+        "type": "object",
+        "properties": {
+          "emoji": {
+            "type": "string"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "ReactionRequest": {
+        "required": [
+          "emoji"
+        ],
+        "type": "object",
+        "properties": {
+          "emoji": {
+            "type": "string"
+          }
+        }
+      },
+      "ReactionsDto": {
+        "required": [
+          "reactions",
+          "canReact"
+        ],
+        "type": "object",
+        "properties": {
+          "reactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReactionDto"
+            }
+          },
+          "canReact": {
+            "type": "boolean"
+          }
+        }
+      },
       "RecipientListDto": {
         "required": [
           "id",
@@ -17619,6 +17825,81 @@
           }
         }
       },
+      "ReportRowsRequest": {
+        "required": [
+          "entitySet",
+          "columns",
+          "descending",
+          "skip",
+          "top"
+        ],
+        "type": "object",
+        "properties": {
+          "entitySet": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filter": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "orderBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descending": {
+            "type": "boolean",
+            "default": false
+          },
+          "skip": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32",
+            "default": 0
+          },
+          "top": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32",
+            "default": 50
+          }
+        }
+      },
+      "ReportRowsResult": {
+        "required": [
+          "rows",
+          "count"
+        ],
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array"
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          }
+        }
+      },
       "ReportSheetRequest": {
         "required": [
           "name",
@@ -17654,7 +17935,8 @@
         "required": [
           "entitySet",
           "label",
-          "fields"
+          "fields",
+          "computed"
         ],
         "type": "object",
         "properties": {
@@ -17675,6 +17957,10 @@
               "null",
               "string"
             ]
+          },
+          "computed": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -20329,6 +20615,9 @@
     },
     {
       "name": "Ratings"
+    },
+    {
+      "name": "Reactions"
     },
     {
       "name": "Workflows"

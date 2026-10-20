@@ -8412,6 +8412,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reports/rows": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReportRowsRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportRowsResult"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/reports/sheet": {
         parameters: {
             query?: never;
@@ -10688,6 +10736,88 @@ export interface paths {
                 };
             };
         };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reactions/{entityType}/{entityId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entityType: string;
+                    entityId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReactionsDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entityType: string;
+                    entityId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ReactionRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReactionsDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -13100,6 +13230,7 @@ export interface components {
             createdAt: string;
             /** Format: date-time */
             editedAt: null | string;
+            reactions: components["schemas"]["ReactionDto"][];
         };
         CommentRequest: {
             text: string;
@@ -13110,6 +13241,8 @@ export interface components {
             comments: components["schemas"]["CommentDto"][];
             canComment: boolean;
             canModerate: boolean;
+            showReactions: boolean;
+            canReact: boolean;
         };
         CompleteSetupRequest: {
             setupToken: string;
@@ -13947,6 +14080,17 @@ export interface components {
             mine: null | number | string;
             canRate: boolean;
         };
+        ReactionDto: {
+            emoji: string;
+            userIds: string[];
+        };
+        ReactionRequest: {
+            emoji: string;
+        };
+        ReactionsDto: {
+            reactions: components["schemas"]["ReactionDto"][];
+            canReact: boolean;
+        };
         RecipientListDto: {
             /** Format: uuid */
             id: string;
@@ -14082,6 +14226,29 @@ export interface components {
             id: string;
             name: string;
         };
+        ReportRowsRequest: {
+            entitySet: string;
+            columns: string[];
+            filter?: null | string;
+            orderBy?: null | string;
+            /** @default false */
+            descending: boolean;
+            /**
+             * Format: int32
+             * @default 0
+             */
+            skip: number | string;
+            /**
+             * Format: int32
+             * @default 50
+             */
+            top: number | string;
+        };
+        ReportRowsResult: {
+            rows: unknown[];
+            /** Format: int64 */
+            count: number | string;
+        };
         ReportSheetRequest: {
             name: string;
             headers: string[];
@@ -14094,6 +14261,8 @@ export interface components {
             label: string;
             fields: components["schemas"]["ReportFieldDto"][];
             topic?: null | string;
+            /** @default false */
+            computed: boolean;
         };
         ReportSummaryDto: {
             /** Format: uuid */

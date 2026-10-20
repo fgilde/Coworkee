@@ -6,8 +6,8 @@
     "build": "tsc --noEmit && vite build"
   },
   "dependencies": {
-    "@coworkee/airworks": "0.0.1034",
-    "@coworkee/client": "0.0.1034",
+    "@coworkee/airworks": "0.0.1035",
+    "@coworkee/client": "0.0.1035",
     "@fgilde/airworks": "git+https://github.com/fgilde/AirWorks.git#12e8507b22f11f99bba2c093fb81f617e751ff1f"
   },
   "devDependencies": {

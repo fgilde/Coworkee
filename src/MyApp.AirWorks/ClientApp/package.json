@@ -6,9 +6,9 @@
     "build": "tsc --noEmit && vite build"
   },
   "dependencies": {
-    "@coworkee/airworks": "0.0.1036",
-    "@coworkee/client": "0.0.1036",
-    "@fgilde/airworks": "git+https://github.com/fgilde/AirWorks.git#12e8507b22f11f99bba2c093fb81f617e751ff1f"
+    "@coworkee/airworks": "0.0.1037",
+    "@coworkee/client": "0.0.1037",
+    "@fgilde/airworks": "git+https://github.com/fgilde/AirWorks.git#9657ff3967a9dd8fa5dc2b7502c2b2e3d4e20d72"
   },
   "devDependencies": {
     "mudex-webcomponents": "9.11.3",

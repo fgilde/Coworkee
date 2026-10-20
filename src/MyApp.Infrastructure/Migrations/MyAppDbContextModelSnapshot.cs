@@ -2159,6 +2159,44 @@ namespace MyApp.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Coworkee.Social.Reaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Emoji")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "EntityType", "EntityId", "UserId", "Emoji")
+                        .IsUnique();
+
+                    b.ToTable("Reactions", "cw");
+
+                    b.HasAnnotation("Coworkee:NotAudited", true);
+                });
+
             modelBuilder.Entity("Coworkee.Social.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2445,6 +2483,9 @@ namespace MyApp.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("RemindedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("RequestedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("RequiresAll")
                         .HasColumnType("boolean");

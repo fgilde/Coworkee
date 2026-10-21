@@ -26,7 +26,7 @@ builder.Services.AddCoworkeeClient(baseAddress, options =>
     options.AllowAnonymous = false;
     options.AboutLinks.Add(new AboutLink("Project page", "https://github.com/fgilde/Coworkee"));
     options.AboutLinks.Add(new AboutLink("Documentation", "https://fgilde.github.io/CoworkeeLib/"));
-    options.About.Credits.Add(Coworkee.Client.Blazor.Components.About.AboutCredit.AirWorks("0.4.0"));
+    options.About.Credits.Add(Coworkee.Client.Blazor.Components.About.AboutCredit.AirWorks("0.6.0"));
 });
 builder.Services.AddCoworkeeClientEntities();
 builder.Services.AddCoworkeeReporting(baseAddress, reports => reports.DrillDown("SalesOrders", "sales/orders").DrillDown("Products", "catalog/products").DrillDown("Brands", "catalog/brands"));

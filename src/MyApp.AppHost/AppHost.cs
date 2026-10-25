@@ -31,7 +31,7 @@ var app = builder.AddCoworkeeApp("myapp", options =>
     options.Configure("auth", s => OfferLanguages(s, languages)).Configure("api", s => OfferLanguages(s, languages));
 }).AddProjects();
 
-// the apps and stacks hosted with AspireUI show up under Services; the administrator signs in locally or through Keycloak (LOGIN.md)
+// the apps and stacks hosted with AspireUI show up under Services; the administrator signs in locally or at the auth server (LOGIN.md)
 if (app.Deploys(CoworkeeTools.AspireUI))
 {
     var aspireUi = builder.AddAspireUI().WithCoworkee(app).WithRetrieveApi();

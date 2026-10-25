@@ -25,6 +25,6 @@ The administrator `info@coworkee.de` signs in with the same email and password t
 
 Both also offer the *Keycloak* button; users with the realm role *Administrator* are administrators there, everybody else may look.
 
-- *aspireui*: host and try more apps and stacks next to MyApp; what you host there also shows up on the admin page *Services* of the app. Sign in as `info@coworkee.de` with the same password, or with the *Keycloak* button (administrators of the realm become AspireUI admins, everybody else gets the app-user permissions). Its data lives in the volume `aspireui-data-aspireui`.
+- *aspireui*: host and try more apps and stacks next to MyApp; what you host there also shows up on the admin page *Services* of the app. Sign in as `info@coworkee.de` with the same password, or at the auth server of the app (only administrators of the system organisation get in, as AspireUI admins). Its data lives in the volume `myapp-aspireui-data`.
 
 The users and passwords come from `src/MyApp.Migrations/DemoUsers.cs` and are seeded on the first start of an empty database. They are for development only: change them before you deploy anywhere.

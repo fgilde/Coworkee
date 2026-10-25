@@ -6513,6 +6513,28 @@
         }
       }
     },
+    "/api/v1/backups/upload": {
+      "post": {
+        "tags": [
+          "Backups"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/backups/{id}/restore": {
       "post": {
         "tags": [

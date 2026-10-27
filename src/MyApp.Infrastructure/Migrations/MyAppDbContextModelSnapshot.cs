@@ -711,6 +711,21 @@ namespace MyApp.Infrastructure.Migrations
                     b.ToTable("ApiKeys", "cw");
                 });
 
+            modelBuilder.Entity("Coworkee.Identity.Domain.GroupSelection", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "GroupId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("GroupSelections", "cw");
+                });
+
             modelBuilder.Entity("Coworkee.Identity.Domain.PermissionGrant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1064,6 +1079,10 @@ namespace MyApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Code")
+                        .HasMaxLength(95)
+                        .HasColumnType("character varying(95)");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -1085,13 +1104,23 @@ namespace MyApp.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId", "Name")
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("TenantId", "Code")
                         .IsUnique();
+
+                    b.HasIndex("TenantId", "ParentId", "Name")
+                        .IsUnique();
+
+                    NpgsqlIndexBuilderExtensions.AreNullsDistinct(b.HasIndex("TenantId", "ParentId", "Name"), false);
 
                     b.ToTable("Groups", "cw");
                 });
@@ -1152,6 +1181,9 @@ namespace MyApp.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<Guid?>("ImpersonatorId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTimeOffset>("OccurredAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -1206,6 +1238,9 @@ namespace MyApp.Infrastructure.Migrations
 
                     b.Property<string>("Error")
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("ImpersonatorId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset?>("NextAttemptAt")
                         .HasColumnType("timestamp with time zone");
@@ -3436,6 +3471,21 @@ namespace MyApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Coworkee.Identity.Domain.GroupSelection", b =>
+                {
+                    b.HasOne("Coworkee.Identity.Domain.UserGroup", null)
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Coworkee.Identity.Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Coworkee.Identity.Domain.ResourcePermission", b =>
                 {
                     b.HasOne("Coworkee.Identity.Domain.Role", null)
@@ -3454,6 +3504,14 @@ namespace MyApp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Coworkee.Identity.Domain.UserGroup", b =>
+                {
+                    b.HasOne("Coworkee.Identity.Domain.UserGroup", null)
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Coworkee.Identity.Domain.UserGroupMember", b =>
                 {
                     b.HasOne("Coworkee.Identity.Domain.UserGroup", null)
@@ -3463,7 +3521,7 @@ namespace MyApp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Coworkee.Identity.Domain.User", null)
-                        .WithMany()
+                        .WithMany("Groups")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -3750,6 +3808,11 @@ namespace MyApp.Infrastructure.Migrations
             modelBuilder.Entity("Coworkee.Ai.Sessions.AiChatSession", b =>
                 {
                     b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("Coworkee.Identity.Domain.User", b =>
+                {
+                    b.Navigation("Groups");
                 });
 
             modelBuilder.Entity("Coworkee.Identity.Domain.UserGroup", b =>

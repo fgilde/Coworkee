@@ -112,10 +112,11 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
         (await UploadAsync(uploader, "tool.exe", [0x4D, 0x5A], "Tool", true, null)).StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         (await UploadAsync(reader, "x.pdf", pdf, "Reader", true, null)).StatusCode.ShouldBe(HttpStatusCode.Forbidden);
 
-        var own = await ODataAsync<DocumentDto>(uploader, "/odata/Documents?$expand=DocumentType&$count=true");
+        (await uploader.GetAsync("/odata/Documents?$expand=DocumentType", Ct)).StatusCode.ShouldBe(HttpStatusCode.Forbidden, "$expand into a set needs that set's View permission");
+        var own = await ODataAsync<DocumentDto>(uploader, "/odata/Documents?$count=true");
         own.Count.ShouldBe(2);
         var mine = own.Items.Single(d => d.Title == "Mine");
-        mine.DocumentType!.Name.ShouldBe("Invoice");
+        (await ODataAsync<DocumentDto>(Admin, "/odata/Documents?$expand=DocumentType&$filter=Title eq 'Mine'")).Items.Single().DocumentType!.Name.ShouldBe("Invoice");
         (await uploader.GetStringAsync("/odata/Documents", Ct)).ShouldNotContain("BlobKey", Case.Insensitive, "the response filter drops the storage key");
 
         using (var view = await uploader.GetAsync($"/api/v1/documents/{mine.Id}/content", Ct))

@@ -1,9 +1,12 @@
 using Coworkee.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MyApp.Sales.Domain;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Sales.Persistence;
 
+[RegisterAs(typeof(IModelContributor), ServiceLifetime = ServiceLifetime.Singleton)]
 internal sealed class SalesModelContributor : IModelContributor
 {
     public void Apply(ModelBuilder modelBuilder)

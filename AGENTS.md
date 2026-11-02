@@ -40,6 +40,7 @@ coworkee migrations add AddSales
 - Permission names are constants in `MyApp.Contracts/<Module>/<Module>Permissions.cs`; define each in the module's `IPermissionDefinitionContributor` (group, display name, parent) and register it in the module. Give the demo roles in `DemoSeed.cs` what they need.
 - Tables: `IModelContributor` in `Persistence/` with schema `app`, maximum lengths and precisions; register it in the module.
 - Endpoints: `app.MapCoworkeeApi("/api/v1/<plural>").RequireAuthorization()`, each one dispatches a request and returns `.ToHttpResult()`. OData sets: `AddODataEntity<T>("<Plural>", <View permission>)`.
+- A request can carry its route instead (`[Get("/api/v1/<plural>/{id:guid}")]`, `[Post]`, `[Put]`, `[Delete]`): `UseCoworkee` maps it, no endpoint class (example: `GetBrandProductsQuery`). Controllers in modules work too (`ProductLookupController`), application services see `MyApp.Sales` and `ICatalogStatisticsAppService`. Services can carry Nextended's `[RegisterAs(typeof(IService), ServiceLifetime = ...)]` instead of `services.Add...` in the module (example: `CatalogModelContributor`).
 - Pages: `@attribute [Authorize(Policy = PermissionPolicy.Prefix + <View permission>)]`, `CoworkeeDataTable` for lists, code in a `.razor.cs` partial next to the `.razor` file. Texts through `L["English text"]`, translations in `MyApp.Contracts/Localization/<culture>.json`.
 - Show files with MudBlazor.Extensions' `MudExFileDisplay` (absolute URL); do not build own previews or viewers.
 

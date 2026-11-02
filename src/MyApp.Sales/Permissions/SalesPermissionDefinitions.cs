@@ -1,8 +1,11 @@
 using Coworkee.Application.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using MyApp.Contracts.Sales;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Sales.Permissions;
 
+[RegisterAs(typeof(IPermissionDefinitionContributor), ServiceLifetime = ServiceLifetime.Singleton)]
 internal sealed class SalesPermissionDefinitions : IPermissionDefinitionContributor
 {
     public void Define(PermissionDefinitionContext context) =>

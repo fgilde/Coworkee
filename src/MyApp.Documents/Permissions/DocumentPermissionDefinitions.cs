@@ -11,7 +11,6 @@ internal sealed class DocumentPermissionDefinitions : IPermissionDefinitionContr
             .Add(DocumentPermissions.Documents.Create, "Upload documents", DocumentPermissions.Documents.View)
             .Add(DocumentPermissions.Documents.Edit, "Edit own documents", DocumentPermissions.Documents.View)
             .Add(DocumentPermissions.Documents.Delete, "Delete own documents", DocumentPermissions.Documents.View)
-            .Add(DocumentPermissions.Documents.Export, "Export documents", DocumentPermissions.Documents.View)
             .Add(DocumentPermissions.Documents.ManageAll, "View, edit and delete every document",
                 DocumentPermissions.Documents.Edit, DocumentPermissions.Documents.Delete)
             .Add(DocumentPermissions.Types.View, "View document types")

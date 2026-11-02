@@ -6,7 +6,7 @@ using MyApp.Documents.Domain;
 
 namespace MyApp.Documents.Privacy;
 
-/// <summary>Documents the user owns. Erasing deletes the private ones with their files; public documents belong to the organisation and stay.</summary>
+/// <summary>Documents the user owns. Erasing deletes the private ones with their files; public documents belong to the organisation and stay, owned by <see cref="PersonalDataSubject.ErasedUserId"/>.</summary>
 internal sealed class DocumentPersonalData(CoworkeeDbContext db, IBlobStorage storage) : IPersonalDataContributor
 {
     public string Section => "documents";
@@ -18,13 +18,17 @@ internal sealed class DocumentPersonalData(CoworkeeDbContext db, IBlobStorage st
 
     public async Task EraseAsync(PersonalDataSubject subject, CancellationToken cancellationToken)
     {
-        var documents = await Owned(subject).Where(d => !d.IsPublic).ToListAsync(cancellationToken);
-        foreach (var document in documents)
+        foreach (var document in await Owned(subject).ToListAsync(cancellationToken))
         {
-            await storage.DeleteAsync(document.BlobKey, cancellationToken);
-        }
+            if (document.IsPublic)
+            {
+                document.OwnerId = PersonalDataSubject.ErasedUserId;
+                continue;
+            }
 
-        db.RemoveRange(documents);
+            await storage.DeleteAsync(document.BlobKey, cancellationToken);
+            db.Remove(document);
+        }
     }
 
     private IQueryable<Document> Owned(PersonalDataSubject subject) =>

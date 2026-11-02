@@ -117,6 +117,13 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
         own.Count.ShouldBe(2);
         var mine = own.Items.Single(d => d.Title == "Mine");
         (await ODataAsync<DocumentDto>(Admin, "/odata/Documents?$expand=DocumentType&$filter=Title eq 'Mine'")).Items.Single().DocumentType!.Name.ShouldBe("Invoice");
+        (await Admin.PutAsJsonAsync($"/api/v1/document-types/{type.Id}", new AddEditDocumentTypeRequest { Name = "Bill" }, Ct)).EnsureSuccessStatusCode();
+        await using (var scope = api.Factory.Services.CreateAsyncScope())
+        {
+            (await scope.ServiceProvider.GetRequiredService<MyApp.Infrastructure.MyAppDbContext>().Set<Coworkee.OData.ClientEntities.ClientEntityTouch>().IgnoreQueryFilters()
+                .Select(t => t.EntityId).ToListAsync(Ct)).ShouldContain(mine.Id, "the client copies expand the type: renaming it reloads its documents");
+        }
+
         (await uploader.GetStringAsync("/odata/Documents", Ct)).ShouldNotContain("BlobKey", Case.Insensitive, "the response filter drops the storage key");
 
         using (var view = await uploader.GetAsync($"/api/v1/documents/{mine.Id}/content", Ct))
@@ -167,6 +174,8 @@ public sealed class CatalogTests(ApiFixture api) : IAsyncLifetime
         (await ODataAsync<DocumentDto>(Admin, "/odata/Documents")).Items.Select(d => d.Id).ShouldBe([shared.Id], "public documents belong to the organisation");
         await using var scope = api.Factory.Services.CreateAsyncScope();
         (await scope.ServiceProvider.GetRequiredService<Coworkee.Storage.IBlobStorage>().OpenReadAsync(secretKey!, Ct)).ShouldBeNull();
+        (await scope.ServiceProvider.GetRequiredService<MyApp.Infrastructure.MyAppDbContext>().Set<MyApp.Documents.Domain.Document>().IgnoreQueryFilters()
+            .Where(d => d.Id == shared.Id).Select(d => d.OwnerId).SingleAsync(Ct)).ShouldBe(Coworkee.Application.Privacy.PersonalDataSubject.ErasedUserId, "the kept document no longer names him");
     }
 
     [Fact]

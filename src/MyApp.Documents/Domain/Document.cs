@@ -6,7 +6,7 @@ using Nextended.Core.Facets;
 namespace MyApp.Documents.Domain;
 
 [Realtime(DocumentPermissions.Documents.View)]
-[ClientEntity]
+[ClientEntity(Expand = "DocumentType")]
 public sealed class Document : AuditedEntity, IMultiTenant
 {
     public required string Title { get; set; }

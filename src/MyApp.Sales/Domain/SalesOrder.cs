@@ -8,7 +8,7 @@ namespace MyApp.Sales.Domain;
 
 /// <summary>Clients keep all orders in the browser and query them there.</summary>
 [Realtime(SalesPermissions.Orders.View)]
-[ClientEntity]
+[ClientEntity(Expand = "Customer")]
 public sealed class SalesOrder : AuditedEntity, IMultiTenant
 {
     public required string Number { get; set; }

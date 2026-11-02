@@ -6,6 +6,7 @@ namespace MyApp.Contracts.Sales;
 /// The writes of sales orders, served under /api/v1/sales-orders by convention; the Blazor client gets a generated proxy.
 /// Reading goes through the OData set "SalesOrders", which the browser keeps as a client entity.
 /// </summary>
+//[ApplicationService(Route = "/api/v2/…", Tag = "")]
 public interface ISalesOrderAppService : IApplicationService
 {
     Task<SalesOrderDto> GetAsync(Guid id, CancellationToken cancellationToken = default);

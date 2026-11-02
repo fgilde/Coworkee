@@ -10,7 +10,6 @@ public static class DocumentPermissions
         public const string Create = "Documents.Create";
         public const string Edit = "Documents.Edit";
         public const string Delete = "Documents.Delete";
-        public const string Export = "Documents.Export";
         public const string ManageAll = "Documents.ManageAll";
     }
 

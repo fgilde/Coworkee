@@ -1,9 +1,13 @@
 using Coworkee.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MyApp.Catalog.Domain;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Catalog.Persistence;
 
+// registered by the attribute: AddCoworkee registers [RegisterAs] classes of every module assembly
+[RegisterAs(typeof(IModelContributor), ServiceLifetime = ServiceLifetime.Singleton)]
 internal sealed class CatalogModelContributor : IModelContributor
 {
     public void Apply(ModelBuilder modelBuilder)

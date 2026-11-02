@@ -3315,6 +3315,80 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/settings/head-script": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["HeadScriptDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SetHeadScriptRequest"];
+                };
+            };
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/settings/global": {
         parameters: {
             query?: never;
@@ -7449,6 +7523,7 @@ export interface paths {
             parameters: {
                 query?: {
                     since?: string;
+                    skip?: number | string;
                 };
                 header?: never;
                 path: {
@@ -9763,6 +9838,50 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["ReportRoleDto"][];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/groups": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ReportGroupDto"][];
                     };
                 };
                 /** @description Bad Request */
@@ -14330,6 +14449,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/catalog-statistics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CatalogStatisticsDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/document-types/{id}": {
         parameters: {
             query?: never;
@@ -14722,6 +14885,103 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/brands/{brandId}/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MyApp.Catalog.Features.Products.Queries.GetByBrand.GetBrandProductsQuery"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/product-lookup/by-barcode/{barcode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    barcode: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json;odata.metadata=minimal;odata.streaming=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;odata.streaming=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;odata.streaming=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;odata.streaming=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;odata.streaming=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;odata.streaming=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none": components["schemas"]["ProductDto"];
+                        "application/json;odata.streaming=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.streaming=false": components["schemas"]["ProductDto"];
+                        "application/json": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;odata.streaming=false;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=minimal;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;odata.streaming=true;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;odata.streaming=false;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=full;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;odata.streaming=true;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;odata.streaming=false;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.metadata=none;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.streaming=true;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.streaming=true;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;odata.streaming=false;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;odata.streaming=false;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                        "application/json;IEEE754Compatible=false": components["schemas"]["ProductDto"];
+                        "application/json;IEEE754Compatible=true": components["schemas"]["ProductDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -14987,6 +15247,14 @@ export interface components {
             bucket: components["schemas"]["DateBucket"];
             dateField?: null | string;
         };
+        CatalogStatisticsDto: {
+            /** Format: int32 */
+            brands: number | string;
+            /** Format: int32 */
+            products: number | string;
+            /** Format: double */
+            averageRate: number | string;
+        };
         ChangeEmailRequest: {
             newEmail: string;
             currentPassword: null | string;
@@ -15219,6 +15487,7 @@ export interface components {
             roleIds?: null | string[];
             /** @default true */
             isActive: boolean;
+            groupIds?: null | string[];
         };
         CustomerDto: {
             /** Format: uuid */
@@ -15629,6 +15898,10 @@ export interface components {
             description: null | string;
             /** Format: uuid */
             parentId?: null | string;
+        };
+        HeadScriptDto: {
+            enabled: boolean;
+            value: string;
         };
         HighlightRange: {
             /** Format: int32 */
@@ -16231,6 +16504,7 @@ export interface components {
             definition: components["schemas"]["ReportDefinition"];
             /** Format: date-time */
             modifiedAt: null | string;
+            groupIds?: null | string[];
         };
         ReportFieldDto: {
             path: string;
@@ -16255,6 +16529,14 @@ export interface components {
         ReportGroupBy: {
             field: string;
             bucket?: components["schemas"]["DateBucket"];
+        };
+        ReportGroupDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            parentId: null | string;
+            code: string;
+            name: string;
         };
         ReportKey: {
             value: null | string;
@@ -16377,7 +16659,7 @@ export interface components {
             modifiedAt: null | string;
         };
         /** @enum {unknown} */
-        ReportVisibility: "Private" | "Roles" | "Organisation";
+        ReportVisibility: "Private" | "Roles" | "Organisation" | "Groups";
         ReportWidget: {
             id: string;
             type: components["schemas"]["WidgetType"];
@@ -16393,6 +16675,7 @@ export interface components {
             h: number | string;
             query?: null | components["schemas"]["WidgetQuery"];
             options: components["schemas"]["WidgetOptions"];
+            appData?: null | Record<string, never>;
         };
         ResourcePermissionDto: {
             /** Format: uuid */
@@ -16519,6 +16802,7 @@ export interface components {
             visibility: components["schemas"]["ReportVisibility"];
             roleIds: string[];
             definition: components["schemas"]["ReportDefinition"];
+            groupIds?: null | string[];
         };
         SaveReportSubscriptionRequest: {
             /** Format: uuid */
@@ -16580,6 +16864,10 @@ export interface components {
         SetDashboardReportRequest: {
             /** Format: uuid */
             reportId: null | string;
+        };
+        SetHeadScriptRequest: {
+            enabled: boolean;
+            value: null | string;
         };
         SetLanguageEnabledRequest: {
             enabled: boolean;
@@ -17033,6 +17321,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SystemInfo"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                };
+            };
+        };
+    };
+    "MyApp.Catalog.Features.Products.Queries.GetByBrand.GetBrandProductsQuery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                brandId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductDto"][];
                 };
             };
             /** @description Bad Request */

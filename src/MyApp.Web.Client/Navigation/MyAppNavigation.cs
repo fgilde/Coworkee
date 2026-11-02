@@ -1,12 +1,15 @@
 using Coworkee.Client.Blazor;
 using Coworkee.Client.Blazor.Navigation;
+using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using MyApp.Contracts.Catalog;
 using MyApp.Contracts.Documents;
 using MyApp.Contracts.Sales;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Web.Client.Navigation;
 
+[RegisterAs(typeof(INavigationContributor), ServiceLifetime = ServiceLifetime.Singleton)]
 internal sealed class MyAppNavigation : INavigationContributor
 {
     private const string Personal = "Personal";

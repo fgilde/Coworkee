@@ -26,8 +26,6 @@ public sealed class MyAppSalesModule : CoworkeeModule
     {
         var services = context.Services;
         services.AddMessagingFromAssembly(typeof(MyAppSalesModule).Assembly);
-        services.AddSingleton<IModelContributor, SalesModelContributor>();
-        services.AddSingleton<IPermissionDefinitionContributor, SalesPermissionDefinitions>();
         services.AddODataEntity<SalesOrder>("SalesOrders", SalesPermissions.Orders.View);
         services.AddODataEntity<Customer>("Customers", SalesPermissions.Orders.View);
         services.AddGlobalSearch<SalesOrder>(s => s.Fields(o => o.Number, o => o.Region).Subtitle(o => o.Region).Page("/sales/orders").Icon("ShoppingCart"));

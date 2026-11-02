@@ -9,6 +9,7 @@ using MyApp.Contracts.Documents;
 using MyApp.Contracts.Settings;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Components.ObjectEdit;
+using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 using MyApp.Web.Client.Navigation;
 using MyApp.Web.Client.Pages.Documents;
@@ -36,7 +37,8 @@ builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
     client.BaseAddress = baseAddress;
     client.Timeout = Timeout.InfiniteTimeSpan;
 });
-builder.Services.AddSingleton<INavigationContributor, MyAppNavigation>();
+// the client has no modules: its [RegisterAs] classes (MyAppNavigation) are registered here
+builder.Services.RegisterAllWithRegisterAsAttribute(typeof(Program).Assembly);
 #pragma warning disable BL0005 // MudEx configures the rendered editor through this instance
 builder.Services.AddCoworkeeSettings<MyAppSettings>(meta =>
 {

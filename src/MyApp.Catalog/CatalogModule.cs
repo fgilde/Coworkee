@@ -26,7 +26,6 @@ public sealed class MyAppCatalogModule : CoworkeeModule, IWebModule
     public override void ConfigureServices(ModuleServiceContext context)
     {
         context.Services.AddMessagingFromAssembly(typeof(MyAppCatalogModule).Assembly);
-        context.Services.AddSingleton<IModelContributor, CatalogModelContributor>();
         context.Services.AddSingleton<IPermissionDefinitionContributor, CatalogPermissionDefinitions>();
         context.Services.AddODataEntity<Brand>("Brands", CatalogPermissions.Brands.View);
         context.Services.AddODataEntity<Product>("Products", CatalogPermissions.Products.View);

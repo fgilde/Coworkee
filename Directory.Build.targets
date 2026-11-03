@@ -13,4 +13,7 @@
   <ItemGroup Condition="'$(CoworkeeReferenceMode)' != 'Project'">
     <PackageReference Include="@(CoworkeePackage)" />
   </ItemGroup>
+  <!-- the packages bring build targets (ICU data for the Blazor client, codegen.json); project references import them here -->
+  <Import Project="$(CoworkeeRoot)src\Coworkee.Client.Blazor\build\Coworkee.Client.Blazor.targets" Condition="'$(CoworkeeReferenceMode)' == 'Project' And Exists('$(CoworkeeRoot)src\Coworkee.Client.Blazor\build\Coworkee.Client.Blazor.targets')" />
+  <Import Project="$(CoworkeeRoot)src\Coworkee.CodeGen\build\Coworkee.CodeGen.targets" Condition="'$(CoworkeeReferenceMode)' == 'Project' And Exists('$(CoworkeeRoot)src\Coworkee.CodeGen\build\Coworkee.CodeGen.targets')" />
 </Project>

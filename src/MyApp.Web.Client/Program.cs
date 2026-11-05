@@ -29,6 +29,8 @@ builder.Services.AddCoworkeeClient(baseAddress, options =>
     options.AboutLinks.Add(new AboutLink("Documentation", "https://fgilde.github.io/CoworkeeLib/"));
     options.About.Credits.Add(Coworkee.Client.Blazor.Components.About.AboutCredit.AirWorks("0.6.0"));
 });
+builder.Services.AddCoworkeeTheme<MyApp.Web.Client.Theming.MyAppTheme, MyApp.Web.Client.ObjectEdit.MyAppThemeEditMeta>();
+builder.Services.AddSingleton<Coworkee.Client.Blazor.Dialogs.DialogOptionsContributor, MyApp.Web.Client.MyAppDialogOptions>();
 builder.Services.AddCoworkeeClientEntities();
 builder.Services.AddCoworkeeReporting(baseAddress, reports => reports.DrillDown("SalesOrders", "sales/orders").DrillDown("Products", "catalog/products").DrillDown("Brands", "catalog/brands"));
 builder.Services.AddHttpClient<ICatalogApi, CatalogApi>(client => client.BaseAddress = baseAddress);

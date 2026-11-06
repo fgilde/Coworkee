@@ -9,7 +9,6 @@ using MyApp.Contracts.Documents;
 using MyApp.Contracts.Settings;
 using MudBlazor.Extensions.Components;
 using MudBlazor.Extensions.Components.ObjectEdit;
-using Nextended.Core.Extensions;
 using Nextended.Core.Types;
 using MyApp.Web.Client.Navigation;
 using MyApp.Web.Client.Pages.Documents;
@@ -39,8 +38,8 @@ builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>
     client.BaseAddress = baseAddress;
     client.Timeout = Timeout.InfiniteTimeSpan;
 });
-// the client has no modules: its [RegisterAs] classes (MyAppNavigation) are registered here
-builder.Services.RegisterAllWithRegisterAsAttribute(typeof(Program).Assembly);
+// the client's [RegisterAs] classes (MyAppNavigation) need no scan here: AddCoworkeeClient's MudBlazor.Extensions registers those of the app
+// assembly; a second scan listed every entry of MyAppNavigation twice
 #pragma warning disable BL0005 // MudEx configures the rendered editor through this instance
 builder.Services.AddCoworkeeSettings<MyAppSettings>(meta =>
 {

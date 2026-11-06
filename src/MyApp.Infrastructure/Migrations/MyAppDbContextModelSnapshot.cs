@@ -2761,6 +2761,9 @@ namespace MyApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("BuiltInId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -2769,6 +2772,9 @@ namespace MyApp.Infrastructure.Migrations
 
                     b.Property<string>("CustomCss")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsCustomized")
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("IsDefault")
                         .HasColumnType("boolean");
@@ -2821,6 +2827,10 @@ namespace MyApp.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique()
                         .HasFilter("\"TenantId\" IS NULL");
+
+                    b.HasIndex("TenantId", "BuiltInId")
+                        .IsUnique()
+                        .HasFilter("\"BuiltInId\" IS NOT NULL");
 
                     b.HasIndex("TenantId", "Name")
                         .IsUnique();

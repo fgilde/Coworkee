@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <CoworkeeVersion>0.0.1.64</CoworkeeVersion>
+    <CoworkeeVersion>0.0.1.67</CoworkeeVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Coworkee.Core" Version="$(CoworkeeVersion)" />
@@ -37,6 +37,7 @@
     <PackageVersion Include="Coworkee.Bff" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Client.Blazor" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Client.Blazor.ClientEntities" Version="$(CoworkeeVersion)" />
+    <PackageVersion Include="Coworkee.Client.Blazor.ClientEntities.Sqlite" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Features" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Files" Version="$(CoworkeeVersion)" />
     <PackageVersion Include="Coworkee.Social" Version="$(CoworkeeVersion)" />

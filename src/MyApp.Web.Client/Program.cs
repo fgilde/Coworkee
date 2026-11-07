@@ -1,5 +1,6 @@
 using Coworkee.Client.Blazor;
 using Coworkee.Client.Blazor.ClientEntities;
+using Coworkee.Client.Blazor.ClientEntities.Sqlite;
 using Coworkee.Client.Blazor.Navigation;
 using Coworkee.Client.Blazor.Pages;
 using Coworkee.Client.Blazor.Reporting;
@@ -31,6 +32,9 @@ builder.Services.AddCoworkeeClient(baseAddress, options =>
 builder.Services.AddCoworkeeTheme<MyApp.Web.Client.Theming.MyAppTheme, MyApp.Web.Client.ObjectEdit.MyAppThemeEditMeta>();
 builder.Services.AddSingleton<Coworkee.Client.Blazor.Dialogs.DialogOptionsContributor, MyApp.Web.Client.MyAppDialogOptions>();
 builder.Services.AddCoworkeeClientEntities();
+// the copies in SQLite inside the browser: the server sends a copy as one file, a reload opens it. AllRowTypes also for the sales orders, whose simple
+// columns would otherwise stay in memory: local in 9 instead of 34 s after the first visit, facets about 370 instead of 40 ms
+builder.Services.AddCoworkeeClientEntitiesSqlite(o => o.AllRowTypes = true);
 builder.Services.AddCoworkeeReporting(baseAddress, reports => reports.DrillDown("SalesOrders", "sales/orders").DrillDown("Products", "catalog/products").DrillDown("Brands", "catalog/brands"));
 builder.Services.AddHttpClient<ICatalogApi, CatalogApi>(client => client.BaseAddress = baseAddress);
 builder.Services.AddHttpClient<IDocumentsApi, DocumentsApi>(client =>

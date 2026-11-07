@@ -5379,6 +5379,82 @@
         }
       }
     },
+    "/api/v1/themes/{id}/reset": {
+      "post": {
+        "tags": [
+          "Themes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/themes/{id}/published": {
+      "put": {
+        "tags": [
+          "Themes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/themes/{id}/default": {
       "post": {
         "tags": [
@@ -7247,6 +7323,38 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/client-entities/{entitySet}/snapshot": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "parameters": [
+          {
+            "name": "entitySet",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientEntitySnapshotRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -15998,6 +16106,46 @@
           }
         }
       },
+      "ClientEntitySnapshotColumn": {
+        "required": [
+          "name",
+          "kind",
+          "indexed"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "indexed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ClientEntitySnapshotRequest": {
+        "required": [
+          "columns",
+          "expand"
+        ],
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientEntitySnapshotColumn"
+            }
+          },
+          "expand": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ClientRequest": {
         "required": [
           "clientId",
@@ -23152,7 +23300,8 @@
           "logo",
           "customCss",
           "revision",
-          "isPublished"
+          "isPublished",
+          "isChanged"
         ],
         "type": "object",
         "properties": {
@@ -23220,6 +23369,10 @@
           "isPublished": {
             "type": "boolean",
             "default": true
+          },
+          "isChanged": {
+            "type": "boolean",
+            "default": false
           }
         }
       },

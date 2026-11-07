@@ -40,6 +40,10 @@ jobs:
         with:
           global-json-file: myapp/global.json
 
+      # the client keeps its client entities in SQLite inside the browser: the package links SQLite in natively
+      - name: wasm-tools workload
+        run: dotnet workload install wasm-tools
+
       # MyApp.AirWorks builds its client with npm
       - uses: actions/setup-node@v4
         with:

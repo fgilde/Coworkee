@@ -17314,21 +17314,20 @@
       },
       "CustomerDto": {
         "required": [
-          "id",
           "name",
           "city"
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "name": {
             "type": "string"
           },
           "city": {
             "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -17871,16 +17870,10 @@
       },
       "DocumentTypeDto": {
         "required": [
-          "id",
-          "name",
-          "description"
+          "name"
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "name": {
             "type": "string"
           },
@@ -17889,6 +17882,10 @@
               "null",
               "string"
             ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },

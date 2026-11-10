@@ -143,7 +143,7 @@ public sealed class PageTests : BunitContext
     [Fact]
     public async Task Sales_orders_are_listed_and_cancelled_through_the_app_service()
     {
-        var order = new SalesOrderDto(Guid.CreateVersion7(), "SO-0000042", Guid.CreateVersion7(), new CustomerDto(Guid.CreateVersion7(), "Hanse Logistik KG", "Bremen"),
+        var order = new SalesOrderDto(Guid.CreateVersion7(), "SO-0000042", Guid.CreateVersion7(), new CustomerDto { Id = Guid.CreateVersion7(), Name = "Hanse Logistik KG", City = "Bremen" },
             SalesOrderStatus.Open, SalesChannel.Online, "Nord", DateTimeOffset.UtcNow, 2, 19.80m);
         _odata.With("SalesOrders", order);
         Render<MudPopoverProvider>();

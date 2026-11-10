@@ -8,6 +8,8 @@
     <CoworkeePackage Include="Coworkee.OData" />
     <CoworkeePackage Include="Coworkee.Workflows" />
     <CoworkeePackage Include="Coworkee.Webhooks" />
+    <CoworkeePackage Include="Coworkee.CodeGen" />
+    <PackageReference Include="Riok.Mapperly" PrivateAssets="all" ExcludeAssets="runtime" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 </Project>

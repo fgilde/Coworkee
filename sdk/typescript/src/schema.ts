@@ -16587,10 +16587,10 @@ export interface components {
             groupIds?: null | string[];
         };
         CustomerDto: {
-            /** Format: uuid */
-            id: string;
             name: string;
             city: string;
+            /** Format: uuid */
+            id?: string;
         };
         CustomPermissionDto: {
             name: string;
@@ -16717,10 +16717,10 @@ export interface components {
             createdAt: string;
         };
         DocumentTypeDto: {
-            /** Format: uuid */
-            id: string;
             name: string;
-            description: null | string;
+            description?: null | string;
+            /** Format: uuid */
+            id?: string;
         };
         EditChatMessageRequest: {
             html: string;

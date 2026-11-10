@@ -16,4 +16,9 @@
   <!-- the packages bring build targets (ICU data for the Blazor client, codegen.json); project references import them here -->
   <Import Project="$(CoworkeeRoot)src\Coworkee.Client.Blazor\build\Coworkee.Client.Blazor.targets" Condition="'$(CoworkeeReferenceMode)' == 'Project' And Exists('$(CoworkeeRoot)src\Coworkee.Client.Blazor\build\Coworkee.Client.Blazor.targets')" />
   <Import Project="$(CoworkeeRoot)src\Coworkee.CodeGen\build\Coworkee.CodeGen.targets" Condition="'$(CoworkeeReferenceMode)' == 'Project' And Exists('$(CoworkeeRoot)src\Coworkee.CodeGen\build\Coworkee.CodeGen.targets')" />
+  <!-- several modules generate DTOs: Nextended.CodeGen 10.1.51 shares its generator between the compilations of one compiler server, so modules built in parallel
+       write into each other's folders. Own compiler process per module; Coworkee.CodeGen does this itself after 0.0.1.74, then this group can go. -->
+  <PropertyGroup Condition="Exists('$(MSBuildProjectDirectory)\codegen.json')">
+    <UseSharedCompilation>false</UseSharedCompilation>
+  </PropertyGroup>
 </Project>

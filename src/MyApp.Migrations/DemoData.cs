@@ -1,14 +1,17 @@
 using Coworkee.Application.Setup;
-using Coworkee.Contracts.Identity;
-using Coworkee.Core.Results;
 using MyApp.Catalog.Domain;
 using MyApp.Documents.Domain;
 using MyApp.Infrastructure;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Migrations;
 
-/// <summary>Sample catalog and document types, so a fresh demo shows filled tables, facets and charts.</summary>
-internal sealed class DemoData(MyAppDbContext db) : ISetupStep
+/// <summary>
+/// Sample catalog and document types, so a fresh demo shows filled tables, facets and charts: in the run that sets the system up (also a
+/// deployment with its first administrator), never again, so what users delete stays deleted.
+/// </summary>
+[RegisterAs(typeof(ISeedContributor))]
+internal sealed class DemoData(MyAppDbContext db) : ISeedContributor
 {
     private static readonly (string Name, string Description, decimal Tax, (string Name, string Barcode, decimal Rate)[] Products)[] Catalog =
     [
@@ -25,8 +28,16 @@ internal sealed class DemoData(MyAppDbContext db) : ISetupStep
         ("Data sheet", "Product data sheets"),
     ];
 
-    public Task<Error?> ApplyAsync(CompleteSetupRequest request, Guid tenantId, CancellationToken cancellationToken)
+    public int Order => DemoSeed.Order.Data;
+
+    public Task SeedAsync(SeedContext context, CancellationToken cancellationToken)
     {
+        if (!context.IsNew)
+        {
+            return Task.CompletedTask;
+        }
+
+        var tenantId = context.TenantId!.Value;
         foreach (var (name, description, tax, products) in Catalog)
         {
             var brand = new Brand { Name = name, Description = description, Tax = tax, TenantId = tenantId };
@@ -35,6 +46,6 @@ internal sealed class DemoData(MyAppDbContext db) : ISetupStep
         }
 
         db.AddRange(DocumentTypes.Select(t => new DocumentType { Name = t.Name, Description = t.Description, TenantId = tenantId }));
-        return Task.FromResult<Error?>(null);
+        return Task.CompletedTask;
     }
 }

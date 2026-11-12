@@ -39,14 +39,40 @@ public sealed class SeedTests
         (await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"Name\", ',' ORDER BY \"Name\") FROM cw.\"Reports\"")).ShouldBe("Catalog,Order desk,Sales overview");
         (await ScalarAsync<long>(postgres.ConnectionString,
             "SELECT count(*) FROM cw.\"Reports\" p JOIN cw.\"Roles\" r ON r.\"Id\" = ANY(p.\"RoleIds\") WHERE r.\"Name\" = 'Sales Manager'")).ShouldBe(2);
+        products.ShouldBe(11);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"DocumentTypes\"")).ShouldBe(3);
     }
 
-    private static async Task<int> RunAsync(string connectionString)
+    [Fact]
+    public async Task A_deployment_gets_its_administrator_and_the_sample_catalog_once_but_no_development_data()
+    {
+        await using var postgres = new DatabaseFixture();
+        await postgres.InitializeAsync();
+        (await RunAsync(postgres.ConnectionString, deployment: true)).ShouldBe(0);
+        await ScalarAsync<int>(postgres.ConnectionString, "DELETE FROM app.\"DocumentTypes\" WHERE \"Name\" = 'Contract'; SELECT 0");
+        (await RunAsync(postgres.ConnectionString, deployment: true)).ShouldBe(0);
+
+        (await ScalarAsync<string>(postgres.ConnectionString, "SELECT string_agg(\"Email\", ',') FROM cw.\"Users\"")).ShouldBe("admin@deploy.test");
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"Products\"")).ShouldBe(11);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"DocumentTypes\"")).ShouldBe(2, "a deleted sample stays deleted");
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM app.\"SalesOrders\"")).ShouldBe(0);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM cw.\"Reports\"")).ShouldBe(0);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM cw.\"WebhookSubscriptions\"")).ShouldBe(0);
+        (await ScalarAsync<long>(postgres.ConnectionString, "SELECT count(*) FROM cw.\"Roles\" WHERE \"Name\" = 'Sales Manager'")).ShouldBe(0);
+    }
+
+    private static async Task<int> RunAsync(string connectionString, bool deployment = false)
     {
         var start = new ProcessStartInfo("dotnet", Path.Combine(AppContext.BaseDirectory, "MyApp.Migrations.dll"))
         {
             Environment = { ["DOTNET_ENVIRONMENT"] = "Production", ["ConnectionStrings__myapp"] = connectionString },
         };
+        if (deployment)
+        {
+            start.Environment["Coworkee__InitialAdmin__Email"] = "admin@deploy.test";
+            start.Environment["Coworkee__InitialAdmin__Password"] = "Deploy#12345";
+        }
+
         using var process = Process.Start(start)!;
         await process.WaitForExitAsync(Ct).WaitAsync(TimeSpan.FromMinutes(3), Ct);
         return process.ExitCode;

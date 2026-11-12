@@ -32,7 +32,7 @@ Pages: dashboard (`/`), brands, products, documents, document types, sales order
 
 1. .NET 10 SDK, Docker, Node.js 22.18 or newer (builds the AirWorks client; skip it with `-p:SkipClientBuild=true`).
 2. Coworkee packages: `git clone https://github.com/fgilde/CoworkeeLib.git ../coworkee`, then run `pwsh build/pack-local.ps1` in `../coworkee` (fills `../coworkee/artifacts/nuget`, which `nuget.config` points at).
-3. `dotnet run --project src/MyApp.AppHost` and open the web app from the Aspire dashboard; the migration service seeds the demo users. How to sign in, also to Keycloak, Grafana, WebDataStudio and AspireUI: [LOGIN.md](LOGIN.md).
+3. `dotnet run --project src/MyApp.AppHost` and open the web app from the Aspire dashboard; the migration service seeds the demo users and, through the seed contributors in `src/MyApp.Migrations` (`Demo*.cs`), the demo data: sample catalog, 100,000 sales orders, reports, approvals and an example webhook. How to sign in, also to Keycloak, Grafana, WebDataStudio and AspireUI: [LOGIN.md](LOGIN.md).
 
 Or with one click: the [QuickRun](https://quickrun.org) badge runs `quickrun.yml`, which clones and packs the library into `../coworkee`, trusts the development certificate, starts the app host and opens the web app once it answers.
 

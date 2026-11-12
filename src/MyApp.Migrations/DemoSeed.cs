@@ -1,7 +1,9 @@
+using Coworkee.Application.Setup;
 using Coworkee.Contracts.Chat;
 using Coworkee.Contracts.Reporting;
 using Coworkee.Contracts.Social;
 using Coworkee.Contracts.Workflows;
+using Coworkee.Core.Security;
 using Coworkee.Identity.Setup;
 using MyApp.Contracts.Catalog;
 using MyApp.Contracts.Documents;
@@ -34,6 +36,21 @@ public static class DemoSeed
         seed.TenantName = "MyApp";
         seed.Users.Add(admin);
     }
+
+    /// <summary>The order of the demo seed contributors: each one builds on the ones before.</summary>
+    public static class Order
+    {
+        public const int Roles = 10;
+        public const int Data = 20;
+        public const int Sales = 30;
+        public const int Reports = 40;
+        public const int Workflows = 50;
+        public const int Webhooks = 60;
+    }
+
+    /// <summary>The demo records belong to the organisation of the seed; tenants created later start empty.</summary>
+    public static async Task<bool> IsSystemTenantAsync(SeedContext context, ITenantDirectory tenants, CancellationToken cancellationToken) =>
+        context.TenantId is { } tenantId && tenantId == await tenants.GetSystemTenantIdAsync(cancellationToken);
 
     private static string[] Shared =>
     [

@@ -1,4 +1,5 @@
 using Coworkee.Application.Messaging;
+using Coworkee.Application.Setup;
 using Coworkee.Core.Results;
 using Coworkee.Core.Security;
 using Coworkee.Identity.Domain;
@@ -11,6 +12,7 @@ using MyApp.Contracts.Sales;
 using MyApp.Infrastructure;
 using MyApp.Sales.Domain;
 using MyApp.Sales.Features.Orders;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Migrations;
 
@@ -19,18 +21,22 @@ namespace MyApp.Migrations;
 /// six products, an administrator approves two and rejects one; three large orders wait for approval and one small one is confirmed.
 /// Everything runs through the commands as the users, like clicks in the app.
 /// </summary>
-internal static class DemoWorkflows
+/// <remarks>Each command commits in a scope of its own, as its user; the runner's transaction only reads.</remarks>
+[RegisterAs(typeof(ISeedContributor))]
+internal sealed class DemoWorkflows(MyAppDbContext db, ITenantDirectory tenants, IServiceProvider services) : ISeedContributor
 {
-    public static async Task EnsureAsync(IServiceProvider services, CancellationToken cancellationToken = default)
+    public int Order => DemoSeed.Order.Workflows;
+
+    public SeedEnvironments Environments => SeedEnvironments.Development;
+
+    public async Task SeedAsync(SeedContext context, CancellationToken cancellationToken)
     {
-        await using var scope = services.CreateAsyncScope();
-        var provider = scope.ServiceProvider;
-        if (await provider.GetRequiredService<ITenantDirectory>().GetSystemTenantIdAsync(cancellationToken) is not { } tenantId)
+        if (!await DemoSeed.IsSystemTenantAsync(context, tenants, cancellationToken))
         {
             return;
         }
 
-        var db = provider.GetRequiredService<MyAppDbContext>();
+        var tenantId = context.TenantId!.Value;
         if (await db.Set<WorkflowItem>().IgnoreQueryFilters().AnyAsync(i => i.TenantId == tenantId, cancellationToken))
         {
             return;
@@ -50,7 +56,8 @@ internal static class DemoWorkflows
 
         for (var i = 3; i < products.Count; i++)
         {
-            var approval = await OpenApprovalAsync(services, tenantId, products[i], cancellationToken);
+            var approval = await db.Set<WorkflowApproval>()
+                .Where(a => a.EntityId == products[i] && a.Status == ApprovalStatus.Pending).Select(a => a.Id).SingleAsync(cancellationToken);
             var approve = i < 5;
             await SendAsync(services, admin, tenantId, new DecideApprovalCommand(approval, approve, approve ? "Looks good" : "The image is missing"), cancellationToken);
         }
@@ -80,13 +87,5 @@ internal static class DemoWorkflows
         using var actor = CurrentUserScope.Begin(new ImpersonatedUser(userId, tenantId));
         await using var scope = services.CreateAsyncScope();
         await scope.ServiceProvider.GetRequiredService<IDispatcher>().SendAsync(command, cancellationToken).OrThrow();
-    }
-
-    private static async Task<Guid> OpenApprovalAsync(IServiceProvider services, Guid tenantId, Guid entityId, CancellationToken cancellationToken)
-    {
-        using var actor = CurrentUserScope.Begin(new ImpersonatedUser(null, tenantId));
-        await using var scope = services.CreateAsyncScope();
-        return await scope.ServiceProvider.GetRequiredService<MyAppDbContext>().Set<WorkflowApproval>()
-            .Where(a => a.EntityId == entityId && a.Status == ApprovalStatus.Pending).Select(a => a.Id).SingleAsync(cancellationToken);
     }
 }

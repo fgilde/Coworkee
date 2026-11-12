@@ -1,29 +1,33 @@
 using System.Text.Json;
+using Coworkee.Application.Setup;
 using Coworkee.Contracts.Reporting;
 using Coworkee.Core.Security;
 using Coworkee.Identity.Domain;
 using Coworkee.Reporting;
 using Microsoft.EntityFrameworkCore;
 using MyApp.Infrastructure;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Migrations;
 
 /// <summary>Prebuilt reports of the administrator, once per database: sales over the 100,000 orders (the organisation's dashboard), an order desk and the catalog.</summary>
-public static class DemoReports
+[RegisterAs(typeof(ISeedContributor))]
+public sealed class DemoReports(MyAppDbContext db, ITenantDirectory tenants) : ISeedContributor
 {
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
 
-    public static async Task EnsureAsync(IServiceProvider services, CancellationToken cancellationToken = default)
+    public int Order => DemoSeed.Order.Reports;
+
+    public SeedEnvironments Environments => SeedEnvironments.Development;
+
+    public async Task SeedAsync(SeedContext context, CancellationToken cancellationToken)
     {
-        await using var scope = services.CreateAsyncScope();
-        var provider = scope.ServiceProvider;
-        if (await provider.GetRequiredService<ITenantDirectory>().GetSystemTenantIdAsync(cancellationToken) is not { } tenantId)
+        if (!await DemoSeed.IsSystemTenantAsync(context, tenants, cancellationToken))
         {
             return;
         }
 
-        using var actor = CurrentUserScope.Begin(new ImpersonatedUser(null, tenantId));
-        var db = provider.GetRequiredService<MyAppDbContext>();
+        var tenantId = context.TenantId!.Value;
         if (!await db.Set<Report>().AnyAsync(cancellationToken)
             && await db.Set<User>().FirstOrDefaultAsync(u => u.Email == DemoSeed.Administrator.Email, cancellationToken) is { } owner)
         {

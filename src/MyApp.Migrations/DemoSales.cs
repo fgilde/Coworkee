@@ -1,7 +1,9 @@
+using Coworkee.Application.Setup;
 using Coworkee.Core.Security;
 using Microsoft.EntityFrameworkCore;
 using MyApp.Infrastructure;
 using MyApp.Sales.Domain;
+using Nextended.Core.Attributes;
 
 namespace MyApp.Migrations;
 
@@ -9,7 +11,8 @@ namespace MyApp.Migrations;
 /// 250 customers and 100,000 sales orders for the client entity demo, once per database. Postgres generates them in one statement
 /// each: the same rows on every machine, dated back from today so the date facets have recent orders.
 /// </summary>
-public static class DemoSales
+[RegisterAs(typeof(ISeedContributor))]
+public sealed class DemoSales(MyAppDbContext db, ITenantDirectory tenants) : ISeedContributor
 {
     public const int Customers = 250;
     public const int Orders = 100_000;
@@ -17,22 +20,24 @@ public static class DemoSales
     // one order every 15 minutes: 100,000 orders reach back almost three years
     private const int MinutesApart = 15;
 
-    public static async Task EnsureAsync(IServiceProvider services, CancellationToken cancellationToken = default)
+    public int Order => DemoSeed.Order.Sales;
+
+    public SeedEnvironments Environments => SeedEnvironments.Development;
+
+    // the runner's transaction holds both statements
+    public async Task SeedAsync(SeedContext context, CancellationToken cancellationToken)
     {
-        await using var scope = services.CreateAsyncScope();
-        var provider = scope.ServiceProvider;
-        if (await provider.GetRequiredService<ITenantDirectory>().GetSystemTenantIdAsync(cancellationToken) is not { } tenantId)
+        if (!await DemoSeed.IsSystemTenantAsync(context, tenants, cancellationToken))
         {
             return;
         }
 
-        var db = provider.GetRequiredService<MyAppDbContext>();
+        var tenantId = context.TenantId!.Value;
         if (await db.Set<Customer>().IgnoreQueryFilters().AnyAsync(c => c.TenantId == tenantId, cancellationToken))
         {
             return;
         }
 
-        await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
         await db.Database.ExecuteSqlAsync($"""
             INSERT INTO app."Customers" ("Id", "Name", "City", "TenantId")
             SELECT md5({tenantId}::text || '/customer/' || c)::uuid,
@@ -62,6 +67,5 @@ public static class DemoSales
                  LATERAL (SELECT {Orders} - g AS age) AS a,
                  LATERAL (SELECT now() - (a.age * {MinutesApart}) * interval '1 minute' AS date) AS d
             """, cancellationToken);
-        await transaction.CommitAsync(cancellationToken);
     }
 }

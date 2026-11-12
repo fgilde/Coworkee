@@ -11067,6 +11067,39 @@
         }
       }
     },
+    "/api/v1/ai/sessions/{id}/client-results": {
+      "post": {
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiClientResult"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/ai/sessions/{id}/messages": {
       "post": {
         "tags": [
@@ -15194,6 +15227,24 @@
           "parameters": {}
         }
       },
+      "AiClientResult": {
+        "required": [
+          "callId",
+          "output"
+        ],
+        "type": "object",
+        "properties": {
+          "callId": {
+            "type": "string"
+          },
+          "output": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "AiConfirmRequest": {
         "required": [
           "approve"
@@ -15708,6 +15759,15 @@
             ],
             "items": {
               "$ref": "#/components/schemas/AiClientActionDto"
+            }
+          },
+          "localSets": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
             }
           }
         }

@@ -4,6 +4,7 @@ using Riok.Mapperly.Abstractions;
 
 namespace MyApp.Documents
 {
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 	public static partial class DocumentTypeMapper
 	{

@@ -3,6 +3,7 @@
 using System;
 namespace MyApp.Contracts.Documents {
 	/// <summary>IDocumentTypeDto - GENERATED FROM <see cref="T:MyApp.Documents.Domain.DocumentType"/></summary>
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	public partial interface IDocumentTypeDto  
 	{
 		string Name { get; set; }
@@ -12,6 +13,7 @@ namespace MyApp.Contracts.Documents {
 
 
 	/// <summary>DocumentTypeDto - GENERATED FROM <see cref="T:MyApp.Documents.Domain.DocumentType"/></summary>
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	public partial class DocumentTypeDto : IDocumentTypeDto 
 	{
 		public required string Name { get; set; }

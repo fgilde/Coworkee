@@ -4,6 +4,7 @@ using Riok.Mapperly.Abstractions;
 
 namespace MyApp.Catalog
 {
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 	[UseStaticMapper(typeof(MyApp.Catalog.MappingExtensions))]
 	public static partial class ProductMapper

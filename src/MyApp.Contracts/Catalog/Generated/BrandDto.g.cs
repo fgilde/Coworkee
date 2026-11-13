@@ -3,6 +3,7 @@
 using System;
 namespace MyApp.Contracts.Catalog {
 	/// <summary>IBrandDto - GENERATED FROM <see cref="T:MyApp.Catalog.Domain.Brand"/></summary>
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	public partial interface IBrandDto  
 	{
 		string Name { get; set; }
@@ -16,6 +17,7 @@ namespace MyApp.Contracts.Catalog {
 
 
 	/// <summary>BrandDto - GENERATED FROM <see cref="T:MyApp.Catalog.Domain.Brand"/></summary>
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	public partial class BrandDto : IBrandDto 
 	{
 		public required string Name { get; set; }

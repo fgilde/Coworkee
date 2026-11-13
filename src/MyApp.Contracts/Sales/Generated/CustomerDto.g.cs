@@ -3,6 +3,7 @@
 using System;
 namespace MyApp.Contracts.Sales {
 	/// <summary>ICustomerDto - GENERATED FROM <see cref="T:MyApp.Sales.Domain.Customer"/></summary>
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	public partial interface ICustomerDto  
 	{
 		string Name { get; set; }
@@ -12,6 +13,7 @@ namespace MyApp.Contracts.Sales {
 
 
 	/// <summary>CustomerDto - GENERATED FROM <see cref="T:MyApp.Sales.Domain.Customer"/></summary>
+	[global::System.CodeDom.Compiler.GeneratedCode("Nextended.CodeGen", null)]
 	public partial class CustomerDto : ICustomerDto 
 	{
 		public required string Name { get; set; }

@@ -18119,6 +18119,7 @@ export interface components {
             scopes: components["schemas"]["SettingScope"][];
             choices: null | string[];
             enabledWhen?: null | components["schemas"]["SettingCondition"];
+            fixedValue?: null | string;
         };
         SettingGroupDto: {
             name: string;

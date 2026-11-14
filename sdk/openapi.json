@@ -23716,6 +23716,12 @@
                 "$ref": "#/components/schemas/SettingCondition"
               }
             ]
+          },
+          "fixedValue": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

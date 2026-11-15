@@ -1,6 +1,7 @@
 using Coworkee.Client.Blazor;
 using Coworkee.Client.Blazor.ClientEntities;
 using Coworkee.Client.Blazor.ClientEntities.Sqlite;
+using Coworkee.Client.Blazor.Components.Users;
 using Coworkee.Client.Blazor.Navigation;
 using Coworkee.Client.Blazor.Pages;
 using Coworkee.Client.Blazor.Reporting;
@@ -57,6 +58,7 @@ builder.Services.AddCoworkeeSettings<MyAppSettings>(meta =>
 });
 #pragma warning restore BL0005
 builder.Services.AddSingleton(new ProfileTab("Documents", "documents", typeof(MyDocuments), DocumentPermissions.Documents.View, MudBlazor.Icons.Material.Outlined.Description));
+builder.Services.AddUserDetailTab<UserDocuments>("Documents", DocumentPermissions.Documents.ManageAll, MudBlazor.Icons.Material.Outlined.Description, order: 200);
 builder.Services.Configure<NavigationMenuOptions>(MyAppNavigation.Order);
 var host = builder.Build();
 await host.Services.InitializeCoworkeeClientAsync();

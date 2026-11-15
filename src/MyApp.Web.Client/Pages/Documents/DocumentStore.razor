@@ -2,14 +2,14 @@
 @attribute [Authorize(Policy = PermissionPolicy.Prefix + DocumentPermissions.Documents.View)]
 @using MyApp.Web.Client.Api
 
-@if (!Mine)
+@if (!Embedded)
 {
     <PageHeader Title="Document Store" Description="Typed documents with an owner, private or visible to everyone who may view documents. Upload, preview and share them." />
 }
 @if (_ready)
 {
     <CoworkeeDataTable @ref="_table" T="DocumentDto" EntitySet="Documents" Expand="DocumentType" SearchFields="SearchFields" MultiSelection="true"
-                       ExportFileName="documents" Filter="@_filter" UrlState="!Mine" DescribeItem="d => d.Title" CreateText="Upload"
+                       ExportFileName="documents" Filter="@_filter" UrlState="!Embedded" DescribeItem="d => d.Title" CreateText="Upload"
                        CreatePermission="@DocumentPermissions.Documents.Create" EditPermission="@DocumentPermissions.Documents.Edit" DeletePermission="@DocumentPermissions.Documents.Delete"
                        OnCreate="CreateAsync" OnEdit="EditAsync" OnDelete="DeleteAsync">
         <Columns>

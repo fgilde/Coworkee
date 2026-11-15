@@ -32,14 +32,21 @@ public partial class DocumentStore
     /// <summary>Only the documents the current user uploaded, as the account page shows them.</summary>
     [Parameter] public bool Mine { get; set; }
 
+    /// <summary>Only the documents of this owner, as the tab "Documents" of the admin user page shows them.</summary>
+    [Parameter] public Guid? OwnerId { get; set; }
+
+    // inside another page (account, user page): no header, no filter in the address
+    private bool Embedded => Mine || OwnerId is not null;
+
     private string? _filter;
     private bool _ready;
 
     protected override async Task OnInitializedAsync()
     {
-        if (Mine && (await AuthenticationState).User.FindFirst("sub")?.Value is { } me)
+        var owner = OwnerId?.ToString() ?? (Mine ? (await AuthenticationState).User.FindFirst("sub")?.Value : null);
+        if (owner is not null)
         {
-            _filter = $"OwnerId eq {me}";
+            _filter = $"OwnerId eq {owner}";
         }
 
         _ready = true;

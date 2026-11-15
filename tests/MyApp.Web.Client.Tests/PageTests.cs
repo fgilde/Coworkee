@@ -111,6 +111,21 @@ public sealed class PageTests : BunitContext
     }
 
     [Fact]
+    public void The_documents_tab_of_the_user_page_lists_the_documents_the_user_owns()
+    {
+        var owner = Guid.CreateVersion7();
+        _odata.With("Documents", new DocumentDto(Guid.CreateVersion7(), "Passport", null, false, null, null, "passport.pdf", "application/pdf", 2048, null, DateTimeOffset.UtcNow));
+
+        var tab = Render<UserDocuments>(p => p.Add(d => d.UserId, owner));
+
+        tab.WaitForAssertion(() => tab.Markup.ShouldContain("Passport"));
+        var table = tab.FindComponent<Coworkee.Client.Blazor.Components.Data.CoworkeeDataTable<DocumentDto>>().Instance;
+        table.Filter.ShouldBe($"OwnerId eq {owner}");
+        table.UrlState.ShouldBeFalse();
+        tab.FindComponents<Coworkee.Client.Blazor.Components.PageHeader>().ShouldBeEmpty();
+    }
+
+    [Fact]
     public async Task A_new_document_is_uploaded_through_the_upload_field_next_to_the_file_choice()
     {
         _api.GetMyPermissionsAsync(default).ReturnsForAnyArgs([Coworkee.Contracts.Files.FilePermissions.View]);

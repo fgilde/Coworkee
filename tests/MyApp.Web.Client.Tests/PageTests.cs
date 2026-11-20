@@ -42,6 +42,7 @@ public sealed class PageTests : BunitContext
         Services.ConfigureHttpClientDefaults(client => client.ConfigurePrimaryHttpMessageHandler(() => new NoServer()));
         Services.AddSingleton(_api);
         Services.AddSingleton(Substitute.For<Coworkee.Client.Blazor.Reporting.Api.IReportsApi>());
+        Services.AddSingleton(new Coworkee.Client.Blazor.Reporting.ReportingOptions());
         Services.AddSingleton(Substitute.For<Coworkee.Client.Blazor.Files.IFilesApi>());
         Services.AddSingleton(new CoworkeeClientOptions());
         Services.AddSingleton(Substitute.For<IRealtimeConnection>());

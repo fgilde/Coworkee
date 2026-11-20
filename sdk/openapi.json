@@ -321,6 +321,45 @@
         }
       }
     },
+    "/api/v1/identity/users/selection/count": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSelection"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSelectionCountDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/identity/me": {
       "get": {
         "tags": [
@@ -4618,6 +4657,109 @@
         }
       }
     },
+    "/api/v1/mail/templates/{name}/send": {
+      "post": {
+        "tags": [
+          "Mail"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMailTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mail/templates/{name}/send/preview": {
+      "post": {
+        "tags": [
+          "Mail"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMailTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MailTemplateSendPreviewDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/mail/templates/{name}/{culture}/history": {
       "get": {
         "tags": [
@@ -6985,6 +7127,38 @@
             }
           }
         ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/send": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendNotificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "204": {
             "description": "No Content"
@@ -12307,6 +12481,45 @@
         }
       }
     },
+    "/api/v1/social/{entityType}": {
+      "get": {
+        "tags": [
+          "Social"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SocialFeaturesDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/comments/{entityType}/{entityId}": {
       "get": {
         "tags": [
@@ -16386,6 +16599,12 @@
               "string"
             ],
             "format": "uuid"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -18568,6 +18787,12 @@
             "items": {
               "$ref": "#/components/schemas/EntityHistoryChangeDto"
             }
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20527,6 +20752,12 @@
           },
           "isCustom": {
             "type": "boolean"
+          },
+          "sampleModel": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20546,6 +20777,42 @@
           },
           "translated": {
             "type": "boolean"
+          }
+        }
+      },
+      "MailTemplateSendPreviewDto": {
+        "required": [
+          "recipients",
+          "excluded",
+          "mail"
+        ],
+        "type": "object",
+        "properties": {
+          "recipients": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "excluded": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mail": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RenderedMailDto"
+              }
+            ]
           }
         }
       },
@@ -21010,6 +21277,14 @@
           }
         }
       },
+      "NotificationMail": {
+        "enum": [
+          "ByPreference",
+          "Never",
+          "Always",
+          "WhenOffline"
+        ]
+      },
       "NotificationPreferenceDto": {
         "required": [
           "type",
@@ -21061,6 +21336,15 @@
           "Off",
           "All",
           "Followed"
+        ]
+      },
+      "NotificationSeverity": {
+        "enum": [
+          "Normal",
+          "Info",
+          "Success",
+          "Warning",
+          "Error"
         ]
       },
       "NumberFormat": {
@@ -22091,6 +22375,16 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          "selection": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UserSelection"
+              }
+            ]
           }
         }
       },
@@ -22098,7 +22392,8 @@
         "enum": [
           "Preset",
           "Query",
-          "Manual"
+          "Manual",
+          "Selection"
         ]
       },
       "RenameChatRequest": {
@@ -23899,6 +24194,81 @@
           }
         }
       },
+      "SendMailTemplateRequest": {
+        "required": [
+          "recipients"
+        ],
+        "type": "object",
+        "properties": {
+          "recipients": {
+            "$ref": "#/components/schemas/UserSelection"
+          },
+          "model": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SendNotificationRequest": {
+        "required": [
+          "recipients",
+          "title",
+          "severity",
+          "stored",
+          "toast",
+          "mail"
+        ],
+        "type": "object",
+        "properties": {
+          "recipients": {
+            "$ref": "#/components/schemas/UserSelection"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "arguments": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "link": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "severity": {
+            "$ref": "#/components/schemas/NotificationSeverity"
+          },
+          "stored": {
+            "type": "boolean"
+          },
+          "toast": {
+            "type": "boolean"
+          },
+          "mail": {
+            "$ref": "#/components/schemas/NotificationMail"
+          },
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ServiceDirectoryResult": {
         "required": [
           "services",
@@ -24374,6 +24744,29 @@
             "type": "string"
           },
           "confirmed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SocialFeaturesDto": {
+        "required": [
+          "comments",
+          "tags",
+          "ratings",
+          "reactions"
+        ],
+        "type": "object",
+        "properties": {
+          "comments": {
+            "type": "boolean"
+          },
+          "tags": {
+            "type": "boolean"
+          },
+          "ratings": {
+            "type": "boolean"
+          },
+          "reactions": {
             "type": "boolean"
           }
         }
@@ -25437,6 +25830,73 @@
           }
         }
       },
+      "UserSelection": {
+        "required": [
+          "allMatching",
+          "isEmpty"
+        ],
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "allMatching": {
+            "type": "boolean",
+            "default": true
+          },
+          "included": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "excluded": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isEmpty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserSelectionCountDto": {
+        "required": [
+          "users",
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "users": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "active": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
       "UserSessionDto": {
         "required": [
           "id",
@@ -26206,6 +26666,9 @@
     },
     {
       "name": "Files"
+    },
+    {
+      "name": "Social"
     },
     {
       "name": "Comments"

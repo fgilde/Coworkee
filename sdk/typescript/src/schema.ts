@@ -306,6 +306,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/identity/users/selection/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UserSelection"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["UserSelectionCountDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/identity/me": {
         parameters: {
             query?: never;
@@ -5004,6 +5052,106 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/mail/templates/{name}/send": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    name: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SendMailTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": number | string;
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/mail/templates/{name}/send/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    name: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SendMailTemplateRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["MailTemplateSendPreviewDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/mail/templates/{name}/{culture}/history": {
         parameters: {
             query?: never;
@@ -7533,6 +7681,52 @@ export interface paths {
                 };
             };
         };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notifications/send": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SendNotificationRequest"];
+                };
+            };
+            responses: {
+                /** @description No Content */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -13551,6 +13745,52 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/social/{entityType}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    entityType: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SocialFeaturesDto"];
+                    };
+                };
+                /** @description Bad Request */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/comments/{entityType}/{entityId}": {
         parameters: {
             query?: never;
@@ -16583,6 +16823,7 @@ export interface components {
             changes: components["schemas"]["AuditChangeDto"][];
             /** Format: uuid */
             impersonatorId?: null | string;
+            reason?: null | string;
         };
         BackupDto: {
             /** Format: uuid */
@@ -17096,6 +17337,7 @@ export interface components {
             /** Format: date-time */
             occurredAt: string;
             changes: components["schemas"]["EntityHistoryChangeDto"][];
+            reason?: null | string;
         };
         EntityHistoryFieldDto: {
             property: string;
@@ -17563,11 +17805,19 @@ export interface components {
             isOverridden: boolean;
             variables: components["schemas"]["MailVariableDto"][];
             isCustom: boolean;
+            sampleModel?: null | string;
         };
         MailTemplateLanguageAddedDto: {
             culture: string;
             from: string;
             translated: boolean;
+        };
+        MailTemplateSendPreviewDto: {
+            /** Format: int32 */
+            recipients: number | string;
+            /** Format: int32 */
+            excluded: number | string;
+            mail: null | components["schemas"]["RenderedMailDto"];
         };
         MailTemplateSummaryDto: {
             name: string;
@@ -17675,6 +17925,8 @@ export interface components {
             /** Format: date-time */
             doneAt?: null | string;
         };
+        /** @enum {unknown} */
+        NotificationMail: "ByPreference" | "Never" | "Always" | "WhenOffline";
         NotificationPreferenceDto: {
             type: string;
             category: null | string;
@@ -17688,6 +17940,8 @@ export interface components {
         };
         /** @enum {unknown} */
         NotificationScope: "Off" | "All" | "Followed";
+        /** @enum {unknown} */
+        NotificationSeverity: "Normal" | "Info" | "Success" | "Warning" | "Error";
         /** @enum {unknown} */
         NumberFormat: "Number" | "Integer" | "Compact" | "Currency" | "Percent";
         OutgoingMailDto: {
@@ -17923,9 +18177,10 @@ export interface components {
             filter?: null | string;
             queryJson?: null | string;
             userIds?: null | string[];
+            selection?: null | components["schemas"]["UserSelection"];
         };
         /** @enum {unknown} */
-        RecipientSourceKind: "Preset" | "Query" | "Manual";
+        RecipientSourceKind: "Preset" | "Query" | "Manual" | "Selection";
         RenameChatRequest: {
             name: string;
         };
@@ -18347,6 +18602,22 @@ export interface components {
         SendChatMessageRequest: {
             text: string;
         };
+        SendMailTemplateRequest: {
+            recipients: components["schemas"]["UserSelection"];
+            model?: null | string;
+        };
+        SendNotificationRequest: {
+            recipients: components["schemas"]["UserSelection"];
+            title: string;
+            body?: null | string;
+            arguments?: null | string[];
+            link?: null | string;
+            severity: components["schemas"]["NotificationSeverity"];
+            stored: boolean;
+            toast: boolean;
+            mail: components["schemas"]["NotificationMail"];
+            type?: null | string;
+        };
         ServiceDirectoryResult: {
             services: components["schemas"]["ServiceDto"][];
             unavailableSources: string[];
@@ -18457,6 +18728,12 @@ export interface components {
         SetUserEmailRequest: {
             email: string;
             confirmed: boolean;
+        };
+        SocialFeaturesDto: {
+            comments: boolean;
+            tags: boolean;
+            ratings: boolean;
+            reactions: boolean;
         };
         StoredFileDto: {
             /** Format: uuid */
@@ -18710,6 +18987,20 @@ export interface components {
         UserPermissionsDto: {
             granted: string[];
             permissions: components["schemas"]["UserPermissionDto"][];
+        };
+        UserSelection: {
+            filter?: null | string;
+            /** @default true */
+            allMatching: boolean;
+            included?: null | string[];
+            excluded?: null | string[];
+            isEmpty: boolean;
+        };
+        UserSelectionCountDto: {
+            /** Format: int32 */
+            users: number | string;
+            /** Format: int32 */
+            active: number | string;
         };
         UserSessionDto: {
             /** Format: uuid */

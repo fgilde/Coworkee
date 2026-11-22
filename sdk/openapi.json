@@ -4724,6 +4724,19 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 0
+            }
           }
         ],
         "requestBody": {
@@ -20758,6 +20771,12 @@
               "null",
               "string"
             ]
+          },
+          "sendModel": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20812,6 +20831,12 @@
               {
                 "$ref": "#/components/schemas/RenderedMailDto"
               }
+            ]
+          },
+          "recipient": {
+            "type": [
+              "null",
+              "string"
             ]
           }
         }
